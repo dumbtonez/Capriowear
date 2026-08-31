@@ -1,0 +1,379 @@
+/* app/globals.css
+   ---------------------------------------------------------------------------
+   Capriowear design tokens.
+
+   Tailwind v4 is installed, so the theme lives in CSS: every token declared in
+   the @theme block below is emitted as a real CSS custom property AND generates
+   the matching Tailwind utility. That gives us both halves of the CLAUDE.md
+   rule (tokens in the Tailwind theme + CSS variables) from one source, with no
+   chance of the two drifting apart.
+
+   Never hard-code a raw hex, px or clamp value in a component. Use a token.
+   --------------------------------------------------------------------------- */
+
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+@theme {
+  /* --- Typeface -------------------------------------------------------- */
+  /* Figtree is the only typeface. Loaded via next/font in app/layout.tsx. */
+  --font-sans: var(--font-figtree), system-ui, -apple-system, sans-serif;
+
+  /* --- Colour ---------------------------------------------------------- */
+  --color-ink: #0e0e12; /* near-black: dark sections + primary text */
+  --color-ink-2: #17171d; /* secondary dark surface */
+  --color-paper: #ffffff; /* default page background */
+  --color-paper-2: #f5f4f1; /* alternating light section */
+  --color-line: rgba(0, 0, 0, 0.1); /* hairline border on light */
+  --color-line-dark: rgba(255, 255, 255, 0.12); /* hairline border on dark */
+  --color-muted: #6b6b74; /* secondary text */
+  --color-accent: #ff5011; /* brand orange: CTAs, highlights */
+  --color-accent-ink: #ffffff; /* text/icon on accent */
+
+  /* --- Type scale ------------------------------------------------------ */
+  /* SOURCE OF TRUTH: the Figma file "Caprio Website", node 284:333, which
+     registers all thirteen styles below as local text styles. Sizes, weights,
+     line heights and letter spacing are Figma's exactly. Do not adjust a value
+     here to taste: change it in Figma and re-read it.
+
+     Line heights: Figma reports some as AUTO, which renders at exactly 1.2x for
+     Figtree (verified against the rendered frame geometry, e.g. Heading 2 is
+     36px type in a 43px box). Those are written as 1.2. The rest are fixed pixel
+     values in Figma and are written here as their unitless ratio, so they keep
+     the same proportion while the size scales.
+
+     Letter spacing is 0 on every Figma style, so no token declares one.
+
+     Scaling: Figma specifies one size, on a 1440px frame, which says nothing
+     about screens wider than that. Two groups:
+
+     - Headline styles (Display, Heading 1-4, Stat Number, Stat Label) scale
+       from a 360px mobile anchor through the exact Figma value at 1440px, at
+       one constant rate, and keep scaling at that SAME rate up to a new max
+       reached at 1920px, then hold flat above that. This is a deliberate
+       extension past Figma, added 2026-08-22: holding these flat at their
+       1440 size made them look small on a 1920 screen, since the container
+       still caps at 1440 and a same-size headline in a visually larger
+       canvas reads as smaller. new-max = max + (max - min) * 4/9, since the
+       1440-to-1920 span (480px) is 4/9 of the 360-to-1440 span (1080px) the
+       rate was fit to -- so it is the exact same line, just evaluated
+       further before the clamp catches it. At exactly 1440px the rendered
+       size still matches Figma to the pixel; only above 1440 does it grow
+       past what Figma specifies, because Figma has no opinion there.
+     - Everything else, 24px and under (Heading 5, Overline, Body, Body
+       Large, Button, Button Small), does not scale at all, at any width.
+       These are reading and UI sizes: growing them on a bigger monitor does
+       not help readability the way a bigger headline does, and Figma's own
+       sizing for them should hold everywhere it applies, mobile included.
+
+     Do not hand-edit a vw coefficient. Recompute: slope = (max - min) / 1080 * 100,
+     intercept = min - slope / 100 * 360, new-max = max + (max - min) * 4 / 9. */
+
+  /* Fixed: identical to Figma at every viewport. */
+  --text-button-sm: 1rem; /* 16px */
+  --text-button-sm--line-height: 1.5; /* 24px */
+  --text-button-sm--font-weight: 700;
+
+  --text-body: 1.125rem; /* 18px */
+  --text-body--line-height: 1.2222; /* 22px */
+  --text-body--font-weight: 400;
+
+  --text-button: 1.125rem; /* 18px */
+  --text-button--line-height: 1.3333; /* 24px */
+  --text-button--font-weight: 700;
+
+  --text-body-lg: 1.25rem; /* 20px */
+  --text-body-lg--line-height: 1.2;
+  --text-body-lg--font-weight: 400;
+
+  --text-overline: 1.25rem; /* 20px */
+  --text-overline--line-height: 1.2;
+  --text-overline--font-weight: 600;
+
+  --text-h5: 1.5rem; /* 24px */
+  --text-h5--line-height: 1.2;
+  --text-h5--font-weight: 500;
+
+  /* Fluid: 360px anchor, Figma's value at 1440, flat above. */
+  --text-h4: clamp(1.3125rem, calc(1.1667rem + 0.6481vw), 1.9444rem); /* 21 -> 28px at 1440, -> 31px at 1920 */
+  --text-h4--line-height: 1.2;
+  --text-h4--font-weight: 500;
+
+  --text-h3: clamp(1.375rem, calc(1.2083rem + 0.7407vw), 2.0972rem); /* 22 -> 30px at 1440, -> 33.6px at 1920 */
+  --text-h3--line-height: 1.2;
+  --text-h3--font-weight: 500;
+
+  --text-h2: clamp(1.5rem, calc(1.25rem + 1.1111vw), 2.5833rem); /* 24 -> 36px at 1440, -> 41.3px at 1920 */
+  --text-h2--line-height: 1.2;
+  --text-h2--font-weight: 500;
+
+  --text-stat-label: clamp(1.75rem, calc(1.2917rem + 2.037vw), 3.7361rem); /* 28 -> 50px at 1440, -> 59.8px at 1920 */
+  --text-stat-label--line-height: 1.2;
+  --text-stat-label--font-weight: 600;
+
+  --text-h1: clamp(1.875rem, calc(1.375rem + 2.2222vw), 4.0417rem); /* 30 -> 54px at 1440, -> 65px at 1920 */
+  --text-h1--line-height: 1.1852; /* 64px on 54px */
+  --text-h1--font-weight: 500;
+
+  --text-stat-number: clamp(2rem, calc(1.4167rem + 2.5926vw), 4.5278rem); /* 32 -> 60px at 1440, -> 72.4px at 1920 */
+  --text-stat-number--line-height: 1.2;
+  --text-stat-number--font-weight: 600;
+
+  --text-display: clamp(2rem, calc(1.3333rem + 2.963vw), 4.8889rem); /* 32 -> 64px at 1440, -> 78.2px at 1920 */
+  --text-display--line-height: 1.09375; /* 70px on 64px */
+  --text-display--font-weight: 400;
+
+  /* --- Spacing ---------------------------------------------------------- */
+  /* 4px base. The whole CLAUDE.md scale is reachable on Tailwind's numeric
+     scale: 4=1, 8=2, 12=3, 16=4, 20=5, 24=6, 32=8, 40=10, 48=12, 64=16,
+     80=20, 96=24, 120=30, 160=40. */
+  --spacing: 4px;
+  /* Section rhythm: 64 mobile / 96 tablet / 120 desktop, as one fluid step. */
+  --spacing-section: clamp(64px, 8vw, 120px);
+
+  /* --- Radii ------------------------------------------------------------ */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px; /* cards */
+  --radius-xl: 24px; /* media */
+  --radius-pill: 9999px; /* buttons */
+
+  /* --- Shadows ---------------------------------------------------------- */
+  /* Minimal and premium. Card lift on hover only, nothing heavier. */
+  --shadow-card: 0 1px 2px rgba(14, 14, 18, 0.04), 0 8px 24px rgba(14, 14, 18, 0.08);
+
+  /* --- Container -------------------------------------------------------- */
+  --container-page: 1440px; /* content caps here; backgrounds go full-bleed */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.2222;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Weight and letter spacing come from the type tokens, never from the
+     element. Setting them here would silently override a Figma value. */
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  /* Visible focus everywhere, for keyboard users. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+  }
+}
+
+/* Page container: centred, capped at 1440, 20/32/80 responsive padding.
+   Desktop was 48px until 2026-08-22; the real Figma content margin (nav and
+   hero both measured it) is 80px, so the token was corrected to match. This
+   shifts every section using .container-p, the nav included. */
+.container-p {
+  margin-inline: auto;
+  width: 100%;
+  max-width: var(--container-page);
+  padding-inline: 20px;
+}
+
+@media (min-width: 768px) {
+  .container-p {
+    padding-inline: 32px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-p {
+    padding-inline: 80px;
+  }
+}
+
+/* Reduced motion disables reveals and smooth scrolling. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Hides the scrollbar on a horizontally-scrollable element (e.g. Inside the
+   Factory's mobile swipe carousel) while leaving native touch/drag scrolling
+   fully working -- there's no Tailwind utility for this across all three
+   engines, so it's a small hand-written class like .container-p above. */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* older Edge */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* ---------------------------------------------------------------------------
+   Marquee (components/Marquee.tsx)
+   The track holds the item list twice, so translating it exactly -50% lands on
+   a pixel-identical frame and the loop is seamless at any content width. Speed
+   is set per instance with --marquee-duration rather than a fixed keyframe, so
+   a long ticker and a short one travel at the same visual pace.
+   --------------------------------------------------------------------------- */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-scroll var(--marquee-duration, 40s) linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Opt-out of the pause-on-hover rule above (Client Logos' desktop ticker,
+   2026-08-26 -- decorative brand logos, not something to read, so hovering
+   shouldn't stop the movement). Same specificity as the rule above; source
+   order after it is what makes this win when both classes are present. */
+.marquee-no-pause:hover .marquee-track,
+.marquee-no-pause:focus-within .marquee-track {
+  animation-play-state: running;
+}
+
+/* Fades the track's own left/right edges to transparent so items entering
+   or leaving the visible strip fade out rather than getting hard-clipped
+   (Client Logos' desktop ticker, 2026-08-26, referencing tedy.app). A mask
+   is alpha-based, so it works over any background colour without needing
+   to hardcode one. */
+.marquee-edge-fade {
+  /* Fixed 20px fade, not a percentage -- a percentage-based fade widens on
+     every viewport bigger than the one it was tuned on, hiding far more
+     logos than intended. A fixed px width stays exactly 20px regardless of
+     the track's own width, so the maximum number of logos stays visible. */
+  mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
+}
+
+/* The base reduced-motion rule collapses animations to 0.001ms, which would
+   snap the track to its end frame. The ticker instead stops at its start and
+   becomes a normal horizontally scrollable strip. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .marquee-viewport {
+    overflow-x: auto;
+  }
+}
+
+/* Word-by-word entrance reveal (TextReveal.tsx), referenced from
+   afternow.co/services (2026-08-27) -- Hero's H1, later extended to other
+   sections' eyebrow + title. --reveal-index is set per-word inline (same
+   pattern as --marquee-duration above); the 100ms base delay lets first
+   paint settle before motion starts, 45ms stagger per word.
+
+   .reveal-word sits hidden (translated below, transparent) until its own
+   TextReveal instance's IntersectionObserver adds `.reveal-active` to the
+   rendered tag -- NOT animated unconditionally on mount. A below-the-fold
+   section mounts at the same time as Hero, so an unconditional mount
+   animation had already finished by the time a reader scrolled down to it
+   (found live, 2026-08-27: "still only shows on the top banner text").
+   Gating on `.reveal-active` instead means each instance's words only start
+   moving once actually scrolled into view. */
+@keyframes reveal-word-in {
+  from {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.reveal-word {
+  transform: translateY(110%);
+  opacity: 0;
+}
+
+.reveal-active .reveal-word {
+  animation: reveal-word-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--reveal-index) * 45ms + 100ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-word {
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* Media/box entrance reveal (RevealBox.tsx), referenced from cuberto.com's
+   own hero video reveal (2026-08-27) -- Hero's video block. A plain CSS
+   transition, not @keyframes: unlike the word-by-word reveal above, there is
+   no per-item stagger here, just one box toggling between two states, so a
+   transition triggered by the `.reveal-box-active` class (set once
+   useRevealOnView's IntersectionObserver fires) is simpler than defining
+   keyframes for a single state change. The clip-path animates inset only, no
+   rounding -- Hero's own video block keeps its existing square corners
+   (radius="none"), unrelated to this reveal. transition-delay trails the
+   headline's own word stagger slightly, so the two don't pop in at the same
+   instant. */
+.reveal-box {
+  clip-path: inset(8% round 0);
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    clip-path 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: 0.2s;
+}
+
+.reveal-box.reveal-box-active {
+  clip-path: inset(0% round 0);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-box {
+    transition: none;
+    clip-path: inset(0% round 0);
+    opacity: 1;
+    transform: none;
+  }
+}
+

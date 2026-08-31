@@ -1,0 +1,400 @@
+"use client";
+
+// components/Header.tsx
+// Site header: desktop nav with mega menu, plus the drawer for narrow viewports
+// (components/MobileNav.tsx). Sticky with a hairline bottom border, on the ink
+// surface, matching the wireframe header.
+//
+// Nav data is passed in (from content/home.ts), never hardcoded, so other pages
+// reuse the same header. A link with `megaMenu` renders as a mega-menu trigger;
+// one without renders as a plain link.
+//
+// Mega menu behaviour: the trigger is a real <button> with aria-expanded and
+// aria-controls, so it is operable by keyboard as well as by pointer. It opens
+// on hover for pointer users and on click/Enter for everyone; Escape closes and
+// returns focus to the trigger; moving focus or the pointer out of the group
+// closes it. A wrapper around the trigger row *and* the panel (not any one
+// <li>) owns the shared focus-within/mouse-leave zone, since the panel is a
+// single full-width element rendered once, not nested inside each trigger's
+// own <li> -- see the note on `header.megaPanel` in components/ui/styles.ts.
+//
+// The desktop nav appears at xl (1280px, see the `nav` and `actions` recipes
+// in components/ui/styles.ts). Below that, MobileNav's drawer takes over.
+//
+// Hide-on-scroll (owner request, 2026-08-26): the header slides off-screen
+// upward once the page has scrolled down past the header's own height, and
+// slides back in on any upward scroll -- a standard pattern (used sitewide
+// by e.g. most editorial/marketing sites) for reclaiming vertical space on
+// long pages without removing the nav outright, since it's still one
+// upward scroll away. The "past its own height" threshold, not an
+// arbitrary pixel count, means the header never hides before the user has
+// actually scrolled past where it would sit anyway, at any breakpoint's
+// real header height. Never hides while a mega menu or the mobile drawer
+// is open -- both are things the user is actively interacting with inside
+// the header itself, so yanking it off-screen mid-interaction would be a
+// real usability regression, not a subtlety worth trading away for the
+// scroll effect.
+import { ChevronDown, Sparkle } from "lucide-react";
+import Link from "next/link";
+import type { ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+
+import { Button } from "./Button";
+import { MenuIcon } from "./icons/MenuIcon";
+import { MobileNav, type MobileNavLink } from "./MobileNav";
+import { cx } from "./ui/cx";
+import { header } from "./ui/styles";
+
+// Matches `header.megaPanel`'s own `duration-500` exactly -- how long the
+// panel stays mounted after its trigger closes, so the closing clip-path
+// sweep has time to actually play before the content unmounts.
+const MEGA_TRANSITION_MS = 500;
+
+export type NavMegaMenuGroup = {
+  label: string;
+  items: { label: string; href: string }[];
+};
+
+export type NavLink = {
+  label: string;
+  href: string;
+  /**
+   * Present on links that open the full-width mega menu (Figma node
+   * 493:3140) -- e.g. Activewear. A link without this is a plain link, no
+   * dropdown at all (e.g. Teamwear & Uniforms, until its own real category
+   * content exists -- see content/home.ts's own scope note).
+   */
+  megaMenu?: NavMegaMenuGroup[];
+};
+
+export type HeaderProps = {
+  /** Always required, even with `logo` set: it becomes the home link's accessible name. */
+  brand: string;
+  /**
+   * The real mark, e.g. <Logo />. When given, it replaces the text brand
+   * block below it entirely — `brandParent` goes unused, since the logo
+   * carries the brand on its own (Figma node 316:1331 has no text brand at
+   * all, logo only). Omit to fall back to the text brand, still useful for a
+   * page that has no logo asset yet.
+   */
+  logo?: ReactNode;
+  brandParent?: string;
+  links: NavLink[];
+  /** The mobile drawer's own link set -- see MobileNav's own props. */
+  mobileLinks: MobileNavLink[];
+  contact: { label: string; email: string };
+  /** The shared footer strip under every mega menu's categories -- see `NavLink.megaMenu`. */
+  megaMenuPromo: { heading: string; description: string; bullets: string[] };
+  /** Same shape as Footer's own `social` prop -- content/site.ts's `ORGANIZATION.sameAs`. */
+  social: readonly string[];
+  cta: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+  className?: string;
+  /**
+   * Default true (every existing page). Set false to render a plain,
+   * non-sticky header that scrolls away with the page -- a trial for the
+   * Activewear PLP (owner request, 2026-08-29: "let's try one time
+   * gymshark approach and see how it looks", comparing against
+   * gymshark.com's own non-sticky header). Also disables the hide-on-
+   * scroll-down/reveal-on-scroll-up behavior entirely, since it has
+   * nothing to mean for a header that isn't pinned to the viewport.
+   */
+  sticky?: boolean;
+};
+
+export function Header({
+  brand,
+  logo,
+  brandParent,
+  links,
+  mobileLinks,
+  contact,
+  megaMenuPromo,
+  social,
+  cta,
+  secondaryCta,
+  className,
+  sticky = true,
+}: HeaderProps) {
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const lastScrollYRef = useRef(0);
+
+  const closeMenu = useCallback(() => setOpenMenu(null), []);
+
+  // Escape closes an open mega menu wherever focus currently sits.
+  useEffect(() => {
+    if (!openMenu) return;
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") closeMenu();
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [openMenu, closeMenu]);
+
+  // Hide on scroll down past the header's own height, reveal on scroll up --
+  // see the file header comment for why. rAF-throttled so this never runs
+  // more than once per rendered frame no matter how fast `scroll` fires.
+  useEffect(() => {
+    // Nothing to hide/reveal for a non-sticky header -- see the `sticky`
+    // prop's own doc comment.
+    if (!sticky) return;
+
+    lastScrollYRef.current = window.scrollY;
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
+      if (openMenu || drawerOpen) {
+        setNavHidden(false);
+        lastScrollYRef.current = window.scrollY;
+        return;
+      }
+      const currentY = window.scrollY;
+      const headerHeight = headerRef.current?.offsetHeight ?? 0;
+      const scrollingDown = currentY > lastScrollYRef.current;
+      if (scrollingDown && currentY > headerHeight) {
+        setNavHidden(true);
+      } else if (!scrollingDown) {
+        setNavHidden(false);
+      }
+      lastScrollYRef.current = currentY;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [openMenu, drawerOpen, sticky]);
+
+  const openLink = links.find((link) => link.label === openMenu && link.megaMenu?.length);
+  const megaPanelId = "desktop-mega-menu";
+
+  // Mirrors `MobileNav`'s own mount-lifetime pattern so the mega panel's
+  // closing `clip-path` sweep has something to animate: unmounting the
+  // instant `openLink` disappears would just cut the content away, since an
+  // element that's not in the DOM can't play a CSS transition. `content`
+  // tracks whichever link's data should currently render -- it updates the
+  // moment a real `openLink` exists (including switching straight from one
+  // open trigger to another) but keeps the last real value during the
+  // close animation, when `openLink` itself has already gone back to
+  // `undefined`.
+  const [megaRendered, setMegaRendered] = useState(false);
+  const [megaRevealed, setMegaRevealed] = useState(false);
+  const [megaContent, setMegaContent] = useState(openLink);
+  if (openLink && openLink !== megaContent) setMegaContent(openLink);
+  if (openLink && !megaRendered) setMegaRendered(true);
+  if (!openLink && megaRevealed) setMegaRevealed(false);
+
+  useEffect(() => {
+    if (!openLink) {
+      const timeout = setTimeout(() => setMegaRendered(false), MEGA_TRANSITION_MS);
+      return () => clearTimeout(timeout);
+    }
+    const raf = requestAnimationFrame(() => setMegaRevealed(true));
+    return () => cancelAnimationFrame(raf);
+  }, [openLink]);
+
+  return (
+    <header
+      ref={headerRef}
+      className={cx(sticky ? header.base : header.baseStatic, sticky && navHidden && header.hidden, className)}
+    >
+      {/* Wraps the trigger row and the mega panel under one shared
+          mouse-leave/blur zone -- required now that the panel is a single
+          full-width element rendered once (below), not nested inside each
+          trigger's own <li>: moving the pointer from a trigger down into
+          the panel must not close it, and the whole group only closes once
+          the pointer/focus leaves BOTH pieces together. */}
+      <div
+        onMouseLeave={closeMenu}
+        onBlur={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget as Node)) closeMenu();
+        }}
+      >
+        <div className={header.inner}>
+          {/* Brand + nav, grouped so their 40px gap is fixed regardless of
+              viewport -- see the comment on `brandNavGroup` in
+              components/ui/styles.ts for why this can't just be a gap on the
+              outer row. */}
+          <div className={header.brandNavGroup}>
+            {/* `brand` is always the link's accessible name, so screen readers
+                get "Capriowear, home" whether the logo image or the text
+                fallback is what's actually on screen. */}
+            <Link href="/" className={header.brand} aria-label={`${brand}, home`}>
+              {logo ?? (
+                <>
+                  <span className={header.brandName}>{brand}</span>
+                  {brandParent ? <span className={header.brandParent}>{brandParent}</span> : null}
+                </>
+              )}
+            </Link>
+
+            {/* Desktop nav */}
+            <nav aria-label="Main" className={header.nav}>
+              <ul className={header.navList}>
+                {links.map((link) => {
+                  const hasMenu = Boolean(link.megaMenu?.length);
+                  const isOpen = openMenu === link.label;
+
+                  if (!hasMenu) {
+                    return (
+                      <li key={link.href}>
+                        <Link href={link.href} className={header.navLink}>
+                          {link.label}
+                        </Link>
+                      </li>
+                    );
+                  }
+
+                  return (
+                    <li key={link.href} onMouseEnter={() => setOpenMenu(link.label)}>
+                      <button
+                        type="button"
+                        aria-expanded={isOpen}
+                        aria-controls={megaPanelId}
+                        onClick={() => setOpenMenu(isOpen ? null : link.label)}
+                        className={header.navTrigger}
+                      >
+                        {/* Grid-stacked label, not plain text -- see the
+                            comment on `navTriggerLabelStack` in
+                            components/ui/styles.ts for why: reserves the
+                            semibold width at all times so toggling weight on
+                            open never shifts this or any later trigger. */}
+                        <span className={header.navTriggerLabelStack}>
+                          <span className={header.navTriggerLabelGhost} aria-hidden="true">
+                            {link.label}
+                          </span>
+                          <span className={cx(header.navTriggerLabelVisible, isOpen && header.navTriggerActive)}>
+                            {link.label}
+                          </span>
+                        </span>
+                        <ChevronDown
+                          className={cx(header.navTriggerChevron, isOpen && header.navTriggerChevronOpen)}
+                          aria-hidden="true"
+                        />
+                        {isOpen ? <span className={header.navUnderline} aria-hidden="true" /> : null}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+          </div>
+
+          {/* Desktop actions */}
+          <div className={header.actions}>
+            {secondaryCta ? (
+              <Link href={secondaryCta.href} className={header.actionLink}>
+                {secondaryCta.label}
+              </Link>
+            ) : null}
+            <Button href={cta.href} className={header.actionButton}>
+              {cta.label}
+            </Button>
+          </div>
+
+          {/* Drawer trigger -- Figma node 465:2871: a bordered pill with the
+              icon and a visible "Menu" label, not an icon-only circle. The
+              visible label is the accessible name, so no aria-label needed. */}
+          <button
+            ref={menuButtonRef}
+            type="button"
+            onClick={() => setDrawerOpen(true)}
+            aria-expanded={drawerOpen}
+            className={header.menuButton}
+          >
+            <span className={header.menuIconWrap}>
+              <MenuIcon className={header.menuIcon} />
+            </span>
+            <span className={header.menuLabel}>Menu</span>
+          </button>
+        </div>
+
+        {/* Full-width mega menu (Figma node 493:3140), corrected on first
+            real use from the earlier guessed `w-80` dropdown card -- a
+            single panel showing whichever link is open, not one per
+            trigger, since a `w-80`-era per-<li> element could never span
+            past its own inline position. Stays mounted through its own
+            closing transition (`megaRendered`), the same pattern
+            `MobileNav` already uses for its own open/close sweep. */}
+        {megaRendered && megaContent?.megaMenu ? (
+          <div
+            id={megaPanelId}
+            className={cx(header.megaPanel, megaRevealed ? header.megaPanelOpen : header.megaPanelClosed)}
+          >
+            <div className={header.megaPanelInner}>
+              <div className={header.megaGroups}>
+                {/* Each column fades/rises in on its own delay -- see the
+                    comment on `megaGroupReveal` in components/ui/styles.ts
+                    for why this is per-column, not one shared fade on the
+                    whole block. */}
+                {megaContent.megaMenu.map((group, index) => (
+                  <div
+                    key={group.label}
+                    className={cx(
+                      header.megaGroup,
+                      header.megaGroupReveal,
+                      megaRevealed ? header.megaGroupRevealOpen : header.megaGroupRevealClosed,
+                    )}
+                    style={{ transitionDelay: `${index * 60}ms` }}
+                  >
+                    <p className={header.megaGroupLabel}>{group.label}</p>
+                    <ul className={header.megaGroupList}>
+                      {group.items.map((item) => (
+                        <li key={item.href}>
+                          <Link href={item.href} onClick={closeMenu} className={header.megaItem}>
+                            {item.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
+              <div
+                className={cx(
+                  header.megaPromo,
+                  header.megaGroupReveal,
+                  megaRevealed ? header.megaGroupRevealOpen : header.megaGroupRevealClosed,
+                )}
+                style={{ transitionDelay: `${megaContent.megaMenu.length * 60}ms` }}
+              >
+                <p className={header.megaPromoHeading}>{megaMenuPromo.heading}</p>
+                <div className={header.megaPromoRow}>
+                  <p className={header.megaPromoText}>{megaMenuPromo.description}</p>
+                  {megaMenuPromo.bullets.map((bullet) => (
+                    <div key={bullet} className={header.megaPromoBullet}>
+                      <Sparkle className={header.megaPromoIcon} aria-hidden="true" fill="currentColor" />
+                      <span>{bullet}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </div>
+
+      <MobileNav
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        brand={brand}
+        logo={logo}
+        links={mobileLinks}
+        contact={contact}
+        social={social}
+        returnFocusTo={menuButtonRef}
+      />
+    </header>
+  );
+}
