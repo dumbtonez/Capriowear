@@ -2442,13 +2442,20 @@ export const footer = {
   /* Mobile: one flat column, gap-24 between every block, matching
      container-p's own 20px mobile side inset exactly (confirmed via
      get_metadata: the frame's own real inset is 20px, not a coincidence). */
-  mobileOuter: "container-p flex flex-col items-start gap-6 pb-6 pt-10 xl:hidden",
+  // pt-14 (56px, owner: "add space of 56px on top of the logo" -- same
+  // request as desktop's own `desktopInner`'s `pt-14`). Was `pt-10` (40px,
+  // this container's own pre-existing base padding, unrelated to the
+  // request) with a separate `mt-14` added on `mobileBrandGroup` below --
+  // the two stacked to a real 96px instead of replacing each other, the
+  // same doubling bug desktop's own `desktopInner` comment already
+  // documents being caught and fixed there; never mirrored here until now.
+  // Single value on the outer container, same pattern as desktop, not an
+  // extra margin on the brand group.
+  mobileOuter: "container-p flex flex-col items-start gap-6 pb-6 pt-14 xl:hidden",
   // No longer holds the tagline (owner, 2026-09-06: moved above the
   // description paragraph, same as desktop -- see `mobileDescriptionGroup`
   // below), so this is just the logo now, not a real "group" any more.
-  // mt-14 (56px, same "space above the logo" request as desktop's own
-  // `desktopBrandGroup`).
-  mobileBrandGroup: "mt-14 flex flex-col items-start gap-3",
+  mobileBrandGroup: "flex flex-col items-start gap-3",
   // `stacked` geometry (WEAR below CAPRIO, Figma node 680:394), not the old
   // side-by-side mark this used to render -- owner-shared mobile footer
   // frame (node 590:1421, 2026-09-06) shows the same stacked mark already
