@@ -2326,18 +2326,37 @@ export const exhibitions = {
 // desktop is a multi-row grid (brand/social, description/nav columns,
 // contact/address), mobile is one flat vertical stack (every block, gap-24,
 // in reading order) with 3 explicit dividers instead of desktop's single
-// one. `root` carries the whole "reveal" transition: `sticky bottom-0` on
-// the footer's own root -- confirmed in isolation (2026-08-26) that this
-// keeps the box pinned to the viewport's bottom edge for the WHOLE scroll
-// range, not just near the page's end (the mistaken assumption this was
-// first built under, since that's how afternow.co/services/ reads
-// visually). The actual "reveal" comes entirely from stacking order, not
-// scroll timing: `z-0` here loses to `<main>`'s own `relative z-10` (set
-// in app/page.tsx) wherever they overlap on screen, so every section's own
-// opaque background keeps covering this box during normal scrolling --
-// it only becomes visible once main's real content has scrolled past that
-// screen position. Applies at both breakpoints (the mechanism itself isn't
-// breakpoint-specific).
+// one.
+//
+// `root` used to carry the "reveal" transition itself via `sticky bottom-0`
+// -- removed 2026-09-06 (owner report: "the footer still has not space from
+// the top of the logo... logo is being cut"). `position: sticky` pins an
+// element to a viewport edge for its *entire* "stuck" duration; since this
+// footer's own real desktop height (826px) is taller than most real laptop
+// browser windows (1280x720, 1366x768, even 1440x900 once real browser
+// chrome is subtracted -- all *shorter* target viewports in
+// tests/screenshots.spec.ts's own list), the sticky-bottom trick could only
+// ever show the footer's own bottom-aligned slice: the top 56px gap and the
+// logo above it were permanently unreachable by scrolling, not just tight,
+// for the entire time the footer was "stuck" (confirmed live at 1440x650:
+// the logo's own top measured -118px, fully above the visible viewport).
+// `root` is now plain, ordinary document flow -- `relative z-0` only for
+// the stacking order `<main>` still needs during its own overlap (below),
+// not for any positioning trick of its own -- so the footer can be any
+// height, on any page, at any real viewport, and is always fully
+// scrollable/visible, never clipped.
+//
+// The "reveal" itself now lives on `<main>` instead
+// (`components/RevealMain.tsx`, wrapping every page's own `<main>`): a real,
+// live-measured negative `margin-bottom` (off this actual rendered `<footer>`
+// element, not a hardcoded per-breakpoint guess) pulls the footer up
+// underneath `<main>`'s own last N pixels, where `<main>`'s existing
+// `relative z-10` + opaque background (unchanged, set per-page) covers it
+// during that overlap -- so the visible "reveal" mechanic (main's own
+// content scrolling normally, uncovering the footer as it goes) is
+// unchanged from before; only the fragile, viewport-height-dependent
+// sticky-on-a-tall-box mechanism underneath it changed. See
+// `RevealMain.tsx`'s own header comment for the full mechanism.
 //
 // A visible seam shadow was tried on `root` itself first (a box-shadow cast
 // upward from Footer's own top edge) and reverted the same session -- it
@@ -2353,7 +2372,7 @@ export const exhibitions = {
 // visible at whatever point the reveal currently sits -- not tied to
 // Footer's own fixed content position the way a shadow on `root` would be.
 export const footer = {
-  root: "sticky bottom-0 z-0 bg-paper text-ink",
+  root: "relative z-0 bg-paper text-ink",
 
   /* Desktop */
   desktopOuter: "hidden xl:block",

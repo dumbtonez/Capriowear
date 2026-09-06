@@ -11,6 +11,7 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import { Logo } from "@/components/Logo";
+import { RevealMain } from "@/components/RevealMain";
 import { CategoryBanner } from "@/components/sections/CategoryBanner";
 import { CategoryFilters } from "@/components/sections/CategoryFilters";
 import { CategoryMetaStrip } from "@/components/sections/CategoryMetaStrip";
@@ -129,7 +130,7 @@ export default async function CategoryPage({ params }: PageProps<"/activewear/[c
           matches the same classes app/page.tsx's own `<main>` already
           uses for the identical reason.
           */}
-      <main className="relative z-10 bg-paper">
+      <RevealMain className="relative z-10 bg-paper">
         <CategoryBanner
           breadcrumbItems={[
             { label: "Home", href: "/" },
@@ -361,7 +362,7 @@ export default async function CategoryPage({ params }: PageProps<"/activewear/[c
             desktop CTAs are the header and the closing FinalCta above), so
             only `ProductCtasMobileBar` (not `ProductCtas`) is used here. */}
         <ProductCtasMobileBar primaryCta={home.nav.cta} />
-      </main>
+      </RevealMain>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />
     </>

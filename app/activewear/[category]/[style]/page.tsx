@@ -20,10 +20,10 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
+import { RevealMain } from "@/components/RevealMain";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
-import { ProductCategoryLinks } from "@/components/sections/ProductCategoryLinks";
 import { FINAL_CTA_MARKER_ID, ProductCtas, ProductCtasMobileBar } from "@/components/sections/ProductCtas";
 import { ProductGallery } from "@/components/sections/ProductGallery";
 import { ProductHighlights } from "@/components/sections/ProductHighlights";
@@ -150,14 +150,6 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
   // separate arrays they're authored as.
   const faqItems = [categoryEntityFaq(data.category), ...(data.product.faqs ?? []), ...pdpFaqOperational];
 
-  // Sibling PDP links (SEO audit, 2026-09-02, rule 6) -- published styles
-  // only, excluding this one (a draft sibling has no PDP route, so linking
-  // to one would be a dead link). See ProductCategoryLinks.tsx's own
-  // header comment.
-  const siblingStyles = data.category.styleCards
-    .filter((card) => card.status === "published" && card.slug !== data.product.slug)
-    .map((card) => ({ label: card.pdpTitle ?? card.cardTitle, href: card.href }));
-
   // Absolute URL for Product schema's own `image` (SEO audit, 2026-09-07):
   // `images[0].src` is root-relative (e.g. "/products/x.jpg"), same as
   // every other internal `href` on this site, but `lib/schema.ts`'s own
@@ -192,7 +184,7 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
           instead of staying hidden until real content has scrolled past
           it. Found live while verifying ProductGallery below (2026-08-31),
           pre-existing on this page since its own first build. */}
-      <main className="relative z-10 bg-paper">
+      <RevealMain className="relative z-10 bg-paper">
         {/* Visible strip hidden on mobile only, CSS-only (owner request,
             2026-08-31: "hide the breadcrumb visually on mobile only...
             Never conditionally render it out of the DOM"). `hidden
@@ -440,18 +432,6 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
             immediately before FinalCta so the bar slides away the instant
             this section is reached, not only once the whole page (Footer)
             is reached. */}
-        {/* ProductCategoryLinks (SEO audit, 2026-09-02, rule 6) -- a real
-            "Back to all [Category]" link plus any other published sibling
-            styles, so every PDP has at least one crawlable upward link at
-            every breakpoint (the breadcrumb's own upward link is
-            CSS-hidden below `md`, see Breadcrumb's own usage above). Plain,
-            undesigned markup -- no Figma frame for this block. */}
-        <ProductCategoryLinks
-          categoryLabel={data.category.menuLabel}
-          categoryHref={`/activewear/${data.category.slug}`}
-          siblings={siblingStyles}
-        />
-
         <div id={FINAL_CTA_MARKER_ID} aria-hidden="true" />
         <FinalCta
           content={{
@@ -483,7 +463,7 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
             ProductCtasMobileBar's own IntersectionObserver. Hidden at `xl`,
             where this bar doesn't render at all. */}
         <ProductCtasMobileBar primaryCta={home.nav.cta} />
-      </main>
+      </RevealMain>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />
     </>

@@ -8,15 +8,17 @@
 // stacked column).
 //
 // The "reveal" scroll transition (owner reference, 2026-08-26:
-// https://afternow.co/services/) is `sticky bottom-0 z-0` on this section's
-// own root, PLUS `<main>`'s own `relative z-10` in app/page.tsx -- both are
-// required. Sticky alone pins this box to the viewport's bottom edge for
-// the entire scroll range, not just near the page's end (confirmed in
-// isolation, 2026-08-26); the reveal itself comes from `<main>` outranking
-// it in stacking order, so every section's own opaque background keeps
-// covering this box during normal scrolling, and it only becomes visible
-// once main's real content has scrolled past that screen position. See the
-// longer note on the `footer` recipe in components/ui/styles.ts.
+// https://afternow.co/services/) no longer uses `position: sticky` on this
+// section's own root -- removed 2026-09-06, see the `footer` recipe's own
+// header comment (components/ui/styles.ts) and components/RevealMain.tsx
+// for why (a sticky-bottom box taller than the viewport permanently clips
+// its own top content, which this footer's real height hits on most real
+// laptop windows). The reveal now comes from `RevealMain` (wrapping every
+// page's own `<main>`) pulling this footer up underneath `<main>` via a
+// real, live-measured negative margin, with `<main>`'s own `relative z-10`
+// + opaque background still doing the actual covering during that overlap
+// -- this component itself needs no special positioning any more, just
+// `relative z-0` for stacking order.
 //
 // Social links read from content/site.ts's ORGANIZATION.sameAs (the same
 // array already feeding organizationSchema()), not a second copy -- matched

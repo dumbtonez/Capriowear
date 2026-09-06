@@ -16,10 +16,10 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
+import { RevealMain } from "@/components/RevealMain";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
-import { ProductCategoryLinks } from "@/components/sections/ProductCategoryLinks";
 import { FINAL_CTA_MARKER_ID, ProductCtas, ProductCtasMobileBar } from "@/components/sections/ProductCtas";
 import { ProductGallery } from "@/components/sections/ProductGallery";
 import { ProductHighlights } from "@/components/sections/ProductHighlights";
@@ -118,10 +118,6 @@ export default async function TeamwearStylePage({ params }: PageProps<"/teamwear
 
   const faqItems = [categoryEntityFaq(data.category), ...(data.product.faqs ?? []), ...pdpFaqOperational];
 
-  const siblingStyles = data.category.styleCards
-    .filter((card) => card.status === "published" && card.slug !== data.product.slug)
-    .map((card) => ({ label: card.pdpTitle ?? card.cardTitle, href: card.href }));
-
   // Absolute URL for Product schema's own `image` -- same fix as
   // app/activewear/[category]/[style]/page.tsx's own `productImage`, see
   // that file's comment.
@@ -142,7 +138,7 @@ export default async function TeamwearStylePage({ params }: PageProps<"/teamwear
         secondaryCta={home.nav.secondaryCta}
       />
 
-      <main className="relative z-10 bg-paper">
+      <RevealMain className="relative z-10 bg-paper">
         <Breadcrumb items={breadcrumbItems} className="hidden md:block" />
         <JsonLd
           data={breadcrumbSchema(
@@ -206,12 +202,6 @@ export default async function TeamwearStylePage({ params }: PageProps<"/teamwear
         <Faq content={{ h2: "Top questions from B2B buyers", items: faqItems }} />
         <JsonLd data={faqSchema(faqItems)} />
 
-        <ProductCategoryLinks
-          categoryLabel={data.category.menuLabel}
-          categoryHref={`/teamwear/${data.category.slug}`}
-          siblings={siblingStyles}
-        />
-
         <div id={FINAL_CTA_MARKER_ID} aria-hidden="true" />
         <FinalCta
           content={{
@@ -224,7 +214,7 @@ export default async function TeamwearStylePage({ params }: PageProps<"/teamwear
         />
 
         <ProductCtasMobileBar primaryCta={home.nav.cta} />
-      </main>
+      </RevealMain>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />
     </>
