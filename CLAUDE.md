@@ -81,6 +81,14 @@ tests/screenshots.spec.ts  screenshot + overflow QA across all target viewports
 6. `npx playwright test tests/screenshots.spec.ts` passes at all viewports.
 7. The knowledge base has been updated to match.
 
+## Git workflow
+- Commit your work at the end of every task, without being asked. A task is not complete until its changes are committed.
+- Before committing, run `git status --short` and make sure only intended files are staged.
+- Write a clear, specific commit message describing what changed (e.g. "Add fight-wear teamwear category: PLP + 2 draft PDPs").
+- After committing, show `git log --oneline -3` so I can confirm it landed.
+- Never run `git clean`, `git reset --hard`, or `git checkout -- .` on uncommitted work without asking first — these destroy uncommitted changes.
+- If we're on the `main` branch and about to start a sizable piece of work, offer to create a branch first.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know
