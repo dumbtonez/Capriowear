@@ -30,7 +30,13 @@ import type { Category, FaqEntry, PdpSpecHighlight } from "./types";
 export function categoryEntityFaq(
   category: Pick<
     Category,
-    "menuLabel" | "styleCards" | "manufacturerNoun" | "productNounPlural" | "entityExampleStyles" | "entityFabrics"
+    | "menuLabel"
+    | "styleCards"
+    | "manufacturerNoun"
+    | "productNounPlural"
+    | "entityExampleStyles"
+    | "entityFabrics"
+    | "audienceClause"
   >,
 ): FaqEntry {
   // Four optional overrides on `Category` itself (owner spec, 2026-09-02,
@@ -74,9 +80,10 @@ export function categoryEntityFaq(
       .map((card) => card.cardTitle)
       .join(", ")}`;
   const fabricsClause = category.entityFabrics ? ` in ${category.entityFabrics}` : "";
+  const audienceClause = category.audienceClause ?? "for activewear brands and teamwear suppliers worldwide";
   return {
     q: "What does Capriowear manufacture?",
-    a: `Capriowear is a custom ${manufacturerNoun} manufacturer for activewear brands and teamwear suppliers worldwide. We produce private label ${productNounPlural} from fabric to packaging, including ${exampleStyles}${fabricsClause}, with low minimums and full customization. ${companyIdentity}`,
+    a: `Capriowear is a custom ${manufacturerNoun} manufacturer ${audienceClause}. We produce private label ${productNounPlural} from fabric to packaging, including ${exampleStyles}${fabricsClause}, with low minimums and full customization. ${companyIdentity}`,
   };
 }
 
