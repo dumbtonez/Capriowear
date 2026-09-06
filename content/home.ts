@@ -2,6 +2,7 @@
 // Single source of truth for all Capriowear homepage copy.
 // Edit copy here only. Verify every string against the Figma design file; where the
 // wireframe was hard to read it is marked with // VERIFY. No en dashes or em dashes.
+import { companyIdentity } from "./site";
 
 // Activewear's category breakdown -- shared verbatim between the desktop
 // mega menu (Header.tsx, Figma node 493:3140) and the mobile drawer's own
@@ -44,7 +45,7 @@ export const activewearMegaMenu = [
     label: "OUTWEAR & SUITS",
     items: [
       { label: "Jackets", href: "/activewear/jackets" },
-      { label: "Track Jackets & Zip-Ups", href: "/activewear/track-jackets-zip-ups" },
+      { label: "Track Jackets & Zip-Ups", href: "/activewear/track-jackets" },
       { label: "Tracksuits", href: "/activewear/tracksuits" },
       { label: "Sweatsuits", href: "/activewear/sweatsuits" },
       { label: "Running Wear", href: "/activewear/running-wear" },
@@ -65,25 +66,35 @@ export const activewearMegaMenu = [
 // hrefs follow the same `/teamwear/[slug]` convention, reusing the exact
 // slugs already used by whatWeMake's own Teamwear tiles for the same real
 // products (Soccer/Basketball/Football Uniforms, the Fighting Wear entry).
-const teamwearMegaMenu = [
+// Cricket, then Basketball, then Rugby, then Baseball, then Volleyball,
+// moved first with their own hrefs corrected to their real slugs
+// ("/teamwear/cricket", "/teamwear/basketball", "/teamwear/rugby",
+// "/teamwear/baseball", "/teamwear/volleyball" -- owner spec: all five are
+// Teamwear's real, built categories now, content/teamwear/{cricket,
+// basketball,rugby,baseball,volleyball}.ts) -- same "confirm the mega-menu
+// href matches the real slug" check every category has followed since the
+// Track Jackets & Zip-Ups mega-menu mismatch, 2026-08-31. Every other item
+// in this group has no content file yet and 404s if clicked, same as before
+// this change -- unrelated to this task, left as-is.
+export const teamwearMegaMenu = [
   {
     label: "UNIFORMS",
     items: [
-      { label: "Soccer Uniforms", href: "/teamwear/soccer-uniforms" },
-      { label: "Basketball Uniforms", href: "/teamwear/basketball-uniforms" },
-      { label: "Football Uniforms", href: "/teamwear/football-uniforms" },
-      { label: "Baseball Uniforms", href: "/teamwear/baseball-uniforms" },
-      { label: "Volleyball Uniforms", href: "/teamwear/volleyball-uniforms" },
-      { label: "Ice Hockey Jerseys", href: "/teamwear/ice-hockey-jerseys" },
-      { label: "Rugby Uniforms", href: "/teamwear/rugby-uniforms" },
-      { label: "Cricket Uniforms", href: "/teamwear/cricket-uniforms" },
+      { label: "Cricket Uniforms", href: "/teamwear/cricket" },
+      { label: "Basketball Uniforms", href: "/teamwear/basketball" },
+      { label: "Rugby Uniforms", href: "/teamwear/rugby" },
+      { label: "Baseball Uniforms", href: "/teamwear/baseball" },
+      { label: "Volleyball Uniforms", href: "/teamwear/volleyball" },
+      { label: "Soccer Uniforms", href: "/teamwear/soccer" },
+      { label: "Football Uniforms", href: "/teamwear/football" },
+      { label: "Ice Hockey Jerseys", href: "/teamwear/ice-hockey" },
     ],
   },
   {
     label: "OTHERS",
     items: [
-      { label: "Cycling Kits", href: "/teamwear/cycling-kits" },
-      { label: "Rash Guards & Fight Wear", href: "/teamwear/rash-guards-fight-wear" },
+      { label: "Cycling Kits", href: "/teamwear/cycling" },
+      { label: "Rash Guards & Fight Wear", href: "/teamwear/fight-wear" },
     ],
   },
 ];
@@ -329,10 +340,10 @@ export const home = {
         ],
         href: "/teamwear",
         tiles: [
-          { label: "Soccer Uniforms", href: "/teamwear/soccer-uniforms" },
+          { label: "Soccer Uniforms", href: "/teamwear/soccer" },
           { label: "Basketball Uniforms", href: "/teamwear/basketball-uniforms" },
-          { label: "Football Uniforms", href: "/teamwear/football-uniforms" },
-          { label: "Fighting Wear", href: "/teamwear/rash-guards-fight-wear" },
+          { label: "Football Uniforms", href: "/teamwear/football" },
+          { label: "Fighting Wear", href: "/teamwear/fight-wear" },
         ],
       },
     ],
@@ -391,7 +402,7 @@ export const home = {
         mobileHeight: 43,
       },
       {
-        name: "IMAC (No Child Labour)",
+        name: "IMAC (No Child Labor)",
         src: "/logos/cert-imac.png",
         width: 135,
         height: 135,
@@ -462,7 +473,7 @@ export const home = {
       "AQL 2.5 inspection",
       "ISO 9001 certified",
       "BSCI ethical audit",
-      "No child labour",
+      "No child labor",
       "OEKO-TEX materials",
     ],
   },
@@ -512,7 +523,11 @@ export const home = {
     items: [
       {
         q: "What services do you offer?",
-        a: "Capriowear is a custom activewear and teamwear manufacturer offering OEM, ODM and private label production. From your tech pack, sketch or idea, we handle fabric sourcing, patterns and grading, fit and sampling, bulk production, printing and branding, quality control and packaging. One factory, start to finish.",
+        // companyIdentity (content/site.ts) interpolated, not retyped, so
+        // this can never drift out of sync with the same sentence used
+        // everywhere else (entity-intro spec, 2026-09-01) -- the rest of
+        // this answer is bespoke, not one of the four stored variants.
+        a: `${companyIdentity} We offer OEM, ODM and private label production. From your tech pack, sketch or idea, we handle fabric sourcing, patterns and grading, fit and sampling, bulk production, printing and branding, quality control and packaging. One factory, start to finish.`,
       },
       {
         q: "What's your minimum order quantity (MOQ)?",
@@ -536,7 +551,7 @@ export const home = {
       },
       {
         q: "What certifications do you hold?",
-        a: "We hold ISO 9001, ISO 45001 and ISO 14001, plus CE and BSCI, with no child labour monitoring (IMAC). We are members of PSGMEA, PRGMEA and WFSGI, and we welcome third-party inspection.",
+        a: "We hold ISO 9001, ISO 45001 and ISO 14001, plus CE and BSCI, with no child labor monitoring (IMAC). We are members of PSGMEA, PRGMEA and WFSGI, and we welcome third-party inspection.",
       },
       {
         q: "Will my designs stay protected?",
@@ -612,7 +627,8 @@ export const home = {
   // before their pages existed).
   footer: {
     tagline: "Capriowear, a division of Caprio Sports",
-    description: "OEM and ODM activewear and teamwear manufacturer. Factory-direct from Sialkot, Pakistan.",
+    description:
+      "Custom activewear and teamwear manufacturer, private label from fabric to packaging. Cut-and-sew, factory-direct from Sialkot, Pakistan.",
     nav: {
       columnOne: [
         { label: "Services", href: "/capabilities" },

@@ -36,6 +36,11 @@ export type ProductGridProps = {
 const MOBILE_PAGE_SIZE = 8;
 const DESKTOP_PAGE_SIZE = 9;
 
+// The category title block (CategoryMetaStrip.tsx's own root, "Sports Bras"
+// etc.) -- see this component's pagination-scroll comment below for why
+// this, not the grid, is the real target.
+const PLP_TITLE_ID = "plp-title";
+
 export function ProductGrid({ cards }: ProductGridProps) {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(DESKTOP_PAGE_SIZE);
@@ -57,6 +62,43 @@ export function ProductGrid({ cards }: ProductGridProps) {
   if (page > totalPages) setPage(totalPages);
   const pageCards = cards.slice((page - 1) * pageSize, page * pageSize);
 
+  // Owner report, 2026-09-03: clicking a page number left the scroll
+  // position where it was (mid-page, wherever Pagination itself sits),
+  // instead of returning to the top of the product list. Two earlier
+  // attempts both scrolled the GRID's own container (not the section root,
+  // which would include CategoryMetaStrip's title/filters above it) into
+  // view -- confirmed live, twice, to still "land in the middle" (owner,
+  // 2026-09-03, both directions) no matter the timing (synchronous, one
+  // `requestAnimationFrame`, a double `requestAnimationFrame`) or scroll
+  // mode (animated "smooth", instant). The actual bug was never the timing
+  // -- it was the TARGET: the owner's own words, "it should land me ...
+  // on top of the title where it says sports bras", name the category
+  // title block (CategoryMetaStrip.tsx's own root, rendered by the page
+  // ABOVE this grid, not inside it) -- scrolling the grid's own top into
+  // view instead left that title scrolled out of view above the fold,
+  // which reads as "landing in the middle" regardless of how precisely
+  // the grid itself was aligned. Fixed by targeting `#plp-title` (that
+  // root's own id) via `getElementById`, since it lives in a sibling
+  // component this one has no ref to. Double `requestAnimationFrame` is
+  // kept regardless -- a real, independent fix for the grid's own
+  // count/height changing under the click (measure after the browser has
+  // actually painted the new page, not before).
+  //
+  // `behavior: "instant"` was a deliberate step while the target was still
+  // wrong -- a "moving target" theory turned out not to be the real bug
+  // (see above), so with the target now fixed (`#plp-title`'s own position
+  // never changes with the page), owner request, 2026-09-03: bring back an
+  // animated transition into the new page. `"smooth"` is safe again now
+  // that there's nothing shifting underneath it to race against.
+  const handlePageChange = (nextPage: number) => {
+    setPage(nextPage);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.getElementById(PLP_TITLE_ID)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  };
+
   return (
     <div className={productGrid.root}>
       <div className={productGrid.grid}>
@@ -65,7 +107,7 @@ export function ProductGrid({ cards }: ProductGridProps) {
         ))}
       </div>
 
-      {totalPages > 1 && <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />}
+      {totalPages > 1 && <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />}
     </div>
   );
 }

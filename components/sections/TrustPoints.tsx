@@ -7,18 +7,40 @@
 import { Sparkle } from "lucide-react";
 
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
+import { cx } from "@/components/ui/cx";
 import { trustPoints } from "@/components/ui/styles";
 
 export type TrustPointsProps = {
   heading: string;
   subline: string;
   points: string[];
+  /**
+   * Desktop side padding + title max-width, paired per page: the PLP's own
+   * 138px padding with a 650px title cap (Figma node 579:5493, the
+   * default), vs. the PDP's 80px padding with no title cap (node 634:5189,
+   * owner, 2026-09-01: "80px gap from right and left" -- the title was
+   * inheriting the PLP's 650px cap and wrapping mid-sentence instead of
+   * using the wider row's full width). A variant token rather than an
+   * arbitrary className override, since two conflicting `px-*`/`max-w-*`
+   * utilities can't reliably override each other by class order.
+   */
+  sidePadding?: "plp" | "pdp";
 };
 
-export function TrustPoints({ heading, subline, points }: TrustPointsProps) {
+export function TrustPoints({ heading, subline, points, sidePadding = "plp" }: TrustPointsProps) {
   return (
-    <section className={trustPoints.section}>
-      <div className={trustPoints.headingBlock}>
+    <section
+      className={cx(
+        trustPoints.section,
+        sidePadding === "pdp" ? trustPoints.sidePaddingPdp : trustPoints.sidePaddingPlp,
+      )}
+    >
+      <div
+        className={cx(
+          trustPoints.headingBlock,
+          sidePadding === "pdp" ? trustPoints.headingMaxWidthPdp : trustPoints.headingMaxWidthPlp,
+        )}
+      >
         <h2 className={trustPoints.heading}>{heading}</h2>
         <p className={trustPoints.subline}>{subline}</p>
       </div>

@@ -16,6 +16,38 @@
 // independently-toggleable groups -- this design shows exactly one open
 // row) drive it. Desktop's <table> renders unchanged above xl; the
 // accordion below xl.
+//
+// Optional `weightTiers` table (owner spec, 2026-09-02, T-Shirts
+// category): a second, smaller real <table> (Tier / GSM / Best for by
+// default) between the main table/accordion and `note` -- rendered only
+// when the prop is actually passed, so a category with no tiered-by-weight
+// fabric range (Leggings, Sports Bras, Shorts) renders nothing extra at
+// all, confirmed unchanged.
+//
+// Mobile no longer scrolls horizontally for this secondary table, or for
+// the "decoration" structuredBlock variant below (owner spec, 2026-09-06:
+// "I dont like to use horizontal scroll for this section, let's use the
+// same structure as fabric options... wherever this horizontal scroll
+// comes"). `SecondaryTable` below renders the exact same desktop-table /
+// mobile-accordion split the main fabric table already uses (hidden below
+// xl / xl:hidden), reusing the same `accordionStack`/`accordionItem`/etc.
+// recipe keys as one shared local component instead of copy-pasting the
+// accordion markup a third time -- fixed once here, so it's fixed on every
+// page that renders either variant (weightTiers or decoration), not just
+// Cricket/Basketball.
+//
+// Configurable column headers (owner spec, 2026-09-02, Compression & Base
+// Layers category): `weightTiersHeaders` swaps the 3 `<th>` labels only
+// (default "Tier"/"GSM"/"Best for") -- the underlying `WeightTier` data
+// shape (`{tier, gsm, bestFor}`) is unchanged and reused as-is for
+// Compression & Base Layers' own "Level"/"mmHg"/"Used for" table (its
+// `tier` field holds "Light"/"Medium"/"Firm", `gsm` holds the mmHg range
+// -- same 3 generic columns, just relabeled and re-purposed for a
+// genuinely different kind of tiered data, not a new table type). Every
+// prior category that already uses `weightTiers` (Hoodies, Sweatshirts,
+// Long-Sleeve Tops, Joggers & Track Pants) omits this prop, so their own
+// "Tier"/"GSM"/"Best for" headers render exactly as before -- confirmed
+// unchanged.
 "use client";
 
 import { useState } from "react";
@@ -24,16 +56,131 @@ import { FilterChevronIcon } from "@/components/icons/FilterChevronIcon";
 import { TextReveal } from "@/components/TextReveal";
 import { cx } from "@/components/ui/cx";
 import { fabricOptions } from "@/components/ui/styles";
-import type { FabricOption, NoteSegment } from "@/content/activewear/types";
+import type { FabricOption, NoteSegment, StructuredBlock, WeightTier, WeightTiersHeaders } from "@/content/activewear/types";
+
+const DEFAULT_WEIGHT_TIERS_HEADERS: WeightTiersHeaders = { tier: "Tier", value: "GSM", bestFor: "Best for" };
+
+type SecondaryTableRow = { key: string; title: string; col2: string; col3: string };
+
+/**
+ * The secondary table both `weightTiers` and `structuredBlock`'s
+ * "decoration" variant render through -- a real `<table>` at `xl`+, a
+ * single-open accordion (same recipe keys as the main fabric table's own
+ * mobile accordion above) below it, never a horizontally-scrolling table
+ * (owner spec, 2026-09-06). Not exported -- purely local to this file, the
+ * one place either variant renders.
+ */
+function SecondaryTable({ headers, rows }: { headers: [string, string, string]; rows: SecondaryTableRow[] }) {
+  const [openIndex, setOpenIndex] = useState(0);
+  const [h1, h2, h3] = headers;
+
+  return (
+    <>
+      <div className={fabricOptions.weightTiersWrap}>
+        <table className={fabricOptions.weightTiersTable}>
+          <thead>
+            <tr className={fabricOptions.weightTiersHeaderRow}>
+              <th scope="col" className={fabricOptions.weightTiersHeaderCell}>
+                {h1}
+              </th>
+              <th scope="col" className={fabricOptions.weightTiersHeaderCell}>
+                {h2}
+              </th>
+              <th scope="col" className={fabricOptions.weightTiersHeaderCell}>
+                {h3}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.key} className={fabricOptions.weightTiersRow}>
+                <td className={fabricOptions.weightTiersTierCell}>{row.title}</td>
+                <td className={fabricOptions.weightTiersGsmCell}>{row.col2}</td>
+                <td className={fabricOptions.weightTiersBestForCell}>{row.col3}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className={fabricOptions.accordionStack}>
+        {rows.map((row, index) => {
+          const isOpen = index === openIndex;
+
+          return (
+            <div
+              key={row.key}
+              className={cx(fabricOptions.accordionItem, isOpen ? fabricOptions.accordionItemOpen : fabricOptions.accordionItemClosed)}
+            >
+              <button
+                type="button"
+                onClick={() => setOpenIndex(isOpen ? -1 : index)}
+                aria-expanded={isOpen}
+                className={fabricOptions.accordionHeader}
+              >
+                <span className={isOpen ? undefined : fabricOptions.accordionCollapsedTitle}>{row.title}</span>
+                <FilterChevronIcon className={cx(fabricOptions.accordionChevron, isOpen && fabricOptions.accordionChevronOpen)} />
+              </button>
+              <div className={isOpen ? fabricOptions.accordionDetailGridOpen : fabricOptions.accordionDetailGrid}>
+                <div className={fabricOptions.accordionDetailClip}>
+                  <div className={fabricOptions.accordionDetail}>
+                    <div className={fabricOptions.accordionField}>
+                      <p className={fabricOptions.accordionLabel}>{h2}</p>
+                      <p className={fabricOptions.accordionValue}>{row.col2}</p>
+                    </div>
+                    <div className={fabricOptions.accordionField}>
+                      <p className={fabricOptions.accordionLabel}>{h3}</p>
+                      <p className={fabricOptions.accordionValue}>{row.col3}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+}
+
+function NoteParagraph({ segments }: { segments: NoteSegment[] }) {
+  return (
+    <p className={fabricOptions.note}>
+      {segments.map((segment, index) =>
+        segment.bold ? (
+          <strong key={index} className={fabricOptions.noteBold}>
+            {segment.text}
+          </strong>
+        ) : (
+          <span key={index}>{segment.text}</span>
+        ),
+      )}
+    </p>
+  );
+}
 
 export type FabricOptionsProps = {
   eyebrow: string;
   heading: string;
   options: FabricOption[];
+  /** Optional secondary Tier/GSM/Best-for table -- omit for a category with no tiered-by-weight (or by-level) fabric range. Prefer `structuredBlock` (type "weightTiers") for a NEW category; this pair stays as the direct path every existing category already uses, unchanged. */
+  weightTiers?: WeightTier[];
+  /** Optional column-header override for `weightTiers` above (e.g. Compression & Base Layers' "Level"/"mmHg"/"Used for") -- defaults to "Tier"/"GSM"/"Best for". */
+  weightTiersHeaders?: WeightTiersHeaders;
+  /** The reusable block's own discriminated-variant form (owner spec, 2026-09-05, Teamwear/Cricket) -- see `StructuredBlock`'s own comment. Only the "decoration" variant renders anything here; `weightTiers`/`weightTiersHeaders` above stay the direct path for that variant, so passing both is harmless (only one of the two ever actually renders for a given category). */
+  structuredBlock?: StructuredBlock;
   note: NoteSegment[];
 };
 
-export function FabricOptions({ eyebrow, heading, options, note }: FabricOptionsProps) {
+export function FabricOptions({
+  eyebrow,
+  heading,
+  options,
+  weightTiers,
+  weightTiersHeaders = DEFAULT_WEIGHT_TIERS_HEADERS,
+  structuredBlock,
+  note,
+}: FabricOptionsProps) {
   const [firstRow, ...restRows] = options;
   const [openIndex, setOpenIndex] = useState(0);
 
@@ -143,17 +290,31 @@ export function FabricOptions({ eyebrow, heading, options, note }: FabricOptions
         })}
       </div>
 
-      <p className={fabricOptions.note}>
-        {note.map((segment, index) =>
-          segment.bold ? (
-            <strong key={index} className={fabricOptions.noteBold}>
-              {segment.text}
-            </strong>
-          ) : (
-            <span key={index}>{segment.text}</span>
-          ),
-        )}
-      </p>
+      {weightTiers && weightTiers.length > 0 ? (
+        <SecondaryTable
+          headers={[weightTiersHeaders.tier, weightTiersHeaders.value, weightTiersHeaders.bestFor]}
+          rows={weightTiers.map((row) => ({ key: row.tier, title: row.tier, col2: row.gsm, col3: row.bestFor }))}
+        />
+      ) : null}
+
+      {/* Decoration-method variant of the same reusable block (owner spec,
+          2026-09-05, Teamwear/Cricket) -- its own eyebrow + H3 (24px gap,
+          owner spec, 2026-09-06 -- `decorationHeading`'s own `mt-6`) above a
+          3-column Method / Best for / Notes table, rendered through the same
+          `SecondaryTable` the `weightTiers` block above uses. */}
+      {structuredBlock && structuredBlock.type === "decoration" ? (
+        <div className={fabricOptions.decorationWrap}>
+          <p className={fabricOptions.decorationEyebrow}>{structuredBlock.eyebrow}</p>
+          <h3 className={fabricOptions.decorationHeading}>{structuredBlock.heading}</h3>
+          <SecondaryTable
+            headers={["Method", "Best for", "Notes"]}
+            rows={structuredBlock.rows.map((row) => ({ key: row.method, title: row.method, col2: row.bestFor, col3: row.notes }))}
+          />
+          {structuredBlock.note ? <NoteParagraph segments={structuredBlock.note} /> : null}
+        </div>
+      ) : null}
+
+      <NoteParagraph segments={note} />
     </section>
   );
 }

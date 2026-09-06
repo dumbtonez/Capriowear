@@ -9,6 +9,16 @@
 // in length and register so design/SEO review can proceed before the
 // client supplies the real text. Spec facts and FAQ are wired into the
 // page as later sections ship.
+//
+// Scale and maintenance (owner spec, 2026-09-01): to add a new style PDP
+// to this category, add one entry to `styleCards` below (slug + the
+// fields it needs -- see StyleCard's own comments in ./types.ts for which
+// are required vs. optional-with-fallback). To add a whole new Activewear
+// category, add its own content file of this same `Category` shape and
+// register it in ./categories.ts. Neither ever touches
+// app/activewear/[category]/page.tsx or app/activewear/[category]/
+// [style]/page.tsx -- no new routes, no new schema code, no new metadata
+// code for either case.
 import type { Category } from "./types";
 
 export const leggings: Category = {
@@ -16,32 +26,45 @@ export const leggings: Category = {
   group: "Activewear",
   menuLabel: "Leggings",
   h1: "Custom Leggings Manufacturer",
-  // Owner-supplied exact copy, 2026-08-30 (SEO/AEO/GEO finalization pass).
   // No "| Capriowear" suffix here -- unlike app/page.tsx (which sits at the
   // same route segment as the root layout's title template and so is used
   // verbatim), this page is a nested child segment, and the root layout's
   // `%s | Capriowear` template DOES apply to it automatically. Including
-  // the suffix here doubled it ("...Manufacturer | Capriowear | Capriowear"),
-  // confirmed live when this page was first built -- so the rendered
-  // <title> here reads exactly "Custom Leggings Manufacturer | Private
-  // Label and OEM | Capriowear" without repeating the suffix in this field.
-  metaTitle: "Custom Leggings Manufacturer | Private Label and OEM",
+  // the suffix here doubles it.
+  //
+  // Shortened to the single-pipe form (owner request, 2026-08-30, Google
+  // display-limit rules: "Custom [Style/Category] Manufacturer |
+  // Capriowear", target ~50-60 chars, never let the title exceed ~65 where
+  // the keyword itself gets cut) -- was "Custom Leggings Manufacturer |
+  // Private Label and OEM", which rendered as a THREE-segment, 78-char
+  // title ("...Manufacturer | Private Label and OEM | Capriowear") once
+  // the layout's own " | Capriowear" suffix appended, well past Google's
+  // ~600px/~60-char truncation point. "Private Label and OEM" already
+  // lives in `metaDescription` below (front-loaded, well inside its own
+  // first 155 chars) -- dropping it from the title loses nothing essential.
+  // Rendered title is now "Custom Leggings Manufacturer | Capriowear", 42
+  // chars.
+  metaTitle: "Custom Leggings Manufacturer",
+  // Trimmed to ~155-160 chars for a clean SERP snippet (owner request,
+  // 2026-09-02) -- the earlier 235-char version ran well past Google's
+  // truncation point even though it fit this project's own ~270-char AEO
+  // allowance. Owner's exact given copy.
   metaDescription:
-    "Custom and private label leggings manufacturer in Sialkot, Pakistan. OEM and ODM from 50 pieces per style, nylon and recycled 4-way stretch fabrics, squat-proof, custom from fabric to packaging, samples in 10 to 14 days, DDP worldwide.",
+    "Custom leggings manufacturer, high-waisted compression, squat-proof, scrunch and pocket styles, 300 to 500 GSM, low MOQ. Capriowear.",
   // Figma-confirmed real copy (node 502:3310, revised 2026-08-28), same
   // treatment as h1 -- not a placeholder. Replaces the earlier single
   // quickAnswer subline, dropped from this design entirely.
   trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 40+ countries"],
   // Figma-confirmed real copy (node 406:3137, 2026-08-28), same treatment
   // as h1/trustBullets above -- not a placeholder.
-  gridSubline: "Every style, made to your brand spec.",
+  gridSubline: "Every style, made to your brand spec",
   // Owner request, 2026-08-30: "Change the subline under leggings heading
   // to 'Every style is available in custom fabrics & colors. Only for
   // mobile" -- replaces `gridSubline` below `xl` only (see
   // CategoryMetaStrip.tsx), picking up the "in custom fabrics & colors"
   // detail now that individual product tiles no longer show their own
   // subline on mobile (see StyleCard.cardSubline's own comment).
-  gridSublineMobile: "Every style is available in custom fabrics & colors.",
+  gridSublineMobile: "Every style is available in custom fabrics & colors",
   // Explicit, though it's also the default -- Leggings has a real Women/Men
   // split (owner, 2026-08-30: "this chips may come on some of the
   // categories but not applicable for all"), so this is written out rather
@@ -65,17 +88,17 @@ export const leggings: Category = {
   fabricHeading: "The fabrics behind the\nbig brands",
   fabricOptions: [
     {
-      fabric: "Nylon or polyamide + elastane (70 to 85% / 15 to 30%)",
+      fabric: "Nylon or polyamide + spandex (70 to 85% / 15 to 30%)",
       bestFor: "Gym, yoga, everyday compression",
       performance: "Soft hand, 4-way stretch, squat-proof, strong recovery",
     },
     {
-      fabric: "Recycled polyester + elastane",
+      fabric: "Recycled polyester + spandex",
       bestFor: "Sustainable lines",
       performance: "Eco-positioning, moisture management, 4-way stretch",
     },
     {
-      fabric: "Polyester + elastane",
+      fabric: "Polyester + spandex",
       bestFor: "Running, high-sweat training",
       performance: "Durable, quick-dry, moisture-wicking",
     },
@@ -92,10 +115,14 @@ export const leggings: Category = {
     { text: "specific fabric", bold: true },
     { text: " from your reference." },
   ],
+  // Figma-confirmed real copy (node 634:5034, 2026-09-01) -- short PDP pill
+  // labels for the same 4 fabrics `fabricOptions` above describes in full,
+  // same order.
+  fabricPills: ["Nylon spandex", "Recycled polyester spandex", "Polyester spandex", "Brushed / fleece-lined"],
   // Figma-confirmed real copy (node 579:5493, 2026-08-29), same treatment
   // as h1/trustBullets/fabricOptions -- not a placeholder.
   qualityHeading: "Built to pass the squat test",
-  qualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+  qualitySubline: "We confirm it all on your sample before a single bulk piece is cut",
   qualityPoints: [
     "Opacity tested, squat-proof",
     "Seams reinforced and stress-tested",
@@ -132,31 +159,29 @@ export const leggings: Category = {
   // not an unfinished copy-paste, since every question below it is
   // genuinely leggings-specific.
   faqHeading: "Top questions from B2B buyers",
+  // The entity-defining "What does Capriowear manufacture?" Q&A used to be
+  // hand-typed as this array's own first entry -- moved out (entity-intro
+  // spec, 2026-09-01): app/activewear/[category]/page.tsx now builds it per
+  // category via categoryEntityFaq() and prepends it at render time, so it
+  // can never drift out of sync with the same answer any other category
+  // (or a PDP under this one) generates. This array holds only the
+  // genuinely leggings-specific questions below.
   faqs: [
-    // Added as the first entry (owner request, 2026-08-30) so it's also
-    // the first question in faqSchema()'s FAQPage output -- a general
-    // "what does Capriowear make" entity-defining Q&A ahead of the more
-    // specific leggings questions below it, good for AEO/GEO answer
-    // engines looking for the broadest, most quotable framing first.
-    {
-      q: "What does Capriowear manufacture?",
-      a: "Capriowear is a custom leggings manufacturer for activewear brands and teamwear suppliers worldwide. We produce private label leggings from fabric to packaging, including high-waisted compression, flare, scrunch, and cropped styles in nylon or recycled polyester blends, with low minimums and full customization. Capriowear is the activewear and teamwear division of Caprio Sports, a cut-and-sew manufacturer in Sialkot, Pakistan.",
-    },
     {
       q: "What is your MOQ for custom leggings?",
       a: "From 50 pieces per style, and you can mix sizes freely within a colorway. Scales to full bulk.",
     },
     {
-      q: "Which fabrics do you use for leggings?",
-      a: "Nylon or polyamide with elastane, the 70 to 85% to 15 to 30% blend used by leading brands, plus recycled polyester options, in weights from 300 to 500 GSM.",
+      q: "What is the ideal GSM for compression leggings?",
+      a: "Nylon or polyamide with spandex, the 70 to 85% to 15 to 30% blend used by leading brands, plus recycled polyester options, in weights from 300 to 500 GSM, the range that holds a true compression fit.",
     },
     {
-      q: "What legging styles can you make?",
-      a: "High-waisted compression, flare and wide-leg, scrunch and ruched, V-back and crossover waistband, capri and cropped, pocket, biker and fleece-lined.",
+      q: "What is a scrunch legging, and what other styles can you make?",
+      a: "High-waisted compression, flare and wide-leg, scrunch and ruched (a center-seam construction that shapes and lifts), V-back and crossover waistband, capri and cropped, pocket, biker and fleece-lined.",
     },
     {
-      q: "Are your leggings squat-proof?",
-      a: "Yes. We use tested squat-proof knits and confirm opacity on your sample before bulk.",
+      q: "What makes leggings squat proof?",
+      a: "A tested squat-proof knit dense enough to stay opaque under stretch, confirmed on your sample before bulk.",
     },
     {
       q: "Can you match a specific fabric or a reference legging?",
@@ -198,7 +223,7 @@ export const leggings: Category = {
   // same "Request a Sample" button, same complianceTicker badges) -- only
   // this subline is category-specific.
   // Owner update, 2026-08-30.
-  ctaSubline: "Share your tech pack, sketch or a reference legging. We'll come back within 24 hours with next steps.",
+  ctaReferenceNoun: "legging",
   // Placeholder cards so the grid renders at its real size, per owner
   // note (2026-08-28): every field here is placeholder, not real product
   // copy, until real style names and photography are supplied. No literal
@@ -215,76 +240,208 @@ export const leggings: Category = {
   // StyleCard (types.ts) for why it's separate from cardTitle.
   styleCards: [
     {
-      slug: "high-waist-leggings",
-      cardTitle: "High Waist Leggings",
-      cardSubline: "Available in custom fabrics & colors",
+      // Slug/href renamed from "high-waist-leggings" (owner spec,
+      // 2026-09-01: first real PDP URL is "/activewear/leggings/
+      // high-waisted-compression") -- safe now, before any PDP was ever
+      // live at the old slug (confirmed via grep: nothing else in the
+      // codebase referenced this href directly). Renaming a slug after a
+      // PDP has actually shipped would need a 301 redirect instead; this
+      // is the one-time window where a plain rename is correct.
+      // Leggings PLP pilot (owner spec, 2026-09-02): the only published
+      // style today -- see StyleCard.status's own comment.
+      status: "published",
+      slug: "high-waisted-compression",
+      // cardTitle/cardSubline corrected to the owner's own exact PLP card
+      // rewrite spec, 2026-09-02: title form "Custom [Style] Leggings"
+      // (was the shorter "High-Waisted Compression", matching pdpTitle
+      // instead of this card format's own required full form), one
+      // distinguishing spec line "Squat-proof compression, 4-way stretch"
+      // (was "Squat-proof, 4-way stretch, compression hold", close but not
+      // the exact given wording).
+      cardTitle: "Custom High-Waisted Compression Leggings",
+      cardSubline: "Squat-proof compression, 4-way stretch",
       image: "",
       imageAlt: "Custom high-waisted compression leggings",
-      href: "/activewear/leggings/high-waist-leggings",
+      href: "/activewear/leggings/high-waisted-compression",
+      // Figma-confirmed real copy (node 634:4952, PDP breadcrumb, 2026-08-31).
+      pdpTitle: "High-Waisted Compression",
+      // Figma-confirmed real copy (node 634:4988 desktop / 638:2541 mobile,
+      // PDP product info text block, 2026-08-31).
+      sku: "CAP-LEG-01",
+      pdpHeading: "Custom High-Waisted Compression Leggings Manufacturer",
+      pdpDescription:
+        "High-waisted compression leggings, custom and private label, a squat-proof 70 to 85% nylon or polyamide and 15 to 30% spandex blend, made to your brand in Sialkot, Pakistan.",
+      // Figma node 634:4961 (desktop) / 638:860 (mobile), 2026-08-31 -- 6
+      // entries so the desktop rail's "show more" chevron (5 visible, 1
+      // hidden) has something real to demonstrate.
+      // 9, not 6 (owner, 2026-09-01: "add more thumbnails so it can cover
+      // the case when you have more than 6 images") -- 6 only ever needed
+      // one "show more" click to reach the rail's own end; this exercises
+      // the rail scrolling across multiple clicks before it runs out.
+      images: [
+        { alt: "High-waisted compression leggings, front view" },
+        { alt: "High-waisted compression leggings, back view" },
+        { alt: "High-waisted compression leggings, side profile" },
+        { alt: "High-waisted compression leggings, waistband detail" },
+        { alt: "High-waisted compression leggings, fabric close-up" },
+        { alt: "High-waisted compression leggings, worn on model" },
+        { alt: "High-waisted compression leggings, flat lay" },
+        { alt: "High-waisted compression leggings, pocket detail" },
+        { alt: "High-waisted compression leggings, stretch in motion" },
+      ],
+      // Shortened title tag (owner spec, 2026-09-04, QA audit fix): the
+      // prior form ("Custom High-Waisted Compression Leggings Manufacturer
+      // | Capriowear") ran 66 rendered chars, over the ~60 char target --
+      // deliberately DIFFERENT from `pdpHeading`/the H1 now (both of which
+      // stay unchanged, "Custom High-Waisted Compression Leggings
+      // Manufacturer"), a genuine exception to this field's usual "same as
+      // pdpHeading" rule, made explicitly to fix the title length without
+      // touching the on-page H1 or the slug.
+      pdpMetaTitle: "Custom Compression Leggings Manufacturer",
+      // Trimmed from 202 chars (owner spec, 2026-09-04, QA audit fix) --
+      // also drops "nylon or polyamide," redundant since polyamide is
+      // nylon.
+      pdpMetaDescription:
+        "Custom high-waisted compression leggings manufacturer, squat-proof four-way stretch nylon and spandex, from 50 pieces, samples in 10 to 14 days. Capriowear.",
+      material: "70 to 85% nylon or polyamide, 15 to 30% spandex, 4-way stretch",
+      faqs: [
+        {
+          q: "Are these leggings squat-proof?",
+          a: "Yes. Every High-Waisted Compression run is opacity tested on the sample before bulk production, and we hold every production run to the same standard.",
+        },
+        {
+          q: "Can I customize the waistband height and compression level?",
+          a: "Yes. Waistband height, compression level, and fabric weight are all adjustable to your spec, and we confirm the final combination on your sample before cutting bulk.",
+        },
+        {
+          q: "What colors and prints are available?",
+          a: "Any color you specify, matched to Pantone, plus sublimation, screen, and DTF printing. We can also match a specific fabric from your own reference sample.",
+        },
+      ],
+      // Figma-confirmed real copy (node 634:5070 desktop / 643:2660 mobile,
+      // "Browse More", 2026-09-01). Owner correction, 2026-09-01: "related
+      // styles should be linked and take user to the relevant page" -- each
+      // tag points at its own real sibling PDP wherever one exists.
+      //
+      // All five point at the parent PLP as of the Leggings PLP pilot
+      // (owner spec, 2026-09-02) -- every other style in this category
+      // (including Flare / Wide-Leg and Capri / Cropped, which used to
+      // link straight to `flare-leggings`/`capri-leggings` before this
+      // pilot) is now "draft," with no generated route, so a direct
+      // per-style link here would be a dead link (the one rule this pilot
+      // is explicit about: "does NOT link anywhere yet... Do not 404").
+      // Re-point each tag at its own real sibling PDP the moment that
+      // style's own status flips to "published."
+      relatedStyleTags: [
+        { label: "Flare & Wide-Leg", href: "/activewear/leggings" },
+        { label: "Scrunch & Ruched", href: "/activewear/leggings" },
+        { label: "V-Back & Crossover", href: "/activewear/leggings" },
+        { label: "Capri & Cropped", href: "/activewear/leggings" },
+        { label: "See All", href: "/activewear/leggings" },
+      ],
+      // Figma-confirmed real copy (node 634:5092, "Specifications",
+      // 2026-09-02) -- this style's own build datasheet.
+      specifications: [
+        { label: "Style", value: "High-waisted compression legging (base type)" },
+        // Fixed, owner report, 2026-09-02: "Fabric row says 'Sustainable
+        // lines'. That is wrong, it is a 'best for' value that leaked from
+        // the fabric table" -- was copy-pasted from `fabricOptions[1]`'s
+        // own `bestFor` field (that row's real fabric is "Recycled
+        // polyester + spandex", not this style's actual composition). Now
+        // the real composition, matching `fabricOptions[0]`'s own `fabric`
+        // field for this style's base fabric, plus the recycled option.
+        { label: "Fabric", value: "Nylon or polyamide with spandex, 70 to 85% / 15 to 30%, recycled polyester option" },
+        { label: "Weight", value: "300 to 500 GSM" },
+        { label: "Stretch and support", value: "4-way stretch, squat-proof, compression hold" },
+        { label: "Waistband", value: "High-rise; plain, wide, or V-back / crossover" },
+        { label: "Construction", value: "Gusset, flatlock finishing, optional pockets and drawcord" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "High-waisted compression leggings, construction detail" },
+    },
+    // The remaining 7 cards (owner spec, 2026-09-02, Leggings PLP pilot)
+    // are all "draft": a real style name and one-line spec, but no PDP
+    // content yet (no pdpDescription/faqs/specifications/images) -- each
+    // renders on the grid as a non-clickable "Coming soon" tile
+    // (ProductCard.tsx), gets no generated route (this page's own
+    // generateStaticParams filters to "published" only), and is excluded
+    // from both the sitemap and this file's own relatedStyleTags/ItemList
+    // schema. Slugs here are NOT yet permanent -- treat each one as
+    // provisional until its own status flips to "published" (see
+    // StyleCard.slug's own comment); replaced the previous 8 fully
+    // placeholder cards (pocket-leggings/compression-leggings/flare-
+    // leggings/ribbed-leggings/capri-leggings/mesh-panel-leggings/fleece-
+    // lined-leggings/maternity-leggings), none of which were ever real
+    // PDP destinations either.
+    //
+    // cardTitle corrected to the owner's own exact "Custom [Style]
+    // Leggings" card-format spec, 2026-09-02 (was the shorter style name
+    // alone, e.g. "Flare / Wide-Leg") -- cardSubline values already
+    // matched the given spec lines exactly, unchanged.
+    {
+      status: "draft",
+      slug: "flare-wide-leg",
+      cardTitle: "Custom Flare / Wide-Leg Leggings",
+      cardSubline: "High-rise flare, studio to street",
+      image: "",
+      imageAlt: "Custom flare and wide-leg leggings manufacturer",
+      href: "/activewear/leggings/flare-wide-leg",
     },
     {
-      slug: "pocket-leggings",
-      cardTitle: "Pocket Leggings",
-      cardSubline: "Available in custom fabrics & colors",
+      status: "draft",
+      slug: "scrunch-ruched",
+      cardTitle: "Custom Scrunch / Ruched Leggings",
+      cardSubline: "Center-seam scrunch, shaping back",
       image: "",
-      imageAlt: "Custom pocket leggings for activewear brands",
-      href: "/activewear/leggings/pocket-leggings",
+      imageAlt: "Custom scrunch and ruched leggings manufacturer",
+      href: "/activewear/leggings/scrunch-ruched",
     },
     {
-      slug: "compression-leggings",
-      cardTitle: "Compression Leggings",
-      cardSubline: "Available in custom fabrics & colors",
+      status: "draft",
+      slug: "v-back-crossover",
+      cardTitle: "Custom V-Back / Crossover Leggings",
+      cardSubline: "Contoured V-back waistband",
       image: "",
-      imageAlt: "Custom compression leggings, squat-proof fabric",
-      href: "/activewear/leggings/compression-leggings",
+      imageAlt: "Custom V-back and crossover waistband leggings manufacturer",
+      href: "/activewear/leggings/v-back-crossover",
     },
     {
-      slug: "flare-leggings",
-      cardTitle: "Flare Leggings",
-      cardSubline: "Available in custom fabrics & colors",
+      status: "draft",
+      slug: "capri-cropped",
+      cardTitle: "Custom Capri / Cropped Leggings",
+      cardSubline: "Cropped length, squat-proof",
       image: "",
-      imageAlt: "Custom flare leggings manufacturer",
-      href: "/activewear/leggings/flare-leggings",
+      imageAlt: "Custom capri and cropped length leggings manufacturer",
+      href: "/activewear/leggings/capri-cropped",
     },
     {
-      slug: "ribbed-leggings",
-      cardTitle: "Ribbed Leggings",
-      cardSubline: "Available in custom fabrics & colors",
+      status: "draft",
+      slug: "pocket",
+      cardTitle: "Custom Pocket Leggings",
+      cardSubline: "Side and waistband pockets",
       image: "",
-      imageAlt: "Custom ribbed leggings for private label brands",
-      href: "/activewear/leggings/ribbed-leggings",
+      imageAlt: "Custom pocket leggings manufacturer",
+      href: "/activewear/leggings/pocket",
     },
     {
-      slug: "capri-leggings",
-      cardTitle: "Capri Leggings",
-      cardSubline: "Available in custom fabrics & colors",
+      status: "draft",
+      slug: "biker",
+      cardTitle: "Custom Biker / Short Leggings",
+      cardSubline: "Compression short, 5 to 9 inch inseam",
       image: "",
-      imageAlt: "Custom capri length leggings manufacturer",
-      href: "/activewear/leggings/capri-leggings",
+      imageAlt: "Custom biker short and compression short manufacturer",
+      href: "/activewear/leggings/biker",
     },
     {
-      slug: "mesh-panel-leggings",
-      cardTitle: "Mesh Panel Leggings",
-      cardSubline: "Available in custom fabrics & colors",
+      status: "draft",
+      slug: "fleece-lined",
+      // "Custom Fleece-Lined Leggings" (owner's exact given title) -- was
+      // "Fleece-Lined / Thermal", an extra qualifier not in the given spec.
+      cardTitle: "Custom Fleece-Lined Leggings",
+      cardSubline: "Brushed thermal, cold-weather",
       image: "",
-      imageAlt: "Custom mesh panel leggings with breathable fabric",
-      href: "/activewear/leggings/mesh-panel-leggings",
-    },
-    {
-      slug: "fleece-lined-leggings",
-      cardTitle: "Fleece Lined Leggings",
-      cardSubline: "Available in custom fabrics & colors",
-      image: "",
-      imageAlt: "Custom fleece-lined thermal leggings",
-      href: "/activewear/leggings/fleece-lined-leggings",
-    },
-    {
-      slug: "maternity-leggings",
-      cardTitle: "Maternity Leggings",
-      cardSubline: "Available in custom fabrics & colors",
-      image: "",
-      imageAlt: "Custom maternity leggings manufacturer",
-      href: "/activewear/leggings/maternity-leggings",
+      imageAlt: "Custom fleece-lined thermal leggings manufacturer",
+      href: "/activewear/leggings/fleece-lined",
     },
   ],
   // Real hrefs and labels, matching content/home.ts's own activewearMegaMenu

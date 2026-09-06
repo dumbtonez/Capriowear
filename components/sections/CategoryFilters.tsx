@@ -50,9 +50,17 @@ import { cx } from "@/components/ui/cx";
 import { categoryFilters } from "@/components/ui/styles";
 import { activewearMegaMenu } from "@/content/home";
 
+type MegaMenuGroup = { label: string; items: { label: string; href: string }[] };
+
 export type CategoryFiltersProps = {
   /** Category.slug of the current page, e.g. "leggings". */
   activeSlug: string;
+  /** The group's own mega-menu data (owner spec, 2026-09-05, Teamwear/Cricket) -- defaults to `activewearMegaMenu`, this panel's own original and only data source, so every existing Activewear call site needs no change at all. */
+  menuGroups?: MegaMenuGroup[];
+  /** URL prefix used to build `activeHref` below (e.g. "/activewear", "/teamwear") -- defaults to "/activewear". */
+  basePath?: string;
+  /** `<nav>`'s own accessible name -- defaults to "Activewear categories". */
+  ariaLabel?: string;
 };
 
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -83,15 +91,21 @@ function toTitleCase(label: string) {
 // `openLabels` state (a plain useState inside this component, re-created
 // per mount): the two are never visible at the same time, so there's no
 // need to lift/share that state between them.
-function FilterGroupList({ activeHref, onNavigate }: { activeHref: string; onNavigate?: () => void }) {
+function FilterGroupList({
+  menuGroups,
+  activeHref,
+  onNavigate,
+}: {
+  menuGroups: MegaMenuGroup[];
+  activeHref: string;
+  onNavigate?: () => void;
+}) {
   // All groups start open (owner call, 2026-08-28: "by default open all the
   // sub-categories") -- a Set, not a single active label, since more than
   // one group can be open at once now. Seeded from every group's own label
   // rather than a fixed list, so a future 6th category group opens by
   // default too, with no second place to remember to update.
-  const [openLabels, setOpenLabels] = useState(
-    () => new Set(activewearMegaMenu.map((group) => group.label)),
-  );
+  const [openLabels, setOpenLabels] = useState(() => new Set(menuGroups.map((group) => group.label)));
 
   function toggleGroup(label: string) {
     setOpenLabels((prev) => {
@@ -107,7 +121,7 @@ function FilterGroupList({ activeHref, onNavigate }: { activeHref: string; onNav
 
   return (
     <>
-      {activewearMegaMenu.map((group) => {
+      {menuGroups.map((group) => {
         const isOpen = openLabels.has(group.label);
 
         return (
@@ -167,7 +181,7 @@ function FilterGroupList({ activeHref, onNavigate }: { activeHref: string; onNav
 // the FAB only while that row is actually in the viewport -- visible from
 // page load (the row starts near the top) through the end of the product
 // grid, gone the moment the user scrolls into unrelated sections below.
-function FilterFabAndDrawer({ activeHref }: { activeHref: string }) {
+function FilterFabAndDrawer({ menuGroups, activeHref }: { menuGroups: MegaMenuGroup[]; activeHref: string }) {
   const fabRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -297,7 +311,7 @@ function FilterFabAndDrawer({ activeHref }: { activeHref: string }) {
                   </button>
                 </div>
                 <div className={categoryFilters.drawerBody}>
-                  <FilterGroupList activeHref={activeHref} onNavigate={() => setOpen(false)} />
+                  <FilterGroupList menuGroups={menuGroups} activeHref={activeHref} onNavigate={() => setOpen(false)} />
                 </div>
               </div>
             </>,
@@ -308,16 +322,21 @@ function FilterFabAndDrawer({ activeHref }: { activeHref: string }) {
   );
 }
 
-export function CategoryFilters({ activeSlug }: CategoryFiltersProps) {
-  const activeHref = `/activewear/${activeSlug}`;
+export function CategoryFilters({
+  activeSlug,
+  menuGroups = activewearMegaMenu,
+  basePath = "/activewear",
+  ariaLabel = "Activewear categories",
+}: CategoryFiltersProps) {
+  const activeHref = `${basePath}/${activeSlug}`;
 
   return (
     <>
-      <nav aria-label="Activewear categories" className={categoryFilters.list}>
+      <nav aria-label={ariaLabel} className={categoryFilters.list}>
         <p className={categoryFilters.header}>Filters</p>
-        <FilterGroupList activeHref={activeHref} />
+        <FilterGroupList menuGroups={menuGroups} activeHref={activeHref} />
       </nav>
-      <FilterFabAndDrawer activeHref={activeHref} />
+      <FilterFabAndDrawer menuGroups={menuGroups} activeHref={activeHref} />
     </>
   );
 }

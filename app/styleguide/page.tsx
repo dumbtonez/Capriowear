@@ -742,7 +742,8 @@ export default function StyleguidePage() {
               <div className="relative overflow-hidden rounded-md border border-line">
                 <Header
                   brand={home.nav.brand}
-                  logo={<Logo className={headerStyles.brandLogo} />}
+                  logo={<Logo stacked className={headerStyles.brandLogo} />}
+                  desktopLogo={<Logo stacked className={headerStyles.brandLogoDesktop} />}
                   links={home.nav.links}
                   mobileLinks={home.nav.mobileLinks}
                   megaMenuPromo={home.nav.megaMenuPromo}
@@ -850,7 +851,7 @@ export default function StyleguidePage() {
           <div className="relative overflow-hidden rounded-md border border-line">
             <HeaderOverlayNav
               brand={home.nav.brand}
-              logo={<Logo className={headerStyles.brandLogo} />}
+              logo={<Logo stacked className={headerStyles.brandLogo} />}
               links={home.nav.links}
               cta={home.nav.cta}
               secondaryCta={home.nav.secondaryCta}

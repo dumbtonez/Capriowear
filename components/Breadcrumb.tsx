@@ -8,6 +8,7 @@
 import Link from "next/link";
 
 import { BreadcrumbArrowIcon } from "@/components/icons/BreadcrumbArrowIcon";
+import { cx } from "@/components/ui/cx";
 import { breadcrumb } from "@/components/ui/styles";
 
 export type BreadcrumbItem = {
@@ -19,13 +20,22 @@ export type BreadcrumbProps = {
   items: BreadcrumbItem[];
   /** "dark" for use on an ink/black background (e.g. CategoryBanner) -- the current-page item needs a lighter colour than `tone="light"`'s near-black text-ink, which is invisible there. Default "light". */
   tone?: "light" | "dark";
+  /**
+   * Extra classes merged onto the `<nav>` -- e.g. a call site's own
+   * vertical padding, or a CSS-only mobile-hide (PDP, 2026-08-31: "hide
+   * the breadcrumb visually on mobile only... never conditionally render
+   * it out of the DOM"). The trail itself always renders regardless of
+   * this className -- only visibility/spacing should ever be overridden
+   * here, never the markup.
+   */
+  className?: string;
 };
 
-export function Breadcrumb({ items, tone = "light" }: BreadcrumbProps) {
+export function Breadcrumb({ items, tone = "light", className }: BreadcrumbProps) {
   const lastIndex = items.length - 1;
 
   return (
-    <nav aria-label="Breadcrumb" className={breadcrumb.nav}>
+    <nav aria-label="Breadcrumb" className={cx(breadcrumb.nav, className)}>
       <ol className={breadcrumb.list}>
         {items.map((item, index) => {
           const isLast = index === lastIndex;

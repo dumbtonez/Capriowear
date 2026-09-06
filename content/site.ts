@@ -14,11 +14,58 @@ export const SITE_URL = "https://www.capriosports.com/capriowear";
 
 export const SITE_NAME = "Capriowear";
 
-// Owner-supplied exact copy (2026-08-26) -- title tag, meta description.
+// The entity intro, stored once at four lengths (owner spec, 2026-09-01:
+// "Set up the Capriowear entity intro so it is consistent across the WHOLE
+// website, from a single stored source"). Exact owner text, never reworded
+// here -- every other file that needs one of these imports it from here,
+// never retypes it. Three anchor facts must never change in any of the
+// four ("activewear and teamwear division of Caprio Sports", "cut-and-sew
+// manufacturer", "Sialkot, Pakistan").
+//
+// - companyIdentity: the one-liner. Goes on the footer (every page) and
+//   anywhere a single identity sentence prints inline.
+// - companyIntroShort: the 2-sentence primary "who we are" text. Goes in
+//   Organization schema's `description` (lib/schema.ts, the field Google
+//   reads for the knowledge panel/AI answers), the homepage's own visible
+//   intro line (app/page.tsx, between Hero and ClientLogos), and the About/
+//   Our Story page's intro paragraph once that page exists (it doesn't
+//   yet -- no route under app/ for it as of this entry).
+// - companyIntroMeta: ~150 chars, built to fit inside Google's ~155-160
+//   char truncation point. Goes in the homepage meta description (via
+//   DEFAULT_DESCRIPTION below, which doubles as the root layout's sitewide
+//   fallback for any page with no more specific description of its own --
+//   exactly the hub-page case this variant is for) and any hub page's own
+//   meta description (Activewear index, Capabilities, Our Factory) once
+//   those pages exist -- none do yet, only the dynamic
+//   app/activewear/[category]/page.tsx and .../[style]/page.tsx, both of
+//   which already generate their own, more specific metadata per category/
+//   style and so don't fall back to this. Never paste companyIntroShort
+//   into a meta tag -- it's roughly double the safe length and will
+//   truncate mid-sentence.
+//
+// The full 3-sentence category intro (the PLP/PDP entity FAQ answer,
+// "What does Capriowear manufacture?") is deliberately NOT a fourth stored
+// constant here -- it's built per category from that category's own real
+// content (menuLabel + example styles), ending with companyIdentity
+// imported and appended unchanged. See categoryEntityFaq() in
+// content/activewear/pdpShared.ts.
+export const companyIdentity =
+  "Capriowear is the activewear and teamwear division of Caprio Sports, a cut-and-sew manufacturer in Sialkot, Pakistan.";
+
+export const companyIntroShort =
+  "Capriowear is a custom activewear and teamwear manufacturer for brands and teamwear suppliers worldwide, private label from fabric to packaging, with low minimums and full customization. Capriowear is the activewear and teamwear division of Caprio Sports, a cut-and-sew manufacturer in Sialkot, Pakistan.";
+
+export const companyIntroMeta =
+  "Capriowear is a custom activewear and teamwear manufacturer, private label from fabric to packaging, with low minimums and full customization.";
+
+// Owner-supplied exact copy (2026-08-26) -- title tag.
 export const DEFAULT_TITLE = "Custom Activewear & Teamwear Manufacturer in Pakistan | Capriowear";
 
-export const DEFAULT_DESCRIPTION =
-  "Custom activewear and teamwear manufacturer in Sialkot, Pakistan. OEM, ODM and private label, low MOQ from 50 pieces, samples in 10 to 14 days, DDP worldwide.";
+// The homepage's own meta description, and the root layout's sitewide
+// fallback for any page without one of its own -- companyIntroMeta is
+// correct for both (2026-09-01 entity-intro spec, rule 3). Was a
+// differently-worded, hand-typed sentence before this change.
+export const DEFAULT_DESCRIPTION = companyIntroMeta;
 
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/opengraph-image`;
 
@@ -29,13 +76,12 @@ export const DEFAULT_OG_IMAGE = `${SITE_URL}/opengraph-image`;
 export const ORGANIZATION = {
   name: "Capriowear",
   legalName: "Caprio Sports",
-  // Canonical entity description (owner-supplied exact wording, 2026-08-30,
-  // GEO finalization pass) -- feeds organizationSchema()'s Organization.
-  // description sitewide, so every page's structured data names this
-  // entity the same way rather than a differently-worded description per
-  // page. Reused verbatim wherever a page's own schema needs to name the
-  // entity (e.g. the Leggings PLP's CollectionPage description).
-  description: "Capriowear, a custom activewear and teamwear manufacturer in Sialkot, Pakistan.",
+  // Organization schema's `description` is companyIntroShort specifically
+  // (2026-09-01 entity-intro spec, rule 2) -- the field Google reads for
+  // the knowledge panel/AI answers, so it gets the fuller 2-sentence
+  // variant, not the one-liner. Was a hand-typed sentence close to
+  // companyIdentity's own length before this change.
+  description: companyIntroShort,
   url: SITE_URL,
   logo: `${SITE_URL}/opengraph-image`,
   address: {

@@ -40,6 +40,17 @@ export const metadata: Metadata = {
 - **Page-specific OG image**: add a route-specific `opengraph-image.tsx` inside that page's own folder only where a custom image earns its keep (e.g. a category page might want its own hero shot once real photography exists) — not by default.
 - **Favicon**: `app/favicon.ico` already exists (Next's file convention auto-injects the `<link>` tag) — no manual `metadata.icons` entry needed unless overriding it.
 
+### 2a · Google display limits (owner rule, 2026-08-30)
+
+These are **display** limits — what shows in the search result — not hard data limits. Google measures by rendered pixel width, so character counts below are safe rules of thumb, not exact cutoffs. Applies to every page, present and future.
+
+- **Title tag**: target ~50–60 chars (Google truncates around 600px, ~60 chars). Form: `"Custom [Style/Category] Manufacturer | Capriowear"` — keyword first, single pipe, nothing else. Never exceed ~65 chars where the keyword itself would get cut; the `" | Capriowear"` suffix is allowed to truncate on a long name — brand is the least important part to show, and it's cheap to lose since it's supplied automatically by the root layout's `title.template` (see `Category.metaTitle`'s own comment) rather than typed per page. Don't bolt on extra qualifiers ("| Private Label and OEM," etc.) even if true — that belongs in the description.
+- **Meta description**: front-load the essentials (style/category + "manufacturer", service model, one key spec) inside the first ~155 chars — Google's desktop snippet truncates around 920px (~155–160 chars), mobile shorter. May run longer, up to ~270 chars, for AEO (an AI reads the whole string) — but nothing essential should sit past ~155. Every page gets its own unique description; never templated, never empty.
+- **H1**: no truncation limit — it's on-page, not a search snippet. Always the full keyword form, `"Custom [Style/Category] Manufacturer"` — never shortened for SEO reasons the way the title tag is.
+- **URL slug**: short, keyword-clean, lowercase, hyphenated (`high-waisted-compression`, not `high-waisted-compression-leggings-for-women-2026`). Slugs are permanent once shipped — rename only via a real 301, never a silent edit.
+- **Breadcrumb labels**: keep each `BreadcrumbList` label short (`Home > Activewear > Leggings > High-Waisted Compression`) — the path line shows in both the search result and AI citations, so a padded label there reads worse than a padded title.
+- **After building/editing a page**: report its rendered title and meta description with character counts so the owner can confirm they fit — don't just assert compliance.
+
 ## 3 · Headings and semantics
 
 - **Exactly one `<h1>` per page.** The homepage's is Hero's. A stray second `<h1>` was found and fixed in `app/page.tsx`'s "not built yet" placeholder block during the 2026-08-25 audit — it's now a styled `<p>`.
@@ -64,8 +75,8 @@ Link related categories/products to each other from inside actual body copy, not
 
 ## Per-page checklist, for every new page from here
 
-1. `metadata` export: title, description, canonical (`SITE_URL` + this page's path), OpenGraph.
-2. `breadcrumbSchema([...])` matching the page's real nav position, rendered via `JsonLd`.
+1. `metadata` export: title, description, canonical (`SITE_URL` + this page's path), OpenGraph — both title and description fit section 2a's Google display limits; report their rendered length in chars.
+2. `breadcrumbSchema([...])` matching the page's real nav position, rendered via `JsonLd`; breadcrumb labels stay short (section 2a).
 3. `faqSchema(...)` if (and only if) the page renders a real FAQ section.
 4. Exactly one `<h1>`, one `<main>`, correct H2/H3 order.
 5. Real, descriptive alt text on every real image.

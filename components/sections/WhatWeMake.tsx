@@ -92,7 +92,12 @@ export function WhatWeMake({ content }: WhatWeMakeProps) {
                 <div className={whatWeMake.mobileList}>
                   {category.tiles.map((tile) => (
                     <a key={tile.href} href={tile.href} className={whatWeMake.mobileTile}>
-                      <MediaPlaceholder label={tile.label} ratio="16:11" radius="none" />
+                      <MediaPlaceholder
+                        label={tile.label}
+                        ratio="16:11"
+                        radius="none"
+                        className={whatWeMake.mobileTileMedia}
+                      />
                       <span className={whatWeMake.mobileTileLabel}>{tile.label}</span>
                     </a>
                   ))}

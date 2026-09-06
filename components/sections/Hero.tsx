@@ -95,8 +95,13 @@ export function Hero({ hero: content, customOfferings }: HeroProps) {
       </div>
 
       {/* Layer 3: Ticker. Desktop scrolls; mobile is a plain stacked list --
-          real, different designs, not one component in two modes. */}
-      <div className="hidden xl:block">
+          real, different designs, not one component in two modes. Split at
+          `md:` (768px), not `xl:` (owner, 2026-09-03: "fully custom
+          offerings, that should be as shown in desktop, not mobile for
+          768-1279px") -- the scrolling Marquee reads fine at tablet width,
+          so real mobile only (<768px) gets the plain stacked-list fallback
+          now, not every width below 1280px. */}
+      <div className="hidden md:block">
         <Marquee
           label={customOfferings.label}
           labelVariant="bold"

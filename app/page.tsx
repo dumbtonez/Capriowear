@@ -34,7 +34,7 @@ import { TrustSignals } from "@/components/sections/TrustSignals";
 import { WhatWeMake } from "@/components/sections/WhatWeMake";
 import { header } from "@/components/ui/styles";
 import { home } from "@/content/home";
-import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, ORGANIZATION, SITE_URL } from "@/content/site";
+import { companyIntroShort, DEFAULT_DESCRIPTION, DEFAULT_TITLE, ORGANIZATION, SITE_URL } from "@/content/site";
 import { breadcrumbSchema, faqSchema, megaMenuSchema, navigationSchema } from "@/lib/schema";
 
 // Homepage's own Open Graph copy -- deliberately worded differently from
@@ -66,7 +66,8 @@ export default function Home() {
       <IntroLoader />
       <Header
         brand={home.nav.brand}
-        logo={<Logo className={header.brandLogo} />}
+        logo={<Logo stacked className={header.brandLogo} />}
+        desktopLogo={<Logo stacked className={header.brandLogoDesktop} />}
         links={home.nav.links}
         mobileLinks={home.nav.mobileLinks}
         megaMenuPromo={home.nav.megaMenuPromo}
@@ -122,6 +123,18 @@ export default function Home() {
           relying on a colour boundary that was never actually visible. */}
       <main className="relative z-10 bg-paper shadow-[0_16px_24px_-12px_rgba(14,14,18,0.18)]">
         <Hero hero={home.hero} customOfferings={home.customOfferings} />
+        {/* Visible company intro line (entity-intro spec, 2026-09-01, rule
+            2) -- companyIntroShort (content/site.ts), placed high so Google
+            can lift it as the branded-search snippet. A plain sentence, not
+            a headline, and deliberately not inside Hero itself: Hero is a
+            locked, Figma-confirmed design (eyebrow/H1/CTAs only, no subline
+            slot in either frame) -- adding one there would be a real,
+            un-asked-for design change. No Figma frame exists for this line
+            either, so it's lean, token-only markup (container-p, the
+            sitewide text-body/text-ink pair) rather than an invented visual
+            treatment -- same "undesigned but correct" approach already used
+            for the PDP's own not-yet-designed sections. */}
+        <p className="container-p py-8 text-body text-ink">{companyIntroShort}</p>
         <ClientLogos brandLogos={home.brandLogos} />
         <TrustSignals items={home.trustStrip} />
         <WhatWeMake content={home.whatWeMake} />

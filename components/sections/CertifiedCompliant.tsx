@@ -40,6 +40,7 @@
 // the homepage's values.
 import Image from "next/image";
 
+import { Marquee } from "@/components/Marquee";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextReveal } from "@/components/TextReveal";
 import { cx } from "@/components/ui/cx";
@@ -74,6 +75,35 @@ export function CertifiedCompliant({ content }: CertifiedCompliantProps) {
               />
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Tablet only (768-1279px): the static row's own flex-wrap genuinely
+          wraps to 2+ lines at this width (6 logos + 5x69px gaps need more
+          room than a 768-1279px container has) -- owner, 2026-09-03:
+          "certificates, make them in one line and add marquie just for
+          these viewports." Reuses Client Logos' own desktop technique
+          (Marquee, separator="none", logos as items) rather than a new
+          mechanism. */}
+      <div className={certified.tabletSection}>
+        <div className={certified.root}>
+          <SectionHeading
+            eyebrow={<TextReveal text={content.eyebrow} />}
+            heading={<TextReveal as="span" text={content.h2} />}
+            eyebrowTone="light"
+            headingClassName={certified.headingNarrow}
+            align="center"
+          />
+          <Marquee
+            items={content.logos.map((logo) => (
+              <Image key={logo.name} src={logo.src} alt={logo.name} width={logo.width} height={logo.height} />
+            ))}
+            separator="none"
+            gap="loose"
+            divider={false}
+            pauseOnHover={false}
+            edgeFade
+          />
         </div>
       </div>
 

@@ -44,12 +44,24 @@ import { button } from "./ui/styles";
 | `muted` | `#6B6B74` | Secondary text |
 | `accent` | `#FF5011` | Brand orange. CTAs and highlights |
 | `accent-ink` | `#FFFFFF` | Text and icons on accent |
+| `subline` | `#17191E` | Subline text directly under a title, light/white sections only |
 
 **Dark sections** run `ink` background, `paper` text, `line-dark` hairlines. Use `surface.dark` from the recipe file rather than assembling it by hand.
 
 **The `currentColor` pattern.** Components that appear on both light and dark sections use `border-current` / `text-current/60` rather than a fixed colour, so they inherit whatever the section sets. This is why `Button` secondary, `Chip`, `Eyebrow` muted and `Accordion` need no "on dark" prop. Prefer this over adding an inverse variant.
 
 **Eyebrow-above-a-heading colour is a standing sitewide rule, not `currentColor` (owner call, 2026-08-24): always `#ABB5C0` on a dark/black section, always `#17191E` on a light/white section, no exceptions.** This replaced an earlier `accent` (brand orange) default that had never actually been confirmed against Figma for most sections using it — Hero's own eyebrow included, changed from accent orange to `#ABB5C0` when this rule was applied. `Eyebrow`'s `tone` prop has no default specifically so this can't be silently inherited wrong: every caller states `"dark"` or `"light"`. `SectionHeading` mirrors this with a required `eyebrowTone` prop. This rule is unrelated to `Eyebrow`'s separate `muted` tone, which is still `currentColor`-based and used only for a standalone label not paired with a heading (Marquee's ticker label, LogoRow's label).
+
+**Subline-under-a-title colour is the same standing rule, extended (owner, 2026-09-01): always `#17191E` (the `subline` token) on a light/white section, sitewide, component-level.** Same colour the eyebrow rule above already uses on light sections, now applied to the sibling pattern — a title with a supporting line directly under it, on white/paper, regardless of whether that field is literally named `subline`, `body`, or `description` in the recipe. Applied to every confirmed instance (owner: "apply it to all the pages, where you see the same pattern, title and subline, both mobile and desktop"):
+- `trustPoints.subline` (PLP + PDP, `TrustPoints`)
+- `categoryMetaStrip.subline` (PLP)
+- `capabilityCard.text` (shared by `OurServices` + `HowItWorks` on the homepage, and `ProductCustomizeSteps` on the PDP)
+- `trustSignals.body` / `trustSignals.mobileBody` (homepage)
+- `whatWeMake.groupBody` (homepage)
+- `productInfo.description` (PDP, the H1's own supporting paragraph)
+- `whatWeCover.itemBody` (PLP, the "What We Cover" fact grid — Fabric, Color and print, Style and fit, Branding, Labels, Packaging)
+
+All were `text-ink` (or no colour class, inheriting it) before. Does **not** apply to `FinalCta`'s subline (dark `bg-ink` band) or `ProductCard`'s subline (a product-tile caption, not this title+subline header pattern) — both audited and deliberately excluded. A future section's title+subline pair on a white/paper background should use `text-subline` from the start, not `text-ink`.
 
 ## Typography
 

@@ -35,6 +35,12 @@ export type CategoryMetaStripProps = {
    * exactly as before.
    */
   showGenderFilter?: boolean;
+  /**
+   * Which chip starts active (owner spec, 2026-09-03, Bodysuits: "default
+   * Women, women's-led category") -- see `Category.defaultGenderFilter`'s
+   * own comment. Defaults to "All", every category's own prior behavior.
+   */
+  defaultChip?: string;
 };
 
 const FILTER_CHIPS = ["All", "Women", "Men"];
@@ -44,11 +50,19 @@ export function CategoryMetaStrip({
   categorySubline,
   categorySublineMobile,
   showGenderFilter = true,
+  defaultChip = "All",
 }: CategoryMetaStripProps) {
-  const [activeChip, setActiveChip] = useState("All");
+  const [activeChip, setActiveChip] = useState(defaultChip);
 
   return (
-    <div className={categoryMetaStrip.root}>
+    // id targeted by ProductGrid.tsx's own pagination scroll-to-top --
+    // owner spec, 2026-09-03: "it should land me ... on top of the title
+    // where it says sports bras" -- the actual section landmark the owner
+    // means is THIS title block, not the grid of cards below it (a first,
+    // wrong attempt scrolled to the grid's own container instead, which
+    // left this title scrolled out of view above the fold -- see that
+    // file's own comment for the full history).
+    <div id="plp-title" className={categoryMetaStrip.root}>
       <div className={categoryMetaStrip.text}>
         {/* h2, not p (SEO/AEO finalization pass, 2026-08-30): this is the
             product grid section's own real title -- every other section on

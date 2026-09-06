@@ -75,9 +75,22 @@ export type HeaderProps = {
    * block below it entirely — `brandParent` goes unused, since the logo
    * carries the brand on its own (Figma node 316:1331 has no text brand at
    * all, logo only). Omit to fall back to the text brand, still useful for a
-   * page that has no logo asset yet.
+   * page that has no logo asset yet. Rendered below `xl:` (mobile bar and
+   * drawer) — see `desktopLogo` for the `xl:`+ mark.
    */
   logo?: ReactNode;
+  /**
+   * The `xl:`+ mark, e.g. <Logo stacked className={header.brandLogoDesktop} />.
+   * Owner, 2026-09-06: "update the caprio logo in the nav bar, not in the
+   * footer. Only for desktop" -- a separate prop (not a responsive variant
+   * of `logo` alone) so the mobile bar/drawer mark stays exactly what it
+   * was. Falls back to `logo` if omitted, so this prop is optional for any
+   * caller that hasn't been updated yet -- but note that `logo`'s own
+   * recipe (`header.brandLogo`) is `xl:hidden`, so omitting `desktopLogo`
+   * on a real page currently means no logo shows at all at `xl:`+; every
+   * page in this codebase passes both.
+   */
+  desktopLogo?: ReactNode;
   brandParent?: string;
   links: NavLink[];
   /** The mobile drawer's own link set -- see MobileNav's own props. */
@@ -105,6 +118,7 @@ export type HeaderProps = {
 export function Header({
   brand,
   logo,
+  desktopLogo,
   brandParent,
   links,
   mobileLinks,
@@ -221,76 +235,75 @@ export function Header({
         }}
       >
         <div className={header.inner}>
-          {/* Brand + nav, grouped so their 40px gap is fixed regardless of
-              viewport -- see the comment on `brandNavGroup` in
-              components/ui/styles.ts for why this can't just be a gap on the
-              outer row. */}
-          <div className={header.brandNavGroup}>
-            {/* `brand` is always the link's accessible name, so screen readers
-                get "Capriowear, home" whether the logo image or the text
-                fallback is what's actually on screen. */}
-            <Link href="/" className={header.brand} aria-label={`${brand}, home`}>
-              {logo ?? (
-                <>
-                  <span className={header.brandName}>{brand}</span>
-                  {brandParent ? <span className={header.brandParent}>{brandParent}</span> : null}
-                </>
-              )}
-            </Link>
+          {/* `brand` is always the link's accessible name, so screen readers
+              get "Capriowear, home" whether the logo image or the text
+              fallback is what's actually on screen. First grid column of
+              `header.inner` at `xl:` -- see that token's own comment for why
+              the nav needs its own column (rather than being grouped with
+              this link) to center inside. */}
+          <Link href="/" className={header.brand} aria-label={`${brand}, home`}>
+            {logo ?? (
+              <>
+                <span className={header.brandName}>{brand}</span>
+                {brandParent ? <span className={header.brandParent}>{brandParent}</span> : null}
+              </>
+            )}
+            {desktopLogo ?? logo}
+          </Link>
 
-            {/* Desktop nav */}
-            <nav aria-label="Main" className={header.nav}>
-              <ul className={header.navList}>
-                {links.map((link) => {
-                  const hasMenu = Boolean(link.megaMenu?.length);
-                  const isOpen = openMenu === link.label;
+          {/* Desktop nav -- middle grid column at `xl:`, centered within it
+              via `header.nav`'s own `xl:justify-center`. */}
+          <nav aria-label="Main" className={header.nav}>
+            <ul className={header.navList}>
+              {links.map((link) => {
+                const hasMenu = Boolean(link.megaMenu?.length);
+                const isOpen = openMenu === link.label;
 
-                  if (!hasMenu) {
-                    return (
-                      <li key={link.href}>
-                        <Link href={link.href} className={header.navLink}>
-                          {link.label}
-                        </Link>
-                      </li>
-                    );
-                  }
-
+                if (!hasMenu) {
                   return (
-                    <li key={link.href} onMouseEnter={() => setOpenMenu(link.label)}>
-                      <button
-                        type="button"
-                        aria-expanded={isOpen}
-                        aria-controls={megaPanelId}
-                        onClick={() => setOpenMenu(isOpen ? null : link.label)}
-                        className={header.navTrigger}
-                      >
-                        {/* Grid-stacked label, not plain text -- see the
-                            comment on `navTriggerLabelStack` in
-                            components/ui/styles.ts for why: reserves the
-                            semibold width at all times so toggling weight on
-                            open never shifts this or any later trigger. */}
-                        <span className={header.navTriggerLabelStack}>
-                          <span className={header.navTriggerLabelGhost} aria-hidden="true">
-                            {link.label}
-                          </span>
-                          <span className={cx(header.navTriggerLabelVisible, isOpen && header.navTriggerActive)}>
-                            {link.label}
-                          </span>
-                        </span>
-                        <ChevronDown
-                          className={cx(header.navTriggerChevron, isOpen && header.navTriggerChevronOpen)}
-                          aria-hidden="true"
-                        />
-                        {isOpen ? <span className={header.navUnderline} aria-hidden="true" /> : null}
-                      </button>
+                    <li key={link.href}>
+                      <Link href={link.href} className={header.navLink}>
+                        {link.label}
+                      </Link>
                     </li>
                   );
-                })}
-              </ul>
-            </nav>
-          </div>
+                }
 
-          {/* Desktop actions */}
+                return (
+                  <li key={link.href} onMouseEnter={() => setOpenMenu(link.label)}>
+                    <button
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-controls={megaPanelId}
+                      onClick={() => setOpenMenu(isOpen ? null : link.label)}
+                      className={header.navTrigger}
+                    >
+                      {/* Grid-stacked label, not plain text -- see the
+                          comment on `navTriggerLabelStack` in
+                          components/ui/styles.ts for why: reserves the
+                          semibold width at all times so toggling weight on
+                          open never shifts this or any later trigger. */}
+                      <span className={header.navTriggerLabelStack}>
+                        <span className={header.navTriggerLabelGhost} aria-hidden="true">
+                          {link.label}
+                        </span>
+                        <span className={cx(header.navTriggerLabelVisible, isOpen && header.navTriggerActive)}>
+                          {link.label}
+                        </span>
+                      </span>
+                      <ChevronDown
+                        className={cx(header.navTriggerChevron, isOpen && header.navTriggerChevronOpen)}
+                        aria-hidden="true"
+                      />
+                      {isOpen ? <span className={header.navUnderline} aria-hidden="true" /> : null}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          {/* Desktop actions -- third grid column at `xl:`. */}
           <div className={header.actions}>
             {secondaryCta ? (
               <Link href={secondaryCta.href} className={header.actionLink}>

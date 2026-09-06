@@ -83,7 +83,12 @@ export function TrustSignals({ items }: TrustSignalsProps) {
 
       {/* Mobile: artwork on top, one divided list below */}
       <div className={trustSignals.mobileWrap}>
-        <MediaPlaceholder label="Trust signals artwork" ratio="16:11" radius="none" />
+        <MediaPlaceholder
+          label="Trust signals artwork"
+          ratio="16:11"
+          radius="none"
+          className={trustSignals.mobileMedia}
+        />
         <div className={trustSignals.mobileList}>
           {items.map((entry, index) => {
             const isFirst = index === 0;

@@ -28,13 +28,22 @@ export type AccordionItem = {
 
 export type AccordionProps = {
   items: AccordionItem[];
-  /** Index open on first render. Omit to start fully collapsed. */
-  defaultOpen?: number;
+  /**
+   * Index open on first render. Defaults to `null` (fully collapsed) --
+   * owner spec, 2026-09-01: "let's not open any FAQ by default, let user
+   * decide which one wants to open... apply it to all pages desktop and
+   * mobile." Supersedes an earlier same-day pass that defaulted this to
+   * `0` (first item always open); every caller sitewide gets the new
+   * fully-collapsed default for free without needing to remember to pass
+   * it. Pass an explicit index for the rare case that should start with
+   * one item already open instead.
+   */
+  defaultOpen?: number | null;
   className?: string;
 };
 
-export function Accordion({ items, defaultOpen, className }: AccordionProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(defaultOpen ?? null);
+export function Accordion({ items, defaultOpen = null, className }: AccordionProps) {
+  const [openIndex, setOpenIndex] = useState<number | null>(defaultOpen);
   const baseId = useId();
 
   return (

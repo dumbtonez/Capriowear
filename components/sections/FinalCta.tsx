@@ -76,7 +76,7 @@ export function FinalCta({ content, ticker, compactMobileTop }: FinalCtaProps) {
               itemSize="lg"
               tone="dark"
               divider={false}
-              className="mt-[110px]"
+              className={cx("mt-[110px]", finalCta.desktopTickerTablet)}
             />
           ) : null}
         </div>

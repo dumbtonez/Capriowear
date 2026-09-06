@@ -26,7 +26,8 @@ export type MediaRatio =
   | "33:31"
   | "19:11"
   | "469:320"
-  | "79:100";
+  | "79:100"
+  | "575:612";
 export type MediaRadius = "lg" | "xl" | "none";
 
 export type MediaPlaceholderProps = {

@@ -29,6 +29,13 @@
   --color-muted: #6b6b74; /* secondary text */
   --color-accent: #ff5011; /* brand orange: CTAs, highlights */
   --color-accent-ink: #ffffff; /* text/icon on accent */
+  /* Subline text under a title, on a white/paper section background only
+     (owner, 2026-09-01: apply sitewide, component-level, so new pages pick
+     it up automatically) -- distinct from --color-ink (also used for
+     headings, body copy, and dark-section text generally); this token is
+     scoped to just that one heading+subline pairing. Not used on FinalCta's
+     subline, which sits on a dark bg-ink band, not white. */
+  --color-subline: #17191e;
 
   /* --- Type scale ------------------------------------------------------ */
   /* SOURCE OF TRUTH: the Figma file "Caprio Website", node 284:333, which

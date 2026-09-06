@@ -63,6 +63,7 @@ export function OurServices({ content }: OurServicesProps) {
           eyebrow={content.eyebrow}
           heading={content.h2}
           eyebrowTone="light"
+          headingClassName={ourServices.mobileHeadingWidth}
           align="center"
         />
         <CardCarousel items={content.items} cardMediaRatio={ourServices.cardMediaRatio} />

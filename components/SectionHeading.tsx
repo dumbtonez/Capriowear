@@ -2,13 +2,18 @@
 // Eyebrow plus H2. Deliberately has no intro line: the copy rule for this
 // component is eyebrow + heading only, nothing else.
 //
-// The heading sets no text colour of its own, so it inherits whatever the
-// wrapping section sets (text-ink by default, text-paper inside a dark
-// section), the same pattern Button's secondary variant uses. The eyebrow's
-// colour follows the standing sitewide rule (owner call, 2026-08-24):
-// #ABB5C0 on a dark section, #17191E on a light one -- callers state which
-// via `eyebrowTone`, since (unlike the heading) that colour can't be
-// inherited automatically.
+// The heading sets no text colour of its own by default, so it inherits
+// whatever the wrapping section sets (text-ink by default, text-paper
+// inside a dark section), the same pattern Button's secondary variant
+// uses -- except on a light-tone section (owner correction, 2026-09-01:
+// "the new color I suggested for subheading will only apply to white
+// background section not black. use this color 17191E"), where the
+// heading gets that explicit colour instead of relying on inheritance.
+// Dark-tone sections are completely unaffected. The eyebrow's own colour
+// follows the standing sitewide rule (owner call, 2026-08-24): #ABB5C0 on
+// a dark section, #17191E on a light one -- callers state which via
+// `eyebrowTone`, since (unlike the heading) that colour can't be inherited
+// automatically.
 import type { ReactNode } from "react";
 
 import { Eyebrow } from "./Eyebrow";
@@ -70,7 +75,15 @@ export function SectionHeading({
       <Eyebrow tone={eyebrowTone} size={eyebrowSize}>
         {eyebrow}
       </Eyebrow>
-      <h2 className={cx(sectionHeading.heading, headingClassName)}>{heading}</h2>
+      <h2
+        className={cx(
+          sectionHeading.heading,
+          eyebrowTone === "light" && sectionHeading.headingLight,
+          headingClassName,
+        )}
+      >
+        {heading}
+      </h2>
     </div>
   );
 }

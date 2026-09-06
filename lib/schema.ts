@@ -5,6 +5,15 @@
 // See docs/06-seo.md. Render the result via components/JsonLd.tsx.
 import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 
+export type ProductSchemaInput = {
+  name: string;
+  description: string;
+  /** Absolute URL. Omitted from the schema entirely when there's no real photo yet -- same "no placeholder image" rule as `CollectionPageItem.image`. */
+  image?: string;
+  /** Short spec line, e.g. "Nylon or polyamide + elastane, 4-way stretch" -- StyleCard.material. */
+  material?: string;
+};
+
 export function organizationSchema() {
   return {
     "@context": "https://schema.org",
@@ -159,6 +168,26 @@ export function collectionPageSchema(name: string, url: string, description: str
         },
       })),
     },
+  };
+}
+
+// The PDP's own Product entity (app/activewear/[category]/[style]/page.tsx)
+// -- fed by the exact same fields the page renders (heading, description,
+// gallery, material). Deliberately no `offers`/`priceSpecification`: this
+// is a made-to-order B2B product with no public price, so this stays a
+// valid Product without an Offer rather than publishing invented pricing
+// -- same "no price data" precedent collectionPageSchema() already sets
+// for the PLP's own lightweight Product entities.
+export function productSchema({ name, description, image, material }: ProductSchemaInput) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name,
+    description,
+    brand: { "@type": "Brand", name: ORGANIZATION.name },
+    manufacturer: { "@type": "Organization", name: ORGANIZATION.legalName },
+    ...(image ? { image } : {}),
+    ...(material ? { material } : {}),
   };
 }
 
