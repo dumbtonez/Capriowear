@@ -89,6 +89,13 @@ tests/screenshots.spec.ts  screenshot + overflow QA across all target viewports
 - Never run `git clean`, `git reset --hard`, or `git checkout -- .` on uncommitted work without asking first — these destroy uncommitted changes.
 - If we're on the `main` branch and about to start a sizable piece of work, offer to create a branch first.
 
+## Deployment (Vercel)
+- This project deploys to Vercel. Vercel runs `next build` on every deploy, and type errors block production builds (unlike `npm run dev`, which ignores them).
+- Before pushing, always run `npm run build` locally and confirm it passes. Never push a commit that fails `npm run build` — it will produce a failed Vercel deploy.
+- Pushing to `main` triggers a production deploy. Pushing any other branch creates a Vercel preview deploy (a separate test URL that does not affect the live site).
+- Canonical URLs, sitemap.xml, and Open Graph URLs must use the real production domain, not localhost. Confirm the site base URL comes from an environment variable (e.g. NEXT_PUBLIC_SITE_URL) set in Vercel, not a hardcoded value.
+- Do not change vercel config, basePath, or environment handling without flagging it to me first — those affect the live deployment.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know
