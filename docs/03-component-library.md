@@ -600,9 +600,6 @@ A two-tone orange seam bar at the transition (owner reference, 2026-08-27: `afte
 `content/home.ts`'s `footer.nav` reuses real routes already used elsewhere (Services → `/capabilities`, Our Factory → `/our-factory`, Download Catalog → `/catalog`, Request a Sample → `/request-a-sample`); `/our-story` is a new link with no page built yet, the same "link ahead of the page" pattern already accepted for other nav links.
 
 **Mobile logo moved onto `stacked` (owner, 2026-09-06: "Update the mobile footer logo", Figma node `590:1421`)** — `footer.mobileBrandLogo` now renders `<Logo stacked className={footer.mobileBrandLogo} />`, matching the same "CAPRIO" over "WEAR" mark already used everywhere else (Header, Footer desktop). `get_metadata` on that frame's own "Logo" node measured the real block at `190.99x50.91`, so the recipe's height moved from the old default-geometry's fitted `h-[28px]` to `h-[51px]` — at the stacked mark's ~3.7:1 aspect ratio that renders ~189px wide, comfortably inside the 320px column available at the narrowest (360px) target viewport. This was the one real-page usage still left on `Logo`'s retiring default (side-by-side) geometry — see `Logo`'s own entry above, which now only lists `IntroLoader` there. Confirmed live at 375px and via the full `tests/screenshots.spec.ts` suite (all 53 passing).
-
-**Unrelated pre-existing `tsc` error fixed in passing**: `components/HeaderOverlayNav.tsx` (an exploratory, not-wired-in component — see its own entry below) still referenced `header.brandNavGroup`, a token an earlier session's `Header.tsx` desktop-nav-centering change had removed without updating this file. Unwrapped the same way the live `Header.tsx` now does (brand `<Link>` and `<nav>` as direct `header.inner` grid children, no wrapping group div) — purely a compile fix, no visual/behavioral change to this unused component.
-
 ---
 
 ## Homepage sections

@@ -117,21 +117,23 @@ export function HeaderOverlayNav({ brand, logo, links, cta, secondaryCta, social
   return (
     <header ref={headerRef} className={header.base}>
       <div className={header.inner}>
-        <Link href="/" className={header.brand} aria-label={`${brand}, home`}>
-          {logo ?? <span className={header.brandName}>{brand}</span>}
-        </Link>
+        <div className={header.brandNavGroup}>
+          <Link href="/" className={header.brand} aria-label={`${brand}, home`}>
+            {logo ?? <span className={header.brandName}>{brand}</span>}
+          </Link>
 
-        <nav aria-label="Main" className={cx(header.nav, headerOverlay.fadeGroup, open && headerOverlay.fadeHidden)}>
-          <ul className={header.navList}>
-            {links.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href} className={header.navLink}>
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+          <nav aria-label="Main" className={cx(header.nav, headerOverlay.fadeGroup, open && headerOverlay.fadeHidden)}>
+            <ul className={header.navList}>
+              {links.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className={header.navLink}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
 
         <div className={cx(header.actions, headerOverlay.fadeGroup, open && headerOverlay.fadeHidden)}>
           {secondaryCta ? (
