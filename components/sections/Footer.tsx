@@ -85,7 +85,6 @@ export function Footer({ content, social }: FooterProps) {
           <div className={footer.desktopRow1}>
             <div className={footer.desktopBrandGroup}>
               <Logo stacked className={footer.desktopBrandLogo} />
-              <p className={footer.desktopTagline}>{content.tagline}</p>
             </div>
             <div className={footer.desktopSocialGroup}>
               <SocialLinks social={social} />
@@ -111,7 +110,10 @@ export function Footer({ content, social }: FooterProps) {
                 ))}
               </div>
             </div>
-            <p className={footer.desktopDescription}>{content.description}</p>
+            <div className={footer.desktopDescriptionGroup}>
+              <p className={footer.desktopTagline}>{content.tagline}</p>
+              <p className={footer.desktopDescription}>{content.description}</p>
+            </div>
           </div>
 
           <div className={footer.desktopRow3}>
@@ -134,8 +136,7 @@ export function Footer({ content, social }: FooterProps) {
           frame goes straight from the divider to the bare email link. */}
       <div className={footer.mobileOuter}>
         <div className={footer.mobileBrandGroup}>
-          <Logo className={footer.mobileBrandLogo} />
-          <p className={footer.mobileTagline}>{content.tagline}</p>
+          <Logo stacked className={footer.mobileBrandLogo} />
         </div>
         <a href={`mailto:${content.contact.email}`} className={footer.mobileEmail}>
           {content.contact.email}
@@ -143,7 +144,10 @@ export function Footer({ content, social }: FooterProps) {
 
         <div className={footer.mobileDivider} />
 
-        <p className={footer.mobileDescription}>{content.description}</p>
+        <div className={footer.mobileDescriptionGroup}>
+          <p className={footer.mobileTagline}>{content.tagline}</p>
+          <p className={footer.mobileDescription}>{content.description}</p>
+        </div>
         <div className={footer.mobileNavList}>
           {[...content.nav.columnOne, ...content.nav.columnTwo].map((link) => (
             <Link key={link.href} href={link.href} className={footer.mobileNavLink}>

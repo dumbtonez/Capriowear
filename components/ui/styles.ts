@@ -709,23 +709,36 @@ export const header = {
   // fill="currentColor" picks up -- no separate colour prop on Logo itself.
   // `xl:hidden` added 2026-09-06: this mark now renders only below `xl:`
   // (drawer/mobile bar) -- see `brandLogoDesktop` below for the desktop
-  // replacement. Unchanged otherwise, so the mobile bar/drawer trigger are
-  // pixel-identical to before.
+  // replacement. `h-[28px]` and the caller's own `<Logo stacked />` (not
+  // just this recipe) are a later same-day extension -- see Logo.tsx's own
+  // file header for the full history; every real page now passes `stacked`
+  // here too, so this mobile/drawer mark is NOT pixel-identical to the
+  // original 2026-09-02 mark any more, by deliberate owner request.
   brandLogo: "h-[28px] w-auto xl:hidden",
-  // Real Figma geometry (`<Logo stacked />`, node 680:394 re-fetched
-  // 2026-09-06) rendered at its own native size -- `h-[38px]` is the
-  // mark's real Figma height, not a fitted-to-fit-overflow value like
-  // `brandLogo`'s `h-5`: at 38px tall the mark renders 141px wide (its
-  // real aspect ratio, WEAR stacked below CAPRIO), actually narrower than
-  // `brandLogo`'s own 190px-wide rendered width at 20px tall, so it fits
-  // the same row with room to spare. 38px is also shorter than the desktop
-  // nav's own 48px-tall trigger pills, so the header's row height (set by
-  // its tallest child) is unaffected -- no overflow, no layout shift.
-  // Owner, 2026-09-06: "update the caprio logo in the nav bar, not in the
-  // footer. Only for desktop" -- `hidden xl:block` scopes this to the
-  // desktop nav bar only; Footer keeps its own untouched `footer.*` logo
-  // recipes, and the mobile bar/drawer keep `brandLogo` above, unchanged.
-  brandLogoDesktop: "hidden h-[38px] w-auto xl:block",
+  // Real Figma geometry (`<Logo stacked />`, node 680:394) rendered at its
+  // own native size -- `h-[37px]` is the mark's real Figma height, not a
+  // fitted-to-fit-overflow value like `brandLogo`'s own sizing: at 37px
+  // tall the mark renders ~137px wide (its real aspect ratio, WEAR stacked
+  // below CAPRIO), narrower than `brandLogo`'s own ~190px-wide rendered
+  // width at 20px tall, so it fits the same row with room to spare. 37px
+  // is also shorter than the desktop nav's own 48px-tall trigger pills, so
+  // the header's row height (set by its tallest child) is unaffected -- no
+  // overflow, no layout shift. Owner, 2026-09-06: "update the caprio logo
+  // in the nav bar, not in the footer. Only for desktop" -- originally
+  // scoped to `xl:block` only, with the mobile/drawer mark meant to stay
+  // on the old geometry; the owner later confirmed extending `stacked` to
+  // the mobile mark too was intentional (see `brandLogo` above), so this
+  // recipe's own desktop-only scoping is now just about SIZE (37px native
+  // vs. `brandLogo`'s fitted 28px), not about which geometry renders.
+  // (Footer's own `footer.desktopBrandLogo` separately also passes
+  // `stacked`, per a later owner request -- Figma node 587:5755 -- so it
+  // automatically picked up this same corrected geometry too; its own
+  // fixed `h-[55px]` sizing is untouched. Footer's mobile mark is the one
+  // remaining default-geometry usage on the site.)
+  // Re-measured 2026-09-06 (owner: "updated the desktop nav logo, update
+  // it again") -- Figma's own node had shrunk slightly since the first
+  // pull (38px -> 37px); height corrected to match.
+  brandLogoDesktop: "hidden h-[37px] w-auto xl:block",
   // Text fallback, for a page with no logo asset passed. Not used by the real
   // header content, which always passes `logo`.
   brandName: "text-h3 uppercase",
@@ -2350,12 +2363,21 @@ export const footer = {
   // sit 15px down inside the row's own 90px height, i.e. dead centre, not
   // top-aligned).
   desktopRow1: "flex items-center justify-between",
+  // Owner, 2026-09-06: "add space of 56px on top of the logo" -- confirmed
+  // via get_metadata against Figma node 587:5755 that this 56px is
+  // `desktopInner`'s own existing `pt-14`, measured from the footer
+  // section's own top edge to the logo (Figma's "Content" frame sits at
+  // y=56 inside the "Desktop Footer" frame) -- NOT an extra margin on top
+  // of that padding. An earlier pass added `mt-14` here too, doubling it to
+  // 112px; removed.
   desktopBrandGroup: "flex flex-col items-start gap-3",
   desktopBrandLogo: "h-[55px] w-auto",
   // Was rendered right next to the logo in row 1's brand group; owner,
-  // 2026-09-06: move it to sit above row 2's description paragraph instead,
-  // with its own divider -- see `desktopDescriptionGroup` below. Style
-  // itself (1.25rem/normal) is unchanged, just relocated.
+  // 2026-09-06: move it to sit above row 2's description paragraph instead
+  // -- see `desktopDescriptionGroup` below. Style itself (1.25rem/normal)
+  // is unchanged, just relocated. No divider between it and the paragraph
+  // (owner, 2026-09-06: "don't add separator under division line") -- just
+  // the 12px gap.
   desktopTagline: "text-[1.25rem] font-normal text-ink",
   desktopSocialGroup: "flex items-center gap-3",
   // 40px gap below row 1 (146 -> 186).
@@ -2372,11 +2394,10 @@ export const footer = {
   // pushes column 2 to its confirmed x-offset, not a gap utility), column
   // 2 is auto-width and nowrap.
   desktopRow2: "mt-[72px] flex items-start gap-[78px]",
-  // Tagline (relocated from row 1, see `desktopTagline` above) + a divider
-  // + the description paragraph, stacked with a 12px gap (owner, 2026-09-06:
-  // "add division line add some 12px gap and then write the paragraph").
+  // Tagline (relocated from row 1, see `desktopTagline` above) + the
+  // description paragraph, stacked with a 12px gap, no divider between them
+  // (owner, 2026-09-06).
   desktopDescriptionGroup: "flex max-w-[307px] flex-col gap-3",
-  desktopDescriptionDivider: "w-full border-t border-line",
   desktopDescription: "text-[1.25rem] leading-[1.4] text-ink",
   desktopNavGroup: "flex items-start",
   desktopNavColumnOne: "flex w-[182px] flex-col",
@@ -2425,20 +2446,26 @@ export const footer = {
   // No longer holds the tagline (owner, 2026-09-06: moved above the
   // description paragraph, same as desktop -- see `mobileDescriptionGroup`
   // below), so this is just the logo now, not a real "group" any more.
-  mobileBrandGroup: "flex flex-col items-start gap-3",
-  // h-[28px], not the original h-[37px] -- the CAPRIO WEAR mark (Figma node
-  // 680:394, 2026-09-02) is much wider per unit height (~9.5:1 vs the
-  // earlier CAPRIO-only mark's ~5.3:1), so left at 37px tall it rendered
-  // ~353px wide, wider than the 320px this column has available at a
-  // 360px viewport (`container-p`'s 20px side inset) -- a real horizontal
-  // overflow, found live via the Playwright viewport gate (`tests/
-  // screenshots.spec.ts`) after the site-wide logo swap. 28px keeps
-  // comfortable margin at the narrowest target viewport (matches the same
-  // proportional reduction `header.brandLogo` needed for the same reason).
-  mobileBrandLogo: "h-[28px] w-auto",
+  // mt-14 (56px, same "space above the logo" request as desktop's own
+  // `desktopBrandGroup`).
+  mobileBrandGroup: "mt-14 flex flex-col items-start gap-3",
+  // `stacked` geometry (WEAR below CAPRIO, Figma node 680:394), not the old
+  // side-by-side mark this used to render -- owner-shared mobile footer
+  // frame (node 590:1421, 2026-09-06) shows the same stacked mark already
+  // used everywhere else the logo appears (header, desktop footer). `h-[51px]`
+  // is that frame's own measured logo block height (`get_metadata` on its
+  // "Logo" node: 190.99x50.91), not a fitted-to-overflow guess -- at the
+  // stacked mark's ~3.7:1 aspect ratio this renders ~189px wide, comfortably
+  // inside the 320px column available at the narrowest (360px) target
+  // viewport, so no repeat of the old wide-mark overflow this token used to
+  // guard against.
+  mobileBrandLogo: "h-[51px] w-auto",
   mobileTagline: "text-[1.125rem] font-normal text-ink",
   mobileEmail: "text-[1.5rem] font-medium text-ink",
   mobileDivider: "w-full border-t border-line",
+  // Tagline + the description paragraph, 12px gap, no divider between them
+  // -- same relocation as desktop's `desktopDescriptionGroup` above.
+  mobileDescriptionGroup: "flex flex-col gap-3",
   mobileDescription: "text-[1.125rem] leading-[1.33] text-ink",
   mobileNavList: "flex flex-col",
   mobileNavLink: "text-[1.125rem] leading-10 text-ink transition-opacity hover:opacity-70",
