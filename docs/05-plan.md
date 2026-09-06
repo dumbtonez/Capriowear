@@ -2356,6 +2356,11 @@ Owner: remove the standalone paragraph ("Capriowear is a custom activewear and t
 
 **Verified**: `npx tsc --noEmit` and `npx eslint .` both clean. Live at `localhost:3000`: homepage now flows Hero straight into Client Logos, no intro paragraph; FAQ answer still contains the sentence unchanged.
 
+### 5ec · Homepage's IntroLoader entrance animation removed — 2026-09-06
+Owner: remove the Caprio logo animation that plays after entering the URL. Removed `<IntroLoader />` and its import from `app/page.tsx` (the only real-page usage). Left `components/IntroLoader.tsx` itself, `lib/pageEntry.ts`, and `components/AppEntryMarker.tsx` (still rendered sitewide in `app/layout.tsx`) untouched — `AppEntryMarker` still backs the styleguide's own `IntroLoaderDemo.tsx`, which continues to work at `/styleguide`. Not asked to delete the component from the library, only to stop it from playing on the live site.
+
+**Verified**: `npx tsc --noEmit` and `npx eslint .` both clean. Live at `localhost:3000`: homepage loads straight into Hero, no loader/animation, no flash of black screen.
+
 ## Phase 3 · Footer and inner pages — Footer done, PLP banner + product grid in progress
 
 Footer shipped 2026-08-26 (see 4i above; sticky-reveal had stacking/paint corrections the same week — see 4k, 4l. A separate seam-bar decoration was attempted and removed, 4q–4s — Footer's own reveal mechanism is unaffected). Activewear PLP template started 2026-08-28 (5i above): route, data shape, and banner section built for Leggings, followed same day by CategoryFilters, ProductGrid/ProductCard/Pagination, and CategoryBanner revisions (5i–5u); layout corrections continued 2026-08-29 (5v). Remaining sections (overview, fabric table, trust block, spec facts, FAQ, related links, final CTA) built incrementally against Figma node `406:3075` as it gets finished.

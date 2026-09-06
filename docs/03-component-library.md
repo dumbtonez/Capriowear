@@ -263,8 +263,8 @@ The Capriowear wordmark — "CAPRIO" plus a smaller "WEAR" mark (Figma node `680
 
 **Used by:** Header (`stacked` geometry at both breakpoints — see Header's own entry below), Footer (`stacked` at both breakpoints), `MobileNav`'s drawer (inherits whatever `Header` passes as `logo`), `IntroLoader` (default geometry only).
 
-### IntroLoader — Built
-`components/IntroLoader.tsx` · recipe: `introLoader` · homepage only (`app/page.tsx`)
+### IntroLoader — Built, no longer live
+`components/IntroLoader.tsx` · recipe: `introLoader` · styleguide only (`app/styleguide/IntroLoaderDemo.tsx`) — removed from `app/page.tsx` 2026-09-06 (owner request); component and its `AppEntryMarker`/`lib/pageEntry.ts` support left in the library, not deleted
 
 A brief, one-time entrance animation: the CAPRIO wordmark wipes into view over a full-screen black overlay, holds briefly, then fades to reveal the homepage underneath (owner request, 2026-08-27). No props — self-contained.
 

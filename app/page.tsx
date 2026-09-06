@@ -16,7 +16,6 @@
 import type { Metadata } from "next";
 
 import { Header } from "@/components/Header";
-import { IntroLoader } from "@/components/IntroLoader";
 import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
 import { CertifiedCompliant } from "@/components/sections/CertifiedCompliant";
@@ -63,7 +62,6 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <IntroLoader />
       <Header
         brand={home.nav.brand}
         logo={<Logo stacked className={header.brandLogo} />}
