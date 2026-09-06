@@ -670,6 +670,27 @@ export const header = {
   // `flex justify-between` is unchanged (mobile only ever shows brand +
   // the "Menu" trigger).
   inner: "container-p flex items-center justify-between gap-4 max-xl:py-2.5 xl:grid xl:grid-cols-[auto_1fr_auto] xl:items-center xl:py-4",
+  // Restored (build fix, 2026-09-08): dropped from this object during the
+  // `inner` grid refactor above (2026-09-06) because Header.tsx itself no
+  // longer needs it -- that component now renders `brand` and `nav` as two
+  // separate direct children of `inner`, one per grid column, so grouping
+  // them was no longer this file's job. Nobody updated the one other real
+  // consumer, `components/HeaderOverlayNav.tsx` (a separate, still-rendered
+  // exploratory header, see its own header comment -- shown on
+  // app/styleguide/page.tsx, not swapped into the live site), which still
+  // wraps its own `brand` + `nav` pair in a single `brandNavGroup` div
+  // (its own layout hugs the logo against the nav in one row, unlike
+  // Header.tsx's current centered-nav column, so it still genuinely needs
+  // a grouping wrapper, not a share of `inner`'s 3 grid columns) -- left
+  // that file with a dangling reference to a key that no longer existed,
+  // breaking `npx tsc --noEmit`/`next build`. No prior value for this
+  // exact key survives in git history or docs to restore verbatim (see
+  // docs/05-plan.md's own entries flagging this break as pre-existing and
+  // out of scope, twice, without recording one) -- `flex items-center
+  // gap-8` is a plain, conservative flex grouping consistent with this
+  // recipe's own other inline groupings (e.g. `brand`'s own `gap-0.5`,
+  // `inner`'s own `gap-4`), not a rediscovered original.
+  brandNavGroup: "flex items-center gap-8",
   brand: "flex shrink-0 flex-col gap-0.5",
   // h-5, w-auto: fixed height, width follows the SVG's own viewBox ratio
   // (217.2x22.76, the CAPRIO + WEAR combined mark -- Figma node 680:394,
