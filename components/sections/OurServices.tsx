@@ -20,6 +20,13 @@
 //
 // Mobile carousel + dots is the shared CardCarousel (components/CardCarousel.tsx),
 // also used by How It Works -- this file needs no client directive itself.
+//
+// Reused on /services (owner, 2026-09-07: "use as is, just check the
+// spacing from the top in this page and use it") -- same cards, same
+// copy, only the outer top/bottom spacing changes per page (Figma node
+// 729:208 on Services: 160px/80px vs homepage's own 120px/120px). `pageVariant`
+// picks between the two pre-built spacing recipes in `ourServices`; nothing
+// else about the section differs between pages.
 import { CapabilityCard } from "@/components/Card";
 import { CardCarousel } from "@/components/CardCarousel";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -28,13 +35,17 @@ import type { home } from "@/content/home";
 
 export type OurServicesProps = {
   content: typeof home.services;
+  pageVariant?: "home" | "services";
 };
 
-export function OurServices({ content }: OurServicesProps) {
+export function OurServices({ content, pageVariant = "home" }: OurServicesProps) {
+  const desktopSection = pageVariant === "services" ? ourServices.desktopSectionServices : ourServices.desktopSection;
+  const mobileSection = pageVariant === "services" ? ourServices.mobileSectionServices : ourServices.mobileSection;
+
   return (
     <section>
       {/* Desktop: sticky heading, scrolling card list */}
-      <div className={ourServices.desktopSection}>
+      <div className={desktopSection}>
         <div className={ourServices.desktopSticky}>
           <SectionHeading
             eyebrow={content.eyebrow}
@@ -58,7 +69,7 @@ export function OurServices({ content }: OurServicesProps) {
       </div>
 
       {/* Mobile: centred heading, swipeable card slider */}
-      <div className={ourServices.mobileSection}>
+      <div className={mobileSection}>
         <SectionHeading
           eyebrow={content.eyebrow}
           heading={content.h2}

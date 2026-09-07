@@ -918,7 +918,7 @@ Built section by section from Figma (owner brief, 2026-09-07), same pattern as t
 | — | Fully Custom Offerings chip strip | Already part of section 1 above — reuses `Marquee`, the exact same component/props as homepage `Hero`, not a second one |
 | 2 | Intro statement ("A factory you can build your brand on") | ✅ **Built** — `components/sections/ServicesIntro.tsx` |
 | — | 4-up services strip (Product Development / Private Label / Low MOQ / Worldwide Shipping) | Not built yet |
-| — | "From raw fabric to retail-ready packaging" (5 items) | Not built yet |
+| 3 | "From raw fabric to retail-ready packaging" (5 items) | ✅ **Built** — reuses homepage's `OurServices` verbatim (see below) |
 | — | Certification logos strip (ISO 9001, OEKO-TEX, BSCI, IMAC, SGS) | Not built yet |
 | — | How It Works (5 steps) | Not built yet |
 | — | B2B FAQ | Not built yet |
@@ -955,6 +955,14 @@ Two columns at `xl:`: a `620px`-wide heading + paragraph on the left, a plain `4
 Copy (heading + paragraph) is the design's own real text layer, read directly — not placeholder copy.
 
 **Verified**: `npx tsc --noEmit`, `npx eslint .`, `npm run build` all clean. Live on `/services` at 1440px: heading measures `620px` wide at `x:80`; paragraph renders exactly 3 `<strong>` segments matching Figma's own bold phrases; media box measures `400x296` at `x:870` (native Figma pixel values, confirmed via `getBoundingClientRect`); no horizontal overflow at 375px or 1440px.
+
+### "From raw fabric to retail-ready packaging" — Built
+
+Owner, 2026-09-07: "we already have it on homepage, use as is, just check the spacing from the top in this page and use it." The exact same section as homepage's `OurServices` (identical cards, copy, sticky-sidebar/carousel behaviour) — not a new component, not a copy of one. `app/services/page.tsx` renders `<OurServices content={home.services} pageVariant="services" />`, same `home.services` content object the homepage itself uses.
+
+The only real difference between the two placements is the outer top/bottom spacing: Figma node `729:208` on this page gives 160px from the Hero above down to 80px below (vs. homepage's own confirmed 120px/120px), so `OurServices` now takes an optional `pageVariant?: "home" | "services"` prop (default `"home"`) that switches between two pre-built spacing recipes — `ourServices.desktopSection`/`mobileSection` (unchanged, homepage) and `ourServices.desktopSectionServices`/`mobileSectionServices` (new). No Figma mobile spacing was given for this placement, so the mobile variant follows the project's standing 72px inter-section gap rule instead of guessing.
+
+`npm run build`, `npx tsc --noEmit`, `npx eslint .` all clean.
 
 ## Activewear category PLP (product listing page)
 

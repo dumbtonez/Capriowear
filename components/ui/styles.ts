@@ -2174,6 +2174,13 @@ export const finalCta = {
 // no bg-ink split needed, the page's own default background already works.
 export const ourServices = {
   desktopSection: "container-p hidden gap-[221px] pt-[120px] pb-[120px] xl:flex xl:items-start",
+  // Services page reuse (owner, 2026-09-07: "use as is, just check the
+  // spacing from the top in this page and use it") -- same section, same
+  // cards, only the outer top/bottom breathing room changes to match this
+  // page's own Figma frame (node 729:208: 160px from the section above,
+  // 80px to whatever comes next), not homepage's 120/120. Everything else
+  // in this recipe (gap, sticky offset, card sizing) is shared as-is.
+  desktopSectionServices: "container-p hidden gap-[221px] pt-[160px] pb-[80px] xl:flex xl:items-start",
   // Sticky sidebar via plain CSS, no scroll listener: the right column's
   // own stacked height is what makes the page taller than the viewport, so
   // pinning this column at top-[56px] with self-start naturally keeps it in
@@ -2238,6 +2245,10 @@ export const ourServices = {
   // session required -- the block never renders at `xl:` regardless.
   // +40px on top of the confirmed mobile `pt-12` (48px), tablet-only.
   mobileSection: "container-p flex flex-col items-center gap-8 pt-12 md:pt-[88px] pb-12 xl:hidden",
+  // Services page reuse, mobile: no Figma mobile spacing was given for this
+  // placement, so this follows the project's standing 72px inter-section
+  // gap rule instead of homepage's own pt-12/md:pt-[88px] figures.
+  mobileSectionServices: "container-p flex flex-col items-center gap-8 pt-[72px] pb-[72px] xl:hidden",
 };
 
 // Shared by every mobile card carousel (Our Services first, How It Works

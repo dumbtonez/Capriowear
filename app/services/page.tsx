@@ -6,17 +6,25 @@
 //
 // Section 1: ServicesHero, Figma desktop node 729:139 -- see
 // components/sections/ServicesHero.tsx for the section's own build notes.
-// Section 2 (this step): ServicesIntro, Figma desktop node 733:529 -- see
+// Section 2: ServicesIntro, Figma desktop node 733:529 -- see
 // components/sections/ServicesIntro.tsx for the section's own build notes.
-// Every later section listed in the owner's brief (the 4-up services
-// strip, the "raw fabric to retail-ready packaging" section, certification
-// logos, How It Works, FAQ, closing CTA) is not built yet -- added
-// incrementally, one Figma link at a time.
+// Section 3 (this step): the homepage's own OurServices section, reused
+// as-is (owner, 2026-09-07: "we already have it on homepage, use as is") --
+// same cards, same copy (home.services), Figma node 729:363 on this page
+// only changes the outer spacing (160px from the section above, 80px
+// below), via `pageVariant="services"` -- see OurServices.tsx and the
+// `ourServices.desktopSectionServices`/`mobileSectionServices` recipes in
+// components/ui/styles.ts.
+//
+// Every later section listed in the owner's brief (certification logos,
+// How It Works, FAQ, closing CTA) is not built yet -- added incrementally,
+// one Figma link at a time.
 import type { Metadata } from "next";
 
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
+import { OurServices } from "@/components/sections/OurServices";
 import { ServicesHero } from "@/components/sections/ServicesHero";
 import { ServicesIntro } from "@/components/sections/ServicesIntro";
 import { header } from "@/components/ui/styles";
@@ -71,6 +79,7 @@ export default function ServicesPage() {
       <main className="relative z-10 bg-paper">
         <ServicesHero hero={services.hero} customOfferings={home.customOfferings} />
         <ServicesIntro content={services.intro} />
+        <OurServices content={home.services} pageVariant="services" />
       </main>
 
       <JsonLd data={breadcrumbSchema([{ name: "Home", url: SITE_URL }, { name: "Services", url: CANONICAL }])} />
