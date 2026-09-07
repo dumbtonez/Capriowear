@@ -102,3 +102,13 @@ Claude adopts a skill when a task calls for it, and says which and why. Relevant
 ## 9. Verification is shown, not claimed
 
 If Claude says something works, it ran it. Screenshot diffs, test output and build results get reported honestly, including failures. "It should work" is not a status.
+
+## 10. Multiple sessions, multiple dev servers
+
+**Added 2026-09-07, after a real mix-up:** several Claude sessions can run at once, often each in its own git worktree. Each can start its own `next dev` server. `localhost:3000` is only ever "the" preview by coincidence — if two servers are alive, whichever claimed port 3000 first wins it, and everyone else is silently looking at a different server (possibly a different worktree, a different commit, even uncommitted work from another session).
+
+`.claude/launch.json`'s dev config has `autoPort: true`, so each session's own server picks a free port automatically instead of colliding on 3000. Because of this:
+
+- Claude always states the exact `localhost:PORT` URL it verified a change on — never assumes or implies port 3000.
+- The owner checks whatever URL Claude just gave, not habit/muscle-memory `:3000`, especially when more than one Claude session is active.
+- If something "isn't showing up" after a fix, the first thing to check is whether the browser is pointed at the same port the fix was verified on.
