@@ -89,6 +89,12 @@ tests/screenshots.spec.ts  screenshot + overflow QA across all target viewports
 - Never run `git clean`, `git reset --hard`, or `git checkout -- .` on uncommitted work without asking first — these destroy uncommitted changes.
 - If we're on the `main` branch and about to start a sizable piece of work, offer to create a branch first.
 
+## Multi-machine sync
+- This project is worked on from more than one computer. GitHub (origin/main) is the single source of truth; the machines sync only through it.
+- At the START of every session, run `git pull origin main` before making any changes, so this machine has the latest.
+- At the END of every session — and always before I switch to another computer — make sure everything is committed, confirm `npm run build` passes, then run `git push origin main`. Never leave a session with unpushed commits.
+- If `git pull` reports a conflict, stop and tell me. Do not force-push or discard anything.
+
 ## Deployment (Vercel)
 - This project deploys to Vercel. Vercel runs `next build` on every deploy, and type errors block production builds (unlike `npm run dev`, which ignores them).
 - Before pushing, always run `npm run build` locally and confirm it passes. Never push a commit that fails `npm run build` — it will produce a failed Vercel deploy.
