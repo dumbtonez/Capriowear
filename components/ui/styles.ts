@@ -2943,7 +2943,11 @@ export const footer = {
   // width (`mobileDescriptionGroup` has no max-width of its own), unaffected.
   desktopDescriptionGroup: "flex max-w-[350px] flex-col gap-3",
   desktopDescription: "text-[1.25rem] leading-[1.4] text-ink",
-  desktopNavGroup: "flex items-start gap-12",
+  // 78px (owner, 2026-09-07: "the space between 3 columns ... should be
+  // the same" -- matches `desktopRow2`'s own gap-[78px] between the nav
+  // group as a whole and the description paragraph, so all 3 visual
+  // columns in this row are evenly spaced). Was `gap-12` (48px).
+  desktopNavGroup: "flex items-start gap-[78px]",
   desktopNavColumnOne: "flex flex-col whitespace-nowrap",
   desktopNavColumnTwo: "flex flex-col whitespace-nowrap",
   desktopNavLink: "text-[1.25rem] leading-[36px] text-ink transition-opacity hover:opacity-70",
