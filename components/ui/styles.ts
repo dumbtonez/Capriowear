@@ -3805,11 +3805,18 @@ export const productGallery = {
   mobileRoot: "relative -mx-5 xl:-mx-8 xl:hidden",
   // Fixed 450px (owner correction, 2026-09-01: "the main image height is
   // 450px", replacing the earlier `ratio="4:5"` aspect-driven height,
-  // which computed ~469px at a 375px viewport) -- MediaPlaceholder's own
-  // `aspect-ratio` class is a no-op once both width (w-full, from
-  // `media.shell`) and height are already definite, so no ratio prop is
-  // passed alongside this.
-  mobileImage: "h-[450px]",
+  // which computed ~469px at a 375px viewport). Split into a wrapper +
+  // fill pair (2026-09-07, swipe-to-change): `MediaPlaceholder` doesn't
+  // forward arbitrary DOM props, so the swipe `onTouchStart`/`onTouchEnd`
+  // handlers need a plain wrapping `<div>` of their own -- this wrapper
+  // now carries the fixed height and the `relative` positioning the
+  // counter/strip siblings already assumed came from `mobileRoot` (still
+  // true, unaffected -- this wrapper is a new, separate box, not a
+  // replacement for `mobileRoot`'s own `relative`). `mobileImage` itself
+  // becomes a plain fill (`h-full`) on the `MediaPlaceholder` inside it,
+  // same rendered 450px box as before, not a visual change.
+  mobileImageWrap: "relative h-[450px]",
+  mobileImage: "h-full",
   // Top-left, mirroring the desktop counter's own bg-paper/shadow-card
   // chrome (owner, 2026-09-01: tapping a thumbnail "should show the image
   // on the top and I should know its changed") -- top, not bottom, since
@@ -3866,7 +3873,10 @@ export const productGallery = {
   // everywhere else on the site.
   // No border colour utility here -- set as an inline style in
   // ProductGallery.tsx instead, same reasoning as desktop's `thumb` above.
-  mobileThumb: "block size-12 shrink-0 snap-start overflow-hidden border-2 [&>div>div]:bg-ink/10",
+  // size-14 (56px, owner request 2026-09-07, up from size-12/48px) --
+  // covers both mobile and tablet, since this whole block only renders
+  // below `xl` (`mobileRoot`'s own `xl:hidden`).
+  mobileThumb: "block size-14 shrink-0 snap-start overflow-hidden border-2 [&>div>div]:bg-ink/10",
 };
 
 /* --- ProductInfo (PDP) --------------------------------------------------- */

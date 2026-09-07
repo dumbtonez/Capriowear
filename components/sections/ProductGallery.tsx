@@ -36,7 +36,7 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import { useRef, useState } from "react";
+import { useRef, useState, type TouchEvent } from "react";
 
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { cx } from "@/components/ui/cx";
@@ -69,11 +69,22 @@ export type ProductGalleryProps = {
 // leading gap (16px), the amount the rail scrolls per "show more" click.
 const RAIL_STEP_PX = 125;
 
+// Minimum horizontal travel (owner request, 2026-09-07: swipe-to-change on
+// the mobile main image) before a touch gesture counts as a deliberate
+// swipe rather than an incidental wobble/tap -- a plain, conservative
+// threshold, not a measured value (no Figma spec for this interaction).
+const SWIPE_THRESHOLD_PX = 40;
+
 export function ProductGallery({ images, productTitle }: ProductGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const railRef = useRef<HTMLDivElement>(null);
   const [railAtTop, setRailAtTop] = useState(true);
   const [railAtBottom, setRailAtBottom] = useState(false);
+  // Mobile swipe-to-change (owner request, 2026-09-07: the main image had
+  // no touch handling at all -- only the thumbnail strip changed it).
+  // Plain ref, not state -- a touch's start point is read-then-discarded
+  // per gesture, never rendered, so it doesn't need to trigger a re-render.
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
 
   function goTo(index: number, options?: { scrollRail?: boolean }) {
     setActiveIndex(index);
@@ -91,6 +102,27 @@ export function ProductGallery({ images, productTitle }: ProductGalleryProps) {
     // circles.
     const next = (activeIndex + direction + images.length) % images.length;
     goTo(next);
+  }
+
+  function handleImageTouchStart(event: TouchEvent<HTMLDivElement>) {
+    const touch = event.touches[0];
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+  }
+
+  function handleImageTouchEnd(event: TouchEvent<HTMLDivElement>) {
+    const start = touchStartRef.current;
+    touchStartRef.current = null;
+    if (!start || images.length <= 1) return;
+
+    const touch = event.changedTouches[0];
+    const dx = touch.clientX - start.x;
+    const dy = touch.clientY - start.y;
+    // Predominantly horizontal and past the threshold -- a vertical or
+    // diagonal-leaning gesture is a page scroll, not a swipe, and is left
+    // alone entirely (no preventDefault anywhere in this handler pair, so
+    // normal scrolling is never interfered with).
+    if (Math.abs(dx) < SWIPE_THRESHOLD_PX || Math.abs(dx) < Math.abs(dy)) return;
+    stepMainImage(dx < 0 ? 1 : -1);
   }
 
   function revealMore() {
@@ -216,14 +248,20 @@ export function ProductGallery({ images, productTitle }: ProductGalleryProps) {
 
       {/* Mobile */}
       <div className={productGallery.mobileRoot}>
-        <MediaPlaceholder
-          key={activeIndex}
-          label={images[activeIndex]?.alt ?? productTitle}
-          image={images[activeIndex]?.src ? { src: images[activeIndex].src!, alt: images[activeIndex]?.alt ?? productTitle } : undefined}
-          radius="none"
-          showLabel={false}
-          className={productGallery.mobileImage}
-        />
+        <div
+          className={productGallery.mobileImageWrap}
+          onTouchStart={handleImageTouchStart}
+          onTouchEnd={handleImageTouchEnd}
+        >
+          <MediaPlaceholder
+            key={activeIndex}
+            label={images[activeIndex]?.alt ?? productTitle}
+            image={images[activeIndex]?.src ? { src: images[activeIndex].src!, alt: images[activeIndex]?.alt ?? productTitle } : undefined}
+            radius="none"
+            showLabel={false}
+            className={productGallery.mobileImage}
+          />
+        </div>
         {images.length > 1 ? (
           <>
             {/* Image count, top-left (owner request, 2026-09-01: tapping a
