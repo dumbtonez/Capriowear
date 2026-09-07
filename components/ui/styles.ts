@@ -1503,7 +1503,10 @@ export const productRange = {
   // any inline-level gap/baseline quirk around the media box.
   cardMediaLink: "block w-full",
   cardMedia: "w-full",
-  cardTextCol: "flex w-full flex-col items-start gap-4",
+  // gap-6 (24px), not gap-4 (16px) -- owner, 2026-09-07: "add 24px gap from
+  // cta to top not 16px" (the gap from the card body text down to the
+  // "Explore" CTA link).
+  cardTextCol: "flex w-full flex-col items-start gap-6",
   // Figma's own flat 20px/28px body copy -- no existing token carries this
   // exact leading (text-body-lg's is 24px), so this is its own explicit
   // value, same reasoning as `servicesHowWeWork.pathSubtitle`.
@@ -1517,8 +1520,15 @@ export const productRange = {
   // colour token needed.
   // `group` so the chevron below can react to hover on the whole link, not
   // just itself.
+  // text-button uppercase (18px/700/24px line-height) -- owner, 2026-09-07:
+  // "use the upper case cta style for explore activewear and teamwear cta
+  // on product range section", matching the same primary-CTA typography
+  // (`button.base`'s own `text-button uppercase`) already applied to
+  // WhatWeMake's "View All" CTAs and FinalCta's button. Was
+  // `text-[1.25rem] leading-7 font-normal` (20px/1.4/regular, no
+  // uppercase) -- a plain size/weight guess predating this standing rule.
   exploreLink:
-    "group inline-flex items-center gap-2 text-[1.25rem] leading-7 font-normal text-accent transition-[filter] hover:brightness-125",
+    "group inline-flex items-center gap-2 text-button uppercase text-accent transition-[filter] hover:brightness-125",
   // Same nudge-right-on-hover as PDP's Related Styles chip chevron
   // (`productRelatedStyles.chipIcon`, `group-hover:translate-x-0.5`) --
   // owner request, reusing that exact established hover treatment rather
@@ -1803,7 +1813,12 @@ export const whatWeMake = {
   // `card.label`'s own desktop size); `text-[1.25rem]` is the same literal
   // value `sectionHeading`/`trustPoints.subline` etc. already use for a
   // plain 20px size elsewhere, `leading-[1.2]`/`font-medium` kept from
-  // `text-h5`'s own values so only the size itself changed.
+  // `text-h5`'s own values so only the size itself changed. Superseded the
+  // same day (owner: "the cta label should be upper case as we use in our
+  // primary cta, 18px and 24 line height") -- `text-button uppercase` is
+  // `button.base`'s own real primary-CTA typography (`app/globals.css`:
+  // 18px/700/1.3333 line-height = 24px), reused verbatim rather than a
+  // third custom size for this one CTA.
   // `group gap-2`: pairs with `desktopCtaIcon` below (owner, same day:
   // "put a chvron next to the cta label," then "on the hover chvron
   // should have the same animation we applied on pdp, related styles" --
@@ -1817,7 +1832,7 @@ export const whatWeMake = {
   // "Explore" link showed the real gap was shape/weight, not just a
   // number.
   desktopGridCta:
-    "group flex aspect-[15/16] items-center justify-center gap-2 border border-accent text-center text-[1.25rem] leading-[1.2] font-medium text-accent transition-colors hover:bg-accent/5",
+    "group flex aspect-[15/16] items-center justify-center gap-2 border border-accent text-center text-button uppercase text-accent transition-colors hover:bg-accent/5",
   // Mobile: a single stacked column, not a grid -- each tile is a landscape
   // (16:11) image, unlike desktop's square, and the label is left-aligned,
   // not centred (confirmed via get_design_context: desktop's tile label
@@ -1841,18 +1856,16 @@ export const whatWeMake = {
   //
   // Split into two real instances 2026-09-07 (owner: "on the mobile
   // homepage, add a cta after 4 products ... Show the first 2 sub-cat
-  // only" -- clarified to 4, not 2), same "two breakpoint-specific
-  // instances, not one repositioned via CSS" pattern already used
-  // elsewhere (e.g. `ProductGallery`) when behavior genuinely differs by
-  // breakpoint, not just layout: real mobile now caps to the first 4
-  // tiles plus a "View All" CTA (`mobileGroupCta` below); tablet keeps
-  // showing every tile with no CTA, exactly as before -- a single shared
-  // list reflowed by CSS couldn't have a different tile COUNT at each
-  // tier, only a different layout, so this needed two real DOM instances,
-  // each visible at only one tier (`WhatWeMake.tsx` gates them
-  // `md:hidden`/`hidden md:grid xl:hidden`).
-  mobileListCapped: "flex flex-col gap-10 md:hidden",
-  mobileListFull: "hidden md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-10 xl:hidden",
+  // only" -- clarified to 4, not 2): real mobile capped to the first 4
+  // tiles plus a "View All" CTA; tablet kept showing every tile with no
+  // CTA. Merged back into this one instance the same day (owner: "tablet
+  // will also follow mobile cta behavior") -- tablet's own layout
+  // (`md:grid md:grid-cols-2`) is untouched, but it now shares mobile's
+  // same tile CAP and CTA instead of being a separate uncapped instance.
+  // `xl:hidden` (was `md:hidden` on the old mobile-only version) --
+  // visible through the whole sub-`xl` range now, `WhatWeMake.tsx`'s
+  // `.slice(0, MOBILE_TILE_LIMIT)` applies at every width this renders.
+  mobileList: "flex flex-col gap-10 md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-10 xl:hidden",
   // Full-width outline pill, real-mobile-only (owner, 2026-09-07, same
   // request as above: "cta ... it will take customers to their respective
   // landing pages" -- `category.href`, already on the content shape,
@@ -1868,9 +1881,9 @@ export const whatWeMake = {
   // `xl:mt-2`, see that recipe's own comment: "32 + 8 = a real 40px").
   // `mt-2` (8px) + the existing 24px gap = 32px, not `mt-8` (which would
   // stack to a wrong 56px total -- confirmed live, then corrected).
-  // `xl:hidden` alone (not `md:hidden`) would be wrong here -- see this
-  // key's own `mobileListCapped`/`mobileListFull` split above for why the
-  // CTA only belongs to the real-mobile tier: `md:hidden` is correct.
+  // `xl:hidden` (was `md:hidden` -- owner, same day: "tablet will also
+  // follow mobile cta behavior"; see `mobileList`'s own comment above for
+  // the matching change on the tile list this sits below).
   //
   // Accent-coloured outline, not the default `button.secondary`
   // currentColor one (owner, same day: first "make the outline and text
@@ -1882,14 +1895,18 @@ export const whatWeMake = {
   // `productCtas.secondaryDesktop` (see that recipe's own comment); reuses
   // its exact hover tint (`#FFF6F3`) rather than inventing a second one.
   // `group gap-2`: same trailing-chevron pairing as `desktopGridCta`
-  // above, see that key's own comment. `!text-[1.25rem]` (20px, owner:
-  // "make the view all activewear and teamwear 20px") overrides
-  // `Button`'s own `base` (`text-button`, 18px) -- `!` needed since both
-  // are same-specificity Tailwind utilities touching the same property,
-  // the same risk already documented on `productCtas.mobileButton`'s own
-  // `!text-[1rem]`.
-  mobileGroupCta:
-    "mt-2 w-full justify-center gap-2 md:hidden !border-accent !text-accent !text-[1.25rem] hover:!bg-[#FFF6F3]",
+  // above, see that key's own comment.
+  //
+  // No font-size override here at all, deliberately (owner: first "make
+  // the view all activewear and teamwear 20px" -- added `!text-[1.25rem]`
+  // -- then, same day: "the cta label should be upper case as we use in
+  // our primary cta, 18px and 24 line height"). `Button`'s own `base`
+  // already carries exactly that spec (`text-button uppercase`,
+  // 18px/700/24px line-height) by default -- the `!text-[1.25rem]`
+  // override was actively fighting the correct value down to 20px and
+  // dropping the line-height pairing; removed rather than replaced with a
+  // new override, since the desired result IS the untouched default.
+  mobileGroupCta: "mt-2 w-full justify-center gap-2 xl:hidden !border-accent !text-accent hover:!bg-[#FFF6F3]",
   // Trailing chevron, mobile CTA only now (desktop's own moved to
   // `desktopCtaIcon` below, a different icon component -- see that key's
   // own comment for why). Owner: "put a chvron next to the cta label ...
@@ -1916,7 +1933,18 @@ export const whatWeMake = {
   // own "Explore Activewear" link, not just a close approximation. Mobile
   // keeps `ctaIcon`/`ChevronRight` above, unchanged -- only "desktop" was
   // reported small.
-  desktopCtaIcon: "h-[16.667px] w-[7px] shrink-0 transition-transform group-hover:translate-x-0.5",
+  // `-translate-y-[1.5px]` (owner: "the chvron is not 100% center aligned
+  // to the text cta label, make it fully centre aligned") -- not a
+  // flexbox alignment bug (`desktopGridCta`'s own `items-center` is
+  // correct); the glyph drawn inside `NextArrowIcon`'s own viewBox
+  // (`0 0 7 16.6667`) isn't centred within it -- its path spans y
+  // 4-15.6667 (visual centre ~9.83), not the viewBox's true centre
+  // (8.33), a ~1.5px built-in offset toward the bottom. Flex-centering
+  // the icon's own box therefore still reads as low; nudging the box up
+  // by that same ~1.5px compensates so the visible glyph, not just its
+  // bounding box, lines up with the label text.
+  desktopCtaIcon:
+    "h-[16.667px] w-[7px] shrink-0 -translate-y-[1.5px] transition-transform group-hover:translate-x-0.5",
   mobileTile: "flex flex-col gap-4",
   // Owner, 2026-09-03: originally a `4:3` mid-point between mobile's old
   // flat `16:11` landscape and desktop's old square tile. Superseded
