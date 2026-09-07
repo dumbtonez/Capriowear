@@ -75,14 +75,24 @@
 // have been corrected more than once to match Figma, not left as
 // whichever order sections happened to be built in.
 //
-// Every later section listed in the owner's brief (FAQ) is not built yet
-// -- added incrementally, one Figma link at a time.
+// Section 10 (final): FAQ, reusing the homepage's own `Faq` component and
+// styling verbatim (owner, 2026-09-07: "same pattern as the homepage
+// 'Top questions from B2B buyers' FAQ ... do NOT fork or restyle it") --
+// `Faq` was already content-agnostic (see its own header comment), so this
+// is just `services.faq`, this page's own 14-question set, fed through the
+// same accordion. Placed after Certified & Compliant, the last section this
+// page had before this one, matching the owner's own brief order (last
+// section) since no other placement was specified. `services.faq.items`
+// also feeds `faqSchema()` below (same "content feeds both the visible
+// accordion and the schema" pattern `home.faq`/`app/page.tsx` already use)
+// so the two can never drift apart.
 import type { Metadata } from "next";
 
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
 import { CertifiedCompliant } from "@/components/sections/CertifiedCompliant";
+import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { OurServices } from "@/components/sections/OurServices";
@@ -95,7 +105,7 @@ import { header } from "@/components/ui/styles";
 import { home } from "@/content/home";
 import { services } from "@/content/services";
 import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 
 const CANONICAL = `${SITE_URL}/services`;
 
@@ -149,9 +159,11 @@ export default function ServicesPage() {
         <HowItWorks content={home.howItWorks} tone="dark" />
         <FinalCta content={home.finalCta} ticker={home.complianceTicker} />
         <CertifiedCompliant content={home.certified} />
+        <Faq content={services.faq} />
       </main>
 
       <JsonLd data={breadcrumbSchema([{ name: "Home", url: SITE_URL }, { name: "Services", url: CANONICAL }])} />
+      <JsonLd data={faqSchema(services.faq.items)} />
     </>
   );
 }

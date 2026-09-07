@@ -127,4 +127,76 @@ export const services = {
       },
     ],
   },
+
+  // FAQ. Same component/styling as the homepage's own FAQ (`Faq.tsx`,
+  // `home.faq`) -- `Faq` is already content-agnostic (see its own header
+  // comment), so this section just feeds it this page's own question set,
+  // no fork. Copy is owner-supplied verbatim (2026-09-07), not paraphrased
+  // -- house rules for this set: American spelling, no en/em dashes,
+  // "spandex" (never elastane/Lycra), no prices. Same
+  // "content feeds both the visible accordion and the FAQPage schema"
+  // pattern `home.faq` already established, so this page's own
+  // `faqSchema(services.faq.items)` call in `app/services/page.tsx` can
+  // never drift from what's actually shown.
+  faq: {
+    h2: "Top questions from B2B buyers",
+    items: [
+      {
+        q: "What services do you offer?",
+        a: "Capriowear is a custom activewear and teamwear manufacturer offering OEM, ODM and private label production, custom from fabric to packaging. We produce leggings, sports bras, tops, fleece, compression, sets and sublimated team kits, with low minimums and full customization. Capriowear is the activewear and teamwear division of Caprio Sports, a cut-and-sew manufacturer in Sialkot, Pakistan.",
+      },
+      {
+        q: "What is the difference between OEM, ODM and private label?",
+        a: "OEM means we manufacture to your design or tech pack. ODM means we design and develop the product from your brief or our blocks, and you brand it. Private label means the product is finished entirely under your brand, labels and packaging. We do all three, and often combine them.",
+      },
+      {
+        q: "What is your minimum order quantity (MOQ)?",
+        a: "From 50 pieces per style, and you can mix sizes freely within a colorway. It scales to full bulk from there.",
+      },
+      {
+        q: "Are you a factory or a middleman?",
+        a: "We are a factory. Capriowear is the in-house activewear and teamwear division of Caprio Sports, a cut-and-sew manufacturer in Sialkot, Pakistan, with our own 75,000 sq ft facility. You work directly with the factory, not a trading agent.",
+      },
+      {
+        q: "Do you work with startups and small brands?",
+        a: "Yes. Low minimums and full design and development support make us a fit for first collections and growing brands, not only large orders.",
+      },
+      {
+        q: "Can you make a product from my tech pack or a reference garment?",
+        a: "Yes. Send a tech pack, sketch or a reference and we develop or match it, then confirm everything on your sample before bulk.",
+      },
+      {
+        q: "How long do samples and bulk production take?",
+        a: "A sample in 10 to 14 days, and a digital mockup first for sublimated teamwear. Bulk lead time depends on quantity and customization, confirmed on your quote.",
+      },
+      {
+        q: "What can I customize?",
+        a: "Everything from fabric to packaging: fabric and weight, fit and construction, decoration and branding, color, labels, hangtags and packaging.",
+      },
+      {
+        q: "What decoration and printing methods do you offer?",
+        a: "Full-dye sublimation, screen, DTG and DTF print, embroidery, tackle twill, patches, puff and heat transfer, with Pantone color matching, all in-house.",
+      },
+      {
+        q: "Do you offer sustainable or recycled fabrics?",
+        a: "Yes, recycled polyester and OEKO-TEX certified fabrics are available, and we can source to your own sustainability spec.",
+      },
+      {
+        q: "What certifications do you hold?",
+        a: "ISO 9001, OEKO-TEX, BSCI, IMAC and SGS, covering quality, materials, social compliance and testing. Every run is also inspected to AQL 2.5.",
+      },
+      {
+        q: "Will my designs stay protected?",
+        a: "Yes. We sign an NDA before any tech pack, and everything is produced under your brand.",
+      },
+      {
+        q: "Do you ship to my country?",
+        a: "Yes, 40+ countries. DDP to the US, UK, EU, Canada and Australia, with GSP+ 0% EU duty.",
+      },
+      {
+        q: "How do I get started?",
+        a: "Send your tech pack, sketch or a reference by email or WhatsApp. We come back within 24 hours with next steps.",
+      },
+    ],
+  },
 } as const;
