@@ -274,6 +274,11 @@ export const media = {
     // common factor between 575 and 612), kept exact per this table's own
     // established precedent rather than rounded to an existing ratio.
     "575:612": "aspect-[575/612]",
+    // /services "How we work with you" path cards, 397x234 (Figma node
+    // 750:777, 2026-09-07) -- 397 is prime, so this fraction is already in
+    // its lowest terms; kept exact per this table's own established
+    // precedent rather than rounded to an existing ratio.
+    "397:234": "aspect-[397/234]",
   },
   radius: {
     lg: "rounded-lg",
@@ -1377,6 +1382,68 @@ export const servicesIntro = {
   paragraph: "text-body-lg leading-8 text-ink",
   paragraphBold: "font-semibold",
   media: "w-full xl:w-[400px] xl:shrink-0",
+};
+
+/* --- ServicesHowWeWork (/services page, section 3) ------------------------- */
+// Figma desktop node 750:770: a centred intro (heading + subheading), 3
+// "path" cards (OEM Production / ODM Development / Private Label), and a
+// closing note with an accent-orange asterisk icon. get_metadata confirmed
+// section padding `pt-[160px] pb-[80px] px-[80px]` (px-[80px] is
+// `container-p`'s own desktop inset, reused not redeclared), a `gap-
+// [72px]` between the intro block and the cards row, `gap-[140px]` between
+// the cards row and the closing note, and each card's own image-to-text
+// `gap-[32px]`.
+//
+// Desktop-only for now, same as `servicesHero`/`servicesIntro` above -- no
+// mobile Figma frame exists yet. Cards use a real CSS grid (1 column below
+// `xl`, 3 from `xl`) rather than Figma's fixed 397px card widths, so the
+// row reflows instead of overflowing at narrower widths -- the same
+// "responsive-safe, not read from a confirmed mobile design" caveat as
+// every other section on this page.
+export const servicesHowWeWork = {
+  section: "bg-paper",
+  inner: "container-p flex flex-col items-center gap-12 pt-16 pb-12 xl:gap-[72px] xl:pt-[160px] xl:pb-20",
+  // 624px intro column in Figma -- kept as a max-width (not a fixed width)
+  // so it can shrink below its own value on a narrow mobile viewport
+  // instead of forcing horizontal overflow.
+  introWrap: "flex max-w-[624px] flex-col items-center gap-4 text-center",
+  heading: "text-h1 text-ink",
+  // Same "20px/400 token, 32px leading layered on top" pattern as
+  // `servicesIntro.paragraph` -- see that key's own comment.
+  subheading: "text-body-lg leading-8 text-[#17191e]",
+  pathsGrid: "grid w-full grid-cols-1 gap-16 xl:grid-cols-3 xl:gap-x-11 xl:gap-y-0",
+  pathCard: "flex flex-col items-start gap-8",
+  pathMedia: "w-full",
+  pathTextCol: "flex w-full flex-col gap-8",
+  pathTitleGroup: "flex flex-col gap-2",
+  // text-h3 hits exactly 30px/500 at this project's own 1440px reference
+  // width (its fluid clamp's own confirmed value) -- matches Figma's flat
+  // 30px/500 "OEM Production"-style title exactly at that width, same
+  // reuse-the-token-at-its-matching-breakpoint approach `servicesIntro`
+  // above takes with `text-h1`.
+  pathTitle: "text-h3 text-ink",
+  // 20px/400, but with a real 0.5px letter-spacing and 28px leading Figma
+  // gives this specific line -- no existing token carries tracking, so
+  // this is its own explicit one-off building on the same #17191e body
+  // colour used elsewhere on this page.
+  pathSubtitle: "text-[1.25rem] font-normal leading-7 tracking-[0.5px] text-[#17191e]",
+  pathDetailGroup: "flex flex-col gap-6",
+  pathDetailItem: "flex flex-col gap-2",
+  // 22px/500 flat, with a real 1px letter-spacing -- Figma's own value for
+  // "What it means"/"Best for", not a fluid token (text-h3's own 22px only
+  // happens at a much narrower viewport than this desktop-only component
+  // ever renders at, so reusing it here would be wrong, not a coincidence
+  // worth relying on).
+  pathDetailLabel: "text-[1.375rem] font-medium tracking-[1px] text-ink",
+  pathDetailBody: "text-[1.25rem] font-normal leading-7 text-[#17191e]",
+  noteWrap: "flex max-w-[656px] flex-col items-center gap-4",
+  noteIconWrap: "flex size-[54px] items-center justify-center rounded-full bg-accent/10 text-accent",
+  noteIcon: "size-[54px]",
+  // 20px, 30px leading (Figma's own real value here -- not the 32px
+  // `leading-8` the intro/subheading paragraphs above use) -- kept exact
+  // rather than reusing a nearby but not-quite-matching override.
+  noteParagraph: "text-body-lg leading-[30px] text-center text-ink",
+  noteParagraphBold: "font-semibold",
 };
 
 /* --- ClientLogos (homepage section 4) -------------------------------------- */

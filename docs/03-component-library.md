@@ -918,7 +918,8 @@ Built section by section from Figma (owner brief, 2026-09-07), same pattern as t
 | — | Fully Custom Offerings chip strip | Already part of section 1 above — reuses `Marquee`, the exact same component/props as homepage `Hero`, not a second one |
 | 2 | Intro statement ("A factory you can build your brand on") | ✅ **Built** — `components/sections/ServicesIntro.tsx` |
 | — | 4-up services strip (Product Development / Private Label / Low MOQ / Worldwide Shipping) | Not built yet |
-| 3 | "From raw fabric to retail-ready packaging" (5 items) | ✅ **Built** — reuses homepage's `OurServices` verbatim (see below) |
+| 3 | How we work with you (OEM/ODM/Private Label path cards) | ✅ **Built** — `components/sections/ServicesHowWeWork.tsx` |
+| 4 | "From raw fabric to retail-ready packaging" (5 items) | ✅ **Built** — reuses homepage's `OurServices` verbatim (see below) |
 | — | Certification logos strip (ISO 9001, OEKO-TEX, BSCI, IMAC, SGS) | Not built yet |
 | — | How It Works (5 steps) | Not built yet |
 | — | B2B FAQ | Not built yet |
@@ -955,6 +956,22 @@ Two columns at `xl:`: a `620px`-wide heading + paragraph on the left, a plain `4
 Copy (heading + paragraph) is the design's own real text layer, read directly — not placeholder copy.
 
 **Verified**: `npx tsc --noEmit`, `npx eslint .`, `npm run build` all clean. Live on `/services` at 1440px: heading measures `620px` wide at `x:80`; paragraph renders exactly 3 `<strong>` segments matching Figma's own bold phrases; media box measures `400x296` at `x:870` (native Figma pixel values, confirmed via `getBoundingClientRect`); no horizontal overflow at 375px or 1440px.
+
+### How we work with you — Built
+`components/sections/ServicesHowWeWork.tsx` · recipe: `servicesHowWeWork` · Figma: desktop node `750:770` (mobile not yet designed)
+
+A centred intro (heading + subheading), 3 "path" cards (OEM Production / ODM Development / Private Label), and a closing note with an accent-orange asterisk icon. `get_metadata`-confirmed exact: section padding `pt-[160px] pb-[80px]` (`px-[80px]` is `container-p`'s own desktop inset, reused not redeclared), `gap-[72px]` between the intro block and the cards row, `gap-[140px]` between the cards row and the closing note, each card's own image-to-text `gap-[32px]`.
+
+**Real Figma page order matters here**: this section's own y-position (`1949`) sits directly between `ServicesIntro`'s (`833`) and the homepage-reused `OurServices`' (`3279`) — confirmed via `get_metadata` on all three nodes. `OurServices` had already been wired in as this page's "section 3" (right after Intro) before this section was built; both `app/services/page.tsx`'s own header comment and its JSX order were corrected to insert this section between the two, matching the real Figma order, rather than appending it after `OurServices` just because that's where the page happened to already end.
+
+- **New, bespoke component, not a reuse** — `CapabilityCard` (Our Services/How It Works) only carries a single title + body per card, not this card's real shape (title + subtitle header, then two separately-labeled "What it means"/"Best for" blocks); forcing this content into it would mean bolting on unused props rather than a clean fit. What IS reused: `MediaPlaceholder` for each card's plain image box, a new `AsteriskIcon` component (`components/icons/AsteriskIcon.tsx`, currentColor, same pattern as every other icon in that folder — not an inlined one-off `<svg>`), and `NoteSegment` (from `content/activewear/types.ts`) for the closing note's bold-phrase paragraph, the same segmented-note pattern `ServicesIntro`'s own paragraph already uses.
+- **New `MediaPlaceholder` ratio, `"397:234"`** — each card's image box is a real, exact Figma pixel size (397×234, node `750:777`) that doesn't match any existing ratio token; 397 is prime, so this fraction is already in lowest terms, added following this table's own established "keep exact Figma ratios, don't round" precedent (`50:37`, `469:320`, `79:100`, etc.).
+- **Cards use a real CSS grid** (`grid-cols-1 xl:grid-cols-3`), not Figma's fixed 397px card widths — the row reflows to a single stacked column below `xl` instead of overflowing at narrower widths, the same "responsive-safe, not a confirmed mobile design" caveat as every other section on this page.
+- **Typography**: card titles reuse `text-h3`, which hits exactly 30px/500 at this project's own 1440px reference width (matching Figma's flat 30px/500 title) — the same "reuse a fluid token at its matching breakpoint" approach `ServicesIntro` takes with `text-h1`. The "What it means"/"Best for" labels (22px/500, 1px letter-spacing) are a real one-off (`text-[1.375rem] font-medium tracking-[1px]`), not `text-h3` — that token's own 22px value only occurs at a much narrower viewport than this desktop-only component ever renders at, so reusing it here would be a coincidence, not a real match. Body/subtitle colour (`#17191E`) matches the same literal Figma value already used elsewhere on this page (`ServicesIntro`'s own body colour, Footer's contact label) — a real, confirmed Figma colour with no matching token, kept exact per this project's own established precedent for that specific case, rather than swapped for the nearest token.
+
+Copy (heading, subheading, all 3 cards' title/subtitle/"What it means"/"Best for" text, and the closing note) is the design's own real text layer, read directly — not placeholder copy.
+
+**Verified**: `npx tsc --noEmit`, `npx eslint .`, `npm run build` all clean. Live on `/services` at 1440px: cards grid measures 3× ~397px columns totaling 1280px (`container-p`'s own inner width); all 3 card titles and their "What it means"/"Best for" copy render exactly; closing note renders both `<strong>` segments matching Figma's own bold phrases; no horizontal overflow at 375px.
 
 ### "From raw fabric to retail-ready packaging" — Built
 

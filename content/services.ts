@@ -34,6 +34,16 @@ const introParagraph: NoteSegment[] = [
   { text: " and our own 75,000 sq ft facility." },
 ];
 
+// Section 3's own closing note (Figma node 750:821) -- same NoteSegment
+// shape as introParagraph above, reused for the same reason.
+const howWeWorkNote: NoteSegment[] = [
+  { text: "Many programs " },
+  { text: "combine them", bold: true },
+  { text: ", for example " },
+  { text: "we develop the design (ODM) and produce it as your private label", bold: true },
+  { text: ". Tell us what you have and we map the fastest, cleanest route." },
+];
+
 export const services = {
   // TODO(owner copy): metaTitle/metaDescription are placeholders -- confirm
   // real SEO copy for this page.
@@ -61,5 +71,35 @@ export const services = {
   intro: {
     heading: "A factory you can build your brand on",
     paragraph: introParagraph,
+  },
+
+  // Section 3: How we work with you. Figma desktop node 750:770. Copy (all
+  // headings, subtitles and body text) is the design's own real text
+  // layer, read directly, same as every prior section.
+  howWeWork: {
+    heading: "How we work with you",
+    subheading:
+      "We manufacture three ways, depending on how much of the design you bring and how much you want us to develop.",
+    paths: [
+      {
+        title: "OEM Production",
+        subtitle: "Fully make to your brand spec",
+        whatItMeans: "You bring the design, tech pack or samples, we manufacture exactly to them",
+        bestFor: "Brands with their own designs ready to produce",
+      },
+      {
+        title: "ODM Development",
+        subtitle: "Design & develop in-house",
+        whatItMeans: "We design and develop from your brief or our proven blocks, you brand it",
+        bestFor: "Brands that want design and development support, or a faster route to market",
+      },
+      {
+        title: "Private Label",
+        subtitle: "Our make, your brand",
+        whatItMeans: "Our production, finished entirely under your brand, labels, tags and packaging",
+        bestFor: "Brands, retailers and teamwear suppliers wanting a ready path to shelf",
+      },
+    ],
+    note: howWeWorkNote,
   },
 } as const;
