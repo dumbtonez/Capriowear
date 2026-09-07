@@ -3935,19 +3935,32 @@ export const productGallery = {
   // xl:hidden -> md:hidden -> xl:hidden (2026-09-04, then reverted
   // 2026-09-07, pairs with desktopRoot's own threshold above).
   mobileRoot: "relative -mx-5 xl:-mx-8 xl:hidden",
-  // Fixed 450px (owner correction, 2026-09-01: "the main image height is
-  // 450px", replacing the earlier `ratio="4:5"` aspect-driven height,
-  // which computed ~469px at a 375px viewport). Split into a wrapper +
-  // fill pair (2026-09-07, swipe-to-change): `MediaPlaceholder` doesn't
-  // forward arbitrary DOM props, so the swipe `onTouchStart`/`onTouchEnd`
-  // handlers need a plain wrapping `<div>` of their own -- this wrapper
-  // now carries the fixed height and the `relative` positioning the
-  // counter/strip siblings already assumed came from `mobileRoot` (still
-  // true, unaffected -- this wrapper is a new, separate box, not a
-  // replacement for `mobileRoot`'s own `relative`). `mobileImage` itself
-  // becomes a plain fill (`h-full`) on the `MediaPlaceholder` inside it,
-  // same rendered 450px box as before, not a visual change.
-  mobileImageWrap: "relative h-[450px]",
+  // Was a fixed 450px (owner correction, 2026-09-01: "the main image
+  // height is 450px", replacing the earlier `ratio="4:5"` aspect-driven
+  // height, which computed ~469px at a 375px viewport). Split into a
+  // wrapper + fill pair 2026-09-07 (swipe-to-change): `MediaPlaceholder`
+  // doesn't forward arbitrary DOM props, so the swipe
+  // `onTouchStart`/`onTouchEnd` handlers need a plain wrapping `<div>` of
+  // their own -- this wrapper carries the sizing and the `relative`
+  // positioning the counter/strip siblings already assumed came from
+  // `mobileRoot` (still true, unaffected -- this wrapper is a new,
+  // separate box, not a replacement for `mobileRoot`'s own `relative`).
+  //
+  // Fixed height replaced with `aspect-[575/612]` (owner report, same
+  // day: on tablet, this box spans the full container width while
+  // staying pinned at a flat 450px tall, so a portrait photo's
+  // `object-cover` had to zoom in hard to fill the now-landscape-shaped
+  // box, cropping away most of the garment vertically -- confirmed live
+  // on a real photo). An aspect ratio makes the box's height scale WITH
+  // its width at any size in the mobile/tablet range instead of staying
+  // flat, so the crop stays sensible throughout, not just at exactly
+  // 375px. `575:612` reuses `mainWrap`'s own desktop main-image ratio
+  // (~0.94:1) rather than a new one-off, for the same shape on both
+  // sides of the `xl` breakpoint. At 375px wide this computes to ~399px
+  // tall, close to (not identical to) the old 450px -- a deliberate,
+  // confirmed trade of that specific owner-set number for a box that no
+  // longer breaks at wider mobile/tablet widths.
+  mobileImageWrap: "relative aspect-[575/612]",
   mobileImage: "h-full",
   // Top-left, mirroring the desktop counter's own bg-paper/shadow-card
   // chrome (owner, 2026-09-01: tapping a thumbnail "should show the image
