@@ -260,7 +260,14 @@ export const leggings: Category = {
       // the exact given wording).
       cardTitle: "Custom High-Waisted Compression Leggings",
       cardSubline: "Squat-proof compression, 4-way stretch",
-      image: "",
+      // Placeholder/QA photo (owner, 2026-09-07: "add a dummy product
+      // image ... see how it would look across home, PLP, PDP, all
+      // platforms") -- a real photo supplied for visual QA of the
+      // placeholder/crop behavior, not final product photography (it's a
+      // waistband detail shot of shorts, not these leggings). Swap for
+      // real photography once available; see `images[0]`'s own comment
+      // below for why only this one slot gets it.
+      image: "/product-images/leggings-high-waisted-compression.png",
       imageAlt: "Custom high-waisted compression leggings",
       href: "/activewear/leggings/high-waisted-compression",
       // Figma-confirmed real copy (node 634:4952, PDP breadcrumb, 2026-08-31).
@@ -279,8 +286,24 @@ export const leggings: Category = {
       // one "show more" click to reach the rail's own end; this exercises
       // the rail scrolling across multiple clicks before it runs out.
       images: [
-        { alt: "High-waisted compression leggings, front view" },
-        { alt: "High-waisted compression leggings, back view" },
+        // Only this first entry gets a real `src` (owner-supplied QA
+        // photo, see `image`'s own comment above) -- the remaining 8 stay
+        // alt-only placeholders, since only one real photo exists; this
+        // is a deliberate "one real photo, rest still placeholder" state
+        // for the visual check, not every slot silently filled with a
+        // repeat of the same image. Two real photos now (owner,
+        // 2026-09-07, added a second QA image) -- `images[1]` specifically
+        // also lights up `ProductCardMedia`'s own desktop hover-swap on
+        // the PLP card (it reads exactly `images[0]`/`images[1]`, never
+        // further into the array), so this is the one other slot worth
+        // filling; alt text describes what the photo actually shows
+        // (worn, in motion), not a mismatched reuse of the original
+        // "back view" placeholder label.
+        { alt: "High-waisted compression leggings, front view", src: "/product-images/leggings-high-waisted-compression.png" },
+        {
+          alt: "High-waisted compression leggings, worn on model, in motion",
+          src: "/product-images/leggings-high-waisted-compression-2.png",
+        },
         { alt: "High-waisted compression leggings, side profile" },
         { alt: "High-waisted compression leggings, waistband detail" },
         { alt: "High-waisted compression leggings, fabric close-up" },

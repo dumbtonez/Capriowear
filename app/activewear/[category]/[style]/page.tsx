@@ -169,7 +169,6 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
         desktopLogo={<Logo stacked className={header.brandLogoDesktop} />}
         links={home.nav.links}
         mobileLinks={home.nav.mobileLinks}
-        megaMenuPromo={home.nav.megaMenuPromo}
         contact={home.nav.contact}
         social={ORGANIZATION.sameAs}
         cta={home.nav.cta}
@@ -231,14 +230,20 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
             metadata (634:4926: breadcrumb's own "Levels Container" ending
             at the same y as this row's own Content frame, 634:4960):
             trusting the owner's direct, currently-visible design over that
-            metadata reading. Mobile is `pt-0` (owner, 2026-09-01: "no gap
-            from the nav and the image") -- the breadcrumb is hidden below
-            `xl`, so this row sits directly under Header there;
-            ProductGallery's own mobile image is the first thing in it, so
-            zero top padding here means zero gap from the header to the
-            image (ProductInfo below still gets its own breathing room from
-            `ProductGallery.mobileRoot`'s own height + this row's `gap-8`,
-            unaffected). The row itself is 700px gallery + a real 66px gap
+            metadata reading. Real mobile is `pt-0` (owner, 2026-09-01: "no
+            gap from the nav and the image") -- the breadcrumb is hidden
+            below `md` (`Breadcrumb`'s own `hidden md:block`), so this row
+            sits directly under Header there; ProductGallery's own mobile
+            image is the first thing in it, so zero top padding here means
+            zero gap from the header to the image (ProductInfo below still
+            gets its own breathing room from `ProductGallery.mobileRoot`'s
+            own height + this row's `gap-8`, unaffected). `md:pt-6` (owner,
+            2026-09-07: "breadcrumbs on the tablet pdp should have the same
+            gap to the image as it has from the top") matches `xl:pt-6` --
+            `breadcrumb.nav`'s own `pt-8`/`pb-2` give a flat 32px above the
+            breadcrumb at every width it's visible; below `md:pt-6` this
+            row's `pb-2` (8px) + `pt-6` (24px) also totalled 32px, matching.
+            The row itself is 700px gallery + a real 66px gap
             + a real 514px text column (766 - 700), not gallery + flex-1 --
             `xl:gap-[66px]` on this row, `xl:w-[514px]` fixed on the text
             column below, replacing the earlier `xl:gap-12`/flex-1
@@ -258,7 +263,7 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
             gap from the gallery image's own bottom edge to the SKU text.
             `xl:gap-[66px]` overrides it in the horizontal direction at
             desktop, unaffected. */}
-        <div className="container-p flex flex-col gap-6 pt-0 md:flex-row md:items-start md:gap-8 md:pt-6 xl:gap-[66px]">
+        <div className="container-p flex flex-col gap-6 pt-0 md:pt-6 xl:flex-row xl:items-start xl:gap-[66px] xl:pt-6">
           {data.product.images ? (
             <ProductGallery images={data.product.images} productTitle={productTitle} />
           ) : null}
@@ -272,7 +277,7 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
               productGallery.mainWrap's own reasoning for why a column
               beside a fixed-width sibling still allows shrinking below its
               content's intrinsic width. */}
-          <div className="flex w-full min-w-0 flex-col gap-8 md:min-w-0 md:flex-1 xl:w-[514px] xl:flex-none">
+          <div className="flex w-full min-w-0 flex-col gap-8 xl:w-[514px] xl:flex-none">
             <ProductInfo sku={data.product.sku} heading={heading} description={description} />
             <ProductHighlights items={pdpSpecHighlights} />
             {/* ProductOptions (node 634:5034/645:2905, 2026-09-01) --
@@ -326,9 +331,21 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
                 confirmed live: heading/list sat flush with a real 0px
                 gap despite `getComputedStyle` reporting 16px. `xl:flex`
                 fixes visibility AND display in one utility, so there's
-                nothing left to clobber it. */}
+                nothing left to clobber it.
+                Moved `md:flex` -> `xl:flex` (owner, 2026-09-07: "make it
+                72px only on both mobile and tablet"). `md:flex` was itself
+                a deliberate 2026-09-04 change (see `ProductInfo`'s own
+                entry in docs/03-component-library.md, "Tablet width" note)
+                that coupled this instance's visibility to the gallery/text
+                column's own `md:`-width two-column switch, so it would
+                appear inside that column as soon as the column split did.
+                Today's request reverses just this one piece: the 72px/
+                no-divider instance below (not this bordered one) should be
+                what shows through tablet, so this instance now waits for
+                `xl` again -- the column split itself (`md:flex-row`, etc.)
+                is untouched. */}
             {data.product.relatedStyleTags ? (
-              <ProductRelatedStyles tags={data.product.relatedStyleTags} className="hidden md:flex" />
+              <ProductRelatedStyles tags={data.product.relatedStyleTags} className="hidden xl:flex" />
             ) : null}
           </div>
         </div>
@@ -389,7 +406,7 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
           sidePadding="pdp"
         />
 
-        {/* ProductRelatedStyles, mobile-only instance (owner correction,
+        {/* ProductRelatedStyles, mobile/tablet instance (owner correction,
             2026-09-02: "reposition it on mobile to under the built to pass
             section") -- the desktop instance above (inside the gallery/info
             row's own text column) stays where it was; this is a second,
@@ -397,9 +414,17 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
             instead, not the same DOM node repositioned via CSS (the two
             breakpoints genuinely sit in different places in the page flow,
             not just visually offset). `container-p` supplies the page-level
-            side inset the text column's own wrapper gave it before. */}
+            side inset the text column's own wrapper gave it before.
+            Was `block md:hidden` until 2026-09-07 (owner: "make it 72px
+            only on both mobile and tablet") -- `md:hidden` was itself a
+            deliberate 2026-09-04 change, paired with the sibling instance
+            above, to match this section's visibility to the gallery/text
+            column's own tablet-width two-column switch. Moved to
+            `xl:hidden` so this 72px/no-divider treatment now covers
+            tablet too, not just phone widths -- see the sibling instance's
+            own comment above for the full reasoning. */}
         {data.product.relatedStyleTags ? (
-          <div className="container-p block md:hidden">
+          <div className="container-p block xl:hidden">
             <ProductRelatedStyles tags={data.product.relatedStyleTags} topRule="none" />
           </div>
         ) : null}
@@ -441,6 +466,7 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
           }}
           ticker={home.complianceTicker}
           compactMobileTop
+          secondaryCta={home.closingCta.secondaryCta}
         />
 
         {/* ProductCtasMobileBar -- the literal last child of `<main>` (owner

@@ -32,6 +32,16 @@ type CardMediaProps = {
    * caller states which one it wants.
    */
   radius?: "lg" | "none";
+  /**
+   * `"light"` (default) or `"dark"` -- selects the empty-state placeholder
+   * fill only (`cardMedia.placeholder` vs. `placeholderDark`); has no effect
+   * once a real `image` is set. Added 2026-09-07 for How It Works' own dark
+   * variant (see that component's own header comment) -- reuses the exact
+   * `bg-ink-2` token `MediaPlaceholder`'s own `placeholderDark` already uses
+   * for this identical "photo not in yet, on a dark section" case, rather
+   * than inventing a second dark-surface colour.
+   */
+  tone?: "light" | "dark";
   className?: string;
 };
 
@@ -40,6 +50,7 @@ function CardMedia({
   imageSizes = "100vw",
   aspectClassName,
   radius = "lg",
+  tone = "light",
   className,
 }: CardMediaProps) {
   const classes = cx(aspectClassName, cardMedia.base, cardMedia.radius[radius], className);
@@ -58,7 +69,12 @@ function CardMedia({
     );
   }
 
-  return <div className={cx(cardMedia.placeholder, classes)} aria-hidden="true" />;
+  return (
+    <div
+      className={cx(tone === "dark" ? cardMedia.placeholderDark : cardMedia.placeholder, classes)}
+      aria-hidden="true"
+    />
+  );
 }
 
 export type CardProps = {
@@ -68,15 +84,31 @@ export type CardProps = {
   imageSizes?: string;
   /** `lg` (default, rounded) or `none` -- What We Make's product tiles' own confirmed 0px radius, 2026-08-26. */
   mediaRadius?: "lg" | "none";
+  /**
+   * Overrides the media area's aspect ratio, default `aspect-square` --
+   * same override pattern as `CapabilityCard`'s own `mediaAspectClassName`
+   * above. What We Make's own desktop grid tiles (owner request,
+   * 2026-09-07: "300 by 320... height more than the width") are the first
+   * caller to actually pass one; every other caller (styleguide) keeps the
+   * square default unchanged.
+   */
+  mediaAspectClassName?: string;
 };
 
-export function Card({ label, href, image, imageSizes, mediaRadius = "lg" }: CardProps) {
+export function Card({
+  label,
+  href,
+  image,
+  imageSizes,
+  mediaRadius = "lg",
+  mediaAspectClassName = "aspect-square",
+}: CardProps) {
   return (
     <Link href={href} className={card.root}>
       <CardMedia
         image={image}
         imageSizes={imageSizes}
-        aspectClassName="aspect-square"
+        aspectClassName={mediaAspectClassName}
         radius={mediaRadius}
         className={card.mediaHover}
       />
@@ -114,6 +146,16 @@ export type CapabilityCardProps = {
   rootClassName?: string;
   bodyClassName?: string;
   titleClassName?: string;
+  /**
+   * `"light"` (default) or `"dark"` -- How It Works' own dark variant
+   * (2026-09-07, /services page). Forwarded to `CardMedia`'s own `tone`
+   * (empty-state placeholder colour) and selects the body paragraph's
+   * colour (`capabilityCard.text` vs. `textDark`). The title needs no
+   * switch of its own -- it carries no colour class at all
+   * (`capabilityCard.title` is plain `text-h3`), so it already inherits
+   * whichever ambient text colour the section around it sets.
+   */
+  tone?: "light" | "dark";
 };
 
 export function CapabilityCard({
@@ -126,6 +168,7 @@ export function CapabilityCard({
   rootClassName = capabilityCard.root,
   bodyClassName = capabilityCard.body,
   titleClassName = capabilityCard.title,
+  tone = "light",
 }: CapabilityCardProps) {
   return (
     <article className={rootClassName}>
@@ -134,10 +177,11 @@ export function CapabilityCard({
         imageSizes={imageSizes}
         aspectClassName={mediaAspectClassName}
         radius={mediaRadius}
+        tone={tone}
       />
       <div className={bodyClassName}>
         <h3 className={titleClassName}>{title}</h3>
-        <p className={capabilityCard.text}>{body}</p>
+        <p className={tone === "dark" ? capabilityCard.textDark : capabilityCard.text}>{body}</p>
       </div>
     </article>
   );

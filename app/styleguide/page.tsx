@@ -746,7 +746,6 @@ export default function StyleguidePage() {
                   desktopLogo={<Logo stacked className={headerStyles.brandLogoDesktop} />}
                   links={home.nav.links}
                   mobileLinks={home.nav.mobileLinks}
-                  megaMenuPromo={home.nav.megaMenuPromo}
                   contact={home.nav.contact}
                   social={ORGANIZATION.sameAs}
                   cta={home.nav.cta}
@@ -766,7 +765,6 @@ export default function StyleguidePage() {
                   brandParent={home.nav.brandParent}
                   links={megaMenuDemoLinks}
                   mobileLinks={home.nav.mobileLinks}
-                  megaMenuPromo={home.nav.megaMenuPromo}
                   contact={home.nav.contact}
                   social={ORGANIZATION.sameAs}
                   cta={home.nav.cta}

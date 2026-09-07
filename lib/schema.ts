@@ -198,7 +198,7 @@ export type FaqItem = {
 
 // Only call this on a page that actually renders the FAQ items visibly --
 // schema must never describe content the page doesn't show.
-export function faqSchema(items: FaqItem[]) {
+export function faqSchema(items: readonly FaqItem[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",

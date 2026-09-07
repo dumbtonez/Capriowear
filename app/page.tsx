@@ -69,7 +69,6 @@ export default function Home() {
         desktopLogo={<Logo stacked className={header.brandLogoDesktop} />}
         links={home.nav.links}
         mobileLinks={home.nav.mobileLinks}
-        megaMenuPromo={home.nav.megaMenuPromo}
         contact={home.nav.contact}
         social={ORGANIZATION.sameAs}
         cta={home.nav.cta}
@@ -129,11 +128,11 @@ export default function Home() {
         <Stats items={home.stats} />
         <InsideFactory content={home.insideFactory} />
         <Exhibitions content={home.exhibitions} />
-        <FinalCta content={home.finalCta} ticker={home.complianceTicker} />
+        <FinalCta content={home.finalCta} ticker={home.complianceTicker} secondaryCta={home.finalCta.secondaryCta} />
         <OurServices content={home.services} />
         <HowItWorks content={home.howItWorks} />
         <Faq content={home.faq} />
-        <FinalCta content={home.closingCta} />
+        <FinalCta content={home.closingCta} secondaryCta={home.closingCta.secondaryCta} />
       </RevealMain>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />

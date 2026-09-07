@@ -35,26 +35,52 @@
 // top of the previous section's standard bottom gap instead, reading as an
 // oversized space above the heading (also found live, 2026-08-27) --
 // `mobileCtaBlockNoTicker` resets it to the standard pt-0.
+//
+// `secondaryCta` (added 2026-09-07, Services page's own closing CTA) is a
+// second, outline `Button` rendered alongside the primary one -- optional,
+// so every existing homepage/PLP usage (a single button) is unaffected.
 import { Button } from "@/components/Button";
 import { Marquee } from "@/components/Marquee";
 import { ScrollSpotlightList } from "@/components/ScrollSpotlightList";
 import { TextReveal } from "@/components/TextReveal";
 import { cx } from "@/components/ui/cx";
 import { finalCta } from "@/components/ui/styles";
-import type { home } from "@/content/home";
+
+// Plain (non-`typeof home.finalCta`/`typeof home.complianceTicker`) shapes,
+// `readonly`-compatible -- same reasoning as `Faq.tsx`'s own `FaqProps`
+// widening: `content/services.ts` is an `as const` file (unlike `content/
+// home.ts`), so `services.finalCta`/`services.complianceBar` are readonly,
+// and this component is reused verbatim by both.
+type FinalCtaContent = { h2: string; subline: string; cta: { label: string; href: string } };
+type ComplianceTicker = { title: string; items: readonly string[] };
 
 export type FinalCtaProps = {
-  content: typeof home.finalCta;
-  ticker?: typeof home.complianceTicker;
+  content: FinalCtaContent;
+  ticker?: ComplianceTicker;
+  /** Renders a second, outline `Button` alongside the primary one (owner,
+   *  2026-09-07, Services page's own closing CTA: "Secondary CTA button:
+   *  Download Catalog"). Optional -- every existing homepage/PLP usage
+   *  omits it and keeps rendering just the one primary button, unchanged. */
+  secondaryCta?: { label: string; href: string };
   /** The section directly above this one already supplies the standard
    *  mobile 72px gap (e.g. Faq's own `mobileSection` pb-[72px] on the
    *  Activewear PLP) -- drops this ticker block's own pt-[72px] so the two
    *  don't stack into 144px. See `mobileTickerBlockTight`'s own comment in
    *  components/ui/styles.ts. */
   compactMobileTop?: boolean;
+  /** Drops the mobile ticker list even when `ticker` is passed (owner,
+   *  2026-09-08, Services page's own FAQ-adjacent closing CTA: "on services
+   *  mobile, remove 'standard on every order' under the faq cta, only keep
+   *  the cta") -- desktop keeps its own Marquee unaffected, since only the
+   *  mobile block was flagged. Mobile then falls back to
+   *  `mobileCtaBlockNoTicker`'s own spacing, the same as a real `!ticker`
+   *  usage, since there's no ticker block above it any more on this
+   *  breakpoint either. */
+  hideTickerMobile?: boolean;
 };
 
-export function FinalCta({ content, ticker, compactMobileTop }: FinalCtaProps) {
+export function FinalCta({ content, ticker, secondaryCta, compactMobileTop, hideTickerMobile }: FinalCtaProps) {
+  const showMobileTicker = ticker && !hideTickerMobile;
   return (
     <section>
       {/* Desktop: CTA block, then the ticker, one continuous band */}
@@ -65,9 +91,20 @@ export function FinalCta({ content, ticker, compactMobileTop }: FinalCtaProps) {
               <TextReveal as="h2" text={content.h2} className={finalCta.desktopHeading} />
               <p className={finalCta.desktopSubline}>{content.subline}</p>
             </div>
-            <Button href={content.cta.href} className={finalCta.desktopButton}>
-              {content.cta.label}
-            </Button>
+            {secondaryCta ? (
+              <div className={finalCta.desktopButtonRow}>
+                <Button href={content.cta.href} className={finalCta.desktopButton}>
+                  {content.cta.label}
+                </Button>
+                <Button variant="secondary" href={secondaryCta.href} className={finalCta.desktopButton}>
+                  {secondaryCta.label}
+                </Button>
+              </div>
+            ) : (
+              <Button href={content.cta.href} className={finalCta.desktopButton}>
+                {content.cta.label}
+              </Button>
+            )}
           </div>
           {ticker ? (
             <Marquee
@@ -85,7 +122,7 @@ export function FinalCta({ content, ticker, compactMobileTop }: FinalCtaProps) {
       {/* Mobile: ticker list first, CTA block below -- a different order
           than desktop, not the same layout reflowed */}
       <div className={finalCta.mobileOuter}>
-        {ticker ? (
+        {showMobileTicker ? (
           <div className={cx(finalCta.mobileTickerBlock, compactMobileTop && finalCta.mobileTickerBlockTight)}>
             <span className={finalCta.mobileTickerLabel}>{ticker.title}</span>
             <ScrollSpotlightList
@@ -95,14 +132,25 @@ export function FinalCta({ content, ticker, compactMobileTop }: FinalCtaProps) {
             />
           </div>
         ) : null}
-        <div className={cx(finalCta.mobileCtaBlock, !ticker && finalCta.mobileCtaBlockNoTicker)}>
+        <div className={cx(finalCta.mobileCtaBlock, !showMobileTicker && finalCta.mobileCtaBlockNoTicker)}>
           <div className={finalCta.mobileHeadingWrap}>
             <TextReveal as="h2" text={content.h2} className={finalCta.mobileHeading} />
             <p className={finalCta.mobileSubline}>{content.subline}</p>
           </div>
-          <Button href={content.cta.href} className={finalCta.mobileButton}>
-            {content.cta.label}
-          </Button>
+          {secondaryCta ? (
+            <div className={finalCta.mobileButtonRow}>
+              <Button href={content.cta.href} className={finalCta.mobileButton}>
+                {content.cta.label}
+              </Button>
+              <Button variant="secondary" href={secondaryCta.href} className={finalCta.mobileButton}>
+                {secondaryCta.label}
+              </Button>
+            </div>
+          ) : (
+            <Button href={content.cta.href} className={finalCta.mobileButton}>
+              {content.cta.label}
+            </Button>
+          )}
         </div>
       </div>
     </section>

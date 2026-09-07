@@ -2,12 +2,19 @@
 // Homepage section 13. Figma desktop node 438:2150 / mobile node 438:2192.
 // No eyebrow -- one large heading, then the answer accordion. Same content
 // feeds the visible Accordion here and the FAQPage schema rendered in
-// app/page.tsx, so the two never drift apart.
+// app/page.tsx, so the two never drift apart. Reused verbatim (no fork, no
+// restyle) by the Services page's own FAQ section (2026-09-07, owner:
+// "same pattern as the homepage ... reuse it") -- `FaqProps` is deliberately
+// a plain shape rather than `typeof home.faq`, so any page's own content
+// object (mutable or `as const`) can feed it.
 import { Accordion } from "@/components/Accordion";
 import { faq } from "@/components/ui/styles";
-import type { home } from "@/content/home";
 
-export type FaqProps = { content: typeof home.faq };
+// A plain (non-`typeof home.faq`) shape, `readonly`-compatible -- this
+// component is reused verbatim by other pages with their own content
+// (e.g. `content/services.ts`'s `services.faq`, an `as const` object, so
+// its own `items` is a readonly tuple unlike `home.faq`'s mutable array).
+export type FaqProps = { content: { h2: string; items: readonly { q: string; a: string }[] } };
 
 // Owner, 2026-09-04: "FAQ title, keep the word B2B in 2nd line all pages" --
 // this exact heading, "Top questions from B2B buyers," is repeated as a

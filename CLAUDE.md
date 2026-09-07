@@ -102,6 +102,12 @@ tests/screenshots.spec.ts  screenshot + overflow QA across all target viewports
 - Canonical URLs, sitemap.xml, and Open Graph URLs must use the real production domain, not localhost. Confirm the site base URL comes from an environment variable (e.g. NEXT_PUBLIC_SITE_URL) set in Vercel, not a hardcoded value.
 - Do not change vercel config, basePath, or environment handling without flagging it to me first — those affect the live deployment.
 
+## Multi-machine sync
+- This project is worked on from more than one computer. GitHub (origin/main) is the single source of truth; the machines sync only through it.
+- At the START of every session, run `git pull origin main` before making any changes, so this machine has the latest.
+- At the END of every session — and always before I switch to another computer — make sure everything is committed, confirm `npm run build` passes, then run `git push origin main`. Never leave a session with unpushed commits.
+- If `git pull` reports a conflict, stop and tell me. Do not force-push or discard anything.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know

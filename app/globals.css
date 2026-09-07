@@ -183,9 +183,16 @@
     border-radius: 2px;
   }
 
+  /* Neutral selection highlight (owner, 2026-09-07: "make it neutral
+     color, not brand color" -- was --color-accent/-accent-ink, the brand
+     orange). A translucent --color-muted (the existing secondary-text
+     gray) reads correctly on both light (near-black text) and dark
+     (white text) sections without needing a second rule per section --
+     `color: inherit` keeps whatever text color is already there, rather
+     than forcing a fixed one that would fight one of the two contexts. */
   ::selection {
-    background: var(--color-accent);
-    color: var(--color-accent-ink);
+    background: color-mix(in srgb, var(--color-muted) 40%, transparent);
+    color: inherit;
   }
 }
 
@@ -288,6 +295,75 @@
      the track's own width, so the maximum number of logos stays visible. */
   mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
+}
+
+/* Progressive frosted-glass blur behind the sticky header (owner reference,
+   2026-09-07: labs.google's own nav) -- 5 stacked layers, each blurring
+   more than the last and masked to its own vertical band, so the blur
+   intensifies toward the header's outer/top edge and tapers to nothing by
+   its bottom edge, rather than one flat blur. Gradient stops are the
+   reference's own real computed values (inspected live via
+   getComputedStyle), not estimated -- deliberately NOT copying its
+   hardcoded 104px layer height, since Capriowear's own header genuinely
+   changes height across breakpoints; `header.blurLayer`'s own `inset-0`
+   sizes each layer to the real header box at any width instead, and these
+   percentage-based gradient stops scale with it automatically.
+   Mask only here (plain CSS, same reasoning as `.marquee-edge-fade` above
+   -- five layers of long gradient-stop-lists is unreadable as inline
+   bracket syntax); the actual `blur(Npx)` amount for each layer is applied
+   as a Tailwind `backdrop-blur-[Npx]` utility class in Header.tsx instead
+   of here (real bug found live, 2026-09-07: a hand-written
+   `backdrop-filter`/`-webkit-backdrop-filter` declaration in this file was
+   silently dropped by the build's CSS pipeline -- confirmed by inspecting
+   the actual compiled stylesheet, which kept `mask-image` but had no
+   `backdrop-filter` at all. Tailwind's own generated `backdrop-blur-*`
+   utilities survive the same pipeline fine -- `productCtas.mobileBar`
+   already proves this elsewhere in this codebase -- so the blur itself
+   goes through that proven path; only the mask, which Tailwind has no
+   built-in gradient-mask utility for, stays hand-written CSS here). */
+.header-blur-1 {
+  mask-image: linear-gradient(transparent 0%, transparent 40%, black 60%, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(transparent 0%, transparent 40%, black 60%, black 80%, transparent 100%);
+}
+.header-blur-2 {
+  mask-image: linear-gradient(transparent 0%, transparent 20%, black 40%, black 60%, transparent 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(transparent 0%, transparent 20%, black 40%, black 60%, transparent 80%, transparent 100%);
+}
+.header-blur-3 {
+  mask-image: linear-gradient(transparent 0%, black 20%, black 40%, transparent 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(transparent 0%, black 20%, black 40%, transparent 60%, transparent 100%);
+}
+.header-blur-4 {
+  mask-image: linear-gradient(black 0%, black 20%, transparent 40%, transparent 100%);
+  -webkit-mask-image: linear-gradient(black 0%, black 20%, transparent 40%, transparent 100%);
+}
+.header-blur-5 {
+  mask-image: linear-gradient(black 0%, transparent 20%, transparent 100%);
+  -webkit-mask-image: linear-gradient(black 0%, transparent 20%, transparent 100%);
+}
+
+/* Header adaptive tone (owner reference, 2026-09-07: labs.google's nav
+   swaps text colour to always contrast whatever section is scrolled behind
+   it) -- default is dark (white text), matching the header's own prior
+   always-on look and every real page's first section under the header
+   (Hero/ServicesHero/CategoryBanner are always bg-ink), so this is the
+   correct SSR-safe default before Header.tsx's own scroll effect has run
+   -- must match that effect's `useState<"dark" | "light">("dark")` default
+   exactly, or the first frame flashes the wrong colour.
+   `--header-hover` is the sitewide accent orange (owner, 2026-09-08: "let's
+   make the [nav hover] text color to primary orange and see how it looks,
+   on both over black and white section") -- one value, not tone-dependent
+   any more (was a tone-swapped muted grey, #838d97 dark-surface /
+   `--color-muted` light-surface, before this request); `--color-accent`
+   reads clearly against both `--color-ink` and `--color-paper`, so it
+   lives on the base `header` rule rather than being repeated identically
+   in the `[data-tone="light"]` block below. */
+header {
+  --header-fg: var(--color-paper);
+  --header-hover: var(--color-accent);
+}
+header[data-tone="light"] {
+  --header-fg: var(--color-ink);
 }
 
 /* The base reduced-motion rule collapses animations to 0.001ms, which would

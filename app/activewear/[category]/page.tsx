@@ -112,7 +112,6 @@ export default async function CategoryPage({ params }: PageProps<"/activewear/[c
         desktopLogo={<Logo stacked className={header.brandLogoDesktop} />}
         links={home.nav.links}
         mobileLinks={home.nav.mobileLinks}
-        megaMenuPromo={home.nav.megaMenuPromo}
         contact={home.nav.contact}
         social={ORGANIZATION.sameAs}
         cta={home.nav.cta}
@@ -129,6 +128,16 @@ export default async function CategoryPage({ params }: PageProps<"/activewear/[c
           top of the page instead of staying hidden until the real end --
           matches the same classes app/page.tsx's own `<main>` already
           uses for the identical reason.
+          No top padding compensation here for Header now being
+          `position: fixed` (owner, 2026-09-07) -- unlike Hero/ServicesHero,
+          `<main>`'s own `pt-*` was tried and reverted: it only pushed
+          CategoryBanner down, leaving `<main>`'s own `bg-paper` (not
+          CategoryBanner's `bg-ink`) painting the gap behind the header --
+          same invisible-white-on-white bug, just relocated. The real fix
+          lives inside CategoryBanner itself (its own header comment) --
+          its section height and internal offsets now account for the
+          header directly, so its own dark background is what's genuinely
+          behind the header at rest, not a gap.
           */}
       <RevealMain className="relative z-10 bg-paper">
         <CategoryBanner
@@ -339,6 +348,7 @@ export default async function CategoryPage({ params }: PageProps<"/activewear/[c
           }}
           ticker={home.complianceTicker}
           compactMobileTop
+          secondaryCta={home.closingCta.secondaryCta}
         />
 
         {/* No separate spacer here (owner report, 2026-09-01: "the cta

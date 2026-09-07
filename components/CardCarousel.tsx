@@ -25,9 +25,16 @@ export type CardCarouselProps = {
   items: CardCarouselItem[];
   /** This section's own confirmed media aspect ratio (mobile/desktop classes). */
   cardMediaRatio: string;
+  /**
+   * `"light"` (default) or `"dark"` -- forwarded straight through to each
+   * `CapabilityCard`'s own `tone` (How It Works' dark variant, 2026-09-07).
+   * The dot pagination below is unaffected -- both its colours already read
+   * fine on either background.
+   */
+  tone?: "light" | "dark";
 };
 
-export function CardCarousel({ items, cardMediaRatio }: CardCarouselProps) {
+export function CardCarousel({ items, cardMediaRatio, tone = "light" }: CardCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -81,6 +88,7 @@ export function CardCarousel({ items, cardMediaRatio }: CardCarouselProps) {
               body={item.body}
               mediaAspectClassName={cardMediaRatio}
               mediaRadius="none"
+              tone={tone}
             />
           </div>
         ))}

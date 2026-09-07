@@ -15,6 +15,17 @@
 // Takes its item list as a prop (not a direct content/home.ts import), so
 // any page can render this section with its own text -- see app/page.tsx
 // for the homepage's values.
+//
+// Reused on /services (owner, 2026-09-07: "this is already built on
+// homepage, use same as is. only the spacing needs to adjust, from the top
+// its 160px bottom 80px") -- same section, same copy (home.trustStrip),
+// only the outer desktop top/bottom spacing changes per page (Figma node
+// 729:208 on Services: 160px/80px vs homepage's own symmetric 120px/120px),
+// via `pageVariant`, same pattern `OurServices` already established for
+// its own Services-page reuse. No mobile Figma spacing exists for this
+// placement either, so mobile stays on the one shared `mobileWrap` --
+// already the project's own standing 72px inter-section rule, not a guess
+// specific to homepage.
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { trustSignals } from "@/components/ui/styles";
 import type { home } from "@/content/home";
@@ -23,6 +34,7 @@ type BodySegment = string | { bold: string };
 
 export type TrustSignalsProps = {
   items: typeof home.trustStrip;
+  pageVariant?: "home" | "services";
 };
 
 function Body({ segments }: { segments: BodySegment[] }) {
@@ -57,13 +69,14 @@ function MobileBody({ segments }: { segments: BodySegment[] }) {
   );
 }
 
-export function TrustSignals({ items }: TrustSignalsProps) {
+export function TrustSignals({ items, pageVariant = "home" }: TrustSignalsProps) {
   const [column1, column2] = [items.slice(0, 2), items.slice(2, 4)];
+  const desktopWrap = pageVariant === "services" ? trustSignals.desktopWrapServices : trustSignals.desktopWrap;
 
   return (
     <section>
       {/* Desktop: media left, two text sub-columns right */}
-      <div className={trustSignals.desktopWrap}>
+      <div className={desktopWrap}>
         <div className={trustSignals.desktopMedia}>
           <MediaPlaceholder label="Trust signals artwork" ratio="50:37" radius="none" />
         </div>

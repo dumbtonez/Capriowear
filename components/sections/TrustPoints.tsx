@@ -13,7 +13,13 @@ import { trustPoints } from "@/components/ui/styles";
 export type TrustPointsProps = {
   heading: string;
   subline: string;
-  points: string[];
+  /** Appended after `subline`, wrapped in `<strong>` (owner, 2026-09-08,
+   *  Services page's own "Responsible make" instance: make "We name what
+   *  is genuinely certified rather than making broad green claims" semi
+   *  bold). Optional -- every existing PLP/PDP usage omits it and renders
+   *  `subline` alone, unchanged. */
+  sublineBold?: string;
+  points: readonly string[];
   /**
    * Desktop side padding + title max-width, paired per page: the PLP's own
    * 138px padding with a 650px title cap (Figma node 579:5493, the
@@ -23,26 +29,40 @@ export type TrustPointsProps = {
    * using the wider row's full width). A variant token rather than an
    * arbitrary className override, since two conflicting `px-*`/`max-w-*`
    * utilities can't reliably override each other by class order.
+   *
+   * `"services"`: the Services page's own "Responsible make" instance
+   * (Figma node 811:1156, owner, 2026-09-07: "104px" top and bottom) --
+   * 80px side padding like the PDP (this site's own standard `.container-p`
+   * desktop inset), but the PLP's own 650px title/subline cap (owner,
+   * 2026-09-07: "subline width should be the same as used in the plp
+   * component") rather than the PDP's uncapped width, since this frame's
+   * heading+subline column reads the same narrower-than-full-row way the
+   * PLP's own does.
    */
-  sidePadding?: "plp" | "pdp";
+  sidePadding?: "plp" | "pdp" | "services";
 };
 
-export function TrustPoints({ heading, subline, points, sidePadding = "plp" }: TrustPointsProps) {
+const sidePaddingSection = {
+  plp: trustPoints.sidePaddingPlp,
+  pdp: trustPoints.sidePaddingPdp,
+  services: trustPoints.sidePaddingServices,
+};
+
+const sidePaddingHeadingWidth = {
+  plp: trustPoints.headingMaxWidthPlp,
+  pdp: trustPoints.headingMaxWidthPdp,
+  services: trustPoints.headingMaxWidthPlp,
+};
+
+export function TrustPoints({ heading, subline, sublineBold, points, sidePadding = "plp" }: TrustPointsProps) {
   return (
-    <section
-      className={cx(
-        trustPoints.section,
-        sidePadding === "pdp" ? trustPoints.sidePaddingPdp : trustPoints.sidePaddingPlp,
-      )}
-    >
-      <div
-        className={cx(
-          trustPoints.headingBlock,
-          sidePadding === "pdp" ? trustPoints.headingMaxWidthPdp : trustPoints.headingMaxWidthPlp,
-        )}
-      >
+    <section className={cx(trustPoints.section, sidePaddingSection[sidePadding])}>
+      <div className={cx(trustPoints.headingBlock, sidePaddingHeadingWidth[sidePadding])}>
         <h2 className={trustPoints.heading}>{heading}</h2>
-        <p className={trustPoints.subline}>{subline}</p>
+        <p className={trustPoints.subline}>
+          {subline}
+          {sublineBold ? <strong className={trustPoints.sublineBold}>{sublineBold}</strong> : null}
+        </p>
       </div>
 
       {/* Mobile-only artwork block (Figma node 590:1258, "Artwork") -- no

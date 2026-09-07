@@ -80,7 +80,6 @@ export default async function SportPage({ params }: PageProps<"/teamwear/[sport]
         desktopLogo={<Logo stacked className={header.brandLogoDesktop} />}
         links={home.nav.links}
         mobileLinks={home.nav.mobileLinks}
-        megaMenuPromo={home.nav.megaMenuPromo}
         contact={home.nav.contact}
         social={ORGANIZATION.sameAs}
         cta={home.nav.cta}
@@ -168,6 +167,7 @@ export default async function SportPage({ params }: PageProps<"/teamwear/[sport]
           }}
           ticker={home.complianceTicker}
           compactMobileTop
+          secondaryCta={home.closingCta.secondaryCta}
         />
 
         <ProductCtasMobileBar primaryCta={home.nav.cta} />

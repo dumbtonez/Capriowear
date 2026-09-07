@@ -4,6 +4,15 @@
 // wireframe was hard to read it is marked with // VERIFY. No en dashes or em dashes.
 import { companyIdentity } from "./site";
 
+// What We Make's own tile shape (owner, 2026-09-07: "add a dummy product
+// image ... see how it would look across home, PLP, PDP") -- `image` is
+// optional and typed explicitly here (via `satisfies` on each `tiles`
+// array below) rather than left to bare literal inference, so adding it to
+// one tile doesn't create an inconsistent union across the array. `Card`
+// (components/Card.tsx) already accepts this exact shape as its own
+// `image` prop; `WhatWeMake.tsx` passes it straight through.
+type WhatWeMakeTile = { label: string; href: string; image?: { src: string; alt: string } };
+
 // Activewear's category breakdown -- shared verbatim between the desktop
 // mega menu (Header.tsx, Figma node 493:3140) and the mobile drawer's own
 // mega menu (MobileNav.tsx, Figma node 473:2919, built earlier the same
@@ -118,18 +127,9 @@ export const home = {
     links: [
       { label: "Activewear", href: "/activewear", megaMenu: activewearMegaMenu },
       { label: "Teamwear & Uniforms", href: "/teamwear", megaMenu: teamwearMegaMenu },
-      { label: "Services", href: "/capabilities" },
+      { label: "Services", href: "/services" },
       { label: "Factory Tour", href: "/our-factory" },
     ],
-    // Shared footer strip under every mega menu's category columns (Figma
-    // node 493:3140) -- identical regardless of which trigger is open, not
-    // per-category content, so it lives once here rather than being
-    // repeated on every future `megaMenu` entry.
-    megaMenuPromo: {
-      heading: "Fully Custom Manufacturing",
-      description: "From fabric to packaging, your brand on every piece",
-      bullets: ["MOQ from 50", "Samples in 10 to 14 days", "DDP worldwide"],
-    },
     // The mobile drawer's own real design (Figma node 465:2817, 2026-08-27)
     // is a flat list, not derived from `links` above: it adds a 5th item
     // ("Our Story", not on desktop) and a `chevron` flag Figma shows on
@@ -151,7 +151,7 @@ export const home = {
         chevron: true,
         megaMenu: teamwearMegaMenu,
       },
-      { label: "Services", href: "/capabilities", chevron: false },
+      { label: "Services", href: "/services", chevron: false },
       { label: "Factory Tour", href: "/our-factory", chevron: false },
       { label: "Our Story", href: "/our-story", chevron: false },
     ],
@@ -322,14 +322,27 @@ export const home = {
         ],
         href: "/activewear",
         tiles: [
-          { label: "Leggings", href: "/activewear/leggings" },
+          // Placeholder/QA photo (owner, 2026-09-07) -- the same one real
+          // photo used on the Leggings PLP card/PDP gallery
+          // (content/activewear/leggings.ts's own high-waisted-compression
+          // style), referenced once and reused, not a second copy of the
+          // same fact. Every other tile below has no photo, so stays a
+          // placeholder box exactly as before.
+          {
+            label: "Leggings",
+            href: "/activewear/leggings",
+            image: {
+              src: "/product-images/leggings-high-waisted-compression.png",
+              alt: "Custom high-waisted compression leggings",
+            },
+          },
           { label: "Sports Bras", href: "/activewear/sports-bras" },
           { label: "Shorts", href: "/activewear/shorts" },
           { label: "Hoodies", href: "/activewear/hoodies" },
           { label: "Joggers & Track Pants", href: "/activewear/joggers-track-pants" },
           { label: "Tracksuits", href: "/activewear/tracksuits" },
           { label: "Base Layers", href: "/activewear/compression-base-layers" },
-        ],
+        ] satisfies WhatWeMakeTile[],
       },
       {
         title: "Teamwear & Uniforms",
@@ -344,7 +357,7 @@ export const home = {
           { label: "Basketball Uniforms", href: "/teamwear/basketball-uniforms" },
           { label: "Football Uniforms", href: "/teamwear/football" },
           { label: "Fighting Wear", href: "/teamwear/fight-wear" },
-        ],
+        ] satisfies WhatWeMakeTile[],
       },
     ],
   },
@@ -590,6 +603,11 @@ export const home = {
     // Owner update, 2026-08-30.
     subline: "Tell us what you're making. We'll come back within 24 hours with next steps.",
     cta: { label: "Request a Sample", href: "/request-a-sample" },
+    // Secondary "Download Catalog" button (owner, 2026-09-08: "on home,
+    // under exhibition cta section add download catalog cta too") -- same
+    // `FinalCta` prop already added everywhere else (`closingCta` above,
+    // every PLP/PDP, Services).
+    secondaryCta: { label: "Download Catalog", href: "/catalog" },
   },
 
   // A second CTA band, same component and styling as `finalCta` above
@@ -612,6 +630,13 @@ export const home = {
     // sitewide default) -- still links to the same request-a-sample form as
     // every other CTA, not a new destination.
     cta: { label: "Let's Talk", href: "/request-a-sample" },
+    // Secondary "Download Catalog" button (owner, 2026-09-08: "wherever we
+    // use cta in the middle of the page, add download catalog as you did
+    // for services under faq section ... all plp, pdp, homepage, services")
+    // -- same `FinalCta` prop already added for the Services page's own
+    // FAQ-adjacent closing CTA (2026-09-07), now applied to every other
+    // page's FAQ-adjacent CTA too (this one on the homepage, `app/page.tsx`).
+    secondaryCta: { label: "Download Catalog", href: "/catalog" },
   },
 
   // Homepage section 15, the site footer. Figma desktop node 461:2650
@@ -630,8 +655,15 @@ export const home = {
     description:
       "Custom activewear and teamwear manufacturer, private label from fabric to packaging. Cut-and-sew, factory-direct from Sialkot, Pakistan.",
     nav: {
+      // Activewear/Teamwear & Uniforms added ahead of Services (owner,
+      // 2026-09-07: "in the footer, all platforms, we are missing
+      // activewear and teamwear & uniforms, add them on top of services")
+      // -- same label/href pair already used by the header nav
+      // (home.nav.links above), not a new route.
       columnOne: [
-        { label: "Services", href: "/capabilities" },
+        { label: "Activewear", href: "/activewear" },
+        { label: "Teamwear & Uniforms", href: "/teamwear" },
+        { label: "Services", href: "/services" },
         { label: "Our Factory", href: "/our-factory" },
         { label: "Our Story", href: "/our-story" },
       ],
