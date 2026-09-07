@@ -68,15 +68,31 @@ export type CardProps = {
   imageSizes?: string;
   /** `lg` (default, rounded) or `none` -- What We Make's product tiles' own confirmed 0px radius, 2026-08-26. */
   mediaRadius?: "lg" | "none";
+  /**
+   * Overrides the media area's aspect ratio, default `aspect-square` --
+   * same override pattern as `CapabilityCard`'s own `mediaAspectClassName`
+   * above. What We Make's own desktop grid tiles (owner request,
+   * 2026-09-07: "300 by 320... height more than the width") are the first
+   * caller to actually pass one; every other caller (styleguide) keeps the
+   * square default unchanged.
+   */
+  mediaAspectClassName?: string;
 };
 
-export function Card({ label, href, image, imageSizes, mediaRadius = "lg" }: CardProps) {
+export function Card({
+  label,
+  href,
+  image,
+  imageSizes,
+  mediaRadius = "lg",
+  mediaAspectClassName = "aspect-square",
+}: CardProps) {
   return (
     <Link href={href} className={card.root}>
       <CardMedia
         image={image}
         imageSizes={imageSizes}
-        aspectClassName="aspect-square"
+        aspectClassName={mediaAspectClassName}
         radius={mediaRadius}
         className={card.mediaHover}
       />

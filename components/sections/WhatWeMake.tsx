@@ -7,11 +7,14 @@
 // been checked against a Figma frame yet.
 //
 // Genuinely different tile treatments per breakpoint, not one responsive
-// layout: desktop reuses Card (square image, centred label, 4-column grid);
-// mobile is a single stacked column of landscape (16:11) tiles with a
-// left-aligned label -- confirmed via get_design_context that Figma's real
-// desktop tile label carries text-center and its mobile counterpart does
-// not, so mobile isn't just a narrower version of the desktop grid.
+// layout: desktop reuses Card (image, centred label, 4-column grid);
+// mobile is a single stacked column with a left-aligned label -- confirmed
+// via get_design_context that Figma's real desktop tile label carries
+// text-center and its mobile counterpart does not, so mobile isn't just a
+// narrower version of the desktop grid. Image ratios (owner, 2026-09-07):
+// mobile square (1:1), tablet and desktop 300:320 (15:16, taller than
+// wide) -- see `whatWeMake.desktopTileMedia`/`mobileTileMedia`'s own
+// comments in components/ui/styles.ts for the full history.
 //
 // Takes its heading and category groups as props (not a direct
 // content/home.ts import), so any page can render this section with its own
@@ -65,7 +68,13 @@ export function WhatWeMake({ content }: WhatWeMakeProps) {
                 </div>
                 <div className={whatWeMake.desktopGrid}>
                   {category.tiles.map((tile) => (
-                    <Card key={tile.href} label={tile.label} href={tile.href} mediaRadius="none" />
+                    <Card
+                      key={tile.href}
+                      label={tile.label}
+                      href={tile.href}
+                      mediaRadius="none"
+                      mediaAspectClassName={whatWeMake.desktopTileMedia}
+                    />
                   ))}
                 </div>
               </div>
@@ -94,7 +103,7 @@ export function WhatWeMake({ content }: WhatWeMakeProps) {
                     <a key={tile.href} href={tile.href} className={whatWeMake.mobileTile}>
                       <MediaPlaceholder
                         label={tile.label}
-                        ratio="16:11"
+                        ratio="1:1"
                         radius="none"
                         className={whatWeMake.mobileTileMedia}
                       />

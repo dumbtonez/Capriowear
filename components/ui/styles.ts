@@ -1538,6 +1538,12 @@ export const whatWeMake = {
   // for Card's category variant once its own gap was corrected (see `card`
   // above).
   desktopGrid: "grid grid-cols-4 gap-x-4 gap-y-12",
+  // Owner request, 2026-09-07: "the image placeholder is 300 by 300, I
+  // want to make it 300 by 320" -- 300:320 reduces to 15:16, passed to
+  // Card's own `mediaAspectClassName` override (default `aspect-square`),
+  // replacing that default for this section only -- every other `<Card>`
+  // caller (styleguide) is unaffected.
+  desktopTileMedia: "aspect-[15/16]",
   // Mobile: a single stacked column, not a grid -- each tile is a landscape
   // (16:11) image, unlike desktop's square, and the label is left-aligned,
   // not centred (confirmed via get_design_context: desktop's tile label
@@ -1560,16 +1566,16 @@ export const whatWeMake = {
   // single stacked column.
   mobileList: "flex flex-col gap-10 md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-10",
   mobileTile: "flex flex-col gap-4",
-  // Owner, 2026-09-03, same review: "should not the images placeholder be
-  // tall, like desktop and mobile ... same width but a little taller" --
-  // desktop's own tile is square (`Card`'s default), mobile's is a flat
-  // landscape `16:11` (1.45:1); at the new 2-column tablet width (above),
-  // reusing mobile's flat ratio verbatim looked too short next to a tile
-  // this much wider. `md:aspect-[4/3]` (1.33:1) only at `md:` -- a real
-  // middle point between the two, taller than mobile's ratio without
-  // going all the way to desktop's square, same width (the grid column)
-  // either way.
-  mobileTileMedia: "md:aspect-[4/3]",
+  // Owner, 2026-09-03: originally a `4:3` mid-point between mobile's old
+  // flat `16:11` landscape and desktop's old square tile. Superseded
+  // 2026-09-07 (owner: "most of the images would be taller so better we
+  // have height more than the width," given alongside making mobile
+  // square and desktop 300:320) -- both endpoints this was bridging are
+  // now themselves square-or-taller (`1:1` mobile, `15:16` desktop, see
+  // `desktopTileMedia` above), so a flatter `4:3` mid-point no longer fits
+  // between them. Matches desktop's own `15:16` instead of inventing a
+  // third one-off ratio.
+  mobileTileMedia: "md:aspect-[15/16]",
   // 22px/500/normal, left-aligned -- a one-off, not H5 (24px): the real
   // mobile tile label is one size down from desktop's, confirmed via
   // get_design_context, not the same size reused smaller.
