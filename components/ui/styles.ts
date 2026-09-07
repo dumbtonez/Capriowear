@@ -1294,6 +1294,48 @@ export const hero = {
   tickerMobileItem: "text-[1.875rem] font-normal leading-[1.2] text-[#838D97]",
 };
 
+/* --- ServicesHero (/services section 1) ------------------------------------ */
+// Figma desktop node 729:139 (owner brief, 2026-09-07: "same design that we
+// have for home, same marquee at the bottom"). A simpler variant of the
+// homepage `hero` recipe above, not a copy of it -- no eyebrow, no video
+// block, so it gets its own recipe rather than forcing unused props onto
+// `hero`'s own shape. Desktop-only for now (owner: "desktop design is
+// ready, I'm handling mobile separately, build desktop to the design and
+// keep it responsive-safe") -- mobile/tablet values below are a reasonable,
+// non-breaking fallback (same container-p + stacked-buttons pattern every
+// other section uses), not read from a real mobile Figma frame yet.
+export const servicesHero = {
+  section: "bg-ink text-paper",
+  // get_metadata confirmed exact: Banner frame is 578px tall with content at
+  // x:80/y:140 -- 140px top matches `hero.bannerInner`'s own xl:pt-[140px]
+  // exactly (same Figma constant, reused). Bottom: content's own box (H1 +
+  // gap + buttons) is 312px tall, and 578 - 140 - 312 = 126px of real,
+  // confirmed bottom padding -- an explicit one-off (no matching spacing
+  // token), not derived from a fixed section height (this component has no
+  // explicit height anywhere, same "content spacing drives it" rule as
+  // every other section).
+  bannerInner: "container-p flex flex-col gap-8 pt-12 pb-12 xl:gap-12 xl:pt-[140px] xl:pb-[126px]",
+  // 832px H1 wrap width in Figma is exactly 52rem -- identical value to
+  // `hero.heading`, reused directly rather than redefined.
+  heading: "max-w-[52rem]",
+  // Figma's real design shows both buttons at every width (no mobile frame
+  // exists to confirm hiding the secondary one the way homepage's does) --
+  // stacked full-width on mobile, side by side from xl, same shape as
+  // `hero.buttons` but with the secondary button always rendered.
+  buttons: "flex flex-col gap-4 xl:flex-row xl:items-center",
+  ctaPrimary: "w-full xl:w-auto",
+  // Ticker: the exact same "Fully Custom Offerings" Marquee as homepage
+  // Hero (reused component, not rebuilt), but with a different top gap --
+  // get_metadata confirmed 72px from this banner's own bottom edge to the
+  // ticker label here, not homepage's 40px (Marquee's own `basePaddingDefault`),
+  // since there's no video block directly above it to share that gap with.
+  // `padded={false}` on Marquee removes its own built-in pt-10/pb-8 so this
+  // wrapper's real, confirmed 72/32px doesn't double up with it -- the same
+  // established pattern Client Logos' mobile marquee already uses (see
+  // `marquee.basePaddingNone`'s own comment) for exactly this situation.
+  tickerWrap: "pt-12 pb-8 xl:pt-[72px] xl:pb-8",
+};
+
 /* --- ClientLogos (homepage section 4) -------------------------------------- */
 // Figma: desktop node 341:1732, mobile node 343:1840. Genuinely different
 // treatments, not one responsive layout: desktop is a horizontal Marquee (72px

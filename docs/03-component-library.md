@@ -908,6 +908,34 @@ A vertical `<ul>`/`<li>` list where the item nearest the viewport's vertical cen
 | 14 | Final CTA band | SectionHeading, Button |
 | 15 | Footer | ✅ **Built** — `components/sections/Footer.tsx`. Desktop multi-row grid / mobile flat stacked column, `sticky bottom-0` reveal transition (see above) |
 
+## /services page
+
+Built section by section from Figma (owner brief, 2026-09-07), same pattern as the homepage: content lives in `content/services.ts`, `app/services/page.tsx` composes sections in Figma order so more can be added without disturbing what's already there. Reuses the homepage's exact `Header`/nav, no page-specific nav variant.
+
+| # | Section | Status / Component |
+|---|---|---|
+| 1 | Hero (banner + "Fully Custom Offerings" ticker) | ✅ **Built** — `components/sections/ServicesHero.tsx` |
+| — | Fully Custom Offerings chip strip | Already part of section 1 above — reuses `Marquee`, the exact same component/props as homepage `Hero`, not a second one |
+| — | 4-up services strip (Product Development / Private Label / Low MOQ / Worldwide Shipping) | Not built yet |
+| — | "From raw fabric to retail-ready packaging" (5 items) | Not built yet |
+| — | Certification logos strip (ISO 9001, OEKO-TEX, BSCI, IMAC, SGS) | Not built yet |
+| — | How It Works (5 steps) | Not built yet |
+| — | B2B FAQ | Not built yet |
+| — | Final CTA + compliance bar | Not built yet |
+
+### Hero — Built
+`components/sections/ServicesHero.tsx` · Figma: desktop node `729:139` (mobile not yet designed — owner handling separately)
+
+A simpler variant of the homepage `Hero` (no eyebrow, no video placeholder block), not a copy of it — the layout genuinely differs enough to warrant its own component, but every reusable piece is the real shared one: `Button`, `TextReveal`, and `Marquee` itself (identical props to homepage `Hero`'s own usage — `label="Fully Custom Offerings"`, `labelVariant="bold"`, `separator="sparkle"`, `tone="dark"`, `pauseOnHover={false}`, same `home.customOfferings` content object, not a duplicated copy of the 9 items). New `servicesHero` recipe in `components/ui/styles.ts`, separate from `hero`, since forcing this simpler shape onto `hero`'s own props (eyebrow, video) would mean passing unused props through for no reason.
+
+**Every spacing value confirmed via `get_metadata` against the real Figma node**, not eyeballed off the screenshot: banner content starts 140px from the top (same real Figma constant `hero.bannerInner` already uses — reused directly, not re-derived), the H1's own 832px wrap width is exactly `max-w-[52rem]` (identical to `hero.heading`, reused directly), the gap between H1 and buttons is 48px (matches `hero`'s own `xl:gap-12`), and the banner's bottom padding is a confirmed one-off `126px` (578px total Banner height − 140px top − 312px of real content height — this component has no explicit height anywhere, content spacing drives it, same rule as every other section). The ticker's own top gap is a real, confirmed **72px**, not homepage's 40px (`Marquee`'s own `basePaddingDefault`) — there's no video block directly above it here to share that gap with, so `Marquee` renders with `padded={false}` and the wrapping `servicesHero.tickerWrap` supplies the real 72px/32px itself instead, the same established pattern Client Logos' mobile marquee already uses for this exact situation (see `marquee.basePaddingNone`'s own comment).
+
+**Desktop-only per the owner's own brief** ("desktop design is ready, I'm handling mobile separately, build desktop to the design and keep it responsive-safe") — mobile/tablet values (`container-p`, stacked full-width buttons, `flex-col gap-4 xl:flex-row`) are a reasonable, non-breaking fallback matching the site's existing responsive conventions, not read from a real mobile Figma frame. Confirmed live at 375px: no overflow, both buttons stack full-width, ticker scrolls correctly. Unlike homepage `Hero`, the secondary "Download Catalog" button is NOT hidden on mobile here — no mobile Figma exists yet to confirm hiding it the way homepage's does, so it stays visible at every width until a real mobile design says otherwise.
+
+**Copy**: the H1 ("Custom activewear and teamwear, from fabric to packaging") and both button labels are read directly off the Figma text layers — the design's own real copy, not placeholder text. `metaTitle`/`metaDescription` in `content/services.ts` ARE placeholders, flagged with a `TODO(owner copy)` comment — no real SEO copy has been given for this page yet.
+
+`npm run build`, `npx tsc --noEmit`, `npx eslint .` all clean; full `tests/screenshots.spec.ts` suite (30 tests, existing pages only — `/services` not yet added to that suite's target list) still green, no regressions.
+
 ## Activewear category PLP (product listing page)
 
 The reusable, data-driven template for every Activewear category page. Route: `app/activewear/[category]/page.tsx`. Content shape: `content/activewear/types.ts`'s `Category` type; one file per category (e.g. `content/activewear/leggings.ts`) registered in `content/activewear/categories.ts`. The page itself has no category copy typed into it — everything renders from the matching `Category` object, including metadata (title, description, canonical, OpenGraph). Reuses the homepage's exact `Header`/nav, no PLP-specific nav variant.
