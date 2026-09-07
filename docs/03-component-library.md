@@ -961,6 +961,7 @@ Built section by section from Figma (owner brief, 2026-09-07), same pattern as t
 | 10 | Responsible Make (4-row sustainability list) | ✅ **Built** — reuses the PLP/PDP's own `TrustPoints` verbatim, its own `sidePadding="services"` |
 | 11 | B2B FAQ (14 Q&As) | ✅ **Built** — reuses homepage's `Faq` verbatim, `services.faq` |
 | 12 | Final CTA + compliance bar (closing, primary+secondary buttons) | ✅ **Built** — reuses `FinalCta`, its own new `secondaryCta` prop, `services.finalCta`/`services.complianceBar` (a shorter, 5-item bar) |
+| 13 | Footer | ✅ **Built** — reuses the sitewide `Footer` verbatim, `home.footer`/`ORGANIZATION.sameAs`, no Services-specific content |
 
 ### Hero — Built
 `components/sections/ServicesHero.tsx` · Figma: desktop node `729:139` (mobile not yet designed — owner handling separately)

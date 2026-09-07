@@ -97,16 +97,19 @@
 // `services.faq.items` also feeds `faqSchema()` below (same "content feeds
 // both the visible accordion and the schema" pattern `home.faq`/
 // `app/page.tsx` already use) so the two can never drift apart.
-// Section 12 (final): a second, closing `FinalCta` (owner, 2026-09-07:
-// "reuse the homepage final CTA + compliance bar component"), distinct
-// from Section 8's own earlier usage under How It Works -- same component,
-// this page's own content (`services.finalCta`, `services.complianceBar`),
-// not `home.finalCta`/`home.complianceTicker`. Adds a real primary+
-// secondary button pair (`FinalCta`'s new `secondaryCta` prop, added the
-// same day) and a shorter, owner-specified 5-item compliance bar (`home.
+// Section 12: a second, closing `FinalCta` (owner, 2026-09-07: "reuse the
+// homepage final CTA + compliance bar component"), distinct from Section
+// 8's own earlier usage under How It Works -- same component, this page's
+// own content (`services.finalCta`, `services.complianceBar`), not
+// `home.finalCta`/`home.complianceTicker`. Adds a real primary+secondary
+// button pair (`FinalCta`'s new `secondaryCta` prop, added the same day)
+// and a shorter, owner-specified 5-item compliance bar (`home.
 // complianceTicker`'s full list has 8) -- the same "two FinalCta usages on
 // one page" pattern the homepage itself already established (`home.
 // finalCta` then `home.closingCta`).
+// Footer (final, owner: "add the footer"): reuses the sitewide `Footer`
+// verbatim, `home.footer`/`ORGANIZATION.sameAs` -- same content/component
+// every other page renders, no Services-specific footer copy exists.
 import type { Metadata } from "next";
 
 import { Header } from "@/components/Header";
@@ -115,6 +118,7 @@ import { Logo } from "@/components/Logo";
 import { CertifiedCompliant } from "@/components/sections/CertifiedCompliant";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
+import { Footer } from "@/components/sections/Footer";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { OurServices } from "@/components/sections/OurServices";
 import { ProductRange } from "@/components/sections/ProductRange";
@@ -168,9 +172,9 @@ export default function ServicesPage() {
 
       {/* relative z-10 bg-paper: same requirement Footer's own sticky
           "reveal" trick imposes on every other page's `<main>` (see
-          Footer.tsx's header comment) -- added ahead of Footer actually
-          being composed onto this page, so that step needs no `<main>`
-          change when it happens. */}
+          Footer.tsx's header comment). Footer itself (below) reuses
+          `home.footer`/`ORGANIZATION.sameAs` verbatim, same as every other
+          page -- no Services-specific footer content exists. */}
       <main className="relative z-10 bg-paper">
         <ServicesHero hero={services.hero} customOfferings={home.customOfferings} />
         <ServicesIntro content={services.intro} />
@@ -190,6 +194,8 @@ export default function ServicesPage() {
         <Faq content={services.faq} />
         <FinalCta content={services.finalCta} ticker={services.complianceBar} secondaryCta={services.finalCta.secondaryCta} />
       </main>
+
+      <Footer content={home.footer} social={ORGANIZATION.sameAs} />
 
       <JsonLd data={breadcrumbSchema([{ name: "Home", url: SITE_URL }, { name: "Services", url: CANONICAL }])} />
       <JsonLd data={faqSchema(services.faq.items)} />

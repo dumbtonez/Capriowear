@@ -26,9 +26,12 @@ export type TrustPointsProps = {
    *
    * `"services"`: the Services page's own "Responsible make" instance
    * (Figma node 811:1156, owner, 2026-09-07: "104px" top and bottom) --
-   * same 80px side padding/no title cap as the PDP (this frame's own
-   * short 2-line heading has no cap either), but its own top/bottom gap
-   * since it isn't following `ProductCustomizeSteps` the way the PDP does.
+   * 80px side padding like the PDP (this site's own standard `.container-p`
+   * desktop inset), but the PLP's own 650px title/subline cap (owner,
+   * 2026-09-07: "subline width should be the same as used in the plp
+   * component") rather than the PDP's uncapped width, since this frame's
+   * heading+subline column reads the same narrower-than-full-row way the
+   * PLP's own does.
    */
   sidePadding?: "plp" | "pdp" | "services";
 };
@@ -42,7 +45,7 @@ const sidePaddingSection = {
 const sidePaddingHeadingWidth = {
   plp: trustPoints.headingMaxWidthPlp,
   pdp: trustPoints.headingMaxWidthPdp,
-  services: trustPoints.headingMaxWidthPdp,
+  services: trustPoints.headingMaxWidthPlp,
 };
 
 export function TrustPoints({ heading, subline, points, sidePadding = "plp" }: TrustPointsProps) {
