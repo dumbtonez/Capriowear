@@ -19,6 +19,9 @@
 // Takes its heading and category groups as props (not a direct
 // content/home.ts import), so any page can render this section with its own
 // content -- see app/page.tsx for the homepage's values.
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
+
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
@@ -35,6 +38,15 @@ import type { home } from "@/content/home";
 // `md:grid md:grid-cols-2` from 768px up) -- both keep showing every tile,
 // out of scope for a request specifically about "the mobile homepage."
 const MOBILE_TILE_LIMIT = 4;
+
+// "Teamwear & Uniforms" shortens to just "Teamwear" for CTA labels only
+// (owner, 2026-09-07: "for teamwear just use view all teamwear") -- every
+// group heading (`<h3>`) keeps its own full title, unaffected. Shared by
+// both the mobile CTA and the desktop grid CTA below, rather than each
+// duplicating the same ternary.
+function ctaLabel(category: (typeof home.whatWeMake)["categories"][number]) {
+  return category.title === "Teamwear & Uniforms" ? "Teamwear" : category.title;
+}
 
 type BodySegment = string | { bold: string };
 
@@ -70,26 +82,43 @@ export function WhatWeMake({ content }: WhatWeMakeProps) {
             eyebrowSize={whatWeMake.eyebrowSize}
           />
           <div className={whatWeMake.groupsGap}>
-            {content.categories.map((category) => (
-              <div key={category.title} className={whatWeMake.group}>
-                <div className={whatWeMake.groupHeader}>
-                  <h3 className={whatWeMake.groupTitle}>{category.title}</h3>
-                  <Body segments={category.body} className={whatWeMake.groupBody} />
+            {content.categories.map((category) => {
+              // Same number of rows the tiles already need, with the
+              // last cell of the final row reserved for the "View All"
+              // CTA (owner, 2026-09-07: "for activewear, shall we use the
+              // last 8th box space and put a cta there?", then "the
+              // pattern should be consistent for both" -- Teamwear &
+              // Uniforms only has 4 tiles/1 full row, so it trims to its
+              // first 3 here so the CTA completes that one row the same
+              // way Activewear's CTA completes its second row; mobile and
+              // tablet read `category.tiles` directly, unaffected).
+              const rows = Math.ceil(category.tiles.length / 4);
+              const desktopTiles = category.tiles.slice(0, rows * 4 - 1);
+              return (
+                <div key={category.title} className={whatWeMake.group}>
+                  <div className={whatWeMake.groupHeader}>
+                    <h3 className={whatWeMake.groupTitle}>{category.title}</h3>
+                    <Body segments={category.body} className={whatWeMake.groupBody} />
+                  </div>
+                  <div className={whatWeMake.desktopGrid}>
+                    {desktopTiles.map((tile) => (
+                      <Card
+                        key={tile.href}
+                        label={tile.label}
+                        href={tile.href}
+                        image={tile.image}
+                        mediaRadius="none"
+                        mediaAspectClassName={whatWeMake.desktopTileMedia}
+                      />
+                    ))}
+                    <Link href={category.href} className={whatWeMake.desktopGridCta}>
+                      View All {ctaLabel(category)}
+                      <ChevronRight className={whatWeMake.ctaIcon} aria-hidden="true" />
+                    </Link>
+                  </div>
                 </div>
-                <div className={whatWeMake.desktopGrid}>
-                  {category.tiles.map((tile) => (
-                    <Card
-                      key={tile.href}
-                      label={tile.label}
-                      href={tile.href}
-                      image={tile.image}
-                      mediaRadius="none"
-                      mediaAspectClassName={whatWeMake.desktopTileMedia}
-                    />
-                  ))}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
@@ -104,16 +133,6 @@ export function WhatWeMake({ content }: WhatWeMakeProps) {
           />
           <div className={whatWeMake.groupsGap}>
             {content.categories.map((category) => {
-              // "Teamwear & Uniforms" shortens to just "Teamwear" for the
-              // CTA label only (owner, 2026-09-07: "for teamwear just use
-              // view all teamwear") -- the heading above it keeps the full
-              // "Teamwear & Uniforms" title, unaffected. Both CTAs share
-              // the same accent-coloured outline (owner, same day: "make
-              // the outline and text orange as primary color" for
-              // Teamwear, then "make view all activewear also orange
-              // outline with text") -- see `mobileGroupCta`'s own comment.
-              const isTeamwear = category.title === "Teamwear & Uniforms";
-              const ctaLabel = isTeamwear ? "Teamwear" : category.title;
               return (
                 <div key={category.title} className={whatWeMake.group}>
                   <div className={whatWeMake.groupHeader}>
@@ -138,7 +157,8 @@ export function WhatWeMake({ content }: WhatWeMakeProps) {
                     ))}
                   </div>
                   <Button href={category.href} variant="secondary" className={whatWeMake.mobileGroupCta}>
-                    View All {ctaLabel}
+                    View All {ctaLabel(category)}
+                    <ChevronRight className={whatWeMake.ctaIcon} aria-hidden="true" />
                   </Button>
                   {/* Tablet only (md through xl) -- every tile, unchanged
                       from before this task; real mobile's own capped list

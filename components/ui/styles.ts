@@ -199,6 +199,14 @@ export const capabilityCard = {
   // larger, pure threshold change. Shared by Our Services and How It
   // Works (and ProductCustomizeSteps, PDP -- out of scope for this pass).
   text: "max-md:text-[1.125rem] max-md:leading-[24px] md:text-[1.25rem] md:leading-[28px] font-normal text-subline",
+  // Dark-section counterpart of `text` above (How It Works' own dark
+  // variant, 2026-09-07, /services page) -- identical size/leading, colour
+  // swapped from `text-subline` (near-black, unreadable on a dark section)
+  // to the owner's own explicit `#838D97`, already this project's
+  // extremely well-established "muted text on dark" colour (mega-menu
+  // labels, footer contact label, Hero's mobile ticker, Stats' caption,
+  // Inside the Factory's subline, etc.) -- not a new one-off value.
+  textDark: "max-md:text-[1.125rem] max-md:leading-[24px] md:text-[1.25rem] md:leading-[28px] font-normal text-[#838D97]",
 
 };
 
@@ -219,6 +227,11 @@ export const cardMedia = {
   // no real section used Card yet; brought in line now that What We Make is
   // the first one that does.
   placeholder: "bg-paper-2",
+  // Dark-section counterpart (How It Works' own dark variant, 2026-09-07,
+  // /services page) -- reuses the exact `bg-ink-2` token `media.
+  // placeholderDark` already uses for this identical "no photo yet, on a
+  // dark section" case, not a new dark-surface colour.
+  placeholderDark: "bg-ink-2",
   imageFill: "object-cover",
 };
 
@@ -1780,23 +1793,29 @@ export const whatWeMake = {
   // same footprint as a photo tile instead. `aspect-[15/16]` matches
   // `desktopTileMedia` above exactly, so this cell is the same size as
   // every `Card` beside it (no separate image+label split needed, since
-  // the bordered box IS the whole cell). `text-h5` matches `card.label`'s
-  // own desktop size; `border-accent`/`text-accent` for the orange
-  // outline+text requested; `hover:bg-accent/5` is a lighter fill than
-  // `button.secondary`'s own `hover:bg-current/10` -- accent orange at
-  // 10% reads much stronger than a neutral ink tint would at the same
-  // opacity.
+  // the bordered box IS the whole cell). `border-accent`/`text-accent` for
+  // the orange outline+text requested; `hover:bg-accent/5` is a lighter
+  // fill than `button.secondary`'s own `hover:bg-current/10` -- accent
+  // orange at 10% reads much stronger than a neutral ink tint would at
+  // the same opacity.
+  // Label size corrected to a literal 20px (owner: "make the view all
+  // activewear and teamwear 20px") -- was `text-h5` (24px, matching
+  // `card.label`'s own desktop size); `text-[1.25rem]` is the same literal
+  // value `sectionHeading`/`trustPoints.subline` etc. already use for a
+  // plain 20px size elsewhere, `leading-[1.2]`/`font-medium` kept from
+  // `text-h5`'s own values so only the size itself changed.
   // `group gap-2`: pairs with `ctaIcon` below (owner, same day: "put a
   // chvron next to the cta label," then "on the hover chvron should have
   // the same animation we applied on pdp, related styles" -- confirmed
   // good, then "chvron icon should be a little big, text to icon gap
-  // should be 8px") -- the `group`+trailing-icon hover-nudge shape is
+  // should be 8px" -- gap confirmed already correct here, unchanged) --
+  // the `group`+trailing-icon hover-nudge shape is
   // `productRelatedStyles.chip`/`chipIcon`'s own (see that recipe's own
   // comment), but size/gap are this CTA's own tuned values, not copied
   // verbatim (that chip's own 4px `gap-1` read too tight once the icon
   // grew).
   desktopGridCta:
-    "group flex aspect-[15/16] items-center justify-center gap-2 border border-accent text-center text-h5 text-accent transition-colors hover:bg-accent/5",
+    "group flex aspect-[15/16] items-center justify-center gap-2 border border-accent text-center text-[1.25rem] leading-[1.2] font-medium text-accent transition-colors hover:bg-accent/5",
   // Mobile: a single stacked column, not a grid -- each tile is a landscape
   // (16:11) image, unlike desktop's square, and the label is left-aligned,
   // not centred (confirmed via get_design_context: desktop's tile label
@@ -1861,18 +1880,25 @@ export const whatWeMake = {
   // `productCtas.secondaryDesktop` (see that recipe's own comment); reuses
   // its exact hover tint (`#FFF6F3`) rather than inventing a second one.
   // `group gap-2`: same trailing-chevron pairing as `desktopGridCta`
-  // above, see that key's own comment.
+  // above, see that key's own comment. `!text-[1.25rem]` (20px, owner:
+  // "make the view all activewear and teamwear 20px") overrides
+  // `Button`'s own `base` (`text-button`, 18px) -- `!` needed since both
+  // are same-specificity Tailwind utilities touching the same property,
+  // the same risk already documented on `productCtas.mobileButton`'s own
+  // `!text-[1rem]`.
   mobileGroupCta:
-    "mt-2 w-full justify-center gap-2 md:hidden !border-accent !text-accent hover:!bg-[#FFF6F3]",
+    "mt-2 w-full justify-center gap-2 md:hidden !border-accent !text-accent !text-[1.25rem] hover:!bg-[#FFF6F3]",
   // Trailing chevron, both CTAs (owner: "put a chvron next to the cta
   // label ... on hover the chvron should have the same animation we
   // applied on pdp, related styles" -- confirmed good, then "chvron icon
-  // should be a little big, text to icon gap should be 8px"). Hover-nudge
-  // mechanism (`transition-transform`/`group-hover:translate-x-0.5`)
-  // reuses `productRelatedStyles.chipIcon` verbatim; size is this CTA's
-  // own, one step up from that chip's `size-3.5` (14px) to `size-4`
-  // (16px) -- "a little big," not a second unrelated value.
-  ctaIcon: "size-4 shrink-0 transition-transform group-hover:translate-x-0.5",
+  // should be a little big, text to icon gap should be 8px", then a size
+  // correction: "chevron size make 7by16 px"). Hover-nudge mechanism
+  // (`transition-transform`/`group-hover:translate-x-0.5`) reuses
+  // `productRelatedStyles.chipIcon` verbatim; the 7×16px size is this
+  // CTA's own literal (lucide's `ChevronRight` is a square glyph by
+  // default -- `w-[7px] h-4` renders it as a taller, narrower mark
+  // instead, not a token this project has elsewhere).
+  ctaIcon: "w-[7px] h-4 shrink-0 transition-transform group-hover:translate-x-0.5",
   mobileTile: "flex flex-col gap-4",
   // Owner, 2026-09-03: originally a `4:3` mid-point between mobile's old
   // flat `16:11` landscape and desktop's old square tile. Superseded
@@ -2537,7 +2563,39 @@ export const howItWorks = {
   // -- see `desktopCard`'s own comment), so extending it to `md:` needed
   // only this breakpoint change plus `desktopRow`'s own padding (below),
   // same as Exhibitions' own tablet-width fix.
-  desktopOuter: "hidden md:flex md:flex-col md:items-center md:gap-[72px] pt-[60px] pb-[120px]",
+  desktopOuter: "hidden md:flex md:flex-col md:items-center md:gap-[72px] pb-[120px]",
+  // `pt-*` split out of `desktopOuter` above into these two tone-specific
+  // tokens (2026-09-07) rather than living there as a shared default --
+  // `desktopOuterLight` (the homepage's own original 60px) and
+  // `darkSurface` (below) both set `pt-*`, and having one on the shared
+  // base plus a second on a conditionally-appended token would be two
+  // same-specificity utilities racing for the same property, the exact
+  // "two conflicting utilities" bug class this project's own comments
+  // already flag elsewhere -- so each tone gets its own single, complete
+  // `pt-*`, never two in the same class list at once.
+  desktopOuterLight: "pt-[60px]",
+  // Dark variant, colour only (owner, 2026-09-07, Figma node 767:868,
+  // /services page: "same section... changed the background to black") --
+  // appended via `cx()` on BOTH `desktopOuter` and `mobileSection` when the
+  // new `tone="dark"` prop is set. `bg-ink`, not Figma's literal pure black
+  // -- colour isn't copied exactly from Figma sitewide (CLAUDE.md rule 4);
+  // `text-paper` sets the ambient colour once so the heading and card
+  // titles below (both colourless, `text-h1`/`text-h3` only) inherit white
+  // for free, no separate override needed on either. No `pt-*` here
+  // deliberately -- see `desktopOuterDark` below for why the desktop top
+  // gap is a separate token; mobile keeps `mobileSection`'s own existing
+  // `pt-12`, unrequested and unchanged, so this token alone is safe to
+  // reuse on both.
+  darkSurface: "bg-ink text-paper",
+  // Desktop-only top-gap override for the dark variant (owner, same day,
+  // follow-up: "how it works should have 200px gap from the top section")
+  // -- this section's own /services-specific gap down from Product Range,
+  // replacing `desktopOuterLight`'s 60px for this variant only. Kept
+  // separate from `darkSurface` above (not folded into one token) because
+  // 200px is a desktop-scale number -- applying it to `mobileSection` too
+  // would roughly quadruple that breakpoint's own standing gap rhythm
+  // (40-72px sitewide) for a value the owner never asked for there.
+  desktopOuterDark: "pt-[200px]",
   // container-p only on the heading -- the card row below is a full-bleed
   // sibling, not nested inside it (same pattern as Inside the Factory's
   // gallery): get_metadata on the real frame shows the 5th card sitting at
