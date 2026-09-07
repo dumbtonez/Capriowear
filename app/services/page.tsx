@@ -30,6 +30,15 @@
 // own comment), via `pageVariant="services"` -- see OurServices.tsx.
 // Section 6: ProductRange, Figma desktop node 758:823 -- see
 // components/sections/ProductRange.tsx for the section's own build notes.
+// Section 7: the homepage's own HowItWorks section, reused with its new
+// `tone="dark"` variant (owner, 2026-09-07: "this is the same setion we
+// have on homepage, I just changed the background to black and subline
+// text color to 838D97... put this section under product range section" --
+// Figma node 767:868) -- same component, same copy (home.howItWorks), only
+// the colour path differs. See HowItWorks.tsx's own header comment and its
+// `tone` prop for the full reasoning (why the eyebrow keeps the standing
+// dark-eyebrow colour rather than Figma's literal one-off hex, and why
+// this reuses the homepage's own spacing rather than a new variant).
 //
 // Confirmed via get_metadata on every section's own real Figma y-position
 // (Intro 833-1413, Trust Signals 1413-1949, How We Work 1949-3279, Our
@@ -40,13 +49,14 @@
 // whichever order sections happened to be built in.
 //
 // Every later section listed in the owner's brief (certification logos,
-// How It Works, FAQ, closing CTA) is not built yet -- added incrementally,
-// one Figma link at a time.
+// FAQ, closing CTA) is not built yet -- added incrementally, one Figma
+// link at a time.
 import type { Metadata } from "next";
 
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
+import { HowItWorks } from "@/components/sections/HowItWorks";
 import { OurServices } from "@/components/sections/OurServices";
 import { ProductRange } from "@/components/sections/ProductRange";
 import { ServicesHero } from "@/components/sections/ServicesHero";
@@ -109,6 +119,7 @@ export default function ServicesPage() {
         <ServicesHowWeWork content={services.howWeWork} />
         <OurServices content={home.services} pageVariant="services" />
         <ProductRange content={services.productRange} />
+        <HowItWorks content={home.howItWorks} tone="dark" />
       </main>
 
       <JsonLd data={breadcrumbSchema([{ name: "Home", url: SITE_URL }, { name: "Services", url: CANONICAL }])} />

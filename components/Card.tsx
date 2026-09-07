@@ -32,6 +32,16 @@ type CardMediaProps = {
    * caller states which one it wants.
    */
   radius?: "lg" | "none";
+  /**
+   * `"light"` (default) or `"dark"` -- selects the empty-state placeholder
+   * fill only (`cardMedia.placeholder` vs. `placeholderDark`); has no effect
+   * once a real `image` is set. Added 2026-09-07 for How It Works' own dark
+   * variant (see that component's own header comment) -- reuses the exact
+   * `bg-ink-2` token `MediaPlaceholder`'s own `placeholderDark` already uses
+   * for this identical "photo not in yet, on a dark section" case, rather
+   * than inventing a second dark-surface colour.
+   */
+  tone?: "light" | "dark";
   className?: string;
 };
 
@@ -40,6 +50,7 @@ function CardMedia({
   imageSizes = "100vw",
   aspectClassName,
   radius = "lg",
+  tone = "light",
   className,
 }: CardMediaProps) {
   const classes = cx(aspectClassName, cardMedia.base, cardMedia.radius[radius], className);
@@ -58,7 +69,12 @@ function CardMedia({
     );
   }
 
-  return <div className={cx(cardMedia.placeholder, classes)} aria-hidden="true" />;
+  return (
+    <div
+      className={cx(tone === "dark" ? cardMedia.placeholderDark : cardMedia.placeholder, classes)}
+      aria-hidden="true"
+    />
+  );
 }
 
 export type CardProps = {
@@ -130,6 +146,16 @@ export type CapabilityCardProps = {
   rootClassName?: string;
   bodyClassName?: string;
   titleClassName?: string;
+  /**
+   * `"light"` (default) or `"dark"` -- How It Works' own dark variant
+   * (2026-09-07, /services page). Forwarded to `CardMedia`'s own `tone`
+   * (empty-state placeholder colour) and selects the body paragraph's
+   * colour (`capabilityCard.text` vs. `textDark`). The title needs no
+   * switch of its own -- it carries no colour class at all
+   * (`capabilityCard.title` is plain `text-h3`), so it already inherits
+   * whichever ambient text colour the section around it sets.
+   */
+  tone?: "light" | "dark";
 };
 
 export function CapabilityCard({
@@ -142,6 +168,7 @@ export function CapabilityCard({
   rootClassName = capabilityCard.root,
   bodyClassName = capabilityCard.body,
   titleClassName = capabilityCard.title,
+  tone = "light",
 }: CapabilityCardProps) {
   return (
     <article className={rootClassName}>
@@ -150,10 +177,11 @@ export function CapabilityCard({
         imageSizes={imageSizes}
         aspectClassName={mediaAspectClassName}
         radius={mediaRadius}
+        tone={tone}
       />
       <div className={bodyClassName}>
         <h3 className={titleClassName}>{title}</h3>
-        <p className={capabilityCard.text}>{body}</p>
+        <p className={tone === "dark" ? capabilityCard.textDark : capabilityCard.text}>{body}</p>
       </div>
     </article>
   );

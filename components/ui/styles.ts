@@ -1804,16 +1804,18 @@ export const whatWeMake = {
   // value `sectionHeading`/`trustPoints.subline` etc. already use for a
   // plain 20px size elsewhere, `leading-[1.2]`/`font-medium` kept from
   // `text-h5`'s own values so only the size itself changed.
-  // `group gap-2`: pairs with `ctaIcon` below (owner, same day: "put a
-  // chvron next to the cta label," then "on the hover chvron should have
-  // the same animation we applied on pdp, related styles" -- confirmed
-  // good, then "chvron icon should be a little big, text to icon gap
-  // should be 8px" -- gap confirmed already correct here, unchanged) --
-  // the `group`+trailing-icon hover-nudge shape is
-  // `productRelatedStyles.chip`/`chipIcon`'s own (see that recipe's own
-  // comment), but size/gap are this CTA's own tuned values, not copied
-  // verbatim (that chip's own 4px `gap-1` read too tight once the icon
-  // grew).
+  // `group gap-2`: pairs with `desktopCtaIcon` below (owner, same day:
+  // "put a chvron next to the cta label," then "on the hover chvron
+  // should have the same animation we applied on pdp, related styles" --
+  // confirmed good, then "chvron icon should be a little big, text to
+  // icon gap should be 8px" -- gap confirmed already correct here,
+  // unchanged, then "desktop chevron is very small make it same size as
+  // servies product range 'explore activewear' cta") -- `group`+
+  // trailing-icon+`gap-2` is unchanged; the icon itself switched from
+  // lucide's `ChevronRight` to `NextArrowIcon` (see `desktopCtaIcon`'s
+  // own comment) once a same-size comparison against Product Range's
+  // "Explore" link showed the real gap was shape/weight, not just a
+  // number.
   desktopGridCta:
     "group flex aspect-[15/16] items-center justify-center gap-2 border border-accent text-center text-[1.25rem] leading-[1.2] font-medium text-accent transition-colors hover:bg-accent/5",
   // Mobile: a single stacked column, not a grid -- each tile is a landscape
@@ -1888,17 +1890,33 @@ export const whatWeMake = {
   // `!text-[1rem]`.
   mobileGroupCta:
     "mt-2 w-full justify-center gap-2 md:hidden !border-accent !text-accent !text-[1.25rem] hover:!bg-[#FFF6F3]",
-  // Trailing chevron, both CTAs (owner: "put a chvron next to the cta
-  // label ... on hover the chvron should have the same animation we
-  // applied on pdp, related styles" -- confirmed good, then "chvron icon
-  // should be a little big, text to icon gap should be 8px", then a size
-  // correction: "chevron size make 7by16 px"). Hover-nudge mechanism
+  // Trailing chevron, mobile CTA only now (desktop's own moved to
+  // `desktopCtaIcon` below, a different icon component -- see that key's
+  // own comment for why). Owner: "put a chvron next to the cta label ...
+  // on hover the chvron should have the same animation we applied on pdp,
+  // related styles" -- confirmed good, then "chvron icon should be a
+  // little big, text to icon gap should be 8px", then a size correction:
+  // "chevron size make 7by16 px". Hover-nudge mechanism
   // (`transition-transform`/`group-hover:translate-x-0.5`) reuses
   // `productRelatedStyles.chipIcon` verbatim; the 7×16px size is this
   // CTA's own literal (lucide's `ChevronRight` is a square glyph by
   // default -- `w-[7px] h-4` renders it as a taller, narrower mark
   // instead, not a token this project has elsewhere).
   ctaIcon: "w-[7px] h-4 shrink-0 transition-transform group-hover:translate-x-0.5",
+  // Desktop CTA's own icon (owner: "desktop chevron is very small make it
+  // same size as servies product range 'explore activewear' cta") --
+  // matching the numeric size alone wasn't the real fix, since lucide's
+  // `ChevronRight` (thin, stroke-based, 24×24 native viewBox) reads much
+  // lighter than `NextArrowIcon` (a small SOLID chevron, no stroke at
+  // all, purpose-built at this exact `7x16.6667` viewBox -- see that
+  // component's own header comment: "a lucide substitute would read as
+  // visibly different weight/style"). Switched the desktop CTA to
+  // `NextArrowIcon` and copied `productRange.exploreIcon`'s exact values
+  // verbatim, so this genuinely IS the same size as the Services page's
+  // own "Explore Activewear" link, not just a close approximation. Mobile
+  // keeps `ctaIcon`/`ChevronRight` above, unchanged -- only "desktop" was
+  // reported small.
+  desktopCtaIcon: "h-[16.667px] w-[7px] shrink-0 transition-transform group-hover:translate-x-0.5",
   mobileTile: "flex flex-col gap-4",
   // Owner, 2026-09-03: originally a `4:3` mid-point between mobile's old
   // flat `16:11` landscape and desktop's old square tile. Superseded
@@ -2588,14 +2606,25 @@ export const howItWorks = {
   // reuse on both.
   darkSurface: "bg-ink text-paper",
   // Desktop-only top-gap override for the dark variant (owner, same day,
-  // follow-up: "how it works should have 200px gap from the top section")
-  // -- this section's own /services-specific gap down from Product Range,
-  // replacing `desktopOuterLight`'s 60px for this variant only. Kept
-  // separate from `darkSurface` above (not folded into one token) because
-  // 200px is a desktop-scale number -- applying it to `mobileSection` too
-  // would roughly quadruple that breakpoint's own standing gap rhythm
-  // (40-72px sitewide) for a value the owner never asked for there.
-  desktopOuterDark: "pt-[200px]",
+  // follow-up: "how it works should have 200px gap from the top section" --
+  // `pt-[120px]`, not a literal 200px: `ProductRange.inner` (the section
+  // immediately above on /services) already carries its own `xl:pb-20`
+  // (80px), a value scoped to that one section/page only (not reused
+  // elsewhere) and presumably Figma-sourced, so 120 + 80 = the requested
+  // 200px total without zeroing out Product Range's own existing bottom
+  // gap. Owner's own explicit follow-up ("remove any space from the
+  // bottom of product range section or add 80px under product range and
+  // 120px top how it works... whatever approach you think is right") --
+  // kept Product Range's 80px rather than removing it, since that value
+  // already exists and this is the less structurally invasive of the two
+  // options for reaching the same total. This section's own /services-
+  // specific gap down from Product Range, replacing `desktopOuterLight`'s
+  // 60px for this variant only. Kept separate from `darkSurface` above
+  // (not folded into one token) because this is a desktop-scale number --
+  // applying it to `mobileSection` too would roughly triple that
+  // breakpoint's own standing gap rhythm (40-72px sitewide) for a value
+  // the owner never asked for there.
+  desktopOuterDark: "pt-[120px]",
   // container-p only on the heading -- the card row below is a full-bleed
   // sibling, not nested inside it (same pattern as Inside the Factory's
   // gallery): get_metadata on the real frame shows the 5th card sitting at

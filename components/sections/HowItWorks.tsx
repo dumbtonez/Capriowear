@@ -46,11 +46,23 @@ import { CardCarousel } from "@/components/CardCarousel";
 import { DesktopChevron, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextReveal } from "@/components/TextReveal";
+import { cx } from "@/components/ui/cx";
 import { howItWorks } from "@/components/ui/styles";
 import type { home } from "@/content/home";
 
 export type HowItWorksProps = {
   content: typeof home.howItWorks;
+  /**
+   * `"light"` (default, the homepage's own original white-background
+   * build) or `"dark"` -- How It Works' dark variant (owner, 2026-09-07,
+   * Figma node 767:868, reused on /services under Product Range). Drives
+   * the section's own background/ambient text colour plus the eyebrow's
+   * standing dark-section colour; forwarded to every `CapabilityCard`
+   * (desktop + mobile) for the body copy and empty-state placeholder
+   * colour. See this file's own git history / docs/03-component-library.md
+   * for the full reasoning.
+   */
+  tone?: "light" | "dark";
 };
 
 // Mobile heading is forced to Figma's own real 3-line break points (owner
@@ -89,7 +101,13 @@ function renderMobileHeading(h2: string) {
 const CARD_WIDTH = 469;
 const CARD_GAP = 24;
 
-function DesktopScroller({ steps }: { steps: typeof home.howItWorks.steps }) {
+function DesktopScroller({
+  steps,
+  tone,
+}: {
+  steps: typeof home.howItWorks.steps;
+  tone: "light" | "dark";
+}) {
   const { wrapRef, trackRef, chevronRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
     useDesktopChevronScroller(CARD_WIDTH + CARD_GAP);
 
@@ -110,6 +128,7 @@ function DesktopScroller({ steps }: { steps: typeof home.howItWorks.steps }) {
               body={step.body}
               mediaAspectClassName={howItWorks.cardMediaRatio}
               mediaRadius="none"
+              tone={tone}
             />
           </div>
         ))}
@@ -119,32 +138,37 @@ function DesktopScroller({ steps }: { steps: typeof home.howItWorks.steps }) {
   );
 }
 
-export function HowItWorks({ content }: HowItWorksProps) {
+export function HowItWorks({ content, tone = "light" }: HowItWorksProps) {
   return (
     <section>
       {/* Desktop: centred heading, scrollable card row */}
-      <div className={howItWorks.desktopOuter}>
+      <div
+        className={cx(
+          howItWorks.desktopOuter,
+          tone === "dark" ? cx(howItWorks.darkSurface, howItWorks.desktopOuterDark) : howItWorks.desktopOuterLight,
+        )}
+      >
         <div className={howItWorks.desktopHeadingWrap}>
           <SectionHeading
             eyebrow={<TextReveal text={content.eyebrow} />}
             heading={<TextReveal as="span" text={content.h2} />}
-            eyebrowTone="light"
+            eyebrowTone={tone}
             align="center"
             headingClassName={howItWorks.desktopHeadingWidth}
           />
         </div>
-        <DesktopScroller steps={content.steps} />
+        <DesktopScroller steps={content.steps} tone={tone} />
       </div>
 
       {/* Mobile: centred heading, swipeable card slider */}
-      <div className={howItWorks.mobileSection}>
+      <div className={cx(howItWorks.mobileSection, tone === "dark" && howItWorks.darkSurface)}>
         <SectionHeading
           eyebrow={<TextReveal text={content.eyebrow} />}
           heading={renderMobileHeading(content.h2)}
-          eyebrowTone="light"
+          eyebrowTone={tone}
           align="center"
         />
-        <CardCarousel items={content.steps} cardMediaRatio={howItWorks.cardMediaRatio} />
+        <CardCarousel items={content.steps} cardMediaRatio={howItWorks.cardMediaRatio} tone={tone} />
       </div>
     </section>
   );
