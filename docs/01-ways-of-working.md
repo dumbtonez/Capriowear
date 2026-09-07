@@ -107,8 +107,10 @@ If Claude says something works, it ran it. Screenshot diffs, test output and bui
 
 **Added 2026-09-07, after a real mix-up:** several Claude sessions can run at once, often each in its own git worktree. Each can start its own `next dev` server. `localhost:3000` is only ever "the" preview by coincidence — if two servers are alive, whichever claimed port 3000 first wins it, and everyone else is silently looking at a different server (possibly a different worktree, a different commit, even uncommitted work from another session).
 
-`.claude/launch.json`'s dev config has `autoPort: true`, so each session's own server picks a free port automatically instead of colliding on 3000. Because of this:
+`.claude/launch.json`'s dev config has `autoPort: true`, so each session's own server picks a free port automatically instead of colliding on 3000. Kept deliberately separate rather than sharing one port — see decision log in [05-plan.md](05-plan.md), 2026-09-07: separate ports need one extra glance at a URL, but a shared port needs manual handoff between sessions, which is exactly what caused the mix-up this rule exists to prevent.
 
-- Claude always states the exact `localhost:PORT` URL it verified a change on — never assumes or implies port 3000.
+Because of this, **every session gives its own local preview URL, every time it verifies a visual change** — not just the first time:
+
+- Claude states the exact `http://localhost:PORT/...` it just checked something on, as part of reporting that verification (e.g. "Verified at `localhost:3001/activewear/leggings/...`") — never assumes or implies port 3000.
 - The owner checks whatever URL Claude just gave, not habit/muscle-memory `:3000`, especially when more than one Claude session is active.
 - If something "isn't showing up" after a fix, the first thing to check is whether the browser is pointed at the same port the fix was verified on.
