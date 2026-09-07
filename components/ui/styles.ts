@@ -647,13 +647,16 @@ export const header = {
   // Adaptive frosted OVERLAY header (owner reference, 2026-09-07: labs.google's
   // own nav) -- was a flat opaque `bg-ink`; now transparent (the 5
   // `blurLayer` spans below supply the frosted background) with
-  // `text-[var(--header-fg)]`/`border-[var(--header-border)]` reading off
-  // the CSS custom properties `app/globals.css` sets on
-  // `header`/`header[data-tone="light"]`, driven by Header.tsx's own
-  // scroll-position tone detection (`data-tone` attribute). `color`/
-  // `border-color` added to the transition list alongside the pre-existing
-  // `transform` (the hide/show toggle below), so a tone flip animates too,
-  // not just hide/reveal.
+  // `text-[var(--header-fg)]` reading off the CSS custom property
+  // `app/globals.css` sets on `header`/`header[data-tone="light"]`, driven
+  // by Header.tsx's own scroll-position tone detection (`data-tone`
+  // attribute). `color` added to the transition list alongside the
+  // pre-existing `transform` (the hide/show toggle below), so a tone flip
+  // animates too, not just hide/reveal. No bottom border any more (owner,
+  // 2026-09-07: "remove the line under the nav") -- a frosted overlay nav
+  // reads as floating over the content rather than a bar sitting flush
+  // above it, so a hard divider line no longer fits the look; the blur
+  // itself is what separates it from the content now.
   //
   // `fixed`, not `sticky` (owner correction, 2026-09-07: "we need that at
   // rest position... exactly the same [as the reference]") -- `sticky`
@@ -675,7 +678,7 @@ export const header = {
   // CategoryBanner in particular has a documented history of fragile
   // fixed-height/absolute-position math -- see that component's own
   // header comment).
-  base: "sticky top-0 z-40 border-b border-[var(--header-border)] bg-transparent text-[var(--header-fg)] transition-[color,border-color,transform] duration-300 ease-in-out",
+  base: "fixed inset-x-0 top-0 z-40 bg-transparent text-[var(--header-fg)] transition-[color,transform] duration-300 ease-in-out",
   // Plain, non-sticky variant (owner trial, 2026-08-29: "let's try one time
   // gymshark approach and see how it looks") -- gymshark.com's own header is
   // `position: static`, scrolling away with the page entirely, which is why
@@ -700,7 +703,7 @@ export const header = {
   // ordering so its own `z-40` (matching `base`'s own value, for the exact
   // same reason) can do its job.
   baseStatic:
-    "relative z-40 border-b border-[var(--header-border)] bg-transparent text-[var(--header-fg)] transition-[color,border-color] duration-300 ease-in-out",
+    "relative z-40 bg-transparent text-[var(--header-fg)] transition-colors duration-300 ease-in-out",
   // Slides the header fully off-screen upward. Applied by Header.tsx while
   // scrolling down past its own measured height (owner request, 2026-08-26:
   // hide on scroll down, reveal on scroll up -- a standard pattern for
@@ -1606,11 +1609,21 @@ export const servicesHowWeWork = {
   // (see `hero.section`'s own comment). Desktop `xl:pt-[160px]` is
   // unchanged (TrustSignals' desktop variant, `desktopWrapServices`, has
   // its own distinct 80px bottom padding, already correct).
-  inner: "container-p flex flex-col items-center pt-0 pb-12 xl:pt-[160px] xl:pb-20",
+  // `items-start` (owner, 2026-09-08: "how we work title and subline make
+  // it left align" -- was `items-center`) stops centring `introWrap` as a
+  // box; `noteWrap` below gains its own `self-center` to stay visually
+  // centred as before, since it wasn't part of this request.
+  // `pt-6`/`xl:pt-[184px]` (owner, same message: "add 24px more gap from
+  // the title top" -- was `pt-0`/`xl:pt-[160px]`, +24px each) is this
+  // section's own top gap, now the real gap down to the heading specifically.
+  inner: "container-p flex flex-col items-start pt-6 pb-12 xl:pt-[184px] xl:pb-20",
   // 624px intro column in Figma -- kept as a max-width (not a fixed width)
   // so it can shrink below its own value on a narrow mobile viewport
   // instead of forcing horizontal overflow.
-  introWrap: "flex max-w-[624px] flex-col items-center gap-4 text-center",
+  // `items-start`/no `text-center` (owner, 2026-09-08: "left align") --
+  // was `items-center text-center`. `gap-2` (8px, owner, same day: "how we
+  // work and subline should have 8px gap" -- was `gap-4`/16px).
+  introWrap: "flex max-w-[624px] flex-col items-start gap-2",
   heading: "text-h1 text-ink",
   // 18px/24px (owner, 2026-09-07: "how we work subline font should be 18
   // by 24 line height" -- was the 20px/400 `text-body-lg` token with a
@@ -1618,8 +1631,9 @@ export const servicesHowWeWork = {
   // still uses). `text-[1.125rem] leading-6` is a plain explicit value,
   // not a token, since no existing type-scale entry is 18px/24px.
   subheading: "text-[1.125rem] leading-6 text-[#17191e]",
-  // mt-12 (48px) mobile fallback, xl:mt-[72px] -- Figma's own confirmed gap
-  // from the intro block above.
+  // `mt-6` (24px, owner, 2026-09-08: "how we work subline and ODM should
+  // have 24px gap" -- was `mt-12`/48px mobile, `xl:mt-[72px]` desktop),
+  // uniform at every breakpoint now rather than a separate desktop value.
   // `gap-3` (12px, owner, 2026-09-07: "make the gap between ODM, OEM same
   // as used in the plp fabric section" -- was `gap-16`/64px) matches
   // `fabricOptions.accordionStack`'s own mobile/tablet stack gap exactly
@@ -1628,7 +1642,7 @@ export const servicesHowWeWork = {
   // dividers, not a gapped stack (so `xl:gap-x-11`, this row's own real
   // 3-column desktop gap, is left unchanged -- fabric options has nothing
   // comparable at that breakpoint to match against).
-  pathsGrid: "mt-12 grid w-full grid-cols-1 gap-3 xl:mt-[72px] xl:grid-cols-3 xl:gap-x-11 xl:gap-y-0",
+  pathsGrid: "mt-6 grid w-full grid-cols-1 gap-3 xl:grid-cols-3 xl:gap-x-11 xl:gap-y-0",
   // `items-start`/`gap-8` are dead weight now that each card is just the
   // one collapsible box (owner: "remove the image placeholders from this
   // section" -- `pathMedia`/its `MediaPlaceholder` are gone too), but left
@@ -1666,7 +1680,10 @@ export const servicesHowWeWork = {
   // gap from the cards row above (not the same 72px the row above uses --
   // see `inner`'s own comment on why this needs its own margin rather than
   // a shared flex `gap`).
-  noteWrap: "mt-12 flex max-w-[656px] flex-col items-center gap-4 xl:mt-[140px]",
+  // `self-center` added when `inner` moved to `items-start` (2026-09-08,
+  // left-aligning `introWrap` above) -- this closing note wasn't part of
+  // that request and stays visually centred, same as before.
+  noteWrap: "mt-12 flex max-w-[656px] flex-col items-center gap-4 self-center xl:mt-[140px]",
   noteIconWrap: "flex size-[54px] items-center justify-center rounded-full bg-accent/10 text-accent",
   noteIcon: "size-[54px]",
   // 18px/24px (owner, 2026-09-07: "many prgrams text make it 18px by 24
@@ -2223,8 +2240,19 @@ export const certified = {
   // Mobile top/bottom corrected 2026-08-24 to the standard mobile
   // section-to-section pattern: 0 top, 72px bottom -- supersedes the 80px
   // top set earlier the same day, now that a sitewide standard exists (see
-  // clientLogos.mobileWrap for the full reasoning).
+  // clientLogos.mobileWrap for the full reasoning). Correct on the
+  // homepage, where the preceding section (`WhatWeMake`) already owns its
+  // own 72px bottom -- `pt-0` here avoids doubling that gap.
   mobileSection: "container-p pt-0 pb-[72px] md:hidden",
+  // Services page variant (owner, 2026-09-08: "certified should have 72px
+  // gap from the top") -- on `/services` this section instead follows the
+  // mid-page `FinalCta` usage, whose own ticker'd mobile block owns just
+  // 60px of bottom padding (`finalCta.mobileCtaBlock`'s `pb-[60px]`), not
+  // 72px, so the shared `pt-0` above landed a real 60px gap there instead
+  // of the standard 72px. A real top value of its own, rather than
+  // touching `finalCta`'s unrelated 60px (which is correct for its own
+  // context, a ticker'd CTA block, not a plain section boundary).
+  mobileSectionServices: "container-p pt-[72px] pb-[72px] md:hidden",
   // 72px gap from the heading down to the logo row on desktop -- off-scale,
   // kept exact. Mobile is a genuinely different, smaller gap (32px, owner
   // call, 2026-08-24) -- not the same value reused, so this is two separate

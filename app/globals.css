@@ -358,12 +358,10 @@
    had only ~2.9:1 contrast against a light/paper surface. */
 header {
   --header-fg: var(--color-paper);
-  --header-border: var(--color-line-dark);
   --header-hover: #838d97;
 }
 header[data-tone="light"] {
   --header-fg: var(--color-ink);
-  --header-border: var(--color-line);
   --header-hover: var(--color-muted);
 }
 

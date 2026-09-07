@@ -49,9 +49,14 @@ import type { home } from "@/content/home";
 
 export type CertifiedCompliantProps = {
   content: typeof home.certified;
+  /** `"services"` gives mobile its own 72px top gap (`certified.
+   *  mobileSectionServices`) instead of the homepage's `pt-0` -- see that
+   *  token's own comment for why the two pages need different values here.
+   *  Default `"default"` (homepage) is byte-for-byte unchanged. */
+  pageVariant?: "default" | "services";
 };
 
-export function CertifiedCompliant({ content }: CertifiedCompliantProps) {
+export function CertifiedCompliant({ content, pageVariant = "default" }: CertifiedCompliantProps) {
   return (
     <section>
       <div className={certified.desktopSection}>
@@ -107,7 +112,7 @@ export function CertifiedCompliant({ content }: CertifiedCompliantProps) {
         </div>
       </div>
 
-      <div className={certified.mobileSection}>
+      <div className={pageVariant === "services" ? certified.mobileSectionServices : certified.mobileSection}>
         <div className={certified.rootMobile}>
           <SectionHeading
             eyebrow={<TextReveal text={content.eyebrow} />}

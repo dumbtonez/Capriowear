@@ -57,9 +57,13 @@
 // (owner, 2026-09-07: "Add this section under how it works, same as we
 // use on homepage" -- Figma node 729:276, "Certifications") -- same
 // component, same content (home.certified: eyebrow, heading and all 6
-// logos match verbatim), no spacing variant needed since this frame's own
-// 120px top / 120px bottom already match `certified.desktopSection`'s
-// existing values exactly. Placed after FinalCta, not directly after
+// logos match verbatim); desktop needed no spacing variant since this
+// frame's own 120px top / 120px bottom already match `certified.
+// desktopSection`'s existing values exactly. Mobile did need one
+// (`pageVariant="services"`, added 2026-09-08) -- see `certified.
+// mobileSectionServices`'s own comment for why this page's own preceding
+// section doesn't supply the homepage's assumed 72px gap here. Placed
+// after FinalCta, not directly after
 // HowItWorks: get_metadata confirms the real Figma stacking is HowItWorks
 // (6911-7785) -> FinalCta (7785-8265) -> Certifications (8265-8887), i.e.
 // this section is genuinely the last of the three, "under How It Works"
@@ -184,7 +188,7 @@ export default function ServicesPage() {
         <ProductRange content={services.productRange} />
         <HowItWorks content={home.howItWorks} tone="dark" />
         <FinalCta content={home.finalCta} ticker={home.complianceTicker} />
-        <CertifiedCompliant content={home.certified} />
+        <CertifiedCompliant content={home.certified} pageVariant="services" />
         <TrustPoints
           heading={services.responsibleMake.heading}
           subline={services.responsibleMake.subline}

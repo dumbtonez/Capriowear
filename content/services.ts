@@ -149,7 +149,7 @@ export const services = {
       {
         title: "Teamwear & Uniforms",
         body: "Sublimated team uniforms and kits for basketball, rugby, baseball and more",
-        exploreLabel: "Explore Teamwear & Uniforms",
+        exploreLabel: "Explore Teamwear",
         href: "/teamwear",
       },
     ],
