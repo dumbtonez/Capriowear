@@ -1458,6 +1458,40 @@ export const servicesHowWeWork = {
   noteParagraphBold: "font-semibold",
 };
 
+/* --- ProductRange (/services page, section 5) ------------------------------ */
+// Figma desktop node 758:823, file dTtJQ9rtKewCqpt2YImiJb. Desktop-only for
+// now, same caveat as `servicesHowWeWork` above -- no mobile frame has been
+// checked against this node yet.
+//
+// The first dark section on this page -- `bg-ink text-paper`, the same token
+// pair every other dark full-bleed section uses (Hero, Stats). No extra top
+// margin: OurServices (the section directly above this one) already supplies
+// the standard 72px mobile section-to-section gap via its own bottom
+// padding, the same "the section above owns the gap" pattern Stats itself
+// follows after Certified & Compliant.
+export const productRange = {
+  section: "bg-ink text-paper",
+  // 48px top/bottom mobile fallback (standing dark-section inset rule,
+  // 2026-08-24); 120px top / 80px desktop, Figma's own confirmed values (an
+  // intentionally asymmetric pair, not a rounding -- same shape as Hero's
+  // own 140/80 split).
+  inner: "container-p flex flex-col items-center gap-12 pt-12 pb-12 xl:gap-[72px] xl:pt-[120px] xl:pb-20",
+  headingWrap: "max-w-[624px]",
+  // Figma's own 20px/500 explore-link size, reused for the eyebrow slot via
+  // SectionHeading's `eyebrowSize` override.
+  eyebrowSize: "text-[1.25rem] font-semibold",
+  cardsRow: "flex w-full flex-col items-center gap-10 xl:w-fit xl:flex-row",
+  card: "flex w-full max-w-[381px] flex-col items-start gap-6",
+  cardMedia: "w-full",
+  cardTextCol: "flex w-full flex-col items-start gap-4",
+  // Figma's own flat 20px/28px body copy -- no existing token carries this
+  // exact leading (text-body-lg's is 24px), so this is its own explicit
+  // value, same reasoning as `servicesHowWeWork.pathSubtitle`.
+  cardBody: "text-[1.25rem] leading-7 font-normal text-paper",
+  exploreLink: "inline-flex items-center gap-2 text-[1.25rem] leading-7 font-normal text-accent transition-opacity hover:opacity-80",
+  exploreIcon: "h-[16.667px] w-[7px] shrink-0",
+};
+
 /* --- ClientLogos (homepage section 4) -------------------------------------- */
 // Figma: desktop node 341:1732, mobile node 343:1840. Genuinely different
 // treatments, not one responsive layout: desktop is a horizontal Marquee (72px
@@ -1736,7 +1770,50 @@ export const whatWeMake = {
   // tile's own fixed `16:11` image ratio then sizes correctly on its own,
   // no extra height/width override needed. Real mobile (`<md:`) keeps the
   // single stacked column.
-  mobileList: "flex flex-col gap-10 md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-10",
+  //
+  // Split into two real instances 2026-09-07 (owner: "on the mobile
+  // homepage, add a cta after 4 products ... Show the first 2 sub-cat
+  // only" -- clarified to 4, not 2), same "two breakpoint-specific
+  // instances, not one repositioned via CSS" pattern already used
+  // elsewhere (e.g. `ProductGallery`) when behavior genuinely differs by
+  // breakpoint, not just layout: real mobile now caps to the first 4
+  // tiles plus a "View All" CTA (`mobileGroupCta` below); tablet keeps
+  // showing every tile with no CTA, exactly as before -- a single shared
+  // list reflowed by CSS couldn't have a different tile COUNT at each
+  // tier, only a different layout, so this needed two real DOM instances,
+  // each visible at only one tier (`WhatWeMake.tsx` gates them
+  // `md:hidden`/`hidden md:grid xl:hidden`).
+  mobileListCapped: "flex flex-col gap-10 md:hidden",
+  mobileListFull: "hidden md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-10 xl:hidden",
+  // Full-width outline pill, real-mobile-only (owner, 2026-09-07, same
+  // request as above: "cta ... it will take customers to their respective
+  // landing pages" -- `category.href`, already on the content shape,
+  // unused until now). `variant="secondary"` (outline, not solid accent)
+  // so this doesn't compete visually with the page's real primary CTAs
+  // ("Request a Sample") -- a "see more" link reads as secondary intent.
+  // 32px total gap above this button (owner: first "sta[rt] space from
+  // the top should be 40px", corrected same day to "space from the top
+  // cta make 32px"). `group`'s own `gap-6` (24px) already applies between
+  // every child in this flex column, this button included -- a margin on
+  // a flex child ADDS to that shared gap, it doesn't replace it (the same
+  // mechanism already documented on `productCtas.desktopRow`'s own
+  // `xl:mt-2`, see that recipe's own comment: "32 + 8 = a real 40px").
+  // `mt-2` (8px) + the existing 24px gap = 32px, not `mt-8` (which would
+  // stack to a wrong 56px total -- confirmed live, then corrected).
+  // `xl:hidden` alone (not `md:hidden`) would be wrong here -- see this
+  // key's own `mobileListCapped`/`mobileListFull` split above for why the
+  // CTA only belongs to the real-mobile tier: `md:hidden` is correct.
+  //
+  // Accent-coloured outline, not the default `button.secondary`
+  // currentColor one (owner, same day: first "make the outline and text
+  // orange as primary color" for Teamwear only, then "make view all
+  // activewear also orange outline with text" -- both CTAs share this
+  // now). `button.secondary` is `border-current`/`text-current`, so
+  // `border-accent`/`text-accent` needs `!` to actually win -- same
+  // same-specificity-utility-order risk already found and fixed once on
+  // `productCtas.secondaryDesktop` (see that recipe's own comment); reuses
+  // its exact hover tint (`#FFF6F3`) rather than inventing a second one.
+  mobileGroupCta: "mt-2 w-full justify-center md:hidden !border-accent !text-accent hover:!bg-[#FFF6F3]",
   mobileTile: "flex flex-col gap-4",
   // Owner, 2026-09-03: originally a `4:3` mid-point between mobile's old
   // flat `16:11` landscape and desktop's old square tile. Superseded

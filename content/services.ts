@@ -102,4 +102,29 @@ export const services = {
     ],
     note: howWeWorkNote,
   },
+
+  // Section 5: Product Range. Figma desktop node 758:823. Copy (eyebrow,
+  // heading, both card descriptions and link labels) is the design's own
+  // real text layer, read directly, same as every prior section. The H2
+  // happens to match home.ts's `whatWeMake.h2` verbatim, but this is a
+  // different, simpler two-card "Explore" layout, not a reuse of that
+  // section -- see ProductRange.tsx's own header comment.
+  productRange: {
+    eyebrow: "PRODUCT RANGE",
+    h2: "End-to-end activewear and teamwear manufacturing",
+    categories: [
+      {
+        title: "Activewear",
+        body: "Leggings, bras, shorts, tops, fleece, compression, sets and more",
+        exploreLabel: "Explore Activewear",
+        href: "/activewear",
+      },
+      {
+        title: "Teamwear & Uniforms",
+        body: "Sublimated team uniforms and kits for basketball, rugby, baseball and more",
+        exploreLabel: "Explore Teamwear & Uniforms",
+        href: "/teamwear",
+      },
+    ],
+  },
 } as const;

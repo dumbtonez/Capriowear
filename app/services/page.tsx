@@ -28,6 +28,8 @@
 // the same day from an initial, wrong 80px that had been copied from Trust
 // Signals' own node by mistake, see `ourServices.desktopSectionServices`'s
 // own comment), via `pageVariant="services"` -- see OurServices.tsx.
+// Section 6: ProductRange, Figma desktop node 758:823 -- see
+// components/sections/ProductRange.tsx for the section's own build notes.
 //
 // Confirmed via get_metadata on every section's own real Figma y-position
 // (Intro 833-1413, Trust Signals 1413-1949, How We Work 1949-3279, Our
@@ -46,6 +48,7 @@ import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
 import { OurServices } from "@/components/sections/OurServices";
+import { ProductRange } from "@/components/sections/ProductRange";
 import { ServicesHero } from "@/components/sections/ServicesHero";
 import { ServicesHowWeWork } from "@/components/sections/ServicesHowWeWork";
 import { ServicesIntro } from "@/components/sections/ServicesIntro";
@@ -105,6 +108,7 @@ export default function ServicesPage() {
         <TrustSignals items={home.trustStrip} pageVariant="services" />
         <ServicesHowWeWork content={services.howWeWork} />
         <OurServices content={home.services} pageVariant="services" />
+        <ProductRange content={services.productRange} />
       </main>
 
       <JsonLd data={breadcrumbSchema([{ name: "Home", url: SITE_URL }, { name: "Services", url: CANONICAL }])} />

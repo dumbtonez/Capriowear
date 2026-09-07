@@ -920,6 +920,7 @@ Built section by section from Figma (owner brief, 2026-09-07), same pattern as t
 | 3 | 4-up services strip (Product Development / Low MOQ / Private Label / Worldwide Shipping) | ✅ **Built** — reuses homepage's `TrustSignals` verbatim (see below) |
 | 4 | How we work with you (OEM/ODM/Private Label path cards) | ✅ **Built** — `components/sections/ServicesHowWeWork.tsx` |
 | 5 | "From raw fabric to retail-ready packaging" (5 items) | ✅ **Built** — reuses homepage's `OurServices` verbatim (see below) |
+| 6 | Product Range (Activewear / Teamwear & Uniforms, 2 "Explore" cards) | ✅ **Built** — `components/sections/ProductRange.tsx` |
 | — | Certification logos strip (ISO 9001, OEKO-TEX, BSCI, IMAC, SGS) | Not built yet |
 | — | How It Works (5 steps) | Not built yet |
 | — | B2B FAQ | Not built yet |
@@ -990,6 +991,22 @@ Copy (heading, subheading, all 3 cards' title/subtitle/"What it means"/"Best for
 - **The `<h2>` had no reveal animation either** (owner, same day: "should have the same animation as we applied on some titles on homepage"). Wrapped in `TextReveal` on plain `text` mode, the exact same shape every homepage section heading already uses (`WhatWeMake`, `CertifiedCompliant`, `HowItWorks`, etc: `<TextReveal as="h2"/"span" text={...} />`) — no new prop or variant needed, just applying the existing, already-correct pattern that had been missed when this section was first built. Confirmed live: renders 5 `.reveal-word` spans, `aria-label="How we work with you"`.
 
 **Verified**: `npx tsc --noEmit`, `npx eslint .`, `npm run build` all clean. Live on `/services` at 1440px: cards grid measures 3× ~397px columns totaling 1280px (`container-p`'s own inner width); all 3 card titles and their "What it means"/"Best for" copy render exactly; closing note renders both `<strong>` segments matching Figma's own bold phrases; no horizontal overflow at 375px.
+
+### Product Range — Built
+`components/sections/ProductRange.tsx` · recipe: `productRange` · Figma: desktop node `758:823` (mobile not yet designed)
+
+The first dark section on `/services`: a centred eyebrow + heading (`SectionHeading`, `eyebrowTone="dark"`, `align="center"`), then two side-by-side cards (Activewear, Teamwear & Uniforms) — a plain image box, a description line, and an "Explore X" accent-orange link with a small arrow icon.
+
+- **New, bespoke component, not a reuse of `WhatWeMake`** — the two sections' H2 copy happens to match verbatim ("End-to-end activewear and teamwear manufacturing"), a real coincidence, but the layouts are genuinely different: `WhatWeMake` is a light section with a 4-tile category grid per group; this is a dark section with exactly one image and one "Explore" link per category, no tile grid at all. Forcing this content into `WhatWeMake` would mean bolting an unused tile-grid shape onto content that has none.
+- **New `NextArrowIcon` component** (`components/icons/NextArrowIcon.tsx`, currentColor) — Figma's real exported asset ("Primary Navigation / Next", node `758:856`), not a lucide substitute; same reasoning as `ChevronArrowIcon.tsx` (a solid filled shape, no stroke, so a lucide chevron would read as a different weight/style).
+- **Image boxes use `MediaPlaceholder` with an inline `style={{ aspectRatio: "381 / 400" }}`**, not a new named ratio token — 381:400 is a one-off Figma pixel size with no other user, matching the documented purpose of `MediaPlaceholder`'s own `style` escape hatch.
+- **Typography kept Figma-exact per the type-scale exception** (rule 4): card body/link text is a flat `text-[1.25rem] leading-7` (20px/28px) — `text-body-lg`'s own line-height (24px) doesn't match this section's real 28px leading, so it's a one-off value, same reasoning as `servicesHowWeWork.pathSubtitle`. `text-accent` (the existing sitewide orange token) is reused for the "Explore" links, not a new colour.
+- **No extra top margin** — `OurServices` (the section directly above) already supplies the standard 72px mobile gap via its own bottom padding, the same "the section above owns the gap" pattern `Stats` follows on the homepage.
+- **Desktop-only for now**, same caveat as every other section on this page — no mobile Figma frame exists yet.
+
+Copy (eyebrow, heading, both card descriptions and "Explore" labels) is the design's own real text layer, read directly — not placeholder copy.
+
+**Verified**: `npx tsc --noEmit`, `npx eslint .`, `npm run build` all clean. Live on `/services` at 1280px (via computed `getBoundingClientRect`/`getComputedStyle`, Browser pane hidden this session): both cards sit in one row with a 40px gap; each image box measures exactly 381×400; section background `rgb(14, 14, 18)` (`bg-ink`); heading renders "End-to-end activewear and teamwear manufacturing" in white; eyebrow renders "PRODUCT RANGE" in `rgb(171, 181, 192)` (`#ABB5C0`, the standing dark-eyebrow colour).
 
 ### "From raw fabric to retail-ready packaging" — Built
 
