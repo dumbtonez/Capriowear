@@ -72,6 +72,7 @@ export function WhatWeMake({ content }: WhatWeMakeProps) {
                       key={tile.href}
                       label={tile.label}
                       href={tile.href}
+                      image={tile.image}
                       mediaRadius="none"
                       mediaAspectClassName={whatWeMake.desktopTileMedia}
                     />
@@ -103,6 +104,7 @@ export function WhatWeMake({ content }: WhatWeMakeProps) {
                     <a key={tile.href} href={tile.href} className={whatWeMake.mobileTile}>
                       <MediaPlaceholder
                         label={tile.label}
+                        image={tile.image}
                         ratio="1:1"
                         radius="none"
                         className={whatWeMake.mobileTileMedia}

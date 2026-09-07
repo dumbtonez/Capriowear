@@ -4,6 +4,15 @@
 // wireframe was hard to read it is marked with // VERIFY. No en dashes or em dashes.
 import { companyIdentity } from "./site";
 
+// What We Make's own tile shape (owner, 2026-09-07: "add a dummy product
+// image ... see how it would look across home, PLP, PDP") -- `image` is
+// optional and typed explicitly here (via `satisfies` on each `tiles`
+// array below) rather than left to bare literal inference, so adding it to
+// one tile doesn't create an inconsistent union across the array. `Card`
+// (components/Card.tsx) already accepts this exact shape as its own
+// `image` prop; `WhatWeMake.tsx` passes it straight through.
+type WhatWeMakeTile = { label: string; href: string; image?: { src: string; alt: string } };
+
 // Activewear's category breakdown -- shared verbatim between the desktop
 // mega menu (Header.tsx, Figma node 493:3140) and the mobile drawer's own
 // mega menu (MobileNav.tsx, Figma node 473:2919, built earlier the same
@@ -322,14 +331,27 @@ export const home = {
         ],
         href: "/activewear",
         tiles: [
-          { label: "Leggings", href: "/activewear/leggings" },
+          // Placeholder/QA photo (owner, 2026-09-07) -- the same one real
+          // photo used on the Leggings PLP card/PDP gallery
+          // (content/activewear/leggings.ts's own high-waisted-compression
+          // style), referenced once and reused, not a second copy of the
+          // same fact. Every other tile below has no photo, so stays a
+          // placeholder box exactly as before.
+          {
+            label: "Leggings",
+            href: "/activewear/leggings",
+            image: {
+              src: "/product-images/leggings-high-waisted-compression.png",
+              alt: "Custom high-waisted compression leggings",
+            },
+          },
           { label: "Sports Bras", href: "/activewear/sports-bras" },
           { label: "Shorts", href: "/activewear/shorts" },
           { label: "Hoodies", href: "/activewear/hoodies" },
           { label: "Joggers & Track Pants", href: "/activewear/joggers-track-pants" },
           { label: "Tracksuits", href: "/activewear/tracksuits" },
           { label: "Base Layers", href: "/activewear/compression-base-layers" },
-        ],
+        ] satisfies WhatWeMakeTile[],
       },
       {
         title: "Teamwear & Uniforms",
@@ -344,7 +366,7 @@ export const home = {
           { label: "Basketball Uniforms", href: "/teamwear/basketball-uniforms" },
           { label: "Football Uniforms", href: "/teamwear/football" },
           { label: "Fighting Wear", href: "/teamwear/fight-wear" },
-        ],
+        ] satisfies WhatWeMakeTile[],
       },
     ],
   },
