@@ -1491,7 +1491,15 @@ export const productRange = {
   // exact leading (text-body-lg's is 24px), so this is its own explicit
   // value, same reasoning as `servicesHowWeWork.pathSubtitle`.
   cardBody: "text-[1.25rem] leading-7 font-normal text-paper",
-  exploreLink: "inline-flex items-center gap-2 text-[1.25rem] leading-7 font-normal text-accent transition-opacity hover:opacity-80",
+  // hover:opacity-* (the sitewide default hover treatment) dims a colour
+  // toward the PAGE background -- lighter on every other hover link, all of
+  // which sit on light/paper backgrounds, but this link sits on `bg-ink`
+  // (near-black), so dimming it mixes toward black and reads as a DARKER
+  // orange, backwards from the owner's ask ("light orange not dark").
+  // `hover:brightness-125` lightens the actual orange instead, no new
+  // colour token needed.
+  exploreLink:
+    "inline-flex items-center gap-2 text-[1.25rem] leading-7 font-normal text-accent transition-[filter] hover:brightness-125",
   exploreIcon: "h-[16.667px] w-[7px] shrink-0",
 };
 

@@ -1008,6 +1008,8 @@ The first dark section on `/services`: a centred eyebrow + heading (`SectionHead
 - **Heading wraps to Figma's own real 2-line break** ("End-to-end activewear and" / "teamwear manufacturing") — `headingWrap` is `max-w-[812px]`, the exact text-box width `get_metadata` confirms on node `758:829` (corrected same-day from an unconfirmed `624px` guess, which didn't reliably reproduce that exact break).
 - **No extra top margin** — `OurServices` (the section directly above) already supplies the standard 72px mobile gap via its own bottom padding, the same "the section above owns the gap" pattern `Stats` follows on the homepage.
 - **Desktop-only for now**, same caveat as every other section on this page — no mobile Figma frame exists yet.
+- **Heading already had the word-by-word reveal** (`<TextReveal as="span" text={content.h2} />`, same as the eyebrow and every other section's heading/eyebrow) from this component's first build — confirmed live via SSR markup (`reveal-word` spans present, `--reveal-index` per word) when the owner asked for it explicitly.
+- **"Explore" link hover fixed from dark to light orange** (owner: "on hover on the explore cta make it light orange not dark") — `hover:opacity-80` (the sitewide default hover treatment) dims a colour toward the page background, which lightens it on every other hover link (all on light/paper backgrounds) but DARKENS it here, since this link sits on `bg-ink`. Fixed with `hover:brightness-125`, which lightens the actual orange instead of blending it toward black — no new colour token needed.
 
 Copy (eyebrow, heading, both card descriptions and "Explore" labels) is the design's own real text layer, read directly — not placeholder copy.
 

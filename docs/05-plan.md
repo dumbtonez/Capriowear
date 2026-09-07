@@ -2475,6 +2475,15 @@ Because a single CSS-reflowed tile list can't have a different tile *count* per 
 
 **Verified**: `npx tsc --noEmit`, `npx eslint .` clean (a full `eslint .` run also surfaced unrelated noise from a stray `.next/build` directory inside a concurrent session's own worktree — confirmed pre-existing and unrelated by linting the two touched files directly, both clean). Live at 375px: both groups show exactly 4 tiles then an orange-outlined "View All" CTA, 32px below the last tile, linking to `/activewear`/`/teamwear`. At 1024px (tablet): both groups show every tile (7 Activewear, 4 Teamwear) in the unchanged 2-column grid, no CTA. At 1440px (desktop): `Card` grid unchanged, 7 tiles. Full 30-viewport screenshot suite passing.
 
+### 5ep · Product Range: confirmed the title reveal, fixed a real dark-orange hover bug — 2026-09-07
+Owner: "add the title animation to end-to-end title and on hover on the explore cta make it light orange not dark."
+
+The heading already had the word-by-word reveal (`<TextReveal as="span" text={content.h2} />`) from this section's first build, same pattern as the eyebrow and every other section's heading — confirmed via SSR markup rather than re-adding anything.
+
+**A real bug in the "Explore" link's hover state**: `exploreLink` used this codebase's own sitewide default hover treatment, `hover:opacity-80`, which dims a colour toward the page background. Every other hover link on the site sits on a light/paper background, where dimming reads as lighter — but this link sits on `bg-ink` (near-black), so the same mechanism mixed the orange toward black instead, reading as a darker orange, backwards from the request. Fixed with `hover:brightness-125`, which lightens the actual colour via a CSS filter rather than blending it toward whatever's behind it — no new colour token needed, and the filter also lightens `NextArrowIcon` for free (it inherits `currentColor` from the same `<Link>`).
+
+**Verified**: `npx tsc --noEmit`, `npx eslint .`, `npm run build` all clean. Confirmed via SSR output: `reveal-word` spans with per-word `--reveal-index` render for "End-to-end activewear and teamwear manufacturing"; both "Explore" links carry `hover:brightness-125`, not the old `hover:opacity-80`.
+
 ## Phase 3 · Footer and inner pages — Footer done, PLP banner + product grid in progress
 
 Footer shipped 2026-08-26 (see 4i above; sticky-reveal had stacking/paint corrections the same week — see 4k, 4l. A separate seam-bar decoration was attempted and removed, 4q–4s — Footer's own reveal mechanism is unaffected). Activewear PLP template started 2026-08-28 (5i above): route, data shape, and banner section built for Leggings, followed same day by CategoryFilters, ProductGrid/ProductCard/Pagination, and CategoryBanner revisions (5i–5u); layout corrections continued 2026-08-29 (5v). Remaining sections (overview, fabric table, trust block, spec facts, FAQ, related links, final CTA) built incrementally against Figma node `406:3075` as it gets finished.
