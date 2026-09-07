@@ -1552,6 +1552,14 @@ export const trustSignals = {
   // get_design_context, kept as its own exact value rather than rounded to
   // an existing spacing token.
   desktopWrap: "container-p hidden py-[120px] xl:flex xl:items-center xl:gap-[84px]",
+  // Services page reuse (owner, 2026-09-07: "this is already built on
+  // homepage, use same as is. only the spacing needs to adjust, from the
+  // top its 160px bottom 80px") -- Figma node 729:208 (this component's
+  // real node, confirmed via get_metadata: content starts 160px from the
+  // frame's own top, 536 - 160 - 296 = 80px remains below it), not
+  // homepage's symmetric 120/120. Everything else (media/text layout, gap)
+  // is shared as-is, same `pageVariant` pattern `OurServices` already uses.
+  desktopWrapServices: "container-p hidden pt-[160px] pb-[80px] xl:flex xl:items-center xl:gap-[84px]",
   // Fixed 400px box, not a proportional half -- Figma's real desktop layout
   // keeps the media box a constant width while the text side grows to fill
   // whatever space is left (confirmed via get_metadata: media 400px, text
@@ -2256,10 +2264,20 @@ export const ourServices = {
   // Services page reuse (owner, 2026-09-07: "use as is, just check the
   // spacing from the top in this page and use it") -- same section, same
   // cards, only the outer top/bottom breathing room changes to match this
-  // page's own Figma frame (node 729:208: 160px from the section above,
-  // 80px to whatever comes next), not homepage's 120/120. Everything else
-  // in this recipe (gap, sticky offset, card sizing) is shared as-is.
-  desktopSectionServices: "container-p hidden gap-[221px] pt-[160px] pb-[80px] xl:flex xl:items-start",
+  // page's own Figma frame (node 729:363, "Our Services": content starts
+  // 160px from the frame's own top, and 2660 - 160 - 2360 = 140px remains
+  // below the tallest card column, both get_metadata-confirmed), not
+  // homepage's 120/120. Everything else in this recipe (gap, sticky
+  // offset, card sizing) is shared as-is.
+  //
+  // Corrected 2026-09-07 from an initial `pb-[80px]` -- a real bug, not a
+  // deliberate value: that number was copied from a DIFFERENT Figma node
+  // (729:208), which turned out to be a separate, not-yet-built section
+  // ("Trust Signals", the 4-up strip) that sits earlier on this same page,
+  // not this section's own real bottom padding. Found while building that
+  // actual Trust Signals reuse and re-checking this section's own node
+  // directly instead of trusting the earlier citation.
+  desktopSectionServices: "container-p hidden gap-[221px] pt-[160px] pb-[140px] xl:flex xl:items-start",
   // Sticky sidebar via plain CSS, no scroll listener: the right column's
   // own stacked height is what makes the page taller than the viewport, so
   // pinning this column at top-[56px] with self-start naturally keeps it in

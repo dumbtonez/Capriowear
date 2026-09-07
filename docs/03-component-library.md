@@ -917,9 +917,9 @@ Built section by section from Figma (owner brief, 2026-09-07), same pattern as t
 | 1 | Hero (banner + "Fully Custom Offerings" ticker) | ✅ **Built** — `components/sections/ServicesHero.tsx` |
 | — | Fully Custom Offerings chip strip | Already part of section 1 above — reuses `Marquee`, the exact same component/props as homepage `Hero`, not a second one |
 | 2 | Intro statement ("A factory you can build your brand on") | ✅ **Built** — `components/sections/ServicesIntro.tsx` |
-| — | 4-up services strip (Product Development / Private Label / Low MOQ / Worldwide Shipping) | Not built yet |
-| 3 | How we work with you (OEM/ODM/Private Label path cards) | ✅ **Built** — `components/sections/ServicesHowWeWork.tsx` |
-| 4 | "From raw fabric to retail-ready packaging" (5 items) | ✅ **Built** — reuses homepage's `OurServices` verbatim (see below) |
+| 3 | 4-up services strip (Product Development / Low MOQ / Private Label / Worldwide Shipping) | ✅ **Built** — reuses homepage's `TrustSignals` verbatim (see below) |
+| 4 | How we work with you (OEM/ODM/Private Label path cards) | ✅ **Built** — `components/sections/ServicesHowWeWork.tsx` |
+| 5 | "From raw fabric to retail-ready packaging" (5 items) | ✅ **Built** — reuses homepage's `OurServices` verbatim (see below) |
 | — | Certification logos strip (ISO 9001, OEKO-TEX, BSCI, IMAC, SGS) | Not built yet |
 | — | How It Works (5 steps) | Not built yet |
 | — | B2B FAQ | Not built yet |
@@ -957,6 +957,18 @@ Copy (heading + paragraph) is the design's own real text layer, read directly �
 
 **Verified**: `npx tsc --noEmit`, `npx eslint .`, `npm run build` all clean. Live on `/services` at 1440px: heading measures `620px` wide at `x:80`; paragraph renders exactly 3 `<strong>` segments matching Figma's own bold phrases; media box measures `400x296` at `x:870` (native Figma pixel values, confirmed via `getBoundingClientRect`); no horizontal overflow at 375px or 1440px.
 
+### 4-up services strip — Built
+
+Owner, 2026-09-07: "this is already built on homepage, use same as is. only the spacing needs to adjust, from the top its 160px bottom 80px." The exact same section as homepage's `TrustSignals` (identical items, layout, desktop media+text split, mobile stacked list) — not a new component, not a copy of one. `app/services/page.tsx` renders `<TrustSignals items={home.trustStrip} pageVariant="services" />`, same `home.trustStrip` content object the homepage itself uses.
+
+The only real difference between the two placements is the outer desktop top/bottom spacing: Figma node `729:208` (named "Trust Signals" in the file, confirmed via `get_metadata` — not to be confused with the differently-named "Our Services" node below it in the flow) gives 160px above/80px below (vs. homepage's own symmetric 120px/120px), so `TrustSignals` now takes the same optional `pageVariant?: "home" | "services"` prop `OurServices` already established, switching between `trustSignals.desktopWrap` (unchanged, homepage) and `trustSignals.desktopWrapServices` (new). No Figma mobile spacing was given for this placement, so mobile stays on the one shared `mobileWrap` — already the project's own standing 72px inter-section gap rule, not a per-page guess.
+
+**Corrected the real Figma page order while building this** — `get_metadata` on this node, `ServicesIntro`'s, and `ServicesHowWeWork`'s all confirmed this section's own y-position (1413–1949) sits between the other two (Intro 833–1413, How We Work 1949–3279), which `OurServices`' own reuse had already skipped past when it was wired in as an earlier "section" on this page before this one existed. Both `app/services/page.tsx`'s header comment and its JSX order were corrected again to match.
+
+**A real bug in `OurServices`' own Services-page spacing was found and fixed while re-verifying this section's node**: `ourServices.desktopSectionServices`'s bottom padding had been set to `80px`, copied from this section's own node (`729:208`) by mistake rather than `OurServices`' own real Figma node (`729:363`). Re-checking `729:363` directly via `get_metadata` gives content starting 160px from the frame's own top and `2660 − 160 − 2360 = 140px` remaining below the tallest card column — corrected to `pb-[140px]`. Confirmed live: homepage's own `TrustSignals`/`OurServices` (both still on their default `pageVariant="home"`) measure unchanged `120px/120px`, and the Services page now measures `160px/80px` for this section and `160px/140px` for `OurServices`.
+
+`npm run build`, `npx tsc --noEmit`, `npx eslint .` all clean. No horizontal overflow at 375px.
+
 ### How we work with you — Built
 `components/sections/ServicesHowWeWork.tsx` · recipe: `servicesHowWeWork` · Figma: desktop node `750:770` (mobile not yet designed)
 
@@ -982,7 +994,9 @@ Copy (heading, subheading, all 3 cards' title/subtitle/"What it means"/"Best for
 
 Owner, 2026-09-07: "we already have it on homepage, use as is, just check the spacing from the top in this page and use it." The exact same section as homepage's `OurServices` (identical cards, copy, sticky-sidebar/carousel behaviour) — not a new component, not a copy of one. `app/services/page.tsx` renders `<OurServices content={home.services} pageVariant="services" />`, same `home.services` content object the homepage itself uses.
 
-The only real difference between the two placements is the outer top/bottom spacing: Figma node `729:208` on this page gives 160px from the Hero above down to 80px below (vs. homepage's own confirmed 120px/120px), so `OurServices` now takes an optional `pageVariant?: "home" | "services"` prop (default `"home"`) that switches between two pre-built spacing recipes — `ourServices.desktopSection`/`mobileSection` (unchanged, homepage) and `ourServices.desktopSectionServices`/`mobileSectionServices` (new). No Figma mobile spacing was given for this placement, so the mobile variant follows the project's standing 72px inter-section gap rule instead of guessing.
+The only real difference between the two placements is the outer top/bottom spacing: Figma node `729:363` ("Our Services") gives 160px above/140px below (vs. homepage's own confirmed 120px/120px), so `OurServices` now takes an optional `pageVariant?: "home" | "services"` prop (default `"home"`) that switches between two pre-built spacing recipes — `ourServices.desktopSection`/`mobileSection` (unchanged, homepage) and `ourServices.desktopSectionServices`/`mobileSectionServices` (new). No Figma mobile spacing was given for this placement, so the mobile variant follows the project's standing 72px inter-section gap rule instead of guessing.
+
+**Bottom padding corrected 2026-09-07, 80px → 140px** — the original build cited node `729:208` for this section's own spacing and used its 80px bottom value, but `729:208` turned out to be a different, not-yet-built section ("Trust Signals," the 4-up strip that sits earlier on this page — see that section's own entry above) with no real connection to `OurServices`. Re-checked `729:363` directly: content starts 160px from the frame's own top (correct, unchanged) and `2660 − 160 − 2360 = 140px` remains below the tallest card column. Confirmed live post-fix: Services measures `160px/140px`, homepage's own default `pageVariant="home"` still measures unchanged `120px/120px`.
 
 `npm run build`, `npx tsc --noEmit`, `npx eslint .` all clean.
 
