@@ -39,6 +39,20 @@
 // `tone` prop for the full reasoning (why the eyebrow keeps the standing
 // dark-eyebrow colour rather than Figma's literal one-off hex, and why
 // this reuses the homepage's own spacing rather than a new variant).
+// Section 8: the homepage's own FinalCta section, reused as-is (owner,
+// 2026-09-07: "Add this cta setion, already built, use as is, put it
+// under how it works section" -- Figma node 770:895) -- same component,
+// same content (home.finalCta + home.complianceTicker) as the homepage's
+// own first FinalCta usage (heading "Let's build your custom collection",
+// button "Request a Sample", the same 8-item compliance ticker). Figma's
+// own subline on this node ("Share your tech pack, sketch or a reference
+// legging...") is `pdpShared.ts`'s `buildCtaSubline` wording -- a leggings
+// PDP-specific string, clearly a copy-paste leftover on this frame (a
+// generic Services page has no reason to reference leggings specifically)
+// -- so this uses `home.finalCta`'s own real subline instead, the same
+// "trust a clean reference over a locally miscopied one" call already
+// made elsewhere on this site (see ProductCustomizeSteps' own entry in
+// docs/03-component-library.md for the precedent).
 //
 // Confirmed via get_metadata on every section's own real Figma y-position
 // (Intro 833-1413, Trust Signals 1413-1949, How We Work 1949-3279, Our
@@ -49,13 +63,13 @@
 // whichever order sections happened to be built in.
 //
 // Every later section listed in the owner's brief (certification logos,
-// FAQ, closing CTA) is not built yet -- added incrementally, one Figma
-// link at a time.
+// FAQ) is not built yet -- added incrementally, one Figma link at a time.
 import type { Metadata } from "next";
 
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
+import { FinalCta } from "@/components/sections/FinalCta";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { OurServices } from "@/components/sections/OurServices";
 import { ProductRange } from "@/components/sections/ProductRange";
@@ -120,6 +134,7 @@ export default function ServicesPage() {
         <OurServices content={home.services} pageVariant="services" />
         <ProductRange content={services.productRange} />
         <HowItWorks content={home.howItWorks} tone="dark" />
+        <FinalCta content={home.finalCta} ticker={home.complianceTicker} />
       </main>
 
       <JsonLd data={breadcrumbSchema([{ name: "Home", url: SITE_URL }, { name: "Services", url: CANONICAL }])} />
