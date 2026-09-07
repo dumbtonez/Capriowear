@@ -44,13 +44,15 @@ export function ProductRange({ content }: ProductRangeProps) {
         <div className={productRange.cardsRow}>
           {content.categories.map((category) => (
             <article key={category.href} className={productRange.card}>
-              <MediaPlaceholder
-                label={category.title}
-                tone="dark"
-                radius="none"
-                style={{ aspectRatio: "381 / 440" }}
-                className={productRange.cardMedia}
-              />
+              <Link href={category.href} className={productRange.cardMediaLink} aria-label={category.exploreLabel}>
+                <MediaPlaceholder
+                  label={category.title}
+                  tone="dark"
+                  radius="none"
+                  style={{ aspectRatio: "381 / 440" }}
+                  className={productRange.cardMedia}
+                />
+              </Link>
               <div className={productRange.cardTextCol}>
                 <p className={productRange.cardBody}>{category.body}</p>
                 <Link href={category.href} className={productRange.exploreLink}>

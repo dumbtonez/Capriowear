@@ -1485,6 +1485,10 @@ export const productRange = {
   eyebrowSize: "text-[1.25rem] font-semibold",
   cardsRow: "flex w-full flex-col items-center gap-10 xl:w-fit xl:flex-row",
   card: "flex w-full max-w-[381px] flex-col items-start gap-6",
+  // Owner request: the image itself should also link through, not just the
+  // "Explore" text -- a plain wrapping `<Link>`, block so it doesn't add
+  // any inline-level gap/baseline quirk around the media box.
+  cardMediaLink: "block w-full",
   cardMedia: "w-full",
   cardTextCol: "flex w-full flex-col items-start gap-4",
   // Figma's own flat 20px/28px body copy -- no existing token carries this
@@ -1782,14 +1786,17 @@ export const whatWeMake = {
   // `button.secondary`'s own `hover:bg-current/10` -- accent orange at
   // 10% reads much stronger than a neutral ink tint would at the same
   // opacity.
-  // `group gap-1`: pairs with `ctaIcon` below (owner, same day: "put a
+  // `group gap-2`: pairs with `ctaIcon` below (owner, same day: "put a
   // chvron next to the cta label," then "on the hover chvron should have
-  // the same animation we applied on pdp, related styles") -- same
-  // `group` + `gap-1` + trailing-icon shape already established by
-  // `productRelatedStyles.chip`/`chipIcon` (see that recipe's own
-  // comment), reused rather than inventing a second hover-nudge pattern.
+  // the same animation we applied on pdp, related styles" -- confirmed
+  // good, then "chvron icon should be a little big, text to icon gap
+  // should be 8px") -- the `group`+trailing-icon hover-nudge shape is
+  // `productRelatedStyles.chip`/`chipIcon`'s own (see that recipe's own
+  // comment), but size/gap are this CTA's own tuned values, not copied
+  // verbatim (that chip's own 4px `gap-1` read too tight once the icon
+  // grew).
   desktopGridCta:
-    "group flex aspect-[15/16] items-center justify-center gap-1 border border-accent text-center text-h5 text-accent transition-colors hover:bg-accent/5",
+    "group flex aspect-[15/16] items-center justify-center gap-2 border border-accent text-center text-h5 text-accent transition-colors hover:bg-accent/5",
   // Mobile: a single stacked column, not a grid -- each tile is a landscape
   // (16:11) image, unlike desktop's square, and the label is left-aligned,
   // not centred (confirmed via get_design_context: desktop's tile label
@@ -1853,7 +1860,19 @@ export const whatWeMake = {
   // same-specificity-utility-order risk already found and fixed once on
   // `productCtas.secondaryDesktop` (see that recipe's own comment); reuses
   // its exact hover tint (`#FFF6F3`) rather than inventing a second one.
-  mobileGroupCta: "mt-2 w-full justify-center md:hidden !border-accent !text-accent hover:!bg-[#FFF6F3]",
+  // `group gap-2`: same trailing-chevron pairing as `desktopGridCta`
+  // above, see that key's own comment.
+  mobileGroupCta:
+    "mt-2 w-full justify-center gap-2 md:hidden !border-accent !text-accent hover:!bg-[#FFF6F3]",
+  // Trailing chevron, both CTAs (owner: "put a chvron next to the cta
+  // label ... on hover the chvron should have the same animation we
+  // applied on pdp, related styles" -- confirmed good, then "chvron icon
+  // should be a little big, text to icon gap should be 8px"). Hover-nudge
+  // mechanism (`transition-transform`/`group-hover:translate-x-0.5`)
+  // reuses `productRelatedStyles.chipIcon` verbatim; size is this CTA's
+  // own, one step up from that chip's `size-3.5` (14px) to `size-4`
+  // (16px) -- "a little big," not a second unrelated value.
+  ctaIcon: "size-4 shrink-0 transition-transform group-hover:translate-x-0.5",
   mobileTile: "flex flex-col gap-4",
   // Owner, 2026-09-03: originally a `4:3` mid-point between mobile's old
   // flat `16:11` landscape and desktop's old square tile. Superseded

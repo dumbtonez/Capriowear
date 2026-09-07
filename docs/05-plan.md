@@ -2489,6 +2489,11 @@ Owner: "on the hover chvron should have the same animation we applied on pdp, re
 
 **Verified**: `npx tsc --noEmit`, `npx eslint .` clean. Confirmed via SSR output: both "Explore" links' chevrons carry `group-hover:translate-x-0.5`.
 
+### 5er · Product Range: image box also clickable — 2026-09-07
+Owner: "the image placeholder should also be clickable for both active and teamwear." Each card's `MediaPlaceholder` now sits inside its own `<Link href={category.href}>` (new `productRange.cardMediaLink`, `block w-full`), not just the "Explore" text/chevron below it.
+
+**Verified**: `npx tsc --noEmit`, `npx eslint .` clean on the touched files (`npm run build`'s own type-check currently fails on an unrelated, uncommitted, in-progress `WhatWeMake.tsx` change from a concurrent session on this same branch -- confirmed via `git diff --stat` and scoping `tsc`'s own error to that file, not this one). Confirmed via SSR output: both cards' image boxes now render as `<a href="/activewear">`/`<a href="/teamwear">` wrapping the media box, alongside the existing "Explore" link.
+
 ## Phase 3 · Footer and inner pages — Footer done, PLP banner + product grid in progress
 
 Footer shipped 2026-08-26 (see 4i above; sticky-reveal had stacking/paint corrections the same week — see 4k, 4l. A separate seam-bar decoration was attempted and removed, 4q–4s — Footer's own reveal mechanism is unaffected). Activewear PLP template started 2026-08-28 (5i above): route, data shape, and banner section built for Leggings, followed same day by CategoryFilters, ProductGrid/ProductCard/Pagination, and CategoryBanner revisions (5i–5u); layout corrections continued 2026-08-29 (5v). Remaining sections (overview, fabric table, trust block, spec facts, FAQ, related links, final CTA) built incrementally against Figma node `406:3075` as it gets finished.
