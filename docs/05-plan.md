@@ -2484,6 +2484,11 @@ The heading already had the word-by-word reveal (`<TextReveal as="span" text={co
 
 **Verified**: `npx tsc --noEmit`, `npx eslint .`, `npm run build` all clean. Confirmed via SSR output: `reveal-word` spans with per-word `--reveal-index` render for "End-to-end activewear and teamwear manufacturing"; both "Explore" links carry `hover:brightness-125`, not the old `hover:opacity-80`.
 
+### 5eq · Explore chevron: same hover nudge as PDP Related Styles — 2026-09-07
+Owner: "on the hover chvron should have the same animation we applied on pdp, related styles." `NextArrowIcon` gained the exact hover treatment PDP's Related Styles chip chevron already established (`productRelatedStyles.chipIcon`'s `group-hover:translate-x-0.5`, a small right-nudge), not a new one-off animation: `exploreLink` gained `group`, `exploreIcon` gained `transition-transform group-hover:translate-x-0.5`.
+
+**Verified**: `npx tsc --noEmit`, `npx eslint .` clean. Confirmed via SSR output: both "Explore" links' chevrons carry `group-hover:translate-x-0.5`.
+
 ## Phase 3 · Footer and inner pages — Footer done, PLP banner + product grid in progress
 
 Footer shipped 2026-08-26 (see 4i above; sticky-reveal had stacking/paint corrections the same week — see 4k, 4l. A separate seam-bar decoration was attempted and removed, 4q–4s — Footer's own reveal mechanism is unaffected). Activewear PLP template started 2026-08-28 (5i above): route, data shape, and banner section built for Leggings, followed same day by CategoryFilters, ProductGrid/ProductCard/Pagination, and CategoryBanner revisions (5i–5u); layout corrections continued 2026-08-29 (5v). Remaining sections (overview, fabric table, trust block, spec facts, FAQ, related links, final CTA) built incrementally against Figma node `406:3075` as it gets finished.

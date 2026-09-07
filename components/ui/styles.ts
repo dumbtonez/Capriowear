@@ -1498,9 +1498,15 @@ export const productRange = {
   // orange, backwards from the owner's ask ("light orange not dark").
   // `hover:brightness-125` lightens the actual orange instead, no new
   // colour token needed.
+  // `group` so the chevron below can react to hover on the whole link, not
+  // just itself.
   exploreLink:
-    "inline-flex items-center gap-2 text-[1.25rem] leading-7 font-normal text-accent transition-[filter] hover:brightness-125",
-  exploreIcon: "h-[16.667px] w-[7px] shrink-0",
+    "group inline-flex items-center gap-2 text-[1.25rem] leading-7 font-normal text-accent transition-[filter] hover:brightness-125",
+  // Same nudge-right-on-hover as PDP's Related Styles chip chevron
+  // (`productRelatedStyles.chipIcon`, `group-hover:translate-x-0.5`) --
+  // owner request, reusing that exact established hover treatment rather
+  // than a new one-off.
+  exploreIcon: "h-[16.667px] w-[7px] shrink-0 transition-transform group-hover:translate-x-0.5",
 };
 
 /* --- ClientLogos (homepage section 4) -------------------------------------- */
@@ -1761,6 +1767,29 @@ export const whatWeMake = {
   // replacing that default for this section only -- every other `<Card>`
   // caller (styleguide) is unaffected.
   desktopTileMedia: "aspect-[15/16]",
+  // CTA tile filling the last grid cell of each group's own row set (owner,
+  // 2026-09-07: "for activewear, shall we use the last 8th box space and
+  // put a cta there?", then "the pattern should be consistent for both...
+  // use the same cta labels as mobile"). Not `Card` (expects an image +
+  // label pair, wrong shape for a CTA) or `Button` (a pill sized to its
+  // own text, not a grid cell) -- a plain `Link` styled to fill the exact
+  // same footprint as a photo tile instead. `aspect-[15/16]` matches
+  // `desktopTileMedia` above exactly, so this cell is the same size as
+  // every `Card` beside it (no separate image+label split needed, since
+  // the bordered box IS the whole cell). `text-h5` matches `card.label`'s
+  // own desktop size; `border-accent`/`text-accent` for the orange
+  // outline+text requested; `hover:bg-accent/5` is a lighter fill than
+  // `button.secondary`'s own `hover:bg-current/10` -- accent orange at
+  // 10% reads much stronger than a neutral ink tint would at the same
+  // opacity.
+  // `group gap-1`: pairs with `ctaIcon` below (owner, same day: "put a
+  // chvron next to the cta label," then "on the hover chvron should have
+  // the same animation we applied on pdp, related styles") -- same
+  // `group` + `gap-1` + trailing-icon shape already established by
+  // `productRelatedStyles.chip`/`chipIcon` (see that recipe's own
+  // comment), reused rather than inventing a second hover-nudge pattern.
+  desktopGridCta:
+    "group flex aspect-[15/16] items-center justify-center gap-1 border border-accent text-center text-h5 text-accent transition-colors hover:bg-accent/5",
   // Mobile: a single stacked column, not a grid -- each tile is a landscape
   // (16:11) image, unlike desktop's square, and the label is left-aligned,
   // not centred (confirmed via get_design_context: desktop's tile label
