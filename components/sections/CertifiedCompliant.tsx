@@ -50,16 +50,23 @@ import type { home } from "@/content/home";
 export type CertifiedCompliantProps = {
   content: typeof home.certified;
   /** `"services"` gives mobile its own 72px top gap (`certified.
-   *  mobileSectionServices`) instead of the homepage's `pt-0` -- see that
-   *  token's own comment for why the two pages need different values here.
+   *  mobileSectionServices`) instead of the homepage's `pt-0`, and zeroes
+   *  every breakpoint's own bottom padding (`desktopSectionServices`/
+   *  `tabletSectionServices`/`mobileSectionServices`, owner 2026-09-08:
+   *  "certified section should not have gap at the bottom should be 0") --
+   *  see those tokens' own comments for why /services needs different
+   *  values here (Responsible Make's own `TrustPoints`, right after this
+   *  section on that page, already supplies its own top padding).
    *  Default `"default"` (homepage) is byte-for-byte unchanged. */
   pageVariant?: "default" | "services";
 };
 
 export function CertifiedCompliant({ content, pageVariant = "default" }: CertifiedCompliantProps) {
+  const isServices = pageVariant === "services";
+
   return (
     <section>
-      <div className={certified.desktopSection}>
+      <div className={isServices ? certified.desktopSectionServices : certified.desktopSection}>
         <div className={certified.root}>
           <SectionHeading
             eyebrow={<TextReveal text={content.eyebrow} />}
@@ -90,7 +97,7 @@ export function CertifiedCompliant({ content, pageVariant = "default" }: Certifi
           these viewports." Reuses Client Logos' own desktop technique
           (Marquee, separator="none", logos as items) rather than a new
           mechanism. */}
-      <div className={certified.tabletSection}>
+      <div className={isServices ? certified.tabletSectionServices : certified.tabletSection}>
         <div className={certified.root}>
           <SectionHeading
             eyebrow={<TextReveal text={content.eyebrow} />}
@@ -112,7 +119,7 @@ export function CertifiedCompliant({ content, pageVariant = "default" }: Certifi
         </div>
       </div>
 
-      <div className={pageVariant === "services" ? certified.mobileSectionServices : certified.mobileSection}>
+      <div className={isServices ? certified.mobileSectionServices : certified.mobileSection}>
         <div className={certified.rootMobile}>
           <SectionHeading
             eyebrow={<TextReveal text={content.eyebrow} />}

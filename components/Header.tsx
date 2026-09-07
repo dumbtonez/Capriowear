@@ -21,19 +21,17 @@
 // The desktop nav appears at xl (1280px, see the `nav` and `actions` recipes
 // in components/ui/styles.ts). Below that, MobileNav's drawer takes over.
 //
-// Hide-on-scroll (owner request, 2026-08-26): the header slides off-screen
-// upward once the page has scrolled down past the header's own height, and
-// slides back in on any upward scroll -- a standard pattern (used sitewide
-// by e.g. most editorial/marketing sites) for reclaiming vertical space on
-// long pages without removing the nav outright, since it's still one
-// upward scroll away. The "past its own height" threshold, not an
-// arbitrary pixel count, means the header never hides before the user has
-// actually scrolled past where it would sit anyway, at any breakpoint's
-// real header height. Never hides while a mega menu or the mobile drawer
-// is open -- both are things the user is actively interacting with inside
-// the header itself, so yanking it off-screen mid-interaction would be a
-// real usability regression, not a subtlety worth trading away for the
-// scroll effect.
+// Hide-on-scroll (owner request, 2026-08-26; reworked 2026-09-08 to follow
+// scroll continuously -- see `headerOffsetRef`'s own comment below): the
+// header slides off-screen upward by an amount proportional to how far
+// down you've actually scrolled, and slides back by the same on scroll up
+// -- a standard pattern (used sitewide by e.g. most editorial/marketing
+// sites) for reclaiming vertical space on long pages without removing the
+// nav outright, since it's still one upward scroll away. Never hides while
+// a mega menu or the mobile drawer is open -- both are things the user is
+// actively interacting with inside the header itself, so yanking it
+// off-screen mid-interaction would be a real usability regression, not a
+// subtlety worth trading away for the scroll effect.
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -174,7 +172,6 @@ export function Header({
   const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [navHidden, setNavHidden] = useState(false);
   // Default "dark" matches app/globals.css's own `header { --header-fg: ... }`
   // default exactly (both represent "before the effect below has run") --
   // keep them in sync, or the header flashes the wrong colour on first paint.
@@ -182,6 +179,42 @@ export function Header({
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const headerRef = useRef<HTMLElement>(null);
   const lastScrollYRef = useRef(0);
+  // Continuous hide/reveal offset (0 = fully visible, -headerHeight = fully
+  // hidden) -- NOT React state (owner report, 2026-09-08: "the nav
+  // disappear... not immediately scroll... the transition to appear and
+  // disappear is very soft but ours is not"). Confirmed live against the
+  // reference: its own pinned nav does NOT flip a binary open/closed class
+  // -- scrolling it a small amount produces a small, exact-to-the-pixel
+  // `translateY` (e.g. -4.4198px for one real scroll gesture), continuously
+  // proportional to how far you've actually scrolled, animated toward each
+  // new target by the same `transform 0.3s ease-in-out` this codebase
+  // already had. A boolean flipped past a fixed threshold can only ever
+  // produce two states (open/closed) snapped between by a transition that
+  // restarts from scratch on every direction change -- reads as sudden no
+  // matter how the transition itself is tuned, and explains both parts of
+  // the report at once (looks "immediate" because there's no partial
+  // state, and never "soft" because it's not actually following the
+  // scroll). Written straight to the DOM via `headerRef` on every rAF
+  // tick, same "bypass React state for a continuous scroll-driven value"
+  // pattern `ScrollSpotlightList.tsx` already established elsewhere in
+  // this codebase -- updating this via `useState` at scroll-tick frequency
+  // would re-render on nearly every tick instead of the rare few times the
+  // old boolean actually changed value.
+  const headerOffsetRef = useRef(0);
+  // Throttles `getSurfaceToneAt` separately from the rest of `update()`
+  // below (owner report, 2026-09-08: "the transition when the nav
+  // disappears or appears... is jerky") -- `getSurfaceToneAt` calls
+  // `getComputedStyle` while walking up several ancestors, which forces a
+  // synchronous style/layout recalculation; running that on every single
+  // rAF tick during a scroll competed with the browser's own compositing
+  // of the hide/reveal `transform` transition for main-thread time, which
+  // is what actually read as "jerky" (confirmed against the reference:
+  // its own hide/reveal nav uses the identical `transform 0.3s ease-in-out`
+  // CSS transition ours already had -- the transition rule itself was
+  // never the problem). A colour swap has no perceptible deadline the way
+  // a slide transform does, so it only needs to be checked a few times a
+  // second, not every frame.
+  const lastToneCheckRef = useRef(0);
 
   const closeMenu = useCallback(() => setOpenMenu(null), []);
 
@@ -195,11 +228,26 @@ export function Header({
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [openMenu, closeMenu]);
 
-  // Hide on scroll down past the header's own height, reveal on scroll up --
-  // see the file header comment for why. Also computes the adaptive tone
-  // (see `getSurfaceToneAt` above) in the same pass, so no second scroll
-  // listener is added just for that. rAF-throttled so this never runs more
-  // than once per rendered frame no matter how fast `scroll` fires.
+  // Writes `headerOffsetRef`'s current value straight to the header's own
+  // inline `transform` -- the CSS `transition-transform` already on
+  // `header.base` animates each new value smoothly, matching the
+  // reference's own approach exactly (see `headerOffsetRef`'s own comment
+  // above). `""` rather than `translateY(0px)` at rest so this never fights
+  // any other transform this element might need in the future.
+  const applyHeaderOffset = useCallback((offset: number) => {
+    headerOffsetRef.current = offset;
+    if (headerRef.current) {
+      headerRef.current.style.transform = offset === 0 ? "" : `translateY(${offset}px)`;
+    }
+  }, []);
+
+  // Hide on scroll down, reveal on scroll up, by a continuous amount
+  // proportional to actual scroll distance -- see `headerOffsetRef`'s own
+  // comment for why this isn't a threshold-triggered boolean any more.
+  // Also computes the adaptive tone (see `getSurfaceToneAt` above) in the
+  // same pass, so no second scroll listener is added just for that.
+  // rAF-throttled so this never runs more than once per rendered frame no
+  // matter how fast `scroll` fires.
   //
   // useLayoutEffect, not useEffect -- same "compute real state before
   // paint" pattern already used elsewhere in this codebase (IntroLoader.tsx,
@@ -219,11 +267,12 @@ export function Header({
     const update = () => {
       ticking = false;
       if (openMenu || drawerOpen) {
-        setNavHidden(false);
+        applyHeaderOffset(0);
         lastScrollYRef.current = window.scrollY;
         return;
       }
       const currentY = window.scrollY;
+      const headerHeight = headerRef.current?.offsetHeight ?? 0;
       // Mobile/tablet only (this codebase's own `xl` desktop threshold,
       // e.g. `header.nav`'s own breakpoint) -- desktop's taller header and
       // larger footer top-gap already leave enough clearance, confirmed
@@ -254,23 +303,33 @@ export function Header({
       const documentHeight = document.documentElement.scrollHeight;
       const footerRevealed = currentY + window.innerHeight >= documentHeight - footerHeight;
       if (footerRevealed && window.innerWidth < 1280) {
-        setNavHidden(true);
+        applyHeaderOffset(-headerHeight);
         lastScrollYRef.current = currentY;
         return;
       }
-      const headerHeight = headerRef.current?.offsetHeight ?? 0;
-      const scrollingDown = currentY > lastScrollYRef.current;
-      if (scrollingDown && currentY > headerHeight) {
-        setNavHidden(true);
-      } else if (!scrollingDown) {
-        setNavHidden(false);
-      }
+      // Accumulates real scroll delta into the offset instead of snapping
+      // between two fixed states -- a small scroll only partially hides
+      // the header (exactly what the reference itself does), and it takes
+      // a real, sustained scroll to fully disappear rather than any single
+      // pixel of downward movement. Clamped to [-headerHeight, 0]; forced
+      // to exactly 0 at the very top of the page as a safety net against
+      // any accumulated rounding drift, not because the clamp alone
+      // wouldn't already keep it there on a normal round trip.
+      const delta = currentY - lastScrollYRef.current;
+      const nextOffset = Math.min(0, Math.max(-headerHeight, headerOffsetRef.current - delta));
+      applyHeaderOffset(currentY <= 0 ? 0 : nextOffset);
       // Probes 1px below the header's own real rendered bottom edge --
       // `elementFromPoint` is viewport-relative, and the sticky header
       // always occupies 0..headerHeight of the viewport regardless of
       // scroll position, so this always lands on whatever's actually
-      // visible directly under it right now.
-      setTone(getSurfaceToneAt(window.innerWidth / 2, headerHeight + 1));
+      // visible directly under it right now. Time-throttled to ~8/sec
+      // (not every rAF tick) -- see `lastToneCheckRef`'s own comment above
+      // for why.
+      const now = performance.now();
+      if (now - lastToneCheckRef.current > 120) {
+        lastToneCheckRef.current = now;
+        setTone(getSurfaceToneAt(window.innerWidth / 2, headerHeight + 1));
+      }
       lastScrollYRef.current = currentY;
     };
 
@@ -285,7 +344,7 @@ export function Header({
 
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [openMenu, drawerOpen, sticky]);
+  }, [openMenu, drawerOpen, sticky, applyHeaderOffset]);
 
   const openLink = links.find((link) => link.label === openMenu && link.megaMenu?.length);
   const megaPanelId = "desktop-mega-menu";
@@ -319,7 +378,7 @@ export function Header({
     <header
       ref={headerRef}
       data-tone={tone}
-      className={cx(sticky ? header.base : header.baseStatic, sticky && navHidden && header.hidden, className)}
+      className={cx(sticky ? header.base : header.baseStatic, className)}
     >
       {/* Progressive frosted-glass blur (owner reference, 2026-09-07:
           labs.google's own nav) -- 5 stacked layers, each blurring more
@@ -387,15 +446,13 @@ export function Header({
                 // reads as "on Activewear".
                 const isRouteActive =
                   pathname === link.href || pathname?.startsWith(`${link.href}/`);
-                // `isActive` still drives the semibold/colour treatment on
-                // both open (hovering a mega-menu trigger) and route-active
-                // states -- only the underline itself is route-only now
-                // (owner, same day: "don't show the underline highlighter
-                // [on hover], just change the color of the text and increase
-                // the font weight ... It only appears when some page is
-                // selected"). Each `isRouteActive ? <navUnderline /> : null`
-                // below is the actual gate; `isActive` is never read for the
-                // underline anymore, only for weight/colour.
+                // `isActive` drives the semibold/colour treatment on both
+                // open (hovering a mega-menu trigger) and route-active
+                // states. The underline that used to render alongside it
+                // (`navUnderline`, gated on `isRouteActive` only) was
+                // removed entirely (owner, 2026-09-08: "remove the selected
+                // page underline") -- weight/colour alone now carries the
+                // "you're on this page" signal.
                 const isActive = isOpen || isRouteActive;
 
                 if (!hasMenu) {
@@ -416,7 +473,6 @@ export function Header({
                             {link.label}
                           </span>
                         </span>
-                        {isRouteActive ? <span className={header.navUnderline} aria-hidden="true" /> : null}
                       </Link>
                     </li>
                   );
@@ -448,7 +504,6 @@ export function Header({
                         className={cx(header.navTriggerChevron, isOpen && header.navTriggerChevronOpen)}
                         aria-hidden="true"
                       />
-                      {isRouteActive ? <span className={header.navUnderline} aria-hidden="true" /> : null}
                     </button>
                   </li>
                 );

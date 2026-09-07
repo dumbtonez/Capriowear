@@ -625,6 +625,13 @@ export const home = {
     // sitewide default) -- still links to the same request-a-sample form as
     // every other CTA, not a new destination.
     cta: { label: "Let's Talk", href: "/request-a-sample" },
+    // Secondary "Download Catalog" button (owner, 2026-09-08: "wherever we
+    // use cta in the middle of the page, add download catalog as you did
+    // for services under faq section ... all plp, pdp, homepage, services")
+    // -- same `FinalCta` prop already added for the Services page's own
+    // FAQ-adjacent closing CTA (2026-09-07), now applied to every other
+    // page's FAQ-adjacent CTA too (this one on the homepage, `app/page.tsx`).
+    secondaryCta: { label: "Download Catalog", href: "/catalog" },
   },
 
   // Homepage section 15, the site footer. Figma desktop node 461:2650

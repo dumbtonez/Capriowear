@@ -187,16 +187,38 @@ export default function ServicesPage() {
         <OurServices content={home.services} pageVariant="services" />
         <ProductRange content={services.productRange} />
         <HowItWorks content={home.howItWorks} tone="dark" />
+        {/* `ticker={home.complianceTicker}` (owner, 2026-09-08: "CTA under
+            how it works should have the marquee used on the home") -- back
+            to the same marquee'd usage the homepage's own first FinalCta
+            renders, reversing an earlier same-day request ("don't show
+            standard on every order section, only show the cta") that had
+            dropped it. The interim no-ticker gap fix (`wideNoTickerTopGap`)
+            is dropped along with it -- it has no effect once a real
+            `ticker` is present (see FinalCta.tsx's own `!ticker &&`
+            checks), so keeping it here would just be dead weight. */}
         <FinalCta content={home.finalCta} ticker={home.complianceTicker} />
         <CertifiedCompliant content={home.certified} pageVariant="services" />
         <TrustPoints
           heading={services.responsibleMake.heading}
           subline={services.responsibleMake.subline}
+          sublineBold={services.responsibleMake.sublineBold}
           points={services.responsibleMake.points}
           sidePadding="services"
         />
         <Faq content={services.faq} />
-        <FinalCta content={services.finalCta} ticker={services.complianceBar} secondaryCta={services.finalCta.secondaryCta} />
+        {/* `compactMobileTop` (owner, 2026-09-08: "under FAQs, standard on
+            every order should have the same space as it has on PLP") --
+            same prop, same reasoning, the PLP's own FinalCta-after-Faq
+            usage already established (see FinalCta.tsx's own doc comment
+            on `compactMobileTop`): Faq's `mobileSection` already supplies
+            the standard 72px bottom gap, so this ticker block's own
+            72px top padding would double it to 144px without this. */}
+        <FinalCta
+          content={services.finalCta}
+          ticker={services.complianceBar}
+          secondaryCta={services.finalCta.secondaryCta}
+          compactMobileTop
+        />
       </main>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />

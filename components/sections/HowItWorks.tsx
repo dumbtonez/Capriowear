@@ -153,6 +153,7 @@ export function HowItWorks({ content, tone = "light" }: HowItWorksProps) {
             eyebrow={<TextReveal text={content.eyebrow} />}
             heading={<TextReveal as="span" text={content.h2} />}
             eyebrowTone={tone}
+            eyebrowSize={tone === "dark" ? howItWorks.eyebrowSizeDark : undefined}
             align="center"
             headingClassName={howItWorks.desktopHeadingWidth}
           />
@@ -166,6 +167,7 @@ export function HowItWorks({ content, tone = "light" }: HowItWorksProps) {
           eyebrow={<TextReveal text={content.eyebrow} />}
           heading={renderMobileHeading(content.h2)}
           eyebrowTone={tone}
+          eyebrowSize={tone === "dark" ? howItWorks.eyebrowSizeDark : undefined}
           align="center"
         />
         <CardCarousel items={content.steps} cardMediaRatio={howItWorks.cardMediaRatio} tone={tone} />

@@ -41,6 +41,7 @@ export type OurServicesProps = {
 export function OurServices({ content, pageVariant = "home" }: OurServicesProps) {
   const desktopSection = pageVariant === "services" ? ourServices.desktopSectionServices : ourServices.desktopSection;
   const mobileSection = pageVariant === "services" ? ourServices.mobileSectionServices : ourServices.mobileSection;
+  const eyebrowSize = pageVariant === "services" ? ourServices.eyebrowSizeServices : undefined;
 
   return (
     <section>
@@ -51,6 +52,7 @@ export function OurServices({ content, pageVariant = "home" }: OurServicesProps)
             eyebrow={content.eyebrow}
             heading={content.h2}
             eyebrowTone="light"
+            eyebrowSize={eyebrowSize}
             headingClassName={ourServices.desktopHeadingWidth}
           />
         </div>
@@ -74,6 +76,7 @@ export function OurServices({ content, pageVariant = "home" }: OurServicesProps)
           eyebrow={content.eyebrow}
           heading={content.h2}
           eyebrowTone="light"
+          eyebrowSize={eyebrowSize}
           headingClassName={ourServices.mobileHeadingWidth}
           align="center"
         />

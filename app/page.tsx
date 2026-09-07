@@ -131,7 +131,7 @@ export default function Home() {
         <OurServices content={home.services} />
         <HowItWorks content={home.howItWorks} />
         <Faq content={home.faq} />
-        <FinalCta content={home.closingCta} />
+        <FinalCta content={home.closingCta} secondaryCta={home.closingCta.secondaryCta} />
       </main>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />

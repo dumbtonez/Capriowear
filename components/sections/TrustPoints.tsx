@@ -13,6 +13,12 @@ import { trustPoints } from "@/components/ui/styles";
 export type TrustPointsProps = {
   heading: string;
   subline: string;
+  /** Appended after `subline`, wrapped in `<strong>` (owner, 2026-09-08,
+   *  Services page's own "Responsible make" instance: make "We name what
+   *  is genuinely certified rather than making broad green claims" semi
+   *  bold). Optional -- every existing PLP/PDP usage omits it and renders
+   *  `subline` alone, unchanged. */
+  sublineBold?: string;
   points: readonly string[];
   /**
    * Desktop side padding + title max-width, paired per page: the PLP's own
@@ -48,12 +54,15 @@ const sidePaddingHeadingWidth = {
   services: trustPoints.headingMaxWidthPlp,
 };
 
-export function TrustPoints({ heading, subline, points, sidePadding = "plp" }: TrustPointsProps) {
+export function TrustPoints({ heading, subline, sublineBold, points, sidePadding = "plp" }: TrustPointsProps) {
   return (
     <section className={cx(trustPoints.section, sidePaddingSection[sidePadding])}>
       <div className={cx(trustPoints.headingBlock, sidePaddingHeadingWidth[sidePadding])}>
         <h2 className={trustPoints.heading}>{heading}</h2>
-        <p className={trustPoints.subline}>{subline}</p>
+        <p className={trustPoints.subline}>
+          {subline}
+          {sublineBold ? <strong className={trustPoints.sublineBold}>{sublineBold}</strong> : null}
+        </p>
       </div>
 
       {/* Mobile-only artwork block (Figma node 590:1258, "Artwork") -- no

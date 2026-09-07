@@ -141,11 +141,7 @@ export default async function TeamwearStylePage({ params }: PageProps<"/teamwear
         secondaryCta={home.nav.secondaryCta}
       />
 
-      {/* pt-[72px] xl:pt-[87px]: compensates for Header now being
-          `position: fixed` (owner, 2026-09-07) -- see
-          app/activewear/[category]/page.tsx's own `<main>` comment for the
-          full reasoning, identical here. */}
-      <main className="relative z-10 bg-paper pt-[72px] xl:pt-[87px]">
+      <main className="relative z-10 bg-paper">
         <Breadcrumb items={breadcrumbItems} className="hidden md:block" />
         <JsonLd
           data={breadcrumbSchema(
@@ -224,6 +220,7 @@ export default async function TeamwearStylePage({ params }: PageProps<"/teamwear
           }}
           ticker={home.complianceTicker}
           compactMobileTop
+          secondaryCta={home.closingCta.secondaryCta}
         />
 
         <ProductCtasMobileBar primaryCta={home.nav.cta} />

@@ -5,32 +5,30 @@
 // 2026-09-07): a centred intro, 3 "path" cards explaining OEM/ODM/Private
 // Label, and a closing note pointing out the three paths can combine.
 //
-// Cards are collapsible now (owner, same day: "oem production odm
+// Cards became collapsible on 2026-09-07 (owner: "oem production odm
 // production can we make them collapsable, first one open and other two
 // collapsed", then: "can we build this something similar to fabric
-// options on PLP?") -- one open at a time, index 0 open by default, built
-// on the PLP `FabricOptions` mobile accordion's own real recipe
+// options on PLP?", then "remove the image placeholders from this
+// section") -- one open at a time, index 0 open by default, built on the
+// PLP `FabricOptions` mobile accordion's own real recipe
 // (`fabricOptions.accordionItem`/`accordionHeader`/`accordionChevron`/
 // `accordionDetailGrid`/`accordionField`/`accordionLabel`/`accordionValue`,
 // reused directly rather than a second near-identical copy of the same
-// bordered-box/chevron-rotate/dimmed-collapsed-title pattern) instead of
-// the FAQ's own `Accordion` component/`accordion.*` tokens (a first pass,
-// replaced the same day) -- that FAQ shape is a plain `{question, answer:
-// string}` pair rendering a bare `<p>`, and its Plus/Minus icon in a
-// borderless row reads as a different visual language than this bordered,
-// chevron-rotate box. `FabricOptions` itself imports `fabricOptions` from
-// this same shared `components/ui/styles.ts`, so this is the same "reuse
-// the token object across pages, don't duplicate" pattern the PDP's own
-// `SecondaryTable` already establishes for `weightTiers`/`decoration`.
-// Subtitle (FabricOptions' own accordion has no equivalent second line)
-// renders inside the header, above the chevron, its own existing
-// `pathSubtitle` typography unchanged.
+// bordered-box/chevron-rotate/dimmed-collapsed-title pattern).
 //
-// Each card's own image placeholder removed the same day (owner: "remove
-// the image placeholders from this section") -- the collapsible box
-// (title/chevron/detail fields) is now each card's entire content, not a
-// media-plus-accordion pairing. `MediaPlaceholder` import and
-// `servicesHowWeWork.pathMedia` are gone with it.
+// Corrected the next day (owner, 2026-09-08: "how we work on desktop
+// should remain as it was before, the collapsable design is for mobile
+// only" -- confirmed against the real Figma frame, node 729:76 /
+// 750:770) -- that whole redesign (collapsible, no image, FabricOptions
+// styling) had been applied at every width, when it was only ever meant
+// for mobile/tablet. Each card now renders BOTH blocks, exactly one
+// visible per breakpoint (`pathCardDesktop`, `hidden xl:flex` /
+// `pathCardMobile`, `xl:hidden`) -- the same "two real per-breakpoint
+// renders, not one CSS-juggled hybrid" pattern `FabricOptions` itself
+// already uses (a real `<table>` plus a separate accordion), not a new
+// convention. Desktop is the section's own original design restored
+// verbatim: image, title/subtitle, both detail fields, always expanded.
+// Mobile/tablet keeps the accordion.
 //
 // New, bespoke section, not a reuse of an existing homepage component --
 // CapabilityCard (Our Services/How It Works) only carries a single title +
@@ -61,6 +59,7 @@ import { useState } from "react";
 
 import { FilterChevronIcon } from "@/components/icons/FilterChevronIcon";
 import { AsteriskIcon } from "@/components/icons/AsteriskIcon";
+import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { TextReveal } from "@/components/TextReveal";
 import { cx } from "@/components/ui/cx";
 import { fabricOptions, servicesHowWeWork } from "@/components/ui/styles";
@@ -89,8 +88,40 @@ export function ServicesHowWeWork({ content }: ServicesHowWeWorkProps) {
 
             return (
               <article key={path.title} className={servicesHowWeWork.pathCard}>
+                {/* Desktop (xl+): the section's own original design --
+                    image, title/subtitle, both detail fields, always
+                    expanded, no accordion. */}
+                <div className={servicesHowWeWork.pathCardDesktop}>
+                  <MediaPlaceholder
+                    label={path.title}
+                    ratio="397:234"
+                    radius="none"
+                    showLabel={false}
+                    className={servicesHowWeWork.pathMedia}
+                  />
+                  <div className={servicesHowWeWork.pathTextCol}>
+                    <div className={servicesHowWeWork.pathTitleGroup}>
+                      <h3 className={servicesHowWeWork.pathTitle}>{path.title}</h3>
+                      <p className={servicesHowWeWork.pathSubtitleDesktop}>{path.subtitle}</p>
+                    </div>
+                    <div className={servicesHowWeWork.pathDetailGroup}>
+                      <div className={servicesHowWeWork.pathDetailItem}>
+                        <p className={servicesHowWeWork.pathDetailLabel}>What it means</p>
+                        <p className={servicesHowWeWork.pathDetailBody}>{path.whatItMeans}</p>
+                      </div>
+                      <div className={servicesHowWeWork.pathDetailItem}>
+                        <p className={servicesHowWeWork.pathDetailLabel}>Best for</p>
+                        <p className={servicesHowWeWork.pathDetailBody}>{path.bestFor}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mobile/tablet (below xl): collapsible, FabricOptions-styled,
+                    no image. */}
                 <div
                   className={cx(
+                    servicesHowWeWork.pathCardMobile,
                     fabricOptions.accordionItem,
                     isOpen ? fabricOptions.accordionItemOpen : fabricOptions.accordionItemClosed,
                   )}

@@ -97,11 +97,7 @@ export default function RunningWearPage() {
         secondaryCta={home.nav.secondaryCta}
       />
 
-      {/* pt-[72px] xl:pt-[87px]: compensates for Header now being
-          `position: fixed` (owner, 2026-09-07) -- see
-          app/activewear/[category]/page.tsx's own `<main>` comment for the
-          full reasoning, identical here. */}
-      <main className="relative z-10 bg-paper pt-[72px] xl:pt-[87px]">
+      <main className="relative z-10 bg-paper">
         <CategoryBanner
           breadcrumbItems={[
             { label: "Home", href: "/" },
@@ -163,6 +159,7 @@ export default function RunningWearPage() {
           }}
           ticker={home.complianceTicker}
           compactMobileTop
+          secondaryCta={home.closingCta.secondaryCta}
         />
 
         <ProductCtasMobileBar primaryCta={home.nav.cta} />

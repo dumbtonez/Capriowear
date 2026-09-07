@@ -166,7 +166,11 @@ export const services = {
   responsibleMake: {
     heading: "Responsible make",
     subline:
-      "We offer recycled polyester and OEKO-TEX certified fabrics for brands that want them, and we source to a sustainability spec you set. We name what is genuinely certified rather than making broad green claims.",
+      "We offer recycled polyester and OEKO-TEX certified fabrics for brands that want them, and we source to a sustainability spec you set. ",
+    // Rendered semi bold (owner, 2026-09-08) -- split out of `subline`
+    // above via `TrustPoints`' own new `sublineBold` prop, not a
+    // hand-typed `<strong>` in this content file.
+    sublineBold: "We name what is genuinely certified rather than making broad green claims.",
     points: [
       "Recycled polyester (rPET) across many knit and woven bases",
       "OEKO-TEX certified fabrics on request",
