@@ -828,14 +828,12 @@ export const header = {
   // a purely visual call.
   navTriggerChevron: "size-3.5 shrink-0 transition-transform",
   navTriggerChevronOpen: "rotate-180",
-  // Sits at the very bottom of the nav row, flush with the header's own
-  // bottom border (owner correction, 2026-08-27: an earlier pass put this
-  // directly under the trigger text, which read as detached from "the nav")
-  // -- `-bottom-[22px]` reaches past the trigger's own small content box
-  // down to the header's real bottom edge, live-measured flush with
-  // `header.base`'s own border-bottom (a plain `-bottom-4`/16px undershot
-  // by 6px against the real 87px header height).
-  navUnderline: "absolute inset-x-4 -bottom-[22px] h-[2px] bg-white",
+  // Sits directly under the trigger's own text, an 8px gap below it (owner
+  // correction, 2026-09-07: reverses the 2026-08-27 call above -- flush with
+  // the header's bottom border read as detached from the selected word
+  // itself). `-bottom-2` (8px) is measured from the link's own content box,
+  // not the header's bottom edge.
+  navUnderline: "absolute inset-x-4 -bottom-2 h-[2px] bg-white",
   // Corrected on first real use (Figma node 493:3140, 2026-08-27) -- the
   // guessed `w-80 rounded-lg` dropdown card predates any real design and is
   // replaced entirely by a full-bleed panel matching the real one: 5
@@ -1329,15 +1327,18 @@ export const servicesHero = {
   // at first. Owner, 2026-09-07: still reading as cut off above the fold on
   // a real laptop viewport even after the divider-line bug (below) was
   // fixed -- confirmed live, this section's total height plus the 87px
-  // sticky header comes to ~849px, taller than a real ~800-820px laptop
-  // browser viewport (same class of bug as the Footer height fix earlier
-  // this same day, see docs/05-plan.md's decision log). Bottom padding
-  // dropped from that one-off 126px to `xl:pb-20` (80px) instead --
-  // `hero.bannerInner`'s own already-established standard bottom inset,
-  // reused directly rather than a second one-off number. Top stays
-  // `xl:pt-[140px]` (that one already IS the shared standard, same
-  // constant `hero.bannerInner` uses).
-  bannerInner: "container-p flex flex-col gap-8 pt-12 pb-12 xl:gap-12 xl:pt-[140px] xl:pb-20",
+  // sticky header still didn't fit a real, more compact laptop browser
+  // viewport (same class of bug as the Footer height fix earlier this same
+  // day, see docs/05-plan.md's decision log), even after a first pass that
+  // trimmed the bottom gap alone to `hero.bannerInner`'s own 80px inset and
+  // kept top at the shared 140px. That first pass was tuned against an
+  // ~800-820px viewport; a real laptop measured live came in smaller still,
+  // so both insets and the H1-to-buttons gap were trimmed further here
+  // (140->96px top, 80->48px bottom, 48->32px gap) -- a services-page-only
+  // adjustment (this is `servicesHero`'s own key, not `hero.bannerInner`),
+  // confirmed live to clear a 1280x700 viewport with room to spare while
+  // still reading comfortably spaced at 1440x900.
+  bannerInner: "container-p flex flex-col gap-8 pt-12 pb-12 xl:gap-8 xl:pt-24 xl:pb-12",
   // 832px H1 wrap width in Figma is exactly 52rem -- identical value to
   // `hero.heading`, reused directly rather than redefined.
   heading: "max-w-[52rem]",
