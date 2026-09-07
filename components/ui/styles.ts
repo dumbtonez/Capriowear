@@ -2357,6 +2357,12 @@ export const footer = {
 
   /* Desktop */
   desktopOuter: "hidden xl:block",
+  // pt-14 (56px) -- matches Figma node 587:5755's own measured value
+  // exactly (confirmed via get_metadata). Owner tried pt-20 (80px,
+  // 2026-09-07) then reverted back to this same session -- the on-screen
+  // difference the owner saw wasn't a real code issue (their laptop
+  // viewport vs. a 1920px+ screen), so leave this at Figma's real number
+  // unless a genuine spacing change is requested again.
   desktopInner: "container-p pb-8 pt-14",
   // Row 1: brand + tagline (left), social icons (right) -- vertically
   // centred as a row (confirmed via get_metadata: the 60px social buttons
@@ -2409,13 +2415,23 @@ export const footer = {
   // items-start like row2. Still a full-width `justify-between` split
   // (contact flush left at container's own left edge, address flush right
   // at container's own right edge -- 940 + 420 = 1360, the container's
-  // real right edge), unlike row2 above. 296px is Figma's own real gap
-  // between row2's lowest content (the 3-line nav column) and this row's
-  // top, updated 2026-08-27 alongside the owner's content-arrangement pass
-  // (was 194px) -- kept as the exact one-off value rather than a rounded
-  // token, the same way other sections keep an odd confirmed Figma number
-  // (e.g. Final CTA's 110px marquee margin).
-  desktopRow3: "mt-[296px] flex items-end justify-between",
+  // real right edge), unlike row2 above.
+  //
+  // mt-[170px], trimmed from Figma's own 296px (owner, 2026-09-07): the
+  // footer's `sticky bottom-0` reveal trick (see the `footer` header
+  // comment above) can only ever show as much of itself as fits inside the
+  // current viewport height -- at the old ~826px total footer height, any
+  // browser window shorter than that (common on 13-14" laptops, ~700-850px
+  // of actual usable viewport after browser chrome) had its own TOP edge
+  // (the 56px gap + logo) scrolled past/clipped before the reveal ever
+  // caught up, which read as "the logo doesn't have its 56px" even though
+  // the value itself was correct -- confirmed live via getBoundingClientRect
+  // (footer height 826px > a tested 816px laptop-sized viewport). This is
+  // this row's own margin specifically because it was the single largest
+  // contributor to the footer's total height; trimming it (rather than the
+  // reveal effect itself, or the confirmed-correct logo spacing) brings the
+  // footer to ~700px, comfortably under that whole laptop range again.
+  desktopRow3: "mt-[170px] flex items-end justify-between",
   desktopContactGroup: "flex flex-col items-start gap-[5px]",
   // #17191e is Figma's own confirmed literal for this line, updated
   // 2026-08-27 from the original build's #3c3c43 (a genuine colour change,
@@ -2446,9 +2462,10 @@ export const footer = {
   // No longer holds the tagline (owner, 2026-09-06: moved above the
   // description paragraph, same as desktop -- see `mobileDescriptionGroup`
   // below), so this is just the logo now, not a real "group" any more.
-  // mt-14 (56px, same "space above the logo" request as desktop's own
-  // `desktopBrandGroup`).
-  mobileBrandGroup: "mt-14 flex flex-col items-start gap-3",
+  // No extra top margin (owner, 2026-09-07: "make it 40px only") -- the
+  // logo now sits directly on `mobileOuter`'s own `pt-10` (40px), not
+  // `pt-10` plus this group's own additional `mt-14` (56px) on top of it.
+  mobileBrandGroup: "flex flex-col items-start gap-3",
   // `stacked` geometry (WEAR below CAPRIO, Figma node 680:394), not the old
   // side-by-side mark this used to render -- owner-shared mobile footer
   // frame (node 590:1421, 2026-09-06) shows the same stacked mark already
