@@ -3541,8 +3541,11 @@ export const trustPoints = {
   // `sidePaddingPdp` below (owner, 2026-09-01: "in PLP... built to pass...
   // has no space from the top, make it 120px" -- was `pt-1.5`/6px, paired
   // with WhatWeCover's own `pb-1.5` to net 12px; PDP wasn't part of that
-  // request, so its own gap stays whatever `ProductCustomizeSteps` above
-  // it already supplies, untouched). `pb` is similarly gone from here --
+  // request at the time, so its own gap stayed whatever
+  // `ProductCustomizeSteps` above it supplied -- `sidePaddingPdp` gained
+  // its own `md:pt-[120px]` tablet-only top gap 2026-09-07, see that
+  // token's own comment; desktop still relies on `ProductCustomizeSteps`,
+  // unchanged). `pb` is similarly gone from here --
   // FabricOptions (PLP-only) now owns its own full top gap the same way.
   // max-xl: mobile Figma frame (node 590:1283, 360px), read 2026-08-30 --
   // no top padding of its own (WhatWeCover's own mobile pb-[72px] above
@@ -3579,22 +3582,29 @@ export const trustPoints = {
   // PDP desktop side padding (app/activewear/[category]/[style]/page.tsx,
   // owner, 2026-09-01) -- the site's own standard 80px content margin
   // (same value as `.container-p`'s desktop inset, app/globals.css), not a
-  // one-off literal. No top gap of its own here -- `ProductCustomizeSteps`
-  // already supplies this section's own top spacing on the PDP (its own
-  // `pb-[200px]`). xl:pb-[120px] (owner, 2026-09-02: "make it 120px from
-  // the bottom" -- was `pb-[100px]`) is this page's own desktop bottom gap.
+  // one-off literal. No top gap of its own at desktop (`xl:pt-0` -- see
+  // below) -- `ProductCustomizeSteps` still supplies this section's own
+  // top spacing there (its own `xl:pb-[200px]`), unchanged. xl:pb-[120px]
+  // (owner, 2026-09-02: "make it 120px from the bottom" -- was
+  // `pb-[100px]`) is this page's own desktop bottom gap.
   // `pb-12` (48px, owner, 2026-09-07: "make it 48px for mobile" -- was
   // `pb-[72px]`, inherited unprefixed from `sidePaddingPlp`'s own value
   // before `pb-*` moved out of the shared `section` string) is this page's
-  // own mobile bottom gap; `md:pb-[72px]` restores the 72px tablet value
-  // fixed the same day (owner: "make it 72px only on both mobile and
-  // tablet" -- that request predates this one, which narrows it back down
-  // for mobile only, tablet unchanged). This is a single shared recipe used
-  // identically by `TrustPoints.tsx` -- every PDP route
+  // own mobile bottom gap.
+  // `md:pt-[120px]`/`md:pb-0` (owner, 2026-09-07: "follow 120px from top
+  // of each section, 0px from the bottom" for this section, Specifications,
+  // and HOW WE CUSTOMIZE) -- was `md:pb-[72px]`, no top of its own (fixed
+  // the same day as the mobile/tablet split above, before this request).
+  // This section now owns a real top gap of its own at tablet, instead of
+  // borrowing `ProductCustomizeSteps`' bottom padding -- `xl:pt-0` cancels
+  // the `md:pt-[120px]` cascade at desktop explicitly, since desktop was
+  // never asked to change and still relies on `ProductCustomizeSteps`'
+  // own `xl:pb-[200px]` for its gap, exactly as before. This is a single
+  // shared recipe used identically by `TrustPoints.tsx` -- every PDP route
   // (`app/activewear/[category]/[style]/page.tsx` is itself one shared
   // template for every category) picks this up automatically, not a
   // per-category override.
-  sidePaddingPdp: "pb-12 md:pb-[72px] xl:px-[80px] xl:pb-[120px]",
+  sidePaddingPdp: "pb-12 md:pb-0 md:pt-[120px] xl:pt-0 xl:px-[80px] xl:pb-[120px]",
   // max-xl:gap-2 (8px, mobile Title frame's own gap)/px-5 (20px, mobile's
   // own inset -- the section itself carries none below xl)/w-full (fills
   // the padded row instead of shrinking to content, unlike desktop's
@@ -4164,17 +4174,26 @@ export const productCtas = {
 export const productCustomizeSteps = {
   // pt-[120px]: no sibling section context confirmed yet for this brand
   // new PDP section (Figma's own frame only specifies its own pt-[120px]).
-  // pb-[200px] (owner, 2026-09-02: "make it 200px from the top" -- this
-  // section's own bottom padding is TrustPoints' entire top gap on the
-  // PDP, see trustPoints' own comment) -- was pb-[120px] (originally set
-  // to mirror pt as a plain symmetric default before TrustPoints' real
-  // gap was ever specified).
+  // Unprefixed, so it already applies at both tablet and desktop (this
+  // div only ever renders from `md:` up) -- owner, 2026-09-07: "follow
+  // 120px from top of each section" for this section, Specifications, and
+  // TrustPoints specifically, already satisfied here, no change needed.
+  // pb-[200px] used to be unprefixed too (owner, 2026-09-02: "make it
+  // 200px from the top" -- this section's own bottom padding doubled as
+  // TrustPoints' entire top gap on the PDP at every width, see
+  // trustPoints' own comment) -- was pb-[120px] (originally set to mirror
+  // pt as a plain symmetric default before TrustPoints' real gap was ever
+  // specified). Split 2026-09-07 (owner: "...0px from the bottom of the
+  // section" for this section too): `pb-0` is now the tablet value,
+  // `xl:pb-[200px]` restores the original desktop-only value explicitly --
+  // TrustPoints now owns its own top gap at tablet instead (see that
+  // recipe's own comment), so this section no longer needs to supply it.
   // xl: -> md: (owner, 2026-09-04: apply the homepage's tablet-width
   // treatment to PDP -- this carousel is the same shape as Inside the
   // Factory/Exhibitions/How It Works, already fixed there; see
   // `desktopRow`/`desktopCard`/`cardMediaRatio` below for the matching
   // padding/width changes).
-  desktopOuter: "hidden md:flex md:flex-col md:items-center md:gap-[72px] pt-[120px] pb-[200px]",
+  desktopOuter: "hidden md:flex md:flex-col md:items-center md:gap-[72px] pt-[120px] pb-0 xl:pb-[200px]",
   desktopHeadingWrap: "container-p",
   // Reverted to Eyebrow's own default Overline size (20px/600), 2026-09-01
   // (owner: "make the eyebrow heading back to 20px wherever you changed")
@@ -4279,43 +4298,40 @@ export const productRelatedStyles = {
   // ProductCtas in that same column). Used by the desktop instance (inside
   // the gallery/info row's own text column).
   topRuleDefault: "border-t border-[#e8ecf1] py-8",
-  // No divider, pt-[72px] (owner correction, 2026-09-02: "remove the top
-  // separator and space should be 72px from the top" -- this project's
-  // standing mobile/tablet inter-section gap, see
-  // productSpecifications.section's own comment) -- used by the mobile/
-  // tablet instance (below `xl`) placed directly after TrustPoints, which
-  // needs a plain section gap, not a divider borrowed from its old position
-  // inside the text column.
+  // No divider (owner correction, 2026-09-02: "remove the top separator")
+  // -- used by the mobile/tablet instance (below `xl`) placed directly
+  // after TrustPoints, which needs a plain section gap, not a divider
+  // borrowed from its old position inside the text column.
   //
-  // pt-0, not pt-[72px] (real bug, found live, owner report: "lot of white
-  // space from the top" -- `trustPoints.sidePaddingPdp` (this component
-  // only ever renders on the PDP, so it's always this variant, never
-  // `sidePaddingPlp`) already carries its own bottom gap on TrustPoints
-  // itself, so stacking a top padding here on top of it would double up),
-  // so this instance never owns a top gap of its own -- whatever TrustPoints'
-  // own bottom padding is at the current width IS the gap between the two
-  // sections.
+  // Real mobile: `pt-0` (real bug, found live, owner report: "lot of white
+  // space from the top" -- `trustPoints.sidePaddingPdp`'s own `pb-12`
+  // already carries TrustPoints' entire bottom gap at real mobile width,
+  // so stacking a top padding here on top of it would double up) + `pb-12`
+  // (48px, owner, 2026-09-07: "make it 48px from bottom too" -- was the
+  // original flat `pb-[72px]`, "72px from the bottom of the section for
+  // related styles"). Net real-mobile gap above this instance: TrustPoints'
+  // own `pb-12` (48px) + this instance's own `pt-0` = 48px, unchanged by
+  // this comment's own history.
   //
-  // TrustPoints' own bottom gap here narrowed to 48px on mobile only
-  // (owner, 2026-09-07: "make it 48px for mobile", `trustPoints.
-  // sidePaddingPdp`'s `pb-12`) -- tablet (`md:pb-[72px]`, fixed the same
-  // day: "make it 72px only on both mobile and tablet") and desktop
-  // (`xl:pb-[120px]`) are unchanged. This instance's own visibility gate
-  // (`xl:hidden`, see `app/activewear/[category]/[style]/page.tsx`'s own
-  // comments on both `ProductRelatedStyles` instances) is what makes it the
-  // one shown below `xl` at all -- it's unrelated to, and untouched by,
-  // that particular gap-size change.
-  //
-  // This instance's OWN bottom gap (nothing below it supplies one) followed
-  // the same mobile-only narrowing the same day (owner: "make it 48px from
-  // bottom too") -- `pb-12` (48px), not the original flat `pb-[72px]`
-  // (owner: "72px from the bottom of the section for related styles").
-  // `md:pb-[72px]` restores 72px at tablet and up, matching the top gap's
-  // own mobile/tablet split above -- there's no Figma frame for this
-  // specific value at either breakpoint (this section only ever had one
-  // spec, 72px, until today), so tablet keeps the last confirmed number
-  // rather than guessing it should also drop to 48.
-  topRuleNone: "pt-0 pb-12 md:pb-[72px]",
+  // Tablet (`md:`): this instance now owns a real top gap of its own,
+  // `md:pt-12` (48px) -- previously `pt-0` here too, borrowing whatever
+  // TrustPoints' own tablet bottom padding happened to be (`md:pb-[72px]`
+  // at the time). Owner, 2026-09-07 (a follow-up once TrustPoints' own
+  // tablet bottom was set to 0 as part of "follow 120px from top of each
+  // section, 0px from the bottom" for Specifications/HOW WE
+  // CUSTOMIZE/TrustPoints, which would otherwise have collapsed this gap
+  // to 0px): "add 48px top gap for related style and remove any other
+  // gaps it has it must be 48px from the top and bottom only" -- so the
+  // old `md:pb-[72px]` tablet-only bottom override is dropped entirely;
+  // with it gone, the unprefixed `pb-12` (48px, mobile-first) already
+  // covers tablet too, giving a clean, self-owned 48px top / 48px bottom
+  // at tablet, matching the request exactly rather than keeping the old
+  // asymmetric 48px-top/72px-bottom split. This instance's own visibility
+  // gate (`xl:hidden`, see `app/activewear/[category]/[style]/page.tsx`'s
+  // own comments on both `ProductRelatedStyles` instances) is what makes
+  // it the one shown below `xl` at all -- desktop's own sibling instance
+  // (`topRuleDefault` above) is untouched by any of this.
+  topRuleNone: "pt-0 md:pt-12 pb-12",
   // 20px/24px-line-height medium -- Figma's own real values for this
   // heading, kept as a literal (Tailwind's own `text-xl` default leading
   // is 28px, not this design's 24px).
@@ -4371,9 +4387,15 @@ export const productSpecifications = {
   // 72px gap from the top... we are using 72px gap on mobile after every
   // section" -- this project's standing mobile inter-section gap, same
   // value already used by ProductCustomizeSteps.mobileSection's own pt/pb)
-  // -- was pt-8/32px. xl:pt-[120px] (owner, 2026-09-02: desktop top gap to
-  // 120px) -- was xl:pt-[80px].
-  section: "container-p flex w-full flex-col pt-[72px] xl:pt-[120px] xl:pb-[40px]",
+  // -- was pt-8/32px. md:pt-[120px] (owner, 2026-09-07: "follow 120px from
+  // top of each section, 0px from the bottom" for this section, HOW WE
+  // CUSTOMIZE, and TrustPoints specifically) -- was `xl:pt-[120px]` only
+  // (owner, 2026-09-02: desktop top gap to 120px, was xl:pt-[80px]); `md:`
+  // already cascades up through `xl:` at the same 120px value, so this is
+  // a pure tablet addition, not a desktop change -- the old `xl:` tier is
+  // dropped as now-redundant rather than kept alongside an equal `md:` one.
+  // Bottom stays 0 at tablet (only `xl:pb-[40px]` adds one, at desktop).
+  section: "container-p flex w-full flex-col pt-[72px] md:pt-[120px] xl:pb-[40px]",
   // mb-8 (32px) to whatever comes next (image on mobile, the list on
   // desktop where there's no image) -- unchanged mobile value. xl:mb-12
   // (48px, owner correction, 2026-09-02: "space from the subline ... to
