@@ -2396,17 +2396,30 @@ export const footer = {
   // together (nav's own right edge to description's left edge is 78px),
   // with real empty space left over to the right of description -- kept
   // as the exact `gap-[78px]` rather than assuming a full-width split.
-  // Nav's column 1 is a fixed 182px (Figma's own real value -- it's what
-  // pushes column 2 to its confirmed x-offset, not a gap utility), column
-  // 2 is auto-width and nowrap.
+  // Nav's column 1 was a fixed 182px (Figma's own real value -- what
+  // pushed column 2 to its confirmed x-offset, not a gap utility) until
+  // "Activewear"/"Teamwear & Uniforms" were added on top of column 1's
+  // original 3 short items (owner, 2026-09-07) -- "Teamwear & Uniforms"
+  // (~232px natural width) wrapped to 2 lines inside that fixed 182px box
+  // (owner: "make teamwear & uniforms in one line"), the same wrap defect
+  // already fixed once in the header's own mega menu for this identical
+  // string (see that recipe's own comment, `megaGroup`/`megaItem`). Same
+  // fix here: `desktopNavColumnOne` dropped its fixed width for
+  // `whitespace-nowrap` (matching column 2's own existing auto-width/
+  // nowrap approach), and `desktopNavGroup` gained an explicit `gap-12`
+  // (48px) between the two columns -- the fixed 182px box used to supply
+  // that visual separation as unused space beside the (all shorter) 3
+  // original links; an auto-width column needs a real gap now that
+  // nothing pushes column 2 over automatically. Column 2 is unaffected
+  // (still auto-width/nowrap, unchanged).
   desktopRow2: "mt-[72px] flex items-start gap-[78px]",
   // Tagline (relocated from row 1, see `desktopTagline` above) + the
   // description paragraph, stacked with a 12px gap, no divider between them
   // (owner, 2026-09-06).
   desktopDescriptionGroup: "flex max-w-[307px] flex-col gap-3",
   desktopDescription: "text-[1.25rem] leading-[1.4] text-ink",
-  desktopNavGroup: "flex items-start",
-  desktopNavColumnOne: "flex w-[182px] flex-col",
+  desktopNavGroup: "flex items-start gap-12",
+  desktopNavColumnOne: "flex flex-col whitespace-nowrap",
   desktopNavColumnTwo: "flex flex-col whitespace-nowrap",
   desktopNavLink: "text-[1.25rem] leading-[36px] text-ink transition-opacity hover:opacity-70",
   // Row 3: contact CTA (left) + address/copyright (right), bottom-aligned --

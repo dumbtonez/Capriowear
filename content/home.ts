@@ -630,7 +630,14 @@ export const home = {
     description:
       "Custom activewear and teamwear manufacturer, private label from fabric to packaging. Cut-and-sew, factory-direct from Sialkot, Pakistan.",
     nav: {
+      // Activewear/Teamwear & Uniforms added ahead of Services (owner,
+      // 2026-09-07: "in the footer, all platforms, we are missing
+      // activewear and teamwear & uniforms, add them on top of services")
+      // -- same label/href pair already used by the header nav
+      // (home.nav.links above), not a new route.
       columnOne: [
+        { label: "Activewear", href: "/activewear" },
+        { label: "Teamwear & Uniforms", href: "/teamwear" },
         { label: "Services", href: "/capabilities" },
         { label: "Our Factory", href: "/our-factory" },
         { label: "Our Story", href: "/our-story" },
