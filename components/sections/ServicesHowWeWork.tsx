@@ -15,11 +15,18 @@
 // bold-phrase paragraph -- the exact same segmented-note pattern
 // ServicesIntro's own paragraph already uses.
 //
+// The closing note animates in word-by-word (owner, 2026-09-07: "it should
+// apply the text animation") via `TextReveal`'s new `segments` mode -- see
+// that component's own comment. This is the first real usage of segments
+// mode; every other `TextReveal` caller (Hero's H1, etc.) still passes
+// plain `text` and is unaffected.
+//
 // Desktop-only for now, per the owner's own brief -- see `servicesHowWeWork`
 // in components/ui/styles.ts for the exact spacing notes and the
 // responsive-safe (not confirmed-mobile) caveat on the cards grid.
 import { AsteriskIcon } from "@/components/icons/AsteriskIcon";
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
+import { TextReveal } from "@/components/TextReveal";
 import { servicesHowWeWork } from "@/components/ui/styles";
 import type { services } from "@/content/services";
 
@@ -70,17 +77,12 @@ export function ServicesHowWeWork({ content }: ServicesHowWeWorkProps) {
           <span className={servicesHowWeWork.noteIconWrap}>
             <AsteriskIcon className={servicesHowWeWork.noteIcon} />
           </span>
-          <p className={servicesHowWeWork.noteParagraph}>
-            {content.note.map((segment, index) =>
-              segment.bold ? (
-                <strong key={index} className={servicesHowWeWork.noteParagraphBold}>
-                  {segment.text}
-                </strong>
-              ) : (
-                <span key={index}>{segment.text}</span>
-              ),
-            )}
-          </p>
+          <TextReveal
+            as="p"
+            segments={content.note}
+            boldClassName={servicesHowWeWork.noteParagraphBold}
+            className={servicesHowWeWork.noteParagraph}
+          />
         </div>
       </div>
     </section>

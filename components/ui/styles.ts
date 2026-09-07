@@ -1444,7 +1444,11 @@ export const servicesHowWeWork = {
   // worth relying on).
   pathDetailLabel: "text-[1.375rem] font-medium tracking-[1px] text-ink",
   pathDetailBody: "text-[1.25rem] font-normal leading-7 text-[#17191e]",
-  noteWrap: "flex max-w-[656px] flex-col items-center gap-4",
+  // mt-12 (48px) mobile fallback, xl:mt-[140px] -- Figma's own confirmed
+  // gap from the cards row above (not the same 72px the row above uses --
+  // see `inner`'s own comment on why this needs its own margin rather than
+  // a shared flex `gap`).
+  noteWrap: "mt-12 flex max-w-[656px] flex-col items-center gap-4 xl:mt-[140px]",
   noteIconWrap: "flex size-[54px] items-center justify-center rounded-full bg-accent/10 text-accent",
   noteIcon: "size-[54px]",
   // 20px, 30px leading (Figma's own real value here -- not the 32px
