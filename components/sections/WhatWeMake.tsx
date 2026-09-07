@@ -24,6 +24,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
+import { NextArrowIcon } from "@/components/icons/NextArrowIcon";
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextReveal } from "@/components/TextReveal";
@@ -113,7 +114,7 @@ export function WhatWeMake({ content }: WhatWeMakeProps) {
                     ))}
                     <Link href={category.href} className={whatWeMake.desktopGridCta}>
                       View All {ctaLabel(category)}
-                      <ChevronRight className={whatWeMake.ctaIcon} aria-hidden="true" />
+                      <NextArrowIcon className={whatWeMake.desktopCtaIcon} />
                     </Link>
                   </div>
                 </div>
