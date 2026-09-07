@@ -161,9 +161,9 @@ export default async function TeamwearStylePage({ params }: PageProps<"/teamwear
           })}
         />
 
-        <div className="container-p flex flex-col gap-6 pt-0 md:flex-row md:items-start md:gap-8 md:pt-6 xl:gap-[66px]">
+        <div className="container-p flex flex-col gap-6 pt-0 xl:flex-row xl:items-start xl:gap-[66px] xl:pt-6">
           {data.product.images ? <ProductGallery images={data.product.images} productTitle={productTitle} /> : null}
-          <div className="flex w-full min-w-0 flex-col gap-8 md:min-w-0 md:flex-1 xl:w-[514px] xl:flex-none">
+          <div className="flex w-full min-w-0 flex-col gap-8 xl:w-[514px] xl:flex-none">
             <ProductInfo sku={data.product.sku} heading={heading} description={description} />
             <ProductHighlights items={pdpSpecHighlights} />
             <ProductOptions
@@ -174,7 +174,7 @@ export default async function TeamwearStylePage({ params }: PageProps<"/teamwear
             />
             <ProductCtas primaryCta={home.nav.cta} secondaryCta={home.nav.secondaryCta} />
             {data.product.relatedStyleTags ? (
-              <ProductRelatedStyles tags={data.product.relatedStyleTags} className="hidden md:flex" />
+              <ProductRelatedStyles tags={data.product.relatedStyleTags} className="hidden xl:flex" />
             ) : null}
           </div>
         </div>
@@ -198,7 +198,7 @@ export default async function TeamwearStylePage({ params }: PageProps<"/teamwear
         />
 
         {data.product.relatedStyleTags ? (
-          <div className="container-p block md:hidden">
+          <div className="container-p block xl:hidden">
             <ProductRelatedStyles tags={data.product.relatedStyleTags} topRule="none" />
           </div>
         ) : null}
