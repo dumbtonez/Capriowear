@@ -2525,6 +2525,11 @@ Placed after `FinalCta`, not directly after `HowItWorks`: `get_metadata` confirm
 
 **Verified**: `npx tsc --noEmit`, `npx eslint .` clean on the touched file (`npm run build`'s own type-check currently fails on an unrelated, uncommitted, in-progress `WhatWeMake.tsx` change from a concurrent session on this branch, confirmed via `git diff --stat`). Confirmed via SSR output: eyebrow, heading and all 6 real cert logos render; section sits after `FinalCta` in DOM order.
 
+### 5ev · What We Make CTA: extra 16px top gap at tablet only — 2026-09-07
+Owner: "on the tablet, add extra 16px space from top of the ctas." `whatWeMake.mobileGroupCta` gained `md:mt-6` alongside its existing `mt-2`. `group`'s own unprefixed `gap-6` (24px) already applies to both real mobile and tablet, so `mt-2` (8px) still nets 32px at real mobile, unchanged; `md:mt-6` (24px) nets 48px at tablet — 16px more, not a replacement value.
+
+**Verified**: `npx tsc --noEmit`, `npx eslint .` clean. Live: gap above the CTA measures 48px at 1024px (tablet), unchanged 32px at 375px (real mobile). `npx playwright test tests/screenshots.spec.ts` (30 tests) all green.
+
 ## Phase 3 · Footer and inner pages — Footer done, PLP banner + product grid in progress
 
 Footer shipped 2026-08-26 (see 4i above; sticky-reveal had stacking/paint corrections the same week — see 4k, 4l. A separate seam-bar decoration was attempted and removed, 4q–4s — Footer's own reveal mechanism is unaffected). Activewear PLP template started 2026-08-28 (5i above): route, data shape, and banner section built for Leggings, followed same day by CategoryFilters, ProductGrid/ProductCard/Pagination, and CategoryBanner revisions (5i–5u); layout corrections continued 2026-08-29 (5v). Remaining sections (overview, fabric table, trust block, spec facts, FAQ, related links, final CTA) built incrementally against Figma node `406:3075` as it gets finished.
