@@ -1533,7 +1533,15 @@ export const productRange = {
   // (`productRelatedStyles.chipIcon`, `group-hover:translate-x-0.5`) --
   // owner request, reusing that exact established hover treatment rather
   // than a new one-off.
-  exploreIcon: "h-[16.667px] w-[7px] shrink-0 transition-transform group-hover:translate-x-0.5",
+  // `h-[11.667px]`, not `h-[16.667px]` (owner, 2026-09-07: "the chveron is
+  // not 100% center aligned to the text cta label, make it fully centre
+  // aligned") -- `NextArrowIcon`'s own viewBox is now cropped to the
+  // glyph's real bounds (see that component's own header comment), so this
+  // box shrinks by the identical proportion; the glyph's rendered pixel
+  // size on screen is unchanged, only the asymmetric transparent padding
+  // around it (which was defeating `items-center`'s own correct box-level
+  // centering) is gone.
+  exploreIcon: "h-[11.667px] w-[7px] shrink-0 transition-transform group-hover:translate-x-0.5",
 };
 
 /* --- ClientLogos (homepage section 4) -------------------------------------- */
@@ -1906,7 +1914,14 @@ export const whatWeMake = {
   // override was actively fighting the correct value down to 20px and
   // dropping the line-height pairing; removed rather than replaced with a
   // new override, since the desired result IS the untouched default.
-  mobileGroupCta: "mt-2 w-full justify-center gap-2 xl:hidden !border-accent !text-accent hover:!bg-[#FFF6F3]",
+  // `md:mt-6` (owner, 2026-09-07: "on the tablet, add extra 16px space
+  // from top of the ctas") -- tablet-only extra: `group`'s own `gap-6`
+  // (24px, unprefixed, applies to both mobile and tablet) plus this
+  // button's own margin gives 32px total at real mobile (`mt-2`, 8px) and
+  // now 48px at tablet (`md:mt-6`, 24px) -- 16px more than mobile, not a
+  // second value replacing it.
+  mobileGroupCta:
+    "mt-2 md:mt-6 w-full justify-center gap-2 xl:hidden !border-accent !text-accent hover:!bg-[#FFF6F3]",
   // Trailing chevron, mobile CTA only now (desktop's own moved to
   // `desktopCtaIcon` below, a different icon component -- see that key's
   // own comment for why). Owner: "put a chvron next to the cta label ...
@@ -1933,18 +1948,19 @@ export const whatWeMake = {
   // own "Explore Activewear" link, not just a close approximation. Mobile
   // keeps `ctaIcon`/`ChevronRight` above, unchanged -- only "desktop" was
   // reported small.
-  // `-translate-y-[1.5px]` (owner: "the chvron is not 100% center aligned
-  // to the text cta label, make it fully centre aligned") -- not a
-  // flexbox alignment bug (`desktopGridCta`'s own `items-center` is
-  // correct); the glyph drawn inside `NextArrowIcon`'s own viewBox
-  // (`0 0 7 16.6667`) isn't centred within it -- its path spans y
-  // 4-15.6667 (visual centre ~9.83), not the viewBox's true centre
-  // (8.33), a ~1.5px built-in offset toward the bottom. Flex-centering
-  // the icon's own box therefore still reads as low; nudging the box up
-  // by that same ~1.5px compensates so the visible glyph, not just its
-  // bounding box, lines up with the label text.
-  desktopCtaIcon:
-    "h-[16.667px] w-[7px] shrink-0 -translate-y-[1.5px] transition-transform group-hover:translate-x-0.5",
+  // Was `-translate-y-[1.5px]` (a compensating nudge for the exact same
+  // "not 100% center aligned" report, applied here first) -- superseded
+  // 2026-09-07 once the real cause was fixed at its source instead:
+  // `NextArrowIcon`'s own viewBox is now cropped to the glyph's real
+  // bounds (was `0 0 7 16.6667` with the path only spanning y 4-15.6667,
+  // an asymmetric built-in offset toward the bottom baked into Figma's
+  // export frame), so the icon's own box and its visible ink are now the
+  // same thing -- a manual translate on top of that would just introduce
+  // a new, opposite offset. Height corrected to `h-[11.667px]` to match
+  // (same proportional shrink as `productRange.exploreIcon`, see that
+  // token's own comment) -- the glyph's own rendered pixel size is
+  // unchanged, only the transparent padding around it is gone.
+  desktopCtaIcon: "h-[11.667px] w-[7px] shrink-0 transition-transform group-hover:translate-x-0.5",
   mobileTile: "flex flex-col gap-4",
   // Owner, 2026-09-03: originally a `4:3` mid-point between mobile's old
   // flat `16:11` landscape and desktop's old square tile. Superseded

@@ -7,11 +7,24 @@
 // currentColor (Figma's own export bakes in the orange fill, dropped here so
 // callers set colour via their own text colour class, same pattern as every
 // other icon component).
+// viewBox cropped to the path's own real bounds, "0 4 7 11.6667" -- not
+// Figma's literal export box, "0 0 7 16.6667" (owner, 2026-09-07: "the
+// chevron is not 100% center aligned to the text cta label, make it fully
+// centre aligned"). The path's y-coordinates only span 4 to 15.6667 within
+// that taller box (confirmed by parsing every point in `d`), an asymmetric
+// ~4px top / ~1px bottom margin baked into Figma's own export frame around
+// the glyph -- so a flex `items-center` was already correctly centering
+// this SVG's own bounding BOX against the text, but the visible ink inside
+// that box sat visibly low. Cropping the viewBox to the path's real bounds
+// (no `d` changes -- same shape, same rendered ink size, since callers'
+// `h-*` shrinks by the identical proportion the viewBox does) makes the box
+// and the ink the same thing, so `items-center` now centers what's
+// actually visible. See `productRange.exploreIcon`'s own updated height.
 import type { SVGProps } from "react";
 
 export function NextArrowIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 7 16.6667" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" {...props}>
+    <svg viewBox="0 4 7 11.6667" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" {...props}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"
