@@ -127,7 +127,7 @@ export const home = {
     links: [
       { label: "Activewear", href: "/activewear", megaMenu: activewearMegaMenu },
       { label: "Teamwear & Uniforms", href: "/teamwear", megaMenu: teamwearMegaMenu },
-      { label: "Services", href: "/capabilities" },
+      { label: "Services", href: "/services" },
       { label: "Factory Tour", href: "/our-factory" },
     ],
     // Shared footer strip under every mega menu's category columns (Figma
@@ -160,7 +160,7 @@ export const home = {
         chevron: true,
         megaMenu: teamwearMegaMenu,
       },
-      { label: "Services", href: "/capabilities", chevron: false },
+      { label: "Services", href: "/services", chevron: false },
       { label: "Factory Tour", href: "/our-factory", chevron: false },
       { label: "Our Story", href: "/our-story", chevron: false },
     ],
@@ -660,7 +660,7 @@ export const home = {
       columnOne: [
         { label: "Activewear", href: "/activewear" },
         { label: "Teamwear & Uniforms", href: "/teamwear" },
-        { label: "Services", href: "/capabilities" },
+        { label: "Services", href: "/services" },
         { label: "Our Factory", href: "/our-factory" },
         { label: "Our Story", href: "/our-story" },
       ],

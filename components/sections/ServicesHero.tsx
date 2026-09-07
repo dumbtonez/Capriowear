@@ -44,17 +44,15 @@ export function ServicesHero({ hero: content, customOfferings }: ServicesHeroPro
         </div>
       </div>
 
-      <div className={servicesHero.tickerWrap}>
-        <Marquee
-          label={customOfferings.label}
-          labelVariant="bold"
-          separator="sparkle"
-          tone="dark"
-          items={customOfferings.items}
-          pauseOnHover={false}
-          padded={false}
-        />
-      </div>
+      <Marquee
+        label={customOfferings.label}
+        labelVariant="bold"
+        separator="sparkle"
+        tone="dark"
+        items={customOfferings.items}
+        pauseOnHover={false}
+        divider={false}
+      />
     </section>
   );
 }

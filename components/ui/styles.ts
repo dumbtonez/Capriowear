@@ -1306,15 +1306,20 @@ export const hero = {
 // other section uses), not read from a real mobile Figma frame yet.
 export const servicesHero = {
   section: "bg-ink text-paper",
-  // get_metadata confirmed exact: Banner frame is 578px tall with content at
-  // x:80/y:140 -- 140px top matches `hero.bannerInner`'s own xl:pt-[140px]
-  // exactly (same Figma constant, reused). Bottom: content's own box (H1 +
-  // gap + buttons) is 312px tall, and 578 - 140 - 312 = 126px of real,
-  // confirmed bottom padding -- an explicit one-off (no matching spacing
-  // token), not derived from a fixed section height (this component has no
-  // explicit height anywhere, same "content spacing drives it" rule as
-  // every other section).
-  bannerInner: "container-p flex flex-col gap-8 pt-12 pb-12 xl:gap-12 xl:pt-[140px] xl:pb-[126px]",
+  // get_metadata's literal Figma number for the bottom gap is 126px (578px
+  // Banner frame - 140px top - 312px of content), which was used verbatim
+  // at first. Owner, 2026-09-07: still reading as cut off above the fold on
+  // a real laptop viewport even after the divider-line bug (below) was
+  // fixed -- confirmed live, this section's total height plus the 87px
+  // sticky header comes to ~849px, taller than a real ~800-820px laptop
+  // browser viewport (same class of bug as the Footer height fix earlier
+  // this same day, see docs/05-plan.md's decision log). Bottom padding
+  // dropped from that one-off 126px to `xl:pb-20` (80px) instead --
+  // `hero.bannerInner`'s own already-established standard bottom inset,
+  // reused directly rather than a second one-off number. Top stays
+  // `xl:pt-[140px]` (that one already IS the shared standard, same
+  // constant `hero.bannerInner` uses).
+  bannerInner: "container-p flex flex-col gap-8 pt-12 pb-12 xl:gap-12 xl:pt-[140px] xl:pb-20",
   // 832px H1 wrap width in Figma is exactly 52rem -- identical value to
   // `hero.heading`, reused directly rather than redefined.
   heading: "max-w-[52rem]",
@@ -1325,15 +1330,53 @@ export const servicesHero = {
   buttons: "flex flex-col gap-4 xl:flex-row xl:items-center",
   ctaPrimary: "w-full xl:w-auto",
   // Ticker: the exact same "Fully Custom Offerings" Marquee as homepage
-  // Hero (reused component, not rebuilt), but with a different top gap --
-  // get_metadata confirmed 72px from this banner's own bottom edge to the
-  // ticker label here, not homepage's 40px (Marquee's own `basePaddingDefault`),
-  // since there's no video block directly above it to share that gap with.
-  // `padded={false}` on Marquee removes its own built-in pt-10/pb-8 so this
-  // wrapper's real, confirmed 72/32px doesn't double up with it -- the same
-  // established pattern Client Logos' mobile marquee already uses (see
-  // `marquee.basePaddingNone`'s own comment) for exactly this situation.
-  tickerWrap: "pt-12 pb-8 xl:pt-[72px] xl:pb-8",
+  // Hero (reused component, not rebuilt). Figma's own literal top gap here
+  // measured 72px (get_metadata), not homepage's 40px (Marquee's own
+  // `basePaddingDefault`) -- first built as a `padded={false}` Marquee
+  // inside this custom 72/32px wrapper. Reverted the same day (owner,
+  // 2026-09-07: still cutting off above the fold on a real laptop viewport)
+  // -- that extra 32px on top of `bannerInner`'s own trimmed bottom padding
+  // (see that key's own comment) was still too tall. `Marquee` now renders
+  // with its own plain defaults (`padded` unset, i.e. true) exactly like
+  // homepage Hero's own usage -- no wrapper, no override -- which is the
+  // real "standard" ticker spacing already established elsewhere in this
+  // codebase, not a second bespoke number tuned to one specific Figma
+  // frame's real-estate.
+  // `divider={false}` (real bug, found live, owner report: "there is some
+  // line coming under the marquee text remove it") -- Marquee's default
+  // `divider: true` bottom border is correct for homepage Hero's own
+  // ticker (Figma shows one there), but this Figma frame (729:139) has no
+  // divider at all under this ticker; confirmed via computed style before
+  // the fix (`border-bottom-width: 1px` on `.marquee`) that this was a real
+  // rendered line, not a misreading.
+};
+
+/* --- ServicesIntro (/services page, section 2) ---------------------------- */
+// Figma desktop node 733:529: a light section, two columns at `xl:` --
+// heading + paragraph (620px) on the left, a plain image placeholder
+// (400x296, "50:37" ratio -- see MediaPlaceholder) on the right, `gap-
+// [170px]` between them. get_metadata confirmed section padding
+// `pt-[160px] pb-[60px] px-[80px]` (px-[80px] is `container-p`'s own
+// desktop inset, reused, not redeclared) and a `gap-[40px]` between the
+// heading and paragraph.
+//
+// Desktop-only for now, same as `servicesHero` above -- no mobile Figma
+// frame exists yet for this page. Mobile/tablet values are a
+// responsive-safe fallback (stacked column, `container-p`'s own padding,
+// image below the text) rather than a confirmed design.
+export const servicesIntro = {
+  section: "bg-paper",
+  inner: "container-p flex flex-col gap-10 pt-16 pb-16 xl:flex-row xl:items-center xl:gap-[170px] xl:pt-[160px] xl:pb-[60px]",
+  textCol: "flex w-full flex-col gap-6 xl:w-[620px] xl:shrink-0 xl:gap-10",
+  heading: "text-h1 text-ink",
+  // text-body-lg is 20px/400 (matches), but its own default line-height
+  // (1.2/24px) is shorter than this paragraph's real Figma leading
+  // (32px) -- `leading-8` overrides just that, per this project's own
+  // "typography copied exactly, layered on top of the shared size token"
+  // convention used elsewhere.
+  paragraph: "text-body-lg leading-8 text-ink",
+  paragraphBold: "font-semibold",
+  media: "w-full xl:w-[400px] xl:shrink-0",
 };
 
 /* --- ClientLogos (homepage section 4) -------------------------------------- */

@@ -4,19 +4,21 @@
 // content/services.ts, this file composes sections in Figma order so more
 // can be added without disturbing what's already here.
 //
-// Section 1 (this step): ServicesHero, Figma desktop node 729:139 -- see
+// Section 1: ServicesHero, Figma desktop node 729:139 -- see
 // components/sections/ServicesHero.tsx for the section's own build notes.
-// Every later section listed in the owner's brief (Fully Custom Offerings
-// chip strip is already this section's own ticker; the 4-up services strip,
-// the "raw fabric to retail-ready packaging" section, certification logos,
-// How It Works, FAQ, closing CTA) is not built yet -- added incrementally,
-// one Figma link at a time.
+// Section 2 (this step): ServicesIntro, Figma desktop node 733:529 -- see
+// components/sections/ServicesIntro.tsx for the section's own build notes.
+// Every later section listed in the owner's brief (the 4-up services
+// strip, the "raw fabric to retail-ready packaging" section, certification
+// logos, How It Works, FAQ, closing CTA) is not built yet -- added
+// incrementally, one Figma link at a time.
 import type { Metadata } from "next";
 
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
 import { ServicesHero } from "@/components/sections/ServicesHero";
+import { ServicesIntro } from "@/components/sections/ServicesIntro";
 import { header } from "@/components/ui/styles";
 import { home } from "@/content/home";
 import { services } from "@/content/services";
@@ -68,6 +70,7 @@ export default function ServicesPage() {
           change when it happens. */}
       <main className="relative z-10 bg-paper">
         <ServicesHero hero={services.hero} customOfferings={home.customOfferings} />
+        <ServicesIntro content={services.intro} />
       </main>
 
       <JsonLd data={breadcrumbSchema([{ name: "Home", url: SITE_URL }, { name: "Services", url: CANONICAL }])} />
