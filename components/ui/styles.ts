@@ -3789,6 +3789,12 @@ export const productGallery = {
   lessButton: "absolute inset-x-0 top-2 z-10 mx-auto flex size-[45px] items-center justify-center rounded-full bg-paper text-ink shadow-card",
   moreIcon: "size-[22px]",
   mainWrap: "relative min-w-0 flex-1 self-stretch",
+  // Single source of truth for the gallery's own image-change fade (owner
+  // request, 2026-09-07) -- applied to both the desktop and mobile main
+  // image (see `app/globals.css`'s own `.gallery-fade-in` comment for the
+  // full reasoning), so both breakpoints can never drift to a different
+  // duration/easing independently.
+  imageTransition: "gallery-fade-in",
   // bottom-6/right-6 (24px, Figma's own measured inset) for the next
   // button; prev sits 81px from the right edge (next's own 24px inset +
   // its 45px width + the pair's 12px gap) -- both circles, matching

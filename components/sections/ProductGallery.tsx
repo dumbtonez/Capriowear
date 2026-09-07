@@ -214,6 +214,7 @@ export function ProductGallery({ images, productTitle }: ProductGalleryProps) {
             ratio="575:612"
             radius="none"
             showLabel={false}
+            className={productGallery.imageTransition}
           />
           {images.length > 1 ? (
             <>
@@ -259,7 +260,7 @@ export function ProductGallery({ images, productTitle }: ProductGalleryProps) {
             image={images[activeIndex]?.src ? { src: images[activeIndex].src!, alt: images[activeIndex]?.alt ?? productTitle } : undefined}
             radius="none"
             showLabel={false}
-            className={productGallery.mobileImage}
+            className={cx(productGallery.mobileImage, productGallery.imageTransition)}
           />
         </div>
         {images.length > 1 ? (

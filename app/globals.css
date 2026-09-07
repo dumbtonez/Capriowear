@@ -276,6 +276,33 @@
   animation-play-state: running;
 }
 
+/* ProductGallery (components/sections/ProductGallery.tsx) -- a subtle fade
+   on every main-image change (owner request, 2026-09-07: "add a subtle
+   animation when the image changes... swipe or user taps on the other
+   thumbnail all should have the same animation for tablet, mobile and
+   desktop"). The main image is already `key={activeIndex}`-remounted on
+   every change (swipe, thumbnail tap/hover/click, prev/next chevron all
+   funnel through the same `activeIndex` state), so a plain fade-in on
+   mount -- not a two-image crossfade, which would need the outgoing image
+   kept mounted alongside the incoming one -- covers every interaction path
+   identically on every breakpoint for free, riding the remount that
+   already happens rather than adding new transition logic per input type.
+   200ms/ease-out matches this codebase's own closest existing state-swap
+   fade (header/mega-menu's own `fadeGroup`, `components/ui/styles.ts`),
+   not an invented duration. */
+@keyframes gallery-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.gallery-fade-in {
+  animation: gallery-fade-in 200ms ease-out;
+}
+
 /* Fades the track's own left/right edges to transparent so items entering
    or leaving the visible strip fade out rather than getting hard-clipped
    (Client Logos' desktop ticker, 2026-08-26, referencing tedy.app). A mask
