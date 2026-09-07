@@ -1321,24 +1321,29 @@ export const hero = {
 // non-breaking fallback (same container-p + stacked-buttons pattern every
 // other section uses), not read from a real mobile Figma frame yet.
 export const servicesHero = {
-  section: "bg-ink text-paper",
   // get_metadata's literal Figma number for the bottom gap is 126px (578px
   // Banner frame - 140px top - 312px of content), which was used verbatim
   // at first. Owner, 2026-09-07: still reading as cut off above the fold on
   // a real laptop viewport even after the divider-line bug (below) was
-  // fixed -- confirmed live, this section's total height plus the 87px
-  // sticky header still didn't fit a real, more compact laptop browser
-  // viewport (same class of bug as the Footer height fix earlier this same
-  // day, see docs/05-plan.md's decision log), even after a first pass that
-  // trimmed the bottom gap alone to `hero.bannerInner`'s own 80px inset and
-  // kept top at the shared 140px. That first pass was tuned against an
-  // ~800-820px viewport; a real laptop measured live came in smaller still,
-  // so both insets and the H1-to-buttons gap were trimmed further here
-  // (140->96px top, 80->48px bottom, 48->32px gap) -- a services-page-only
-  // adjustment (this is `servicesHero`'s own key, not `hero.bannerInner`),
-  // confirmed live to clear a 1280x700 viewport with room to spare while
-  // still reading comfortably spaced at 1440x900.
-  bannerInner: "container-p flex flex-col gap-8 pt-12 pb-12 xl:gap-8 xl:pt-24 xl:pb-12",
+  // fixed. Two fixed-padding passes followed (126->80px bottom, then
+  // 140/80/48 -> 96/48/32px top/bottom/gap), each tuned against one
+  // specific viewport height and each still wrong on a different one --
+  // any fixed-padding number is fighting a moving target, since "above the
+  // fold" is the full viewport height minus the 87px sticky header, which
+  // varies by the visitor's own browser chrome. Owner, 2026-09-07 (second
+  // report): the trimmed version now falls short of the fold instead,
+  // leaving visible white space above the next section. Fixed by making
+  // the section genuinely viewport-sized (`xl:min-h-[calc(100vh-87px)]`,
+  // 87px being this site's own fixed header height, same literal already
+  // used elsewhere for this -- see e.g. `stickyGallery`'s own top-offset
+  // note) with `xl:justify-between` distributing `bannerInner` and the
+  // Marquee to the section's own top and bottom edges -- so the section
+  // always exactly fills the fold and the two content blocks never need
+  // their own tuned insets again. `bannerInner`'s own top/bottom padding
+  // stays only as the minimum breathing room against the header/marquee,
+  // not as what determines the section's total height any more.
+  section: "bg-ink text-paper xl:flex xl:min-h-[calc(100vh-87px)] xl:flex-col xl:justify-between",
+  bannerInner: "container-p flex flex-col gap-8 pt-12 pb-12 xl:gap-8 xl:pt-16 xl:pb-8",
   // 832px H1 wrap width in Figma is exactly 52rem -- identical value to
   // `hero.heading`, reused directly rather than redefined.
   heading: "max-w-[52rem]",
