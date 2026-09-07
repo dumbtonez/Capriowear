@@ -1369,10 +1369,12 @@ export const servicesHero = {
   // 832px H1 wrap width in Figma is exactly 52rem -- identical value to
   // `hero.heading`, reused directly rather than redefined.
   heading: "max-w-[52rem]",
-  // Figma's real design shows both buttons at every width (no mobile frame
-  // exists to confirm hiding the secondary one the way homepage's does) --
-  // stacked full-width on mobile, side by side from xl, same shape as
-  // `hero.buttons` but with the secondary button always rendered.
+  // Figma's real desktop design shows both buttons (stacked full-width on
+  // mobile, side by side from xl, same shape as `hero.buttons`) -- mobile
+  // itself now hides the secondary one the same way homepage's does (owner,
+  // 2026-09-07: "Remove the download catalog cta" on mobile), via the
+  // shared `hero.ctaSecondaryWrap` wrapper in `ServicesHero.tsx` rather than
+  // a change to this token.
   buttons: "flex flex-col gap-4 xl:flex-row xl:items-center",
   ctaPrimary: "w-full xl:w-auto",
   // Ticker: the exact same "Fully Custom Offerings" Marquee as homepage
@@ -1395,6 +1397,26 @@ export const servicesHero = {
   // divider at all under this ticker; confirmed via computed style before
   // the fix (`border-bottom-width: 1px` on `.marquee`) that this was a real
   // rendered line, not a misreading.
+  //
+  // Mobile ticker fallback (owner, 2026-09-07: "fully custom offering make
+  // it same as used on the homepage" -- Hero's own `ScrollSpotlightList`
+  // treatment, see ServicesHero.tsx), then an experimental tweak the same
+  // day ("make the fully custom font to 24px auto and make the entire
+  // content center-aligned and see how it looks") -- a services-page-only
+  // fork of `hero.tickerMobile*` rather than editing those shared tokens,
+  // so the homepage's own mobile ticker (30px items, left-aligned) is
+  // untouched. `items-center`/`text-center` on both the block and the list
+  // (not just the label) since "entire content" was the ask. 24px on both
+  // the label and the list items (`text-[1.5rem]`, "24px" verbatim) with
+  // `leading-normal` ("auto" -- CSS has no literal auto line-height
+  // keyword, `normal` is its real equivalent) replacing both elements' own
+  // fixed `leading-[1.2]`. Explicitly called out by the owner as a
+  // "see how it looks" experiment, not a confirmed design -- may get
+  // reverted or adjusted once seen live.
+  tickerMobile: "container-p flex flex-col items-center gap-8 pt-12 pb-12 text-center md:hidden",
+  tickerMobileLabel: "text-[1.5rem] font-medium leading-normal",
+  tickerMobileList: "flex flex-col items-center gap-3",
+  tickerMobileItem: "text-[1.5rem] font-normal leading-normal text-[#838D97]",
 };
 
 /* --- ServicesIntro (/services page, section 2) ---------------------------- */
@@ -2893,7 +2915,13 @@ export const footer = {
   // of that padding. An earlier pass added `mt-14` here too, doubling it to
   // 112px; removed.
   desktopBrandGroup: "flex flex-col items-start gap-3",
-  desktopBrandLogo: "h-[55px] w-auto",
+  // 57.69px (owner, 2026-09-07: "updated the footer caprio logo. Update
+  // it") -- `Logo`'s new `footer` geometry's own real Figma height
+  // (`get_metadata` on node `787:1073`: 224x57.69169...), not the old
+  // `stacked` mark's 55px (a value fitted to the previous, now-superseded
+  // asset). Renders ~224px wide at this height, comfortably inside row 1's
+  // own 60px-tall Content frame.
+  desktopBrandLogo: "h-[57.69px] w-auto",
   // Was rendered right next to the logo in row 1's brand group; owner,
   // 2026-09-06: move it to sit above row 2's description paragraph instead
   // -- see `desktopDescriptionGroup` below. Style itself (1.25rem/normal)

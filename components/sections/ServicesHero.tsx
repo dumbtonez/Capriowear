@@ -13,13 +13,37 @@
 // second copy of any of them. See `servicesHero` in components/ui/styles.ts
 // for the exact spacing/token notes.
 //
-// Desktop-only for now, per the owner's own brief -- mobile is being
-// handled separately; the mobile/tablet values here are a responsive-safe
-// fallback (container-p + stacked layout), not a confirmed mobile design.
+// Mobile (owner, 2026-09-07, three requests together): "Remove the
+// download catalog cta [on mobile] ... make the banner height the same as
+// the homepage hero banner ... fully custom offering make it same as used
+// on the homepage" -- all three land as "mobile mirrors Hero.tsx's own
+// mobile treatment exactly, not a second bespoke one":
+//   - Secondary button ("Download Catalog") is desktop-only now, same
+//     `hidden xl:contents` wrapper Hero.tsx's own secondary CTA uses (see
+//     `hero.ctaSecondaryWrap`, reused directly rather than a second
+//     identical token) -- both buttons still render at every width from
+//     xl up, matching this page's own Figma frame (729:139), which shows
+//     both (no mobile frame exists to say otherwise).
+//   - `bannerInner`'s mobile padding (`pt-12 pb-12 gap-8`) was already
+//     byte-identical to `hero.bannerInner`'s own mobile value before this
+//     change -- removing the second button is what actually closes the
+//     height gap (a stacked two-button column reads taller than Hero's own
+//     single-button mobile block), not a padding change here.
+//   - Ticker: mobile now gets Hero's own real mobile treatment, a plain
+//     `ScrollSpotlightList` label+list (not a scrolling Marquee) below
+//     `md:` -- originally `hero.tickerMobile*` reused directly (same 48px
+//     inset, same label size/weight), then forked into this page's own
+//     `servicesHero.tickerMobile*` tokens the same day for an experimental
+//     tweak ("make the fully custom font to 24px auto and make the entire
+//     content center-aligned and see how it looks") -- see those tokens'
+//     own comment in components/ui/styles.ts for the full reasoning; the
+//     homepage's own mobile ticker is untouched by this. Desktop Marquee
+//     (`md:` and up) is unchanged.
 import { Button } from "@/components/Button";
 import { Marquee } from "@/components/Marquee";
+import { ScrollSpotlightList } from "@/components/ScrollSpotlightList";
 import { TextReveal } from "@/components/TextReveal";
-import { servicesHero } from "@/components/ui/styles";
+import { hero, servicesHero } from "@/components/ui/styles";
 import type { home } from "@/content/home";
 import type { services } from "@/content/services";
 
@@ -38,21 +62,33 @@ export function ServicesHero({ hero: content, customOfferings }: ServicesHeroPro
           <Button href={content.ctaPrimary.href} className={servicesHero.ctaPrimary}>
             {content.ctaPrimary.label}
           </Button>
-          <Button variant="secondary" href={content.ctaSecondary.href}>
-            {content.ctaSecondary.label}
-          </Button>
+          <div className={hero.ctaSecondaryWrap}>
+            <Button variant="secondary" href={content.ctaSecondary.href}>
+              {content.ctaSecondary.label}
+            </Button>
+          </div>
         </div>
       </div>
 
-      <Marquee
-        label={customOfferings.label}
-        labelVariant="bold"
-        separator="sparkle"
-        tone="dark"
-        items={customOfferings.items}
-        pauseOnHover={false}
-        divider={false}
-      />
+      <div className="hidden md:block">
+        <Marquee
+          label={customOfferings.label}
+          labelVariant="bold"
+          separator="sparkle"
+          tone="dark"
+          items={customOfferings.items}
+          pauseOnHover={false}
+          divider={false}
+        />
+      </div>
+      <div className={servicesHero.tickerMobile}>
+        <span className={servicesHero.tickerMobileLabel}>{customOfferings.label}</span>
+        <ScrollSpotlightList
+          items={customOfferings.items}
+          listClassName={servicesHero.tickerMobileList}
+          itemClassName={servicesHero.tickerMobileItem}
+        />
+      </div>
     </section>
   );
 }

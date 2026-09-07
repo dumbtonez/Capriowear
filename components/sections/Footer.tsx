@@ -84,7 +84,7 @@ export function Footer({ content, social }: FooterProps) {
         <div className={footer.desktopInner}>
           <div className={footer.desktopRow1}>
             <div className={footer.desktopBrandGroup}>
-              <Logo stacked className={footer.desktopBrandLogo} />
+              <Logo footer className={footer.desktopBrandLogo} />
             </div>
             <div className={footer.desktopSocialGroup}>
               <SocialLinks social={social} />
