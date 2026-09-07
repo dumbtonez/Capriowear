@@ -130,15 +130,6 @@ export const home = {
       { label: "Services", href: "/services" },
       { label: "Factory Tour", href: "/our-factory" },
     ],
-    // Shared footer strip under every mega menu's category columns (Figma
-    // node 493:3140) -- identical regardless of which trigger is open, not
-    // per-category content, so it lives once here rather than being
-    // repeated on every future `megaMenu` entry.
-    megaMenuPromo: {
-      heading: "Fully Custom Manufacturing",
-      description: "From fabric to packaging, your brand on every piece",
-      bullets: ["MOQ from 50", "Samples in 10 to 14 days", "DDP worldwide"],
-    },
     // The mobile drawer's own real design (Figma node 465:2817, 2026-08-27)
     // is a flat list, not derived from `links` above: it adds a 5th item
     // ("Our Story", not on desktop) and a `chevron` flag Figma shows on

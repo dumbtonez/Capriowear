@@ -128,7 +128,6 @@ export default function ServicesPage() {
         desktopLogo={<Logo stacked className={header.brandLogoDesktop} />}
         links={home.nav.links}
         mobileLinks={home.nav.mobileLinks}
-        megaMenuPromo={home.nav.megaMenuPromo}
         contact={home.nav.contact}
         social={ORGANIZATION.sameAs}
         cta={home.nav.cta}

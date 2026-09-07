@@ -34,7 +34,7 @@
 // the header itself, so yanking it off-screen mid-interaction would be a
 // real usability regression, not a subtlety worth trading away for the
 // scroll effect.
-import { ChevronDown, Sparkle } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
@@ -97,8 +97,6 @@ export type HeaderProps = {
   /** The mobile drawer's own link set -- see MobileNav's own props. */
   mobileLinks: MobileNavLink[];
   contact: { label: string; email: string };
-  /** The shared footer strip under every mega menu's categories -- see `NavLink.megaMenu`. */
-  megaMenuPromo: { heading: string; description: string; bullets: string[] };
   /** Same shape as Footer's own `social` prop -- content/site.ts's `ORGANIZATION.sameAs`. */
   social: readonly string[];
   cta: { label: string; href: string };
@@ -124,7 +122,6 @@ export function Header({
   links,
   mobileLinks,
   contact,
-  megaMenuPromo,
   social,
   cta,
   secondaryCta,
@@ -304,6 +301,15 @@ export function Header({
                 // reads as "on Activewear".
                 const isRouteActive =
                   pathname === link.href || pathname?.startsWith(`${link.href}/`);
+                // `isActive` still drives the semibold/colour treatment on
+                // both open (hovering a mega-menu trigger) and route-active
+                // states -- only the underline itself is route-only now
+                // (owner, same day: "don't show the underline highlighter
+                // [on hover], just change the color of the text and increase
+                // the font weight ... It only appears when some page is
+                // selected"). Each `isRouteActive ? <navUnderline /> : null`
+                // below is the actual gate; `isActive` is never read for the
+                // underline anymore, only for weight/colour.
                 const isActive = isOpen || isRouteActive;
 
                 if (!hasMenu) {
@@ -314,7 +320,7 @@ export function Header({
                         className={cx(header.navLink, isActive && header.navTriggerActive)}
                       >
                         {link.label}
-                        {isActive ? <span className={header.navUnderline} aria-hidden="true" /> : null}
+                        {isRouteActive ? <span className={header.navUnderline} aria-hidden="true" /> : null}
                       </Link>
                     </li>
                   );
@@ -346,7 +352,7 @@ export function Header({
                         className={cx(header.navTriggerChevron, isOpen && header.navTriggerChevronOpen)}
                         aria-hidden="true"
                       />
-                      {isActive ? <span className={header.navUnderline} aria-hidden="true" /> : null}
+                      {isRouteActive ? <span className={header.navUnderline} aria-hidden="true" /> : null}
                     </button>
                   </li>
                 );
@@ -423,26 +429,6 @@ export function Header({
                     </ul>
                   </div>
                 ))}
-              </div>
-
-              <div
-                className={cx(
-                  header.megaPromo,
-                  header.megaGroupReveal,
-                  megaRevealed ? header.megaGroupRevealOpen : header.megaGroupRevealClosed,
-                )}
-                style={{ transitionDelay: `${megaContent.megaMenu.length * 60}ms` }}
-              >
-                <p className={header.megaPromoHeading}>{megaMenuPromo.heading}</p>
-                <div className={header.megaPromoRow}>
-                  <p className={header.megaPromoText}>{megaMenuPromo.description}</p>
-                  {megaMenuPromo.bullets.map((bullet) => (
-                    <div key={bullet} className={header.megaPromoBullet}>
-                      <Sparkle className={header.megaPromoIcon} aria-hidden="true" fill="currentColor" />
-                      <span>{bullet}</span>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
           </div>

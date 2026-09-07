@@ -875,6 +875,11 @@ export const header = {
     "absolute inset-x-0 top-full z-30 border-t border-line-dark bg-ink text-paper transition-[clip-path] duration-300 ease-in-out",
   megaPanelOpen: "[clip-path:inset(0_0_0_0)]",
   megaPanelClosed: "[clip-path:inset(0_0_100%_0)]",
+  // `pb-10` (40px, owner request 2026-09-07: "finish the mega menu 40px
+  // from the bottom of the content") -- the promo block that used to sit
+  // below the category columns (and its own divider line, "a line where
+  // the menu ends") was removed the same day, so `megaGroups` is now the
+  // last thing in the panel and this padding is the real gap to its edge.
   megaPanelInner: "container-p flex flex-col pt-12 pb-10",
   // 56px between columns (Figma's own confirmed gap).
   megaGroups: "flex gap-14",
@@ -910,29 +915,6 @@ export const header = {
   // wrapped 2-line item breaks the shared `h-11` row rhythm every other
   // item relies on for even vertical spacing between rows.
   megaItem: "flex h-11 items-center whitespace-nowrap text-body-lg text-paper transition-colors hover:text-[#838d97]",
-  // Own top border + 24px above and below the heading (owner call,
-  // 2026-08-27, revised down from an initial 48px/40px pass that still read
-  // as "tight against the categories" from the other direction -- too much
-  // space above, not enough of a deliberate rhythm) -- `mt-12` still clears
-  // the categories themselves before the divider (an addition on top of the
-  // real design, see below); `pt-6` (24px) opens the promo up from that
-  // line. `gap-3` (12px, corrected 2026-08-27 from an earlier 24px guess),
-  // not `gap-6` -- the owner asked for the heading-to-content gap to match
-  // Figma's own real value, and node 493:3140's promo content wraps both in
-  // one `gap-[12px]` flex column. The divider itself and the 24px above it
-  // aren't in that real design at all (an explicit owner addition, "a line
-  // where the menu ends" / separating the promo from the categories), so
-  // that spacing stays a deliberate one-off, not something to match against
-  // Figma.
-  // `border-line-dark` again, matching the panel's own top/bottom borders
-  // and the header's, so the whole panel reads as one consistently-bordered
-  // surface.
-  megaPromo: "mt-16 flex flex-col gap-3 border-t border-line-dark pt-10",
-  megaPromoHeading: "text-[1.375rem] font-medium text-paper",
-  megaPromoRow: "flex items-center gap-10",
-  megaPromoText: "text-body-lg text-[#838d97]",
-  megaPromoBullet: "flex items-center gap-3 text-body-lg text-[#838d97]",
-  megaPromoIcon: "size-3.5 shrink-0",
   // gap-6 -> gap-5 (owner call, 2026-08-28): "Our Factory" -> "Factory
   // Tour" made the nav's longest label one character wider, which pushed
   // this row 4px past the header's own tight 1280px budget (a real
