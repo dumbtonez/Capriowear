@@ -127,7 +127,7 @@ export default function Home() {
         <Stats items={home.stats} />
         <InsideFactory content={home.insideFactory} />
         <Exhibitions content={home.exhibitions} />
-        <FinalCta content={home.finalCta} ticker={home.complianceTicker} />
+        <FinalCta content={home.finalCta} ticker={home.complianceTicker} secondaryCta={home.finalCta.secondaryCta} />
         <OurServices content={home.services} />
         <HowItWorks content={home.howItWorks} />
         <Faq content={home.faq} />

@@ -218,6 +218,41 @@ export function Header({
 
   const closeMenu = useCallback(() => setOpenMenu(null), []);
 
+  const openLink = links.find((link) => link.label === openMenu && link.megaMenu?.length);
+  const megaPanelId = "desktop-mega-menu";
+
+  // Mirrors `MobileNav`'s own mount-lifetime pattern so the mega panel's
+  // closing `clip-path` sweep has something to animate: unmounting the
+  // instant `openLink` disappears would just cut the content away, since an
+  // element that's not in the DOM can't play a CSS transition. `content`
+  // tracks whichever link's data should currently render -- it updates the
+  // moment a real `openLink` exists (including switching straight from one
+  // open trigger to another) but keeps the last real value during the
+  // close animation, when `openLink` itself has already gone back to
+  // `undefined`.
+  //
+  // Declared here, above the scroll effect below, rather than after it (as
+  // it originally was) -- `megaRendered` has to be in scope for that
+  // effect's own guard condition to reference (see that effect's own
+  // comment for why: the panel stays mounted for `MEGA_TRANSITION_MS`
+  // after closing, and a tone recompute that runs during that window would
+  // sample the still-visible panel instead of the real page behind it).
+  const [megaRendered, setMegaRendered] = useState(false);
+  const [megaRevealed, setMegaRevealed] = useState(false);
+  const [megaContent, setMegaContent] = useState(openLink);
+  if (openLink && openLink !== megaContent) setMegaContent(openLink);
+  if (openLink && !megaRendered) setMegaRendered(true);
+  if (!openLink && megaRevealed) setMegaRevealed(false);
+
+  useEffect(() => {
+    if (!openLink) {
+      const timeout = setTimeout(() => setMegaRendered(false), MEGA_TRANSITION_MS);
+      return () => clearTimeout(timeout);
+    }
+    const raf = requestAnimationFrame(() => setMegaRevealed(true));
+    return () => cancelAnimationFrame(raf);
+  }, [openLink]);
+
   // Escape closes an open mega menu wherever focus currently sits.
   useEffect(() => {
     if (!openMenu) return;
@@ -266,7 +301,23 @@ export function Header({
 
     const update = () => {
       ticking = false;
-      if (openMenu || drawerOpen) {
+      // `megaRendered`, not just `openMenu` (real bug, found live,
+      // 2026-09-08: "hover on the nav content and move out the cursor...
+      // the logo turn white... it stays white") -- the mega panel stays
+      // mounted and visually present for `MEGA_TRANSITION_MS` (500ms)
+      // after `openMenu` already goes back to `null` on mouse-leave (its
+      // own closing `clip-path` sweep needs something to animate, see
+      // `megaRendered`'s own comment above). Every `openMenu` change
+      // re-runs this whole effect, including one synchronous `update()`
+      // call -- gating on `openMenu` alone meant that call fired the
+      // instant the trigger closed, while the still-mounted, fully opaque
+      // `bg-ink` panel (`absolute top-full`, i.e. starting exactly at the
+      // probe point below) was still sitting exactly where
+      // `getSurfaceToneAt` samples, misreading "dark" no matter what
+      // section was actually behind the header -- and nothing ever
+      // recomputed it again afterward, since only a real scroll (or
+      // another `openMenu` change) triggers a fresh check.
+      if (openMenu || drawerOpen || megaRendered) {
         applyHeaderOffset(0);
         lastScrollYRef.current = window.scrollY;
         return;
@@ -344,35 +395,7 @@ export function Header({
 
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [openMenu, drawerOpen, sticky, applyHeaderOffset]);
-
-  const openLink = links.find((link) => link.label === openMenu && link.megaMenu?.length);
-  const megaPanelId = "desktop-mega-menu";
-
-  // Mirrors `MobileNav`'s own mount-lifetime pattern so the mega panel's
-  // closing `clip-path` sweep has something to animate: unmounting the
-  // instant `openLink` disappears would just cut the content away, since an
-  // element that's not in the DOM can't play a CSS transition. `content`
-  // tracks whichever link's data should currently render -- it updates the
-  // moment a real `openLink` exists (including switching straight from one
-  // open trigger to another) but keeps the last real value during the
-  // close animation, when `openLink` itself has already gone back to
-  // `undefined`.
-  const [megaRendered, setMegaRendered] = useState(false);
-  const [megaRevealed, setMegaRevealed] = useState(false);
-  const [megaContent, setMegaContent] = useState(openLink);
-  if (openLink && openLink !== megaContent) setMegaContent(openLink);
-  if (openLink && !megaRendered) setMegaRendered(true);
-  if (!openLink && megaRevealed) setMegaRevealed(false);
-
-  useEffect(() => {
-    if (!openLink) {
-      const timeout = setTimeout(() => setMegaRendered(false), MEGA_TRANSITION_MS);
-      return () => clearTimeout(timeout);
-    }
-    const raf = requestAnimationFrame(() => setMegaRevealed(true));
-    return () => cancelAnimationFrame(raf);
-  }, [openLink]);
+  }, [openMenu, drawerOpen, megaRendered, sticky, applyHeaderOffset]);
 
   return (
     <header

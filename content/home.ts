@@ -603,6 +603,11 @@ export const home = {
     // Owner update, 2026-08-30.
     subline: "Tell us what you're making. We'll come back within 24 hours with next steps.",
     cta: { label: "Request a Sample", href: "/request-a-sample" },
+    // Secondary "Download Catalog" button (owner, 2026-09-08: "on home,
+    // under exhibition cta section add download catalog cta too") -- same
+    // `FinalCta` prop already added everywhere else (`closingCta` above,
+    // every PLP/PDP, Services).
+    secondaryCta: { label: "Download Catalog", href: "/catalog" },
   },
 
   // A second CTA band, same component and styling as `finalCta` above
