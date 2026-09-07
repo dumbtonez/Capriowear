@@ -3841,12 +3841,28 @@ export const productGallery = {
   lessButton: "absolute inset-x-0 top-2 z-10 mx-auto flex size-[45px] items-center justify-center rounded-full bg-paper text-ink shadow-card",
   moreIcon: "size-[22px]",
   mainWrap: "relative min-w-0 flex-1 self-stretch",
-  // Single source of truth for the gallery's own image-change fade (owner
-  // request, 2026-09-07) -- applied to both the desktop and mobile main
-  // image (see `app/globals.css`'s own `.gallery-fade-in` comment for the
-  // full reasoning), so both breakpoints can never drift to a different
-  // duration/easing independently.
-  imageTransition: "gallery-fade-in",
+  // Native scroll-snap track (owner report, 2026-09-07: "blinky, jerky" --
+  // replaces the old `key={activeIndex}`+`gallery-fade-in` remount, which
+  // unmounted the whole image on every change and gave zero visual
+  // feedback during a mobile swipe). `no-scrollbar` is the same utility
+  // `rail`/`ProductGallery.tsx`'s own mobile strip already use. Every
+  // slide (`mainSlide`, below) is exactly this track's own width, so
+  // scrolling one slide-width is a full "page" to the next image -- real
+  // finger-tracking on touch, and `ProductGallery.tsx`'s own imperative
+  // `scrollTo` for thumbnail/chevron-driven changes, both riding the same
+  // native mechanism rather than two different transition systems.
+  mainTrack: "flex h-full w-full snap-x snap-mandatory overflow-x-auto no-scrollbar",
+  // `ratio="575:612"` lives on the `MediaPlaceholder` inside each slide
+  // (unchanged from before), not here -- this wrapper only needs to be
+  // exactly the track's own width so the aspect-ratio box behind it
+  // renders at the identical size the old single-image version did.
+  mainSlide: "w-full shrink-0 snap-center",
+  // Mobile counterpart of `mainTrack`/`mainSlide` -- same mechanism, sized
+  // against `mobileImageWrap`'s existing fixed `h-[450px]` instead of an
+  // aspect-ratio box (each slide's own `MediaPlaceholder` already gets
+  // `h-full` via `mobileImage`, unchanged from before).
+  mobileTrack: "flex h-full w-full snap-x snap-mandatory overflow-x-auto no-scrollbar",
+  mobileSlide: "h-full w-full shrink-0 snap-center",
   // bottom-6/right-6 (24px, Figma's own measured inset) for the next
   // button; prev sits 81px from the right edge (next's own 24px inset +
   // its 45px width + the pair's 12px gap) -- both circles, matching

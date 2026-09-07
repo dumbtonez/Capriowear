@@ -36,7 +36,7 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import { useRef, useState, type TouchEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { cx } from "@/components/ui/cx";
@@ -69,25 +69,41 @@ export type ProductGalleryProps = {
 // leading gap (16px), the amount the rail scrolls per "show more" click.
 const RAIL_STEP_PX = 125;
 
-// Minimum horizontal travel (owner request, 2026-09-07: swipe-to-change on
-// the mobile main image) before a touch gesture counts as a deliberate
-// swipe rather than an incidental wobble/tap -- a plain, conservative
-// threshold, not a measured value (no Figma spec for this interaction).
-const SWIPE_THRESHOLD_PX = 40;
-
 export function ProductGallery({ images, productTitle }: ProductGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const railRef = useRef<HTMLDivElement>(null);
   const [railAtTop, setRailAtTop] = useState(true);
   const [railAtBottom, setRailAtBottom] = useState(false);
-  // Mobile swipe-to-change (owner request, 2026-09-07: the main image had
-  // no touch handling at all -- only the thumbnail strip changed it).
-  // Plain ref, not state -- a touch's start point is read-then-discarded
-  // per gesture, never rendered, so it doesn't need to trigger a re-render.
-  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+  // Main-image scroll-snap tracks (owner report, 2026-09-07: "blinky,
+  // jerky" -- the old key={activeIndex}+CSS-fade swap unmounted the whole
+  // image on every change, and mobile swipe was a bare touchstart/touchend
+  // threshold with no touchmove tracking at all, so the image never
+  // actually followed the finger). Two real tracks, one per breakpoint
+  // (same "genuinely different layouts" split as the rest of this file),
+  // both permanently mounted -- native `overflow-x-auto`/`snap-x` scrolling
+  // now supplies all the motion (real finger-tracking, GPU-composited,
+  // nothing ever unmounts so there's nothing to blink), the same technique
+  // `CardCarousel.tsx` already established for finger-swipeable content
+  // elsewhere on this site.
+  const desktopTrackRef = useRef<HTMLDivElement>(null);
+  const mobileTrackRef = useRef<HTMLDivElement>(null);
 
-  function goTo(index: number, options?: { scrollRail?: boolean }) {
+  // Imperatively scrolls both tracks to `index`'s slide -- called on every
+  // activeIndex change (click/hover/chevron) and by the resize effect
+  // below. Scrolling the currently-`hidden` breakpoint's track is a
+  // harmless no-op visually, but keeps it correctly positioned for the
+  // moment it becomes visible (see the resize effect's own comment).
+  function scrollTracksTo(index: number, behavior: ScrollBehavior) {
+    for (const ref of [desktopTrackRef, mobileTrackRef]) {
+      const track = ref.current;
+      if (!track) continue;
+      track.scrollTo({ left: index * track.clientWidth, behavior });
+    }
+  }
+
+  function goTo(index: number, options?: { scrollRail?: boolean; behavior?: ScrollBehavior }) {
     setActiveIndex(index);
+    scrollTracksTo(index, options?.behavior ?? "smooth");
     if (options?.scrollRail !== false) {
       railRef.current
         ?.querySelector<HTMLElement>(`[data-index="${index}"]`)
@@ -99,31 +115,80 @@ export function ProductGallery({ images, productTitle }: ProductGalleryProps) {
     // Wraps at both ends -- Figma shows no disabled-edge state to match
     // here, unlike Pagination's explicit prev/next disabling, so continuous
     // wrap is the reasonable default for a fixed pair of always-enabled
-    // circles.
-    const next = (activeIndex + direction + images.length) % images.length;
-    goTo(next);
+    // circles. Wrapping jump (last -> first / first -> last) scrolls
+    // instantly ("auto"), not smoothly -- a smooth scroll here would fly
+    // across every intermediate slide, which reads as broken for a gallery
+    // with more than a couple of images. Every other step still slides.
+    const raw = activeIndex + direction;
+    const isWrap = raw < 0 || raw >= images.length;
+    const next = (raw + images.length) % images.length;
+    goTo(next, { behavior: isWrap ? "auto" : "smooth" });
   }
 
-  function handleImageTouchStart(event: TouchEvent<HTMLDivElement>) {
-    const touch = event.touches[0];
-    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
-  }
+  // Detects which slide is nearest the track's own scroll position and
+  // syncs `activeIndex` -- the counterpart to `goTo`'s own imperative
+  // scroll, needed for the reverse direction: the user swiping the track
+  // directly (not via a button), which never calls `goTo` at all. Every
+  // slide is exactly the track's own width, so "nearest" is just the
+  // rounded scroll-position ratio -- simpler than CardCarousel's own
+  // per-card distance loop, which exists there because its cards aren't
+  // full-track-width.
+  useEffect(() => {
+    const tracks = [desktopTrackRef.current, mobileTrackRef.current].filter((el) => el !== null);
+    let ticking = false;
 
-  function handleImageTouchEnd(event: TouchEvent<HTMLDivElement>) {
-    const start = touchStartRef.current;
-    touchStartRef.current = null;
-    if (!start || images.length <= 1) return;
+    function update(track: HTMLDivElement) {
+      const width = track.clientWidth;
+      if (width === 0) return;
+      const nearest = Math.round(track.scrollLeft / width);
+      setActiveIndex((current) => (nearest === current ? current : nearest));
+    }
 
-    const touch = event.changedTouches[0];
-    const dx = touch.clientX - start.x;
-    const dy = touch.clientY - start.y;
-    // Predominantly horizontal and past the threshold -- a vertical or
-    // diagonal-leaning gesture is a page scroll, not a swipe, and is left
-    // alone entirely (no preventDefault anywhere in this handler pair, so
-    // normal scrolling is never interfered with).
-    if (Math.abs(dx) < SWIPE_THRESHOLD_PX || Math.abs(dx) < Math.abs(dy)) return;
-    stepMainImage(dx < 0 ? 1 : -1);
-  }
+    const listeners = tracks.map((track) => {
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          update(track);
+          ticking = false;
+        });
+      };
+      track.addEventListener("scroll", onScroll, { passive: true });
+      return { track, onScroll };
+    });
+
+    return () => {
+      for (const { track, onScroll } of listeners) track.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  // Resize safety net: desktop and mobile are two permanently-mounted,
+  // breakpoint-hidden tracks (`hidden xl:flex` / `xl:hidden`, below). A
+  // `goTo` call while a track is `display:none` multiplies by that track's
+  // own `clientWidth`, which is 0 while hidden, so `scrollTracksTo`
+  // silently zeroes out the HIDDEN breakpoint's target position on every
+  // single interaction -- so the hidden one needs re-syncing the moment it
+  // becomes visible. `matchMedia` on this project's own `xl` breakpoint
+  // (1280px, Tailwind's default -- confirmed no custom `screens` override
+  // in `tailwind.config.ts`), not a generic `window` "resize" listener or
+  // `ResizeObserver`: both were tried live and neither reliably fired in
+  // testing (a `resize` event doesn't necessarily fire for every viewport
+  // change, and `ResizeObserver`'s callback -- despite the spec guaranteeing
+  // an initial notification -- never fired at all here); `matchMedia`'s own
+  // `change` event is the well-supported, direct signal for "the query this
+  // component actually cares about just flipped," not a proxy for it.
+  useEffect(() => {
+    const query = window.matchMedia("(min-width: 1280px)");
+    function resync() {
+      setActiveIndex((current) => {
+        scrollTracksTo(current, "auto");
+        return current;
+      });
+    }
+    resync(); // also covers the initial mount (real mobile vs. real desktop load)
+    query.addEventListener("change", resync);
+    return () => query.removeEventListener("change", resync);
+  }, []);
 
   function revealMore() {
     const rail = railRef.current;
@@ -207,15 +272,19 @@ export function ProductGallery({ images, productTitle }: ProductGalleryProps) {
         </div>
 
         <div className={productGallery.mainWrap}>
-          <MediaPlaceholder
-            key={activeIndex}
-            label={images[activeIndex]?.alt ?? productTitle}
-            image={images[activeIndex]?.src ? { src: images[activeIndex].src!, alt: images[activeIndex]?.alt ?? productTitle } : undefined}
-            ratio="575:612"
-            radius="none"
-            showLabel={false}
-            className={productGallery.imageTransition}
-          />
+          <div ref={desktopTrackRef} className={productGallery.mainTrack}>
+            {images.map((image, index) => (
+              <div key={index} className={productGallery.mainSlide} aria-hidden={index !== activeIndex}>
+                <MediaPlaceholder
+                  label={image.alt ?? productTitle}
+                  image={image.src ? { src: image.src, alt: image.alt ?? productTitle } : undefined}
+                  ratio="575:612"
+                  radius="none"
+                  showLabel={false}
+                />
+              </div>
+            ))}
+          </div>
           {images.length > 1 ? (
             <>
               {/* Image count (owner request, 2026-09-01: "so when I change
@@ -249,19 +318,20 @@ export function ProductGallery({ images, productTitle }: ProductGalleryProps) {
 
       {/* Mobile */}
       <div className={productGallery.mobileRoot}>
-        <div
-          className={productGallery.mobileImageWrap}
-          onTouchStart={handleImageTouchStart}
-          onTouchEnd={handleImageTouchEnd}
-        >
-          <MediaPlaceholder
-            key={activeIndex}
-            label={images[activeIndex]?.alt ?? productTitle}
-            image={images[activeIndex]?.src ? { src: images[activeIndex].src!, alt: images[activeIndex]?.alt ?? productTitle } : undefined}
-            radius="none"
-            showLabel={false}
-            className={cx(productGallery.mobileImage, productGallery.imageTransition)}
-          />
+        <div className={productGallery.mobileImageWrap}>
+          <div ref={mobileTrackRef} className={productGallery.mobileTrack}>
+            {images.map((image, index) => (
+              <div key={index} className={productGallery.mobileSlide} aria-hidden={index !== activeIndex}>
+                <MediaPlaceholder
+                  label={image.alt ?? productTitle}
+                  image={image.src ? { src: image.src, alt: image.alt ?? productTitle } : undefined}
+                  radius="none"
+                  showLabel={false}
+                  className={productGallery.mobileImage}
+                />
+              </div>
+            ))}
+          </div>
         </div>
         {images.length > 1 ? (
           <>
