@@ -469,14 +469,18 @@ export function Header({
                 // reads as "on Activewear".
                 const isRouteActive =
                   pathname === link.href || pathname?.startsWith(`${link.href}/`);
-                // `isActive` drives the semibold/colour treatment on both
-                // open (hovering a mega-menu trigger) and route-active
-                // states. The underline that used to render alongside it
-                // (`navUnderline`, gated on `isRouteActive` only) was
+                // Semibold is gated on `isRouteActive` ALONE now, not
+                // `isOpen`/hover (owner, 2026-09-08: "on hover the text
+                // should only change the color not the font weight, after
+                // selection it can change the font weight") -- hovering a
+                // mega-menu trigger (or a plain link, via CSS `:hover`/
+                // `group-hover`) now only changes colour; landing on that
+                // page is the only thing that still bolds it. The
+                // underline that used to render alongside this (
+                // `navUnderline`, also gated on `isRouteActive` only) was
                 // removed entirely (owner, 2026-09-08: "remove the selected
                 // page underline") -- weight/colour alone now carries the
                 // "you're on this page" signal.
-                const isActive = isOpen || isRouteActive;
 
                 if (!hasMenu) {
                   return (
@@ -485,14 +489,13 @@ export function Header({
                         {/* Same grid-stacked label as a mega-menu trigger
                             (see `navLinkLabelStack` in
                             components/ui/styles.ts) -- reserves the
-                            semibold width up front so hovering (CSS
-                            `group-hover`) or landing on this page
-                            (`isActive`) never shifts a later nav item. */}
+                            semibold width up front so landing on this page
+                            (`isRouteActive`) never shifts a later nav item. */}
                         <span className={header.navLinkLabelStack}>
                           <span className={header.navLinkLabelGhost} aria-hidden="true">
                             {link.label}
                           </span>
-                          <span className={cx(header.navLinkLabelVisible, isActive && header.navTriggerActive)}>
+                          <span className={cx(header.navLinkLabelVisible, isRouteActive && header.navTriggerActive)}>
                             {link.label}
                           </span>
                         </span>
@@ -519,7 +522,7 @@ export function Header({
                         <span className={header.navTriggerLabelGhost} aria-hidden="true">
                           {link.label}
                         </span>
-                        <span className={cx(header.navTriggerLabelVisible, isActive && header.navTriggerActive)}>
+                        <span className={cx(header.navTriggerLabelVisible, isRouteActive && header.navTriggerActive)}>
                           {link.label}
                         </span>
                       </span>

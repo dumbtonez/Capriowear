@@ -72,6 +72,11 @@ export const button = {
   primary: "bg-accent text-accent-ink hover:text-[#5E240F]",
   // currentColor, so the same outline reads on light and dark sections without
   // a separate inverse variant.
+  // `hover:bg-accent/10` was tried 2026-09-08 (owner: "make it same hover
+  // color as used on the pdp download catalog") to match the PDP's own
+  // `productCtas.secondaryDesktop` accent-tinted hover -- reverted the same
+  // day (owner: "revert back, it does not look nice"). Back to the
+  // original whitish `current/10` overlay.
   secondary: "border border-current bg-transparent text-current hover:bg-current/10",
 };
 
@@ -889,9 +894,14 @@ export const header = {
     "group relative inline-flex min-h-11 items-center whitespace-nowrap rounded-pill px-4 text-[1.0625rem] leading-[21px] text-current transition-colors hover:text-[var(--header-hover)]",
   navTrigger:
     "relative inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-pill px-4 text-[1.0625rem] leading-[21px] text-current transition-colors hover:text-[var(--header-hover)]",
-  // Active state (Figma node 493:3140, 2026-08-27) -- semibold text plus a
-  // 2px white underline, this request's own explicit spec.
-  navTriggerActive: "font-semibold",
+  // Selected-page state ONLY now (colour-only, owner, 2026-09-08: "keep
+  // the selected page regular font weight as default" -- reverses the
+  // semibold this same day's earlier pass added). Applied when
+  // `isRouteActive`: the sitewide accent orange, regular weight, same as
+  // every other state -- weight never toggles anywhere in the nav any
+  // more, hover or selected. Was `"font-semibold"` (Figma node 493:3140,
+  // 2026-08-27) before colour replaced it as the sole active-state signal.
+  navTriggerActive: "text-accent",
   // The label itself is a 2-layer grid stack, not plain text (owner report,
   // 2026-08-27: the trigger visibly shifted position when it turned
   // semibold -- bold glyphs are wider than regular ones at the same size,
@@ -899,26 +909,25 @@ export const header = {
   // it sideways). Both layers occupy the same grid cell; the invisible one
   // is always semibold, so the cell is always sized to the widest (bold)
   // version of the label -- only the *visible* layer's weight actually
-  // toggles with `isOpen`, and toggling a weight inside an already-fixed-
+  // toggles with `isRouteActive`, and toggling a weight inside an already-fixed-
   // width cell never reflows anything around it.
   navTriggerLabelStack: "relative isolate inline-grid",
   navTriggerLabelGhost: "invisible col-start-1 row-start-1 font-semibold",
   navTriggerLabelVisible: "col-start-1 row-start-1",
-  // Plain nav links (Services, Factory Tour) get the exact same hover
-  // treatment as a mega-menu trigger (owner, 2026-09-07: "Nav factory tour
-  // and download catalog should have the same hover treatment as
-  // teamwear") -- hovering Teamwear bolds its label via `isOpen` (mouse
-  // entering the trigger opens its menu, which flips `isActive`); a plain
-  // link never opens anything, so this reaches the same bold-on-hover
-  // result with a real CSS `hover:font-semibold` instead of JS state.
-  // Same 2-layer grid-stack technique as the trigger's own label (see
-  // above) for the same reason -- an always-semibold invisible ghost
-  // reserves the widest width up front, so this link's own hover-bold
-  // (and route-active bold, `navTriggerActive` again) never shifts
-  // whatever nav item sits after it.
+  // Plain nav links (Services, Factory Tour): same 2-layer grid-stack
+  // technique as the trigger's own label (see above) so the route-active
+  // bold (`navTriggerActive`, applied via `isRouteActive` in Header.tsx)
+  // never shifts whatever nav item sits after it -- the ghost always
+  // reserves the widest (bold) width regardless of whether the visible
+  // layer is currently bold. No `group-hover:font-semibold` any more
+  // (owner, 2026-09-08: "on hover the text should only change the color
+  // not the font weight" -- was added 2026-09-07 to match Teamwear's own
+  // hover treatment, reversed the next day): hovering now only changes
+  // colour, via `navLink`'s own plain CSS `hover:text-[var(--header-hover)]`,
+  // same as every other nav item.
   navLinkLabelStack: "relative isolate inline-grid",
   navLinkLabelGhost: "invisible col-start-1 row-start-1 font-semibold",
-  navLinkLabelVisible: "col-start-1 row-start-1 group-hover:font-semibold",
+  navLinkLabelVisible: "col-start-1 row-start-1",
   // Chevron, added 2026-08-27 (owner call) for every mega-menu trigger
   // (Activewear, Teamwear & Uniforms) -- not in the Figma frame itself, but
   // requested as a standard "this opens something" affordance. Rotates to
@@ -1476,19 +1485,38 @@ export const servicesHero = {
   // the current figures): `pt-[115px]` = 67px + 48px,
   // `xl:pt-[132px]` = 68px + 64px.
   section: "bg-ink text-paper xl:flex xl:min-h-[100vh] xl:flex-col xl:justify-between",
-  bannerInner: "container-p flex flex-col gap-8 pt-[115px] pb-12 xl:gap-8 xl:pt-[132px] xl:pb-8",
+  // gap-12 (48px, owner, 2026-09-08: "title and ctas should have 48px
+  // gap" -- was gap-8/32px) -- also Figma's own real value for this node
+  // (729:139's Content div is `gap-[48px]`, confirmed via
+  // get_design_context), so this corrects a gap that had drifted from the
+  // design's own real spec, not just a taste change.
+  bannerInner: "container-p flex flex-col gap-12 pt-[115px] pb-12 xl:gap-12 xl:pt-[132px] xl:pb-8",
   // 832px H1 wrap width in Figma is exactly 52rem -- identical value to
   // `hero.heading`, reused directly rather than redefined.
-  // Line-height overrides `text-display`'s own 1.09375 ratio (ServicesHero.tsx
-  // appends `text-display` alongside this token) with the PLP/PDP
-  // CategoryBanner's own h1 line-height instead (owner, 2026-09-07: "hero
-  // banner title line height should be the same as other plp hero banner
-  // titles") -- `categoryBanner.h1`'s own two literal values (38px mobile,
-  // 64px desktop, same `md:` threshold that component already splits at),
-  // layered on top of the shared `text-display` size/weight exactly like
-  // `servicesIntro.paragraph`'s own `leading-8` override of `text-body-lg`
-  // above -- font-size itself stays `text-display`'s fluid clamp, unchanged.
-  heading: "max-w-[52rem] leading-[38px] md:leading-[64px]",
+  // No line-height override any more (real bug, found live, 2026-09-08:
+  // "the packaging word is still being cut") -- a previous pass (owner,
+  // 2026-09-07: "hero banner title line height should be the same as
+  // other plp hero banner titles") had borrowed CategoryBanner's own h1
+  // line-height LITERALLY (`leading-[38px] md:leading-[64px]`), but that
+  // pairing was tuned for CategoryBanner's own, SMALLER font-size at each
+  // breakpoint (`categoryBanner.h1` is `text-[1.875rem]`/30px mobile,
+  // `md:text-[3.375rem]`/54px desktop -- NOT `text-display`'s 32px/64px).
+  // Reused as a bare number rather than re-derived for this heading's own
+  // actual (larger) font-size, `md:leading-[64px]` on a 64px font is a
+  // 1.0 ratio -- far too tight for Figtree's real ascender/descender
+  // metrics at that size, so `overflow-hidden` word-reveal masks (sized to
+  // each word's own tight layout box, see `textReveal.mask`'s own comment)
+  // clipped the descenders on any word with a "g"/"p"/"y" -- "packaging"
+  // (three: p, g, g) most visibly. Removing the override entirely restores
+  // `text-display`'s own bundled 1.09375 ratio (ServicesHero.tsx appends
+  // `text-display` alongside this token) -- which is ALSO Figma's own real
+  // spec for this exact node (729:139: 64px text, 70px line-height,
+  // 70/64 = 1.09375, confirmed via get_design_context), not a coincidence:
+  // `text-display`'s ratio was itself derived from this same design system's
+  // Figma source. Scales correctly at every breakpoint (mobile through
+  // 1920+) instead of two borrowed fixed pixel values that only ever
+  // matched CategoryBanner's own different font-sizes.
+  heading: "max-w-[52rem]",
   // Figma's real desktop design shows both buttons (stacked full-width on
   // mobile, side by side from xl, same shape as `hero.buttons`) -- mobile
   // itself now hides the secondary one the same way homepage's does (owner,

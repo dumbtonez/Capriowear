@@ -350,19 +350,20 @@
    correct SSR-safe default before Header.tsx's own scroll effect has run
    -- must match that effect's `useState<"dark" | "light">("dark")` default
    exactly, or the first frame flashes the wrong colour.
-   `--header-hover` swaps the muted grey too: #838d97 is this codebase's
-   own documented dark-surface muted colour (see `header.megaGroupLabel`'s
-   own comment in components/ui/styles.ts); `--color-muted` is the
-   already-established light-surface equivalent, reused here rather than
-   inventing a new value -- the plain `hover:text-[#838d97]` this replaced
-   had only ~2.9:1 contrast against a light/paper surface. */
+   `--header-hover` is the sitewide accent orange (owner, 2026-09-08: "let's
+   make the [nav hover] text color to primary orange and see how it looks,
+   on both over black and white section") -- one value, not tone-dependent
+   any more (was a tone-swapped muted grey, #838d97 dark-surface /
+   `--color-muted` light-surface, before this request); `--color-accent`
+   reads clearly against both `--color-ink` and `--color-paper`, so it
+   lives on the base `header` rule rather than being repeated identically
+   in the `[data-tone="light"]` block below. */
 header {
   --header-fg: var(--color-paper);
-  --header-hover: #838d97;
+  --header-hover: var(--color-accent);
 }
 header[data-tone="light"] {
   --header-fg: var(--color-ink);
-  --header-hover: var(--color-muted);
 }
 
 /* The base reduced-motion rule collapses animations to 0.001ms, which would

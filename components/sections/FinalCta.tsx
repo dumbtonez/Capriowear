@@ -68,9 +68,19 @@ export type FinalCtaProps = {
    *  don't stack into 144px. See `mobileTickerBlockTight`'s own comment in
    *  components/ui/styles.ts. */
   compactMobileTop?: boolean;
+  /** Drops the mobile ticker list even when `ticker` is passed (owner,
+   *  2026-09-08, Services page's own FAQ-adjacent closing CTA: "on services
+   *  mobile, remove 'standard on every order' under the faq cta, only keep
+   *  the cta") -- desktop keeps its own Marquee unaffected, since only the
+   *  mobile block was flagged. Mobile then falls back to
+   *  `mobileCtaBlockNoTicker`'s own spacing, the same as a real `!ticker`
+   *  usage, since there's no ticker block above it any more on this
+   *  breakpoint either. */
+  hideTickerMobile?: boolean;
 };
 
-export function FinalCta({ content, ticker, secondaryCta, compactMobileTop }: FinalCtaProps) {
+export function FinalCta({ content, ticker, secondaryCta, compactMobileTop, hideTickerMobile }: FinalCtaProps) {
+  const showMobileTicker = ticker && !hideTickerMobile;
   return (
     <section>
       {/* Desktop: CTA block, then the ticker, one continuous band */}
@@ -112,7 +122,7 @@ export function FinalCta({ content, ticker, secondaryCta, compactMobileTop }: Fi
       {/* Mobile: ticker list first, CTA block below -- a different order
           than desktop, not the same layout reflowed */}
       <div className={finalCta.mobileOuter}>
-        {ticker ? (
+        {showMobileTicker ? (
           <div className={cx(finalCta.mobileTickerBlock, compactMobileTop && finalCta.mobileTickerBlockTight)}>
             <span className={finalCta.mobileTickerLabel}>{ticker.title}</span>
             <ScrollSpotlightList
@@ -122,7 +132,7 @@ export function FinalCta({ content, ticker, secondaryCta, compactMobileTop }: Fi
             />
           </div>
         ) : null}
-        <div className={cx(finalCta.mobileCtaBlock, !ticker && finalCta.mobileCtaBlockNoTicker)}>
+        <div className={cx(finalCta.mobileCtaBlock, !showMobileTicker && finalCta.mobileCtaBlockNoTicker)}>
           <div className={finalCta.mobileHeadingWrap}>
             <TextReveal as="h2" text={content.h2} className={finalCta.mobileHeading} />
             <p className={finalCta.mobileSubline}>{content.subline}</p>

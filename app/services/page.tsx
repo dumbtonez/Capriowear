@@ -206,18 +206,26 @@ export default function ServicesPage() {
           sidePadding="services"
         />
         <Faq content={services.faq} />
-        {/* `compactMobileTop` (owner, 2026-09-08: "under FAQs, standard on
+        {/* `compactMobileTop` (owner, 2026-09-07: "under FAQs, standard on
             every order should have the same space as it has on PLP") --
             same prop, same reasoning, the PLP's own FinalCta-after-Faq
             usage already established (see FinalCta.tsx's own doc comment
             on `compactMobileTop`): Faq's `mobileSection` already supplies
             the standard 72px bottom gap, so this ticker block's own
-            72px top padding would double it to 144px without this. */}
+            72px top padding would double it to 144px without this.
+            `hideTickerMobile` (owner, 2026-09-08: "on services mobile,
+            remove 'standard on every order' under the faq cta, only keep
+            the cta") -- desktop keeps its own Marquee (`ticker` is still
+            passed, so `services.complianceBar` still renders there),
+            mobile now falls back to `mobileCtaBlockNoTicker`'s spacing
+            instead (`compactMobileTop`'s own `mobileTickerBlockTight`
+            override is moot with no ticker block to apply it to). */}
         <FinalCta
           content={services.finalCta}
           ticker={services.complianceBar}
           secondaryCta={services.finalCta.secondaryCta}
           compactMobileTop
+          hideTickerMobile
         />
       </main>
 
