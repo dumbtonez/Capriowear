@@ -4294,9 +4294,7 @@ export const productRelatedStyles = {
   // itself, so stacking a top padding here on top of it would double up),
   // so this instance never owns a top gap of its own -- whatever TrustPoints'
   // own bottom padding is at the current width IS the gap between the two
-  // sections. pb-[72px] (owner: "72px from the bottom of the section for
-  // related styles") unchanged -- this instance still owns its own bottom
-  // gap, since nothing below it supplies one.
+  // sections.
   //
   // TrustPoints' own bottom gap here narrowed to 48px on mobile only
   // (owner, 2026-09-07: "make it 48px for mobile", `trustPoints.
@@ -4306,8 +4304,18 @@ export const productRelatedStyles = {
   // (`xl:hidden`, see `app/activewear/[category]/[style]/page.tsx`'s own
   // comments on both `ProductRelatedStyles` instances) is what makes it the
   // one shown below `xl` at all -- it's unrelated to, and untouched by,
-  // this particular gap-size change.
-  topRuleNone: "pt-0 pb-[72px]",
+  // that particular gap-size change.
+  //
+  // This instance's OWN bottom gap (nothing below it supplies one) followed
+  // the same mobile-only narrowing the same day (owner: "make it 48px from
+  // bottom too") -- `pb-12` (48px), not the original flat `pb-[72px]`
+  // (owner: "72px from the bottom of the section for related styles").
+  // `md:pb-[72px]` restores 72px at tablet and up, matching the top gap's
+  // own mobile/tablet split above -- there's no Figma frame for this
+  // specific value at either breakpoint (this section only ever had one
+  // spec, 72px, until today), so tablet keeps the last confirmed number
+  // rather than guessing it should also drop to 48.
+  topRuleNone: "pt-0 pb-12 md:pb-[72px]",
   // 20px/24px-line-height medium -- Figma's own real values for this
   // heading, kept as a literal (Tailwind's own `text-xl` default leading
   // is 28px, not this design's 24px).
