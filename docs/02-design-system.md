@@ -63,6 +63,8 @@ import { button } from "./ui/styles";
 
 All were `text-ink` (or no colour class, inheriting it) before. Does **not** apply to `FinalCta`'s subline (dark `bg-ink` band) or `ProductCard`'s subline (a product-tile caption, not this title+subline header pattern) — both audited and deliberately excluded. A future section's title+subline pair on a white/paper background should use `text-subline` from the start, not `text-ink`.
 
+**Text selection (`::selection`) is a neutral translucent gray, not the brand accent (owner, 2026-09-07: "make it neutral color, not brand color")** — was `background: var(--color-accent); color: var(--color-accent-ink)` (the brand orange, white text), one sitewide rule in `app/globals.css`. Now `background: color-mix(in srgb, var(--color-muted) 40%, transparent); color: inherit` — `--color-muted` (`#6B6B74`, the existing secondary-text gray) works as a translucent overlay on both light and dark sections without a second per-section rule, and `color: inherit` keeps whichever text colour was already there rather than forcing one that would fight one of the two contexts.
+
 ## Typography
 
 **SOURCE OF TRUTH: Figma**, file "Caprio Website", node `284:333` ("Design System"), where all thirteen styles below are registered as local text styles. This is the one deliberate exception to the "Figma is layout only" rule elsewhere in this document — for type, Figma's sizes, weights and line heights are copied exactly, because the owner asked for it directly. Do not adjust a value here to taste; change it in Figma and re-read it.

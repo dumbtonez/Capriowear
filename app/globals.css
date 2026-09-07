@@ -183,9 +183,16 @@
     border-radius: 2px;
   }
 
+  /* Neutral selection highlight (owner, 2026-09-07: "make it neutral
+     color, not brand color" -- was --color-accent/-accent-ink, the brand
+     orange). A translucent --color-muted (the existing secondary-text
+     gray) reads correctly on both light (near-black text) and dark
+     (white text) sections without needing a second rule per section --
+     `color: inherit` keeps whatever text color is already there, rather
+     than forcing a fixed one that would fight one of the two contexts. */
   ::selection {
-    background: var(--color-accent);
-    color: var(--color-accent-ink);
+    background: color-mix(in srgb, var(--color-muted) 40%, transparent);
+    color: inherit;
   }
 }
 
