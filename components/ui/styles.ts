@@ -4387,7 +4387,14 @@ export const productSpecifications = {
 // that component's own header comment) -- this is a functional crawl link
 // list, not a browse-by-attribute design.
 export const productCategoryLinks = {
-  root: "container-p flex flex-col gap-4 border-t border-line py-8",
+  // `hidden xl:flex` (owner request, 2026-09-07: "keep it in the backend
+  // but remove from both tablet and mobile frontend") -- the link/data
+  // still renders into the DOM at every breakpoint (still crawlable, still
+  // satisfies this component's own SEO rule-6 purpose above), only its
+  // visual display is gated to `xl:` (this codebase's own desktop
+  // threshold, e.g. ProductGallery's `desktopRoot`/CategoryFilters'
+  // sidebar) so it no longer shows on mobile or tablet.
+  root: "container-p hidden flex-col gap-4 border-t border-line py-8 xl:flex",
   backLink: "text-base font-medium text-ink underline decoration-solid underline-offset-2 hover:opacity-70",
   siblingsHeading: "text-sm font-medium text-muted",
   siblingsList: "flex flex-wrap gap-x-4 gap-y-2",
