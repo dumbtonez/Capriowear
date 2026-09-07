@@ -19,12 +19,22 @@
 // Takes its heading and category groups as props (not a direct
 // content/home.ts import), so any page can render this section with its own
 // content -- see app/page.tsx for the homepage's values.
+import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextReveal } from "@/components/TextReveal";
 import { whatWeMake } from "@/components/ui/styles";
 import type { home } from "@/content/home";
+
+// Real mobile only (owner, 2026-09-07: "on the mobile homepage, add a cta
+// after 4 products ... Show the first 2 sub-cat only" -- clarified via
+// follow-up to 4, not 2) -- caps each group's tile list to its first 4
+// before the "View All" CTA below it. Not applied to the desktop grid
+// (`desktopGrid`) or tablet's own 2-column grid (`mobileList` becomes
+// `md:grid md:grid-cols-2` from 768px up) -- both keep showing every tile,
+// out of scope for a request specifically about "the mobile homepage."
+const MOBILE_TILE_LIMIT = 4;
 
 type BodySegment = string | { bold: string };
 
@@ -93,28 +103,64 @@ export function WhatWeMake({ content }: WhatWeMakeProps) {
             eyebrowSize={whatWeMake.eyebrowSize}
           />
           <div className={whatWeMake.groupsGap}>
-            {content.categories.map((category) => (
-              <div key={category.title} className={whatWeMake.group}>
-                <div className={whatWeMake.groupHeader}>
-                  <h3 className={whatWeMake.groupTitle}>{category.title}</h3>
-                  <Body segments={category.body} className={whatWeMake.groupBody} />
+            {content.categories.map((category) => {
+              // "Teamwear & Uniforms" shortens to just "Teamwear" for the
+              // CTA label only (owner, 2026-09-07: "for teamwear just use
+              // view all teamwear") -- the heading above it keeps the full
+              // "Teamwear & Uniforms" title, unaffected. Both CTAs share
+              // the same accent-coloured outline (owner, same day: "make
+              // the outline and text orange as primary color" for
+              // Teamwear, then "make view all activewear also orange
+              // outline with text") -- see `mobileGroupCta`'s own comment.
+              const isTeamwear = category.title === "Teamwear & Uniforms";
+              const ctaLabel = isTeamwear ? "Teamwear" : category.title;
+              return (
+                <div key={category.title} className={whatWeMake.group}>
+                  <div className={whatWeMake.groupHeader}>
+                    <h3 className={whatWeMake.groupTitle}>{category.title}</h3>
+                    <Body segments={category.body} className={whatWeMake.groupBody} />
+                  </div>
+                  {/* Real mobile only (below md) -- capped to the first 4
+                      tiles, plus the "View All" CTA. Tablet's own 2-column
+                      grid (its own instance below) shows every tile, no CTA. */}
+                  <div className={whatWeMake.mobileListCapped}>
+                    {category.tiles.slice(0, MOBILE_TILE_LIMIT).map((tile) => (
+                      <a key={tile.href} href={tile.href} className={whatWeMake.mobileTile}>
+                        <MediaPlaceholder
+                          label={tile.label}
+                          image={tile.image}
+                          ratio="1:1"
+                          radius="none"
+                          className={whatWeMake.mobileTileMedia}
+                        />
+                        <span className={whatWeMake.mobileTileLabel}>{tile.label}</span>
+                      </a>
+                    ))}
+                  </div>
+                  <Button href={category.href} variant="secondary" className={whatWeMake.mobileGroupCta}>
+                    View All {ctaLabel}
+                  </Button>
+                  {/* Tablet only (md through xl) -- every tile, unchanged
+                      from before this task; real mobile's own capped list
+                      above covers <md, desktop's `desktopGrid` above covers
+                      xl+. */}
+                  <div className={whatWeMake.mobileListFull}>
+                    {category.tiles.map((tile) => (
+                      <a key={tile.href} href={tile.href} className={whatWeMake.mobileTile}>
+                        <MediaPlaceholder
+                          label={tile.label}
+                          image={tile.image}
+                          ratio="1:1"
+                          radius="none"
+                          className={whatWeMake.mobileTileMedia}
+                        />
+                        <span className={whatWeMake.mobileTileLabel}>{tile.label}</span>
+                      </a>
+                    ))}
+                  </div>
                 </div>
-                <div className={whatWeMake.mobileList}>
-                  {category.tiles.map((tile) => (
-                    <a key={tile.href} href={tile.href} className={whatWeMake.mobileTile}>
-                      <MediaPlaceholder
-                        label={tile.label}
-                        image={tile.image}
-                        ratio="1:1"
-                        radius="none"
-                        className={whatWeMake.mobileTileMedia}
-                      />
-                      <span className={whatWeMake.mobileTileLabel}>{tile.label}</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
