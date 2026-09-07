@@ -168,6 +168,40 @@ export function Header({
         return;
       }
       const currentY = window.scrollY;
+      // Mobile/tablet only (this codebase's own `xl` desktop threshold,
+      // e.g. `header.nav`'s own breakpoint) -- desktop's taller header and
+      // larger footer top-gap already leave enough clearance, confirmed
+      // live not to overlap there.
+      //
+      // Owner report, 2026-09-07: on mobile/tablet, scrolling up even a
+      // little while at the footer reveals the sticky header back over the
+      // footer's own logo -- the header's `z-40` sits above the footer's
+      // own `z-0`, so whenever both are visible in the same viewport
+      // region they physically overlap; confirmed live, not a footer
+      // sizing/clipping bug. NOT an IntersectionObserver on the footer
+      // element -- this site's own footer "reveal" trick (see Footer.tsx's
+      // own header comment) keeps the footer geometrically `sticky
+      // bottom-0`-pinned to the viewport's bottom edge for the page's
+      // ENTIRE scroll range, only visually uncovered once `<main>`'s own
+      // opaque content has scrolled past that screen position -- so a
+      // geometric-intersection check reports "in view" almost everywhere
+      // on the page, not just near the real bottom (confirmed live: still
+      // "intersecting" at scrollY 2000 on a 12000px+ page). What actually
+      // matters here is whether the footer is currently the thing showing
+      // through, i.e. whether we've scrolled within the footer's own
+      // height of the true document end -- computed directly from scroll
+      // position instead, the same real condition the reveal trick itself
+      // uses. `document.querySelector("footer")` (exactly one per page,
+      // `components/sections/Footer.tsx`) read fresh on every scroll tick,
+      // not cached, since its own height can change with viewport width.
+      const footerHeight = document.querySelector("footer")?.scrollHeight ?? 0;
+      const documentHeight = document.documentElement.scrollHeight;
+      const footerRevealed = currentY + window.innerHeight >= documentHeight - footerHeight;
+      if (footerRevealed && window.innerWidth < 1280) {
+        setNavHidden(true);
+        lastScrollYRef.current = currentY;
+        return;
+      }
       const headerHeight = headerRef.current?.offsetHeight ?? 0;
       const scrollingDown = currentY > lastScrollYRef.current;
       if (scrollingDown && currentY > headerHeight) {
