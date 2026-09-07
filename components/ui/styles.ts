@@ -714,7 +714,21 @@ export const header = {
   // file header for the full history; every real page now passes `stacked`
   // here too, so this mobile/drawer mark is NOT pixel-identical to the
   // original 2026-09-02 mark any more, by deliberate owner request.
-  brandLogo: "h-[28px] w-auto xl:hidden",
+  //
+  // Enlarged 28px -> 31px (owner, 2026-09-07, Figma node 587:6968:
+  // "Inlarged the mobile header logo, update it on both tablet and
+  // mobile") -- `get_metadata` on that node's own "Logo" frame measured
+  // 114.99..x30.99.., i.e. Figma's real height is 31px (rounded), not a
+  // guessed bump. Covers both mobile and tablet in one change: this key
+  // already renders everywhere below `xl` (mobile bar and the drawer), no
+  // separate tablet variant exists or is needed. At 31px tall the mark
+  // renders ~115px wide (same ~3.7:1 stacked-mark ratio as `h-[28px]`
+  // did), still comfortably inside the header row's own available width
+  // before the "Menu" trigger (confirmed against this same frame's own
+  // Menu icon offset, x=195 of a 320px content width) -- no repeat of the
+  // overflow this mark's own sizing history (see above) already guards
+  // against.
+  brandLogo: "h-[31px] w-auto xl:hidden",
   // Real Figma geometry (`<Logo stacked />`, node 680:394) rendered at its
   // own native size -- `h-[37px]` is the mark's real Figma height, not a
   // fitted-to-fit-overflow value like `brandLogo`'s own sizing: at 37px
@@ -2415,8 +2429,17 @@ export const footer = {
   desktopRow2: "mt-[72px] flex items-start gap-[78px]",
   // Tagline (relocated from row 1, see `desktopTagline` above) + the
   // description paragraph, stacked with a 12px gap, no divider between them
-  // (owner, 2026-09-06).
-  desktopDescriptionGroup: "flex max-w-[307px] flex-col gap-3",
+  // (owner, 2026-09-06). max-w-[307px] wrapped the tagline ("Capriowear,
+  // a division of Caprio Sports", ~347.6px natural width at this size) to
+  // 2 lines -- owner, 2026-09-07: "make sports in one line too and adjust
+  // the under paragraph with the same width." Widened to `max-w-[350px]`
+  // (a few px of buffer over the measured natural width, avoiding a
+  // sub-pixel wrap edge case) -- both children share this one container,
+  // so the description paragraph picks up the new width for free, exactly
+  // the "same width" the owner asked for, not a second value to keep in
+  // sync. Real mobile's own tagline was already single-line at every real
+  // width (`mobileDescriptionGroup` has no max-width of its own), unaffected.
+  desktopDescriptionGroup: "flex max-w-[350px] flex-col gap-3",
   desktopDescription: "text-[1.25rem] leading-[1.4] text-ink",
   desktopNavGroup: "flex items-start gap-12",
   desktopNavColumnOne: "flex flex-col whitespace-nowrap",
