@@ -239,14 +239,20 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
             metadata (634:4926: breadcrumb's own "Levels Container" ending
             at the same y as this row's own Content frame, 634:4960):
             trusting the owner's direct, currently-visible design over that
-            metadata reading. Mobile is `pt-0` (owner, 2026-09-01: "no gap
-            from the nav and the image") -- the breadcrumb is hidden below
-            `xl`, so this row sits directly under Header there;
-            ProductGallery's own mobile image is the first thing in it, so
-            zero top padding here means zero gap from the header to the
-            image (ProductInfo below still gets its own breathing room from
-            `ProductGallery.mobileRoot`'s own height + this row's `gap-8`,
-            unaffected). The row itself is 700px gallery + a real 66px gap
+            metadata reading. Real mobile is `pt-0` (owner, 2026-09-01: "no
+            gap from the nav and the image") -- the breadcrumb is hidden
+            below `md` (`Breadcrumb`'s own `hidden md:block`), so this row
+            sits directly under Header there; ProductGallery's own mobile
+            image is the first thing in it, so zero top padding here means
+            zero gap from the header to the image (ProductInfo below still
+            gets its own breathing room from `ProductGallery.mobileRoot`'s
+            own height + this row's `gap-8`, unaffected). `md:pt-6` (owner,
+            2026-09-07: "breadcrumbs on the tablet pdp should have the same
+            gap to the image as it has from the top") matches `xl:pt-6` --
+            `breadcrumb.nav`'s own `pt-8`/`pb-2` give a flat 32px above the
+            breadcrumb at every width it's visible; below `md:pt-6` this
+            row's `pb-2` (8px) + `pt-6` (24px) also totalled 32px, matching.
+            The row itself is 700px gallery + a real 66px gap
             + a real 514px text column (766 - 700), not gallery + flex-1 --
             `xl:gap-[66px]` on this row, `xl:w-[514px]` fixed on the text
             column below, replacing the earlier `xl:gap-12`/flex-1
@@ -266,7 +272,7 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
             gap from the gallery image's own bottom edge to the SKU text.
             `xl:gap-[66px]` overrides it in the horizontal direction at
             desktop, unaffected. */}
-        <div className="container-p flex flex-col gap-6 pt-0 xl:flex-row xl:items-start xl:gap-[66px] xl:pt-6">
+        <div className="container-p flex flex-col gap-6 pt-0 md:pt-6 xl:flex-row xl:items-start xl:gap-[66px] xl:pt-6">
           {data.product.images ? (
             <ProductGallery images={data.product.images} productTitle={productTitle} />
           ) : null}

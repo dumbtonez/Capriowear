@@ -161,7 +161,7 @@ export default async function TeamwearStylePage({ params }: PageProps<"/teamwear
           })}
         />
 
-        <div className="container-p flex flex-col gap-6 pt-0 xl:flex-row xl:items-start xl:gap-[66px] xl:pt-6">
+        <div className="container-p flex flex-col gap-6 pt-0 md:pt-6 xl:flex-row xl:items-start xl:gap-[66px] xl:pt-6">
           {data.product.images ? <ProductGallery images={data.product.images} productTitle={productTitle} /> : null}
           <div className="flex w-full min-w-0 flex-col gap-8 xl:w-[514px] xl:flex-none">
             <ProductInfo sku={data.product.sku} heading={heading} description={description} />
