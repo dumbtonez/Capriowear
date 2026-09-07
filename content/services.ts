@@ -22,12 +22,23 @@ import type { NoteSegment } from "@/content/activewear/types";
 // `NoteSegment[]` annotation -- `as const` on the object as a whole would
 // otherwise narrow each segment to its own literal shape and drop the
 // optional `bold` field off segments that omit it.
-const introParagraph: NoteSegment[] = [
+//
+// Split into two paragraphs (owner, 2026-09-07: "the subline of this
+// section divide into 2 parts. break it from we are the activewear with
+// 24px gap from the top paragraph") -- was one single `NoteSegment[]`
+// rendered as one `<p>`; the second sentence ("We are the activewear and
+// teamwear division...") now starts its own paragraph. See
+// ServicesIntro.tsx for the 24px gap between them.
+const introParagraph1: NoteSegment[] = [
   {
     text: "Capriowear is a custom activewear and teamwear manufacturer offering OEM, ODM and private label production, custom from fabric to packaging, with ",
   },
   { text: "low minimums and worldwide delivery", bold: true },
-  { text: ". We are the activewear and teamwear division of Caprio Sports, a " },
+  { text: "." },
+];
+
+const introParagraph2: NoteSegment[] = [
+  { text: "We are the activewear and teamwear division of Caprio Sports, a " },
   { text: "cut-and-sew manufacturer in Sialkot, Pakistan", bold: true },
   { text: ", with " },
   { text: "25+ years of experience", bold: true },
@@ -58,19 +69,35 @@ export const services = {
     h1: "Custom activewear and teamwear, from fabric to packaging",
     ctaPrimary: { label: "Request a Sample", href: "/request-a-sample" },
     ctaSecondary: { label: "Download Catalog", href: "/catalog" },
+    // Mobile-only ticker copy (owner, 2026-09-07): the same 9 items
+    // `home.customOfferings.items` lists individually (Design, Fabric, Fit,
+    // Color, Print & Embroidery, Branding, Trims, Labels, Packaging),
+    // paired down to 5 lines for this page's own mobile list -- desktop
+    // still renders the shared `home.customOfferings.items` marquee
+    // unchanged (see ServicesHero.tsx). Not a home.ts change since the
+    // homepage's own mobile list keeps the original 9 individual items.
+    mobileTickerItems: [
+      "Design & Color",
+      "Fabric & Fit",
+      "Print & Embroidery",
+      "Branding & Trims",
+      "Labels & Packaging",
+    ],
   },
 
   // Section 2: Intro statement. Figma desktop node 733:529. Copy (heading +
   // paragraph) is the design's own real text layer, read directly, same as
-  // hero.h1 above. `paragraph` is segmented, not a single string, so the
+  // hero.h1 above. Each paragraph is segmented, not a single string, so the
   // three semibold phrases Figma marks inline ("low minimums and worldwide
   // delivery", "cut-and-sew manufacturer in Sialkot, Pakistan", "25+ years
   // of experience") render as real inline emphasis -- same segmented-note
   // pattern FabricOptions' own closing note already uses (see
   // ServicesIntro.tsx), not a second bespoke rich-text renderer.
+  // `paragraphs` (plural, 2 entries) since 2026-09-07 -- see
+  // introParagraph1/2's own comment above for why this split from one.
   intro: {
     heading: "A factory you can build your brand on",
-    paragraph: introParagraph,
+    paragraphs: [introParagraph1, introParagraph2],
   },
 
   // Section 3: How we work with you. Figma desktop node 750:770. Copy (all

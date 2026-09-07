@@ -190,8 +190,12 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
           bottom-0 z-0` shows through immediately at the top of the page
           instead of staying hidden until real content has scrolled past
           it. Found live while verifying ProductGallery below (2026-08-31),
-          pre-existing on this page since its own first build. */}
-      <main className="relative z-10 bg-paper">
+          pre-existing on this page since its own first build.
+          `pt-[72px] xl:pt-[87px]`: compensates for Header now being
+          `position: fixed` (owner, 2026-09-07) -- see
+          app/activewear/[category]/page.tsx's own `<main>` comment for the
+          full reasoning, identical here. */}
+      <main className="relative z-10 bg-paper pt-[72px] xl:pt-[87px]">
         {/* Visible strip hidden on mobile only, CSS-only (owner request,
             2026-08-31: "hide the breadcrumb visually on mobile only...
             Never conditionally render it out of the DOM"). `hidden

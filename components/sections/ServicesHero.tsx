@@ -38,7 +38,13 @@
 //     content center-aligned and see how it looks") -- see those tokens'
 //     own comment in components/ui/styles.ts for the full reasoning; the
 //     homepage's own mobile ticker is untouched by this. Desktop Marquee
-//     (`md:` and up) is unchanged.
+//     (`md:` and up) is unchanged, still fed `customOfferings.items`
+//     (the shared 9 individual items).
+//   - Mobile list content, same day: the owner's own 5-line paired version
+//     ("Design & Color" / "Fabric & Fit" / "Print & Embroidery" /
+//     "Branding & Trims" / "Labels & Packaging") -- `services.hero.
+//     mobileTickerItems` (content/services.ts), not a change to the shared
+//     `home.customOfferings.items` the desktop marquee above still uses.
 import { Button } from "@/components/Button";
 import { Marquee } from "@/components/Marquee";
 import { ScrollSpotlightList } from "@/components/ScrollSpotlightList";
@@ -84,7 +90,7 @@ export function ServicesHero({ hero: content, customOfferings }: ServicesHeroPro
       <div className={servicesHero.tickerMobile}>
         <span className={servicesHero.tickerMobileLabel}>{customOfferings.label}</span>
         <ScrollSpotlightList
-          items={customOfferings.items}
+          items={content.mobileTickerItems}
           listClassName={servicesHero.tickerMobileList}
           itemClassName={servicesHero.tickerMobileItem}
         />

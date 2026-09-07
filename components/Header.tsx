@@ -38,7 +38,7 @@ import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { Button } from "./Button";
 import { MenuIcon } from "./icons/MenuIcon";
@@ -50,6 +50,49 @@ import { header } from "./ui/styles";
 // panel stays mounted after its trigger closes, so the closing clip-path
 // sweep has time to actually play before the content unmounts.
 const MEGA_TRANSITION_MS = 500;
+
+// Adaptive header tone (owner reference, 2026-09-07: labs.google's own
+// nav swaps its text colour to always contrast whatever section is
+// currently scrolled behind it). Rather than tagging every section on
+// every page with its own light/dark identity (this site has 15+ section
+// components across home/services/every PLP/PDP, and it would need
+// re-auditing on every new page), this derives tone from what's actually
+// rendered: every real section here already expresses its own tone as a
+// real `background-color` (`bg-ink`, or nothing, falling through to
+// `<main>`'s own `bg-paper`) -- confirmed no gradient/image CSS
+// backgrounds exist anywhere in components/ui/styles.ts. So this walks up
+// from the point directly under the header to the first ancestor with a
+// real (non-fully-transparent) background and classifies it by perceptual
+// luminance, instead of reading a hand-maintained tag that could drift out
+// of sync with what's actually on screen.
+//
+// Known accepted limitation, not a bug: a future full-bleed image/video
+// section with no explicit `bg-*` of its own reads as whichever ancestor's
+// tone it inherits, not a sampled pixel colour -- the same thing the
+// reference site's own per-section tagging would do anyway.
+function getSurfaceToneAt(x: number, y: number): "dark" | "light" {
+  let el = document.elementFromPoint(x, y) as Element | null;
+  while (el && el !== document.documentElement) {
+    const bg = getComputedStyle(el).backgroundColor;
+    const match = bg.match(/rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)(?:,\s*([\d.]+))?\)/);
+    if (match) {
+      const alpha = match[4] === undefined ? 1 : Number(match[4]);
+      // > 0, not "must be fully opaque" -- no genuinely translucent section
+      // background exists today, but a future one should still count as
+      // "the thing visibly there" rather than being skipped past.
+      if (alpha > 0) {
+        const [r, g, b] = [Number(match[1]), Number(match[2]), Number(match[3])];
+        const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        return luminance < 128 ? "dark" : "light";
+      }
+    }
+    el = el.parentElement;
+  }
+  // <main> and <footer> both set their own bg-paper directly (see every
+  // page's own <main className="... bg-paper"> and Footer.tsx's
+  // `footer.root`), so this is rarely actually reached.
+  return "light";
+}
 
 export type NavMegaMenuGroup = {
   label: string;
@@ -132,6 +175,10 @@ export function Header({
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [navHidden, setNavHidden] = useState(false);
+  // Default "dark" matches app/globals.css's own `header { --header-fg: ... }`
+  // default exactly (both represent "before the effect below has run") --
+  // keep them in sync, or the header flashes the wrong colour on first paint.
+  const [tone, setTone] = useState<"dark" | "light">("dark");
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const headerRef = useRef<HTMLElement>(null);
   const lastScrollYRef = useRef(0);
@@ -149,9 +196,19 @@ export function Header({
   }, [openMenu, closeMenu]);
 
   // Hide on scroll down past the header's own height, reveal on scroll up --
-  // see the file header comment for why. rAF-throttled so this never runs
-  // more than once per rendered frame no matter how fast `scroll` fires.
-  useEffect(() => {
+  // see the file header comment for why. Also computes the adaptive tone
+  // (see `getSurfaceToneAt` above) in the same pass, so no second scroll
+  // listener is added just for that. rAF-throttled so this never runs more
+  // than once per rendered frame no matter how fast `scroll` fires.
+  //
+  // useLayoutEffect, not useEffect -- same "compute real state before
+  // paint" pattern already used elsewhere in this codebase (IntroLoader.tsx,
+  // ScrollReset.tsx): `update()` is also called once synchronously below,
+  // right after it's defined, so the header's tone (and hide/reveal state)
+  // is correct for wherever the page actually mounted -- a restored scroll
+  // position or a #anchor deep link, not just scroll position 0 -- before
+  // the first paint, not after a flash of the wrong state.
+  useLayoutEffect(() => {
     // Nothing to hide/reveal for a non-sticky header -- see the `sticky`
     // prop's own doc comment.
     if (!sticky) return;
@@ -208,8 +265,16 @@ export function Header({
       } else if (!scrollingDown) {
         setNavHidden(false);
       }
+      // Probes 1px below the header's own real rendered bottom edge --
+      // `elementFromPoint` is viewport-relative, and the sticky header
+      // always occupies 0..headerHeight of the viewport regardless of
+      // scroll position, so this always lands on whatever's actually
+      // visible directly under it right now.
+      setTone(getSurfaceToneAt(window.innerWidth / 2, headerHeight + 1));
       lastScrollYRef.current = currentY;
     };
+
+    update();
 
     const onScroll = () => {
       if (!ticking) {
@@ -253,8 +318,29 @@ export function Header({
   return (
     <header
       ref={headerRef}
+      data-tone={tone}
       className={cx(sticky ? header.base : header.baseStatic, sticky && navHidden && header.hidden, className)}
     >
+      {/* Progressive frosted-glass blur (owner reference, 2026-09-07:
+          labs.google's own nav) -- 5 stacked layers, each blurring more
+          than the last, masked to its own band so the blur intensifies
+          toward the header's outer/top edge. Blur amount is a Tailwind
+          `backdrop-blur-[Npx]` utility class here, not part of the
+          `.header-blur-N` CSS classes in app/globals.css -- a hand-written
+          `backdrop-filter` there was silently dropped by the build's CSS
+          pipeline (real bug, found live); Tailwind's own generated
+          `backdrop-blur-*` utilities survive that same pipeline fine (see
+          `.header-blur-1`'s own comment in app/globals.css for the full
+          story), so the blur itself goes through that proven path and only
+          the mask (no Tailwind utility exists for a gradient mask) stays
+          hand-written CSS. See `header.blurLayer`'s own comment in
+          components/ui/styles.ts for why `-z-10` matters here. */}
+      <span aria-hidden="true" className={cx(header.blurLayer, "header-blur-1 backdrop-blur-[4px]")} />
+      <span aria-hidden="true" className={cx(header.blurLayer, "header-blur-2 backdrop-blur-[6px]")} />
+      <span aria-hidden="true" className={cx(header.blurLayer, "header-blur-3 backdrop-blur-[10px]")} />
+      <span aria-hidden="true" className={cx(header.blurLayer, "header-blur-4 backdrop-blur-[18px]")} />
+      <span aria-hidden="true" className={cx(header.blurLayer, "header-blur-5 backdrop-blur-[34px]")} />
+
       {/* Wraps the trigger row and the mega panel under one shared
           mouse-leave/blur zone -- required now that the panel is a single
           full-width element rendered once (below), not nested inside each

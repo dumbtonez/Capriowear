@@ -644,10 +644,38 @@ export const faq = {
 /* --- Header -------------------------------------------------------------- */
 
 export const header = {
-  // transition-transform: the hide/show below is a translateY toggle, not a
-  // visibility/display change, so the header keeps its sticky positioning
-  // and layout box the whole time -- only its rendered offset moves.
-  base: "sticky top-0 z-40 border-b border-line-dark bg-ink text-paper transition-transform duration-300 ease-in-out",
+  // Adaptive frosted OVERLAY header (owner reference, 2026-09-07: labs.google's
+  // own nav) -- was a flat opaque `bg-ink`; now transparent (the 5
+  // `blurLayer` spans below supply the frosted background) with
+  // `text-[var(--header-fg)]`/`border-[var(--header-border)]` reading off
+  // the CSS custom properties `app/globals.css` sets on
+  // `header`/`header[data-tone="light"]`, driven by Header.tsx's own
+  // scroll-position tone detection (`data-tone` attribute). `color`/
+  // `border-color` added to the transition list alongside the pre-existing
+  // `transform` (the hide/show toggle below), so a tone flip animates too,
+  // not just hide/reveal.
+  //
+  // `fixed`, not `sticky` (owner correction, 2026-09-07: "we need that at
+  // rest position... exactly the same [as the reference]") -- `sticky`
+  // still reserves its own box in normal document flow at rest (scroll 0),
+  // so `<main>` started right after it, never actually behind/under it;
+  // there was nothing for the blur to blur until the user had already
+  // scrolled. `fixed` removes the header from flow entirely, so real page
+  // content now starts at true y=0 underneath it from the very first
+  // frame, matching the reference (confirmed live via its own
+  // `position: absolute` on inspection). `inset-x-0` is required here in a
+  // way it wasn't for `sticky`: a fixed block element with no `left`/
+  // `right` set shrink-wraps to its own content's width instead of
+  // stretching to the viewport. Removing the header from flow means every
+  // page's own first section needs compensating top clearance -- see
+  // `hero.bannerInner`/`servicesHero.bannerInner`'s own comments (true
+  // overlay, background extends to y=0) and the `pt-[72px] xl:pt-[87px]`
+  // added to `<main>` on the PLP/PDP pages (simpler compensation, that
+  // first section's own internal layout stays untouched here since
+  // CategoryBanner in particular has a documented history of fragile
+  // fixed-height/absolute-position math -- see that component's own
+  // header comment).
+  base: "sticky top-0 z-40 border-b border-[var(--header-border)] bg-transparent text-[var(--header-fg)] transition-[color,border-color,transform] duration-300 ease-in-out",
   // Plain, non-sticky variant (owner trial, 2026-08-29: "let's try one time
   // gymshark approach and see how it looks") -- gymshark.com's own header is
   // `position: static`, scrolling away with the page entirely, which is why
@@ -671,7 +699,8 @@ export const header = {
   // unchanged -- it only opts the element into normal stacking-context
   // ordering so its own `z-40` (matching `base`'s own value, for the exact
   // same reason) can do its job.
-  baseStatic: "relative z-40 border-b border-line-dark bg-ink text-paper",
+  baseStatic:
+    "relative z-40 border-b border-[var(--header-border)] bg-transparent text-[var(--header-fg)] transition-[color,border-color] duration-300 ease-in-out",
   // Slides the header fully off-screen upward. Applied by Header.tsx while
   // scrolling down past its own measured height (owner request, 2026-08-26:
   // hide on scroll down, reveal on scroll up -- a standard pattern for
@@ -679,6 +708,18 @@ export const header = {
   // entirely). Never applied while a mega menu or the mobile drawer is
   // open, so an open menu can't be yanked off-screen mid-interaction.
   hidden: "-translate-y-full",
+  // The 5 progressive-blur spans (`.header-blur-1`..`-5`, app/globals.css)
+  // rendered as this header's first children (owner reference, 2026-09-07:
+  // labs.google's own nav). `-z-10`, not the default `z-index: auto` a bare
+  // `absolute` span would get -- these are `position: absolute` with no
+  // z-index of their own, which paints ON TOP of the header's plain
+  // in-flow nav content (logo, links, buttons), burying it; `-z-10` fixes
+  // that without touching `header.inner`'s own stacking or `megaPanel`'s
+  // `z-30` (`-z-10 < auto (nav content) < 30 (megaPanel) < 40 (header)` is
+  // already the correct order). `inset-0`, no explicit height -- sizes to
+  // the header's own real box at any breakpoint, not the reference's
+  // hardcoded 104px (see the `.header-blur-*` comment in app/globals.css).
+  blurLayer: "pointer-events-none absolute inset-0 -z-10",
   // Mobile-only vertical padding tuned to a 72px total header height
   // (owner call, 2026-08-27, revised up from an earlier 62px) -- the new
   // "Menu" pill (51px tall, its own padding taken verbatim from Figma) is
@@ -786,7 +827,9 @@ export const header = {
   // Text fallback, for a page with no logo asset passed. Not used by the real
   // header content, which always passes `logo`.
   brandName: "text-h3 uppercase",
-  brandParent: "text-button-sm uppercase text-paper/50",
+  // text-current, not text-paper (2026-09-07, adaptive header) -- inherits
+  // the header's own tone-driven colour instead of a hardcoded white.
+  brandParent: "text-button-sm uppercase text-current/50",
   // The real nav's intrinsic width (logo + 4 plain links + actions, no mega
   // menu) is ~1117px, which fits inside the standard xl (1280px) breakpoint
   // with room to spare -- see docs/03-component-library.md for the measured
@@ -816,10 +859,17 @@ export const header = {
   // pill's padding (not directly over a glyph) wouldn't trigger it. See
   // `navLinkLabelVisible` below for why the weight toggle itself lives on
   // the label's inner visible layer, not here.
+  // text-current + hover:text-[var(--header-hover)], not the old hardcoded
+  // text-paper/#838d97 (2026-09-07, adaptive header) -- inherits the
+  // header's own tone-driven colours. `--header-hover` itself swaps
+  // between #838d97 (this codebase's documented dark-surface muted grey)
+  // and `--color-muted` (the light-surface equivalent) in app/globals.css
+  // -- the old flat #838d97 measured only ~2.9:1 against a light/paper
+  // surface, a real contrast regression this avoids.
   navLink:
-    "group relative inline-flex min-h-11 items-center whitespace-nowrap rounded-pill px-4 text-body text-paper transition-colors hover:text-[#838d97]",
+    "group relative inline-flex min-h-11 items-center whitespace-nowrap rounded-pill px-4 text-body text-current transition-colors hover:text-[var(--header-hover)]",
   navTrigger:
-    "relative inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-pill px-4 text-body text-paper transition-colors hover:text-[#838d97]",
+    "relative inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-pill px-4 text-body text-current transition-colors hover:text-[var(--header-hover)]",
   // Active state (Figma node 493:3140, 2026-08-27) -- semibold text plus a
   // 2px white underline, this request's own explicit spec.
   navTriggerActive: "font-semibold",
@@ -867,7 +917,9 @@ export const header = {
   // the header's bottom border read as detached from the selected word
   // itself). `-bottom-2` (8px) is measured from the link's own content box,
   // not the header's bottom edge.
-  navUnderline: "absolute inset-x-4 -bottom-2 h-[2px] bg-white",
+  // bg-current, not bg-white (2026-09-07, adaptive header) -- a literal
+  // white underline would be invisible on a light-tone header.
+  navUnderline: "absolute inset-x-4 -bottom-2 h-[2px] bg-current",
   // Corrected on first real use (Figma node 493:3140, 2026-08-27) -- the
   // guessed `w-80 rounded-lg` dropdown card predates any real design and is
   // replaced entirely by a full-bleed panel matching the real one: 5
@@ -962,7 +1014,10 @@ export const header = {
   // instead of the generic opacity-70 fade every other `hover:opacity-70`
   // link on this site uses, so the whole nav row reads as one consistent
   // hover language.
-  actionLink: "inline-flex min-h-11 items-center whitespace-nowrap text-button-sm uppercase text-paper transition-colors hover:text-[#838d97]",
+  // text-current + hover:text-[var(--header-hover)] (2026-09-07, adaptive
+  // header) -- same tone-driven swap as navLink/navTrigger above, so this
+  // stays consistent with them on every surface, not just the dark one.
+  actionLink: "inline-flex min-h-11 items-center whitespace-nowrap text-button-sm uppercase text-current transition-colors hover:text-[var(--header-hover)]",
   // `!px-6` (real bug, found live, 2026-09-02): without `!`, this lost to
   // Button's own base `px-8` in Tailwind's generated stylesheet order (same
   // same-specificity-utility-conflict class of bug already hit and fixed
@@ -974,9 +1029,13 @@ export const header = {
   // Mobile drawer trigger, corrected to Figma's real pill button (node
   // 465:2862/465:2871, "Caprio Website" file, 2026-08-27) -- previously a
   // plain circular icon button (guessed, pre-real-design). border-current so
-  // it always matches the header's own ambient colour, not a hardcoded white.
+  // it always matches the header's own ambient colour -- text-current now
+  // too (2026-09-07, adaptive header): the hardcoded text-paper next to an
+  // already-adaptive border-current was the one piece not actually
+  // following its own stated reasoning, harmless while the header was
+  // always dark, a real bug now that it isn't.
   menuButton:
-    "xl:hidden inline-flex items-center gap-[9px] rounded-pill border-[1.5px] border-current px-6 py-3 text-paper",
+    "xl:hidden inline-flex items-center gap-[9px] rounded-pill border-[1.5px] border-current px-6 py-3 text-current",
   menuIconWrap: "flex size-[22px] items-center justify-center",
   menuIcon: "h-[19px] w-[22px]",
   // Same pill reused for the open drawer's "Close" state (MobileNav.tsx) --
@@ -1236,7 +1295,18 @@ export const hero = {
   // section, which all stay at container-p's standard 1440px cap, looked
   // like an inconsistency, not a deliberate wide moment). Hero now uses
   // plain container-p like the rest of the page.
-  bannerInner: "container-p flex flex-col gap-8 pt-12 pb-12 xl:gap-12 xl:pt-[140px] xl:pb-20",
+  //
+  // Top values additionally carry the header's own real height now that
+  // it's `position: fixed` (owner, 2026-09-07: true overlay from rest --
+  // see `header.base`'s own comment) -- `72px`/`87px` are this codebase's
+  // own already-established literal constants for the header's real
+  // mobile/tablet vs. desktop height (used verbatim elsewhere, e.g.
+  // ProductGallery's sticky offset, HowItWorks' `min-h` calc), not new
+  // numbers. `calc(72px + 48px)` / `calc(87px + 140px)` keep the heading's
+  // own visual position pixel-identical to before (same as when the header
+  // reserved that same space in normal flow); only Hero's own background
+  // now extends up underneath the header instead of starting below it.
+  bannerInner: "container-p flex flex-col gap-8 pt-[120px] pb-12 xl:gap-12 xl:pt-[227px] xl:pb-20",
   // 12px gap mobile, 24px desktop, between the eyebrow and the H1.
   textBlock: "flex flex-col gap-3 xl:gap-6",
   // 832px measured H1 wrap width in Figma is exactly 52rem; unconstrained the
@@ -1364,11 +1434,31 @@ export const servicesHero = {
   // their own tuned insets again. `bannerInner`'s own top/bottom padding
   // stays only as the minimum breathing room against the header/marquee,
   // not as what determines the section's total height any more.
-  section: "bg-ink text-paper xl:flex xl:min-h-[calc(100vh-87px)] xl:flex-col xl:justify-between",
-  bannerInner: "container-p flex flex-col gap-8 pt-12 pb-12 xl:gap-8 xl:pt-16 xl:pb-8",
+  //
+  // `min-h-[100vh]`, not `calc(100vh-87px)` (owner, 2026-09-07: true
+  // overlay from rest -- see `header.base`'s own comment): the header is
+  // now `position: fixed`, so it no longer reserves 87px of the viewport
+  // for this section to subtract -- this section's own box already starts
+  // at true y=0 and should fill the genuine full viewport height, with the
+  // header floating on top of it rather than pushing it down.
+  // `bannerInner`'s own top padding gets the same `calc(header-height +
+  // original value)` treatment as `hero.bannerInner` above, for the same
+  // reason (keep the heading's own visual position unchanged; only the
+  // background now extends under the header).
+  section: "bg-ink text-paper xl:flex xl:min-h-[100vh] xl:flex-col xl:justify-between",
+  bannerInner: "container-p flex flex-col gap-8 pt-[120px] pb-12 xl:gap-8 xl:pt-[151px] xl:pb-8",
   // 832px H1 wrap width in Figma is exactly 52rem -- identical value to
   // `hero.heading`, reused directly rather than redefined.
-  heading: "max-w-[52rem]",
+  // Line-height overrides `text-display`'s own 1.09375 ratio (ServicesHero.tsx
+  // appends `text-display` alongside this token) with the PLP/PDP
+  // CategoryBanner's own h1 line-height instead (owner, 2026-09-07: "hero
+  // banner title line height should be the same as other plp hero banner
+  // titles") -- `categoryBanner.h1`'s own two literal values (38px mobile,
+  // 64px desktop, same `md:` threshold that component already splits at),
+  // layered on top of the shared `text-display` size/weight exactly like
+  // `servicesIntro.paragraph`'s own `leading-8` override of `text-body-lg`
+  // above -- font-size itself stays `text-display`'s fluid clamp, unchanged.
+  heading: "max-w-[52rem] leading-[38px] md:leading-[64px]",
   // Figma's real desktop design shows both buttons (stacked full-width on
   // mobile, side by side from xl, same shape as `hero.buttons`) -- mobile
   // itself now hides the secondary one the same way homepage's does (owner,
@@ -1415,7 +1505,8 @@ export const servicesHero = {
   // reverted or adjusted once seen live.
   tickerMobile: "container-p flex flex-col items-center gap-8 pt-12 pb-12 text-center md:hidden",
   tickerMobileLabel: "text-[1.5rem] font-medium leading-normal",
-  tickerMobileList: "flex flex-col items-center gap-3",
+  // gap-5 (20px, owner, 2026-09-07: "make it 20px" -- was gap-3/12px).
+  tickerMobileList: "flex flex-col items-center gap-5",
   tickerMobileItem: "text-[1.5rem] font-normal leading-normal text-[#838D97]",
 };
 
@@ -1434,9 +1525,41 @@ export const servicesHero = {
 // image below the text) rather than a confirmed design.
 export const servicesIntro = {
   section: "bg-paper",
-  inner: "container-p flex flex-col gap-10 pt-16 pb-16 xl:flex-row xl:items-center xl:gap-[170px] xl:pt-[160px] xl:pb-[60px]",
-  textCol: "flex w-full flex-col gap-6 xl:w-[620px] xl:shrink-0 xl:gap-10",
+  // `pt-10` (40px, owner, 2026-09-07: "from the top image gap should be
+  // 40px" -- was `pt-16`/64px) is this section's own mobile/tablet top gap,
+  // now the real gap down to the image placeholder specifically, since the
+  // image renders first (see `textCol`/`media`'s own `xl:order-2`/
+  // `xl:order-1` comment above). Desktop `xl:pt-[160px]` is unchanged.
+  // `gap-6` (24px, owner, 2026-09-07: "make it 24px" -- was `gap-10`/40px)
+  // is this section's own mobile/tablet gap between the image and the
+  // heading below it now that the image renders first (media/textCol are
+  // this flex column's only two children). Desktop `xl:gap-[170px]` is
+  // unchanged.
+  // `pb-[72px]` (owner, 2026-09-07: "a factory section to trust signal
+  // image the gap should be 72px" -- was `pb-16`/64px) is this section's
+  // own mobile/tablet bottom gap, the real gap down to TrustSignals' own
+  // image below it (`trustSignals.mobileWrap` has no top padding of its
+  // own -- 0 top, standard "previous section's bottom padding supplies the
+  // gap" pattern, see that token's own comment). Desktop `xl:pb-[60px]` is
+  // unchanged (TrustSignals switches to its own `desktopWrapServices` top
+  // padding at `xl:`, not this section's bottom one).
+  inner: "container-p flex flex-col gap-6 pt-10 pb-[72px] xl:flex-row xl:items-center xl:gap-[170px] xl:pt-[160px] xl:pb-[60px]",
+  // `xl:order-2` (owner, 2026-09-07: "image placeholder should come first
+  // then the text" -- mobile/tablet only, real mobile Figma frame for this
+  // page doesn't exist yet, but the desktop frame, 733:529, does show text
+  // left / image right, unchanged) -- DOM order below is now media first,
+  // text second (matches the new mobile/tablet visual order directly, no
+  // CSS reorder needed there); `xl:order-2` pushes text back after media
+  // at desktop so that frame's own left/right order is preserved.
+  textCol: "flex w-full flex-col gap-6 xl:order-2 xl:w-[620px] xl:shrink-0 xl:gap-10",
   heading: "text-h1 text-ink",
+  // Wraps the two `<p>`s (owner, 2026-09-07: "the subline of this section
+  // divide into 2 parts ... with 24px gap from the top paragraph") -- its
+  // own fixed `gap-6` (24px) at every breakpoint, deliberately not
+  // `textCol`'s own responsive heading-to-body gap (`gap-6`/`xl:gap-10`),
+  // since the owner asked for one specific number between the two
+  // paragraphs, not "whatever the heading gap already is".
+  paragraphStack: "flex flex-col gap-6",
   // text-body-lg is 20px/400 (matches), but its own default line-height
   // (1.2/24px) is shorter than this paragraph's real Figma leading
   // (32px) -- `leading-8` overrides just that, per this project's own
@@ -1444,7 +1567,8 @@ export const servicesIntro = {
   // convention used elsewhere.
   paragraph: "text-body-lg leading-8 text-ink",
   paragraphBold: "font-semibold",
-  media: "w-full xl:w-[400px] xl:shrink-0",
+  // `xl:order-1`: pairs with `textCol`'s own `xl:order-2` above.
+  media: "w-full xl:order-1 xl:w-[400px] xl:shrink-0",
 };
 
 /* --- ServicesHowWeWork (/services page, section 3) ------------------------- */
@@ -1471,21 +1595,61 @@ export const servicesHowWeWork = {
   // owner report 2026-09-07: "should have the 140px gap from the top
   // content"). Each of `pathsGrid`/`noteWrap` now owns its own top margin
   // instead -- see those keys' own comments.
-  inner: "container-p flex flex-col items-center pt-16 pb-12 xl:pt-[160px] xl:pb-20",
+  // `pt-0` (owner, 2026-09-07: "how we work top gap should be 72px" --
+  // first set as this section's own `pt-[72px]`, then corrected the same
+  // day, "looks more than 72px maybe the top section has bottom gap ...
+  // remove it" -- confirmed live: TrustSignals' shared `mobileWrap` already
+  // supplies its own `pb-[72px]` before this section, so the two stacked
+  // to a real 144px, not 72px. Zeroed here instead of touching
+  // `trustSignals.mobileWrap` (shared with the homepage's own usage) --
+  // same "one side owns the gap" pattern this file already uses elsewhere
+  // (see `hero.section`'s own comment). Desktop `xl:pt-[160px]` is
+  // unchanged (TrustSignals' desktop variant, `desktopWrapServices`, has
+  // its own distinct 80px bottom padding, already correct).
+  inner: "container-p flex flex-col items-center pt-0 pb-12 xl:pt-[160px] xl:pb-20",
   // 624px intro column in Figma -- kept as a max-width (not a fixed width)
   // so it can shrink below its own value on a narrow mobile viewport
   // instead of forcing horizontal overflow.
   introWrap: "flex max-w-[624px] flex-col items-center gap-4 text-center",
   heading: "text-h1 text-ink",
-  // Same "20px/400 token, 32px leading layered on top" pattern as
-  // `servicesIntro.paragraph` -- see that key's own comment.
-  subheading: "text-body-lg leading-8 text-[#17191e]",
+  // 18px/24px (owner, 2026-09-07: "how we work subline font should be 18
+  // by 24 line height" -- was the 20px/400 `text-body-lg` token with a
+  // 32px `leading-8` override, same pattern `servicesIntro.paragraph`
+  // still uses). `text-[1.125rem] leading-6` is a plain explicit value,
+  // not a token, since no existing type-scale entry is 18px/24px.
+  subheading: "text-[1.125rem] leading-6 text-[#17191e]",
   // mt-12 (48px) mobile fallback, xl:mt-[72px] -- Figma's own confirmed gap
   // from the intro block above.
-  pathsGrid: "mt-12 grid w-full grid-cols-1 gap-16 xl:mt-[72px] xl:grid-cols-3 xl:gap-x-11 xl:gap-y-0",
-  pathCard: "flex flex-col items-start gap-8",
-  pathMedia: "w-full",
-  pathTextCol: "flex w-full flex-col gap-8",
+  // `gap-3` (12px, owner, 2026-09-07: "make the gap between ODM, OEM same
+  // as used in the plp fabric section" -- was `gap-16`/64px) matches
+  // `fabricOptions.accordionStack`'s own mobile/tablet stack gap exactly
+  // (`mt-8 flex flex-col gap-3`) -- the real "gap between items" concept
+  // that component has, since its own desktop view is a `<table>` with row
+  // dividers, not a gapped stack (so `xl:gap-x-11`, this row's own real
+  // 3-column desktop gap, is left unchanged -- fabric options has nothing
+  // comparable at that breakpoint to match against).
+  pathsGrid: "mt-12 grid w-full grid-cols-1 gap-3 xl:mt-[72px] xl:grid-cols-3 xl:gap-x-11 xl:gap-y-0",
+  // `items-start`/`gap-8` are dead weight now that each card is just the
+  // one collapsible box (owner: "remove the image placeholders from this
+  // section" -- `pathMedia`/its `MediaPlaceholder` are gone too), but left
+  // as plain `flex w-full` rather than removed outright: `pathsGrid`'s own
+  // grid cells still need `pathCard` to be a real block-level width-filling
+  // wrapper, not bare content, for its `xl:grid-cols-3` columns to size
+  // correctly.
+  pathCard: "flex w-full",
+  // Collapsible now (owner: "oem production odm production can we make
+  // them collapsable", then "build this something similar to fabric
+  // options on PLP") -- the bordered box/chevron/dimmed-collapsed-title
+  // wrapper is `fabricOptions.accordionItem`/`accordionHeader`/
+  // `accordionChevron`/`accordionCollapsedTitle`/`accordionDetailGrid`/
+  // `accordionField`/`accordionLabel`/`accordionValue` (reused directly
+  // from the PLP's own `FabricOptions` component -- see
+  // ServicesHowWeWork.tsx's own header comment), not a second near-copy of
+  // that same recipe under this section's own keys. Only `pathTitleGroup`/
+  // `pathTitle`/`pathSubtitle` below remain this section's own -- the
+  // title/subtitle typography stays this card's real Figma values, laid
+  // out inside `fabricOptions.accordionHeader`'s generic row rather than
+  // matching that component's own plain fabric-name title.
   pathTitleGroup: "flex flex-col gap-2",
   // text-h3 hits exactly 30px/500 at this project's own 1440px reference
   // width (its fluid clamp's own confirmed value) -- matches Figma's flat
@@ -1498,15 +1662,6 @@ export const servicesHowWeWork = {
   // this is its own explicit one-off building on the same #17191e body
   // colour used elsewhere on this page.
   pathSubtitle: "text-[1.25rem] font-normal leading-7 tracking-[0.5px] text-[#17191e]",
-  pathDetailGroup: "flex flex-col gap-6",
-  pathDetailItem: "flex flex-col gap-2",
-  // 22px/500 flat, with a real 1px letter-spacing -- Figma's own value for
-  // "What it means"/"Best for", not a fluid token (text-h3's own 22px only
-  // happens at a much narrower viewport than this desktop-only component
-  // ever renders at, so reusing it here would be wrong, not a coincidence
-  // worth relying on).
-  pathDetailLabel: "text-[1.375rem] font-medium tracking-[1px] text-ink",
-  pathDetailBody: "text-[1.25rem] font-normal leading-7 text-[#17191e]",
   // mt-12 (48px) mobile fallback, xl:mt-[140px] -- Figma's own confirmed
   // gap from the cards row above (not the same 72px the row above uses --
   // see `inner`'s own comment on why this needs its own margin rather than
@@ -1514,10 +1669,12 @@ export const servicesHowWeWork = {
   noteWrap: "mt-12 flex max-w-[656px] flex-col items-center gap-4 xl:mt-[140px]",
   noteIconWrap: "flex size-[54px] items-center justify-center rounded-full bg-accent/10 text-accent",
   noteIcon: "size-[54px]",
-  // 20px, 30px leading (Figma's own real value here -- not the 32px
-  // `leading-8` the intro/subheading paragraphs above use) -- kept exact
-  // rather than reusing a nearby but not-quite-matching override.
-  noteParagraph: "text-body-lg leading-[30px] text-center text-ink",
+  // 18px/24px (owner, 2026-09-07: "many prgrams text make it 18px by 24
+  // line height" -- was the 20px/400 `text-body-lg` token with a 30px
+  // `leading-[30px]` override, same "explicit value, not a token" pattern
+  // `subheading` above already uses since no existing type-scale entry is
+  // 18px/24px).
+  noteParagraph: "text-[1.125rem] leading-6 text-center text-ink",
   noteParagraphBold: "font-semibold",
 };
 
@@ -1534,11 +1691,12 @@ export const servicesHowWeWork = {
 // follows after Certified & Compliant.
 export const productRange = {
   section: "bg-ink text-paper",
-  // 48px top/bottom mobile fallback (standing dark-section inset rule,
-  // 2026-08-24); 120px top / 80px desktop, Figma's own confirmed values (an
+  // Mobile: 72px top (owner, 2026-09-07, up from the standing 48px
+  // dark-section fallback), 48px bottom (unchanged, standing rule).
+  // Desktop: 120px top / 80px bottom, Figma's own confirmed values (an
   // intentionally asymmetric pair, not a rounding -- same shape as Hero's
   // own 140/80 split).
-  inner: "container-p flex flex-col items-center gap-12 pt-12 pb-12 xl:gap-[72px] xl:pt-[120px] xl:pb-20",
+  inner: "container-p flex flex-col items-center gap-12 pt-[72px] pb-12 xl:gap-[72px] xl:pt-[120px] xl:pb-20",
   // 812px, Figma's own confirmed text-box width (get_metadata, node
   // 758:829) -- the exact width that forces Figma's real 2-line break
   // ("End-to-end activewear and" / "teamwear manufacturing"), not a guess.

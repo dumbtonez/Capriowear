@@ -127,8 +127,18 @@ export default async function CategoryPage({ params }: PageProps<"/activewear/[c
           top of the page instead of staying hidden until the real end --
           matches the same classes app/page.tsx's own `<main>` already
           uses for the identical reason.
+          `pt-[72px] xl:pt-[87px]` (owner, 2026-09-07: Header is now
+          `position: fixed`, a true overlay, no longer reserving its own
+          space in flow -- see header.base's own comment) -- compensates
+          so CategoryBanner starts exactly where it used to visually,
+          without touching its own fragile fixed-height/absolute-position
+          math (see CategoryBanner's own header comment for that history).
+          Unlike Hero/ServicesHero, this page's first section does NOT get
+          the true background-extends-under-the-header overlay treatment;
+          every section after it still gets the real blur/tone-swap once
+          scrolled, same as everywhere else.
           */}
-      <main className="relative z-10 bg-paper">
+      <main className="relative z-10 bg-paper pt-[72px] xl:pt-[87px]">
         <CategoryBanner
           breadcrumbItems={[
             { label: "Home", href: "/" },
