@@ -32,7 +32,7 @@
 import { useEffect, useRef } from "react";
 
 export type ScrollSpotlightListProps = {
-  items: string[];
+  items: readonly string[];
   listClassName: string;
   itemClassName: string;
   restColor?: string;

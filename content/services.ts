@@ -128,6 +128,26 @@ export const services = {
     ],
   },
 
+  // Section 6: Responsible Make. Figma desktop node 811:1156, directly
+  // under CertifiedCompliant (owner, 2026-09-07, spacing: "104px" top and
+  // bottom). Reuses the PLP/PDP's own `TrustPoints` component verbatim
+  // ("its a same component that we used on PLP and PDP, just changed the
+  // content") -- heading + subline + a bordered list, this page's own 4
+  // rows instead of the PLP's 5. Copy is the design's own real text layer,
+  // read directly via Figma MCP (get_metadata + screenshot confirmed,
+  // node 811:1156), same as every prior section on this page.
+  responsibleMake: {
+    heading: "Responsible make",
+    subline:
+      "We offer recycled polyester and OEKO-TEX certified fabrics for brands that want them, and we source to a sustainability spec you set. We name what is genuinely certified rather than making broad green claims.",
+    points: [
+      "Recycled polyester (rPET) across many knit and woven bases",
+      "OEKO-TEX certified fabrics on request",
+      "BSCI and IMAC audited social and ethical compliance",
+      "Sourcing and matching to your own sustainability requirements",
+    ],
+  },
+
   // FAQ. Same component/styling as the homepage's own FAQ (`Faq.tsx`,
   // `home.faq`) -- `Faq` is already content-agnostic (see its own header
   // comment), so this section just feeds it this page's own question set,
@@ -197,6 +217,40 @@ export const services = {
         q: "How do I get started?",
         a: "Send your tech pack, sketch or a reference by email or WhatsApp. We come back within 24 hours with next steps.",
       },
+    ],
+  },
+
+  // Final CTA, the page's closing section, reusing the homepage's own
+  // `FinalCta` component and compliance-bar pattern verbatim (owner,
+  // 2026-09-07: "reuse the homepage final CTA + compliance bar
+  // component") -- distinct from the earlier `<FinalCta content={home.
+  // finalCta} ticker={home.complianceTicker} />` usage under How It Works
+  // (Section 8 above): that one reuses homepage content as-is, this one is
+  // its own copy (a genuinely different subline from `home.finalCta`'s),
+  // its own secondary button, and its own 5-item compliance bar -- the
+  // same two-FinalCta-usages-per-page pattern the homepage itself already
+  // established (`home.finalCta` then `home.closingCta`).
+  finalCta: {
+    h2: "Let's build your custom collection",
+    subline: "Share your tech pack, sketch or a reference. We'll come back within 24 hours with next steps.",
+    cta: { label: "Request a Sample", href: "/request-a-sample" },
+    secondaryCta: { label: "Download Catalog", href: "/catalog" },
+  },
+
+  // The 5 items are owner-specified verbatim, a shorter list than home.ts's
+  // full 8-item `complianceTicker` -- not a typo/omission, an intentional
+  // trim for this page's own closing band. `title` reuses the same
+  // "STANDARD ON EVERY ORDER" label `home.complianceTicker` already
+  // established for this identical pattern (a labelled compliance-claims
+  // strip), since no new title was given for this shorter set.
+  complianceBar: {
+    title: "STANDARD ON EVERY ORDER",
+    items: [
+      "NDA before tech pack",
+      "Pre-shipment inspection",
+      "GSP+ Form A per container",
+      "AQL 2.5 inspection",
+      "ISO 9001 certified",
     ],
   },
 } as const;

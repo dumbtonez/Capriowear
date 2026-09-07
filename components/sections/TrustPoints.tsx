@@ -13,7 +13,7 @@ import { trustPoints } from "@/components/ui/styles";
 export type TrustPointsProps = {
   heading: string;
   subline: string;
-  points: string[];
+  points: readonly string[];
   /**
    * Desktop side padding + title max-width, paired per page: the PLP's own
    * 138px padding with a 650px title cap (Figma node 579:5493, the
@@ -23,24 +23,32 @@ export type TrustPointsProps = {
    * using the wider row's full width). A variant token rather than an
    * arbitrary className override, since two conflicting `px-*`/`max-w-*`
    * utilities can't reliably override each other by class order.
+   *
+   * `"services"`: the Services page's own "Responsible make" instance
+   * (Figma node 811:1156, owner, 2026-09-07: "104px" top and bottom) --
+   * same 80px side padding/no title cap as the PDP (this frame's own
+   * short 2-line heading has no cap either), but its own top/bottom gap
+   * since it isn't following `ProductCustomizeSteps` the way the PDP does.
    */
-  sidePadding?: "plp" | "pdp";
+  sidePadding?: "plp" | "pdp" | "services";
+};
+
+const sidePaddingSection = {
+  plp: trustPoints.sidePaddingPlp,
+  pdp: trustPoints.sidePaddingPdp,
+  services: trustPoints.sidePaddingServices,
+};
+
+const sidePaddingHeadingWidth = {
+  plp: trustPoints.headingMaxWidthPlp,
+  pdp: trustPoints.headingMaxWidthPdp,
+  services: trustPoints.headingMaxWidthPdp,
 };
 
 export function TrustPoints({ heading, subline, points, sidePadding = "plp" }: TrustPointsProps) {
   return (
-    <section
-      className={cx(
-        trustPoints.section,
-        sidePadding === "pdp" ? trustPoints.sidePaddingPdp : trustPoints.sidePaddingPlp,
-      )}
-    >
-      <div
-        className={cx(
-          trustPoints.headingBlock,
-          sidePadding === "pdp" ? trustPoints.headingMaxWidthPdp : trustPoints.headingMaxWidthPlp,
-        )}
-      >
+    <section className={cx(trustPoints.section, sidePaddingSection[sidePadding])}>
+      <div className={cx(trustPoints.headingBlock, sidePaddingHeadingWidth[sidePadding])}>
         <h2 className={trustPoints.heading}>{heading}</h2>
         <p className={trustPoints.subline}>{subline}</p>
       </div>

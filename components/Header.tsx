@@ -315,11 +315,21 @@ export function Header({
                 if (!hasMenu) {
                   return (
                     <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className={cx(header.navLink, isActive && header.navTriggerActive)}
-                      >
-                        {link.label}
+                      <Link href={link.href} className={header.navLink}>
+                        {/* Same grid-stacked label as a mega-menu trigger
+                            (see `navLinkLabelStack` in
+                            components/ui/styles.ts) -- reserves the
+                            semibold width up front so hovering (CSS
+                            `group-hover`) or landing on this page
+                            (`isActive`) never shifts a later nav item. */}
+                        <span className={header.navLinkLabelStack}>
+                          <span className={header.navLinkLabelGhost} aria-hidden="true">
+                            {link.label}
+                          </span>
+                          <span className={cx(header.navLinkLabelVisible, isActive && header.navTriggerActive)}>
+                            {link.label}
+                          </span>
+                        </span>
                         {isRouteActive ? <span className={header.navUnderline} aria-hidden="true" /> : null}
                       </Link>
                     </li>

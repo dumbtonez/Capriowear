@@ -75,17 +75,38 @@
 // have been corrected more than once to match Figma, not left as
 // whichever order sections happened to be built in.
 //
-// Section 10 (final): FAQ, reusing the homepage's own `Faq` component and
-// styling verbatim (owner, 2026-09-07: "same pattern as the homepage
-// 'Top questions from B2B buyers' FAQ ... do NOT fork or restyle it") --
-// `Faq` was already content-agnostic (see its own header comment), so this
-// is just `services.faq`, this page's own 14-question set, fed through the
-// same accordion. Placed after Certified & Compliant, the last section this
-// page had before this one, matching the owner's own brief order (last
-// section) since no other placement was specified. `services.faq.items`
-// also feeds `faqSchema()` below (same "content feeds both the visible
-// accordion and the schema" pattern `home.faq`/`app/page.tsx` already use)
-// so the two can never drift apart.
+// Section 10: Responsible Make, Figma desktop node 811:1156 (owner,
+// 2026-09-07: "Built under the certified section, its a same component
+// that we used on PLP and PDP, just changed the content. spacing from top
+// and bottom is 104px") -- reuses the PLP/PDP's own `TrustPoints`
+// component verbatim, its own new `sidePadding="services"` variant (see
+// that component's own prop comment). get_metadata confirms this frame
+// starts at y=8887, exactly where Certifications (8265-8887) ends -- a
+// genuine next sibling, not just "further down the page" the way
+// Certifications was to HowItWorks. Content is `services.responsibleMake`
+// (4 rows: recycled polyester, OEKO-TEX, BSCI/IMAC, sustainability
+// sourcing), confirmed against the design's own real text layer via
+// get_screenshot.
+// Section 11: FAQ, reusing the homepage's own `Faq` component and styling
+// verbatim (owner, 2026-09-07: "same pattern as the homepage 'Top
+// questions from B2B buyers' FAQ ... do NOT fork or restyle it") -- `Faq`
+// was already content-agnostic (see its own header comment), so this is
+// just `services.faq`, this page's own 14-question set, fed through the
+// same accordion. Placed after Responsible Make, matching the owner's own
+// brief order (last section) since no other placement was specified.
+// `services.faq.items` also feeds `faqSchema()` below (same "content feeds
+// both the visible accordion and the schema" pattern `home.faq`/
+// `app/page.tsx` already use) so the two can never drift apart.
+// Section 12 (final): a second, closing `FinalCta` (owner, 2026-09-07:
+// "reuse the homepage final CTA + compliance bar component"), distinct
+// from Section 8's own earlier usage under How It Works -- same component,
+// this page's own content (`services.finalCta`, `services.complianceBar`),
+// not `home.finalCta`/`home.complianceTicker`. Adds a real primary+
+// secondary button pair (`FinalCta`'s new `secondaryCta` prop, added the
+// same day) and a shorter, owner-specified 5-item compliance bar (`home.
+// complianceTicker`'s full list has 8) -- the same "two FinalCta usages on
+// one page" pattern the homepage itself already established (`home.
+// finalCta` then `home.closingCta`).
 import type { Metadata } from "next";
 
 import { Header } from "@/components/Header";
@@ -100,6 +121,7 @@ import { ProductRange } from "@/components/sections/ProductRange";
 import { ServicesHero } from "@/components/sections/ServicesHero";
 import { ServicesHowWeWork } from "@/components/sections/ServicesHowWeWork";
 import { ServicesIntro } from "@/components/sections/ServicesIntro";
+import { TrustPoints } from "@/components/sections/TrustPoints";
 import { TrustSignals } from "@/components/sections/TrustSignals";
 import { header } from "@/components/ui/styles";
 import { home } from "@/content/home";
@@ -159,7 +181,14 @@ export default function ServicesPage() {
         <HowItWorks content={home.howItWorks} tone="dark" />
         <FinalCta content={home.finalCta} ticker={home.complianceTicker} />
         <CertifiedCompliant content={home.certified} />
+        <TrustPoints
+          heading={services.responsibleMake.heading}
+          subline={services.responsibleMake.subline}
+          points={services.responsibleMake.points}
+          sidePadding="services"
+        />
         <Faq content={services.faq} />
+        <FinalCta content={services.finalCta} ticker={services.complianceBar} secondaryCta={services.finalCta.secondaryCta} />
       </main>
 
       <JsonLd data={breadcrumbSchema([{ name: "Home", url: SITE_URL }, { name: "Services", url: CANONICAL }])} />

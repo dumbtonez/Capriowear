@@ -51,8 +51,20 @@ export const button = {
   // measures 54px tall (Hero banner buttons, node 322:1528/1529/1531) -- the
   // sitewide 44px (min-h-11) is the accessibility floor everywhere else, but
   // the real button design exceeds it. Corrected 2026-08-24 from min-h-11.
-  base: "inline-flex min-h-[54px] items-center justify-center rounded-pill px-8 py-2 text-button uppercase transition-colors disabled:pointer-events-none disabled:opacity-40",
-  primary: "bg-accent text-accent-ink hover:opacity-90",
+  // `transition-[color,background-color,border-color,filter]`, not the
+  // plain `transition-colors` utility (owner, 2026-09-07: "hover on the
+  // primary cta should have the same hover color ... use on the main ctas
+  // wherever it is" -- referring to Product Range's "Explore Activewear"
+  // link, `productRange.exploreLink`'s `hover:brightness-125`) -- an
+  // explicit color-property list that also covers `filter`, so `primary`'s
+  // new brightness hover below actually animates instead of snapping.
+  base: "inline-flex min-h-[54px] items-center justify-center rounded-pill px-8 py-2 text-button uppercase transition-[color,background-color,border-color,filter] disabled:pointer-events-none disabled:opacity-40",
+  // `hover:brightness-125`, not `hover:opacity-90` -- the same hover
+  // treatment `productRange.exploreLink` already established for a CTA on
+  // an accent-coloured element, applied here so it reads consistently on
+  // every primary CTA sitewide (this is the one shared `button.primary`
+  // recipe every `<Button>` instance uses), not just the Explore links.
+  primary: "bg-accent text-accent-ink hover:brightness-125",
   // currentColor, so the same outline reads on light and dark sections without
   // a separate inverse variant.
   secondary: "border border-current bg-transparent text-current hover:bg-current/10",
@@ -797,8 +809,15 @@ export const header = {
   // the 2026-09-02 16px override above. `text-body` is the sitewide token
   // for exactly this size/line-height (1.125rem/1.2222), so this now reuses
   // it directly instead of carrying its own arbitrary-value override.
+  // `group` (not a bare hoverable label span) -- the pill's own padding
+  // (`px-4`, min-h-11) is wider than the label text it wraps, so the
+  // bold-on-hover below has to key off this whole element's `:hover`, not
+  // the inner label's own tighter box, or moving the pointer into the
+  // pill's padding (not directly over a glyph) wouldn't trigger it. See
+  // `navLinkLabelVisible` below for why the weight toggle itself lives on
+  // the label's inner visible layer, not here.
   navLink:
-    "relative inline-flex min-h-11 items-center whitespace-nowrap rounded-pill px-4 text-body text-paper transition-colors hover:text-[#838d97]",
+    "group relative inline-flex min-h-11 items-center whitespace-nowrap rounded-pill px-4 text-body text-paper transition-colors hover:text-[#838d97]",
   navTrigger:
     "relative inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-pill px-4 text-body text-paper transition-colors hover:text-[#838d97]",
   // Active state (Figma node 493:3140, 2026-08-27) -- semibold text plus a
@@ -816,6 +835,21 @@ export const header = {
   navTriggerLabelStack: "relative isolate inline-grid",
   navTriggerLabelGhost: "invisible col-start-1 row-start-1 font-semibold",
   navTriggerLabelVisible: "col-start-1 row-start-1",
+  // Plain nav links (Services, Factory Tour) get the exact same hover
+  // treatment as a mega-menu trigger (owner, 2026-09-07: "Nav factory tour
+  // and download catalog should have the same hover treatment as
+  // teamwear") -- hovering Teamwear bolds its label via `isOpen` (mouse
+  // entering the trigger opens its menu, which flips `isActive`); a plain
+  // link never opens anything, so this reaches the same bold-on-hover
+  // result with a real CSS `hover:font-semibold` instead of JS state.
+  // Same 2-layer grid-stack technique as the trigger's own label (see
+  // above) for the same reason -- an always-semibold invisible ghost
+  // reserves the widest width up front, so this link's own hover-bold
+  // (and route-active bold, `navTriggerActive` again) never shifts
+  // whatever nav item sits after it.
+  navLinkLabelStack: "relative isolate inline-grid",
+  navLinkLabelGhost: "invisible col-start-1 row-start-1 font-semibold",
+  navLinkLabelVisible: "col-start-1 row-start-1 group-hover:font-semibold",
   // Chevron, added 2026-08-27 (owner call) for every mega-menu trigger
   // (Activewear, Teamwear & Uniforms) -- not in the Figma frame itself, but
   // requested as a standard "this opens something" affordance. Rotates to
@@ -922,7 +956,13 @@ export const header = {
   // chevron overflow, fixed the same way: shave a few px from a low-impact
   // value rather than touch a Figma-confirmed one like navLink's padding).
   actions: "hidden shrink-0 items-center gap-5 xl:flex",
-  actionLink: "inline-flex min-h-11 items-center whitespace-nowrap text-button-sm uppercase transition-opacity hover:opacity-70",
+  // Colour fade, not opacity (owner correction, 2026-09-07: "download
+  // catalog hover color should be the same as others") -- matches
+  // `navLink`/`navTrigger`'s own hover treatment (`hover:text-[#838d97]`)
+  // instead of the generic opacity-70 fade every other `hover:opacity-70`
+  // link on this site uses, so the whole nav row reads as one consistent
+  // hover language.
+  actionLink: "inline-flex min-h-11 items-center whitespace-nowrap text-button-sm uppercase text-paper transition-colors hover:text-[#838d97]",
   // `!px-6` (real bug, found live, 2026-09-02): without `!`, this lost to
   // Button's own base `px-8` in Tailwind's generated stylesheet order (same
   // same-specificity-utility-conflict class of bug already hit and fixed
@@ -2369,6 +2409,14 @@ export const finalCta = {
   // own label) would otherwise render notably narrower and read as
   // inconsistent between the two CTA bands on the same page.
   desktopButton: "min-w-[240px] justify-center",
+  // Opt-in row for a second, outline button (`secondaryCta`, added
+  // 2026-09-07 for the Services page's own closing CTA: primary "Request a
+  // Sample" plus secondary "Download Catalog") -- same `gap-4` row already
+  // used by `servicesHero.buttons`' desktop pairing, not a new value.
+  desktopButtonRow: "flex items-center gap-4",
+  // Stacked full-width, same `gap-4` as the desktop row above -- matches
+  // `servicesHero.buttons`' own mobile stack.
+  mobileButtonRow: "flex w-full flex-col gap-4",
   // Tablet-only trim (owner, 2026-09-04: "reduce the space from top and
   // bottom of compliance section. reduce 32px from both sides") --
   // `Marquee`'s own shared `basePaddingDefault` (`pt-10 pb-8`, every
@@ -4095,6 +4143,17 @@ export const trustPoints = {
   // template for every category) picks this up automatically, not a
   // per-category override.
   sidePaddingPdp: "pb-12 md:pb-0 md:pt-[120px] xl:pt-0 xl:px-[80px] xl:pb-[120px]",
+  // Services page's own "Responsible make" instance (Figma node 811:1156,
+  // owner, 2026-09-07: "spacing from top and bottom is 104px") -- same
+  // 80px side padding as `sidePaddingPdp` (this site's own standard
+  // `.container-p` desktop inset), but this page's own top/bottom gap
+  // rather than relying on the section above the way the PDP's `xl:pt-0`
+  // does (this section here isn't following `ProductCustomizeSteps`).
+  // Mobile/tablet fall back to the same top/bottom value too -- no mobile
+  // Figma frame exists yet for this page's own instance to confirm a
+  // different number against, same "responsive-safe fallback, not a
+  // confirmed design" treatment `ServicesHero`/`ServicesIntro` already use.
+  sidePaddingServices: "pt-[104px] pb-[104px] xl:px-[80px]",
   // max-xl:gap-2 (8px, mobile Title frame's own gap)/px-5 (20px, mobile's
   // own inset -- the section itself carries none below xl)/w-full (fills
   // the padded row instead of shrinking to content, unlike desktop's

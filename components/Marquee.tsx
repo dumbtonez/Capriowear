@@ -21,7 +21,7 @@ import { cx } from "./ui/cx";
 import { marquee } from "./ui/styles";
 
 export type MarqueeProps = {
-  items: ReactNode[];
+  items: readonly ReactNode[];
   /** Static label shown before the ticker, e.g. "Fully Custom Offerings". */
   label?: ReactNode;
   /**

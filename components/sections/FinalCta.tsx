@@ -35,17 +35,33 @@
 // top of the previous section's standard bottom gap instead, reading as an
 // oversized space above the heading (also found live, 2026-08-27) --
 // `mobileCtaBlockNoTicker` resets it to the standard pt-0.
+//
+// `secondaryCta` (added 2026-09-07, Services page's own closing CTA) is a
+// second, outline `Button` rendered alongside the primary one -- optional,
+// so every existing homepage/PLP usage (a single button) is unaffected.
 import { Button } from "@/components/Button";
 import { Marquee } from "@/components/Marquee";
 import { ScrollSpotlightList } from "@/components/ScrollSpotlightList";
 import { TextReveal } from "@/components/TextReveal";
 import { cx } from "@/components/ui/cx";
 import { finalCta } from "@/components/ui/styles";
-import type { home } from "@/content/home";
+
+// Plain (non-`typeof home.finalCta`/`typeof home.complianceTicker`) shapes,
+// `readonly`-compatible -- same reasoning as `Faq.tsx`'s own `FaqProps`
+// widening: `content/services.ts` is an `as const` file (unlike `content/
+// home.ts`), so `services.finalCta`/`services.complianceBar` are readonly,
+// and this component is reused verbatim by both.
+type FinalCtaContent = { h2: string; subline: string; cta: { label: string; href: string } };
+type ComplianceTicker = { title: string; items: readonly string[] };
 
 export type FinalCtaProps = {
-  content: typeof home.finalCta;
-  ticker?: typeof home.complianceTicker;
+  content: FinalCtaContent;
+  ticker?: ComplianceTicker;
+  /** Renders a second, outline `Button` alongside the primary one (owner,
+   *  2026-09-07, Services page's own closing CTA: "Secondary CTA button:
+   *  Download Catalog"). Optional -- every existing homepage/PLP usage
+   *  omits it and keeps rendering just the one primary button, unchanged. */
+  secondaryCta?: { label: string; href: string };
   /** The section directly above this one already supplies the standard
    *  mobile 72px gap (e.g. Faq's own `mobileSection` pb-[72px] on the
    *  Activewear PLP) -- drops this ticker block's own pt-[72px] so the two
@@ -54,7 +70,7 @@ export type FinalCtaProps = {
   compactMobileTop?: boolean;
 };
 
-export function FinalCta({ content, ticker, compactMobileTop }: FinalCtaProps) {
+export function FinalCta({ content, ticker, secondaryCta, compactMobileTop }: FinalCtaProps) {
   return (
     <section>
       {/* Desktop: CTA block, then the ticker, one continuous band */}
@@ -65,9 +81,20 @@ export function FinalCta({ content, ticker, compactMobileTop }: FinalCtaProps) {
               <TextReveal as="h2" text={content.h2} className={finalCta.desktopHeading} />
               <p className={finalCta.desktopSubline}>{content.subline}</p>
             </div>
-            <Button href={content.cta.href} className={finalCta.desktopButton}>
-              {content.cta.label}
-            </Button>
+            {secondaryCta ? (
+              <div className={finalCta.desktopButtonRow}>
+                <Button href={content.cta.href} className={finalCta.desktopButton}>
+                  {content.cta.label}
+                </Button>
+                <Button variant="secondary" href={secondaryCta.href} className={finalCta.desktopButton}>
+                  {secondaryCta.label}
+                </Button>
+              </div>
+            ) : (
+              <Button href={content.cta.href} className={finalCta.desktopButton}>
+                {content.cta.label}
+              </Button>
+            )}
           </div>
           {ticker ? (
             <Marquee
@@ -100,9 +127,20 @@ export function FinalCta({ content, ticker, compactMobileTop }: FinalCtaProps) {
             <TextReveal as="h2" text={content.h2} className={finalCta.mobileHeading} />
             <p className={finalCta.mobileSubline}>{content.subline}</p>
           </div>
-          <Button href={content.cta.href} className={finalCta.mobileButton}>
-            {content.cta.label}
-          </Button>
+          {secondaryCta ? (
+            <div className={finalCta.mobileButtonRow}>
+              <Button href={content.cta.href} className={finalCta.mobileButton}>
+                {content.cta.label}
+              </Button>
+              <Button variant="secondary" href={secondaryCta.href} className={finalCta.mobileButton}>
+                {secondaryCta.label}
+              </Button>
+            </div>
+          ) : (
+            <Button href={content.cta.href} className={finalCta.mobileButton}>
+              {content.cta.label}
+            </Button>
+          )}
         </div>
       </div>
     </section>
