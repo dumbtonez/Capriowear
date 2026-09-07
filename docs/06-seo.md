@@ -8,7 +8,11 @@ How this site wins on traditional search and on AI answer engines (AEO): structu
 
 Production is `www.capriosports.com`. This Next app is not the whole site — it's mounted at `/capriowear` (the landing page splits into "capriogear," the existing WordPress site, and "capriowear," this app). So every canonical/OG/sitemap URL must read `https://www.capriosports.com/capriowear...`, even though this app's own internal routing still starts at `/`.
 
-That real public URL lives in exactly one place: `content/site.ts`'s `SITE_URL`. Never hand-type it, never assume Next's automatic relative-URL resolution (via `metadataBase`) gets it right for a per-page canonical — set `alternates.canonical` as an explicit absolute string built from `SITE_URL` on every page (see `app/page.tsx`).
+That real public URL lives in exactly one place: `content/site.ts`'s `SITE_URL`. Never hand-type it, never assume Next's automatic relative-URL resolution (via `metadataBase`) gets it right for a per-page canonical — set `alternates.canonical` as an explicit absolute string built from `SITE_URL` on every page (see `app/page.tsx`). `SITE_URL` reads from `NEXT_PUBLIC_SITE_URL` when set, falling back to the exact literal above when it isn't (every environment today) — so a preview/staging deploy can point canonicals at its own URL without a code change, while every environment that never sets the var keeps behaving exactly as before.
+
+## Indexing switch — currently OFF (do not flip without checking with the owner)
+
+The site is staging on Vercel ahead of the real launch on `capriosports.com/capriowear` and must not be indexed by Google until then. One env var controls the whole site: `NEXT_PUBLIC_ALLOW_INDEXING`, read into `content/site.ts`'s `ALLOW_INDEXING` constant (defaults to `false`/off whenever unset). While off: `app/layout.tsx` renders a sitewide `<meta name="robots" content="noindex, nofollow">` (via the Metadata API's own `robots` field, no per-page override reintroduces indexing), and `app/robots.ts` disallows every path for every agent, with no sitemap reference. Set `NEXT_PUBLIC_ALLOW_INDEXING=true` in Vercel's production environment variables at real launch to flip both at once — no code change needed.
 
 ## 1 · Structured data (JSON-LD)
 

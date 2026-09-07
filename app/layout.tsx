@@ -4,7 +4,7 @@ import { Figtree } from "next/font/google";
 import { AppEntryMarker } from "@/components/AppEntryMarker";
 import { JsonLd } from "@/components/JsonLd";
 import { ScrollReset } from "@/components/ScrollReset";
-import { DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from "@/content/site";
+import { ALLOW_INDEXING, DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from "@/content/site";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import "./globals.css";
 
@@ -30,6 +30,14 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description: DEFAULT_DESCRIPTION,
+  // Sitewide noindex switch (SEO/metadata audit, 2026-09-06) -- see
+  // ALLOW_INDEXING's own comment (content/site.ts). `false` here renders
+  // <meta name="robots" content="noindex, nofollow"> via Next's own
+  // Metadata API; `undefined` (once ALLOW_INDEXING is true) omits the
+  // `robots` key entirely, so no meta tag renders and normal indexing
+  // applies. No per-page override anywhere reintroduces indexing while this
+  // is off -- every page inherits this root layout value untouched.
+  ...(ALLOW_INDEXING ? {} : { robots: { index: false, follow: false } }),
   openGraph: {
     siteName: SITE_NAME,
     type: "website",

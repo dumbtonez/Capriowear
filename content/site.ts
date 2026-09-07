@@ -10,9 +10,31 @@
 // "capriowear", this app) -- so every canonical/OG/sitemap URL must read
 // https://www.capriosports.com/capriowear..., even though every route inside
 // this app itself still starts at "/". Confirmed by the owner, 2026-08-25.
-export const SITE_URL = "https://www.capriosports.com/capriowear";
+//
+// Reads from NEXT_PUBLIC_SITE_URL (SEO/metadata audit, 2026-09-06) so a
+// Vercel preview/staging deploy can point this at its own URL without
+// editing code, while an unset env var (every environment today) falls back
+// to this exact literal -- canonical/sitemap/OG URLs never silently break
+// to localhost or a *.vercel.app preview URL just because the env var
+// wasn't configured yet.
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.capriosports.com/capriowear";
 
 export const SITE_NAME = "Capriowear";
+
+// The single site-wide indexing switch (SEO/metadata audit, 2026-09-06):
+// this site is currently staging on Vercel, ahead of the real launch on
+// capriosports.com/capriowear, and must NOT be indexed by Google until that
+// launch. Defaults to OFF (not indexable) whenever NEXT_PUBLIC_ALLOW_INDEXING
+// is unset -- the safe default for every environment (local dev, every
+// Vercel preview, and production) until someone explicitly flips it. Set
+// NEXT_PUBLIC_ALLOW_INDEXING=true in Vercel's production environment
+// variables at real launch to flip the whole site indexable with this one
+// var -- no code change needed at that point. Read by app/layout.tsx (the
+// sitewide `<meta name="robots">` via the Metadata API's own `robots`
+// field) and app/robots.ts (whether /robots.txt disallows everything or
+// allows crawling and references the sitemap) -- both read this one
+// constant, never a second, independently-set flag.
+export const ALLOW_INDEXING = process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true";
 
 // The entity intro, stored once at four lengths (owner spec, 2026-09-01:
 // "Set up the Capriowear entity intro so it is consistent across the WHOLE

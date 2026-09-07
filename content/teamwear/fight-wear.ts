@@ -58,10 +58,24 @@ export const fightWear: Category = {
   slug: "fight-wear",
   group: "Teamwear",
   menuLabel: "Rash Guards & Fight Wear",
-  manufacturerNoun: "Rash Guard & Fight Wear",
+  // "and", not "&" (owner spec, 2026-09-06): this feeds the auto-built
+  // entity-FAQ sentence's lowercase inline noun ("a custom rash guard and
+  // fight wear manufacturer"), where an ampersand read oddly verbatim in
+  // prose. `h1`/`menuLabel` below are separate, explicit fields -- neither
+  // derives from this one -- so they keep the "&" form ("Rash Guards &
+  // Fight Wear" / "Custom Rash Guard & Fight Wear Manufacturer")
+  // unaffected by this change.
+  manufacturerNoun: "Rash Guard and Fight Wear",
   productNounPlural: "rash guards and fight wear",
   entityExampleStyles: "rash guards, fight shorts, grappling spats, and compression tops",
   entityFabrics: "sublimated poly-spandex knits",
+  // Combat-sports-specific audience (owner spec, 2026-09-06) -- this
+  // category's real buyers are combat-sports brands and academies, not the
+  // generic activewear/teamwear-brand audience `categoryEntityFaq()`'s own
+  // default clause names. See that function's own comment
+  // (content/activewear/pdpShared.ts) and `Category.audienceClause`'s own
+  // comment (content/activewear/types.ts).
+  audienceClause: "for combat-sports brands, academies and teamwear suppliers worldwide",
   // H1 and metaTitle are deliberately different strings here (owner spec):
   // the on-page H1 is the broader category name, the title tag leads with
   // the higher-search-volume "BJJ" term to avoid a generic "uniform/kit"

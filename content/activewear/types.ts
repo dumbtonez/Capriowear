@@ -332,11 +332,23 @@ export type Category = {
    *   when omitted, the " in [fabrics]" clause is dropped from the
    *   sentence entirely (Leggings' own prior sentence shape had no such
    *   clause at all, so adding an empty one would be a silent regression).
+   * - `audienceClause`: the "for [X]" clause right after "a custom [noun]
+   *   manufacturer" -- falls back to the exact original hardcoded text,
+   *   "for activewear brands and teamwear suppliers worldwide", so every
+   *   category that doesn't set this (every one so far) renders
+   *   byte-identical output. Added for Rash Guards & Fight Wear (owner
+   *   spec, 2026-09-06): a combat-sports category's real buyer audience
+   *   ("combat-sports brands, academies and teamwear suppliers worldwide")
+   *   is genuinely different from every other category's own activewear/
+   *   teamwear-brand audience, the same kind of real per-category gap
+   *   `manufacturerNoun`/`productNounPlural`/`entityExampleStyles`/
+   *   `entityFabrics` were each added to cover.
    */
   manufacturerNoun?: string;
   productNounPlural?: string;
   entityExampleStyles?: string;
   entityFabrics?: string;
+  audienceClause?: string;
   /** Page H1. Form: "Custom [Product] Manufacturer". */
   h1: string;
   /**
