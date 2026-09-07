@@ -1476,7 +1476,10 @@ export const productRange = {
   // intentionally asymmetric pair, not a rounding -- same shape as Hero's
   // own 140/80 split).
   inner: "container-p flex flex-col items-center gap-12 pt-12 pb-12 xl:gap-[72px] xl:pt-[120px] xl:pb-20",
-  headingWrap: "max-w-[624px]",
+  // 812px, Figma's own confirmed text-box width (get_metadata, node
+  // 758:829) -- the exact width that forces Figma's real 2-line break
+  // ("End-to-end activewear and" / "teamwear manufacturing"), not a guess.
+  headingWrap: "max-w-[812px]",
   // Figma's own 20px/500 explore-link size, reused for the eyebrow slot via
   // SectionHeading's `eyebrowSize` override.
   eyebrowSize: "text-[1.25rem] font-semibold",
