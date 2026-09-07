@@ -3989,41 +3989,36 @@ export const productGallery = {
   // `mobileRoot` (still true, unaffected -- this wrapper is a new,
   // separate box, not a replacement for `mobileRoot`'s own `relative`).
   //
-  // Fixed height replaced with `aspect-[575/612]` (owner report, same
-  // day: on tablet, this box spans the full container width while
-  // staying pinned at a flat 450px tall, so a portrait photo's
-  // `object-cover` had to zoom in hard to fill the now-landscape-shaped
-  // box, cropping away most of the garment vertically -- confirmed live
-  // on a real photo). An aspect ratio makes the box's height scale WITH
-  // its width at any size in the mobile/tablet range instead of staying
-  // flat, so the crop stays sensible throughout, not just at exactly
-  // 375px. `575:612` reuses `mainWrap`'s own desktop main-image ratio
-  // (~0.94:1) rather than a new one-off, for the same shape on both
-  // sides of the `xl` breakpoint. At 375px wide this computes to ~399px
-  // tall, close to (not identical to) the old 450px -- a deliberate,
-  // confirmed trade of that specific owner-set number for a box that no
-  // longer breaks at wider mobile/tablet widths.
-  mobileImageWrap: "relative aspect-[575/612]",
+  // Fixed height replaced with an aspect ratio (owner report, 2026-09-07:
+  // on tablet, this box spans the full container width while staying
+  // pinned at a flat 450px tall, so a portrait photo's `object-cover` had
+  // to zoom in hard to fill the now-landscape-shaped box, cropping away
+  // most of the garment vertically -- confirmed live on a real photo). An
+  // aspect ratio makes the box's height scale WITH its width at any size
+  // in the mobile/tablet range instead of staying flat, so the crop stays
+  // sensible throughout, not just at exactly 375px. `360:450` (4:5) is
+  // this frame's own confirmed ratio (Figma node 814:98, "Hero Image"),
+  // replacing an earlier stand-in that borrowed desktop's own main-image
+  // ratio before a mobile-specific frame existed to source one from.
+  mobileImageWrap: "relative aspect-[360/450]",
   mobileImage: "h-full",
   // Top-left, mirroring the desktop counter's own bg-paper/shadow-card
   // chrome (owner, 2026-09-01: tapping a thumbnail "should show the image
   // on the top and I should know its changed") -- top, not bottom, since
   // the thumbnail strip already owns the bottom edge here.
   mobileCounter: "absolute left-4 top-4 z-10 rounded-full bg-paper px-3 py-1.5 text-[0.875rem] font-medium text-ink shadow-card",
-  // bg-paper (solid, matching Figma's own opaque strip) rather than
-  // Figma's literal #f2f2f7 -- colour isn't copied exactly from Figma in
-  // this project (unlike typography), and bg-paper is the closest existing
-  // light-surface token rather than a new, near-duplicate hex.
-  // bottom-2 (8px, owner correction, 2026-09-01: "thumbnails should be
-  // over the main image[,] 8px gaps from the bottom" -- was flush at
-  // bottom-0) -- still `absolute` over the image itself (a real overlay,
-  // not a separate section below it), just inset from the true edge now.
-  // No background (owner correction, 2026-09-01: "should not have a
-  // background, keep it without the background") -- was `bg-paper`, a
-  // solid white bar; now genuinely transparent so only the thumbnails
-  // themselves sit over the photo, not a strip behind them.
-  // `scroll-pl-4` + `pl-4` (real bug, found live 2026-09-01, same root
-  // cause already solved once on this site's own carousels -- e.g.
+  // Moved out from an absolute overlay on the main image into normal flow
+  // below it (owner report, 2026-09-07: with a real photo wired in, the
+  // overlay treatment "does not look good... over the image" -- now that
+  // Figma's own mobile-specific frame exists (node 814:98), this strip
+  // matches its "Thumbnail Slider" band: a plain block sitting directly
+  // after the image, no `absolute`/`z-10`/`bg-paper` needed since it's not
+  // competing with the photo underneath it anymore).
+  // px-4 (was pl-4-only while it hung off the image's own left edge) --
+  // a normal-flow block can take symmetric side padding like the rest of
+  // the page content instead of a one-sided inset.
+  // `scroll-pl-4` (real bug, found live 2026-09-01, same root cause
+  // already solved once on this site's own carousels -- e.g.
   // HowItWorks/Exhibitions' `scroll-pl-[80px]` matching their own
   // `px-[80px]`): a `padding-left` (or a margin on the first child, tried
   // both) on a `snap-x` container isn't enough on its own -- the browser
@@ -4035,17 +4030,15 @@ export const productGallery = {
   // not 0). `scroll-padding-left` tells the snap algorithm the scrollport
   // itself starts inset by that amount, so `scrollLeft: 0` becomes the
   // correct, stable resting alignment for the first item -- the real
-  // visual gap still comes from `pl-4` itself, this just keeps the browser
-  // from auto-scrolling past it. No matching trailing inset -- the last
-  // thumbnail is allowed to sit flush/scroll-clipped at the right edge on
-  // purpose (owner, 2026-09-01: "when horizontally scrolls then it can
-  // cut from the canvas as a natural scroll behavior").
+  // visual gap still comes from `px-4` itself, this just keeps the browser
+  // from auto-scrolling past it. No matching trailing scroll-padding -- the
+  // last thumbnail is allowed to sit flush/scroll-clipped at the right edge
+  // on purpose (owner, 2026-09-01: "when horizontally scrolls then it can
+  // cut from the canvas as a natural scroll behavior"; Figma's own frame
+  // shows the same partially-cropped final thumbnail).
   // gap-2 (8px, owner correction, 2026-09-01: "not for mobile, make mobile
-  // 8px, desktop 12px" -- the "12px between thumbnails" request was
-  // desktop-only; desktop's own `rail` already had gap-3/12px before this,
-  // so only this mobile value briefly changed to 12px and back).
-  mobileStrip:
-    "no-scrollbar absolute inset-x-0 bottom-2 z-10 flex snap-x snap-mandatory gap-2 overflow-x-auto py-2 pl-4 scroll-pl-4",
+  // 8px, desktop 12px" -- matches Figma node 814:98's own 8px gap too).
+  mobileStrip: "no-scrollbar flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 py-2 scroll-pl-4",
   // size-12 (48px, Figma's own thumbnail size) -- same border-reserve
   // technique as `thumb` above, snap-start for the swipeable strip.
   // `[&>div>div]:bg-ink/10` (owner, 2026-09-01: "change the mobile
