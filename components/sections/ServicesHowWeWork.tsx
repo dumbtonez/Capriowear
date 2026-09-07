@@ -21,6 +21,12 @@
 // mode; every other `TextReveal` caller (Hero's H1, etc.) still passes
 // plain `text` and is unaffected.
 //
+// The heading itself now reveals the same way (owner, 2026-09-07: "should
+// have the same animation as we applied on some titles on homepage") --
+// plain `text` mode, same as every homepage section heading (WhatWeMake,
+// CertifiedCompliant, HowItWorks, etc: `<TextReveal as="span" text={h2} />`
+// inside the `<h2>`), not a new variant.
+//
 // Desktop-only for now, per the owner's own brief -- see `servicesHowWeWork`
 // in components/ui/styles.ts for the exact spacing notes and the
 // responsive-safe (not confirmed-mobile) caveat on the cards grid.
@@ -39,7 +45,7 @@ export function ServicesHowWeWork({ content }: ServicesHowWeWorkProps) {
     <section className={servicesHowWeWork.section}>
       <div className={servicesHowWeWork.inner}>
         <div className={servicesHowWeWork.introWrap}>
-          <h2 className={servicesHowWeWork.heading}>{content.heading}</h2>
+          <TextReveal as="h2" text={content.heading} className={servicesHowWeWork.heading} />
           <p className={servicesHowWeWork.subheading}>{content.subheading}</p>
         </div>
 
