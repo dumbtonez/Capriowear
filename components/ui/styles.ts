@@ -3725,18 +3725,17 @@ export const productGallery = {
   // same reasoning CategoryFilters' own sticky sidebar documents. Not
   // sticky below `xl`: at that breakpoint this column isn't even rendered
   // (`hidden`, mobile has its own separate `mobileRoot` markup below).
-  // xl: -> md: (owner, 2026-09-04: apply the homepage's tablet-width
-  // treatment to the PDP), plus a real tablet-specific width: the
-  // desktop column's own fixed 700px, beside a fixed 514px text column
-  // (page.tsx's own wrapper), totals 1280px -- doesn't fit a 768-1279px
-  // container at all. `md:w-[320px]` is a judgment call (no tablet Figma
-  // frame exists): the rail (109px, unchanged) + its own 16px gap leaves
-  // ~195px for the main image, a compact but proportionate gallery: the
-  // text column becomes `flex-1`/`min-w-0` instead of a fixed width at
-  // this tier (page.tsx's own wrapper), so it takes whatever room is left
-  // rather than forcing the same overflow. `xl:` restores the original
-  // 700px/gap-4 exactly.
-  desktopRoot: "hidden md:sticky md:top-[24px] md:flex md:w-[320px] md:shrink-0 md:gap-4 md:self-start xl:w-[700px]",
+  // xl: -> md: -> xl: (owner, 2026-09-04: apply the homepage's tablet-width
+  // treatment to the PDP; reverted 2026-09-07, owner: "the PDP top section,
+  // above the specifications should follow the mobile layout, not desktop
+  // as the main product image size is very small"). The 2026-09-04 version
+  // squeezed the desktop column into a judgment-call `md:w-[320px]` at
+  // tablet width (no tablet Figma frame exists for this page) -- the rail
+  // (109px) + its own 16px gap left only ~195px for the main image, which
+  // read as too small live. Reverted to the original single `xl:` tier:
+  // this column only renders from 1280px up again, `mobileRoot` below
+  // covers the full 768-1279px tablet range with its own full-width image.
+  desktopRoot: "hidden xl:sticky xl:top-[24px] xl:flex xl:w-[700px] xl:shrink-0 xl:gap-4 xl:self-start",
   // h-[609px] = 5 x 109px thumbnail + 4 x 16px gap (owner, 2026-09-01:
   // "make it 16px" -- was 12px, itself a same-day correction down from an
   // original 16px, now reverted back) -- the exact height of a 5-visible
@@ -3801,9 +3800,9 @@ export const productGallery = {
   // own mobile gallery frame, which is edge-to-edge with its OWN internal
   // padding (the thumbnail strip's `px-4` below), not inset by an outer
   // page margin.
-  // xl:hidden -> md:hidden (2026-09-04, pairs with desktopRoot's own new
-  // md: threshold above).
-  mobileRoot: "relative -mx-5 md:-mx-8 md:hidden",
+  // xl:hidden -> md:hidden -> xl:hidden (2026-09-04, then reverted
+  // 2026-09-07, pairs with desktopRoot's own threshold above).
+  mobileRoot: "relative -mx-5 xl:-mx-8 xl:hidden",
   // Fixed 450px (owner correction, 2026-09-01: "the main image height is
   // 450px", replacing the earlier `ratio="4:5"` aspect-driven height,
   // which computed ~469px at a 375px viewport) -- MediaPlaceholder's own
@@ -4000,10 +3999,11 @@ export const productCtas = {
   // ProductHighlights, etc.) that was never asked to change. A margin on
   // a flex child adds to its own `gap`, it doesn't collapse into it, so
   // 32 + 8 = a real 40px above this row specifically.
-  // Threshold moved xl: -> md: (owner, 2026-09-04: apply the homepage's
-  // tablet-width treatment to PLP/PDP) -- plain flex row, no fixed-width
-  // elements, no overflow risk at tablet width.
-  desktopRow: "hidden w-full items-center gap-3 md:flex md:mt-2",
+  // Threshold moved xl: -> md: -> xl: (owner, 2026-09-04: apply the
+  // homepage's tablet-width treatment to PLP/PDP; reverted 2026-09-07
+  // alongside ProductGallery's own revert, so this row switches in step
+  // with the gallery beside it rather than a breakpoint earlier on its own).
+  desktopRow: "hidden w-full items-center gap-3 xl:flex xl:mt-2",
   // Sticky bar, not fixed (real bug, found live, owner report, 2026-09-02:
   // "the fixed cta, overlapping the social icons on the footer" -- a
   // `position: fixed` bar pinned to the viewport painted over Footer
@@ -4044,10 +4044,10 @@ export const productCtas = {
   // always present so `mobileBarHidden` below animates smoothly rather
   // than snapping, and so the button doesn't spill out while its own box
   // is shrinking toward 0.
-  // xl:hidden -> md:hidden (2026-09-04, same review) -- pairs with
-  // desktopRow's own new md: threshold above.
+  // xl:hidden -> md:hidden -> xl:hidden (2026-09-04, same review; reverted
+  // 2026-09-07) -- pairs with desktopRow's own threshold above.
   mobileBar:
-    "sticky inset-x-0 bottom-0 z-10 flex max-h-[60px] w-full items-center justify-center overflow-hidden backdrop-blur-sm px-5 py-2 shadow-[0px_-4px_16px_rgba(14,14,18,0.06)] transition-[max-height,opacity] duration-300 ease-out md:hidden",
+    "sticky inset-x-0 bottom-0 z-10 flex max-h-[60px] w-full items-center justify-center overflow-hidden backdrop-blur-sm px-5 py-2 shadow-[0px_-4px_16px_rgba(14,14,18,0.06)] transition-[max-height,opacity] duration-300 ease-out xl:hidden",
   // Owner spec, 2026-09-02: "when it gets to the cta section, remove the
   // fixed cta automatically" -- collapses `max-height` to 0 (not `hidden`/
   // `display:none`, so it still animates) the instant the marker fires.
@@ -4092,6 +4092,11 @@ export const productCtas = {
   // minimum width and centers in the bar instead of stretching to fill
   // it; the bar itself (`mobileBar`, full-bleed/sticky) is unchanged --
   // only the button inside it stops growing past a normal CTA width.
+  // Unlike `desktopRow`/`mobileBar` above, this `md:` stays as-is through
+  // the 2026-09-07 revert: `mobileBar` now renders all the way to 1279px
+  // again, so this fix (avoiding a full-bleed button at real tablet width)
+  // is newly relevant across the whole 768-1279px range it covers, not
+  // superseded by it.
   mobileButton: "w-full !min-h-[44px] !text-[1rem] md:mx-auto md:w-auto md:min-w-[280px]",
   // Desktop-only override for the secondary ("Download Catalog") button
   // (owner, 2026-09-01: "should have primary orange text and outline, on
@@ -4244,17 +4249,29 @@ export const productRelatedStyles = {
   topRuleDefault: "border-t border-[#e8ecf1] py-8",
   // No divider, pt-[72px] (owner correction, 2026-09-02: "remove the top
   // separator and space should be 72px from the top" -- this project's
-  // standing mobile inter-section gap, see productSpecifications.section's
-  // own comment) -- used by the mobile-only instance placed directly after
-  // TrustPoints, which needs a plain section gap, not a divider borrowed
-  // from its old position inside the text column.
+  // standing mobile/tablet inter-section gap, see
+  // productSpecifications.section's own comment) -- used by the mobile/
+  // tablet instance (below `xl`) placed directly after TrustPoints, which
+  // needs a plain section gap, not a divider borrowed from its old position
+  // inside the text column.
   //
   // pt-0, not pt-[72px] (real bug, found live, owner report: "lot of white
   // space from the top" -- `trustPoints.section` already carries its own
-  // `pb-[72px]` on mobile, so stacking another 72px top padding here
-  // doubled the gap to 144px). pb-[72px] (owner: "72px from the bottom of
-  // the section for related styles") unchanged -- this instance still owns
-  // its own bottom gap, since nothing below it supplies one.
+  // unprefixed `pb-[72px]` (applies at every width under `xl`, mobile and
+  // tablet alike), so stacking another 72px top padding here doubled the
+  // gap to 144px). pb-[72px] (owner: "72px from the bottom of the section
+  // for related styles") unchanged -- this instance still owns its own
+  // bottom gap, since nothing below it supplies one. This net-72px result
+  // only actually reached tablet widths starting 2026-09-07 (owner: "make
+  // it 72px only on both mobile and tablet") -- until then, this instance's
+  // own `xl:hidden` visibility gate had been moved to `md:hidden` as a
+  // deliberate 2026-09-04 change (coupled to the PDP's tablet-width
+  // two-column layout switch, see `ProductInfo`'s own entry in
+  // docs/03-component-library.md), so a tablet viewport showed the *other*
+  // instance's `topRuleDefault` (32px + divider) instead. Today's request
+  // moves the visibility gate back to `xl:hidden` -- see
+  // `app/activewear/[category]/[style]/page.tsx`'s own comments on both
+  // `ProductRelatedStyles` instances for the full reasoning.
   topRuleNone: "pt-0 pb-[72px]",
   // 20px/24px-line-height medium -- Figma's own real values for this
   // heading, kept as a literal (Tailwind's own `text-xl` default leading
