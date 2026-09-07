@@ -1351,6 +1351,8 @@ Props: `heading`, `subline`, `points: string[]`. Row glyph is lucide's `Sparkle`
 
 **`heading`/`subline`/`pointText` font-size threshold moved xl:/max-xl: → md:/max-md: (owner, 2026-09-04: apply the homepage's tablet-width treatment to PLP/PDP)** — `heading` reuses `sectionHeading.heading`'s own `text-h1` scale (fluid, safe at 768px, confirmed on the homepage pass); `subline`/`pointText` are fixed literals, desktop always larger. `section`'s own flat `px-[138px]` (unconditional, no breakpoint split at all) is unaffected. Confirmed live on the PDP (`sidePadding="pdp"`): heading measures ~44.8px at 1024px.
 
+**Reused a third time on `/services`, "Responsible make" (2026-09-07), a third `sidePadding` value, `"services"`** — 80px side padding (same as PDP), Figma's own confirmed 104px top/bottom (owner: "spacing from top and bottom is 104px"). Mobile initially just inherited that same 104px (no mobile Figma frame exists for this instance) but was corrected 2026-09-08 (owner: "responsible make should have 72px gap from top and bottom") to this project's own standing 72px mobile section-to-section gap instead — `sidePaddingServices` is now `pt-[72px] pb-[72px] xl:px-[80px] xl:pt-[104px] xl:pb-[104px]`, `xl:` explicitly restoring the Figma-confirmed 104px since the base values are now mobile-only. Confirmed live: 72px top/bottom at 375px, unchanged 104px at 1440px.
+
 ### WhatWeCover — Built (desktop only)
 `components/sections/WhatWeCover.tsx` · recipe: `whatWeCover`
 

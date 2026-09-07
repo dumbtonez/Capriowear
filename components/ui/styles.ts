@@ -1671,11 +1671,12 @@ export const servicesHowWeWork = {
   // reuse-the-token-at-its-matching-breakpoint approach `servicesIntro`
   // above takes with `text-h1`.
   pathTitle: "text-h3 text-ink",
-  // 20px/400, but with a real 0.5px letter-spacing and 28px leading Figma
-  // gives this specific line -- no existing token carries tracking, so
-  // this is its own explicit one-off building on the same #17191e body
+  // 18px/24px (owner, 2026-09-08: "ODm, OEM< private label subline should
+  // be 18px by 24 line" -- was 20px/400 with a 28px leading override).
+  // Tracking/colour unchanged -- no existing token carries this tracking
+  // value, so it stays its own explicit one-off on the same #17191e body
   // colour used elsewhere on this page.
-  pathSubtitle: "text-[1.25rem] font-normal leading-7 tracking-[0.5px] text-[#17191e]",
+  pathSubtitle: "text-[1.125rem] font-normal leading-6 tracking-[0.5px] text-[#17191e]",
   // mt-12 (48px) mobile fallback, xl:mt-[140px] -- Figma's own confirmed
   // gap from the cards row above (not the same 72px the row above uses --
   // see `inner`'s own comment on why this needs its own margin rather than
@@ -1683,7 +1684,10 @@ export const servicesHowWeWork = {
   // `self-center` added when `inner` moved to `items-start` (2026-09-08,
   // left-aligning `introWrap` above) -- this closing note wasn't part of
   // that request and stays visually centred, same as before.
-  noteWrap: "mt-12 flex max-w-[656px] flex-col items-center gap-4 self-center xl:mt-[140px]",
+  // `mt-16`/`xl:mt-[156px]` (owner, 2026-09-08: "many program combine top
+  // should have 16px more gap from top" -- was `mt-12`/48px mobile,
+  // `xl:mt-[140px]` desktop, both +16px).
+  noteWrap: "mt-16 flex max-w-[656px] flex-col items-center gap-4 self-center xl:mt-[156px]",
   noteIconWrap: "flex size-[54px] items-center justify-center rounded-full bg-accent/10 text-accent",
   noteIcon: "size-[54px]",
   // 18px/24px (owner, 2026-09-07: "many prgrams text make it 18px by 24
@@ -4367,11 +4371,15 @@ export const trustPoints = {
   // `.container-p` desktop inset), but this page's own top/bottom gap
   // rather than relying on the section above the way the PDP's `xl:pt-0`
   // does (this section here isn't following `ProductCustomizeSteps`).
-  // Mobile/tablet fall back to the same top/bottom value too -- no mobile
-  // Figma frame exists yet for this page's own instance to confirm a
-  // different number against, same "responsive-safe fallback, not a
-  // confirmed design" treatment `ServicesHero`/`ServicesIntro` already use.
-  sidePaddingServices: "pt-[104px] pb-[104px] xl:px-[80px]",
+  // Mobile own gap corrected 2026-09-08 (owner: "responsible make should
+  // have 72px gap from top and bottom") -- was falling back to the same
+  // 104px as desktop (no mobile Figma frame exists for this page's own
+  // instance to confirm a different number against, so it had inherited
+  // desktop's value as a placeholder); 72px is this project's own standing
+  // mobile section-to-section gap instead. `xl:pt-[104px]`/`xl:pb-[104px]`
+  // restore the Figma-confirmed desktop value explicitly, since the base
+  // `pt-*`/`pb-*` are now the mobile-only 72px.
+  sidePaddingServices: "pt-[72px] pb-[72px] xl:px-[80px] xl:pt-[104px] xl:pb-[104px]",
   // max-xl:gap-2 (8px, mobile Title frame's own gap)/px-5 (20px, mobile's
   // own inset -- the section itself carries none below xl)/w-full (fills
   // the padded row instead of shrinking to content, unlike desktop's
