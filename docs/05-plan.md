@@ -2518,6 +2518,13 @@ Same-day follow-up to 5es. Owner: "tablet will also follow mobile cta behavior. 
 
 **Verified**: `npx tsc --noEmit`, `npx eslint .` clean (scoped to touched files, known unrelated `eslint .`-wide noise from a concurrent session's worktree). Live at 1024px: both groups show exactly 4 tiles (unchanged 2-column grid) then the CTA, 18px/uppercase/24px-line-height label. 375px: pixel-identical tile count/CTA to before, same typography. 1440px: desktop CTA label also 18px/uppercase/24px; chevron's own rendered path centre now matches the CTA's vertical centre to within 0.01px (was ~1.5px off). Full 30-viewport screenshot suite passing.
 
+### 5eu · /services page, section 9: Certified & Compliant — 2026-09-07
+Owner: "Add this section under how it works, same as we use on homepage," Figma link to node `729:276` ("Certifications"). Reuses homepage's `CertifiedCompliant` verbatim (`home.certified` content, no `pageVariant`/spacing override) — this Figma frame's own 120px top / 120px bottom already match the existing `certified.desktopSection` values, so no variant was needed, same as `OurServices`'/`TrustSignals`' own reuse pattern when the numbers happen to already match.
+
+Placed after `FinalCta`, not directly after `HowItWorks`: `get_metadata` confirmed the real Figma stacking is How It Works (`6911–7785`) → CTA Bottom (`7785–8265`) → Certifications (`8265–8887`) — this section is genuinely the last of the three, so "under How It Works" is read as "further down the page," matching real Figma order rather than literal DOM adjacency.
+
+**Verified**: `npx tsc --noEmit`, `npx eslint .` clean on the touched file (`npm run build`'s own type-check currently fails on an unrelated, uncommitted, in-progress `WhatWeMake.tsx` change from a concurrent session on this branch, confirmed via `git diff --stat`). Confirmed via SSR output: eyebrow, heading and all 6 real cert logos render; section sits after `FinalCta` in DOM order.
+
 ## Phase 3 · Footer and inner pages — Footer done, PLP banner + product grid in progress
 
 Footer shipped 2026-08-26 (see 4i above; sticky-reveal had stacking/paint corrections the same week — see 4k, 4l. A separate seam-bar decoration was attempted and removed, 4q–4s — Footer's own reveal mechanism is unaffected). Activewear PLP template started 2026-08-28 (5i above): route, data shape, and banner section built for Leggings, followed same day by CategoryFilters, ProductGrid/ProductCard/Pagination, and CategoryBanner revisions (5i–5u); layout corrections continued 2026-08-29 (5v). Remaining sections (overview, fabric table, trust block, spec facts, FAQ, related links, final CTA) built incrementally against Figma node `406:3075` as it gets finished.

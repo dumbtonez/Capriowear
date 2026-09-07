@@ -951,10 +951,10 @@ Built section by section from Figma (owner brief, 2026-09-07), same pattern as t
 | 4 | How we work with you (OEM/ODM/Private Label path cards) | ✅ **Built** — `components/sections/ServicesHowWeWork.tsx` |
 | 5 | "From raw fabric to retail-ready packaging" (5 items) | ✅ **Built** — reuses homepage's `OurServices` verbatim (see below) |
 | 6 | Product Range (Activewear / Teamwear & Uniforms, 2 "Explore" cards) | ✅ **Built** — `components/sections/ProductRange.tsx` |
-| — | Certification logos strip (ISO 9001, OEKO-TEX, BSCI, IMAC, SGS) | Not built yet |
-| — | How It Works (5 steps) | Not built yet |
+| 7 | How It Works (5 steps, dark) | ✅ **Built** — reuses homepage's `HowItWorks` with its `tone="dark"` variant |
+| 8 | Final CTA + compliance bar | ✅ **Built** — reuses homepage's `FinalCta` verbatim |
+| 9 | Certified & Compliant (6 cert logos) | ✅ **Built** — reuses homepage's `CertifiedCompliant` verbatim, see below |
 | — | B2B FAQ | Not built yet |
-| — | Final CTA + compliance bar | Not built yet |
 
 ### Hero — Built
 `components/sections/ServicesHero.tsx` · Figma: desktop node `729:139` (mobile not yet designed — owner handling separately)
@@ -1053,6 +1053,14 @@ The only real difference between the two placements is the outer top/bottom spac
 **Bottom padding corrected 2026-09-07, 80px → 140px** — the original build cited node `729:208` for this section's own spacing and used its 80px bottom value, but `729:208` turned out to be a different, not-yet-built section ("Trust Signals," the 4-up strip that sits earlier on this page — see that section's own entry above) with no real connection to `OurServices`. Re-checked `729:363` directly: content starts 160px from the frame's own top (correct, unchanged) and `2660 − 160 − 2360 = 140px` remains below the tallest card column. Confirmed live post-fix: Services measures `160px/140px`, homepage's own default `pageVariant="home"` still measures unchanged `120px/120px`.
 
 `npm run build`, `npx tsc --noEmit`, `npx eslint .` all clean.
+
+### Certified & Compliant — Built
+
+Owner, 2026-09-07: "Add this section under how it works, same as we use on homepage" (Figma node `729:276`, "Certifications"). The exact same section as homepage's `CertifiedCompliant` (same eyebrow "CERTIFIED & COMPLIANT," same heading "Audited for quality, safety, environment, and ethics," all 6 real cert logos) — not a new component, not a copy of one, and no `pageVariant`/spacing override needed: this Figma frame's own 120px top / 120px bottom already match `certified.desktopSection`'s existing values exactly. `app/services/page.tsx` renders `<CertifiedCompliant content={home.certified} />`, the same `home.certified` content object the homepage itself uses.
+
+**Placed after `FinalCta`, not directly after `HowItWorks`** — `get_metadata` confirms the real Figma stacking is How It Works (y `6911–7785`) → CTA Bottom (`7785–8265`) → Certifications (`8265–8887`), i.e. this section is genuinely the last of the three. Read "under how it works" as "further down the page from How It Works" (which it is — both `FinalCta` and this section sit below it), the same "trust `get_metadata`'s real y-order over a literal reading of the request" call made throughout this page's build.
+
+`npx tsc --noEmit`, `npx eslint .` clean (`npm run build`'s own type-check currently fails on an unrelated, uncommitted, in-progress `WhatWeMake.tsx` change from a concurrent session on this same branch — confirmed via `git diff --stat`, not this section). Confirmed via SSR output: eyebrow/heading render correctly, all 6 logos (`ISO 9001`, `ISO 45001`, `ISO 14001`, `BSCI`, `IMAC`, `WFSGI`) present, section sits after `FinalCta` in DOM order.
 
 ## Activewear category PLP (product listing page)
 

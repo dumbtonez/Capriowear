@@ -53,6 +53,19 @@
 // "trust a clean reference over a locally miscopied one" call already
 // made elsewhere on this site (see ProductCustomizeSteps' own entry in
 // docs/03-component-library.md for the precedent).
+// Section 9: the homepage's own CertifiedCompliant section, reused as-is
+// (owner, 2026-09-07: "Add this section under how it works, same as we
+// use on homepage" -- Figma node 729:276, "Certifications") -- same
+// component, same content (home.certified: eyebrow, heading and all 6
+// logos match verbatim), no spacing variant needed since this frame's own
+// 120px top / 120px bottom already match `certified.desktopSection`'s
+// existing values exactly. Placed after FinalCta, not directly after
+// HowItWorks: get_metadata confirms the real Figma stacking is HowItWorks
+// (6911-7785) -> FinalCta (7785-8265) -> Certifications (8265-8887), i.e.
+// this section is genuinely the last of the three, "under How It Works"
+// in the sense of "further down the page," not literally the very next
+// sibling -- the same "trust get_metadata's real y-order over a literal
+// reading of the request" call made throughout this file already.
 //
 // Confirmed via get_metadata on every section's own real Figma y-position
 // (Intro 833-1413, Trust Signals 1413-1949, How We Work 1949-3279, Our
@@ -62,13 +75,14 @@
 // have been corrected more than once to match Figma, not left as
 // whichever order sections happened to be built in.
 //
-// Every later section listed in the owner's brief (certification logos,
-// FAQ) is not built yet -- added incrementally, one Figma link at a time.
+// Every later section listed in the owner's brief (FAQ) is not built yet
+// -- added incrementally, one Figma link at a time.
 import type { Metadata } from "next";
 
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
+import { CertifiedCompliant } from "@/components/sections/CertifiedCompliant";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { OurServices } from "@/components/sections/OurServices";
@@ -135,6 +149,7 @@ export default function ServicesPage() {
         <ProductRange content={services.productRange} />
         <HowItWorks content={home.howItWorks} tone="dark" />
         <FinalCta content={home.finalCta} ticker={home.complianceTicker} />
+        <CertifiedCompliant content={home.certified} />
       </main>
 
       <JsonLd data={breadcrumbSchema([{ name: "Home", url: SITE_URL }, { name: "Services", url: CANONICAL }])} />
