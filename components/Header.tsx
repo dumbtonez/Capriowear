@@ -36,6 +36,7 @@
 // scroll effect.
 import { ChevronDown, Sparkle } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -130,6 +131,7 @@ export function Header({
   className,
   sticky = true,
 }: HeaderProps) {
+  const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [navHidden, setNavHidden] = useState(false);
@@ -292,12 +294,27 @@ export function Header({
               {links.map((link) => {
                 const hasMenu = Boolean(link.megaMenu?.length);
                 const isOpen = openMenu === link.label;
+                // Stays underlined for the whole time the user is on that
+                // section, not just while the trigger is open/hovered --
+                // owner request, 2026-09-07: "once user is on services page,
+                // that underline should be visible until the page is
+                // changed", same for factory tour, matching how Activewear
+                // is meant to behave. `startsWith` (not exact match) so any
+                // page under that section counts, e.g. a Leggings PDP still
+                // reads as "on Activewear".
+                const isRouteActive =
+                  pathname === link.href || pathname?.startsWith(`${link.href}/`);
+                const isActive = isOpen || isRouteActive;
 
                 if (!hasMenu) {
                   return (
                     <li key={link.href}>
-                      <Link href={link.href} className={header.navLink}>
+                      <Link
+                        href={link.href}
+                        className={cx(header.navLink, isActive && header.navTriggerActive)}
+                      >
                         {link.label}
+                        {isActive ? <span className={header.navUnderline} aria-hidden="true" /> : null}
                       </Link>
                     </li>
                   );
@@ -321,7 +338,7 @@ export function Header({
                         <span className={header.navTriggerLabelGhost} aria-hidden="true">
                           {link.label}
                         </span>
-                        <span className={cx(header.navTriggerLabelVisible, isOpen && header.navTriggerActive)}>
+                        <span className={cx(header.navTriggerLabelVisible, isActive && header.navTriggerActive)}>
                           {link.label}
                         </span>
                       </span>
@@ -329,7 +346,7 @@ export function Header({
                         className={cx(header.navTriggerChevron, isOpen && header.navTriggerChevronOpen)}
                         aria-hidden="true"
                       />
-                      {isOpen ? <span className={header.navUnderline} aria-hidden="true" /> : null}
+                      {isActive ? <span className={header.navUnderline} aria-hidden="true" /> : null}
                     </button>
                   </li>
                 );

@@ -785,7 +785,7 @@ export const header = {
   // for exactly this size/line-height (1.125rem/1.2222), so this now reuses
   // it directly instead of carrying its own arbitrary-value override.
   navLink:
-    "inline-flex min-h-11 items-center whitespace-nowrap rounded-pill px-4 text-body text-paper transition-colors hover:text-[#838d97]",
+    "relative inline-flex min-h-11 items-center whitespace-nowrap rounded-pill px-4 text-body text-paper transition-colors hover:text-[#838d97]",
   navTrigger:
     "relative inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-pill px-4 text-body text-paper transition-colors hover:text-[#838d97]",
   // Active state (Figma node 493:3140, 2026-08-27) -- semibold text plus a
@@ -1402,7 +1402,13 @@ export const servicesIntro = {
 // every other section on this page.
 export const servicesHowWeWork = {
   section: "bg-paper",
-  inner: "container-p flex flex-col items-center gap-12 pt-16 pb-12 xl:gap-[72px] xl:pt-[160px] xl:pb-20",
+  // No `gap` here any more -- a uniform flex `gap` on this wrapper doesn't
+  // let its two real gaps differ (72px above the cards row, 140px above
+  // the closing note), so it was wrongly applying 72px to both (real bug,
+  // owner report 2026-09-07: "should have the 140px gap from the top
+  // content"). Each of `pathsGrid`/`noteWrap` now owns its own top margin
+  // instead -- see those keys' own comments.
+  inner: "container-p flex flex-col items-center pt-16 pb-12 xl:pt-[160px] xl:pb-20",
   // 624px intro column in Figma -- kept as a max-width (not a fixed width)
   // so it can shrink below its own value on a narrow mobile viewport
   // instead of forcing horizontal overflow.
@@ -1411,7 +1417,9 @@ export const servicesHowWeWork = {
   // Same "20px/400 token, 32px leading layered on top" pattern as
   // `servicesIntro.paragraph` -- see that key's own comment.
   subheading: "text-body-lg leading-8 text-[#17191e]",
-  pathsGrid: "grid w-full grid-cols-1 gap-16 xl:grid-cols-3 xl:gap-x-11 xl:gap-y-0",
+  // mt-12 (48px) mobile fallback, xl:mt-[72px] -- Figma's own confirmed gap
+  // from the intro block above.
+  pathsGrid: "mt-12 grid w-full grid-cols-1 gap-16 xl:mt-[72px] xl:grid-cols-3 xl:gap-x-11 xl:gap-y-0",
   pathCard: "flex flex-col items-start gap-8",
   pathMedia: "w-full",
   pathTextCol: "flex w-full flex-col gap-8",
