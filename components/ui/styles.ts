@@ -1528,7 +1528,16 @@ export const ourFactoryProcess = {
   // number, so this section now states its own 160px explicitly rather
   // than depending on whatever the previous section's own padding happens
   // to be).
-  inner: "container-p flex flex-col gap-12 pt-12 pb-16 xl:gap-[104px] xl:pb-[120px] xl:pt-[160px]",
+  // Not `container-p` (owner correction, 2026-09-08: "the whole section
+  // should have 80px from the left" -- `container-p` caps at
+  // `max-width:1440px` and centers past that, so at any viewport wider
+  // than 1440px its own 80px padding sits inside a centered box, reading
+  // as more than 80px from the true page edge; confirmed live, exactly
+  // 80px at 1440px itself but ~320px at 1920px). Same padding-inline
+  // values as `container-p` at every breakpoint (20px/32px/80px), just
+  // without its `max-width`/`mx-auto` -- a flat, edge-anchored inset at
+  // every width instead of a centered box.
+  inner: "w-full flex flex-col gap-12 px-5 pt-12 pb-16 md:px-8 xl:gap-[104px] xl:px-20 xl:pb-[120px] xl:pt-[160px]",
   // Heading block (eyebrow + H2) plus the first row, 72px apart -- the
   // real Figma nesting (get_metadata: node 857:1986 wraps the heading
   // block and row 1 together with its own 72px gap, separate from the
@@ -1539,12 +1548,14 @@ export const ourFactoryProcess = {
   // 72px gap above, a real bug: that 72px was always meant for heading-to-
   // row, not eyebrow-to-heading, collapsed into one wrapper by mistake).
   headingGroup: "flex flex-col gap-6",
-  // 565px real Figma heading column, wrapping "From fabric to shipped, in
-  // one building" to its own real two-line break -- unconstrained, it runs
-  // wider and wraps differently at xl and up. Same "max-w forces the real
-  // Figma wrap point" pattern already used elsewhere (e.g. servicesIntro/
-  // insideFactory's own `desktopHeadingNarrow`).
-  heading: "max-w-[35.3125rem]",
+  // No `heading` max-w token (owner correction, 2026-09-08: "still in 3
+  // lines" -- a first pass used a 565px max-w to force this heading's real
+  // 2-line Figma break, but `text-h1` is a fluid clamp that keeps growing
+  // past 1440px while a fixed px max-w doesn't, so the same box that
+  // wrapped correctly at 1440px re-wrapped to 3 lines at wider viewports).
+  // The 2-line break is now a real "\n" in the content string itself
+  // (content/our-factory.ts, TextReveal already renders "\n" as a real
+  // <br />), which holds at every width -- no max-w needed at all.
   row: "flex flex-col gap-10 xl:flex-row xl:items-start",
   item: "flex w-full flex-col gap-8",
   // Desktop-only fixed widths per item, matching each row's own real Figma
@@ -1563,7 +1574,11 @@ export const ourFactoryProcess = {
   label: "text-base font-medium text-[#3c3c43]",
   // 30px/36px/500 -- text-h3 matches exactly at this page's own 1440px
   // reference width (fluid token, see its own definition in globals.css).
-  title: "text-h3 text-subline",
+  // whitespace-nowrap (owner, 2026-09-08: "make it in one line" -- flagged
+  // on "Retail-ready, delivered to your door", but every station title's
+  // own Figma text layer is a single 36px line height, none double --
+  // applied sitewide on this token, not just that one caller).
+  title: "text-h3 text-subline whitespace-nowrap",
   body: "text-body-lg leading-7 text-subline",
 };
 

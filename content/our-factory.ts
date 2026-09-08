@@ -24,13 +24,10 @@
 import type { MediaRatio } from "@/components/MediaPlaceholder";
 import type { NoteSegment } from "@/content/activewear/types";
 
-// The "Journey" gallery (section 5, `process` below): a station has real
-// copy (a headline + body, both crawlable, real DOM text) and its own
-// image; a breather is image-only, no copy, no heading -- structurally
-// different, so `rows` is a union of the two rather than forcing a
-// breather to carry empty title/body fields.
+// The "Journey" gallery (section 5, `process` below): 7 process stations,
+// real copy (a headline + body, both crawlable, real DOM text) plus its
+// own image, in the real Figma layout's row pairing.
 type ProcessStation = {
-  kind: "station";
   /** "01".."07" -- the eyebrow reads "<number> <name>", never a heading (see OurFactoryProcess.tsx). */
   number: string;
   name: string;
@@ -43,13 +40,7 @@ type ProcessStation = {
   width: "lg" | "md" | "sm" | "full";
 };
 
-type ProcessBreather = {
-  kind: "breather";
-  imageAlt: string;
-  image?: { src: string };
-};
-
-type ProcessRow = { items: (ProcessStation | ProcessBreather)[] };
+type ProcessRow = { items: ProcessStation[] };
 
 const introParagraph: NoteSegment[] = [
   {
@@ -94,31 +85,35 @@ export const ourFactory = {
   // the original 7-station layout and copy; the owner's follow-up SEO/AEO/
   // GEO pass (2026-09-08) added numbered eyebrows ("01 Fabric" etc, not
   // headings -- the station title is), a reordered reading sequence
-  // (Fabric before Cutting, Quality Control before Packed & Shipped), an
-  // 8th "breather" image (the wide sewing floor, no copy), and the exact
-  // alt text below for all 8 images.
+  // (Fabric before Cutting, Quality Control before Packed & Shipped), and
+  // the exact alt text below for every image.
   //
-  // Row pairing matches Figma's real layout exactly (owner correction,
-  // 2026-09-08: "keep the 1st row as is ... but for the rest follow the
-  // design" -- a first pass had split Sewing and Printing & Sublimation
-  // into their own solo rows to make room for the breather, which broke
-  // the real Figma pairing): row 1 is Fabric+Cutting (kept, per the
-  // numbered reorder above); row 2 is Sewing+Printing & Sublimation
-  // together, the real Figma pair; the breather is its own full-width row
-  // placed right after that pair (a full-width image can't sit inside a
-  // 2-up flex row, so it can't literally sit "between" them the way the
-  // copy brief describes -- this is the closest real position;) row 3 is
-  // Finishing, unchanged, full-width; row 4 is Quality Control+Packed &
-  // Shipped together (the real Figma pair, order reversed to match the
-  // numbered sequence, same as row 1).
+  // No 8th "breather" image: that copy brief originally asked for one (the
+  // wide sewing floor, no copy, between Sewing and Printing & Sublimation),
+  // built and placed in its own row after that pair since a full-width
+  // image can't sit inside a 2-up flex row -- but read live against the
+  // real Figma layout it showed as a stray extra box sitting right above
+  // Finishing (owner, 2026-09-08: "there is one extra box above finishing"
+  // -> "remove it entirely"). Row pairing is now the real Figma layout
+  // throughout: row 1 Fabric+Cutting, row 2 Sewing+Printing & Sublimation,
+  // row 3 Finishing (solo, full-width), row 4 Quality Control+Packed &
+  // Shipped -- rows 1 and 4 keep the numbered reorder's reversed pair
+  // order, same as the design's own real pairs otherwise.
   process: {
     eyebrow: "WHAT WE MAKE",
-    heading: "From fabric to shipped, in one building",
+    // Real "\n" line break (owner correction, 2026-09-08: "still in 3
+    // lines" -- the max-w-based wrap point in styles.ts wasn't reliable at
+    // every width, since text-h1 is a fluid clamp that keeps growing past
+    // 1440px while the fixed 565px column didn't, so the same box that
+    // wrapped correctly at 1440px could overflow to 3 lines wider than
+    // that). TextReveal already splits on "\n" into a real <br /> (see its
+    // own comment, same pattern FabricOptions' 2-line heading uses) --
+    // guarantees this exact 2-line break at every viewport width.
+    heading: "From fabric to shipped,\nin one building",
     rows: [
       {
         items: [
           {
-            kind: "station",
             number: "01",
             name: "Fabric",
             title: "It starts with the right cloth",
@@ -129,7 +124,6 @@ export const ourFactory = {
             width: "sm",
           },
           {
-            kind: "station",
             number: "02",
             name: "Cutting",
             title: "Cut and sewn, seam by seam",
@@ -149,7 +143,6 @@ export const ourFactory = {
       {
         items: [
           {
-            kind: "station",
             number: "03",
             name: "Sewing",
             title: "Cut and sewn, seam by seam",
@@ -160,7 +153,6 @@ export const ourFactory = {
             width: "md",
           },
           {
-            kind: "station",
             number: "04",
             name: "Printing & Sublimation",
             title: "Your design, dyed into the fabric",
@@ -174,15 +166,6 @@ export const ourFactory = {
       {
         items: [
           {
-            kind: "breather",
-            imageAlt: "The sewing floor at Capriowear's activewear and teamwear factory in Sialkot, Pakistan",
-          },
-        ],
-      },
-      {
-        items: [
-          {
-            kind: "station",
             number: "05",
             name: "Finishing",
             title: "Labels, tags and the last details",
@@ -196,7 +179,6 @@ export const ourFactory = {
       {
         items: [
           {
-            kind: "station",
             number: "06",
             name: "Quality Control",
             title: "Checked while it can still be fixed",
@@ -206,7 +188,6 @@ export const ourFactory = {
             width: "sm",
           },
           {
-            kind: "station",
             number: "07",
             name: "Packed & Shipped",
             title: "Retail-ready, delivered to your door",

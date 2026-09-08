@@ -1,9 +1,10 @@
 // components/sections/OurFactoryProcess.tsx
 // /our-factory page, section 5, "the Journey section" -- Figma desktop
 // node 857:2090 ("Content"), "What We Make": intro heading, then 7 process
-// stations plus one image-only "breather" (owner's SEO/AEO/GEO pass,
+// stations in the real Figma row pairing (owner's SEO/AEO/GEO pass,
 // 2026-09-08 -- see content/our-factory.ts's own `process` comment for the
-// full reordering/breather rationale).
+// full reordering rationale, including a since-removed 8th "breather"
+// image that read as a stray extra box against the real design).
 //
 // Heading levels (owner brief, 2026-09-08, do not skip levels):
 //   - Section intro = <h2> ("From fabric to shipped, in one building").
@@ -25,9 +26,8 @@
 // only: the sitewide reduced-motion rule collapses the transition while the
 // image and its alt text stay exactly as they are, and next/image's own
 // default lazy-loading (no `priority` set anywhere here) already defers
-// every one of these below-the-fold images. Real alt text on all 8 images
-// (7 stations + the breather) comes straight from content, never generic
-// ("image1"-style) or empty.
+// every one of these below-the-fold images. Real alt text on all 7 images
+// comes straight from content, never generic ("image1"-style) or empty.
 //
 // Station text blocks are plain, static markup -- no reveal/rise motion
 // (owner, 2026-09-08: "no need to add the text level moving animation"),
@@ -52,14 +52,6 @@ type ProcessRow = (typeof ourFactory.process)["rows"][number];
 type ProcessItem = ProcessRow["items"][number];
 
 function Item({ item }: { item: ProcessItem }) {
-  if (item.kind === "breather") {
-    return (
-      <div className={`${ourFactoryProcess.item} ${ourFactoryProcess.itemWidth.full}`}>
-        <ParallaxMedia label={item.imageAlt} image={item.image} ratio="1280:640" showLabel={false} />
-      </div>
-    );
-  }
-
   return (
     <div className={`${ourFactoryProcess.item} ${ourFactoryProcess.itemWidth[item.width]}`}>
       <ParallaxMedia label={item.imageAlt} image={item.image} ratio={item.ratio} showLabel={false} />
@@ -79,8 +71,8 @@ function Item({ item }: { item: ProcessItem }) {
 function Row({ row }: { row: ProcessRow }) {
   return (
     <div className={ourFactoryProcess.row}>
-      {row.items.map((item, index) => (
-        <Item key={item.kind === "station" ? item.number : `breather-${index}`} item={item} />
+      {row.items.map((item) => (
+        <Item key={item.number} item={item} />
       ))}
     </div>
   );
@@ -93,7 +85,7 @@ export function OurFactoryProcess({ content }: OurFactoryProcessProps) {
         <div className={ourFactoryProcess.headingRowGroup}>
           <div className={ourFactoryProcess.headingGroup}>
             <Eyebrow tone="light">{content.eyebrow}</Eyebrow>
-            <TextReveal as="h2" text={content.heading} className={`${ourFactoryProcess.heading} text-h1 text-ink`} />
+            <TextReveal as="h2" text={content.heading} className="text-h1 text-ink" />
           </div>
           <Row row={content.rows[0]} />
         </div>
