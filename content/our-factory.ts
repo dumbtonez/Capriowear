@@ -61,4 +61,88 @@ export const ourFactory = {
       { value: "100,000+", caption: "Monthly capacity" },
     ],
   },
+
+  // Section 5, Figma desktop node 857:2090 ("Content"): 7 process steps in
+  // a staggered, alternating-width grid (700/520, 600/600, one full-width,
+  // 700/520 again) -- get_metadata confirms these exact groupings and each
+  // image's own real pixel size, which `width`/`ratio` below map onto.
+  // Copy is the design's own text layers verbatim.
+  process: {
+    eyebrow: "WHAT WE MAKE",
+    heading: "From fabric to shipped, in one building",
+    rows: [
+      {
+        items: [
+          {
+            label: "CUTTING",
+            title: "Cut and sewn, seam by seam",
+            body: "Cut to your pattern, graded to your sizes. Every panel cut to spec, graded XS to 5XL across men's, women's, unisex and youth blocks.",
+            imageAlt: "Fabric panels cut to pattern on the factory's cutting table",
+            ratio: "1:1" as const,
+            width: "lg" as const,
+          },
+          {
+            label: "FABRIC",
+            title: "It starts with the right cloth",
+            body: "Knits, fleece, tricot, woven shells and sublimation polyester, sourced or matched to your reference, at the weight you approve on your sample.",
+            imageAlt: "Rolls of activewear fabric in the factory's material store",
+            ratio: "520:480" as const,
+            width: "sm" as const,
+          },
+        ],
+      },
+      {
+        items: [
+          {
+            label: "SEWING",
+            title: "Cut and sewn, seam by seam",
+            body: "Skilled machinists assemble the garment with flatlock and reinforced seams built to hold, run after run.",
+            imageAlt: "Machinist sewing a garment on the factory floor",
+            ratio: "600:640" as const,
+            width: "md" as const,
+          },
+          {
+            label: "PRINTING & SUBLIMATION",
+            title: "Your design, dyed into the fabric",
+            body: "Full-dye sublimation, screen, DTG and DTF, plus embroidery and tackle twill, all color-matched and done in-house.",
+            imageAlt: "Sublimation printing station applying a custom design to fabric",
+            ratio: "600:640" as const,
+            width: "md" as const,
+          },
+        ],
+      },
+      {
+        items: [
+          {
+            label: "FINISHING",
+            title: "Labels, tags and the last details",
+            body: "Woven labels, size and care labels, hangtags and trims, applied so the garment arrives finished, not half-made.",
+            imageAlt: "Woven labels and hangtags being applied to a finished garment",
+            ratio: "1280:640" as const,
+            width: "full" as const,
+          },
+        ],
+      },
+      {
+        items: [
+          {
+            label: "PACKED & SHIPPED",
+            title: "Retail-ready, delivered to your door",
+            body: "Polybagged and boxed to your spec, then shipped DDP to 40+ countries, with GSP+ 0% duty into the EU.",
+            imageAlt: "Polybagged and boxed garments ready for shipment",
+            ratio: "1:1" as const,
+            width: "lg" as const,
+          },
+          {
+            label: "QUALITY CONTROL",
+            title: "Checked while it can still be fixed",
+            body: "In-line inspection during production and a full check to AQL 2.5 before anything ships. Third-party inspection welcome.",
+            imageAlt: "Quality inspector checking a garment against AQL standards",
+            ratio: "520:480" as const,
+            width: "sm" as const,
+          },
+        ],
+      },
+    ],
+  },
 };

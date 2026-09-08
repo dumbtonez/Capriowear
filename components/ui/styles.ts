@@ -318,6 +318,17 @@ export const media = {
     // its lowest terms; kept exact per this table's own established
     // precedent rather than rounded to an existing ratio.
     "397:234": "aspect-[397/234]",
+    // /our-factory "What We Make" process gallery (Figma node 857:2090,
+    // 2026-09-08): 3 real image sizes confirmed via get_metadata, each kept
+    // as its own exact fraction per this table's established precedent.
+    // 520x480 (Fabric/Quality Control).
+    "520:480": "aspect-[520/480]",
+    // 600x640 (Sewing/Printing & Sublimation).
+    "600:640": "aspect-[600/640]",
+    // 1280x640 (Finishing, full-width) -- exactly 2:1, but kept as the
+    // literal Figma pixel pair rather than renamed "2:1", matching this
+    // table's own naming convention for every other entry.
+    "1280:640": "aspect-[1280/640]",
   },
   radius: {
     lg: "rounded-lg",
@@ -1496,6 +1507,47 @@ export const ourFactoryIntro = {
   stat: "flex flex-col gap-2",
   statValue: "text-h1 text-ink",
   statCaption: "text-body-lg leading-7 text-subline",
+};
+
+/* --- OurFactoryProcess (/our-factory section 5) ----------------------------- */
+// Figma desktop node 857:2090 ("Content"), "What We Make": heading, then 7
+// process steps in a staggered, alternating-width grid -- get_metadata's
+// real nesting is heading+row1 sharing a 72px gap, then every further row
+// (row1's own group, row2, row3, row4) 104px apart; `inner`/`headingRow`
+// below reproduce that two-tier gap directly rather than flattening it to
+// one uniform value. No mobile Figma frame exists yet (owner: desktop is
+// ready, mobile handled separately) -- rows stack to one column below `xl`,
+// each item's own fixed desktop width dropping to `w-full`.
+export const ourFactoryProcess = {
+  section: "bg-paper",
+  inner: "container-p flex flex-col gap-12 pb-16 xl:gap-[104px] xl:pb-[120px]",
+  headingGroup: "flex flex-col gap-8 xl:gap-[72px]",
+  // 565px real Figma heading column, wrapping "From fabric to shipped, in
+  // one building" to its own real two-line break -- unconstrained, it runs
+  // wider and wraps differently at xl and up. Same "max-w forces the real
+  // Figma wrap point" pattern already used elsewhere (e.g. servicesIntro/
+  // insideFactory's own `desktopHeadingNarrow`).
+  heading: "max-w-[35.3125rem]",
+  row: "flex flex-col gap-10 xl:flex-row xl:items-start",
+  item: "flex w-full flex-col gap-8",
+  // Desktop-only fixed widths per item, matching each row's own real Figma
+  // pixel pair (700+520, 600+600, one full-width, 700+520 again).
+  itemWidth: {
+    lg: "xl:w-[700px] xl:shrink-0",
+    md: "xl:w-[600px] xl:shrink-0",
+    sm: "xl:w-[520px] xl:shrink-0",
+    full: "xl:w-full",
+  },
+  textCol: "flex max-w-[30rem] flex-col gap-4",
+  labelGroup: "flex flex-col gap-2",
+  // 16px, Figma's own #3c3c43 -- already this project's established literal
+  // for this exact muted-label grey (see e.g. `desktopNav.item`/`chip` in
+  // this same file), not a new one-off hex.
+  label: "text-base font-medium text-[#3c3c43]",
+  // 30px/36px/500 -- text-h3 matches exactly at this page's own 1440px
+  // reference width (fluid token, see its own definition in globals.css).
+  title: "text-h3 text-subline",
+  body: "text-body-lg leading-7 text-subline",
 };
 
 /* --- ServicesHero (/services section 1) ------------------------------------ */

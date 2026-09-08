@@ -22,8 +22,11 @@
 // factory cta for this page, not from the homepage component") -- this
 // page IS the factory-tour destination that CTA links to, so it has no
 // reason to link to itself here; the homepage's own usage is untouched.
-// See InsideFactory.tsx's own
-// prop comments for the full reasoning.
+// See InsideFactory.tsx's own prop comments for the full reasoning.
+// Section 5 (this step): OurFactoryProcess, Figma desktop node 857:2090
+// ("Content"), "What We Make" -- see components/sections/
+// OurFactoryProcess.tsx for the section's own build notes, including the
+// new ParallaxMedia primitive (components/ParallaxMedia.tsx) its images use.
 import type { Metadata } from "next";
 
 import { Header } from "@/components/Header";
@@ -33,6 +36,7 @@ import { Footer } from "@/components/sections/Footer";
 import { InsideFactory } from "@/components/sections/InsideFactory";
 import { OurFactoryHero } from "@/components/sections/OurFactoryHero";
 import { OurFactoryIntro } from "@/components/sections/OurFactoryIntro";
+import { OurFactoryProcess } from "@/components/sections/OurFactoryProcess";
 import { header } from "@/components/ui/styles";
 import { home } from "@/content/home";
 import { ourFactory } from "@/content/our-factory";
@@ -83,6 +87,7 @@ export default function OurFactoryPage() {
         <OurFactoryHero hero={ourFactory.hero} />
         <OurFactoryIntro content={ourFactory.intro} />
         <InsideFactory content={home.insideFactory} tone="light" showHeading={false} showCta={false} />
+        <OurFactoryProcess content={ourFactory.process} />
       </main>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />
