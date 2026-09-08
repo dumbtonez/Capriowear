@@ -52,3 +52,11 @@ next-env.d.ts
 # not meant to be shared across the team. .claude/launch.json (the dev
 # server config other teammates need) is intentionally NOT ignored here.
 .claude/settings.local.json
+
+# Local scratch images dropped into public/Product images/ for visual
+# testing, not referenced by any component (2026-09-08). "Referne Image.png"
+# in the same folder IS committed -- it's wired into content/our-factory.ts
+# as a temporary Journey-section placeholder -- so this ignores the two
+# unused files by name rather than the whole directory.
+/public/Product images/Placeholder 2 .png
+/public/Product images/Placeholder Image.png
