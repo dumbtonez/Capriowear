@@ -1578,15 +1578,30 @@ export const ourFactoryProcess = {
   // The 2-line break is now a real "\n" in the content string itself
   // (content/our-factory.ts, TextReveal already renders "\n" as a real
   // <br />), which holds at every width -- no max-w needed at all.
-  row: "flex flex-col gap-10 xl:flex-row xl:items-start",
+  //
+  // Row layout switches at a custom `min-[1420px]:`, not `xl:` (1280px) --
+  // real bug, found live, 2026-09-08: the widest row (700+520px items,
+  // 40px gap = 1260px) needs 1260px of content width, but `xl:`'s own
+  // `container-p` padding (80px each side) only leaves 1120px of content
+  // width at exactly 1280px -- a 140px shortfall that forced the whole
+  // page to horizontally scroll for any viewport between 1280 and 1419px.
+  // 1420px is the exact width where 1260px of content first fits (1420 -
+  // 160 = 1260, no margin needed, computed not guessed) -- already an
+  // established custom breakpoint in this codebase for the same class of
+  // "xl's own 1280px is too early" problem (see the desktop nav's own
+  // former use of a custom 1420px, `docs/05-plan.md`'s decision log,
+  // 2026-08-22). Below 1420px, items keep stacking to one column (already
+  // the established `xl:`-and-under fallback) rather than overflowing.
+  row: "flex flex-col gap-10 min-[1420px]:flex-row min-[1420px]:items-start",
   item: "flex w-full flex-col gap-8",
   // Desktop-only fixed widths per item, matching each row's own real Figma
-  // pixel pair (700+520, 600+600, one full-width, 700+520 again).
+  // pixel pair (700+520, 600+600, one full-width, 700+520 again). Gated to
+  // the same `min-[1420px]:` as `row` above, not `xl:` -- see its comment.
   itemWidth: {
-    lg: "xl:w-[700px] xl:shrink-0",
-    md: "xl:w-[600px] xl:shrink-0",
-    sm: "xl:w-[520px] xl:shrink-0",
-    full: "xl:w-full",
+    lg: "min-[1420px]:w-[700px] min-[1420px]:shrink-0",
+    md: "min-[1420px]:w-[600px] min-[1420px]:shrink-0",
+    sm: "min-[1420px]:w-[520px] min-[1420px]:shrink-0",
+    full: "min-[1420px]:w-full",
   },
   textCol: "flex max-w-[30rem] flex-col gap-4",
   labelGroup: "flex flex-col gap-2",
