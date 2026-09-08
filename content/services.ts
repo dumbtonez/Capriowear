@@ -40,9 +40,9 @@ const introParagraph1: NoteSegment[] = [
 const introParagraph2: NoteSegment[] = [
   { text: "We are the activewear and teamwear division of Caprio Sports, a " },
   { text: "cut-and-sew manufacturer in Sialkot, Pakistan", bold: true },
-  { text: ", " },
-  { text: "established in 2009", bold: true },
-  { text: ", with our own 75,000 sq ft facility." },
+  { text: ", with " },
+  { text: "17+ years of experience", bold: true },
+  { text: " and our own 75,000 sq ft facility." },
 ];
 
 // Section 3's own closing note (Figma node 750:821) -- same NoteSegment
@@ -95,9 +95,10 @@ export const services = {
   // real inline emphasis -- same segmented-note pattern FabricOptions' own
   // closing note already uses (see ServicesIntro.tsx), not a second bespoke
   // rich-text renderer. `introParagraph2`'s own third bold phrase was
-  // Figma's "25+ years of experience" -- corrected sitewide, 2026-09-08,
-  // to "established in 2009" (the real founding year overstated the
-  // company's age; see `docs/04-product.md`'s now-resolved open question 2).
+  // Figma's own text read "25+ years of experience" -- corrected
+  // 2026-09-08 to "17+ years of experience" (real founding year 2009, per
+  // `docs/04-product.md`'s now-resolved open question 2; 25+ overstated
+  // the company's real age).
   // `paragraphs` (plural, 2 entries) since 2026-09-07 -- see
   // introParagraph1/2's own comment above for why this split from one.
   intro: {
