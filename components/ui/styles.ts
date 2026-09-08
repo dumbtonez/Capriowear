@@ -1596,11 +1596,17 @@ export const ourFactoryProcess = {
   label: "text-base font-medium text-[#3c3c43]",
   // 30px/36px/500 -- text-h3 matches exactly at this page's own 1440px
   // reference width (fluid token, see its own definition in globals.css).
-  // whitespace-nowrap (owner, 2026-09-08: "make it in one line" -- flagged
-  // on "Retail-ready, delivered to your door", but every station title's
-  // own Figma text layer is a single 36px line height, none double --
-  // applied sitewide on this token, not just that one caller).
-  title: "text-h3 text-subline whitespace-nowrap",
+  // whitespace-nowrap gated to `xl:` only (real bug, found live,
+  // 2026-09-08: applying it unconditionally forced true page-level
+  // horizontal scroll at the 360px min mobile viewport -- "Retail-ready,
+  // delivered to your door" cannot fit this item's mobile width, which is
+  // this section's own responsive `w-full`, not the fixed desktop
+  // itemWidth values nowrap was original written for). At `xl:` and up,
+  // every station title's own Figma text layer is a single 36px line
+  // height, none double (owner, 2026-09-08: "make it in one line",
+  // flagged on this same title) -- that intent only ever applied to the
+  // desktop layout's fixed item widths, so it stays desktop-only too.
+  title: "text-h3 text-subline xl:whitespace-nowrap",
   body: "text-body-lg leading-7 text-subline",
 };
 
