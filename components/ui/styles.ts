@@ -1528,16 +1528,16 @@ export const ourFactoryProcess = {
   // number, so this section now states its own 160px explicitly rather
   // than depending on whatever the previous section's own padding happens
   // to be).
-  // Not `container-p` (owner correction, 2026-09-08: "the whole section
-  // should have 80px from the left" -- `container-p` caps at
-  // `max-width:1440px` and centers past that, so at any viewport wider
-  // than 1440px its own 80px padding sits inside a centered box, reading
-  // as more than 80px from the true page edge; confirmed live, exactly
-  // 80px at 1440px itself but ~320px at 1920px). Same padding-inline
-  // values as `container-p` at every breakpoint (20px/32px/80px), just
-  // without its `max-width`/`mx-auto` -- a flat, edge-anchored inset at
-  // every width instead of a centered box.
-  inner: "w-full flex flex-col gap-12 px-5 pt-12 pb-16 md:px-8 xl:gap-[104px] xl:px-20 xl:pb-[120px] xl:pt-[160px]",
+  // Back to `container-p` (owner, 2026-09-08, reversing the previous
+  // correction: a flat edge-anchored 80px inset was tried, but at large
+  // screens it left content pinned to the left with a growing dead zone
+  // on the right -- "it looks odd ... lot of empty space on the right".
+  // `container-p`'s own centered 1440px cap is what every other section
+  // on this page already uses (Hero, Intro, InsideFactory), and still
+  // gives exactly 80px from the left at the page's own 1440px reference
+  // width -- only diverges from a flat 80px past that width, which reads
+  // as balanced instead of lopsided.
+  inner: "container-p flex flex-col gap-12 pt-12 pb-16 xl:gap-[104px] xl:pb-[120px] xl:pt-[160px]",
   // Heading block (eyebrow + H2) plus the first row, 72px apart -- the
   // real Figma nesting (get_metadata: node 857:1986 wraps the heading
   // block and row 1 together with its own 72px gap, separate from the
