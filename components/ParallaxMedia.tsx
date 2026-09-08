@@ -30,12 +30,20 @@ import type { MediaRadius, MediaRatio } from "./MediaPlaceholder";
 import { media } from "./ui/styles";
 
 export type ParallaxMediaProps = {
-  /** Shown inside the empty box; becomes the image alt text once real photography lands. */
+  /** Always becomes the image alt text. Also shown as the placeholder's own visible overlay text, unless `showLabel` is false. */
   label: string;
   ratio?: MediaRatio;
   radius?: MediaRadius;
   image?: { src: string | StaticImageData; alt?: string };
   imageSizes?: string;
+  /**
+   * Set false to render a bare placeholder box with no visible caption
+   * text (owner, 2026-09-08: "remove them" -- the overlaid label read as
+   * a design element, not a dev-only placeholder cue). `label` still
+   * supplies the image alt text either way -- same contract as
+   * MediaPlaceholder's own `showLabel` prop. Default true.
+   */
+  showLabel?: boolean;
   className?: string;
   /**
    * How far the inner layer drifts, as a percentage of the box's own
@@ -52,6 +60,7 @@ export function ParallaxMedia({
   radius = "none",
   image,
   imageSizes = "50vw",
+  showLabel = true,
   className,
   range = 12,
 }: ParallaxMediaProps) {
@@ -67,7 +76,7 @@ export function ParallaxMedia({
           <Image src={image.src} alt={image.alt ?? label} fill sizes={imageSizes} className={media.imageFill} />
         ) : (
           <div className={cx(media.placeholder, media.placeholderCentred, media.placeholderLight, "h-full")}>
-            <span className={media.label}>{label}</span>
+            {showLabel ? <span className={media.label}>{label}</span> : null}
           </div>
         )}
       </motion.div>

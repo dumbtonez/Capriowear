@@ -42,7 +42,7 @@ export function OurFactoryProcess({ content }: OurFactoryProcessProps) {
           <div key={rowIndex} className={ourFactoryProcess.row}>
             {row.items.map((item) => (
               <div key={item.label} className={`${ourFactoryProcess.item} ${ourFactoryProcess.itemWidth[item.width]}`}>
-                <ParallaxMedia label={item.imageAlt} ratio={item.ratio} />
+                <ParallaxMedia label={item.imageAlt} ratio={item.ratio} showLabel={false} />
                 <div className={ourFactoryProcess.textCol}>
                   <div className={ourFactoryProcess.labelGroup}>
                     <p className={ourFactoryProcess.label}>{item.label}</p>
