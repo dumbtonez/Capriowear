@@ -26,7 +26,7 @@ export default function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", fontSize: 96, fontWeight: 700, letterSpacing: -2 }}>
-          CAPRIO<span style={{ color: "#ff5011" }}>WEAR</span>
+          CAPRIO<span style={{ color: "#ff791b" }}>WEAR</span>
         </div>
         <div style={{ display: "flex", fontSize: 32, fontWeight: 400, marginTop: 24, color: "#abb5c0" }}>
           Custom Activewear &amp; Teamwear Manufacturer

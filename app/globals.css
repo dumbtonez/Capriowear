@@ -27,7 +27,7 @@
   --color-line: rgba(0, 0, 0, 0.1); /* hairline border on light */
   --color-line-dark: rgba(255, 255, 255, 0.12); /* hairline border on dark */
   --color-muted: #6b6b74; /* secondary text */
-  --color-accent: #ff5011; /* brand orange: CTAs, highlights */
+  --color-accent: #ff791b; /* brand orange: CTAs, highlights (owner, 2026-09-08) */
   --color-accent-ink: #ffffff; /* text/icon on accent */
   /* Subline text under a title, on a white/paper section background only
      (owner, 2026-09-01: apply sitewide, component-level, so new pages pick

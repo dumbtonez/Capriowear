@@ -42,7 +42,7 @@ import { button } from "./ui/styles";
 | `line` | `rgba(0,0,0,0.10)` | Hairline border on light |
 | `line-dark` | `rgba(255,255,255,0.12)` | Hairline border on dark |
 | `muted` | `#6B6B74` | Secondary text |
-| `accent` | `#FF5011` | Brand orange. CTAs and highlights |
+| `accent` | `#FF791B` | Brand orange. CTAs and highlights |
 | `accent-ink` | `#FFFFFF` | Text and icons on accent |
 | `subline` | `#17191E` | Subline text directly under a title, light/white sections only |
 

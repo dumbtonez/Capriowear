@@ -48,7 +48,7 @@ export const colorTokens: ColorToken[] = [
   },
   {
     name: "accent",
-    value: "#FF5011",
+    value: "#FF791B",
     use: "Brand orange. Primary CTAs and highlights.",
     utility: "bg-accent / text-accent",
   },
