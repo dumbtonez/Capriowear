@@ -26,6 +26,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    // /our-factory (owner brief, 2026-09-08): a real, standalone page being
+    // built section by section, same hand-added pattern as /services above.
+    {
+      url: `${SITE_URL}/our-factory`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
     // Running Wear (owner spec, 2026-09-03): a real, indexable curated
     // collection page, but NOT in the `categories` registry (see
     // CuratedCollection's own comment, content/activewear/types.ts) -- so
