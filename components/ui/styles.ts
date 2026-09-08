@@ -1505,15 +1505,29 @@ export const ourFactoryIntro = {
   // `docs/05-plan.md`'s decision log, 2026-08-23: overriding a compound
   // token's size alone without its paired weight/line-height silently
   // drops to the browser default).
+  // md:whitespace-nowrap (real bug, found live, 2026-09-08: on wide
+  // screens the title wraps to 2 lines): textCol's own 841px `xl:max-w`
+  // is a fixed pixel value, but the heading reads from `text-h1`, which
+  // keeps scaling up past 1440px to a new max at 1920px -- the grown
+  // text (measured 902px wide at 1920px) no longer fits the fixed 841px
+  // box. `nowrap` alone (not a wider max-w) is the fix, same reasoning as
+  // `ourFactoryProcess`'s own heading fix above: `textCol`'s max-w still
+  // usefully wraps the paragraph beneath it (a fixed 26px reading-copy
+  // size, not fluid, so it isn't affected), and there's ample slack
+  // (measured ~358px) between the box's right edge and the section's own
+  // right inset for the heading to safely bleed into without any real
+  // page-level overflow risk.
   heading:
-    "max-md:text-[1.375rem] max-md:font-medium max-md:leading-[1.1852] max-md:whitespace-nowrap md:text-h1 text-ink",
+    "max-md:text-[1.375rem] max-md:font-medium max-md:leading-[1.1852] max-md:whitespace-nowrap md:text-h1 md:whitespace-nowrap text-ink",
   paragraph: "text-[1.625rem] leading-9 text-subline",
   paragraphBold: "font-semibold",
-  // gap-12 (48px) sitewide, not gap-8 (32px) below md (owner, 2026-09-08:
-  // "the space between 2 numbers should be 48px" -- was already 48px at
-  // md and up via the `md:gap-12` below, this only affects the stacked
-  // mobile layout's own vertical gap).
-  statsRow: "flex flex-col gap-12 md:flex-row md:items-start",
+  // gap-12 (48px) below md, matching mobile's own confirmed value (owner,
+  // 2026-09-08: "the space between 2 numbers should be 48px" -- the
+  // stacked mobile layout's own vertical gap). md:gap-[72px] (owner,
+  // 2026-09-08, wide-screen follow-up: "make it 72px") -- the side-by-side
+  // desktop gap between the two stat columns, a separate, later-confirmed
+  // number from mobile's 48px, not the same value reused at both tiers.
+  statsRow: "flex flex-col gap-12 md:flex-row md:items-start md:gap-[72px]",
   // The gradient line (Figma "Line 329"): a real two-stop linear gradient
   // asset (accent orange solid to ~36% of the line, fading to transparent),
   // not a plain divider -- reproduced as CSS rather than an image so it
@@ -2741,7 +2755,25 @@ export const insideFactory = {
   // the same reason How It Works' cards are all one size. Relative +
   // cursor-none for the same reason as How It Works: the floating chevron
   // IS the cursor here.
-  desktopScrollerWrap: "relative w-full cursor-none overflow-hidden",
+  //
+  // `mx-auto max-w-[1440px]` added (real bug, found live, 2026-09-08): this
+  // wrap has no width cap at all, so `desktopRow`'s own flat `xl:px-[80px]`
+  // only matches `container-p`'s real inset up to 1440px -- above it,
+  // `container-p` grows past 80px (it centers within its own 1440px cap),
+  // but this flat 80px never moves, so the gallery's left edge drifted
+  // further and further from every other section's on any screen wider
+  // than 1440px (measured: 80px vs 320px at 1920px). Capping this wrap at
+  // 1440px and centering it makes `desktopRow`'s existing 80px padding
+  // behave exactly like `container-p` at every width, the same technique
+  // `container-p` itself uses (width:100% + max-width + auto margins, not
+  // a vw-based calc, so it isn't exposed to viewport-scrollbar-gutter
+  // quirks a calc/vw approach would be) -- and matches this project's own
+  // stated rule, "Max content width 1440px, centred, sitewide, no
+  // exceptions" (`docs/02-design-system.md`). The section's own background
+  // (`desktopOuter`/`desktopOuterLight`) stays a separate, unconstrained
+  // full-bleed wrapper, untouched -- only the scrollable content is capped,
+  // the same "background vs. content" split already established sitewide.
+  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-none overflow-hidden",
   // snap-center at `xl:` (not How It Works' snap-start) -- the point there
   // is the active card centers in the viewport, not aligns to an edge.
   // Padding is calculated (half the card width, 475px) so the first/last
@@ -3338,7 +3370,16 @@ export const howItWorks = {
   // cursor-none: the floating chevron IS the cursor here -- the native
   // pointer/hand icon showing alongside it read as a duplicate affordance
   // (owner call, 2026-08-25).
-  desktopScrollerWrap: "relative w-full cursor-none overflow-hidden",
+  //
+  // `mx-auto max-w-[1440px]` added (real bug, found live, 2026-09-08, same
+  // class of bug as `insideFactory`/`exhibitions`' own `desktopScrollerWrap`
+  // -- see `insideFactory`'s own comment for the full reasoning): this wrap
+  // had no width cap, so `desktopRow`'s flat `xl:px-[80px]` only matched
+  // `container-p`'s real inset up to 1440px, drifting further from every
+  // other section's own left edge above it. Capping this wrap at 1440px
+  // makes the existing 80px padding behave exactly like `container-p` at
+  // every width.
+  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-none overflow-hidden",
   // scroll-pl/pr match the visual px inset -- without them, scroll-snap's
   // own snap-point maths (each card's snap-start) doesn't know the
   // padding is "safe" space, so the browser auto-corrects the rest scroll
@@ -3437,7 +3478,19 @@ export const exhibitions = {
   // needed no structural change, only the left padding scaled to match
   // `container-p`'s own `md:` inset (32px) instead of `xl:`'s 80px, which
   // this row's own fixed padding had previously assumed unconditionally.
-  desktopScrollerWrap: "relative w-full cursor-none overflow-hidden",
+  //
+  // `mx-auto max-w-[1440px]` added (real bug, found live, 2026-09-08, same
+  // class of bug as `insideFactory.desktopScrollerWrap` -- see its own
+  // comment for the full reasoning): this wrap had no width cap, so
+  // `desktopRow`'s flat `xl:px-[80px]` only matched `container-p`'s real
+  // inset up to 1440px -- above it the first card stayed pinned at a flat
+  // 80px (measured, unchanged from 1440px through 2560px) while every
+  // other section's own left edge kept growing with `container-p`'s
+  // centring. Capping this wrap at 1440px makes the existing 80px padding
+  // behave exactly like `container-p` at every width, matching this
+  // project's own stated rule ("Max content width 1440px, centred,
+  // sitewide, no exceptions", `docs/02-design-system.md`).
+  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-none overflow-hidden",
   // `overflow-x-hidden`, not `-auto` (owner, 2026-09-08: "user can only
   // scroll by clicking" -- see `useDesktopChevronScroller`'s own header
   // comment in DesktopChevronScroller.tsx for the full reasoning).
@@ -5518,14 +5571,20 @@ export const productCustomizeSteps = {
   // all sit inside `container-p`, so their content starts 80px in from
   // whatever margin centres that 1440px box). Without this cap, the
   // scroller wrap below is a genuine full-bleed sibling of the heading's
-  // own `container-p` (same pattern `howItWorks` uses on the homepage,
-  // intentionally, for its own wide-gallery feel) -- its own `px-[80px]`
-  // is measured from the TRUE viewport edge, not from container-p's
-  // centred boundary, so on any viewport wider than 1440px the two visibly
-  // diverge (confirmed live via an owner screenshot: cards start well
-  // left of the heading/TrustPoints text on a wide screen). This is a
-  // PDP-only fix -- `howItWorks.desktopScrollerWrap` (homepage) is a
-  // completely separate recipe/component and is untouched.
+  // own `container-p` -- its own `px-[80px]` is measured from the TRUE
+  // viewport edge, not from container-p's centred boundary, so on any
+  // viewport wider than 1440px the two visibly diverge (confirmed live via
+  // an owner screenshot: cards start well left of the heading/TrustPoints
+  // text on a wide screen).
+  //
+  // At the time this was written, the homepage's own `howItWorks` (and
+  // `exhibitions`/`insideFactory`) used the same uncapped shape
+  // deliberately, "for its own wide-gallery feel" -- that was superseded
+  // 2026-09-08 (owner: the drift read as a real bug, not a wide-gallery
+  // effect, once shown live on Our Factory's own gallery/process sections)
+  // -- every `desktopScrollerWrap` sitewide now gets this same 1440px cap.
+  // See `docs/02-design-system.md`'s own "full-bleed scroller" note for
+  // the general rule this recipe follows.
   desktopScrollerCap: "mx-auto w-full max-w-[1440px]",
   desktopScrollerWrap: "relative w-full cursor-none overflow-hidden",
   // scroll-pl/pr match the visual px-[80px] inset -- same reasoning as

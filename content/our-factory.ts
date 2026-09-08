@@ -126,7 +126,7 @@ export const ourFactory = {
           {
             number: "02",
             name: "Cutting",
-            title: "Cut and sewn, seam by seam",
+            title: "Cut to your pattern",
             body: "Cut to your pattern, graded to your sizes. Every panel cut to spec, graded XS to 5XL across men's, women's, unisex and youth blocks.",
             imageAlt: "Fabric panels cut to pattern at Capriowear's apparel factory in Sialkot, Pakistan",
             // Temporary: the owner's own reference photo (public/Product
