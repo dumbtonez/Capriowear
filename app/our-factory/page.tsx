@@ -23,10 +23,14 @@
 // page IS the factory-tour destination that CTA links to, so it has no
 // reason to link to itself here; the homepage's own usage is untouched.
 // See InsideFactory.tsx's own prop comments for the full reasoning.
-// Section 5 (this step): OurFactoryProcess, Figma desktop node 857:2090
-// ("Content"), "What We Make" -- see components/sections/
-// OurFactoryProcess.tsx for the section's own build notes, including the
-// new ParallaxMedia primitive (components/ParallaxMedia.tsx) its images use.
+// Section 5: OurFactoryProcess, Figma desktop node 857:2090 ("Content"),
+// "What We Make" -- see components/sections/OurFactoryProcess.tsx for the
+// section's own build notes, including the new ParallaxMedia primitive
+// (components/ParallaxMedia.tsx) its images use.
+// Section 6 (this step): OurFactoryDetails, Figma desktop node 857:2088
+// ("Content"), "The details you would check on a sample" -- see
+// components/sections/OurFactoryDetails.tsx for the section's own build
+// notes (the dark accordion + synced-image panel, and its animation).
 import type { Metadata } from "next";
 
 import { Header } from "@/components/Header";
@@ -34,6 +38,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
 import { Footer } from "@/components/sections/Footer";
 import { InsideFactory } from "@/components/sections/InsideFactory";
+import { OurFactoryDetails } from "@/components/sections/OurFactoryDetails";
 import { OurFactoryHero } from "@/components/sections/OurFactoryHero";
 import { OurFactoryIntro } from "@/components/sections/OurFactoryIntro";
 import { OurFactoryProcess } from "@/components/sections/OurFactoryProcess";
@@ -88,6 +93,7 @@ export default function OurFactoryPage() {
         <OurFactoryIntro content={ourFactory.intro} />
         <InsideFactory content={home.insideFactory} tone="light" showHeading={false} showCta={false} />
         <OurFactoryProcess content={ourFactory.process} />
+        <OurFactoryDetails content={ourFactory.sampleDetails} />
       </main>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />

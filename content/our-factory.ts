@@ -42,6 +42,21 @@ type ProcessStation = {
 
 type ProcessRow = { items: ProcessStation[] };
 
+// Section 6, "The details you would check on a sample" (Figma node
+// 857:2088, "Content", owner brief 2026-09-08) -- comes after the "Journey"
+// gallery above (section 5, `process`) in page order, despite the owner's
+// own brief calling it "Section 5" too; `content/our-factory.ts`'s own
+// established numbering already claims 5 for `process`, so this is 6 here
+// to avoid two same-numbered sections in the same file.
+type SampleDetail = {
+  /** Rendered as the accordion trigger's own label -- a button label, never a heading (see OurFactoryDetails.tsx). */
+  label: string;
+  description: string;
+  /** Per-item alt text for the swapped right-panel image -- never a generic "placeholder" description (owner spec). */
+  imageAlt: string;
+  image?: { src: string };
+};
+
 const introParagraph: NoteSegment[] = [
   {
     text: "Capriowear is the activewear and teamwear division of Caprio Sports, a cut-and-sew apparel manufacturer in Sialkot, Pakistan. Every order is produced in-house, ",
@@ -200,5 +215,67 @@ export const ourFactory = {
         ],
       },
     ] as ProcessRow[],
+  },
+
+  // Section 6, "The details you would check on a sample" -- see the
+  // `SampleDetail` type comment above. `leadParagraph` is a 2-segment
+  // NoteSegment array (muted lead-in, bold close), same shape as
+  // `introParagraph` above, not a second bespoke rich-text type. Item 1
+  // (Sublimation) is open by default (OurFactoryDetails.tsx).
+  sampleDetails: {
+    // No eyebrow (owner, 2026-09-09: "remove the details eyebrow from the
+    // title") -- Figma's own "THE DETAIL" eyebrow layer is dropped, not
+    // just visually hidden.
+    // Real "\n" line break (owner, 2026-09-09: "make the title in 2 lines"),
+    // same TextReveal-renders-"\n"-as-a-real-<br/> pattern already used for
+    // ourFactoryProcess.heading -- holds this exact 2-line break at every
+    // viewport width, not just wherever the fluid `text-h1` clamp happens
+    // to wrap it.
+    heading: "The details you would\ncheck on a sample",
+    leadParagraph: [
+      { text: "Every choice we make in construction is one you can see and feel. " },
+      { text: "Explore a pair of custom shorts, point by point.", bold: true },
+    ] as NoteSegment[],
+    items: [
+      {
+        label: "Sublimation",
+        description:
+          "Dyed into the fiber, not printed on top, so the color will not crack, peel or fade in the wash.",
+        imageAlt: "Close-up of full-dye sublimation on Capriowear custom training shorts, Sialkot, Pakistan",
+      },
+      {
+        label: "Flatlock seams",
+        description:
+          "Stitched flat where the fabric meets, so seams sit smooth against the skin and resist chafing and abrasion.",
+        imageAlt: "Close-up of the flatlock seam on Capriowear custom shorts",
+      },
+      {
+        label: "Elastic waistband",
+        description:
+          "Built to hold its shape and stay put through training, finished clean inside with no exposed raw edge.",
+        imageAlt: "Close-up of the elastic waistband on Capriowear custom shorts",
+      },
+      {
+        label: "Drawcord",
+        description: "A secure adjustable cord through reinforced eyelets, tied off so it will not pull through.",
+        imageAlt: "Close-up of the drawcord and eyelets on Capriowear custom shorts",
+      },
+      {
+        label: "Gusseted construction",
+        description:
+          "An added panel at the inseam that opens up range of motion and takes the strain off the seams.",
+        imageAlt: "Close-up of the gusseted inseam construction on Capriowear custom shorts",
+      },
+      {
+        label: "Bar-tacks",
+        description: "Reinforced stitching at pockets, side splits and the fly, exactly where a garment takes the most load.",
+        imageAlt: "Close-up of bar-tack reinforcement stitching on Capriowear custom shorts",
+      },
+      {
+        label: "Woven labels",
+        description: "Your brand, size and care labels woven and applied in-house, so the shorts arrive finished under your name.",
+        imageAlt: "Close-up of a woven brand label on Capriowear custom shorts",
+      },
+    ] as SampleDetail[],
   },
 };

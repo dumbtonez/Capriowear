@@ -329,6 +329,13 @@ export const media = {
     // literal Figma pixel pair rather than renamed "2:1", matching this
     // table's own naming convention for every other entry.
     "1280:640": "aspect-[1280/640]",
+    // /our-factory "The details you would check on a sample" (Figma node
+    // 857:2088, section 6, 2026-09-08): the right image panel, 730x644
+    // (get_metadata) -- no common factor between 730 and 644 beyond 2, so
+    // this is already close to its lowest terms; kept as the literal Figma
+    // pixel pair per this table's established precedent, matching
+    // "1280:640" above rather than reducing to a renamed ratio.
+    "730:644": "aspect-[730/644]",
   },
   radius: {
     lg: "rounded-lg",
@@ -1637,6 +1644,359 @@ export const ourFactoryProcess = {
   // desktop layout's fixed item widths, so it stays desktop-only too.
   title: "text-h3 text-subline xl:whitespace-nowrap",
   body: "text-body-lg leading-7 text-subline",
+};
+
+/* --- OurFactoryDetails (/our-factory section 6) ----------------------------- */
+// Figma desktop node 857:2088 ("Content"), "The details you would check on a
+// sample" (owner brief, 2026-09-08). A dark accordion + synced-image panel,
+// the same visual language as Apple's macbook-pro "Take a closer look"
+// section per the brief, but a left-accordion layout, not pinned scroll
+// markers -- see OurFactoryDetails.tsx for the interaction build notes.
+//
+// Colour: `surface.dark`/`surface.darkRaised` (bg-ink/bg-ink-2) for the
+// section and card -- both now exact hex matches for this Figma frame's own
+// #121317/#17191e (owner updated the tokens to these exact values the same
+// day this section was built), not just "close enough". The item pill/open-
+// card surface, #1f2126, has no existing token (a third, lighter dark tier
+// this project hasn't needed before) -- kept as its own one-off literal,
+// this file's established convention for a confirmed Figma colour with no
+// token match.
+export const ourFactoryDetails = {
+  section: "bg-ink text-paper",
+  // xl:py-[80px] (owner, 2026-09-09: "make the heading top 80px gap and
+  // bottom of the section also 80px") -- was xl:py-[120px].
+  inner: "container-p flex flex-col gap-12 py-[72px] xl:gap-[72px] xl:py-[80px]",
+  // Header row: H2 left, lead paragraph right (Figma: 539px/181px gap/560px
+  // at the 1440px reference width) -- `max-w`, not a fixed `w`, on both
+  // sides, and `justify-between` doing the gap instead of a flat 181px:
+  // 539+181+560 sums to exactly 1280px (this section's own 1440px frame
+  // minus its 80px side padding), so a literal gap only ever fits at that
+  // one reference width -- the same class of bug already fixed twice on
+  // this page today (OurFactoryProcess's heading max-w, then its row
+  // breakpoint). `max-w` lets both blocks shrink/wrap at any narrower
+  // `xl:` width instead of forcing an overflow.
+  headingRow: "flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between xl:gap-12",
+  // No `max-w` (real bug, found live, owner: "make the title in 2 lines"):
+  // a fixed 539px cap combined with the real "\n" break in the content
+  // string (see `content/our-factory.ts`) re-wrapped that already-broken
+  // first line to a 3rd line, the exact same class of bug already fixed
+  // on `ourFactoryProcess.heading` -- a fixed max-w and a fluid `text-h1`
+  // (which keeps growing past 1440px) don't stay in sync, so a box that
+  // fit the "\n"-broken lines at 1440px could re-wrap wider than that.
+  // `headingRow`'s own `xl:justify-between` (this section's inner) keeps
+  // this column from colliding with the lead paragraph without needing a
+  // second, competing width constraint here.
+  headingCol: "flex flex-col gap-6",
+  heading: "text-h1 text-paper",
+  // 26px/36px leading -- the same literal `ourFactoryIntro.paragraph`
+  // already uses for this exact Figma size, reused rather than a second
+  // one-off of the identical value.
+  lead: "text-[1.625rem] leading-9 text-[#838D97] xl:max-w-[560px]",
+  // Regular weight (owner, 2026-09-09: "explore a pair text highlighted
+  // should be regular weight") -- white/`text-paper` only, no
+  // `font-semibold`. Figma's own reference layer agreed with this all
+  // along (its "Explore a pair..." span carries no bold class either); an
+  // earlier pass added weight that was never actually asked for or in the
+  // source.
+  leadBold: "text-paper",
+  // The big rounded card. Height is intrinsic (content-driven), not
+  // Figma's own fixed 708px -- a fixed height risks clipping the open
+  // item's description at a length Figma's own placeholder copy didn't
+  // need to account for, and this project's own "no magic pixel heights"
+  // rule for exactly this class of component (see OurFactoryDetails.tsx's
+  // own animation notes) extends naturally to the card's outer height too.
+  // `rounded-none` (owner, 2026-09-09: "the main container and the image
+  // container should have 0 radius") -- was `rounded-xl`, corrected
+  // alongside `imageCol` below.
+  card: "flex flex-col gap-8 rounded-none bg-ink-2 p-6 xl:flex-row xl:items-center xl:gap-10 xl:p-10",
+  // Real flex column, not Figma's absolute `top-1/2 -translate-y-1/2` --
+  // `self-center` against the row's own cross-axis (stretched to the
+  // tallest sibling, the image panel) gives the same vertical-centred
+  // read without a magic-number position that would need re-tuning any
+  // time the list's own total height changes (e.g. a longer description).
+  stepperCol: "hidden shrink-0 flex-col items-center gap-6 xl:flex xl:self-center",
+  stepperButton:
+    "flex size-8 items-center justify-center rounded-pill text-paper transition-colors duration-200 hover:bg-paper/10 disabled:pointer-events-none disabled:opacity-30",
+  stepperIcon: "size-4",
+  stepperIconUp: "-rotate-180",
+  listCol: "flex w-full flex-col gap-4 xl:w-[320px] xl:shrink-0",
+  // Dynamic per-item width (owner, 2026-09-09: "the chips width should be
+  // dynamic based on the text label, follow the design", and separately:
+  // "it does not open to the bottom, it opens on the right side" --
+  // Figma's own real per-item widths independently confirm this too --
+  // get_metadata measured each collapsed pill sized to its own content
+  // (238px/169px/154px/168px/200px, not a shared column width), which an
+  // earlier flat `w-full` on every item silently ignored).
+  //
+  // `width` here is a REAL, measured pixel value when closed (see
+  // `OurFactoryDetails.tsx`'s own hidden-measurement-clone comment), not a
+  // CSS keyword -- two CSS-only approaches were tried and both failed,
+  // confirmed by real frame-by-frame sampling, not assumption: a bare
+  // `width: auto` (via `align-self: flex-start`) never animated at all,
+  // it snapped in ~5ms, because CSS transitions require a definite
+  // starting length and `auto` isn't one; a follow-up attempt using this
+  // codebase's own established `grid-template-columns` 0fr/1fr-style
+  // technique (the same mechanism that DOES smoothly animate height,
+  // `detailGrid`/`detailGridOpen` below) also just snapped -- interpolating
+  // between an intrinsic keyword (`max-content`) and `1fr` isn't the same
+  // supported case as interpolating between two `fr` values, and browsers
+  // evidently don't smoothly animate it either. It also briefly introduced
+  // a worse bug: mid-transition, the still-transitioning grid track's own
+  // width recalculation let the closed panel's unwrapped description text
+  // flash the chip out to 900px+ before settling. A real measured pixel
+  // width is the standard, well-established pattern for exactly this
+  // "expand a chip from its own content-width to full-width" case, and
+  // being an ordinary definite length, it's unambiguously animatable by a
+  // plain `transition: width` -- no grid trick needed at all. Falls back
+  // to no inline width (natural full-width flow) for the one frame before
+  // the measurement effect runs; that effect is `useLayoutEffect`, which
+  // fires before the browser paints, so there's no visible flash on a
+  // client-rendered page.
+  //
+  // `flex-col` (button above the panel, never a row) applies
+  // unconditionally across both states -- `flex-direction` cannot be
+  // transitioned by CSS at all (confirmed the hard way, 2026-09-08:
+  // flipping it between states made the whole chip instantly snap from a
+  // horizontal pill to a vertical stack in the same frame the height was
+  // trying to animate smoothly). Only the shape (radius/background/width,
+  // all real CSS transitions) actually changes on open.
+  //
+  // No padding on this element any more (real bug, found live, owner:
+  // "the whole chip should be clickable not just plus"): `px-6 py-4` used
+  // to live on a plain non-interactive wrapper `<div>`, while the actual
+  // `<button>` inside had no padding of its own -- clicking the pill's own
+  // visible padding (the bulk of its clickable-looking area) did nothing,
+  // only the tight icon+label box responded. The padding now lives
+  // directly on `itemButton` below, so the button's own hit target is the
+  // full visible chip, not just its text.
+  //
+  // `hover:bg-[#191b1f]` (owner, 2026-09-09: "on the chip hover, change
+  // the chip color a bit dark with a mouseover on hover") -- ~18% darker
+  // than the base `#1f2126`, computed rather than eyeballed (both one-off
+  // literals for the same reason, no existing token is this specific
+  // dark-surface tier). CSS `:hover` matches an ancestor whenever any
+  // descendant is hovered, so this alone (not also needed on
+  // `itemButton`) already covers the whole chip once `itemButton` fills
+  // it -- see that element's own "whole chip clickable" fix, the same
+  // shape of coverage. Applies at both open and closed (no separate
+  // open/closed hover colour) -- the interactive affordance doesn't
+  // change meaning between states, only the panel's own reveal does.
+  item: "relative flex flex-col bg-[#1f2126] text-left transition-[width,border-radius,background-color] ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[#191b1f] motion-reduce:transition-none",
+  itemOpen: "w-full gap-2 rounded-xl duration-[340ms]",
+  itemClosed: "rounded-pill duration-[260ms]",
+  // No `pb-*` on the shared base -- split into `itemButtonClosed`/`Open`
+  // below (real bug, found live, owner: "the gap between the chip title
+  // and subline should be 8px"): a flat `py-4` gave the button its own
+  // 16px bottom padding UNCONDITIONALLY, which then stacked with
+  // `itemOpen`'s own `gap-2` (8px) between button and panel -- 24px
+  // total, not the intended 8. Closed keeps the full `pb-4` (a standalone
+  // pill needs even top/bottom padding); open drops to `pb-0`, so
+  // `itemOpen`'s `gap-2` becomes the ENTIRE visible gap between the label
+  // and the description below it. `padding` joins the transition list so
+  // this collapses/expands smoothly alongside the chip's own width/radius
+  // change, same easing -- and, like `item`'s own duration split (see its
+  // comment on the last-frame jerk fix), `duration` moves into
+  // `itemButtonClosed`/`Open` too, matching `detailGrid`/`detailGridOpen`
+  // exactly, so this element's own vertical-space change also finishes in
+  // lockstep with the panel's height animation, not a beat later.
+  itemButton:
+    "flex w-full items-center px-6 pt-4 transition-[padding] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+  itemButtonClosed: "pb-4 duration-[260ms]",
+  itemButtonOpen: "pb-0 duration-[340ms]",
+  // Plus icon persists in the DOM at both states (opacity/rotate driven by
+  // `isOpen`, not conditionally rendered) so it can transition out rather
+  // than pop -- see the component's own comment on why a truly `hidden`
+  // icon can't animate. `itemButton`'s own `gap-2.5` moved onto this
+  // element as a `mr-2.5` (closed only) specifically so the reserved space
+  // is something `width`/`margin` transitions can actually collapse to 0
+  // -- a flex `gap` cannot animate away, it stays constant regardless of a
+  // shrinking sibling.
+  //
+  // `itemIconWrapClosed`/`itemIconWrapOpen` are fully mutually exclusive
+  // (real bug, found live, owner: "selected chip... should be left align
+  // with the text" -- persisted after a first fix attempt): `width`/
+  // `margin`/`opacity` all used to live partly on the shared base
+  // (`w-6`/`mr-2.5`/implicit opacity-100) and partly as an `isOpen`-only
+  // override (`w-0`/`mr-0`/`opacity-0`) -- both values for the same
+  // property landed in the class list at once when open, the identical
+  // class of Tailwind-generation-order collision as `imageLayer`'s own bug
+  // above, just on different properties. The base (`itemIconWrap`) now
+  // only carries what never differs between states (height, layout,
+  // transition config); every property that actually changes lives
+  // entirely in one or the other variant, never both.
+  itemIconWrap:
+    "flex h-6 shrink-0 items-center justify-center overflow-hidden transition-[opacity,transform,width,margin] duration-200 ease-out motion-reduce:transition-none",
+  itemIconWrapClosed: "w-6 mr-2.5 rotate-0 opacity-100",
+  itemIconWrapOpen: "pointer-events-none w-0 mr-0 rotate-45 opacity-0",
+  itemIcon: "size-6 shrink-0 text-paper",
+  // text-body-lg (20px, fixed -- matches Figma's own confirmed size at
+  // both label and description, `text-overline`'s sibling body-copy size)
+  // for both the label and the description -- weight/colour are the only
+  // real difference (semibold+white label, regular+muted description),
+  // not a font-size change between them. Weight is the only real
+  // difference Figma shows between the two states (both text-paper/white,
+  // 20px) -- collapsed is regular, open is semibold. No trailing colon any
+  // more (owner, 2026-09-09: "it should not have ':' apply to all chips")
+  // -- the component used to append one on the open label only.
+  // `whitespace-nowrap` matches every collapsed pill sizing to its own
+  // label's content width, same as Figma's own fixed-to-content pill
+  // shapes.
+  itemLabel: "text-body-lg whitespace-nowrap text-paper",
+  itemLabelOpen: "font-semibold",
+  // Asymmetric expand/collapse timing (owner spec, 2026-09-08: "make
+  // expand/collapse feel smooth and generous... this is the important
+  // part") -- 340ms opening (a touch slower, so it reads as "unfolding"),
+  // 260ms collapsing (snappier, so it doesn't feel sluggish to dismiss).
+  // Easing corrected 2026-09-09 (owner: "chips animation is very jerky") --
+  // was the named `ease-out`/`ease-in` curves, which start or end quite
+  // abruptly; both directions now use `cubic-bezier(0.22,1,0.36,1)`, the
+  // exact smooth-deceleration curve this project's own `.reveal-box`
+  // scroll-reveal already established sitewide (`app/globals.css`) for
+  // "premium" motion, not a new one invented for this component. Paired
+  // with the flex-direction fix on `item` above (the other real source
+  // of jerkiness -- see its own comment), this removes both causes rather
+  // than just retuning numbers. Same core `grid-rows-[0fr]`/`[1fr]` +
+  // `overflow-hidden` + `inert` mechanism this codebase already
+  // established on FabricOptions/ServicesHowWeWork -- animates real layout
+  // height without ever measuring a pixel value. `motion-reduce:` gated to
+  // instant (no height/opacity/transform transitions at all) per the same
+  // spec.
+  // `absolute` on the closed state only (real bug, found live, discovered
+  // while building the dynamic-width chips above): this panel's own
+  // description `<p>` has no wrap constraint, so its own max-content width
+  // is its full UNWRAPPED single line (900px+ for the longer
+  // descriptions) -- as an ordinary normal-flow sibling of the button,
+  // that intrinsic width was feeding straight into `item`'s own
+  // shrink-to-fit calculation even while the panel was visually collapsed
+  // to 0 height, forcing every closed pill to whatever the widest hidden
+  // description needed instead of its own short label (this was actually
+  // the FIRST real bug found in this whole area, before `item`'s own
+  // width became a real measured pixel value -- kept, since it's still
+  // good hygiene even now that width no longer depends on it). `position:
+  // absolute` on close removes it from the flow `item`'s own layout
+  // considers at all; back to plain flow (no `absolute`) on open, when
+  // the panel's real width should match the now-full-width card. `item`
+  // carries `relative` as the positioning context for this.
+  //
+  // `w-full` (100% of `item`), not a hardcoded pixel value -- this WAS
+  // briefly a literal `w-[320px]` (matching `listCol`'s own fixed
+  // `xl:w-[320px]`), from when `item`'s own width was still driven by an
+  // in-progress CSS grid-track experiment whose OWN size was influenced by
+  // its children (a real, confirmed circular-dependency bug: a percentage
+  // width here read that still-settling, content-dependent value every
+  // frame, letting the panel's own still-unwrapped description text
+  // briefly inflate the chip past 900px mid-transition). `item`'s width is
+  // now a real, externally-measured pixel value (see its own comment) or
+  // a plain `w-full`, never influenced by ITS OWN children's content --
+  // that circular dependency no longer exists, so `w-full` is safe again,
+  // and it has to be `w-full` rather than a hardcoded 320px regardless:
+  // this list also renders on mobile (not desktop-only), where `item`'s
+  // own real width is narrower than 320px -- a flat 320px here forced
+  // real horizontal page overflow at the 360px min mobile viewport
+  // (found live, confirmed via a real Playwright overflow sweep).
+  detailGrid:
+    "absolute grid w-full grid-rows-[0fr] transition-[grid-template-rows] duration-[260ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+  detailGridOpen:
+    "grid w-full grid-rows-[1fr] transition-[grid-template-rows] duration-[340ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+  detailClip: "overflow-hidden",
+  // Inner fade-and-rise, delayed ~100ms after the grid track starts
+  // growing (owner spec: "slightly delayed... so it feels like it
+  // unfolds rather than snapping") -- opening only; collapsing has no
+  // delay so the text doesn't linger visible while its own row is already
+  // shrinking away underneath it. Same `cubic-bezier(0.22,1,0.36,1)` curve
+  // as the height transition above, not a different one, so the height and
+  // the text read as one coordinated motion rather than two competing
+  // ones. `motion-reduce:` collapses both to an instant, undelayed swap.
+  //
+  // `px-6 pb-4` (matching `itemButton`'s own padding, now that `item`
+  // itself carries none -- see its own comment) keeps the description
+  // aligned under the label and gives the open card real bottom breathing
+  // room. No `pt-2` any more (owner, 2026-09-09: "the gap between the chip
+  // title and subline should be 8px") -- it used to stack on top of
+  // `itemOpen`'s own `gap-2` (8px), so label-to-description read as 16px,
+  // not the intended 8. `gap-2` alone on `itemOpen` now supplies the
+  // entire gap.
+  // `delay-100 duration-[240ms]` (real bug, found live, owner: "when it's
+  // open and gets to the final frame, it jerks at the last moment" --
+  // measured: the box itself (height, via `detailGridOpen`) finished
+  // growing at ~267ms into its own 340ms transition (its own easing curve
+  // visually settles a bit before the transition technically ends), but
+  // this fade was still running until 100+300=400ms -- a ~130ms tail
+  // where the box sat fully still while only the text kept fading in,
+  // the ONE thing still visibly moving in an otherwise-settled card. Was
+  // `duration-300` (400ms finish); now `delay-100 duration-[240ms]`
+  // finishes at exactly 340ms, matching `detailGridOpen`'s own duration
+  // precisely, so the box and the text always finish in the same frame.
+  detailInner:
+    "px-6 pb-4 opacity-0 translate-y-3 transition-[opacity,transform] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none motion-reduce:translate-y-0",
+  detailInnerOpen:
+    "px-6 pb-4 opacity-100 translate-y-0 transition-[opacity,transform] delay-100 duration-[240ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none motion-reduce:delay-0",
+  itemDescription: "text-body-lg leading-7 text-[#838D97]",
+  // Image panel: its own rounded box inside the card (Figma: 730x644, not
+  // full-bleed) -- `730:644` added to MediaPlaceholder's own ratio table.
+  // `hidden xl:block`: desktop-first (owner brief: "mobile I'll refine
+  // separately... image panel on top" instead), so this exact box isn't
+  // reused below `xl` -- OurFactoryDetails.tsx renders a plain stacked
+  // mobile image instead of this crossfade stack.
+  // `aspect-[730/644]` directly on this column (real bug, found live: the
+  // column had no intrinsic sizing of its own, only `xl:flex-1` for width
+  // -- once the 7 stacked children below are correctly `absolute` (see
+  // `imageLayer`'s own comment), an absolutely-positioned child con-
+  // tributes nothing to its parent's height, so without this the whole
+  // column, and the section under it, collapsed. Giving the column itself
+  // the same 730:644 ratio fixes that independent of the children).
+  // No border any more (owner, 2026-09-09: "remove the outline"). An
+  // earlier pass added `border-line-dark` because `tone="dark"` filled
+  // with `bg-ink-2`, the exact same colour as this card
+  // (`surface.darkRaised`) -- invisible without a border. The owner's
+  // follow-up fix is a colour change instead: `imagePlaceholderFill`
+  // below gives the placeholder `bg-ink` (`#121317`, the section's own
+  // background, darker than the `bg-ink-2` card it sits inside) via
+  // `MediaPlaceholder`'s new `placeholderClassName` override -- a real
+  // colour difference is now what makes the box legible, not a hairline.
+  // `rounded-none` (owner, 2026-09-09: "the main container and the image
+  // container should have 0 radius") -- was `rounded-xl`, matching `card`
+  // above.
+  // `h-[620px]` (owner, 2026-09-09: "make the image placeholder height
+  // 620px") -- was `aspect-[730/644]` (Figma's own pixel ratio). An
+  // explicit height takes priority over `aspect-ratio` once both
+  // dimensions are otherwise determined (this column's own width still
+  // comes from `xl:flex-1`), so the two were never meant to combine --
+  // this replaces the ratio outright, it doesn't add to it.
+  imageCol: "relative hidden w-full overflow-hidden rounded-none h-[620px] xl:block xl:flex-1",
+  // `bg-ink` (`#121317`) for the no-image placeholder fill, replacing
+  // `tone="dark"`'s own `bg-ink-2` -- see `imageCol`'s own comment.
+  // `MediaPlaceholder` has no built-in tone for this exact colour, so this
+  // is passed via its `placeholderClassName` override prop rather than
+  // inventing a third `tone` value for what is, so far, a single caller.
+  imagePlaceholderFill: "bg-ink",
+  // Real bug, found live: `imageLayer` used to be passed straight into
+  // `MediaPlaceholder`'s own `className` prop, appending `absolute inset-0`
+  // alongside `MediaPlaceholder`'s own root `position: relative` (from its
+  // `media.shell` recipe) -- both position utilities landed on the exact
+  // same element, and Tailwind's generated stylesheet order (not the class
+  // attribute's source order) silently let `relative` win. All 7 images
+  // rendered in normal document flow instead of stacked, each its own real
+  // 730:644-tall box -- 7x that height, which is exactly where the whole
+  // section's absurd extra height came from. Fix: `imageLayer` is now a
+  // dedicated WRAPPER `<div>` around each `MediaPlaceholder`, never merged
+  // into `MediaPlaceholder`'s own className -- the wrapper owns
+  // `position: absolute` (nothing else claims it), `MediaPlaceholder`
+  // keeps its own untouched `relative`, no collision.
+  //
+  // All 7 stacked in the same box, every one mounted from first render
+  // (owner spec: "preload all 7 detail images so the swap is instant") --
+  // only `opacity` transitions, no slide, no remount, so the active image
+  // is always the one already-decoded image simply becoming visible.
+  // No opacity on the shared base -- `imageLayerActive`/`imageLayerInactive`
+  // below are mutually exclusive, never combined in the same class string
+  // (the same class of bug as the position collision above: two opposite
+  // opacity utilities present at once would again leave the stylesheet's
+  // own generation order to silently decide the winner).
+  imageLayer: "absolute inset-0 transition-opacity duration-[250ms] ease-in-out motion-reduce:transition-none",
+  imageLayerActive: "opacity-100",
+  imageLayerInactive: "opacity-0",
+  mobileImageWrap: "w-full overflow-hidden rounded-none xl:hidden",
 };
 
 /* --- ServicesHero (/services section 1) ------------------------------------ */
