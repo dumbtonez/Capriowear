@@ -56,9 +56,11 @@ const howWeWorkNote: NoteSegment[] = [
 ];
 
 export const services = {
-  // TODO(owner copy): metaTitle/metaDescription are placeholders -- confirm
-  // real SEO copy for this page.
-  metaTitle: "Custom Manufacturing Services",
+  // metaTitle renders as "%s | Capriowear" via the layout title template
+  // (app/layout.tsx). Keyword-form title (activewear + teamwear +
+  // manufacturing services); location + factory-direct sit in the meta
+  // description. Confirmed copy (owner, 2026-09-08), was a placeholder.
+  metaTitle: "Custom Activewear & Teamwear Manufacturing Services",
   metaDescription:
     "OEM, ODM and private label activewear and teamwear manufacturing services, from fabric sourcing to retail-ready packaging, factory-direct from Sialkot, Pakistan.",
 
