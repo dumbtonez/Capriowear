@@ -50,7 +50,7 @@
 // unchanged.
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 
 import { FilterChevronIcon } from "@/components/icons/FilterChevronIcon";
 import { TextReveal } from "@/components/TextReveal";
@@ -73,6 +73,10 @@ type SecondaryTableRow = { key: string; title: string; col2: string; col3: strin
 function SecondaryTable({ headers, rows }: { headers: [string, string, string]; rows: SecondaryTableRow[] }) {
   const [openIndex, setOpenIndex] = useState(0);
   const [h1, h2, h3] = headers;
+  // Unique per component instance (this section can render more than one
+  // SecondaryTable -- weightTiers and the "decoration" block -- so a plain
+  // index-based id would collide between them), stable across re-renders.
+  const baseId = useId();
 
   return (
     <>
@@ -106,6 +110,7 @@ function SecondaryTable({ headers, rows }: { headers: [string, string, string]; 
       <div className={fabricOptions.accordionStack}>
         {rows.map((row, index) => {
           const isOpen = index === openIndex;
+          const panelId = `${baseId}-panel-${index}`;
 
           return (
             <div
@@ -116,12 +121,17 @@ function SecondaryTable({ headers, rows }: { headers: [string, string, string]; 
                 type="button"
                 onClick={() => setOpenIndex(isOpen ? -1 : index)}
                 aria-expanded={isOpen}
+                aria-controls={panelId}
                 className={fabricOptions.accordionHeader}
               >
                 <span className={isOpen ? undefined : fabricOptions.accordionCollapsedTitle}>{row.title}</span>
                 <FilterChevronIcon className={cx(fabricOptions.accordionChevron, isOpen && fabricOptions.accordionChevronOpen)} />
               </button>
-              <div className={isOpen ? fabricOptions.accordionDetailGridOpen : fabricOptions.accordionDetailGrid}>
+              <div
+                id={panelId}
+                inert={!isOpen}
+                className={isOpen ? fabricOptions.accordionDetailGridOpen : fabricOptions.accordionDetailGrid}
+              >
                 <div className={fabricOptions.accordionDetailClip}>
                   <div className={fabricOptions.accordionDetail}>
                     <div className={fabricOptions.accordionField}>
@@ -183,6 +193,7 @@ export function FabricOptions({
 }: FabricOptionsProps) {
   const [firstRow, ...restRows] = options;
   const [openIndex, setOpenIndex] = useState(0);
+  const baseId = useId();
 
   return (
     <section className={fabricOptions.section}>
@@ -252,10 +263,25 @@ export function FabricOptions({
           colour classes toggle -- so the collapse/expand transition has a
           real starting frame to animate from/to, and the border's constant
           width keeps the title from shifting position on toggle (see the
-          recipe's own comment in components/ui/styles.ts). */}
+          recipe's own comment in components/ui/styles.ts).
+
+          Accessibility fix, 2026-09-08: the toggle button now points
+          `aria-controls` at its own panel's real `id` (paired with the
+          existing `aria-expanded`), and a collapsed panel gets `inert`
+          instead of `hidden`/`display:none` -- `inert` removes it from the
+          accessibility tree AND the tab order (a screen reader or keyboard
+          user could otherwise reach a collapsed panel's focusable content,
+          or read text that isn't visibly open) while leaving its `display`
+          alone, so the `accordionDetailGrid`/`accordionDetailGridOpen`
+          grid-rows collapse animation still plays and the content stays in
+          the DOM for crawlers. `ServicesHowWeWork.tsx`'s own mobile
+          accordion copies this same recipe's classes into its own JSX (not
+          a shared component), so it got the identical `aria-controls`/
+          `inert` treatment applied directly there too -- see that file. */}
       <div className={fabricOptions.accordionStack}>
         {options.map((option, index) => {
           const isOpen = index === openIndex;
+          const panelId = `${baseId}-panel-${index}`;
 
           return (
             <div
@@ -266,12 +292,17 @@ export function FabricOptions({
                 type="button"
                 onClick={() => setOpenIndex(isOpen ? -1 : index)}
                 aria-expanded={isOpen}
+                aria-controls={panelId}
                 className={fabricOptions.accordionHeader}
               >
                 <span className={isOpen ? undefined : fabricOptions.accordionCollapsedTitle}>{option.fabric}</span>
                 <FilterChevronIcon className={cx(fabricOptions.accordionChevron, isOpen && fabricOptions.accordionChevronOpen)} />
               </button>
-              <div className={isOpen ? fabricOptions.accordionDetailGridOpen : fabricOptions.accordionDetailGrid}>
+              <div
+                id={panelId}
+                inert={!isOpen}
+                className={isOpen ? fabricOptions.accordionDetailGridOpen : fabricOptions.accordionDetailGrid}
+              >
                 <div className={fabricOptions.accordionDetailClip}>
                   <div className={fabricOptions.accordionDetail}>
                     <div className={fabricOptions.accordionField}>

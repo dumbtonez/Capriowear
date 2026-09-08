@@ -55,7 +55,7 @@
 // Desktop-only for now, per the owner's own brief -- see `servicesHowWeWork`
 // in components/ui/styles.ts for the exact spacing notes and the
 // responsive-safe (not confirmed-mobile) caveat on the cards grid.
-import { useState } from "react";
+import { useId, useState } from "react";
 
 import { FilterChevronIcon } from "@/components/icons/FilterChevronIcon";
 import { AsteriskIcon } from "@/components/icons/AsteriskIcon";
@@ -73,6 +73,7 @@ export function ServicesHowWeWork({ content }: ServicesHowWeWorkProps) {
   // Index 0 open by default (owner: "first one open and other two
   // collapsed") -- same as `FabricOptions`' own accordion default.
   const [openIndex, setOpenIndex] = useState(0);
+  const baseId = useId();
 
   return (
     <section className={servicesHowWeWork.section}>
@@ -85,6 +86,7 @@ export function ServicesHowWeWork({ content }: ServicesHowWeWorkProps) {
         <div className={servicesHowWeWork.pathsGrid}>
           {content.paths.map((path, index) => {
             const isOpen = index === openIndex;
+            const panelId = `${baseId}-panel-${index}`;
 
             return (
               <article key={path.title} className={servicesHowWeWork.pathCard}>
@@ -118,7 +120,14 @@ export function ServicesHowWeWork({ content }: ServicesHowWeWorkProps) {
                 </div>
 
                 {/* Mobile/tablet (below xl): collapsible, FabricOptions-styled,
-                    no image. */}
+                    no image. Accessibility fix, 2026-09-08: same treatment
+                    as FabricOptions' own mobile accordion (see that file's
+                    header comment on its accordion) -- `aria-controls` on
+                    the toggle points at the panel's real `id`, and the
+                    collapsed panel is `inert` rather than hidden, so it
+                    drops out of the accessibility tree and tab order without
+                    touching the grid-rows collapse animation or removing it
+                    from the DOM. */}
                 <div
                   className={cx(
                     servicesHowWeWork.pathCardMobile,
@@ -130,6 +139,7 @@ export function ServicesHowWeWork({ content }: ServicesHowWeWorkProps) {
                     type="button"
                     onClick={() => setOpenIndex(isOpen ? -1 : index)}
                     aria-expanded={isOpen}
+                    aria-controls={panelId}
                     className={fabricOptions.accordionHeader}
                   >
                     <div className={servicesHowWeWork.pathTitleGroup}>
@@ -144,7 +154,11 @@ export function ServicesHowWeWork({ content }: ServicesHowWeWorkProps) {
                       className={cx(fabricOptions.accordionChevron, isOpen && fabricOptions.accordionChevronOpen)}
                     />
                   </button>
-                  <div className={isOpen ? fabricOptions.accordionDetailGridOpen : fabricOptions.accordionDetailGrid}>
+                  <div
+                    id={panelId}
+                    inert={!isOpen}
+                    className={isOpen ? fabricOptions.accordionDetailGridOpen : fabricOptions.accordionDetailGrid}
+                  >
                     <div className={fabricOptions.accordionDetailClip}>
                       <div className={fabricOptions.accordionDetail}>
                         <div className={fabricOptions.accordionField}>
