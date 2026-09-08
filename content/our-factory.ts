@@ -24,5 +24,13 @@ export const ourFactory = {
     h1: "A cut-and-sew factory, not a middleman, your brand made under one roof",
     ctaPrimary: { label: "Request a Sample", href: "/request-a-sample" },
     ctaSecondary: { label: "Download Catalog", href: "/catalog" },
+    // Layer 2, Figma node 854:1402 ("Youtube Video") -- same video placeholder
+    // block as the homepage Hero's own Layer 2 (home.hero.media), continuing
+    // the same bg-ink box straight from the banner above (get_metadata: this
+    // frame starts at y=647, exactly where the Banner frame ends at 69+578).
+    // Label follows the same "descriptive alt text even for placeholders"
+    // house rule home.hero.media.label already sets, specific to this page's
+    // own subject (the factory itself, not a generic hero video).
+    media: { type: "video" as const, label: "Factory tour video, Capriowear's Sialkot cut-and-sew facility" },
   },
 };

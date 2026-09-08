@@ -1440,6 +1440,18 @@ export const hero = {
   tickerMobileItem: "text-[1.875rem] font-normal leading-[1.2] text-[#838D97]",
 };
 
+/* --- OurFactoryHero (/our-factory sections 1-2) ----------------------------- */
+// Figma desktop node 854:1402 ("Youtube Video"): unlike the homepage Hero,
+// this video layer is the last thing in the dark box (no ticker follows it),
+// and its own Figma frame carries an explicit pb-[80px] the homepage's
+// `hero.videoWrap` doesn't need (Hero's own box keeps going into the ticker
+// layer instead). Composes `hero.videoWrap` verbatim plus that bottom inset,
+// reusing the same pb-12/pb-20 pair `hero.bannerInner` already uses for an
+// identical top/bottom mobile-vs-desktop split, rather than a new value.
+export const ourFactoryHero = {
+  videoWrap: `${hero.videoWrap} pb-12 xl:pb-20`,
+};
+
 /* --- ServicesHero (/services section 1) ------------------------------------ */
 // Figma desktop node 729:139 (owner brief, 2026-09-07: "same design that we
 // have for home, same marquee at the bottom"). A simpler variant of the
