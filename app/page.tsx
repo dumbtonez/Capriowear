@@ -119,7 +119,7 @@ export default function Home() {
           sits, giving the transition a deliberate "the page above is
           lifting away" depth cue regardless of scroll position, instead of
           relying on a colour boundary that was never actually visible. */}
-      <RevealMain className="relative z-10 bg-paper shadow-[0_16px_24px_-12px_rgba(14,14,18,0.18)]">
+      <RevealMain className="relative z-10 bg-paper shadow-[0_16px_24px_-12px_rgba(18,19,23,0.18)]">
         <Hero hero={home.hero} customOfferings={home.customOfferings} />
         <ClientLogos brandLogos={home.brandLogos} />
         <TrustSignals items={home.trustStrip} />

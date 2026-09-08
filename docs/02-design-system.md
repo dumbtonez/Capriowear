@@ -35,8 +35,8 @@ import { button } from "./ui/styles";
 
 | Token | Value | Use |
 |---|---|---|
-| `ink` | `#0E0E12` | Near-black. Dark sections and primary text |
-| `ink-2` | `#17171D` | Secondary dark surface, e.g. a menu panel on an ink band |
+| `ink` | `#121317` | Near-black. Dark sections and primary text |
+| `ink-2` | `#17191E` | Secondary dark surface, e.g. a menu panel or a container (media placeholder, exhibition card, etc.) on an ink band |
 | `paper` | `#FFFFFF` | Default page background |
 | `paper-2` | `#F5F4F1` | Alternating light section |
 | `line` | `rgba(0,0,0,0.10)` | Hairline border on light |

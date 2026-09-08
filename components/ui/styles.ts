@@ -3684,10 +3684,11 @@ export const footer = {
   desktopContactGroup: "flex flex-col items-start gap-[5px]",
   // #17191e is Figma's own confirmed literal for this line, updated
   // 2026-08-27 from the original build's #3c3c43 (a genuine colour change,
-  // not a correction) -- distinct from the project's --color-ink token
-  // (#0e0e12), kept as-is per the "typography/colour values copied exactly
-  // where Figma gives a real one" rule, not swapped for the nearest
-  // existing token.
+  // not a correction) -- kept as-is per the "typography/colour values
+  // copied exactly where Figma gives a real one" rule, not swapped for a
+  // token, even now that --color-ink-2 was updated to this same hex
+  // 2026-09-08 (a coincidence of the two values matching, not a reason to
+  // couple this text colour to a background surface token going forward).
   // 22px (owner request, 2026-08-30: "make the fint 22px get in touch") --
   // was 30px, matching the email line below it; the "Get in touch" label
   // is now deliberately smaller than its own email.
@@ -5404,7 +5405,7 @@ export const productCtas = {
   // the shadow subtle, looks hard") -- was Figma's own literal 3-layer
   // upward shadow at up to 8% opacity with tight blur, which read as a
   // hard edge rather than a soft lift; now a single, wider, lower-opacity
-  // pass using the same ink colour (`#0e0e12`, `--color-ink`) and general
+  // pass using the same ink colour (`#121317`, `--color-ink`) and general
   // softness `shadow-card` already uses sitewide, just cast upward (a
   // shadow above a bar pinned to the BOTTOM of the screen naturally casts
   // up, not down, so `shadow-card` itself doesn't apply directly) -- still
@@ -5431,7 +5432,7 @@ export const productCtas = {
   // xl:hidden -> md:hidden -> xl:hidden (2026-09-04, same review; reverted
   // 2026-09-07) -- pairs with desktopRow's own threshold above.
   mobileBar:
-    "sticky inset-x-0 bottom-0 z-10 flex max-h-[60px] w-full items-center justify-center overflow-hidden backdrop-blur-sm px-5 py-2 shadow-[0px_-4px_16px_rgba(14,14,18,0.06)] transition-[max-height,opacity] duration-300 ease-out xl:hidden",
+    "sticky inset-x-0 bottom-0 z-10 flex max-h-[60px] w-full items-center justify-center overflow-hidden backdrop-blur-sm px-5 py-2 shadow-[0px_-4px_16px_rgba(18,19,23,0.06)] transition-[max-height,opacity] duration-300 ease-out xl:hidden",
   // Owner spec, 2026-09-02: "when it gets to the cta section, remove the
   // fixed cta automatically" -- collapses `max-height` to 0 (not `hidden`/
   // `display:none`, so it still animates) the instant the marker fires.

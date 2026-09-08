@@ -20,8 +20,8 @@
   --font-sans: var(--font-figtree), system-ui, -apple-system, sans-serif;
 
   /* --- Colour ---------------------------------------------------------- */
-  --color-ink: #0e0e12; /* near-black: dark sections + primary text */
-  --color-ink-2: #17171d; /* secondary dark surface */
+  --color-ink: #121317; /* near-black: dark sections + primary text (owner, 2026-09-08) */
+  --color-ink-2: #17191e; /* secondary dark surface, e.g. a container on top of an ink section (owner, 2026-09-08) */
   --color-paper: #ffffff; /* default page background */
   --color-paper-2: #f5f4f1; /* alternating light section */
   --color-line: rgba(0, 0, 0, 0.1); /* hairline border on light */
@@ -147,7 +147,7 @@
 
   /* --- Shadows ---------------------------------------------------------- */
   /* Minimal and premium. Card lift on hover only, nothing heavier. */
-  --shadow-card: 0 1px 2px rgba(14, 14, 18, 0.04), 0 8px 24px rgba(14, 14, 18, 0.08);
+  --shadow-card: 0 1px 2px rgba(18, 19, 23, 0.04), 0 8px 24px rgba(18, 19, 23, 0.08);
 
   /* --- Container -------------------------------------------------------- */
   --container-page: 1440px; /* content caps here; backgrounds go full-bleed */

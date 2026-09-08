@@ -18,13 +18,13 @@ export type ColorToken = {
 export const colorTokens: ColorToken[] = [
   {
     name: "ink",
-    value: "#0E0E12",
+    value: "#121317",
     use: "Near-black. Dark sections and primary text.",
     utility: "bg-ink / text-ink",
   },
   {
     name: "ink-2",
-    value: "#17171D",
+    value: "#17191E",
     use: "Secondary dark surface, cards inside dark sections.",
     utility: "bg-ink-2",
   },

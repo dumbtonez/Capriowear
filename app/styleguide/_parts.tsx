@@ -78,7 +78,7 @@ export function Slot({
         className={`flex flex-1 items-center justify-center bg-paper-2 px-4 py-8 ${minHeight}`}
         style={{
           backgroundImage:
-            "repeating-linear-gradient(135deg, transparent 0 10px, rgba(14,14,18,0.035) 10px 11px)",
+            "repeating-linear-gradient(135deg, transparent 0 10px, rgba(18,19,23,0.035) 10px 11px)",
         }}
       >
         <span className="text-button-sm uppercase text-muted">{name} slot</span>
