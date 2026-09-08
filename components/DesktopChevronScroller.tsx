@@ -117,6 +117,39 @@ export function useDesktopChevronScroller(cardPitch: number) {
     if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
   }, []);
 
+  // Owner, 2026-09-08: "when you scroll over the images and scroll down, it
+  // slides the images a little, that should not be the behavior, user can
+  // only scroll by clicking as it was before." A plain vertical trackpad
+  // gesture always carries a little diagonal noise, and on an x-scrollable
+  // track that noise's horizontal component natively scrolls it -- with
+  // `snap-x snap-mandatory` on top, even that tiny nudge is enough to snap
+  // the whole row to the next/previous card once the gesture ends.
+  //
+  // First fix attempted here was a JS `wheel` listener: intercept any
+  // vertical-dominant gesture, `preventDefault()`, and replay it onto the
+  // page manually. Abandoned after two passes (one using `scrollBy`, a
+  // second correcting it to a direct `scrollTop` write once `scrollBy`'s
+  // `behavior: "auto"` turned out to still defer to `<html>`'s sitewide
+  // `scroll-behavior: smooth`, per spec) -- even the corrected version
+  // still read as "stuck", confirmed live: manually replaying a wheel
+  // gesture in JS can approximate native scrolling but can't reproduce a
+  // trackpad's real momentum/deceleration curve, so any JS-driven
+  // replacement for the browser's own scroll handling is inherently a
+  // worse, laggier version of it, not a neutral stand-in.
+  //
+  // Real fix: don't intercept the gesture at all -- remove the track's own
+  // ability to respond to it. `insideFactory.desktopRow`/`howItWorks.
+  // desktopRow`/`exhibitions.desktopRow`/`productCustomizeSteps.desktopRow`
+  // switched from `overflow-x-auto` to `overflow-x-hidden` (see each
+  // token's own comment in styles.ts): an `overflow: hidden` element is
+  // still a real scroll container (CSS Scroll Snap and a plain `scrollLeft`/
+  // `scrollBy` write both still work on it, which is exactly what
+  // `handleClick` below already uses), it just no longer responds to wheel,
+  // trackpad, or click-drag input -- so the horizontal noise this section
+  // never wanted has nothing left to act on, and the page's own vertical
+  // scroll passes straight through untouched, at full native speed, with
+  // zero JS in the loop. "user can only scroll by clicking" is now
+  // literally true, not just intended.
   return {
     wrapRef,
     trackRef,

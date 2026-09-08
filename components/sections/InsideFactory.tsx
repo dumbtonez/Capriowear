@@ -38,11 +38,31 @@ import { DesktopChevron, useDesktopChevronScroller } from "@/components/DesktopC
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextReveal } from "@/components/TextReveal";
+import { cx } from "@/components/ui/cx";
 import { insideFactory } from "@/components/ui/styles";
 import type { home } from "@/content/home";
 
 export type InsideFactoryProps = {
   content: typeof home.insideFactory;
+  /**
+   * Defaults to "dark" -- the homepage's own confirmed design (bg-ink,
+   * paper text/cards). "light" is /our-factory's reuse (owner, 2026-09-08:
+   * "the inside the factory section we use on homepage ... on white
+   * background") -- bg-paper/text-ink, placeholders switch to their own
+   * light tone.
+   */
+  tone?: "light" | "dark";
+  /**
+   * Defaults to true (the homepage's own eyebrow + H2). false drops both
+   * entirely (owner, 2026-09-08, same /our-factory brief: "not eyebrow and
+   * title") -- the gallery's own top inset (`desktopGalleryWrap`'s
+   * `pt-[72px]`) still applies with no heading above it, which happens to
+   * land on this site's own standard 72px section-to-section gap, so no
+   * separate no-heading token is needed there. Mobile's heading-to-gallery
+   * `mt-12` is skipped instead, since `mobileSection`'s own `pt-12` already
+   * supplies the top inset once there's no heading to gap from.
+   */
+  showHeading?: boolean;
 };
 
 const CARD_WIDTH = 300;
@@ -55,7 +75,7 @@ function lerp(from: number, to: number, t: number) {
 
 // Desktop gallery card pitch -- must match insideFactory.desktopCard's width
 // and insideFactory.desktopRow's gap-12, xl: (1280px+) only.
-const DESKTOP_CARD_WIDTH = 950;
+const DESKTOP_CARD_WIDTH = 1200;
 const DESKTOP_CARD_GAP = 48;
 // Tablet-only (768-1279px) pitch -- owner, 2026-09-03: "Inside the factory
 // should also use desktop version" (this gallery previously only showed at
@@ -88,7 +108,13 @@ const DESKTOP_CARD_GAP = 48;
 const TABLET_CARD_WIDTH = 469;
 const TABLET_CARD_GAP = 24;
 
-function DesktopGallery({ shots }: { shots: typeof home.insideFactory.media }) {
+function DesktopGallery({
+  shots,
+  tone,
+}: {
+  shots: typeof home.insideFactory.media;
+  tone: "light" | "dark";
+}) {
   // Same `matchMedia` pattern ProductGrid.tsx already uses for its own
   // breakpoint-dependent page size -- the chevron's click-to-scroll amount
   // (`cardPitch`) must match whichever card size is actually rendered at
@@ -121,11 +147,15 @@ function DesktopGallery({ shots }: { shots: typeof home.insideFactory.media }) {
           <div key={shot.label} className={insideFactory.desktopCard}>
             <MediaPlaceholder
               label={shot.label}
-              ratio="19:11"
+              ratio="15:8"
               radius="none"
-              tone="dark"
+              tone={tone}
+              showLabel={false}
               className={insideFactory.desktopCardMedia}
             />
+            <p className={tone === "light" ? insideFactory.desktopCardLabelLight : insideFactory.desktopCardLabel}>
+              {shot.label}
+            </p>
           </div>
         ))}
       </div>
@@ -134,7 +164,13 @@ function DesktopGallery({ shots }: { shots: typeof home.insideFactory.media }) {
   );
 }
 
-function MobileCarousel({ shots }: { shots: typeof home.insideFactory.media }) {
+function MobileCarousel({
+  shots,
+  tone,
+}: {
+  shots: typeof home.insideFactory.media;
+  tone: "light" | "dark";
+}) {
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -182,33 +218,35 @@ function MobileCarousel({ shots }: { shots: typeof home.insideFactory.media }) {
           className={insideFactory.mobileCard}
           style={{ height: index === 0 ? ACTIVE_HEIGHT : INACTIVE_HEIGHT }}
         >
-          <MediaPlaceholder label={shot.label} radius="none" tone="dark" className="h-full" />
+          <MediaPlaceholder label={shot.label} radius="none" tone={tone} className="h-full" />
         </div>
       ))}
     </div>
   );
 }
 
-export function InsideFactory({ content }: InsideFactoryProps) {
+export function InsideFactory({ content, tone = "dark", showHeading = true }: InsideFactoryProps) {
   return (
     <section>
       {/* Desktop: chevron-driven carousel through all 5 shots. The gallery
           is a full-bleed sibling of the (container-p-padded) heading, not
           nested inside it -- Figma's real gallery spans the frame's full
           width, unlike the heading. */}
-      <div className={insideFactory.desktopOuter}>
-        <div className={insideFactory.desktopSection}>
-          <SectionHeading
-            eyebrow={<TextReveal text={content.eyebrow} />}
-            heading={<TextReveal as="span" text={content.h2} />}
-            eyebrowTone="dark"
-            eyebrowSize={insideFactory.desktopEyebrowSize}
-            headingClassName={insideFactory.desktopHeadingNarrow}
-            align="center"
-          />
-        </div>
+      <div className={tone === "light" ? insideFactory.desktopOuterLight : insideFactory.desktopOuter}>
+        {showHeading ? (
+          <div className={insideFactory.desktopSection}>
+            <SectionHeading
+              eyebrow={<TextReveal text={content.eyebrow} />}
+              heading={<TextReveal as="span" text={content.h2} />}
+              eyebrowTone={tone}
+              eyebrowSize={insideFactory.desktopEyebrowSize}
+              headingClassName={insideFactory.desktopHeadingNarrow}
+              align="center"
+            />
+          </div>
+        ) : null}
         <div className={insideFactory.desktopGalleryWrap}>
-          <DesktopGallery shots={content.media} />
+          <DesktopGallery shots={content.media} tone={tone} />
           <div className={insideFactory.desktopCtaWrap}>
             <Button href={content.cta.href}>{content.cta.label}</Button>
           </div>
@@ -216,18 +254,20 @@ export function InsideFactory({ content }: InsideFactoryProps) {
       </div>
 
       {/* Mobile: finger-swipeable carousel, no auto-rotation */}
-      <div className={insideFactory.mobileSection}>
-        <div className={insideFactory.mobileHeadingWrap}>
-          <SectionHeading
-            eyebrow={<TextReveal text={content.eyebrow} />}
-            heading={<TextReveal as="span" text={content.h2} />}
-            eyebrowTone="dark"
-            eyebrowSize={insideFactory.mobileEyebrowSize}
-            align="center"
-          />
-        </div>
-        <div className={insideFactory.mobileGalleryGap}>
-          <MobileCarousel shots={content.media} />
+      <div className={cx(tone === "light" ? insideFactory.mobileSectionLight : insideFactory.mobileSection)}>
+        {showHeading ? (
+          <div className={insideFactory.mobileHeadingWrap}>
+            <SectionHeading
+              eyebrow={<TextReveal text={content.eyebrow} />}
+              heading={<TextReveal as="span" text={content.h2} />}
+              eyebrowTone={tone}
+              eyebrowSize={insideFactory.mobileEyebrowSize}
+              align="center"
+            />
+          </div>
+        ) : null}
+        <div className={showHeading ? insideFactory.mobileGalleryGap : undefined}>
+          <MobileCarousel shots={content.media} tone={tone} />
         </div>
         <div className={insideFactory.mobileCtaWrap}>
           <Button href={content.cta.href}>{content.cta.label}</Button>

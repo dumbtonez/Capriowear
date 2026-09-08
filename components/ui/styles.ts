@@ -297,6 +297,10 @@ export const media = {
     // narrow static row (which had its own "39:110" side-tile ratio,
     // removed here once nothing referenced it any more).
     "19:11": "aspect-[19/11]",
+    // Inside the Factory's desktop gallery card, bumped to 1200x640 (owner,
+    // 2026-09-08: "increase the size to 1200px width by 640") -- 1200/640
+    // reduces to 15/8, its own exact fraction, not a rounding of "19:11".
+    "15:8": "aspect-[15/8]",
     // Exhibitions' desktop gallery card, 469x320 (node 455:2381) -- not close
     // to any ratio above, kept as its own exact fraction rather than rounded.
     "469:320": "aspect-[469/320]",
@@ -1615,11 +1619,18 @@ export const servicesHero = {
   // fixed `leading-[1.2]`. Explicitly called out by the owner as a
   // "see how it looks" experiment, not a confirmed design -- may get
   // reverted or adjusted once seen live.
-  tickerMobile: "container-p flex flex-col items-center gap-8 pt-12 pb-12 text-center md:hidden",
+  // pb-[60px] (owner, 2026-09-08: "12px more space from the bottom of the
+  // content ... on mobile only" -- was pb-12/48px; desktop Marquee's own
+  // spacing is untouched).
+  tickerMobile: "container-p flex flex-col items-center gap-8 pt-12 pb-[60px] text-center md:hidden",
   tickerMobileLabel: "text-[1.5rem] font-medium leading-normal",
-  // gap-5 (20px, owner, 2026-09-07: "make it 20px" -- was gap-3/12px).
-  tickerMobileList: "flex flex-col items-center gap-5",
-  tickerMobileItem: "text-[1.5rem] font-normal leading-normal text-[#838D97]",
+  // 28px (owner, 2026-09-08: "16px more" then "reduce 8px" -- net +8px on
+  // the gap-5/20px, 2026-09-07 baseline).
+  tickerMobileList: "flex flex-col items-center gap-7",
+  // Owner, 2026-09-08: item list ("Design & Color" and the remaining
+  // paired items) sized up to 30px/34px -- label above it stays 24px/auto,
+  // this is the list only.
+  tickerMobileItem: "text-[1.875rem] font-normal leading-[34px] text-[#838D97]",
 };
 
 /* --- ServicesIntro (/services page, section 2) ---------------------------- */
@@ -2561,6 +2572,13 @@ export const insideFactory = {
   // factory should also use desktop version") -- same split already
   // applied to Hero's ticker and Certified & Compliant's desktop row.
   desktopOuter: "hidden bg-ink text-paper md:block",
+  // /our-factory's own reuse (owner, 2026-09-08: "same section we use on
+  // homepage, it will be on white background, not eyebrow and title") --
+  // `tone="light"` on InsideFactory.tsx swaps to this instead of the
+  // homepage's bg-ink/text-paper pairing above. No separate no-heading
+  // variant needed: `showHeading={false}` just skips rendering the heading
+  // block entirely (see InsideFactory.tsx's own prop comments).
+  desktopOuterLight: "hidden bg-paper text-ink md:block",
   // Heading only -- container-p's own 80px side inset. Provisional 120px
   // top, same caveat as What We Make/Certified & Compliant: this frame's
   // own top edge reads 60px, the same unreliable frame-crop pattern that
@@ -2615,13 +2633,40 @@ export const insideFactory = {
   // padding's negative-value clamping bug since there's no centering math
   // to go negative in the first place. `md:gap-6` (24px) matches
   // `TABLET_CARD_GAP`.
+  // xl: centering padding recalculated to half of the new 1200px card
+  // width (owner, 2026-09-08: card bumped to 1200x640, see `desktopCard`'s
+  // own comment) -- was `calc(50%-475px)` (half of the old 950px card).
+  // `overflow-x-hidden`, not `-auto` (owner, 2026-09-08: "user can only
+  // scroll by clicking" -- see the header comment on `useDesktopChevronScroller`
+  // in DesktopChevronScroller.tsx for the full history/reasoning). Still a
+  // real scroll container -- `handleClick`'s own `scrollBy` keeps working --
+  // it just no longer responds to wheel/trackpad/drag input, only to this
+  // component's own JS-driven scroll calls.
+  // `snap-x`/`snap-mandatory` (and the `scroll-pl`/`scroll-pr` padding that
+  // only existed to keep its snap-point maths correct) dropped in the same
+  // pass (owner, 2026-09-08: "still requires 2 times scroll to go up or
+  // down, further make it smooth") -- CSS scroll-snap on an `overflow-
+  // hidden` container is still a real snap container per spec, and in
+  // practice (confirmed live) that combination makes some browsers treat
+  // the very first wheel tick over it as a snap-settling attempt rather
+  // than immediately chaining the scroll up to the page, reading as an
+  // extra "dead" scroll before the page actually moves. Snapping only ever
+  // mattered for wheel/drag-driven scrolling landing exactly on a card
+  // boundary -- now that the ONLY way to move this track is `handleClick`'s
+  // own exact `cardPitch`-sized `scrollBy` jump, there's no free-scroll
+  // position left that snapping would ever need to correct.
   desktopRow:
-    "no-scrollbar flex w-full snap-x snap-mandatory items-center gap-6 overflow-x-auto scroll-smooth px-8 xl:gap-12 xl:px-[calc(50%-475px)] xl:scroll-pl-[calc(50%-475px)] xl:scroll-pr-[calc(50%-475px)]",
+    "no-scrollbar flex w-full items-center gap-6 overflow-x-hidden scroll-smooth px-8 xl:gap-12 xl:px-[calc(50%-600px)]",
   // 469px (owner, 2026-09-03: "i like the exhibition image size and it
   // has gap from the left, use the same for factory") -- matches
   // `exhibitions.desktopCard`'s own confirmed `md:` width exactly, after
   // going 600 ("too wide") -> 520 -> 560 first.
-  desktopCard: "w-[469px] shrink-0 snap-start xl:w-[950px] xl:snap-center",
+  // xl: bumped 950 -> 1200px (owner, 2026-09-08: "increase the size to
+  // 1200px width by 640") -- must match `DESKTOP_CARD_WIDTH` in
+  // InsideFactory.tsx and `desktopRow`'s own centering calc above.
+  // `snap-start`/`xl:snap-center` dropped along with `desktopRow`'s own
+  // `snap-x` above -- meaningless without a snap container parent.
+  desktopCard: "w-[469px] shrink-0 xl:w-[1200px]",
   // Owner, 2026-09-03, same review: "Inside the factory image container
   // size and behavior still look different than the exhibition container
   // ... make the factory the same as exhibition" -- width/gap/left-inset
@@ -2639,7 +2684,20 @@ export const insideFactory = {
   // tall instead of the correct 550px (950 / (469/320) instead of
   // 950 / (19/11)) until `xl:aspect-[19/11]` was added back explicitly to
   // restore this section's own real, Figma-confirmed desktop ratio.
-  desktopCardMedia: "md:aspect-[469/320] xl:aspect-[19/11]",
+  // xl: ratio bumped from "19:11" to the new "15:8" (1200x640, owner,
+  // 2026-09-08) -- see that ratio's own comment in `media.ratio`.
+  desktopCardMedia: "md:aspect-[469/320] xl:aspect-[15/8]",
+  // Caption under each image (owner, 2026-09-08: "under each image there
+  // will be text label ... 24 by 28 line height ... space from image to
+  // title is 32px", then "text will be left align to image, make it
+  // regular weight") -- a new, separate element below the media box, not
+  // the placeholder's own internal centred label (`media.label`), which
+  // stays for use elsewhere. `mt-8` is the 32px gap; left-aligned to the
+  // image (this card's own text-left default), font-normal not font-medium.
+  desktopCardLabel: "mt-8 text-[1.5rem] font-normal leading-[28px] text-paper",
+  // /our-factory's `tone="light"` reuse: same size/weight/gap, `text-ink`
+  // instead of `text-paper` now that the card sits on a white section.
+  desktopCardLabelLight: "mt-8 text-[1.5rem] font-normal leading-[28px] text-ink",
   // The floating chevron is the shared `chevronScroller` recipe -- see the
   // note on `howItWorks` above.
   // CTA to Our Factory, added 2026-08-26 (owner request), sitting under the
@@ -2657,6 +2715,9 @@ export const insideFactory = {
   // page-background seam between two black boxes that should read as one
   // continuous band.
   mobileSection: "bg-ink text-paper pt-12 pb-12 md:hidden",
+  // /our-factory's `tone="light"` reuse -- same 48px/48px top/bottom inset,
+  // bg-paper/text-ink instead of the homepage's bg-ink/text-paper.
+  mobileSectionLight: "bg-paper text-ink pt-12 pb-12 md:hidden",
   // container-p only on the heading, not the gallery below -- the gallery
   // is full-bleed edge to edge (confirmed via get_metadata: no side inset
   // at all), unlike every other section's mobile content. Eyebrow is now
@@ -2899,7 +2960,15 @@ export const finalCta = {
   // subline used before the 2026-08-28 bump to 24px, and the same pairing
   // this size already uses everywhere else on the site.
   mobileSubline: "text-[1.125rem] font-normal leading-6 text-[#838D97]",
-  mobileButton: "w-[320px] max-w-full justify-center",
+  // Owner, 2026-09-08: "on large mobile viewport [button] does not scale
+  // edge to edge, on 360 it is fine but on large view it's not scaling" --
+  // the fixed `w-[320px]` matched a 360px viewport (container-p's own side
+  // padding leaves ~320px of content) but stayed pinned to that width on
+  // any wider mobile viewport instead of growing with the container. `w-full`
+  // lets it fill `mobileCtaBlock`/`mobileButtonRow`'s own container-p
+  // width at every mobile size, same pattern already used elsewhere on the
+  // site (e.g. `servicesHero.ctaPrimary`'s own `w-full`).
+  mobileButton: "w-full justify-center",
 };
 
 /* --- OurServices (homepage section 11) -------------------------------- */
@@ -3140,15 +3209,25 @@ export const howItWorks = {
   // Exhibitions' own desktopRow: a flat 80px was correct only at `xl:`
   // (matching container-p's own xl: inset), below that it needs `md:`'s
   // own smaller inset (32px) instead of reusing the desktop number.
-  desktopRow:
-    "no-scrollbar flex w-full snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-8 scroll-pl-8 scroll-pr-8 xl:px-[80px] xl:scroll-pl-[80px] xl:scroll-pr-[80px]",
+  // `overflow-x-hidden`, not `-auto` (owner, 2026-09-08: "user can only
+  // scroll by clicking" -- see `useDesktopChevronScroller`'s own header
+  // comment in DesktopChevronScroller.tsx for the full reasoning).
+  // `snap-x`/`snap-mandatory`/`scroll-pl`/`scroll-pr` dropped in the same
+  // pass (owner, 2026-09-08: "still requires 2 times scroll to go up or
+  // down, further make it smooth") -- see `insideFactory.desktopRow`'s own
+  // comment for the full reasoning (CSS scroll-snap on an `overflow-hidden`
+  // container still eats the first wheel tick in some browsers instead of
+  // chaining it to the page; snapping is meaningless now that this track
+  // only ever moves via `handleClick`'s own exact `cardPitch` jump).
+  desktopRow: "no-scrollbar flex w-full gap-6 overflow-x-hidden scroll-smooth px-8 xl:px-[80px]",
   // Widened from the Figma-confirmed 335px to match Exhibitions' own
   // desktop card width exactly (owner call, 2026-08-27: both sections'
   // media containers, and the space between them, should read as the same
   // size) -- a deliberate departure from the literal Figma frame's own
   // number, not a correction to it. Card gap (24px, `desktopRow`'s
   // `gap-6`) already matched Exhibitions before this change.
-  desktopCard: "w-[469px] shrink-0 snap-start",
+  // `snap-start` dropped along with `desktopRow`'s own `snap-x` above.
+  desktopCard: "w-[469px] shrink-0",
   // 469:320 desktop -- Exhibitions' own confirmed ratio, matched here for
   // the same reason as the width above (was 67:44/335x220). Mobile stays
   // 7:5 (280x200): mobile cards go through the shared CardCarousel at its
@@ -3220,9 +3299,15 @@ export const exhibitions = {
   // `container-p`'s own `md:` inset (32px) instead of `xl:`'s 80px, which
   // this row's own fixed padding had previously assumed unconditionally.
   desktopScrollerWrap: "relative w-full cursor-none overflow-hidden",
-  desktopRow:
-    "no-scrollbar flex w-full snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-8 scroll-pl-8 scroll-pr-8 xl:px-[80px] xl:scroll-pl-[80px] xl:scroll-pr-[80px]",
-  desktopCard: "w-[469px] shrink-0 snap-start",
+  // `overflow-x-hidden`, not `-auto` (owner, 2026-09-08: "user can only
+  // scroll by clicking" -- see `useDesktopChevronScroller`'s own header
+  // comment in DesktopChevronScroller.tsx for the full reasoning).
+  // `snap-x`/`snap-mandatory`/`scroll-pl`/`scroll-pr` dropped in the same
+  // pass (owner, 2026-09-08: "still requires 2 times scroll to go up or
+  // down, further make it smooth") -- see `insideFactory.desktopRow`'s own
+  // comment for the full reasoning.
+  desktopRow: "no-scrollbar flex w-full gap-6 overflow-x-hidden scroll-smooth px-8 xl:px-[80px]",
+  desktopCard: "w-[469px] shrink-0",
   // The floating chevron is the shared `chevronScroller` recipe -- see the
   // note on `howItWorks` above.
 
@@ -3439,7 +3524,11 @@ export const footer = {
   // documents being caught and fixed there; never mirrored here until now.
   // Single value on the outer container, same pattern as desktop, not an
   // extra margin on the brand group.
-  mobileOuter: "container-p flex flex-col items-start gap-6 pb-6 pt-14 xl:hidden",
+  // pt-10 (40px, owner, 2026-09-08: "make it 40px" -- matches Figma node
+  // 590:1421's own measured value exactly, get_metadata: "Contnet" frame
+  // sits at y=40 inside the "Mobile Footer" frame). Was pt-14/56px, mirrored
+  // from desktop's own value; this mobile frame's real spec is smaller.
+  mobileOuter: "container-p flex flex-col items-start gap-6 pb-6 pt-10 xl:hidden",
   // No longer holds the tagline (owner, 2026-09-06: moved above the
   // description paragraph, same as desktop -- see `mobileDescriptionGroup`
   // below), so this is just the logo now, not a real "group" any more.
@@ -3454,9 +3543,16 @@ export const footer = {
   // inside the 320px column available at the narrowest (360px) target
   // viewport, so no repeat of the old wide-mark overflow this token used to
   // guard against.
-  mobileBrandLogo: "h-[51px] w-auto",
+  // 44.51px (owner, 2026-09-08: "reduce the logo size" -- Figma node
+  // 590:1421's own "Logo" frame measured height, get_metadata: 167x44.51,
+  // not the old 51px this had been carrying over from before). Renders
+  // ~167px wide at this height, matching Figma's own frame width.
+  mobileBrandLogo: "h-[44.51px] w-auto",
   mobileTagline: "text-[1.125rem] font-normal text-ink",
-  mobileEmail: "text-[1.5rem] font-medium text-ink",
+  // Owner, 2026-09-08: "does not look like a clickable link, make it
+  // underline" -- mobile only, desktop's own `desktopContactEmail` is
+  // unaffected.
+  mobileEmail: "text-[1.5rem] font-medium text-ink underline transition-opacity hover:opacity-70",
   mobileDivider: "w-full border-t border-line",
   // Tagline + the description paragraph, 12px gap, no divider between them
   // -- same relocation as desktop's `desktopDescriptionGroup` above.
@@ -5300,8 +5396,14 @@ export const productCustomizeSteps = {
   // md:px-8 (32px, container-p's own md: inset) / xl:px-[80px] (the
   // original, container-p's xl: inset) -- same tablet-width fix as
   // How It Works' own desktopRow.
-  desktopRow:
-    "no-scrollbar flex w-full snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-8 scroll-pl-8 scroll-pr-8 xl:px-[80px] xl:scroll-pl-[80px] xl:scroll-pr-[80px]",
+  // `overflow-x-hidden`, not `-auto` (owner, 2026-09-08: "user can only
+  // scroll by clicking" -- see `useDesktopChevronScroller`'s own header
+  // comment in DesktopChevronScroller.tsx for the full reasoning).
+  // `snap-x`/`snap-mandatory`/`scroll-pl`/`scroll-pr` dropped in the same
+  // pass (owner, 2026-09-08: "still requires 2 times scroll to go up or
+  // down, further make it smooth") -- see `insideFactory.desktopRow`'s own
+  // comment for the full reasoning.
+  desktopRow: "no-scrollbar flex w-full gap-6 overflow-x-hidden scroll-smooth px-8 xl:px-[80px]",
   // 469px -- owner correction, 2026-09-01: "you did not use the same
   // component how [it] works from the homepage. Use homepage component
   // size, overall." Was a section-specific 335px (Figma's own literal
@@ -5309,7 +5411,7 @@ export const productCustomizeSteps = {
   // `howItWorks.desktopCard` exactly, same reasoning How It Works itself
   // used to widen off its own literal Figma value (reads as the same size
   // as its sibling carousel sections).
-  desktopCard: "w-[469px] shrink-0 snap-start",
+  desktopCard: "w-[469px] shrink-0",
   // 469:320 desktop, matching `howItWorks.cardMediaRatio` exactly (see
   // `desktopCard`'s own comment for why). Mobile stays the shared 7:5
   // CardCarousel default, same as How It Works' own mobile cards.
