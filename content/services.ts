@@ -40,9 +40,9 @@ const introParagraph1: NoteSegment[] = [
 const introParagraph2: NoteSegment[] = [
   { text: "We are the activewear and teamwear division of Caprio Sports, a " },
   { text: "cut-and-sew manufacturer in Sialkot, Pakistan", bold: true },
-  { text: ", with " },
-  { text: "25+ years of experience", bold: true },
-  { text: " and our own 75,000 sq ft facility." },
+  { text: ", " },
+  { text: "established in 2009", bold: true },
+  { text: ", with our own 75,000 sq ft facility." },
 ];
 
 // Section 3's own closing note (Figma node 750:821) -- same NoteSegment
@@ -90,11 +90,14 @@ export const services = {
   // Section 2: Intro statement. Figma desktop node 733:529. Copy (heading +
   // paragraph) is the design's own real text layer, read directly, same as
   // hero.h1 above. Each paragraph is segmented, not a single string, so the
-  // three semibold phrases Figma marks inline ("low minimums and worldwide
-  // delivery", "cut-and-sew manufacturer in Sialkot, Pakistan", "25+ years
-  // of experience") render as real inline emphasis -- same segmented-note
-  // pattern FabricOptions' own closing note already uses (see
-  // ServicesIntro.tsx), not a second bespoke rich-text renderer.
+  // semibold phrases Figma marks inline ("low minimums and worldwide
+  // delivery", "cut-and-sew manufacturer in Sialkot, Pakistan") render as
+  // real inline emphasis -- same segmented-note pattern FabricOptions' own
+  // closing note already uses (see ServicesIntro.tsx), not a second bespoke
+  // rich-text renderer. `introParagraph2`'s own third bold phrase was
+  // Figma's "25+ years of experience" -- corrected sitewide, 2026-09-08,
+  // to "established in 2009" (the real founding year overstated the
+  // company's age; see `docs/04-product.md`'s now-resolved open question 2).
   // `paragraphs` (plural, 2 entries) since 2026-09-07 -- see
   // introParagraph1/2's own comment above for why this split from one.
   intro: {
@@ -244,7 +247,7 @@ export const services = {
       },
       {
         q: "Do you ship to my country?",
-        a: "Yes, 40+ countries. DDP to the US, UK, EU, Canada and Australia, with GSP+ 0% EU duty.",
+        a: "Yes, 20+ countries. DDP to the US, UK, EU, Canada and Australia, with GSP+ 0% EU duty.",
       },
       {
         q: "How do I get started?",

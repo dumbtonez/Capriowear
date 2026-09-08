@@ -191,7 +191,7 @@ export const ourFactory = {
             number: "07",
             name: "Packed & Shipped",
             title: "Retail-ready, delivered to your door",
-            body: "Polybagged and boxed to your spec, then shipped DDP to 40+ countries, with GSP+ 0% duty into the EU.",
+            body: "Polybagged and boxed to your spec, then shipped DDP to 20+ countries, with GSP+ 0% duty into the EU.",
             imageAlt:
               "Retail-ready garments polybagged and boxed for shipping at Capriowear's factory in Sialkot, Pakistan",
             ratio: "1:1",

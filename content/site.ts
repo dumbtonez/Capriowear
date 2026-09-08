@@ -104,6 +104,14 @@ export const ORGANIZATION = {
   // variant, not the one-liner. Was a hand-typed sentence close to
   // companyIdentity's own length before this change.
   description: companyIntroShort,
+  // Real founding year, 2009 -- added 2026-09-08 alongside a sitewide fact
+  // correction (the site had drifted to "Since 2000"/"25+ years" in a few
+  // places, both wrong; see docs/04-product.md's now-resolved open
+  // question 2). schema.org's Organization type supports `foundingDate`
+  // directly (ISO 8601, a bare year is valid) -- fed into the schema the
+  // same way every other Organization field already is, not a second,
+  // independently-maintained fact.
+  foundingDate: "2009",
   url: SITE_URL,
   logo: `${SITE_URL}/opengraph-image`,
   address: {

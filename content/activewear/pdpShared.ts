@@ -117,7 +117,7 @@ export const pdpSpecHighlights: PdpSpecHighlight[] = [
   { icon: "package", text: "MOQ from 50 pieces" },
   { icon: "calendarDays", text: "Samples in 10 to 14 days" },
   { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
-  { icon: "ship", text: "DDP to 40+ countries" },
+  { icon: "ship", text: "DDP to 20+ countries" },
 ];
 
 // The PDP's "Customization" pill group (Figma node 634:5034 desktop /
@@ -194,7 +194,7 @@ export const pdpFaqOperational: FaqEntry[] = [
   },
   {
     q: "Do you ship worldwide, and who handles duties?",
-    a: "Yes. We ship DDP to over 40 countries, meaning duties and import taxes are included in your landed cost quote rather than billed separately on arrival.",
+    a: "Yes. We ship DDP to over 20 countries, meaning duties and import taxes are included in your landed cost quote rather than billed separately on arrival.",
   },
   {
     q: "Will you sign an NDA before I share my designs?",

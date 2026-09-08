@@ -441,7 +441,7 @@ export const home = {
   // ft") -- owner resolved 2026-08-24: follow desktop on both breakpoints.
   stats: [
     {
-      value: "Since 2000",
+      value: "Since 2009",
       caption: "Delivering to 80+ brands in 20+ countries worldwide.",
     },
     {
@@ -560,7 +560,7 @@ export const home = {
       },
       {
         q: "Do you ship to my country?",
-        a: "Yes. We export to 40+ countries, with DDP delivery to the US, UK, EU, Canada and Australia. EU orders benefit from GSP+ 0% import duty, and all export paperwork is handled in house.",
+        a: "Yes. We export to 20+ countries, with DDP delivery to the US, UK, EU, Canada and Australia. EU orders benefit from GSP+ 0% import duty, and all export paperwork is handled in house.",
       },
       {
         q: "What certifications do you hold?",
@@ -674,6 +674,6 @@ export const home = {
     },
     contact: { label: "Get in touch", email: "hello@capriosports.com" },
     address: "10 KM from Daska road, Sialkot, Pakistan",
-    copyright: "Caprio 2000-2026. All Rights Reserved",
+    copyright: "Caprio 2009-2026. All Rights Reserved",
   },
 };

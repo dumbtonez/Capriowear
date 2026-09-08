@@ -20,6 +20,7 @@ export function organizationSchema() {
     "@type": "Organization",
     name: ORGANIZATION.name,
     description: ORGANIZATION.description,
+    foundingDate: ORGANIZATION.foundingDate,
     parentOrganization: {
       "@type": "Organization",
       name: ORGANIZATION.legalName,

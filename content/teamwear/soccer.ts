@@ -44,7 +44,7 @@ export const soccer: Category = {
   metaTitle: "Custom Soccer Uniform Manufacturer",
   metaDescription:
     "Custom soccer uniform manufacturer. Sublimated jerseys with names and numbers, goalkeeper kits, home and away kits, low MOQ. Capriowear.",
-  trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private label", "DDP to 40+ countries"],
+  trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
   showGenderFilter: true,

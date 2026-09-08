@@ -47,7 +47,7 @@ export const trackJackets: Category = {
   // char truncation point.
   metaDescription:
     "Custom track jacket manufacturer, brushed polyester tricot, funnel neck, quarter-zip, mesh-lined styles, low MOQ. Capriowear.",
-  trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 40+ countries"],
+  trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
   showGenderFilter: true,
@@ -151,7 +151,7 @@ export const trackJackets: Category = {
     },
     {
       q: "Do you ship to my country?",
-      a: "Yes, 40+ countries. DDP to the US, UK, EU, Canada and Australia, with GSP+ 0% EU duty.",
+      a: "Yes, 20+ countries. DDP to the US, UK, EU, Canada and Australia, with GSP+ 0% EU duty.",
     },
     {
       q: "Will my designs stay protected?",

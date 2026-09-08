@@ -36,7 +36,7 @@ These are the claims the site makes. Anything marked ⚠️ is unconfirmed and m
 | IP | NDA signed before any tech pack is received |
 | Certifications | ISO 9001, ISO 45001, ISO 14001, CE, BSCI, no-child-labour monitoring (IMAC) ⚠️ |
 | Memberships | PSGMEA, PRGMEA, WFSGI, SCCI ⚠️ |
-| Shipping | 40+ countries. DDP to US, UK, EU, Canada, Australia. GSP+ 0% EU duty ⚠️ |
+| Shipping | 20+ countries. DDP to US, UK, EU, Canada, Australia. GSP+ 0% EU duty ⚠️ |
 | Terms | FOB, CIF or DDP |
 
 ## Open questions ⚠️
@@ -46,7 +46,7 @@ These need the owner's confirmation before launch. Each is also marked `// VERIF
 | # | Question | Current state |
 |---|---|---|
 | 1 | Hero eyebrow wording | Wireframe renders "BASED IN SIALKOT, PAKISTAN"; the copy doc says "MADE IN SIALKOT, PAKISTAN". Using the wireframe version, since the copy doc says the design wins where they differ |
-| 2 | Founded 2000 or 2009? | Wireframe stat says "Since 2000". Caprio Sports' own site says 2009. Copy doc flags it |
+| ~~2~~ | ~~Founded 2000 or 2009?~~ | **Resolved 2026-09-08.** 2009 confirmed. "Since 2000" (homepage stats) and "25+ years" (Services intro paragraph) both corrected sitewide to reflect 2009 -- see `docs/05-plan.md`'s decision log |
 | 3 | Facility size | Wireframe says 75,000 sq ft; copy doc says 50,000 sq ft |
 | ~~4~~ | ~~Which client logos may be shown~~ | **Resolved 2026-08-24.** Permission confirmed for all 8: MyProtein, Gymreapers, Youngla, GymBeam, Evolution Athletics, RISE, WOLFpak, Capo. Real artwork now live in the client logos section, `public/logos/` |
 | 5 | Which certifications are current | The badge list needs confirming against live certificates |

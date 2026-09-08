@@ -52,7 +52,7 @@ export const sweatshirts: Category = {
     "Custom crewneck sweatshirt manufacturer, half-zip and quarter-zip, ribbed collar, French terry or brushed fleece, low MOQ. Capriowear.",
   // CategoryBanner's own checkmark row -- same 4 facts, same wording, as
   // every prior category's own.
-  trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 40+ countries"],
+  trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
   // Real Women/Men split, same as every prior category -- explicit,
@@ -217,7 +217,7 @@ export const sweatshirts: Category = {
     },
     {
       q: "Do you ship to my country?",
-      a: "Yes, 40+ countries. DDP to the US, UK, EU, Canada and Australia, with GSP+ 0% EU duty.",
+      a: "Yes, 20+ countries. DDP to the US, UK, EU, Canada and Australia, with GSP+ 0% EU duty.",
     },
     {
       q: "Will my designs stay protected?",
