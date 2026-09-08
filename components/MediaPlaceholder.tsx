@@ -11,6 +11,17 @@
 // Aspect ratios are the three the wireframe uses: 16:9 for the hero video and
 // service tiles, 4:5 for portrait product shots, 1:1 for square category tiles.
 // Radius is lg or xl per the radii table ("Media and video blocks").
+//
+// `showLabel={false}` (used sitewide -- Hero, ProductGallery, InsideFactory,
+// ServicesIntro, etc.) was always meant to keep `label` supplying the alt
+// text while only hiding the VISIBLE caption (see e.g. ProductGallery.tsx's
+// own header comment, "`label` still supplies the alt text") -- but the
+// no-`image` placeholder path never actually implemented that: with no
+// visible caption and no real `<Image alt>` yet, the box had no
+// discoverable accessible name at all (a real bug, found live in Our
+// Factory's sample-detail review, 2026-09-09). `role="img"`/`aria-label`
+// on the placeholder fill closes that gap for every existing caller at
+// once, without changing anything visible.
 import Image, { type StaticImageData } from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 
@@ -32,7 +43,8 @@ export type MediaRatio =
   | "397:234"
   | "520:480"
   | "600:640"
-  | "1280:640";
+  | "1280:640"
+  | "730:644";
 export type MediaRadius = "lg" | "xl" | "none";
 
 export type MediaPlaceholderProps = {
@@ -55,6 +67,17 @@ export type MediaPlaceholderProps = {
   showLabel?: boolean;
   /** Dark boxes on ink sections, e.g. the hero video and factory shots. */
   tone?: "light" | "dark";
+  /**
+   * Overrides the placeholder box's own `tone`-driven background colour
+   * (owner, 2026-09-09, Our Factory's sample-detail panel: a placeholder
+   * that needed the section's own `bg-ink` -- a third value neither `tone`
+   * option maps to -- instead of `tone="dark"`'s `bg-ink-2`). Only affects
+   * the no-`image` placeholder fill; has no effect once `image` is set.
+   * A real, already-established token class (e.g. `"bg-ink"`), not a raw
+   * hex -- this prop exists so a caller can reach that one nested div, not
+   * to license arbitrary colours here.
+   */
+  placeholderClassName?: string;
   className?: string;
   /**
    * Inline style on the root box. Only for a value `ratio`'s fixed set can't
@@ -76,6 +99,7 @@ export function MediaPlaceholder({
   overlay,
   showLabel = true,
   tone = "light",
+  placeholderClassName,
   className,
   style,
 }: MediaPlaceholderProps) {
@@ -91,10 +115,12 @@ export function MediaPlaceholder({
         />
       ) : (
         <div
+          role={showLabel ? undefined : "img"}
+          aria-label={showLabel ? undefined : label}
           className={cx(
             media.placeholder,
             overlay ? media.placeholderWithOverlay : media.placeholderCentred,
-            tone === "dark" ? media.placeholderDark : media.placeholderLight,
+            placeholderClassName ?? (tone === "dark" ? media.placeholderDark : media.placeholderLight),
           )}
         >
           {showLabel ? <span className={media.label}>{label}</span> : null}
