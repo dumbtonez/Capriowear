@@ -1505,7 +1505,12 @@ export const ourFactoryIntro = {
   statCol: "flex w-full flex-col gap-8 md:max-w-[342px]",
   statDivider: "h-px w-full bg-[linear-gradient(to_right,var(--color-accent)_36%,transparent)]",
   stat: "flex flex-col gap-2",
-  statValue: "text-h1 text-ink",
+  // whitespace-nowrap: statCol's own 342px width is a fixed pixel value
+  // (Figma's 1440px frame), but statValue reads from the h1 token, which
+  // keeps scaling up past 1440 to a new max at 1920 -- on wide screens the
+  // grown number no longer fits the fixed column and wraps mid-value
+  // ("75,000 sq" / "ft"), a real bug found live, 2026-09-08.
+  statValue: "text-h1 text-ink whitespace-nowrap",
   statCaption: "text-body-lg leading-7 text-subline",
 };
 
