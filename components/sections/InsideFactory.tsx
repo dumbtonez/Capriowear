@@ -48,7 +48,7 @@ export type InsideFactoryProps = {
    * Defaults to "dark" -- the homepage's own confirmed design (bg-ink,
    * paper text/cards). "light" is /our-factory's reuse (owner, 2026-09-08:
    * "the inside the factory section we use on homepage ... on white
-   * background") -- bg-paper/text-ink, placeholders switch to their own
+   * background") -- bg-paper/text-text, placeholders switch to their own
    * light tone.
    */
   tone?: "light" | "dark";

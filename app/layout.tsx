@@ -57,7 +57,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           2026-08-26 testing the live Footer. Plain block flow doesn't have
           that failure mode, and nothing here relies on the flex context
           (checked: no child uses `flex-1` expecting to grow inside it). */}
-      <body className="min-h-full bg-paper font-sans text-body text-ink">
+      <body className="min-h-full bg-paper font-sans text-body text-text">
         {/* Present on every route, renders nothing -- records which path
             this browser tab's JS actually booted on, so IntroLoader (the
             homepage's own entrance animation) can tell a genuine fresh

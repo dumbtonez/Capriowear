@@ -3,7 +3,7 @@
 // component is eyebrow + heading only, nothing else.
 //
 // The heading sets no text colour of its own by default, so it inherits
-// whatever the wrapping section sets (text-ink by default, text-paper
+// whatever the wrapping section sets (text-text by default, text-paper
 // inside a dark section), the same pattern Button's secondary variant
 // uses -- except on a light-tone section (owner correction, 2026-09-01:
 // "the new color I suggested for subheading will only apply to white

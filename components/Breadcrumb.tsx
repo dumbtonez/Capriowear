@@ -18,7 +18,7 @@ export type BreadcrumbItem = {
 
 export type BreadcrumbProps = {
   items: BreadcrumbItem[];
-  /** "dark" for use on an ink/black background (e.g. CategoryBanner) -- the current-page item needs a lighter colour than `tone="light"`'s near-black text-ink, which is invisible there. Default "light". */
+  /** "dark" for use on an ink/black background (e.g. CategoryBanner) -- the current-page item needs a lighter colour than `tone="light"`'s near-black text-text, which is invisible there. Default "light". */
   tone?: "light" | "dark";
   /**
    * Extra classes merged onto the `<nav>` -- e.g. a call site's own

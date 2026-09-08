@@ -140,7 +140,7 @@ export default function StyleguidePage() {
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className="inline-flex min-h-11 items-center rounded-pill px-3 text-button-sm text-muted transition-colors hover:bg-paper-2 hover:text-ink"
+                    className="inline-flex min-h-11 items-center rounded-pill px-3 text-button-sm text-muted transition-colors hover:bg-paper-2 hover:text-text"
                   >
                     {item.label}
                   </a>
@@ -206,7 +206,7 @@ export default function StyleguidePage() {
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <span
                       className={`rounded-sm px-2 py-1 text-button-sm ${
-                        token.onDark ? "bg-ink-2 text-paper" : "bg-paper-2 text-ink"
+                        token.onDark ? "bg-ink-2 text-paper" : "bg-paper-2 text-text"
                       }`}
                     >
                       {token.name}
@@ -296,7 +296,7 @@ export default function StyleguidePage() {
                 {/* Labels share a row with the bar from sm up, stack below it on mobile
                     so the 160px step still renders at full length at 360w. */}
                 <span className="flex items-center gap-3 sm:contents">
-                  <span className="w-14 shrink-0 text-button-sm tabular-nums text-ink">{token.px}px</span>
+                  <span className="w-14 shrink-0 text-button-sm tabular-nums text-text">{token.px}px</span>
                   <span className="w-24 shrink-0">
                     <TokenName>p-{token.utility}</TokenName>
                   </span>
@@ -514,7 +514,7 @@ export default function StyleguidePage() {
               there's no default to silently get wrong. */}
           <BuiltSlot
             name="SectionHeading"
-            note="eyebrowTone is required: 'light' (#17191E) or 'dark' (#ABB5C0). The H2 has no colour of its own, so it inherits ambient text colour, text-ink by default or text-paper inside a dark section."
+            note="eyebrowTone is required: 'light' (#17191E) or 'dark' (#ABB5C0). The H2 has no colour of its own, so it inherits ambient text colour, text-text by default or text-paper inside a dark section."
           >
             <SectionHeading
               eyebrow={home.whatWeMake.eyebrow}

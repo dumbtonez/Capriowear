@@ -35,8 +35,9 @@ import { button } from "./ui/styles";
 
 | Token | Value | Use |
 |---|---|---|
-| `ink` | `#121317` | Near-black. Dark sections and primary text |
+| `ink` | `#121317` | Near-black. Dark section backgrounds only |
 | `ink-2` | `#17191E` | Secondary dark surface, e.g. a menu panel or a container (media placeholder, exhibition card, etc.) on an ink band |
+| `text` | `#1D1D1F` | Primary text colour on a white/paper section (headings, body copy) |
 | `paper` | `#FFFFFF` | Default page background |
 | `paper-2` | `#F5F4F1` | Alternating light section |
 | `line` | `rgba(0,0,0,0.10)` | Hairline border on light |
@@ -47,6 +48,8 @@ import { button } from "./ui/styles";
 | `subline` | `#17191E` | Subline text directly under a title, light/white sections only |
 
 **Dark sections** run `ink` background, `paper` text, `line-dark` hairlines. Use `surface.dark` from the recipe file rather than assembling it by hand.
+
+**`ink` and `text` are two separate tokens, not one dual-purpose colour** (split 2026-09-08, owner: "change all the text color to 1D1D1F ... only for those which are on the white background, don't change anything on the black/dark background"). Before this, `--color-ink` doubled as both "dark section background" and "primary text on a light section" — the two roles happened to share one near-black value. `text-ink` (the old utility, sitewide) is now `text-text`; `bg-ink` is untouched. Text that sits on a dark section still reads `text-paper` (white) or a muted-on-dark literal (`#838D97`), never `text`/`ink`.
 
 **The `currentColor` pattern.** Components that appear on both light and dark sections use `border-current` / `text-current/60` rather than a fixed colour, so they inherit whatever the section sets. This is why `Button` secondary, `Chip`, `Eyebrow` muted and `Accordion` need no "on dark" prop. Prefer this over adding an inverse variant.
 

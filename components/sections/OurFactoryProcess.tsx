@@ -85,7 +85,7 @@ export function OurFactoryProcess({ content }: OurFactoryProcessProps) {
         <div className={ourFactoryProcess.headingRowGroup}>
           <div className={ourFactoryProcess.headingGroup}>
             <Eyebrow tone="light">{content.eyebrow}</Eyebrow>
-            <TextReveal as="h2" text={content.heading} className="text-h1 text-ink" />
+            <TextReveal as="h2" text={content.heading} className="text-h1 text-text" />
           </div>
           <Row row={content.rows[0]} />
         </div>

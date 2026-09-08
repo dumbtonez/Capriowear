@@ -43,7 +43,7 @@ export function Spec({ children }: { children: ReactNode }) {
 /** The token name, shown the way you would type it in a class. */
 export function TokenName({ children }: { children: ReactNode }) {
   return (
-    <span className="rounded-sm bg-paper-2 px-2 py-1 text-button-sm text-ink">
+    <span className="rounded-sm bg-paper-2 px-2 py-1 text-button-sm text-text">
       {children}
     </span>
   );

@@ -20,8 +20,18 @@
   --font-sans: var(--font-figtree), system-ui, -apple-system, sans-serif;
 
   /* --- Colour ---------------------------------------------------------- */
-  --color-ink: #121317; /* near-black: dark sections + primary text (owner, 2026-09-08) */
+  --color-ink: #121317; /* near-black: dark section backgrounds only (owner, 2026-09-08) */
   --color-ink-2: #17191e; /* secondary dark surface, e.g. a container on top of an ink section (owner, 2026-09-08) */
+  /* Primary text colour on a white/paper section (owner, 2026-09-08: "change
+     all the text color to 1D1D1F ... only for those which are on the white
+     background, don't change anything on the black/dark background") -- a
+     dedicated token, split out from --color-ink, which used to double as
+     both "dark section background" and "primary text on light" (the two
+     roles happened to share one near-black value, but they're conceptually
+     different things and this request needs to move only one of them).
+     Text that sits on a dark section still reads --color-paper (white) or
+     --color-ink-2-derived greys, never this token. */
+  --color-text: #1d1d1f;
   --color-paper: #ffffff; /* default page background */
   --color-paper-2: #f5f4f1; /* alternating light section */
   --color-line: rgba(0, 0, 0, 0.1); /* hairline border on light */
@@ -31,10 +41,10 @@
   --color-accent-ink: #ffffff; /* text/icon on accent */
   /* Subline text under a title, on a white/paper section background only
      (owner, 2026-09-01: apply sitewide, component-level, so new pages pick
-     it up automatically) -- distinct from --color-ink (also used for
-     headings, body copy, and dark-section text generally); this token is
-     scoped to just that one heading+subline pairing. Not used on FinalCta's
-     subline, which sits on a dark bg-ink band, not white. */
+     it up automatically) -- distinct from --color-text (the general
+     heading/body copy colour on light sections); this token is scoped to
+     just that one heading+subline pairing. Not used on FinalCta's subline,
+     which sits on a dark bg-ink band, not white. */
   --color-subline: #17191e;
 
   /* --- Type scale ------------------------------------------------------ */
@@ -160,7 +170,7 @@
 
   body {
     background: var(--color-paper);
-    color: var(--color-ink);
+    color: var(--color-text);
     font-family: var(--font-sans);
     font-size: var(--text-body);
     line-height: 1.2222;
@@ -363,7 +373,7 @@ header {
   --header-hover: var(--color-accent);
 }
 header[data-tone="light"] {
-  --header-fg: var(--color-ink);
+  --header-fg: var(--color-text);
 }
 
 /* The base reduced-motion rule collapses animations to 0.001ms, which would

@@ -19,14 +19,20 @@ export const colorTokens: ColorToken[] = [
   {
     name: "ink",
     value: "#121317",
-    use: "Near-black. Dark sections and primary text.",
-    utility: "bg-ink / text-ink",
+    use: "Near-black. Dark section backgrounds only.",
+    utility: "bg-ink",
   },
   {
     name: "ink-2",
     value: "#17191E",
     use: "Secondary dark surface, cards inside dark sections.",
     utility: "bg-ink-2",
+  },
+  {
+    name: "text",
+    value: "#1D1D1F",
+    use: "Primary text colour on a white/paper section.",
+    utility: "text-text",
   },
   {
     name: "paper",

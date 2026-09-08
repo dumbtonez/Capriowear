@@ -35,7 +35,7 @@
 
 /** Surfaces that flip a whole block between the light and dark section styles. */
 export const surface = {
-  light: "border-line bg-paper text-ink",
+  light: "border-line bg-paper text-text",
   dark: "border-line-dark bg-ink text-paper",
   /** Secondary dark surface, e.g. a menu panel sitting on top of an ink band. */
   darkRaised: "border-line-dark bg-ink-2 text-paper",
@@ -136,7 +136,7 @@ export const sectionHeading = {
   // 17191E" -- text-subline is the shared token for this exact "title on a
   // white/paper background" case (app/globals.css's --color-subline), not
   // a hardcoded hex, so this stays in sync with any future token change.
-  // The heading's own default is to inherit the section's colour (text-ink
+  // The heading's own default is to inherit the section's colour (text-text
   // or text-paper, see this component's own header comment); this is a
   // light-background-only override, applied conditionally in
   // SectionHeading.tsx (eyebrowTone === "light"), never on a dark section.
@@ -150,7 +150,7 @@ export const sectionHeading = {
   // the token's 500/~35.6px. Scoped here rather than changing the shared
   // --text-h1 token, since there's no confirmation yet that other text-h1
   // headings share this same mobile discrepancy (worth re-checking if one
-  // does). No colour: inherits text-ink or text-paper from the section
+  // does). No colour: inherits text-text or text-paper from the section
   // around it.
   // max-md:/md: are mutually exclusive media conditions, not two utilities
   // racing at the same specificity for the same property (the Button/hidden
@@ -213,7 +213,7 @@ export const capabilityCard = {
   // Figma's real 28px (1.4), so this is explicit values, not the token.
   // text-subline (#17191e, owner, 2026-09-01: sitewide title+subline colour
   // on white/paper backgrounds) -- was plain near-black with no colour
-  // class (inherited text-ink). Every caller of this shared component
+  // class (inherited text-text). Every caller of this shared component
   // (Our Services, How It Works, ProductCustomizeSteps on the PDP) picks
   // this up automatically, all on white/paper sections.
   // Threshold moved xl:/max-xl: -> md:/max-md: (owner, 2026-09-04: use
@@ -409,7 +409,7 @@ export const marquee = {
   // the header's bottom border, too faint here). Kept separate so that
   // shared token isn't changed for every other dark surface that uses it.
   toneDark: "border-paper/20 bg-ink text-paper",
-  toneLight: "border-line bg-paper text-ink",
+  toneLight: "border-line bg-paper text-text",
   // Stacked: label on its own row, the scrolling row below it, 32px gap --
   // Figma's real offerings ticker (desktop and mobile both measure this same
   // 32px label-to-items gap). This is the only ticker read from Figma so far,
@@ -1113,7 +1113,7 @@ export const header = {
 // promo/mega-menu text, per the project's documented typography exception.
 // Figma's own literal colours (a muted grey link, near-black current page)
 // are mapped onto existing tokens (#838d97, the same muted grey used
-// elsewhere; text-ink, not the literal #000 Figma shows).
+// elsewhere; text-text, not the literal #000 Figma shows).
 export const breadcrumb = {
   // pt-8 (32px, corrected 2026-08-28 from an earlier pt-6/24px) -- the
   // real value confirmed once this component's own real usage context
@@ -1126,17 +1126,17 @@ export const breadcrumb = {
   item: "flex items-center gap-2",
   // Corrected on first real use of tone="light" (PDP breadcrumb, Figma
   // node 634:4952, 2026-08-31) -- built before any light-background design
-  // existed to check it against, so the original #838d97/text-ink guess is
+  // existed to check it against, so the original #838d97/text-text guess is
   // replaced with this frame's own real values.
-  link: "text-[1rem] leading-[18px] text-[#727272] transition-colors hover:text-ink",
-  // hover:text-paper here, not hover:text-ink -- this is the tone="dark"
+  link: "text-[1rem] leading-[18px] text-[#727272] transition-colors hover:text-text",
+  // hover:text-paper here, not hover:text-text -- this is the tone="dark"
   // variant (CategoryBanner's own ink background, node 502:3310, revised
-  // 2026-08-28): text-ink is near-black, invisible against that surface.
+  // 2026-08-28): text-text is near-black, invisible against that surface.
   linkDark: "text-[1rem] leading-[18px] text-[#838d97] transition-colors hover:text-paper",
   // #21272a font-semibold -- same correction as `link` above, node 634:4952.
   current: "text-[1rem] leading-[18px] font-semibold text-[#21272a]",
   // #abb5c0 -- Figma's own real value for the current-page item on a dark
-  // banner (node 502:3310); tone="light"'s text-ink would be invisible on
+  // banner (node 502:3310); tone="light"'s text-text would be invisible on
   // an ink background.
   currentDark: "text-[1rem] leading-[18px] font-medium text-[#abb5c0]",
   arrow: "size-2 shrink-0 text-[#838d97]",
@@ -1479,11 +1479,11 @@ export const ourFactoryHero = {
 // case) -- mobile/tablet below xl fall back to container-p's own literal
 // 20px/32px insets instead, since no mobile Figma frame exists yet.
 //
-// Heading reuses `text-h1`/`text-ink` (54px/64px/500, matches exactly, same
+// Heading reuses `text-h1`/`text-text` (54px/64px/500, matches exactly, same
 // pairing `servicesIntro.heading` already uses). Paragraph's 26px/36px has
 // no matching type-scale step, so it's a scoped arbitrary value (flagged),
 // layered with `text-subline` -- Figma's own #17191e literal for this text.
-// Stat numbers reuse `text-h1`/`text-ink` again (also 54px/64px/500 in
+// Stat numbers reuse `text-h1`/`text-text` again (also 54px/64px/500 in
 // Figma); stat captions are `text-body-lg` (20px, matches) with `leading-7`
 // overriding its own shorter default line-height to Figma's real 28px,
 // same "token size, arbitrary leading override" pattern `servicesIntro.
@@ -1518,7 +1518,7 @@ export const ourFactoryIntro = {
   // right inset for the heading to safely bleed into without any real
   // page-level overflow risk.
   heading:
-    "max-md:text-[1.375rem] max-md:font-medium max-md:leading-[1.1852] max-md:whitespace-nowrap md:text-h1 md:whitespace-nowrap text-ink",
+    "max-md:text-[1.375rem] max-md:font-medium max-md:leading-[1.1852] max-md:whitespace-nowrap md:text-h1 md:whitespace-nowrap text-text",
   paragraph: "text-[1.625rem] leading-9 text-subline",
   paragraphBold: "font-semibold",
   // gap-12 (48px) below md, matching mobile's own confirmed value (owner,
@@ -1541,7 +1541,7 @@ export const ourFactoryIntro = {
   // keeps scaling up past 1440 to a new max at 1920 -- on wide screens the
   // grown number no longer fits the fixed column and wraps mid-value
   // ("75,000 sq" / "ft"), a real bug found live, 2026-09-08.
-  statValue: "text-h1 text-ink whitespace-nowrap",
+  statValue: "text-h1 text-text whitespace-nowrap",
   statCaption: "text-body-lg leading-7 text-subline",
 };
 
@@ -1818,7 +1818,7 @@ export const servicesIntro = {
   // (corrected 2026-09-08, owner: "image goes on the right" -- the order
   // values were swapped, putting the image on the left instead).
   textCol: "flex w-full flex-col gap-6 xl:order-1 xl:w-[620px] xl:shrink-0 xl:gap-10",
-  heading: "text-h1 text-ink",
+  heading: "text-h1 text-text",
   // Wraps the two `<p>`s (owner, 2026-09-07: "the subline of this section
   // divide into 2 parts ... with 24px gap from the top paragraph") -- its
   // own fixed `gap-6` (24px) at every breakpoint, deliberately not
@@ -1831,7 +1831,7 @@ export const servicesIntro = {
   // (32px) -- `leading-8` overrides just that, per this project's own
   // "typography copied exactly, layered on top of the shared size token"
   // convention used elsewhere.
-  paragraph: "text-body-lg leading-8 text-ink",
+  paragraph: "text-body-lg leading-8 text-text",
   paragraphBold: "font-semibold",
   // `xl:order-2`: pairs with `textCol`'s own `xl:order-1` above, keeping
   // media on the right at desktop.
@@ -1891,7 +1891,7 @@ export const servicesHowWeWork = {
   // heading 0-64, subheading starts at 80) -- mobile keeps `items-start
   // gap-2` (left-aligned, 8px), its own tuned values, unchanged.
   introWrap: "flex max-w-[624px] flex-col items-start gap-2 xl:items-center xl:gap-4 xl:text-center",
-  heading: "text-h1 text-ink",
+  heading: "text-h1 text-text",
   // Mobile-only 18px/24px now; `xl:text-body-lg xl:leading-8` restores the
   // frame's own real 20px/32px-leading subheading (get_metadata: 64px text
   // box height at 624px width = 2 lines at 32px leading, not 24px).
@@ -1932,7 +1932,7 @@ export const servicesHowWeWork = {
   // 30px/500 "OEM Production"-style title exactly at that width, same
   // reuse-the-token-at-its-matching-breakpoint approach `servicesIntro`
   // above takes with `text-h1`.
-  pathTitle: "text-h3 text-ink",
+  pathTitle: "text-h3 text-text",
   // Desktop's own original subtitle (20px/400, 0.5px tracking, 28px
   // leading -- Figma's real value, get_metadata-confirmed). Kept distinct
   // from `pathSubtitle` below (18px/24px), which is now mobile-only.
@@ -1944,7 +1944,7 @@ export const servicesHowWeWork = {
   // happens at a much narrower viewport than this desktop-only block ever
   // renders at, so reusing it here would be wrong, not a coincidence worth
   // relying on).
-  pathDetailLabel: "text-[1.375rem] font-medium tracking-[1px] text-ink",
+  pathDetailLabel: "text-[1.375rem] font-medium tracking-[1px] text-text",
   pathDetailBody: "text-[1.25rem] font-normal leading-7 text-[#17191e]",
   // Mobile/tablet only (owner, 2026-09-07: "oem production odm production
   // can we make them collapsable", then "build this something similar to
@@ -1983,7 +1983,7 @@ export const servicesHowWeWork = {
   // get_metadata: 90px text box height at 30px leading = 3 lines, matching
   // this note's real length) -- same mobile-only-drift correction as
   // `subheading`/`inner`/`introWrap`/`pathsGrid`/`noteWrap` above.
-  noteParagraph: "text-[1.125rem] leading-6 text-center text-ink xl:text-body-lg xl:leading-[30px]",
+  noteParagraph: "text-[1.125rem] leading-6 text-center text-text xl:text-body-lg xl:leading-[30px]",
   noteParagraphBold: "font-semibold",
 };
 
@@ -2185,7 +2185,7 @@ export const trustSignals = {
   // 20px/400/28px line-height -- a one-off, not the Body Large token (which
   // is 20px/400 but a 24px line-height). Confirmed via get_design_context.
   // text-subline (#17191e, owner, 2026-09-01: sitewide title+subline colour
-  // on white/paper backgrounds) -- was no colour class (inherited text-ink).
+  // on white/paper backgrounds) -- was no colour class (inherited text-text).
   body: "text-[1.25rem] font-normal leading-[1.4] text-subline",
   // font-semibold next to the body's own 400 weight is deliberate emphasis
   // within the style (see the note at the top of this file), matching two of
@@ -2231,7 +2231,7 @@ export const trustSignals = {
   // 18px/400/24px line-height -- a one-off, not the Body token (18px/400 but
   // 22px line-height). Confirmed via get_design_context. text-subline
   // (#17191e, owner, 2026-09-01: sitewide title+subline colour on white/
-  // paper backgrounds) -- was no colour class (inherited text-ink).
+  // paper backgrounds) -- was no colour class (inherited text-text).
   mobileBody: "text-[1.125rem] font-normal leading-[1.3333] text-subline",
 };
 
@@ -2303,7 +2303,7 @@ export const whatWeMake = {
   // to fewer lines than the design (owner correction, 2026-08-23: should
   // wrap to 2 lines, matching Figma's own 620px-wide, 2-line text box).
   // text-subline (#17191e, owner, 2026-09-01: sitewide title+subline colour
-  // on white/paper backgrounds) -- was no colour class (inherited text-ink).
+  // on white/paper backgrounds) -- was no colour class (inherited text-text).
   // Threshold moved xl:/max-xl: -> md:/max-md: (2026-09-04, same review) --
   // the `md:max-w-[620px]` wrap constraint moves with it, so the wider
   // tablet text still wraps to 2 lines instead of running unconstrained.
@@ -2719,7 +2719,7 @@ export const insideFactory = {
   // homepage's bg-ink/text-paper pairing above. No separate no-heading
   // variant needed: `showHeading={false}` just skips rendering the heading
   // block entirely (see InsideFactory.tsx's own prop comments).
-  desktopOuterLight: "hidden bg-paper text-ink md:block",
+  desktopOuterLight: "hidden bg-paper text-text md:block",
   // Heading only -- container-p's own 80px side inset. Provisional 120px
   // top, same caveat as What We Make/Certified & Compliant: this frame's
   // own top edge reads 60px, the same unreliable frame-crop pattern that
@@ -2870,9 +2870,9 @@ export const insideFactory = {
   // project's own established muted-on-dark literal (Stats' caption,
   // mega-menu labels, etc.), not a new one-off value.
   desktopCardLabel: "mt-8 text-[1.5rem] font-normal leading-[28px] text-[#838d97]",
-  // /our-factory's `tone="light"` reuse: same size/weight/gap, `text-ink`
+  // /our-factory's `tone="light"` reuse: same size/weight/gap, `text-text`
   // instead of `text-paper` now that the card sits on a white section.
-  desktopCardLabelLight: "mt-8 text-[1.5rem] font-normal leading-[28px] text-ink",
+  desktopCardLabelLight: "mt-8 text-[1.5rem] font-normal leading-[28px] text-text",
   // The floating chevron is the shared `chevronScroller` recipe -- see the
   // note on `howItWorks` above.
   // CTA to Our Factory, added 2026-08-26 (owner request), sitting under the
@@ -2891,8 +2891,8 @@ export const insideFactory = {
   // continuous band.
   mobileSection: "bg-ink text-paper pt-12 pb-12 md:hidden",
   // /our-factory's `tone="light"` reuse -- same 48px/48px top/bottom inset,
-  // bg-paper/text-ink instead of the homepage's bg-ink/text-paper.
-  mobileSectionLight: "bg-paper text-ink pt-12 pb-12 md:hidden",
+  // bg-paper/text-text instead of the homepage's bg-ink/text-paper.
+  mobileSectionLight: "bg-paper text-text pt-12 pb-12 md:hidden",
   // container-p only on the heading, not the gallery below -- the gallery
   // is full-bleed edge to edge (confirmed via get_metadata: no side inset
   // at all), unlike every other section's mobile content. Eyebrow is now
@@ -3282,7 +3282,7 @@ export const cardCarousel = {
 // same property would just fight the JS writes, never settling.
 export const chevronScroller = {
   circle:
-    "pointer-events-none absolute top-0 left-0 z-10 flex size-20 items-center justify-center rounded-full bg-paper text-ink opacity-0 shadow-card transition-opacity duration-200 ease-out",
+    "pointer-events-none absolute top-0 left-0 z-10 flex size-20 items-center justify-center rounded-full bg-paper text-text opacity-0 shadow-card transition-opacity duration-200 ease-out",
   icon: "size-10",
 };
 
@@ -3574,7 +3574,7 @@ export const exhibitions = {
 // visible at whatever point the reveal currently sits -- not tied to
 // Footer's own fixed content position the way a shadow on `root` would be.
 export const footer = {
-  root: "relative z-0 bg-paper text-ink",
+  root: "relative z-0 bg-paper text-text",
 
   /* Desktop */
   desktopOuter: "hidden xl:block",
@@ -3611,7 +3611,7 @@ export const footer = {
   // is unchanged, just relocated. No divider between it and the paragraph
   // (owner, 2026-09-06: "don't add separator under division line") -- just
   // the 12px gap.
-  desktopTagline: "text-[1.25rem] font-normal text-ink",
+  desktopTagline: "text-[1.25rem] font-normal text-text",
   desktopSocialGroup: "flex items-center gap-3",
   // 40px gap below row 1 (146 -> 186).
   desktopDivider: "mt-10 border-t border-line",
@@ -3653,7 +3653,7 @@ export const footer = {
   // sync. Real mobile's own tagline was already single-line at every real
   // width (`mobileDescriptionGroup` has no max-width of its own), unaffected.
   desktopDescriptionGroup: "flex max-w-[350px] flex-col gap-3",
-  desktopDescription: "text-[1.25rem] leading-[1.4] text-ink",
+  desktopDescription: "text-[1.25rem] leading-[1.4] text-text",
   // 78px (owner, 2026-09-07: "the space between 3 columns ... should be
   // the same" -- matches `desktopRow2`'s own gap-[78px] between the nav
   // group as a whole and the description paragraph, so all 3 visual
@@ -3661,7 +3661,7 @@ export const footer = {
   desktopNavGroup: "flex items-start gap-[78px]",
   desktopNavColumnOne: "flex flex-col whitespace-nowrap",
   desktopNavColumnTwo: "flex flex-col whitespace-nowrap",
-  desktopNavLink: "text-[1.25rem] leading-[36px] text-ink transition-opacity hover:opacity-70",
+  desktopNavLink: "text-[1.25rem] leading-[36px] text-text transition-opacity hover:opacity-70",
   // Row 3: contact CTA (left) + address/copyright (right), bottom-aligned --
   // confirmed via get_metadata: both blocks share the same bottom edge
   // despite starting at different top offsets, so this is items-end, not
@@ -3697,17 +3697,17 @@ export const footer = {
   // was 30px, matching the email line below it; the "Get in touch" label
   // is now deliberately smaller than its own email.
   desktopContactLabel: "text-[1.375rem] font-normal text-[#17191e]",
-  desktopContactEmail: "text-[1.875rem] font-medium text-ink transition-opacity hover:opacity-70",
+  desktopContactEmail: "text-[1.875rem] font-medium text-text transition-opacity hover:opacity-70",
   // Was a vertical stack (flex-col); changed to side-by-side columns
   // 2026-08-27 alongside the owner's content-arrangement pass -- Figma's
   // real gap between the two 194px-wide lines is 32px.
   desktopAddressGroup: "flex items-start gap-8",
-  desktopAddressLine: "w-[194px] text-[1.25rem] leading-[1.4] text-ink",
+  desktopAddressLine: "w-[194px] text-[1.25rem] leading-[1.4] text-text",
   // Owner narrowed just this second line's own container (194px -> 174px,
   // 2026-08-27) -- the row itself still ends flush at the container's real
   // right edge (960 + 400 = 1360), so this is a width-only change, not a
   // position one.
-  desktopAddressLineNarrow: "w-[174px] text-[1.25rem] leading-[1.4] text-ink",
+  desktopAddressLineNarrow: "w-[174px] text-[1.25rem] leading-[1.4] text-text",
 
   /* Mobile: one flat column, gap-24 between every block, matching
      container-p's own 20px mobile side inset exactly (confirmed via
@@ -3745,20 +3745,20 @@ export const footer = {
   // not the old 51px this had been carrying over from before). Renders
   // ~167px wide at this height, matching Figma's own frame width.
   mobileBrandLogo: "h-[44.51px] w-auto",
-  mobileTagline: "text-[1.125rem] font-normal text-ink",
+  mobileTagline: "text-[1.125rem] font-normal text-text",
   // Owner, 2026-09-08: "does not look like a clickable link, make it
   // underline" -- mobile only, desktop's own `desktopContactEmail` is
   // unaffected.
-  mobileEmail: "text-[1.5rem] font-medium text-ink underline transition-opacity hover:opacity-70",
+  mobileEmail: "text-[1.5rem] font-medium text-text underline transition-opacity hover:opacity-70",
   mobileDivider: "w-full border-t border-line",
   // Tagline + the description paragraph, 12px gap, no divider between them
   // -- same relocation as desktop's `desktopDescriptionGroup` above.
   mobileDescriptionGroup: "flex flex-col gap-3",
-  mobileDescription: "text-[1.125rem] leading-[1.33] text-ink",
+  mobileDescription: "text-[1.125rem] leading-[1.33] text-text",
   mobileNavList: "flex flex-col",
-  mobileNavLink: "text-[1.125rem] leading-10 text-ink transition-opacity hover:opacity-70",
+  mobileNavLink: "text-[1.125rem] leading-10 text-text transition-opacity hover:opacity-70",
   mobileAddressGroup: "flex flex-col items-start gap-4",
-  mobileAddressLine: "text-[1.125rem] leading-[1.33] text-ink",
+  mobileAddressLine: "text-[1.125rem] leading-[1.33] text-text",
   mobileSocialGroup: "flex items-center gap-3",
 
   // Shared by both breakpoints (identical Figma values at both sizes).
@@ -3770,7 +3770,7 @@ export const footer = {
   // turns white -- both existing tokens, owner call 2026-08-27, replacing
   // the earlier plain opacity fade.
   socialButton:
-    "flex size-[60px] items-center justify-center rounded-[14px] bg-[#f1f1f1] text-ink transition-colors hover:bg-accent hover:text-accent-ink",
+    "flex size-[60px] items-center justify-center rounded-[14px] bg-[#f1f1f1] text-text transition-colors hover:bg-accent hover:text-accent-ink",
   socialIconLg: "size-[22px]",
   socialIconSm: "size-6",
   // Facebook's exported glyph isn't square (it's cropped tight to the "f"
@@ -4052,7 +4052,7 @@ export const categoryFilters = {
   // one divider below it (mb-[-1px] in Figma's export is the same "each
   // row owns only its own edge" technique already used throughout this
   // list, not a new pattern).
-  header: "flex items-center justify-start border-b border-[#e8ecf1] pb-6 pl-4 text-[1.375rem] font-medium leading-[26px] text-ink",
+  header: "flex items-center justify-start border-b border-[#e8ecf1] pb-6 pl-4 text-[1.375rem] font-medium leading-[26px] text-text",
   // py-6 (24px, was py-5/20px) -- same 2026-08-29 style revision.
   // Text colour #727272 (owner correction, 2026-08-30, was #838d97).
   groupHeaderCollapsed:
@@ -4064,7 +4064,7 @@ export const categoryFilters = {
   // beneath the open category's own label; groupWrapExpanded below owns
   // the one real border around the whole open group instead.
   // pt-6 (24px, was pt-5/20px) -- same 2026-08-29 style revision.
-  groupHeaderExpanded: "flex w-full items-center justify-between px-4 pt-6 text-left text-[1.125rem] leading-5 font-semibold text-ink",
+  groupHeaderExpanded: "flex w-full items-center justify-between px-4 pt-6 text-left text-[1.125rem] leading-5 font-semibold text-text",
   groupWrapExpanded: "border-b border-[#e8ecf1]",
   chevron: "size-3 shrink-0 text-current transition-transform duration-300 ease-in-out",
   chevronOpen: "rotate-180",
@@ -4101,14 +4101,14 @@ export const categoryFilters = {
   // height + 12px, so the FAB sits with a clean 12px gap above the bar
   // instead of overlapping it (was bottom-6/24px, which sat inside the
   // bar's own height).
-  fab: "fixed inset-x-0 bottom-[72px] z-40 mx-auto flex w-fit items-center gap-2 rounded-full border border-[#e8ecf1] bg-paper px-6 py-3 text-ink shadow-card xl:hidden",
+  fab: "fixed inset-x-0 bottom-[72px] z-40 mx-auto flex w-fit items-center gap-2 rounded-full border border-[#e8ecf1] bg-paper px-6 py-3 text-text shadow-card xl:hidden",
   fabIcon: "size-4 shrink-0",
   fabLabel: "text-[1rem] leading-5 font-medium",
   // Bottom sheet, not MobileNav's full-screen takeover (owner reference,
   // 2026-08-30: a partial-height sheet with a drag handle and a dimmed but
   // still-visible backdrop, not an opaque full-screen swap) -- portalled to
   // document.body, same reasoning as MobileNav's own `drawer.panel`.
-  // bg-paper/text-ink here instead of that component's bg-ink, since this
+  // bg-paper/text-text here instead of that component's bg-ink, since this
   // panel shows the same light-theme filter list the desktop sidebar
   // already does, not the site nav.
   drawerBackdrop: "fixed inset-0 z-40 bg-ink/40 transition-opacity duration-300 ease-in-out",
@@ -4117,7 +4117,7 @@ export const categoryFilters = {
   // Square top corners (owner correction, 2026-08-30: was `rounded-t-2xl`)
   // -- no rounding on this sheet at all now, matching the rest of this
   // component's own `rounded-none` sitewide convention.
-  drawerPanel: "fixed inset-x-0 bottom-0 z-50 flex max-h-[85vh] flex-col overflow-hidden bg-paper text-ink transition-transform duration-300 ease-in-out",
+  drawerPanel: "fixed inset-x-0 bottom-0 z-50 flex max-h-[85vh] flex-col overflow-hidden bg-paper text-text transition-transform duration-300 ease-in-out",
   drawerRevealOpen: "translate-y-0",
   drawerRevealClosed: "translate-y-full",
   // Decorative drag-handle bar (Babyshop reference) -- purely visual, no
@@ -4125,8 +4125,8 @@ export const categoryFilters = {
   // real ways to dismiss, same as this project's other overlays.
   drawerHandle: "mx-auto mt-3 h-1 w-10 shrink-0 rounded-full bg-[#e8ecf1]",
   drawerHead: "container-p flex shrink-0 items-center justify-between border-b border-[#e8ecf1] py-6",
-  drawerHeading: "text-[1.375rem] font-medium leading-[26px] text-ink",
-  drawerClose: "flex items-center gap-2 text-ink",
+  drawerHeading: "text-[1.375rem] font-medium leading-[26px] text-text",
+  drawerClose: "flex items-center gap-2 text-text",
   drawerCloseIcon: "size-5",
   drawerBody: "flex-1 overflow-y-auto",
 };
@@ -4210,8 +4210,8 @@ export const categoryMetaStrip = {
   // layout switch unchanged (coupled to the sidebar's 252px width, itself
   // deliberately left `xl:`-gated -- see docs/05-plan.md's PLP/PDP tablet
   // pass entry).
-  title: "max-md:text-[1.5rem] max-md:leading-[28px] md:text-[1.875rem] font-medium text-ink",
-  // Colour corrected to text-ink (owner call, 2026-08-28, "layout changes
+  title: "max-md:text-[1.5rem] max-md:leading-[28px] md:text-[1.875rem] font-medium text-text",
+  // Colour corrected to text-text (owner call, 2026-08-28, "layout changes
   // to the heading"): the updated Figma frame renders this line in the
   // same near-black as the title, not the muted #3c3c43 grey the first
   // build guessed.
@@ -4219,7 +4219,7 @@ export const categoryMetaStrip = {
   // [24px]) -- was the desktop 20px size unconditionally; xl keeps that
   // confirmed desktop value.
   // text-subline (#17191e, owner, 2026-09-01: sitewide title+subline color
-  // on white/paper backgrounds) -- was text-ink.
+  // on white/paper backgrounds) -- was text-text.
   subline: "max-md:text-[1.125rem] max-md:leading-6 md:text-[1.25rem] font-normal text-subline",
   // Separator REMOVED (owner correction, 2026-08-30: "let's put it under
   // the title not on the top without the separator") -- a same-day earlier
@@ -4359,7 +4359,7 @@ export const pagination = {
   // owner request, 2026-09-03: page-number cells should hover the same
   // color. `cellActive` (the current page) is excluded, same as that CTA
   // never needing a hover state while already in its "on" look.
-  cell: "flex max-xl:size-[40px] xl:size-[48px] items-center justify-center rounded-none bg-[#fafafa] text-[0.875rem] font-medium text-ink hover:bg-[#FFF6F3]",
+  cell: "flex max-xl:size-[40px] xl:size-[48px] items-center justify-center rounded-none bg-[#fafafa] text-[0.875rem] font-medium text-text hover:bg-[#FFF6F3]",
   cellActive:
     "flex max-xl:size-[40px] xl:size-[48px] items-center justify-center rounded-none bg-accent text-[0.875rem] font-bold text-paper",
   // No fixed mobile width any more (real bug, found live 2026-08-30, owner:
@@ -4441,7 +4441,7 @@ export const fabricOptions = {
   headingBlock: "mx-auto flex w-full max-w-[579px] flex-col items-center gap-4 text-center md:max-w-[750px] md:gap-6",
   // Threshold moved max-xl:/xl: -> max-md:/md: (owner, 2026-09-04: same
   // tablet-width treatment as the homepage). Fixed values, desktop larger.
-  eyebrow: "text-base font-semibold text-ink md:text-[1.25rem]",
+  eyebrow: "text-base font-semibold text-text md:text-[1.25rem]",
   // max-xl:text-[1.875rem]/leading-[34px]/font-normal (30px/34px, mobile
   // Figma, matching whatWeCover.heading's exact pattern). xl keeps the
   // original 54px/64px/font-medium.
@@ -4462,7 +4462,7 @@ export const fabricOptions = {
   // Threshold moved xl:/max-xl: -> md:/max-md: (2026-09-04, same review) --
   // paired with `headingBlock`'s own `md:max-w-[750px]` above so the
   // "3-line bug" fix travels with it, not just the size.
-  heading: "text-[1.875rem] leading-[34px] font-normal text-ink md:text-[3.375rem] md:leading-[64px] md:font-medium",
+  heading: "text-[1.875rem] leading-[34px] font-normal text-text md:text-[3.375rem] md:leading-[64px] md:font-medium",
   // gap-0 (was gap-12/48px) -- get_metadata shows zero gap between one
   // row's own box and the next; the 32px around every divider comes from
   // each row's own mb-8 (below its content) and pt-8 (above the next
@@ -4502,15 +4502,15 @@ export const fabricOptions = {
   headerRow: "flex flex-col gap-8 border-b border-[#e8ecf1] pb-8 text-left xl:flex-row xl:items-center xl:gap-[132px]",
   colFabric: "flex w-full flex-col gap-6 xl:w-[302px] xl:gap-12",
   col: "flex w-full flex-col gap-6 xl:w-[293px] xl:gap-12",
-  colHeader: "text-[1.875rem] font-medium text-ink",
+  colHeader: "text-[1.875rem] font-medium text-text",
   // font-semibold (owner request, 2026-08-30: "make the fabric coloum
   // content semibold") -- was font-medium.
-  fabricCell: "text-[1.375rem] font-semibold leading-7 text-ink",
+  fabricCell: "text-[1.375rem] font-semibold leading-7 text-text",
   // font-normal, explicit (owner request, 2026-08-30: "make these regular
   // font" -- Gym/yoga/etc "Best For" and "Soft hand/etc" Performance cells)
   // -- was already regular by omission, written out now so it can't be
   // mistaken for an oversight.
-  bodyCell: "text-[1.375rem] font-normal leading-7 text-ink",
+  bodyCell: "text-[1.375rem] font-normal leading-7 text-text",
   dataRow: "flex flex-col gap-6 border-b border-[#e8ecf1] pt-8 pb-8 xl:flex-row xl:items-center xl:gap-[132px]",
   // No xl:shrink-0 (fix, 2026-08-30): the header row's own equivalent
   // cells (colFabric/col above) never had shrink-0 and already shrink
@@ -4524,8 +4524,8 @@ export const fabricOptions = {
   // proportionally, so the row always fits without losing its ratio.
   // Same semibold/regular correction as fabricCell/bodyCell above, applied
   // to every row after the first.
-  fabricCellCol: "w-full text-[1.375rem] font-semibold leading-7 text-ink xl:w-[302px]",
-  bodyCellCol: "w-full text-[1.375rem] font-normal leading-7 text-ink xl:w-[293px]",
+  fabricCellCol: "w-full text-[1.375rem] font-semibold leading-7 text-text xl:w-[302px]",
+  bodyCellCol: "w-full text-[1.375rem] font-normal leading-7 text-text xl:w-[293px]",
   // max-xl:mt-8/max-w-[320px] (mobile Figma node 590:1488: 32px gap under
   // the accordion stack, 320px note width). xl keeps the original 48px
   // gap/570px width.
@@ -4537,7 +4537,7 @@ export const fabricOptions = {
   // every breakpoint before this).
   // Threshold moved xl:/1280px -> md:/768px (2026-09-04, same review) --
   // margin/width/size all move together, desktop values always larger.
-  note: "mt-8 w-full max-w-[320px] text-[1.125rem] leading-6 text-ink md:mt-12 md:max-w-[570px] md:text-[1.25rem] md:leading-7",
+  note: "mt-8 w-full max-w-[320px] text-[1.125rem] leading-6 text-text md:mt-12 md:max-w-[570px] md:text-[1.25rem] md:leading-7",
   noteBold: "font-semibold",
 
   /* --- Weight tiers (owner spec, 2026-09-02, T-Shirts category) ---------
@@ -4571,9 +4571,9 @@ export const fabricOptions = {
   // an earlier bump from pr-6/24px that still read tight). On this cell
   // and the two below. Applies to every category using this table
   // (weightTiers or decoration), not just Cricket/Basketball.
-  weightTiersHeaderCell: "pb-4 pr-16 text-[1.5rem] font-medium text-ink last:pr-0",
+  weightTiersHeaderCell: "pb-4 pr-16 text-[1.5rem] font-medium text-text last:pr-0",
   weightTiersRow: "border-b border-[#e8ecf1] last:border-b-0",
-  weightTiersTierCell: "py-4 pr-16 text-[1.125rem] font-semibold leading-6 text-ink whitespace-nowrap",
+  weightTiersTierCell: "py-4 pr-16 text-[1.125rem] font-semibold leading-6 text-text whitespace-nowrap",
   // No `whitespace-nowrap` (real bug, found live, 2026-09-06): this cell is
   // "GSM" for the `weightTiers` variant (always short) but "Best for" for
   // the "decoration" variant (StructuredBlock, Cricket/Basketball) -- a
@@ -4582,8 +4582,8 @@ export const fabricOptions = {
   // generous gap this same fix adds. Wrapping is safe for the short
   // `weightTiers` values too (nothing here is short enough to need forcing
   // onto one line).
-  weightTiersGsmCell: "py-4 pr-16 text-[1.125rem] font-normal leading-6 text-ink",
-  weightTiersBestForCell: "py-4 pr-0 text-[1.125rem] font-normal leading-6 text-ink",
+  weightTiersGsmCell: "py-4 pr-16 text-[1.125rem] font-normal leading-6 text-text",
+  weightTiersBestForCell: "py-4 pr-0 text-[1.125rem] font-normal leading-6 text-text",
   /* --- Decoration method (owner spec, 2026-09-05, Teamwear/Cricket) -----
      Alternate variant of the same reusable block above -- own eyebrow + H3
      ahead of a 3-column table, which reuses the weightTiers* table recipe
@@ -4594,12 +4594,12 @@ export const fabricOptions = {
   // mt-[64px]/xl:mt-[80px] (owner spec, 2026-09-06: "Decoration from top, on
   // mobile, make it 64 and 80 on desktop" -- was mt-[44px]/xl:mt-[60px]).
   decorationWrap: "mt-[64px] w-full xl:mt-[80px]",
-  decorationEyebrow: "text-base font-semibold text-ink xl:text-[1.25rem]",
+  decorationEyebrow: "text-base font-semibold text-text xl:text-[1.25rem]",
   // mt-4/xl:mt-6 (16px mobile / 24px desktop, owner spec, 2026-09-06: "on
   // mobile eyebrow to title 16px is gap, follow the same for decoration" --
   // matches this same section's own headingBlock gap-4/xl:gap-6 pattern.
   // Was a flat mt-6/24px at every breakpoint.
-  decorationHeading: "mt-4 text-[1.875rem] font-medium text-ink xl:mt-6",
+  decorationHeading: "mt-4 text-[1.875rem] font-medium text-text xl:mt-6",
 
   /* --- Mobile accordion (Figma node 590:1488, "Content", 2026-08-30) ----
      Below xl only -- the desktop <table> above covers xl+. First item
@@ -4649,7 +4649,7 @@ export const fabricOptions = {
   accordionItem: "flex flex-col border transition-colors duration-300",
   accordionItemOpen: "gap-4 border-transparent bg-[#f2f2f7] px-4 pt-4 pb-5",
   accordionItemClosed: "border-[#e8ecf1] p-4",
-  accordionHeader: "flex w-full items-center justify-between gap-4 text-left text-[1.125rem] font-medium leading-6 text-ink",
+  accordionHeader: "flex w-full items-center justify-between gap-4 text-left text-[1.125rem] font-medium leading-6 text-text",
   // grid-template-rows 0fr<->1fr, same mechanism as categoryFilters.
   // itemListGrid/itemListGridOpen -- overflow-hidden lives one level
   // deeper (accordionDetailClip), not on this padded track, since padding
@@ -4666,7 +4666,7 @@ export const fabricOptions = {
   // No explicit leading override -- Figma specifies leading-[normal] here
   // (not a tight leading-none), same as the eyebrow above.
   accordionLabel: "text-sm font-semibold uppercase text-[#727272]",
-  accordionValue: "text-[1.125rem] font-normal leading-6 text-ink",
+  accordionValue: "text-[1.125rem] font-normal leading-6 text-text",
   accordionCollapsedTitle: "overflow-hidden text-ellipsis whitespace-nowrap",
   accordionChevron: "size-3 shrink-0 text-current transition-transform duration-300 ease-in-out",
   accordionChevronOpen: "rotate-180",
@@ -4728,7 +4728,7 @@ export const whatWeCover = {
   headingBlock: "mx-auto flex w-full max-w-[579px] flex-col items-center gap-4 px-5 text-center max-xl:mb-8 xl:gap-6 xl:px-0 xl:mb-0",
   // Threshold moved xl:/768px -> md: (2026-09-04, same PLP/PDP tablet
   // pass as FabricOptions). Fixed values, desktop larger.
-  eyebrow: "text-base font-semibold text-ink md:text-[1.25rem]",
+  eyebrow: "text-base font-semibold text-text md:text-[1.25rem]",
   // max-xl:text-[1.875rem]/leading-[34px] (30px/34px, mobile Figma) --
   // font-normal there too (Figma's own mobile export: "Regular", weight
   // 460, not Medium). xl keeps the original 54px/64px/font-medium.
@@ -4737,7 +4737,7 @@ export const whatWeCover = {
   // FabricOptions' own heading, which needed a paired width change too --
   // this heading has no forced line break to protect), so no coupled
   // width change is needed.
-  heading: "text-[1.875rem] leading-[34px] font-normal text-ink md:text-[3.375rem] md:leading-[64px] md:font-medium",
+  heading: "text-[1.875rem] leading-[34px] font-normal text-text md:text-[3.375rem] md:leading-[64px] md:font-medium",
   // Mobile-only (Figma node 590:1220, "Artwork", 320x220 -- exactly the
   // 16:11 ratio already in MediaPlaceholder's own set). xl:hidden on the
   // wrapper: no equivalent frame exists on the desktop design at all, not a
@@ -4797,11 +4797,11 @@ export const whatWeCover = {
   // 24px, auto line-height (owner correction, 2026-09-03: "customization
   // section currently titles are 30px, make them 24px auto line height" --
   // was text-[1.875rem]/30px). Same size at both breakpoints, as before.
-  itemTitle: "text-[1.5rem] font-medium text-ink",
+  itemTitle: "text-[1.5rem] font-medium text-text",
   // max-xl:text-[1.125rem]/leading-6 (18px/24px, mobile Figma). xl keeps
   // the original 20px/28px. text-subline (#17191e, owner, 2026-09-01:
   // sitewide title+subline colour on white/paper backgrounds) -- was
-  // text-ink; missed in the first pass over this pattern, caught when the
+  // text-text; missed in the first pass over this pattern, caught when the
   // owner pointed at this exact grid ("Fabric"/"Color and print"/etc.).
   // Threshold moved xl: -> md: (2026-09-04, same review). Fixed values,
   // desktop larger.
@@ -4958,14 +4958,14 @@ export const trustPoints = {
   // Threshold moved xl: -> md: (owner, 2026-09-04: same tablet-width
   // treatment as the homepage, PLP/PDP). Fixed values, desktop larger.
   heading:
-    "text-[1.875rem] leading-[34px] font-medium text-ink text-wrap md:text-[3.375rem] md:leading-[64px]",
+    "text-[1.875rem] leading-[34px] font-medium text-text text-wrap md:text-[3.375rem] md:leading-[64px]",
   // max-xl:text-[1.125rem]/leading-6 (18px/24px, mobile Figma). xl keeps
   // the original 22px/32px-line-height regular -- Figma's own real value
   // for this subline, a size this project's own type scale has no match
   // for (same "one-off literal value straight from Figma" precedent as
   // every other bespoke PLP section). text-subline (#17191e, owner,
   // 2026-09-01: sitewide title+subline color on white/paper backgrounds)
-  // -- was text-ink. Threshold moved xl: -> md: (2026-09-04, same review).
+  // -- was text-text. Threshold moved xl: -> md: (2026-09-04, same review).
   subline: "text-[1.125rem] leading-6 font-normal text-subline md:text-[1.375rem] md:leading-8",
   // Services page's own "Responsible make" instance (owner, 2026-09-08:
   // make "We name what is genuinely certified rather than making broad
@@ -5017,7 +5017,7 @@ export const trustPoints = {
   // Threshold moved max-xl: -> max-md: (2026-09-04, same review). Base
   // (unprefixed) is the desktop 24px value; the mobile override now only
   // applies below 768px.
-  pointText: "text-[1.5rem] leading-tight font-normal text-ink max-md:text-[1.125rem] max-md:leading-6",
+  pointText: "text-[1.5rem] leading-tight font-normal text-text max-md:text-[1.125rem] max-md:leading-6",
   // 18x18px (owner correction 2026-08-30, down from the sitewide size-5
   // token/20px) on desktop. max-xl:size-4 (16px, mobile Figma). mt-1.5
   // (6px)/max-xl:mt-1 (4px) -- paired with `row`'s own `items-start` above
@@ -5115,13 +5115,13 @@ export const productGallery = {
   // chevron stays there until user go through all the images"), not just
   // for one click -- `ProductGallery.tsx`'s own `railAtBottom` state drives
   // that, this is only the chrome.
-  moreButton: "absolute inset-x-0 bottom-2 z-10 mx-auto flex size-[45px] items-center justify-center rounded-full bg-paper text-ink shadow-card",
+  moreButton: "absolute inset-x-0 bottom-2 z-10 mx-auto flex size-[45px] items-center justify-center rounded-full bg-paper text-text shadow-card",
   // Mirrors `moreButton` at the rail's own top edge (owner, 2026-09-01:
   // once the user has scrolled down at all, "the chevron should appear too
   // when user goes one image down... so now user should have an option to
   // scroll back") -- same chrome, `top-2` instead of `bottom-2`, hidden
   // until the rail has scrolled past its own start.
-  lessButton: "absolute inset-x-0 top-2 z-10 mx-auto flex size-[45px] items-center justify-center rounded-full bg-paper text-ink shadow-card",
+  lessButton: "absolute inset-x-0 top-2 z-10 mx-auto flex size-[45px] items-center justify-center rounded-full bg-paper text-text shadow-card",
   moreIcon: "size-[22px]",
   mainWrap: "relative min-w-0 flex-1 self-stretch",
   // Native scroll-snap track (owner report, 2026-09-07: "blinky, jerky" --
@@ -5150,7 +5150,7 @@ export const productGallery = {
   // button; prev sits 81px from the right edge (next's own 24px inset +
   // its 45px width + the pair's 12px gap) -- both circles, matching
   // `moreButton`'s own bg-paper/shadow-card chrome.
-  navButton: "absolute bottom-6 z-10 flex size-[45px] items-center justify-center rounded-full bg-paper text-ink shadow-card",
+  navButton: "absolute bottom-6 z-10 flex size-[45px] items-center justify-center rounded-full bg-paper text-text shadow-card",
   navButtonPrev: "right-[81px]",
   navButtonNext: "right-6",
   navIcon: "size-[22px]",
@@ -5158,7 +5158,7 @@ export const productGallery = {
   // request, 2026-09-01: a visible confirmation that the prev/next chevrons
   // actually changed the image) -- same bg-paper/shadow-card chrome as the
   // circular buttons beside it, not a new pill style.
-  counter: "absolute bottom-6 left-6 z-10 rounded-full bg-paper px-3 py-1.5 text-[0.875rem] font-medium text-ink shadow-card",
+  counter: "absolute bottom-6 left-6 z-10 rounded-full bg-paper px-3 py-1.5 text-[0.875rem] font-medium text-text shadow-card",
   // Mobile: thumbnail strip pinned over the bottom of the main image
   // (Figma's own `Thumbnail Slider`, 638:2525) -- xl:hidden, the mirror of
   // desktopRoot above. Full-bleed edge to edge (owner, 2026-09-01: "product
@@ -5204,7 +5204,7 @@ export const productGallery = {
   // chrome (owner, 2026-09-01: tapping a thumbnail "should show the image
   // on the top and I should know its changed") -- top, not bottom, since
   // the thumbnail strip already owns the bottom edge here.
-  mobileCounter: "absolute left-4 top-4 z-10 rounded-full bg-paper px-3 py-1.5 text-[0.875rem] font-medium text-ink shadow-card",
+  mobileCounter: "absolute left-4 top-4 z-10 rounded-full bg-paper px-3 py-1.5 text-[0.875rem] font-medium text-text shadow-card",
   // Moved out from an absolute overlay on the main image into normal flow
   // below it (owner report, 2026-09-07: with a real photo wired in, the
   // overlay treatment "does not look good... over the image" -- now that
@@ -5274,7 +5274,7 @@ export const productInfo = {
   // row's own gap between the SKU and the heading+description block).
   root: "flex w-full flex-col gap-3 xl:gap-5",
   skuRow: "flex w-full items-end",
-  sku: "text-base font-semibold text-ink",
+  sku: "text-base font-semibold text-text",
   // gap-2 (8px), matching Figma's own gap between the H1 and description.
   content: "flex w-full flex-col gap-2",
   // 20px/28px below xl (owner correction, 2026-09-01: "product title 20px
@@ -5303,11 +5303,11 @@ export const productInfo = {
   // full-width column at every width below `xl:` today, which is wider
   // than the 514px desktop column the `xl:tracking-normal` reset was
   // tuned for -- more room, not less, so no new wrap risk.
-  heading: "w-full text-[1.25rem] leading-7 tracking-[-0.02em] md:text-2xl md:leading-[30px] md:tracking-normal font-semibold text-ink",
+  heading: "w-full text-[1.25rem] leading-7 tracking-[-0.02em] md:text-2xl md:leading-[30px] md:tracking-normal font-semibold text-text",
   // 18px/28px-line-height regular -- text-lg/leading-7 match Figma's
   // literal values exactly, same reasoning as `heading` above. text-subline
   // (#17191e, owner, 2026-09-01: sitewide title+subline colour on white/
-  // paper backgrounds) -- was text-ink.
+  // paper backgrounds) -- was text-text.
   description: "w-full text-lg font-normal leading-7 text-subline",
 };
 
@@ -5335,7 +5335,7 @@ export const productHighlights = {
   // as productInfo.description) but font-medium, not font-normal -- Figma's
   // own export ("Figtree:Medium") for this list, a real weight difference
   // from the description text next to it, not an inconsistency to fix.
-  text: "text-lg font-medium leading-7 text-ink",
+  text: "text-lg font-medium leading-7 text-text",
 };
 
 /* --- ProductOptions (PDP) ------------------------------------------------ */
@@ -5354,7 +5354,7 @@ export const productOptions = {
   group: "flex w-full flex-col gap-4",
   // 20px/32px-line-height medium -- text-xl/leading-[32px] match Figma's
   // literal values exactly.
-  heading: "w-full text-xl font-medium leading-[32px] text-ink",
+  heading: "w-full text-xl font-medium leading-[32px] text-text",
   pillRow: "flex w-full flex-wrap items-center gap-3",
   // rounded-[6px], not this project's other pill/chip radius
   // (categoryMetaStrip.chip's own rounded-[4px] border pill) -- a
@@ -5497,7 +5497,7 @@ export const productCtas = {
   // treatment instead, not "whatever colour is ambient here" -- a real
   // difference in kind, not just this button living somewhere `currentColor`
   // happens to resolve to orange already (it doesn't; the ambient text
-  // colour on this row is `text-ink`). `!` on every one of these: the same
+  // colour on this row is `text-text`). `!` on every one of these: the same
   // same-specificity-utility-order risk already found and fixed on
   // `ProductGallery`'s own active-thumbnail border (see that component's
   // comment) applies here too (`border-current`/`text-current` vs.
@@ -5699,8 +5699,8 @@ export const productRelatedStyles = {
   // Pill chip: rounded-full, #f2f4f8 border, white fill, the exact drop
   // shadow Figma specifies (a one-off arbitrary value -- no other chip in
   // this project casts a shadow, so there's no existing token to reuse).
-  // hover:text-ink (owner, 2026-09-01: "on hover the chips, the font and
-  // chevron should get the black primary color") -- text-ink is this
+  // hover:text-text (owner, 2026-09-01: "on hover the chips, the font and
+  // chevron should get the black primary color") -- text-text is this
   // project's own near-black token; the icon has no colour of its own
   // (see chipIcon) so it inherits this on hover too, no separate rule
   // needed. hover:bg-[#fafafb] (owner, 2026-09-01: "the background white
@@ -5711,7 +5711,7 @@ export const productRelatedStyles = {
   // read as a visible fill change, not "very subtle").
   // `group` -- so chipIcon's own `group-hover:translate-x-0.5` (the
   // chevron nudge) can react to hovering this chip.
-  chip: "group inline-flex shrink-0 items-center gap-1 rounded-full border border-[#f2f4f8] bg-paper px-5 py-3 text-base leading-5 text-[#3c3c43] shadow-[0px_2px_2px_rgba(39,39,39,0.1)] transition-colors hover:bg-[#fafafb] hover:text-ink",
+  chip: "group inline-flex shrink-0 items-center gap-1 rounded-full border border-[#f2f4f8] bg-paper px-5 py-3 text-base leading-5 text-[#3c3c43] shadow-[0px_2px_2px_rgba(39,39,39,0.1)] transition-colors hover:bg-[#fafafb] hover:text-text",
   // No colour of its own -- inherits `currentColor` from `chip`, so it
   // goes black on hover for free along with the label text. `group-hover:
   // translate-x-0.5` (owner, 2026-09-01: "on hover can you move the
@@ -5769,7 +5769,7 @@ export const productSpecifications = {
   // the homepage) -- `text-h1`'s fluid clamp already evaluates well above
   // the 30px mobile value at 768px (confirmed on the homepage pass), safe
   // here too.
-  heading: "max-md:text-[1.875rem] max-md:font-[460] max-md:leading-[34px] md:text-h1 text-ink",
+  heading: "max-md:text-[1.875rem] max-md:font-[460] max-md:leading-[34px] md:text-h1 text-text",
   // Reuses trustPoints.subline's own literal values verbatim -- same
   // "heading + gray subline sentence" pairing already used directly below
   // this section (TrustPoints). Threshold moved xl: -> md: (2026-09-04).
@@ -5807,14 +5807,14 @@ export const productSpecifications = {
   // section title are 22px, make them also 24px medium font weight" --
   // was text-[1.375rem]/22px with an explicit leading-[30px]/leading-7).
   // Same size/weight at both breakpoints now, no fixed line-height override.
-  label: "text-[1.5rem] font-medium text-ink shrink-0 xl:w-[302px]",
+  label: "text-[1.5rem] font-medium text-text shrink-0 xl:w-[302px]",
   // Desktop 22px/28px, same as label above (owner: same sentence covers
   // both "style, fabric" font size). Mobile 18px/24px (owner: "'High-waisted
   // compression legging (base type)' is 18px by 24" -- text-lg/leading-6) --
   // a real, deliberate size step down from the mobile label's 22px, not a
   // copy-paste of it.
   // Threshold moved max-xl:/xl: -> max-md:/md: (2026-09-04, same review).
-  value: "max-md:text-lg max-md:leading-6 md:text-[1.375rem] md:leading-7 font-normal text-ink",
+  value: "max-md:text-lg max-md:leading-6 md:text-[1.375rem] md:leading-7 font-normal text-text",
 };
 
 /* --- ProductCategoryLinks (PDP) ------------------------------------------ */
@@ -5836,8 +5836,8 @@ export const productCategoryLinks = {
   // crawlable, still satisfies this component's own SEO rule-6 purpose
   // above), it just never becomes visible now, at any width.
   root: "container-p hidden flex-col gap-4 border-t border-line py-8",
-  backLink: "text-base font-medium text-ink underline decoration-solid underline-offset-2 hover:opacity-70",
+  backLink: "text-base font-medium text-text underline decoration-solid underline-offset-2 hover:opacity-70",
   siblingsHeading: "text-sm font-medium text-muted",
   siblingsList: "flex flex-wrap gap-x-4 gap-y-2",
-  siblingLink: "text-base text-ink underline decoration-solid underline-offset-2 hover:opacity-70",
+  siblingLink: "text-base text-text underline decoration-solid underline-offset-2 hover:opacity-70",
 };
