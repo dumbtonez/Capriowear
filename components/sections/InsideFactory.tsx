@@ -63,6 +63,15 @@ export type InsideFactoryProps = {
    * supplies the top inset once there's no heading to gap from.
    */
   showHeading?: boolean;
+  /**
+   * Defaults to true (the homepage's own "Take Factory Tour" CTA under the
+   * gallery). false drops it (owner, 2026-09-08: "remove the factory cta
+   * for this page, not from the homepage component") -- /our-factory IS
+   * the factory tour destination that CTA links to, so it has no reason to
+   * link to itself there; the homepage keeps the CTA via this prop's
+   * default, unchanged.
+   */
+  showCta?: boolean;
 };
 
 const CARD_WIDTH = 300;
@@ -225,7 +234,12 @@ function MobileCarousel({
   );
 }
 
-export function InsideFactory({ content, tone = "dark", showHeading = true }: InsideFactoryProps) {
+export function InsideFactory({
+  content,
+  tone = "dark",
+  showHeading = true,
+  showCta = true,
+}: InsideFactoryProps) {
   return (
     <section>
       {/* Desktop: chevron-driven carousel through all 5 shots. The gallery
@@ -247,9 +261,11 @@ export function InsideFactory({ content, tone = "dark", showHeading = true }: In
         ) : null}
         <div className={insideFactory.desktopGalleryWrap}>
           <DesktopGallery shots={content.media} tone={tone} />
-          <div className={insideFactory.desktopCtaWrap}>
-            <Button href={content.cta.href}>{content.cta.label}</Button>
-          </div>
+          {showCta ? (
+            <div className={insideFactory.desktopCtaWrap}>
+              <Button href={content.cta.href}>{content.cta.label}</Button>
+            </div>
+          ) : null}
         </div>
       </div>
 
@@ -269,9 +285,11 @@ export function InsideFactory({ content, tone = "dark", showHeading = true }: In
         <div className={showHeading ? insideFactory.mobileGalleryGap : undefined}>
           <MobileCarousel shots={content.media} tone={tone} />
         </div>
-        <div className={insideFactory.mobileCtaWrap}>
-          <Button href={content.cta.href}>{content.cta.label}</Button>
-        </div>
+        {showCta ? (
+          <div className={insideFactory.mobileCtaWrap}>
+            <Button href={content.cta.href}>{content.cta.label}</Button>
+          </div>
+        ) : null}
       </div>
     </section>
   );

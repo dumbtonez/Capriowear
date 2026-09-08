@@ -13,12 +13,16 @@
 // see components/sections/OurFactoryIntro.tsx for the section's own build
 // notes. (Section 2 is the video layer, already inside OurFactoryHero
 // above -- no standalone "section 2" component exists.)
-// Section 4 (this step): the homepage's own InsideFactory section, reused
-// with its new `tone="light"`/`showHeading={false}` variant (owner,
-// 2026-09-08: "add the inside the factory section we use on homepage, it
-// will be on white background, not eyebrow and title") -- same component,
-// same content (home.insideFactory: the 5 factory shots and the CTA), only
-// the surface and heading visibility differ. See InsideFactory.tsx's own
+// Section 4: the homepage's own InsideFactory section, reused with its new
+// `tone="light"`/`showHeading={false}` variant (owner, 2026-09-08: "add the
+// inside the factory section we use on homepage, it will be on white
+// background, not eyebrow and title") -- same component, same content
+// (home.insideFactory's 5 factory shots), only the surface and heading
+// visibility differ. `showCta={false}` (this step, same day: "remove the
+// factory cta for this page, not from the homepage component") -- this
+// page IS the factory-tour destination that CTA links to, so it has no
+// reason to link to itself here; the homepage's own usage is untouched.
+// See InsideFactory.tsx's own
 // prop comments for the full reasoning.
 import type { Metadata } from "next";
 
@@ -78,7 +82,7 @@ export default function OurFactoryPage() {
       <main className="relative z-10 bg-paper">
         <OurFactoryHero hero={ourFactory.hero} />
         <OurFactoryIntro content={ourFactory.intro} />
-        <InsideFactory content={home.insideFactory} tone="light" showHeading={false} />
+        <InsideFactory content={home.insideFactory} tone="light" showHeading={false} showCta={false} />
       </main>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />
