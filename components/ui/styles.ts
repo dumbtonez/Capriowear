@@ -1493,10 +1493,27 @@ export const ourFactoryIntro = {
   inner:
     "mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-5 py-12 md:px-8 xl:gap-20 xl:pb-[120px] xl:pl-[260px] xl:pr-[118px] xl:pt-[160px]",
   textCol: "flex flex-col gap-8 xl:max-w-[52.5625rem]",
-  heading: "text-h1 text-ink",
+  // max-md overrides (owner, 2026-09-08: "the title should be in 1 line"):
+  // below md, text-h1's own fluid mobile anchor (30px) is still too wide
+  // for "The factory behind Capriowear" to fit one line down to the 360px
+  // min mobile viewport (confirmed: wraps below ~600px). 1.375rem (22px,
+  // already this project's established literal for a fitted mobile
+  // headline-adjacent size -- see e.g. `desktopNav`'s own `labelBold`)
+  // measured against the real rendered text width leaves a safe margin at
+  // 360px. Weight and line-height re-set alongside the size, not left to
+  // the h1 token's own bundled values (established gotcha, see
+  // `docs/05-plan.md`'s decision log, 2026-08-23: overriding a compound
+  // token's size alone without its paired weight/line-height silently
+  // drops to the browser default).
+  heading:
+    "max-md:text-[1.375rem] max-md:font-medium max-md:leading-[1.1852] max-md:whitespace-nowrap md:text-h1 text-ink",
   paragraph: "text-[1.625rem] leading-9 text-subline",
   paragraphBold: "font-semibold",
-  statsRow: "flex flex-col gap-8 md:flex-row md:items-start md:gap-12",
+  // gap-12 (48px) sitewide, not gap-8 (32px) below md (owner, 2026-09-08:
+  // "the space between 2 numbers should be 48px" -- was already 48px at
+  // md and up via the `md:gap-12` below, this only affects the stacked
+  // mobile layout's own vertical gap).
+  statsRow: "flex flex-col gap-12 md:flex-row md:items-start",
   // The gradient line (Figma "Line 329"): a real two-stop linear gradient
   // asset (accent orange solid to ~36% of the line, fading to transparent),
   // not a plain divider -- reproduced as CSS rather than an image so it
