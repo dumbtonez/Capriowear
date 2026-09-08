@@ -2865,7 +2865,11 @@ export const insideFactory = {
   // the placeholder's own internal centred label (`media.label`), which
   // stays for use elsewhere. `mt-8` is the 32px gap; left-aligned to the
   // image (this card's own text-left default), font-normal not font-medium.
-  desktopCardLabel: "mt-8 text-[1.5rem] font-normal leading-[28px] text-paper",
+  // Colour changed text-paper -> #838d97 (owner, 2026-09-08: "text under
+  // the inside the factory image change the color to #838D97") -- this
+  // project's own established muted-on-dark literal (Stats' caption,
+  // mega-menu labels, etc.), not a new one-off value.
+  desktopCardLabel: "mt-8 text-[1.5rem] font-normal leading-[28px] text-[#838d97]",
   // /our-factory's `tone="light"` reuse: same size/weight/gap, `text-ink`
   // instead of `text-paper` now that the card sits on a white section.
   desktopCardLabelLight: "mt-8 text-[1.5rem] font-normal leading-[28px] text-ink",
