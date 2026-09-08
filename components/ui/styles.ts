@@ -1520,8 +1520,25 @@ export const ourFactoryIntro = {
 // each item's own fixed desktop width dropping to `w-full`.
 export const ourFactoryProcess = {
   section: "bg-paper",
-  inner: "container-p flex flex-col gap-12 pb-16 xl:gap-[104px] xl:pb-[120px]",
-  headingGroup: "flex flex-col gap-8 xl:gap-[72px]",
+  // xl:pt-[160px]: this section's own real top inset (owner correction,
+  // 2026-09-08: "top should have 160px gap" -- get_metadata's own frame
+  // read no top padding at all, since the previous section, InsideFactory,
+  // already happened to close with a matching 120px bottom pad; that
+  // coincidence read as "close enough" but wasn't the real confirmed
+  // number, so this section now states its own 160px explicitly rather
+  // than depending on whatever the previous section's own padding happens
+  // to be).
+  inner: "container-p flex flex-col gap-12 pt-12 pb-16 xl:gap-[104px] xl:pb-[120px] xl:pt-[160px]",
+  // Heading block (eyebrow + H2) plus the first row, 72px apart -- the
+  // real Figma nesting (get_metadata: node 857:1986 wraps the heading
+  // block and row 1 together with its own 72px gap, separate from the
+  // 104px gap between THIS group and every row after it).
+  headingRowGroup: "flex flex-col gap-8 xl:gap-[72px]",
+  // Eyebrow to H2, 24px (owner correction, 2026-09-08: "eyebrow and title
+  // should have 24px gap" -- was wrongly sharing `headingRowGroup`'s own
+  // 72px gap above, a real bug: that 72px was always meant for heading-to-
+  // row, not eyebrow-to-heading, collapsed into one wrapper by mistake).
+  headingGroup: "flex flex-col gap-6",
   // 565px real Figma heading column, wrapping "From fabric to shipped, in
   // one building" to its own real two-line break -- unconstrained, it runs
   // wider and wraps differently at xl and up. Same "max-w forces the real
@@ -2707,8 +2724,20 @@ export const insideFactory = {
   // boundary -- now that the ONLY way to move this track is `handleClick`'s
   // own exact `cardPitch`-sized `scrollBy` jump, there's no free-scroll
   // position left that snapping would ever need to correct.
-  desktopRow:
-    "no-scrollbar flex w-full items-center gap-6 overflow-x-hidden scroll-smooth px-8 xl:gap-12 xl:px-[calc(50%-600px)]",
+  // `xl:px-[80px]`, not the old `calc(50%-600px)` centering formula (real
+  // bug, found live, owner report, 2026-09-08: "should have 80px from the
+  // left of the page, currently it has more") -- that formula only ever
+  // equals 80px at one specific viewport width; centering math scales with
+  // the viewport, so on any wider real screen the first card sat further
+  // than 80px from the edge. It was a leftover from this row's original
+  // wheel/drag-driven center-snap carousel (`xl:snap-center`, since
+  // removed above) -- now that this track only ever moves via a precise
+  // click-driven jump, there's no reason left for it to differ from every
+  // other full-bleed gallery on the site (`exhibitions.desktopRow`/
+  // `howItWorks.desktopRow`/`productCustomizeSteps.desktopRow`), which all
+  // already use this exact flat 80px, matching `container-p`'s own real
+  // `xl:` inset (app/globals.css).
+  desktopRow: "no-scrollbar flex w-full items-center gap-6 overflow-x-hidden scroll-smooth px-8 xl:gap-12 xl:px-[80px]",
   // 469px (owner, 2026-09-03: "i like the exhibition image size and it
   // has gap from the left, use the same for factory") -- matches
   // `exhibitions.desktopCard`'s own confirmed `md:` width exactly, after
