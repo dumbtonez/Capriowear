@@ -1,32 +1,41 @@
 // components/ParallaxMedia.tsx
-// A MediaPlaceholder-shaped box whose image content drifts vertically as
-// the page scrolls -- the "What We Make" process gallery's own animated
-// treatment (/our-factory, owner brief, 2026-09-08: "on the images we will
-// have parallax animation", referencing wmf-coffeemachines.com's "For full
-// taste, in a fast pace" gallery). Framer Motion's scroll-linked
-// `useScroll`/`useTransform` drives an inner layer that's taller than its
-// own clipping box and translates within it -- MediaPlaceholder itself has
-// no such inner layer to animate (its placeholder/image fills the box
-// exactly), so this is a sibling primitive, not a MediaPlaceholder prop:
-// reuses the same `media` shell/ratio/radius/placeholder tokens directly
-// rather than re-describing the same box a second way.
+// A MediaPlaceholder-shaped box whose image settles into place with a
+// slight zoom-and-drift as it scrolls into view -- the "What We Make"
+// process gallery's own animated treatment (/our-factory, owner brief,
+// 2026-09-08: "on the images we will have parallax animation", referencing
+// wmf-coffeemachines.com's "For full taste, in a fast pace" gallery).
 //
-// Motion is layered on top of a static, crawlable box: with JS disabled or
-// before hydration, the image renders in its resting position via a plain
-// CSS transform, same content either way. `useReducedMotion` collapses the
-// scroll range to 0 (owner brief, page-wide rule: "honor prefers-reduced-
-// motion, parallax/reveals off, static shown") -- the sitewide
-// `@media (prefers-reduced-motion: reduce)` rule in globals.css only
-// disables CSS transitions/animations, not a motion value driven directly
-// by scroll position, so this needs its own explicit check.
+// Corrected 2026-09-08 after inspecting that reference site's own live DOM:
+// its image transforms (`translate3d(...) scale(1.2, 1.2)`) do NOT change
+// value across a scroll delta (confirmed by reading the same element's
+// inline transform before and after a 2000px `scrollTo`, twice, byte-
+// identical both times) -- it is NOT a continuous scroll-linked drift.
+// It is a one-time "settle" reveal: each image starts scaled up and
+// slightly offset, transitions to rest once it scrolls into view, and
+// stays there. The first build of this component used Framer Motion's
+// `useScroll`/`useTransform` for a true continuous drift, which is why it
+// read differently from the reference -- replaced here with the same
+// `useRevealOnView` IntersectionObserver hook TextReveal/RevealBox already
+// use elsewhere on this site (one shared "reveal once it's in view"
+// primitive, not a second scroll-tracking mechanism), driving a plain CSS
+// transition instead. Framer Motion is no longer a dependency of this
+// component (removed from package.json in the same change).
+//
+// Motion is layered on top of a static, crawlable box: the image/label is
+// in the initial markup either way, only the resting transform value
+// differs pre/post reveal. `prefers-reduced-motion` is handled by the
+// sitewide `@media (prefers-reduced-motion: reduce)` rule in globals.css,
+// which collapses `transition-duration` to ~0 -- the box still ends at
+// its correct resting position, just without the animated settle, no
+// separate check needed here (unlike the old scroll-linked version, a
+// plain CSS transition IS covered by that sitewide rule).
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import Image, { type StaticImageData } from "next/image";
-import { useRef } from "react";
 
-import { cx } from "./ui/cx";
 import type { MediaRadius, MediaRatio } from "./MediaPlaceholder";
+import { useRevealOnView } from "./TextReveal";
+import { cx } from "./ui/cx";
 import { media } from "./ui/styles";
 
 export type ParallaxMediaProps = {
@@ -36,22 +45,9 @@ export type ParallaxMediaProps = {
   radius?: MediaRadius;
   image?: { src: string | StaticImageData; alt?: string };
   imageSizes?: string;
-  /**
-   * Set false to render a bare placeholder box with no visible caption
-   * text (owner, 2026-09-08: "remove them" -- the overlaid label read as
-   * a design element, not a dev-only placeholder cue). `label` still
-   * supplies the image alt text either way -- same contract as
-   * MediaPlaceholder's own `showLabel` prop. Default true.
-   */
+  /** Set false for a bare placeholder box with no visible caption text. `label` still supplies the image alt text either way. Default true. */
   showLabel?: boolean;
   className?: string;
-  /**
-   * How far the inner layer drifts, as a percentage of the box's own
-   * height in each direction. Owner brief: "subtle (~10-15%)" -- 12
-   * splits that range, applied here rather than per-call so every image
-   * in this gallery moves at the same rate.
-   */
-  range?: number;
 };
 
 export function ParallaxMedia({
@@ -62,16 +58,17 @@ export function ParallaxMedia({
   imageSizes = "50vw",
   showLabel = true,
   className,
-  range = 12,
 }: ParallaxMediaProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], reduceMotion ? ["0%", "0%"] : [`-${range}%`, `${range}%`]);
+  const { ref, active } = useRevealOnView<HTMLDivElement>();
 
   return (
     <div ref={ref} className={cx(media.shell, media.ratio[ratio], media.radius[radius], className)}>
-      <motion.div style={{ y }} className="absolute inset-x-0 -top-[15%] h-[130%]">
+      <div
+        className={cx(
+          "absolute inset-0 transition-transform duration-[1400ms] ease-out",
+          active ? "scale-100 translate-y-0" : "scale-[1.12] translate-y-[3%]",
+        )}
+      >
         {image ? (
           <Image src={image.src} alt={image.alt ?? label} fill sizes={imageSizes} className={media.imageFill} />
         ) : (
@@ -79,7 +76,7 @@ export function ParallaxMedia({
             {showLabel ? <span className={media.label}>{label}</span> : null}
           </div>
         )}
-      </motion.div>
+      </div>
     </div>
   );
 }

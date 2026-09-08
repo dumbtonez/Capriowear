@@ -17,21 +17,21 @@
 // below only toggle a CSS class post-hydration for the fade/rise entrance,
 // the words themselves are already in the server-rendered HTML either way.
 //
-// Images use ParallaxMedia (components/ParallaxMedia.tsx), the page's own
-// scroll-linked drift effect (owner brief: "parallax animation ... as
-// shown" on wmf-coffeemachines.com's "For full taste, in a fast pace"
-// gallery) -- enhancement only: `useReducedMotion` collapses the drift to
-// 0 while the image and its alt text stay exactly as they are, and
-// next/image's own default lazy-loading (no `priority` set anywhere here)
-// already defers every one of these below-the-fold images. Real alt text
-// on all 8 images (7 stations + the breather) comes straight from content,
-// never generic ("image1"-style) or empty.
+// Images use ParallaxMedia (components/ParallaxMedia.tsx), a one-time
+// zoom-and-settle reveal (owner brief: "parallax animation ... as shown"
+// on wmf-coffeemachines.com's "For full taste, in a fast pace" gallery --
+// see that component's own header comment for how its reference DOM was
+// inspected to confirm this is what that site actually does) -- enhancement
+// only: the sitewide reduced-motion rule collapses the transition while the
+// image and its alt text stay exactly as they are, and next/image's own
+// default lazy-loading (no `priority` set anywhere here) already defers
+// every one of these below-the-fold images. Real alt text on all 8 images
+// (7 stations + the breather) comes straight from content, never generic
+// ("image1"-style) or empty.
 //
-// Text blocks fade + rise on enter via RevealBox, same page-wide "reveal-
-// on-enter" treatment as Hero/OurFactoryIntro -- opacity + transform only,
-// and content is fully present/readable either way (RevealBox's own
-// resting state, which `prefers-reduced-motion` locks to immediately, is
-// the same fully-visible content, just without the animated entrance).
+// Station text blocks are plain, static markup -- no reveal/rise motion
+// (owner, 2026-09-08: "no need to add the text level moving animation"),
+// deliberately unlike Hero/OurFactoryIntro. Only the images animate here.
 //
 // Desktop-only layout for now (owner: desktop ready, mobile handled
 // separately, keep it responsive-safe) -- see `ourFactoryProcess` in
@@ -40,7 +40,6 @@
 // `w-full`).
 import { Eyebrow } from "@/components/Eyebrow";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
-import { RevealBox } from "@/components/RevealBox";
 import { TextReveal } from "@/components/TextReveal";
 import { ourFactoryProcess } from "@/components/ui/styles";
 import type { ourFactory } from "@/content/our-factory";
@@ -64,7 +63,7 @@ function Item({ item }: { item: ProcessItem }) {
   return (
     <div className={`${ourFactoryProcess.item} ${ourFactoryProcess.itemWidth[item.width]}`}>
       <ParallaxMedia label={item.imageAlt} image={item.image} ratio={item.ratio} showLabel={false} />
-      <RevealBox className={ourFactoryProcess.textCol}>
+      <div className={ourFactoryProcess.textCol}>
         <div className={ourFactoryProcess.labelGroup}>
           <p className={ourFactoryProcess.label}>
             {item.number} {item.name}
@@ -72,7 +71,7 @@ function Item({ item }: { item: ProcessItem }) {
           <h3 className={ourFactoryProcess.title}>{item.title}</h3>
         </div>
         <p className={ourFactoryProcess.body}>{item.body}</p>
-      </RevealBox>
+      </div>
     </div>
   );
 }

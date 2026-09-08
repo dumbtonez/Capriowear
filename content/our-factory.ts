@@ -92,18 +92,25 @@ export const ourFactory = {
 
   // Section 5, "Journey" -- Figma desktop node 857:2090 ("Content") gave
   // the original 7-station layout and copy; the owner's follow-up SEO/AEO/
-  // GEO pass (2026-09-08) added: numbered eyebrows ("01 Fabric" etc, not
+  // GEO pass (2026-09-08) added numbered eyebrows ("01 Fabric" etc, not
   // headings -- the station title is), a reordered reading sequence
   // (Fabric before Cutting, Quality Control before Packed & Shipped), an
-  // 8th "breather" image (the wide sewing floor, no copy) between Sewing
-  // and Printing & Sublimation, and the exact alt text below for all 8
-  // images. No new Figma frame exists for this exact reordering, so the
-  // row groupings are a reasonable adaptation of the original layout, not
-  // a literal re-read: stations that were originally paired stay close in
-  // spirit (Fabric+Cutting, Quality Control+Packed & Shipped), the
-  // breather forces Sewing and Printing & Sublimation apart into their own
-  // rows (a full-width image can't sit inside a 2-up flex row), and
-  // Finishing keeps its own original full-width row.
+  // 8th "breather" image (the wide sewing floor, no copy), and the exact
+  // alt text below for all 8 images.
+  //
+  // Row pairing matches Figma's real layout exactly (owner correction,
+  // 2026-09-08: "keep the 1st row as is ... but for the rest follow the
+  // design" -- a first pass had split Sewing and Printing & Sublimation
+  // into their own solo rows to make room for the breather, which broke
+  // the real Figma pairing): row 1 is Fabric+Cutting (kept, per the
+  // numbered reorder above); row 2 is Sewing+Printing & Sublimation
+  // together, the real Figma pair; the breather is its own full-width row
+  // placed right after that pair (a full-width image can't sit inside a
+  // 2-up flex row, so it can't literally sit "between" them the way the
+  // copy brief describes -- this is the closest real position;) row 3 is
+  // Finishing, unchanged, full-width; row 4 is Quality Control+Packed &
+  // Shipped together (the real Figma pair, order reversed to match the
+  // numbered sequence, same as row 1).
   process: {
     eyebrow: "WHAT WE MAKE",
     heading: "From fabric to shipped, in one building",
@@ -152,18 +159,6 @@ export const ourFactory = {
             ratio: "600:640",
             width: "md",
           },
-        ],
-      },
-      {
-        items: [
-          {
-            kind: "breather",
-            imageAlt: "The sewing floor at Capriowear's activewear and teamwear factory in Sialkot, Pakistan",
-          },
-        ],
-      },
-      {
-        items: [
           {
             kind: "station",
             number: "04",
@@ -173,6 +168,14 @@ export const ourFactory = {
             imageAlt: "Full-dye sublimation printing at Capriowear's factory in Sialkot, Pakistan",
             ratio: "600:640",
             width: "md",
+          },
+        ],
+      },
+      {
+        items: [
+          {
+            kind: "breather",
+            imageAlt: "The sewing floor at Capriowear's activewear and teamwear factory in Sialkot, Pakistan",
           },
         ],
       },
