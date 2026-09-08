@@ -1452,6 +1452,48 @@ export const ourFactoryHero = {
   videoWrap: `${hero.videoWrap} pb-12 xl:pb-20`,
 };
 
+/* --- OurFactoryIntro (/our-factory section 3) ------------------------------- */
+// Figma desktop node 857:1906 ("Content"): heading, one rich-text paragraph,
+// a 2-stat row. get_metadata confirms real desktop insets of pl-260/pr-118
+// (genuinely asymmetric, not container-p's own uniform 80px -- no other
+// section on this page has needed a value like it) and pt-160/pb-120.
+// Built by hand rather than composing `container-p` (which sets
+// `padding-inline`, a single shorthand `pl`/`pr` utilities at `xl:` can't
+// reliably out-specificity in the compiled stylesheet -- the same real bug
+// `hero.ctaSecondaryWrap`'s own comment already documents for a similar
+// case) -- mobile/tablet below xl fall back to container-p's own literal
+// 20px/32px insets instead, since no mobile Figma frame exists yet.
+//
+// Heading reuses `text-h1`/`text-ink` (54px/64px/500, matches exactly, same
+// pairing `servicesIntro.heading` already uses). Paragraph's 26px/36px has
+// no matching type-scale step, so it's a scoped arbitrary value (flagged),
+// layered with `text-subline` -- Figma's own #17191e literal for this text.
+// Stat numbers reuse `text-h1`/`text-ink` again (also 54px/64px/500 in
+// Figma); stat captions are `text-body-lg` (20px, matches) with `leading-7`
+// overriding its own shorter default line-height to Figma's real 28px,
+// same "token size, arbitrary leading override" pattern `servicesIntro.
+// paragraph` already establishes.
+export const ourFactoryIntro = {
+  section: "bg-paper",
+  inner:
+    "mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-5 py-12 md:px-8 xl:gap-20 xl:pb-[120px] xl:pl-[260px] xl:pr-[118px] xl:pt-[160px]",
+  textCol: "flex flex-col gap-8 xl:max-w-[52.5625rem]",
+  heading: "text-h1 text-ink",
+  paragraph: "text-[1.625rem] leading-9 text-subline",
+  paragraphBold: "font-semibold",
+  statsRow: "flex flex-col gap-8 md:flex-row md:items-start md:gap-12",
+  // The gradient line (Figma "Line 329"): a real two-stop linear gradient
+  // asset (accent orange solid to ~36% of the line, fading to transparent),
+  // not a plain divider -- reproduced as CSS rather than an image so it
+  // scales with the column's own width, using the existing accent token
+  // rather than a new hardcoded hex.
+  statCol: "flex w-full flex-col gap-8 md:max-w-[342px]",
+  statDivider: "h-px w-full bg-[linear-gradient(to_right,var(--color-accent)_36%,transparent)]",
+  stat: "flex flex-col gap-2",
+  statValue: "text-h1 text-ink",
+  statCaption: "text-body-lg leading-7 text-subline",
+};
+
 /* --- ServicesHero (/services section 1) ------------------------------------ */
 // Figma desktop node 729:139 (owner brief, 2026-09-07: "same design that we
 // have for home, same marquee at the bottom"). A simpler variant of the

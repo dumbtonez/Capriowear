@@ -10,10 +10,29 @@
 // site's existing routes for the same two actions (services.hero.ctaPrimary/
 // ctaSecondary use the same pair) rather than inventing new ones.
 //
+// Section 3: Intro, Figma desktop node 857:1906 ("Content") -- heading,
+// a single rich-text paragraph (two semibold inline phrases), and a
+// 2-stat row. Same NoteSegment shape as services.ts's intro paragraphs,
+// reused rather than a second bespoke rich-text type. Copy is the design's
+// own text layers verbatim, same "no separate copy doc yet" note as
+// section 1 above.
+//
 // metaTitle/metaDescription follow the brief's own exact title
 // ("Our Factory in Sialkot, Pakistan | Capriowear") -- description is a
 // first-draft placeholder pending real SEO copy, flagged the same way
 // services.metaDescription already is.
+import type { NoteSegment } from "@/content/activewear/types";
+
+const introParagraph: NoteSegment[] = [
+  {
+    text: "Capriowear is the activewear and teamwear division of Caprio Sports, a cut-and-sew apparel manufacturer in Sialkot, Pakistan. Every order is produced in-house, ",
+  },
+  { text: "from fabric to finished, retail-ready packaging", bold: true },
+  { text: ". You " },
+  { text: "work directly with the factory", bold: true },
+  { text: " that makes your product, not a trading agent placing it elsewhere." },
+];
+
 export const ourFactory = {
   metaTitle: "Our Factory in Sialkot, Pakistan | Capriowear",
   metaDescription:
@@ -32,5 +51,14 @@ export const ourFactory = {
     // house rule home.hero.media.label already sets, specific to this page's
     // own subject (the factory itself, not a generic hero video).
     media: { type: "video" as const, label: "Factory tour video, Capriowear's Sialkot cut-and-sew facility" },
+  },
+
+  intro: {
+    heading: "The factory behind Capriowear",
+    paragraph: introParagraph,
+    stats: [
+      { value: "75,000 sq ft", caption: "Production facility" },
+      { value: "100,000+", caption: "Monthly capacity" },
+    ],
   },
 };

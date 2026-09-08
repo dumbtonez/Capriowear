@@ -6,9 +6,13 @@
 // didn't exist before this page -- nav, footer, Services, and various CTAs
 // already link to /our-factory, so this resolves those dead links.
 //
-// Section 1 (this step): OurFactoryHero, Figma desktop node 854:1421
-// ("Banner") -- see components/sections/OurFactoryHero.tsx for the
-// section's own build notes.
+// Section 1: OurFactoryHero, Figma desktop node 854:1421 ("Banner") + node
+// 854:1402 ("Youtube Video") -- see components/sections/OurFactoryHero.tsx
+// for the section's own build notes.
+// Section 3 (this step): OurFactoryIntro, Figma desktop node 857:1906
+// ("Content") -- see components/sections/OurFactoryIntro.tsx for the
+// section's own build notes. (Section 2 is the video layer, already inside
+// OurFactoryHero above -- no standalone "section 2" component exists.)
 import type { Metadata } from "next";
 
 import { Header } from "@/components/Header";
@@ -16,6 +20,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
 import { Footer } from "@/components/sections/Footer";
 import { OurFactoryHero } from "@/components/sections/OurFactoryHero";
+import { OurFactoryIntro } from "@/components/sections/OurFactoryIntro";
 import { header } from "@/components/ui/styles";
 import { home } from "@/content/home";
 import { ourFactory } from "@/content/our-factory";
@@ -64,6 +69,7 @@ export default function OurFactoryPage() {
           Footer.tsx's header comment). */}
       <main className="relative z-10 bg-paper">
         <OurFactoryHero hero={ourFactory.hero} />
+        <OurFactoryIntro content={ourFactory.intro} />
       </main>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />
