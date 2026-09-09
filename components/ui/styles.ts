@@ -2506,8 +2506,23 @@ export const productRange = {
   // 20px/500 explore-link size (matching the homepage's own default
   // `--text-overline`) from `md:` up; only `max-md:` gets the smaller size.
   eyebrowSize: "max-md:text-[1rem] max-md:leading-normal font-semibold md:text-[1.25rem] md:leading-[1.2]",
-  cardsRow: "flex w-full flex-col items-center gap-10 xl:w-fit xl:flex-row",
-  card: "flex w-full max-w-[381px] flex-col items-start gap-6",
+  // `md:flex-row` (owner, 2026-09-09: "product range image either be a
+  // little small so they can come side by side not top bottom as now")
+  // -- was stacked (`flex-col`) at every width below `xl:`, this
+  // section's own "desktop-only for now, responsive-safe not confirmed-
+  // mobile" caveat (see this file's own header comment) meaning tablet
+  // had never actually been checked/tuned. `md:gap-6` (24px, down from
+  // desktop's 40px) keeps both cards comfortably inside `container-p`'s
+  // own narrower `md:` content width (704px at the 768px minimum) once
+  // paired with `card`'s own smaller `md:` width below.
+  cardsRow: "flex w-full flex-col items-center gap-10 md:w-fit md:flex-row md:gap-6 xl:gap-10",
+  // `md:max-w-[320px]` (owner, same request) -- a real size reduction, not
+  // just a tighter row gap: two cards at the full 381px Figma width plus
+  // any real gap exceed `container-p`'s own 704px `md:` content width at
+  // 768px, the narrowest tablet target. 320px×2 + 24px gap = 664px,
+  // comfortably inside it at every width from 768px up; `xl:max-w-[381px]`
+  // restores Figma's own real desktop size, unchanged.
+  card: "flex w-full max-w-[381px] md:max-w-[320px] xl:max-w-[381px] flex-col items-start gap-6",
   // Owner request: the image itself should also link through, not just the
   // "Explore" text -- a plain wrapping `<Link>`, block so it doesn't add
   // any inline-level gap/baseline quirk around the media box.
@@ -2597,7 +2612,11 @@ export const clientLogos = {
   // mobile treatment as of 2026-08-26 (owner call: swap the marquee in for
   // the static grid, keep the grid in the styleguide only) -- see
   // mobileWrapGrid below for the now-demo-only grid's own wrapper.
-  mobileWrap: "container-p flex flex-col items-center gap-8 pt-[40px] pb-[40px] xl:hidden",
+  // Tablet top gained its own +40px tier, 2026-09-10 (owner: "home, tablet,
+  // top brand title should have 40px more gap from top") -- was the same
+  // flat 40px as real mobile (this wrapper spans both, `xl:hidden`); bottom
+  // is unaffected, not asked for.
+  mobileWrap: "container-p flex flex-col items-center gap-8 pt-[40px] pb-[40px] md:pt-[80px] xl:hidden",
   // Same as mobileWrap, minus `xl:hidden` -- for the styleguide-only
   // ClientLogosMobileMarquee comparison instance (2026-08-26), which never
   // mounts on the real page and should render regardless of the reviewer's
@@ -2823,9 +2842,11 @@ export const whatWeMake = {
   root: "flex flex-col gap-12 xl:gap-[90px]",
   // Gap *between* category groups (owner call, 2026-08-23, revised down the
   // same day from an initial 100px/180px correction): 64px mobile, 120px
-  // desktop. Only applies when there's more than one group -- see
+  // desktop. Tablet given its own explicit 80px tier 2026-09-10 (owner:
+  // "make it 80px from the top tablet") -- was falling through to mobile's
+  // 64px. Only applies when there's more than one group -- see
   // WhatWeMake.tsx.
-  groupsGap: "flex flex-col gap-16 xl:gap-[120px]",
+  groupsGap: "flex flex-col gap-16 md:gap-20 xl:gap-[120px]",
   // 24px mobile / 40px desktop, group header (title+body) to its tile list --
   // a different gap than `root`'s heading-to-group spacing above, so it's its
   // own value, not a shared one reused at two different sizes.
@@ -3235,8 +3256,12 @@ export const stats = {
   // however much space happens to be left after the media block, which had
   // been stretching the caption text far wider than the real design.
   // 40px gap between stats (was 48px, owner, 2026-09-09 revision, along
-  // with the new divider line below -- see `item`'s own comment).
-  desktopList: "flex w-[300px] shrink-0 flex-col gap-[40px]",
+  // with the new divider line below -- see `item`'s own comment). `pb-
+  // [40px]` (owner, same day, later follow-up: "100000 monthly capacity
+  // should have 40px gap from the bottom") -- the last stat (no divider
+  // of its own) otherwise sat flush with this list's own bottom edge,
+  // confirmed live (0px gap) before this was added.
+  desktopList: "flex w-[300px] shrink-0 flex-col gap-[40px] pb-[40px]",
   // Each stat: text block + a gradient divider line (except the last
   // stat, which has none -- confirmed via get_metadata, node 894:331 has
   // no "Line" child) -- 32px between them (owner, 2026-09-09 revision,
@@ -3277,7 +3302,11 @@ export const stats = {
   // shape as `desktopList` above (see `item`'s own comment), now its own
   // 32px value (owner, 2026-09-09, same-day follow-up: "from separator to
   // next title gap should be 32px") -- diverges from desktop's 40px.
-  mobileList: "flex flex-col gap-[32px]",
+  // `pb-[40px]` added, same day, same reasoning as `desktopList`'s own
+  // (owner: "100000 monthly capacity should have 40px gap from the
+  // bottom") -- the last stat otherwise sat flush with this list's own
+  // bottom edge, same 0px-gap issue confirmed on desktop.
+  mobileList: "flex flex-col gap-[32px] pb-[40px]",
   // 30px/500 (medium)/normal leading -- owner call, 2026-08-24, sized up
   // from the Figma-confirmed 24px (text-h5 exact match). Kept the medium
   // weight and normal leading from that match, size only.
@@ -3295,16 +3324,19 @@ export const stats = {
 // viewport width, never capped at 1440px.
 export const insideFactory = {
   // xl: -> md: (owner, 2026-09-03, tablet-width review: "Inside the
-  // factory should also use desktop version") -- same split already
-  // applied to Hero's ticker and Certified & Compliant's desktop row.
-  desktopOuter: "hidden bg-ink text-paper md:block",
+  // factory should also use desktop version") -- then back to xl: (owner,
+  // 2026-09-09: tablet should swipe with dots, not use the chevron -- see
+  // `mobileSection`'s own comment below). True desktop (1280px+) only
+  // again, matching Hero's ticker and Certified & Compliant's own desktop
+  // row before this section briefly diverged from them.
+  desktopOuter: "hidden bg-ink text-paper xl:block",
   // /our-factory's own reuse (owner, 2026-09-08: "same section we use on
   // homepage, it will be on white background, not eyebrow and title") --
   // `tone="light"` on InsideFactory.tsx swaps to this instead of the
   // homepage's bg-ink/text-paper pairing above. No separate no-heading
   // variant needed: `showHeading={false}` just skips rendering the heading
   // block entirely (see InsideFactory.tsx's own prop comments).
-  desktopOuterLight: "hidden bg-paper text-text md:block",
+  desktopOuterLight: "hidden bg-paper text-text xl:block",
   // Heading only -- container-p's own 80px side inset. Provisional 120px
   // top, same caveat as What We Make/Certified & Compliant: this frame's
   // own top edge reads 60px, the same unreliable frame-crop pattern that
