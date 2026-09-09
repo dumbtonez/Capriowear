@@ -3118,12 +3118,15 @@ export const stats = {
   // No more `mx-auto`/`w-fit` centring (owner, 2026-09-09, Figma node
   // 819:329 revision) -- the old 660+130+300=1090px group was narrower
   // than the 1280px content area, so it sat centred with extra margin
-  // beyond `container-p`'s own 80px inset instead of meeting it. New
-  // sizes sum to exactly 1280 (864+116+300), so a plain `w-full` row now
-  // fills the content area edge-to-edge, flush with the 80px inset on
-  // both sides -- no new padding needed, `container-p` already supplies
-  // it. Gap 130px -> 116px, the frame's own new confirmed value.
-  desktopInner: "flex w-full items-center gap-[116px]",
+  // beyond `container-p`'s own 80px inset instead of meeting it. `w-full`
+  // fills the content area, flush with the 80px inset on both sides -- no
+  // new padding needed, `container-p` already supplies it.
+  // Gap 130px -> 116px (the frame's own confirmed value) -> 92px (owner,
+  // same day follow-up: "since 2009 text section make 24px less gap from
+  // the image placeholder"). No longer sums to exactly 1280 (864+92+300=
+  // 1256) -- the text column now sits 24px short of the right edge
+  // instead of meeting it, an explicit, asked-for tradeoff.
+  desktopInner: "flex w-full items-center gap-[92px]",
   // No `shrink-0` (real bug, found live: true horizontal overflow at
   // 1280/1366px) -- 864 (media) + 116 (gap) + 300 (list, its own
   // `shrink-0`) = 1280px of fixed-width content, which only fits inside
@@ -3841,7 +3844,9 @@ export const howItWorks = {
   // "two conflicting utilities" bug class this project's own comments
   // already flag elsewhere -- so each tone gets its own single, complete
   // `pt-*`, never two in the same class list at once.
-  desktopOuterLight: "pt-[60px]",
+  // 160px (owner, 2026-09-09: "how it works, make 160px gap from the
+  // top") -- was the homepage's own original 60px.
+  desktopOuterLight: "pt-[160px]",
   // Dark variant, colour only (owner, 2026-09-07, Figma node 767:868,
   // /services page: "same section... changed the background to black") --
   // appended via `cx()` on BOTH `desktopOuter` and `mobileSection` when the
