@@ -26,6 +26,12 @@
 // section needs no custom colour override, so the earlier reason for
 // bespoke markup (avoiding a colour-class conflict) no longer applies.
 //
+// `showMediaLabel` (default true, every existing usage unaffected): false
+// drops the visible caption `MediaPlaceholder`'s no-`image` placeholder
+// fill renders by default -- /our-factory's own mobile-only correction
+// (owner, 2026-09-09: "factory shots, remove the label from the images").
+//
+
 // Takes its heading and media list as props (not a direct content/home.ts
 // import), so any page can render this section with its own shots -- see
 // app/page.tsx for the homepage's values.
@@ -72,6 +78,18 @@ export type InsideFactoryProps = {
    * default, unchanged.
    */
   showCta?: boolean;
+  /**
+   * Defaults to true (every existing usage, including the homepage's own
+   * mobile carousel, is unaffected). false drops the visible caption
+   * `MediaPlaceholder` renders by default on the no-`image` placeholder
+   * fill -- /our-factory's own mobile-only correction (owner, 2026-09-09:
+   * "factory shots, remove the label from the images"). `label` still
+   * supplies the alt text either way (`MediaPlaceholder`'s own contract).
+   * Desktop is untouched either way -- `DesktopGallery` already sets its
+   * own `showLabel={false}` plus a separate real `<p>` caption, unrelated
+   * to this prop.
+   */
+  showMediaLabel?: boolean;
 };
 
 // Mobile 300px, tablet 469px (owner, 2026-09-09: "on tablet... show dots
@@ -147,9 +165,11 @@ function DesktopGallery({
 function MobileCarousel({
   shots,
   tone,
+  showLabel = true,
 }: {
   shots: typeof home.insideFactory.media;
   tone: "light" | "dark";
+  showLabel?: boolean;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -245,7 +265,7 @@ function MobileCarousel({
             className={insideFactory.mobileCard}
             style={{ height: index === 0 ? activeHeight : inactiveHeight }}
           >
-            <MediaPlaceholder label={shot.label} radius="none" tone={tone} className="h-full" />
+            <MediaPlaceholder label={shot.label} radius="none" tone={tone} showLabel={showLabel} className="h-full" />
           </div>
         ))}
       </div>
@@ -266,6 +286,7 @@ export function InsideFactory({
   tone = "dark",
   showHeading = true,
   showCta = true,
+  showMediaLabel = true,
 }: InsideFactoryProps) {
   return (
     <section>
@@ -310,7 +331,7 @@ export function InsideFactory({
           </div>
         ) : null}
         <div className={showHeading ? insideFactory.mobileGalleryGap : undefined}>
-          <MobileCarousel shots={content.media} tone={tone} />
+          <MobileCarousel shots={content.media} tone={tone} showLabel={showMediaLabel} />
         </div>
         {showCta ? (
           <div className={insideFactory.mobileCtaWrap}>
