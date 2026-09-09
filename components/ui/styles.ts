@@ -276,6 +276,18 @@ export const media = {
   ratio: {
     "16:9": "aspect-video",
     "4:5": "aspect-[4/5]",
+    // Our Services' own card ratio (`ourServices.cardMediaRatio`, a raw
+    // class string passed directly to `CapabilityCard`, not through this
+    // table) -- added here as real `MediaRatio` entries so a plain
+    // `MediaPlaceholder` caller can match it exactly (How We Work,
+    // 2026-09-09: "container size... should follow the services", desktop
+    // only -- that section's own mobile/tablet accordion has no image at
+    // all). `8:5` is the one this caller uses; `7:5` (Our Services' own
+    // mobile tier) is added alongside it for the same reason -- kept
+    // together as one real pair, not a single value with its sibling
+    // omitted.
+    "7:5": "aspect-[7/5]",
+    "8:5": "aspect-[8/5]",
     "1:1": "aspect-square",
     // Trust Signals' desktop media box is a fixed 400x296 box (confirmed via
     // get_metadata, node 348:1864) -- landscape, not close to any ratio
@@ -2318,34 +2330,37 @@ export const servicesHowWeWork = {
   // frame's own real 20px/32px-leading subheading (get_metadata: 64px text
   // box height at 624px width = 2 lines at 32px leading, not 24px).
   subheading: "text-[1.125rem] leading-6 text-[#17191e] xl:text-body-lg xl:leading-8",
-  // `xl:mt-[72px]` restores the frame's own real cards-row gap (get_metadata:
-  // intro bottom at 304, cards row starts at 376, 376-304=72) -- mobile
-  // keeps `mt-6` (24px), its own tuned value, unchanged.
-  // `gap-3` (12px, owner, 2026-09-07: "make the gap between ODM, OEM same
-  // as used in the plp fabric section" -- was `gap-16`/64px) matches
-  // `fabricOptions.accordionStack`'s own mobile/tablet stack gap exactly
-  // (`mt-8 flex flex-col gap-3`) -- the real "gap between items" concept
-  // that component has, since its own desktop view is a `<table>` with row
-  // dividers, not a gapped stack (so `xl:gap-x-11`, this row's own real
-  // 3-column desktop gap, is unchanged -- fabric options has nothing
-  // comparable at that breakpoint to match against). This desktop gap is
-  // now moot anyway -- desktop cards are always-expanded, not a stack.
-  pathsGrid: "mt-6 grid w-full grid-cols-1 gap-3 xl:mt-[72px] xl:grid-cols-3 xl:gap-x-11 xl:gap-y-0",
-  // Plain width-filling wrapper -- `pathCardDesktop`/`pathCardMobile` below
-  // are the two real, mutually-exclusive (`hidden xl:flex` / `xl:hidden`)
-  // per-breakpoint renders inside it.
-  pathCard: "flex w-full",
-  // Desktop (xl and up): the section's own ORIGINAL design, restored
-  // verbatim (owner, 2026-09-08: "how we work on desktop should remain as
-  // it was before, the collapsable design is for mobile only" -- confirmed
-  // against Figma node 750:770 via get_metadata: image 397x234, then 32px
-  // gap down to the title block, 8px title-to-subtitle, 32px down to the
-  // "What it means"/"Best for" pair, 24px between those two, matching
-  // `pathMedia`/`pathTextCol`/`pathTitleGroup`/`pathDetailGroup`/
-  // `pathDetailItem` below exactly). The collapsible, no-image,
-  // FabricOptions-styled box (`pathCardMobile` below) is mobile/tablet-only
-  // now, not a fallback used at every width.
-  pathCardDesktop: "hidden w-full flex-col items-start gap-8 xl:flex",
+  // Desktop cards moved off this 3-column grid onto a real scrollable row,
+  // 2026-09-09 -- see `desktopWrap`/`desktopScrollerWrap`/`desktopRow`/
+  // `desktopCard` below and this section's own header comment
+  // (ServicesHowWeWork.tsx) for the full reasoning. `pathsGrid` itself is
+  // retired; mobile/tablet's own stack moved to `mobileList` below,
+  // keeping its exact former values (`mt-6`, `gap-3`) unchanged.
+  //
+  // Desktop (xl+): `hidden xl:block` -- the mirror of every other
+  // scrollable row's own wrap-visibility split (How It Works/Inside the
+  // Factory/Exhibitions/Trust Signals). `xl:mt-[112px]` (owner, 2026-09-09,
+  // same-day follow-up: "add more 40px more on the top from the title") --
+  // was the retired `pathsGrid`'s own `xl:mt-[72px]` (Figma's real
+  // intro-to-cards gap), +40px.
+  desktopWrap: "hidden xl:block xl:mt-[112px]",
+  // Same `mx-auto max-w-[1440px]` fix already applied to every other
+  // scroller here (How It Works/Inside the Factory/Exhibitions/Trust
+  // Signals' own `desktopScrollerWrap`) -- a flat `px-[80px]` row inset
+  // alone only matches `container-p`'s own centring inset up to 1440px.
+  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-none overflow-hidden",
+  // `overflow-x-hidden`, not `-auto` -- "user can only scroll by
+  // clicking," the same established rule every other chevron-driven row
+  // here follows (see `DesktopChevronScroller.tsx`'s own header comment).
+  // `px-[80px]` matches `container-p`'s own `xl:` inset, the same flat
+  // value every other scroller's own row uses at this breakpoint.
+  desktopRow: "no-scrollbar flex w-full gap-[44px] overflow-x-hidden scroll-smooth px-[80px]",
+  // 480px, Our Services' own real (unshrunk) card width -- the whole
+  // reason this moved off the 3-column grid, see this file's own header
+  // comment (ServicesHowWeWork.tsx). `shrink-0` so the browser doesn't
+  // squeeze it to fit -- the point here is the row overflows and the last
+  // card peeks, not that everything always fits.
+  desktopCard: "flex w-[480px] shrink-0 flex-col items-start gap-8",
   pathMedia: "w-full",
   pathTextCol: "flex w-full flex-col gap-8",
   pathTitleGroup: "flex flex-col gap-2",
@@ -2353,21 +2368,37 @@ export const servicesHowWeWork = {
   // width (its fluid clamp's own confirmed value) -- matches Figma's flat
   // 30px/500 "OEM Production"-style title exactly at that width, same
   // reuse-the-token-at-its-matching-breakpoint approach `servicesIntro`
-  // above takes with `text-h1`.
+  // above takes with `text-h1`. Already the same token `capabilityCard.
+  // title` (Our Services) uses -- no change needed for the "follow Our
+  // Services" pass below.
   pathTitle: "text-h3 text-text",
-  // Desktop's own original subtitle (20px/400, 0.5px tracking, 28px
-  // leading -- Figma's real value, get_metadata-confirmed). Kept distinct
-  // from `pathSubtitle` below (18px/24px), which is now mobile-only.
-  pathSubtitleDesktop: "text-[1.25rem] font-normal leading-7 tracking-[0.5px] text-[#17191e]",
+  // Body-role text sized to match Our Services' own scale (owner,
+  // 2026-09-09: "container size, text all should follow the services...
+  // don't change anything else except the image container and text" --
+  // structure/grid/accordion/light-mode untouched, only sizing) -- was its
+  // own one-off 20px/28px/0.5px-tracking. Now `capabilityCard.text`'s
+  // exact desktop tier (20px/400/28px leading, `text-subline`), this
+  // block's own desktop-only wrapper (`pathCardDesktop`, `hidden xl:flex`)
+  // already gates it, so no responsive prefix is needed here the way
+  // `capabilityCard.text` itself carries one (that token also covers a
+  // mobile tier this desktop-only block never renders at).
+  pathSubtitleDesktop: "text-[1.25rem] font-normal leading-[28px] text-subline",
   pathDetailGroup: "flex flex-col gap-6",
   pathDetailItem: "flex flex-col gap-2",
-  // 22px/500 flat, with a real 1px letter-spacing -- Figma's own value for
-  // "What it means"/"Best for", not a fluid token (text-h3's own 22px only
-  // happens at a much narrower viewport than this desktop-only block ever
-  // renders at, so reusing it here would be wrong, not a coincidence worth
-  // relying on).
-  pathDetailLabel: "text-[1.375rem] font-medium tracking-[1px] text-text",
-  pathDetailBody: "text-[1.25rem] font-normal leading-7 text-[#17191e]",
+  // Resized to the same new body scale as `pathSubtitleDesktop`/
+  // `pathDetailBody` (2026-09-09, see that key's own comment) -- was
+  // 22px/1px-tracking. `font-medium`/letter-spacing kept: Our Services has
+  // no "field label" of its own to match against, and dropping the
+  // label's own weight/spacing distinction from its value below would
+  // remove this card's own real label-vs-value hierarchy, not something
+  // "text sizing" was asked to change.
+  pathDetailLabel: "text-[1.25rem] font-medium tracking-[1px] text-text",
+  // Matches `capabilityCard.text`'s own desktop tier exactly (2026-09-09,
+  // see `pathSubtitleDesktop`'s own comment) -- was `text-[#17191e]`, the
+  // same colour as `text-subline` but the raw literal instead of the
+  // token; switched to the token to match Our Services' own recipe
+  // precisely, not just its computed value.
+  pathDetailBody: "text-[1.25rem] font-normal leading-[28px] text-subline",
   // Mobile/tablet only (owner, 2026-09-07: "oem production odm production
   // can we make them collapsable", then "build this something similar to
   // fabric options on PLP", then 2026-09-08: "the collapsable design is for
@@ -2378,7 +2409,11 @@ export const servicesHowWeWork = {
   // from the PLP's own `FabricOptions` component -- see
   // ServicesHowWeWork.tsx's own header comment), not a second near-copy of
   // that same recipe under this section's own keys.
-  pathCardMobile: "flex w-full flex-col xl:hidden",
+  // Mobile/tablet stack, moved out of the old per-card dual-render wrapper
+  // into its own explicit block, 2026-09-09 (see this file's own header
+  // comment) -- same values as the retired `pathsGrid`'s own mobile tier
+  // (`mt-6 flex flex-col gap-3`), unchanged.
+  mobileList: "mt-6 flex w-full flex-col gap-3 xl:hidden",
   // 18px/24px (owner, 2026-09-07: "ODm, OEM< private label subline should
   // be 18px by 24 line") -- mobile-only now; `pathSubtitleDesktop` above
   // carries the section's own original desktop value.
