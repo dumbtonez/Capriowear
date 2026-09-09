@@ -39,6 +39,8 @@
 // `secondaryCta` (added 2026-09-07, Services page's own closing CTA) is a
 // second, outline `Button` rendered alongside the primary one -- optional,
 // so every existing homepage/PLP usage (a single button) is unaffected.
+import { Fragment } from "react";
+
 import { Button } from "@/components/Button";
 import { Marquee } from "@/components/Marquee";
 import { ScrollSpotlightList } from "@/components/ScrollSpotlightList";
@@ -79,8 +81,29 @@ export type FinalCtaProps = {
   hideTickerMobile?: boolean;
 };
 
+// A literal "\n" in `content.subline` forces a line break on desktop only
+// (owner, 2026-09-09, `home.finalCta.subline`: "make with next steps in
+// 2nd line") -- desktop renders it as a real `<br/>`; mobile (no request
+// to change its own natural wrap) strips it back to a plain space. Every
+// other caller's subline has no "\n" at all, so both paths are a no-op for
+// them.
+function DesktopSubline({ text }: { text: string }) {
+  const lines = text.split("\n");
+  return (
+    <p className={finalCta.desktopSubline}>
+      {lines.map((line, index) => (
+        <Fragment key={index}>
+          {index > 0 && <br />}
+          {line}
+        </Fragment>
+      ))}
+    </p>
+  );
+}
+
 export function FinalCta({ content, ticker, secondaryCta, compactMobileTop, hideTickerMobile }: FinalCtaProps) {
   const showMobileTicker = ticker && !hideTickerMobile;
+  const mobileSubline = content.subline.replace(/\n/g, " ");
   return (
     <section>
       {/* Desktop: CTA block, then the ticker, one continuous band */}
@@ -89,7 +112,7 @@ export function FinalCta({ content, ticker, secondaryCta, compactMobileTop, hide
           <div className={finalCta.desktopCtaBlock}>
             <div className={finalCta.desktopHeadingWrap}>
               <TextReveal as="h2" text={content.h2} className={finalCta.desktopHeading} />
-              <p className={finalCta.desktopSubline}>{content.subline}</p>
+              <DesktopSubline text={content.subline} />
             </div>
             {secondaryCta ? (
               <div className={finalCta.desktopButtonRow}>
@@ -135,7 +158,7 @@ export function FinalCta({ content, ticker, secondaryCta, compactMobileTop, hide
         <div className={cx(finalCta.mobileCtaBlock, !showMobileTicker && finalCta.mobileCtaBlockNoTicker)}>
           <div className={finalCta.mobileHeadingWrap}>
             <TextReveal as="h2" text={content.h2} className={finalCta.mobileHeading} />
-            <p className={finalCta.mobileSubline}>{content.subline}</p>
+            <p className={finalCta.mobileSubline}>{mobileSubline}</p>
           </div>
           {secondaryCta ? (
             <div className={finalCta.mobileButtonRow}>

@@ -442,7 +442,15 @@ export const marquee = {
   // Regular weight (owner call, 2026-08-26), not font-semibold -- this is
   // Hero's desktop "Fully Custom Offerings" label only usage, so changing
   // the weight here doesn't affect any other ticker.
-  labelBold: "shrink-0 whitespace-nowrap text-[1.375rem] font-normal leading-[1.2]",
+  // `text-[#838D97]` (owner, 2026-09-09: "make fully custom offering text
+  // on hero banner the same dark background subline color") -- was
+  // colourless (inherited `text-paper`/white from `toneDark`). The sitewide
+  // muted-on-dark literal (docs/02-design-system.md's standing rule), same
+  // colour Hero's own MOBILE ticker label already used -- this brings
+  // desktop in line with it. `labelVariant="bold"` is exclusively this
+  // ticker (Hero + ServicesHero, both desktop-only Marquee usages), so no
+  // other ticker is affected.
+  labelBold: "shrink-0 whitespace-nowrap text-[1.375rem] font-normal leading-[1.2] text-[#838D97]",
   // Client Logos' desktop title (2026-08-26, referencing tedy.app, not
   // Figma) -- a real heading, not a ticker label, so no whitespace-nowrap:
   // it should wrap within its own column like the reference's fixed-width

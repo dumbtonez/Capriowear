@@ -605,8 +605,14 @@ export const home = {
 
   finalCta: {
     h2: "Let's build your custom collection",
-    // Owner update, 2026-08-30.
-    subline: "Tell us what you're making. We'll come back within 24 hours with next steps.",
+    // Owner update, 2026-08-30. "\n" (owner, 2026-09-09: "make with next
+    // steps in 2nd line," desktop only) forces "with next steps." onto its
+    // own line on desktop -- `FinalCta.tsx`'s desktop subline renders a
+    // real `<br/>` at this marker; mobile strips it back to a plain space,
+    // keeping its own natural wrap unaffected (not asked for there). Also
+    // reused verbatim on /services (its own first `FinalCta`, `home.
+    // finalCta`), so this break applies there too, same content object.
+    subline: "Tell us what you're making. We'll come back within 24 hours\nwith next steps.",
     cta: { label: "Request a Sample", href: "/request-a-sample" },
     // Secondary "Download Catalog" button (owner, 2026-09-08: "on home,
     // under exhibition cta section add download catalog cta too") -- same

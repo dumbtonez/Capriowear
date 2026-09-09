@@ -22,6 +22,12 @@
 // reads `items` directly, just now in this redesign's own corrected order
 // (see content/home.ts's own `trustStrip` comment).
 //
+// `showLabel={false}` on every `MediaPlaceholder` here (owner, 2026-09-09:
+// "remove image placeholder text labels from truesignals") -- `label`
+// still supplies the accessible name (`role="img"`/`aria-label`, the
+// established pattern every `showLabel={false}` caller already relies on),
+// this only hides the visible caption text inside the empty box.
+//
 // This replaces docs/03-component-library.md's earlier "CapabilityCard x4"
 // entry, which was a wireframe-era guess with no real design behind it.
 //
@@ -109,6 +115,7 @@ function DesktopScroller({ items }: { items: typeof home.trustStrip }) {
               label={`${entry.title} artwork`}
               ratio={index % 2 === 0 ? "5:6" : "25:21"}
               radius="none"
+              showLabel={false}
             />
             <div className={trustSignals.desktopCardText}>
               <h3 className={trustSignals.title}>{entry.title}</h3>
@@ -139,6 +146,7 @@ export function TrustSignals({ items, pageVariant = "home" }: TrustSignalsProps)
           ratio="16:11"
           radius="none"
           className={trustSignals.mobileMedia}
+          showLabel={false}
         />
         <div className={trustSignals.mobileList}>
           {items.map((entry, index) => {
