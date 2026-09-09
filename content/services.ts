@@ -23,26 +23,23 @@ import type { NoteSegment } from "@/content/activewear/types";
 // otherwise narrow each segment to its own literal shape and drop the
 // optional `bold` field off segments that omit it.
 //
-// Split into two paragraphs (owner, 2026-09-07: "the subline of this
-// section divide into 2 parts. break it from we are the activewear with
-// 24px gap from the top paragraph") -- was one single `NoteSegment[]`
-// rendered as one `<p>`; the second sentence ("We are the activewear and
-// teamwear division...") now starts its own paragraph. See
-// ServicesIntro.tsx for the 24px gap between them.
-const introParagraph1: NoteSegment[] = [
+// Back to a single paragraph, 2026-09-10 -- the section itself was rebuilt
+// to match a new Figma frame (node 886:181, owner: "a factory you can buil
+// section change it to this style"), which reads as one paragraph, not the
+// 2026-09-07 split above's two ("the subline of this section divide into 2
+// parts"). The new frame also moves "17+ years of experience"/"our own
+// 75,000 sq ft facility" out of the paragraph entirely, into a proper 2-stat
+// row (see `intro.stats` below) -- 75,000 sq ft itself is dropped, since the
+// new frame's second stat is "100,000+ Monthly capacity" instead (Stats'
+// own confirmed figures, not a third number invented for this section).
+// See ServicesIntro.tsx for the new dark, stats-row layout.
+const introParagraph: NoteSegment[] = [
   {
     text: "Capriowear is a custom activewear and teamwear manufacturer offering OEM, ODM and private label production, custom from fabric to packaging, with ",
   },
   { text: "low minimums and worldwide delivery", bold: true },
-  { text: "." },
-];
-
-const introParagraph2: NoteSegment[] = [
-  { text: "We are the activewear and teamwear division of Caprio Sports, a " },
-  { text: "cut-and-sew manufacturer in Sialkot, Pakistan", bold: true },
-  { text: ", with " },
-  { text: "17+ years of experience", bold: true },
-  { text: " and our own 75,000 sq ft facility." },
+  { text: ". We are the activewear and teamwear division of Caprio Sports, a " },
+  { text: "cut-and-sew manufacturer in Sialkot, Pakistan.", bold: true },
 ];
 
 // Section 3's own closing note (Figma node 750:821) -- same NoteSegment
@@ -87,23 +84,35 @@ export const services = {
     ],
   },
 
-  // Section 2: Intro statement. Figma desktop node 733:529. Copy (heading +
-  // paragraph) is the design's own real text layer, read directly, same as
-  // hero.h1 above. Each paragraph is segmented, not a single string, so the
-  // semibold phrases Figma marks inline ("low minimums and worldwide
-  // delivery", "cut-and-sew manufacturer in Sialkot, Pakistan") render as
+  // Section 2: Intro statement. Rebuilt 2026-09-10 to a new Figma frame,
+  // desktop node 886:181 (owner: "a factory you can buil section change it
+  // to this style") -- supersedes the original 733:529 build. Dark section
+  // now (was light+image), heading + one rich-text paragraph + a 2-stat row
+  // with a gradient divider above each number, no media at all. Copy
+  // (heading + paragraph + both stats) is the new frame's own real text
+  // layer, read directly. Paragraph is segmented, not a single string, so
+  // the semibold phrases Figma marks inline ("low minimums and worldwide
+  // delivery", "cut-and-sew manufacturer in Sialkot, Pakistan.") render as
   // real inline emphasis -- same segmented-note pattern FabricOptions' own
   // closing note already uses (see ServicesIntro.tsx), not a second bespoke
-  // rich-text renderer. `introParagraph2`'s own third bold phrase was
-  // Figma's own text read "25+ years of experience" -- corrected
-  // 2026-09-08 to "17+ years of experience" (real founding year 2009, per
-  // `docs/04-product.md`'s now-resolved open question 2; 25+ overstated
-  // the company's real age).
-  // `paragraphs` (plural, 2 entries) since 2026-09-07 -- see
-  // introParagraph1/2's own comment above for why this split from one.
+  // rich-text renderer. "17+ years of experience" already carried its
+  // 2026-09-08 correction (was "25+," overstated the company's real age,
+  // founded 2009 per `docs/04-product.md`'s now-resolved open question 2) --
+  // unchanged here, just moved out of the paragraph into its own stat.
   intro: {
+    // Plain string -- real mobile (owner: "on mobile, the title should be
+    // in 2 line") already wraps this to exactly 2 lines naturally at real
+    // mobile width, no forced break needed there. Tablet/desktop's own
+    // different forced break ("'build your' text can be in 1st line") is
+    // its own separate hardcoded string in ServicesIntro.tsx, not this
+    // field -- see that file's own comment for why one plain string can't
+    // serve both breakpoints' different required breaks.
     heading: "A factory you can build your brand on",
-    paragraphs: [introParagraph1, introParagraph2],
+    paragraph: introParagraph,
+    stats: [
+      { value: "17+", caption: "Years of experience" },
+      { value: "100,000+", caption: "Monthly capacity" },
+    ],
   },
 
   // Section 3: How we work with you. Figma desktop node 750:770. Copy (all

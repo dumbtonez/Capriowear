@@ -1,35 +1,49 @@
 // components/sections/ServicesIntro.tsx
-// /services page, section 2. Figma desktop node 733:529 (owner brief,
-// 2026-09-07): a statement heading, a supporting paragraph with three
-// inline semibold phrases, and a plain image placeholder alongside it.
+// /services page, section 2. Rebuilt 2026-09-10 to a new Figma frame,
+// desktop node 886:181 (owner: "a factory you can buil section change it to
+// this style") -- supersedes the original 733:529 build (light section,
+// image beside the text). New shape: dark section (`bg-ink`, matches this
+// frame's own `#121317`), a statement heading, one rich-text paragraph, and
+// a 2-stat row, each stat topped with a short accent gradient rule -- no
+// media at all. Structurally the same "heading + paragraph + gradient-
+// divided stat row" shape `OurFactoryIntro.tsx` already uses (see that
+// file's own comment), just its own dark colours here instead of that
+// section's light ones -- not a reuse of that component directly (this
+// section is its own bespoke composition, `services.intro`'s own content
+// shape), since duplicating one small recipe is simpler than threading a
+// tone prop through a component that has never needed one before.
 //
-// Each paragraph is rendered from its own segmented array (`{ text, bold?
-// }[]`), not a single string -- same pattern FabricOptions' own closing
-// note already uses for inline bold phrases, reused here rather than
-// building a second bespoke rich-text renderer.
+// The paragraph is rendered from a segmented array (`{ text, bold? }[]`),
+// not a plain string -- same pattern FabricOptions' own closing note
+// already uses for inline bold phrases, reused here rather than building a
+// second bespoke rich-text renderer.
 //
-// Split into two paragraphs the same day (owner: "the subline of this
-// section divide into 2 parts. break it from we are the activewear with
-// 24px gap from the top paragraph") -- `content.paragraphs` (plural),
-// mapped to one `<p>` each inside `servicesIntro.paragraphStack`'s own
-// `gap-6` (24px) wrapper, not a change to `textCol`'s own heading-to-body
-// gap (which stays whatever that token already sets per breakpoint).
+// Heading reveals word-by-word on scroll (`TextReveal`), the same pattern
+// every other section heading sitewide already uses -- the original build
+// had missed it (a plain `<h2>`), corrected here as part of this rebuild
+// rather than left as a second gap alongside `OurFactoryIntro`'s own
+// (already fixed separately, see that file's own comment).
 //
-// Desktop-only for now, per the owner's own brief -- see `servicesIntro`
-// in components/ui/styles.ts for the exact spacing notes and the mobile
+// Desktop-only for now, per the owner's own brief -- see `servicesIntro` in
+// components/ui/styles.ts for the exact spacing notes and the mobile
 // fallback caveat.
 //
-// `showLabel={false}` on the placeholder: Figma shows a bare `#f2f2f7` box,
-// no caption text -- matches the "just an image placeholder container, no
-// label" convention already established for the PLP grid (ProductCardMedia,
-// 2026-09-02).
-//
-// Media renders before the text column below (owner, 2026-09-07: "image
-// placeholder should come first then the text") -- real DOM order for
-// mobile/tablet; `servicesIntro.textCol`/`.media`'s own `xl:order-2`/
-// `xl:order-1` pair restores the desktop frame's own text-left/image-right
-// order (733:529), unchanged.
-import { MediaPlaceholder } from "@/components/MediaPlaceholder";
+// The heading needs two DIFFERENT forced breaks, not one shared string
+// (owner, 2026-09-10: "'build your' text can be in 1st line" for tablet/
+// desktop, then "on mobile, the title should be in 2 line"). Real mobile
+// already wraps `content.heading`'s own plain string to exactly 2 lines
+// naturally at real mobile width ("A factory you / can build your / brand
+// on" would be 3 -- confirmed live it's actually "A factory you can /
+// build your brand on" with no forced break at all), so it renders
+// unmodified there. Tablet/desktop's own required split ("A factory you
+// can build your" / "brand on") can't come from width alone either (past a
+// point, once "your" fits, so does the rest of the sentence on the same
+// line) -- so it's a second, hardcoded `"\n"` string, `TextReveal`
+// splitting on it first (same mechanism FabricOptions' own 2-line heading
+// uses). Same "two real breakpoint-specific instances, not one repositioned
+// via CSS" shape `HowItWorks.tsx`'s own mobile-vs-tablet heading already
+// uses for an identical two-different-forced-breaks problem.
+import { TextReveal } from "@/components/TextReveal";
 import { servicesIntro } from "@/components/ui/styles";
 import type { services } from "@/content/services";
 
@@ -41,31 +55,38 @@ export function ServicesIntro({ content }: ServicesIntroProps) {
   return (
     <section className={servicesIntro.section}>
       <div className={servicesIntro.inner}>
-        <MediaPlaceholder
-          label="Factory and production floor"
-          ratio="50:37"
-          radius="none"
-          showLabel={false}
-          className={servicesIntro.media}
-        />
-
         <div className={servicesIntro.textCol}>
-          <h2 className={servicesIntro.heading}>{content.heading}</h2>
-          <div className={servicesIntro.paragraphStack}>
-            {content.paragraphs.map((paragraph, paragraphIndex) => (
-              <p key={paragraphIndex} className={servicesIntro.paragraph}>
-                {paragraph.map((segment, index) =>
-                  segment.bold ? (
-                    <strong key={index} className={servicesIntro.paragraphBold}>
-                      {segment.text}
-                    </strong>
-                  ) : (
-                    <span key={index}>{segment.text}</span>
-                  ),
-                )}
-              </p>
-            ))}
-          </div>
+          <h2 className={servicesIntro.heading}>
+            <span className="md:hidden">
+              <TextReveal as="span" text={content.heading} />
+            </span>
+            <span className="hidden md:inline">
+              <TextReveal as="span" text={"A factory you can build your\nbrand on"} />
+            </span>
+          </h2>
+          <p className={servicesIntro.paragraph}>
+            {content.paragraph.map((segment, index) =>
+              segment.bold ? (
+                <strong key={index} className={servicesIntro.paragraphBold}>
+                  {segment.text}
+                </strong>
+              ) : (
+                <span key={index}>{segment.text}</span>
+              ),
+            )}
+          </p>
+        </div>
+
+        <div className={servicesIntro.statsRow}>
+          {content.stats.map((stat) => (
+            <div key={stat.caption} className={servicesIntro.statCol}>
+              <div className={servicesIntro.statDivider} />
+              <div className={servicesIntro.stat}>
+                <p className={servicesIntro.statValue}>{stat.value}</p>
+                <p className={servicesIntro.statCaption}>{stat.caption}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

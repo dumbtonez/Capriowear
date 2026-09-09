@@ -2221,55 +2221,86 @@ export const servicesHero = {
 // frame exists yet for this page. Mobile/tablet values are a
 // responsive-safe fallback (stacked column, `container-p`'s own padding,
 // image below the text) rather than a confirmed design.
+// Rebuilt 2026-09-10 to a new Figma frame, desktop node 886:181 (owner: "a
+// factory you can buil section change it to this style"). `get_design_context`
+// confirmed real desktop insets of pl-[300px]/pr-[118px] (genuinely
+// asymmetric, not `container-p`'s own uniform 80px -- the same kind of
+// value `ourFactoryIntro.inner`'s own pl-260/pr-118 already established for
+// this page's near-identical layout shape) and pt-[160px]/pb-[120px], an
+// 80px gap between the text block and the stats row, a 32px heading-to-
+// paragraph gap, and an 841px text column. No mobile Figma frame exists for
+// this new design either (same "desktop-only for now" status the previous
+// build already had) -- mobile/tablet below `xl` fall back to
+// `container-p`'s own literal insets, same pattern `ourFactoryIntro.inner`
+// uses for its own identical gap.
+//
+// Heading reuses `text-h1`/`text-paper` (54px/64px/500, matches exactly,
+// the dark-section mirror of `ourFactoryIntro.heading`'s own `text-h1`/
+// `text-text` pairing on light). Paragraph's 26px/36px has no matching
+// type-scale step, so it's a scoped arbitrary value (flagged), layered with
+// this project's own dark-section subline colour (`#838D97`, standing rule,
+// see docs/02-design-system.md) -- the literal dark-section mirror of
+// `ourFactoryIntro.paragraph`'s own light-section `text-subline`. Stat
+// numbers reuse `text-h1`/`text-paper` again (also 54px/64px/500 in Figma);
+// stat captions are `text-body-lg` (20px, matches) with `leading-7`
+// overriding its own shorter default line-height to Figma's real 28px --
+// the same "token size, arbitrary leading override" pattern
+// `ourFactoryIntro.statCaption` already establishes, on dark instead of light.
 export const servicesIntro = {
-  section: "bg-paper",
-  // `pt-10` (40px, owner, 2026-09-07: "from the top image gap should be
-  // 40px" -- was `pt-16`/64px) is this section's own mobile/tablet top gap,
-  // now the real gap down to the image placeholder specifically, since the
-  // image renders first (see `textCol`/`media`'s own `xl:order-2`/
-  // `xl:order-1` comment above). Desktop `xl:pt-[160px]` is unchanged.
-  // `gap-6` (24px, owner, 2026-09-07: "make it 24px" -- was `gap-10`/40px)
-  // is this section's own mobile/tablet gap between the image and the
-  // heading below it now that the image renders first (media/textCol are
-  // this flex column's only two children). Desktop `xl:gap-[170px]` is
-  // unchanged.
-  // `pb-[72px]` (owner, 2026-09-07: "a factory section to trust signal
-  // image the gap should be 72px" -- was `pb-16`/64px) is this section's
-  // own mobile/tablet bottom gap, the real gap down to TrustSignals' own
-  // image below it (`trustSignals.mobileWrap` has no top padding of its
-  // own -- 0 top, standard "previous section's bottom padding supplies the
-  // gap" pattern, see that token's own comment). Desktop `xl:pb-[60px]` is
-  // unchanged (TrustSignals switches to its own `desktopWrapServices` top
-  // padding at `xl:`, not this section's bottom one).
-  inner: "container-p flex flex-col gap-6 pt-10 pb-[72px] xl:flex-row xl:items-center xl:gap-[170px] xl:pt-[160px] xl:pb-[60px]",
-  // `xl:order-1` (owner, 2026-09-07: "image placeholder should come first
-  // then the text" -- mobile/tablet only, real mobile Figma frame for this
-  // page doesn't exist yet, but the desktop frame, 733:529, does show text
-  // left / image right, unchanged) -- DOM order below is now media first,
-  // text second (matches the new mobile/tablet visual order directly, no
-  // CSS reorder needed there); `xl:order-1` pulls text back in front of
-  // media at desktop so that frame's own left/right order is preserved
-  // (corrected 2026-09-08, owner: "image goes on the right" -- the order
-  // values were swapped, putting the image on the left instead).
-  textCol: "flex w-full flex-col gap-6 xl:order-1 xl:w-[620px] xl:shrink-0 xl:gap-10",
-  heading: "text-h1 text-text",
-  // Wraps the two `<p>`s (owner, 2026-09-07: "the subline of this section
-  // divide into 2 parts ... with 24px gap from the top paragraph") -- its
-  // own fixed `gap-6` (24px) at every breakpoint, deliberately not
-  // `textCol`'s own responsive heading-to-body gap (`gap-6`/`xl:gap-10`),
-  // since the owner asked for one specific number between the two
-  // paragraphs, not "whatever the heading gap already is".
-  paragraphStack: "flex flex-col gap-6",
-  // text-body-lg is 20px/400 (matches), but its own default line-height
-  // (1.2/24px) is shorter than this paragraph's real Figma leading
-  // (32px) -- `leading-8` overrides just that, per this project's own
-  // "typography copied exactly, layered on top of the shared size token"
-  // convention used elsewhere.
-  paragraph: "text-body-lg leading-8 text-text",
-  paragraphBold: "font-semibold",
-  // `xl:order-2`: pairs with `textCol`'s own `xl:order-1` above, keeping
-  // media on the right at desktop.
-  media: "w-full xl:order-2 xl:w-[400px] xl:shrink-0",
+  section: "bg-ink",
+  // Built by hand rather than composing `container-p` (a single shorthand
+  // `pl`/`pr` utilities at `xl:` can't reliably out-specificity in the
+  // compiled stylesheet -- the same real bug `ourFactoryIntro.inner`'s own
+  // comment already documents for this identical asymmetric-inset shape).
+  // `px-5`/`md:px-8` reproduce `container-p`'s own literal mobile/tablet
+  // insets directly instead. `md:pt-[88px]` (owner, 2026-09-10: "on
+  // tablet, add 40px more space from the title" -- was the same flat
+  // `py-12`/48px real mobile uses, +40) and `md:gap-16` (owner, same
+  // message: "add 24px more gap from the top of the separator" -- the
+  // text-block-to-stats-row gap, `gap-10`/40px at every other tier, +24 on
+  // tablet only) are both tablet-only tiers; real mobile and desktop
+  // (`xl:gap-20`/`xl:pt-[160px]`) are unaffected.
+  inner:
+    "mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-5 py-12 md:gap-16 md:px-8 md:pt-[88px] xl:gap-20 xl:pb-[120px] xl:pl-[300px] xl:pr-[118px] xl:pt-[160px]",
+  textCol: "flex flex-col gap-6 xl:w-[841px] xl:gap-8",
+  heading: "text-h1 text-paper",
+  // 24px/32px on real mobile (owner, 2026-09-10: "subline font size should
+  // be 24 by 32") -- `text-2xl`/`leading-8` match exactly; tablet/desktop
+  // keep the original 26px/36px (`md:text-[1.625rem] md:leading-9`),
+  // unaffected.
+  paragraph: "text-2xl leading-8 md:text-[1.625rem] md:leading-9 text-[#838D97]",
+  // Regular weight, not bold (owner, 2026-09-10: "highlight 'low minimums
+  // and worldwide delivery' with regular font" / "make it regular font
+  // too 'cut-and-sew manufacturer in Sialkot, Pakistan'") -- was
+  // `font-semibold` with no colour override (Figma's own literal spec, see
+  // this section's header comment), which was the phrase's only visual
+  // distinction from the surrounding grey paragraph. Now the emphasis is
+  // colour, not weight: `text-paper` (white) against the paragraph's own
+  // `#838D97`, same weight as the rest of the sentence.
+  paragraphBold: "font-normal text-paper",
+  // Stacks below `md:`, side by side from `md:` up -- the same breakpoint
+  // `ourFactoryIntro.statsRow` already uses for its own identical 2-stat
+  // shape. `gap-6` (24px) on real mobile only -- owner, 2026-09-10: "17+
+  // and 100,000 should have 24px from top and bottom of the separator,"
+  // where "top" is this stacking gap (between the two stat columns) and
+  // "bottom" is `statCol`'s own divider-to-value gap below. `md:gap-12`
+  // (48px, Figma's own confirmed desktop row gap) restores the original
+  // flat value once the row switches to side-by-side, unaffected.
+  statsRow: "flex flex-col gap-6 md:flex-row md:items-center md:gap-12",
+  // `gap-6` (24px) on real mobile, `md:gap-8` (32px, Figma's own confirmed
+  // value) from tablet up -- see `statsRow`'s own comment for the "24px
+  // top and bottom of the separator" request this answers on real mobile.
+  statCol: "flex w-full flex-col gap-6 md:gap-8 md:max-w-[342px]",
+  // The gradient line (Figma "Line 330"): a real two-stop linear gradient
+  // (accent orange solid to ~36% of the line, fading to transparent), not a
+  // plain divider -- reproduced as CSS so it scales with the column's own
+  // width, using the existing accent token. Same recipe as
+  // `ourFactoryIntro.statDivider`, duplicated rather than shared, per this
+  // file's own established per-section-recipe convention.
+  statDivider: "h-px w-full bg-[linear-gradient(to_right,var(--color-accent)_36%,transparent)]",
+  stat: "flex flex-col gap-2",
+  statValue: "text-h1 text-paper whitespace-nowrap",
+  statCaption: "text-body-lg leading-7 text-[#838D97]",
 };
 
 /* --- ServicesHowWeWork (/services page, section 3) ------------------------- */
