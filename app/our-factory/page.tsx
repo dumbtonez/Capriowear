@@ -22,15 +22,13 @@
 // factory cta for this page, not from the homepage component") -- this
 // page IS the factory-tour destination that CTA links to, so it has no
 // reason to link to itself here; the homepage's own usage is untouched.
-// `showMediaLabel={false}`/`mobileDots` (2026-09-09, mobile-only review:
-// "factory shots, remove the label from the images ... add dots under the
-// images") -- both new opt-in props, homepage's own mobile carousel is
-// unaffected at their defaults. `tabletBehavior="mobile"` (2026-09-09,
-// tablet review: "factory shot should follow the mobile behavior as you
-// had earlier") -- keeps the swipeable mobile carousel through the full
-// tablet range instead of switching to the chevron desktop gallery at
-// `md:`, the homepage's own 2026-09-03 tablet decision. See
-// InsideFactory.tsx's own prop comments for the full reasoning.
+// `showMediaLabel={false}` (2026-09-09, mobile-only review: "factory
+// shots, remove the label from the images") -- a new opt-in prop, the
+// homepage's own mobile carousel is unaffected at its default. The dots
+// pagination and tablet-swipes-not-chevron behaviour this page originally
+// asked for as its own opt-in are now InsideFactory's own sitewide default
+// (a separate, later same-day owner decision covering every gallery on the
+// site, not just this page) -- no extra props needed for either any more.
 // Section 5: OurFactoryProcess, Figma desktop node 857:2090 ("Content"),
 // "What We Make" -- see components/sections/OurFactoryProcess.tsx for the
 // section's own build notes, including the new ParallaxMedia primitive
@@ -170,8 +168,6 @@ export default function OurFactoryPage() {
           showHeading={false}
           showCta={false}
           showMediaLabel={false}
-          mobileDots
-          tabletBehavior="mobile"
         />
         <OurFactoryProcess content={ourFactory.process} />
         <OurFactoryDetails content={ourFactory.sampleDetails} />
