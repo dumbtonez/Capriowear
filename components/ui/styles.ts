@@ -336,6 +336,13 @@ export const media = {
     // pixel pair per this table's established precedent, matching
     // "1280:640" above rather than reducing to a renamed ratio.
     "730:644": "aspect-[730/644]",
+    // Trust Signals' desktop cards, redesigned 2026-09-09 (Figma nodes
+    // 890:253/890:279): alternating 500x600/500x420 per card, reduced to
+    // their exact lowest terms rather than kept as the raw pixel pair --
+    // both share the same 500px width, so unlike "730:644" above there's a
+    // real common factor (100 and 20) worth simplifying.
+    "5:6": "aspect-[5/6]",
+    "25:21": "aspect-[25/21]",
   },
   radius: {
     lg: "rounded-lg",
@@ -2563,31 +2570,68 @@ export const clientLogos = {
 // media-top + a single divided list. Light section (paper background).
 export const trustSignals = {
   // Desktop only, hidden below xl. 120px top/bottom section padding
-  // (standard rhythm), 84px media-to-text gap -- confirmed off-scale via
-  // get_design_context, kept as its own exact value rather than rounded to
-  // an existing spacing token.
-  desktopWrap: "container-p hidden py-[120px] xl:flex xl:items-center xl:gap-[84px]",
+  // (standard rhythm) -- unchanged by the 2026-09-09 redesign below, which
+  // only replaces the horizontal content structure, not this outer
+  // vertical rhythm. No `items-center`/`gap` any more -- both were the old
+  // media+text layout's own, meaningless now that this wraps a full-bleed
+  // scroller instead (see `desktopScrollerWrap` below).
+  // No `container-p` any more (real bug, found live: doubled the left
+  // inset to 160px) -- the new scroller below supplies its own `px-8
+  // xl:px-[80px]` insets on `desktopRow` directly, the same shape every
+  // other scroller here uses (its wrap has no `container-p` either);
+  // stacking this element's own `container-p` (80px) on top of that
+  // doubled up instead of matching it.
+  desktopWrap: "hidden py-[120px] xl:block",
   // Services page reuse (owner, 2026-09-07: "this is already built on
   // homepage, use same as is. only the spacing needs to adjust, from the
   // top its 160px bottom 80px") -- Figma node 729:208 (this component's
   // real node, confirmed via get_metadata: content starts 160px from the
   // frame's own top, 536 - 160 - 296 = 80px remains below it), not
-  // homepage's symmetric 120/120. Everything else (media/text layout, gap)
-  // is shared as-is, same `pageVariant` pattern `OurServices` already uses.
-  desktopWrapServices: "container-p hidden pt-[160px] pb-[80px] xl:flex xl:items-center xl:gap-[84px]",
-  // Fixed 400px box, not a proportional half -- Figma's real desktop layout
-  // keeps the media box a constant width while the text side grows to fill
-  // whatever space is left (confirmed via get_metadata: media 400px, text
-  // 796px, inside a 1280px content area).
-  desktopMedia: "xl:w-[400px] xl:shrink-0",
-  // Two side-by-side sub-columns (Product Development + Low MOQ on the left,
-  // Private Label + Worldwide Shipping on the right) -- confirmed via
-  // metadata, not a single 4-item grid, so the DOM keeps that same
-  // column-major structure rather than a grid relying on a reordering trick.
-  desktopText: "flex flex-1 gap-20",
-  desktopColumn: "flex flex-1 flex-col gap-10",
-  // 8px title-to-body gap, shared with the mobile item shapes below.
-  item: "flex flex-col gap-2",
+  // homepage's symmetric 120/120. Everything else (the new scroller
+  // structure below) is shared as-is, same `pageVariant` pattern
+  // `OurServices` already uses.
+  desktopWrapServices: "hidden pt-[160px] pb-[80px] xl:block",
+  // Redesigned 2026-09-09 (Figma nodes 890:253/890:279, owner: "change
+  // product development, Low MOQ section to this... there are 4 cards"):
+  // the old media-block-plus-two-text-columns layout becomes 4 independent
+  // image+title+body cards, each 500px wide -- 4x500 + 3x40px gaps =
+  // 2120px, wider than the 1440px page frame, so this is a
+  // horizontally-scrollable row, the same class of section already built
+  // three times (How It Works, Inside the Factory, Exhibitions) via the
+  // shared `useDesktopChevronScroller` hook -- no chevron layer exists in
+  // any of those three Figma frames either (see e.g. HowItWorks.tsx's own
+  // header comment), it's this project's own standing solution for "more
+  // cards than fit," reused verbatim here rather than re-derived.
+  // `mx-auto max-w-[1440px]`: the same real bug/fix already applied to
+  // every other scroller of this kind (see e.g. `insideFactory.
+  // desktopScrollerWrap`'s own comment) -- a flat `px-[80px]` inset alone
+  // only matches `container-p`'s own centring inset up to 1440px, drifting
+  // wider apart above it.
+  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-none overflow-hidden",
+  // `overflow-x-hidden`, not `-auto` (matching every other scroller here,
+  // see `DesktopChevronScroller.tsx`'s own header comment: "user can only
+  // scroll by clicking"). `px-8 xl:px-[80px]`/`scroll-pl`/`scroll-pr`:
+  // `container-p`'s own breakpoint insets -- this section's own explicit
+  // "80px gap from the left of the page" ask is the `xl:` value; matched
+  // on the right too so the last card doesn't sit flush against the
+  // viewport edge, the same as every other scrollable row here.
+  // `items-start` (real bug, found live: flex's own default `stretch`
+  // forced every card to the tallest card's height, 768px, hiding the
+  // 600/420px alternating image heights and the cards' own real,
+  // different total heights entirely) -- Figma's own cards are top-
+  // aligned, each its own natural height.
+  desktopRow:
+    "no-scrollbar flex items-start gap-[40px] overflow-x-hidden scroll-smooth px-8 xl:px-[80px] scroll-pl-8 xl:scroll-pl-[80px] scroll-pr-8 xl:scroll-pr-[80px]",
+  // 500px fixed width, 32px gap down to the text block below the image
+  // (Figma: 890:229 etc.).
+  desktopCard: "flex w-[500px] shrink-0 flex-col gap-[32px]",
+  // 16px title-to-body gap (was 8px, shared with the old 2-column layout's
+  // `item`) -- this redesign's own confirmed value, Figma nodes
+  // 890:231/890:280/890:285/890:249.
+  desktopCardText: "flex flex-col gap-[16px]",
+  // Shared by both the old mobile list (unchanged) and the new desktop
+  // cards above -- already matches this redesign's own type (text-h3 =
+  // 30px/500/1.2 at the 1440 reference).
   title: "text-h3",
   // 20px/400/28px line-height -- a one-off, not the Body Large token (which
   // is 20px/400 but a 24px line-height). Confirmed via get_design_context.

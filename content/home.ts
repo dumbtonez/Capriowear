@@ -277,30 +277,35 @@ export const home = {
     itemsMobile: ["MyProtein", "GymBeam", "Gymreapers", "RISE", "Youngla", "Capo", "Evolution Athletics", "WOLFpak"],
   },
 
-  // Order is Figma's real column-major reading order (left sub-column top to
-  // bottom, then right sub-column top to bottom), not a 2x2 row order -- see
-  // TrustSignals.tsx. body is a segment array so the two items with a real
-  // Figma bold span (Low MOQ, Private Label) can mark it without a full
-  // rich-text system; a plain segment is just a string. Figma's own "⚠️"
-  // authoring flags on two bodies are left out of the displayed copy (they
-  // read as the designer's own "needs verification" marker, matching this
-  // file's own // VERIFY convention) -- the two affected items are marked
-  // below so they're easy to find again if the designer confirms wording.
+  // Order and copy re-confirmed against the section's own redesigned Figma
+  // frame (owner, 2026-09-09, nodes 890:253/890:279 -- "for full content,
+  // use this"): Product Development, Private Label, Low MOQ, Worldwide
+  // Shipping, matching that frame's real left-to-right card order (was
+  // Product Development, Low MOQ, Private Label, Worldwide Shipping, the
+  // old media+2-column layout's own column-major reading order). Both
+  // former `// VERIFY` flags (Low MOQ, Worldwide Shipping) are resolved --
+  // this frame confirms both titles exactly. body is a segment array so
+  // the two items with a real Figma bold span (Low MOQ, Private Label) can
+  // mark it without a full rich-text system; a plain segment is just a
+  // string.
   trustStrip: [
     {
       title: "Product Development",
-      body: ["We refine ideas through sampling, pattern development and technical adjustments to meet your needs."],
-    },
-    {
-      title: "Low MOQ", // VERIFY
-      body: ["Start from just ", { bold: "50 pieces per style" }, ". From first samples to full bulk order."],
+      body: ["We refine ideas through sampling, pattern development, and technical adjustments to meet your needs."],
     },
     {
       title: "Private Label",
       body: ["Your designs, fabrics, labels and packaging. ", { bold: "Factory-direct, no middleman." }],
     },
     {
-      title: "Worldwide Shipping", // VERIFY
+      title: "Low MOQ",
+      // Bold span corrected to match this frame's real emphasis -- the
+      // previous copy (still sourced from the earlier frame) bolded "50
+      // pieces per style" instead.
+      body: ["Start from just 50 pieces per style. ", { bold: "From first samples to full bulk order." }],
+    },
+    {
+      title: "Worldwide Shipping",
       body: ["DDP to the USA, UK, Europe, Canada and Australia. GSP+ 0% EU import duty."],
     },
   ],
