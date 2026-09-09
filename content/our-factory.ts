@@ -67,6 +67,23 @@ const introParagraph: NoteSegment[] = [
   { text: " that makes your product, not a trading agent placing it elsewhere." },
 ];
 
+// Section 7, "Audited, not just promised" (Figma node 873:123, "Content") --
+// same NoteSegment shape as introParagraph above, not a second type.
+const complianceParagraph: NoteSegment[] = [
+  { text: "Quality management, material safety, social compliance and independent testing. " },
+  { text: "Every run is inspected to AQL 2.5", bold: true },
+  { text: ", in-line and pre-shipment, and " },
+  { text: "we sign an NDA before any tech pack.", bold: true },
+];
+
+// Section 10, "Skilled hands behind every stitch" (Figma node 917:231,
+// "Content") -- same NoteSegment shape as above, reversed emphasis order
+// (bold lead-in, regular close) matching this node's own real text layers.
+const teamGallerySubline: NoteSegment[] = [
+  { text: "A 700+ team of experienced cutters, machinists, printers and QC inspectors", bold: true },
+  { text: " who have made technical apparel for years." },
+];
+
 export const ourFactory = {
   metaTitle: "Our Factory in Sialkot, Pakistan | Capriowear",
   metaDescription:
@@ -277,5 +294,110 @@ export const ourFactory = {
         imageAlt: "Close-up of a woven brand label on Capriowear custom shorts",
       },
     ] as SampleDetail[],
+  },
+
+  // Section 7, "Audited, not just promised" -- Figma node 873:123 ("Content"),
+  // owner brief 2026-09-09: same `OurFactoryIntro` component as `intro`
+  // above (heading + rich paragraph + a gradient-divided stat row), just
+  // stacked directly after `sampleDetails` instead of after the Hero --
+  // see `ourFactoryIntro`'s `placement` prop in components/ui/styles.ts.
+  compliance: {
+    heading: "Audited, not just promised",
+    paragraph: complianceParagraph,
+    stats: [
+      { value: "06", caption: "QC stages" },
+      { value: "05", caption: "Certifications" },
+      { value: "100%", caption: "Runs inspected" },
+    ],
+  },
+
+  // Section 8, "Audited for safety, environment and ethics" -- Figma node
+  // 883:156 ("Content"), owner brief 2026-09-09: "already built section
+  // just content been changed" -- the PLP/PDP/Services page's own
+  // `TrustPoints` component (heading + subline + a bordered points list),
+  // reused verbatim, same story as Services' own `responsibleMake` section
+  // (content/services.ts) built from the same component the day before.
+  // Paragraph rewritten by the owner, 2026-09-09, into one sentence --
+  // split at the same "setup, then the credibility clause" point the
+  // original two-sentence copy used, so the bold treatment still lands on
+  // the differentiating claim, not the lead-in.
+  certifications: {
+    heading: "Audited for safety, environment and ethics",
+    subline: "We build to whatever sustainability standard you set, and ",
+    sublineBold: "we name only what is independently certified rather than making broad green claims.",
+    points: [
+      "BSCI and IMAC audited social and ethical compliance",
+      "OEKO-TEX certified fabrics on request",
+      "Recycled polyester (rPET) across many knit and woven bases",
+      "Sourcing to your own sustainability spec",
+    ],
+  },
+
+  // Section 10, "Skilled hands behind every stitch" -- Figma desktop node
+  // 917:231 ("Content"), owner brief 2026-09-09. Centred heading + subline
+  // (no eyebrow, confirmed against the node -- none of this page's other
+  // sections carry one either besides `process`'s own "WHAT WE MAKE"), a
+  // full-bleed 1440x900 hero photo, then a horizontally-scrolling row of 4
+  // staggered-height photos (`get_metadata`: the row's own content extends
+  // to x=2200 against a 1440px frame, the same "genuinely overflows, not a
+  // static 4-up grid" signature `ourFactoryProcess`/`insideFactory`'s own
+  // galleries already have -- reuses the shared `useDesktopChevronScroller`
+  // hook, not a new scroll mechanism). `size` alternates tall (600px)/
+  // short (420px) per the node's own real per-item heights, at one shared
+  // 500px width -- not a MediaRatio (the ratio itself differs per item at
+  // a fixed width, so an aspect-ratio can't express it; a literal height
+  // is simpler than inventing a 4th ratio token for a one-time stagger).
+  // No mobile/tablet Figma frame exists for this node yet -- desktop-only
+  // for now, same caveat `process`/`sampleDetails` above already carry.
+  teamGallery: {
+    heading: "Skilled hands behind every stitch",
+    subline: teamGallerySubline,
+    hero: { label: "Factory floor at Capriowear's Sialkot facility, the full production team at work" },
+    media: [
+      { label: "Cutting team preparing fabric panels at Capriowear's Sialkot factory", size: "tall" as const },
+      { label: "A machinist sewing a garment seam at Capriowear's Sialkot factory", size: "short" as const },
+      { label: "Printing and sublimation team at work at Capriowear's Sialkot factory", size: "tall" as const },
+      {
+        label: "A quality control inspector checking a finished garment at Capriowear's Sialkot factory",
+        size: "short" as const,
+      },
+    ],
+  },
+
+  // Section 11, FAQ -- owner brief, 2026-09-09 (Q&As supplied directly, no
+  // Figma frame for this one). Same `{ h2, items: {q, a}[] }` shape
+  // `home.faq`/`services.faq` already use -- reuses the sitewide `Faq`
+  // component verbatim (no variant props exist on it, see its own
+  // header comment), not a new component. `items` also feeds `faqSchema()`
+  // in app/our-factory/page.tsx, same "content feeds structured data, never
+  // hand-typed twice" rule every other page's FAQ already follows.
+  faq: {
+    h2: "Top questions about the factory",
+    items: [
+      {
+        q: "Where is Capriowear's factory located?",
+        a: "Capriowear manufactures in its own 75,000 sq ft cut-and-sew facility in Sialkot, Pakistan. Capriowear is the activewear and teamwear division of Caprio Sports.",
+      },
+      {
+        q: "Are you a manufacturer or a middleman?",
+        a: "We are the factory. Production is cut-and-sew and done in-house, so you work directly with the people who make your product, not a trading agent.",
+      },
+      {
+        q: "What does the factory produce?",
+        a: "Custom activewear and teamwear, OEM, ODM and private label, from fabric to retail-ready packaging, with a low minimum from 50 pieces per style.",
+      },
+      {
+        q: "What certifications and quality standards do you hold?",
+        a: "ISO 9001, OEKO-TEX, BSCI, IMAC and SGS, with every production run inspected to AQL 2.5, in-line and pre-shipment.",
+      },
+      {
+        q: "Can I send a third-party inspector or an NDA?",
+        a: "Yes. Third-party inspection is welcome on your schedule, and we sign an NDA before any tech pack.",
+      },
+      {
+        q: "Is the factory audited for ethics and environment?",
+        a: "Yes. Social and ethical compliance is BSCI and IMAC audited, and OEKO-TEX certified and recycled polyester fabrics are available on request.",
+      },
+    ],
   },
 };
