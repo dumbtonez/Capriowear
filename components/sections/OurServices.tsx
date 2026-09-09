@@ -36,51 +36,88 @@ import type { home } from "@/content/home";
 export type OurServicesProps = {
   content: typeof home.services;
   pageVariant?: "home" | "services";
+  /**
+   * `"light"` (default) or `"dark"` -- the homepage's own dark variant
+   * (owner, 2026-09-09: "bring services section under certified section...
+   * create a variance of services section in dark mode"), same
+   * reusable-prop shape `HowItWorks` already established for its own
+   * dark/`/services` variant (2026-09-07): `bg-ink`/`text-paper` on both
+   * breakpoints' outer wrapper, `eyebrowTone` forwarded instead of the
+   * hardcoded `"light"`, `tone` forwarded to every `CapabilityCard`
+   * (desktop list + mobile carousel) for its own dark subline colour and
+   * empty-state placeholder, plus this placement's own 32px/12px card gap
+   * overrides (`ourServices.cardRootDark`/`cardBodyDark`). Independent of
+   * `pageVariant` -- orthogonal knobs, same as `HowItWorks`' own `tone`
+   * needed no `pageVariant`-equivalent of its own.
+   */
+  tone?: "light" | "dark";
 };
 
-export function OurServices({ content, pageVariant = "home" }: OurServicesProps) {
-  const desktopSection = pageVariant === "services" ? ourServices.desktopSectionServices : ourServices.desktopSection;
+export function OurServices({ content, pageVariant = "home", tone = "light" }: OurServicesProps) {
+  const desktopSection =
+    pageVariant === "services"
+      ? ourServices.desktopSectionServices
+      : tone === "dark"
+        ? ourServices.desktopSectionDark
+        : ourServices.desktopSection;
   const mobileSection = pageVariant === "services" ? ourServices.mobileSectionServices : ourServices.mobileSection;
   const eyebrowSize = pageVariant === "services" ? ourServices.eyebrowSizeServices : undefined;
+  const cardRootClassName = tone === "dark" ? ourServices.cardRootDark : undefined;
+  const cardBodyClassName = tone === "dark" ? ourServices.cardBodyDark : undefined;
 
   return (
     <section>
-      {/* Desktop: sticky heading, scrolling card list */}
-      <div className={desktopSection}>
-        <div className={ourServices.desktopSticky}>
+      {/* `darkSurface` lives on this wrapper (unconstrained, no
+          `container-p` of its own) around BOTH breakpoints' blocks, not on
+          `desktopSection`/`mobileSection` directly -- see `darkSurface`'s
+          own comment for the edge-to-edge bug that fixed. */}
+      <div className={tone === "dark" ? ourServices.darkSurface : undefined}>
+        {/* Desktop: sticky heading, scrolling card list */}
+        <div className={desktopSection}>
+          <div className={ourServices.desktopSticky}>
+            <SectionHeading
+              eyebrow={content.eyebrow}
+              heading={content.h2}
+              eyebrowTone={tone}
+              eyebrowSize={eyebrowSize}
+              headingClassName={ourServices.desktopHeadingWidth}
+            />
+          </div>
+          <div className={ourServices.desktopList}>
+            {content.items.map((item) => (
+              <div key={item.title} className={ourServices.desktopCardWidth}>
+                <CapabilityCard
+                  title={item.title}
+                  body={item.body}
+                  mediaAspectClassName={ourServices.cardMediaRatio}
+                  mediaRadius="none"
+                  tone={tone}
+                  rootClassName={cardRootClassName}
+                  bodyClassName={cardBodyClassName}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile: centred heading, swipeable card slider */}
+        <div className={mobileSection}>
           <SectionHeading
             eyebrow={content.eyebrow}
             heading={content.h2}
-            eyebrowTone="light"
+            eyebrowTone={tone}
             eyebrowSize={eyebrowSize}
-            headingClassName={ourServices.desktopHeadingWidth}
+            headingClassName={ourServices.mobileHeadingWidth}
+            align="center"
+          />
+          <CardCarousel
+            items={content.items}
+            cardMediaRatio={ourServices.cardMediaRatio}
+            tone={tone}
+            rootClassName={cardRootClassName}
+            bodyClassName={cardBodyClassName}
           />
         </div>
-        <div className={ourServices.desktopList}>
-          {content.items.map((item) => (
-            <div key={item.title} className={ourServices.desktopCardWidth}>
-              <CapabilityCard
-                title={item.title}
-                body={item.body}
-                mediaAspectClassName={ourServices.cardMediaRatio}
-                mediaRadius="none"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Mobile: centred heading, swipeable card slider */}
-      <div className={mobileSection}>
-        <SectionHeading
-          eyebrow={content.eyebrow}
-          heading={content.h2}
-          eyebrowTone="light"
-          eyebrowSize={eyebrowSize}
-          headingClassName={ourServices.mobileHeadingWidth}
-          align="center"
-        />
-        <CardCarousel items={content.items} cardMediaRatio={ourServices.cardMediaRatio} />
       </div>
     </section>
   );

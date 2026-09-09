@@ -32,9 +32,20 @@ export type CardCarouselProps = {
    * fine on either background.
    */
   tone?: "light" | "dark";
+  /**
+   * Forwarded straight through to each `CapabilityCard`'s own
+   * `rootClassName`/`bodyClassName` (Our Services' dark variant,
+   * 2026-09-09, so its mobile carousel gets the same 32px/16px card gaps
+   * as its desktop list) -- same default-through-to-the-component-default
+   * shape `CapabilityCard` itself already uses. `undefined` for every
+   * existing caller (light Our Services, How It Works), so neither
+   * changes.
+   */
+  rootClassName?: string;
+  bodyClassName?: string;
 };
 
-export function CardCarousel({ items, cardMediaRatio, tone = "light" }: CardCarouselProps) {
+export function CardCarousel({ items, cardMediaRatio, tone = "light", rootClassName, bodyClassName }: CardCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -89,6 +100,8 @@ export function CardCarousel({ items, cardMediaRatio, tone = "light" }: CardCaro
               mediaAspectClassName={cardMediaRatio}
               mediaRadius="none"
               tone={tone}
+              rootClassName={rootClassName}
+              bodyClassName={bodyClassName}
             />
           </div>
         ))}

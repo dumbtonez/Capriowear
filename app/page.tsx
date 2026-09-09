@@ -125,11 +125,11 @@ export default function Home() {
         <TrustSignals items={home.trustStrip} />
         <WhatWeMake content={home.whatWeMake} />
         <CertifiedCompliant content={home.certified} />
+        <OurServices content={home.services} tone="dark" />
         <Stats items={home.stats} />
         <InsideFactory content={home.insideFactory} />
         <Exhibitions content={home.exhibitions} />
         <FinalCta content={home.finalCta} ticker={home.complianceTicker} secondaryCta={home.finalCta.secondaryCta} />
-        <OurServices content={home.services} />
         <HowItWorks content={home.howItWorks} />
         <Faq content={home.faq} />
         <FinalCta content={home.closingCta} secondaryCta={home.closingCta.secondaryCta} />

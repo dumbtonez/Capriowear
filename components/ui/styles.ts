@@ -1369,9 +1369,21 @@ export const hero = {
   bannerInner: "container-p flex flex-col gap-8 pt-[115px] pb-12 xl:gap-12 xl:pt-[208px] xl:pb-20",
   // 12px gap mobile, 24px desktop, between the eyebrow and the H1.
   textBlock: "flex flex-col gap-3 xl:gap-6",
-  // 832px measured H1 wrap width in Figma is exactly 52rem; unconstrained the
-  // H1 would run wider and wrap to fewer lines than the design at xl and up.
-  heading: "max-w-[52rem]",
+  // 13em, not a fixed 832px/52rem (owner, 2026-09-09: on very wide screens
+  // the H1 wraps to 4 lines, not the intended 3 across all viewports).
+  // `--text-display` (globals.css) is a `clamp()` that keeps growing with
+  // viewport width up to ~1920px (64px at the 1440px reference, 78.2px at
+  // its own max) -- a fixed-px/rem cap stays locked at the 1440px-tuned
+  // 832px while the font keeps growing past it, so the same box holds
+  // fewer, no-longer-Figma-matching characters per line the wider the
+  // viewport gets, which is exactly what forced the extra 4th line. `em`
+  // is relative to the H1's OWN font-size, so the box scales in lockstep
+  // with `text-display` at every width (832px at the 64px/1440px
+  // reference, same as before; wider automatically past that, matching
+  // the font's own growth instead of racing against it) -- the same class
+  // of fixed-max-w-vs-fluid-type mismatch already fixed twice on
+  // /our-factory (see `ourFactoryDetails.heading`'s own comment).
+  heading: "max-w-[13em]",
   // Secondary CTA is desktop-only (owner correction, 2026-08-23): shown from
   // xl up, absent on mobile -- not narrower, genuinely not there below xl.
   buttons: "flex flex-col gap-4 xl:flex-row",
@@ -1663,9 +1675,10 @@ export const ourFactoryProcess = {
 // token match.
 export const ourFactoryDetails = {
   section: "bg-ink text-paper",
-  // xl:py-[80px] (owner, 2026-09-09: "make the heading top 80px gap and
-  // bottom of the section also 80px") -- was xl:py-[120px].
-  inner: "container-p flex flex-col gap-12 py-[72px] xl:gap-[72px] xl:py-[80px]",
+  // xl:pt-[96px] (owner, 2026-09-09: "add 16px on top of the heading" --
+  // was xl:py-[80px] on both sides; split so only the top gap grows to
+  // 96px, bottom stays the 80px the owner set the same day).
+  inner: "container-p flex flex-col gap-12 py-[72px] xl:gap-[72px] xl:pb-[80px] xl:pt-[96px]",
   // Header row: H2 left, lead paragraph right (Figma: 539px/181px gap/560px
   // at the 1440px reference width) -- `max-w`, not a fixed `w`, on both
   // sides, and `justify-between` doing the gap instead of a flat 181px:
@@ -1715,8 +1728,13 @@ export const ourFactoryDetails = {
   // read without a magic-number position that would need re-tuning any
   // time the list's own total height changes (e.g. a longer description).
   stepperCol: "hidden shrink-0 flex-col items-center gap-6 xl:flex xl:self-center",
+  // `cursor-pointer` (owner, 2026-09-09: "chevron should also have hand
+  // icon on hover") -- same preflight `cursor: default` reset as
+  // `itemButton` above; `disabled:cursor-default` keeps the first/last
+  // disabled state honest, since a disabled stepper button isn't
+  // actually clickable.
   stepperButton:
-    "flex size-8 items-center justify-center rounded-pill text-paper transition-colors duration-200 hover:bg-paper/10 disabled:pointer-events-none disabled:opacity-30",
+    "flex size-8 cursor-pointer items-center justify-center rounded-pill text-paper transition-colors duration-200 hover:bg-paper/10 disabled:pointer-events-none disabled:cursor-default disabled:opacity-30",
   stepperIcon: "size-4",
   stepperIconUp: "-rotate-180",
   listCol: "flex w-full flex-col gap-4 xl:w-[320px] xl:shrink-0",
@@ -1770,20 +1788,45 @@ export const ourFactoryDetails = {
   // directly on `itemButton` below, so the button's own hit target is the
   // full visible chip, not just its text.
   //
-  // `hover:bg-[#191b1f]` (owner, 2026-09-09: "on the chip hover, change
-  // the chip color a bit dark with a mouseover on hover") -- ~18% darker
-  // than the base `#1f2126`, computed rather than eyeballed (both one-off
-  // literals for the same reason, no existing token is this specific
-  // dark-surface tier). CSS `:hover` matches an ancestor whenever any
-  // descendant is hovered, so this alone (not also needed on
-  // `itemButton`) already covers the whole chip once `itemButton` fills
-  // it -- see that element's own "whole chip clickable" fix, the same
-  // shape of coverage. Applies at both open and closed (no separate
-  // open/closed hover colour) -- the interactive affordance doesn't
-  // change meaning between states, only the panel's own reveal does.
-  item: "relative flex flex-col bg-[#1f2126] text-left transition-[width,border-radius,background-color] ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[#191b1f] motion-reduce:transition-none",
+  // Base chip surface -- no hover here any more (owner, 2026-09-09: "the
+  // open chip should not have a hover effect"). Hover now lives on
+  // `itemClosed` only, so it drops away the instant a chip opens instead
+  // of continuing to react to the pointer while it's the active,
+  // already-obvious-it's-interactive panel.
+  //
+  // `ease-[cubic-bezier(0.33,1,0.68,1)]` (owner, 2026-09-09: "why the chip
+  // when opens at the end have a jerk effect... apple has very smooth
+  // towards the right it goes") -- was the same `cubic-bezier(0.22,1,0.36,1)`
+  // `detailGrid`'s height animation still uses. Root cause, confirmed by
+  // evaluating that curve as a function of elapsed time (not a guess): it
+  // reaches 96% of its total travel by 50% of the duration and 99.8% by
+  // 80%, so for this chip's real ~166px closed->open width range, the last
+  // 40% of the 340ms transition (its final ~136ms) only ever moves ~2-3px
+  // total -- sub-pixel-per-frame deltas that the browser rounds to whole
+  // device pixels, so most of those frames render byte-identical and the
+  // remaining couple of pixels appear to snap in one frame instead of
+  // gliding, right when the motion should read as settling. `(0.33,1,0.68,1)`
+  // ("easeOutCubic") is still a fast-start/slow-finish curve -- same
+  // character, not a different animation -- but keeps ~11px of real,
+  // still-visible travel at the same 60%-elapsed mark instead of ~3px, so
+  // the last third of the grow reads as a continuous glide rather than a
+  // pause-then-snap. `detailGrid`/`detailInner` (the height/text-fade,
+  // already tuned and not what was reported jerky) keep their own existing
+  // curve -- this is scoped to `item`'s own width/radius/background only.
+  item: "relative flex flex-col bg-[#1f2126] text-left transition-[width,border-radius,background-color] ease-[cubic-bezier(0.33,1,0.68,1)] motion-reduce:transition-none",
   itemOpen: "w-full gap-2 rounded-xl duration-[340ms]",
-  itemClosed: "rounded-pill duration-[260ms]",
+  // `hover:bg-[#25272d]` (owner, 2026-09-09: chip hover should be "a
+  // little lighter than the actual color not dark" -- reverses this same
+  // day's earlier "a bit dark" ask). ~18% lighter than the base
+  // `#1f2126`, the same multiplicative step the darker version used, just
+  // inverted -- both one-off literals for the same reason, no existing
+  // token is this specific dark-surface tier. CSS `:hover` matches an
+  // ancestor whenever any descendant is hovered, so this alone (not also
+  // needed on `itemButton`) already covers the whole chip once
+  // `itemButton` fills it -- see that element's own "whole chip
+  // clickable" fix, the same shape of coverage. Closed-only, per the
+  // "open chip should not have a hover effect" ask above.
+  itemClosed: "rounded-pill duration-[260ms] hover:bg-[#25272d]",
   // No `pb-*` on the shared base -- split into `itemButtonClosed`/`Open`
   // below (real bug, found live, owner: "the gap between the chip title
   // and subline should be 8px"): a flat `py-4` gave the button its own
@@ -1799,8 +1842,12 @@ export const ourFactoryDetails = {
   // `itemButtonClosed`/`Open` too, matching `detailGrid`/`detailGridOpen`
   // exactly, so this element's own vertical-space change also finishes in
   // lockstep with the panel's height animation, not a beat later.
+  // `cursor-pointer` (owner, 2026-09-09: "on hover the mouseover should
+  // turn hand icon so it tells its clikable") -- Tailwind's own preflight
+  // resets `<button>` to `cursor: default`, so the browser's native
+  // pointer-on-button behaviour doesn't apply here without it.
   itemButton:
-    "flex w-full items-center px-6 pt-4 transition-[padding] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+    "flex w-full items-center px-6 pt-4 transition-[padding] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none cursor-pointer",
   itemButtonClosed: "pb-4 duration-[260ms]",
   itemButtonOpen: "pb-0 duration-[340ms]",
   // Plus icon persists in the DOM at both states (opacity/rotate driven by
@@ -3510,7 +3557,55 @@ export const finalCta = {
 // Figma: desktop node 415:5449, mobile node 415:5484. A light section --
 // no bg-ink split needed, the page's own default background already works.
 export const ourServices = {
+  // Dark `tone` variant (owner, 2026-09-09: "bring services section under
+  // certified section... create a variance of services section in dark
+  // mode, use the same black background color we are using") -- same
+  // shape as `howItWorks.darkSurface` (`bg-ink`/`text-paper`), kept as its
+  // own literal rather than importing that token: every section here owns
+  // its own recipe, the established sitewide convention even for
+  // identical two-class strings. `text-paper` sets the ambient colour
+  // once so the eyebrow/heading/card titles below (all colourless on
+  // their own) inherit pure white for free -- no separate white override
+  // needed anywhere.
+  //
+  // Applied to its own unconstrained wrapper around BOTH the desktop and
+  // mobile blocks (owner follow-up, same day: "make the black background
+  // edge to edge") -- not on `desktopSection`/`mobileSection` themselves,
+  // which both carry `container-p` (capped at 1440px). A background on
+  // that same capped element stops at 1440px too, showing the page's own
+  // background outside it on any wider viewport instead of true
+  // edge-to-edge black -- the exact bug this project's other full-bleed
+  // dark sections (Hero, Stats, Inside the Factory, FAQ) already avoid by
+  // splitting background (outer, unconstrained) from `container-p`
+  // (inner). Real bug here too, not just a class-order guess: initially
+  // landed on `desktopSection`/`mobileSection` directly, confirmed
+  // clipping at 1920px+.
+  darkSurface: "bg-ink text-paper",
+  // 32px image-to-title-block gap (owner spec, this dark placement only)
+  // -- replaces `capabilityCard.root`'s own default (16/24px) via its
+  // `rootClassName` override, the mechanism that prop exists for; the
+  // shared default stays untouched for every other `CapabilityCard`
+  // caller (light Our Services, How It Works, ProductCustomizeSteps).
+  cardRootDark: "flex flex-col gap-8",
+  // 12px title-to-subline gap (owner, 2026-09-09, same day: corrected
+  // from an initial 16px -- "make it 12px") -- same reasoning as
+  // `cardRootDark` above, via `bodyClassName`. Subline colour itself
+  // needs no new token: `capabilityCard.textDark` already resolves to the
+  // sitewide `#838D97` muted-on-dark literal once `tone` is forwarded.
+  cardBodyDark: "flex flex-col gap-3",
   desktopSection: "container-p hidden gap-[221px] pt-[120px] pb-[120px] xl:flex xl:items-start",
+  // Dark-tone desktop variant, homepage only (owner, same day: "next
+  // section gap should be 160px") -- a complete, self-contained string
+  // like `desktopSectionServices` below, not `desktopSection` plus a
+  // second `pb-*` utility layered on top: two same-specificity utilities
+  // touching the same property is this project's own established
+  // "doesn't reliably resolve by class-list order" bug class (see e.g.
+  // `howItWorks.desktopOuterLight`/`desktopOuterDark`'s own split for the
+  // same reasoning). Only the bottom gap changes (120px -> 160px, the
+  // space down to `Stats`, this section's new next-door neighbour); the
+  // top gap down from Certified & Compliant is unchanged at 120px, not
+  // asked for. No background here any more -- see `darkSurface` above.
+  desktopSectionDark: "container-p hidden gap-[221px] pt-[120px] pb-[160px] xl:flex xl:items-start",
   // Services page reuse (owner, 2026-09-07: "use as is, just check the
   // spacing from the top in this page and use it") -- same section, same
   // cards, only the outer top/bottom breathing room changes to match this
