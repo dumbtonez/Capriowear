@@ -12,7 +12,16 @@
 // separately, keep it responsive-safe) -- see `ourFactoryIntro` in
 // components/ui/styles.ts for the exact spacing notes and the mobile
 // fallback caveat.
+//
+// Heading gained a reveal animation, 2026-09-10 (owner: "the factory behind
+// caprio should have title animation") -- was a plain `<h2>`, the one
+// section heading on this page that had been missed; every other section
+// heading sitewide already wraps in `TextReveal` on plain `text` mode
+// (WhatWeMake, CertifiedCompliant, HowItWorks, ServicesHowWeWork, etc.), so
+// this just applies that same existing pattern rather than inventing a new
+// one.
 import type { NoteSegment } from "@/content/activewear/types";
+import { TextReveal } from "@/components/TextReveal";
 import { ourFactoryIntro } from "@/components/ui/styles";
 import type { ourFactory } from "@/content/our-factory";
 
@@ -41,7 +50,7 @@ export function OurFactoryIntro({ content }: OurFactoryIntroProps) {
     <section className={ourFactoryIntro.section}>
       <div className={ourFactoryIntro.inner}>
         <div className={ourFactoryIntro.textCol}>
-          <h2 className={ourFactoryIntro.heading}>{content.heading}</h2>
+          <TextReveal as="h2" text={content.heading} className={ourFactoryIntro.heading} />
           <Paragraph segments={content.paragraph} />
         </div>
 
