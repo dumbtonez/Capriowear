@@ -43,9 +43,28 @@ export type CardCarouselProps = {
    */
   rootClassName?: string;
   bodyClassName?: string;
+  /**
+   * Overrides each card's own width/snap classes -- default `undefined`
+   * falls through to `cardCarousel.card` (`w-[280px] shrink-0 snap-start`),
+   * unaffected for every existing caller (Our Services, How It Works'
+   * mobile-only usage). How It Works' now-also-tablet usage (owner,
+   * 2026-09-09: swap the tablet chevron for swipe+dots, keeping tablet's
+   * own already-defined wider ~469px card) passes a `md:w-[469px]` variant
+   * -- the track's own `activeIndex` tracking already reads each card's
+   * real rendered `offsetLeft`/`offsetWidth`, not a hardcoded pixel
+   * constant, so a wider card needs no other change here.
+   */
+  cardClassName?: string;
 };
 
-export function CardCarousel({ items, cardMediaRatio, tone = "light", rootClassName, bodyClassName }: CardCarouselProps) {
+export function CardCarousel({
+  items,
+  cardMediaRatio,
+  tone = "light",
+  rootClassName,
+  bodyClassName,
+  cardClassName = cardCarousel.card,
+}: CardCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -92,7 +111,7 @@ export function CardCarousel({ items, cardMediaRatio, tone = "light", rootClassN
             ref={(el) => {
               cardRefs.current[index] = el;
             }}
-            className={cardCarousel.card}
+            className={cardClassName}
           >
             <CapabilityCard
               title={item.title}

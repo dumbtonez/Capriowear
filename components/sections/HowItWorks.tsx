@@ -161,16 +161,41 @@ export function HowItWorks({ content, tone = "light" }: HowItWorksProps) {
         <DesktopScroller steps={content.steps} tone={tone} />
       </div>
 
-      {/* Mobile: centred heading, swipeable card slider */}
+      {/* Mobile + tablet: centred heading, swipeable card slider. Heading
+          itself still splits by real breakpoint (owner, 2026-09-09: "how it
+          works title should be in 2 lines" on tablet) even though this
+          whole block's own visibility no longer does (tablet moved in here
+          alongside real mobile when the chevron became xl:-only, see
+          `howItWorks.mobileSection`'s own comment) -- real mobile keeps its
+          own Figma-matched 3-line forced break (`renderMobileHeading`,
+          real `<br/>`s, can't be undone by width alone); tablet/desktop
+          both get the natural 2-line wrap instead, via the exact same
+          `desktopHeadingWidth` constraint the desktop block above already
+          uses for this identical string -- `text-h1`'s own fluid clamp
+          means a narrower tablet viewport also renders a smaller font, so
+          the same 812px cap holds 2 lines (or fewer) there too, not more. */}
       <div className={cx(howItWorks.mobileSection, tone === "dark" && howItWorks.darkSurface)}>
         <SectionHeading
           eyebrow={<TextReveal text={content.eyebrow} />}
-          heading={renderMobileHeading(content.h2)}
+          heading={
+            <>
+              <span className="md:hidden">{renderMobileHeading(content.h2)}</span>
+              <span className="hidden md:inline">
+                <TextReveal as="span" text={content.h2} />
+              </span>
+            </>
+          }
           eyebrowTone={tone}
           eyebrowSize={tone === "dark" ? howItWorks.eyebrowSizeDark : undefined}
           align="center"
+          headingClassName={howItWorks.desktopHeadingWidth}
         />
-        <CardCarousel items={content.steps} cardMediaRatio={howItWorks.cardMediaRatio} tone={tone} />
+        <CardCarousel
+          items={content.steps}
+          cardMediaRatio={howItWorks.cardMediaRatio}
+          tone={tone}
+          cardClassName={howItWorks.mobileCardWidth}
+        />
       </div>
     </section>
   );

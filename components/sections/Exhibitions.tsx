@@ -33,16 +33,24 @@ export type ExhibitionsProps = {
   content: typeof home.exhibitions;
 };
 
-const CARD_WIDTH = 300;
-const ACTIVE_HEIGHT = 340;
-const INACTIVE_HEIGHT = 248;
+// Mobile 300px, tablet 469px -- same values/reasoning as InsideFactory.tsx's
+// own identical constants (owner, 2026-09-09: tablet swipes with dots now,
+// keeping its own already-defined wider card size).
+const CARD_WIDTH_MOBILE = 300;
+const CARD_WIDTH_TABLET = 469;
+const ACTIVE_HEIGHT_MOBILE = 340;
+const INACTIVE_HEIGHT_MOBILE = 248;
+const ACTIVE_HEIGHT_TABLET = 532;
+const INACTIVE_HEIGHT_TABLET = 388;
 
 function lerp(from: number, to: number, t: number) {
   return from + (to - from) * t;
 }
 
 // Desktop gallery card pitch -- must match exhibitions.desktopCard's width
-// and exhibitions.desktopRow's gap-6.
+// and exhibitions.desktopRow's gap-6. `xl:` (1280px+) only now, same as
+// InsideFactory.tsx's own gallery -- tablet moved to the swipe+dots
+// carousel below.
 const DESKTOP_CARD_WIDTH = 469;
 const DESKTOP_CARD_GAP = 24;
 
@@ -79,6 +87,21 @@ function MobileCarousel({ shots }: { shots: typeof home.exhibitions.media }) {
   // same shared `cardCarousel` dot recipe/mechanism as Inside the
   // Factory's own identical carousel, see that file's own comment.
   const [activeIndex, setActiveIndex] = useState(0);
+  // This carousel now also covers tablet width (owner, 2026-09-09: swap
+  // the tablet chevron for swipe+dots) -- same `matchMedia` pattern
+  // InsideFactory.tsx's own identical carousel uses, see that file's own
+  // comment.
+  const [isTablet, setIsTablet] = useState(false);
+  useEffect(() => {
+    const query = window.matchMedia("(min-width: 768px)");
+    const update = () => setIsTablet(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+  const cardWidth = isTablet ? CARD_WIDTH_TABLET : CARD_WIDTH_MOBILE;
+  const activeHeight = isTablet ? ACTIVE_HEIGHT_TABLET : ACTIVE_HEIGHT_MOBILE;
+  const inactiveHeight = isTablet ? INACTIVE_HEIGHT_TABLET : INACTIVE_HEIGHT_MOBILE;
 
   useEffect(() => {
     const track = trackRef.current;
@@ -91,8 +114,8 @@ function MobileCarousel({ shots }: { shots: typeof home.exhibitions.media }) {
       let nearestDistance = Infinity;
       cardRefs.current.forEach((card, index) => {
         if (!card) return;
-        const distance = Math.min(Math.abs(scrollLeft - index * CARD_WIDTH) / CARD_WIDTH, 1);
-        card.style.height = `${lerp(ACTIVE_HEIGHT, INACTIVE_HEIGHT, distance)}px`;
+        const distance = Math.min(Math.abs(scrollLeft - index * cardWidth) / cardWidth, 1);
+        card.style.height = `${lerp(activeHeight, inactiveHeight, distance)}px`;
         if (distance < nearestDistance) {
           nearestDistance = distance;
           nearest = index;
@@ -111,7 +134,7 @@ function MobileCarousel({ shots }: { shots: typeof home.exhibitions.media }) {
     update();
     track.addEventListener("scroll", onScroll, { passive: true });
     return () => track.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [cardWidth, activeHeight, inactiveHeight]);
 
   return (
     // No `items-center` -- same real overflow bug as InsideFactory.tsx's
@@ -130,7 +153,7 @@ function MobileCarousel({ shots }: { shots: typeof home.exhibitions.media }) {
               cardRefs.current[index] = el;
             }}
             className={exhibitions.mobileCard}
-            style={{ height: index === 0 ? ACTIVE_HEIGHT : INACTIVE_HEIGHT }}
+            style={{ height: index === 0 ? activeHeight : inactiveHeight }}
           >
             <MediaPlaceholder label={shot.label} radius="none" tone="dark" className="h-full" />
           </div>
@@ -178,6 +201,18 @@ export function Exhibitions({ content }: ExhibitionsProps) {
             eyebrowTone="dark"
             eyebrowSize={exhibitions.mobileEyebrowSize}
             align="center"
+            // Tablet 2-line wrap, 2026-09-10 (owner: "tablet, exhibition
+            // title should be in 2 lines like other titles") -- this
+            // block's own wrapper spans real mobile AND tablet (`xl:hidden`,
+            // see `exhibitions.mobileSection`'s own comment), and had no
+            // width constraint at either tier, so tablet's wider container
+            // let the heading sit on one line. Reuses the same
+            // `desktopHeadingWidth` (812px) the desktop block above already
+            // uses for this identical string -- `text-h1`'s own fluid clamp
+            // means the narrower tablet font size still wraps to 2 lines
+            // (or fewer) under the same cap, not more; real mobile's own
+            // much narrower viewport is unaffected by an 812px cap.
+            headingClassName={exhibitions.desktopHeadingWidth}
           />
         </div>
         <div className={exhibitions.mobileGalleryGap}>

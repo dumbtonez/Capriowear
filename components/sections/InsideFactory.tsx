@@ -74,48 +74,34 @@ export type InsideFactoryProps = {
   showCta?: boolean;
 };
 
-const CARD_WIDTH = 300;
-const ACTIVE_HEIGHT = 340;
-const INACTIVE_HEIGHT = 248;
+// Mobile 300px, tablet 469px (owner, 2026-09-09: "on tablet... show dots
+// under like mobile" -- tablet now swipes natively with dots, the same
+// `MobileCarousel` mechanism, just at its own already-defined wider card
+// size instead of shrinking back to the 300px mobile card). 469px is the
+// same value this file's own desktop chevron gallery already used for its
+// own former tablet tier (see `DESKTOP_CARD_WIDTH`'s own comment below) --
+// reused, not re-derived. Active/inactive heights scale by the same
+// 469/300 ratio so the active-card-taller proportions stay identical at
+// the wider size, not a new arbitrary design value.
+const CARD_WIDTH_MOBILE = 300;
+const CARD_WIDTH_TABLET = 469;
+const ACTIVE_HEIGHT_MOBILE = 340;
+const INACTIVE_HEIGHT_MOBILE = 248;
+const ACTIVE_HEIGHT_TABLET = 532;
+const INACTIVE_HEIGHT_TABLET = 388;
 
 function lerp(from: number, to: number, t: number) {
   return from + (to - from) * t;
 }
 
 // Desktop gallery card pitch -- must match insideFactory.desktopCard's width
-// and insideFactory.desktopRow's gap-12, xl: (1280px+) only.
+// (1200px) and insideFactory.desktopRow's gap-12 (48px). `xl:` (1280px+)
+// only now (owner, 2026-09-09: tablet moved to the swipe+dots carousel
+// below instead of this chevron gallery -- see that carousel's own
+// `CARD_WIDTH_TABLET` comment) -- no more `matchMedia`/tablet branch
+// needed here, since this component never renders below `xl:` any more.
 const DESKTOP_CARD_WIDTH = 1200;
 const DESKTOP_CARD_GAP = 48;
-// Tablet-only (768-1279px) pitch -- owner, 2026-09-03: "Inside the factory
-// should also use desktop version" (this gallery previously only showed at
-// xl:, same as the rest of the homepage's tablet-width review). Two real
-// problems with reusing the desktop card/layout verbatim, both owner-
-// confirmed live: (1) the desktop card's own 950px width doesn't fit --
-// `desktopRow`'s centering padding, `calc(50% - 475px)`, goes negative
-// below a 950px viewport and is silently clamped to 0px (padding can't be
-// negative), so the first card rendered flush against the left edge, no
-// centering/peek at all; (2) even a smaller *centered* card is wrong here
-// regardless of width -- owner: "image placeholder should have same gap
-// from the left as other sections have as default state ... 2nd image
-// peak should be visible so customer knows its scrollable." Centering
-// puts equal padding on both sides (matching nothing else on the page)
-// and, depending on width, can leave no second-card peek at rest at all.
-// Tablet now uses a real left-aligned layout instead of the desktop
-// card's centered-snap technique: starts flush at the section's own
-// standard `container-p` inset, snapping to each card's start (not
-// centre) -- guarantees a visible second-card peek at rest at every width
-// in this range, and the same left inset every other section already
-// uses. `TABLET_CARD_WIDTH` went 600 ("too wide") -> 520 -> 560, before
-// settling on Exhibitions' own confirmed `469px` card (owner, 2026-09-03:
-// "i like the exhibition image size and it has gap from the left, use
-// the same for factory" -- after Exhibitions got this exact same tablet
-// treatment, see that section's own comments in styles.ts) -- matching
-// value across both sections rather than each carrying its own separate
-// number. `TABLET_CARD_GAP` (24) already matched Exhibitions' own `gap-6`.
-// Must match `insideFactory.desktopCard`'s own `md:` width and
-// `desktopRow`'s own `md:gap` below.
-const TABLET_CARD_WIDTH = 469;
-const TABLET_CARD_GAP = 24;
 
 function DesktopGallery({
   shots,
@@ -124,23 +110,8 @@ function DesktopGallery({
   shots: typeof home.insideFactory.media;
   tone: "light" | "dark";
 }) {
-  // Same `matchMedia` pattern ProductGrid.tsx already uses for its own
-  // breakpoint-dependent page size -- the chevron's click-to-scroll amount
-  // (`cardPitch`) must match whichever card size is actually rendered at
-  // the current width, or a click scrolls the wrong distance and misses
-  // the next card's snap point.
-  const [cardPitch, setCardPitch] = useState(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP);
-  useEffect(() => {
-    const query = window.matchMedia("(min-width: 1280px)");
-    const update = () =>
-      setCardPitch(query.matches ? DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP : TABLET_CARD_WIDTH + TABLET_CARD_GAP);
-    update();
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, []);
-
   const { wrapRef, trackRef, chevronRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
-    useDesktopChevronScroller(cardPitch);
+    useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP);
 
   return (
     <div
@@ -193,6 +164,22 @@ function MobileCarousel({
   // scroll frame, so it doesn't carry the same per-frame re-render cost
   // the height write was written to avoid.
   const [activeIndex, setActiveIndex] = useState(0);
+  // This carousel now also covers tablet width (owner, 2026-09-09: swap
+  // the tablet chevron for swipe+dots, same mechanism as mobile, just at
+  // tablet's own wider already-defined card size) -- same `matchMedia`
+  // pattern `DesktopGallery` above used for its own former tablet branch,
+  // now moved here since this is the component that needs it.
+  const [isTablet, setIsTablet] = useState(false);
+  useEffect(() => {
+    const query = window.matchMedia("(min-width: 768px)");
+    const update = () => setIsTablet(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+  const cardWidth = isTablet ? CARD_WIDTH_TABLET : CARD_WIDTH_MOBILE;
+  const activeHeight = isTablet ? ACTIVE_HEIGHT_TABLET : ACTIVE_HEIGHT_MOBILE;
+  const inactiveHeight = isTablet ? INACTIVE_HEIGHT_TABLET : INACTIVE_HEIGHT_MOBILE;
 
   useEffect(() => {
     const track = trackRef.current;
@@ -212,8 +199,8 @@ function MobileCarousel({
       let nearestDistance = Infinity;
       cardRefs.current.forEach((card, index) => {
         if (!card) return;
-        const distance = Math.min(Math.abs(scrollLeft - index * CARD_WIDTH) / CARD_WIDTH, 1);
-        card.style.height = `${lerp(ACTIVE_HEIGHT, INACTIVE_HEIGHT, distance)}px`;
+        const distance = Math.min(Math.abs(scrollLeft - index * cardWidth) / cardWidth, 1);
+        card.style.height = `${lerp(activeHeight, inactiveHeight, distance)}px`;
         if (distance < nearestDistance) {
           nearestDistance = distance;
           nearest = index;
@@ -232,7 +219,7 @@ function MobileCarousel({
     update();
     track.addEventListener("scroll", onScroll, { passive: true });
     return () => track.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [cardWidth, activeHeight, inactiveHeight]);
 
   return (
     // No `items-center` on this wrapper (real bug, found live via the
@@ -256,7 +243,7 @@ function MobileCarousel({
               cardRefs.current[index] = el;
             }}
             className={insideFactory.mobileCard}
-            style={{ height: index === 0 ? ACTIVE_HEIGHT : INACTIVE_HEIGHT }}
+            style={{ height: index === 0 ? activeHeight : inactiveHeight }}
           >
             <MediaPlaceholder label={shot.label} radius="none" tone={tone} className="h-full" />
           </div>

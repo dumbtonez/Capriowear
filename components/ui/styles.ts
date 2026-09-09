@@ -3444,37 +3444,22 @@ export const insideFactory = {
   // `howItWorks.desktopRow`/`productCustomizeSteps.desktopRow`), which all
   // already use this exact flat 80px, matching `container-p`'s own real
   // `xl:` inset (app/globals.css).
-  desktopRow: "no-scrollbar flex w-full items-center gap-6 overflow-x-hidden scroll-smooth px-8 xl:gap-12 xl:px-[80px]",
-  // 469px (owner, 2026-09-03: "i like the exhibition image size and it
-  // has gap from the left, use the same for factory") -- matches
-  // `exhibitions.desktopCard`'s own confirmed `md:` width exactly, after
-  // going 600 ("too wide") -> 520 -> 560 first.
-  // xl: bumped 950 -> 1200px (owner, 2026-09-08: "increase the size to
-  // 1200px width by 640") -- must match `DESKTOP_CARD_WIDTH` in
-  // InsideFactory.tsx and `desktopRow`'s own centering calc above.
-  // `snap-start`/`xl:snap-center` dropped along with `desktopRow`'s own
-  // `snap-x` above -- meaningless without a snap container parent.
-  desktopCard: "w-[469px] shrink-0 xl:w-[1200px]",
-  // Owner, 2026-09-03, same review: "Inside the factory image container
-  // size and behavior still look different than the exhibition container
-  // ... make the factory the same as exhibition" -- width/gap/left-inset
-  // already matched (see `desktopCard`'s own comment), but the image
-  // itself still read as a different SIZE: this section's own real
-  // `19:11` ratio (271px tall at a 469px-wide card) vs Exhibitions'
-  // `469:320` (320px tall, taller) -- same width, visibly different
-  // height. `md:aspect-[469/320]` overrides the `ratio="19:11"` prop's
-  // own `aspect-[19/11]` class at `md:`, matching Exhibitions' tablet-tier
-  // image exactly. A first version omitted the `xl:` half of this pair,
-  // assuming (wrong) that a `md:` utility only applies within the
-  // 768-1279px range -- `md:` is a min-width breakpoint, so it stays
-  // active at every wider screen too, including `xl:`, unless overridden
-  // there -- confirmed live: the real desktop card rendered at 648px
-  // tall instead of the correct 550px (950 / (469/320) instead of
-  // 950 / (19/11)) until `xl:aspect-[19/11]` was added back explicitly to
-  // restore this section's own real, Figma-confirmed desktop ratio.
-  // xl: ratio bumped from "19:11" to the new "15:8" (1200x640, owner,
-  // 2026-09-08) -- see that ratio's own comment in `media.ratio`.
-  desktopCardMedia: "md:aspect-[469/320] xl:aspect-[15/8]",
+  // `md:` tier removed, 2026-09-09 -- this whole gallery only renders at
+  // `xl:` now (see `desktopOuter`'s own comment), so the base/`md:`-tier
+  // values that used to serve the tablet range are unreachable dead code.
+  // Real, no-longer-conditional desktop-only values now.
+  desktopRow: "no-scrollbar flex w-full items-center gap-12 overflow-x-hidden scroll-smooth px-[80px]",
+  // 1200px (owner, 2026-09-08: "increase the size to 1200px width by
+  // 640") -- must match `DESKTOP_CARD_WIDTH` in InsideFactory.tsx and
+  // `desktopRow`'s own gap above. The `md:`/tablet-tier 469px width is
+  // gone, 2026-09-09 -- see `desktopRow`'s own comment.
+  desktopCard: "w-[1200px] shrink-0",
+  // "15:8" (1200x640, owner, 2026-09-08: "increase the size to 1200px
+  // width by 640") -- see that ratio's own comment in `media.ratio`. The
+  // `md:`/tablet-tier "469:320" ratio is gone, 2026-09-09, along with the
+  // rest of this gallery's own former tablet tier -- see `desktopRow`'s
+  // own comment.
+  desktopCardMedia: "aspect-[15/8]",
   // Caption under each image (owner, 2026-09-08: "under each image there
   // will be text label ... 24 by 28 line height ... space from image to
   // title is 32px", then "text will be left align to image, make it
@@ -3506,10 +3491,13 @@ export const insideFactory = {
   // next section (Final CTA) is also dark, so a margin here would show as a
   // page-background seam between two black boxes that should read as one
   // continuous band.
-  mobileSection: "bg-ink text-paper pt-12 pb-12 md:hidden",
+  // `md:hidden` -> `xl:hidden` (owner, 2026-09-09: swap the tablet chevron
+  // for swipe+dots) -- this carousel now covers real mobile and tablet
+  // alike, the desktop chevron gallery above moved to `xl:` to match.
+  mobileSection: "bg-ink text-paper pt-12 pb-12 xl:hidden",
   // /our-factory's `tone="light"` reuse -- same 48px/48px top/bottom inset,
   // bg-paper/text-text instead of the homepage's bg-ink/text-paper.
-  mobileSectionLight: "bg-paper text-text pt-12 pb-12 md:hidden",
+  mobileSectionLight: "bg-paper text-text pt-12 pb-12 xl:hidden",
   // container-p only on the heading, not the gallery below -- the gallery
   // is full-bleed edge to edge (confirmed via get_metadata: no side inset
   // at all), unlike every other section's mobile content. Eyebrow is now
@@ -3517,7 +3505,15 @@ export const insideFactory = {
   // prop, and 16px/600 leading matches this section's confirmed mobile
   // size.
   mobileHeadingWrap: "container-p",
-  mobileEyebrowSize: "text-[1rem] font-semibold leading-[1.2]",
+  // 16px real mobile, standard 20px/24px Overline from `md:` up (owner,
+  // 2026-09-10: "on tablet, eyebrow heading across pages should be 20px by
+  // 24px... make it consistent across pages" -- this token's own wrapper
+  // spans mobile AND tablet in one instance (`mobileSection` is `xl:hidden`,
+  // not `md:hidden`), so the unconditional 16px value below was reaching
+  // tablet too. Same `max-md:.../md:text-overline` split every other
+  // eyebrow override already uses (WhatWeMake, Hero) -- this was the one
+  // that had been left unguarded.
+  mobileEyebrowSize: "max-md:text-[1rem] max-md:font-semibold max-md:leading-[1.2] md:text-overline",
   // 48px gap from the heading down to the gallery (owner call, 2026-08-25,
   // overriding Figma's raw 32px read).
   mobileGalleryGap: "mt-12",
@@ -3551,15 +3547,21 @@ export const insideFactory = {
   // reading correctly at any width from a narrow phone up through tablet-
   // range "mobile" viewports; it still expands down to true centring below
   // ~380px wide, where the formula's own value is smaller than 40px anyway.
-  // Fixed height at the active card's own size (340px) -- without this the
-  // track's height is intrinsic (sized to its tallest child), so every
-  // scroll-frame height write to a card also changes the track's own box,
-  // which reflows the whole section and reads as the entire background
-  // shifting while the user swipes. Pinning it here means cards only ever
-  // grow/shrink inside a box that itself never moves.
+  // Fixed height at the active card's own size (340px mobile, 532px
+  // tablet -- 340 scaled by the same 469/300 ratio the tablet card width
+  // itself uses, owner, 2026-09-09) -- without this the track's height is
+  // intrinsic (sized to its tallest child), so every scroll-frame height
+  // write to a card also changes the track's own box, which reflows the
+  // whole section and reads as the entire background shifting while the
+  // user swipes. Pinning it here means cards only ever grow/shrink inside
+  // a box that itself never moves. `md:` padding tier matches the wider
+  // 469px tablet card the same way the base tier matches the 300px mobile
+  // one (safe centring space for the first/last card).
   mobileTrack:
-    "no-scrollbar flex h-[340px] items-center snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-300px)/2))]",
-  mobileCard: "w-[300px] shrink-0 snap-center",
+    "no-scrollbar flex h-[340px] items-center snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-300px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-469px)/2))]",
+  // 300px mobile, 469px tablet (owner, 2026-09-09: tablet swipes now,
+  // keeping its own already-defined wider card size, not mobile's 300px).
+  mobileCard: "w-[300px] shrink-0 snap-center md:w-[469px]",
   // Active/inactive card ratios (MediaRatio values, not classNames -- see
   // InsideFactory.tsx) are defined there directly, not here: the active
   // (centred) card renders taller than its neighbours -- a real overlap
@@ -3964,8 +3966,13 @@ export const howItWorks = {
   // size/ratio/gap were widened to match Exhibitions verbatim, 2026-08-27
   // -- see `desktopCard`'s own comment), so extending it to `md:` needed
   // only this breakpoint change plus `desktopRow`'s own padding (below),
-  // same as Exhibitions' own tablet-width fix.
-  desktopOuter: "hidden md:flex md:flex-col md:items-center md:gap-[72px] pb-[120px]",
+  // same as Exhibitions' own tablet-width fix. -- Reverted back to `xl:`,
+  // 2026-09-09 (owner: tablet should swipe with dots, not use the chevron
+  // -- see `mobileSection`'s own comment below), the interaction-only
+  // half of that 2026-09-04 change undone; the card sizing it also
+  // brought in (`desktopCard`'s 469px) lives on in the mobile carousel's
+  // own new `md:` tier instead (`mobileCardWidth`, `HowItWorks.tsx`).
+  desktopOuter: "hidden xl:flex xl:flex-col xl:items-center xl:gap-[72px] pb-[120px]",
   // `pt-*` split out of `desktopOuter` above into these two tone-specific
   // tokens (2026-09-07) rather than living there as a shared default --
   // `desktopOuterLight` (the homepage's own original 60px) and
@@ -4070,7 +4077,11 @@ export const howItWorks = {
   // container still eats the first wheel tick in some browsers instead of
   // chaining it to the page; snapping is meaningless now that this track
   // only ever moves via `handleClick`'s own exact `cardPitch` jump).
-  desktopRow: "no-scrollbar flex w-full gap-6 overflow-x-hidden scroll-smooth px-8 xl:px-[80px]",
+  // `xl:` tier only now (`md:` base tier removed, 2026-09-09) -- this
+  // row only renders at `xl:` any more (see `desktopOuter`'s own comment),
+  // so the base tier that used to serve the tablet range is unreachable
+  // dead code.
+  desktopRow: "no-scrollbar flex w-full gap-6 overflow-x-hidden scroll-smooth px-[80px]",
   // Widened from the Figma-confirmed 335px to match Exhibitions' own
   // desktop card width exactly (owner call, 2026-08-27: both sections'
   // media containers, and the space between them, should read as the same
@@ -4079,16 +4090,21 @@ export const howItWorks = {
   // `gap-6`) already matched Exhibitions before this change.
   // `snap-start` dropped along with `desktopRow`'s own `snap-x` above.
   desktopCard: "w-[469px] shrink-0",
-  // 469:320 desktop -- Exhibitions' own confirmed ratio, matched here for
-  // the same reason as the width above (was 67:44/335x220). Mobile stays
-  // 7:5 (280x200): mobile cards go through the shared CardCarousel at its
-  // own fixed 280px width, unrelated to this section-specific widening.
-  // `xl:` -> `md:` (2026-09-04, tablet-width review): this same value now
-  // needs to apply from `md:` up too, since the desktop scroller itself
-  // shows from `md:` (above) -- no separate `xl:` override needed, since
-  // it's the identical ratio at both tiers, unlike Inside the Factory's
-  // own tablet-vs-desktop ratio split.
-  cardMediaRatio: "aspect-[7/5] md:aspect-[469/320]",
+  // `md:aspect-[469/320]` tablet tier moved to `xl:`, 2026-09-09 (owner:
+  // "how it works on services should follow the same image container size
+  // as our services section... same fix we did for home") -- Our
+  // Services' own mobile `CardCarousel` (which also covers tablet,
+  // `xl:hidden`) never overrides its own base ratio below `xl:`, so its
+  // tablet-tier image is just the shared `7:5`. This card's own tablet
+  // tier (now rendered by this same mobile `CardCarousel`, since the
+  // chevron gallery moved to `xl:`-only -- see `desktopOuter`'s own
+  // comment) falls through to that identical base `7:5` value instead of
+  // its former one-off `469:320` tablet ratio -- an exact match, not just
+  // a close one. True desktop (the chevron gallery, `xl:`+) keeps its own
+  // real `469:320` ratio, just re-scoped from `md:` to `xl:` since that's
+  // the only tier this class list needs to differ from the shared base at
+  // any more.
+  cardMediaRatio: "aspect-[7/5] xl:aspect-[469/320]",
   // The floating chevron: both its position (translate, tracking the
   // cursor on X *and* Y) and visibility are written directly to this
   // element's inline `style` from a mousemove/mouseenter/mouseleave
@@ -4107,7 +4123,17 @@ export const howItWorks = {
   // 32px gap from the heading down to the carousel, same as Our Services.
   // xl:hidden -> md:hidden (2026-09-04, tablet-width review) -- real
   // mobile only now, matching `desktopOuter`'s own new `md:` cutoff above.
-  mobileSection: "container-p flex flex-col items-center gap-8 pt-12 pb-12 md:hidden",
+  // `md:hidden` -> `xl:hidden` (owner, 2026-09-09: swap the tablet chevron
+  // for swipe+dots) -- this carousel now covers real mobile and tablet
+  // alike, the desktop chevron row above moved to `xl:` to match.
+  mobileSection: "container-p flex flex-col items-center gap-8 pt-12 pb-12 xl:hidden",
+  // 469px at `md:`, matching this section's own `desktopCard` width
+  // exactly -- passed as `CardCarousel`'s new `cardClassName` override
+  // (owner, 2026-09-09: tablet keeps its own already-defined wider card,
+  // just swipes with dots instead of using the chevron). Base tier
+  // (`w-[280px] shrink-0 snap-start`) matches `cardCarousel.card`'s own
+  // default exactly, real mobile only.
+  mobileCardWidth: "w-[280px] shrink-0 snap-start md:w-[469px]",
 };
 
 /* --- Exhibitions ---------------------------------------------------------- */
@@ -4126,8 +4152,10 @@ export const exhibitions = {
   // every other full-bleed dark section uses.
   // xl: -> md: (owner, 2026-09-03: "apply the same structure to
   // exhibition" -- Inside the Factory's own tablet-width fix, see that
-  // section's own comments for the full history).
-  desktopOuter: "hidden bg-ink text-paper md:block",
+  // section's own comments for the full history) -- then back to xl:
+  // (owner, 2026-09-09: tablet swipes with dots now, not the chevron --
+  // see `mobileSection`'s own comment below).
+  desktopOuter: "hidden bg-ink text-paper xl:block",
   // 60px top (this section's own confirmed top padding -- genuinely
   // different from the usual 120px, not a frame-crop misread like What We
   // Make/Certified & Compliant/Inside the Factory's first passes had).
@@ -4169,7 +4197,10 @@ export const exhibitions = {
   // pass (owner, 2026-09-08: "still requires 2 times scroll to go up or
   // down, further make it smooth") -- see `insideFactory.desktopRow`'s own
   // comment for the full reasoning.
-  desktopRow: "no-scrollbar flex w-full gap-6 overflow-x-hidden scroll-smooth px-8 xl:px-[80px]",
+  // `xl:` tier only now (`md:` tier removed, 2026-09-09) -- this row only
+  // renders at `xl:` any more (see `desktopOuter`'s own comment), so the
+  // base tier that used to serve the tablet range is unreachable dead code.
+  desktopRow: "no-scrollbar flex w-full gap-6 overflow-x-hidden scroll-smooth px-[80px]",
   desktopCard: "w-[469px] shrink-0",
   // The floating chevron is the shared `chevronScroller` recipe -- see the
   // note on `howItWorks` above.
@@ -4178,15 +4209,28 @@ export const exhibitions = {
   // split needed -- nothing here is full-bleed the way the desktop gallery
   // is, container-p covers both the heading and the carousel's own centring
   // padding).
-  mobileSection: "bg-ink text-paper pt-12 pb-12 md:hidden",
+  // `md:hidden` -> `xl:hidden` (owner, 2026-09-09: swap the tablet chevron
+  // for swipe+dots) -- this carousel now covers real mobile and tablet
+  // alike, the desktop chevron gallery above moved to `xl:` to match.
+  mobileSection: "bg-ink text-paper pt-12 pb-12 xl:hidden",
   mobileHeadingWrap: "container-p",
-  mobileEyebrowSize: "text-[1rem] font-semibold leading-[1.2]",
+  // 16px real mobile, standard 20px/24px Overline from `md:` up (owner,
+  // 2026-09-10: "on tablet, eyebrow heading across pages should be 20px by
+  // 24px... make it consistent across pages") -- this section's own
+  // `mobileSection` is `xl:hidden`, spanning tablet too, so the
+  // unconditional 16px value below was reaching tablet. Same fix as
+  // `insideFactory.mobileEyebrowSize` (its own exact copy, see that
+  // token's comment).
+  mobileEyebrowSize: "max-md:text-[1rem] max-md:font-semibold max-md:leading-[1.2] md:text-overline",
   mobileGalleryGap: "mt-8",
   // Inside the Factory's exact carousel numbers, reused verbatim per the
   // owner's explicit instruction -- see components/sections/Exhibitions.tsx.
+  // `md:` tiers (532px height, 469px-card centring padding, both matching
+  // InsideFactory.tsx's own identical tablet values) added 2026-09-09 for
+  // the same tablet swipe+dots swap.
   mobileTrack:
-    "no-scrollbar flex h-[340px] items-center snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-300px)/2))]",
-  mobileCard: "w-[300px] shrink-0 snap-center",
+    "no-scrollbar flex h-[340px] items-center snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-300px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-469px)/2))]",
+  mobileCard: "w-[300px] shrink-0 snap-center md:w-[469px]",
 };
 
 /* --- Footer (homepage section 15) ----------------------------------------- */
