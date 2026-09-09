@@ -6,12 +6,14 @@
 // structurally like Trust Signals, and this section's own typography
 // doesn't match StatBlock's Stat Number/Stat Label tokens either.
 //
-// Genuinely different treatments per breakpoint, not one responsive layout:
-//   - Desktop: media left (660x660-ish, its own confirmed ratio), 3 stats
-//     stacked right, 48px gap, no divider.
-//   - Mobile: media on top, 3 stats in a divided list (border between each
-//     pair, none after the last) -- the same pattern already established in
-//     Trust Signals and What We Make.
+// Redesigned 2026-09-09 (Figma node 819:329): media widened to 864x620,
+// each stat now ends in a gradient divider line except the last, and
+// both breakpoints share the same spacing/divider structure -- the
+// owner's numbers (16px value-to-caption, 32px text-to-divider, 40px
+// between stats) carry no breakpoint split, and mobile's own former
+// bordered divided list is gone, replaced by the same `item`/`itemText`/
+// `divider` shape desktop uses. See `stats` (components/ui/styles.ts)
+// for the full reasoning.
 //
 // Mobile section padding follows the standing rule for every dark
 // full-bleed section (2026-08-24, first applied to Hero): content keeps a
@@ -42,13 +44,16 @@ export function Stats({ items }: StatsProps) {
         <div className={stats.desktopSection}>
           <div className={stats.desktopInner}>
             <div className={stats.desktopMedia}>
-              <MediaPlaceholder label="Stats artwork" ratio="33:31" radius="none" tone="dark" />
+              <MediaPlaceholder label="Stats artwork" ratio="216:155" radius="none" tone="dark" />
             </div>
             <div className={stats.desktopList}>
-              {items.map((stat) => (
+              {items.map((stat, index) => (
                 <div key={stat.value} className={stats.item}>
-                  <p className={stats.value}>{stat.value}</p>
-                  <p className={stats.caption}>{stat.caption}</p>
+                  <div className={stats.itemText}>
+                    <p className={stats.value}>{stat.value}</p>
+                    <p className={stats.caption}>{stat.caption}</p>
+                  </div>
+                  {index < items.length - 1 ? <div className={stats.divider} /> : null}
                 </div>
               ))}
             </div>
@@ -62,18 +67,15 @@ export function Stats({ items }: StatsProps) {
           <MediaPlaceholder label="Stats artwork" ratio="16:11" radius="none" tone="dark" />
         </div>
         <div className={stats.mobileList}>
-          {items.map((stat, index) => {
-            const isLast = index === items.length - 1;
-            return (
-              <div
-                key={stat.value}
-                className={isLast ? stats.mobileItemLast : stats.mobileItem}
-              >
+          {items.map((stat, index) => (
+            <div key={stat.value} className={stats.item}>
+              <div className={stats.itemText}>
                 <p className={stats.mobileValue}>{stat.value}</p>
                 <p className={stats.mobileCaption}>{stat.caption}</p>
               </div>
-            );
-          })}
+              {index < items.length - 1 ? <div className={stats.divider} /> : null}
+            </div>
+          ))}
         </div>
       </div>
     </section>

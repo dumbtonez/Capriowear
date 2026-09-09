@@ -286,10 +286,10 @@ export const media = {
     // genuinely different crop from the desktop box, not the same image
     // scaled down, so it gets its own exact ratio too.
     "16:11": "aspect-[16/11]",
-    // Stats' desktop media box, 660x620 (node 387:499) -- close to square but
-    // not quite, kept as its own exact reduced fraction rather than rounded
-    // to 1:1.
-    "33:31": "aspect-[33/31]",
+    // Stats' desktop media box, widened to 864x620 (owner, 2026-09-09, Figma
+    // node 819:329 revision -- was 660x620/"33:31") -- exact reduced
+    // fraction (864:620 / 4), not rounded.
+    "216:155": "aspect-[216/155]",
     // Inside the Factory's desktop gallery: two narrow side tiles (195x550,
     // Inside the Factory's desktop gallery card (950x550, node 402:911) --
     // now the uniform size every card in that chevron-driven carousel uses
@@ -3042,11 +3042,10 @@ export const stats = {
   // already used this split (bg on the outer <section>, container-p on an
   // inner wrapper); Stats just hadn't followed it.
   desktopOuter: "hidden bg-ink text-paper xl:block",
-  // 120px top/bottom, confirmed from the frame's own geometry (unlike the
-  // unreliable frame-crop reading that bit What We Make and Certified &
-  // Compliant -- here the image height plus symmetric 120px margins account
-  // for the whole frame height exactly).
-  desktopSection: "container-p pt-[120px] pb-[120px]",
+  // pt-[160px] (was 120px, owner, 2026-09-09, Figma node 819:329 revision)
+  // -- confirmed from the frame's own geometry, now 900px tall: 160
+  // (top) + 620 (media height) + 120 (bottom, unchanged) = 900.
+  desktopSection: "container-p pt-[160px] pb-[120px]",
   // Standing rule (2026-08-24, applies to every dark full-bleed section):
   // content keeps a fixed 48px inset from the box's own top/bottom edges,
   // and the standard 72px section-to-section gap lives OUTSIDE the box as a
@@ -3064,42 +3063,67 @@ export const stats = {
   // confirmed via get_metadata.
   mobileSection:
     "container-p flex flex-col gap-6 bg-ink text-paper pt-12 pb-12 xl:hidden",
-  // mx-auto + w-fit: the whole media+text group (1090px) is centred within
-  // the standard 1280px content area, not flush against its left edge with
-  // the text column stretching to fill whatever's left -- confirmed via
-  // get_metadata (95px margin on both sides beyond container-p's own 80px
-  // padding, symmetric). 130px gap between media and text -- corrected
-  // 2026-08-24 from an incorrect 84px (this section's own confirmed value,
-  // not Trust Signals' unrelated 84px gap it had been mistakenly copied
-  // from).
-  desktopInner: "mx-auto flex w-fit items-center gap-[130px]",
-  desktopMedia: "w-[660px] shrink-0",
+  // No more `mx-auto`/`w-fit` centring (owner, 2026-09-09, Figma node
+  // 819:329 revision) -- the old 660+130+300=1090px group was narrower
+  // than the 1280px content area, so it sat centred with extra margin
+  // beyond `container-p`'s own 80px inset instead of meeting it. New
+  // sizes sum to exactly 1280 (864+116+300), so a plain `w-full` row now
+  // fills the content area edge-to-edge, flush with the 80px inset on
+  // both sides -- no new padding needed, `container-p` already supplies
+  // it. Gap 130px -> 116px, the frame's own new confirmed value.
+  desktopInner: "flex w-full items-center gap-[116px]",
+  // No `shrink-0` (real bug, found live: true horizontal overflow at
+  // 1280/1366px) -- 864 (media) + 116 (gap) + 300 (list, its own
+  // `shrink-0`) = 1280px of fixed-width content, which only fits inside
+  // `container-p`'s available width at exactly 1440px and up (1440 -
+  // 2*80px padding = 1280). Below that, `shrink-0` here forced the row
+  // past the viewport instead of letting anything give -- the same class
+  // of "genuinely fixed pixel widths don't fit at 1280/1366px" bug
+  // already fixed elsewhere (Our Services' sticky column, ourFactoryProcess's
+  // row). Only the media shrinks (aspect-ratio keeps its height in sync,
+  // no distortion) -- the text column stays the real, fixed 300px Figma
+  // width at every viewport, unlike the image, which has no such single
+  // confirmed narrower-viewport size to fall back to.
+  desktopMedia: "w-[864px]",
   // 300px fixed, not flex-1 -- corrected 2026-08-24: Figma's real text
   // column is a fixed 300px width (confirmed via get_metadata), not
   // however much space happens to be left after the media block, which had
   // been stretching the caption text far wider than the real design.
-  // 48px gap between stats, no divider -- confirmed via get_design_context
-  // (no border classes on any desktop stat node).
-  desktopList: "flex w-[300px] shrink-0 flex-col gap-12",
-  // 8px value-to-caption gap, shared with mobile.
-  item: "flex flex-col gap-2",
+  // 40px gap between stats (was 48px, owner, 2026-09-09 revision, along
+  // with the new divider line below -- see `item`'s own comment).
+  desktopList: "flex w-[300px] shrink-0 flex-col gap-[40px]",
+  // Each stat: text block + a gradient divider line (except the last
+  // stat, which has none -- confirmed via get_metadata, node 894:331 has
+  // no "Line" child) -- 32px between them (owner, 2026-09-09 revision,
+  // Figma node 819:329). Shared by both breakpoints: the owner's spacing
+  // numbers carry no breakpoint split, and this replaces mobile's own
+  // former border-based divided list entirely (see `divider`'s own
+  // comment) -- `Stats.tsx` renders `divider` conditionally per item.
+  item: "flex flex-col gap-[32px]",
+  // Value + caption, 16px apart (was 8px -- owner, 2026-09-09 revision).
+  itemText: "flex flex-col gap-[16px]",
+  // The stat divider: a plain 2-stop linear gradient, not an image asset
+  // -- Figma's own line asset (node 894:321 etc.) is an SVG whose
+  // gradient stops are `#FF791B` -> `#121317`, an exact match for this
+  // project's own `accent`/`ink` tokens, so it's reproduced with Tailwind
+  // v4's gradient utility instead of committing and loading a static SVG
+  // for a two-colour straight line.
+  divider: "h-px w-full bg-linear-to-r from-accent to-ink",
   // 54px/400 (regular)/64px leading -- the size matches text-h1 exactly but
   // the weight doesn't (h1 is 500), so this is its own one-off, not a reused
   // token.
   value: "text-[3.375rem] font-normal leading-[64px]",
   // 20px/400/28px leading, #838d97 -- the same muted-on-dark colour already
   // confirmed independently for Hero's mobile ticker items, now a second
-  // real confirmation of the same hex, not a coincidence.
+  // real confirmation of the same hex, not a coincidence. Also this
+  // project's own now-formalized standing "subline on a dark section"
+  // rule (docs/02-design-system.md) -- already correct, unchanged here.
   caption: "text-[1.25rem] font-normal leading-[28px] text-[#838D97]",
   mobileMedia: "w-full",
-  mobileList: "flex flex-col",
-  // Divided list: every item but the last gets a bottom border + 24px
-  // vertical padding; the last item gets top padding only, no border --
-  // same pattern already established in trustSignals/whatWeMake's own
-  // divided lists. #2a2e33 is close to border-line-dark but not identical,
-  // so it's kept as its own confirmed value rather than reused.
-  mobileItem: "flex flex-col gap-2 border-b border-[#2a2e33] py-6",
-  mobileItemLast: "flex flex-col gap-2 pt-6",
+  // Was a plain `flex flex-col` relying on `mobileItem`/`mobileItemLast`'s
+  // own border+padding for spacing -- now the same `gap-[40px]` shared
+  // shape as `desktopList` above, see `item`'s own comment.
+  mobileList: "flex flex-col gap-[40px]",
   // 30px/500 (medium)/normal leading -- owner call, 2026-08-24, sized up
   // from the Figma-confirmed 24px (text-h5 exact match). Kept the medium
   // weight and normal leading from that match, size only.
