@@ -22,6 +22,20 @@
 // reads `items` directly, just now in this redesign's own corrected order
 // (see content/home.ts's own `trustStrip` comment).
 //
+// Tablet moved onto the SAME card layout as desktop, 2026-09-10 (owner: "on
+// home, tablet, use the same section as desktop for product development,
+// low moq etc, but don't add the chevron like desktop instead use the dots
+// under it. image size can be the same as desktop") -- previously tablet
+// fell through to the mobile stacked-list block (`mobileWrap` was
+// `xl:hidden`, covering every width below desktop). Tablet now gets its own
+// `TabletCarousel`: the exact same 500px cards (image, title, body) as
+// `DesktopScroller`, just swiped natively with CSS scroll-snap and a dot
+// row instead of the chevron -- the same "keep the desktop card, swap the
+// chevron for swipe+dots" shape already used by How It Works/Inside the
+// Factory/Exhibitions' own tablet carousels, not a new pattern. `mobileWrap`
+// is now `md:hidden` (mobile only); the new `tabletWrap` is `hidden md:block
+// xl:hidden`.
+//
 // `showLabel={false}` on every `MediaPlaceholder` here (owner, 2026-09-09:
 // "remove image placeholder text labels from truesignals") -- `label`
 // still supplies the accessible name (`role="img"`/`aria-label`, the
@@ -48,9 +62,12 @@
 // 72px inter-section rule, not a guess specific to homepage.
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+
 import { DesktopChevron, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
-import { trustSignals } from "@/components/ui/styles";
+import { cardCarousel, trustSignals } from "@/components/ui/styles";
+import { cx } from "@/components/ui/cx";
 import type { home } from "@/content/home";
 
 type BodySegment = string | { bold: string };
@@ -129,14 +146,99 @@ function DesktopScroller({ items }: { items: typeof home.trustStrip }) {
   );
 }
 
+// Same card markup and 500px width as `DesktopScroller` above -- only the
+// scroll mechanism differs (native swipe + dots, not the chevron). Tracks
+// the nearest-centred card via each card's own real `offsetLeft`/
+// `offsetWidth`, the same pattern `CardCarousel.tsx`'s own activeIndex
+// tracking already uses, not a new one-off.
+function TabletCarousel({ items }: { items: typeof home.trustStrip }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    let ticking = false;
+    const update = () => {
+      const trackCenter = track.scrollLeft + track.clientWidth / 2;
+      let nearest = 0;
+      let nearestDistance = Infinity;
+      cardRefs.current.forEach((card, index) => {
+        if (!card) return;
+        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        const distance = Math.abs(cardCenter - trackCenter);
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          nearest = index;
+        }
+      });
+      setActiveIndex(nearest);
+      ticking = false;
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    update();
+    track.addEventListener("scroll", onScroll, { passive: true });
+    return () => track.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <div className="flex w-full flex-col gap-4">
+      <div ref={trackRef} className={trustSignals.tabletRow}>
+        {items.map((entry, index) => (
+          <div
+            key={entry.title}
+            ref={(el) => {
+              cardRefs.current[index] = el;
+            }}
+            className={trustSignals.tabletCard}
+          >
+            <MediaPlaceholder
+              label={`${entry.title} artwork`}
+              ratio={index % 2 === 0 ? "5:6" : "25:21"}
+              radius="none"
+              showLabel={false}
+            />
+            <div className={trustSignals.desktopCardText}>
+              <h3 className={trustSignals.title}>{entry.title}</h3>
+              <Body segments={entry.body} />
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className={cx(cardCarousel.dotsRow, "mx-auto")}>
+        {items.map((entry, index) => (
+          <span
+            key={entry.title}
+            className={cx(cardCarousel.dot, index === activeIndex ? cardCarousel.dotActive : cardCarousel.dotInactive)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function TrustSignals({ items, pageVariant = "home" }: TrustSignalsProps) {
   const desktopWrap = pageVariant === "services" ? trustSignals.desktopWrapServices : trustSignals.desktopWrap;
 
   return (
     <section>
-      {/* Desktop: 4-card horizontally-scrollable row */}
+      {/* Desktop: 4-card horizontally-scrollable row, chevron-paged */}
       <div className={desktopWrap}>
         <DesktopScroller items={items} />
+      </div>
+
+      {/* Tablet: same 4-card row and image size as desktop, swiped
+          natively with dots instead of the chevron */}
+      <div className={trustSignals.tabletWrap}>
+        <TabletCarousel items={items} />
       </div>
 
       {/* Mobile: artwork on top, one divided list below */}

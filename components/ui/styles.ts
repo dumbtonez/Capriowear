@@ -2717,13 +2717,37 @@ export const trustSignals = {
   // the four items' real Figma bold spans (Low MOQ, Private Label).
   bold: "font-semibold",
 
-  // Mobile only, hidden at and above xl. 0px top (owner call, 2026-08-23):
-  // the artwork sits flush against whatever comes before it -- this turned
-  // out to be the first instance of what's now the standard mobile
+  // Mobile only, hidden at and above md (tablet now gets its own
+  // `tabletWrap`/`TabletCarousel` below, 2026-09-10 -- was `xl:hidden`,
+  // which used to cover tablet too). 0px top (owner call, 2026-08-23): the
+  // artwork sits flush against whatever comes before it -- this turned out
+  // to be the first instance of what's now the standard mobile
   // section-to-section pattern (0 top, gap contributed entirely by bottom
   // padding). Bottom corrected 2026-08-24 from pb-section (64px) to the
   // standard 72px. 24px gap between the artwork and the item list.
-  mobileWrap: "container-p flex flex-col gap-6 pt-0 pb-[72px] xl:hidden",
+  mobileWrap: "container-p flex flex-col gap-6 pt-0 pb-[72px] md:hidden",
+  // Tablet only (owner, 2026-09-10: "on home, tablet, use the same section
+  // as desktop for product development, low moq etc, but don't add the
+  // chevron like desktop instead use the dots under it. image size can be
+  // the same as desktop"). Top 72px, bottom 104px (owner: "space from top
+  // and bottom of the section should be 72px," then "from the bottom make
+  // 104px") -- a real, explicit tablet value, not the old shared
+  // `mobileWrap`'s 0-top/72-bottom rhythm (that pattern relies on the
+  // artwork above it sitting flush against the previous section, which this
+  // card row doesn't have).
+  tabletWrap: "hidden pt-[72px] pb-[104px] md:block xl:hidden",
+  // `overflow-x-auto`/`snap-x snap-mandatory`, unlike `desktopRow`'s
+  // `overflow-x-hidden` -- this track is meant to respond to a real finger
+  // swipe (native scroll), not just the chevron's `scrollBy`, so it keeps
+  // the browser's own scroll handling instead of disabling it. `px-8`/
+  // `scroll-pl-8`/`scroll-pr-8`: `container-p`'s own tablet inset (32px),
+  // matching every other tablet-width scrollable row's own left/right
+  // insets.
+  tabletRow: "no-scrollbar flex snap-x snap-mandatory gap-[40px] overflow-x-auto px-8 scroll-pl-8 scroll-pr-8",
+  // Same 500px width and 32px image-to-text gap as `desktopCard` (owner:
+  // "image size can be the same as desktop") -- only `snap-start` is added,
+  // for the native scroll-snap this track uses instead of the chevron.
+  tabletCard: "flex w-[500px] shrink-0 snap-start flex-col gap-[32px]",
   // First fix (owner report, 2026-09-03: "the image container looks big")
   // capped this box's width to phone size (`md:max-w-[420px] md:mx-auto`,
   // matching TrustPoints/WhatWeCover/WhatWeMake's own fix) -- owner
