@@ -54,7 +54,13 @@ type ProcessItem = ProcessRow["items"][number];
 function Item({ item }: { item: ProcessItem }) {
   return (
     <div className={`${ourFactoryProcess.item} ${ourFactoryProcess.itemWidth[item.width]}`}>
-      <ParallaxMedia label={item.imageAlt} image={item.image} ratio={item.ratio} showLabel={false} />
+      <ParallaxMedia
+        label={item.imageAlt}
+        image={item.image}
+        ratio={item.ratio}
+        showLabel={false}
+        className={ourFactoryProcess.itemMediaMobile}
+      />
       <div className={ourFactoryProcess.textCol}>
         <div className={ourFactoryProcess.labelGroup}>
           <p className={ourFactoryProcess.label}>
@@ -84,7 +90,9 @@ export function OurFactoryProcess({ content }: OurFactoryProcessProps) {
       <div className={ourFactoryProcess.inner}>
         <div className={ourFactoryProcess.headingRowGroup}>
           <div className={ourFactoryProcess.headingGroup}>
-            <Eyebrow tone="light">{content.eyebrow}</Eyebrow>
+            <Eyebrow tone="light" size={ourFactoryProcess.eyebrowSize}>
+              {content.eyebrow}
+            </Eyebrow>
             <TextReveal as="h2" text={content.heading} className="text-h1 text-text" />
           </div>
           <Row row={content.rows[0]} />
