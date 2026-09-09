@@ -69,7 +69,7 @@ export function Stats({ items }: StatsProps) {
         <div className={stats.mobileList}>
           {items.map((stat, index) => (
             <div key={stat.value} className={stats.item}>
-              <div className={stats.itemText}>
+              <div className={stats.mobileItemText}>
                 <p className={stats.mobileValue}>{stat.value}</p>
                 <p className={stats.mobileCaption}>{stat.caption}</p>
               </div>

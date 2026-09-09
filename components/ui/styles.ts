@@ -3156,7 +3156,14 @@ export const stats = {
   // comment) -- `Stats.tsx` renders `divider` conditionally per item.
   item: "flex flex-col gap-[32px]",
   // Value + caption, 16px apart (was 8px -- owner, 2026-09-09 revision).
+  // Desktop only now -- see `mobileItemText` below for mobile's own,
+  // narrower value.
   itemText: "flex flex-col gap-[16px]",
+  // Mobile-only value-to-caption gap, 8px (owner, 2026-09-09, same-day
+  // follow-up: "since 2009 titles and subline should have 8px gap") --
+  // diverges from desktop's 16px, so `Stats.tsx`'s mobile item map uses
+  // this instead of the shared `itemText` above.
+  mobileItemText: "flex flex-col gap-2",
   // The stat divider: a plain 2-stop linear gradient, not an image asset
   // -- Figma's own line asset (node 894:321 etc.) is an SVG whose
   // gradient stops are `#FF791B` -> `#121317`, an exact match for this
@@ -3176,9 +3183,11 @@ export const stats = {
   caption: "text-[1.25rem] font-normal leading-[28px] text-[#838D97]",
   mobileMedia: "w-full",
   // Was a plain `flex flex-col` relying on `mobileItem`/`mobileItemLast`'s
-  // own border+padding for spacing -- now the same `gap-[40px]` shared
-  // shape as `desktopList` above, see `item`'s own comment.
-  mobileList: "flex flex-col gap-[40px]",
+  // own border+padding for spacing -- then the same `gap-[40px]` shared
+  // shape as `desktopList` above (see `item`'s own comment), now its own
+  // 32px value (owner, 2026-09-09, same-day follow-up: "from separator to
+  // next title gap should be 32px") -- diverges from desktop's 40px.
+  mobileList: "flex flex-col gap-[32px]",
   // 30px/500 (medium)/normal leading -- owner call, 2026-08-24, sized up
   // from the Figma-confirmed 24px (text-h5 exact match). Kept the medium
   // weight and normal leading from that match, size only.

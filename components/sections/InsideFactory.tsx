@@ -39,7 +39,7 @@ import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextReveal } from "@/components/TextReveal";
 import { cx } from "@/components/ui/cx";
-import { insideFactory } from "@/components/ui/styles";
+import { cardCarousel, insideFactory } from "@/components/ui/styles";
 import type { home } from "@/content/home";
 
 export type InsideFactoryProps = {
@@ -182,6 +182,17 @@ function MobileCarousel({
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  // Dot pagination (owner, 2026-09-09: "under inside the factory and
+  // exhibition images, add dots for showing it has multiple images") --
+  // same `cardCarousel` dot recipe `CardCarousel.tsx` already uses for Our
+  // Services/How It Works' own mobile carousels, reused here rather than
+  // a new one-off, even though this carousel's own height-interpolation
+  // mechanism is bespoke (see the `update()` comment below). React state,
+  // not a direct DOM write like the height loop below -- a dot's active/
+  // inactive swap only needs to happen once per settled card, not every
+  // scroll frame, so it doesn't carry the same per-frame re-render cost
+  // the height write was written to avoid.
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -197,11 +208,18 @@ function MobileCarousel({
     let ticking = false;
     const update = () => {
       const scrollLeft = track.scrollLeft;
+      let nearest = 0;
+      let nearestDistance = Infinity;
       cardRefs.current.forEach((card, index) => {
         if (!card) return;
         const distance = Math.min(Math.abs(scrollLeft - index * CARD_WIDTH) / CARD_WIDTH, 1);
         card.style.height = `${lerp(ACTIVE_HEIGHT, INACTIVE_HEIGHT, distance)}px`;
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          nearest = index;
+        }
       });
+      setActiveIndex(nearest);
       ticking = false;
     };
     const onScroll = () => {
@@ -217,19 +235,41 @@ function MobileCarousel({
   }, []);
 
   return (
-    <div ref={trackRef} className={insideFactory.mobileTrack}>
-      {shots.map((shot, index) => (
-        <div
-          key={shot.label}
-          ref={(el) => {
-            cardRefs.current[index] = el;
-          }}
-          className={insideFactory.mobileCard}
-          style={{ height: index === 0 ? ACTIVE_HEIGHT : INACTIVE_HEIGHT }}
-        >
-          <MediaPlaceholder label={shot.label} radius="none" tone={tone} className="h-full" />
-        </div>
-      ))}
+    // No `items-center` on this wrapper (real bug, found live via the
+    // Playwright overflow sweep): `insideFactory.mobileTrack` has no
+    // explicit width class of its own -- it always relied on simply being
+    // an ordinary block-level child, which fills its container's width by
+    // default. Once it became a flex item here, `items-center` (a
+    // non-`stretch` cross-axis alignment) made the browser size it to its
+    // own un-clipped CONTENT width (1575px, all 5 cards) instead of
+    // stretching to the column's width, forcing real page-level
+    // horizontal scroll. Default `align-items: stretch` (omitting the
+    // class entirely) keeps the track's old, correct full-width sizing;
+    // the dots row is centred on its own instead (`mx-auto`), via
+    // `cardCarousel.dotsRow`'s own intrinsic/content width.
+    <div className="flex w-full flex-col gap-4">
+      <div ref={trackRef} className={insideFactory.mobileTrack}>
+        {shots.map((shot, index) => (
+          <div
+            key={shot.label}
+            ref={(el) => {
+              cardRefs.current[index] = el;
+            }}
+            className={insideFactory.mobileCard}
+            style={{ height: index === 0 ? ACTIVE_HEIGHT : INACTIVE_HEIGHT }}
+          >
+            <MediaPlaceholder label={shot.label} radius="none" tone={tone} className="h-full" />
+          </div>
+        ))}
+      </div>
+      <div className={cx(cardCarousel.dotsRow, "mx-auto")}>
+        {shots.map((shot, index) => (
+          <span
+            key={shot.label}
+            className={cx(cardCarousel.dot, index === activeIndex ? cardCarousel.dotActive : cardCarousel.dotInactive)}
+          />
+        ))}
+      </div>
     </div>
   );
 }

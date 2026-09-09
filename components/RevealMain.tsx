@@ -59,6 +59,27 @@
 // silently no-op the same way. The observer still handles every
 // *subsequent* change (window resize, orientation change, footer content
 // changing height) so the pulled-up amount never desyncs after first paint.
+//
+// `applyPullUp` skips the negative margin entirely once the footer's own
+// height reaches the viewport's (owner, 2026-09-09: "on mobile footer is
+// not showing" -- a real bug, root-caused live, not guessed at). The pull-
+// up-by-the-footer's-own-full-height trick can only ever uncover the
+// footer if that overlap region is SHORTER than the viewport -- otherwise
+// the entire visible viewport at max scroll still falls inside the region
+// `<main>`'s own opaque, higher-z-index background covers, so the footer
+// can never surface no matter how far the page scrolls. Confirmed live:
+// desktop's own footer was deliberately trimmed to ~700px specifically to
+// stay under realistic laptop viewport heights (see `desktopRow3`'s own
+// comment, components/ui/styles.ts) -- no equivalent trim was ever done
+// for mobile, and the real mobile footer (866px) is taller than every
+// target mobile viewport (812-932px), worse still once real browser
+// chrome is subtracted. Rather than chase that height relationship with
+// an ever-shrinking content trim, `<main>`/`<footer>` simply fall back to
+// plain, ordinary document flow (`margin-bottom: 0`) whenever the pull-up
+// can't safely reveal the whole footer -- unconditionally correct
+// regardless of either box's height, just without the reveal animation
+// (already the real, working behavior on any page whose footer already
+// happens to fit, e.g. this same mechanism resolves to a no-op there).
 import { useLayoutEffect, useRef } from "react";
 
 export type RevealMainProps = {
@@ -75,7 +96,8 @@ export function RevealMain({ className, children }: RevealMainProps) {
     if (!main || !footer) return;
 
     function applyPullUp(height: number) {
-      main!.style.marginBottom = `-${Math.round(height)}px`;
+      const canReveal = height < window.innerHeight;
+      main!.style.marginBottom = canReveal ? `-${Math.round(height)}px` : "0px";
     }
 
     applyPullUp(footer.getBoundingClientRect().height);
@@ -84,7 +106,18 @@ export function RevealMain({ className, children }: RevealMainProps) {
       applyPullUp(entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height);
     });
     observer.observe(footer);
-    return () => observer.disconnect();
+
+    // Viewport-height changes (orientation change, browser chrome showing/
+    // hiding, window resize) can flip the `canReveal` threshold on their
+    // own even when the footer's own size hasn't changed -- the
+    // ResizeObserver above only watches the footer element itself.
+    const onResize = () => applyPullUp(footer.getBoundingClientRect().height);
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", onResize);
+    };
   }, []);
 
   return (

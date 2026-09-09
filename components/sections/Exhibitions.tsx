@@ -20,12 +20,13 @@
 // ends with the gallery.
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { DesktopChevron, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { SectionHeading } from "@/components/SectionHeading";
-import { exhibitions } from "@/components/ui/styles";
+import { cx } from "@/components/ui/cx";
+import { cardCarousel, exhibitions } from "@/components/ui/styles";
 import type { home } from "@/content/home";
 
 export type ExhibitionsProps = {
@@ -73,6 +74,11 @@ function DesktopScroller({ shots }: { shots: typeof home.exhibitions.media }) {
 function MobileCarousel({ shots }: { shots: typeof home.exhibitions.media }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  // Dot pagination (owner, 2026-09-09: "under inside the factory and
+  // exhibition images, add dots for showing it has multiple images") --
+  // same shared `cardCarousel` dot recipe/mechanism as Inside the
+  // Factory's own identical carousel, see that file's own comment.
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -81,11 +87,18 @@ function MobileCarousel({ shots }: { shots: typeof home.exhibitions.media }) {
     let ticking = false;
     const update = () => {
       const scrollLeft = track.scrollLeft;
+      let nearest = 0;
+      let nearestDistance = Infinity;
       cardRefs.current.forEach((card, index) => {
         if (!card) return;
         const distance = Math.min(Math.abs(scrollLeft - index * CARD_WIDTH) / CARD_WIDTH, 1);
         card.style.height = `${lerp(ACTIVE_HEIGHT, INACTIVE_HEIGHT, distance)}px`;
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          nearest = index;
+        }
       });
+      setActiveIndex(nearest);
       ticking = false;
     };
     const onScroll = () => {
@@ -101,19 +114,36 @@ function MobileCarousel({ shots }: { shots: typeof home.exhibitions.media }) {
   }, []);
 
   return (
-    <div ref={trackRef} className={exhibitions.mobileTrack}>
-      {shots.map((shot, index) => (
-        <div
-          key={shot.label}
-          ref={(el) => {
-            cardRefs.current[index] = el;
-          }}
-          className={exhibitions.mobileCard}
-          style={{ height: index === 0 ? ACTIVE_HEIGHT : INACTIVE_HEIGHT }}
-        >
-          <MediaPlaceholder label={shot.label} radius="none" tone="dark" className="h-full" />
-        </div>
-      ))}
+    // No `items-center` -- same real overflow bug as InsideFactory.tsx's
+    // own identical wrapper (see that file's own comment): `exhibitions.
+    // mobileTrack` has no explicit width class, relying on default
+    // block-fill behavior; `items-center`'s non-`stretch` alignment sized
+    // it to its own un-clipped content width instead. Default
+    // `align-items: stretch` keeps the track's old, correct sizing; the
+    // dots row centres itself instead (`mx-auto`).
+    <div className="flex w-full flex-col gap-4">
+      <div ref={trackRef} className={exhibitions.mobileTrack}>
+        {shots.map((shot, index) => (
+          <div
+            key={shot.label}
+            ref={(el) => {
+              cardRefs.current[index] = el;
+            }}
+            className={exhibitions.mobileCard}
+            style={{ height: index === 0 ? ACTIVE_HEIGHT : INACTIVE_HEIGHT }}
+          >
+            <MediaPlaceholder label={shot.label} radius="none" tone="dark" className="h-full" />
+          </div>
+        ))}
+      </div>
+      <div className={cx(cardCarousel.dotsRow, "mx-auto")}>
+        {shots.map((shot, index) => (
+          <span
+            key={shot.label}
+            className={cx(cardCarousel.dot, index === activeIndex ? cardCarousel.dotActive : cardCarousel.dotInactive)}
+          />
+        ))}
+      </div>
     </div>
   );
 }
