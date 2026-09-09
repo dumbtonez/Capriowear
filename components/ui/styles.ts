@@ -2342,10 +2342,12 @@ export const ourFactoryTeam = {
   // gap should be 32px") -- was the shared 72px at every breakpoint;
   // md:/xl: keep 72px unchanged.
   heroWrap: "max-md:mt-8 md:mt-[72px] w-full",
-  // Hero ratio, mobile/tablet overrides only -- the base `ratio="1440:900"`
-  // prop (an unprefixed `aspect-*` class) already covers true desktop
-  // (`xl:`+) untouched. `max-md:aspect-[13/17]` (owner, 2026-09-09: "on
-  // mobile, increase the bleed image height" -- no exact figure given, a
+  // Hero ratio, mobile/tablet overrides only -- the base `ratio="8:5"` prop
+  // (an unprefixed `aspect-*` class, already 1440:900's own exact reduced
+  // fraction -- reused rather than a redundant duplicate ratio entry)
+  // already covers true desktop (`xl:`+) untouched. `max-md:aspect-[13/17]`
+  // (owner, 2026-09-09: "on mobile, increase the bleed image height" -- no
+  // exact figure given, a
   // judgement call: 4:3 (0.75 ratio, previous mobile value); then, same
   // day: "the main image should have large height maybe 150px more what
   // it has now" -- computed at this page's own 390px mobile reference
