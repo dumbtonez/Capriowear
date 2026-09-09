@@ -22,11 +22,21 @@
 // one.
 import type { NoteSegment } from "@/content/activewear/types";
 import { TextReveal } from "@/components/TextReveal";
+import { cx } from "@/components/ui/cx";
 import { ourFactoryIntro } from "@/components/ui/styles";
 import type { ourFactory } from "@/content/our-factory";
 
 export type OurFactoryIntroProps = {
   content: typeof ourFactory.intro;
+  /**
+   * "afterHero" (default): this component's original placement, section 3,
+   * directly under the page's own Hero. "stacked": placed directly after
+   * another section instead (section 7, "Audited, not just promised", under
+   * OurFactoryDetails) -- a much smaller top gap and a slightly different
+   * desktop inset, both Figma's own real measurements for that node. See
+   * `ourFactoryIntro.innerAfterHero`/`innerStacked` in components/ui/styles.ts.
+   */
+  placement?: "afterHero" | "stacked";
 };
 
 function Paragraph({ segments }: { segments: NoteSegment[] }) {
@@ -34,9 +44,9 @@ function Paragraph({ segments }: { segments: NoteSegment[] }) {
     <p className={ourFactoryIntro.paragraph}>
       {segments.map((segment, index) =>
         segment.bold ? (
-          <strong key={index} className={ourFactoryIntro.paragraphBold}>
+          <span key={index} className={ourFactoryIntro.paragraphBold}>
             {segment.text}
-          </strong>
+          </span>
         ) : (
           <span key={index}>{segment.text}</span>
         ),
@@ -45,10 +55,12 @@ function Paragraph({ segments }: { segments: NoteSegment[] }) {
   );
 }
 
-export function OurFactoryIntro({ content }: OurFactoryIntroProps) {
+export function OurFactoryIntro({ content, placement = "afterHero" }: OurFactoryIntroProps) {
+  const isStacked = placement === "stacked";
+
   return (
     <section className={ourFactoryIntro.section}>
-      <div className={ourFactoryIntro.inner}>
+      <div className={cx(ourFactoryIntro.inner, isStacked ? ourFactoryIntro.innerStacked : ourFactoryIntro.innerAfterHero)}>
         <div className={ourFactoryIntro.textCol}>
           <TextReveal as="h2" text={content.heading} className={ourFactoryIntro.heading} />
           <Paragraph segments={content.paragraph} />
@@ -56,7 +68,10 @@ export function OurFactoryIntro({ content }: OurFactoryIntroProps) {
 
         <div className={ourFactoryIntro.statsRow}>
           {content.stats.map((stat) => (
-            <div key={stat.caption} className={ourFactoryIntro.statCol}>
+            <div
+              key={stat.caption}
+              className={cx(ourFactoryIntro.statCol, isStacked ? ourFactoryIntro.statColStacked : ourFactoryIntro.statColAfterHero)}
+            >
               <div className={ourFactoryIntro.statDivider} />
               <div className={ourFactoryIntro.stat}>
                 <p className={ourFactoryIntro.statValue}>{stat.value}</p>

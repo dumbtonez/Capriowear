@@ -38,27 +38,45 @@ export type TrustPointsProps = {
    * component") rather than the PDP's uncapped width, since this frame's
    * heading+subline column reads the same narrower-than-full-row way the
    * PLP's own does.
+   *
+   * `"ourFactory"`: /our-factory's own instance, section 8 (Figma node
+   * 883:156, owner, 2026-09-09: "already built section just content been
+   * change" -- same reuse story as `"services"` above) -- the PLP's own
+   * 138px side padding (this node's real measurement too), its own
+   * 160px/104px top/bottom gap, and its own `headingMaxWidthOurFactory`
+   * (the PLP's 650px desktop cap, plus a tablet-only fluid cap the PLP
+   * variant doesn't have -- owner, same day, tablet review: "audit for
+   * safety title and subline, should follow the same style").
    */
-  sidePadding?: "plp" | "pdp" | "services";
+  sidePadding?: "plp" | "pdp" | "services" | "ourFactory";
 };
 
 const sidePaddingSection = {
   plp: trustPoints.sidePaddingPlp,
   pdp: trustPoints.sidePaddingPdp,
   services: trustPoints.sidePaddingServices,
+  ourFactory: trustPoints.sidePaddingOurFactory,
 };
 
 const sidePaddingHeadingWidth = {
   plp: trustPoints.headingMaxWidthPlp,
   pdp: trustPoints.headingMaxWidthPdp,
   services: trustPoints.headingMaxWidthPlp,
+  ourFactory: trustPoints.headingMaxWidthOurFactory,
+};
+
+const headingClass = {
+  plp: trustPoints.heading,
+  pdp: trustPoints.heading,
+  services: trustPoints.heading,
+  ourFactory: trustPoints.headingOurFactory,
 };
 
 export function TrustPoints({ heading, subline, sublineBold, points, sidePadding = "plp" }: TrustPointsProps) {
   return (
     <section className={cx(trustPoints.section, sidePaddingSection[sidePadding])}>
       <div className={cx(trustPoints.headingBlock, sidePaddingHeadingWidth[sidePadding])}>
-        <h2 className={trustPoints.heading}>{heading}</h2>
+        <h2 className={headingClass[sidePadding]}>{heading}</h2>
         <p className={trustPoints.subline}>
           {subline}
           {sublineBold ? <strong className={trustPoints.sublineBold}>{sublineBold}</strong> : null}

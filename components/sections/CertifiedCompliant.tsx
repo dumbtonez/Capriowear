@@ -57,24 +57,51 @@ export type CertifiedCompliantProps = {
    *  see those tokens' own comments for why /services needs different
    *  values here (Responsible Make's own `TrustPoints`, right after this
    *  section on that page, already supplies its own top padding).
+   *  `"ourFactory"`: /our-factory's own instance (Figma node 917:170, "All
+   *  Logos") -- 72px top / 0 bottom at every breakpoint (`desktopSection
+   *  OurFactory`/`tabletSectionOurFactory`/`mobileSectionOurFactory`).
    *  Default `"default"` (homepage) is byte-for-byte unchanged. */
-  pageVariant?: "default" | "services";
+  pageVariant?: "default" | "services" | "ourFactory";
+  /** Default true. False for /our-factory's own instance (owner,
+   *  2026-09-09: "without title, only logo") -- that Figma node has no
+   *  eyebrow/heading at all above the logo row, unlike every other real
+   *  usage of this section. Suppresses the `SectionHeading` in all three
+   *  breakpoint blocks; the logos themselves are unaffected. */
+  showHeading?: boolean;
 };
 
-export function CertifiedCompliant({ content, pageVariant = "default" }: CertifiedCompliantProps) {
+export function CertifiedCompliant({ content, pageVariant = "default", showHeading = true }: CertifiedCompliantProps) {
   const isServices = pageVariant === "services";
+  const isOurFactory = pageVariant === "ourFactory";
+  const desktopSection = isOurFactory
+    ? certified.desktopSectionOurFactory
+    : isServices
+      ? certified.desktopSectionServices
+      : certified.desktopSection;
+  const tabletSection = isOurFactory
+    ? certified.tabletSectionOurFactory
+    : isServices
+      ? certified.tabletSectionServices
+      : certified.tabletSection;
+  const mobileSection = isOurFactory
+    ? certified.mobileSectionOurFactory
+    : isServices
+      ? certified.mobileSectionServices
+      : certified.mobileSection;
 
   return (
     <section>
-      <div className={isServices ? certified.desktopSectionServices : certified.desktopSection}>
+      <div className={desktopSection}>
         <div className={certified.root}>
-          <SectionHeading
-            eyebrow={<TextReveal text={content.eyebrow} />}
-            heading={<TextReveal as="span" text={content.h2} />}
-            eyebrowTone="light"
-            headingClassName={certified.headingNarrow}
-            align="center"
-          />
+          {showHeading ? (
+            <SectionHeading
+              eyebrow={<TextReveal text={content.eyebrow} />}
+              heading={<TextReveal as="span" text={content.h2} />}
+              eyebrowTone="light"
+              headingClassName={certified.headingNarrow}
+              align="center"
+            />
+          ) : null}
           <div className={certified.desktopRow}>
             {content.logos.map((logo) => (
               <Image
@@ -97,15 +124,17 @@ export function CertifiedCompliant({ content, pageVariant = "default" }: Certifi
           these viewports." Reuses Client Logos' own desktop technique
           (Marquee, separator="none", logos as items) rather than a new
           mechanism. */}
-      <div className={isServices ? certified.tabletSectionServices : certified.tabletSection}>
+      <div className={tabletSection}>
         <div className={certified.root}>
-          <SectionHeading
-            eyebrow={<TextReveal text={content.eyebrow} />}
-            heading={<TextReveal as="span" text={content.h2} />}
-            eyebrowTone="light"
-            headingClassName={certified.headingNarrow}
-            align="center"
-          />
+          {showHeading ? (
+            <SectionHeading
+              eyebrow={<TextReveal text={content.eyebrow} />}
+              heading={<TextReveal as="span" text={content.h2} />}
+              eyebrowTone="light"
+              headingClassName={certified.headingNarrow}
+              align="center"
+            />
+          ) : null}
           <Marquee
             items={content.logos.map((logo) => (
               <Image key={logo.name} src={logo.src} alt={logo.name} width={logo.width} height={logo.height} />
@@ -119,15 +148,17 @@ export function CertifiedCompliant({ content, pageVariant = "default" }: Certifi
         </div>
       </div>
 
-      <div className={isServices ? certified.mobileSectionServices : certified.mobileSection}>
+      <div className={mobileSection}>
         <div className={certified.rootMobile}>
-          <SectionHeading
-            eyebrow={<TextReveal text={content.eyebrow} />}
-            heading={<TextReveal as="span" text={content.h2} />}
-            eyebrowTone="light"
-            eyebrowSize={certified.eyebrowSizeMobile}
-            align="center"
-          />
+          {showHeading ? (
+            <SectionHeading
+              eyebrow={<TextReveal text={content.eyebrow} />}
+              heading={<TextReveal as="span" text={content.h2} />}
+              eyebrowTone="light"
+              eyebrowSize={certified.eyebrowSizeMobile}
+              align="center"
+            />
+          ) : null}
           <div className={certified.mobileGridWrap}>
             <div className={certified.mobileGrid}>
               {content.logos.map((logo, index) => {
