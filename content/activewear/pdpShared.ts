@@ -125,7 +125,16 @@ export const pdpSpecHighlights: PdpSpecHighlight[] = [
 // manufacturing-capability tags, identical for every style on every PDP
 // (unlike the neighbouring "Fabric options" group, which is category-
 // specific -- see `Category.fabricPills`'s own comment).
-export const pdpCustomizationPills: string[] = ["Your fit", "Your branding", "Custom labels", "Custom packaging"];
+// "Custom fabric" and "Custom Color & design" added first (owner,
+// 2026-09-10) ahead of the original 4 pills.
+export const pdpCustomizationPills: string[] = [
+  "Custom fabric",
+  "Custom color & design",
+  "Your fit",
+  "Your branding",
+  "Custom labels",
+  "Custom packaging",
+];
 
 // The PDP's "How We Customize" carousel (Figma node 634:5153 desktop /
 // 643:2714 mobile, "Content"/"Steps", 2026-09-01) -- eyebrow + heading over
@@ -161,10 +170,12 @@ export const pdpCustomizationSteps = {
   // Rendered via `productCustomizeSteps.mobileHeadingWidth`'s own
   // `whitespace-pre-line`.
   mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+  // Fabric moved first (owner, 2026-09-10: "make fabric as first card") --
+  // was 3rd.
   steps: [
+    { title: "Fabric and material", body: "Any blend and weight, sourced to your reference" },
     { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG" },
     { title: "Branding", body: "Silicone, heat transfer, embroidery" },
-    { title: "Fabric", body: "Any blend and weight, sourced to your reference" },
     { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags" },
     { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec" },
   ],
