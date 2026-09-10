@@ -69,7 +69,24 @@ export const button = {
   // inventing a token" rule (styling only through tokens/recipes, colour
   // excepted from the typography-only exception), not yet a named token
   // since only this one hover state uses it.
-  primary: "bg-accent text-accent-ink hover:text-[#5E240F]",
+  // `cta-primary-shimmer` (globals.css): default state is plain solid
+  // `bg-accent` at every breakpoint, unchanged -- the gradient only exists
+  // on hover. Went through a few passes the same day (2026-09-10): first a
+  // gradient fill shown at rest ("apply orange some nice looking gradiant
+  // in the primary cta... works both on black and white background"), then
+  // a hover-only pan ("the gradiant should move a little that user can
+  // feel," "while hovering, default state should be plain only"), then
+  // finally moving the gradient itself to be hover-only too ("primarily cta
+  // default state should be our primary orange color, do not change it but
+  // when hover, then it should animate a grandiant inside the button") --
+  // so `bg-accent` alone covers rest/mobile/tablet, and `cta-primary-
+  // shimmer`'s own `:hover` rule (desktop-only, `xl:`-gated) is where the
+  // gradient + pan animation both live now, not here in the class string.
+  // `hover:text-[#5E240F]` (2026-09-08's dark-brown hover label) stays
+  // removed (owner, same 2026-09-10 turn: "keep the text white in the
+  // primary cta") -- the gradient's own hover motion is the feedback now,
+  // text stays plain `text-accent-ink` white at every state.
+  primary: "bg-accent cta-primary-shimmer text-accent-ink",
   // currentColor, so the same outline reads on light and dark sections without
   // a separate inverse variant.
   // `hover:bg-accent/10` was tried 2026-09-08 (owner: "make it same hover
@@ -3626,8 +3643,25 @@ export const whatWeMake = {
   // own comment) once a same-size comparison against Product Range's
   // "Explore" link showed the real gap was shape/weight, not just a
   // number.
+  // `cta-gradient-border` (globals.css): same moving-orange-comet-within-
+  // the-outline hover animation as the Download Catalog CTA (owner,
+  // 2026-09-10: "make the same outline animation to view all activewear
+  // and teamwhere cta in what we make section"). `hover:bg-accent/5` (the
+  // tint that used to be this tile's only hover feedback) is removed in
+  // the same turn ("without the inner hover color remove it") -- same
+  // reasoning as the Download Catalog fix: a background wash behind the
+  // ring dulls it, and the ring itself is now the hover feedback.
+  // `cta-tile` (globals.css) added same day (owner: "view all activewear
+  // cta does not look good while hover, should we treat it separately?" ->
+  // "fix it") -- this is a large square grid cell flush against its
+  // sibling tiles, not an isolated pill button, so the lift-off-the-page
+  // scale/shadow bloom `cta-gradient-border` also carries (tuned for a
+  // small button) reads wrong here: scaling it up visually creeps toward
+  // the neighbouring tiles instead of "lifting." `cta-tile` overrides just
+  // that part back to a plain border/background hover, proportional to a
+  // grid tile, while keeping the ring.
   desktopGridCta:
-    "group flex aspect-[15/16] items-center justify-center gap-2 border border-accent text-center text-button uppercase text-accent transition-colors hover:bg-accent/5",
+    "group flex aspect-[15/16] items-center justify-center gap-2 border border-accent text-center text-button uppercase text-accent transition-colors cta-gradient-border cta-tile",
   // Mobile: a single stacked column, not a grid -- each tile is a landscape
   // (16:11) image, unlike desktop's square, and the label is left-aligned,
   // not centred (confirmed via get_design_context: desktop's tile label
@@ -4747,6 +4781,23 @@ export const chevronScroller = {
   circle:
     "pointer-events-none absolute top-0 left-0 z-10 flex size-20 items-center justify-center rounded-full bg-paper text-text opacity-0 shadow-card transition-opacity duration-200 ease-out",
   icon: "size-10",
+  // Instant-follow dot, no lerp lag at all (owner, 2026-09-10, still not
+  // satisfied with the ring's own smoothness after several tuning passes:
+  // "can you find it yourself?" -> researched 14islands' own custom-cursor
+  // technique -- their real recommendation is a two-layer cursor, a small
+  // dot that snaps to the exact pointer position every frame plus a larger
+  // ring that lags behind it, not a single lagging element on its own).
+  // The dot removes any sense of "delay" (there's always something exactly
+  // under the real cursor), while the ring above still supplies the soft
+  // glide -- together they read as smooth+responsive rather than either
+  // snappy-but-plain or smooth-but-laggy on their own. z-20, above the
+  // ring's own z-10.
+  // White, not orange (owner, 2026-09-10: "can we make it invisible maybe
+  // white that does not show in interface?") -- matches `circle`'s own
+  // `bg-paper`, so it blends into the ring rather than standing out as its
+  // own visible mark; still does real work (the instant-follow position
+  // fix), just no longer reads as a separate design element.
+  dot: "pointer-events-none absolute top-0 left-0 z-20 size-1.5 rounded-full bg-paper opacity-0 transition-opacity duration-200 ease-out",
 };
 
 /* --- HowItWorks (homepage section 12) --------------------------------- */

@@ -119,7 +119,7 @@ export function FinalCta({ content, ticker, secondaryCta, compactMobileTop, hide
                 <Button href={content.cta.href} className={finalCta.desktopButton}>
                   {content.cta.label}
                 </Button>
-                <Button variant="secondary" href={secondaryCta.href} className={finalCta.desktopButton}>
+                <Button variant="secondary" href={secondaryCta.href} className={finalCta.desktopButton} gradientBorder>
                   {secondaryCta.label}
                 </Button>
               </div>

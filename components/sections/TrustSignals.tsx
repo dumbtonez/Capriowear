@@ -119,7 +119,7 @@ const CARD_WIDTH = 380;
 const CARD_GAP = 24;
 
 function DesktopScroller({ items }: { items: typeof home.trustStrip }) {
-  const { wrapRef, trackRef, chevronRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
+  const { wrapRef, trackRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
     useDesktopChevronScroller(CARD_WIDTH + CARD_GAP);
 
   return (
@@ -147,7 +147,7 @@ function DesktopScroller({ items }: { items: typeof home.trustStrip }) {
           </div>
         ))}
       </div>
-      <DesktopChevron chevronRef={chevronRef} direction={direction} />
+      <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
     </div>
   );
 }

@@ -599,3 +599,262 @@ header[data-tone="light"] {
   }
 }
 
+/* --- CTA gradient-border hover (Button.tsx `gradientBorder` prop) --------
+   Owner, 2026-09-10: "on the hover on download catalog... the outline moves
+   around the cta, the moving outline can be gradiant of our orange color."
+   Desktop only (owner, same turn: "next changes will only be for desktop, no
+   mobile, no tablet") -- gated at `xl`'s own 1280px threshold, the same
+   desktop split this codebase's own PLP grid/CategoryFilters sidebar already
+   use, so the hover reveal below simply never triggers below that width
+   (real touch devices have no persistent `:hover` anyway, this is the
+   belt-and-suspenders version).
+
+   A rotating conic-gradient ring drawn on a `::before`, layered directly
+   over the button's own `border-current` (not floating outside it -- see
+   that rule's own comment below) -- mask-composite: exclude punches out
+   everything except a `padding`-wide ring, so the gradient never fills the
+   button's own interior. `border-radius: inherit` matches `button.base`'s
+   `rounded-pill` automatically, no value duplicated here. Opacity-gated
+   (0 -> 1 on hover) rather than only starting the animation on hover, so the
+   ring is mid-rotation the instant it appears instead of always restarting
+   from the same angle. */
+@property --cta-gradient-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.cta-gradient-border {
+  position: relative;
+}
+
+.cta-gradient-border::before {
+  content: "";
+  position: absolute;
+  /* Sits ON the button's own border track now, not outside it (owner,
+     2026-09-10, final pass: "an orange line within the white outline
+     moves... within the white line" -- was `inset: -3px`, a separate ring
+     floating outside the button; the white outline stayed the real border,
+     this element just orbited past it). `inset: 0` + `padding` close to
+     `button.secondary`'s own 1px `border-current` puts this band directly
+     over that border instead of beside it. */
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  /* Mostly translucent white (matching the button's own white border) with
+     one bright orange segment sweeping through -- the white outline itself
+     is NOT hidden any more (see the removed `border-color: transparent`
+     rule below), so this ring only needs to carry the moving orange
+     highlight, not stand in for the whole outline. */
+  background: conic-gradient(
+    from var(--cta-gradient-angle),
+    rgba(255, 255, 255, 0.4) 0deg,
+    rgba(255, 255, 255, 0.4) 300deg,
+    var(--color-accent) 330deg,
+    #ffcf9e 345deg,
+    var(--color-accent) 360deg
+  );
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  /* 4s, not 2.6s (owner, 2026-09-10: "its too fast animation, make it
+     moderate") -- same ring, slower rotation. */
+  animation: cta-gradient-spin 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes cta-gradient-spin {
+  to {
+    --cta-gradient-angle: 360deg;
+  }
+}
+
+/* Lift + press (owner, 2026-09-10: "this outline hover animation does not
+   look wow, how can we make it pleasing emotional feeling" -> "lets try" a
+   subtle scale + shadow bloom on hover, plus a press-down on click). The
+   ring alone was purely decorative -- nothing physically responded to the
+   cursor. `transition` lives on the class itself (not inside the `xl:`
+   block below) so it's always armed, but `transform`/`box-shadow` only
+   ever change inside that block, so nothing actually animates below
+   `1280px`. */
+/* `cubic-bezier(0.25, 0.8, 0.35, 1)`, not the flat `ease` timing function
+   (owner, 2026-09-10: "you reduced the shadow effect i think, i did not
+   ask for it, i just asked to smooth the blooming animation" -- the actual
+   ask was the motion's own smoothness, not the bloom's size; a decelerate-
+   only curve like this eases OUT gently at the end instead of `ease`'s
+   fairly linear-feeling middle, which is what actually reads as "smooth,"
+   not a smaller shadow). */
+.cta-gradient-border {
+  transition:
+    transform 0.35s cubic-bezier(0.25, 0.8, 0.35, 1),
+    box-shadow 0.35s cubic-bezier(0.25, 0.8, 0.35, 1);
+}
+
+@media (min-width: 1280px) {
+  /* Ring temporarily disabled (owner, 2026-09-10: "let's remove the moving
+     outline and keep the shadow bloom to see how it looks") -- the
+     rotating comet's own `::before` no longer opens up to opacity: 1 on
+     hover, so it stays invisible; nothing else here changed, so the lift +
+     shadow bloom below still run on their own. Re-add
+     `.cta-gradient-border:hover::before { opacity: 1; }` to bring the ring
+     back once compared. */
+  /* Scale replaces the earlier flat ambient glow -- box-shadow now grows
+     WITH the lift instead of appearing at a fixed size, so the two read as
+     one physical motion (rising toward the cursor) rather than two
+     separate effects layered on top of each other. Not `filter: drop-
+     shadow` -- see the ring's own `::before` comment on why that stays a
+     `box-shadow` and not a filter (re-rasterizing the masked ring every
+     frame was what made the rotation choppy in an earlier pass). */
+  /* Default bloom -- tuned for a dark (`bg-ink`) section, which is where
+     almost every CTA on this site actually lives. The orange glow alone
+     already reads clearly against dark, so the lift can be the fuller
+     1.03/stronger-shadow version here. See `.cta-on-light` below for the
+     handful of CTAs that sit on a white/paper section instead -- owner,
+     2026-09-10: "on the white background it does not pop really, how do
+     we handle white separately?", then, after a first pass added a flat
+     dark shadow layer to every instance: "on white its too much popping
+     and lifting up" -- a single shared value couldn't satisfy both, so
+     this became a real two-tone system instead of one compromise value. */
+  .cta-gradient-border:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 28px -8px rgba(255, 121, 27, 0.45), 0 0 16px 0 rgba(255, 121, 27, 0.3);
+  }
+  /* Press-down on click -- the other half of "physically responds to the
+     cursor": without this the lift only ever goes one direction, which
+     reads as hover-triggered decoration, not something you can press. */
+  .cta-gradient-border:active {
+    transform: scale(0.97);
+  }
+  /* `.cta-on-light`: opt-in modifier for CTAs that sit on a white/paper
+     section -- applied explicitly at the two known instances (Header's
+     primary CTA, toggled by its own live `tone` state; `ProductCtas`'
+     inline desktop pair, which always renders on the PDP's `bg-paper`
+     body), not detected automatically -- this button has no way to sense
+     its own background. A dark elevation shadow does the "pop" work here
+     (the same cue any light-background card/button already leans on)
+     instead of the orange glow, which barely registers on white; a
+     smaller 1.02 lift, since the same 1.03 read as excessive once real
+     contrast made the motion itself more visible. */
+  .cta-gradient-border.cta-on-light:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 18px -8px rgba(20, 12, 6, 0.18), 0 0 16px 0 rgba(255, 121, 27, 0.3);
+  }
+  /* Overrides `button.secondary`'s own `hover:bg-current/10` (owner,
+     2026-09-10: "remove the hover white background from the cta, the line
+     is not visible glowing line") -- that whitish fill was washing out the
+     ring's own glow. Scoped to this class only, so every other
+     `variant="secondary"` button keeps its normal tint hover. */
+  .cta-gradient-border:hover {
+    background-color: transparent;
+  }
+  /* `border-color: transparent` (an earlier pass, hiding the white outline
+     entirely on hover) is gone -- owner, 2026-09-10, final pass: "an
+     orange line within the white outline moves." The white outline is
+     meant to stay; only the orange comet segment on the ring above should
+     read as new/moving. */
+  /* `cta-tile`: overrides the pill-button lift/shadow bloom back off for a
+     large grid tile (owner, 2026-09-10: "view all activewear cta does not
+     look good while hover, should we treat it separately?" -> "fix it").
+     Higher specificity (`.cta-gradient-border.cta-tile:hover`, 3 classes)
+     than the plain `.cta-gradient-border:hover` rule above (2 classes), so
+     this wins without `!important`. The ring itself (`::before`) is
+     untouched -- that's still the hover feedback here, same as the
+     Download Catalog CTA; only the scale/shadow bloom is reset back to
+     nothing (not replaced with a background tint -- that was deliberately
+     removed for this exact tile in the earlier "without the inner hover
+     color remove it" pass, and nothing about that reasoning changed). */
+  /* A near-imperceptible 1.008 scale, not `none` any more (owner follow-up,
+     same turn: "there should be some sort of motion, very very subtle
+     though") -- the pill button's own 1.03 was too much for a tile flush
+     against its neighbours, but zero motion at all read as inert/dead.
+     1.008 is barely a hint -- still no shadow bloom, since that part of
+     the complaint (competing with the tile's own image/border) still
+     applies. */
+  .cta-gradient-border.cta-tile:hover {
+    transform: scale(1.008);
+    box-shadow: none;
+  }
+  .cta-gradient-border.cta-tile:active {
+    transform: scale(0.996);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-gradient-border::before {
+    animation: none;
+  }
+}
+
+/* --- Primary CTA gradient shimmer (button.primary's `cta-primary-shimmer`)
+   Owner, 2026-09-10, final pass: "primarily cta default state should be our
+   primary orange color, do not change it but when hover, then it should
+   animate a grandiant inside the button" -- so unlike the CTA ring, nothing
+   here is visible at rest at all. `button.primary`'s own `bg-accent` (plain
+   solid orange) is untouched at every breakpoint; only `:hover`, and only
+   at `xl` and up, swaps in the gradient background-image AND starts the
+   pan in the same rule -- there's no separate "gradient visible but
+   frozen" state to manage. `background-size: 250%` gives the pan room to
+   move without its own edge ever reaching the button's edge.
+   Stops only ever go darker than `--color-accent`, never lighter (owner
+   follow-up, same turn: "gradiant should not go light since we have a
+   white text" -- the earlier `#ffa257` light-peach stop was dropping
+   white-text contrast wherever the pan crossed it). */
+.cta-primary-shimmer {
+  transition:
+    transform 0.35s cubic-bezier(0.25, 0.8, 0.35, 1),
+    box-shadow 0.35s cubic-bezier(0.25, 0.8, 0.35, 1);
+}
+
+@media (min-width: 1280px) {
+  /* Shimmer temporarily disabled (owner, 2026-09-10: "let's only add bloom
+     and hide the other one for now" -- comparing the lift+bloom hover
+     below against the gradient pan, same approach already used to compare
+     the CTA ring against its own bloom). Re-add the `background-image`/
+     `background-size`/`animation` trio below to bring the pan back. */
+  /* .cta-primary-shimmer:hover {
+    background-image: linear-gradient(to right bottom, var(--color-accent), #d9530e 50%, #b8460b);
+    background-size: 250% 250%;
+    animation: cta-primary-shimmer 3s ease-in-out infinite alternate;
+  } */
+  /* Same lift + warm shadow bloom as the CTA ring's own hover (see
+     `.cta-gradient-border:hover` above) -- owner, 2026-09-10: "should we
+     apply this shadow style to primary button... let's only add bloom."
+     `transition` lives on the base class above so it's armed everywhere,
+     but only actually changes at `xl:`. Default here is the dark-section
+     version, same reasoning as the ring's own default -- see
+     `.cta-on-light` immediately below for the light-section pair. */
+  .cta-primary-shimmer:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 28px -8px rgba(255, 121, 27, 0.45), 0 0 16px 0 rgba(255, 121, 27, 0.3);
+  }
+  .cta-primary-shimmer:active {
+    transform: scale(0.97);
+  }
+  /* `.cta-on-light`: same modifier and reasoning as `.cta-gradient-
+     border.cta-on-light` above -- applied at the same two known
+     light-section call sites (Header's primary CTA via its live `tone`
+     state; `ProductCtas`' inline desktop pair on the PDP's `bg-paper`
+     body). */
+  .cta-primary-shimmer.cta-on-light:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 18px -8px rgba(20, 12, 6, 0.18), 0 0 16px 0 rgba(255, 121, 27, 0.3);
+  }
+}
+
+@keyframes cta-primary-shimmer {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 100% 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-primary-shimmer {
+    animation: none;
+  }
+}
+

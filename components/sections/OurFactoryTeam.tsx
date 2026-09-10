@@ -87,7 +87,7 @@ function Subline({ segments }: { segments: NoteSegment[] }) {
 }
 
 function DesktopScroller({ media }: { media: typeof ourFactory.teamGallery.media }) {
-  const { wrapRef, trackRef, chevronRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
+  const { wrapRef, trackRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
     useDesktopChevronScroller(ITEM_WIDTH + ITEM_GAP);
 
   return (
@@ -106,7 +106,7 @@ function DesktopScroller({ media }: { media: typeof ourFactory.teamGallery.media
           </div>
         ))}
       </div>
-      <DesktopChevron chevronRef={chevronRef} direction={direction} />
+      <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
     </div>
   );
 }
