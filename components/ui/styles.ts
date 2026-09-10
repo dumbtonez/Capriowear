@@ -3340,7 +3340,17 @@ export const trustSignals = {
   // homepage's symmetric 120/120. Everything else (the new scroller
   // structure below) is shared as-is, same `pageVariant` pattern
   // `OurServices` already uses.
-  desktopWrapServices: "hidden pt-[160px] pb-[80px] xl:block",
+  //
+  // Top corrected 160px -> 120px (owner, 2026-09-10: "the trust section
+  // gap from the top of the logos should be same as homepage" -- once
+  // `ClientLogos` was added directly above this section on desktop only,
+  // the original 160px was still measuring from ServicesIntro, not the
+  // marquee that now actually precedes it). Homepage's own logos-to-
+  // trust-signals gap is `clientLogos.desktopWrap`'s own `pt-[120px]`
+  // (nothing below it) into this section's default `desktopWrap`'s own
+  // `py-[120px]` -- matched here so the same visual gap holds on both
+  // pages now that both have the same real preceding section.
+  desktopWrapServices: "hidden pt-[120px] pb-[80px] xl:block",
   // Redesigned 2026-09-09 (Figma nodes 890:253/890:279, owner: "change
   // product development, Low MOQ section to this... there are 4 cards"):
   // the old media-block-plus-two-text-columns layout becomes 4 independent
@@ -3370,15 +3380,27 @@ export const trustSignals = {
   // 600/420px alternating image heights and the cards' own real,
   // different total heights entirely) -- Figma's own cards are top-
   // aligned, each its own natural height.
+  // 24px card gap (owner, 2026-09-10: "make it 32" then "make it 24" --
+  // was 40px).
   desktopRow:
-    "no-scrollbar flex items-start gap-[40px] overflow-x-hidden scroll-smooth px-8 xl:px-[80px] scroll-pl-8 xl:scroll-pl-[80px] scroll-pr-8 xl:scroll-pr-[80px]",
-  // 500px fixed width, 32px gap down to the text block below the image
-  // (Figma: 890:229 etc.).
-  desktopCard: "flex w-[500px] shrink-0 flex-col gap-[32px]",
-  // 16px title-to-body gap (was 8px, shared with the old 2-column layout's
-  // `item`) -- this redesign's own confirmed value, Figma nodes
-  // 890:231/890:280/890:285/890:249.
-  desktopCardText: "flex flex-col gap-[16px]",
+    "no-scrollbar flex items-start gap-[24px] overflow-x-hidden scroll-smooth px-8 xl:px-[80px] scroll-pl-8 xl:scroll-pl-[80px] scroll-pr-8 xl:scroll-pr-[80px]",
+  // 380px fixed width (owner, 2026-09-10, referencing a Google Health/Pixel
+  // marketing layout: "make the card size as per this reference, current
+  // one is too big, no cornor radious though" -- was 500px; radius was
+  // already `none` on every `MediaPlaceholder` here, so only the width
+  // needed to shrink). Keep `TrustSignals.tsx`'s own `CARD_WIDTH` JS
+  // constant (used for the chevron's scroll-by-one-card math) equal to
+  // this value.
+  // Image-to-text gap 32px -> 24px (owner, same day: "make the product
+  // developemnt low moq also 24px") -- matches How It Works' own desktop
+  // media-to-text gap (`capabilityCard.root`'s `xl:gap-6`), deliberately
+  // brought in line rather than left at this section's own former
+  // Figma-sourced 32px.
+  desktopCard: "flex w-[380px] shrink-0 flex-col gap-[24px]",
+  // 12px title-to-body gap (owner, 2026-09-10: "make it 12" -- was 16px,
+  // itself a change from an original 8px; overrides the redesign's own
+  // Figma-confirmed 16px, deliberate owner value).
+  desktopCardText: "flex flex-col gap-[12px]",
   // Shared by both the old mobile list (unchanged) and the new desktop
   // cards above -- already matches this redesign's own type (text-h3 =
   // 30px/500/1.2 at the 1440 reference).
@@ -3428,11 +3450,15 @@ export const trustSignals = {
   // `scroll-pl-8`/`scroll-pr-8`: `container-p`'s own tablet inset (32px),
   // matching every other tablet-width scrollable row's own left/right
   // insets.
-  tabletRow: "no-scrollbar flex snap-x snap-mandatory gap-[40px] overflow-x-auto px-8 scroll-pl-8 scroll-pr-8",
-  // Same 500px width and 32px image-to-text gap as `desktopCard` (owner:
-  // "image size can be the same as desktop") -- only `snap-start` is added,
-  // for the native scroll-snap this track uses instead of the chevron.
-  tabletCard: "flex w-[500px] shrink-0 snap-start flex-col gap-[32px]",
+  // 24px card gap alongside `desktopRow` (2026-09-10) to keep that parity
+  // intact.
+  tabletRow: "no-scrollbar flex snap-x snap-mandatory gap-[24px] overflow-x-auto px-8 scroll-pl-8 scroll-pr-8",
+  // Same width and image-to-text gap as `desktopCard` (owner: "image size
+  // can be the same as desktop") -- only `snap-start` is added, for the
+  // native scroll-snap this track uses instead of the chevron. Shrunk to
+  // 380px/24px alongside `desktopCard` (2026-09-10) to keep that parity
+  // intact, not a separate tablet-only change.
+  tabletCard: "flex w-[380px] shrink-0 snap-start flex-col gap-[24px]",
   // First fix (owner report, 2026-09-03: "the image container looks big")
   // capped this box's width to phone size (`md:max-w-[420px] md:mx-auto`,
   // matching TrustPoints/WhatWeCover/WhatWeMake's own fix) -- owner

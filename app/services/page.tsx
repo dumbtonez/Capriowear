@@ -125,6 +125,7 @@ import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
 import { CertifiedCompliant } from "@/components/sections/CertifiedCompliant";
+import { ClientLogos } from "@/components/sections/ClientLogos";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
@@ -191,6 +192,18 @@ export default function ServicesPage() {
       <main className="relative z-10 bg-paper">
         <ServicesHero hero={services.hero} customOfferings={home.customOfferings} />
         <ServicesIntro content={services.intro} />
+        {/* Desktop only (owner, 2026-09-10: "Add clients logo marquee above
+            product development section on desktop only") -- `ClientLogos`
+            itself already splits desktop (a `Marquee`, `xl:block`) from its
+            own separate mobile/tablet treatment (title + scrolling
+            `Marquee`, `xl:hidden`); wrapped in `hidden xl:block` here on
+            top of that so the mobile-tier half never renders on this page
+            at all, not just so it happens to be hidden below `xl` the way
+            it already is on the homepage. Reuses `home.brandLogos` as-is,
+            same logos/order the homepage's own usage renders. */}
+        <div className="hidden xl:block">
+          <ClientLogos brandLogos={home.brandLogos} />
+        </div>
         <TrustSignals items={home.trustStrip} pageVariant="services" />
         <ServicesHowWeWork content={services.howWeWork} />
         <OurServices content={home.services} pageVariant="services" />
