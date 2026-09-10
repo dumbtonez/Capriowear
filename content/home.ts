@@ -466,11 +466,17 @@ export const home = {
   insideFactory: {
     eyebrow: "INSIDE THE FACTORY",
     h2: "Cutting, stitching, printing and QC under one roof",
+    // Real photography on the first 4 shots only (owner, 2026-09-10: "let's
+    // add 4 images... to test how it will work with images"), 5th stays a
+    // placeholder -- a deliberate mixed state for this test, not a mistake.
+    // Not real factory floor photography (stand-in product/model shots the
+    // owner had on hand) -- swap for the real thing later, same `image`
+    // contract `content/our-factory.ts`'s own `image: { src }` shape uses.
     media: [
-      { label: "Factory shot 1" },
-      { label: "Factory shot 2" },
-      { label: "Factory shot 3" },
-      { label: "Factory shot 4" },
+      { label: "Factory shot 1", image: { src: "/factory-test/factory-test-1.png" } },
+      { label: "Factory shot 2", image: { src: "/factory-test/factory-test-2.png" } },
+      { label: "Factory shot 3", image: { src: "/factory-test/factory-test-3.png" } },
+      { label: "Factory shot 4", image: { src: "/factory-test/factory-test-4.png" } },
       { label: "Factory shot 5" },
     ],
     // "Explore Our Factory" -> "Take Factory Tour" (owner call, 2026-08-28,

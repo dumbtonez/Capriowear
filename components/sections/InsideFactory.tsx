@@ -90,23 +90,41 @@ export type InsideFactoryProps = {
    * to this prop.
    */
   showMediaLabel?: boolean;
+  /**
+   * Mobile/tablet swipe carousel card proportions. Defaults to `"wide"`
+   * (owner, 2026-09-10, real-photography test: "wider looks better, let's
+   * use it" -- a ~4:3 landscape active card, replacing the original
+   * near-square one so wide factory-floor/machine-row shots have room to
+   * show their coverage). `"compact"` is that original ratio, kept as a
+   * real selectable variant rather than deleted ("don't descard the other
+   * one, keep it in the design system we might need it again") -- pick it
+   * for a future gallery whose photography wants a tighter, more-portrait
+   * crop instead. See `insideFactory.mobileTrackWide`/`mobileCardWide` vs.
+   * `mobileTrackCompact`/`mobileCardCompact` in components/ui/styles.ts.
+   */
+  cardSize?: "wide" | "compact";
 };
 
-// Mobile 300px, tablet 469px (owner, 2026-09-09: "on tablet... show dots
-// under like mobile" -- tablet now swipes natively with dots, the same
-// `MobileCarousel` mechanism, just at its own already-defined wider card
-// size instead of shrinking back to the 300px mobile card). 469px is the
-// same value this file's own desktop chevron gallery already used for its
-// own former tablet tier (see `DESKTOP_CARD_WIDTH`'s own comment below) --
-// reused, not re-derived. Active/inactive heights scale by the same
-// 469/300 ratio so the active-card-taller proportions stay identical at
-// the wider size, not a new arbitrary design value.
-const CARD_WIDTH_MOBILE = 300;
-const CARD_WIDTH_TABLET = 469;
-const ACTIVE_HEIGHT_MOBILE = 340;
-const INACTIVE_HEIGHT_MOBILE = 248;
-const ACTIVE_HEIGHT_TABLET = 532;
-const INACTIVE_HEIGHT_TABLET = 388;
+// Two real, both-kept card size/height sets -- see `cardSize`'s own prop
+// comment above for why both exist. `Wide`'s tablet values scale by the
+// same width/height ratios `Compact`'s original mobile/tablet pair already
+// used (340/255 active, 340/186 inactive), not re-derived independently.
+const CARD_SIZE_WIDE = {
+  mobileWidth: 340,
+  tabletWidth: 530,
+  activeHeightMobile: 255,
+  inactiveHeightMobile: 186,
+  activeHeightTablet: 398,
+  inactiveHeightTablet: 290,
+};
+const CARD_SIZE_COMPACT = {
+  mobileWidth: 300,
+  tabletWidth: 469,
+  activeHeightMobile: 340,
+  inactiveHeightMobile: 248,
+  activeHeightTablet: 532,
+  inactiveHeightTablet: 388,
+};
 
 function lerp(from: number, to: number, t: number) {
   return from + (to - from) * t;
@@ -116,8 +134,9 @@ function lerp(from: number, to: number, t: number) {
 // (1200px) and insideFactory.desktopRow's gap-12 (48px). `xl:` (1280px+)
 // only now (owner, 2026-09-09: tablet moved to the swipe+dots carousel
 // below instead of this chevron gallery -- see that carousel's own
-// `CARD_WIDTH_TABLET` comment) -- no more `matchMedia`/tablet branch
-// needed here, since this component never renders below `xl:` any more.
+// `CARD_SIZE_WIDE`/`CARD_SIZE_COMPACT` comment) -- no more `matchMedia`/
+// tablet branch needed here, since this component never renders below
+// `xl:` any more.
 const DESKTOP_CARD_WIDTH = 1200;
 const DESKTOP_CARD_GAP = 48;
 
@@ -149,6 +168,7 @@ function DesktopGallery({
               radius="none"
               tone={tone}
               showLabel={false}
+              image={shot.image}
               className={insideFactory.desktopCardMedia}
             />
             <p className={tone === "light" ? insideFactory.desktopCardLabelLight : insideFactory.desktopCardLabel}>
@@ -166,11 +186,14 @@ function MobileCarousel({
   shots,
   tone,
   showLabel = true,
+  cardSize = "wide",
 }: {
   shots: typeof home.insideFactory.media;
   tone: "light" | "dark";
   showLabel?: boolean;
+  cardSize?: "wide" | "compact";
 }) {
+  const size = cardSize === "compact" ? CARD_SIZE_COMPACT : CARD_SIZE_WIDE;
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   // Dot pagination (owner, 2026-09-09: "under inside the factory and
@@ -197,9 +220,9 @@ function MobileCarousel({
     query.addEventListener("change", update);
     return () => query.removeEventListener("change", update);
   }, []);
-  const cardWidth = isTablet ? CARD_WIDTH_TABLET : CARD_WIDTH_MOBILE;
-  const activeHeight = isTablet ? ACTIVE_HEIGHT_TABLET : ACTIVE_HEIGHT_MOBILE;
-  const inactiveHeight = isTablet ? INACTIVE_HEIGHT_TABLET : INACTIVE_HEIGHT_MOBILE;
+  const cardWidth = isTablet ? size.tabletWidth : size.mobileWidth;
+  const activeHeight = isTablet ? size.activeHeightTablet : size.activeHeightMobile;
+  const inactiveHeight = isTablet ? size.inactiveHeightTablet : size.inactiveHeightMobile;
 
   useEffect(() => {
     const track = trackRef.current;
@@ -242,30 +265,30 @@ function MobileCarousel({
   }, [cardWidth, activeHeight, inactiveHeight]);
 
   return (
-    // No `items-center` on this wrapper (real bug, found live via the
-    // Playwright overflow sweep): `insideFactory.mobileTrack` has no
-    // explicit width class of its own -- it always relied on simply being
-    // an ordinary block-level child, which fills its container's width by
-    // default. Once it became a flex item here, `items-center` (a
-    // non-`stretch` cross-axis alignment) made the browser size it to its
-    // own un-clipped CONTENT width (1575px, all 5 cards) instead of
-    // stretching to the column's width, forcing real page-level
-    // horizontal scroll. Default `align-items: stretch` (omitting the
-    // class entirely) keeps the track's old, correct full-width sizing;
-    // the dots row is centred on its own instead (`mx-auto`), via
-    // `cardCarousel.dotsRow`'s own intrinsic/content width.
-    <div className="flex w-full flex-col gap-4">
-      <div ref={trackRef} className={insideFactory.mobileTrack}>
+    // See `insideFactory.mobileCarouselWrap`'s own comment for why this
+    // wrapper has no `items-center` (a real bug, found live).
+    <div className={insideFactory.mobileCarouselWrap}>
+      <div ref={trackRef} className={cardSize === "compact" ? insideFactory.mobileTrackCompact : insideFactory.mobileTrackWide}>
         {shots.map((shot, index) => (
           <div
             key={shot.label}
             ref={(el) => {
               cardRefs.current[index] = el;
             }}
-            className={insideFactory.mobileCard}
+            className={cx(
+              cardSize === "compact" ? insideFactory.mobileCardCompact : insideFactory.mobileCardWide,
+              index === activeIndex && insideFactory.mobileCardActiveShadow,
+            )}
             style={{ height: index === 0 ? activeHeight : inactiveHeight }}
           >
-            <MediaPlaceholder label={shot.label} radius="none" tone={tone} showLabel={showLabel} className="h-full" />
+            <MediaPlaceholder
+              label={shot.label}
+              radius="none"
+              tone={tone}
+              showLabel={showLabel}
+              image={shot.image}
+              className="h-full"
+            />
           </div>
         ))}
       </div>
@@ -287,6 +310,7 @@ export function InsideFactory({
   showHeading = true,
   showCta = true,
   showMediaLabel = true,
+  cardSize = "wide",
 }: InsideFactoryProps) {
   return (
     <section>
@@ -325,13 +349,12 @@ export function InsideFactory({
               eyebrow={<TextReveal text={content.eyebrow} />}
               heading={<TextReveal as="span" text={content.h2} />}
               eyebrowTone={tone}
-              eyebrowSize={insideFactory.mobileEyebrowSize}
               align="center"
             />
           </div>
         ) : null}
         <div className={showHeading ? insideFactory.mobileGalleryGap : undefined}>
-          <MobileCarousel shots={content.media} tone={tone} showLabel={showMediaLabel} />
+          <MobileCarousel shots={content.media} tone={tone} showLabel={showMediaLabel} cardSize={cardSize} />
         </div>
         {showCta ? (
           <div className={insideFactory.mobileCtaWrap}>

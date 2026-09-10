@@ -3937,15 +3937,9 @@ export const insideFactory = {
   // prop, and 16px/600 leading matches this section's confirmed mobile
   // size.
   mobileHeadingWrap: "container-p",
-  // 16px real mobile, standard 20px/24px Overline from `md:` up (owner,
-  // 2026-09-10: "on tablet, eyebrow heading across pages should be 20px by
-  // 24px... make it consistent across pages" -- this token's own wrapper
-  // spans mobile AND tablet in one instance (`mobileSection` is `xl:hidden`,
-  // not `md:hidden`), so the unconditional 16px value below was reaching
-  // tablet too. Same `max-md:.../md:text-overline` split every other
-  // eyebrow override already uses (WhatWeMake, Hero) -- this was the one
-  // that had been left unguarded.
-  mobileEyebrowSize: "max-md:text-[1rem] max-md:font-semibold max-md:leading-[1.2] md:text-overline",
+  // No `mobileEyebrowSize` override any more (2026-09-10 cleanup): this
+  // exact `max-md:.../md:text-overline` split is now `eyebrow.size`'s own
+  // sitewide default.
   // 48px gap from the heading down to the gallery (owner call, 2026-08-25,
   // overriding Figma's raw 32px read).
   mobileGalleryGap: "mt-12",
@@ -3979,21 +3973,63 @@ export const insideFactory = {
   // reading correctly at any width from a narrow phone up through tablet-
   // range "mobile" viewports; it still expands down to true centring below
   // ~380px wide, where the formula's own value is smaller than 40px anyway.
-  // Fixed height at the active card's own size (340px mobile, 532px
-  // tablet -- 340 scaled by the same 469/300 ratio the tablet card width
-  // itself uses, owner, 2026-09-09) -- without this the track's height is
-  // intrinsic (sized to its tallest child), so every scroll-frame height
-  // write to a card also changes the track's own box, which reflows the
-  // whole section and reads as the entire background shifting while the
-  // user swipes. Pinning it here means cards only ever grow/shrink inside
-  // a box that itself never moves. `md:` padding tier matches the wider
-  // 469px tablet card the same way the base tier matches the 300px mobile
-  // one (safe centring space for the first/last card).
-  mobileTrack:
-    "no-scrollbar flex h-[340px] items-center snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-300px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-469px)/2))]",
-  // 300px mobile, 469px tablet (owner, 2026-09-09: tablet swipes now,
-  // keeping its own already-defined wider card size, not mobile's 300px).
-  mobileCard: "w-[300px] shrink-0 snap-center md:w-[469px]",
+  // Two real, both-kept card sizes (owner, 2026-09-10: tried a wider
+  // landscape card against real photography -- "wider looks better, let's
+  // use it but don't descard the other one, keep it in the design system
+  // we might need it again") -- `Wide` is now the default every existing
+  // page gets (`InsideFactory.tsx`'s own `cardSize` prop, default
+  // `"wide"`); `Compact` is the original near-square 300x340 active ratio,
+  // kept as a real, selectable variant (not deleted, not just a comment)
+  // for whichever future gallery turns out to want tighter/more-portrait
+  // crops instead of this one's wide factory-floor coverage. Without a
+  // fixed height here the track's height is intrinsic (sized to its
+  // tallest child), so every scroll-frame height write to a card also
+  // changes the track's own box, which reflows the whole section and
+  // reads as the entire background shifting while the user swipes.
+  // Pinning it here means cards only ever grow/shrink inside a box that
+  // itself never moves. `md:` padding tier matches the wider tablet card
+  // the same way the base tier matches the mobile one (safe centring
+  // space for the first/last card).
+  // `gap-3` (12px, same owner request, real-photography test: "images
+  // should not collapse with one another... have some shadow or some
+  // treatement under the focus image so it does not touch or collapse with
+  // the behind ones") -- cards used to sit flush edge to edge, invisible
+  // with the grey placeholder fill but reading as genuinely merged once
+  // real photography has hard edges. A small breathing gap plus the active
+  // card's own shadow below (`mobileCardActiveShadow`) are the two pieces
+  // of that fix, and apply to both sizes -- this one is real space, not
+  // implied by the shadow alone.
+  mobileTrackWide:
+    "no-scrollbar flex h-[255px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-340px)/2))] md:h-[398px] md:px-[min(40px,calc((100%-530px)/2))]",
+  mobileCardWide: "w-[340px] shrink-0 snap-center md:w-[530px]",
+  // The original 300px mobile/469px tablet, 300x340 active ratio -- see
+  // `mobileTrackWide`'s own comment above for why this is kept, not
+  // dropped, now that `Wide` is the default.
+  mobileTrackCompact:
+    "no-scrollbar flex h-[340px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-300px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-469px)/2))]",
+  mobileCardCompact: "w-[300px] shrink-0 snap-center md:w-[469px]",
+  // Track-to-dots gap: 28px (owner, 2026-09-10: "give 12px more space to
+  // the dots from the top" -- was `gap-4`/16px). No `items-center` here
+  // (real bug, found live via the Playwright overflow sweep): the track
+  // has no explicit width class of its own -- it always relied on simply
+  // being an ordinary block-level child, which fills its container's
+  // width by default. Once it became a flex item here, `items-center` (a
+  // non-`stretch` cross-axis alignment) made the browser size it to its
+  // own un-clipped CONTENT width (all cards) instead of stretching to the
+  // column's width, forcing real page-level horizontal scroll. Default
+  // `align-items: stretch` (omitting the class entirely) keeps the
+  // track's own correct full-width sizing; the dots row is centred on its
+  // own instead (`mx-auto`), via `cardCarousel.dotsRow`'s own
+  // intrinsic/content width.
+  mobileCarouselWrap: "flex w-full flex-col gap-7",
+  // Active-card lift (same 2026-09-10 request as `mobileTrack`'s own `gap-3`
+  // above): a real drop shadow, not the theme's own `shadow-card` (tuned
+  // for a light/paper card and its ~8% black would vanish against this
+  // section's own near-black `bg-ink`) -- strong enough to read against
+  // either tone this section renders on. Applied only to the currently-
+  // centred card in InsideFactory.tsx (`index === activeIndex`), so the
+  // "this one is in focus" read comes from depth, not just its own height.
+  mobileCardActiveShadow: "shadow-[0_24px_48px_-12px_rgba(0,0,0,0.55)]",
   // Active/inactive card ratios (MediaRatio values, not classNames -- see
   // InsideFactory.tsx) are defined there directly, not here: the active
   // (centred) card renders taller than its neighbours -- a real overlap
