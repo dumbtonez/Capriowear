@@ -4930,14 +4930,16 @@ export const footer = {
   // ~167px wide at this height, matching Figma's own frame width.
   mobileBrandLogo: "h-[44.51px] w-auto",
   mobileTagline: "text-[1.125rem] font-normal text-text",
-  // Owner, 2026-09-08: "does not look like a clickable link, make it
-  // underline" -- mobile only, desktop's own `desktopContactEmail` is
-  // unaffected.
-  mobileEmail: "text-[1.5rem] font-medium text-text underline transition-opacity hover:opacity-70",
   mobileDivider: "w-full border-t border-line",
   // Tagline + the description paragraph, 12px gap, no divider between them
   // -- same relocation as desktop's `desktopDescriptionGroup` above.
-  mobileDescriptionGroup: "flex flex-col gap-3",
+  // `mt-2` (owner, 2026-09-10: "remove the email and separator, add 32px
+  // gap between logo and capriowear text" -- the email link and its own
+  // divider, right above this group, are both gone now; `mobileOuter`'s
+  // shared `gap-6`/24px between every child still applies here too, so
+  // +8px on top of that is this pair's own 32px, not a second value
+  // fighting the shared gap).
+  mobileDescriptionGroup: "mt-2 flex flex-col gap-3",
   mobileDescription: "text-[1.125rem] leading-[1.33] text-text",
   mobileNavList: "flex flex-col",
   mobileNavLink: "text-[1.125rem] leading-10 text-text transition-opacity hover:opacity-70",

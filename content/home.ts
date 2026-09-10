@@ -684,9 +684,16 @@ export const home = {
         { label: "Our Factory", href: "/our-factory" },
         { label: "Our Story", href: "/our-story" },
       ],
+      // Request a Sample before Download Catalog (owner, 2026-09-10: "Make
+      // request a sample first then download catalog" -- was the reverse
+      // order). Privacy Policy appended the same turn ("add privacy policy
+      // page link") -- no route built for it yet, same "nav link exists
+      // ahead of its page" precedent Our Story/Download Catalog/Request a
+      // Sample already established below and elsewhere on this site.
       columnTwo: [
-        { label: "Download Catalog", href: "/catalog" },
         { label: "Request a Sample", href: "/request-a-sample" },
+        { label: "Download Catalog", href: "/catalog" },
+        { label: "Privacy Policy", href: "/privacy-policy" },
       ],
     },
     contact: { label: "Get in touch", email: "hello@capriosports.com" },

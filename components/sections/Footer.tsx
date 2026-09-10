@@ -133,18 +133,11 @@ export function Footer({ content, social }: FooterProps) {
         </div>
       </div>
 
-      {/* Mobile: one flat stacked column -- see the styles.ts header comment.
-          No separate "Let's explore..." contact label here: Figma's mobile
-          frame goes straight from the divider to the bare email link. */}
+      {/* Mobile: one flat stacked column -- see the styles.ts header comment. */}
       <div className={footer.mobileOuter}>
         <div className={footer.mobileBrandGroup}>
           <Logo stacked className={footer.mobileBrandLogo} />
         </div>
-        <a href={`mailto:${content.contact.email}`} className={footer.mobileEmail}>
-          {content.contact.email}
-        </a>
-
-        <div className={footer.mobileDivider} />
 
         <div className={footer.mobileDescriptionGroup}>
           <p className={footer.mobileTagline}>{content.tagline}</p>
