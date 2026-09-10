@@ -43,6 +43,7 @@
 // uses). Same "two real breakpoint-specific instances, not one repositioned
 // via CSS" shape `HowItWorks.tsx`'s own mobile-vs-tablet heading already
 // uses for an identical two-different-forced-breaks problem.
+import { GradientStat } from "@/components/GradientStat";
 import { TextReveal } from "@/components/TextReveal";
 import { servicesIntro } from "@/components/ui/styles";
 import type { services } from "@/content/services";
@@ -79,13 +80,12 @@ export function ServicesIntro({ content }: ServicesIntroProps) {
 
         <div className={servicesIntro.statsRow}>
           {content.stats.map((stat) => (
-            <div key={stat.caption} className={servicesIntro.statCol}>
-              <div className={servicesIntro.statDivider} />
-              <div className={servicesIntro.stat}>
-                <p className={servicesIntro.statValue}>{stat.value}</p>
-                <p className={servicesIntro.statCaption}>{stat.caption}</p>
-              </div>
-            </div>
+            <GradientStat
+              key={stat.caption}
+              value={stat.value}
+              caption={stat.caption}
+              className={servicesIntro.statCol}
+            />
           ))}
         </div>
       </div>

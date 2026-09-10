@@ -21,6 +21,7 @@
 // this just applies that same existing pattern rather than inventing a new
 // one.
 import type { NoteSegment } from "@/content/activewear/types";
+import { GradientStat } from "@/components/GradientStat";
 import { TextReveal } from "@/components/TextReveal";
 import { cx } from "@/components/ui/cx";
 import { ourFactoryIntro } from "@/components/ui/styles";
@@ -68,16 +69,12 @@ export function OurFactoryIntro({ content, placement = "afterHero" }: OurFactory
 
         <div className={ourFactoryIntro.statsRow}>
           {content.stats.map((stat) => (
-            <div
+            <GradientStat
               key={stat.caption}
-              className={cx(ourFactoryIntro.statCol, isStacked ? ourFactoryIntro.statColStacked : ourFactoryIntro.statColAfterHero)}
-            >
-              <div className={ourFactoryIntro.statDivider} />
-              <div className={ourFactoryIntro.stat}>
-                <p className={ourFactoryIntro.statValue}>{stat.value}</p>
-                <p className={ourFactoryIntro.statCaption}>{stat.caption}</p>
-              </div>
-            </div>
+              value={stat.value}
+              caption={stat.caption}
+              className={isStacked ? ourFactoryIntro.statColStacked : ourFactoryIntro.statColAfterHero}
+            />
           ))}
         </div>
       </div>

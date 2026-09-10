@@ -35,7 +35,7 @@
 "use client";
 
 import { Plus } from "lucide-react";
-import { useId, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
 
 import { FilterChevronIcon } from "@/components/icons/FilterChevronIcon";
@@ -71,6 +71,25 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
     setChipWidths(measureRefs.current.map((el) => el?.offsetWidth ?? 0));
   }, [items]);
 
+  // Same measured-pixel-width technique as the desktop chips above, now
+  // for the mobile pills too (owner, 2026-09-10: "This chip animation is
+  // different from the once we have on desktop, please use the same") --
+  // without it, the pill has no definite width to transition (`width:
+  // auto` can't be animated by CSS, the exact limitation `item`'s own
+  // comment already documents), so only its background colour was ever
+  // actually morphing, not its size, unlike desktop's chip. Two hidden
+  // clones per item (closed: icon + label; open: bold label only) give
+  // both ends a real measured pixel value, so `mobilePill`'s own
+  // `width` transition has something definite to animate between.
+  const mobileClosedRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const mobileOpenRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [mobileClosedWidths, setMobileClosedWidths] = useState<number[]>([]);
+  const [mobileOpenWidths, setMobileOpenWidths] = useState<number[]>([]);
+  useLayoutEffect(() => {
+    setMobileClosedWidths(mobileClosedRefs.current.map((el) => el?.offsetWidth ?? 0));
+    setMobileOpenWidths(mobileOpenRefs.current.map((el) => el?.offsetWidth ?? 0));
+  }, [items]);
+
   const isFirst = openIndex === 0;
   const isLast = openIndex === items.length - 1;
   const goPrev = () => setOpenIndex((index) => Math.max(0, index - 1));
@@ -90,6 +109,21 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
       goNext();
     }
   };
+
+  // Mobile/tablet pill row: keeps the active pill scrolled into view as
+  // `openIndex` changes, since the row can hold more pills than fit on
+  // screen at once (owner reference: Apple's own "Take a closer look"
+  // mobile pattern). `prefers-reduced-motion` gates the scroll itself to
+  // instant, same rule every other animated element on the site follows.
+  const pillRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    pillRefs.current[openIndex]?.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      inline: "center",
+      block: "nearest",
+    });
+  }, [openIndex]);
 
   return (
     <section className={ourFactoryDetails.section}>
@@ -112,26 +146,6 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
         </div>
 
         <div className={ourFactoryDetails.card}>
-          {/* Mobile-only (owner spec: "image panel on top, accordion list
-              full-width below") -- rendered first in DOM so it lands above
-              the list at every width below `xl`, where the stepper and
-              desktop image column below are both hidden. Just the
-              currently-open item's own image, no crossfade stack -- a
-              tap on any pill is enough to drive it at this width, so the
-              instant preloaded-swap the desktop crossfade needs doesn't
-              apply here. */}
-          <div className={ourFactoryDetails.mobileImageWrap}>
-            <MediaPlaceholder
-              label={items[openIndex].imageAlt}
-              image={items[openIndex].image}
-              ratio="730:644"
-              radius="none"
-              tone="dark"
-              placeholderClassName={ourFactoryDetails.imagePlaceholderFill}
-              showLabel={false}
-            />
-          </div>
-
           <div className={ourFactoryDetails.stepperCol}>
             <button
               type="button"
@@ -265,6 +279,146 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
                 />
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile/tablet only (below `xl:`) -- Apple's own "Take a closer
+          look" mobile pattern (owner reference: apple.com/apple-watch-
+          series-12, "Take a closer look"), a full-bleed FIXED-SIZE image
+          with a caption chip and a horizontally-scrollable pill row
+          floating over its bottom edge, not the accordion above (`card`,
+          now `xl:`-only). Sibling of `inner`, outside its `container-p`,
+          so the image bleeds truly edge-to-edge -- see `ourFactoryDetails.
+          mobileWrap`'s own comment. Switching `openIndex` only ever
+          crossfades the image and swaps the caption text; this block's
+          own height never changes. */}
+      <div className={ourFactoryDetails.mobileWrap}>
+        <div className={ourFactoryDetails.mobileMediaWrap}>
+          {items.map((item, index) => (
+            <div
+              key={item.label}
+              className={cx(
+                ourFactoryDetails.imageLayer,
+                index === openIndex ? ourFactoryDetails.imageLayerActive : ourFactoryDetails.imageLayerInactive,
+              )}
+            >
+              <MediaPlaceholder
+                label={item.imageAlt}
+                image={item.image}
+                radius="none"
+                tone="dark"
+                showLabel={false}
+                className="size-full"
+              />
+            </div>
+          ))}
+
+          <div aria-hidden="true" className={ourFactoryDetails.mobileScrim} />
+
+          {/* Caption sits ABOVE the pill row, inside the image, with its
+              own solid background chip (owner: "the selected chip should
+              open the text above not below and that should have a
+              background as shown in the reference") -- was a plain <p>
+              below the whole image block; both now live in one
+              bottom-anchored column inside `mobileMediaWrap`. */}
+          <div className={ourFactoryDetails.mobileOverlay}>
+            <p aria-live="polite" className={ourFactoryDetails.mobileCaption}>
+              {items[openIndex].description}
+            </p>
+
+            {/* Hidden width-measurement clones -- see the `mobileClosedWidths`/
+                `mobileOpenWidths` state comment above. One pair per item,
+                each always rendered in its own fixed shape (closed: icon +
+                label; open: bold label only) regardless of which item is
+                actually active, so every width is available immediately.
+                `invisible` (not `hidden`) keeps them in layout while
+                unpainted; `pointer-events-none`/`aria-hidden` keep them out
+                of the way of real taps and the accessibility tree.
+                `w-full overflow-hidden` -- real bug, found live, 2026-09-10
+                ("the last chip expansion still show that weird anumation
+                and slide the whole section"): with 14 pill clones (7
+                closed + 7 open) in one unconstrained flex row, this
+                wrapper measured ~1940px wide -- `visibility:hidden`
+                content still counts toward the page's own `scrollWidth`
+                even though nothing paints, the exact same bug (and fix)
+                already documented on the desktop chip's own measurement
+                clone below. Capping this wrapper to its positioned
+                ancestor's width and clipping anything past it removes it
+                from the page's real scroll size entirely. */}
+            <div aria-hidden="true" className="pointer-events-none invisible absolute left-0 top-0 flex w-full overflow-hidden">
+              {items.map((item, index) => (
+                <div
+                  key={item.label}
+                  ref={(el) => {
+                    mobileClosedRefs.current[index] = el;
+                  }}
+                  className={cx(ourFactoryDetails.mobilePill, ourFactoryDetails.mobilePillClosed)}
+                >
+                  <span className={cx(ourFactoryDetails.itemIconWrap, ourFactoryDetails.itemIconWrapClosed)}>
+                    <Plus className={ourFactoryDetails.itemIcon} />
+                  </span>
+                  <span className={ourFactoryDetails.mobilePillLabel}>{item.label}</span>
+                </div>
+              ))}
+              {items.map((item, index) => (
+                <div
+                  key={item.label}
+                  ref={(el) => {
+                    mobileOpenRefs.current[index] = el;
+                  }}
+                  className={cx(ourFactoryDetails.mobilePill, ourFactoryDetails.mobilePillOpen)}
+                >
+                  <span className={cx(ourFactoryDetails.itemIconWrap, ourFactoryDetails.itemIconWrapOpen)}>
+                    <Plus className={ourFactoryDetails.itemIcon} />
+                  </span>
+                  <span className={cx(ourFactoryDetails.mobilePillLabel, ourFactoryDetails.mobilePillLabelOpen)}>
+                    {item.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div className={ourFactoryDetails.mobilePillRow} onKeyDown={handleListKeyDown}>
+              {items.map((item, index) => {
+                const isOpen = index === openIndex;
+                const width = isOpen ? mobileOpenWidths[index] : mobileClosedWidths[index];
+                return (
+                  <button
+                    key={item.label}
+                    type="button"
+                    ref={(el) => {
+                      pillRefs.current[index] = el;
+                    }}
+                    onClick={() => setOpenIndex(index)}
+                    aria-pressed={isOpen}
+                    style={width ? { width } : undefined}
+                    className={cx(
+                      ourFactoryDetails.mobilePill,
+                      isOpen ? ourFactoryDetails.mobilePillOpen : ourFactoryDetails.mobilePillClosed,
+                    )}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={cx(
+                        ourFactoryDetails.itemIconWrap,
+                        isOpen ? ourFactoryDetails.itemIconWrapOpen : ourFactoryDetails.itemIconWrapClosed,
+                      )}
+                    >
+                      <Plus className={ourFactoryDetails.itemIcon} />
+                    </span>
+                    <span
+                      className={cx(
+                        ourFactoryDetails.mobilePillLabel,
+                        isOpen && ourFactoryDetails.mobilePillLabelOpen,
+                      )}
+                    >
+                      {item.label}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

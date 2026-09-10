@@ -1535,6 +1535,40 @@ export const ourFactoryHero = {
 // overriding its own shorter default line-height to Figma's real 28px,
 // same "token size, arbitrary leading override" pattern `servicesIntro.
 // paragraph` already establishes.
+/* --- GradientStat (shared "value + orange gradient divider + caption" stat) -
+// Used by both OurFactoryIntro (below) and ServicesIntro -- see
+// components/GradientStat.tsx. Extracted 2026-09-10 (owner: "these stats
+// with the orange separator should be one component and used wherever this
+// comes") -- both files had built the identical divider+value+caption
+// block from scratch, each with its own statCol/statDivider/stat/
+// statValue/statCaption set that were pixel-for-pixel the same recipe,
+// only nominally duplicated. Only each placement's own column max-width
+// stays per-caller (passed as `className`, e.g. OurFactoryIntro's two
+// placements), since that's the one real per-node difference.
+// `max-md:text-[2.5rem] max-md:font-medium max-md:leading-normal` (40px,
+// owner, mobile-only review: "make 17+ and 100000 same font size 40px" --
+// matches the homepage Stats section's own `mobileValue`) overrides the
+// shared `md:text-h1` fluid clamp below md only -- both call sites'
+// existing desktop-and-up size (`text-h1`) is unaffected, only mobile was
+// asked for. Weight/leading are re-set alongside the size, not left to
+// `text-h1`'s own bundled values -- the same established gotcha this
+// project already documents elsewhere (overriding a compound token's size
+// alone silently drops to the browser default).
+// `stat: "flex flex-col gap-1"` (4px, was `gap-2`/8px on both original
+// recipes) -- owner, same review: "the subline gap between 4px same as we
+// did on the homepage", matching `stats.mobileItemText`'s own 2026-09-10
+// value. Applied at every breakpoint via this one shared token (not a
+// mobile-only override) since neither original recipe had ever split this
+// particular gap by breakpoint. */
+export const gradientStat = {
+  col: "flex w-full flex-col gap-6 md:gap-8",
+  divider: "h-px w-full bg-[linear-gradient(to_right,var(--color-accent)_36%,transparent)]",
+  stat: "flex flex-col gap-1",
+  value:
+    "max-md:text-[2.5rem] max-md:font-medium max-md:leading-normal md:text-h1 text-paper whitespace-nowrap",
+  caption: "text-body-lg leading-7 text-[#838D97]",
+};
+
 export const ourFactoryIntro = {
   // `bg-ink` (owner, 2026-09-09: "make this section dark", node 857:1906) --
   // was `bg-paper`. Figma's own reference for this node has always been
@@ -1586,8 +1620,16 @@ export const ourFactoryIntro = {
   // should be 64px", then "make top gap 104px") -- both corrections
   // supersede Figma's own raw 40px measurement for this node; the owner's
   // latest instruction wins, same precedent as the stat-row's own shared
-  // 72px gap above.
-  innerStacked: "xl:pt-[104px]",
+  // 72px gap above. `max-md:pt-[72px]` (owner, 2026-09-10: "audited, not
+  // just promised should have the same space from top as the details you
+  // would [check on a sample] section") -- was the shared `inner`'s own
+  // `max-md:pt-8` (32px), meant for section 3's own "right after the
+  // Hero" placement; section 7 instead follows `OurFactoryDetails`
+  // directly, whose own mobile top gap is `ourFactoryDetails.inner`'s
+  // `pt-[72px]` -- matched here explicitly rather than left on the
+  // shared 32px value, same "each placement gets its own top inset"
+  // pattern `innerAfterHero`/`innerStacked` already establish at `xl:`.
+  innerStacked: "max-md:pt-[72px] xl:pt-[104px]",
   // max-md:gap-6/md:gap-8 (owner, 2026-09-09, mobile-only review: "make the
   // paragraph gap 24px") -- heading-to-paragraph gap drops to 24px below
   // md (was the shared 32px `gap-8` at every breakpoint); md:/xl: unchanged.
@@ -1672,34 +1714,16 @@ export const ourFactoryIntro = {
   // not a plain divider -- reproduced as CSS rather than an image so it
   // scales with the column's own width, using the existing accent token
   // rather than a new hardcoded hex.
-  // Base + two placement-specific max-widths, same reasoning as
-  // `innerAfterHero`/`innerStacked` above: the first section's 2 stats are
-  // each 342px in Figma, the second's 3 stats are each 280px (narrower, so
-  // three columns plus the shared 72px gaps still read as a single
-  // deliberate row rather than a cramped one) -- both real per-node
-  // measurements, not a shared guess.
-  // max-md:gap-6/md:gap-8 (owner, 2026-09-09, mobile-only review, first on
-  // section 7's own "06 QC stages"/"05 Certifications" stats: "separator
-  // space should be same as the top", then confirmed with an exact number
-  // on section 3's own stats: "75000 should have 24px gap from top and
-  // separator ... follow the same for 06QC and others on this section") --
-  // the divider-to-value gap (this token's own gap) is now 24px below md,
-  // matching `inner`/`statsRow`'s own "gap from top" (also 24px below md,
-  // see their own comments). Shared with section 3's own stats
-  // (`placement="afterHero"`) since both placements use this one token by
-  // design -- fixed for both sections at once, not just the one named.
-  statCol: "flex w-full flex-col max-md:gap-6 md:gap-8",
+  // Column max-width only, passed as `GradientStat`'s own `className` --
+  // the rest of the stat block (gap, divider, value, caption) now lives in
+  // the shared `gradientStat` recipe above. Two placement-specific values,
+  // same reasoning as `innerAfterHero`/`innerStacked` above: the first
+  // section's 2 stats are each 342px in Figma, the second's 3 stats are
+  // each 280px (narrower, so three columns plus the shared 72px gaps still
+  // read as a single deliberate row rather than a cramped one) -- both
+  // real per-node measurements, not a shared guess.
   statColAfterHero: "md:max-w-[342px]",
   statColStacked: "md:max-w-[280px]",
-  statDivider: "h-px w-full bg-[linear-gradient(to_right,var(--color-accent)_36%,transparent)]",
-  stat: "flex flex-col gap-2",
-  // whitespace-nowrap: statCol's own 342px width is a fixed pixel value
-  // (Figma's 1440px frame), but statValue reads from the h1 token, which
-  // keeps scaling up past 1440 to a new max at 1920 -- on wide screens the
-  // grown number no longer fits the fixed column and wraps mid-value
-  // ("75,000 sq" / "ft"), a real bug found live, 2026-09-08.
-  statValue: "text-h1 text-paper whitespace-nowrap",
-  statCaption: "text-body-lg leading-7 text-[#838D97]",
 };
 
 /* --- OurFactoryProcess (/our-factory section 5) ----------------------------- */
@@ -1742,8 +1766,10 @@ export const ourFactoryProcess = {
   // row, not eyebrow-to-heading, collapsed into one wrapper by mistake).
   // max-md:gap-3 (owner, 2026-09-09, mobile-only review: "what we make
   // eyebrow and title should have 12px") -- 12px below md; md:/xl: keep
-  // the original 24px unchanged.
-  headingGroup: "flex flex-col max-md:gap-3 md:gap-6",
+  // the original 24px unchanged. `max-md:gap-[10px]` (owner, 2026-09-10,
+  // mobile-only review: "reduce 2px more space from the title and the
+  // subline for what we make section") -- was 12px, -2px here specifically.
+  headingGroup: "flex flex-col max-md:gap-[10px] md:gap-6",
   // No `eyebrowSize` override any more (2026-09-10 cleanup): this section's
   // 16px/600/1.2 mobile fix (owner, 2026-09-09) is now `eyebrow.size`'s own
   // sitewide default, so `<Eyebrow>` in OurFactoryProcess.tsx picks it up
@@ -1833,7 +1859,15 @@ export const ourFactoryProcess = {
   // still capping the widest ("full"-width) row item's own body-copy line
   // length to a comfortable reading width, not left unconstrained at the
   // row's own full ~1280px+.
-  textCol: "flex max-w-[36rem] flex-col gap-4",
+  // `gap-2` (8px, was `gap-3`/12px, itself down from `gap-4`/16px) -- owner,
+  // 2026-09-10, mobile-only review, in sequence: "'it starts with the right
+  // cloth' to subline make the space 4px less for all titles for this
+  // section," then "make it 8px" -- title-to-body gap, one shared token
+  // every station's own title already reads (`Item`'s own markup has no
+  // per-station override), so this fixes every title in the section at
+  // once, not just the one named as an example. Now matches `labelGroup`'s
+  // own eyebrow-to-title gap below, also 8px.
+  textCol: "flex max-w-[36rem] flex-col gap-2",
   labelGroup: "flex flex-col gap-2",
   // 16px, Figma's own #3c3c43 -- already this project's established literal
   // for this exact muted-label grey (see e.g. `desktopNav.item`/`chip` in
@@ -1879,7 +1913,17 @@ export const ourFactoryDetails = {
   // xl:pt-[96px] (owner, 2026-09-09: "add 16px on top of the heading" --
   // was xl:py-[80px] on both sides; split so only the top gap grows to
   // 96px, bottom stays the 80px the owner set the same day).
-  inner: "container-p flex flex-col gap-12 py-[72px] xl:gap-[72px] xl:pb-[80px] xl:pt-[96px]",
+  // `pb-0` below `xl:` (was the shared `py-[72px]`, i.e. `pb-[72px]` at
+  // every breakpoint) -- real bug, found live, 2026-09-10: this bottom
+  // padding used to give space before `card` (this section's own
+  // accordion), but `card` is now `hidden` below `xl:` (see its own
+  // comment), so that space is empty and dead. The new mobile media block
+  // (`mobileWrap`, a sibling of `inner`, below) supplies its OWN top gap
+  // (`mt-12`, 48px, owner: "image and the top subline text gap should be
+  // 48px") -- with `inner`'s own `pb-[72px]` still active, the two were
+  // stacking into a real 120px gap instead of the intended 48px.
+  // `xl:pb-[80px]` restores the confirmed desktop value explicitly.
+  inner: "container-p flex flex-col gap-12 pt-[72px] pb-0 xl:gap-[72px] xl:pb-[80px] xl:pt-[96px]",
   // Header row: H2 left, lead paragraph right (Figma: 539px/181px gap/560px
   // at the 1440px reference width) -- `max-w`, not a fixed `w`, on both
   // sides, and `justify-between` doing the gap instead of a flat 181px:
@@ -1936,7 +1980,22 @@ export const ourFactoryDetails = {
   // `rounded-none` (owner, 2026-09-09: "the main container and the image
   // container should have 0 radius") -- was `rounded-xl`, corrected
   // alongside `imageCol` below.
-  card: "flex flex-col gap-8 rounded-none bg-ink-2 p-6 xl:flex-row xl:items-center xl:gap-10 xl:p-10",
+  // `hidden xl:flex` (was bare `flex ... xl:flex-row`) -- desktop-only,
+  // 2026-09-10 (owner: rebuild the mobile presentation entirely, Apple's
+  // "Take a closer look" pills-over-image pattern, not this accordion).
+  // This card's own children (`stepperCol`, `listCol`, `imageCol`) were
+  // already effectively desktop-only in spirit but never actually hidden
+  // below `xl:` -- `listCol` in particular rendered the exact same
+  // full-row-expanding accordion at every width, which WAS the broken
+  // mobile behaviour. Rather than touch any of that shared machinery
+  // (still used verbatim at `xl:+`, unchanged), this card is now hidden
+  // outright below `xl:` and a wholly separate mobile-only block (below,
+  // `mobileWrap`) renders instead. `hidden`/`xl:flex` on the same
+  // unprefixed-display property, not `flex` plus a competing override --
+  // the same "two same-specificity utilities racing" bug class this
+  // project avoids everywhere else (e.g. `howItWorks.desktopOuterLight`/
+  // `desktopOuterDark`).
+  card: "hidden flex-col gap-8 rounded-none bg-ink-2 p-6 xl:flex xl:flex-row xl:items-center xl:gap-10 xl:p-10",
   // Real flex column, not Figma's absolute `top-1/2 -translate-y-1/2` --
   // `self-center` against the row's own cross-axis (stretched to the
   // tallest sibling, the image panel) gives the same vertical-centred
@@ -2267,7 +2326,119 @@ export const ourFactoryDetails = {
   imageLayer: "absolute inset-0 transition-opacity duration-[250ms] ease-in-out motion-reduce:transition-none",
   imageLayerActive: "opacity-100",
   imageLayerInactive: "opacity-0",
-  mobileImageWrap: "w-full overflow-hidden rounded-none xl:hidden",
+
+  // ---------------------------------------------------------------------
+  // Mobile/tablet only (below `xl:`), 2026-09-10 rebuild -- Apple's "Take a
+  // closer look" mobile pattern (owner-supplied reference, apple.com/
+  // apple-watch-series-12, "Take a closer look"), not the accordion `card`
+  // above (now `hidden` below `xl:`, see its own comment). A full-bleed,
+  // FIXED-SIZE image (`mobileMediaWrap`'s own aspect ratio never changes),
+  // a horizontally-scrollable row of pill tabs floating over its bottom
+  // edge, and a short caption below -- switching items only ever
+  // crossfades the image and swaps the caption text, it never changes
+  // this block's own height. Reuses `imageLayer`/`imageLayerActive`/
+  // `imageLayerInactive` above verbatim for the crossfade (those three
+  // tokens carry no breakpoint restriction of their own) and `itemIconWrap`/
+  // `itemIconWrapOpen`/`itemIconWrapClosed`/`itemIcon`/`itemLabel`/
+  // `itemLabelOpen` above verbatim for each pill's own "+ icon when
+  // closed, bold label only when open" treatment -- the owner's own
+  // clarification was to reuse that existing behaviour, not invent a new
+  // "swatch" icon.
+  //
+  // Sibling of `inner` (outside its own `container-p`), not nested inside
+  // it -- the same "background/media lives on an unconstrained outer
+  // wrapper, text content gets its own padded wrapper" split this page
+  // already uses for `OurFactoryTeam`'s hero photo and `InsideFactory`'s
+  // gallery, needed here so the image can bleed truly edge-to-edge rather
+  // than only to `inner`'s own container-p inset.
+  // `mt-12` (48px, owner, 2026-09-10: "the space from the image to top
+  // subline should be 48px") -- was `mt-8`/32px, an initial judgement call
+  // (no Figma frame exists for this new mobile-only pattern).
+  mobileWrap: "xl:hidden mt-12",
+  // Fixed aspect ratio (judgement call, same caveat as above) -- this is
+  // the one thing that must never change size as `openIndex` changes, so
+  // it's a plain CSS ratio, not content-driven.
+  mobileMediaWrap: "relative w-full overflow-hidden aspect-[4/5]",
+  // Bottom-anchored gradient purely for pill/caption legibility over
+  // arbitrary photography -- the same reasoning the Apple reference itself
+  // uses (its own caption + pill row sit on a matching scrim).
+  // `pointer-events-none` so it never intercepts a tap meant for the
+  // overlay/image underneath.
+  mobileScrim: "pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent",
+  // The caption + pill row, stacked in reading order (caption ABOVE the
+  // pills -- owner, 2026-09-10: "the selected chip should open the text
+  // above not below") -- one bottom-anchored column inside the fixed-ratio
+  // media box, replacing the caption's earlier position as a separate <p>
+  // below the whole image block.
+  mobileOverlay: "absolute inset-x-0 bottom-0 flex flex-col gap-3 px-5 pb-5",
+  // `no-scrollbar` -- the same sitewide utility every other horizontal
+  // scroller on this page already uses. `items-center` (cross-axis) so
+  // pills of different heights (open vs. closed, before the icon-collapse
+  // transition finishes) stay vertically aligned. No longer `absolute`
+  // itself (moved onto the shared `mobileOverlay` wrapper above, alongside
+  // the caption) or its own `px-5 pb-5` (same reason).
+  mobilePillRow: "no-scrollbar flex items-center gap-2 overflow-x-auto",
+  // `shrink-0` (never compresses in the scroll row) `whitespace-nowrap`
+  // (never wraps, matching `itemLabel`'s own established rule for a
+  // collapsed pill). Semi-opaque dark backing so the pill reads against
+  // any photo, not just a specific one -- `bg-[#1f2126]/90`, the same base
+  // dark-surface literal `item`'s own closed state already uses (see that
+  // token's own comment), now with opacity since this sits over a photo
+  // rather than the card's own solid background.
+  // Same easing AND same animated properties as desktop's own `item`
+  // open/close transition (owner, 2026-09-10, twice: "use the same
+  // animation for the expanded chip that we used on the desktop" / "this
+  // chip animation is different... please use the same") --
+  // `cubic-bezier(0.33,1,0.68,1)`, the curve that replaced a jerkier one
+  // specifically because it keeps more real travel late in the transition
+  // (see `item`'s own comment for the full reasoning). `width` now joins
+  // `background-color` in the transition list -- without it, this pill had
+  // no definite width to animate at all (`width: auto` can't be
+  // transitioned by CSS, the exact limitation `item`'s own comment already
+  // documents), so only the colour was ever really morphing, not the
+  // shape, unlike desktop's chip. `OurFactoryDetails.tsx` now measures
+  // both the open and closed pixel width per item (the same hidden-clone
+  // technique `chipWidths` already uses for desktop) and applies it as an
+  // inline `style`, giving this transition two real values to animate
+  // between. Duration itself is asymmetric, also matching desktop: 340ms
+  // opening (`mobilePillOpen`), 260ms collapsing (`mobilePillClosed`).
+  // `min-w-0` -- real bug, found live, 2026-09-10 ("when expand the last
+  // chip, it shows some weird spacing from the right"): flex items get an
+  // implicit `min-width: auto` by default, which floors a shrinking item
+  // at its own CONTENT's natural (unwrapped, `whitespace-nowrap`) width,
+  // no matter what explicit `width` is requested. The open-state label
+  // (no icon) still measured a genuinely narrower natural width than the
+  // closed state for several items, but without `min-w-0` the browser
+  // silently clamped the pill back UP to its label's own intrinsic
+  // minimum instead of honouring the measured, narrower open width --
+  // confirmed live via `getBoundingClientRect()` reporting a wider box
+  // than the inline `style.width` it was actually given. The extra,
+  // un-shrunk width on the LAST pill is exactly what pushed the
+  // scrollable row's own content past where the closed measurement
+  // expected it to end, reading as stray space at the row's right edge.
+  mobilePill:
+    "flex min-w-0 shrink-0 items-center whitespace-nowrap rounded-pill px-4 py-3 transition-[width,background-color] ease-[cubic-bezier(0.33,1,0.68,1)] motion-reduce:transition-none",
+  // Open: a lighter backing (same "lighter, not darker" emphasis direction
+  // `item`'s own closed-hover state already established) so the active
+  // pill visibly stands out from its neighbours without needing a second
+  // colour system.
+  mobilePillOpen: "bg-[#2a2d33] duration-[340ms]",
+  mobilePillClosed: "bg-[#1f2126]/90 duration-[260ms]",
+  mobilePillLabel: "text-sm text-paper",
+  mobilePillLabelOpen: "font-semibold",
+  // Now a real background chip, not plain body copy (owner, same message:
+  // "that should have a background as shown in the reference") -- same
+  // semi-opaque dark backing as a closed pill (`bg-[#1f2126]/90`), white
+  // `text-paper` (was the page's own muted `#838D97`, illegible-adjacent
+  // against a dark photo backing and inconsistent with the reference's
+  // own white caption text). `line-clamp-3` caps a long description from
+  // growing the box; the paired `min-h-[60px]` (3 lines at this text
+  // size's own `leading-5`/20px line-height) guarantees a SHORT
+  // description doesn't leave a shorter chip than a long one -- together
+  // these two are what make switching the active item never change this
+  // block's own height, without a JS measurement effect (unlike `card`'s
+  // own chip-width machinery, deliberately not needed here).
+  mobileCaption: "min-h-[60px] rounded-2xl bg-[#1f2126]/90 px-4 py-3 text-sm leading-5 text-paper line-clamp-3",
 };
 
 /* --- OurFactoryTeam (/our-factory section 10) ------------------------------ */
@@ -2306,7 +2477,25 @@ export const ourFactoryTeam = {
   // site already uses. No shared `gap` any more either -- headingCol-to-
   // hero (72px) and hero-to-gallery (40px, see `galleryWrap`'s own
   // comment) are two different values now, not one gap reused for both.
-  inner: "flex w-full flex-col items-center pt-[160px] pb-[160px]",
+  // `max-md:pt-0` (owner, 2026-09-10, mobile-only review: "remove the space
+  // from the bottom of certified section") -- the confirmed 160px top gap
+  // was applying at every breakpoint, including real mobile, where no
+  // Figma frame for this section exists yet to confirm a smaller number
+  // against; zeroed rather than guessed at a different mobile value, since
+  // the section above (`certified.mobileSectionOurFactory`) already reads
+  // flush against whatever comes before it. `md:pt-[160px]` restores the
+  // confirmed desktop/tablet value explicitly. Real mobile gained its own
+  // real value the same day, same review, in a follow-up correction:
+  // `max-md:pt-[72px]` (owner: "skilled hands title should have 72px space
+  // from the top") -- 0px had removed the gap entirely instead of matching
+  // this project's own standing mobile section-to-section rhythm.
+  // `max-md:pb-[48px]` (owner, 2026-09-10, same review, pointing at the
+  // boundary with the dark Faq section right after: "skilled hands bottom
+  // to faq top ... make it 48px") -- the confirmed 160px bottom gap was
+  // also applying at every breakpoint below `md:pt-[160px]`'s own real
+  // mobile/tablet split above; `md:pb-[160px]` restores the confirmed
+  // desktop/tablet value explicitly.
+  inner: "flex w-full flex-col items-center max-md:pt-[72px] md:pt-[160px] max-md:pb-[48px] md:pb-[160px]",
   headingCol: "flex flex-col items-center gap-4 text-center max-w-[812px]",
   heading: "text-h1 text-text",
   // 22px/32px (Figma's own real size for this subline, not this project's
@@ -2321,8 +2510,16 @@ export const ourFactoryTeam = {
   // precedent.
   // max-md:text-[1.125rem]/leading-6 (owner, 2026-09-09, mobile-only
   // review: "700+ team text should be 18px 24") -- 18px/24px below md;
-  // md:/xl: keep the original 22px/32px unchanged.
-  subline: "max-md:text-[1.125rem] max-md:leading-6 md:max-w-[750px] md:text-[1.375rem] md:leading-8 text-[#17191e]",
+  // md:/xl: keep the original 22px/32px unchanged. max-md:px-5 (owner,
+  // 2026-09-10, mobile-only review: "700+ team subline should have 20px
+  // gap from both right and left") -- this section's own `inner`/
+  // `headingCol` carry no side padding at all (deliberately, for the hero
+  // photo's edge-to-edge bleed below), so this text was touching the
+  // viewport edges directly on real mobile; scoped to the subline itself
+  // (not `headingCol`, which would also widen the heading's own already-
+  // comfortable 2-line wrap unnecessarily).
+  subline:
+    "max-md:px-5 max-md:text-[1.125rem] max-md:leading-6 md:max-w-[750px] md:text-[1.375rem] md:leading-8 text-[#17191e]",
   sublineBold: "font-semibold",
   // Full-bleed hero photo -- a sibling of the (centred, capped) heading
   // column, not nested inside it, since Figma's own frame spans the full
@@ -2387,55 +2584,39 @@ export const ourFactoryTeam = {
     tall: "h-[600px]",
     short: "h-[420px]",
   },
-  // Mobile/tablet slider (owner, 2026-09-09: "the images below should have
-  // slider with the [chevron] and add dots under it" / "treat the below
-  // section proper slider") -- a native CSS scroll-snap track, the same
-  // finger-drag-following mechanism InsideFactory's own mobile carousel
-  // already uses, not the desktop's click-only chevron (which never
-  // responds to touch input at all, see this recipe's own header comment).
-  // `xl:hidden`: visible through the full 0-1279px range, swapping to the
-  // chevron scroller above only at true desktop. `pt-6` (owner, 2026-09-09,
-  // first mobile-only: "the images under it should have the same space as
-  // it has between the other images", then tablet too: "the gap from the
-  // top image to images under should have the same gap as the other
-  // images have in between") -- was the shared 40px at every width below
-  // `xl:`, which didn't match `sliderTrack`'s own 24px (`gap-6`) inter-item
-  // gap; 24px now matches it exactly at both mobile and tablet, so this is
-  // a single unprefixed value again (no `md:` override left to carry).
+  // Mobile/tablet gallery, rebuilt 2026-09-10 to match the homepage
+  // Exhibitions section's own mobile carousel style exactly (owner: "for
+  // them use the same component we used for homepage exhibition section
+  // images style") -- was a native scroll-snap track with static
+  // per-item tall/short heights (owner, 2026-09-09), replaced with
+  // Exhibitions' own centred-active-card mechanism: the nearest-to-centre
+  // card grows to `ACTIVE_HEIGHT`, its neighbours shrink to
+  // `INACTIVE_HEIGHT`, animated continuously as the reader swipes
+  // (`OurFactoryTeam.tsx`'s own `Slider`, mirroring `Exhibitions.tsx`'s
+  // `MobileCarousel` component-for-component, including its own
+  // `MediaPlaceholder` instead of this page's usual `ParallaxMedia` -- the
+  // hero photo above keeps `ParallaxMedia` unchanged, only these 4 gallery
+  // images below it changed). `sliderWrap` (outer spacing, owner-tuned
+  // separately) is unaffected.
   sliderWrap: "w-full pt-6 xl:hidden",
-  // `px-5` (owner, 2026-09-09: "the images under the main images should
-  // have 20px gap from the left" (mobile), then "images under the same
-  // image should also have gaps from the left 20px" (tablet) -- was
-  // `px-5 md:px-8` (32px at tablet); now one shared 20px at both. Real bug
-  // fixed in the same pass: `scroll-pl-5` (matching, `scroll-padding-left`)
-  // was missing entirely, so the browser's own scroll-snap alignment
-  // auto-scrolled the track 20px on load to snap the first item flush with
-  // the scroll-port instead of respecting the visual `px-5` inset --
-  // confirmed live (`scrollLeft` read 20 on mount, not 0, so the first
-  // item's real left edge sat flush at 0px instead of the intended 20px).
-  // `scroll-padding` tells the snap algorithm where the "true" edge of the
-  // scrollable viewport is, independent of the container's own visual
-  // padding -- setting it to match `px-5` stops that auto-correction.
-  // `gap-6` (24px) is a deliberately smaller gap than desktop's 40px,
-  // proportional to the smaller card sizes below.
-  sliderTrack: "no-scrollbar flex items-start gap-6 overflow-x-auto scroll-smooth px-5 scroll-pl-5 snap-x snap-mandatory",
-  // 300px mobile / 420px tablet (owner, 2026-09-09, no exact figures given
-  // for this range -- scaled down from the desktop 500px card at a
-  // reasonable ratio for each tier, same "judgement call, scaled
-  // proportionally" approach `InsideFactory`'s own `TABLET_CARD` metrics
-  // used). Heights scale by the identical factor as the width at each
-  // tier, keeping the tall/short proportions from the desktop version
-  // exactly (600/420 at 500px wide -> 360/252 at 300px -> 504/353 at
-  // 420px). The active-dot tracking in OurFactoryTeam.tsx reads each
-  // item's own real DOM offset, not a hardcoded copy of these numbers
-  // (found live: a pitch-math version drifted a full index off, since it
-  // didn't account for `sliderTrack`'s own leading scroll-snap padding),
-  // so there's no second place these pixel values need to match.
-  sliderItem: "shrink-0 w-[300px] snap-start md:w-[420px]",
-  sliderItemHeight: {
-    tall: "h-[360px] md:h-[504px]",
-    short: "h-[252px] md:h-[353px]",
-  },
+  // Same centred-snap track as `exhibitions.mobileTrack`: `items-center`
+  // (not `items-start`) plus a calculated `px-[min(40px,calc((100%-card)/2))]`
+  // inset centres the active card with its neighbours peeking on both
+  // sides, instead of the previous left-aligned `px-5` track. `h-[340px]`/
+  // `md:h-[532px]` cap the track to the active card's own height at each
+  // tier (`ACTIVE_HEIGHT_MOBILE`/`ACTIVE_HEIGHT_TABLET` in
+  // `OurFactoryTeam.tsx`, kept in sync since both come from the same
+  // Exhibitions-derived values).
+  sliderTrack:
+    "no-scrollbar flex h-[340px] items-center snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-300px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-469px)/2))]",
+  // 300px mobile / 469px tablet -- Exhibitions' own exact card widths, not
+  // this section's previous 300/420px scaled-from-desktop guess. Height is
+  // no longer a Tailwind class at all (unlike the old `tall`/`short`
+  // tokens below): `Slider`'s own scroll handler sets it directly per
+  // frame via inline style, animating between `ACTIVE_HEIGHT`/
+  // `INACTIVE_HEIGHT`, the same technique `Exhibitions.tsx`'s own
+  // `MobileCarousel` uses.
+  sliderItem: "w-[300px] shrink-0 snap-center md:w-[469px]",
   // Reuses `cardCarousel.dot`/`dotActive`/`dotInactive` directly for the
   // dots themselves (same one-dot-per-real-item pattern already
   // established there) -- only this row-layout wrapper is new.
@@ -2664,20 +2845,13 @@ export const servicesIntro = {
   // (48px, Figma's own confirmed desktop row gap) restores the original
   // flat value once the row switches to side-by-side, unaffected.
   statsRow: "flex flex-col gap-6 md:flex-row md:items-center md:gap-12",
-  // `gap-6` (24px) on real mobile, `md:gap-8` (32px, Figma's own confirmed
-  // value) from tablet up -- see `statsRow`'s own comment for the "24px
-  // top and bottom of the separator" request this answers on real mobile.
-  statCol: "flex w-full flex-col gap-6 md:gap-8 md:max-w-[342px]",
-  // The gradient line (Figma "Line 330"): a real two-stop linear gradient
-  // (accent orange solid to ~36% of the line, fading to transparent), not a
-  // plain divider -- reproduced as CSS so it scales with the column's own
-  // width, using the existing accent token. Same recipe as
-  // `ourFactoryIntro.statDivider`, duplicated rather than shared, per this
-  // file's own established per-section-recipe convention.
-  statDivider: "h-px w-full bg-[linear-gradient(to_right,var(--color-accent)_36%,transparent)]",
-  stat: "flex flex-col gap-2",
-  statValue: "text-h1 text-paper whitespace-nowrap",
-  statCaption: "text-body-lg leading-7 text-[#838D97]",
+  // Column max-width only, passed as `GradientStat`'s own `className` --
+  // the rest of the stat block (gap, divider, value, caption) now lives in
+  // the shared `gradientStat` recipe (components/ui/styles.ts, above
+  // `ourFactoryIntro`) rather than duplicated here (owner, 2026-09-10:
+  // "these stats with the orange separator should be one component and
+  // used wherever this comes").
+  statCol: "md:max-w-[342px]",
 };
 
 /* --- ServicesHowWeWork (/services page, section 3) ------------------------- */
@@ -3122,6 +3296,15 @@ export const trustSignals = {
   // padding). Bottom corrected 2026-08-24 from pb-section (64px) to the
   // standard 72px. 24px gap between the artwork and the item list.
   mobileWrap: "container-p flex flex-col gap-6 pt-0 pb-[72px] md:hidden",
+  // /services' own mobile instance (owner, 2026-09-10, mobile-only review:
+  // "add 40px gap from the top of the production development section
+  // image placeholder") -- unlike the homepage's own usage, this page's
+  // preceding section (Intro statement) doesn't read as flush-against
+  // artwork, so `mobileWrap`'s standing "0px top, artwork sits flush"
+  // rule doesn't apply here. A separate variant rather than changing the
+  // shared `mobileWrap` directly, since the homepage's own usage wasn't
+  // part of this request.
+  mobileWrapServices: "container-p flex flex-col gap-6 pt-[40px] pb-[72px] md:hidden",
   // Tablet only (owner, 2026-09-10: "on home, tablet, use the same section
   // as desktop for product development, low moq etc, but don't add the
   // chevron like desktop instead use the dots under it. image size can be
@@ -3512,12 +3695,20 @@ export const certified = {
   // of the standard 72px. A real top value of its own, rather than
   // touching `finalCta`'s unrelated 60px (which is correct for its own
   // context, a ticker'd CTA block, not a plain section boundary).
-  // `pb-[72px]` -- briefly zeroed (owner, 2026-09-08: "certified section
-  // should not have gap at the bottom should be 0"), then reverted the
-  // same day alongside `desktopSectionServices`/`tabletSectionServices`
-  // ("certified should have 120px frm the bottom" -- desktop's own value;
-  // mobile's own standard 72px restored to match).
-  mobileSectionServices: "container-p pt-[72px] pb-[72px] md:hidden",
+  // `pb-0` (was `pb-[72px]`) -- briefly zeroed once before (owner,
+  // 2026-09-08: "certified section should not have gap at the bottom
+  // should be 0"), then reverted the same day back to the standard 72px
+  // alongside `desktopSectionServices`/`tabletSectionServices` ("certified
+  // should have 120px frm the bottom" -- desktop's own value; mobile's own
+  // standard 72px restored to match, correct at the time). `Responsible
+  // Make` (`trustPoints.sidePaddingServices`) has since gained its own
+  // `pt-[72px]` (2026-09-09), so the two together were stacking into a
+  // real 144px gap, not the intended 72px -- re-zeroed here (owner,
+  // 2026-09-10, mobile-only review: "remove the gap under the certified
+  // section") so `Responsible Make`'s own top padding is the sole source
+  // of the gap between them, the same "one section owns the gap"
+  // convention already used elsewhere on this site.
+  mobileSectionServices: "container-p pt-[72px] pb-0 md:hidden",
   // /our-factory's own instance -- see desktopSectionOurFactory above.
   // `pt-[48px]` (owner, 2026-09-09, mobile-only review: "certification
   // logo, make 24px less space from the top") -- was `pt-[72px]`; mobile
@@ -3989,11 +4180,20 @@ export const insideFactory = {
   // Active-card lift (same 2026-09-10 request as `mobileTrack`'s own `gap-3`
   // above): a real drop shadow, not the theme's own `shadow-card` (tuned
   // for a light/paper card and its ~8% black would vanish against this
-  // section's own near-black `bg-ink`) -- strong enough to read against
-  // either tone this section renders on. Applied only to the currently-
-  // centred card in InsideFactory.tsx (`index === activeIndex`), so the
-  // "this one is in focus" read comes from depth, not just its own height.
+  // section's own near-black `bg-ink`) -- strong enough to read against the
+  // homepage's own dark `bg-ink`. Applied only to the currently-centred
+  // card in InsideFactory.tsx (`index === activeIndex`), so the "this one
+  // is in focus" read comes from depth, not just its own height.
+  //
+  // `/our-factory`'s own `tone="light"` reuse (`bg-paper`) needs a separate,
+  // much lighter shadow -- this dark one, on a white background, read as a
+  // literal black smudge behind the image (owner, 2026-09-10: "why there is
+  // black shadow behind the factory images on factory page ... fix it").
+  // `mobileCardActiveShadowLight` reuses the sitewide `shadow-card` token
+  // (the same subtle light-surface shadow every other card on a paper
+  // background already uses), picked in InsideFactory.tsx by `tone`.
   mobileCardActiveShadow: "shadow-[0_24px_48px_-12px_rgba(0,0,0,0.55)]",
+  mobileCardActiveShadowLight: "shadow-card",
   // Active/inactive card ratios (MediaRatio values, not classNames -- see
   // InsideFactory.tsx) are defined there directly, not here: the active
   // (centred) card renders taller than its neighbours -- a real overlap
@@ -4346,7 +4546,10 @@ export const ourServices = {
   // Services page reuse, mobile: no Figma mobile spacing was given for this
   // placement, so this follows the project's standing 72px inter-section
   // gap rule instead of homepage's own pt-12/md:pt-[88px] figures.
-  mobileSectionServices: "container-p flex flex-col items-center gap-8 pt-[72px] pb-[72px] xl:hidden",
+  // `pb-[60px]` (owner, 2026-09-10, mobile-only review: "our services
+  // section ends reduce 12px space from the bottom") -- was the standing
+  // 72px, -12px here specifically; top gap and every other value unaffected.
+  mobileSectionServices: "container-p flex flex-col items-center gap-8 pt-[72px] pb-[60px] xl:hidden",
 };
 
 // Shared by every mobile card carousel (Our Services first, How It Works
@@ -6088,8 +6291,11 @@ export const trustPoints = {
   // desktop's value as a placeholder); 72px is this project's own standing
   // mobile section-to-section gap instead. `xl:pt-[104px]`/`xl:pb-[104px]`
   // restore the Figma-confirmed desktop value explicitly, since the base
-  // `pt-*`/`pb-*` are now the mobile-only 72px.
-  sidePaddingServices: "pt-[72px] pb-[72px] xl:px-[80px] xl:pt-[104px] xl:pb-[104px]",
+  // `pt-*`/`pb-*` are now the mobile-only 72px. `pb-[56px]` (owner,
+  // 2026-09-10, mobile-only review: "reduce 16px from responsible make
+  // section from the bottom") -- was the standing 72px, -16px here
+  // specifically; top gap and desktop's own 104px unaffected.
+  sidePaddingServices: "pt-[72px] pb-[56px] xl:px-[80px] xl:pt-[104px] xl:pb-[104px]",
   // /our-factory's own instance, section 8 (Figma node 883:156) -- side
   // padding matches the PLP's own 138px (this node's real measurement too,
   // not a coincidence), but its own top/bottom gap: `xl:pt-[160px]` (owner,
