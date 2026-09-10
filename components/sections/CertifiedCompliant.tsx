@@ -155,7 +155,6 @@ export function CertifiedCompliant({ content, pageVariant = "default", showHeadi
               eyebrow={<TextReveal text={content.eyebrow} />}
               heading={<TextReveal as="span" text={content.h2} />}
               eyebrowTone="light"
-              eyebrowSize={certified.eyebrowSizeMobile}
               align="center"
             />
           ) : null}

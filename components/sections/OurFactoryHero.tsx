@@ -41,7 +41,7 @@ export function OurFactoryHero({ hero: content }: OurFactoryHeroProps) {
     <section className={hero.section}>
       <div className={hero.bannerInner}>
         <div className={hero.textBlock}>
-          <Eyebrow tone="dark" size={hero.eyebrowSize}>
+          <Eyebrow tone="dark">
             {content.eyebrow}
           </Eyebrow>
           <TextReveal as="h1" text={content.h1} className={`${hero.heading} text-display`} />

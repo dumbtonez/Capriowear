@@ -86,9 +86,23 @@ export const button = {
 // split out from the transform so a real per-instance size override (e.g. the
 // Hero eyebrow, smaller on its real mobile design) can replace just the size,
 // not fight it -- see the `size` prop on Eyebrow.tsx.
+//
+// Mobile default is 16px/600/1.2, not the raw `text-overline` 20px (owner,
+// 2026-09-10, mobile-only review: "the eyebrow heading on all the sections
+// should be 16px font size semibold, some are big or small. make them
+// consistent") -- an Explore audit of every real eyebrow usage sitewide
+// found this exact 16px/600 value already the de facto standard almost
+// everywhere (each section pairing its own local `eyebrowSize` override with
+// this same string), with one real gap (HowItWorks' light-tone/homepage
+// usage, still on the bare 20px default) and one earlier fix (OurServices'
+// `pageVariant="home"` usage, same bug). Moving the value here, into the
+// component's own default, makes it the sitewide rule instead of a value
+// every section has to individually remember to override -- any future
+// section gets it for free with no `eyebrowSize` prop needed. Desktop is
+// unaffected (`md:text-overline`, the real 20px/600 Figma Overline style).
 export const eyebrow = {
   base: "uppercase",
-  size: "text-overline",
+  size: "max-md:text-[1rem] max-md:font-semibold max-md:leading-[1.2] md:text-overline",
   // Standing rule (owner call, 2026-08-24, applies everywhere, no
   // exceptions): an eyebrow paired with a heading is always #ABB5C0 on a
   // dark/black section, always #17191E on a light/white one. Replaces an
@@ -1743,16 +1757,10 @@ export const ourFactoryProcess = {
   // eyebrow and title should have 12px") -- 12px below md; md:/xl: keep
   // the original 24px unchanged.
   headingGroup: "flex flex-col max-md:gap-3 md:gap-6",
-  // "WHAT WE MAKE" eyebrow's own mobile size (owner, 2026-09-09, mobile-
-  // only review: "WHAT WE MAKE font size should be the same as other
-  // eyebrow") -- this section's `<Eyebrow>` had never been given a mobile
-  // override at all, so it rendered `Eyebrow`'s bare default (`eyebrow.
-  // size`/`text-overline`, 20px) at every width, unlike every other
-  // section's own eyebrow, which explicitly drops to this project's
-  // established 16px/600/1.2-line-height mobile literal below `md:`
-  // (`certified.eyebrowSizeMobile`, `insideFactory.mobileEyebrowSize`,
-  // etc.) -- passed to `<Eyebrow size={...}>` in OurFactoryProcess.tsx.
-  eyebrowSize: "max-md:text-[1rem] max-md:font-semibold max-md:leading-[1.2] md:text-overline",
+  // No `eyebrowSize` override any more (2026-09-10 cleanup): this section's
+  // 16px/600/1.2 mobile fix (owner, 2026-09-09) is now `eyebrow.size`'s own
+  // sitewide default, so `<Eyebrow>` in OurFactoryProcess.tsx picks it up
+  // with no `size` prop needed.
   // No `heading` max-w token (owner correction, 2026-09-08: "still in 3
   // lines" -- a first pass used a 565px max-w to force this heading's real
   // 2-line Figma break, but `text-h1` is a fluid clamp that keeps growing
@@ -3211,20 +3219,9 @@ export const whatWeMake = {
   // different components, not one recipe class. This is distinct from
   // `groupsGap` below (the gap *between* category groups, e.g. Activewear to
   // Teamwear & Uniforms) -- two different spacings, not one value reused.
-  // 16px mobile / 20px desktop -- the same one-off already established for
-  // Hero's own mobile eyebrow (hero.eyebrowSize), confirmed here too rather
-  // than assumed: this is the first other section to actually use
-  // SectionHeading with a real mobile Figma frame behind it. max-xl:/xl: are
-  // mutually exclusive media conditions, not two same-specificity utilities
-  // racing for the same property -- see the note on sectionHeading.heading.
-  // font-semibold set explicitly for mobile: overriding text-overline's size
-  // alone silently drops its paired 600 weight too (caught here and fixed
-  // retroactively in hero.eyebrowSize, which had carried the same bug
-  // unnoticed since Hero shipped).
-  // Threshold moved xl:/max-xl: -> md:/max-md: (owner, 2026-09-04: use
-  // desktop sizes at tablet width) -- fixed 16px mobile snaps to the
-  // fixed 20px text-overline token from md: instead of xl:.
-  eyebrowSize: "max-md:text-[1rem] max-md:font-semibold max-md:leading-[1.2] md:text-overline",
+  // No `eyebrowSize` override any more (2026-09-10 cleanup): this section's
+  // 16px/600 mobile eyebrow is now `eyebrow.size`'s own sitewide default,
+  // so both `<SectionHeading>` calls below pick it up automatically.
   // SectionHeading to the groups list.
   root: "flex flex-col gap-12 xl:gap-[90px]",
   // Gap *between* category groups (owner call, 2026-08-23, revised down the
@@ -3557,12 +3554,8 @@ export const certified = {
   // SectionHeading's `headingClassName`, desktop instance only -- mobile's
   // own w-full column already wraps correctly without it.
   headingNarrow: "max-w-[812px]",
-  // 16px mobile eyebrow, the same one-off value already confirmed for Hero
-  // and What We Make. No max-xl:/xl: split needed here (unlike those two):
-  // this section renders two fully separate SectionHeading instances, one
-  // per breakpoint wrapper, not one shared instance spanning both, so this
-  // value is only ever active inside the mobile-only wrapper already.
-  eyebrowSizeMobile: "text-[1rem] font-semibold leading-[1.2]",
+  // No `eyebrowSizeMobile` override any more (2026-09-10 cleanup): this
+  // 16px/600 value is now `eyebrow.size`'s own sitewide default.
   // Desktop: one static row, no ticker, no border/box -- confirmed via
   // get_design_context (bare logo marks, no bg/border on any of the 6
   // frames). Centred within the standard content width, 69px gap between
@@ -4255,7 +4248,7 @@ export const ourServices = {
   // the homepage's own `--text-overline`) from `md:` up. Scoped to
   // `pageVariant === "services"`, not the shared default, since the
   // homepage's own usage wasn't part of this request either way.
-  eyebrowSizeServices: "max-md:text-[1rem] max-md:leading-normal font-semibold md:text-[1.25rem] md:leading-[1.2]",
+  eyebrowSize: "max-md:text-[1rem] max-md:leading-normal font-semibold md:text-[1.25rem] md:leading-[1.2]",
   // Sticky sidebar via plain CSS, no scroll listener: the right column's
   // own stacked height is what makes the page taller than the viewport, so
   // pinning this column at top-[56px] with self-start naturally keeps it in
@@ -4318,8 +4311,11 @@ export const ourServices = {
   // sticky-sidebar layout is `xl:`-only and not yet extended to `md:`), so
   // no `xl:` reset is needed the way other tablet-tier overrides this
   // session required -- the block never renders at `xl:` regardless.
-  // +40px on top of the confirmed mobile `pt-12` (48px), tablet-only.
-  mobileSection: "container-p flex flex-col items-center gap-8 pt-12 md:pt-[88px] pb-12 xl:hidden",
+  // +40px on top of the confirmed mobile top gap, tablet-only.
+  // `pt-16` (64px, owner, 2026-09-10, mobile-only review: "make it 64px" --
+  // was `pt-12`/48px) -- real mobile's own top gap; `md:pt-[88px]` is a
+  // separate, already-confirmed tablet value, unaffected.
+  mobileSection: "container-p flex flex-col items-center gap-8 pt-16 md:pt-[88px] pb-12 xl:hidden",
   // Services page reuse, mobile: no Figma mobile spacing was given for this
   // placement, so this follows the project's standing 72px inter-section
   // gap rule instead of homepage's own pt-12/md:pt-[88px] figures.
@@ -4436,10 +4432,17 @@ export const howItWorks = {
   // the above chages were for mobile only") -- 16px only below `md:`;
   // `md:text-[1.25rem] md:leading-[1.2]` restores the shared default
   // Eyebrow size from `md:` up, matching the homepage's own
-  // `--text-overline`. Scoped to `tone === "dark"` (Services' only usage
-  // today), not the shared default, since the homepage's own
-  // `tone="light"` usage wasn't part of this request either way.
-  eyebrowSizeDark: "max-md:text-[1rem] max-md:leading-normal font-semibold md:text-[1.25rem] md:leading-[1.2]",
+  // `--text-overline`. Originally scoped to `tone === "dark"` only
+  // (Services' own usage at the time), leaving the homepage's own
+  // `tone="light"` usage on the bare 20px/600 `Eyebrow` default -- widened
+  // to apply regardless of `tone`, 2026-09-10 (owner: "the eyebrow heading
+  // on all the sections should be 16px font size semibold, some are big
+  // or small, make them consistent" -- a sitewide mobile audit found this
+  // was the one real gap: every other section's own eyebrow already had
+  // its own mobile override, this one only got it for one of its two real
+  // usages). Renamed from `eyebrowSizeDark` since it's no longer
+  // tone-specific.
+  eyebrowSize: "max-md:text-[1rem] max-md:leading-normal font-semibold md:text-[1.25rem] md:leading-[1.2]",
   // container-p only on the heading -- the card row below is a full-bleed
   // sibling, not nested inside it (same pattern as Inside the Factory's
   // gallery): get_metadata on the real frame shows the 5th card sitting at
@@ -4626,14 +4629,9 @@ export const exhibitions = {
   // alike, the desktop chevron gallery above moved to `xl:` to match.
   mobileSection: "bg-ink text-paper pt-12 pb-12 xl:hidden",
   mobileHeadingWrap: "container-p",
-  // 16px real mobile, standard 20px/24px Overline from `md:` up (owner,
-  // 2026-09-10: "on tablet, eyebrow heading across pages should be 20px by
-  // 24px... make it consistent across pages") -- this section's own
-  // `mobileSection` is `xl:hidden`, spanning tablet too, so the
-  // unconditional 16px value below was reaching tablet. Same fix as
-  // `insideFactory.mobileEyebrowSize` (its own exact copy, see that
-  // token's comment).
-  mobileEyebrowSize: "max-md:text-[1rem] max-md:font-semibold max-md:leading-[1.2] md:text-overline",
+  // No `mobileEyebrowSize` override any more (2026-09-10 cleanup): this
+  // exact `max-md:.../md:text-overline` split is now `eyebrow.size`'s own
+  // sitewide default.
   mobileGalleryGap: "mt-8",
   // Inside the Factory's exact carousel numbers, reused verbatim per the
   // owner's explicit instruction -- see components/sections/Exhibitions.tsx.
@@ -5562,9 +5560,14 @@ export const fabricOptions = {
   // at the same breakpoint (or vice versa) reintroduces that exact bug at
   // tablet width.
   headingBlock: "mx-auto flex w-full max-w-[579px] flex-col items-center gap-4 text-center md:max-w-[750px] md:gap-6",
-  // Threshold moved max-xl:/xl: -> max-md:/md: (owner, 2026-09-04: same
-  // tablet-width treatment as the homepage). Fixed values, desktop larger.
-  eyebrow: "text-base font-semibold text-text md:text-[1.25rem]",
+  // No local `eyebrow` token any more (2026-09-10 cleanup): this rendered
+  // as a bare `<p>` instead of the shared `<Eyebrow>` component, so it sat
+  // outside the sitewide eyebrow system entirely -- any future design-system
+  // eyebrow change (colour rule, weight, letter-spacing) would have quietly
+  // missed this page. Its values already matched `eyebrow.size`'s own
+  // default exactly (16px/600 mobile, 20px/600 desktop at the same `md:`
+  // threshold), so switching FabricOptions.tsx to `<Eyebrow tone="light">`
+  // with no size override is a like-for-like swap, not a value change.
   // max-xl:text-[1.875rem]/leading-[34px]/font-normal (30px/34px, mobile
   // Figma, matching whatWeCover.heading's exact pattern). xl keeps the
   // original 54px/64px/font-medium.
@@ -5717,7 +5720,15 @@ export const fabricOptions = {
   // mt-[64px]/xl:mt-[80px] (owner spec, 2026-09-06: "Decoration from top, on
   // mobile, make it 64 and 80 on desktop" -- was mt-[44px]/xl:mt-[60px]).
   decorationWrap: "mt-[64px] w-full xl:mt-[80px]",
-  decorationEyebrow: "text-base font-semibold text-text xl:text-[1.25rem]",
+  // Now routed through the shared `<Eyebrow>` component (2026-09-10
+  // cleanup, same reasoning as `eyebrow` above) instead of a bare `<p>`.
+  // Kept as its own explicit `size` override, not dropped to the sitewide
+  // default, since this block's own tablet breakpoint is `xl:` (matching
+  // `decorationWrap`'s own `xl:mt-[80px]`), not the sitewide default's
+  // `md:` -- real mobile value is identical either way (16px/600), so this
+  // preserves the existing, unreviewed-today tablet behaviour rather than
+  // silently changing it while only mobile is in scope.
+  decorationEyebrowSize: "text-base font-semibold xl:text-[1.25rem]",
   // mt-4/xl:mt-6 (16px mobile / 24px desktop, owner spec, 2026-09-06: "on
   // mobile eyebrow to title 16px is gap, follow the same for decoration" --
   // matches this same section's own headingBlock gap-4/xl:gap-6 pattern.

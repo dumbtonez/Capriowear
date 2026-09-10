@@ -82,7 +82,6 @@ export function WhatWeMake({ content }: WhatWeMakeProps) {
             eyebrow={<TextReveal text={content.eyebrow} />}
             heading={<TextReveal as="span" text={content.h2} />}
             eyebrowTone="light"
-            eyebrowSize={whatWeMake.eyebrowSize}
           />
           <div className={whatWeMake.groupsGap}>
             {content.categories.map((category) => {
@@ -132,7 +131,6 @@ export function WhatWeMake({ content }: WhatWeMakeProps) {
             eyebrow={<TextReveal text={content.eyebrow} />}
             heading={<TextReveal as="span" text={content.h2} />}
             eyebrowTone="light"
-            eyebrowSize={whatWeMake.eyebrowSize}
           />
           <div className={whatWeMake.groupsGap}>
             {content.categories.map((category) => {

@@ -61,7 +61,7 @@ export function OurServices({ content, pageVariant = "home", tone = "light" }: O
         ? ourServices.desktopSectionDark
         : ourServices.desktopSection;
   const mobileSection = pageVariant === "services" ? ourServices.mobileSectionServices : ourServices.mobileSection;
-  const eyebrowSize = pageVariant === "services" ? ourServices.eyebrowSizeServices : undefined;
+  const eyebrowSize = ourServices.eyebrowSize;
   const cardRootClassName = tone === "dark" ? ourServices.cardRootDark : undefined;
   const cardBodyClassName = tone === "dark" ? ourServices.cardBodyDark : undefined;
 
