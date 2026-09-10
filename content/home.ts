@@ -159,14 +159,14 @@ export const home = {
     // Footer already uses (content/home.ts's own footer.contact.email).
     contact: { label: "Get in touch", email: "hello@capriosports.com" },
     cta: { label: "Request a Sample", href: "/request-a-sample" },
-    secondaryCta: { label: "Download Catalog", href: "/catalog" },
+    secondaryCta: { label: "Download Catalog", href: "/download-catalog" },
   },
 
   hero: {
     eyebrow: "BASED IN SIALKOT, PAKISTAN", // matches the wireframe; the content doc says "MADE IN". VERIFY
     h1: "Custom OEM & ODM activewear & teamwear manufacturer", // VERIFY exact H1
     ctaPrimary: { label: "Request a Sample", href: "/request-a-sample" },
-    ctaSecondary: { label: "Download Catalog", href: "/catalog" },
+    ctaSecondary: { label: "Download Catalog", href: "/download-catalog" },
     media: { type: "video", label: "Hero video, factory and product" },
   },
 
@@ -635,7 +635,7 @@ export const home = {
     // under exhibition cta section add download catalog cta too") -- same
     // `FinalCta` prop already added everywhere else (`closingCta` above,
     // every PLP/PDP, Services).
-    secondaryCta: { label: "Download Catalog", href: "/catalog" },
+    secondaryCta: { label: "Download Catalog", href: "/download-catalog" },
   },
 
   // A second CTA band, same component and styling as `finalCta` above
@@ -664,7 +664,7 @@ export const home = {
     // -- same `FinalCta` prop already added for the Services page's own
     // FAQ-adjacent closing CTA (2026-09-07), now applied to every other
     // page's FAQ-adjacent CTA too (this one on the homepage, `app/page.tsx`).
-    secondaryCta: { label: "Download Catalog", href: "/catalog" },
+    secondaryCta: { label: "Download Catalog", href: "/download-catalog" },
   },
 
   // Homepage section 15, the site footer. Figma desktop node 461:2650
@@ -703,7 +703,7 @@ export const home = {
       // Sample already established below and elsewhere on this site.
       columnTwo: [
         { label: "Request a Sample", href: "/request-a-sample" },
-        { label: "Download Catalog", href: "/catalog" },
+        { label: "Download Catalog", href: "/download-catalog" },
         { label: "Privacy Policy", href: "/privacy-policy" },
       ],
     },
