@@ -191,8 +191,20 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
             deliberately NOT inside this hidden wrapper, and doesn't read
             from it either (it's built straight from breadcrumbItems, the
             same data feeding the visible trail) -- hiding the strip can
-            never touch it. */}
-        <Breadcrumb items={breadcrumbItems} className="hidden md:block" />
+            never touch it.
+            `mt-[68px]` (owner, 2026-09-11: "breadcrums are hidden under the
+            top nav, fix it" -- a real bug, confirmed live: `header.base` is
+            `position: fixed` (components/ui/styles.ts), removed from
+            document flow entirely, and this `<main>` never compensated for
+            it, so the breadcrumb rendered directly underneath/behind the
+            68px-tall fixed header instead of below it. `mt-` (margin), not
+            adding to `breadcrumb.nav`'s own `pt-8` -- a second `pt-*` class
+            appended via this component's `className` prop risks losing to
+            `pt-8` in Tailwind's own compiled class order (the same
+            same-property specificity gotcha documented elsewhere in this
+            codebase), where a separate `margin-top` property can't
+            conflict with `padding-top` at all. */}
+        <Breadcrumb items={breadcrumbItems} className="mt-[68px] hidden md:block" />
         <JsonLd
           data={breadcrumbSchema(
             breadcrumbItems.map((item) => ({

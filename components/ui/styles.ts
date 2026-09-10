@@ -7120,7 +7120,14 @@ export const productInfo = {
 // this site (FabricOptions/CategoryFilters/ProductGrid), not a second,
 // near-duplicate grey for what reads as the identical line.
 export const productHighlights = {
-  root: "flex w-full flex-col",
+  // `xl:mt-2` (owner, 2026-09-11: "make it 40px" -- desktop only) adds 8px
+  // on TOP of the shared column `gap-8` (32px) between ProductInfo and
+  // this list (app/activewear/[category]/[style]/page.tsx), rather than
+  // changing that shared gap itself -- it also spaces ProductOptions/
+  // ProductCtas/ProductRelatedStyles in the same column, none of which
+  // were asked to change. A margin on a flex child adds to its own `gap`,
+  // it doesn't replace it, so 32 + 8 = a real 40px above this list only.
+  root: "flex w-full flex-col xl:mt-2",
   // first:pt-0 -- Figma's own first row has no top padding (flush with
   // whatever sits above it); every row, including the last, still gets its
   // own border-b (same "every row owns its own trailing divider, no
