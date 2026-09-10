@@ -276,7 +276,9 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
                 key={item.label}
                 className={cx(
                   ourFactoryDetails.imageLayer,
-                  index === openIndex ? ourFactoryDetails.imageLayerActive : ourFactoryDetails.imageLayerInactive,
+                  index === openIndex
+                    ? ourFactoryDetails.desktopImageLayerActive
+                    : ourFactoryDetails.desktopImageLayerInactive,
                 )}
               >
                 <MediaPlaceholder

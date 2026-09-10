@@ -130,7 +130,7 @@ export default function Home() {
         <CertifiedCompliant content={home.certified} />
         <OurServices content={home.services} tone="dark" />
         <Stats items={home.stats} />
-        <InsideFactory content={home.insideFactory} />
+        <InsideFactory content={home.insideFactory} showDesktopImages={false} />
         <Exhibitions content={home.exhibitions} />
         {/* Wrapped in a real element (not a thin marker) so
             ProductCtasMobileBar's own `hideWithinIds` can watch this whole

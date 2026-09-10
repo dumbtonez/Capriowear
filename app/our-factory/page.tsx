@@ -169,6 +169,7 @@ export default function OurFactoryPage() {
           showHeading={false}
           showCta={false}
           showMediaLabel={false}
+          showDesktopImages={false}
         />
         <OurFactoryProcess content={ourFactory.process} />
         <OurFactoryDetails content={ourFactory.sampleDetails} />

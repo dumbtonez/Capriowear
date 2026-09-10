@@ -1711,7 +1711,17 @@ export const ourFactoryIntro = {
   // `pt-[72px]` -- matched here explicitly rather than left on the
   // shared 32px value, same "each placement gets its own top inset"
   // pattern `innerAfterHero`/`innerStacked` already establish at `xl:`.
-  innerStacked: "max-md:pt-[72px] xl:pt-[104px]",
+  // Left inset tried a placement-specific 276px (260px, then +16px),
+  // reverted the same day (owner: "keep it 300 -- it looks odd" once
+  // compared against the rest of the page: "The factory behind
+  // Capriowear" right above it sits at the shared `inner`'s own
+  // `xl:pl-[300px]`, and the 24px jog between the two broke the page's
+  // own vertical left-edge alignment). Back to inheriting `inner`'s
+  // 300px unmodified -- no override needed here any more.
+  // `xl:pt-[72px]` (owner, 2026-09-11: "make 24 px less gap from the top"
+  // then, same turn, "or 32px less" -- the second, final value wins: was
+  // 104px, -32px).
+  innerStacked: "max-md:pt-[72px] xl:pt-[72px]",
   // max-md:gap-6/md:gap-8 (owner, 2026-09-09, mobile-only review: "make the
   // paragraph gap 24px") -- heading-to-paragraph gap drops to 24px below
   // md (was the shared 32px `gap-8` at every breakpoint); md:/xl: unchanged.
@@ -1804,14 +1814,21 @@ export const ourFactoryIntro = {
   // rather than a new hardcoded hex.
   // Column max-width only, passed as `GradientStat`'s own `className` --
   // the rest of the stat block (gap, divider, value, caption) now lives in
-  // the shared `gradientStat` recipe above. Two placement-specific values,
-  // same reasoning as `innerAfterHero`/`innerStacked` above: the first
-  // section's 2 stats are each 342px in Figma, the second's 3 stats are
-  // each 280px (narrower, so three columns plus the shared 72px gaps still
-  // read as a single deliberate row rather than a cramped one) -- both
-  // real per-node measurements, not a shared guess.
+  // the shared `gradientStat` recipe above. Originally two placement-
+  // specific values (342px for the first section's 2 stats, 280px for the
+  // second's 3, both real per-node Figma measurements), tried unifying to
+  // one shared 342px, then corrected once more (owner, 2026-09-11: "i said
+  // use the small space for separator as we have 3 stats in this section
+  // so the overall the width of those 2 stats match the 3 stats width
+  // here" -- not each COLUMN matching 342px, the whole ROW's total span
+  // matching the top section's total row span). Top section: 2 columns +
+  // 1 gap = 2×342 + 72 = 756px total. This section's own `statsRow` uses
+  // the same shared 72px gap (2 gaps for 3 columns), so solving 3×w + 144
+  // = 756 gives w = 204px -- each column (and its own `w-full` divider)
+  // narrower, but the row's own overall width now matches the top
+  // section's exactly, not each individual divider.
   statColAfterHero: "md:max-w-[342px]",
-  statColStacked: "md:max-w-[280px]",
+  statColStacked: "md:max-w-[204px]",
 };
 
 /* --- OurFactoryProcess (/our-factory section 5) ----------------------------- */
@@ -2413,7 +2430,26 @@ export const ourFactoryDetails = {
   // (the same class of bug as the position collision above: two opposite
   // opacity utilities present at once would again leave the stylesheet's
   // own generation order to silently decide the winner).
-  imageLayer: "absolute inset-0 transition-opacity duration-[250ms] ease-in-out motion-reduce:transition-none",
+  // 250ms plain opacity -> 650ms opacity+scale (owner, 2026-09-11: "when
+  // changing the chip... the images transition is very abrupt, not smooth
+  // like silk... it should be delightful" -- a fast linear-ish crossfade
+  // with no motion of its own reads as a hard cut, not a transition, no
+  // matter how short. Adds a subtle scale (`desktopImageLayerActive`/
+  // `desktopImageLayerInactive` below, NOT the shared `imageLayerActive`/
+  // `imageLayerInactive` -- those stay opacity-only, since the mobile
+  // crossfade already layers its own separate `mobileImageZoom` scale
+  // transform on top of them; giving this shared pair its own scale too
+  // would double up two independent transforms on the same element there)
+  // so the outgoing image breathes outward and the incoming one settles
+  // in, not just fades -- the same "ease + gentle motion, not a flat
+  // opacity swap" idea `mobileImageZoom` already proved reads as
+  // "delightful" rather than "jerky" once applied there. `cubic-bezier
+  // (0.22,1,0.36,1)` matches this file's own established "smooth" curve
+  // (`ourFactoryDetails.detailGrid`'s own comment: "chips animation is
+  // very jerky" -- the same fix already applied to this section's
+  // accordion, reused here rather than a third curve).
+  imageLayer:
+    "absolute inset-0 transition-[opacity,transform] duration-[650ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
   // Mobile-only variant (owner, 2026-09-10: "tha paralax animation is not
   // working on the chip changing some jerky effect") -- the mobile crossfade
   // stack layers `mobileImageZoom`'s own 1400ms zoom-settle transform
@@ -2427,6 +2463,18 @@ export const ourFactoryDetails = {
   mobileImageLayer: "absolute inset-0 transition-opacity duration-[1400ms] ease-out motion-reduce:transition-none",
   imageLayerActive: "opacity-100",
   imageLayerInactive: "opacity-0",
+  // Desktop-only pair, used with the `imageLayer` transition above --
+  // NOT `imageLayerActive`/`imageLayerInactive` (see that pair's own
+  // comment for why: mobile already layers its own separate
+  // `mobileImageZoom` scale on top of the plain opacity pair, so giving
+  // the shared pair a scale too would double up two transforms on the
+  // same mobile element). Incoming image settles from a gentle 102%
+  // (`scale-100`, was already full-size, just zoomed a hair); outgoing
+  // eases up to 102% as it fades rather than sitting pixel-static while
+  // its opacity drops -- both directions moving, not just fading, is
+  // what reads as "silk" instead of a flat crossfade.
+  desktopImageLayerActive: "opacity-100 scale-100",
+  desktopImageLayerInactive: "opacity-0 scale-[1.02]",
 
   // ---------------------------------------------------------------------
   // Mobile/tablet only (below `xl:`), 2026-09-10 rebuild -- Apple's "Take a
@@ -4102,6 +4150,23 @@ export const insideFactory = {
   // bottom (this section's own bottom padding) both live here directly,
   // since this element has no horizontal padding to also carry them.
   desktopGalleryWrap: "pt-[72px] pb-[120px]",
+  // /our-factory's own top gap (owner, 2026-09-11: "make the top gap 80px
+  // from the images ection" -- said once for the mobile/tablet block,
+  // repeated once the desktop gallery was restored after a same-turn
+  // over-eager first pass had dropped it entirely). A separate light-tone
+  // variant, not a change to `desktopGalleryWrap` itself, since that token
+  // is shared with the homepage's own dark gallery (`showHeading={false}`
+  // there too would otherwise land the exact same 72px->80px change on a
+  // page that never asked for it).
+  //
+  // 80px -> 96px (owner, same day: "top and left gap does not visually
+  // match" -- confirmed live both measured exactly 80px via
+  // `getBoundingClientRect()`, so the mismatch is optical, not a real
+  // pixel error: a vertical gap reads as visually smaller than a
+  // horizontal gap of the identical pixel value, a well-known effect --
+  // 96px top now visually balances the row's own real 80px left inset
+  // (`insideFactory.desktopRow`'s `px-[80px]`).
+  desktopGalleryWrapLight: "pt-[96px] pb-[120px]",
   // Heading is SectionHeading (align="center", eyebrowTone="dark") -- now
   // that the sitewide eyebrow-colour rule exists (2026-08-24: #ABB5C0 on
   // dark, #17191E on light, no exceptions), this section's eyebrow needs no
@@ -4257,7 +4322,12 @@ export const insideFactory = {
   // bottom wasn't part of this request. `xl:hidden`, matching `mobileSection`
   // above -- this carousel now covers tablet too (no separate "Xl" variant
   // needed any more; both tone variants share the same breakpoint).
-  mobileSectionLight: "bg-paper text-text pt-[40px] pb-12 xl:hidden",
+  //
+  // `pt-[40px]` -> `pt-[80px]` (owner, 2026-09-11: "on this factory shots
+  // give 80px gap from the top" -- same turn the desktop gallery was
+  // dropped entirely on /our-factory via `showDesktopGallery`, making this
+  // mobile/tablet block the section's own first visible content there).
+  mobileSectionLight: "bg-paper text-text pt-[80px] pb-12 xl:hidden",
   // container-p only on the heading, not the gallery below -- the gallery
   // is full-bleed edge to edge (confirmed via get_metadata: no side inset
   // at all), unlike every other section's mobile content. Eyebrow is now
@@ -7221,8 +7291,11 @@ export const whatsappFloating = {
   // Header's own stacking level (`header.base`'s `z-40`) -- high enough to
   // float over every section's content, not fighting Footer's own
   // higher-still `z-50` drawer/portal layers (nothing here ever coexists
-  // with the mobile drawer, which is `xl:hidden` itself).
-  wrap: "fixed bottom-6 right-6 z-40 hidden xl:flex",
+  // with the mobile drawer, which is `xl:hidden` itself). `flex-col` +
+  // `gap-3` (owner, 2026-09-10: "keep it under the whatsapp icon" --
+  // Instagram added as a second, stacked button below) -- 12px between
+  // the two circles, this project's own standard small-gap unit.
+  wrap: "fixed bottom-6 right-6 z-40 hidden flex-col gap-3 xl:flex",
   // Same 56px size / brand-green / white-icon treatment as the mobile
   // bar's own `productCtas.whatsappButton`, scaled up slightly (44px ->
   // 56px) since this button stands alone on desktop rather than sitting
@@ -7233,6 +7306,57 @@ export const whatsappFloating = {
   button:
     "flex size-14 items-center justify-center rounded-full bg-[#25D366] text-paper shadow-lg transition-transform hover:scale-105",
   icon: "size-7",
+  // Instagram, stacked below WhatsApp (owner, 2026-09-10: "I also want to
+  // highlight our insta page, should we add the icon above the whatsapp
+  // icon?" -- recommended against a second bright/competing CTA; owner
+  // then: "maybe keep it under the whatsapp icon but not bright actual
+  // insta color but nutral color"). Same 56px circle, neutral (not
+  // Instagram's own bright gradient mark) -- keeps WhatsApp as the one
+  // visually "loud" action (the real conversion CTA) while Instagram
+  // stays reachable without competing for attention.
+  //
+  // A flat solid `#1f2126` fill (this site's other neutral social-icon
+  // treatment, `drawer.socialButton`) reads fine over the dark sections
+  // this button floats over, but as a fully opaque circle it read too
+  // heavy/"loud" against the light/paper ones (owner, same day: "make the
+  // insta backgriund maybe frosted blured so it does not look too loud on
+  // white, on black it looks fine maybe something that works for both").
+  // Switched to a translucent frosted-glass treatment instead -- the same
+  // `backdrop-blur` mechanism the fixed Header's own adaptive overlay
+  // already uses (see `header.base`'s own comment) -- so it reads as
+  // "floating glass" over whatever's actually behind it rather than a
+  // flat opaque disc. Tuned twice more live, same turn: "make it more
+  // lighter blur" (`bg-ink/60`/`backdrop-blur-md` -> `bg-ink/40`/
+  // `backdrop-blur-sm`) then "less visible background on white"
+  // (`bg-ink/40` -> `bg-ink/20`) -- `bg-ink` stays this project's own
+  // near-black ink token throughout (not the literal `#1f2126`).
+  // `border-white/25` (up from `/15`) and `shadow-lg` carry more of the
+  // circle's own definition now that the fill itself is this faint --
+  // over a white section this reads as barely-there glass with a crisp
+  // edge and a visible drop shadow, not a flat disc; over a dark section
+  // the same fill still reads as a soft frosted circle.
+  //
+  // Icon colour: first corrected `text-paper` (white) -> `text-muted`
+  // (owner: "on the white background the icon should turn dark not too
+  // blackish but visible, white on white background is not very visible"
+  // then "make a balnce" -- one fixed grey compromise, not real per-
+  // section detection). Owner then asked directly for the real thing
+  // ("make it a bit dark on white and should go white on blck bacground,
+  // is it not too much right?") -- not too much: `getSurfaceToneAt`
+  // (extracted to lib/surfaceTone.ts the same turn) already exists for
+  // exactly this, built for the fixed Header's own adaptive tone -- this
+  // button's own `FloatingSocialButtons.tsx` now samples it too, so this
+  // token no longer sets a colour itself; `instagramIconLight`/
+  // `instagramIconDark` below do, switched by that live sample.
+  instagramButton:
+    "flex size-14 items-center justify-center rounded-full border border-white/25 bg-ink/20 shadow-lg backdrop-blur-sm transition-transform hover:scale-105",
+  instagramIcon: "size-6",
+  // `text-text` (`#1d1d1f`, this project's own near-black body-text
+  // colour) over a light section -- not pure black (owner: "not too
+  // blackish"). `text-paper` (white) over a dark section, same as
+  // `whatsappFloating.icon`'s own colour there.
+  instagramIconLight: "text-text",
+  instagramIconDark: "text-paper",
 };
 
 /* --- ProductCustomizeSteps (PDP) ----------------------------------------- */

@@ -103,6 +103,23 @@ export type InsideFactoryProps = {
    * `mobileTrackCompact`/`mobileCardCompact` in components/ui/styles.ts.
    */
   cardSize?: "wide" | "compact";
+  /**
+   * Defaults to true. false keeps the desktop gallery's own structure
+   * (cards, chevron, captions) but blanks each card's real `image` --
+   * /our-factory's own desktop-only correction (owner, 2026-09-11:
+   * "factory page, remove the factory shot 1, section images, keep them
+   * in the mobile" -- clarified after an over-eager first pass dropped
+   * the whole desktop block: "I ask to just remove the images from it not
+   * the section" / "Just remove the images testing from desktop, not
+   * mobile"), then applied to the homepage's own usage too the same way
+   * (owner: "same section is on hompege, remove the images from there
+   * too not the section, only desktop"). Mobile/tablet is unaffected by
+   * this prop on either page. `content.media` itself is never mutated --
+   * only the array `DesktopGallery` renders from here has each shot's
+   * `image` stripped, real "test placeholder" photos removed without
+   * touching the one content source every breakpoint/page reads from.
+   */
+  showDesktopImages?: boolean;
 };
 
 // Two real, both-kept card size/height sets -- see `cardSize`'s own prop
@@ -312,7 +329,14 @@ export function InsideFactory({
   showCta = true,
   showMediaLabel = true,
   cardSize = "wide",
+  showDesktopImages = true,
 }: InsideFactoryProps) {
+  // Only the array DesktopGallery renders from -- `content.media` itself
+  // (the homepage's own dark gallery, and this component's own mobile
+  // carousel below, both read the real one) is untouched. See
+  // `showDesktopImages`'s own prop comment above.
+  const desktopShots = showDesktopImages ? content.media : content.media.map((shot) => ({ ...shot, image: undefined }));
+
   return (
     <section>
       {/* Desktop: chevron-driven carousel through all 5 shots. The gallery
@@ -332,8 +356,8 @@ export function InsideFactory({
             />
           </div>
         ) : null}
-        <div className={insideFactory.desktopGalleryWrap}>
-          <DesktopGallery shots={content.media} tone={tone} />
+        <div className={tone === "light" ? insideFactory.desktopGalleryWrapLight : insideFactory.desktopGalleryWrap}>
+          <DesktopGallery shots={desktopShots} tone={tone} />
           {showCta ? (
             <div className={insideFactory.desktopCtaWrap}>
               <Button href={content.cta.href}>{content.cta.label}</Button>
