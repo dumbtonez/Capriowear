@@ -957,14 +957,22 @@ export const header = {
     "group relative inline-flex min-h-11 items-center whitespace-nowrap rounded-pill px-4 text-[1.0625rem] leading-[21px] text-current transition-colors hover:text-[var(--header-hover)]",
   navTrigger:
     "relative inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-pill px-4 text-[1.0625rem] leading-[21px] text-current transition-colors hover:text-[var(--header-hover)]",
-  // Selected-page state ONLY now (colour-only, owner, 2026-09-08: "keep
-  // the selected page regular font weight as default" -- reverses the
-  // semibold this same day's earlier pass added). Applied when
-  // `isRouteActive`: the sitewide accent orange, regular weight, same as
-  // every other state -- weight never toggles anywhere in the nav any
-  // more, hover or selected. Was `"font-semibold"` (Figma node 493:3140,
-  // 2026-08-27) before colour replaced it as the sole active-state signal.
-  navTriggerActive: "text-accent",
+  // Selected-page state, tone-dependent (owner, 2026-09-10: "when selected
+  // it is orange but it does not look very visible on the white
+  // background" -- the header is a fixed overlay that reads over both
+  // dark (`ink`) and light (`paper`) sections as the page scrolls
+  // underneath it, via the same `data-tone` mechanism `--header-fg`
+  // already uses; this reuses that, rather than a separate mechanism).
+  // Over dark sections the plain accent orange (`navTriggerActiveDark`)
+  // reads clearly, as before. Over light sections that same orange sits
+  // too close to white to read as clearly "selected" -- swapped for the
+  // near-black `--color-text` (already this state's own base colour via
+  // `--header-fg` on `[data-tone="light"]`) plus semibold, so weight
+  // alone carries the signal there instead of a low-contrast colour.
+  // Header.tsx picks between the two using its own live `tone` state
+  // (the same value driving `data-tone`), not a second scroll listener.
+  navTriggerActiveDark: "text-accent",
+  navTriggerActiveLight: "text-text font-semibold",
   // The label itself is a 2-layer grid stack, not plain text (owner report,
   // 2026-08-27: the trigger visibly shifted position when it turned
   // semibold -- bold glyphs are wider than regular ones at the same size,
@@ -979,7 +987,8 @@ export const header = {
   navTriggerLabelVisible: "col-start-1 row-start-1",
   // Plain nav links (Services, Factory Tour): same 2-layer grid-stack
   // technique as the trigger's own label (see above) so the route-active
-  // bold (`navTriggerActive`, applied via `isRouteActive` in Header.tsx)
+  // bold (`navTriggerActiveDark`/`navTriggerActiveLight`, applied via
+  // `isRouteActive` in Header.tsx)
   // never shifts whatever nav item sits after it -- the ghost always
   // reserves the widest (bold) width regardless of whether the visible
   // layer is currently bold. No `group-hover:font-semibold` any more
