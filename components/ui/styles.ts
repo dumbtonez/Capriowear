@@ -4102,6 +4102,23 @@ export const insideFactory = {
   // bottom (this section's own bottom padding) both live here directly,
   // since this element has no horizontal padding to also carry them.
   desktopGalleryWrap: "pt-[72px] pb-[120px]",
+  // /our-factory's own top gap (owner, 2026-09-11: "make the top gap 80px
+  // from the images ection" -- said once for the mobile/tablet block,
+  // repeated once the desktop gallery was restored after a same-turn
+  // over-eager first pass had dropped it entirely). A separate light-tone
+  // variant, not a change to `desktopGalleryWrap` itself, since that token
+  // is shared with the homepage's own dark gallery (`showHeading={false}`
+  // there too would otherwise land the exact same 72px->80px change on a
+  // page that never asked for it).
+  //
+  // 80px -> 96px (owner, same day: "top and left gap does not visually
+  // match" -- confirmed live both measured exactly 80px via
+  // `getBoundingClientRect()`, so the mismatch is optical, not a real
+  // pixel error: a vertical gap reads as visually smaller than a
+  // horizontal gap of the identical pixel value, a well-known effect --
+  // 96px top now visually balances the row's own real 80px left inset
+  // (`insideFactory.desktopRow`'s `px-[80px]`).
+  desktopGalleryWrapLight: "pt-[96px] pb-[120px]",
   // Heading is SectionHeading (align="center", eyebrowTone="dark") -- now
   // that the sitewide eyebrow-colour rule exists (2026-08-24: #ABB5C0 on
   // dark, #17191E on light, no exceptions), this section's eyebrow needs no
@@ -4257,7 +4274,12 @@ export const insideFactory = {
   // bottom wasn't part of this request. `xl:hidden`, matching `mobileSection`
   // above -- this carousel now covers tablet too (no separate "Xl" variant
   // needed any more; both tone variants share the same breakpoint).
-  mobileSectionLight: "bg-paper text-text pt-[40px] pb-12 xl:hidden",
+  //
+  // `pt-[40px]` -> `pt-[80px]` (owner, 2026-09-11: "on this factory shots
+  // give 80px gap from the top" -- same turn the desktop gallery was
+  // dropped entirely on /our-factory via `showDesktopGallery`, making this
+  // mobile/tablet block the section's own first visible content there).
+  mobileSectionLight: "bg-paper text-text pt-[80px] pb-12 xl:hidden",
   // container-p only on the heading, not the gallery below -- the gallery
   // is full-bleed edge to edge (confirmed via get_metadata: no side inset
   // at all), unlike every other section's mobile content. Eyebrow is now
