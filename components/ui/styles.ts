@@ -2118,7 +2118,19 @@ export const ourFactoryDetails = {
     "flex size-8 cursor-pointer items-center justify-center rounded-pill text-paper transition-colors duration-200 hover:bg-paper/10 disabled:pointer-events-none disabled:cursor-default disabled:opacity-30",
   stepperIcon: "size-4",
   stepperIconUp: "-rotate-180",
-  listCol: "flex w-full flex-col gap-4 xl:w-[320px] xl:shrink-0",
+  // `items-start` added (owner, 2026-09-11: performance-profiled jerk
+  // report -- see `item`'s own comment) -- without it, this flex column's
+  // default cross-axis `stretch` forced every chip to the column's own
+  // full width regardless of its actual open/closed state, which is
+  // exactly why the closed state used to need a real JS-measured pixel
+  // width (`chipWidths`, now removed) just to shrink-wrap to its own
+  // label. With `items-start`, a closed chip naturally shrinks to its own
+  // content width with zero measurement, and Framer Motion's `layout`
+  // prop on each chip can FLIP-animate between that natural width and the
+  // open state's own explicit `w-full` (unaffected by `items-start` --
+  // percentage widths resolve against the container regardless of
+  // cross-axis alignment).
+  listCol: "flex w-full flex-col items-start gap-4 xl:w-[320px] xl:shrink-0",
   // Dynamic per-item width (owner, 2026-09-09: "the chips width should be
   // dynamic based on the text label, follow the design", and separately:
   // "it does not open to the bottom, it opens on the right side" --
@@ -2194,7 +2206,20 @@ export const ourFactoryDetails = {
   // pause-then-snap. `detailGrid`/`detailInner` (the height/text-fade,
   // already tuned and not what was reported jerky) keep their own existing
   // curve -- this is scoped to `item`'s own width/radius/background only.
-  item: "relative flex flex-col bg-[#1f2126] text-left transition-[width,border-radius,background-color] ease-[cubic-bezier(0.33,1,0.68,1)] motion-reduce:transition-none",
+  // `width` removed from this transition list (owner, 2026-09-11,
+  // performance-profiled report: "the chip expand/collapse... [is] built
+  // with plain CSS transitions on LAYOUT-triggering properties... animating
+  // them forces the browser to recalculate layout and repaint on every
+  // single frame, on the main thread"). `OurFactoryDetails.tsx` now wraps
+  // this element in `motion.div layout` (Framer Motion): the width (and
+  // padding/height) change is captured as a FLIP transform and animated
+  // via `transform`/`scale` on the compositor thread instead, with no
+  // pixel-measurement hack needed (`chipWidths` removed -- see
+  // `listCol`'s own `items-start` comment). `border-radius`/
+  // `background-color` stay plain CSS transitions -- cheap, paint-only
+  // properties, not layout-triggering, exactly the case the same report
+  // says is fine to leave as-is.
+  item: "relative flex flex-col bg-[#1f2126] text-left transition-[border-radius,background-color] ease-[cubic-bezier(0.33,1,0.68,1)] motion-reduce:transition-none",
   itemOpen: "w-full gap-2 rounded-xl duration-[340ms]",
   // `hover:bg-[#25272d]` (owner, 2026-09-09: chip hover should be "a
   // little lighter than the actual color not dark" -- reverses this same
@@ -2227,10 +2252,15 @@ export const ourFactoryDetails = {
   // turn hand icon so it tells its clikable") -- Tailwind's own preflight
   // resets `<button>` to `cursor: default`, so the browser's native
   // pointer-on-button behaviour doesn't apply here without it.
-  itemButton:
-    "flex w-full items-center px-6 pt-4 transition-[padding] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none cursor-pointer",
-  itemButtonClosed: "pb-4 duration-[260ms]",
-  itemButtonOpen: "pb-0 duration-[340ms]",
+  // `transition-[padding]` removed (same performance report as `item`
+  // above) -- the parent chip's own `motion.div layout` already captures
+  // this padding change as part of the whole chip's FLIP transform, so
+  // the padding value itself can snap instantly in real terms; visually
+  // it still reads as smooth because the entire chip (padding included)
+  // is being scaled/translated as one compositor-thread transform.
+  itemButton: "flex w-full items-center px-6 pt-4 cursor-pointer",
+  itemButtonClosed: "pb-4",
+  itemButtonOpen: "pb-0",
   // Plus icon persists in the DOM at both states (opacity/rotate driven by
   // `isOpen`, not conditionally rendered) so it can transition out rather
   // than pop -- see the component's own comment on why a truly `hidden`
@@ -2322,11 +2352,21 @@ export const ourFactoryDetails = {
   // own real width is narrower than 320px -- a flat 320px here forced
   // real horizontal page overflow at the 360px min mobile viewport
   // (found live, confirmed via a real Playwright overflow sweep).
-  detailGrid:
-    "absolute grid w-full grid-rows-[0fr] transition-[grid-template-rows] duration-[260ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-  detailGridOpen:
-    "grid w-full grid-rows-[1fr] transition-[grid-template-rows] duration-[340ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-  detailClip: "overflow-hidden",
+  // `grid-template-rows` (the `0fr`/`1fr` accordion trick) removed
+  // (owner, 2026-09-11, performance-profiled report: this is a known
+  // technique that forces a real layout recalculation every frame,
+  // especially with real content/images inside). `OurFactoryDetails.tsx`
+  // now wraps this element in `motion.div layout` instead -- Framer
+  // Motion measures the real `h-0` -> `h-auto` height change and
+  // FLIP-animates it via `transform`/`scale` on the compositor thread,
+  // the same mechanism now used for the chip's own width above, so the
+  // two motions (chip resize, panel reveal, and the image crossfade
+  // already on `transform`/`opacity`) all run off the main thread
+  // together instead of competing for it. `overflow-hidden` folded in
+  // directly (the separate `detailClip` wrapper it used to need is gone
+  // -- one fewer nested div).
+  detailGrid: "absolute w-full overflow-hidden h-0",
+  detailGridOpen: "w-full overflow-hidden h-auto",
   // Inner fade-and-rise, delayed ~100ms after the grid track starts
   // growing (owner spec: "slightly delayed... so it feels like it
   // unfolds rather than snapping") -- opening only; collapsing has no
