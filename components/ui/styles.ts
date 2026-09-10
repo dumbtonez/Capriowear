@@ -2413,7 +2413,26 @@ export const ourFactoryDetails = {
   // (the same class of bug as the position collision above: two opposite
   // opacity utilities present at once would again leave the stylesheet's
   // own generation order to silently decide the winner).
-  imageLayer: "absolute inset-0 transition-opacity duration-[250ms] ease-in-out motion-reduce:transition-none",
+  // 250ms plain opacity -> 650ms opacity+scale (owner, 2026-09-11: "when
+  // changing the chip... the images transition is very abrupt, not smooth
+  // like silk... it should be delightful" -- a fast linear-ish crossfade
+  // with no motion of its own reads as a hard cut, not a transition, no
+  // matter how short. Adds a subtle scale (`desktopImageLayerActive`/
+  // `desktopImageLayerInactive` below, NOT the shared `imageLayerActive`/
+  // `imageLayerInactive` -- those stay opacity-only, since the mobile
+  // crossfade already layers its own separate `mobileImageZoom` scale
+  // transform on top of them; giving this shared pair its own scale too
+  // would double up two independent transforms on the same element there)
+  // so the outgoing image breathes outward and the incoming one settles
+  // in, not just fades -- the same "ease + gentle motion, not a flat
+  // opacity swap" idea `mobileImageZoom` already proved reads as
+  // "delightful" rather than "jerky" once applied there. `cubic-bezier
+  // (0.22,1,0.36,1)` matches this file's own established "smooth" curve
+  // (`ourFactoryDetails.detailGrid`'s own comment: "chips animation is
+  // very jerky" -- the same fix already applied to this section's
+  // accordion, reused here rather than a third curve).
+  imageLayer:
+    "absolute inset-0 transition-[opacity,transform] duration-[650ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
   // Mobile-only variant (owner, 2026-09-10: "tha paralax animation is not
   // working on the chip changing some jerky effect") -- the mobile crossfade
   // stack layers `mobileImageZoom`'s own 1400ms zoom-settle transform
@@ -2427,6 +2446,18 @@ export const ourFactoryDetails = {
   mobileImageLayer: "absolute inset-0 transition-opacity duration-[1400ms] ease-out motion-reduce:transition-none",
   imageLayerActive: "opacity-100",
   imageLayerInactive: "opacity-0",
+  // Desktop-only pair, used with the `imageLayer` transition above --
+  // NOT `imageLayerActive`/`imageLayerInactive` (see that pair's own
+  // comment for why: mobile already layers its own separate
+  // `mobileImageZoom` scale on top of the plain opacity pair, so giving
+  // the shared pair a scale too would double up two transforms on the
+  // same mobile element). Incoming image settles from a gentle 102%
+  // (`scale-100`, was already full-size, just zoomed a hair); outgoing
+  // eases up to 102% as it fades rather than sitting pixel-static while
+  // its opacity drops -- both directions moving, not just fading, is
+  // what reads as "silk" instead of a flat crossfade.
+  desktopImageLayerActive: "opacity-100 scale-100",
+  desktopImageLayerInactive: "opacity-0 scale-[1.02]",
 
   // ---------------------------------------------------------------------
   // Mobile/tablet only (below `xl:`), 2026-09-10 rebuild -- Apple's "Take a
