@@ -7,18 +7,45 @@
 // exact structural difference (desktop's multi-row grid vs. mobile's flat
 // stacked column).
 //
-// The "reveal" scroll transition (owner reference, 2026-08-26:
-// https://afternow.co/services/) no longer uses `position: sticky` on this
-// section's own root -- removed 2026-09-06, see the `footer` recipe's own
-// header comment (components/ui/styles.ts) and components/RevealMain.tsx
-// for why (a sticky-bottom box taller than the viewport permanently clips
-// its own top content, which this footer's real height hits on most real
-// laptop windows). The reveal now comes from `RevealMain` (wrapping every
-// page's own `<main>`) pulling this footer up underneath `<main>` via a
-// real, live-measured negative margin, with `<main>`'s own `relative z-10`
-// + opaque background still doing the actual covering during that overlap
-// -- this component itself needs no special positioning any more, just
-// `relative z-0` for stacking order.
+// The "reveal" scroll transition has gone through several mechanisms, all
+// on 2026-09-10 except the first:
+//   1. `position: sticky` directly on this section's own root (removed
+//      2026-09-06 -- permanently clipped the footer's top content on any
+//      viewport shorter than its own height).
+//   2. `components/RevealMain.tsx`, pulling this footer up underneath
+//      `<main>` via a JS-measured negative `margin-bottom`. Checked out
+//      correct in every layout-level automated test (computed styles,
+//      two from-scratch production builds, a freshly restarted dev
+//      server) but never actually appeared in the owner's real desktop
+//      Chrome. Deleted after no root cause was found.
+//   3. Restored at the owner's request, plus a defensive re-measurement
+//      after `window.load`/`document.fonts.ready`, after concluding the
+//      likely cause was this session's own unusually long, heavily hot-
+//      reloaded dev server rather than a real defect.
+//   4. Deleted again the same day: further isolated testing, this time
+//      with the test browser tab genuinely fronted (not backgrounded) and
+//      a real desktop-height viewport, reproduced the exact same
+//      "computed layout is correct, nothing actually paints" signature
+//      the owner had described -- ruling out the "just a stale dev
+//      session" theory. This points at a real paint/compositing bug with
+//      applying a negative margin via direct JS style mutation after
+//      initial paint (the layout engine updates correctly; some
+//      rendering paths appear not to correctly repaint the newly-
+//      uncovered region), not a layout bug -- which is exactly why every
+//      layout-level check (computed styles, `getBoundingClientRect`)
+//      kept reporting the mechanism as correct while it visually wasn't.
+//
+// Current (and, going forward, preferred) mechanism: a self-contained CSS
+// reveal directly on this component -- `useRevealOnView` (the same
+// `IntersectionObserver` hook `TextReveal`/`RevealBox` already use
+// sitewide) toggles a `.footer-reveal-active` class, driving a plain
+// opacity + upward-translate transition (`.footer-reveal`,
+// app/globals.css). No document-flow trick at all: this footer always
+// renders at its own real height, in completely ordinary position,
+// immediately after `<main>` -- only opacity/transform are ever animated,
+// so nothing here can structurally hide it, and there is no negative-
+// margin-style paint risk to repeat. See `docs/05-plan.md`'s 2026-09-10
+// entries for the full back-and-forth if this ever needs revisiting.
 //
 // Social links read from content/site.ts's ORGANIZATION.sameAs (the same
 // array already feeding organizationSchema()), not a second copy -- matched
@@ -40,10 +67,15 @@
 // would wrongly resolve as /capriowear/... under this app's own basePath.
 // No such external link exists in this component today; this is the rule
 // to follow if/when one is added.
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 import { FacebookIcon, InstagramIcon, LinkedinIcon } from "@/components/icons/SocialIcons";
 import { Logo } from "@/components/Logo";
+import { useRevealOnView } from "@/components/TextReveal";
+import { cx } from "@/components/ui/cx";
 import { footer } from "@/components/ui/styles";
 import type { home } from "@/content/home";
 
@@ -79,8 +111,45 @@ function SocialLinks({ social }: { social: readonly string[] }) {
 }
 
 export function Footer({ content, social }: FooterProps) {
+  const { ref, active } = useRevealOnView<HTMLElement>(0.05);
+  // Bounded safety net: `useRevealOnView`'s `IntersectionObserver` is the
+  // same one every other reveal on this site already relies on, but if it
+  // somehow never fires, `active` would stay false forever and this footer
+  // would sit at `opacity: 0` permanently -- exactly as bad as the footer
+  // actually being missing. Deliberately NOT a flat timer from mount: this
+  // element mounts with the rest of the page, well before most visitors
+  // scroll anywhere near it, so a mount-based timeout would just make the
+  // footer fade in on its own a second or two after page load regardless
+  // of scroll position. Instead this plain `scroll` listener does the same
+  // "is it roughly in view" check using nothing but
+  // `getBoundingClientRect` -- no observer API at all, so it can't share
+  // whatever, if anything, keeps that one from firing.
+  const [forceVisible, setForceVisible] = useState(false);
+  useEffect(() => {
+    if (forceVisible) return;
+
+    function checkProximity() {
+      const el = ref.current;
+      if (!el) return;
+      if (el.getBoundingClientRect().top < window.innerHeight + 200) {
+        setForceVisible(true);
+      }
+    }
+
+    checkProximity();
+    window.addEventListener("scroll", checkProximity, { passive: true });
+    window.addEventListener("resize", checkProximity);
+    return () => {
+      window.removeEventListener("scroll", checkProximity);
+      window.removeEventListener("resize", checkProximity);
+    };
+  }, [ref, forceVisible]);
+
   return (
-    <footer className={footer.root}>
+    <footer
+      ref={ref}
+      className={cx(footer.root, "footer-reveal", (active || forceVisible) && "footer-reveal-active")}
+    >
       {/* Desktop: multi-row grid -- see the styles.ts header comment. */}
       <div className={footer.desktopOuter}>
         <div className={footer.desktopInner}>

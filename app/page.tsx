@@ -18,7 +18,6 @@ import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
-import { RevealMain } from "@/components/RevealMain";
 import { CertifiedCompliant } from "@/components/sections/CertifiedCompliant";
 import { ClientLogos } from "@/components/sections/ClientLogos";
 import { Exhibitions } from "@/components/sections/Exhibitions";
@@ -119,7 +118,7 @@ export default function Home() {
           sits, giving the transition a deliberate "the page above is
           lifting away" depth cue regardless of scroll position, instead of
           relying on a colour boundary that was never actually visible. */}
-      <RevealMain className="relative z-10 bg-paper shadow-[0_16px_24px_-12px_rgba(18,19,23,0.18)]">
+      <main className="relative z-10 bg-paper shadow-[0_16px_24px_-12px_rgba(18,19,23,0.18)]">
         <Hero hero={home.hero} customOfferings={home.customOfferings} />
         <ClientLogos brandLogos={home.brandLogos} />
         <TrustSignals items={home.trustStrip} />
@@ -133,7 +132,7 @@ export default function Home() {
         <HowItWorks content={home.howItWorks} />
         <Faq content={home.faq} />
         <FinalCta content={home.closingCta} secondaryCta={home.closingCta.secondaryCta} />
-      </RevealMain>
+      </main>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />
 

@@ -13,7 +13,6 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import { Logo } from "@/components/Logo";
-import { RevealMain } from "@/components/RevealMain";
 import { CategoryBanner } from "@/components/sections/CategoryBanner";
 import { CategoryFilters } from "@/components/sections/CategoryFilters";
 import { CategoryMetaStrip } from "@/components/sections/CategoryMetaStrip";
@@ -86,7 +85,7 @@ export default async function SportPage({ params }: PageProps<"/teamwear/[sport]
         secondaryCta={home.nav.secondaryCta}
       />
 
-      <RevealMain className="relative z-10 bg-paper">
+      <main className="relative z-10 bg-paper">
         <CategoryBanner
           breadcrumbItems={[
             { label: "Home", href: "/" },
@@ -171,7 +170,7 @@ export default async function SportPage({ params }: PageProps<"/teamwear/[sport]
         />
 
         <ProductCtasMobileBar primaryCta={home.nav.cta} />
-      </RevealMain>
+      </main>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />
     </>

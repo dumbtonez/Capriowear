@@ -4671,17 +4671,20 @@ export const exhibitions = {
 // height, on any page, at any real viewport, and is always fully
 // scrollable/visible, never clipped.
 //
-// The "reveal" itself now lives on `<main>` instead
-// (`components/RevealMain.tsx`, wrapping every page's own `<main>`): a real,
-// live-measured negative `margin-bottom` (off this actual rendered `<footer>`
-// element, not a hardcoded per-breakpoint guess) pulls the footer up
-// underneath `<main>`'s own last N pixels, where `<main>`'s existing
-// `relative z-10` + opaque background (unchanged, set per-page) covers it
-// during that overlap -- so the visible "reveal" mechanic (main's own
-// content scrolling normally, uncovering the footer as it goes) is
-// unchanged from before; only the fragile, viewport-height-dependent
-// sticky-on-a-tall-box mechanism underneath it changed. See
-// `RevealMain.tsx`'s own header comment for the full mechanism.
+// The "reveal" itself lives on `root` directly now, not on `<main>` -- a
+// plain CSS fade + translate transition (`.footer-reveal`,
+// app/globals.css), triggered by the same `useRevealOnView` hook every
+// other scroll-reveal on this site already uses. `root` stays plain
+// ordinary document flow either way -- only this transition's
+// opacity/transform changes on scroll-into-view. This is the last of
+// several mechanisms tried on 2026-09-10, after a JS-measured negative-
+// margin `<main>`-pull-up approach (`components/RevealMain.tsx`, deleted)
+// repeatedly failed to actually reveal the footer in the owner's real
+// desktop Chrome -- layout-level checks (computed styles, from-scratch
+// production builds) kept reporting it correct while it visually wasn't,
+// pointing at a real paint/compositing bug with mutating a negative
+// margin via JS after initial paint, not a layout bug. See Footer.tsx's
+// own header comment for the full back-and-forth.
 //
 // A visible seam shadow was tried on `root` itself first (a box-shadow cast
 // upward from Footer's own top edge) and reverted the same session -- it
@@ -7049,4 +7052,121 @@ export const productCategoryLinks = {
   siblingsHeading: "text-sm font-medium text-muted",
   siblingsList: "flex flex-wrap gap-x-4 gap-y-2",
   siblingLink: "text-base text-text underline decoration-solid underline-offset-2 hover:opacity-70",
+};
+
+/* --- RequestSampleForm (/request-a-sample) --------------------------------- */
+
+// Dark section (bg-ink), the site's chosen direction (owner, 2026-09-10:
+// "V2 black design is the final" -- this recipe was the "dark variant"
+// built alongside the original light one for a side-by-side comparison at
+// /request-a-sample-v2; the light recipe and that draft route are both
+// deleted now that a direction is picked, this is the one real page). No
+// form component precedent existed anywhere on this site before this
+// build (2026-09-10 audit) -- every value below is built fresh from
+// existing tokens, not a copy of a component that doesn't exist.
+// Filled-input style (static label above the field, not floating):
+// simplest to build correctly and accessibly with no existing precedent to
+// match. Reference layout: filled light-grey inputs with no visible
+// border, a full-width accent-orange pill submit button, outline pill
+// chips.
+export const requestSampleForm = {
+  // Top padding only, -32px total now (owner: "full name field 16px less
+  // space from top", then "make it more 16px less" -- was a flat `py-16
+  // md:py-20 xl:py-24`, split into pt/pb so only the space above "Full
+  // name" shrinks; the bottom padding is unchanged).
+  section: "bg-ink pt-8 pb-16 md:pt-12 md:pb-20 xl:pt-16 xl:pb-24",
+  inner: "container-p mx-auto flex w-full max-w-[640px] flex-col gap-8",
+  form: "flex flex-col items-center gap-8",
+  field: "flex w-full max-w-[500px] flex-col items-start gap-2",
+  label: "text-lg font-medium text-paper",
+  required: "text-[color:var(--color-error)]",
+  helpText: "text-sm text-[#838D97]",
+  // Filled, borderless (the reference's own light-grey fields on black) --
+  // `--color-paper-2` (#f5f4f1, this site's existing light alternating-
+  // section tone) doubles as the filled-field colour here rather than a
+  // new one invented for this draft.
+  input:
+    "h-[54px] w-full rounded-[4px] border-0 bg-paper-2 px-4 text-base text-text placeholder:text-muted focus-visible:outline-2 focus-visible:outline-accent",
+  inputError: "outline outline-2 outline-[color:var(--color-error)]",
+  textarea:
+    "w-full min-h-32 resize-y rounded-[4px] border-0 bg-paper-2 px-4 py-3 text-base text-text placeholder:text-muted focus-visible:outline-2 focus-visible:outline-accent",
+  segmented: "mt-3 flex w-full max-w-[500px] flex-wrap gap-2",
+  // border-2 + a stronger literal white (owner, 2026-09-10: "make the
+  // chips outline a little prominent" -- was a 1px `border-line-dark`,
+  // 12% white, close to invisible against `bg-ink`).
+  segmentedOption: "h-[54px] rounded-pill border-2 border-[rgba(255,255,255,0.3)] px-5 text-base font-medium transition-colors",
+  segmentedOptionActive: "border-accent bg-accent text-accent-ink",
+  segmentedOptionInactive: "text-paper",
+  // Same border-2/stronger-white prominence as the chips above ("same for
+  // attachment outline"), plus a wider dash pattern -- `border-dashed`'s
+  // own dash length/gap scales with border width, so the heavier 2px
+  // border alone reads as more spaciously dashed than the old 1px line,
+  // without needing a hand-built background-image dash pattern.
+  fileDropzone:
+    "flex h-32 w-full max-w-[500px] cursor-pointer flex-col items-center justify-center gap-2 rounded-[4px] border-2 border-dashed border-[rgba(255,255,255,0.3)] bg-transparent px-4 text-center text-sm text-[#838D97] transition-colors hover:border-accent",
+  fileDropzoneIcon: "size-5 text-[#838D97]",
+  fileInputHidden: "sr-only",
+  // Attached-file preview (owner, 2026-09-10: "once something is attached,
+  // there should be an option to remove that, maybe show a preview of
+  // that attached item with a cross icon") -- replaces the dashed
+  // dropzone once a file is chosen, matching the site's own other filled-
+  // field look (bg-paper-2, no border) rather than staying dashed, which
+  // reads as "empty, waiting for a drop" everywhere else this pattern
+  // exists. A plain `<div>`, not a `<label>` -- the remove button needs
+  // its own independent click target, not one nested inside (and
+  // therefore re-triggering) a label wired to reopen the file picker.
+  // Round 2 (owner: "attached file design looks very bad... give it a
+  // grey background or position it better way") -- the first pass kept
+  // the dropzone's own flat 128px height, which left a single line of
+  // text floating in a mostly-empty box (the actual bug: "grey
+  // background" was already there, `bg-paper-2`, the height/proportions
+  // were what read as broken). Now a compact row (natural height, `py-3`)
+  // with a real border for definition and an accent-tinted icon badge
+  // instead of a bare icon, closer to a standard "attached file" chip.
+  filePreview:
+    "flex w-full max-w-[500px] items-center justify-between gap-3 rounded-[4px] border border-line bg-paper-2 px-4 py-3",
+  filePreviewInfo: "flex min-w-0 items-center gap-3",
+  // Accent-tinted badge (10% accent fill, full accent icon) rather than a
+  // bare grey paperclip -- reads as "successfully attached," not just a
+  // repeated version of the empty dropzone's own icon.
+  filePreviewIconWrap: "flex size-10 shrink-0 items-center justify-center rounded-[4px] bg-accent/10 text-accent",
+  filePreviewIcon: "size-5",
+  filePreviewText: "flex min-w-0 flex-col items-start gap-0.5 text-left",
+  filePreviewName: "w-full truncate text-sm font-medium text-text",
+  filePreviewSize: "text-xs text-muted",
+  // Round hit target well past the visible icon (owner spec: 44px tap
+  // target floor applies here too, this being the only way to undo an
+  // attachment). This button sits inside `filePreview`, a light
+  // `bg-paper-2` box -- a *dark*-tinted hover (this site's existing
+  // `border-line` black hairline token), not a white one, which would be
+  // invisible against that light fill despite the section itself being
+  // dark.
+  fileRemoveButton:
+    "flex size-9 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:bg-line hover:text-text",
+  errorText: "text-sm text-[color:var(--color-error)]",
+  consentRow: "mt-4 flex items-start gap-3",
+  consentText: "text-sm text-[#838D97]",
+  consentLink: "text-paper underline decoration-solid underline-offset-2 hover:opacity-70",
+  submitRow: "flex w-full max-w-[500px] flex-col gap-4",
+  // Accent orange (owner correction, 2026-09-10: "make the cta orange" --
+  // supersedes the reference's own inverted white-pill button). Same
+  // colours/hover as `Button`'s own `primary` variant (`button.primary`),
+  // reproduced directly rather than reused through that component -- see
+  // this recipe's own file-level comment for why the dark variant renders
+  // a plain `<button>` here instead of `<Button>`.
+  submitButton:
+    "inline-flex h-[54px] w-full items-center justify-center rounded-pill bg-accent px-8 text-button uppercase text-accent-ink transition-[color,background-color,filter] hover:text-[#5E240F] disabled:pointer-events-none disabled:opacity-40",
+  formError: "text-sm text-[color:var(--color-error)]",
+  // Green circle (owner: "use green instead of orange" -- a real success
+  // state reads more clearly in the universal green than the brand's own
+  // accent orange, which is otherwise this page's CTA colour), 18px
+  // message text (owner: "font size looks bigger," was text-h5/24px).
+  // Entrance animation classes (.form-success-icon/.form-success-check/
+  // .form-success-message) live in app/globals.css, same "named class the
+  // component toggles, keyframes defined once in the stylesheet" pattern
+  // .reveal-box/.reveal-word already use.
+  successWrap: "flex flex-col items-center gap-4 py-12 text-center",
+  successIconWrap: "flex size-16 items-center justify-center rounded-full bg-[#16A34A] text-paper form-success-icon",
+  successCheck: "form-success-check",
+  successMessage: "text-lg font-medium text-paper form-success-message",
 };

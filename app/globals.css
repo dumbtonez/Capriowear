@@ -39,6 +39,11 @@
   --color-muted: #6b6b74; /* secondary text */
   --color-accent: #ff791b; /* brand orange: CTAs, highlights (owner, 2026-09-08) */
   --color-accent-ink: #ffffff; /* text/icon on accent */
+  /* Standard error red: inline form validation states only (Request a
+     Sample form, 2026-09-10 -- the first form on the site, no error token
+     existed yet). Owner confirmed a standard red over a muted red-brown
+     variant closer to the accent-orange family. */
+  --color-error: #e5484d;
   /* Subline text under a title, on a white/paper section background only
      (owner, 2026-09-01: apply sitewide, component-level, so new pages pick
      it up automatically) -- distinct from --color-text (the general
@@ -467,6 +472,130 @@ header[data-tone="light"] {
     clip-path: inset(0% round 0);
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Success-state entrance (RequestSampleForm.tsx, 2026-09-10) -- the circle
+   pops in with a deliberate overshoot (a "back" easing curve, not a plain
+   ease-out -- owner: "use an animation when the success happens," a flat
+   scale+fade read as too quiet), the checkmark then draws itself in via a
+   stroke-dasharray/dashoffset reveal (a real inline SVG path, not an icon
+   component, see RequestSampleForm.tsx's own comment for why), and the
+   confirmation message follows once the check has finished drawing. Same
+   "one-shot entrance on mount" idea as .reveal-box above, no scroll
+   trigger needed since the success state only ever mounts in response to
+   a user action already in view. The base reduced-motion rule
+   (prefers-reduced-motion: reduce, near the top of this file) already
+   collapses every animation-duration to 0.001ms, which is enough on its
+   own -- every element still lands at its final, fully-visible/fully-drawn
+   state almost instantly, no separate override needed here. */
+@keyframes form-success-icon-in {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes form-success-check-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes form-success-message-in {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.form-success-icon {
+  animation: form-success-icon-in 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.form-success-check {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: form-success-check-draw 0.35s ease-out 0.3s both;
+}
+
+.form-success-message {
+  animation: form-success-message-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.6s;
+}
+
+/* Footer reveal (Footer.tsx, 2026-09-10) -- see that component's own
+   header comment for the full history of what this replaced. A plain
+   opacity + upward-translate transition, same shape as `.reveal-box`
+   above, triggered by `useRevealOnView` once the footer scrolls into
+   view -- deliberately NOT a layout/positioning trick: the footer always
+   renders at its own real height, in completely ordinary document flow,
+   so this transition can only ever affect how it looks, never whether
+   it's there. */
+.footer-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.footer-reveal.footer-reveal-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Missing-field shake (RequestSampleForm.tsx, 2026-09-10) -- owner: "you
+   should slide them up to the field that is missing, animation." The
+   "slide" itself is a plain `scrollIntoView({behavior: "smooth"})` call
+   in JS, no CSS needed for that part; this is the accompanying attention
+   animation once the field is in view. Applied via direct
+   classList.add/remove in the component (not a React className prop,
+   see that file's own comment) so it can replay on every failed submit
+   attempt, not just the first. */
+@keyframes field-shake {
+  10%,
+  90% {
+    transform: translateX(-1px);
+  }
+  20%,
+  80% {
+    transform: translateX(2px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-4px);
+  }
+  40%,
+  60% {
+    transform: translateX(4px);
+  }
+}
+
+.field-shake {
+  animation: field-shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field-shake {
+    animation: none;
   }
 }
 
