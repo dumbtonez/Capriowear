@@ -137,7 +137,11 @@ export default async function TeamwearStylePage({ params }: PageProps<"/teamwear
       />
 
       <main className="relative z-10 bg-paper">
-        <Breadcrumb items={breadcrumbItems} className="hidden md:block" />
+        {/* `mt-[68px]` clears the fixed header (components/ui/styles.ts's
+            `header.base` is `position: fixed`, out of document flow) --
+            same fix and reasoning as the activewear PDP's own Breadcrumb,
+            see that file's own comment. */}
+        <Breadcrumb items={breadcrumbItems} className="mt-[68px] hidden md:block" />
         <JsonLd
           data={breadcrumbSchema(
             breadcrumbItems.map((item) => ({

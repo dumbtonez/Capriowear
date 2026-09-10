@@ -93,11 +93,45 @@ export function ProductGallery({ images, productTitle }: ProductGalleryProps) {
   // below. Scrolling the currently-`hidden` breakpoint's track is a
   // harmless no-op visually, but keeps it correctly positioned for the
   // moment it becomes visible (see the resize effect's own comment).
+  // Set for the duration of a programmatic smooth scroll (goTo/stepMainImage),
+  // cleared once it settles -- owner report, 2026-09-11: "the image counter
+  // number have weird animation, moves from 1 to 2, to 3 very jerky." The
+  // scroll-sync effect below (`Math.round(scrollLeft / width)`) fires on
+  // every scroll frame, including the ones this component's OWN smooth
+  // scroll produces -- jumping more than one slide (a thumbnail two images
+  // away, or the wrap-around case) meant the animated scroll transited
+  // every slide in between, and this effect dutifully set `activeIndex` to
+  // each one it passed, so the counter counted up/down through every
+  // intermediate number instead of jumping straight to the target (`goTo`'s
+  // own `setActiveIndex(index)` already sets the correct final value
+  // immediately; the scroll-sync effect was just re-overwriting it many
+  // times per second while the scroll animation played out).
+  const isProgrammaticScrollRef = useRef(false);
+  const programmaticScrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   function scrollTracksTo(index: number, behavior: ScrollBehavior) {
+    isProgrammaticScrollRef.current = true;
+    if (programmaticScrollTimeoutRef.current !== null) clearTimeout(programmaticScrollTimeoutRef.current);
+    // `scrollend` is the real signal (fires once the browser's own smooth
+    // scroll finishes), but isn't universally supported yet -- a timeout
+    // matching `behavior: "smooth"`'s own typical settle time is a safety
+    // net, not the primary mechanism, so it's generous rather than tight.
+    programmaticScrollTimeoutRef.current = setTimeout(() => {
+      isProgrammaticScrollRef.current = false;
+    }, 600);
     for (const ref of [desktopTrackRef, mobileTrackRef]) {
       const track = ref.current;
       if (!track) continue;
       track.scrollTo({ left: index * track.clientWidth, behavior });
+      if (behavior === "smooth") {
+        track.addEventListener(
+          "scrollend",
+          () => {
+            isProgrammaticScrollRef.current = false;
+          },
+          { once: true },
+        );
+      }
     }
   }
 
@@ -138,6 +172,11 @@ export function ProductGallery({ images, productTitle }: ProductGalleryProps) {
     let ticking = false;
 
     function update(track: HTMLDivElement) {
+      // Skip while our own `scrollTracksTo` smooth-scroll is still in
+      // flight -- see `isProgrammaticScrollRef`'s own comment above. Real
+      // user-driven swipe/drag scrolling (the only case this effect exists
+      // for) never sets this flag.
+      if (isProgrammaticScrollRef.current) return;
       const width = track.clientWidth;
       if (width === 0) return;
       const nearest = Math.round(track.scrollLeft / width);
@@ -161,6 +200,14 @@ export function ProductGallery({ images, productTitle }: ProductGalleryProps) {
       for (const { track, onScroll } of listeners) track.removeEventListener("scroll", onScroll);
     };
   }, []);
+
+  // Stop a stray timeout if the component unmounts mid-scroll.
+  useEffect(
+    () => () => {
+      if (programmaticScrollTimeoutRef.current !== null) clearTimeout(programmaticScrollTimeoutRef.current);
+    },
+    [],
+  );
 
   // Resize safety net: desktop and mobile are two permanently-mounted,
   // breakpoint-hidden tracks (`hidden xl:flex` / `xl:hidden`, below). A
