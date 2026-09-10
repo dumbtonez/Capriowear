@@ -3020,28 +3020,35 @@ export const servicesHowWeWork = {
   //
   // Desktop (xl+): `hidden xl:block` -- the mirror of every other
   // scrollable row's own wrap-visibility split (How It Works/Inside the
-  // Factory/Exhibitions/Trust Signals). `xl:mt-[112px]` (owner, 2026-09-09,
-  // same-day follow-up: "add more 40px more on the top from the title") --
-  // was the retired `pathsGrid`'s own `xl:mt-[72px]` (Figma's real
-  // intro-to-cards gap), +40px.
-  desktopWrap: "hidden xl:block xl:mt-[112px]",
-  // Same `mx-auto max-w-[1440px]` fix already applied to every other
-  // scroller here (How It Works/Inside the Factory/Exhibitions/Trust
-  // Signals' own `desktopScrollerWrap`) -- a flat `px-[80px]` row inset
-  // alone only matches `container-p`'s own centring inset up to 1440px.
-  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-none overflow-hidden",
-  // `overflow-x-hidden`, not `-auto` -- "user can only scroll by
-  // clicking," the same established rule every other chevron-driven row
-  // here follows (see `DesktopChevronScroller.tsx`'s own header comment).
-  // `px-[80px]` matches `container-p`'s own `xl:` inset, the same flat
-  // value every other scroller's own row uses at this breakpoint.
-  desktopRow: "no-scrollbar flex w-full gap-[44px] overflow-x-hidden scroll-smooth px-[80px]",
-  // 480px, Our Services' own real (unshrunk) card width -- the whole
-  // reason this moved off the 3-column grid, see this file's own header
-  // comment (ServicesHowWeWork.tsx). `shrink-0` so the browser doesn't
-  // squeeze it to fit -- the point here is the row overflows and the last
-  // card peeks, not that everything always fits.
-  desktopCard: "flex w-[480px] shrink-0 flex-col items-start gap-8",
+  // Factory/Exhibitions/Trust Signals). `xl:mt-[72px]` (owner, 2026-09-10:
+  // "how we work with you subline and images gap should be 72px on
+  // services page" -- reverts the `xl:mt-[112px]` a same-day-earlier
+  // follow-up had set, back to the retired `pathsGrid`'s own original
+  // Figma-confirmed intro-to-cards gap).
+  desktopWrap: "hidden xl:block xl:mt-[72px]",
+  // No chevron/scroll any more (owner, 2026-09-10: "how we work with you
+  // section should not have a chevron, it should fit in the 1440 viewport
+  // as in design" -- reverses the 2026-09-09 move onto a horizontally-
+  // scrollable row, which had grown each card to Our Services' own 480px
+  // width; 3 cards at 480px + 2×44px gaps (1528px) can't fit the 1280px
+  // content area at 1440px regardless of scroll mechanism, which is what
+  // forced the chevron in the first place). Plain centred row, `mx-auto
+  // max-w-[1440px]` kept for the same reason every other section here
+  // centres past 1440px.
+  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px]",
+  // `px-[80px]` matches `container-p`'s own `xl:` inset. No `overflow`/
+  // `scroll-smooth`/`no-scrollbar` any more -- nothing here scrolls.
+  desktopRow: "flex w-full justify-center gap-[44px] px-[80px]",
+  // 397px -- the section's own original, Figma-confirmed 3-column-grid
+  // card width (get_metadata, node 750:770; also why `MediaPlaceholder`'s
+  // `"397:234"` ratio option exists at all) restored (owner, 2026-09-10,
+  // see `desktopScrollerWrap`'s own comment) after a same-day-earlier pass
+  // had grown it to Our Services' own 480px -- 3×397px + 2×44px gaps
+  // (1279px) fits the 1280px content area at 1440px with room to spare,
+  // no scroll/chevron required. `shrink-0` kept even though nothing
+  // scrolls any more: harmless, and cheaper than re-verifying flex-basis
+  // math holds without it.
+  desktopCard: "flex w-[397px] shrink-0 flex-col items-start gap-8",
   pathMedia: "w-full",
   pathTextCol: "flex w-full flex-col gap-8",
   pathTitleGroup: "flex flex-col gap-2",
