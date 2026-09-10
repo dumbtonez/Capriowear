@@ -34,6 +34,7 @@
 // mirroring the stepper's own step direction.
 "use client";
 
+import { motion, MotionConfig } from "framer-motion";
 import { Plus } from "lucide-react";
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
@@ -54,26 +55,21 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
   const [openIndex, setOpenIndex] = useState(0);
   const baseId = useId();
 
-  // Real measured pixel width per item's own closed shape, not a CSS
-  // keyword -- `ourFactoryDetails.item`'s own comment covers why (two
-  // CSS-only attempts, both confirmed broken via real frame sampling).
-  // Measured from a HIDDEN clone (`visibility:hidden`, not `display:none`
-  // -- the latter has zero layout size and can't be measured), one per
-  // item, always rendered in its own closed shape regardless of which
-  // item is actually open in the visible list -- so every width is
-  // available immediately, not just the one the user happens to have
-  // toggled. `useLayoutEffect`, not `useEffect`: fires before the browser
-  // paints, so applying the measured width the same frame it's read
-  // leaves no visible flash on a client-rendered page.
-  const measureRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [chipWidths, setChipWidths] = useState<number[]>([]);
-  useLayoutEffect(() => {
-    setChipWidths(measureRefs.current.map((el) => el?.offsetWidth ?? 0));
-  }, [items]);
+  // Desktop chip width used to need a real measured-pixel clone here too
+  // (CSS `width: auto` can't be transitioned) -- removed, 2026-09-11
+  // (performance-profiled report: convert the chip resize to a
+  // compositor-friendly FLIP transform instead of raw `width`). Each
+  // desktop chip is now a `motion.div layout` below, which measures its
+  // own real closed/open sizes and animates between them via `transform`
+  // directly -- no manual measurement needed any more. See
+  // `ourFactoryDetails.listCol`'s own `items-start` comment for the
+  // matching CSS-side half of this fix (shrink-to-fit needs the parent
+  // to stop stretching children, not just a measured width).
 
-  // Same measured-pixel-width technique as the desktop chips above, now
-  // for the mobile pills too (owner, 2026-09-10: "This chip animation is
-  // different from the once we have on desktop, please use the same") --
+  // Same measured-pixel-width technique as the desktop chips USED to use,
+  // still needed for the mobile pills (owner, 2026-09-10: "This chip
+  // animation is different from the once we have on desktop, please use
+  // the same") --
   // without it, the pill has no definite width to transition (`width:
   // auto` can't be animated by CSS, the exact limitation `item`'s own
   // comment already documents), so only its background colour was ever
@@ -138,7 +134,17 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
   }, [openIndex]);
 
   return (
-    <section className={ourFactoryDetails.section}>
+    // `reducedMotion="user"` (owner, performance-profiled report, point 5:
+    // "Respect prefers-reduced-motion exactly as it already does") -- the
+    // two `motion.div layout` elements below (the chip and its detail
+    // panel) aren't driven by a CSS `@media` query the way the rest of
+    // this section's `motion-reduce:` classes are, so they need Framer
+    // Motion's own equivalent: this disables their layout animations
+    // (they still resize, just instantly) whenever the OS-level
+    // `prefers-reduced-motion: reduce` is set, matching every other
+    // animated element on this page.
+    <MotionConfig reducedMotion="user">
+      <section className={ourFactoryDetails.section}>
       <div className={ourFactoryDetails.inner}>
         <div className={ourFactoryDetails.headingRow}>
           <div className={ourFactoryDetails.headingCol}>
@@ -179,57 +185,24 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
             </button>
           </div>
 
-          {/* Hidden width-measurement clones -- see the `chipWidths` state
-              comment above. Each renders the exact closed-shape markup
-              (icon + label, same padding) so its own `offsetWidth` matches
-              the real closed pill precisely; `invisible` (not `hidden`)
-              keeps it participating in layout while unpainted, and
-              `aria-hidden`/`pointer-events-none` keep it out of the
-              accessibility tree and out of the way of real clicks.
-              `w-full overflow-hidden` (real bug, found live: a real
-              horizontal page overflow at the 360px min mobile viewport) --
-              `visibility:hidden` content still counts toward the page's
-              own `scrollWidth` even though nothing paints, so on a
-              narrow viewport the widest label's own natural width (e.g.
-              "Gusseted construction") could exceed the visible viewport
-              and silently force real horizontal scroll. Capping this
-              wrapper's own width to its positioned ancestor (effectively
-              the viewport, since nothing between here and it is
-              `position: relative`) and clipping anything past that
-              removes it from the page's scroll size entirely, regardless
-              of how wide any one label's own measurement box gets. */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none invisible absolute left-0 top-0 flex w-full flex-col items-start overflow-hidden"
-          >
-            {items.map((item, index) => (
-              <div
-                key={item.label}
-                ref={(el) => {
-                  measureRefs.current[index] = el;
-                }}
-                className={cx(ourFactoryDetails.item, ourFactoryDetails.itemClosed)}
-              >
-                <div className={cx(ourFactoryDetails.itemButton, ourFactoryDetails.itemButtonClosed)}>
-                  <span className={cx(ourFactoryDetails.itemIconWrap, ourFactoryDetails.itemIconWrapClosed)}>
-                    <Plus className={ourFactoryDetails.itemIcon} />
-                  </span>
-                  <span className={ourFactoryDetails.itemLabel}>{item.label}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
           <div className={ourFactoryDetails.listCol} onKeyDown={handleListKeyDown}>
             {items.map((item, index) => {
               const isOpen = index === openIndex;
               const panelId = `${baseId}-panel-${index}`;
+              // Asymmetric open/collapse timing (340ms opening, 260ms
+              // collapsing), same values/curve `detailGrid`'s own comment
+              // documents -- now passed as Framer Motion's own `transition`
+              // prop (per-render, keyed on `isOpen`) instead of living in
+              // Tailwind `duration-*` classes, since the resize itself is
+              // no longer a CSS transition at all.
+              const chipTransition = { duration: isOpen ? 0.34 : 0.26, ease: [0.22, 1, 0.36, 1] as const };
 
               return (
-                <div
+                <motion.div
                   key={item.label}
+                  layout
+                  transition={chipTransition}
                   className={cx(ourFactoryDetails.item, isOpen ? ourFactoryDetails.itemOpen : ourFactoryDetails.itemClosed)}
-                  style={isOpen ? undefined : { width: chipWidths[index] || undefined }}
                 >
                   <button
                     type="button"
@@ -254,18 +227,18 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
                       {item.label}
                     </span>
                   </button>
-                  <div
+                  <motion.div
                     id={panelId}
                     inert={!isOpen}
+                    layout
+                    transition={chipTransition}
                     className={isOpen ? ourFactoryDetails.detailGridOpen : ourFactoryDetails.detailGrid}
                   >
-                    <div className={ourFactoryDetails.detailClip}>
-                      <div className={isOpen ? ourFactoryDetails.detailInnerOpen : ourFactoryDetails.detailInner}>
-                        <p className={ourFactoryDetails.itemDescription}>{item.description}</p>
-                      </div>
+                    <div className={isOpen ? ourFactoryDetails.detailInnerOpen : ourFactoryDetails.detailInner}>
+                      <p className={ourFactoryDetails.itemDescription}>{item.description}</p>
                     </div>
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
               );
             })}
           </div>
@@ -446,6 +419,7 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
           </div>
         </div>
       </div>
-    </section>
+      </section>
+    </MotionConfig>
   );
 }
