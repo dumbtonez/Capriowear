@@ -1711,21 +1711,17 @@ export const ourFactoryIntro = {
   // `pt-[72px]` -- matched here explicitly rather than left on the
   // shared 32px value, same "each placement gets its own top inset"
   // pattern `innerAfterHero`/`innerStacked` already establish at `xl:`.
-  // `xl:!pl-[276px]` (owner, 2026-09-11: "audited not just promised
-  // section make it 260px gap from the left" then "make 16px more gap
-  // from the left" -- 260px + 16px) -- diverges section 7 back off the
-  // shared `inner`'s own `xl:pl-[300px]` (unified with section 3 on
-  // 2026-09-09, see that token's own comment) for this placement only.
-  // `!` is required: `inner`'s own `xl:pl-[300px]` is the exact same
-  // `xl:`-prefixed utility at the same specificity, so without it
-  // Tailwind's generated stylesheet order (not this className's own
-  // position in `cx(inner, innerStacked)`) would silently decide which
-  // wins -- the same real risk this file already documents and guards
-  // against elsewhere (e.g. `ProductGallery`'s active-thumbnail border).
+  // Left inset tried a placement-specific 276px (260px, then +16px),
+  // reverted the same day (owner: "keep it 300 -- it looks odd" once
+  // compared against the rest of the page: "The factory behind
+  // Capriowear" right above it sits at the shared `inner`'s own
+  // `xl:pl-[300px]`, and the 24px jog between the two broke the page's
+  // own vertical left-edge alignment). Back to inheriting `inner`'s
+  // 300px unmodified -- no override needed here any more.
   // `xl:pt-[72px]` (owner, 2026-09-11: "make 24 px less gap from the top"
   // then, same turn, "or 32px less" -- the second, final value wins: was
   // 104px, -32px).
-  innerStacked: "max-md:pt-[72px] xl:pt-[72px] xl:!pl-[276px]",
+  innerStacked: "max-md:pt-[72px] xl:pt-[72px]",
   // max-md:gap-6/md:gap-8 (owner, 2026-09-09, mobile-only review: "make the
   // paragraph gap 24px") -- heading-to-paragraph gap drops to 24px below
   // md (was the shared 32px `gap-8` at every breakpoint); md:/xl: unchanged.
@@ -1818,14 +1814,22 @@ export const ourFactoryIntro = {
   // rather than a new hardcoded hex.
   // Column max-width only, passed as `GradientStat`'s own `className` --
   // the rest of the stat block (gap, divider, value, caption) now lives in
-  // the shared `gradientStat` recipe above. Two placement-specific values,
-  // same reasoning as `innerAfterHero`/`innerStacked` above: the first
-  // section's 2 stats are each 342px in Figma, the second's 3 stats are
-  // each 280px (narrower, so three columns plus the shared 72px gaps still
-  // read as a single deliberate row rather than a cramped one) -- both
-  // real per-node measurements, not a shared guess.
+  // the shared `gradientStat` recipe above. Originally two placement-
+  // specific values (342px for the first section's 2 stats, 280px for the
+  // second's 3, both real per-node Figma measurements) -- unified to one
+  // shared 342px (owner, 2026-09-11: "make the separators orange ones in
+  // this section smaller since we are using 3 stats here, make it same
+  // width as 2 on the top section" -- the divider itself is `gradientStat.
+  // divider`'s own `w-full`, i.e. exactly this column's own max-width, so
+  // matching the two placements' column widths is what makes their
+  // dividers read as the same size). `statColStacked` kept as its own
+  // token (not collapsed into reusing `statColAfterHero` directly) per
+  // this file's own established "keep the placement-specific token even
+  // once its value matches" precedent (see e.g. `desktopGalleryWrapLight`/
+  // `desktopWrap`'s own comment) -- a future placement-specific need is
+  // one value to change here, not a new prop to thread through again.
   statColAfterHero: "md:max-w-[342px]",
-  statColStacked: "md:max-w-[280px]",
+  statColStacked: "md:max-w-[342px]",
 };
 
 /* --- OurFactoryProcess (/our-factory section 5) ----------------------------- */
