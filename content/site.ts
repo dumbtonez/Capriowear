@@ -122,3 +122,14 @@ export const ORGANIZATION = {
   // owner has it -- never a placeholder URL. LinkedIn added 2026-08-26.
   sameAs: ["https://www.instagram.com/capriowear", "https://www.linkedin.com/company/capriowear"],
 };
+
+// WhatsApp CTA (owner, 2026-09-10, added alongside the "Request a Sample"
+// sticky bar sitewide): "+923348034434 -- Can I change it later, I am using
+// my personal number for now" -- a real, working number, but explicitly a
+// stand-in for the eventual business line. Swap this one value when the
+// real number is ready; every `wa.me` link sitewide reads from here, never
+// hand-typed a second time. `WHATSAPP_NUMBER` keeps the human-readable "+"
+// form for display; `wa.me` itself needs the digits-only form (no "+", no
+// spaces), built from it once here rather than re-stripped at each usage.
+export const WHATSAPP_NUMBER = "+923348034434";
+export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER.replace(/\D/g, "")}`;

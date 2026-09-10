@@ -112,6 +112,7 @@ import { OurFactoryHero } from "@/components/sections/OurFactoryHero";
 import { OurFactoryIntro } from "@/components/sections/OurFactoryIntro";
 import { OurFactoryProcess } from "@/components/sections/OurFactoryProcess";
 import { OurFactoryTeam } from "@/components/sections/OurFactoryTeam";
+import { FINAL_CTA_MARKER_ID, ProductCtasMobileBar } from "@/components/sections/ProductCtas";
 import { TrustPoints } from "@/components/sections/TrustPoints";
 import { header } from "@/components/ui/styles";
 import { home } from "@/content/home";
@@ -192,6 +193,11 @@ export default function OurFactoryPage() {
             verbatim (no page-specific copy given for this section) -- the
             same "reuse the homepage's own CTA as-is" precedent /services'
             own FIRST FinalCta usage already establishes. */}
+        {/* Invisible marker, watched by ProductCtasMobileBar's own
+            IntersectionObserver -- see that component's own header comment.
+            Placed immediately before this page's own closing FinalCta so
+            the bar slides away as this section is approached. */}
+        <div id={FINAL_CTA_MARKER_ID} aria-hidden="true" />
         <FinalCta
           content={home.finalCta}
           ticker={home.complianceTicker}
@@ -199,6 +205,17 @@ export default function OurFactoryPage() {
           compactMobileTop
           hideTickerMobile
         />
+        {/* ProductCtasMobileBar, the literal last child of `<main>` (owner,
+            2026-09-10: "let's add the fixed request a sample cta... make it
+            across home, services, and our factory pages") -- the exact
+            same component PLP/PDP already use, reused verbatim.
+            `hideInFirstFold` (same owner turn: "CTA should not appear in
+            the first fold") is an opt-in prop PLP/PDP don't pass,
+            unaffected. This page's own single FinalCta above already has
+            nothing after it but Footer, so its existing
+            `FINAL_CTA_MARKER_ID` marker (hide forever once reached) is
+            correct as-is -- no `hideWithinIds` needed here. */}
+        <ProductCtasMobileBar primaryCta={home.nav.cta} hideInFirstFold />
       </main>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />

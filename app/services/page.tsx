@@ -125,6 +125,7 @@ import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { OurServices } from "@/components/sections/OurServices";
+import { FINAL_CTA_MARKER_ID, ProductCtasMobileBar } from "@/components/sections/ProductCtas";
 import { ProductRange } from "@/components/sections/ProductRange";
 import { ServicesHero } from "@/components/sections/ServicesHero";
 import { ServicesHowWeWork } from "@/components/sections/ServicesHowWeWork";
@@ -138,6 +139,9 @@ import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 
 const CANONICAL = `${SITE_URL}/services`;
+
+/** Wraps the mid-page "Let's build your custom collection" FinalCta -- see its own usage below. */
+const MID_PAGE_CTA_ZONE_ID = "services-mid-page-cta-zone";
 
 export const metadata: Metadata = {
   title: services.metaTitle,
@@ -196,7 +200,18 @@ export default function ServicesPage() {
             is dropped along with it -- it has no effect once a real
             `ticker` is present (see FinalCta.tsx's own `!ticker &&`
             checks), so keeping it here would just be dead weight. */}
-        <FinalCta content={home.finalCta} ticker={home.complianceTicker} />
+        {/* Wrapped in a real element (not a thin marker) so
+            ProductCtasMobileBar's own `hideWithinIds` can watch this whole
+            section's natural `isIntersecting` -- owner, 2026-09-10: "when
+            page gets to 'let's build your custom collection' it should
+            disappear... when [you] pass the section, it should appear
+            again" (real content follows -- CertifiedCompliant, TrustPoints,
+            Faq -- so this can't reuse `FINAL_CTA_MARKER_ID`'s own "hide
+            forever" logic, meant for the page's own closing CTA below,
+            which has nothing after it). */}
+        <div id={MID_PAGE_CTA_ZONE_ID}>
+          <FinalCta content={home.finalCta} ticker={home.complianceTicker} />
+        </div>
         <CertifiedCompliant content={home.certified} pageVariant="services" />
         <TrustPoints
           heading={services.responsibleMake.heading}
@@ -220,6 +235,11 @@ export default function ServicesPage() {
             mobile now falls back to `mobileCtaBlockNoTicker`'s spacing
             instead (`compactMobileTop`'s own `mobileTickerBlockTight`
             override is moot with no ticker block to apply it to). */}
+        {/* Invisible marker, watched by ProductCtasMobileBar's own
+            IntersectionObserver -- see that component's own header comment.
+            Placed immediately before this page's own closing FinalCta so
+            the bar slides away as this section is approached. */}
+        <div id={FINAL_CTA_MARKER_ID} aria-hidden="true" />
         <FinalCta
           content={services.finalCta}
           ticker={services.complianceBar}
@@ -227,6 +247,15 @@ export default function ServicesPage() {
           compactMobileTop
           hideTickerMobile
         />
+        {/* ProductCtasMobileBar, the literal last child of `<main>` (owner,
+            2026-09-10: "let's add the fixed request a sample cta... make it
+            across home, services, and our factory pages") -- the exact
+            same component PLP/PDP already use, reused verbatim.
+            `hideInFirstFold` (same owner turn: "CTA should not appear in
+            the first fold") and `hideWithinIds` (see the marker's own
+            comment above) are both opt-in props PLP/PDP don't pass,
+            unaffected. */}
+        <ProductCtasMobileBar primaryCta={home.nav.cta} hideWithinIds={[MID_PAGE_CTA_ZONE_ID]} hideInFirstFold />
       </main>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />

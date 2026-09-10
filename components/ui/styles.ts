@@ -6720,6 +6720,25 @@ export const productCtas = {
   // 2026-09-07) -- pairs with desktopRow's own threshold above.
   mobileBar:
     "sticky inset-x-0 bottom-0 z-10 flex max-h-[60px] w-full items-center justify-center overflow-hidden backdrop-blur-sm px-5 py-2 shadow-[0px_-4px_16px_rgba(18,19,23,0.06)] transition-[max-height,opacity] duration-300 ease-out xl:hidden",
+  // Row holding the new WhatsApp button beside the existing CTA button
+  // (owner, 2026-09-10: "along with the cta, we want to add Whatsapp icon
+  // too" -- net new, no Figma frame for this pairing). `w-full` at real
+  // mobile (matches `mobileButton`'s own former full-bleed width), capped
+  // at a fixed max-width and centred by the bar's own `justify-center`
+  // from `md:` up -- the same "stop stretching into an ugly full-bleed
+  // stripe past phone width" fix `mobileButton` used to apply to itself
+  // alone, now applied to the pair as a unit.
+  mobileBarRow: "flex w-full items-center gap-3 md:max-w-[360px]",
+  // WhatsApp button: a fixed 44px circle, matching the CTA button's own
+  // 44px height (`mobileButton`'s `!min-h-[44px]`) so the pair reads as
+  // one row, not two mismatched controls. `shrink-0` so the CTA button
+  // beside it (now `flex-1`) never squeezes this one narrower. Brand green
+  // (`#25D366`, WhatsApp's own mark colour) -- not a sitewide token, this
+  // is the one place the brand's own colour is the point, same reasoning
+  // `icons/SocialIcons.tsx`'s glyphs already lean on brand recognition.
+  whatsappButton:
+    "flex size-11 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-paper transition-opacity hover:opacity-90",
+  whatsappIcon: "size-6",
   // Owner spec, 2026-09-02: "when it gets to the cta section, remove the
   // fixed cta automatically" -- collapses `max-height` to 0 (not `hidden`/
   // `display:none`, so it still animates) the instant the marker fires.
@@ -6757,19 +6776,13 @@ export const productCtas = {
   // without it, Tailwind's own generated stylesheet order (not this
   // className's position) decides which wins, the exact bug already found
   // and fixed once on this gallery's own active-thumbnail border.
-  // Full-width stays real-mobile only (`max-md:`) -- owner report,
-  // 2026-09-03: this bar reads fine edge-to-edge on a phone, but the same
-  // `w-full` inside a much wider tablet viewport stretched into an ugly
-  // full-bleed stripe. From `md:` (768px) up, the button caps at a fixed
-  // minimum width and centers in the bar instead of stretching to fill
-  // it; the bar itself (`mobileBar`, full-bleed/sticky) is unchanged --
-  // only the button inside it stops growing past a normal CTA width.
-  // Unlike `desktopRow`/`mobileBar` above, this `md:` stays as-is through
-  // the 2026-09-07 revert: `mobileBar` now renders all the way to 1279px
-  // again, so this fix (avoiding a full-bleed button at real tablet width)
-  // is newly relevant across the whole 768-1279px range it covers, not
-  // superseded by it.
-  mobileButton: "w-full !min-h-[44px] !text-[1rem] md:mx-auto md:w-auto md:min-w-[280px]",
+  // `flex-1`, not its own `w-full`/`md:w-auto md:min-w-[280px]` any more
+  // (2026-09-10, alongside the new WhatsApp button beside it) -- the "stop
+  // stretching past phone width" job moved to the shared row wrapper
+  // (`mobileBarRow`'s own `md:max-w-[360px]`) now that this button isn't
+  // the bar's only child; `flex-1` just fills whatever the row leaves
+  // after the WhatsApp button's own fixed 44px, at every breakpoint alike.
+  mobileButton: "flex-1 !min-h-[44px] !text-[1rem]",
   // Desktop-only override for the secondary ("Download Catalog") button
   // (owner, 2026-09-01: "should have primary orange text and outline, on
   // hover should have this color FFF6F3") -- `Button`'s shared `secondary`

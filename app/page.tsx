@@ -29,6 +29,7 @@ import { Hero } from "@/components/sections/Hero";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { InsideFactory } from "@/components/sections/InsideFactory";
 import { OurServices } from "@/components/sections/OurServices";
+import { FINAL_CTA_MARKER_ID, ProductCtasMobileBar } from "@/components/sections/ProductCtas";
 import { Stats } from "@/components/sections/Stats";
 import { TrustSignals } from "@/components/sections/TrustSignals";
 import { WhatWeMake } from "@/components/sections/WhatWeMake";
@@ -43,6 +44,9 @@ import { breadcrumbSchema, faqSchema, megaMenuSchema, navigationSchema } from "@
 const OG_TITLE = "Capriowear | Custom Activewear & Teamwear Manufacturer in Pakistan";
 const OG_DESCRIPTION =
   "OEM, ODM and private label activewear and teamwear, factory-direct from Sialkot, Pakistan. Low MOQ from 50 pieces, custom from fabric to packaging, DDP worldwide.";
+
+/** Wraps the mid-page "Let's build your custom collection" FinalCta -- see its own usage below. */
+const MID_PAGE_CTA_ZONE_ID = "home-mid-page-cta-zone";
 
 export const metadata: Metadata = {
   title: DEFAULT_TITLE,
@@ -129,10 +133,47 @@ export default function Home() {
         <Stats items={home.stats} />
         <InsideFactory content={home.insideFactory} />
         <Exhibitions content={home.exhibitions} />
-        <FinalCta content={home.finalCta} ticker={home.complianceTicker} secondaryCta={home.finalCta.secondaryCta} />
+        {/* Wrapped in a real element (not a thin marker) so
+            ProductCtasMobileBar's own `hideWithinIds` can watch this whole
+            section's natural `isIntersecting` -- owner, 2026-09-10: "when
+            page gets to 'let's build your custom collection' it should
+            disappear... when [you] pass the section, it should appear
+            again" (real content follows -- HowItWorks, Faq -- so this
+            can't reuse `FINAL_CTA_MARKER_ID`'s own "hide forever" logic,
+            meant for a true closing CTA with nothing after it). */}
+        <div id={MID_PAGE_CTA_ZONE_ID}>
+          <FinalCta content={home.finalCta} ticker={home.complianceTicker} secondaryCta={home.finalCta.secondaryCta} />
+        </div>
         <HowItWorks content={home.howItWorks} />
         <Faq content={home.faq} />
-        <FinalCta content={home.closingCta} secondaryCta={home.closingCta.secondaryCta} />
+        {/* No more closing "Still have questions?" CTA here (owner,
+            2026-09-10: "remove still have questions cta under faq") --
+            `home.closingCta` stays defined in content/home.ts (not dead
+            content: every PLP/PDP/teamwear page still reads its own
+            `secondaryCta` for their own "Download Catalog" button), just
+            no longer rendered as a full section on this page. Faq is now
+            the page's own last real section before the sticky bar/Footer. */}
+        {/* Invisible marker, watched by ProductCtasMobileBar's own
+            IntersectionObserver (`hideNearIds`, its own default
+            `FINAL_CTA_MARKER_ID`) -- owner follow-up, same turn: "at the
+            footer, the cta bar should disappear again." Removing the
+            closing CTA section above left nothing marking the approach to
+            Footer, so the bar (revealed again after the mid-page zone)
+            just stayed visible the rest of the way down -- this marker is
+            the fix, placed right before Footer with no CTA section of its
+            own to wrap (there isn't one here any more). */}
+        <div id={FINAL_CTA_MARKER_ID} aria-hidden="true" />
+        {/* ProductCtasMobileBar, the literal last child of `<main>` (owner,
+            2026-09-10: "let's add the fixed request a sample cta on the
+            homepage too. the one we use on PLP, PDP... make it across home,
+            services, and our factory pages") -- the exact same component
+            those pages already use (components/sections/ProductCtas.tsx),
+            reused verbatim, not a second copy. `hideInFirstFold` (same
+            owner turn: "CTA should not appear in the first fold... after
+            scrolling 1, 2 sections... it should be shown") and
+            `hideWithinIds` (see the marker's own comment above) are both
+            opt-in props PLP/PDP don't pass, unaffected. */}
+        <ProductCtasMobileBar primaryCta={home.nav.cta} hideWithinIds={[MID_PAGE_CTA_ZONE_ID]} hideInFirstFold />
       </RevealMain>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />
