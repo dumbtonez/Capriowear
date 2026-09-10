@@ -40,6 +40,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { DesktopChevron, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
+import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
 import { TextReveal } from "@/components/TextReveal";
 import { cardCarousel, ourFactoryTeam } from "@/components/ui/styles";
@@ -53,6 +54,21 @@ export type OurFactoryTeamProps = {
 
 const ITEM_WIDTH = 500;
 const ITEM_GAP = 40;
+
+// Mobile/tablet slider constants, identical to `Exhibitions.tsx`'s own
+// (owner, 2026-09-10: "for them use the same component we used for
+// homepage exhibition section images style") -- see `ourFactoryTeam.
+// sliderTrack`'s own comment in components/ui/styles.ts.
+const SLIDER_WIDTH_MOBILE = 300;
+const SLIDER_WIDTH_TABLET = 469;
+const SLIDER_ACTIVE_HEIGHT_MOBILE = 340;
+const SLIDER_INACTIVE_HEIGHT_MOBILE = 248;
+const SLIDER_ACTIVE_HEIGHT_TABLET = 532;
+const SLIDER_INACTIVE_HEIGHT_TABLET = 388;
+
+function lerp(from: number, to: number, t: number) {
+  return from + (to - from) * t;
+}
 
 function Subline({ segments }: { segments: NoteSegment[] }) {
   return (
@@ -95,33 +111,43 @@ function DesktopScroller({ media }: { media: typeof ourFactory.teamGallery.media
   );
 }
 
+// Mirrors `Exhibitions.tsx`'s own `MobileCarousel` component-for-component
+// (owner, 2026-09-10: "for them use the same component we used for
+// homepage exhibition section images style") -- the nearest-to-centre card
+// grows to the active height, its neighbours shrink to the inactive
+// height, animated continuously via each frame's real `scrollLeft`, using
+// `MediaPlaceholder` (not this page's usual `ParallaxMedia`, which the
+// hero photo above keeps unchanged) to match Exhibitions' own image
+// treatment exactly.
 function Slider({ media }: { media: typeof ourFactory.teamGallery.media }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isTablet, setIsTablet] = useState(false);
+  useEffect(() => {
+    const query = window.matchMedia("(min-width: 768px)");
+    const update = () => setIsTablet(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+  const cardWidth = isTablet ? SLIDER_WIDTH_TABLET : SLIDER_WIDTH_MOBILE;
+  const activeHeight = isTablet ? SLIDER_ACTIVE_HEIGHT_TABLET : SLIDER_ACTIVE_HEIGHT_MOBILE;
+  const inactiveHeight = isTablet ? SLIDER_INACTIVE_HEIGHT_TABLET : SLIDER_INACTIVE_HEIGHT_MOBILE;
 
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
 
-    // Nearest-item detection via each item's own real DOM offset, not a
-    // pitch-math formula (`width + gap`) -- found live, that formula
-    // drifted a full index off because it didn't account for the track's
-    // own leading `px-5`/`md:px-8` scroll-snap padding, which shifts every
-    // item's real snap position by that same amount. Same "compare each
-    // item's own centre to the track's centre" technique CardCarousel.tsx
-    // already uses for its own dot pagination, not a new one -- robust to
-    // padding/gap/breakpoint changes since it reads real layout instead of
-    // assuming a formula.
     let ticking = false;
     const update = () => {
-      const trackCenter = track.scrollLeft + track.clientWidth / 2;
+      const scrollLeft = track.scrollLeft;
       let nearest = 0;
       let nearestDistance = Infinity;
       itemRefs.current.forEach((item, index) => {
         if (!item) return;
-        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
-        const distance = Math.abs(itemCenter - trackCenter);
+        const distance = Math.min(Math.abs(scrollLeft - index * cardWidth) / cardWidth, 1);
+        item.style.height = `${lerp(activeHeight, inactiveHeight, distance)}px`;
         if (distance < nearestDistance) {
           nearestDistance = distance;
           nearest = index;
@@ -140,7 +166,7 @@ function Slider({ media }: { media: typeof ourFactory.teamGallery.media }) {
     update();
     track.addEventListener("scroll", onScroll, { passive: true });
     return () => track.removeEventListener("scroll", onScroll);
-  }, [media.length]);
+  }, [cardWidth, activeHeight, inactiveHeight]);
 
   return (
     <div className={ourFactoryTeam.sliderWrap}>
@@ -151,9 +177,10 @@ function Slider({ media }: { media: typeof ourFactory.teamGallery.media }) {
             ref={(el) => {
               itemRefs.current[index] = el;
             }}
-            className={cx(ourFactoryTeam.sliderItem, ourFactoryTeam.sliderItemHeight[mediaItem.size])}
+            className={ourFactoryTeam.sliderItem}
+            style={{ height: index === 0 ? activeHeight : inactiveHeight }}
           >
-            <ParallaxMedia label={mediaItem.label} radius="none" showLabel={false} className="h-full" />
+            <MediaPlaceholder label={mediaItem.label} radius="none" showLabel={false} className="h-full" />
           </div>
         ))}
       </div>

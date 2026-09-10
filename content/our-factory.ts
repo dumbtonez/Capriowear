@@ -57,13 +57,23 @@ type SampleDetail = {
   image?: { src: string };
 };
 
+// `bold: true` here means "white" (same colour-only convention
+// `ourFactoryIntro.paragraphBold` and `servicesIntro.paragraphBold` both
+// use -- see those tokens' own comments), not literal bold weight. Owner,
+// 2026-09-10, mobile-only review: "every order is produced in house to
+// with the factory, make it white" -- extends the white run from "Every
+// order is produced in-house" through "work directly with the factory" as
+// one continuous phrase, rather than the previous two disjoint white spans
+// ("from fabric to finished..." and "work directly with the factory")
+// separated by a grey ". You " in between.
 const introParagraph: NoteSegment[] = [
   {
-    text: "Capriowear is the activewear and teamwear division of Caprio Sports, a cut-and-sew apparel manufacturer in Sialkot, Pakistan. Every order is produced in-house, ",
+    text: "Capriowear is the activewear and teamwear division of Caprio Sports, a cut-and-sew apparel manufacturer in Sialkot, Pakistan. ",
   },
-  { text: "from fabric to finished, retail-ready packaging", bold: true },
-  { text: ". You " },
-  { text: "work directly with the factory", bold: true },
+  {
+    text: "Every order is produced in-house, from fabric to finished, retail-ready packaging. You work directly with the factory",
+    bold: true,
+  },
   { text: " that makes your product, not a trading agent placing it elsewhere." },
 ];
 

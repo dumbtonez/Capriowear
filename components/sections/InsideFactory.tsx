@@ -277,7 +277,8 @@ function MobileCarousel({
             }}
             className={cx(
               cardSize === "compact" ? insideFactory.mobileCardCompact : insideFactory.mobileCardWide,
-              index === activeIndex && insideFactory.mobileCardActiveShadow,
+              index === activeIndex &&
+                (tone === "light" ? insideFactory.mobileCardActiveShadowLight : insideFactory.mobileCardActiveShadow),
             )}
             style={{ height: index === 0 ? activeHeight : inactiveHeight }}
           >

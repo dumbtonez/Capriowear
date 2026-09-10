@@ -227,6 +227,7 @@ function TabletCarousel({ items }: { items: typeof home.trustStrip }) {
 
 export function TrustSignals({ items, pageVariant = "home" }: TrustSignalsProps) {
   const desktopWrap = pageVariant === "services" ? trustSignals.desktopWrapServices : trustSignals.desktopWrap;
+  const mobileWrap = pageVariant === "services" ? trustSignals.mobileWrapServices : trustSignals.mobileWrap;
 
   return (
     <section>
@@ -242,7 +243,7 @@ export function TrustSignals({ items, pageVariant = "home" }: TrustSignalsProps)
       </div>
 
       {/* Mobile: artwork on top, one divided list below */}
-      <div className={trustSignals.mobileWrap}>
+      <div className={mobileWrap}>
         <MediaPlaceholder
           label="Trust signals artwork"
           ratio="16:11"

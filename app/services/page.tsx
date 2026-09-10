@@ -105,12 +105,17 @@
 // homepage final CTA + compliance bar component"), distinct from Section
 // 8's own earlier usage under How It Works -- same component, this page's
 // own content (`services.finalCta`, `services.complianceBar`), not
-// `home.finalCta`/`home.complianceTicker`. Adds a real primary+secondary
+// `home.finalCta`/`home.complianceTicker`. Added a real primary+secondary
 // button pair (`FinalCta`'s new `secondaryCta` prop, added the same day)
 // and a shorter, owner-specified 5-item compliance bar (`home.
 // complianceTicker`'s full list has 8) -- the same "two FinalCta usages on
-// one page" pattern the homepage itself already established (`home.
-// finalCta` then `home.closingCta`).
+// one page" pattern the homepage itself established (`home.finalCta` then
+// `home.closingCta`). Removed entirely, 2026-09-10 (owner, mobile-only
+// review: "remove the cta under the faq section") -- same "drop the
+// closing CTA, keep the FINAL_CTA_MARKER_ID marker right before Footer"
+// fix already applied to the homepage's own closing CTA the same session.
+// `services.finalCta`/`services.complianceBar` stay defined in
+// content/services.ts, unused for now, matching that same precedent.
 // Footer (final, owner: "add the footer"): reuses the sitewide `Footer`
 // verbatim, `home.footer`/`ORGANIZATION.sameAs` -- same content/component
 // every other page renders, no Services-specific footer copy exists.
@@ -221,32 +226,17 @@ export default function ServicesPage() {
           sidePadding="services"
         />
         <Faq content={services.faq} />
-        {/* `compactMobileTop` (owner, 2026-09-07: "under FAQs, standard on
-            every order should have the same space as it has on PLP") --
-            same prop, same reasoning, the PLP's own FinalCta-after-Faq
-            usage already established (see FinalCta.tsx's own doc comment
-            on `compactMobileTop`): Faq's `mobileSection` already supplies
-            the standard 72px bottom gap, so this ticker block's own
-            72px top padding would double it to 144px without this.
-            `hideTickerMobile` (owner, 2026-09-08: "on services mobile,
-            remove 'standard on every order' under the faq cta, only keep
-            the cta") -- desktop keeps its own Marquee (`ticker` is still
-            passed, so `services.complianceBar` still renders there),
-            mobile now falls back to `mobileCtaBlockNoTicker`'s spacing
-            instead (`compactMobileTop`'s own `mobileTickerBlockTight`
-            override is moot with no ticker block to apply it to). */}
         {/* Invisible marker, watched by ProductCtasMobileBar's own
             IntersectionObserver -- see that component's own header comment.
-            Placed immediately before this page's own closing FinalCta so
-            the bar slides away as this section is approached. */}
+            Placed right before Footer (owner, 2026-09-10: "remove the cta
+            under the faq section" -- the closing FinalCta that used to sit
+            here is gone; `services.finalCta`/`services.complianceBar`
+            content stays defined, unused for now, same "content survives
+            even if this render disappears" precedent the homepage's own
+            closing-CTA removal already set) so the sticky bar still hides
+            once the reader nears the very end of the page, matching the
+            homepage's own "hide near Footer" behaviour. */}
         <div id={FINAL_CTA_MARKER_ID} aria-hidden="true" />
-        <FinalCta
-          content={services.finalCta}
-          ticker={services.complianceBar}
-          secondaryCta={services.finalCta.secondaryCta}
-          compactMobileTop
-          hideTickerMobile
-        />
         {/* ProductCtasMobileBar, the literal last child of `<main>` (owner,
             2026-09-10: "let's add the fixed request a sample cta... make it
             across home, services, and our factory pages") -- the exact

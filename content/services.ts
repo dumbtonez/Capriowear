@@ -33,10 +33,20 @@ import type { NoteSegment } from "@/content/activewear/types";
 // new frame's second stat is "100,000+ Monthly capacity" instead (Stats'
 // own confirmed figures, not a third number invented for this section).
 // See ServicesIntro.tsx for the new dark, stats-row layout.
+// `bold: true` here means "white" (`servicesIntro.paragraphBold` is
+// `font-normal text-paper`, colour only, no weight change -- see that
+// token's own comment), not literal bold weight -- reused as-is to extend
+// the white treatment to "custom from fabric to packaging, with" (owner,
+// 2026-09-10, mobile-only review: "subline text make it white 'custom from
+// fabric to packaging, with'"). The "a" before "cut-and-sew manufacturer"
+// was briefly whitened the same turn too, then reverted the same review
+// ("make a before cut back to non white") -- back to its original grey,
+// merged into the surrounding sentence.
 const introParagraph: NoteSegment[] = [
   {
-    text: "Capriowear is a custom activewear and teamwear manufacturer offering OEM, ODM and private label production, custom from fabric to packaging, with ",
+    text: "Capriowear is a custom activewear and teamwear manufacturer offering OEM, ODM and private label production, ",
   },
+  { text: "custom from fabric to packaging, with ", bold: true },
   { text: "low minimums and worldwide delivery", bold: true },
   { text: ". We are the activewear and teamwear division of Caprio Sports, a " },
   { text: "cut-and-sew manufacturer in Sialkot, Pakistan.", bold: true },
