@@ -1816,20 +1816,19 @@ export const ourFactoryIntro = {
   // the rest of the stat block (gap, divider, value, caption) now lives in
   // the shared `gradientStat` recipe above. Originally two placement-
   // specific values (342px for the first section's 2 stats, 280px for the
-  // second's 3, both real per-node Figma measurements) -- unified to one
-  // shared 342px (owner, 2026-09-11: "make the separators orange ones in
-  // this section smaller since we are using 3 stats here, make it same
-  // width as 2 on the top section" -- the divider itself is `gradientStat.
-  // divider`'s own `w-full`, i.e. exactly this column's own max-width, so
-  // matching the two placements' column widths is what makes their
-  // dividers read as the same size). `statColStacked` kept as its own
-  // token (not collapsed into reusing `statColAfterHero` directly) per
-  // this file's own established "keep the placement-specific token even
-  // once its value matches" precedent (see e.g. `desktopGalleryWrapLight`/
-  // `desktopWrap`'s own comment) -- a future placement-specific need is
-  // one value to change here, not a new prop to thread through again.
+  // second's 3, both real per-node Figma measurements), tried unifying to
+  // one shared 342px, then corrected once more (owner, 2026-09-11: "i said
+  // use the small space for separator as we have 3 stats in this section
+  // so the overall the width of those 2 stats match the 3 stats width
+  // here" -- not each COLUMN matching 342px, the whole ROW's total span
+  // matching the top section's total row span). Top section: 2 columns +
+  // 1 gap = 2×342 + 72 = 756px total. This section's own `statsRow` uses
+  // the same shared 72px gap (2 gaps for 3 columns), so solving 3×w + 144
+  // = 756 gives w = 204px -- each column (and its own `w-full` divider)
+  // narrower, but the row's own overall width now matches the top
+  // section's exactly, not each individual divider.
   statColAfterHero: "md:max-w-[342px]",
-  statColStacked: "md:max-w-[342px]",
+  statColStacked: "md:max-w-[204px]",
 };
 
 /* --- OurFactoryProcess (/our-factory section 5) ----------------------------- */
