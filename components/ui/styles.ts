@@ -5672,8 +5672,12 @@ export const productCard = {
   // line the same way a wide desktop column does would read wrong; this
   // keeps the "wrap, don't truncate" mobile behavior through the full
   // 2-column range and only grows the text size.
-  title: "xl:truncate max-md:text-[0.875rem] md:text-[1.125rem] font-medium text-[#21272a]",
-  subline: "truncate max-md:text-[0.75rem] md:text-[1rem] text-[#727272]",
+  // Mobile bumped to 15px/13px (owner, 2026-09-10: "make mobile 15 and 13
+  // subline"), a deliberate override of the Figma-literal 14px/12px this
+  // recipe otherwise runs on -- explicit owner value, not re-derived from
+  // any node.
+  title: "xl:truncate max-md:text-[0.9375rem] md:text-[1.125rem] font-medium text-[#21272a]",
+  subline: "truncate max-md:text-[0.8125rem] md:text-[1rem] text-[#727272]",
   // 220px fixed image height at real mobile (node 590:1173: 156x220
   // tiles) -- passed as an extra className on MediaPlaceholder alongside
   // its own `ratio="79:100"` aspect class: an explicit height wins over
@@ -5688,7 +5692,11 @@ export const productCard = {
   // `xl:`, no height override applies, so the box falls through to its
   // own `aspect-[79/100]` ratio -- proportional at every tablet width,
   // same ratio the desktop card already uses.
-  image: "max-md:h-[220px]",
+  // Bumped to 260px (owner, 2026-09-10, confirmed after a live before/after
+  // comparison: taller mobile tiles read less cramped) -- was 220px,
+  // Figma node 590:1173's own literal 156x220 mobile tile. Deliberate
+  // override, permanent.
+  image: "max-md:h-[260px]",
 };
 
 // rounded-none on every cell at every breakpoint (owner request,
@@ -6756,7 +6764,12 @@ export const productInfo = {
   // full-width column at every width below `xl:` today, which is wider
   // than the 514px desktop column the `xl:tracking-normal` reset was
   // tuned for -- more room, not less, so no new wrap risk.
-  heading: "w-full text-[1.25rem] leading-7 tracking-[-0.02em] md:text-2xl md:leading-[30px] md:tracking-normal font-semibold text-text",
+  // Mobile bumped to 22px (owner, 2026-09-10: "make title 22px"), overriding
+  // the earlier 20px Figma-literal value (node 638:2541) -- explicit owner
+  // value. Line-height kept at 28px (leading-7); tracking/wrap behavior
+  // below `md` unchanged, re-check the 2-line wrap at 360px this was
+  // originally tuned for if the title copy ever runs longer.
+  heading: "w-full text-[1.375rem] leading-7 tracking-[-0.02em] md:text-2xl md:leading-[30px] md:tracking-normal font-semibold text-text",
   // 18px/28px-line-height regular -- text-lg/leading-7 match Figma's
   // literal values exactly, same reasoning as `heading` above. text-subline
   // (#17191e, owner, 2026-09-01: sitewide title+subline colour on white/
