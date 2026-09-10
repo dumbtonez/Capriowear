@@ -13,21 +13,20 @@
 // ctaSecondaryWrap, eyebrowSize) rather than forking new ones.
 //
 // Layer 2 (video): owner brief, "same as homepage reuse it" -- the exact
-// same MediaPlaceholder + RevealBox + play-control markup Hero.tsx's own
-// Layer 2 renders, same `hero.videoWrap`/`video`/`playWrap`/`playCircle`/
-// `playIcon`/`playLabel` tokens (Figma's 650px height / 79px inset match
-// Hero's own desktop video block exactly). No ticker layer on this page.
+// same `ScrollGrowVideo` (components/ScrollGrowVideo.tsx) Hero.tsx's own
+// Layer 2 renders, same `hero`-namespaced tokens (Figma's 650px height /
+// 79px inset match Hero's own desktop video block exactly). No ticker
+// layer on this page. The narrow-to-full-viewport scroll grow that
+// component carries applies here too (owner, 2026-09-11: "apply it on
+// other pages where it exist").
 //
 // Secondary CTA is desktop-only via the same `hero.ctaSecondaryWrap` (xl and
 // up) -- no mobile Figma frame exists yet for this page (owner is handling
 // mobile separately), so this follows the one confirmed sitewide pattern
 // rather than guessing.
-import { Play } from "lucide-react";
-
 import { Button } from "@/components/Button";
 import { Eyebrow } from "@/components/Eyebrow";
-import { MediaPlaceholder } from "@/components/MediaPlaceholder";
-import { RevealBox } from "@/components/RevealBox";
+import { ScrollGrowVideo } from "@/components/ScrollGrowVideo";
 import { TextReveal } from "@/components/TextReveal";
 import { hero, ourFactoryHero } from "@/components/ui/styles";
 import type { ourFactory } from "@/content/our-factory";
@@ -59,25 +58,7 @@ export function OurFactoryHero({ hero: content }: OurFactoryHeroProps) {
         </div>
       </div>
 
-      <div className={ourFactoryHero.videoWrap}>
-        <RevealBox>
-          <MediaPlaceholder
-            label={content.media.label}
-            tone="dark"
-            showLabel={false}
-            radius="none"
-            className={hero.video}
-            overlay={
-              <div className={hero.playWrap}>
-                <span className={hero.playCircle}>
-                  <Play className={hero.playIcon} aria-hidden="true" fill="currentColor" />
-                </span>
-                <span className={hero.playLabel}>Play Video</span>
-              </div>
-            }
-          />
-        </RevealBox>
-      </div>
+      <ScrollGrowVideo label={content.media.label} wrapClassName={ourFactoryHero.videoWrap} />
     </section>
   );
 }
