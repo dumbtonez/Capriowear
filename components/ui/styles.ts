@@ -86,9 +86,23 @@ export const button = {
 // split out from the transform so a real per-instance size override (e.g. the
 // Hero eyebrow, smaller on its real mobile design) can replace just the size,
 // not fight it -- see the `size` prop on Eyebrow.tsx.
+//
+// Mobile default is 16px/600/1.2, not the raw `text-overline` 20px (owner,
+// 2026-09-10, mobile-only review: "the eyebrow heading on all the sections
+// should be 16px font size semibold, some are big or small. make them
+// consistent") -- an Explore audit of every real eyebrow usage sitewide
+// found this exact 16px/600 value already the de facto standard almost
+// everywhere (each section pairing its own local `eyebrowSize` override with
+// this same string), with one real gap (HowItWorks' light-tone/homepage
+// usage, still on the bare 20px default) and one earlier fix (OurServices'
+// `pageVariant="home"` usage, same bug). Moving the value here, into the
+// component's own default, makes it the sitewide rule instead of a value
+// every section has to individually remember to override -- any future
+// section gets it for free with no `eyebrowSize` prop needed. Desktop is
+// unaffected (`md:text-overline`, the real 20px/600 Figma Overline style).
 export const eyebrow = {
   base: "uppercase",
-  size: "text-overline",
+  size: "max-md:text-[1rem] max-md:font-semibold max-md:leading-[1.2] md:text-overline",
   // Standing rule (owner call, 2026-08-24, applies everywhere, no
   // exceptions): an eyebrow paired with a heading is always #ABB5C0 on a
   // dark/black section, always #17191E on a light/white one. Replaces an
@@ -1120,8 +1134,33 @@ export const header = {
   // already-adaptive border-current was the one piece not actually
   // following its own stated reasoning, harmless while the header was
   // always dark, a real bug now that it isn't.
+  // `focus-visible:outline-offset-0` (owner-facing bug, 2026-09-10: "weird
+  // orange outline around the menu action"): the sitewide `:focus-visible`
+  // rule (app/globals.css) is a real accessibility feature, not something to
+  // strip -- but its default `outline-offset: 2px` floats a second, detached
+  // ring outside this button's own 1.5px pill border, reading as a stray
+  // double-ring rather than a highlighted control. Flush against the pill's
+  // own border instead (0 offset) keeps the same visible focus indicator for
+  // keyboard/touch users, just anchored to the shape instead of floating
+  // past it. `MobileNav.tsx`'s Close state reuses this exact same token
+  // (its own `closeRef.current?.focus()` on open triggers the identical
+  // ring), so this one fix covers both.
+  //
+  // `data-[quiet-focus=true]:focus-visible:outline-none` (same owner report,
+  // follow-up: the ring "still shows"/"comes back" -- turned out the offset
+  // fix above wasn't the whole bug). This trap always moves focus
+  // programmatically (into the Close button on open, back to this trigger on
+  // close, `MobileNav.tsx`'s own focus-restoration effect) -- confirmed live
+  // that Chromium's `:focus-visible` heuristic treats ANY script-called
+  // `.focus()` as keyboard-equivalent, unconditionally, so the ring showed
+  // after every plain tap/click too, not just real keyboard use. `MobileNav.
+  // tsx`'s own `focusQuietly` sets `data-quiet-focus="true"` only when the
+  // transition that triggered the move was itself pointer-driven (checked
+  // via `event.detail === 0` at the click that opened/closed the drawer),
+  // clearing it again on the element's own next blur -- real keyboard users
+  // (Tab, Escape) still get the full ring, unaffected.
   menuButton:
-    "xl:hidden inline-flex items-center gap-[9px] rounded-pill border-[1.5px] border-current px-6 py-3 text-current",
+    "xl:hidden inline-flex items-center gap-[9px] rounded-pill border-[1.5px] border-current px-6 py-3 text-current focus-visible:outline-offset-0 data-[quiet-focus=true]:focus-visible:outline-none",
   menuIconWrap: "flex size-[22px] items-center justify-center",
   menuIcon: "h-[19px] w-[22px]",
   // Same pill reused for the open drawer's "Close" state (MobileNav.tsx) --
@@ -1451,54 +1490,16 @@ export const hero = {
   playCircle: "inline-flex size-16 items-center justify-center rounded-pill bg-accent text-accent-ink xl:size-24",
   playIcon: "size-6 xl:size-8",
   playLabel: "text-body-lg text-paper",
-  // Mobile eyebrow is smaller than the Overline token on its real design --
-  // measured at ~16px (19px line box / 1.2 ratio), not Overline's fixed 20px.
-  // Overridden here rather than in the shared token, since no other section's
-  // mobile eyebrow has been confirmed against Figma yet.
-  // max-xl:/xl: are mutually exclusive media conditions -- corrected
-  // 2026-08-23 from an unprefixed text-[1rem]/leading-[1.2] plus xl:text-overline.
-  // That version had two real bugs, not one: the unprefixed classes could
-  // still win the cascade at desktop widths (What We Make's own copy of this
-  // exact shape proved it, see whatWeMake below), and it never set
-  // font-weight for mobile at all -- text-overline's semibold weight is part
-  // of that one token, so overriding just the size silently dropped weight
-  // to the browser default (400) on every mobile Hero render, undetected
-  // until this fix. font-semibold added explicitly for mobile now.
-  // Threshold moved xl:/max-xl: -> md:/max-md: (owner, 2026-09-04: use
-  // desktop sizes at tablet width) -- fixed 16px mobile snaps to the
-  // fixed 20px text-overline token from md: instead of xl:.
-  eyebrowSize: "max-md:text-[1rem] max-md:font-semibold max-md:leading-[1.2] md:text-overline",
-  // Mobile ticker fallback (Marquee is desktop-only, xl and up -- see Hero.tsx).
-  // 48px top and bottom (owner call, 2026-08-24): content inside a coloured,
-  // full-bleed background (Hero's bg-ink) always keeps this 48px inset from
-  // the box's own edges -- a fixed rule, not the section-to-section gap.
-  // The standard 72px gap to whatever comes next lives OUTSIDE this dark
-  // box entirely, as a margin on `hero.section`, not as extra padding here
-  // (padding here would just make the black box itself taller, not create a
-  // real gap -- that was the actual bug, corrected 2026-08-24).
-  // xl:hidden -> md:hidden (owner, 2026-09-03: the desktop Marquee ticker
-  // should show at tablet width, 768-1279px, not this mobile stacked-list
-  // fallback) -- see Hero.tsx's own comment on its sibling desktop wrapper.
-  tickerMobile: "container-p flex flex-col gap-8 pt-12 pb-12 md:hidden",
-  // 20px, 500 medium -- an explicit one-off (not a token; the size doesn't
-  // match Body Large's 400 weight or Overline's 600), given directly by the
-  // owner 2026-08-24.
-  tickerMobileLabel: "text-[1.25rem] font-medium leading-[1.2]",
-  tickerMobileList: "flex flex-col gap-3",
-  // 30px, 500 medium. The 30/500 pairing matches Heading 3 exactly, but h3 is
-  // a *fluid* token (scales with viewport, only reaching 30px at 1440px) --
-  // this block only ever renders below xl (1280px), so text-h3 here would
-  // actually render ~22px, not the fixed 30px asked for. A raw fixed value,
-  // not the token, is correct precisely because this usage needs a flat size
-  // a fluid token can't give it. Weight is 400 regular, not 500 medium --
-  // corrected 2026-08-24, a second correction on this same line (previously
-  // 24px/500 as a box-height guess, then wrongly given as 500 alongside the
-  // real 30px size).
-  // Colour corrected 2026-08-24 (owner call): #838D97 flat, not text-paper/70
-  // (an opacity-based grey that shifts with whatever's behind it). No
-  // existing colour token matches this hex, so it's a one-off arbitrary
-  // value scoped to this line, not a new sitewide token.
-  tickerMobileItem: "text-[1.875rem] font-normal leading-[1.2] text-[#838D97]",
+  // No `eyebrowSize` override any more (2026-09-10 cleanup): this exact
+  // 16px/600/1.2 mobile value, once a one-off confirmed here first, is now
+  // `eyebrow.size`'s own sitewide default -- see that token's own comment.
+  // `<Eyebrow>` picks it up automatically with no `size` prop needed.
+  // No more `tickerMobile*` tokens here (2026-09-10 cleanup): the mobile
+  // "Fully Custom Offerings" ticker now reads `servicesHero.tickerMobile*`
+  // directly (owner: "I have created a different similar variant on
+  // services page, let's use that here") -- see that recipe's own comment
+  // for the shared, left-aligned treatment both Hero.tsx and
+  // ServicesHero.tsx use.
 };
 
 /* --- OurFactoryHero (/our-factory sections 1-2) ----------------------------- */
@@ -1743,16 +1744,10 @@ export const ourFactoryProcess = {
   // eyebrow and title should have 12px") -- 12px below md; md:/xl: keep
   // the original 24px unchanged.
   headingGroup: "flex flex-col max-md:gap-3 md:gap-6",
-  // "WHAT WE MAKE" eyebrow's own mobile size (owner, 2026-09-09, mobile-
-  // only review: "WHAT WE MAKE font size should be the same as other
-  // eyebrow") -- this section's `<Eyebrow>` had never been given a mobile
-  // override at all, so it rendered `Eyebrow`'s bare default (`eyebrow.
-  // size`/`text-overline`, 20px) at every width, unlike every other
-  // section's own eyebrow, which explicitly drops to this project's
-  // established 16px/600/1.2-line-height mobile literal below `md:`
-  // (`certified.eyebrowSizeMobile`, `insideFactory.mobileEyebrowSize`,
-  // etc.) -- passed to `<Eyebrow size={...}>` in OurFactoryProcess.tsx.
-  eyebrowSize: "max-md:text-[1rem] max-md:font-semibold max-md:leading-[1.2] md:text-overline",
+  // No `eyebrowSize` override any more (2026-09-10 cleanup): this section's
+  // 16px/600/1.2 mobile fix (owner, 2026-09-09) is now `eyebrow.size`'s own
+  // sitewide default, so `<Eyebrow>` in OurFactoryProcess.tsx picks it up
+  // with no `size` prop needed.
   // No `heading` max-w token (owner correction, 2026-09-08: "still in 3
   // lines" -- a first pass used a 565px max-w to force this heading's real
   // 2-line Figma break, but `text-h1` is a fluid clamp that keeps growing
@@ -2557,25 +2552,27 @@ export const servicesHero = {
   // it same as used on the homepage" -- Hero's own `ScrollSpotlightList`
   // treatment, see ServicesHero.tsx), then an experimental tweak the same
   // day ("make the fully custom font to 24px auto and make the entire
-  // content center-aligned and see how it looks") -- a services-page-only
-  // fork of `hero.tickerMobile*` rather than editing those shared tokens,
-  // so the homepage's own mobile ticker (30px items, left-aligned) is
-  // untouched. `items-center`/`text-center` on both the block and the list
-  // (not just the label) since "entire content" was the ask. 24px on both
-  // the label and the list items (`text-[1.5rem]`, "24px" verbatim) with
+  // content center-aligned and see how it looks") -- originally a
+  // services-page-only fork of `hero.tickerMobile*`. Now the shared
+  // version instead (owner, 2026-09-10: "I have created a different
+  // similar variant on services page, let's use that here" -- Hero.tsx
+  // now reads these same tokens directly, `hero.tickerMobile*` removed as
+  // the now-redundant original it forked from) -- `items-center`/
+  // `text-center` dropped from both the block and the list (same owner
+  // turn: "make it left align on home and services both", overriding the
+  // center-align experiment above) so this is left-aligned on both pages
+  // it renders on. 24px on the label (`text-[1.5rem]`) with
   // `leading-normal` ("auto" -- CSS has no literal auto line-height
-  // keyword, `normal` is its real equivalent) replacing both elements' own
-  // fixed `leading-[1.2]`. Explicitly called out by the owner as a
-  // "see how it looks" experiment, not a confirmed design -- may get
-  // reverted or adjusted once seen live.
+  // keyword, `normal` is its real equivalent) unchanged from that
+  // experiment; only the alignment reverted.
   // pb-[60px] (owner, 2026-09-08: "12px more space from the bottom of the
   // content ... on mobile only" -- was pb-12/48px; desktop Marquee's own
-  // spacing is untouched).
-  tickerMobile: "container-p flex flex-col items-center gap-8 pt-12 pb-[60px] text-center md:hidden",
+  // spacing is untouched). Applies to both pages now too.
+  tickerMobile: "container-p flex flex-col gap-8 pt-12 pb-[60px] md:hidden",
   tickerMobileLabel: "text-[1.5rem] font-medium leading-normal",
   // 28px (owner, 2026-09-08: "16px more" then "reduce 8px" -- net +8px on
   // the gap-5/20px, 2026-09-07 baseline).
-  tickerMobileList: "flex flex-col items-center gap-7",
+  tickerMobileList: "flex flex-col gap-7",
   // Owner, 2026-09-08: item list ("Design & Color" and the remaining
   // paired items) sized up to 30px/34px -- label above it stays 24px/auto,
   // this is the list only.
@@ -3211,20 +3208,9 @@ export const whatWeMake = {
   // different components, not one recipe class. This is distinct from
   // `groupsGap` below (the gap *between* category groups, e.g. Activewear to
   // Teamwear & Uniforms) -- two different spacings, not one value reused.
-  // 16px mobile / 20px desktop -- the same one-off already established for
-  // Hero's own mobile eyebrow (hero.eyebrowSize), confirmed here too rather
-  // than assumed: this is the first other section to actually use
-  // SectionHeading with a real mobile Figma frame behind it. max-xl:/xl: are
-  // mutually exclusive media conditions, not two same-specificity utilities
-  // racing for the same property -- see the note on sectionHeading.heading.
-  // font-semibold set explicitly for mobile: overriding text-overline's size
-  // alone silently drops its paired 600 weight too (caught here and fixed
-  // retroactively in hero.eyebrowSize, which had carried the same bug
-  // unnoticed since Hero shipped).
-  // Threshold moved xl:/max-xl: -> md:/max-md: (owner, 2026-09-04: use
-  // desktop sizes at tablet width) -- fixed 16px mobile snaps to the
-  // fixed 20px text-overline token from md: instead of xl:.
-  eyebrowSize: "max-md:text-[1rem] max-md:font-semibold max-md:leading-[1.2] md:text-overline",
+  // No `eyebrowSize` override any more (2026-09-10 cleanup): this section's
+  // 16px/600 mobile eyebrow is now `eyebrow.size`'s own sitewide default,
+  // so both `<SectionHeading>` calls below pick it up automatically.
   // SectionHeading to the groups list.
   root: "flex flex-col gap-12 xl:gap-[90px]",
   // Gap *between* category groups (owner call, 2026-08-23, revised down the
@@ -3557,12 +3543,8 @@ export const certified = {
   // SectionHeading's `headingClassName`, desktop instance only -- mobile's
   // own w-full column already wraps correctly without it.
   headingNarrow: "max-w-[812px]",
-  // 16px mobile eyebrow, the same one-off value already confirmed for Hero
-  // and What We Make. No max-xl:/xl: split needed here (unlike those two):
-  // this section renders two fully separate SectionHeading instances, one
-  // per breakpoint wrapper, not one shared instance spanning both, so this
-  // value is only ever active inside the mobile-only wrapper already.
-  eyebrowSizeMobile: "text-[1rem] font-semibold leading-[1.2]",
+  // No `eyebrowSizeMobile` override any more (2026-09-10 cleanup): this
+  // 16px/600 value is now `eyebrow.size`'s own sitewide default.
   // Desktop: one static row, no ticker, no border/box -- confirmed via
   // get_design_context (bare logo marks, no bg/border on any of the 6
   // frames). Centred within the standard content width, 69px gap between
@@ -3676,11 +3658,12 @@ export const stats = {
   // Desktop only now -- see `mobileItemText` below for mobile's own,
   // narrower value.
   itemText: "flex flex-col gap-[16px]",
-  // Mobile-only value-to-caption gap, 8px (owner, 2026-09-09, same-day
-  // follow-up: "since 2009 titles and subline should have 8px gap") --
-  // diverges from desktop's 16px, so `Stats.tsx`'s mobile item map uses
-  // this instead of the shared `itemText` above.
-  mobileItemText: "flex flex-col gap-2",
+  // Mobile-only value-to-caption gap, 4px (owner, 2026-09-10, mobile-only
+  // review: "make that 8px gap to 4px from title to subline for since 2009
+  // and others" -- was 8px, itself a 2026-09-09 revision down from
+  // desktop's 16px). Diverges from desktop's 16px, so `Stats.tsx`'s mobile
+  // item map uses this instead of the shared `itemText` above.
+  mobileItemText: "flex flex-col gap-1",
   // The stat divider: a plain 2-stop linear gradient, not an image asset
   // -- Figma's own line asset (node 894:321 etc.) is an SVG whose
   // gradient stops are `#FF791B` -> `#121317`, an exact match for this
@@ -3709,10 +3692,11 @@ export const stats = {
   // bottom") -- the last stat otherwise sat flush with this list's own
   // bottom edge, same 0px-gap issue confirmed on desktop.
   mobileList: "flex flex-col gap-[32px] pb-[40px]",
-  // 30px/500 (medium)/normal leading -- owner call, 2026-08-24, sized up
-  // from the Figma-confirmed 24px (text-h5 exact match). Kept the medium
-  // weight and normal leading from that match, size only.
-  mobileValue: "text-[1.875rem] font-medium leading-normal",
+  // 40px (owner, 2026-09-10, mobile-only review: "since 2009, 75,000 and
+  // remaining make these fonts 40px" -- was 30px, itself sized up
+  // 2026-08-24 from the Figma-confirmed 24px/text-h5 match). Weight/leading
+  // unchanged (medium/normal), only the size moved.
+  mobileValue: "text-[2.5rem] font-medium leading-normal",
   // 18px/400/24px leading, #838d97 -- same colour as desktop, confirmed
   // separately on the mobile frame.
   mobileCaption: "text-[1.125rem] font-normal leading-[24px] text-[#838D97]",
@@ -3917,15 +3901,9 @@ export const insideFactory = {
   // prop, and 16px/600 leading matches this section's confirmed mobile
   // size.
   mobileHeadingWrap: "container-p",
-  // 16px real mobile, standard 20px/24px Overline from `md:` up (owner,
-  // 2026-09-10: "on tablet, eyebrow heading across pages should be 20px by
-  // 24px... make it consistent across pages" -- this token's own wrapper
-  // spans mobile AND tablet in one instance (`mobileSection` is `xl:hidden`,
-  // not `md:hidden`), so the unconditional 16px value below was reaching
-  // tablet too. Same `max-md:.../md:text-overline` split every other
-  // eyebrow override already uses (WhatWeMake, Hero) -- this was the one
-  // that had been left unguarded.
-  mobileEyebrowSize: "max-md:text-[1rem] max-md:font-semibold max-md:leading-[1.2] md:text-overline",
+  // No `mobileEyebrowSize` override any more (2026-09-10 cleanup): this
+  // exact `max-md:.../md:text-overline` split is now `eyebrow.size`'s own
+  // sitewide default.
   // 48px gap from the heading down to the gallery (owner call, 2026-08-25,
   // overriding Figma's raw 32px read).
   mobileGalleryGap: "mt-12",
@@ -3959,21 +3937,63 @@ export const insideFactory = {
   // reading correctly at any width from a narrow phone up through tablet-
   // range "mobile" viewports; it still expands down to true centring below
   // ~380px wide, where the formula's own value is smaller than 40px anyway.
-  // Fixed height at the active card's own size (340px mobile, 532px
-  // tablet -- 340 scaled by the same 469/300 ratio the tablet card width
-  // itself uses, owner, 2026-09-09) -- without this the track's height is
-  // intrinsic (sized to its tallest child), so every scroll-frame height
-  // write to a card also changes the track's own box, which reflows the
-  // whole section and reads as the entire background shifting while the
-  // user swipes. Pinning it here means cards only ever grow/shrink inside
-  // a box that itself never moves. `md:` padding tier matches the wider
-  // 469px tablet card the same way the base tier matches the 300px mobile
-  // one (safe centring space for the first/last card).
-  mobileTrack:
-    "no-scrollbar flex h-[340px] items-center snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-300px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-469px)/2))]",
-  // 300px mobile, 469px tablet (owner, 2026-09-09: tablet swipes now,
-  // keeping its own already-defined wider card size, not mobile's 300px).
-  mobileCard: "w-[300px] shrink-0 snap-center md:w-[469px]",
+  // Two real, both-kept card sizes (owner, 2026-09-10: tried a wider
+  // landscape card against real photography -- "wider looks better, let's
+  // use it but don't descard the other one, keep it in the design system
+  // we might need it again") -- `Wide` is now the default every existing
+  // page gets (`InsideFactory.tsx`'s own `cardSize` prop, default
+  // `"wide"`); `Compact` is the original near-square 300x340 active ratio,
+  // kept as a real, selectable variant (not deleted, not just a comment)
+  // for whichever future gallery turns out to want tighter/more-portrait
+  // crops instead of this one's wide factory-floor coverage. Without a
+  // fixed height here the track's height is intrinsic (sized to its
+  // tallest child), so every scroll-frame height write to a card also
+  // changes the track's own box, which reflows the whole section and
+  // reads as the entire background shifting while the user swipes.
+  // Pinning it here means cards only ever grow/shrink inside a box that
+  // itself never moves. `md:` padding tier matches the wider tablet card
+  // the same way the base tier matches the mobile one (safe centring
+  // space for the first/last card).
+  // `gap-3` (12px, same owner request, real-photography test: "images
+  // should not collapse with one another... have some shadow or some
+  // treatement under the focus image so it does not touch or collapse with
+  // the behind ones") -- cards used to sit flush edge to edge, invisible
+  // with the grey placeholder fill but reading as genuinely merged once
+  // real photography has hard edges. A small breathing gap plus the active
+  // card's own shadow below (`mobileCardActiveShadow`) are the two pieces
+  // of that fix, and apply to both sizes -- this one is real space, not
+  // implied by the shadow alone.
+  mobileTrackWide:
+    "no-scrollbar flex h-[255px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-340px)/2))] md:h-[398px] md:px-[min(40px,calc((100%-530px)/2))]",
+  mobileCardWide: "w-[340px] shrink-0 snap-center md:w-[530px]",
+  // The original 300px mobile/469px tablet, 300x340 active ratio -- see
+  // `mobileTrackWide`'s own comment above for why this is kept, not
+  // dropped, now that `Wide` is the default.
+  mobileTrackCompact:
+    "no-scrollbar flex h-[340px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-300px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-469px)/2))]",
+  mobileCardCompact: "w-[300px] shrink-0 snap-center md:w-[469px]",
+  // Track-to-dots gap: 28px (owner, 2026-09-10: "give 12px more space to
+  // the dots from the top" -- was `gap-4`/16px). No `items-center` here
+  // (real bug, found live via the Playwright overflow sweep): the track
+  // has no explicit width class of its own -- it always relied on simply
+  // being an ordinary block-level child, which fills its container's
+  // width by default. Once it became a flex item here, `items-center` (a
+  // non-`stretch` cross-axis alignment) made the browser size it to its
+  // own un-clipped CONTENT width (all cards) instead of stretching to the
+  // column's width, forcing real page-level horizontal scroll. Default
+  // `align-items: stretch` (omitting the class entirely) keeps the
+  // track's own correct full-width sizing; the dots row is centred on its
+  // own instead (`mx-auto`), via `cardCarousel.dotsRow`'s own
+  // intrinsic/content width.
+  mobileCarouselWrap: "flex w-full flex-col gap-7",
+  // Active-card lift (same 2026-09-10 request as `mobileTrack`'s own `gap-3`
+  // above): a real drop shadow, not the theme's own `shadow-card` (tuned
+  // for a light/paper card and its ~8% black would vanish against this
+  // section's own near-black `bg-ink`) -- strong enough to read against
+  // either tone this section renders on. Applied only to the currently-
+  // centred card in InsideFactory.tsx (`index === activeIndex`), so the
+  // "this one is in focus" read comes from depth, not just its own height.
+  mobileCardActiveShadow: "shadow-[0_24px_48px_-12px_rgba(0,0,0,0.55)]",
   // Active/inactive card ratios (MediaRatio values, not classNames -- see
   // InsideFactory.tsx) are defined there directly, not here: the active
   // (centred) card renders taller than its neighbours -- a real overlap
@@ -4255,7 +4275,7 @@ export const ourServices = {
   // the homepage's own `--text-overline`) from `md:` up. Scoped to
   // `pageVariant === "services"`, not the shared default, since the
   // homepage's own usage wasn't part of this request either way.
-  eyebrowSizeServices: "max-md:text-[1rem] max-md:leading-normal font-semibold md:text-[1.25rem] md:leading-[1.2]",
+  eyebrowSize: "max-md:text-[1rem] max-md:leading-normal font-semibold md:text-[1.25rem] md:leading-[1.2]",
   // Sticky sidebar via plain CSS, no scroll listener: the right column's
   // own stacked height is what makes the page taller than the viewport, so
   // pinning this column at top-[56px] with self-start naturally keeps it in
@@ -4318,8 +4338,11 @@ export const ourServices = {
   // sticky-sidebar layout is `xl:`-only and not yet extended to `md:`), so
   // no `xl:` reset is needed the way other tablet-tier overrides this
   // session required -- the block never renders at `xl:` regardless.
-  // +40px on top of the confirmed mobile `pt-12` (48px), tablet-only.
-  mobileSection: "container-p flex flex-col items-center gap-8 pt-12 md:pt-[88px] pb-12 xl:hidden",
+  // +40px on top of the confirmed mobile top gap, tablet-only.
+  // `pt-16` (64px, owner, 2026-09-10, mobile-only review: "make it 64px" --
+  // was `pt-12`/48px) -- real mobile's own top gap; `md:pt-[88px]` is a
+  // separate, already-confirmed tablet value, unaffected.
+  mobileSection: "container-p flex flex-col items-center gap-8 pt-16 md:pt-[88px] pb-12 xl:hidden",
   // Services page reuse, mobile: no Figma mobile spacing was given for this
   // placement, so this follows the project's standing 72px inter-section
   // gap rule instead of homepage's own pt-12/md:pt-[88px] figures.
@@ -4436,10 +4459,17 @@ export const howItWorks = {
   // the above chages were for mobile only") -- 16px only below `md:`;
   // `md:text-[1.25rem] md:leading-[1.2]` restores the shared default
   // Eyebrow size from `md:` up, matching the homepage's own
-  // `--text-overline`. Scoped to `tone === "dark"` (Services' only usage
-  // today), not the shared default, since the homepage's own
-  // `tone="light"` usage wasn't part of this request either way.
-  eyebrowSizeDark: "max-md:text-[1rem] max-md:leading-normal font-semibold md:text-[1.25rem] md:leading-[1.2]",
+  // `--text-overline`. Originally scoped to `tone === "dark"` only
+  // (Services' own usage at the time), leaving the homepage's own
+  // `tone="light"` usage on the bare 20px/600 `Eyebrow` default -- widened
+  // to apply regardless of `tone`, 2026-09-10 (owner: "the eyebrow heading
+  // on all the sections should be 16px font size semibold, some are big
+  // or small, make them consistent" -- a sitewide mobile audit found this
+  // was the one real gap: every other section's own eyebrow already had
+  // its own mobile override, this one only got it for one of its two real
+  // usages). Renamed from `eyebrowSizeDark` since it's no longer
+  // tone-specific.
+  eyebrowSize: "max-md:text-[1rem] max-md:leading-normal font-semibold md:text-[1.25rem] md:leading-[1.2]",
   // container-p only on the heading -- the card row below is a full-bleed
   // sibling, not nested inside it (same pattern as Inside the Factory's
   // gallery): get_metadata on the real frame shows the 5th card sitting at
@@ -4626,14 +4656,9 @@ export const exhibitions = {
   // alike, the desktop chevron gallery above moved to `xl:` to match.
   mobileSection: "bg-ink text-paper pt-12 pb-12 xl:hidden",
   mobileHeadingWrap: "container-p",
-  // 16px real mobile, standard 20px/24px Overline from `md:` up (owner,
-  // 2026-09-10: "on tablet, eyebrow heading across pages should be 20px by
-  // 24px... make it consistent across pages") -- this section's own
-  // `mobileSection` is `xl:hidden`, spanning tablet too, so the
-  // unconditional 16px value below was reaching tablet. Same fix as
-  // `insideFactory.mobileEyebrowSize` (its own exact copy, see that
-  // token's comment).
-  mobileEyebrowSize: "max-md:text-[1rem] max-md:font-semibold max-md:leading-[1.2] md:text-overline",
+  // No `mobileEyebrowSize` override any more (2026-09-10 cleanup): this
+  // exact `max-md:.../md:text-overline` split is now `eyebrow.size`'s own
+  // sitewide default.
   mobileGalleryGap: "mt-8",
   // Inside the Factory's exact carousel numbers, reused verbatim per the
   // owner's explicit instruction -- see components/sections/Exhibitions.tsx.
@@ -4872,14 +4897,16 @@ export const footer = {
   // ~167px wide at this height, matching Figma's own frame width.
   mobileBrandLogo: "h-[44.51px] w-auto",
   mobileTagline: "text-[1.125rem] font-normal text-text",
-  // Owner, 2026-09-08: "does not look like a clickable link, make it
-  // underline" -- mobile only, desktop's own `desktopContactEmail` is
-  // unaffected.
-  mobileEmail: "text-[1.5rem] font-medium text-text underline transition-opacity hover:opacity-70",
   mobileDivider: "w-full border-t border-line",
   // Tagline + the description paragraph, 12px gap, no divider between them
   // -- same relocation as desktop's `desktopDescriptionGroup` above.
-  mobileDescriptionGroup: "flex flex-col gap-3",
+  // `mt-2` (owner, 2026-09-10: "remove the email and separator, add 32px
+  // gap between logo and capriowear text" -- the email link and its own
+  // divider, right above this group, are both gone now; `mobileOuter`'s
+  // shared `gap-6`/24px between every child still applies here too, so
+  // +8px on top of that is this pair's own 32px, not a second value
+  // fighting the shared gap).
+  mobileDescriptionGroup: "mt-2 flex flex-col gap-3",
   mobileDescription: "text-[1.125rem] leading-[1.33] text-text",
   mobileNavList: "flex flex-col",
   mobileNavLink: "text-[1.125rem] leading-10 text-text transition-opacity hover:opacity-70",
@@ -5565,9 +5592,14 @@ export const fabricOptions = {
   // at the same breakpoint (or vice versa) reintroduces that exact bug at
   // tablet width.
   headingBlock: "mx-auto flex w-full max-w-[579px] flex-col items-center gap-4 text-center md:max-w-[750px] md:gap-6",
-  // Threshold moved max-xl:/xl: -> max-md:/md: (owner, 2026-09-04: same
-  // tablet-width treatment as the homepage). Fixed values, desktop larger.
-  eyebrow: "text-base font-semibold text-text md:text-[1.25rem]",
+  // No local `eyebrow` token any more (2026-09-10 cleanup): this rendered
+  // as a bare `<p>` instead of the shared `<Eyebrow>` component, so it sat
+  // outside the sitewide eyebrow system entirely -- any future design-system
+  // eyebrow change (colour rule, weight, letter-spacing) would have quietly
+  // missed this page. Its values already matched `eyebrow.size`'s own
+  // default exactly (16px/600 mobile, 20px/600 desktop at the same `md:`
+  // threshold), so switching FabricOptions.tsx to `<Eyebrow tone="light">`
+  // with no size override is a like-for-like swap, not a value change.
   // max-xl:text-[1.875rem]/leading-[34px]/font-normal (30px/34px, mobile
   // Figma, matching whatWeCover.heading's exact pattern). xl keeps the
   // original 54px/64px/font-medium.
@@ -5720,7 +5752,15 @@ export const fabricOptions = {
   // mt-[64px]/xl:mt-[80px] (owner spec, 2026-09-06: "Decoration from top, on
   // mobile, make it 64 and 80 on desktop" -- was mt-[44px]/xl:mt-[60px]).
   decorationWrap: "mt-[64px] w-full xl:mt-[80px]",
-  decorationEyebrow: "text-base font-semibold text-text xl:text-[1.25rem]",
+  // Now routed through the shared `<Eyebrow>` component (2026-09-10
+  // cleanup, same reasoning as `eyebrow` above) instead of a bare `<p>`.
+  // Kept as its own explicit `size` override, not dropped to the sitewide
+  // default, since this block's own tablet breakpoint is `xl:` (matching
+  // `decorationWrap`'s own `xl:mt-[80px]`), not the sitewide default's
+  // `md:` -- real mobile value is identical either way (16px/600), so this
+  // preserves the existing, unreviewed-today tablet behaviour rather than
+  // silently changing it while only mobile is in scope.
+  decorationEyebrowSize: "text-base font-semibold xl:text-[1.25rem]",
   // mt-4/xl:mt-6 (16px mobile / 24px desktop, owner spec, 2026-09-06: "on
   // mobile eyebrow to title 16px is gap, follow the same for decoration" --
   // matches this same section's own headingBlock gap-4/xl:gap-6 pattern.
@@ -6649,6 +6689,25 @@ export const productCtas = {
   // 2026-09-07) -- pairs with desktopRow's own threshold above.
   mobileBar:
     "sticky inset-x-0 bottom-0 z-10 flex max-h-[60px] w-full items-center justify-center overflow-hidden backdrop-blur-sm px-5 py-2 shadow-[0px_-4px_16px_rgba(18,19,23,0.06)] transition-[max-height,opacity] duration-300 ease-out xl:hidden",
+  // Row holding the new WhatsApp button beside the existing CTA button
+  // (owner, 2026-09-10: "along with the cta, we want to add Whatsapp icon
+  // too" -- net new, no Figma frame for this pairing). `w-full` at real
+  // mobile (matches `mobileButton`'s own former full-bleed width), capped
+  // at a fixed max-width and centred by the bar's own `justify-center`
+  // from `md:` up -- the same "stop stretching into an ugly full-bleed
+  // stripe past phone width" fix `mobileButton` used to apply to itself
+  // alone, now applied to the pair as a unit.
+  mobileBarRow: "flex w-full items-center gap-3 md:max-w-[360px]",
+  // WhatsApp button: a fixed 44px circle, matching the CTA button's own
+  // 44px height (`mobileButton`'s `!min-h-[44px]`) so the pair reads as
+  // one row, not two mismatched controls. `shrink-0` so the CTA button
+  // beside it (now `flex-1`) never squeezes this one narrower. Brand green
+  // (`#25D366`, WhatsApp's own mark colour) -- not a sitewide token, this
+  // is the one place the brand's own colour is the point, same reasoning
+  // `icons/SocialIcons.tsx`'s glyphs already lean on brand recognition.
+  whatsappButton:
+    "flex size-11 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-paper transition-opacity hover:opacity-90",
+  whatsappIcon: "size-6",
   // Owner spec, 2026-09-02: "when it gets to the cta section, remove the
   // fixed cta automatically" -- collapses `max-height` to 0 (not `hidden`/
   // `display:none`, so it still animates) the instant the marker fires.
@@ -6686,19 +6745,13 @@ export const productCtas = {
   // without it, Tailwind's own generated stylesheet order (not this
   // className's position) decides which wins, the exact bug already found
   // and fixed once on this gallery's own active-thumbnail border.
-  // Full-width stays real-mobile only (`max-md:`) -- owner report,
-  // 2026-09-03: this bar reads fine edge-to-edge on a phone, but the same
-  // `w-full` inside a much wider tablet viewport stretched into an ugly
-  // full-bleed stripe. From `md:` (768px) up, the button caps at a fixed
-  // minimum width and centers in the bar instead of stretching to fill
-  // it; the bar itself (`mobileBar`, full-bleed/sticky) is unchanged --
-  // only the button inside it stops growing past a normal CTA width.
-  // Unlike `desktopRow`/`mobileBar` above, this `md:` stays as-is through
-  // the 2026-09-07 revert: `mobileBar` now renders all the way to 1279px
-  // again, so this fix (avoiding a full-bleed button at real tablet width)
-  // is newly relevant across the whole 768-1279px range it covers, not
-  // superseded by it.
-  mobileButton: "w-full !min-h-[44px] !text-[1rem] md:mx-auto md:w-auto md:min-w-[280px]",
+  // `flex-1`, not its own `w-full`/`md:w-auto md:min-w-[280px]` any more
+  // (2026-09-10, alongside the new WhatsApp button beside it) -- the "stop
+  // stretching past phone width" job moved to the shared row wrapper
+  // (`mobileBarRow`'s own `md:max-w-[360px]`) now that this button isn't
+  // the bar's only child; `flex-1` just fills whatever the row leaves
+  // after the WhatsApp button's own fixed 44px, at every breakpoint alike.
+  mobileButton: "flex-1 !min-h-[44px] !text-[1rem]",
   // Desktop-only override for the secondary ("Download Catalog") button
   // (owner, 2026-09-01: "should have primary orange text and outline, on
   // hover should have this color FFF6F3") -- `Button`'s shared `secondary`

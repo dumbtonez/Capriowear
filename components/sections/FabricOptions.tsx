@@ -52,6 +52,7 @@
 
 import { useId, useState } from "react";
 
+import { Eyebrow } from "@/components/Eyebrow";
 import { FilterChevronIcon } from "@/components/icons/FilterChevronIcon";
 import { TextReveal } from "@/components/TextReveal";
 import { cx } from "@/components/ui/cx";
@@ -198,9 +199,9 @@ export function FabricOptions({
   return (
     <section className={fabricOptions.section}>
       <div className={fabricOptions.headingBlock}>
-        <p className={fabricOptions.eyebrow}>
+        <Eyebrow tone="light">
           <TextReveal text={eyebrow} />
-        </p>
+        </Eyebrow>
         <h2 className={fabricOptions.heading}>
           <TextReveal as="span" text={heading} />
         </h2>
@@ -335,7 +336,9 @@ export function FabricOptions({
           `SecondaryTable` the `weightTiers` block above uses. */}
       {structuredBlock && structuredBlock.type === "decoration" ? (
         <div className={fabricOptions.decorationWrap}>
-          <p className={fabricOptions.decorationEyebrow}>{structuredBlock.eyebrow}</p>
+          <Eyebrow tone="light" size={fabricOptions.decorationEyebrowSize}>
+            {structuredBlock.eyebrow}
+          </Eyebrow>
           <h3 className={fabricOptions.decorationHeading}>{structuredBlock.heading}</h3>
           <SecondaryTable
             headers={["Method", "Best for", "Notes"]}

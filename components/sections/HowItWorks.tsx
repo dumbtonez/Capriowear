@@ -153,7 +153,7 @@ export function HowItWorks({ content, tone = "light" }: HowItWorksProps) {
             eyebrow={<TextReveal text={content.eyebrow} />}
             heading={<TextReveal as="span" text={content.h2} />}
             eyebrowTone={tone}
-            eyebrowSize={tone === "dark" ? howItWorks.eyebrowSizeDark : undefined}
+            eyebrowSize={howItWorks.eyebrowSize}
             align="center"
             headingClassName={howItWorks.desktopHeadingWidth}
           />
@@ -186,7 +186,7 @@ export function HowItWorks({ content, tone = "light" }: HowItWorksProps) {
             </>
           }
           eyebrowTone={tone}
-          eyebrowSize={tone === "dark" ? howItWorks.eyebrowSizeDark : undefined}
+          eyebrowSize={howItWorks.eyebrowSize}
           align="center"
           headingClassName={howItWorks.desktopHeadingWidth}
         />

@@ -199,7 +199,6 @@ export function Exhibitions({ content }: ExhibitionsProps) {
             eyebrow={content.eyebrow}
             heading={content.h2}
             eyebrowTone="dark"
-            eyebrowSize={exhibitions.mobileEyebrowSize}
             align="center"
             // Tablet 2-line wrap, 2026-09-10 (owner: "tablet, exhibition
             // title should be in 2 lines like other titles") -- this

@@ -62,13 +62,52 @@
 // beyond that (no further crossing ever fires to flip it back while
 // continuing to scroll down), only reverting if the user scrolls back up
 // far enough to re-enter that same zone from below.
+//
+// WhatsApp button (owner, 2026-09-10: "along with the cta, we want to add
+// Whatsapp icon too, upon tap it will open up the what's app for the
+// customer" -- added alongside making this same mobile bar sitewide, not
+// just PLP/PDP, see app/page.tsx, app/services/page.tsx, app/our-factory/
+// page.tsx). A plain `<a href="https://wa.me/...">`, not a click handler --
+// `wa.me` is WhatsApp's own universal link, already the right behaviour on
+// both mobile (opens the app) and desktop (opens web.whatsapp.com) with no
+// platform detection needed. Number lives in `content/site.ts`
+// (`WHATSAPP_LINK`), not hand-typed here -- see that constant's own
+// comment (currently the owner's personal number, a deliberate stand-in
+// until the real business line is ready).
+//
+// Two more behaviours, same day, scoped to the marketing pages this bar
+// was just extended to (home/services/our-factory) -- PLP/PDP's own
+// existing behaviour below is untouched, both new props default to off:
+//
+// 1. `hideInFirstFold` (owner: "CTA should not appear in the first fold...
+// after scrolling 1, 2 sections... it should be shown") -- a plain
+// scroll-position check (`window.scrollY` past ~80% of one viewport
+// height), not a page marker: every page's hero is a different height, so
+// a fixed pixel/section-count threshold would need per-page tuning either
+// way, and a fraction of the viewport itself already approximates "a
+// section or so down" at any device size without that tuning.
+//
+// 2. `hideWithinIds` (owner: "when page gets to 'let's build your custom
+// collection' it should disappear... when [you] pass the section, it
+// should appear again") -- genuinely different from `FINAL_CTA_MARKER_ID`'s
+// own "hide forever, nothing meaningful follows" semantics below: this is
+// for a CTA section with real content AFTER it, so the bar must come back.
+// Takes ids of the section's own wrapping element (real height), not a
+// thin single-point marker -- a real element's own `entry.isIntersecting`
+// already toggles correctly both ways (true while any part is near the
+// viewport, false again once fully passed OR not yet reached) with no
+// `top < 0` special-casing needed, unlike a thin marker (see this file's
+// own "two real bugs" note above, which was solving a different problem:
+// a single crossing point, not a real element with extent).
 "use client";
 
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/Button";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { cx } from "@/components/ui/cx";
 import { productCtas } from "@/components/ui/styles";
+import { WHATSAPP_LINK } from "@/content/site";
 
 export type ProductCtasProps = {
   primaryCta: { label: string; href: string };
@@ -90,43 +129,149 @@ export function ProductCtas({ primaryCta, secondaryCta }: ProductCtasProps) {
 
 export type ProductCtasMobileBarProps = {
   primaryCta: { label: string; href: string };
+  /**
+   * Ids of thin markers rendered right before a page's own closing CTA (a
+   * section with nothing meaningful after it but Footer) -- default
+   * `[FINAL_CTA_MARKER_ID]`, the PDP's own original single marker,
+   * unchanged. Hides "forever" once reached (see this file's own header
+   * comment, "two real bugs"), since nothing later would need to un-hide
+   * it. Not for a mid-page CTA with real content after it -- see
+   * `hideWithinIds` instead.
+   */
+  hideNearIds?: string[];
+  /**
+   * Ids of a mid-page CTA section's own wrapping element -- hides while
+   * that section is anywhere near the viewport, reappears once fully
+   * scrolled past (owner, 2026-09-10, see this file's own header comment).
+   * Default `[]` (no such zones) -- PLP/PDP's own single closing CTA
+   * doesn't need this.
+   */
+  hideWithinIds?: string[];
+  /**
+   * Owner, 2026-09-10: "CTA should not appear in the first fold... after
+   * scrolling 1, 2 sections... it should be shown." Default false (PLP/
+   * PDP's own existing "visible from page load" behaviour, unchanged --
+   * that bar sits beside real product-decision content from the top, not
+   * under a marketing hero). See this file's own header comment for why
+   * this is a scroll-position check, not a page marker.
+   */
+  hideInFirstFold?: boolean;
 };
 
-/** Id of the invisible marker rendered right before `<FinalCta>` on the PDP. */
+/** Id of the invisible marker rendered right before a page's own closing CTA. */
 export const FINAL_CTA_MARKER_ID = "pdp-final-cta-marker";
 
-export function ProductCtasMobileBar({ primaryCta }: ProductCtasMobileBarProps) {
+const FIRST_FOLD_REVEAL_FRACTION = 0.8;
+
+export function ProductCtasMobileBar({
+  primaryCta,
+  hideNearIds = [FINAL_CTA_MARKER_ID],
+  hideWithinIds = [],
+  hideInFirstFold = false,
+}: ProductCtasMobileBarProps) {
   const [nearFinalCta, setNearFinalCta] = useState(false);
+  const [withinMidPageCta, setWithinMidPageCta] = useState(false);
+  const [pastFirstFold, setPastFirstFold] = useState(!hideInFirstFold);
 
   useEffect(() => {
-    const marker = document.getElementById(FINAL_CTA_MARKER_ID);
-    if (!marker) return;
+    const markers = hideNearIds.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => el !== null);
+    if (markers.length === 0) return;
     // `entry.isIntersecting || entry.boundingClientRect.top < 0`, not
     // `entry.boundingClientRect.top < window.innerHeight` alone -- see this
     // file's own header comment (bug #2): IntersectionObserver only fires
-    // at threshold crossings, so a raw `top` comparison read at the wrong
+    // at threshold CROSSINGS, so a raw `top` comparison read at the wrong
     // crossing evaluates false and doesn't get another chance to correct
     // itself until the NEXT crossing, far later. `isIntersecting` is
     // already correct for the "approaching" crossing (accounts for
     // `rootMargin` itself); `top < 0` covers the "already scrolled past,
     // marker now above the viewport" case once `isIntersecting` reverts to
-    // false on its own crossing.
+    // false on its own crossing. Each marker's own flag, once true, is
+    // never written back to false (`||` against its previous value) --
+    // "stays hidden for every scroll position at or beyond that" -- and
+    // the bar hides if ANY marker (usually just one) is hit.
+    const nearFlags = new Map<Element, boolean>();
     const observer = new IntersectionObserver(
-      ([entry]) => setNearFinalCta(entry.isIntersecting || entry.boundingClientRect.top < 0),
-      // Triggers a little before the marker's own top edge, matching "when
-      // I am close or coming to" the CTA heading -- fires as soon as the
-      // marker is within 20% of the viewport height of coming on screen.
+      (entries) => {
+        for (const entry of entries) {
+          const hit = entry.isIntersecting || entry.boundingClientRect.top < 0;
+          nearFlags.set(entry.target, hit || (nearFlags.get(entry.target) ?? false));
+        }
+        setNearFinalCta([...nearFlags.values()].some(Boolean));
+      },
+      // Triggers a little before each marker's own top edge, matching
+      // "when I am close or coming to" the CTA heading -- fires as soon as
+      // the marker is within 20% of the viewport height of coming on
+      // screen.
       { rootMargin: "0px 0px 20% 0px" },
     );
-    observer.observe(marker);
+    markers.forEach((marker) => observer.observe(marker));
     return () => observer.disconnect();
+    // hideNearIds is a small, effectively-static prop (a literal array at
+    // each call site); re-subscribing on every render would just churn
+    // identical observers.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (hideWithinIds.length === 0) return;
+    const targets = hideWithinIds.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => el !== null);
+    if (targets.length === 0) return;
+    // Plain `entry.isIntersecting`, no `top < 0` special-casing -- unlike
+    // `hideNearIds`'s thin single-point markers, these ids are the CTA
+    // section's own real wrapping element (real height), so a natural
+    // `IntersectionObserver` already reports true for the whole time any
+    // part of it is near the viewport and false again once it's fully
+    // passed OR not yet reached -- exactly "disappear approaching it,
+    // reappear once past it," both directions, no extra logic needed.
+    const withinFlags = new Map<Element, boolean>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) withinFlags.set(entry.target, entry.isIntersecting);
+        setWithinMidPageCta([...withinFlags.values()].some(Boolean));
+      },
+      { rootMargin: "0px 0px -10% 0px" },
+    );
+    targets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (!hideInFirstFold) return;
+    let ticking = false;
+    const update = () => {
+      setPastFirstFold(window.scrollY > window.innerHeight * FIRST_FOLD_REVEAL_FRACTION);
+      ticking = false;
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [hideInFirstFold]);
+
+  const hidden = nearFinalCta || withinMidPageCta || !pastFirstFold;
+
   return (
-    <div className={cx(productCtas.mobileBar, nearFinalCta && productCtas.mobileBarHidden)}>
-      <Button href={primaryCta.href} variant="primary" className={productCtas.mobileButton}>
-        {primaryCta.label}
-      </Button>
+    <div className={cx(productCtas.mobileBar, hidden && productCtas.mobileBarHidden)}>
+      <div className={productCtas.mobileBarRow}>
+        <a
+          href={WHATSAPP_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat with us on WhatsApp"
+          className={productCtas.whatsappButton}
+        >
+          <WhatsAppIcon className={productCtas.whatsappIcon} />
+        </a>
+        <Button href={primaryCta.href} variant="primary" className={productCtas.mobileButton}>
+          {primaryCta.label}
+        </Button>
+      </div>
     </div>
   );
 }

@@ -172,7 +172,18 @@ export const home = {
 
   customOfferings: {
     label: "Fully Custom Offerings",
+    // Desktop Marquee's own 9 individual items, confirmed against Figma --
+    // unaffected by `mobileItems` below.
     items: ["Design", "Fabric", "Fit", "Color", "Print & Embroidery", "Branding", "Trims", "Labels", "Packaging"],
+    // Owner, 2026-09-10: "I asked you to use the fully custom section from
+    // the services page" -- not just that section's typography/alignment
+    // (already applied via `servicesHero.tickerMobile*`, see Hero.tsx) but
+    // its own 5-paired-item mobile list too, same wording as `services.
+    // hero.mobileTickerItems` (content/services.ts) verbatim -- these are
+    // the exact same 9 words above, just regrouped into pairs, not new
+    // copy. Mobile-only: desktop Marquee keeps the 9-item `items` list
+    // above, unaffected.
+    mobileItems: ["Design & Color", "Fabric & Fit", "Print & Embroidery", "Branding & Trims", "Labels & Packaging"],
   },
 
   // Real Figma design (desktop node 341:1732, mobile node 343:1840) has no
@@ -466,11 +477,17 @@ export const home = {
   insideFactory: {
     eyebrow: "INSIDE THE FACTORY",
     h2: "Cutting, stitching, printing and QC under one roof",
+    // Real photography on the first 4 shots only (owner, 2026-09-10: "let's
+    // add 4 images... to test how it will work with images"), 5th stays a
+    // placeholder -- a deliberate mixed state for this test, not a mistake.
+    // Not real factory floor photography (stand-in product/model shots the
+    // owner had on hand) -- swap for the real thing later, same `image`
+    // contract `content/our-factory.ts`'s own `image: { src }` shape uses.
     media: [
-      { label: "Factory shot 1" },
-      { label: "Factory shot 2" },
-      { label: "Factory shot 3" },
-      { label: "Factory shot 4" },
+      { label: "Factory shot 1", image: { src: "/factory-test/factory-test-1.png" } },
+      { label: "Factory shot 2", image: { src: "/factory-test/factory-test-2.png" } },
+      { label: "Factory shot 3", image: { src: "/factory-test/factory-test-3.png" } },
+      { label: "Factory shot 4", image: { src: "/factory-test/factory-test-4.png" } },
       { label: "Factory shot 5" },
     ],
     // "Explore Our Factory" -> "Take Factory Tour" (owner call, 2026-08-28,
@@ -678,9 +695,16 @@ export const home = {
         { label: "Our Factory", href: "/our-factory" },
         { label: "Our Story", href: "/our-story" },
       ],
+      // Request a Sample before Download Catalog (owner, 2026-09-10: "Make
+      // request a sample first then download catalog" -- was the reverse
+      // order). Privacy Policy appended the same turn ("add privacy policy
+      // page link") -- no route built for it yet, same "nav link exists
+      // ahead of its page" precedent Our Story/Download Catalog/Request a
+      // Sample already established below and elsewhere on this site.
       columnTwo: [
-        { label: "Download Catalog", href: "/catalog" },
         { label: "Request a Sample", href: "/request-a-sample" },
+        { label: "Download Catalog", href: "/catalog" },
+        { label: "Privacy Policy", href: "/privacy-policy" },
       ],
     },
     contact: { label: "Get in touch", email: "hello@capriosports.com" },
