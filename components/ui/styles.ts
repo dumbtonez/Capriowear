@@ -974,14 +974,22 @@ export const header = {
     "group relative inline-flex min-h-11 items-center whitespace-nowrap rounded-pill px-4 text-[1.0625rem] leading-[21px] text-current transition-colors hover:text-[var(--header-hover)]",
   navTrigger:
     "relative inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-pill px-4 text-[1.0625rem] leading-[21px] text-current transition-colors hover:text-[var(--header-hover)]",
-  // Selected-page state ONLY now (colour-only, owner, 2026-09-08: "keep
-  // the selected page regular font weight as default" -- reverses the
-  // semibold this same day's earlier pass added). Applied when
-  // `isRouteActive`: the sitewide accent orange, regular weight, same as
-  // every other state -- weight never toggles anywhere in the nav any
-  // more, hover or selected. Was `"font-semibold"` (Figma node 493:3140,
-  // 2026-08-27) before colour replaced it as the sole active-state signal.
-  navTriggerActive: "text-accent",
+  // Selected-page state, tone-dependent (owner, 2026-09-10: "when selected
+  // it is orange but it does not look very visible on the white
+  // background" -- the header is a fixed overlay that reads over both
+  // dark (`ink`) and light (`paper`) sections as the page scrolls
+  // underneath it, via the same `data-tone` mechanism `--header-fg`
+  // already uses; this reuses that, rather than a separate mechanism).
+  // Over dark sections the plain accent orange (`navTriggerActiveDark`)
+  // reads clearly, as before. Over light sections that same orange sits
+  // too close to white to read as clearly "selected" -- swapped for the
+  // near-black `--color-text` (already this state's own base colour via
+  // `--header-fg` on `[data-tone="light"]`) plus semibold, so weight
+  // alone carries the signal there instead of a low-contrast colour.
+  // Header.tsx picks between the two using its own live `tone` state
+  // (the same value driving `data-tone`), not a second scroll listener.
+  navTriggerActiveDark: "text-accent",
+  navTriggerActiveLight: "text-text font-semibold",
   // The label itself is a 2-layer grid stack, not plain text (owner report,
   // 2026-08-27: the trigger visibly shifted position when it turned
   // semibold -- bold glyphs are wider than regular ones at the same size,
@@ -996,7 +1004,8 @@ export const header = {
   navTriggerLabelVisible: "col-start-1 row-start-1",
   // Plain nav links (Services, Factory Tour): same 2-layer grid-stack
   // technique as the trigger's own label (see above) so the route-active
-  // bold (`navTriggerActive`, applied via `isRouteActive` in Header.tsx)
+  // bold (`navTriggerActiveDark`/`navTriggerActiveLight`, applied via
+  // `isRouteActive` in Header.tsx)
   // never shifts whatever nav item sits after it -- the ghost always
   // reserves the widest (bold) width regardless of whether the visible
   // layer is currently bold. No `group-hover:font-semibold` any more
@@ -1330,8 +1339,15 @@ export const drawer = {
   screens: "flex w-[200%] transition-transform duration-[350ms] ease-in-out",
   // Each screen is exactly half the (200%-wide) track, i.e. one real
   // viewport width. `shrink-0` stops flex from squeezing them to fit side
-  // by side in the track's own un-widened parent.
-  screen: "flex w-1/2 shrink-0 flex-col",
+  // by side in the track's own un-widened parent. `pb-[260px]` reserves
+  // real space at the bottom of BOTH screens (main list and the mega-menu
+  // sub-screen) for the fixed footer below (`drawer.ctaWrap`, now taller
+  // since it also carries "Get in touch" + the social row, not just the
+  // CTA button -- owner, 2026-09-10: those need to be always visible, not
+  // scrollable list content competing with the footer for the same
+  // viewport height) so neither screen's own last real content sits
+  // underneath it.
+  screen: "flex w-1/2 shrink-0 flex-col pb-[260px]",
   // 92px from the header row's own bottom edge to the first link's top
   // (owner-measured, 2026-08-27) -- not Figma's own frame gap (which read
   // closer to 100px against the frame edge, not the header row itself).
@@ -1387,12 +1403,61 @@ export const drawer = {
   // Story"'s own bottom edge to this block's top is 131.5px) -- always
   // correct regardless of viewport height, and harmless on a tall one
   // since `panel` already scrolls.
-  bottomWrap: "mt-[132px] flex flex-col gap-8 pb-10",
-  contactGroup: "flex flex-col gap-1",
+  // Owner, 2026-09-10, twice: "social icons does not appear above the
+  // fold, only shows when you scroll" then, even after tightening this
+  // gap, "on the large phone i have zfold 7 which is large phone i still
+  // have to scroll to see the social icons." Any fixed top-margin here is
+  // fundamentally the wrong fix -- it trades one device's fold line for
+  // another's, since "Get in touch"/social still lived in the *scrollable*
+  // list column, competing for the same finite viewport height as the
+  // fixed CTA bar below it. Real fix: contact + social moved out of this
+  // scrollable column entirely, into `ctaWrap` alongside the CTA button
+  // (see below) -- a `position: fixed` block is visible in full on every
+  // device by construction, not just ones tall enough to fit everything
+  // above an increasingly short fold. This token (and the JSX wrapper
+  // that used it) is retired; kept only as a comment pointer in case a
+  // future design genuinely wants a scrollable trailing block again.
+  //
+  // Owner, 2026-09-10: "in the mobile menu at bottom of the page add
+  // request a sample cta" -- the same primary CTA the desktop header
+  // renders, full-width to match this column's own width rather than the
+  // header's auto-width pill.
+  cta: "w-full",
+  // Truly `fixed`, not `position: sticky` (real bug, found live, owner:
+  // "cta in mobile menu is not fixed at the bottom" -- sticky only keeps
+  // an element from scrolling PAST its own natural resting spot once
+  // scrolling has gotten that far; it does nothing on open, before any
+  // scrolling happens, which is exactly when a taller link list pushes
+  // the CTA off-screen). Rendered as a sibling of `nav` in MobileNav.tsx
+  // (outside the scrollable flow entirely, not nested in `screen`), so
+  // `inset-x-0 bottom-0` is relative to the real viewport via `panel`'s
+  // own `fixed inset-0` -- always visible the instant the drawer opens,
+  // regardless of scroll position or which of the two `screen`s is
+  // showing. `container-p` reproduces the same horizontal inset every
+  // other row in the drawer already has (this element sits outside
+  // `nav`'s own `container-p`, so it needs its own). Solid `bg-ink`
+  // backing so scrolled list content never shows through underneath it;
+  // `screen`'s own `pb-*` reserves real space so this bar never covers
+  // the real last item in either screen.
+  //
+  // Now also carries "Get in touch" + the social row (owner, 2026-09-10,
+  // see the retired `bottomWrap` comment above): stacked in one flex
+  // column with the button, so the whole group is always fully visible
+  // together, on any device height, with no scroll dependency at all.
+  // No flex `gap` here (was a uniform `gap-5`): the social-row-to-button
+  // spacing needed its own value distinct from the contact-to-social
+  // spacing (owner, 2026-09-10: "social icons are too close to the cta
+  // make more 24px gap from the bottom of the icons") -- `contactGroup`'s
+  // `mb-5` (kept at the old 20px) and `socialRow`'s `mb-6` (24px) each
+  // carry their own gap below instead of a flex gap that would apply the
+  // same value to both.
+  ctaWrap: "fixed inset-x-0 bottom-0 z-10 container-p bg-ink pt-6 pb-6 flex flex-col",
+  contactGroup: "flex flex-col gap-1 mb-5",
   contactLabel: "text-[1.125rem] leading-[26px] text-[#838d97]",
   contactEmail: "text-h5 font-medium text-paper underline decoration-solid underline-offset-2",
-  // Left-aligned to match the contact block above it, not centred.
-  socialRow: "flex items-center justify-start gap-3",
+  // Left-aligned to match the contact block above it, not centred. `mb-6`
+  // (24px) to the CTA button below -- see `ctaWrap`'s own comment.
+  socialRow: "flex items-center justify-start gap-3 mb-6",
   // Distinct from Footer's own `footer.social*` keys: 50px/dark-bg here vs.
   // Footer's 60px/light-bg -- two different confirmed Figma treatments of
   // the same three icons, not one shared recipe forced to cover both.
@@ -2861,9 +2926,10 @@ export const servicesIntro = {
   // message: "add 24px more gap from the top of the separator" -- the
   // text-block-to-stats-row gap, `gap-10`/40px at every other tier, +24 on
   // tablet only) are both tablet-only tiers; real mobile and desktop
-  // (`xl:gap-20`/`xl:pt-[160px]`) are unaffected.
+  // (`xl:gap-20`/`xl:pt-[160px]`) are unaffected. `xl:pl-[320px]` (owner,
+  // 2026-09-10: "make it 320 from left" -- was 300px).
   inner:
-    "mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-5 py-12 md:gap-16 md:px-8 md:pt-[88px] xl:gap-20 xl:pb-[120px] xl:pl-[300px] xl:pr-[118px] xl:pt-[160px]",
+    "mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-5 py-12 md:gap-16 md:px-8 md:pt-[88px] xl:gap-20 xl:pb-[120px] xl:pl-[320px] xl:pr-[118px] xl:pt-[160px]",
   textCol: "flex flex-col gap-6 xl:w-[841px] xl:gap-8",
   heading: "text-h1 text-paper",
   // 24px/32px on real mobile (owner, 2026-09-10: "subline font size should
@@ -2971,28 +3037,35 @@ export const servicesHowWeWork = {
   //
   // Desktop (xl+): `hidden xl:block` -- the mirror of every other
   // scrollable row's own wrap-visibility split (How It Works/Inside the
-  // Factory/Exhibitions/Trust Signals). `xl:mt-[112px]` (owner, 2026-09-09,
-  // same-day follow-up: "add more 40px more on the top from the title") --
-  // was the retired `pathsGrid`'s own `xl:mt-[72px]` (Figma's real
-  // intro-to-cards gap), +40px.
-  desktopWrap: "hidden xl:block xl:mt-[112px]",
-  // Same `mx-auto max-w-[1440px]` fix already applied to every other
-  // scroller here (How It Works/Inside the Factory/Exhibitions/Trust
-  // Signals' own `desktopScrollerWrap`) -- a flat `px-[80px]` row inset
-  // alone only matches `container-p`'s own centring inset up to 1440px.
-  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-none overflow-hidden",
-  // `overflow-x-hidden`, not `-auto` -- "user can only scroll by
-  // clicking," the same established rule every other chevron-driven row
-  // here follows (see `DesktopChevronScroller.tsx`'s own header comment).
-  // `px-[80px]` matches `container-p`'s own `xl:` inset, the same flat
-  // value every other scroller's own row uses at this breakpoint.
-  desktopRow: "no-scrollbar flex w-full gap-[44px] overflow-x-hidden scroll-smooth px-[80px]",
-  // 480px, Our Services' own real (unshrunk) card width -- the whole
-  // reason this moved off the 3-column grid, see this file's own header
-  // comment (ServicesHowWeWork.tsx). `shrink-0` so the browser doesn't
-  // squeeze it to fit -- the point here is the row overflows and the last
-  // card peeks, not that everything always fits.
-  desktopCard: "flex w-[480px] shrink-0 flex-col items-start gap-8",
+  // Factory/Exhibitions/Trust Signals). `xl:mt-[72px]` (owner, 2026-09-10:
+  // "how we work with you subline and images gap should be 72px on
+  // services page" -- reverts the `xl:mt-[112px]` a same-day-earlier
+  // follow-up had set, back to the retired `pathsGrid`'s own original
+  // Figma-confirmed intro-to-cards gap).
+  desktopWrap: "hidden xl:block xl:mt-[72px]",
+  // No chevron/scroll any more (owner, 2026-09-10: "how we work with you
+  // section should not have a chevron, it should fit in the 1440 viewport
+  // as in design" -- reverses the 2026-09-09 move onto a horizontally-
+  // scrollable row, which had grown each card to Our Services' own 480px
+  // width; 3 cards at 480px + 2×44px gaps (1528px) can't fit the 1280px
+  // content area at 1440px regardless of scroll mechanism, which is what
+  // forced the chevron in the first place). Plain centred row, `mx-auto
+  // max-w-[1440px]` kept for the same reason every other section here
+  // centres past 1440px.
+  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px]",
+  // `px-[80px]` matches `container-p`'s own `xl:` inset. No `overflow`/
+  // `scroll-smooth`/`no-scrollbar` any more -- nothing here scrolls.
+  desktopRow: "flex w-full justify-center gap-[44px] px-[80px]",
+  // 397px -- the section's own original, Figma-confirmed 3-column-grid
+  // card width (get_metadata, node 750:770; also why `MediaPlaceholder`'s
+  // `"397:234"` ratio option exists at all) restored (owner, 2026-09-10,
+  // see `desktopScrollerWrap`'s own comment) after a same-day-earlier pass
+  // had grown it to Our Services' own 480px -- 3×397px + 2×44px gaps
+  // (1279px) fits the 1280px content area at 1440px with room to spare,
+  // no scroll/chevron required. `shrink-0` kept even though nothing
+  // scrolls any more: harmless, and cheaper than re-verifying flex-basis
+  // math holds without it.
+  desktopCard: "flex w-[397px] shrink-0 flex-col items-start gap-8",
   pathMedia: "w-full",
   pathTextCol: "flex w-full flex-col gap-8",
   pathTitleGroup: "flex flex-col gap-2",
@@ -3177,17 +3250,19 @@ export const productRange = {
 // full colour, also no label). Light section (paper background) -- the only
 // homepage section built so far that isn't on ink.
 export const clientLogos = {
-  // 120px top / 0px bottom on desktop, 40px both on mobile -- both given
-  // directly by the owner (2026-08-24) after the desktop Figma frame had been
-  // resized to show off-screen logos, which made its own height untrustworthy
-  // for padding purposes even though its width (used for the logo positions
-  // and gaps) still was reliable.
-  //
-  // No container-p here: Marquee's own `innerStacked` already applies it to
-  // the label/track, same as the offerings ticker. Adding it again on this
-  // wrapper double-padded the ticker to 160px on each side instead of the
-  // real 80px -- corrected 2026-08-24.
-  desktopWrap: "hidden pt-[120px] pb-0 xl:block",
+  // Top 120px -> 80px, 2026-09-10 (owner: originally set on /services --
+  // "add clients logo marquee above product development section on
+  // desktop only" then "make it 80px" -- then "apply this to homepage
+  // too"). Bottom (0px) and mobile (40px) unaffected, not part of this
+  // request. `desktopWrapServices` below is now numerically identical to
+  // this default; kept as its own separate token anyway (not collapsed
+  // back into reusing this one directly) since `ClientLogos`' own
+  // `pageVariant` prop already exists and a future page-specific value is
+  // one line to add there, not a new prop to thread through again.
+  desktopWrap: "hidden pt-[80px] pb-0 xl:block",
+  // /services' own usage -- see `desktopWrap`'s own comment above for the
+  // full history; both are 80px now.
+  desktopWrapServices: "hidden pt-[80px] pb-0 xl:block",
   // Figma's mobile grid is exactly 2 columns; LogoRow's flex-wrap wouldn't
   // guarantee that at every width, so this section uses its own grid rather
   // than reusing LogoRow, which is built for a flowing, wrap-as-needed row.
@@ -3275,7 +3350,11 @@ export const trustSignals = {
   // other scroller here uses (its wrap has no `container-p` either);
   // stacking this element's own `container-p` (80px) on top of that
   // doubled up instead of matching it.
-  desktopWrap: "hidden py-[120px] xl:block",
+  // Top 120px -> 80px, 2026-09-10 (owner: "make the trust gap from top
+  // 80px too" on /services, then "apply this to homepage too" -- top
+  // only, matching the same `clientLogos.desktopWrap` change above;
+  // bottom (120px) unaffected, not part of this request).
+  desktopWrap: "hidden pt-[80px] pb-[120px] xl:block",
   // Services page reuse (owner, 2026-09-07: "this is already built on
   // homepage, use same as is. only the spacing needs to adjust, from the
   // top its 160px bottom 80px") -- Figma node 729:208 (this component's
@@ -3284,7 +3363,18 @@ export const trustSignals = {
   // homepage's symmetric 120/120. Everything else (the new scroller
   // structure below) is shared as-is, same `pageVariant` pattern
   // `OurServices` already uses.
-  desktopWrapServices: "hidden pt-[160px] pb-[80px] xl:block",
+  //
+  // Top corrected 160px -> 120px -> 80px (owner, 2026-09-10, in sequence:
+  // "the trust section gap from the top of the logos should be same as
+  // homepage" -- once `ClientLogos` was added directly above this section
+  // on desktop only, the original 160px was still measuring from
+  // ServicesIntro, not the marquee that now actually precedes it; matched
+  // to 120px, homepage's own gap at the time -- then "make the trust gap
+  // from top 80px too", then "apply this to homepage too," which also
+  // dropped the homepage default's own top to 80px above, so this value
+  // is no longer a services-only deviation -- kept as its own token
+  // anyway per this section's established `pageVariant` pattern).
+  desktopWrapServices: "hidden pt-[80px] pb-[80px] xl:block",
   // Redesigned 2026-09-09 (Figma nodes 890:253/890:279, owner: "change
   // product development, Low MOQ section to this... there are 4 cards"):
   // the old media-block-plus-two-text-columns layout becomes 4 independent
@@ -4259,7 +4349,11 @@ export const insideFactory = {
   // track's own correct full-width sizing; the dots row is centred on its
   // own instead (`mx-auto`), via `cardCarousel.dotsRow`'s own
   // intrinsic/content width.
-  mobileCarouselWrap: "flex w-full flex-col gap-7",
+  // No `gap-*` any more (was `gap-7`/28px) -- that track-to-dots spacing
+  // now lives on the shared `cardCarousel.dotsRow` itself (`mt-[28px]`,
+  // see its own comment), the single source for this gap sitewide, not a
+  // per-caller wrapper value.
+  mobileCarouselWrap: "flex w-full flex-col",
   // Active-card lift (same 2026-09-10 request as `mobileTrack`'s own `gap-3`
   // above): a real drop shadow, not the theme's own `shadow-card` (tuned
   // for a light/paper card and its ~8% black would vanish against this
@@ -4647,7 +4741,22 @@ export const cardCarousel = {
   // aware of the section's real item count (Our Services' own export was a
   // mismatched 4 dots for 5 real cards; reproduced from the item list
   // instead of the asset every time, not just that once).
-  dotsRow: "flex items-center gap-1.5",
+  // `mt-[28px]` (owner, 2026-09-10: "dots are too close make 12px gap from
+  // the top, apply it to all") -- was 16px (via each caller's own wrapper
+  // `gap-4`), +12px = 28px, matching `insideFactory.mobileCarouselWrap`'s
+  // own already-correct 2026-09-10 value. Used directly by Exhibitions,
+  // InsideFactory, and TrustSignals' tablet carousel -- their own cards
+  // read correctly at 28px. `CardCarousel.tsx` (Our Services/How It Works/
+  // Product Customize Steps) does NOT use this token any more -- same-day
+  // follow-up (owner: "how it works and our services dots are too far,
+  // reduce 12px space from top") found 28px too much for those three's own
+  // shorter cards; see `dotsRowTight` below instead.
+  dotsRow: "mt-[28px] flex items-center gap-1.5",
+  // `CardCarousel.tsx`'s own dots gap -- 12px (owner, 2026-09-10, in
+  // sequence: briefly unified to the 28px `dotsRow` above, reverted to
+  // 16px once it read as too far for these three sections' own shorter
+  // cards, then corrected once more to 12px: "make it 12px").
+  dotsRowTight: "mt-3 flex items-center gap-1.5",
   dot: "size-[6px] rounded-full transition-colors",
   dotActive: "bg-accent",
   dotInactive: "bg-[#D1D1D6]",
@@ -7091,6 +7200,39 @@ export const productCtas = {
   // owner-specified hex for this one hover state, not a design-system
   // token -- kept exact rather than substituted for an existing colour.
   secondaryDesktop: "!border-accent !text-accent hover:!bg-[#FFF6F3]",
+};
+
+/* --- WhatsAppFloatingButton (sitewide, desktop only) ---------------------- */
+// Owner, 2026-09-10: "on mobile we added whatsapp, on desktop sitewide i
+// want to add too on the right cornor of the site as floating with the
+// same number integrated to it" -- the mobile-only WhatsApp CTA already
+// lives inside `productCtas.mobileBar` (`xl:hidden`, and itself only
+// rendered on the handful of pages that mount `ProductCtasMobileBar`).
+// This is a separate, always-on floating button instead of extending that
+// bar to desktop: desktop has no equivalent bottom bar at all to extend,
+// and mounting this once in `app/layout.tsx` (rather than per-page, the
+// way the mobile bar is) is what makes it genuinely sitewide with no risk
+// of a future page forgetting to add it.
+export const whatsappFloating = {
+  // `hidden xl:flex`: the mirror of `productCtas.mobileBar`'s own
+  // `xl:hidden` -- the two are mutually exclusive by breakpoint, never
+  // both on screen at once. `fixed bottom-6 right-6` (24px inset, this
+  // project's own standard spacing unit) `z-40` matches the fixed
+  // Header's own stacking level (`header.base`'s `z-40`) -- high enough to
+  // float over every section's content, not fighting Footer's own
+  // higher-still `z-50` drawer/portal layers (nothing here ever coexists
+  // with the mobile drawer, which is `xl:hidden` itself).
+  wrap: "fixed bottom-6 right-6 z-40 hidden xl:flex",
+  // Same 56px size / brand-green / white-icon treatment as the mobile
+  // bar's own `productCtas.whatsappButton`, scaled up slightly (44px ->
+  // 56px) since this button stands alone on desktop rather than sitting
+  // beside a second, same-height CTA button it needs to visually match.
+  // `shadow-lg` -- floating over arbitrary page content (light and dark
+  // sections alike) needs its own depth cue the mobile bar's blurred
+  // backing bar already supplied for free.
+  button:
+    "flex size-14 items-center justify-center rounded-full bg-[#25D366] text-paper shadow-lg transition-transform hover:scale-105",
+  icon: "size-7",
 };
 
 /* --- ProductCustomizeSteps (PDP) ----------------------------------------- */

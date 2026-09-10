@@ -4,6 +4,7 @@ import { Figtree } from "next/font/google";
 import { AppEntryMarker } from "@/components/AppEntryMarker";
 import { JsonLd } from "@/components/JsonLd";
 import { ScrollReset } from "@/components/ScrollReset";
+import { WhatsAppFloatingButton } from "@/components/WhatsAppFloatingButton";
 import { ALLOW_INDEXING, DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from "@/content/site";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import "./globals.css";
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <AppEntryMarker />
         <ScrollReset />
         {children}
+        <WhatsAppFloatingButton />
         <JsonLd data={organizationSchema()} />
         <JsonLd data={websiteSchema()} />
       </body>

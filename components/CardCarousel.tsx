@@ -125,7 +125,7 @@ export function CardCarousel({
           </div>
         ))}
       </div>
-      <div className={cardCarousel.dotsRow}>
+      <div className={cardCarousel.dotsRowTight}>
         {items.map((item, index) => (
           <span
             key={item.title}

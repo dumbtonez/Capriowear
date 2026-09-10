@@ -52,31 +52,27 @@
 // CertifiedCompliant, HowItWorks, etc: `<TextReveal as="span" text={h2} />`
 // inside the `<h2>`), not a new variant.
 //
-// Desktop cards moved off the 3-column grid onto a real horizontally-
-// scrollable row, 2026-09-09 (owner: "how we work still does not follow
-// the image size as our services" -- matching Our Services' own media
-// RATIO, already done above, isn't the same as matching its real SIZE;
-// the grid divided the 1280px content area into 397px columns, not Our
-// Services' actual 480px width, and 3 cards at a literal 480px can't all
-// fit in 1280px regardless of gap. Confirmed via `AskUserQuestion`: keep
-// all 3 cards at the real 480px width and let the row overflow, the last
-// card peeking at the edge -- the same "more cards than fit, partial edge
-// peek" shape already used by How It Works/Inside the Factory/
-// Exhibitions/Trust Signals' own scrollable rows (`useDesktopChevronScroller`,
-// components/DesktopChevronScroller.tsx), reused verbatim here rather than
-// invented a second time. This split the single dual-render `pathCard`
-// (desktop half + mobile accordion half, only one ever visible per
-// breakpoint) into two real top-level blocks instead, matching those same
-// sections' own "separate DesktopScroller/MobileCarousel functions"
-// convention -- the mobile/tablet accordion itself is unchanged, just
-// moved into its own explicit wrapper rather than living inside the same
-// per-card element as the now-scrollable desktop half.
+// Desktop cards briefly moved off the 3-column grid onto a horizontally-
+// scrollable chevron-paged row, 2026-09-09 (owner: "how we work still does
+// not follow the image size as our services" -- grown to Our Services' own
+// 480px card width, which meant 3 cards no longer fit the 1280px content
+// area, hence the scroll/chevron). Reverted the next day (owner,
+// 2026-09-10: "how we work with you section should not have a chevron, it
+// should fit in the 1440 viewport as in design") -- cards restored to the
+// section's own original, Figma-confirmed 397px width (see
+// `servicesHowWeWork.desktopCard`'s own comment in components/ui/
+// styles.ts), which fits all 3 in the 1280px content area with no scroll
+// mechanism needed at all. `DesktopRow` (a plain flex row, no refs/mouse
+// handlers/chevron) replaces the old `DesktopScroller`, still its own
+// top-level block separate from the mobile/tablet accordion below (not
+// re-merged into one dual-render `pathCard`) since the two now have
+// genuinely different layouts (row vs. accordion), not just different
+// visibility.
 //
 // Mobile/tablet-only, per the owner's own brief -- see `servicesHowWeWork`
 // in components/ui/styles.ts for the exact spacing notes.
 import { useId, useState } from "react";
 
-import { DesktopChevron, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
 import { FilterChevronIcon } from "@/components/icons/FilterChevronIcon";
 import { AsteriskIcon } from "@/components/icons/AsteriskIcon";
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
@@ -89,32 +85,20 @@ export type ServicesHowWeWorkProps = {
   content: typeof services.howWeWork;
 };
 
-// 480px, Our Services' own real (unshrunk) card width -- see this file's
-// own header comment. 44px gap is this section's own existing confirmed
-// desktop column gap (`xl:gap-x-11`, from the retired 3-column grid),
-// reused rather than picking a new number.
-const CARD_WIDTH = 480;
-const CARD_GAP = 44;
-
-function DesktopScroller({ paths }: { paths: typeof services.howWeWork.paths }) {
-  const { wrapRef, trackRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
-    useDesktopChevronScroller(CARD_WIDTH + CARD_GAP);
-
+// No chevron/scroll any more (owner, 2026-09-10: "how we work with you
+// section should not have a chevron, it should fit in the 1440 viewport
+// as in design") -- see `servicesHowWeWork.desktopScrollerWrap`'s own
+// comment in components/ui/styles.ts for the full reasoning. Plain row,
+// not a scroller: no wrap refs, no mouse handlers, no chevron element.
+function DesktopRow({ paths }: { paths: typeof services.howWeWork.paths }) {
   return (
-    <div
-      ref={wrapRef}
-      className={servicesHowWeWork.desktopScrollerWrap}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
-    >
-      <div ref={trackRef} className={servicesHowWeWork.desktopRow}>
+    <div className={servicesHowWeWork.desktopScrollerWrap}>
+      <div className={servicesHowWeWork.desktopRow}>
         {paths.map((path) => (
           <article key={path.title} className={servicesHowWeWork.desktopCard}>
             <MediaPlaceholder
               label={path.title}
-              ratio="8:5"
+              ratio="397:234"
               radius="none"
               showLabel={false}
               className={servicesHowWeWork.pathMedia}
@@ -138,7 +122,6 @@ function DesktopScroller({ paths }: { paths: typeof services.howWeWork.paths }) 
           </article>
         ))}
       </div>
-      <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
     </div>
   );
 }
@@ -157,11 +140,10 @@ export function ServicesHowWeWork({ content }: ServicesHowWeWorkProps) {
           <p className={servicesHowWeWork.subheading}>{content.subheading}</p>
         </div>
 
-        {/* Desktop (xl+): real Our Services card width, horizontally
-            scrollable, chevron-paged -- see this file's own header
-            comment. */}
+        {/* Desktop (xl+): plain row, all 3 cards fit the 1440px frame with
+            no scroll/chevron -- see this file's own header comment. */}
         <div className={servicesHowWeWork.desktopWrap}>
-          <DesktopScroller paths={content.paths} />
+          <DesktopRow paths={content.paths} />
         </div>
 
         {/* Mobile/tablet (below xl): collapsible, FabricOptions-styled,

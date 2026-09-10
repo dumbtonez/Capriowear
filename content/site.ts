@@ -132,4 +132,11 @@ export const ORGANIZATION = {
 // form for display; `wa.me` itself needs the digits-only form (no "+", no
 // spaces), built from it once here rather than re-stripped at each usage.
 export const WHATSAPP_NUMBER = "+923348034434";
-export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER.replace(/\D/g, "")}`;
+// Pre-filled opening message (owner, 2026-09-10: "when someone taps on the
+// button whatsapp open, let's add a default message like 'Hi Arsalan, I
+// would like to discuss my custom apperal requiremtns' improve the copy")
+// -- tightened grammar/spelling, kept the name and the real ask. `wa.me`'s
+// own `?text=` query param pre-fills WhatsApp's message box without
+// sending anything automatically; the visitor still taps send themselves.
+export const WHATSAPP_MESSAGE = "Hi Arsalan, I'd like to discuss my custom apparel manufacturing requirements.";
+export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER.replace(/\D/g, "")}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;

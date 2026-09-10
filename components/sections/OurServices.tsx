@@ -30,6 +30,7 @@
 import { CapabilityCard } from "@/components/Card";
 import { CardCarousel } from "@/components/CardCarousel";
 import { SectionHeading } from "@/components/SectionHeading";
+import { TextReveal } from "@/components/TextReveal";
 import { ourServices } from "@/components/ui/styles";
 import type { home } from "@/content/home";
 
@@ -104,7 +105,7 @@ export function OurServices({ content, pageVariant = "home", tone = "light" }: O
         <div className={mobileSection}>
           <SectionHeading
             eyebrow={content.eyebrow}
-            heading={content.h2}
+            heading={<TextReveal as="span" text={content.h2} />}
             eyebrowTone={tone}
             eyebrowSize={eyebrowSize}
             headingClassName={ourServices.mobileHeadingWidth}

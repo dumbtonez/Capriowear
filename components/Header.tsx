@@ -499,7 +499,12 @@ export function Header({
                           <span className={header.navLinkLabelGhost} aria-hidden="true">
                             {link.label}
                           </span>
-                          <span className={cx(header.navLinkLabelVisible, isRouteActive && header.navTriggerActive)}>
+                          <span
+                            className={cx(
+                              header.navLinkLabelVisible,
+                              isRouteActive && (tone === "light" ? header.navTriggerActiveLight : header.navTriggerActiveDark),
+                            )}
+                          >
                             {link.label}
                           </span>
                         </span>
@@ -526,7 +531,12 @@ export function Header({
                         <span className={header.navTriggerLabelGhost} aria-hidden="true">
                           {link.label}
                         </span>
-                        <span className={cx(header.navTriggerLabelVisible, isRouteActive && header.navTriggerActive)}>
+                        <span
+                          className={cx(
+                            header.navTriggerLabelVisible,
+                            isRouteActive && (tone === "light" ? header.navTriggerActiveLight : header.navTriggerActiveDark),
+                          )}
+                        >
                           {link.label}
                         </span>
                       </span>
@@ -635,6 +645,7 @@ export function Header({
         links={mobileLinks}
         contact={contact}
         social={social}
+        cta={cta}
         returnFocusTo={menuButtonRef}
         openedByKeyboardRef={menuOpenedByKeyboardRef}
       />
