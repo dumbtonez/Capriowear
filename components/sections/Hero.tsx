@@ -42,13 +42,10 @@
 //   - The desktop ticker never pauses on hover (`pauseOnHover={false}`,
 //     owner call 2026-08-26) -- decorative, not something to read, so it
 //     shouldn't stop moving just because the cursor passes over it.
-import { Play } from "lucide-react";
-
 import { Button } from "@/components/Button";
 import { Eyebrow } from "@/components/Eyebrow";
 import { Marquee } from "@/components/Marquee";
-import { MediaPlaceholder } from "@/components/MediaPlaceholder";
-import { RevealBox } from "@/components/RevealBox";
+import { ScrollGrowVideo } from "@/components/ScrollGrowVideo";
 import { ScrollSpotlightList } from "@/components/ScrollSpotlightList";
 import { TextReveal } from "@/components/TextReveal";
 import { hero, servicesHero } from "@/components/ui/styles";
@@ -87,26 +84,12 @@ export function Hero({ hero: content, customOfferings }: HeroProps) {
         </div>
       </div>
 
-      {/* Layer 2: Video placeholder */}
-      <div className={hero.videoWrap}>
-        <RevealBox>
-          <MediaPlaceholder
-            label={content.media.label}
-            tone="dark"
-            showLabel={false}
-            radius="none"
-            className={hero.video}
-            overlay={
-              <div className={hero.playWrap}>
-                <span className={hero.playCircle}>
-                  <Play className={hero.playIcon} aria-hidden="true" fill="currentColor" />
-                </span>
-                <span className={hero.playLabel}>Play Video</span>
-              </div>
-            }
-          />
-        </RevealBox>
-      </div>
+      {/* Layer 2: Video placeholder -- extracted to ScrollGrowVideo.tsx
+          (2026-09-11, once OurFactoryHero needed the identical narrow-to-
+          full-viewport scroll grow: "apply it on other pages where it
+          exist"), see that file's own header comment for the full
+          mechanism. */}
+      <ScrollGrowVideo label={content.media.label} wrapClassName={hero.videoWrap} />
 
       {/* Layer 3: Ticker. Desktop scrolls; mobile is a plain stacked list --
           real, different designs, not one component in two modes. Split at
