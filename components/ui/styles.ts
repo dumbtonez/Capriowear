@@ -1692,8 +1692,14 @@ export const ourFactoryIntro = {
   // scales it smoothly between the two. `xl:max-w-none` restores the
   // original uncapped behaviour at true desktop, where `textCol`'s own
   // 841px cap already keeps this readable and this pass is tablet-only.
+  // `max-md:leading-7` (28px, owner, 2026-09-10, mobile-only review:
+  // "make it 28" -- was `leading-8`/32px) -- shared by both placements
+  // (section 3 "The factory behind Capriowear" and section 7 "Audited,
+  // not just promised," "Quality management, material safety..."), so
+  // this one token change covers both sublines at once. md:/xl: leading-9
+  // unchanged.
   paragraph:
-    "max-md:text-[1.5rem] max-md:leading-8 md:max-w-[clamp(560px,65vw,780px)] md:text-[1.625rem] md:leading-9 xl:max-w-none text-[#838D97]",
+    "max-md:text-[1.5rem] max-md:leading-7 md:max-w-[clamp(560px,65vw,780px)] md:text-[1.625rem] md:leading-9 xl:max-w-none text-[#838D97]",
   // `text-paper`, no weight utility (was `font-semibold`) -- Figma's own
   // reference for this paragraph doesn't bold these spans at all, it
   // switches them to white at the same regular weight as the rest of the
@@ -1963,7 +1969,9 @@ export const ourFactoryDetails = {
   // `xl:max-w-[560px]` is this section's own pre-existing desktop value
   // (unrelated, `headingRow`'s own `xl:justify-between` layout need) and
   // naturally wins back over the new tablet value at `xl:`, unchanged.
-  lead: "max-md:text-[1.5rem] max-md:leading-8 md:max-w-[clamp(560px,65vw,780px)] md:text-[1.625rem] md:leading-9 text-[#838D97] xl:max-w-[560px]",
+  // `max-md:leading-7` (28px, owner, 2026-09-10, mobile-only review:
+  // "make it 28") -- was `leading-8`/32px. md:/xl: leading-9 unchanged.
+  lead: "max-md:text-[1.5rem] max-md:leading-7 md:max-w-[clamp(560px,65vw,780px)] md:text-[1.625rem] md:leading-9 text-[#838D97] xl:max-w-[560px]",
   // Regular weight (owner, 2026-09-09: "explore a pair text highlighted
   // should be regular weight") -- white/`text-paper` only, no
   // `font-semibold`. Figma's own reference layer agreed with this all
@@ -2324,6 +2332,17 @@ export const ourFactoryDetails = {
   // opacity utilities present at once would again leave the stylesheet's
   // own generation order to silently decide the winner).
   imageLayer: "absolute inset-0 transition-opacity duration-[250ms] ease-in-out motion-reduce:transition-none",
+  // Mobile-only variant (owner, 2026-09-10: "tha paralax animation is not
+  // working on the chip changing some jerky effect") -- the mobile crossfade
+  // stack layers `mobileImageZoom`'s own 1400ms zoom-settle transform
+  // UNDER this opacity fade; at the shared 250ms duration, a newly-active
+  // image reached full opacity while still ~82% through its own zoom,
+  // reading as a fully-visible photo that kept visibly drifting/settling
+  // for another second -- two motions finishing at different times instead
+  // of one coordinated one. `duration-[1400ms] ease-out` matches
+  // `mobileImageZoom` exactly, not the shared desktop `imageLayer` above
+  // (unaffected, its own crossfade has no zoom to coordinate with).
+  mobileImageLayer: "absolute inset-0 transition-opacity duration-[1400ms] ease-out motion-reduce:transition-none",
   imageLayerActive: "opacity-100",
   imageLayerInactive: "opacity-0",
 
@@ -2439,6 +2458,20 @@ export const ourFactoryDetails = {
   // block's own height, without a JS measurement effect (unlike `card`'s
   // own chip-width machinery, deliberately not needed here).
   mobileCaption: "min-h-[60px] rounded-2xl bg-[#1f2126]/90 px-4 py-3 text-sm leading-5 text-paper line-clamp-3",
+  // Same zoom-and-settle transform/timing as `ParallaxMedia` (owner,
+  // 2026-09-10: "add the same animation that we have on top factory
+  // images, when the chip changes that animation applies") -- not that
+  // component directly, since its own `useRevealOnView` trigger is a
+  // one-shot IntersectionObserver (plays once when the box first scrolls
+  // into view, then never again), not something that replays every time a
+  // different chip becomes active. Keyed on `isOpen` in
+  // `OurFactoryDetails.tsx` instead: starts zoomed in, settles to rest
+  // whenever this layer becomes the active one, resets when it isn't, so
+  // it replays on every tap. `prefers-reduced-motion` is handled by the
+  // sitewide rule in `globals.css` (collapses `transition-duration`), same
+  // as `ParallaxMedia` itself relies on -- no separate check needed here.
+  mobileImageZoom: "absolute inset-0 scale-[1.12] translate-y-[3%] transition-transform duration-[1400ms] ease-out",
+  mobileImageZoomActive: "scale-100 translate-y-0",
 };
 
 /* --- OurFactoryTeam (/our-factory section 10) ------------------------------ */

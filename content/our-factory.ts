@@ -263,45 +263,62 @@ export const ourFactory = {
       { text: "Every choice we make in construction is one you can see and feel. " },
       { text: "Explore a pair of custom shorts, point by point.", bold: true },
     ] as NoteSegment[],
+    // Temporary: 7 distinct real images (owner, 2026-09-10: "we should
+    // have different images for all the chips" -- the same reference photo
+    // on all 7 had made the crossfade read as "the image isn't changing"),
+    // cycling through every real photo currently in `public/` -- the
+    // reference photo, both leggings product shots, and all 4 factory-test
+    // shots. None of these are real close-up shots of any of these 7
+    // details (no shorts-specific photography exists yet), so this is
+    // still a placeholder, just a distinct one per item so the crossfade
+    // is visibly doing something. Swap each for its own real close-up
+    // photo once it exists.
     items: [
       {
         label: "Sublimation",
         description:
           "Dyed into the fiber, not printed on top, so the color will not crack, peel or fade in the wash.",
         imageAlt: "Close-up of full-dye sublimation on Capriowear custom training shorts, Sialkot, Pakistan",
+        image: { src: "/Product%20images/Referne%20Image.png" },
       },
       {
         label: "Flatlock seams",
         description:
           "Stitched flat where the fabric meets, so seams sit smooth against the skin and resist chafing and abrasion.",
         imageAlt: "Close-up of the flatlock seam on Capriowear custom shorts",
+        image: { src: "/product-images/leggings-high-waisted-compression.png" },
       },
       {
         label: "Elastic waistband",
         description:
           "Built to hold its shape and stay put through training, finished clean inside with no exposed raw edge.",
         imageAlt: "Close-up of the elastic waistband on Capriowear custom shorts",
+        image: { src: "/product-images/leggings-high-waisted-compression-2.png" },
       },
       {
         label: "Drawcord",
         description: "A secure adjustable cord through reinforced eyelets, tied off so it will not pull through.",
         imageAlt: "Close-up of the drawcord and eyelets on Capriowear custom shorts",
+        image: { src: "/factory-test/factory-test-1.png" },
       },
       {
         label: "Gusseted construction",
         description:
           "An added panel at the inseam that opens up range of motion and takes the strain off the seams.",
         imageAlt: "Close-up of the gusseted inseam construction on Capriowear custom shorts",
+        image: { src: "/factory-test/factory-test-2.png" },
       },
       {
         label: "Bar-tacks",
         description: "Reinforced stitching at pockets, side splits and the fly, exactly where a garment takes the most load.",
         imageAlt: "Close-up of bar-tack reinforcement stitching on Capriowear custom shorts",
+        image: { src: "/factory-test/factory-test-3.png" },
       },
       {
         label: "Woven labels",
         description: "Your brand, size and care labels woven and applied in-house, so the shorts arrive finished under your name.",
         imageAlt: "Close-up of a woven brand label on Capriowear custom shorts",
+        image: { src: "/factory-test/factory-test-4.png" },
       },
     ] as SampleDetail[],
   },
