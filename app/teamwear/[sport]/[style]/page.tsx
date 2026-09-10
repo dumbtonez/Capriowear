@@ -16,7 +16,6 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
-import { RevealMain } from "@/components/RevealMain";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
@@ -137,7 +136,7 @@ export default async function TeamwearStylePage({ params }: PageProps<"/teamwear
         secondaryCta={home.nav.secondaryCta}
       />
 
-      <RevealMain className="relative z-10 bg-paper">
+      <main className="relative z-10 bg-paper">
         <Breadcrumb items={breadcrumbItems} className="hidden md:block" />
         <JsonLd
           data={breadcrumbSchema(
@@ -214,7 +213,7 @@ export default async function TeamwearStylePage({ params }: PageProps<"/teamwear
         />
 
         <ProductCtasMobileBar primaryCta={home.nav.cta} />
-      </RevealMain>
+      </main>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />
     </>

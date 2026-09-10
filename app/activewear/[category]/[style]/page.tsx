@@ -20,7 +20,6 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
-import { RevealMain } from "@/components/RevealMain";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
@@ -183,7 +182,7 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
           instead of staying hidden until real content has scrolled past
           it. Found live while verifying ProductGallery below (2026-08-31),
           pre-existing on this page since its own first build. */}
-      <RevealMain className="relative z-10 bg-paper">
+      <main className="relative z-10 bg-paper">
         {/* Visible strip hidden on mobile only, CSS-only (owner request,
             2026-08-31: "hide the breadcrumb visually on mobile only...
             Never conditionally render it out of the DOM"). `hidden
@@ -489,7 +488,7 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
             ProductCtasMobileBar's own IntersectionObserver. Hidden at `xl`,
             where this bar doesn't render at all. */}
         <ProductCtasMobileBar primaryCta={home.nav.cta} />
-      </RevealMain>
+      </main>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />
     </>

@@ -11,7 +11,6 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import { Logo } from "@/components/Logo";
-import { RevealMain } from "@/components/RevealMain";
 import { CategoryBanner } from "@/components/sections/CategoryBanner";
 import { CategoryFilters } from "@/components/sections/CategoryFilters";
 import { CategoryMetaStrip } from "@/components/sections/CategoryMetaStrip";
@@ -139,7 +138,7 @@ export default async function CategoryPage({ params }: PageProps<"/activewear/[c
           header directly, so its own dark background is what's genuinely
           behind the header at rest, not a gap.
           */}
-      <RevealMain className="relative z-10 bg-paper">
+      <main className="relative z-10 bg-paper">
         <CategoryBanner
           breadcrumbItems={[
             { label: "Home", href: "/" },
@@ -372,7 +371,7 @@ export default async function CategoryPage({ params }: PageProps<"/activewear/[c
             desktop CTAs are the header and the closing FinalCta above), so
             only `ProductCtasMobileBar` (not `ProductCtas`) is used here. */}
         <ProductCtasMobileBar primaryCta={home.nav.cta} />
-      </RevealMain>
+      </main>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />
     </>
