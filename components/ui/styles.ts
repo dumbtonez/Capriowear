@@ -2698,9 +2698,10 @@ export const ourFactoryTeam = {
   // boundary with the dark Faq section right after: "skilled hands bottom
   // to faq top ... make it 48px") -- the confirmed 160px bottom gap was
   // also applying at every breakpoint below `md:pt-[160px]`'s own real
-  // mobile/tablet split above; `md:pb-[160px]` restores the confirmed
-  // desktop/tablet value explicitly.
-  inner: "flex w-full flex-col items-center max-md:pt-[72px] md:pt-[160px] max-md:pb-[48px] md:pb-[160px]",
+  // mobile/tablet split above. `md:pb-[104px]` (owner, 2026-09-11: "make
+  // it 104" -- was 160px, the "gap from skilled hands to faq" the owner
+  // had just confirmed).
+  inner: "flex w-full flex-col items-center max-md:pt-[72px] md:pt-[160px] max-md:pb-[48px] md:pb-[104px]",
   headingCol: "flex flex-col items-center gap-4 text-center max-w-[812px]",
   heading: "text-h1 text-text",
   // 22px/32px (Figma's own real size for this subline, not this project's
@@ -2777,8 +2778,12 @@ export const ourFactoryTeam = {
   // the hero photo was asked for that treatment. `hidden xl:block`: this
   // mechanism is desktop-only now (see `sliderWrap` below for the mobile/
   // tablet replacement).
-  galleryWrap: "relative mx-auto hidden w-full max-w-[1440px] cursor-none overflow-hidden pt-[40px] xl:block",
-  galleryRow: "no-scrollbar flex items-start gap-[40px] overflow-x-hidden scroll-smooth pl-[80px]",
+  // `pt-[24px]` (owner, same turn: "from top make it 24 too" -- was 40px,
+  // matching `galleryRow`'s own new 24px image gap below).
+  galleryWrap: "relative mx-auto hidden w-full max-w-[1440px] cursor-none overflow-hidden pt-[24px] xl:block",
+  // `gap-[24px]` (owner, 2026-09-11: "gap between the images is 40px?"
+  // then "make it 24" -- was 40px).
+  galleryRow: "no-scrollbar flex items-start gap-[24px] overflow-x-hidden scroll-smooth pl-[80px]",
   // 500px wide, fixed per-item height (600px "tall" / 420px "short",
   // alternating per this node's own real per-item measurements) -- not a
   // MediaRatio: the ratio itself differs per item at one shared width, so
