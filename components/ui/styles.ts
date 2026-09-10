@@ -1711,7 +1711,21 @@ export const ourFactoryIntro = {
   // `pt-[72px]` -- matched here explicitly rather than left on the
   // shared 32px value, same "each placement gets its own top inset"
   // pattern `innerAfterHero`/`innerStacked` already establish at `xl:`.
-  innerStacked: "max-md:pt-[72px] xl:pt-[104px]",
+  // `xl:!pl-[276px]` (owner, 2026-09-11: "audited not just promised
+  // section make it 260px gap from the left" then "make 16px more gap
+  // from the left" -- 260px + 16px) -- diverges section 7 back off the
+  // shared `inner`'s own `xl:pl-[300px]` (unified with section 3 on
+  // 2026-09-09, see that token's own comment) for this placement only.
+  // `!` is required: `inner`'s own `xl:pl-[300px]` is the exact same
+  // `xl:`-prefixed utility at the same specificity, so without it
+  // Tailwind's generated stylesheet order (not this className's own
+  // position in `cx(inner, innerStacked)`) would silently decide which
+  // wins -- the same real risk this file already documents and guards
+  // against elsewhere (e.g. `ProductGallery`'s active-thumbnail border).
+  // `xl:pt-[72px]` (owner, 2026-09-11: "make 24 px less gap from the top"
+  // then, same turn, "or 32px less" -- the second, final value wins: was
+  // 104px, -32px).
+  innerStacked: "max-md:pt-[72px] xl:pt-[72px] xl:!pl-[276px]",
   // max-md:gap-6/md:gap-8 (owner, 2026-09-09, mobile-only review: "make the
   // paragraph gap 24px") -- heading-to-paragraph gap drops to 24px below
   // md (was the shared 32px `gap-8` at every breakpoint); md:/xl: unchanged.
