@@ -2909,9 +2909,10 @@ export const servicesIntro = {
   // message: "add 24px more gap from the top of the separator" -- the
   // text-block-to-stats-row gap, `gap-10`/40px at every other tier, +24 on
   // tablet only) are both tablet-only tiers; real mobile and desktop
-  // (`xl:gap-20`/`xl:pt-[160px]`) are unaffected.
+  // (`xl:gap-20`/`xl:pt-[160px]`) are unaffected. `xl:pl-[320px]` (owner,
+  // 2026-09-10: "make it 320 from left" -- was 300px).
   inner:
-    "mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-5 py-12 md:gap-16 md:px-8 md:pt-[88px] xl:gap-20 xl:pb-[120px] xl:pl-[300px] xl:pr-[118px] xl:pt-[160px]",
+    "mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-5 py-12 md:gap-16 md:px-8 md:pt-[88px] xl:gap-20 xl:pb-[120px] xl:pl-[320px] xl:pr-[118px] xl:pt-[160px]",
   textCol: "flex flex-col gap-6 xl:w-[841px] xl:gap-8",
   heading: "text-h1 text-paper",
   // 24px/32px on real mobile (owner, 2026-09-10: "subline font size should
