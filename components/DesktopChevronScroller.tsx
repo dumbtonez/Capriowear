@@ -28,20 +28,45 @@ import { useEffect, useRef, useState, type MouseEvent, type RefObject } from "re
 import { chevronScroller } from "@/components/ui/styles";
 
 const CHEVRON_HALF = 40; // half of size-20 (80px) circle, to centre it on the cursor
+const DOT_HALF = 3; // half of size-1.5 (6px) dot, to centre it on the cursor
 // Fraction of the remaining distance closed per 60fps-equivalent frame --
-// tuned by feel (0.35 reads as a tight, responsive trail; higher values
-// approach an instant snap, lower values read as sluggish/laggy).
-const SMOOTHING = 0.35;
+// tuned by feel. Lowered 0.35 -> 0.22 (owner, 2026-09-10: "this chvron
+// component when you hover on the section is very tight not smooth... how
+// can we make it very light, smooth" -- referencing studio-size.com's own
+// featured-work drag element as the target feel) -- a smaller fraction
+// closes less of the remaining distance each frame, so the circle trails
+// the cursor with a longer, softer glide instead of nearly snapping to it.
+// Pushed to 0.14 (owner: "is that the max smoothness you can make?" ->
+// "go ahead"), then reverted (owner, same turn: "go back to previous this
+// is too slow") -- 0.14 confirmed the "disconnected/laggy" floor this
+// comment already predicted; back to 0.22.
+const SMOOTHING = 0.22;
 
 export function useDesktopChevronScroller(cardPitch: number) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const chevronRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
   const targetRef = useRef({ x: 0, y: 0 });
   const currentRef = useRef({ x: 0, y: 0 });
+  // Own clamp (DOT_HALF, not CHEVRON_HALF) -- the dot is much smaller than
+  // the ring, so clamping it to the ring's own 40px-from-edge margin would
+  // strand it that far from the real cursor near the row's edges for no
+  // reason; it only needs to stay fully inside the clipped wrap.
+  const dotTargetRef = useRef({ x: 0, y: 0 });
   const directionRef = useRef<1 | -1>(1);
   const rafRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);
+  // Cached on `handleMouseEnter`/resize, NOT read on every `mousemove`
+  // (owner, same turn: "when you scroll up and down, it sticks there for
+  // one scroll and scrolls down on the second attempt" -- `getBoundingClientRect()`
+  // forces a synchronous layout recalculation, and it was being called on
+  // every single mousemove sample while hovering this row; that layout
+  // thrash on the main thread is exactly what a scroll gesture starting
+  // mid-hover would contend with, reading as the first wheel tick being
+  // "stuck" until the thread caught up). A mouse move never changes this
+  // element's own layout, so one measurement per hover session is enough.
+  const wrapRectRef = useRef<{ left: number; top: number; width: number; height: number } | null>(null);
   const [direction, setDirection] = useState<1 | -1>(1);
 
   const applyTransform = () => {
@@ -50,10 +75,26 @@ export function useDesktopChevronScroller(cardPitch: number) {
     chevron.style.transform = `translate(${currentRef.current.x - CHEVRON_HALF}px, ${currentRef.current.y - CHEVRON_HALF}px)`;
   };
 
-  const setTargetFromEvent = (event: MouseEvent<HTMLDivElement>) => {
+  // Written directly from `dotTargetRef` on every event, not from the rAF
+  // loop -- the dot has no lag at all, on purpose (see `chevronScroller.
+  // dot`'s own comment).
+  const applyDotTransform = () => {
+    const dot = dotRef.current;
+    if (!dot) return;
+    dot.style.transform = `translate(${dotTargetRef.current.x - DOT_HALF}px, ${dotTargetRef.current.y - DOT_HALF}px)`;
+  };
+
+  const measureWrap = () => {
     const wrap = wrapRef.current;
-    if (!wrap) return;
+    if (!wrap) return null;
     const rect = wrap.getBoundingClientRect();
+    wrapRectRef.current = { left: rect.left, top: rect.top, width: rect.width, height: rect.height };
+    return wrapRectRef.current;
+  };
+
+  const setTargetFromEvent = (event: MouseEvent<HTMLDivElement>) => {
+    const rect = wrapRectRef.current ?? measureWrap();
+    if (!rect) return;
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
     // Clamped, not the raw cursor position -- the wrap clips overflow, so
@@ -63,7 +104,22 @@ export function useDesktopChevronScroller(cardPitch: number) {
       x: Math.min(Math.max(x, CHEVRON_HALF), rect.width - CHEVRON_HALF),
       y: Math.min(Math.max(y, CHEVRON_HALF), rect.height - CHEVRON_HALF),
     };
-    const nextDirection = x < rect.width / 2 ? -1 : 1;
+    dotTargetRef.current = {
+      x: Math.min(Math.max(x, DOT_HALF), rect.width - DOT_HALF),
+      y: Math.min(Math.max(y, DOT_HALF), rect.height - DOT_HALF),
+    };
+    applyDotTransform();
+    let nextDirection: 1 | -1 = x < rect.width / 2 ? -1 : 1;
+    // Owner, 2026-09-10: "the chevron on this section should not show
+    // backward icon since user can not go to left, untill he slides to the
+    // right" -- at the very start of the row there's nowhere left to
+    // scroll back to, so the cursor-side check above is overridden to
+    // forward-only until a real forward scroll (`handleClick`/native
+    // scroll-snap) moves `scrollLeft` off 0. `> 1`, not `> 0`, absorbs
+    // sub-pixel scroll positions some browsers report at rest.
+    if (nextDirection === -1 && (trackRef.current?.scrollLeft ?? 0) <= 1) {
+      nextDirection = 1;
+    }
     if (nextDirection !== directionRef.current) {
       directionRef.current = nextDirection;
       setDirection(nextDirection);
@@ -88,6 +144,7 @@ export function useDesktopChevronScroller(cardPitch: number) {
   const handleMouseMove = setTargetFromEvent;
 
   const handleMouseEnter = (event: MouseEvent<HTMLDivElement>) => {
+    measureWrap();
     setTargetFromEvent(event);
     // Seed current = target immediately, before the loop starts -- without
     // this the circle eases in from wherever it was left last time (or its
@@ -96,12 +153,19 @@ export function useDesktopChevronScroller(cardPitch: number) {
     currentRef.current = { ...targetRef.current };
     applyTransform();
     if (chevronRef.current) chevronRef.current.style.opacity = "1";
+    if (dotRef.current) dotRef.current.style.opacity = "1";
     lastTimeRef.current = null;
     if (rafRef.current === null) rafRef.current = requestAnimationFrame(tick);
   };
 
+  // Tried keeping the rAF loop alive past the leave event so the circle
+  // would keep gliding toward the exit point while it faded (owner,
+  // 2026-09-10: "the chevron exit from the section is jerky, can we make
+  // it smooth too?") -- reverted the same turn ("that's even worse now,
+  // let's revert it back"). Back to the plain instant stop.
   const handleMouseLeave = () => {
     if (chevronRef.current) chevronRef.current.style.opacity = "0";
+    if (dotRef.current) dotRef.current.style.opacity = "0";
     if (rafRef.current !== null) {
       cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
@@ -115,6 +179,19 @@ export function useDesktopChevronScroller(cardPitch: number) {
   // Stop a stray rAF loop if the component unmounts mid-hover.
   useEffect(() => () => {
     if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+  }, []);
+
+  // Drops the cached rect on resize so the next `mouseenter` re-measures --
+  // covers the (rare) case of a viewport resize while this row's own
+  // position/size changed. Doesn't re-measure immediately: nothing reads
+  // `wrapRectRef` again until the next real hover, so there's nothing to
+  // keep in sync while the cursor isn't over the row anyway.
+  useEffect(() => {
+    const onResize = () => {
+      wrapRectRef.current = null;
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   // Owner, 2026-09-08: "when you scroll over the images and scroll down, it
@@ -154,6 +231,7 @@ export function useDesktopChevronScroller(cardPitch: number) {
     wrapRef,
     trackRef,
     chevronRef,
+    dotRef,
     direction,
     handleMouseMove,
     handleMouseEnter,
@@ -164,18 +242,26 @@ export function useDesktopChevronScroller(cardPitch: number) {
 
 export function DesktopChevron({
   chevronRef,
+  dotRef,
   direction,
 }: {
   chevronRef: RefObject<HTMLDivElement | null>;
+  dotRef: RefObject<HTMLDivElement | null>;
   direction: 1 | -1;
 }) {
   return (
-    <div ref={chevronRef} className={chevronScroller.circle}>
-      {direction === -1 ? (
-        <ChevronLeft className={chevronScroller.icon} aria-hidden="true" />
-      ) : (
-        <ChevronRight className={chevronScroller.icon} aria-hidden="true" />
-      )}
-    </div>
+    <>
+      {/* Instant-follow dot, see `chevronScroller.dot`'s own comment --
+          rendered as a sibling, not nested inside the ring, since the two
+          move independently (the dot has no lag, the ring does). */}
+      <div ref={dotRef} className={chevronScroller.dot} />
+      <div ref={chevronRef} className={chevronScroller.circle}>
+        {direction === -1 ? (
+          <ChevronLeft className={chevronScroller.icon} aria-hidden="true" />
+        ) : (
+          <ChevronRight className={chevronScroller.icon} aria-hidden="true" />
+        )}
+      </div>
+    </>
   );
 }

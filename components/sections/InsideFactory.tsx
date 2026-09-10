@@ -147,7 +147,7 @@ function DesktopGallery({
   shots: typeof home.insideFactory.media;
   tone: "light" | "dark";
 }) {
-  const { wrapRef, trackRef, chevronRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
+  const { wrapRef, trackRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
     useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP);
 
   return (
@@ -177,7 +177,7 @@ function DesktopGallery({
           </div>
         ))}
       </div>
-      <DesktopChevron chevronRef={chevronRef} direction={direction} />
+      <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
     </div>
   );
 }

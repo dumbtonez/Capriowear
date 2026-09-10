@@ -117,10 +117,19 @@ export type ProductCtasProps = {
 export function ProductCtas({ primaryCta, secondaryCta }: ProductCtasProps) {
   return (
     <div className={productCtas.desktopRow}>
-      <Button href={primaryCta.href} variant="primary">
+      {/* `cta-on-light` (globals.css): this row always renders inline in
+          the PDP's `bg-paper` body (never a dark section), so unlike
+          Header's own CTA this is a static class, not tone-tracked --
+          owner, 2026-09-10, the same "handle white separately" pass. */}
+      <Button href={primaryCta.href} variant="primary" className="cta-on-light">
         {primaryCta.label}
       </Button>
-      <Button href={secondaryCta.href} variant="secondary" className={productCtas.secondaryDesktop}>
+      <Button
+        href={secondaryCta.href}
+        variant="secondary"
+        className={cx(productCtas.secondaryDesktop, "cta-on-light")}
+        gradientBorder
+      >
         {secondaryCta.label}
       </Button>
     </div>

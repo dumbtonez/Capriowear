@@ -37,7 +37,7 @@ const CARD_WIDTH = 469;
 const CARD_GAP = 24;
 
 function DesktopScroller({ steps }: { steps: typeof pdpCustomizationSteps.steps }) {
-  const { wrapRef, trackRef, chevronRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
+  const { wrapRef, trackRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
     useDesktopChevronScroller(CARD_WIDTH + CARD_GAP);
 
   return (
@@ -61,7 +61,7 @@ function DesktopScroller({ steps }: { steps: typeof pdpCustomizationSteps.steps 
           </div>
         ))}
       </div>
-      <DesktopChevron chevronRef={chevronRef} direction={direction} />
+      <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
     </div>
   );
 }

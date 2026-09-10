@@ -24,6 +24,12 @@ type Shared = {
   variant?: ButtonVariant;
   className?: string;
   children: ReactNode;
+  /** Rotating orange gradient ring on hover, desktop only (`.cta-gradient-border`
+   *  in globals.css) -- opt-in per instance, not baked into `variant`, since
+   *  most secondary buttons (category links, etc.) don't want it. Owner,
+   *  2026-09-10: "on the hover on download catalog... the outline moves
+   *  around the cta." */
+  gradientBorder?: boolean;
 };
 
 type AsLink = Shared &
@@ -38,8 +44,8 @@ type AsButton = Shared &
 
 export type ButtonProps = AsLink | AsButton;
 
-export function Button({ variant = "primary", className, children, ...props }: ButtonProps) {
-  const classes = cx(button.base, button[variant], className);
+export function Button({ variant = "primary", className, children, gradientBorder, ...props }: ButtonProps) {
+  const classes = cx(button.base, button[variant], gradientBorder && "cta-gradient-border", className);
 
   if ("href" in props && props.href) {
     const { href, ...rest } = props;

@@ -102,18 +102,28 @@ export function CertifiedCompliant({ content, pageVariant = "default", showHeadi
               align="center"
             />
           ) : null}
-          <div className={certified.desktopRow}>
-            {content.logos.map((logo) => (
-              <Image
-                key={logo.name}
-                src={logo.src}
-                alt={logo.name}
-                width={logo.width}
-                height={logo.height}
-                priority
-              />
+          {/* Marquee, not the earlier static row (owner, 2026-09-10: "make
+              them move marquee sitewide desktop and tablet") -- same
+              mechanism tablet already used below, `<Marquee>` with
+              `separator="none"`, no bordered/paused treatment, matching
+              Client Logos' own established desktop technique. `priority`
+              is dropped here (Marquee duplicates each item to loop, so a
+              literal `priority` on every render would eagerly load twice
+              as many images as actually visible) -- this section is still
+              far enough down the page to need eager loading in general
+              (see this file's own header comment), so `loading="eager"` is
+              passed directly instead, covering both the original and
+              duplicated copies alike. */}
+          <Marquee
+            items={content.logos.map((logo) => (
+              <Image key={logo.name} src={logo.src} alt={logo.name} width={logo.width} height={logo.height} loading="eager" />
             ))}
-          </div>
+            separator="none"
+            gap="loose"
+            divider={false}
+            pauseOnHover={false}
+            edgeFade
+          />
         </div>
       </div>
 

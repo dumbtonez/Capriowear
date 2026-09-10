@@ -80,7 +80,7 @@ export function Hero({ hero: content, customOfferings }: HeroProps) {
               fight Button's own unconditional inline-flex base class -- see
               hero.ctaSecondaryWrap in components/ui/styles.ts. */}
           <div className={hero.ctaSecondaryWrap}>
-            <Button variant="secondary" href={content.ctaSecondary.href}>
+            <Button variant="secondary" href={content.ctaSecondary.href} gradientBorder>
               {content.ctaSecondary.label}
             </Button>
           </div>

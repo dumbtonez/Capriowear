@@ -55,7 +55,7 @@ const DESKTOP_CARD_WIDTH = 469;
 const DESKTOP_CARD_GAP = 24;
 
 function DesktopScroller({ shots }: { shots: typeof home.exhibitions.media }) {
-  const { wrapRef, trackRef, chevronRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
+  const { wrapRef, trackRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
     useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP);
 
   return (
@@ -74,7 +74,7 @@ function DesktopScroller({ shots }: { shots: typeof home.exhibitions.media }) {
           </div>
         ))}
       </div>
-      <DesktopChevron chevronRef={chevronRef} direction={direction} />
+      <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
     </div>
   );
 }

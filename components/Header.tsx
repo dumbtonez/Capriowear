@@ -548,7 +548,12 @@ export function Header({
                 {secondaryCta.label}
               </Link>
             ) : null}
-            <Button href={cta.href} className={header.actionButton}>
+            {/* `cta-on-light` (globals.css) toggled by this header's own
+                already-tracked `tone` state, not a separate detector --
+                owner, 2026-09-10: the CTA bloom needed a different, softer
+                version once it's floating over a white/paper section, and
+                this frosted header already knows which section it's over. */}
+            <Button href={cta.href} className={cx(header.actionButton, tone === "light" && "cta-on-light")}>
               {cta.label}
             </Button>
           </div>

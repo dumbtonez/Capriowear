@@ -76,7 +76,7 @@ export function ServicesHero({ hero: content, customOfferings }: ServicesHeroPro
             {content.ctaPrimary.label}
           </Button>
           <div className={hero.ctaSecondaryWrap}>
-            <Button variant="secondary" href={content.ctaSecondary.href}>
+            <Button variant="secondary" href={content.ctaSecondary.href} gradientBorder>
               {content.ctaSecondary.label}
             </Button>
           </div>
