@@ -1693,8 +1693,10 @@ export const ourFactoryIntro = {
   // standing "match the top" rule).
   inner: "mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-5 max-md:pb-10 md:pb-12 max-md:pt-8 md:pt-12 md:px-8 xl:gap-20 xl:pb-[120px] xl:pl-[300px] xl:pr-[118px]",
   // Default placement: this component's first use (section 3, right after
-  // the Hero) -- unchanged from before the `placement` prop existed.
-  innerAfterHero: "xl:pt-[160px]",
+  // the Hero). `xl:pt-[104px]` (owner, 2026-09-11, in sequence: "whats
+  // the space from top the factory behind capriowear" -> "make it 120px"
+  // -> "make it 104" -- was 160px).
+  innerAfterHero: "xl:pt-[104px]",
   // Second placement (section 7, "Audited, not just promised", Figma node
   // 873:123): stacked directly after another dark section (OurFactoryDetails)
   // instead of the Hero, so it needs a smaller top gap than section 3's.
