@@ -7170,8 +7170,11 @@ export const whatsappFloating = {
   // Header's own stacking level (`header.base`'s `z-40`) -- high enough to
   // float over every section's content, not fighting Footer's own
   // higher-still `z-50` drawer/portal layers (nothing here ever coexists
-  // with the mobile drawer, which is `xl:hidden` itself).
-  wrap: "fixed bottom-6 right-6 z-40 hidden xl:flex",
+  // with the mobile drawer, which is `xl:hidden` itself). `flex-col` +
+  // `gap-3` (owner, 2026-09-10: "keep it under the whatsapp icon" --
+  // Instagram added as a second, stacked button below) -- 12px between
+  // the two circles, this project's own standard small-gap unit.
+  wrap: "fixed bottom-6 right-6 z-40 hidden flex-col gap-3 xl:flex",
   // Same 56px size / brand-green / white-icon treatment as the mobile
   // bar's own `productCtas.whatsappButton`, scaled up slightly (44px ->
   // 56px) since this button stands alone on desktop rather than sitting
@@ -7182,6 +7185,57 @@ export const whatsappFloating = {
   button:
     "flex size-14 items-center justify-center rounded-full bg-[#25D366] text-paper shadow-lg transition-transform hover:scale-105",
   icon: "size-7",
+  // Instagram, stacked below WhatsApp (owner, 2026-09-10: "I also want to
+  // highlight our insta page, should we add the icon above the whatsapp
+  // icon?" -- recommended against a second bright/competing CTA; owner
+  // then: "maybe keep it under the whatsapp icon but not bright actual
+  // insta color but nutral color"). Same 56px circle, neutral (not
+  // Instagram's own bright gradient mark) -- keeps WhatsApp as the one
+  // visually "loud" action (the real conversion CTA) while Instagram
+  // stays reachable without competing for attention.
+  //
+  // A flat solid `#1f2126` fill (this site's other neutral social-icon
+  // treatment, `drawer.socialButton`) reads fine over the dark sections
+  // this button floats over, but as a fully opaque circle it read too
+  // heavy/"loud" against the light/paper ones (owner, same day: "make the
+  // insta backgriund maybe frosted blured so it does not look too loud on
+  // white, on black it looks fine maybe something that works for both").
+  // Switched to a translucent frosted-glass treatment instead -- the same
+  // `backdrop-blur` mechanism the fixed Header's own adaptive overlay
+  // already uses (see `header.base`'s own comment) -- so it reads as
+  // "floating glass" over whatever's actually behind it rather than a
+  // flat opaque disc. Tuned twice more live, same turn: "make it more
+  // lighter blur" (`bg-ink/60`/`backdrop-blur-md` -> `bg-ink/40`/
+  // `backdrop-blur-sm`) then "less visible background on white"
+  // (`bg-ink/40` -> `bg-ink/20`) -- `bg-ink` stays this project's own
+  // near-black ink token throughout (not the literal `#1f2126`).
+  // `border-white/25` (up from `/15`) and `shadow-lg` carry more of the
+  // circle's own definition now that the fill itself is this faint --
+  // over a white section this reads as barely-there glass with a crisp
+  // edge and a visible drop shadow, not a flat disc; over a dark section
+  // the same fill still reads as a soft frosted circle.
+  //
+  // Icon colour: first corrected `text-paper` (white) -> `text-muted`
+  // (owner: "on the white background the icon should turn dark not too
+  // blackish but visible, white on white background is not very visible"
+  // then "make a balnce" -- one fixed grey compromise, not real per-
+  // section detection). Owner then asked directly for the real thing
+  // ("make it a bit dark on white and should go white on blck bacground,
+  // is it not too much right?") -- not too much: `getSurfaceToneAt`
+  // (extracted to lib/surfaceTone.ts the same turn) already exists for
+  // exactly this, built for the fixed Header's own adaptive tone -- this
+  // button's own `FloatingSocialButtons.tsx` now samples it too, so this
+  // token no longer sets a colour itself; `instagramIconLight`/
+  // `instagramIconDark` below do, switched by that live sample.
+  instagramButton:
+    "flex size-14 items-center justify-center rounded-full border border-white/25 bg-ink/20 shadow-lg backdrop-blur-sm transition-transform hover:scale-105",
+  instagramIcon: "size-6",
+  // `text-text` (`#1d1d1f`, this project's own near-black body-text
+  // colour) over a light section -- not pure black (owner: "not too
+  // blackish"). `text-paper` (white) over a dark section, same as
+  // `whatsappFloating.icon`'s own colour there.
+  instagramIconLight: "text-text",
+  instagramIconDark: "text-paper",
 };
 
 /* --- ProductCustomizeSteps (PDP) ----------------------------------------- */

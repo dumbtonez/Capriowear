@@ -43,6 +43,7 @@ import { MenuIcon } from "./icons/MenuIcon";
 import { MobileNav, type MobileNavLink } from "./MobileNav";
 import { cx } from "./ui/cx";
 import { header } from "./ui/styles";
+import { getSurfaceToneAt } from "@/lib/surfaceTone";
 
 // Matches `header.megaPanel`'s own `duration-500` exactly -- how long the
 // panel stays mounted after its trigger closes, so the closing clip-path
@@ -51,46 +52,11 @@ const MEGA_TRANSITION_MS = 500;
 
 // Adaptive header tone (owner reference, 2026-09-07: labs.google's own
 // nav swaps its text colour to always contrast whatever section is
-// currently scrolled behind it). Rather than tagging every section on
-// every page with its own light/dark identity (this site has 15+ section
-// components across home/services/every PLP/PDP, and it would need
-// re-auditing on every new page), this derives tone from what's actually
-// rendered: every real section here already expresses its own tone as a
-// real `background-color` (`bg-ink`, or nothing, falling through to
-// `<main>`'s own `bg-paper`) -- confirmed no gradient/image CSS
-// backgrounds exist anywhere in components/ui/styles.ts. So this walks up
-// from the point directly under the header to the first ancestor with a
-// real (non-fully-transparent) background and classifies it by perceptual
-// luminance, instead of reading a hand-maintained tag that could drift out
-// of sync with what's actually on screen.
-//
-// Known accepted limitation, not a bug: a future full-bleed image/video
-// section with no explicit `bg-*` of its own reads as whichever ancestor's
-// tone it inherits, not a sampled pixel colour -- the same thing the
-// reference site's own per-section tagging would do anyway.
-function getSurfaceToneAt(x: number, y: number): "dark" | "light" {
-  let el = document.elementFromPoint(x, y) as Element | null;
-  while (el && el !== document.documentElement) {
-    const bg = getComputedStyle(el).backgroundColor;
-    const match = bg.match(/rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)(?:,\s*([\d.]+))?\)/);
-    if (match) {
-      const alpha = match[4] === undefined ? 1 : Number(match[4]);
-      // > 0, not "must be fully opaque" -- no genuinely translucent section
-      // background exists today, but a future one should still count as
-      // "the thing visibly there" rather than being skipped past.
-      if (alpha > 0) {
-        const [r, g, b] = [Number(match[1]), Number(match[2]), Number(match[3])];
-        const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-        return luminance < 128 ? "dark" : "light";
-      }
-    }
-    el = el.parentElement;
-  }
-  // <main> and <footer> both set their own bg-paper directly (see every
-  // page's own <main className="... bg-paper"> and Footer.tsx's
-  // `footer.root`), so this is rarely actually reached.
-  return "light";
-}
+// currently scrolled behind it). `getSurfaceToneAt` itself now lives in
+// lib/surfaceTone.ts (extracted 2026-09-11 once `FloatingSocialButtons`
+// needed the same detection) -- see that file's own header comment for
+// the full "derive tone from real background-color, not a hand-maintained
+// tag" reasoning.
 
 export type NavMegaMenuGroup = {
   label: string;
