@@ -295,24 +295,34 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
           own height never changes. */}
       <div className={ourFactoryDetails.mobileWrap}>
         <div className={ourFactoryDetails.mobileMediaWrap}>
-          {items.map((item, index) => (
-            <div
-              key={item.label}
-              className={cx(
-                ourFactoryDetails.imageLayer,
-                index === openIndex ? ourFactoryDetails.imageLayerActive : ourFactoryDetails.imageLayerInactive,
-              )}
-            >
-              <MediaPlaceholder
-                label={item.imageAlt}
-                image={item.image}
-                radius="none"
-                tone="dark"
-                showLabel={false}
-                className="size-full"
-              />
-            </div>
-          ))}
+          {items.map((item, index) => {
+            const isOpen = index === openIndex;
+            return (
+              <div
+                key={item.label}
+                className={cx(ourFactoryDetails.mobileImageLayer, isOpen ? ourFactoryDetails.imageLayerActive : ourFactoryDetails.imageLayerInactive)}
+              >
+                {/* Same zoom-and-settle reveal as `ParallaxMedia` (the "What
+                    We Make" process images/"Skilled hands" hero photo) --
+                    not that component directly, since its own trigger is a
+                    one-shot IntersectionObserver ("plays once when scrolled
+                    into view"), not a repeatable "plays every time this
+                    becomes the active chip" one. Same transform/timing
+                    values, keyed on `isOpen` instead, so it replays on every
+                    tap. */}
+                <div className={cx(ourFactoryDetails.mobileImageZoom, isOpen && ourFactoryDetails.mobileImageZoomActive)}>
+                  <MediaPlaceholder
+                    label={item.imageAlt}
+                    image={item.image}
+                    radius="none"
+                    tone="dark"
+                    showLabel={false}
+                    className="size-full"
+                  />
+                </div>
+              </div>
+            );
+          })}
 
           <div aria-hidden="true" className={ourFactoryDetails.mobileScrim} />
 
