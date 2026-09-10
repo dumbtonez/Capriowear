@@ -23,7 +23,6 @@
 // `@theme` token for a single page.
 import type { Metadata } from "next";
 
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
@@ -75,7 +74,20 @@ export default function PrivacyPolicyPage() {
       />
 
       <main className="relative z-10 bg-paper">
-        <div className="container-p mx-auto max-w-[760px] pt-[120px] pb-24">
+        {/* Not `container-p` + `max-w-[760px]` composed on one element --
+            found live, 2026-09-10 (owner: "currently taking the whole page
+            width"): `container-p`'s own `max-width: var(--container-page)`
+            (1440px) and this narrower override both target `max-width` on
+            the same element, and the compiled stylesheet's own cascade
+            order lets `container-p`'s win, silently overriding the
+            760px cap -- the identical specificity bug already documented
+            on `ourFactoryIntro.inner`/`servicesIntro.inner` (see either's
+            own comment in components/ui/styles.ts). Fixed the same way:
+            drop `container-p` entirely and hand-build its own mobile/
+            tablet padding fallback (`px-5`/`md:px-8`) directly, since this
+            page wants a genuinely narrower cap than `container-p`'s own
+            1440px, not a composed override of it. */}
+        <div className="mx-auto w-full max-w-[760px] px-5 pt-[120px] pb-24 md:px-8">
           <Breadcrumb items={[...privacyPolicy.hero.breadcrumb]} className="hidden md:block" />
 
           <div className="mt-8 flex flex-col gap-2">
