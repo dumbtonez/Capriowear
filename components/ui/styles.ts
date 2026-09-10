@@ -3233,17 +3233,19 @@ export const productRange = {
 // full colour, also no label). Light section (paper background) -- the only
 // homepage section built so far that isn't on ink.
 export const clientLogos = {
-  // 120px top / 0px bottom on desktop, 40px both on mobile -- both given
-  // directly by the owner (2026-08-24) after the desktop Figma frame had been
-  // resized to show off-screen logos, which made its own height untrustworthy
-  // for padding purposes even though its width (used for the logo positions
-  // and gaps) still was reliable.
-  //
-  // No container-p here: Marquee's own `innerStacked` already applies it to
-  // the label/track, same as the offerings ticker. Adding it again on this
-  // wrapper double-padded the ticker to 160px on each side instead of the
-  // real 80px -- corrected 2026-08-24.
-  desktopWrap: "hidden pt-[120px] pb-0 xl:block",
+  // Top 120px -> 80px, 2026-09-10 (owner: originally set on /services --
+  // "add clients logo marquee above product development section on
+  // desktop only" then "make it 80px" -- then "apply this to homepage
+  // too"). Bottom (0px) and mobile (40px) unaffected, not part of this
+  // request. `desktopWrapServices` below is now numerically identical to
+  // this default; kept as its own separate token anyway (not collapsed
+  // back into reusing this one directly) since `ClientLogos`' own
+  // `pageVariant` prop already exists and a future page-specific value is
+  // one line to add there, not a new prop to thread through again.
+  desktopWrap: "hidden pt-[80px] pb-0 xl:block",
+  // /services' own usage -- see `desktopWrap`'s own comment above for the
+  // full history; both are 80px now.
+  desktopWrapServices: "hidden pt-[80px] pb-0 xl:block",
   // Figma's mobile grid is exactly 2 columns; LogoRow's flex-wrap wouldn't
   // guarantee that at every width, so this section uses its own grid rather
   // than reusing LogoRow, which is built for a flowing, wrap-as-needed row.
@@ -3331,7 +3333,11 @@ export const trustSignals = {
   // other scroller here uses (its wrap has no `container-p` either);
   // stacking this element's own `container-p` (80px) on top of that
   // doubled up instead of matching it.
-  desktopWrap: "hidden py-[120px] xl:block",
+  // Top 120px -> 80px, 2026-09-10 (owner: "make the trust gap from top
+  // 80px too" on /services, then "apply this to homepage too" -- top
+  // only, matching the same `clientLogos.desktopWrap` change above;
+  // bottom (120px) unaffected, not part of this request).
+  desktopWrap: "hidden pt-[80px] pb-[120px] xl:block",
   // Services page reuse (owner, 2026-09-07: "this is already built on
   // homepage, use same as is. only the spacing needs to adjust, from the
   // top its 160px bottom 80px") -- Figma node 729:208 (this component's
@@ -3341,16 +3347,17 @@ export const trustSignals = {
   // structure below) is shared as-is, same `pageVariant` pattern
   // `OurServices` already uses.
   //
-  // Top corrected 160px -> 120px (owner, 2026-09-10: "the trust section
-  // gap from the top of the logos should be same as homepage" -- once
-  // `ClientLogos` was added directly above this section on desktop only,
-  // the original 160px was still measuring from ServicesIntro, not the
-  // marquee that now actually precedes it). Homepage's own logos-to-
-  // trust-signals gap is `clientLogos.desktopWrap`'s own `pt-[120px]`
-  // (nothing below it) into this section's default `desktopWrap`'s own
-  // `py-[120px]` -- matched here so the same visual gap holds on both
-  // pages now that both have the same real preceding section.
-  desktopWrapServices: "hidden pt-[120px] pb-[80px] xl:block",
+  // Top corrected 160px -> 120px -> 80px (owner, 2026-09-10, in sequence:
+  // "the trust section gap from the top of the logos should be same as
+  // homepage" -- once `ClientLogos` was added directly above this section
+  // on desktop only, the original 160px was still measuring from
+  // ServicesIntro, not the marquee that now actually precedes it; matched
+  // to 120px, homepage's own gap at the time -- then "make the trust gap
+  // from top 80px too", then "apply this to homepage too," which also
+  // dropped the homepage default's own top to 80px above, so this value
+  // is no longer a services-only deviation -- kept as its own token
+  // anyway per this section's established `pageVariant` pattern).
+  desktopWrapServices: "hidden pt-[80px] pb-[80px] xl:block",
   // Redesigned 2026-09-09 (Figma nodes 890:253/890:279, owner: "change
   // product development, Low MOQ section to this... there are 4 cards"):
   // the old media-block-plus-two-text-columns layout becomes 4 independent

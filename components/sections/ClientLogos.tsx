@@ -32,6 +32,14 @@ import type { home } from "@/content/home";
 
 export type ClientLogosProps = {
   brandLogos: typeof home.brandLogos;
+  /**
+   * /services' own top-gap variant (owner, 2026-09-10: "add clients logo
+   * marquee above product development section on desktop only" then "make
+   * it 80px" -- this page's own desktop top padding, not homepage's
+   * 120px). Same `pageVariant` pattern `TrustSignals`/`OurServices` already
+   * use for their own Services-page reuse.
+   */
+  pageVariant?: "home" | "services";
 };
 
 function Logo({
@@ -126,14 +134,16 @@ function MobileGrid({ brandLogos, wrapClassName }: ClientLogosProps & { wrapClas
   );
 }
 
-export function ClientLogos({ brandLogos }: ClientLogosProps) {
+export function ClientLogos({ brandLogos, pageVariant = "home" }: ClientLogosProps) {
+  const desktopWrap = pageVariant === "services" ? clientLogos.desktopWrapServices : clientLogos.desktopWrap;
+
   return (
     <section>
       {/* Desktop: title beside the ticker, side by side -- not in the
           original Figma frame, added 2026-08-26 referencing tedy.app's
           "Trusted by 500+ businesses" treatment (see Marquee's `title`
           labelVariant). */}
-      <div className={clientLogos.desktopWrap}>
+      <div className={desktopWrap}>
         <Marquee
           items={brandLogos.itemsDesktop.map((name) => (
             <Logo key={name} name={name} registry={brandLogos.registry} />

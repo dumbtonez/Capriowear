@@ -202,7 +202,7 @@ export default function ServicesPage() {
             it already is on the homepage. Reuses `home.brandLogos` as-is,
             same logos/order the homepage's own usage renders. */}
         <div className="hidden xl:block">
-          <ClientLogos brandLogos={home.brandLogos} />
+          <ClientLogos brandLogos={home.brandLogos} pageVariant="services" />
         </div>
         <TrustSignals items={home.trustStrip} pageVariant="services" />
         <ServicesHowWeWork content={services.howWeWork} />
