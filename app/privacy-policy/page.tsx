@@ -1,18 +1,32 @@
 // app/privacy-policy/page.tsx
 // Pillar 7 on the launch punchlist, and a hard dependency for the consent
 // lines on both Request a Sample and Download Catalog, which already link
-// here. Replaces the earlier placeholder stub (2026-09-10) with the real
-// page -- content/design direction both come from Mohsin's own spec doc,
+// here. Content/design direction both come from Mohsin's own spec doc,
 // read directly. See content/privacy-policy.ts for the full copy and the
 // jurisdiction/legal caveats.
 //
-// Deliberately the one light-throughout page on the site with no hero
-// banner, no dark section, no fact strip, no CTA, no accordion, and no
-// animation -- this is dense legal body text meant to be read carefully
-// and searched (Cmd+F), not a conversion moment (doc: "treat it like a
-// document"). Plain server component -- no form, no client-side
-// interactivity beyond native anchor-link jumps, so no "use client"
-// anywhere on this page.
+// Dark throughout (owner, 2026-09-10: "let's tey one black version of
+// this page" -> "let's keep this and remove the white one") -- overrides
+// the source spec doc's own original light-background reasoning ("dense
+// legal body text meant to be read carefully... light background with
+// dark text reads better for long-form legal content than the site's
+// dark sections"), a deliberate choice, not an oversight. Was built and
+// compared as a `/privacy-policy-v2` draft first (same pattern
+// `/request-a-sample-v2` used), now promoted to the real route; that
+// draft is deleted.
+//
+// Otherwise still the one document-style page on the site with no hero
+// banner, no fact strip, no CTA, no accordion, and no animation -- this
+// is dense legal body text meant to be read carefully and searched
+// (Cmd+F), not a conversion moment (doc: "treat it like a document").
+// Plain server component -- no form, no client-side interactivity beyond
+// native anchor-link jumps, so no "use client" anywhere on this page.
+//
+// No visible `<Breadcrumb>` (owner: "remove the breadcrums, keep it in
+// the backend for crawling only" -- same UI-vs-schema split already made
+// on Request a Sample/Download Catalog). `breadcrumbSchema()`'s JsonLd
+// below still renders unconditionally, so the real BreadcrumbList
+// structured data is unaffected.
 //
 // Centred reading column at a literal `max-w-[760px]` (doc: "roughly 720
 // to 800px") -- no existing named width token fits a long-form body-text
@@ -20,7 +34,13 @@
 // a short heading/subline constraint), so this follows the same
 // established convention of a literal one-off value the rest of this
 // file's own recipes already use elsewhere, rather than inventing a new
-// `@theme` token for a single page.
+// `@theme` token for a single page. Not composed with `container-p` (a
+// real bug, found live, 2026-09-10: `container-p`'s own 1440px
+// `max-width` silently won over a composed narrower override in the
+// compiled stylesheet's cascade order, the same specificity bug already
+// documented on `ourFactoryIntro.inner`/`servicesIntro.inner`) -- built
+// by hand instead, `px-5`/`md:px-8`, matching `container-p`'s own mobile/
+// tablet padding fallback without composing with it.
 import type { Metadata } from "next";
 
 import { Header } from "@/components/Header";
@@ -53,9 +73,8 @@ export const metadata: Metadata = {
     title: `${privacyPolicy.metaTitle} | ${SITE_NAME}`,
     description: privacyPolicy.metaDescription,
   },
-  // Indexable now (doc: "legitimate page visitors and reviewers will want
-  // to find" this page) -- the earlier stub had `robots: { index: false }`
-  // since it carried no real content yet; that override is gone.
+  // Indexable (doc: "legitimate page visitors and reviewers will want to
+  // find" this page).
 };
 
 export default function PrivacyPolicyPage() {
@@ -73,34 +92,24 @@ export default function PrivacyPolicyPage() {
         secondaryCta={home.nav.secondaryCta}
       />
 
-      <main className="relative z-10 bg-paper">
-        {/* Not `container-p` + `max-w-[760px]` composed on one element --
-            found live, 2026-09-10 (owner: "currently taking the whole page
-            width"): `container-p`'s own `max-width: var(--container-page)`
-            (1440px) and this narrower override both target `max-width` on
-            the same element, and the compiled stylesheet's own cascade
-            order lets `container-p`'s win, silently overriding the
-            760px cap -- the identical specificity bug already documented
-            on `ourFactoryIntro.inner`/`servicesIntro.inner` (see either's
-            own comment in components/ui/styles.ts). Fixed the same way:
-            drop `container-p` entirely and hand-build its own mobile/
-            tablet padding fallback (`px-5`/`md:px-8`) directly, since this
-            page wants a genuinely narrower cap than `container-p`'s own
-            1440px, not a composed override of it. */}
+      <main className="relative z-10 bg-ink">
         <div className="mx-auto w-full max-w-[760px] px-5 pt-[120px] pb-24 md:px-8">
-          <Breadcrumb items={[...privacyPolicy.hero.breadcrumb]} className="hidden md:block" />
-
-          <div className="mt-8 flex flex-col gap-2">
-            <h1 className="text-h2 text-text">{privacyPolicy.hero.h1}</h1>
-            <p className="text-body text-muted">Last updated {privacyPolicy.hero.lastUpdated}</p>
+          <div className="flex flex-col gap-2">
+            <h1 className="text-h2 text-paper">{privacyPolicy.hero.h1}</h1>
+            <p className="text-body text-[#838D97]">Last updated {privacyPolicy.hero.lastUpdated}</p>
           </div>
 
-          <nav aria-label={privacyPolicy.tocLabel} className="mt-10 flex flex-col gap-2 rounded-lg border border-line p-6">
-            <p className="text-button-sm text-text">{privacyPolicy.tocLabel}</p>
+          {/* rounded-[4px], not rounded-lg/16px (owner: "make the radious
+              4px round only for the outline container") -- same literal
+              one-off radius convention already used on Request a
+              Sample's own field styling (no named 4px radius token
+              exists). */}
+          <nav aria-label={privacyPolicy.tocLabel} className="mt-10 flex flex-col gap-2 rounded-[4px] border border-line-dark p-6">
+            <p className="text-button-sm text-paper">{privacyPolicy.tocLabel}</p>
             <ul className="flex flex-col gap-1.5">
               {privacyPolicy.sections.map((section) => (
                 <li key={section.id}>
-                  <a href={`#${section.id}`} className="text-body text-muted underline decoration-solid underline-offset-2 hover:text-text">
+                  <a href={`#${section.id}`} className="text-body text-[#838D97] underline decoration-solid underline-offset-2 hover:text-paper">
                     {section.heading}
                   </a>
                 </li>
@@ -111,24 +120,24 @@ export default function PrivacyPolicyPage() {
           <div className="mt-12 flex flex-col gap-10">
             {privacyPolicy.sections.map((section) => (
               <section key={section.id} id={section.id} className="scroll-mt-24">
-                <h2 className="text-h5 text-text">{section.heading}</h2>
+                <h2 className="text-h5 text-paper">{section.heading}</h2>
                 <div className="mt-4 flex flex-col gap-4">
                   {section.body.paragraphs.map((paragraph, index) => (
-                    <p key={index} className="text-body text-muted">
+                    <p key={index} className="text-body text-[#838D97]">
                       {paragraph}
                     </p>
                   ))}
                   {section.body.list ? (
                     <ul className="flex flex-col gap-2 pl-5">
                       {section.body.list.map((item, index) => (
-                        <li key={index} className="list-disc text-body text-muted">
+                        <li key={index} className="list-disc text-body text-[#838D97]">
                           {item}
                         </li>
                       ))}
                     </ul>
                   ) : null}
                   {section.body.closingParagraphs?.map((paragraph, index) => (
-                    <p key={index} className="text-body text-muted">
+                    <p key={index} className="text-body text-[#838D97]">
                       {paragraph}
                     </p>
                   ))}
@@ -137,6 +146,14 @@ export default function PrivacyPolicyPage() {
             ))}
           </div>
         </div>
+
+        {/* Edge-to-edge separator before the footer (owner: "add a
+            separator at the end of the section so footer and it has some
+            separation," then "should be edge to edge") -- a direct
+            sibling of the centred `max-w-[760px]` column above, not
+            nested inside it, so it spans this section's own full width
+            instead of being capped to the reading column. */}
+        <hr className="mt-16 border-t border-line-dark" />
       </main>
 
       <Footer content={home.footer} social={ORGANIZATION.sameAs} />
