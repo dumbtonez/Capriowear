@@ -1313,12 +1313,15 @@ export const drawer = {
   screens: "flex w-[200%] transition-transform duration-[350ms] ease-in-out",
   // Each screen is exactly half the (200%-wide) track, i.e. one real
   // viewport width. `shrink-0` stops flex from squeezing them to fit side
-  // by side in the track's own un-widened parent. `pb-[110px]` reserves
+  // by side in the track's own un-widened parent. `pb-[260px]` reserves
   // real space at the bottom of BOTH screens (main list and the mega-menu
-  // sub-screen) for the fixed CTA bar below (`drawer.ctaWrap`, ~94px tall
-  // -- 54px button + 16px top padding + 24px bottom padding -- rounded up)
-  // so neither screen's own last real content sits underneath it.
-  screen: "flex w-1/2 shrink-0 flex-col pb-[110px]",
+  // sub-screen) for the fixed footer below (`drawer.ctaWrap`, now taller
+  // since it also carries "Get in touch" + the social row, not just the
+  // CTA button -- owner, 2026-09-10: those need to be always visible, not
+  // scrollable list content competing with the footer for the same
+  // viewport height) so neither screen's own last real content sits
+  // underneath it.
+  screen: "flex w-1/2 shrink-0 flex-col pb-[260px]",
   // 92px from the header row's own bottom edge to the first link's top
   // (owner-measured, 2026-08-27) -- not Figma's own frame gap (which read
   // closer to 100px against the frame edge, not the header row itself).
@@ -1374,14 +1377,21 @@ export const drawer = {
   // Story"'s own bottom edge to this block's top is 131.5px) -- always
   // correct regardless of viewport height, and harmless on a tall one
   // since `panel` already scrolls.
-  // No `pb-*` any more (was `pb-6`, briefly holding space for a CTA that
-  // used to render as this block's own last child) -- the CTA is now a
-  // `position: fixed` sibling of `nav` entirely outside this scrollable
-  // column (see `ctaWrap`'s own comment), and `screen`'s own `pb-[110px]`
-  // is what reserves real clearance for it now, so this block's own
-  // trailing padding would only add unwanted extra whitespace on top of
-  // that.
-  bottomWrap: "mt-[132px] flex flex-col gap-8",
+  // Owner, 2026-09-10, twice: "social icons does not appear above the
+  // fold, only shows when you scroll" then, even after tightening this
+  // gap, "on the large phone i have zfold 7 which is large phone i still
+  // have to scroll to see the social icons." Any fixed top-margin here is
+  // fundamentally the wrong fix -- it trades one device's fold line for
+  // another's, since "Get in touch"/social still lived in the *scrollable*
+  // list column, competing for the same finite viewport height as the
+  // fixed CTA bar below it. Real fix: contact + social moved out of this
+  // scrollable column entirely, into `ctaWrap` alongside the CTA button
+  // (see below) -- a `position: fixed` block is visible in full on every
+  // device by construction, not just ones tall enough to fit everything
+  // above an increasingly short fold. This token (and the JSX wrapper
+  // that used it) is retired; kept only as a comment pointer in case a
+  // future design genuinely wants a scrollable trailing block again.
+  //
   // Owner, 2026-09-10: "in the mobile menu at bottom of the page add
   // request a sample cta" -- the same primary CTA the desktop header
   // renders, full-width to match this column's own width rather than the
@@ -1401,9 +1411,14 @@ export const drawer = {
   // other row in the drawer already has (this element sits outside
   // `nav`'s own `container-p`, so it needs its own). Solid `bg-ink`
   // backing so scrolled list content never shows through underneath it;
-  // `screen`'s own `pb-[110px]` reserves real space so this bar never
-  // covers the real last item in either screen.
-  ctaWrap: "fixed inset-x-0 bottom-0 z-10 container-p bg-ink pt-4 pb-6",
+  // `screen`'s own `pb-*` reserves real space so this bar never covers
+  // the real last item in either screen.
+  //
+  // Now also carries "Get in touch" + the social row (owner, 2026-09-10,
+  // see the retired `bottomWrap` comment above): stacked in one flex
+  // column with the button, so the whole group is always fully visible
+  // together, on any device height, with no scroll dependency at all.
+  ctaWrap: "fixed inset-x-0 bottom-0 z-10 container-p bg-ink pt-6 pb-6 flex flex-col gap-5",
   contactGroup: "flex flex-col gap-1",
   contactLabel: "text-[1.125rem] leading-[26px] text-[#838d97]",
   contactEmail: "text-h5 font-medium text-paper underline decoration-solid underline-offset-2",

@@ -357,18 +357,6 @@ export function MobileNav({ open, onClose, brand, logo, links, contact, social, 
                     ),
                   )}
                 </ul>
-
-                <div className={drawer.bottomWrap}>
-                  <div className={drawer.contactGroup}>
-                    <p className={drawer.contactLabel}>{contact.label}</p>
-                    <a href={`mailto:${contact.email}`} className={drawer.contactEmail}>
-                      {contact.email}
-                    </a>
-                  </div>
-                  <div className={drawer.socialRow}>
-                    <SocialLinks social={social} />
-                  </div>
-                </div>
               </div>
 
               {/* Category breakdown for whichever link is active (Figma
@@ -408,12 +396,31 @@ export function MobileNav({ open, onClose, brand, logo, links, contact, social, 
           outside the scrollable flow entirely, `fixed inset-x-0 bottom-0`
           relative to the viewport -- visible immediately on open,
           regardless of scroll position or which of the two `screen`s is
-          showing. `drawer.list`/`drawer.bottomWrap` inside `nav` reserve
-          real bottom padding (`drawer.listBottomPad`) so this bar never
-          covers the real last item. Same fade-with-`open` treatment as
-          `head` above, so it doesn't hard-cut in/out with the rest of the
-          drawer's own 900ms reveal. */}
+          showing. `drawer.screen`'s own bottom padding reserves real
+          clearance so this bar never covers the real last item. Same
+          fade-with-`open` treatment as `head` above, so it doesn't
+          hard-cut in/out with the rest of the drawer's own 900ms reveal.
+
+          Also carries "Get in touch" + the social row (owner, 2026-09-10:
+          "social icons does not appear above the fold, only shows when
+          you scroll", then, even after tightening the old in-list gap,
+          "on the large phone i have zfold 7 ... i still have to scroll
+          to see the social icons"). Living inside the scrollable list
+          column, that block was competing with this fixed bar for the
+          same finite viewport height -- fixed for one device's height
+          broke on the next. Moving it into this fixed footer makes it
+          visible in full on every device by construction, with no scroll
+          dependency at all. */}
       <div className={cx(drawer.ctaWrap, "transition-opacity duration-[900ms] ease-in-out", open ? drawer.headRevealed : drawer.headHidden)}>
+        <div className={drawer.contactGroup}>
+          <p className={drawer.contactLabel}>{contact.label}</p>
+          <a href={`mailto:${contact.email}`} className={drawer.contactEmail}>
+            {contact.email}
+          </a>
+        </div>
+        <div className={drawer.socialRow}>
+          <SocialLinks social={social} />
+        </div>
         <Button href={cta.href} onClick={onClose} className={drawer.cta}>
           {cta.label}
         </Button>
