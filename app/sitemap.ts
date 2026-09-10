@@ -34,6 +34,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    // /request-a-sample (2026-09-10): the conversion point every CTA on
+    // the site points to -- was missing from this file entirely until
+    // noticed while adding /download-catalog below; added now rather than
+    // left, same "add it the moment it's noticed" rule this file's own
+    // header comment states.
+    {
+      url: `${SITE_URL}/request-a-sample`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    // /download-catalog (2026-09-10): Pillar 5's other lead-gen page,
+    // same hand-added pattern as /request-a-sample above.
+    {
+      url: `${SITE_URL}/download-catalog`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    // /privacy-policy (2026-09-10): kept indexable now that it carries
+    // real content, not the earlier noindex stub (doc: "legitimate page
+    // visitors and reviewers will want to find") -- low priority/rare
+    // change frequency, since accuracy matters here, not ranking.
+    {
+      url: `${SITE_URL}/privacy-policy`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
     // Running Wear (owner spec, 2026-09-03): a real, indexable curated
     // collection page, but NOT in the `categories` registry (see
     // CuratedCollection's own comment, content/activewear/types.ts) -- so
