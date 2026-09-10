@@ -1490,54 +1490,16 @@ export const hero = {
   playCircle: "inline-flex size-16 items-center justify-center rounded-pill bg-accent text-accent-ink xl:size-24",
   playIcon: "size-6 xl:size-8",
   playLabel: "text-body-lg text-paper",
-  // Mobile eyebrow is smaller than the Overline token on its real design --
-  // measured at ~16px (19px line box / 1.2 ratio), not Overline's fixed 20px.
-  // Overridden here rather than in the shared token, since no other section's
-  // mobile eyebrow has been confirmed against Figma yet.
-  // max-xl:/xl: are mutually exclusive media conditions -- corrected
-  // 2026-08-23 from an unprefixed text-[1rem]/leading-[1.2] plus xl:text-overline.
-  // That version had two real bugs, not one: the unprefixed classes could
-  // still win the cascade at desktop widths (What We Make's own copy of this
-  // exact shape proved it, see whatWeMake below), and it never set
-  // font-weight for mobile at all -- text-overline's semibold weight is part
-  // of that one token, so overriding just the size silently dropped weight
-  // to the browser default (400) on every mobile Hero render, undetected
-  // until this fix. font-semibold added explicitly for mobile now.
-  // Threshold moved xl:/max-xl: -> md:/max-md: (owner, 2026-09-04: use
-  // desktop sizes at tablet width) -- fixed 16px mobile snaps to the
-  // fixed 20px text-overline token from md: instead of xl:.
-  eyebrowSize: "max-md:text-[1rem] max-md:font-semibold max-md:leading-[1.2] md:text-overline",
-  // Mobile ticker fallback (Marquee is desktop-only, xl and up -- see Hero.tsx).
-  // 48px top and bottom (owner call, 2026-08-24): content inside a coloured,
-  // full-bleed background (Hero's bg-ink) always keeps this 48px inset from
-  // the box's own edges -- a fixed rule, not the section-to-section gap.
-  // The standard 72px gap to whatever comes next lives OUTSIDE this dark
-  // box entirely, as a margin on `hero.section`, not as extra padding here
-  // (padding here would just make the black box itself taller, not create a
-  // real gap -- that was the actual bug, corrected 2026-08-24).
-  // xl:hidden -> md:hidden (owner, 2026-09-03: the desktop Marquee ticker
-  // should show at tablet width, 768-1279px, not this mobile stacked-list
-  // fallback) -- see Hero.tsx's own comment on its sibling desktop wrapper.
-  tickerMobile: "container-p flex flex-col gap-8 pt-12 pb-12 md:hidden",
-  // 20px, 500 medium -- an explicit one-off (not a token; the size doesn't
-  // match Body Large's 400 weight or Overline's 600), given directly by the
-  // owner 2026-08-24.
-  tickerMobileLabel: "text-[1.25rem] font-medium leading-[1.2]",
-  tickerMobileList: "flex flex-col gap-3",
-  // 30px, 500 medium. The 30/500 pairing matches Heading 3 exactly, but h3 is
-  // a *fluid* token (scales with viewport, only reaching 30px at 1440px) --
-  // this block only ever renders below xl (1280px), so text-h3 here would
-  // actually render ~22px, not the fixed 30px asked for. A raw fixed value,
-  // not the token, is correct precisely because this usage needs a flat size
-  // a fluid token can't give it. Weight is 400 regular, not 500 medium --
-  // corrected 2026-08-24, a second correction on this same line (previously
-  // 24px/500 as a box-height guess, then wrongly given as 500 alongside the
-  // real 30px size).
-  // Colour corrected 2026-08-24 (owner call): #838D97 flat, not text-paper/70
-  // (an opacity-based grey that shifts with whatever's behind it). No
-  // existing colour token matches this hex, so it's a one-off arbitrary
-  // value scoped to this line, not a new sitewide token.
-  tickerMobileItem: "text-[1.875rem] font-normal leading-[1.2] text-[#838D97]",
+  // No `eyebrowSize` override any more (2026-09-10 cleanup): this exact
+  // 16px/600/1.2 mobile value, once a one-off confirmed here first, is now
+  // `eyebrow.size`'s own sitewide default -- see that token's own comment.
+  // `<Eyebrow>` picks it up automatically with no `size` prop needed.
+  // No more `tickerMobile*` tokens here (2026-09-10 cleanup): the mobile
+  // "Fully Custom Offerings" ticker now reads `servicesHero.tickerMobile*`
+  // directly (owner: "I have created a different similar variant on
+  // services page, let's use that here") -- see that recipe's own comment
+  // for the shared, left-aligned treatment both Hero.tsx and
+  // ServicesHero.tsx use.
 };
 
 /* --- OurFactoryHero (/our-factory sections 1-2) ----------------------------- */
@@ -2590,25 +2552,27 @@ export const servicesHero = {
   // it same as used on the homepage" -- Hero's own `ScrollSpotlightList`
   // treatment, see ServicesHero.tsx), then an experimental tweak the same
   // day ("make the fully custom font to 24px auto and make the entire
-  // content center-aligned and see how it looks") -- a services-page-only
-  // fork of `hero.tickerMobile*` rather than editing those shared tokens,
-  // so the homepage's own mobile ticker (30px items, left-aligned) is
-  // untouched. `items-center`/`text-center` on both the block and the list
-  // (not just the label) since "entire content" was the ask. 24px on both
-  // the label and the list items (`text-[1.5rem]`, "24px" verbatim) with
+  // content center-aligned and see how it looks") -- originally a
+  // services-page-only fork of `hero.tickerMobile*`. Now the shared
+  // version instead (owner, 2026-09-10: "I have created a different
+  // similar variant on services page, let's use that here" -- Hero.tsx
+  // now reads these same tokens directly, `hero.tickerMobile*` removed as
+  // the now-redundant original it forked from) -- `items-center`/
+  // `text-center` dropped from both the block and the list (same owner
+  // turn: "make it left align on home and services both", overriding the
+  // center-align experiment above) so this is left-aligned on both pages
+  // it renders on. 24px on the label (`text-[1.5rem]`) with
   // `leading-normal` ("auto" -- CSS has no literal auto line-height
-  // keyword, `normal` is its real equivalent) replacing both elements' own
-  // fixed `leading-[1.2]`. Explicitly called out by the owner as a
-  // "see how it looks" experiment, not a confirmed design -- may get
-  // reverted or adjusted once seen live.
+  // keyword, `normal` is its real equivalent) unchanged from that
+  // experiment; only the alignment reverted.
   // pb-[60px] (owner, 2026-09-08: "12px more space from the bottom of the
   // content ... on mobile only" -- was pb-12/48px; desktop Marquee's own
-  // spacing is untouched).
-  tickerMobile: "container-p flex flex-col items-center gap-8 pt-12 pb-[60px] text-center md:hidden",
+  // spacing is untouched). Applies to both pages now too.
+  tickerMobile: "container-p flex flex-col gap-8 pt-12 pb-[60px] md:hidden",
   tickerMobileLabel: "text-[1.5rem] font-medium leading-normal",
   // 28px (owner, 2026-09-08: "16px more" then "reduce 8px" -- net +8px on
   // the gap-5/20px, 2026-09-07 baseline).
-  tickerMobileList: "flex flex-col items-center gap-7",
+  tickerMobileList: "flex flex-col gap-7",
   // Owner, 2026-09-08: item list ("Design & Color" and the remaining
   // paired items) sized up to 30px/34px -- label above it stays 24px/auto,
   // this is the list only.

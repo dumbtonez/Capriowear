@@ -172,7 +172,18 @@ export const home = {
 
   customOfferings: {
     label: "Fully Custom Offerings",
+    // Desktop Marquee's own 9 individual items, confirmed against Figma --
+    // unaffected by `mobileItems` below.
     items: ["Design", "Fabric", "Fit", "Color", "Print & Embroidery", "Branding", "Trims", "Labels", "Packaging"],
+    // Owner, 2026-09-10: "I asked you to use the fully custom section from
+    // the services page" -- not just that section's typography/alignment
+    // (already applied via `servicesHero.tickerMobile*`, see Hero.tsx) but
+    // its own 5-paired-item mobile list too, same wording as `services.
+    // hero.mobileTickerItems` (content/services.ts) verbatim -- these are
+    // the exact same 9 words above, just regrouped into pairs, not new
+    // copy. Mobile-only: desktop Marquee keeps the 9-item `items` list
+    // above, unaffected.
+    mobileItems: ["Design & Color", "Fabric & Fit", "Print & Embroidery", "Branding & Trims", "Labels & Packaging"],
   },
 
   // Real Figma design (desktop node 341:1732, mobile node 343:1840) has no

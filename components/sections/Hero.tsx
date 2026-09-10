@@ -22,7 +22,21 @@
 //     a mode of Marquee. It does scroll-highlight though: the line nearest
 //     the viewport's centre brightens to white as you scroll, one line in
 //     focus at a time -- ScrollSpotlightList, shared with Final CTA's mobile
-//     compliance list (2026-08-25), not a one-off.
+//     compliance list (2026-08-25), not a one-off. Its styling reads
+//     `servicesHero.tickerMobile*` (components/ui/styles.ts), not a
+//     `hero`-namespaced token of its own (owner, 2026-09-10: "I have
+//     created a different similar variant on services page, let's use
+//     that here" -- ServicesHero.tsx's own mobile ticker, left-aligned on
+//     both pages per the same request) -- same cross-reuse precedent this
+//     file already follows the other way for `hero.ctaSecondaryWrap`
+//     (ServicesHero.tsx imports that one from here). Mobile list content
+//     is now `customOfferings.mobileItems` too (owner follow-up, same
+//     turn: "I asked you to use the fully custom section from the
+//     services page" -- not just that section's typography, its own
+//     5-paired-item list too) -- the same 9 words the desktop Marquee
+//     still uses via `customOfferings.items`, just regrouped into pairs,
+//     matching `services.hero.mobileTickerItems`'s exact wording
+//     (content/services.ts) rather than a second, differently-worded list.
 //   - The mobile eyebrow is smaller than the shared Overline token -- see
 //     `hero.eyebrowSize` in components/ui/styles.ts.
 //   - The desktop ticker never pauses on hover (`pauseOnHover={false}`,
@@ -37,7 +51,7 @@ import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { RevealBox } from "@/components/RevealBox";
 import { ScrollSpotlightList } from "@/components/ScrollSpotlightList";
 import { TextReveal } from "@/components/TextReveal";
-import { hero } from "@/components/ui/styles";
+import { hero, servicesHero } from "@/components/ui/styles";
 import type { home } from "@/content/home";
 
 export type HeroProps = {
@@ -51,7 +65,7 @@ export function Hero({ hero: content, customOfferings }: HeroProps) {
       {/* Layer 1: Banner */}
       <div className={hero.bannerInner}>
         <div className={hero.textBlock}>
-          <Eyebrow tone="dark" size={hero.eyebrowSize}>
+          <Eyebrow tone="dark">
             {content.eyebrow}
           </Eyebrow>
           <TextReveal as="h1" text={content.h1} className={`${hero.heading} text-display`} />
@@ -111,12 +125,12 @@ export function Hero({ hero: content, customOfferings }: HeroProps) {
           pauseOnHover={false}
         />
       </div>
-      <div className={hero.tickerMobile}>
-        <span className={hero.tickerMobileLabel}>{customOfferings.label}</span>
+      <div className={servicesHero.tickerMobile}>
+        <span className={servicesHero.tickerMobileLabel}>{customOfferings.label}</span>
         <ScrollSpotlightList
-          items={customOfferings.items}
-          listClassName={hero.tickerMobileList}
-          itemClassName={hero.tickerMobileItem}
+          items={customOfferings.mobileItems}
+          listClassName={servicesHero.tickerMobileList}
+          itemClassName={servicesHero.tickerMobileItem}
         />
       </div>
     </section>

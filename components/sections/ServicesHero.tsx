@@ -35,11 +35,18 @@
 //     inset, same label size/weight), then forked into this page's own
 //     `servicesHero.tickerMobile*` tokens the same day for an experimental
 //     tweak ("make the fully custom font to 24px auto and make the entire
-//     content center-aligned and see how it looks") -- see those tokens'
-//     own comment in components/ui/styles.ts for the full reasoning; the
-//     homepage's own mobile ticker is untouched by this. Desktop Marquee
-//     (`md:` and up) is unchanged, still fed `customOfferings.items`
-//     (the shared 9 individual items).
+//     content center-aligned and see how it looks"). That fork is now the
+//     SHARED version instead (owner, 2026-09-10: "I have created a
+//     different similar variant on services page, let's use that here" --
+//     Hero.tsx reads these same `servicesHero.tickerMobile*` tokens now,
+//     `hero.tickerMobile*` removed as the redundant original), left-
+//     aligned on both pages (same turn: "make it left align on home and
+//     services both", overriding the center-align experiment) -- see
+//     those tokens' own comment in components/ui/styles.ts for the full
+//     reasoning. Desktop Marquee (`md:` and up) is unchanged, still fed
+//     `customOfferings.items` (the shared 9 individual items) on the
+//     homepage; this page's own mobile list content stays its own
+//     5-paired-item version, see below.
 //   - Mobile list content, same day: the owner's own 5-line paired version
 //     ("Design & Color" / "Fabric & Fit" / "Print & Embroidery" /
 //     "Branding & Trims" / "Labels & Packaging") -- `services.hero.
