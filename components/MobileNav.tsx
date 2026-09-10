@@ -64,6 +64,14 @@ export type MobileNavProps = {
   social: readonly string[];
   /** Focus returns here on close, i.e. the button that opened the drawer. */
   returnFocusTo?: React.RefObject<HTMLButtonElement | null>;
+  /**
+   * Whether the trigger's own click that just opened the drawer was a
+   * keyboard activation (`event.detail === 0`, the standard signal for an
+   * Enter/Space-triggered click vs. a real pointer one -- see Header.tsx's
+   * own trigger `onClick`). Read once, at the moment focus moves into the
+   * drawer -- see `focusQuietly`'s own header comment for why this matters.
+   */
+  openedByKeyboardRef?: React.RefObject<boolean>;
 };
 
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -72,6 +80,31 @@ const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1
 // the component stays mounted after `open` goes false, so the closing
 // clip-path transition has time to actually play before the portal unmounts.
 const CLOSE_TRANSITION_MS = 900;
+
+// Real bug, found live (owner, 2026-09-10: "weird orange outline around the
+// menu action" -- reappeared even after `header.menuButton`'s own
+// `focus-visible:outline-offset-0` fix, "when you refresh the page it comes
+// back"): Chromium's own `:focus-visible` heuristic treats ANY script-called
+// `.focus()` as keyboard-equivalent, full stop -- confirmed live, with no
+// timing/tabindex trick able to change that (unlike a *native* click
+// activating a button, which correctly stays outline-free). Since this trap
+// always moves focus programmatically (into the close button on open, back
+// to the trigger on close -- see the effect below), the sitewide accent ring
+// showed on every open/close, even from a plain tap, not just real keyboard
+// use. `data-quiet-focus` is a scoped escape hatch (see `header.menuButton`'s
+// own `data-[quiet-focus=true]:focus-visible:outline-none`): applied only
+// when the transition that triggered this focus move was itself pointer-
+// driven (see `openedByKeyboardRef`/the close handlers' own `event.detail`
+// check below), self-clearing on the element's own next real blur so a
+// later genuine Tab into the same button still rings normally.
+function focusQuietly(el: HTMLElement | null, quiet: boolean) {
+  if (!el) return;
+  if (quiet) {
+    el.setAttribute("data-quiet-focus", "true");
+    el.addEventListener("blur", () => el.removeAttribute("data-quiet-focus"), { once: true });
+  }
+  el.focus({ preventScroll: true });
+}
 
 // Same LinkedIn-then-Instagram-then-Facebook order as the real Figma design
 // -- independent of ORGANIZATION.sameAs's own array order (Instagram first),
@@ -102,9 +135,13 @@ function SocialLinks({ social }: { social: readonly string[] }) {
   );
 }
 
-export function MobileNav({ open, onClose, brand, logo, links, contact, social, returnFocusTo }: MobileNavProps) {
+export function MobileNav({ open, onClose, brand, logo, links, contact, social, returnFocusTo, openedByKeyboardRef }: MobileNavProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  // Set right before whichever close path actually fires (the X button's own
+  // `onClick` below, or the Escape handler further down) -- read once by the
+  // focus-restoration effect. See `focusQuietly`'s own header comment.
+  const closedByKeyboardRef = useRef(false);
   // Which link's megaMenu (if any) is pushed on screen -- keyed by href
   // since that's already guaranteed unique across `links`. null means the
   // main list is showing.
@@ -154,14 +191,36 @@ export function MobileNav({ open, onClose, brand, logo, links, contact, social, 
     };
   }, [open]);
 
-  // Move focus in on open, return it on close.
+  // Move focus in on open, return it on close. Real bug, found live while
+  // chasing the "weird orange outline" report: `open` starts `false`, and
+  // this effect also runs once after the very FIRST render (React always
+  // runs a new effect at least once, mount included), not just on real
+  // open/close transitions -- so the `else` branch fired on every page
+  // load, stealing focus onto the trigger button before the visitor had
+  // done anything at all (the "when you refresh the page it comes back"
+  // symptom, and the actual root cause, not just the focus-visible
+  // heuristic `focusQuietly` itself works around).
+  //
+  // `hasEverOpenedRef` gates the `else` (focus-return) branch on the
+  // drawer having genuinely opened at least once -- NOT a plain "did this
+  // effect run before" flag toggled inside the effect body itself, which
+  // breaks under React StrictMode's dev-only double-invoke of the first
+  // mount (confirmed live: that flag ends up permanently `true` after the
+  // first of the two synthetic mount passes, so the second pass then
+  // incorrectly treats itself as a real transition). Both mount passes see
+  // `open: false` / `hasEverOpenedRef.current: false` here and correctly
+  // no-op either way, since neither depends on run-count, only on whether
+  // the drawer has ever actually been opened.
+  const hasEverOpenedRef = useRef(false);
   useEffect(() => {
     if (open) {
-      closeRef.current?.focus();
-    } else {
-      returnFocusTo?.current?.focus();
+      hasEverOpenedRef.current = true;
+      focusQuietly(closeRef.current, !(openedByKeyboardRef?.current ?? false));
+    } else if (hasEverOpenedRef.current) {
+      focusQuietly(returnFocusTo?.current ?? null, !closedByKeyboardRef.current);
     }
-    // returnFocusTo is a ref object and stable; only `open` should retrigger.
+    // returnFocusTo/openedByKeyboardRef are ref objects and stable; only
+    // `open` should retrigger.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
@@ -172,6 +231,7 @@ export function MobileNav({ open, onClose, brand, logo, links, contact, social, 
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         event.preventDefault();
+        closedByKeyboardRef.current = true;
         onClose();
         return;
       }
@@ -227,7 +287,18 @@ export function MobileNav({ open, onClose, brand, logo, links, contact, social, 
         <Link href="/" className={header.brand} aria-label={`${brand}, home`}>
           {logo}
         </Link>
-        <button ref={closeRef} type="button" onClick={onClose} className={header.menuButton}>
+        <button
+          ref={closeRef}
+          type="button"
+          onClick={(event) => {
+            // `detail === 0` is the standard signal for a keyboard-activated
+            // click (Enter/Space on a focused button) vs. a real pointer
+            // click -- see `focusQuietly`'s own header comment.
+            closedByKeyboardRef.current = event.detail === 0;
+            onClose();
+          }}
+          className={header.menuButton}
+        >
           <span className={header.closeIconWrap}>
             <X className={header.closeIcon} aria-hidden="true" />
           </span>

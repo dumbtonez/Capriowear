@@ -177,6 +177,10 @@ export function Header({
   // keep them in sync, or the header flashes the wrong colour on first paint.
   const [tone, setTone] = useState<"dark" | "light">("dark");
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  // Set right before the drawer trigger's own `onClick` below opens it --
+  // read once by MobileNav's focus-restoration effect. See
+  // `focusQuietly`'s own header comment in MobileNav.tsx.
+  const menuOpenedByKeyboardRef = useRef(false);
   const headerRef = useRef<HTMLElement>(null);
   const lastScrollYRef = useRef(0);
   // Continuous hide/reveal offset (0 = fully visible, -headerHeight = fully
@@ -555,7 +559,13 @@ export function Header({
           <button
             ref={menuButtonRef}
             type="button"
-            onClick={() => setDrawerOpen(true)}
+            onClick={(event) => {
+              // `detail === 0` is the standard signal for a keyboard-activated
+              // click (Enter/Space on a focused button) vs. a real pointer
+              // click -- see MobileNav.tsx's own `focusQuietly` comment.
+              menuOpenedByKeyboardRef.current = event.detail === 0;
+              setDrawerOpen(true);
+            }}
             aria-expanded={drawerOpen}
             className={header.menuButton}
           >
@@ -621,6 +631,7 @@ export function Header({
         contact={contact}
         social={social}
         returnFocusTo={menuButtonRef}
+        openedByKeyboardRef={menuOpenedByKeyboardRef}
       />
     </header>
   );

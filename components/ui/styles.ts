@@ -1134,8 +1134,33 @@ export const header = {
   // already-adaptive border-current was the one piece not actually
   // following its own stated reasoning, harmless while the header was
   // always dark, a real bug now that it isn't.
+  // `focus-visible:outline-offset-0` (owner-facing bug, 2026-09-10: "weird
+  // orange outline around the menu action"): the sitewide `:focus-visible`
+  // rule (app/globals.css) is a real accessibility feature, not something to
+  // strip -- but its default `outline-offset: 2px` floats a second, detached
+  // ring outside this button's own 1.5px pill border, reading as a stray
+  // double-ring rather than a highlighted control. Flush against the pill's
+  // own border instead (0 offset) keeps the same visible focus indicator for
+  // keyboard/touch users, just anchored to the shape instead of floating
+  // past it. `MobileNav.tsx`'s Close state reuses this exact same token
+  // (its own `closeRef.current?.focus()` on open triggers the identical
+  // ring), so this one fix covers both.
+  //
+  // `data-[quiet-focus=true]:focus-visible:outline-none` (same owner report,
+  // follow-up: the ring "still shows"/"comes back" -- turned out the offset
+  // fix above wasn't the whole bug). This trap always moves focus
+  // programmatically (into the Close button on open, back to this trigger on
+  // close, `MobileNav.tsx`'s own focus-restoration effect) -- confirmed live
+  // that Chromium's `:focus-visible` heuristic treats ANY script-called
+  // `.focus()` as keyboard-equivalent, unconditionally, so the ring showed
+  // after every plain tap/click too, not just real keyboard use. `MobileNav.
+  // tsx`'s own `focusQuietly` sets `data-quiet-focus="true"` only when the
+  // transition that triggered the move was itself pointer-driven (checked
+  // via `event.detail === 0` at the click that opened/closed the drawer),
+  // clearing it again on the element's own next blur -- real keyboard users
+  // (Tab, Escape) still get the full ring, unaffected.
   menuButton:
-    "xl:hidden inline-flex items-center gap-[9px] rounded-pill border-[1.5px] border-current px-6 py-3 text-current",
+    "xl:hidden inline-flex items-center gap-[9px] rounded-pill border-[1.5px] border-current px-6 py-3 text-current focus-visible:outline-offset-0 data-[quiet-focus=true]:focus-visible:outline-none",
   menuIconWrap: "flex size-[22px] items-center justify-center",
   menuIcon: "h-[19px] w-[22px]",
   // Same pill reused for the open drawer's "Close" state (MobileNav.tsx) --
