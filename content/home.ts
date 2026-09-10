@@ -154,6 +154,11 @@ export const home = {
       { label: "Services", href: "/services", chevron: false },
       { label: "Factory Tour", href: "/our-factory", chevron: false },
       { label: "Our Story", href: "/our-story", chevron: false },
+      // Owner, 2026-09-10: "on the mobile menu, add request a catalog...
+      // cta" then clarified: "add download catalog under our story" -- a
+      // plain list item, not the special bottom CTA button the first
+      // phrasing suggested. Same route `nav.secondaryCta` already links to.
+      { label: "Download Catalog", href: "/download-catalog", chevron: false },
     ],
     // "Get in touch" block at the foot of the mobile drawer -- same email
     // Footer already uses (content/home.ts's own footer.contact.email).
@@ -362,9 +367,12 @@ export const home = {
       },
       {
         title: "Teamwear & Uniforms",
+        // "low" was sitting outside the bold span, so "MOQ to bulk" alone
+        // was highlighted, not "low MOQ to bulk" (owner, 2026-09-10:
+        // "highlight low moq to bulk, low is missing").
         body: [
-          "Fully sublimated custom uniforms and kits for clubs, schools and teamwear brands, low ",
-          { bold: "MOQ to bulk" },
+          "Fully sublimated custom uniforms and kits for clubs, schools and teamwear brands, ",
+          { bold: "low MOQ to bulk" },
           ".",
         ],
         href: "/teamwear",
@@ -522,8 +530,14 @@ export const home = {
       { title: "Custom Manufacturing", body: "Bring a tech pack or a sketch. We handle patterns, grading fit and development, from sample to bulk." },
       { title: "Fabrics & Materials", body: "Sourcing premium raw fabrics and materials from textile mills that supply to leading global brands." },
       { title: "Printing & Branding", body: "Sublimation, silicone, screen, DTG, DTF, embroidery and tackle twill, plus labels, hangtags & packaging." },
-      { title: "Quality & Compliance", body: "End-to-end handling of packaging, freight and delivery. We ensure your order arrives on schedule." },
-      { title: "Logistics & Fulfilment", body: "Inline and final inspections done by independent audits, shipments leave with proper documentation." },
+      // Bodies were swapped between these two items -- real bug, found
+      // live, 2026-09-10 (owner: "quality and compliance subline is
+      // swaped with logistics and fulfilment") -- confirmed by content:
+      // "Quality & Compliance" had the packaging/freight/delivery body
+      // (that's logistics), "Logistics & Fulfilment" had the inspections/
+      // audits/documentation body (that's quality). Swapped back.
+      { title: "Quality & Compliance", body: "Inline and final inspections done by independent audits, shipments leave with proper documentation." },
+      { title: "Logistics & Fulfilment", body: "End-to-end handling of packaging, freight and delivery. We ensure your order arrives on schedule." },
     ],
   },
 

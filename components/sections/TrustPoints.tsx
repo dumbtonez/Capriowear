@@ -7,6 +7,7 @@
 import { Sparkle } from "lucide-react";
 
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
+import { TextReveal } from "@/components/TextReveal";
 import { cx } from "@/components/ui/cx";
 import { trustPoints } from "@/components/ui/styles";
 
@@ -76,7 +77,13 @@ export function TrustPoints({ heading, subline, sublineBold, points, sidePadding
   return (
     <section className={cx(trustPoints.section, sidePaddingSection[sidePadding])}>
       <div className={cx(trustPoints.headingBlock, sidePaddingHeadingWidth[sidePadding])}>
-        <h2 className={headingClass[sidePadding]}>{heading}</h2>
+        {/* Sitewide TextReveal (owner, 2026-09-10, Services' own "Responsible
+            make" instance: "responsible make title make it animation") --
+            was a plain `<h2>`. Applied here at the shared-component level
+            (not a per-usage opt-in) so every `sidePadding` variant (PLP,
+            PDP, Services, /our-factory) gets the same consistent title
+            animation every other section heading sitewide already has. */}
+        <TextReveal as="h2" text={heading} className={headingClass[sidePadding]} />
         <p className={trustPoints.subline}>
           {subline}
           {sublineBold ? <strong className={trustPoints.sublineBold}>{sublineBold}</strong> : null}

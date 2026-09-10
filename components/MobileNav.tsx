@@ -30,6 +30,7 @@ import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
+import { Button } from "./Button";
 import { ChevronArrowIcon } from "./icons/ChevronArrowIcon";
 import { FacebookIcon, InstagramIcon, LinkedinIcon } from "./icons/SocialIcons";
 import type { NavMegaMenuGroup } from "./Header";
@@ -62,6 +63,13 @@ export type MobileNavProps = {
   links: MobileNavLink[];
   contact: { label: string; email: string };
   social: readonly string[];
+  /**
+   * Owner, 2026-09-10: "in the mobile menu at bottom of the page add
+   * request a sample cta" -- the same primary CTA the desktop header
+   * already renders, now also reachable from inside the mobile drawer
+   * itself, not only from the page behind it.
+   */
+  cta: { label: string; href: string };
   /** Focus returns here on close, i.e. the button that opened the drawer. */
   returnFocusTo?: React.RefObject<HTMLButtonElement | null>;
   /**
@@ -135,7 +143,7 @@ function SocialLinks({ social }: { social: readonly string[] }) {
   );
 }
 
-export function MobileNav({ open, onClose, brand, logo, links, contact, social, returnFocusTo, openedByKeyboardRef }: MobileNavProps) {
+export function MobileNav({ open, onClose, brand, logo, links, contact, social, cta, returnFocusTo, openedByKeyboardRef }: MobileNavProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   // Set right before whichever close path actually fires (the X button's own
@@ -390,6 +398,26 @@ export function MobileNav({ open, onClose, brand, logo, links, contact, social, 
             </div>
           </div>
       </nav>
+
+      {/* Truly fixed, not `position: sticky` (real bug, found live, owner:
+          "cta in mobile menu is not fixed at the bottom" -- sticky only
+          keeps an element from scrolling PAST its own natural resting
+          spot once the scroll has gotten that far; it does nothing on
+          open, before any scrolling happens, which is exactly when a
+          taller link list pushes the CTA off-screen). A sibling of `nav`,
+          outside the scrollable flow entirely, `fixed inset-x-0 bottom-0`
+          relative to the viewport -- visible immediately on open,
+          regardless of scroll position or which of the two `screen`s is
+          showing. `drawer.list`/`drawer.bottomWrap` inside `nav` reserve
+          real bottom padding (`drawer.listBottomPad`) so this bar never
+          covers the real last item. Same fade-with-`open` treatment as
+          `head` above, so it doesn't hard-cut in/out with the rest of the
+          drawer's own 900ms reveal. */}
+      <div className={cx(drawer.ctaWrap, "transition-opacity duration-[900ms] ease-in-out", open ? drawer.headRevealed : drawer.headHidden)}>
+        <Button href={cta.href} onClick={onClose} className={drawer.cta}>
+          {cta.label}
+        </Button>
+      </div>
     </div>,
     document.body,
   );

@@ -190,7 +190,9 @@ function TabletCarousel({ items }: { items: typeof home.trustStrip }) {
   }, []);
 
   return (
-    <div className="flex w-full flex-col gap-4">
+    // No `gap-*` -- the track-to-dots spacing now lives on the shared
+    // `cardCarousel.dotsRow` itself (`mt-[28px]`).
+    <div className="flex w-full flex-col">
       <div ref={trackRef} className={trustSignals.tabletRow}>
         {items.map((entry, index) => (
           <div

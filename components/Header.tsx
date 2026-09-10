@@ -630,6 +630,7 @@ export function Header({
         links={mobileLinks}
         contact={contact}
         social={social}
+        cta={cta}
         returnFocusTo={menuButtonRef}
         openedByKeyboardRef={menuOpenedByKeyboardRef}
       />

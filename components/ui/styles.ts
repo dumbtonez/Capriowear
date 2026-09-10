@@ -1313,8 +1313,12 @@ export const drawer = {
   screens: "flex w-[200%] transition-transform duration-[350ms] ease-in-out",
   // Each screen is exactly half the (200%-wide) track, i.e. one real
   // viewport width. `shrink-0` stops flex from squeezing them to fit side
-  // by side in the track's own un-widened parent.
-  screen: "flex w-1/2 shrink-0 flex-col",
+  // by side in the track's own un-widened parent. `pb-[110px]` reserves
+  // real space at the bottom of BOTH screens (main list and the mega-menu
+  // sub-screen) for the fixed CTA bar below (`drawer.ctaWrap`, ~94px tall
+  // -- 54px button + 16px top padding + 24px bottom padding -- rounded up)
+  // so neither screen's own last real content sits underneath it.
+  screen: "flex w-1/2 shrink-0 flex-col pb-[110px]",
   // 92px from the header row's own bottom edge to the first link's top
   // (owner-measured, 2026-08-27) -- not Figma's own frame gap (which read
   // closer to 100px against the frame edge, not the header row itself).
@@ -1370,7 +1374,36 @@ export const drawer = {
   // Story"'s own bottom edge to this block's top is 131.5px) -- always
   // correct regardless of viewport height, and harmless on a tall one
   // since `panel` already scrolls.
-  bottomWrap: "mt-[132px] flex flex-col gap-8 pb-10",
+  // No `pb-*` any more (was `pb-6`, briefly holding space for a CTA that
+  // used to render as this block's own last child) -- the CTA is now a
+  // `position: fixed` sibling of `nav` entirely outside this scrollable
+  // column (see `ctaWrap`'s own comment), and `screen`'s own `pb-[110px]`
+  // is what reserves real clearance for it now, so this block's own
+  // trailing padding would only add unwanted extra whitespace on top of
+  // that.
+  bottomWrap: "mt-[132px] flex flex-col gap-8",
+  // Owner, 2026-09-10: "in the mobile menu at bottom of the page add
+  // request a sample cta" -- the same primary CTA the desktop header
+  // renders, full-width to match this column's own width rather than the
+  // header's auto-width pill.
+  cta: "w-full",
+  // Truly `fixed`, not `position: sticky` (real bug, found live, owner:
+  // "cta in mobile menu is not fixed at the bottom" -- sticky only keeps
+  // an element from scrolling PAST its own natural resting spot once
+  // scrolling has gotten that far; it does nothing on open, before any
+  // scrolling happens, which is exactly when a taller link list pushes
+  // the CTA off-screen). Rendered as a sibling of `nav` in MobileNav.tsx
+  // (outside the scrollable flow entirely, not nested in `screen`), so
+  // `inset-x-0 bottom-0` is relative to the real viewport via `panel`'s
+  // own `fixed inset-0` -- always visible the instant the drawer opens,
+  // regardless of scroll position or which of the two `screen`s is
+  // showing. `container-p` reproduces the same horizontal inset every
+  // other row in the drawer already has (this element sits outside
+  // `nav`'s own `container-p`, so it needs its own). Solid `bg-ink`
+  // backing so scrolled list content never shows through underneath it;
+  // `screen`'s own `pb-[110px]` reserves real space so this bar never
+  // covers the real last item in either screen.
+  ctaWrap: "fixed inset-x-0 bottom-0 z-10 container-p bg-ink pt-4 pb-6",
   contactGroup: "flex flex-col gap-1",
   contactLabel: "text-[1.125rem] leading-[26px] text-[#838d97]",
   contactEmail: "text-h5 font-medium text-paper underline decoration-solid underline-offset-2",
@@ -4209,7 +4242,11 @@ export const insideFactory = {
   // track's own correct full-width sizing; the dots row is centred on its
   // own instead (`mx-auto`), via `cardCarousel.dotsRow`'s own
   // intrinsic/content width.
-  mobileCarouselWrap: "flex w-full flex-col gap-7",
+  // No `gap-*` any more (was `gap-7`/28px) -- that track-to-dots spacing
+  // now lives on the shared `cardCarousel.dotsRow` itself (`mt-[28px]`,
+  // see its own comment), the single source for this gap sitewide, not a
+  // per-caller wrapper value.
+  mobileCarouselWrap: "flex w-full flex-col",
   // Active-card lift (same 2026-09-10 request as `mobileTrack`'s own `gap-3`
   // above): a real drop shadow, not the theme's own `shadow-card` (tuned
   // for a light/paper card and its ~8% black would vanish against this
@@ -4597,7 +4634,22 @@ export const cardCarousel = {
   // aware of the section's real item count (Our Services' own export was a
   // mismatched 4 dots for 5 real cards; reproduced from the item list
   // instead of the asset every time, not just that once).
-  dotsRow: "flex items-center gap-1.5",
+  // `mt-[28px]` (owner, 2026-09-10: "dots are too close make 12px gap from
+  // the top, apply it to all") -- was 16px (via each caller's own wrapper
+  // `gap-4`), +12px = 28px, matching `insideFactory.mobileCarouselWrap`'s
+  // own already-correct 2026-09-10 value. Used directly by Exhibitions,
+  // InsideFactory, and TrustSignals' tablet carousel -- their own cards
+  // read correctly at 28px. `CardCarousel.tsx` (Our Services/How It Works/
+  // Product Customize Steps) does NOT use this token any more -- same-day
+  // follow-up (owner: "how it works and our services dots are too far,
+  // reduce 12px space from top") found 28px too much for those three's own
+  // shorter cards; see `dotsRowTight` below instead.
+  dotsRow: "mt-[28px] flex items-center gap-1.5",
+  // `CardCarousel.tsx`'s own dots gap -- 12px (owner, 2026-09-10, in
+  // sequence: briefly unified to the 28px `dotsRow` above, reverted to
+  // 16px once it read as too far for these three sections' own shorter
+  // cards, then corrected once more to 12px: "make it 12px").
+  dotsRowTight: "mt-3 flex items-center gap-1.5",
   dot: "size-[6px] rounded-full transition-colors",
   dotActive: "bg-accent",
   dotInactive: "bg-[#D1D1D6]",

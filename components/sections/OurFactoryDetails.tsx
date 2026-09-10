@@ -113,16 +113,28 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
   // Mobile/tablet pill row: keeps the active pill scrolled into view as
   // `openIndex` changes, since the row can hold more pills than fit on
   // screen at once (owner reference: Apple's own "Take a closer look"
-  // mobile pattern). `prefers-reduced-motion` gates the scroll itself to
-  // instant, same rule every other animated element on the site follows.
+  // mobile pattern; owner, 2026-09-10, confirmed: "it should auto scroll
+  // on tap"). `prefers-reduced-motion` gates the scroll itself to instant,
+  // same rule every other animated element on the site follows.
+  //
+  // Scrolls only the row's OWN internal `scrollLeft` (computed from the
+  // pill's `offsetLeft`/`offsetWidth` against the row's own `clientWidth`),
+  // never `window`/page scroll -- real bug, found live, first fix attempt:
+  // `element.scrollIntoView()` scrolls the nearest scrollable ANCESTOR,
+  // which is the PAGE itself when the target pill is otherwise reachable,
+  // so this section (well below the fold) pulled the whole page down to
+  // reveal its first pill the instant `/our-factory` mounted, hijacking
+  // the browser's own "land at the top" navigation behaviour. `scrollTo`
+  // on the row element itself can never move the page, regardless of
+  // where this section sits on it.
   const pillRefs = useRef<(HTMLButtonElement | null)[]>([]);
   useEffect(() => {
+    const pill = pillRefs.current[openIndex];
+    const row = pill?.parentElement;
+    if (!pill || !row) return;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    pillRefs.current[openIndex]?.scrollIntoView({
-      behavior: reduceMotion ? "auto" : "smooth",
-      inline: "center",
-      block: "nearest",
-    });
+    const target = pill.offsetLeft - row.clientWidth / 2 + pill.offsetWidth / 2;
+    row.scrollTo({ left: target, behavior: reduceMotion ? "auto" : "smooth" });
   }, [openIndex]);
 
   return (

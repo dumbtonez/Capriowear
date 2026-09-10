@@ -25,6 +25,7 @@ import { useEffect, useRef, useState } from "react";
 import { DesktopChevron, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { SectionHeading } from "@/components/SectionHeading";
+import { TextReveal } from "@/components/TextReveal";
 import { cx } from "@/components/ui/cx";
 import { cardCarousel, exhibitions } from "@/components/ui/styles";
 import type { home } from "@/content/home";
@@ -144,7 +145,10 @@ function MobileCarousel({ shots }: { shots: typeof home.exhibitions.media }) {
     // it to its own un-clipped content width instead. Default
     // `align-items: stretch` keeps the track's old, correct sizing; the
     // dots row centres itself instead (`mx-auto`).
-    <div className="flex w-full flex-col gap-4">
+    // No `gap-*` -- the track-to-dots spacing now lives on the shared
+    // `cardCarousel.dotsRow` itself (`mt-[28px]`), owner: "dots are too
+    // close make 12px gap from the top, apply it to all".
+    <div className="flex w-full flex-col">
       <div ref={trackRef} className={exhibitions.mobileTrack}>
         {shots.map((shot, index) => (
           <div
@@ -180,7 +184,7 @@ export function Exhibitions({ content }: ExhibitionsProps) {
         <div className={exhibitions.desktopHeadingWrap}>
           <SectionHeading
             eyebrow={content.eyebrow}
-            heading={content.h2}
+            heading={<TextReveal as="span" text={content.h2} />}
             eyebrowTone="dark"
             headingClassName={exhibitions.desktopHeadingWidth}
             align="center"
@@ -197,7 +201,7 @@ export function Exhibitions({ content }: ExhibitionsProps) {
         <div className={exhibitions.mobileHeadingWrap}>
           <SectionHeading
             eyebrow={content.eyebrow}
-            heading={content.h2}
+            heading={<TextReveal as="span" text={content.h2} />}
             eyebrowTone="dark"
             align="center"
             // Tablet 2-line wrap, 2026-09-10 (owner: "tablet, exhibition
