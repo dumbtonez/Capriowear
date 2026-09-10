@@ -3694,11 +3694,12 @@ export const stats = {
   // Desktop only now -- see `mobileItemText` below for mobile's own,
   // narrower value.
   itemText: "flex flex-col gap-[16px]",
-  // Mobile-only value-to-caption gap, 8px (owner, 2026-09-09, same-day
-  // follow-up: "since 2009 titles and subline should have 8px gap") --
-  // diverges from desktop's 16px, so `Stats.tsx`'s mobile item map uses
-  // this instead of the shared `itemText` above.
-  mobileItemText: "flex flex-col gap-2",
+  // Mobile-only value-to-caption gap, 4px (owner, 2026-09-10, mobile-only
+  // review: "make that 8px gap to 4px from title to subline for since 2009
+  // and others" -- was 8px, itself a 2026-09-09 revision down from
+  // desktop's 16px). Diverges from desktop's 16px, so `Stats.tsx`'s mobile
+  // item map uses this instead of the shared `itemText` above.
+  mobileItemText: "flex flex-col gap-1",
   // The stat divider: a plain 2-stop linear gradient, not an image asset
   // -- Figma's own line asset (node 894:321 etc.) is an SVG whose
   // gradient stops are `#FF791B` -> `#121317`, an exact match for this
@@ -3727,10 +3728,11 @@ export const stats = {
   // bottom") -- the last stat otherwise sat flush with this list's own
   // bottom edge, same 0px-gap issue confirmed on desktop.
   mobileList: "flex flex-col gap-[32px] pb-[40px]",
-  // 30px/500 (medium)/normal leading -- owner call, 2026-08-24, sized up
-  // from the Figma-confirmed 24px (text-h5 exact match). Kept the medium
-  // weight and normal leading from that match, size only.
-  mobileValue: "text-[1.875rem] font-medium leading-normal",
+  // 40px (owner, 2026-09-10, mobile-only review: "since 2009, 75,000 and
+  // remaining make these fonts 40px" -- was 30px, itself sized up
+  // 2026-08-24 from the Figma-confirmed 24px/text-h5 match). Weight/leading
+  // unchanged (medium/normal), only the size moved.
+  mobileValue: "text-[2.5rem] font-medium leading-normal",
   // 18px/400/24px leading, #838d97 -- same colour as desktop, confirmed
   // separately on the mobile frame.
   mobileCaption: "text-[1.125rem] font-normal leading-[24px] text-[#838D97]",
