@@ -479,6 +479,19 @@ The PDP's request/download CTAs (Figma node `634:5065` desktop / `638:1645` mobi
 
 **Used by:** `app/activewear/[category]/page.tsx`, `app/activewear/[category]/[style]/page.tsx`, `app/activewear/running-wear/page.tsx`.
 
+### WhatsAppFloatingButton — Built
+`components/WhatsAppFloatingButton.tsx` · recipe: `whatsappFloating`
+
+Sitewide, desktop-only floating WhatsApp button (owner, 2026-09-10: "on mobile we added whatsapp, on desktop sitewide i want to add too on the right cornor of the site as floating with the same number integrated to it"). A plain `<a href="https://wa.me/...">`, same universal-link approach as the mobile bar's own WhatsApp CTA above — no platform detection needed, correct on both desktop (`web.whatsapp.com`) and mobile (the app) alike.
+
+**Mounted once, in `app/layout.tsx`** — not per-page like `ProductCtasMobileBar`. There's no desktop bottom bar to extend here (unlike mobile, which already had `productCtas.mobileBar`), and a single sitewide layout mount means no future page can forget to add it.
+
+`fixed bottom-6 right-6 z-40 hidden xl:flex` — mutually exclusive by breakpoint with the mobile CTA bar's own WhatsApp button (`productCtas.whatsappButton`, `xl:hidden`), never both on screen. Same brand-green (`#25D366`) circle treatment, scaled up from the mobile bar's 44px to 56px since this button stands alone here rather than sitting beside a same-height CTA button it needs to visually pair with.
+
+**Pre-filled opening message** — `content/site.ts`'s `WHATSAPP_LINK` now bundles a `?text=` query param (`WHATSAPP_MESSAGE`, URL-encoded) alongside the existing `WHATSAPP_NUMBER`. Owner: "when someone taps on the button whatsaap open, let's add a default message like 'Hi Arsalan, I would like to discuss my custom apperal requiremtns' improve the copy" — tightened to `"Hi Arsalan, I'd like to discuss my custom apparel manufacturing requirements."`. Since both this button and the existing mobile CTA's WhatsApp button read the same `WHATSAPP_LINK` constant, the pre-filled message applies everywhere on the site, not just here.
+
+Verified: `npx tsc --noEmit`, `npx eslint .`, `npm run build` clean. Live: renders on `/` and on `/privacy-policy` (a page that never mounts `ProductCtasMobileBar`, confirming the layout-level mount works independent of any per-page wiring); `href` decodes to the exact improved message; hidden below `xl:` while the mobile bar's own WhatsApp button (44px, `xl:hidden`) takes over there, confirmed via `offsetHeight` at 768px (0 vs. 44).
+
 **Button capped at tablet width, not stretched full-bleed (owner, 2026-09-03)**: `productCtas.mobileButton` was `w-full`, correct at real mobile width (matches the bar's own full-bleed `px-5` inset at any phone width) but a jarring stretched pill once the same bar rendered at 768–1279px tablet width. `w-full` now scoped to `max-md:`; from `md:` up the button caps at `md:w-auto md:min-w-[280px] md:mx-auto` — a normal CTA width, centered in the bar. The bar itself (`mobileBar`, full-bleed/sticky) is unchanged at any width — only the button inside it stopped growing to fill it.
 
 ### ProductRelatedStyles — Built

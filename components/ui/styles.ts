@@ -7151,6 +7151,39 @@ export const productCtas = {
   secondaryDesktop: "!border-accent !text-accent hover:!bg-[#FFF6F3]",
 };
 
+/* --- WhatsAppFloatingButton (sitewide, desktop only) ---------------------- */
+// Owner, 2026-09-10: "on mobile we added whatsapp, on desktop sitewide i
+// want to add too on the right cornor of the site as floating with the
+// same number integrated to it" -- the mobile-only WhatsApp CTA already
+// lives inside `productCtas.mobileBar` (`xl:hidden`, and itself only
+// rendered on the handful of pages that mount `ProductCtasMobileBar`).
+// This is a separate, always-on floating button instead of extending that
+// bar to desktop: desktop has no equivalent bottom bar at all to extend,
+// and mounting this once in `app/layout.tsx` (rather than per-page, the
+// way the mobile bar is) is what makes it genuinely sitewide with no risk
+// of a future page forgetting to add it.
+export const whatsappFloating = {
+  // `hidden xl:flex`: the mirror of `productCtas.mobileBar`'s own
+  // `xl:hidden` -- the two are mutually exclusive by breakpoint, never
+  // both on screen at once. `fixed bottom-6 right-6` (24px inset, this
+  // project's own standard spacing unit) `z-40` matches the fixed
+  // Header's own stacking level (`header.base`'s `z-40`) -- high enough to
+  // float over every section's content, not fighting Footer's own
+  // higher-still `z-50` drawer/portal layers (nothing here ever coexists
+  // with the mobile drawer, which is `xl:hidden` itself).
+  wrap: "fixed bottom-6 right-6 z-40 hidden xl:flex",
+  // Same 56px size / brand-green / white-icon treatment as the mobile
+  // bar's own `productCtas.whatsappButton`, scaled up slightly (44px ->
+  // 56px) since this button stands alone on desktop rather than sitting
+  // beside a second, same-height CTA button it needs to visually match.
+  // `shadow-lg` -- floating over arbitrary page content (light and dark
+  // sections alike) needs its own depth cue the mobile bar's blurred
+  // backing bar already supplied for free.
+  button:
+    "flex size-14 items-center justify-center rounded-full bg-[#25D366] text-paper shadow-lg transition-transform hover:scale-105",
+  icon: "size-7",
+};
+
 /* --- ProductCustomizeSteps (PDP) ----------------------------------------- */
 
 // Figma node 634:5153 desktop / 643:2714 mobile, "How We Customize",
