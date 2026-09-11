@@ -95,7 +95,13 @@ const teamGallerySubline: NoteSegment[] = [
 ];
 
 export const ourFactory = {
-  metaTitle: "Our Factory in Sialkot, Pakistan | Capriowear",
+  // No " | Capriowear" suffix here -- this route is a nested child segment
+  // of the root layout, whose own title.template ("%s | Capriowear")
+  // applies automatically (same reasoning as Category.metaTitle's own
+  // comment, app/activewear/[category]/page.tsx). Fixed 2026-09-11: this
+  // field previously carried the suffix itself, doubling it live
+  // ("... | Capriowear | Capriowear") -- audit finding.
+  metaTitle: "Our Factory in Sialkot, Pakistan",
   metaDescription:
     "Inside Capriowear's own 75,000 sq ft cut-and-sew factory in Sialkot, Pakistan: fabric to packaging under one roof, not a middleman.",
 

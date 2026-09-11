@@ -197,7 +197,10 @@ const sections: PrivacyPolicySection[] = [
 ];
 
 export const privacyPolicy = {
-  metaTitle: "Privacy Policy | Capriowear",
+  // No " | Capriowear" suffix -- the root layout's title.template applies
+  // it automatically. Fixed 2026-09-11: this field previously baked the
+  // suffix in itself, doubling it live ("... | Capriowear | Capriowear").
+  metaTitle: "Privacy Policy",
   metaDescription: "How Capriowear collects, uses, and protects information from website visitors and B2B form submissions.",
 
   hero: {

@@ -41,13 +41,20 @@ import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 const CANONICAL = `${SITE_URL}/download-catalog`;
 
 export const metadata: Metadata = {
-  title: downloadCatalog.metaTitle,
+  // `metaTitle` already carries its own full branding ("... | Capriowear
+  // Custom Manufacturing"), unlike every other page's short, unsuffixed
+  // metaTitle -- a bare string here would still run through the root
+  // layout's title.template ("%s | Capriowear") and double up
+  // ("... | Capriowear Custom Manufacturing | Capriowear", audit finding,
+  // fixed 2026-09-11). `title.absolute` opts this one page out of that
+  // template instead of stripping the keyword phrase to fit it.
+  title: { absolute: downloadCatalog.metaTitle },
   description: downloadCatalog.metaDescription,
   alternates: {
     canonical: CANONICAL,
   },
   openGraph: {
-    title: `${downloadCatalog.metaTitle} | ${SITE_NAME}`,
+    title: downloadCatalog.metaTitle,
     description: downloadCatalog.metaDescription,
     url: CANONICAL,
     siteName: SITE_NAME,
@@ -55,7 +62,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${downloadCatalog.metaTitle} | ${SITE_NAME}`,
+    title: downloadCatalog.metaTitle,
     description: downloadCatalog.metaDescription,
   },
 };
