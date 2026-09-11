@@ -123,6 +123,36 @@ export const ORGANIZATION = {
   sameAs: ["https://www.instagram.com/capriowear", "https://www.linkedin.com/company/capriowear"],
 };
 
+// The confirmed, sitewide certification set (owner-confirmed, 2026-09-11
+// site audit correction -- the site previously had three different,
+// disagreeing lists live at once across the homepage trust strip, homepage
+// FAQ and Our Factory FAQ; see docs/05-plan.md's decision log for that
+// date). No CE, and no PSGMEA/PRGMEA membership claims -- those were
+// dropped as false. Every visible mention of certifications sitewide
+// (homepage trust strip/FAQ, Our Factory trust strip/FAQ, Services FAQ,
+// Teamwear hub trust strip) must draw from this same set of seven, worded
+// to fit its own context -- never a second, independently-typed list. Also
+// fed into `organizationSchema()`'s `hasCredential` (lib/schema.ts) as the
+// structured-data mirror of the same facts.
+//
+// "SGI" is NOT a real, separate certification -- corrected 2026-09-11, same
+// day as the unification above: it was the owner's own momentary mix-up
+// with WFSGI (a real membership, not a certification -- see
+// `MEMBERSHIPS` below), caused by WFSGI's own logo mark rendering "SGI" as
+// its large center letters (confirmed by viewing
+// public/logos/cert-wfsgi.png: "WORLD FEDERATION SPORTING GOODS INDUSTRY"
+// wraps around a big central "SGI"). Do not reintroduce "SGI" as a
+// certification anywhere.
+export const CERTIFICATIONS = ["ISO 9001", "ISO 45001", "ISO 14001", "BSCI", "IMAC", "SGS", "OEKO-TEX"] as const;
+
+// Real, confirmed membership(s) -- distinct from CERTIFICATIONS above: a
+// membership is belonging to an industry body, not a third-party audit/
+// certification of the factory itself, so it gets its own const and its
+// own schema.org shape (`memberOf`, not `hasCredential` -- see
+// `organizationSchema()`, lib/schema.ts). WFSGI (World Federation of the
+// Sporting Goods Industry) is the only one confirmed today.
+export const MEMBERSHIPS = ["WFSGI"] as const;
+
 // WhatsApp CTA (owner, 2026-09-10, added alongside the "Request a Sample"
 // sticky bar sitewide): "+923348034434 -- Can I change it later, I am using
 // my personal number for now" -- a real, working number, but explicitly a

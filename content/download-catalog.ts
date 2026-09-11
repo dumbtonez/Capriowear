@@ -6,8 +6,8 @@
 //
 // Confirmed facts (do not change without Mohsin): established 2009, MOQ
 // from 50 pieces per style, samples in 10 to 14 days, NDA signed before
-// any tech pack, ISO 9001/OEKO-TEX/BSCI/IMAC/SGS certified, 20+ export
-// countries.
+// any tech pack, ISO 9001/ISO 45001/ISO 14001/BSCI/IMAC/SGS/OEKO-TEX
+// certified, WFSGI member, 20+ export countries.
 //
 // Background, dark throughout: Request a Sample shipped fully dark top to
 // bottom, not the alternating dark-hero/light-form split this page's own

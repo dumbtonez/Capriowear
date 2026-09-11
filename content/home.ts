@@ -517,6 +517,23 @@ export const home = {
         mobileHeight: 43,
       },
       {
+        // Sourced 2026-09-11 directly from SGS's own official media
+        // resources page (sgs.com/en/our-company/media/media-resources ->
+        // "Brand assets: SGS Logo"), monotone-black variant, not a
+        // third-party logo repository. The official kit's own artwork is a
+        // wide plain wordmark (no square icon like ISO/IMAC), so it's
+        // fit-and-padded into BSCI's exact existing box (156x134 desktop,
+        // 119x43 mobile) -- the closest existing wordmark-style precedent
+        // already in this grid -- rather than a new, one-off size.
+        name: "SGS",
+        src: "/logos/cert-sgs.png",
+        width: 156,
+        height: 134,
+        mobileSrc: "/logos/cert-sgs-mobile.png",
+        mobileWidth: 119,
+        mobileHeight: 43,
+      },
+      {
         name: "IMAC (No Child Labor)",
         src: "/logos/cert-imac.png",
         width: 135,
@@ -526,6 +543,14 @@ export const home = {
         mobileHeight: 47,
       },
       {
+        // Restored 2026-09-11: briefly removed the same day on a mistaken
+        // "not a WFSGI member" premise -- corrected same day, WFSGI
+        // membership is real and confirmed (the earlier removal note had
+        // it backwards; see content/site.ts's MEMBERSHIPS/CERTIFICATIONS
+        // comments for the full correction). This is WFSGI's own real,
+        // official federation logo, not a placeholder -- "SGI" is just how
+        // "WORLD FEDERATION SPORTING GOODS INDUSTRY" renders large in the
+        // center of their mark.
         name: "WFSGI",
         src: "/logos/cert-wfsgi.png",
         mobileSrc: "/logos/cert-wfsgi-mobile.png",
@@ -535,6 +560,14 @@ export const home = {
         mobileHeight: 76,
       },
     ],
+    // OEKO-TEX still has no logo asset in public/logos/ -- unlike every
+    // other mark here, OEKO-TEX doesn't publish its label/logo as a public
+    // download at all: it's only released to a company once actually
+    // certified, via their private myOEKO-TEX portal or by request to
+    // communication@oekotex.com (confirmed 2026-09-11 checking their own
+    // site). Mohsin (or whoever holds Capriowear's OEKO-TEX certificate
+    // number) needs to pull the licensed file from there -- add it here
+    // once obtained, same shape as the entries above.
   },
 
   // Real Figma copy (node 387:498 desktop, 387:511 mobile), replacing the
@@ -678,7 +711,7 @@ export const home = {
       },
       {
         q: "What certifications do you hold?",
-        a: "We hold ISO 9001, ISO 45001 and ISO 14001, plus CE and BSCI, with no child labor monitoring (IMAC). We are members of PSGMEA, PRGMEA and WFSGI, and we welcome third-party inspection.",
+        a: "We hold ISO 9001, ISO 45001 and ISO 14001, plus BSCI, IMAC, SGS and OEKO-TEX, we're WFSGI members, and we welcome third-party inspection.",
       },
       {
         q: "Will my designs stay protected?",

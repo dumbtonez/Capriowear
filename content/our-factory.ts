@@ -421,7 +421,7 @@ export const ourFactory = {
       },
       {
         q: "What certifications and quality standards do you hold?",
-        a: "ISO 9001, OEKO-TEX, BSCI, IMAC and SGS, with every production run inspected to AQL 2.5, in-line and pre-shipment.",
+        a: "ISO 9001, ISO 45001, ISO 14001, BSCI, IMAC, SGS and OEKO-TEX, WFSGI membership, with every production run inspected to AQL 2.5, in-line and pre-shipment.",
       },
       {
         q: "Can I send a third-party inspector or an NDA?",

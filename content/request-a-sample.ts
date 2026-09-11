@@ -10,7 +10,7 @@
 //
 // Confirmed facts (do not change without Mohsin): established 2009, MOQ
 // from 50 pieces per style, samples in 10 to 14 days, reply within 24
-// hours, NDA signed before any tech pack, ISO 9001/OEKO-TEX/BSCI/IMAC/SGS
+// hours, NDA signed before any tech pack, ISO 9001/ISO 45001/ISO 14001/BSCI/IMAC/SGS/OEKO-TEX certified, WFSGI member
 // certified, 20+ export countries.
 //
 // SEO strategy stays the sitewide light-touch formula (metadata, FAQ

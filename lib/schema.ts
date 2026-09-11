@@ -3,7 +3,7 @@
 // from content/site.ts (or, per-page, from whatever content that page
 // already renders as visible copy) -- never hand-typed a second time here.
 // See docs/06-seo.md. Render the result via components/JsonLd.tsx.
-import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
+import { CERTIFICATIONS, MEMBERSHIPS, ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 
 export type ProductSchemaInput = {
   name: string;
@@ -32,6 +32,28 @@ export function organizationSchema() {
       ...ORGANIZATION.address,
     },
     sameAs: ORGANIZATION.sameAs,
+    // The confirmed, sitewide certification list (content/site.ts's
+    // CERTIFICATIONS -- the single source of truth every visible mention
+    // of certifications also reads from) as schema.org credentials, added
+    // 2026-09-11 (site audit finding: this field didn't exist, so the
+    // Organization schema made no certification claim at all). Each entry
+    // is a minimal, valid EducationalOccupationalCredential: just a name
+    // and the org that recognizes it -- no invented issuing body, issue
+    // date, or credential ID, since none of that is a confirmed fact.
+    hasCredential: CERTIFICATIONS.map((name) => ({
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "certification",
+      name,
+    })),
+    // Industry-body membership(s) (content/site.ts's MEMBERSHIPS), added
+    // 2026-09-11 alongside a correction to the certification list above:
+    // belonging to WFSGI is a membership, not a third-party audit of the
+    // factory, so it gets schema.org's own `memberOf` shape (an
+    // Organization entity) rather than being folded into `hasCredential`.
+    memberOf: MEMBERSHIPS.map((name) => ({
+      "@type": "Organization",
+      name,
+    })),
   };
 }
 
@@ -163,6 +185,37 @@ export function collectionPageSchema(name: string, url: string, description: str
         position: index + 1,
         item: {
           "@type": "Product",
+          name: item.name,
+          url: item.url,
+          ...(item.image ? { image: item.image } : {}),
+        },
+      })),
+    },
+  };
+}
+
+// A directory/hub page's own list of OTHER PAGES (not products) -- for the
+// Teamwear hub (app/teamwear/page.tsx), whose 10 cards each link to a sport
+// PLP, not a product. Deliberately `WebPage` entities, not `Product` --
+// unlike `collectionPageSchema` above, every PDP under every one of these
+// PLPs is still draft (no route, not indexed), so describing these list
+// items as Product would claim products that don't have a real page yet.
+// Same CollectionPage/ItemList wrapper shape as `collectionPageSchema`,
+// just a different, non-Product leaf entity.
+export function collectionOfPagesSchema(name: string, url: string, description: string, items: CollectionPageItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name,
+    url,
+    description,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: items.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "WebPage",
           name: item.name,
           url: item.url,
           ...(item.image ? { image: item.image } : {}),

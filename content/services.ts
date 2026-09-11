@@ -259,7 +259,7 @@ export const services = {
       },
       {
         q: "What certifications do you hold?",
-        a: "ISO 9001, OEKO-TEX, BSCI, IMAC and SGS, covering quality, materials, social compliance and testing. Every run is also inspected to AQL 2.5.",
+        a: "ISO 9001, ISO 45001, ISO 14001, BSCI, IMAC, SGS and OEKO-TEX, plus WFSGI membership, covering quality, materials, social compliance and testing. Every run is also inspected to AQL 2.5.",
       },
       {
         q: "Will my designs stay protected?",
