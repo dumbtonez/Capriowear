@@ -130,7 +130,7 @@ export const ORGANIZATION = {
 // date). No CE, and no PSGMEA/PRGMEA membership claims -- those were
 // dropped as false. Every visible mention of certifications sitewide
 // (homepage trust strip/FAQ, Our Factory trust strip/FAQ, Services FAQ,
-// Teamwear hub trust strip) must draw from this same set of seven, worded
+// Teamwear hub trust strip) must draw from this same set of six, worded
 // to fit its own context -- never a second, independently-typed list. Also
 // fed into `organizationSchema()`'s `hasCredential` (lib/schema.ts) as the
 // structured-data mirror of the same facts.
@@ -143,7 +143,17 @@ export const ORGANIZATION = {
 // public/logos/cert-wfsgi.png: "WORLD FEDERATION SPORTING GOODS INDUSTRY"
 // wraps around a big central "SGI"). Do not reintroduce "SGI" as a
 // certification anywhere.
-export const CERTIFICATIONS = ["ISO 9001", "ISO 45001", "ISO 14001", "BSCI", "IMAC", "SGS", "OEKO-TEX"] as const;
+//
+// OEKO-TEX dropped entirely, 2026-09-11, same day (owner correction,
+// confirmed with the team): Capriowear does NOT hold OEKO-TEX. It had
+// been wrongly treated as a confirmed, held certification in nearly every
+// content doc in this project up to this point (Our Factory, Services,
+// Download Catalog, both hub pages, and the original "confirmed facts"
+// header comments) -- all of those were wrong on this specific point and
+// were corrected the same day this const changed. Do not reintroduce
+// OEKO-TEX as a certification, a "confirmed fact," or a fabric-material
+// claim anywhere on the site.
+export const CERTIFICATIONS = ["ISO 9001", "ISO 45001", "ISO 14001", "BSCI", "IMAC", "SGS"] as const;
 
 // Real, confirmed membership(s) -- distinct from CERTIFICATIONS above: a
 // membership is belonging to an industry body, not a third-party audit/

@@ -354,13 +354,15 @@ export const ourFactory = {
   // split at the same "setup, then the credibility clause" point the
   // original two-sentence copy used, so the bold treatment still lands on
   // the differentiating claim, not the lead-in.
+  // "OEKO-TEX certified fabrics on request" dropped from `points` below,
+  // 2026-09-11 (owner correction, confirmed with the team: Capriowear
+  // does not hold OEKO-TEX).
   certifications: {
     heading: "Audited for safety, environment and ethics",
     subline: "We build to whatever sustainability standard you set, and ",
     sublineBold: "we name only what is independently certified rather than making broad green claims.",
     points: [
       "BSCI and IMAC audited social and ethical compliance",
-      "OEKO-TEX certified fabrics on request",
       "Recycled polyester (rPET) across many knit and woven bases",
       "Sourcing to your own sustainability spec",
     ],
@@ -421,7 +423,7 @@ export const ourFactory = {
       },
       {
         q: "What certifications and quality standards do you hold?",
-        a: "ISO 9001, ISO 45001, ISO 14001, BSCI, IMAC, SGS and OEKO-TEX, WFSGI membership, with every production run inspected to AQL 2.5, in-line and pre-shipment.",
+        a: "ISO 9001, ISO 45001, ISO 14001, BSCI, IMAC and SGS, WFSGI membership, with every production run inspected to AQL 2.5, in-line and pre-shipment.",
       },
       {
         q: "Can I send a third-party inspector or an NDA?",
@@ -429,7 +431,7 @@ export const ourFactory = {
       },
       {
         q: "Is the factory audited for ethics and environment?",
-        a: "Yes. Social and ethical compliance is BSCI and IMAC audited, and OEKO-TEX certified and recycled polyester fabrics are available on request.",
+        a: "Yes. Social and ethical compliance is BSCI and IMAC audited, and recycled polyester fabrics are available on request.",
       },
     ],
   },

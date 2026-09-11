@@ -560,14 +560,14 @@ export const home = {
         mobileHeight: 76,
       },
     ],
-    // OEKO-TEX still has no logo asset in public/logos/ -- unlike every
-    // other mark here, OEKO-TEX doesn't publish its label/logo as a public
-    // download at all: it's only released to a company once actually
-    // certified, via their private myOEKO-TEX portal or by request to
-    // communication@oekotex.com (confirmed 2026-09-11 checking their own
-    // site). Mohsin (or whoever holds Capriowear's OEKO-TEX certificate
-    // number) needs to pull the licensed file from there -- add it here
-    // once obtained, same shape as the entries above.
+    // OEKO-TEX dropped entirely 2026-09-11 (owner correction, confirmed
+    // with the team): Capriowear does not hold OEKO-TEX -- it was never
+    // added to this grid in the first place (an earlier pass here found
+    // it had no public logo download and left it out for that reason;
+    // that reasoning is now moot, since it isn't a real held cert at all).
+    // 6 certifications total (ISO 9001, ISO 45001, ISO 14001, BSCI, IMAC,
+    // SGS) plus WFSGI as a separate membership, all six real certs already
+    // have real logos in this grid -- nothing outstanding to source here.
   },
 
   // Real Figma copy (node 387:498 desktop, 387:511 mobile), replacing the
@@ -618,6 +618,14 @@ export const home = {
   // 8 items, confirmed via get_design_context against both the desktop
   // (409:5309) and mobile (409:5342) frames -- a 9th, "Safe, audited
   // workplace", was trimmed 2026-08-24 to match: no real design has it.
+  // "OEKO-TEX materials" swapped to "SGS tested" 2026-09-11 (owner
+  // correction, confirmed with the team: Capriowear does not hold
+  // OEKO-TEX -- drop it sitewide, text and schema). This is no longer a
+  // byte-exact match to the original Figma frame's own wording (that
+  // frame predates the correction and still shows the now-false claim),
+  // kept at 8 items and the same real-cert tone rather than left blank --
+  // flagged for the owner to confirm the exact replacement wording
+  // whenever this ticker's own Figma frame is next revised.
   complianceTicker: {
     title: "STANDARD ON EVERY ORDER",
     items: [
@@ -628,7 +636,7 @@ export const home = {
       "ISO 9001 certified",
       "BSCI ethical audit",
       "No child labor",
-      "OEKO-TEX materials",
+      "SGS tested",
     ],
   },
 
@@ -711,7 +719,7 @@ export const home = {
       },
       {
         q: "What certifications do you hold?",
-        a: "We hold ISO 9001, ISO 45001 and ISO 14001, plus BSCI, IMAC, SGS and OEKO-TEX, we're WFSGI members, and we welcome third-party inspection.",
+        a: "We hold ISO 9001, ISO 45001 and ISO 14001, plus BSCI, IMAC and SGS, we're WFSGI members, and we welcome third-party inspection.",
       },
       {
         q: "Will my designs stay protected?",
