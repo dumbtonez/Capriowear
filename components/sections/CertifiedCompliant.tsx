@@ -177,7 +177,14 @@ export function CertifiedCompliant({ content, pageVariant = "default", showHeadi
               `mobileWidth`/`mobileHeight` (the dedicated mobile crop, not
               the desktop file reused smaller -- see this file's own header
               comment for why that distinction exists) exactly like the
-              tablet Marquee block below reuses the desktop-sized ones. */}
+              tablet Marquee block below reuses the desktop-sized ones.
+              `gap="default"` (40px), not `"loose"` (72px, what desktop/
+              tablet use) -- at real mobile width, 72px between these
+              smaller mobile-cropped logos left only about one and a half
+              marks visible at once (owner: "too much space between these
+              logo, at least 3 should look at a time while moving"). 40px
+              fits roughly 3 of this row's own mobile logo widths at once
+              in a 375px viewport; desktop/tablet are untouched. */}
           <Marquee
             items={content.logos.map((logo) => (
               <Image
@@ -191,7 +198,7 @@ export function CertifiedCompliant({ content, pageVariant = "default", showHeadi
               />
             ))}
             separator="none"
-            gap="loose"
+            gap="default"
             divider={false}
             pauseOnHover={false}
             edgeFade

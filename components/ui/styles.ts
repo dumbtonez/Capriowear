@@ -3979,7 +3979,11 @@ export const certified = {
   // clientLogos.mobileWrap for the full reasoning). Correct on the
   // homepage, where the preceding section (`WhatWeMake`) already owns its
   // own 72px bottom -- `pt-0` here avoids doubling that gap.
-  mobileSection: "container-p pt-0 pb-[72px] md:hidden",
+  // Bottom trimmed 72px -> 48px -> 32px, 2026-09-11 (owner, this section
+  // only -- explicitly NOT the sitewide 72px standard, confirmed scoped
+  // before changing): "make it 48px" then corrected same day to 32px for
+  // Certified & Compliant's own mobile bottom gap.
+  mobileSection: "container-p pt-0 pb-8 md:hidden",
   // Services page variant (owner, 2026-09-08: "certified should have 72px
   // gap from the top") -- on `/services` this section instead follows the
   // mid-page `FinalCta` usage, whose own ticker'd mobile block owns just
