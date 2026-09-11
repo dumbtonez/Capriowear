@@ -7,6 +7,7 @@
 // page renders, per this project's standing SEO/AEO rule -- never a second,
 // hand-typed copy of the title/description.
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
@@ -79,7 +80,7 @@ export async function generateMetadata({
 export default async function CategoryPage({ params }: PageProps<"/activewear/[category]">) {
   const { category } = await params;
   const data = categories[category];
-  if (!data) return null;
+  if (!data) notFound();
 
   // Entity question first, then this category's own questions -- see
   // categoryEntityFaq()'s own comment (content/activewear/pdpShared.ts) for

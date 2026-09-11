@@ -9,6 +9,7 @@
 // (sports, not categories) differ. Adding a sport is adding its own content
 // file to content/teamwear/sports.ts's registry, same as Activewear.
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
@@ -66,7 +67,7 @@ export async function generateMetadata({
 export default async function SportPage({ params }: PageProps<"/teamwear/[sport]">) {
   const { sport } = await params;
   const data = sports[sport];
-  if (!data) return null;
+  if (!data) notFound();
 
   const faqItems = [categoryEntityFaq(data), ...data.faqs];
   const publishedStyleCards = data.styleCards.filter((card) => card.status === "published");

@@ -73,6 +73,7 @@ Every FAQ answer is answer-first and self-contained: the question and its own an
 - `app/robots.ts` — served at `/robots.txt`. Disallows `/styleguide` (internal QA surface, not for search engines or AI crawlers), points at the sitemap.
 - Clean URLs: already true, App Router file-based routing.
 - Fast, mobile-first, Core Web Vitals: already this project's practice (the Playwright viewport suite, `tests/screenshots.spec.ts`, checks every target viewport before anything is called done) — no new process needed, just keep doing it.
+- **No soft-404s**: every dynamic `[param]` route (`app/activewear/[category]/page.tsx`, `app/activewear/[category]/[style]/page.tsx`, `app/teamwear/[sport]/page.tsx`, `app/teamwear/[sport]/[style]/page.tsx`) must call Next's `notFound()` (`next/navigation`) for an unrecognized slug, never `return null` — a bare `return null` still ships an HTTP `200`, so a bad URL renders as a real, indexable page to a crawler even though it's visually blank/broken. Fixed sitewide 2026-09-11 (site audit finding) on the category and sport PLPs; the `[style]` PDP routes already did this correctly and were the reference fix. Verify with raw `curl -o /dev/null -w "%{http_code}"`, not a browser — the browser-rendered fallback UI can look identical whether the status is `200` or `404`.
 
 ## 6 · Internal linking in body copy
 
