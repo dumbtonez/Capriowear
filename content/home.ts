@@ -13,6 +13,17 @@ import { companyIdentity } from "./site";
 // `image` prop; `WhatWeMake.tsx` passes it straight through.
 type WhatWeMakeTile = { label: string; href: string; image?: { src: string; alt: string } };
 
+// Inside the Factory's own shot shape -- `image` is optional and widened
+// explicitly here (via an `as` cast below, not `satisfies`, which keeps the
+// literal's own narrower inferred type rather than widening it), same
+// reasoning as `WhatWeMakeTile` above: every shot happening to have a real
+// `image` now (2026-09-11, real factory photography) would otherwise infer
+// `image` as required on the literal array, breaking `InsideFactory.tsx`'s
+// own `showDesktopImages={false}` path, which maps this array to strip
+// `image` (`{ ...shot, image: undefined }`) for /our-factory's desktop-only
+// blank state -- a real `tsc` error hit live making this change.
+type InsideFactoryShot = { label: string; image?: { src: string } };
+
 // Activewear's category breakdown -- shared verbatim between the desktop
 // mega menu (Header.tsx, Figma node 493:3140) and the mobile drawer's own
 // mega menu (MobileNav.tsx, Figma node 473:2919, built earlier the same
@@ -558,19 +569,22 @@ export const home = {
   insideFactory: {
     eyebrow: "INSIDE THE FACTORY",
     h2: "Cutting, stitching, printing and QC under one roof",
-    // Real photography on the first 4 shots only (owner, 2026-09-10: "let's
-    // add 4 images... to test how it will work with images"), 5th stays a
-    // placeholder -- a deliberate mixed state for this test, not a mistake.
-    // Not real factory floor photography (stand-in product/model shots the
-    // owner had on hand) -- swap for the real thing later, same `image`
-    // contract `content/our-factory.ts`'s own `image: { src }` shape uses.
+    // Real factory-floor photography on all 5 shots now (owner, 2026-09-11:
+    // "added more photos add them to INSIDE THE FACTORY SECTION" -- supplied
+    // via the main checkout's tests/RED0*.JPG, copied into this worktree's
+    // established test-photo location). Replaces the previous mixed state
+    // (4 stand-in product/model shots the owner had on hand, one still a
+    // placeholder) with 5 real shots of the actual production floor:
+    // hardware/D-ring sorting, an embroidery machine mid-run, strap/QC
+    // assembly, a weight-belt assembly line, and a sewing line. Same
+    // `image: { src }` contract `content/our-factory.ts`'s own media uses.
     media: [
-      { label: "Factory shot 1", image: { src: "/factory-test/factory-test-1.png" } },
-      { label: "Factory shot 2", image: { src: "/factory-test/factory-test-2.png" } },
-      { label: "Factory shot 3", image: { src: "/factory-test/factory-test-3.png" } },
-      { label: "Factory shot 4", image: { src: "/factory-test/factory-test-4.png" } },
-      { label: "Factory shot 5" },
-    ],
+      { label: "Factory shot 1", image: { src: "/factory-test/inside-factory-1.jpg" } },
+      { label: "Factory shot 2", image: { src: "/factory-test/inside-factory-2.jpg" } },
+      { label: "Factory shot 3", image: { src: "/factory-test/inside-factory-3.jpg" } },
+      { label: "Factory shot 4", image: { src: "/factory-test/inside-factory-4.jpg" } },
+      { label: "Factory shot 5", image: { src: "/factory-test/inside-factory-5.jpg" } },
+    ] as InsideFactoryShot[],
     // "Explore Our Factory" -> "Take Factory Tour" (owner call, 2026-08-28,
     // matching the nav's own "Our Factory" -> "Factory Tour" rename), href
     // unchanged -- still /our-factory.
