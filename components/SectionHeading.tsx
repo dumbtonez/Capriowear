@@ -52,6 +52,30 @@ export type SectionHeadingProps = {
    * full container width and wrapped to only 1.
    */
   headingClassName?: string;
+  /**
+   * Full replacement (not appended) for `sectionHeading.heading` itself --
+   * for a caller that needs a different font-size/line-height/weight, not
+   * just an added max-width like `headingClassName` above. Appending a
+   * second `text-*` utility alongside the shared `md:text-h1` token isn't
+   * guaranteed to win the cascade (the same two-utilities-on-one-property
+   * risk this codebase has already been burned by elsewhere -- see
+   * `ProductCard`'s own `titleClassName` for the same full-replacement
+   * fix). Added 2026-09-11 for the Activewear/Teamwear hub group headings
+   * (owner: "for titles let's use 48px font not 54") -- every other
+   * `SectionHeading` caller omits this and keeps the shared `text-h1`
+   * size, unaffected.
+   */
+  headingSize?: string;
+  /**
+   * Full replacement (not appended) for `sectionHeading.root`'s own
+   * `gap-6` (the eyebrow-to-heading gap) -- same full-replacement reasoning
+   * as `headingSize` above. Added 2026-09-11 for the Activewear/Teamwear
+   * hub group + Overview headings (owner: "gap of eyebrow and title gap
+   * make it 8px less on mobile"). Every other `SectionHeading` caller
+   * omits this and keeps the shared 24px gap at every breakpoint,
+   * unaffected.
+   */
+  gap?: string;
   className?: string;
 };
 
@@ -62,12 +86,14 @@ export function SectionHeading({
   eyebrowSize,
   align = "left",
   headingClassName,
+  headingSize,
+  gap,
   className,
 }: SectionHeadingProps) {
   return (
     <div
       className={cx(
-        sectionHeading.root,
+        gap ?? sectionHeading.root,
         align === "center" && sectionHeading.alignCenter,
         className,
       )}
@@ -77,7 +103,7 @@ export function SectionHeading({
       </Eyebrow>
       <h2
         className={cx(
-          sectionHeading.heading,
+          headingSize ?? sectionHeading.heading,
           eyebrowTone === "light" && sectionHeading.headingLight,
           headingClassName,
         )}

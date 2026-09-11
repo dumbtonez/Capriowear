@@ -39,6 +39,7 @@
 // `secondaryCta` (added 2026-09-07, Services page's own closing CTA) is a
 // second, outline `Button` rendered alongside the primary one -- optional,
 // so every existing homepage/PLP usage (a single button) is unaffected.
+import Link from "next/link";
 import { Fragment } from "react";
 
 import { Button } from "@/components/Button";
@@ -79,6 +80,12 @@ export type FinalCtaProps = {
    *  usage, since there's no ticker block above it any more on this
    *  breakpoint either. */
   hideTickerMobile?: boolean;
+  /** A short row of plain text links under the CTA button(s) (added
+   *  2026-09-11, Teamwear hub's closing CTA: cross-links to /activewear,
+   *  /our-factory, /services). Optional -- every existing usage omits it
+   *  and renders unaffected. Shared markup for both breakpoints, since the
+   *  row is short enough not to need its own mobile stack. */
+  crossLinks?: { label: string; href: string }[];
 };
 
 // A literal "\n" in `content.subline` forces a line break on desktop only
@@ -101,7 +108,28 @@ function DesktopSubline({ text }: { text: string }) {
   );
 }
 
-export function FinalCta({ content, ticker, secondaryCta, compactMobileTop, hideTickerMobile }: FinalCtaProps) {
+function CrossLinks({ links }: { links: { label: string; href: string }[] }) {
+  return (
+    <ul className={finalCta.crossLinksList}>
+      {links.map((link) => (
+        <li key={link.href}>
+          <Link href={link.href} className={finalCta.crossLinksItem}>
+            {link.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export function FinalCta({
+  content,
+  ticker,
+  secondaryCta,
+  compactMobileTop,
+  hideTickerMobile,
+  crossLinks,
+}: FinalCtaProps) {
   const showMobileTicker = ticker && !hideTickerMobile;
   const mobileSubline = content.subline.replace(/\n/g, " ");
   return (
@@ -128,6 +156,7 @@ export function FinalCta({ content, ticker, secondaryCta, compactMobileTop, hide
                 {content.cta.label}
               </Button>
             )}
+            {crossLinks ? <CrossLinks links={crossLinks} /> : null}
           </div>
           {ticker ? (
             <Marquee
@@ -174,6 +203,7 @@ export function FinalCta({ content, ticker, secondaryCta, compactMobileTop, hide
               {content.cta.label}
             </Button>
           )}
+          {crossLinks ? <CrossLinks links={crossLinks} /> : null}
         </div>
       </div>
     </section>

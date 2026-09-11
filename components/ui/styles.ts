@@ -4718,6 +4718,14 @@ export const finalCta = {
   // width at every mobile size, same pattern already used elsewhere on the
   // site (e.g. `servicesHero.ctaPrimary`'s own `w-full`).
   mobileButton: "w-full justify-center",
+  // crossLinks (added 2026-09-11, Teamwear hub's closing CTA: "cross-links
+  // to /activewear, /our-factory, /services") -- a small row of plain text
+  // links under the primary/secondary buttons, both breakpoints share the
+  // same classes since the row is short enough not to need a mobile-only
+  // stack. `crossLinksList` a flex-wrap row so 3 short labels never force
+  // horizontal overflow at narrow widths.
+  crossLinksList: "flex flex-wrap items-center justify-center gap-x-6 gap-y-2",
+  crossLinksItem: "text-body text-[#838D97] underline decoration-solid underline-offset-2 hover:text-paper",
 };
 
 /* --- OurServices (homepage section 11) -------------------------------- */
@@ -5683,6 +5691,99 @@ export const categoryBanner = {
   trustBulletText: "text-[1.25rem] leading-[28px] font-normal text-[#abb5c0]",
 };
 
+// teamwearOverview (added 2026-09-11, revised same day per owner desktop
+// feedback: "use existing design component for this section, this does
+// not look nice"). Eyebrow + H2 via `SectionHeading` (same sitewide
+// pattern `WhatWeMake`/`OurServices` use) + a lead paragraph + a 2-column
+// grid of the real `CapabilityCard` (components/Card.tsx) -- the same
+// card `OurServices`/`HowItWorks` already use for a title+body block, not
+// a bespoke one-off shape, so this section carries the same visual
+// polish as the rest of the site rather than plain unstyled text.
+export const teamwearOverview = {
+  // pb-0 below xl (owner mobile-review correction, 2026-09-11: "certified
+  // and inspected should have 72px gap from top") -- `TrustPoints`
+  // (`sidePadding="services"`) right below already supplies its own
+  // pt-[72px] below xl; without pb-0 here the two stacked to 144px.
+  // xl:pt-[72px] (owner, 2026-09-11: "make it 96px on both pages" -- then
+  // same day, corrected to "why caprio make gap 72px, same for the other
+  // section below on both pages" -- was 120px, briefly 96px). Same 72px
+  // now used at every breakpoint, no separate xl: override needed.
+  // xl:pb-[120px] unchanged (paired with TrustPoints' own top gap, not
+  // part of this request).
+  section: "container-p flex flex-col pt-[72px] pb-0 xl:pt-[72px] xl:pb-[120px]",
+  // max-md:gap-5 (20px, owner: "make the title to gap 4px less" -- was a
+  // flat gap-6/24px at every breakpoint, per the earlier "title and
+  // subline should have 24px gap" request). md:gap-6 keeps that same 24px
+  // at tablet/desktop, unchanged. Wraps SectionHeading (eyebrow+H2) and
+  // the lead paragraph together so this gap is exactly the H2-to-lead
+  // distance, not shared with the eyebrow-to-H2 gap SectionHeading owns
+  // internally (see `headingGap` below for that one).
+  textGroup: "flex flex-col max-md:gap-5 md:gap-6",
+  // 16px mobile (owner: "gap of eyebrow and title gap make it 8px less on
+  // mobile" -- was the shared `sectionHeading.root`'s flat gap-6/24px),
+  // 20px desktop (owner, same day, corrected: "the gap between the title
+  // make it 4px less" -- also meant for desktop, was briefly left at the
+  // unchanged 24px).
+  headingGap: "flex flex-col max-md:gap-4 md:gap-5",
+  // 16px at every breakpoint (owner: "eyebrow font size make it 16px only
+  // on these pages" -- corrected same day: "for desktop eyebrow i asked to
+  // make it 16px" too, not just mobile -- was briefly a mobile-only
+  // override, `md:text-[1.25rem]`/20px at tablet+desktop).
+  eyebrowSize: "text-[1rem] leading-normal font-semibold",
+  // Mobile/desktop split (owner mobile-review correction, 2026-09-11:
+  // "title and subline should match the font sizes we have on mobile for
+  // this type of content") -- 18px/1.3333 leading below md (matching
+  // WhatWeMake's own `groupBody` mobile size for this same "subline under
+  // a section heading" content type), 20px/28px-leading (`leading-7`,
+  // owner: "make line height 28px both pages paragraphs" -- was
+  // `leading-6`/24px) at md and up. Explicit size+leading pair, not
+  // `text-body-lg` -- see this token's own prior comment for why (still
+  // applies: two `text-*`/`leading-*` utilities on the same property
+  // aren't guaranteed to cascade predictably).
+  lead: "max-w-[780px] max-md:text-[1.125rem] max-md:leading-[1.3333] md:text-[1.25rem] md:leading-7 font-normal text-subline",
+  // Owner request, 2026-09-11: "highlight any important info" -- same
+  // inline-bold-span pattern WhatWeMake's own `bold` token already uses.
+  leadBold: "font-semibold",
+  // mt-[72px] (owner request, 2026-09-11: "subline and images placeholder
+  // have 72px gap") -- was mt-10/xl:mt-12 (40/48px). No `max-w` on the grid
+  // itself any more -- a same-day `max-w-[780px]` pass (matching the
+  // subline's own width) shrank the card images too, which the owner
+  // flagged and reverted ("you messed the WHY CAPRIOWEAR images sizes,
+  // revert it back") -- the width constraint moved to just the text
+  // column instead, see `cardBody` below.
+  // max-md:mt-8 (32px, owner: "why capriowear subline and under image gap
+  // should be 32px [on mobile]") -- was a flat mt-[72px] at every
+  // breakpoint; md:mt-[72px] keeps that same 72px at tablet/desktop,
+  // unchanged (no desktop complaint).
+  grid: "mt-8 md:mt-[72px] grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12",
+  // max-md:gap-6 (24px, owner: "image and full dye sublimation gap should
+  // be 24px" -- was max-md:gap-8/32px from an earlier, now-corrected pass)
+  // -- the gap between the card's own image and this text block below it,
+  // overriding `capabilityCard.root`'s own `max-xl:gap-4`/16px at mobile
+  // specifically; md:max-xl: (tablet) and xl: (desktop) stay the shared
+  // component's own 16px/24px, unchanged.
+  cardRoot: "flex flex-col max-md:gap-6 md:max-xl:gap-4 xl:gap-6",
+  // 10% narrower than the image above it (owner: "make the text title and
+  // subline width 20% less than the image width," corrected same day to
+  // "make these 10% less wider not 20%") -- `w-[90%]` on just the text
+  // wrapper, not the image, which still fills the full card column width.
+  // gap-3 (12px, owner: "title and subline gap should be same as used on
+  // other pages") -- the shared `capabilityCard.body`'s own default gap
+  // (every CapabilityCard sitewide, e.g. Our Services/How It Works) at
+  // every breakpoint; an earlier `max-xl:gap-4 xl:gap-6` override here
+  // (16/24px) didn't match that standard, now corrected.
+  cardBody: "flex w-[90%] flex-col gap-3",
+  // md:text-[1.875rem] (30px desktop, owner: "make the title font size to
+  // 30 for this section title") -- mobile keeps the shared `capabilityCard.
+  // title`'s own `text-h3` (a fluid clamp, ~22px at real phone widths),
+  // matching "the other site pattern standard sizes" every other
+  // CapabilityCard title sitewide already uses (owner, same day: "use the
+  // same title font size for these 2 sections as per the other site
+  // pattern standard sizes" -- the earlier flat 30px-everywhere value had
+  // bumped mobile up too, which this corrects).
+  cardTitle: "text-h3 md:text-[1.875rem]",
+};
+
 /* --- CategoryFilters -------------------------------------------------- */
 
 // Figma node 406:3085 ("Filters"), the Activewear PLP's left-panel category
@@ -6032,6 +6133,12 @@ export const productCard = {
   // recipe otherwise runs on -- explicit owner value, not re-derived from
   // any node.
   title: "xl:truncate max-md:text-[0.9375rem] md:text-[1.125rem] font-medium text-[#21272a]",
+  // titleLg (added 2026-09-11, Teamwear hub's sport cards, owner feedback:
+  // "make tht product titles 22px") -- same shape as `title` above, just
+  // 22px (`1.375rem`) instead of 18px at `md:` and up. Passed via
+  // `ProductCard`'s own `titleClassName` override, never the shared
+  // `title` default every real PLP grid still uses.
+  titleLg: "xl:truncate max-md:text-[0.9375rem] md:text-[1.375rem] font-medium text-[#21272a]",
   subline: "truncate max-md:text-[0.8125rem] md:text-[1rem] text-[#727272]",
   // 220px fixed image height at real mobile (node 590:1173: 156x220
   // tiles) -- passed as an extra className on MediaPlaceholder alongside
@@ -6659,6 +6766,14 @@ export const trustPoints = {
   // section from the bottom") -- was the standing 72px, -16px here
   // specifically; top gap and desktop's own 104px unaffected.
   sidePaddingServices: "pt-[72px] pb-[56px] xl:px-[80px] xl:pt-[104px] xl:pb-[104px]",
+  // "hub" (added 2026-09-11, Activewear/Teamwear hubs' own TrustPoints
+  // instance): same 80px side padding as "services", but its own 72px
+  // desktop top gap (owner: "make it 96px on both pages" -- then same day,
+  // corrected to "why caprio make gap 72px, same for the other section
+  // below on both pages" -- was briefly 96px) -- a dedicated variant
+  // rather than editing "services" itself, since that variant is still
+  // live on /services with its own confirmed 104px.
+  sidePaddingHub: "pt-[72px] pb-[56px] xl:px-[80px] xl:pt-[72px] xl:pb-[104px]",
   // /our-factory's own instance, section 8 (Figma node 883:156) -- side
   // padding matches the PLP's own 138px (this node's real measurement too,
   // not a coincidence), but its own top/bottom gap: `xl:pt-[160px]` (owner,
@@ -6852,6 +6967,142 @@ export const relatedCategories = {
   section: "container-p flex flex-col items-start gap-6 py-16",
   heading: "text-h3",
   list: "flex flex-wrap gap-4",
+};
+
+// categoryLinkGrid (added 2026-09-11, Activewear hub's category-group
+// grid) -- the grouped grid *wrapper* only; the card itself moved to a
+// shared `categoryCard` recipe (below) once the Teamwear hub's own flat
+// `SportGrid` switched to the same card, 2026-09-11 (owner: "use the same
+// card-grid component on both pages so they stay visually consistent with
+// each other"). Each group renders its own eyebrow+H2 (via SectionHeading)
+// above its own grid -- 1 column below `xl` (source doc: "groups stack
+// full width, one column... same collapse behavior already used
+// elsewhere"), 3 columns at `xl`.
+// Outer wrapper for all 5 `CategoryLinkGrid` instances stacked together.
+// pt-10 (40px, matching the Teamwear hub's own confirmed "product tiles
+// from the top" gap) below xl, xl:pt-[80px] at xl+; pb-0 below xl (the
+// Overview section right after already supplies its own pt-[72px] below
+// xl -- see that section's own comment for why, same double-stack lesson
+// learned building the Teamwear hub).
+export const categoryGroupsSection = {
+  section: "container-p flex flex-col gap-16 pt-10 pb-0 xl:gap-20 xl:pt-[80px] xl:pb-[120px]",
+};
+
+export const categoryLinkGrid = {
+  group: "flex flex-col gap-8 xl:gap-10",
+  grid: "grid grid-cols-1 gap-4 xl:grid-cols-3",
+  // Full replacement for `SectionHeading`'s own shared `sectionHeading.
+  // heading` (text-h1, 54px desktop), passed via its `headingSize` prop --
+  // owner request, 2026-09-11: "for titles let's use 48px font not 54,"
+  // pointing at these group headings specifically ("Everyday tops, built
+  // for performance" etc.), corrected the same day to 40px ("make this
+  // title 40px... all titles"). Same mobile size/weight/leading as the
+  // shared token, just a fixed 40px (not fluid) at md and up.
+  groupHeadingSize: "max-md:text-[1.875rem] max-md:font-[460] max-md:leading-[34px] md:text-[2.5rem] md:font-medium md:leading-[1.1852]",
+  // 16px mobile (owner: "gap of eyebrow and title gap make it 8px less on
+  // mobile"), 20px desktop (owner, same day, corrected: "the gap between
+  // the title make it 4px less" -- also meant for desktop).
+  groupHeadingGap: "flex flex-col max-md:gap-4 md:gap-5",
+  // 16px at every breakpoint (owner: "eyebrow font size make it 16px only
+  // on these pages" -- corrected same day to apply at desktop too, not
+  // just mobile).
+  groupEyebrowSize: "text-[1rem] leading-normal font-semibold",
+};
+
+// categoryCard (added 2026-09-11, then made the SHARED card for both hub
+// grids the same day, owner: "add a small thumbnail image to each
+// category card on both the Activewear hub and Teamwear hub, using the
+// same card-grid component on both pages") -- one small square thumbnail
+// (48px mobile, 64px desktop -- owner's own display-size spec) to the
+// left of a name + one-line descriptor, deliberately distinct from
+// `ProductCard`'s image-forward, image-above-text PLP tile (no existing
+// component fit this shape: `RelatedCategories` is a pill-button row with
+// no descriptor, `ProductCategoryLinks` is bare text links). A real
+// `hover:border-accent` state plus an arrow that shifts on hover (same
+// affordance language `WhatWeMake`'s own CTA tile already uses) so the
+// card reads as a distinct clickable unit even before a thumbnail lands.
+export const categoryCard = {
+  root: "group flex items-center gap-4 rounded-[8px] border border-line p-4 transition-colors hover:border-accent",
+  // size-12 (48px) mobile, md:size-16 (64px) desktop -- owner's own
+  // "roughly 48 to 64px" display-size spec. `overflow-hidden` clips the
+  // real `<Image>` (sourced ~2x this size, ~120-130px, for retina) to
+  // this exact square box via `object-cover`.
+  thumb: "relative size-12 shrink-0 overflow-hidden rounded-[6px] bg-paper-2 md:size-16",
+  thumbImage: "object-cover",
+  thumbPlaceholder: "size-full bg-paper-2",
+  text: "flex min-w-0 flex-1 flex-col gap-1",
+  // 22px (owner request, 2026-09-11: "make the category font like
+  // leggings, etc 22px") -- was `text-h5` (24px). Explicit size, not a
+  // token, since no named size sits at exactly 22px.
+  label: "truncate text-[1.375rem] font-medium leading-[1.2]",
+  descriptor: "truncate text-body text-muted",
+  icon: "size-4 shrink-0 text-muted transition-transform group-hover:translate-x-1 group-hover:text-accent",
+};
+
+// activewearOverview: same shape/spacing lessons as the Teamwear hub's own
+// `teamwearOverview` (mobile/desktop lead-paragraph font split, pb-0 below
+// xl since TrustPoints right after already supplies its own pt-[72px]),
+// but a plain bulleted differentiator list instead of a CapabilityCard
+// grid -- the source doc gives two short positioning lines here, not
+// titled title+body blocks.
+// Same shape as `teamwearOverview` (owner request, 2026-09-11: "why
+// capriowear, use the same style used on teamwear") -- a `CapabilityCard`
+// grid instead of the earlier plain Sparkle-bulleted differentiator list.
+export const activewearOverview = {
+  // xl:pt-[72px] (owner, 2026-09-11: "make it 96px on both pages" -- then
+  // same day, corrected to "why caprio make gap 72px, same for the other
+  // section below on both pages" -- was 120px, briefly 96px).
+  section: "container-p flex flex-col pt-[72px] pb-0 xl:pt-[72px] xl:pb-[120px]",
+  // max-md:gap-5 (20px, owner: "make the title to gap 4px less" -- was a
+  // flat gap-6/24px at every breakpoint). md:gap-6 keeps 24px at
+  // tablet/desktop, unchanged.
+  textGroup: "flex flex-col max-md:gap-5 md:gap-6",
+  // 16px mobile (owner: "gap of eyebrow and title gap make it 8px less on
+  // mobile"), 20px desktop (owner, same day, corrected: "the gap between
+  // the title make it 4px less" -- also meant for desktop).
+  headingGap: "flex flex-col max-md:gap-4 md:gap-5",
+  // 16px at every breakpoint (owner: "eyebrow font size make it 16px only
+  // on these pages" -- corrected same day to apply at desktop too, not
+  // just mobile).
+  eyebrowSize: "text-[1rem] leading-normal font-semibold",
+  lead: "max-w-[780px] max-md:text-[1.125rem] max-md:leading-[1.3333] md:text-[1.25rem] md:leading-7 font-normal text-subline",
+  leadBold: "font-semibold",
+  // No `max-w` on the grid itself -- a same-day `max-w-[780px]` pass
+  // (matching the subline's own width) shrank the card images too, which
+  // the owner flagged and reverted ("you messed the WHY CAPRIOWEAR images
+  // sizes, revert it back") -- the width constraint moved to just the text
+  // column instead, see `cardBody` below.
+  // max-md:mt-8 (32px, owner: "why capriowear subline and under image gap
+  // should be 32px [on mobile]") -- was a flat mt-[72px] at every
+  // breakpoint; md:mt-[72px] keeps that same 72px at tablet/desktop,
+  // unchanged (no desktop complaint).
+  grid: "mt-8 md:mt-[72px] grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12",
+  // max-md:gap-6 (24px, owner: "image and full dye sublimation gap should
+  // be 24px" -- was max-md:gap-8/32px from an earlier, now-corrected pass)
+  // -- the gap between the card's own image and this text block below it,
+  // overriding `capabilityCard.root`'s own `max-xl:gap-4`/16px at mobile
+  // specifically; md:max-xl: (tablet) and xl: (desktop) stay the shared
+  // component's own 16px/24px, unchanged.
+  cardRoot: "flex flex-col max-md:gap-6 md:max-xl:gap-4 xl:gap-6",
+  // 10% narrower than the image above it (owner: "make the text title and
+  // subline width 20% less than the image width," corrected same day to
+  // "make these 10% less wider not 20%") -- `w-[90%]` on just the text
+  // wrapper, not the image, which still fills the full card column width.
+  // gap-3 (12px, owner: "title and subline gap should be same as used on
+  // other pages") -- the shared `capabilityCard.body`'s own default gap
+  // (every CapabilityCard sitewide, e.g. Our Services/How It Works) at
+  // every breakpoint; an earlier `max-xl:gap-4 xl:gap-6` override here
+  // (16/24px) didn't match that standard, now corrected.
+  cardBody: "flex w-[90%] flex-col gap-3",
+  // md:text-[1.875rem] (30px desktop, owner: "make the title font size to
+  // 30 for this section title") -- mobile keeps the shared `capabilityCard.
+  // title`'s own `text-h3` (a fluid clamp, ~22px at real phone widths),
+  // matching "the other site pattern standard sizes" every other
+  // CapabilityCard title sitewide already uses (owner, same day: "use the
+  // same title font size for these 2 sections as per the other site
+  // pattern standard sizes" -- the earlier flat 30px-everywhere value had
+  // bumped mobile up too, which this corrects).
+  cardTitle: "text-h3 md:text-[1.875rem]",
 };
 
 /* --- ProductGallery (PDP) -------------------------------------------------- */
