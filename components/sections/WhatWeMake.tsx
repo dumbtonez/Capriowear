@@ -41,6 +41,14 @@ import type { home } from "@/content/home";
 // `xl:` and up), which has its own separate "CTA fills the last row cell"
 // treatment instead (see that block's own comment).
 const MOBILE_TILE_LIMIT = 4;
+// 2-col grid variant's own limit (owner, 2026-09-11: "now since we have 2
+// columns should we add 6 items for each or you think 4 is enough" --
+// recommended 6: 4 tiles in 2 columns is only 2 rows, noticeably sparser
+// than the original 1-col/4-row version, undersells the category range;
+// 6 (3 rows) keeps the same compact grid feel while showing more of
+// what's actually available). Scoped to `mobileGridVariant` only -- the
+// original 1-col layout's own 4-tile cap is unaffected.
+const MOBILE_TILE_LIMIT_GRID = 6;
 
 // "Teamwear & Uniforms" shortens to just "Teamwear" for CTA labels only
 // (owner, 2026-09-07: "for teamwear just use view all teamwear") -- every
@@ -55,6 +63,19 @@ type BodySegment = string | { bold: string };
 
 export type WhatWeMakeProps = {
   content: typeof home.whatWeMake;
+  /**
+   * Trial variant (owner, 2026-09-11: "Homepage activewear and teamwear
+   * categories on mobile are shown ony by one, let's try a variant where
+   * we use 2 in a row same width and height of the image as used on the
+   * plp. Let's try and decide which one to finalize, one vs 2"). Default
+   * `false`: unchanged 1-col real-mobile / 2-col tablet-up behaviour.
+   * `true`: 2 columns at every width below `xl:` (real mobile included),
+   * PLP-matching grid gaps and image ratio (`79:100`, `MediaPlaceholder`'s
+   * own PLP-card ratio) instead of this section's own square/`15:16`
+   * tiles. A real prop, not a hand-edited swap, so both stay one flag
+   * away from each other for a real side-by-side comparison.
+   */
+  mobileGridVariant?: boolean;
 };
 
 function Body({ segments, className }: { segments: BodySegment[]; className: string }) {
@@ -73,7 +94,7 @@ function Body({ segments, className }: { segments: BodySegment[]; className: str
   );
 }
 
-export function WhatWeMake({ content }: WhatWeMakeProps) {
+export function WhatWeMake({ content, mobileGridVariant = false }: WhatWeMakeProps) {
   return (
     <section>
       <div className={whatWeMake.desktopSection}>
@@ -144,17 +165,19 @@ export function WhatWeMake({ content }: WhatWeMakeProps) {
                       tiles, plus the "View All" CTA, at every width in this
                       range. Desktop's own separate grid (xl:) covers every
                       tile via its own "CTA fills the last row cell" rule. */}
-                  <div className={whatWeMake.mobileList}>
-                    {category.tiles.slice(0, MOBILE_TILE_LIMIT).map((tile) => (
+                  <div className={mobileGridVariant ? whatWeMake.mobileListGrid : whatWeMake.mobileList}>
+                    {category.tiles.slice(0, mobileGridVariant ? MOBILE_TILE_LIMIT_GRID : MOBILE_TILE_LIMIT).map((tile) => (
                       <a key={tile.href} href={tile.href} className={whatWeMake.mobileTile}>
                         <MediaPlaceholder
                           label={tile.label}
                           image={tile.image}
-                          ratio="1:1"
+                          ratio={mobileGridVariant ? "79:100" : "1:1"}
                           radius="none"
-                          className={whatWeMake.mobileTileMedia}
+                          className={mobileGridVariant ? undefined : whatWeMake.mobileTileMedia}
                         />
-                        <span className={whatWeMake.mobileTileLabel}>{tile.label}</span>
+                        <span className={mobileGridVariant ? whatWeMake.mobileTileLabelGrid : whatWeMake.mobileTileLabel}>
+                          {tile.label}
+                        </span>
                       </a>
                     ))}
                   </div>

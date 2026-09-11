@@ -347,8 +347,7 @@ export const home = {
           // photo used on the Leggings PLP card/PDP gallery
           // (content/activewear/leggings.ts's own high-waisted-compression
           // style), referenced once and reused, not a second copy of the
-          // same fact. Every other tile below has no photo, so stays a
-          // placeholder box exactly as before.
+          // same fact.
           {
             label: "Leggings",
             href: "/activewear/leggings",
@@ -357,12 +356,45 @@ export const home = {
               alt: "Custom high-waisted compression leggings",
             },
           },
-          { label: "Sports Bras", href: "/activewear/sports-bras" },
-          { label: "Shorts", href: "/activewear/shorts" },
-          { label: "Hoodies", href: "/activewear/hoodies" },
-          { label: "Joggers & Track Pants", href: "/activewear/joggers-track-pants" },
-          { label: "Tracksuits", href: "/activewear/tracksuits" },
-          { label: "Base Layers", href: "/activewear/compression-base-layers" },
+          // Owner, 2026-09-11: "add testing pictures into to activewear
+          // catagories from public folder" -- for the mobile 1-vs-2-column
+          // layout comparison (`WhatWeMake.tsx`), real photos on every
+          // tile instead of mostly-empty placeholder boxes. Cycled through
+          // this project's existing QA/reference photo set (the same
+          // `factory-test-*`/"Referne Image" assets already reused
+          // elsewhere for identical placeholder-testing reasons, e.g.
+          // `content/our-factory.ts`'s own `sampleDetails`), not real
+          // per-category product photography yet.
+          {
+            label: "Sports Bras",
+            href: "/activewear/sports-bras",
+            image: { src: "/product-images/leggings-high-waisted-compression-2.png", alt: "" },
+          },
+          {
+            label: "Shorts",
+            href: "/activewear/shorts",
+            image: { src: "/factory-test/factory-test-1.png", alt: "" },
+          },
+          {
+            label: "Hoodies",
+            href: "/activewear/hoodies",
+            image: { src: "/factory-test/factory-test-2.png", alt: "" },
+          },
+          {
+            label: "Joggers & Track Pants",
+            href: "/activewear/joggers-track-pants",
+            image: { src: "/factory-test/factory-test-3.png", alt: "" },
+          },
+          {
+            label: "Tracksuits",
+            href: "/activewear/tracksuits",
+            image: { src: "/factory-test/factory-test-4.png", alt: "" },
+          },
+          {
+            label: "Base Layers",
+            href: "/activewear/compression-base-layers",
+            image: { src: "/Product%20images/Referne%20Image.png", alt: "" },
+          },
         ] satisfies WhatWeMakeTile[],
       },
       {
@@ -376,11 +408,57 @@ export const home = {
           ".",
         ],
         href: "/teamwear",
+        // Owner, 2026-09-11: "add testing pictures into to activewear
+        // catagories from public folder" -- the original ask named
+        // Activewear specifically, but the same mobile 1-vs-2-column
+        // comparison (`WhatWeMake.tsx`'s own `mobileGridVariant`) covers
+        // Teamwear too ("Homepage activewear and teamwear categories on
+        // mobile..."), and every tile here needs the same `image` key
+        // shape as Activewear's now does regardless (a real `tsc` error
+        // otherwise -- `content.categories` infers one union type across
+        // both groups, so one group's tiles all lacking `image` while the
+        // other's all have it breaks generic `.map` access). Same reused
+        // QA/reference photo set as Activewear, not real per-category
+        // photography yet.
+        // Owner, 2026-09-11: "add 6 products to teamwear too" -- Rugby and
+        // Baseball added (real, built `/teamwear/rugby`/`/teamwear/baseball`
+        // routes, same set the mega menu already links to) so this group
+        // reaches 6 tiles/3 rows, matching Activewear's own new count.
+        // Real bug, fixed in passing: "Basketball Uniforms" pointed at
+        // `/teamwear/basketball-uniforms`, which doesn't exist -- the real
+        // built page is `/teamwear/basketball` (confirmed against
+        // `content/teamwear/basketball.ts` and the mega menu's own link).
         tiles: [
-          { label: "Soccer Uniforms", href: "/teamwear/soccer" },
-          { label: "Basketball Uniforms", href: "/teamwear/basketball-uniforms" },
-          { label: "Football Uniforms", href: "/teamwear/football" },
-          { label: "Fighting Wear", href: "/teamwear/fight-wear" },
+          {
+            label: "Soccer Uniforms",
+            href: "/teamwear/soccer",
+            image: { src: "/factory-test/factory-test-1.png", alt: "" },
+          },
+          {
+            label: "Basketball Uniforms",
+            href: "/teamwear/basketball",
+            image: { src: "/factory-test/factory-test-2.png", alt: "" },
+          },
+          {
+            label: "Football Uniforms",
+            href: "/teamwear/football",
+            image: { src: "/factory-test/factory-test-3.png", alt: "" },
+          },
+          {
+            label: "Fighting Wear",
+            href: "/teamwear/fight-wear",
+            image: { src: "/factory-test/factory-test-4.png", alt: "" },
+          },
+          {
+            label: "Rugby Uniforms",
+            href: "/teamwear/rugby",
+            image: { src: "/product-images/leggings-high-waisted-compression.png", alt: "" },
+          },
+          {
+            label: "Baseball Uniforms",
+            href: "/teamwear/baseball",
+            image: { src: "/product-images/leggings-high-waisted-compression-2.png", alt: "" },
+          },
         ] satisfies WhatWeMakeTile[],
       },
     ],

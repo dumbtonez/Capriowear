@@ -3790,6 +3790,19 @@ export const whatWeMake = {
   // visible through the whole sub-`xl` range now, `WhatWeMake.tsx`'s
   // `.slice(0, MOBILE_TILE_LIMIT)` applies at every width this renders.
   mobileList: "flex flex-col gap-10 md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-10 xl:hidden",
+  // Trial 2-column real-mobile variant (owner, 2026-09-11: "Homepage
+  // activewear and teamwear categories on mobile are shown ony by one,
+  // let's try a variant where we use 2 in a row same width and height of
+  // the image as used on the plp") -- a real alternative to `mobileList`
+  // above (1-col real mobile, 2-col from `md:` up), not a replacement:
+  // `WhatWeMake.tsx`'s own `mobileGridVariant` prop picks between the two
+  // so both stay easy to compare/revert. 2 columns at EVERY width below
+  // `xl:` (real mobile included), using the PLP's own real grid gaps
+  // (`productGrid.grid`'s own `max-xl:gap-x-2 max-xl:gap-y-6`) rather than
+  // this section's own former `gap-10`/`md:gap-x-6 md:gap-y-10` -- "same
+  // width and height of the image as used on the plp" means the whole
+  // grid shape matches, not just the image ratio.
+  mobileListGrid: "grid grid-cols-2 gap-x-2 gap-y-6 xl:hidden",
   // Full-width outline pill, real-mobile-only (owner, 2026-09-07, same
   // request as above: "cta ... it will take customers to their respective
   // landing pages" -- `category.href`, already on the content shape,
@@ -3892,6 +3905,18 @@ export const whatWeMake = {
   // mobile tile label is one size down from desktop's, confirmed via
   // get_design_context, not the same size reused smaller.
   mobileTileLabel: "text-[1.375rem] font-medium leading-normal",
+  // 2-col grid variant's own label (owner, 2026-09-11: "what font size
+  // should we use so it only comes in one line?" -- at 22px, the two
+  // narrower 163px-wide 2-col tiles wrap a longer label like "Basketball
+  // Uniforms" to a second line, ~164px vs. the box's own 163.5px). First
+  // set to `productCard.title`'s own 15px, then "that looks small how
+  // about 18" -- checked live first (measuring each of the 8 real
+  // category labels currently shown at 18px against its own 164px-wide
+  // tile): none wrap, "Basketball Uniforms" is the tightest fit at 161px
+  // of 164px available (~3px margin) -- confirmed before applying, not a
+  // guess. `truncate` kept as a safety net for any future label that's
+  // still too long even at this size.
+  mobileTileLabelGrid: "text-[1.125rem] font-medium leading-normal truncate",
 };
 
 /* --- CertifiedCompliant ---------------------------------------------------- */

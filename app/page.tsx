@@ -126,7 +126,7 @@ export default function Home() {
         <Hero hero={home.hero} customOfferings={home.customOfferings} />
         <ClientLogos brandLogos={home.brandLogos} />
         <TrustSignals items={home.trustStrip} />
-        <WhatWeMake content={home.whatWeMake} />
+        <WhatWeMake content={home.whatWeMake} mobileGridVariant />
         <CertifiedCompliant content={home.certified} />
         <OurServices content={home.services} tone="dark" />
         <Stats items={home.stats} />
