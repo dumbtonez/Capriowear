@@ -89,7 +89,7 @@ export function Hero({ hero: content, customOfferings }: HeroProps) {
           full-viewport scroll grow: "apply it on other pages where it
           exist"), see that file's own header comment for the full
           mechanism. */}
-      <ScrollGrowVideo label={content.media.label} wrapClassName={hero.videoWrap} />
+      <ScrollGrowVideo label={content.media.label} wrapClassName={hero.videoWrap} image={content.media.image} />
 
       {/* Layer 3: Ticker. Desktop scrolls; mobile is a plain stacked list --
           real, different designs, not one component in two modes. Split at

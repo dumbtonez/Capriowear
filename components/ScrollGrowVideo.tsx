@@ -37,7 +37,7 @@
 import { Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-import { MediaPlaceholder } from "@/components/MediaPlaceholder";
+import { MediaPlaceholder, type MediaPlaceholderProps } from "@/components/MediaPlaceholder";
 import { cx } from "@/components/ui/cx";
 import { hero } from "@/components/ui/styles";
 
@@ -111,9 +111,11 @@ export type ScrollGrowVideoProps = {
   label: string;
   /** The outer padded wrap token, e.g. `hero.videoWrap` or `ourFactoryHero.videoWrap`. */
   wrapClassName: string;
+  /** Swaps the placeholder fill for a real photo behind the play button. `label` still supplies the alt text unless this sets its own. */
+  image?: MediaPlaceholderProps["image"];
 };
 
-export function ScrollGrowVideo({ label, wrapClassName }: ScrollGrowVideoProps) {
+export function ScrollGrowVideo({ label, wrapClassName, image }: ScrollGrowVideoProps) {
   const videoRef = useRef<HTMLDivElement>(null);
   const videoBox = useScrollGrowBox(videoRef);
 
@@ -141,6 +143,8 @@ export function ScrollGrowVideo({ label, wrapClassName }: ScrollGrowVideoProps) 
           tone="dark"
           showLabel={false}
           radius="none"
+          image={image}
+          imageSizes="100vw"
           className="h-full w-full"
           overlay={
             <div className={hero.playWrap}>

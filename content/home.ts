@@ -172,7 +172,24 @@ export const home = {
     h1: "Custom OEM & ODM activewear & teamwear manufacturer", // VERIFY exact H1
     ctaPrimary: { label: "Request a Sample", href: "/request-a-sample" },
     ctaSecondary: { label: "Download Catalog", href: "/download-catalog" },
-    media: { type: "video", label: "Hero video, factory and product" },
+    media: {
+      type: "video",
+      label: "Hero video, factory and product",
+      // Test photo (owner, 2026-09-11: "there is a test images i added for
+      // home hero banner video. take it from the test folder from public"
+      // -- provided via the main checkout's own public/Test/RED01277.JPG,
+      // copied into this worktree as public/factory-test/hero-video-test.jpg,
+      // the established "test/reference photo, not final photography"
+      // location this project already uses for factory-test-*.png). Real
+      // resolution (7952x5304) is well above the "at least 1920x1080"
+      // recommendation given when this section's own image size was asked
+      // about, since ScrollGrowVideo scales this box up to the full
+      // viewport on scroll, not just its small starting box.
+      image: {
+        src: "/factory-test/hero-video-test.jpg",
+        alt: "Factory worker stitching a garment on an industrial sewing machine",
+      },
+    },
   },
 
   customOfferings: {
