@@ -1,5 +1,3 @@
-"use client";
-
 // components/FloatingSocialButtons.tsx
 // Sitewide, desktop-only floating button stack (owner, 2026-09-10: "on
 // mobile we added whatsapp, on desktop sitewide i want to add too on the
@@ -25,23 +23,12 @@
 // single-button component, same name would now undersell/mislabel the
 // second icon).
 //
-// Instagram's own icon colour is tone-adaptive (owner, 2026-09-11: "make
-// it a bit dark on white and should go white on blck bacground, is it not
-// too much right?" -- after an interim fixed-grey "balance" compromise
-// hadn't been quite what was wanted). Reuses `getSurfaceToneAt`
-// (lib/surfaceTone.ts, extracted from Header.tsx the same turn, where it
-// already drives that fixed header's own adaptive text colour) rather
-// than a second implementation. Samples a point just to the LEFT of this
-// stack, not literally on top of either button -- `elementFromPoint`
-// returns the topmost element at a pixel, and since this stack is a
-// `position: fixed` sibling of the page content (not a descendant of any
-// section), walking up ITS OWN ancestor chain from a point on itself would
-// never reach the real section actually behind it. Re-samples on scroll
-// (rAF-throttled, same pattern Header's own hide/reveal listener uses)
-// and on resize, since the corner position and what's behind it both
-// change. WhatsApp's own icon stays plain white throughout -- brand green
-// is bright enough to read against both a white and a dark section as-is,
-// unlike the much fainter frosted Instagram circle.
+// Instagram's own icon colour is a fixed brand colour (owner, 2026-09-11:
+// "for insta sticky icon on desktop, use the brand color for the icon
+// only") -- `--color-instagram` (app/globals.css), icon-only, the button's
+// own frosted-glass background is unchanged. Previously tone-adaptive via
+// `getSurfaceToneAt` (lib/surfaceTone.ts, still used by Header.tsx for its
+// own adaptive text colour); no longer sampled here.
 //
 // Both are plain `<a>` tags, not click handlers -- `wa.me` is WhatsApp's
 // own universal link, already correct on both desktop (opens
@@ -49,53 +36,16 @@
 // needed, same as the existing mobile CTA; Instagram is a plain profile
 // URL. Number/message and the Instagram URL both live in content/site.ts
 // (`WHATSAPP_LINK`, `ORGANIZATION.sameAs`), not hand-typed here.
-import { useEffect, useRef, useState } from "react";
-
 import { InstagramIcon } from "@/components/icons/SocialIcons";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { cx } from "@/components/ui/cx";
 import { whatsappFloating } from "@/components/ui/styles";
 import { ORGANIZATION, WHATSAPP_LINK } from "@/content/site";
-import { getSurfaceToneAt } from "@/lib/surfaceTone";
 
 const INSTAGRAM_URL = ORGANIZATION.sameAs.find((url) => url.includes("instagram.com"));
 
-// Clear of both circles (56px each) and the gap between them -- lands on
-// real page content beside the stack, not on the stack itself.
-const SAMPLE_OFFSET_X = 90;
-
 export function FloatingSocialButtons() {
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const [tone, setTone] = useState<"dark" | "light">("light");
-
-  useEffect(() => {
-    let ticking = false;
-    const sample = () => {
-      const rect = wrapRef.current?.getBoundingClientRect();
-      if (rect) {
-        const x = Math.max(rect.left - SAMPLE_OFFSET_X, 1);
-        const y = rect.top + rect.height / 2;
-        setTone(getSurfaceToneAt(x, y));
-      }
-      ticking = false;
-    };
-    const onScrollOrResize = () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(sample);
-      }
-    };
-    sample();
-    window.addEventListener("scroll", onScrollOrResize, { passive: true });
-    window.addEventListener("resize", onScrollOrResize);
-    return () => {
-      window.removeEventListener("scroll", onScrollOrResize);
-      window.removeEventListener("resize", onScrollOrResize);
-    };
-  }, []);
-
   return (
-    <div ref={wrapRef} className={whatsappFloating.wrap}>
+    <div className={whatsappFloating.wrap}>
       <a
         href={WHATSAPP_LINK}
         target="_blank"
@@ -113,12 +63,7 @@ export function FloatingSocialButtons() {
           aria-label="Follow us on Instagram"
           className={whatsappFloating.instagramButton}
         >
-          <InstagramIcon
-            className={cx(
-              whatsappFloating.instagramIcon,
-              tone === "light" ? whatsappFloating.instagramIconLight : whatsappFloating.instagramIconDark,
-            )}
-          />
+          <InstagramIcon className={whatsappFloating.instagramIcon} />
         </a>
       ) : null}
     </div>

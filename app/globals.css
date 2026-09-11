@@ -44,6 +44,12 @@
      existed yet). Owner confirmed a standard red over a muted red-brown
      variant closer to the accent-orange family. */
   --color-error: #e5484d;
+  /* Instagram's own brand pink -- icon-only use on the desktop floating
+     social stack (owner, 2026-09-11: "for insta sticky icon on desktop,
+     use the brand color for the icon only"), overriding the neutral
+     tone-adaptive treatment from the day before. Not applied to the
+     button's own frosted-glass background, which stays neutral. */
+  --color-instagram: #e1306c;
   /* Subline text under a title, on a white/paper section background only
      (owner, 2026-09-01: apply sitewide, component-level, so new pages pick
      it up automatically) -- distinct from --color-text (the general
