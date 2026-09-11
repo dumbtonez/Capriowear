@@ -23,12 +23,16 @@
 // single-button component, same name would now undersell/mislabel the
 // second icon).
 //
-// Instagram's own icon colour is a fixed brand colour (owner, 2026-09-11:
-// "for insta sticky icon on desktop, use the brand color for the icon
-// only") -- `--color-instagram` (app/globals.css), icon-only, the button's
-// own frosted-glass background is unchanged. Previously tone-adaptive via
-// `getSurfaceToneAt` (lib/surfaceTone.ts, still used by Header.tsx for its
-// own adaptive text colour); no longer sampled here.
+// Instagram's own icon colour is the real Meta brand gradient (owner,
+// 2026-09-11: "for insta sticky icon on desktop, use the brand color for
+// the icon only", then "is this pink the offical color for instagram,
+// please double check their guidelines and use the right one" -- a flat
+// pink was one real stop of Instagram's gradient, not the actual brand
+// mark; `InstagramIcon`'s own `gradient` prop, components/icons/
+// SocialIcons.tsx, carries Meta's published stops). Icon-only -- the
+// button's own frosted-glass background is unchanged. Previously
+// tone-adaptive via `getSurfaceToneAt` (lib/surfaceTone.ts, still used by
+// Header.tsx for its own adaptive text colour); no longer sampled here.
 //
 // Both are plain `<a>` tags, not click handlers -- `wa.me` is WhatsApp's
 // own universal link, already correct on both desktop (opens
@@ -63,7 +67,7 @@ export function FloatingSocialButtons() {
           aria-label="Follow us on Instagram"
           className={whatsappFloating.instagramButton}
         >
-          <InstagramIcon className={whatsappFloating.instagramIcon} />
+          <InstagramIcon gradient className={whatsappFloating.instagramIcon} />
         </a>
       ) : null}
     </div>

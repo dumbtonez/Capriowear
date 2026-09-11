@@ -7422,13 +7422,15 @@ export const whatsappFloating = {
   // tone-adaptive via `getSurfaceToneAt` (owner: "make it a bit dark on
   // white and should go white on blck bacground"). Superseded 2026-09-11
   // (owner: "for insta sticky icon on desktop, use the brand color for the
-  // icon only") -- a single fixed brand colour now, not tone-adaptive;
-  // `FloatingSocialButtons.tsx` no longer samples tone for this icon.
-  // `--color-instagram` (app/globals.css) is Instagram's own brand pink,
-  // icon-only -- the button's own frosted-glass background is unchanged.
+  // icon only", then "is this pink the offical color for instagram...use
+  // the right one") -- `InstagramIcon`'s own `gradient` prop now paints
+  // Meta's real published brand gradient directly in the SVG (see that
+  // component's own comment for the source/stops), not a single flat
+  // colour token here; `FloatingSocialButtons.tsx` no longer samples tone
+  // for this icon. The button's own frosted-glass background is unchanged.
   instagramButton:
     "flex size-14 items-center justify-center rounded-full border border-white/25 bg-ink/20 shadow-lg backdrop-blur-sm transition-transform hover:scale-105",
-  instagramIcon: "size-6 text-instagram",
+  instagramIcon: "size-6",
 };
 
 /* --- ProductCustomizeSteps (PDP) ----------------------------------------- */
