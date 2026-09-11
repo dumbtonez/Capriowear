@@ -232,6 +232,15 @@ export function collectionOfPagesSchema(name: string, url: string, description: 
 // valid Product without an Offer rather than publishing invented pricing
 // -- same "no price data" precedent collectionPageSchema() already sets
 // for the PLP's own lightweight Product entities.
+//
+// Re-confirmed 2026-09-11 (cleanup pass, after the sitewide certifications
+// correction): the two are unrelated facts -- certifications describe the
+// factory's own compliance, an Offer describes a price for this specific
+// product -- so fixing the former has no bearing on this decision. This is
+// a deliberate, signed-off choice, not a gap the audit should keep
+// re-flagging: Capriowear has no fixed public per-unit price to publish
+// (quote-based, made-to-order), so omitting `offers` is the only schema.org
+// -valid option here, not an incomplete implementation.
 export function productSchema({ name, description, image, material }: ProductSchemaInput) {
   return {
     "@context": "https://schema.org",

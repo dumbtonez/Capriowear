@@ -7761,14 +7761,27 @@ export const productSpecifications = {
 // that component's own header comment) -- this is a functional crawl link
 // list, not a browse-by-attribute design.
 export const productCategoryLinks = {
-  // `hidden`, every breakpoint (owner, 2026-09-08: "back to all leggings
-  // still shows on the frontend, we decided to keep it only on the
-  // backend for crawling remove it") -- supersedes the 2026-09-07 pass
+  // Visually hidden at every breakpoint (owner, 2026-09-08: "back to all
+  // leggings still shows on the frontend, we decided to keep it only on
+  // the backend for crawling remove it") -- supersedes the 2026-09-07 pass
   // that hid this on mobile/tablet but still showed it at `xl:` desktop.
-  // The link/data still renders into the DOM at every breakpoint (still
-  // crawlable, still satisfies this component's own SEO rule-6 purpose
-  // above), it just never becomes visible now, at any width.
-  root: "container-p hidden flex-col gap-4 border-t border-line py-8",
+  //
+  // `sr-only`, NOT `hidden` (fixed 2026-09-11, cleanup-pass audit finding):
+  // `hidden` is a real `display: none`, which pulls the whole block out of
+  // the accessibility tree too, not just off-screen -- functionally
+  // indistinguishable from a hidden-link-spam pattern to anything auditing
+  // it, which is exactly the wrong signal for what this block actually is
+  // (legitimate internal linking, kept off-screen only because there's no
+  // approved visible design for it). `sr-only` is the standard
+  // visually-hidden-but-accessible technique (absolute-positioned,
+  // 1px×1px, clipped, not display:none) -- still fully present for a
+  // screen reader and a crawler, still invisible to a sighted visitor,
+  // same end result the owner asked for without the cloaking-shaped
+  // implementation. The layout utilities `sr-only` replaces here
+  // (`container-p flex-col gap-4 border-t border-line py-8`) only ever
+  // mattered for a visible rendering this block was never given, so
+  // they're dropped, not carried along unused.
+  root: "sr-only",
   backLink: "text-base font-medium text-text underline decoration-solid underline-offset-2 hover:opacity-70",
   siblingsHeading: "text-sm font-medium text-muted",
   siblingsList: "flex flex-wrap gap-x-4 gap-y-2",
