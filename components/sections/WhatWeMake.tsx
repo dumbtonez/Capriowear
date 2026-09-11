@@ -25,7 +25,7 @@ import Link from "next/link";
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { NextArrowIcon } from "@/components/icons/NextArrowIcon";
-import { MediaPlaceholder } from "@/components/MediaPlaceholder";
+import { ParallaxMedia } from "@/components/ParallaxMedia";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextReveal } from "@/components/TextReveal";
 import { whatWeMake } from "@/components/ui/styles";
@@ -132,6 +132,7 @@ export function WhatWeMake({ content, mobileGridVariant = false }: WhatWeMakePro
                         image={tile.image}
                         mediaRadius="none"
                         mediaAspectClassName={whatWeMake.desktopTileMedia}
+                        parallax
                       />
                     ))}
                     <Link href={category.href} className={whatWeMake.desktopGridCta}>
@@ -168,7 +169,7 @@ export function WhatWeMake({ content, mobileGridVariant = false }: WhatWeMakePro
                   <div className={mobileGridVariant ? whatWeMake.mobileListGrid : whatWeMake.mobileList}>
                     {category.tiles.slice(0, mobileGridVariant ? MOBILE_TILE_LIMIT_GRID : MOBILE_TILE_LIMIT).map((tile) => (
                       <a key={tile.href} href={tile.href} className={whatWeMake.mobileTile}>
-                        <MediaPlaceholder
+                        <ParallaxMedia
                           label={tile.label}
                           image={tile.image}
                           ratio={mobileGridVariant ? "79:100" : "1:1"}

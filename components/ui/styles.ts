@@ -7673,24 +7673,19 @@ export const whatsappFloating = {
   // Icon colour: first corrected `text-paper` (white) -> `text-muted`
   // (owner: "on the white background the icon should turn dark not too
   // blackish but visible, white on white background is not very visible"
-  // then "make a balnce" -- one fixed grey compromise, not real per-
-  // section detection). Owner then asked directly for the real thing
-  // ("make it a bit dark on white and should go white on blck bacground,
-  // is it not too much right?") -- not too much: `getSurfaceToneAt`
-  // (extracted to lib/surfaceTone.ts the same turn) already exists for
-  // exactly this, built for the fixed Header's own adaptive tone -- this
-  // button's own `FloatingSocialButtons.tsx` now samples it too, so this
-  // token no longer sets a colour itself; `instagramIconLight`/
-  // `instagramIconDark` below do, switched by that live sample.
+  // then "make a balnce" -- one fixed grey compromise), then made
+  // tone-adaptive via `getSurfaceToneAt` (owner: "make it a bit dark on
+  // white and should go white on blck bacground"). Superseded 2026-09-11
+  // (owner: "for insta sticky icon on desktop, use the brand color for the
+  // icon only", then "is this pink the offical color for instagram...use
+  // the right one") -- `InstagramIcon`'s own `gradient` prop now paints
+  // Meta's real published brand gradient directly in the SVG (see that
+  // component's own comment for the source/stops), not a single flat
+  // colour token here; `FloatingSocialButtons.tsx` no longer samples tone
+  // for this icon. The button's own frosted-glass background is unchanged.
   instagramButton:
     "flex size-14 items-center justify-center rounded-full border border-white/25 bg-ink/20 shadow-lg backdrop-blur-sm transition-transform hover:scale-105",
   instagramIcon: "size-6",
-  // `text-text` (`#1d1d1f`, this project's own near-black body-text
-  // colour) over a light section -- not pure black (owner: "not too
-  // blackish"). `text-paper` (white) over a dark section, same as
-  // `whatsappFloating.icon`'s own colour there.
-  instagramIconLight: "text-text",
-  instagramIconDark: "text-paper",
 };
 
 /* --- ProductCustomizeSteps (PDP) ----------------------------------------- */
