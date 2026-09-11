@@ -8,9 +8,22 @@
 // renders a plain placeholder box, since real photography is not available yet.
 // Passing `image` later swaps in a real next/image in its place with no other
 // code changes, so photography can land without a rebuild.
+//
+// `parallax` (Card only, owner 2026-09-11: "should we add the parallax
+// effect on the product category images, the one we used on factory page
+// images" -- confirmed) reuses the same one-time scale/settle-on-reveal
+// treatment as ParallaxMedia/OurFactoryProcess/OurFactoryTeam, via the same
+// `useRevealOnView` IntersectionObserver hook -- not a second mechanism.
+// Card can't reuse ParallaxMedia itself (different token set: `cardMedia.*`
+// vs. `media.*`, plus Card's own hover shadow), so the reveal wrapper is
+// inlined here as its own small client boundary instead of making all of
+// Card client-side.
+"use client";
+
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 
+import { useRevealOnView } from "./TextReveal";
 import { cx } from "./ui/cx";
 import { capabilityCard, card, cardMedia } from "./ui/styles";
 
@@ -42,6 +55,8 @@ type CardMediaProps = {
    * than inventing a second dark-surface colour.
    */
   tone?: "light" | "dark";
+  /** See the file header comment. Default false: unchanged, no reveal wrapper. */
+  parallax?: boolean;
   className?: string;
 };
 
@@ -51,11 +66,33 @@ function CardMedia({
   aspectClassName,
   radius = "lg",
   tone = "light",
+  parallax = false,
   className,
 }: CardMediaProps) {
   const classes = cx(aspectClassName, cardMedia.base, cardMedia.radius[radius], className);
+  const { ref, active } = useRevealOnView<HTMLDivElement>();
 
   if (image) {
+    if (parallax) {
+      return (
+        <div ref={ref} className={cx(cardMedia.image, classes)}>
+          <div
+            className={cx(
+              "absolute inset-0 transition-transform duration-[1400ms] ease-out",
+              active ? "scale-100 translate-y-0" : "scale-[1.12] translate-y-[3%]",
+            )}
+          >
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes={imageSizes}
+              className={cardMedia.imageFill}
+            />
+          </div>
+        </div>
+      );
+    }
     return (
       <div className={cx(cardMedia.image, classes)}>
         <Image
@@ -93,6 +130,8 @@ export type CardProps = {
    * square default unchanged.
    */
   mediaAspectClassName?: string;
+  /** See the file header comment. Default false: unchanged, no reveal wrapper. */
+  parallax?: boolean;
 };
 
 export function Card({
@@ -102,6 +141,7 @@ export function Card({
   imageSizes,
   mediaRadius = "lg",
   mediaAspectClassName = "aspect-square",
+  parallax = false,
 }: CardProps) {
   return (
     <Link href={href} className={card.root}>
@@ -110,6 +150,7 @@ export function Card({
         imageSizes={imageSizes}
         aspectClassName={mediaAspectClassName}
         radius={mediaRadius}
+        parallax={parallax}
         className={card.mediaHover}
       />
       <span className={card.label}>{label}</span>

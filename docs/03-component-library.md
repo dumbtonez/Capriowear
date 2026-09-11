@@ -104,6 +104,8 @@ Both share an internal media area. With no `image` prop it renders a placeholder
 
 **Used by:** How It Works.
 
+**`Card` gained a `parallax` prop (2026-09-11, owner: "should we add the parallax effect on the product category images, the one we used on factory page images")**, default `false`. When `true` and an `image` is set, `CardMedia` wraps the image in the same one-time scale/settle-on-reveal treatment as `ParallaxMedia` (`components/ParallaxMedia.tsx`, see its own file header) — `useRevealOnView`, not a second scroll-tracking mechanism. Not lifted into `ParallaxMedia` itself since `Card` uses its own `cardMedia.*` tokens (plus its hover shadow), not `media.*` — the reveal wrapper is inlined in `CardMedia` instead. This made `Card.tsx` a client component (`useRevealOnView` needs `useEffect`/IntersectionObserver). Used by What We Make's desktop tile grid; What We Make's mobile tiles use `ParallaxMedia` directly instead of `MediaPlaceholder` for the same effect.
+
 ### StatBlock — Built
 `components/StatBlock.tsx` · recipe: `stat`
 
