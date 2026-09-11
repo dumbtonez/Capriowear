@@ -61,6 +61,16 @@ export const metadata: Metadata = {
     description: OG_DESCRIPTION,
     url: SITE_URL,
   },
+  // Missing entirely until now (cleanup pass, 2026-09-11) -- every other
+  // page already sets this (e.g. app/our-factory/page.tsx), the homepage
+  // itself was the one gap. Reuses the same OG title/description rather
+  // than the shorter title-tag copy, same "share-context phrasing"
+  // reasoning OG_TITLE/OG_DESCRIPTION's own comment above already gives.
+  twitter: {
+    card: "summary_large_image",
+    title: OG_TITLE,
+    description: OG_DESCRIPTION,
+  },
 };
 
 export default function Home() {

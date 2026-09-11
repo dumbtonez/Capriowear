@@ -48,8 +48,14 @@ export type TrustPointsProps = {
    * (the PLP's 650px desktop cap, plus a tablet-only fluid cap the PLP
    * variant doesn't have -- owner, same day, tablet review: "audit for
    * safety title and subline, should follow the same style").
+   *
+   * `"hub"`: the Activewear/Teamwear hub pages' own instance (added
+   * 2026-09-11) -- same 80px side padding as `"services"`, but its own
+   * 96px desktop top gap (owner: "make it 96px on both pages"), kept as
+   * its own variant rather than changing `"services"` itself, since that
+   * one is still live on /services at its own confirmed 104px.
    */
-  sidePadding?: "plp" | "pdp" | "services" | "ourFactory";
+  sidePadding?: "plp" | "pdp" | "services" | "ourFactory" | "hub";
 };
 
 const sidePaddingSection = {
@@ -57,6 +63,7 @@ const sidePaddingSection = {
   pdp: trustPoints.sidePaddingPdp,
   services: trustPoints.sidePaddingServices,
   ourFactory: trustPoints.sidePaddingOurFactory,
+  hub: trustPoints.sidePaddingHub,
 };
 
 const sidePaddingHeadingWidth = {
@@ -64,6 +71,7 @@ const sidePaddingHeadingWidth = {
   pdp: trustPoints.headingMaxWidthPdp,
   services: trustPoints.headingMaxWidthPlp,
   ourFactory: trustPoints.headingMaxWidthOurFactory,
+  hub: trustPoints.headingMaxWidthPlp,
 };
 
 const headingClass = {
@@ -71,6 +79,7 @@ const headingClass = {
   pdp: trustPoints.heading,
   services: trustPoints.heading,
   ourFactory: trustPoints.headingOurFactory,
+  hub: trustPoints.heading,
 };
 
 export function TrustPoints({ heading, subline, sublineBold, points, sidePadding = "plp" }: TrustPointsProps) {

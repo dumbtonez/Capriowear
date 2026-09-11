@@ -20,6 +20,7 @@ import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
 import { FINAL_CTA_MARKER_ID, ProductCtas, ProductCtasMobileBar } from "@/components/sections/ProductCtas";
+import { ProductCategoryLinks } from "@/components/sections/ProductCategoryLinks";
 import { ProductGallery } from "@/components/sections/ProductGallery";
 import { ProductHighlights } from "@/components/sections/ProductHighlights";
 import { ProductInfo } from "@/components/sections/ProductInfo";
@@ -203,6 +204,20 @@ export default async function TeamwearStylePage({ params }: PageProps<"/teamwear
 
         <Faq content={{ h2: "Top questions from B2B buyers", items: faqItems }} />
         <JsonLd data={faqSchema(faqItems)} />
+
+        {/* ProductCategoryLinks -- same wiring as the Activewear PDP's own
+            instance (see that file's comment for the full history: built
+            alongside this template but never actually rendered until now).
+            `productCategoryLinks.root` is `hidden` at every breakpoint by
+            deliberate owner choice, purely a crawlable "Back to all
+            [Sport]" link plus sibling-PDP links in the DOM. */}
+        <ProductCategoryLinks
+          categoryLabel={data.category.menuLabel}
+          categoryHref={`/teamwear/${data.category.slug}`}
+          siblings={data.category.styleCards
+            .filter((card) => card.status === "published" && card.slug !== data.product.slug)
+            .map((card) => ({ label: card.cardTitle, href: card.href }))}
+        />
 
         <div id={FINAL_CTA_MARKER_ID} aria-hidden="true" />
         <FinalCta

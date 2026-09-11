@@ -43,7 +43,6 @@ import Image from "next/image";
 import { Marquee } from "@/components/Marquee";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextReveal } from "@/components/TextReveal";
-import { cx } from "@/components/ui/cx";
 import { certified } from "@/components/ui/styles";
 import type { home } from "@/content/home";
 
@@ -168,33 +167,42 @@ export function CertifiedCompliant({ content, pageVariant = "default", showHeadi
               align="center"
             />
           ) : null}
-          <div className={certified.mobileGridWrap}>
-            <div className={certified.mobileGrid}>
-              {content.logos.map((logo, index) => {
-                const isLeftColumn = index % 2 === 0;
-                const isLastRow = index >= content.logos.length - 2;
-                return (
-                  <div
-                    key={logo.name}
-                    className={cx(
-                      certified.mobileItem,
-                      isLeftColumn && certified.mobileItemDividerRight,
-                      !isLastRow && certified.mobileItemDividerBottom,
-                    )}
-                  >
-                    <Image
-                      src={logo.mobileSrc}
-                      alt={logo.name}
-                      width={logo.mobileWidth}
-                      height={logo.mobileHeight}
-                      style={{ width: logo.mobileWidth, height: logo.mobileHeight }}
-                      priority
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          {/* Real mobile switched from the bordered 2-column grid to a
+              scrolling Marquee, 2026-09-11 (owner: "for the mobile, let's
+              apply marquee style too, wherever its been used") -- matching
+              Client Logos' own real mobile treatment (`MobileMarquee`,
+              `ClientLogos.tsx`), which made the identical switch on
+              2026-08-26 and kept its old grid only as a styleguide/demo
+              comparison, not live. Uses each logo's own `mobileSrc`/
+              `mobileWidth`/`mobileHeight` (the dedicated mobile crop, not
+              the desktop file reused smaller -- see this file's own header
+              comment for why that distinction exists) exactly like the
+              tablet Marquee block below reuses the desktop-sized ones.
+              `gap="default"` (40px), not `"loose"` (72px, what desktop/
+              tablet use) -- at real mobile width, 72px between these
+              smaller mobile-cropped logos left only about one and a half
+              marks visible at once (owner: "too much space between these
+              logo, at least 3 should look at a time while moving"). 40px
+              fits roughly 3 of this row's own mobile logo widths at once
+              in a 375px viewport; desktop/tablet are untouched. */}
+          <Marquee
+            items={content.logos.map((logo) => (
+              <Image
+                key={logo.name}
+                src={logo.mobileSrc}
+                alt={logo.name}
+                width={logo.mobileWidth}
+                height={logo.mobileHeight}
+                style={{ width: logo.mobileWidth, height: logo.mobileHeight }}
+                priority
+              />
+            ))}
+            separator="none"
+            gap="default"
+            divider={false}
+            pauseOnHover={false}
+            edgeFade
+          />
         </div>
       </div>
     </section>

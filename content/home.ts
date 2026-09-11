@@ -462,6 +462,23 @@ export const home = {
         mobileHeight: 43,
       },
       {
+        // Sourced 2026-09-11 directly from SGS's own official media
+        // resources page (sgs.com/en/our-company/media/media-resources ->
+        // "Brand assets: SGS Logo"), monotone-black variant, not a
+        // third-party logo repository. The official kit's own artwork is a
+        // wide plain wordmark (no square icon like ISO/IMAC), so it's
+        // fit-and-padded into BSCI's exact existing box (156x134 desktop,
+        // 119x43 mobile) -- the closest existing wordmark-style precedent
+        // already in this grid -- rather than a new, one-off size.
+        name: "SGS",
+        src: "/logos/cert-sgs.png",
+        width: 156,
+        height: 134,
+        mobileSrc: "/logos/cert-sgs-mobile.png",
+        mobileWidth: 119,
+        mobileHeight: 43,
+      },
+      {
         name: "IMAC (No Child Labor)",
         src: "/logos/cert-imac.png",
         width: 135,
@@ -471,6 +488,14 @@ export const home = {
         mobileHeight: 47,
       },
       {
+        // Restored 2026-09-11: briefly removed the same day on a mistaken
+        // "not a WFSGI member" premise -- corrected same day, WFSGI
+        // membership is real and confirmed (the earlier removal note had
+        // it backwards; see content/site.ts's MEMBERSHIPS/CERTIFICATIONS
+        // comments for the full correction). This is WFSGI's own real,
+        // official federation logo, not a placeholder -- "SGI" is just how
+        // "WORLD FEDERATION SPORTING GOODS INDUSTRY" renders large in the
+        // center of their mark.
         name: "WFSGI",
         src: "/logos/cert-wfsgi.png",
         mobileSrc: "/logos/cert-wfsgi-mobile.png",
@@ -480,6 +505,14 @@ export const home = {
         mobileHeight: 76,
       },
     ],
+    // OEKO-TEX dropped entirely 2026-09-11 (owner correction, confirmed
+    // with the team): Capriowear does not hold OEKO-TEX -- it was never
+    // added to this grid in the first place (an earlier pass here found
+    // it had no public logo download and left it out for that reason;
+    // that reasoning is now moot, since it isn't a real held cert at all).
+    // 6 certifications total (ISO 9001, ISO 45001, ISO 14001, BSCI, IMAC,
+    // SGS) plus WFSGI as a separate membership, all six real certs already
+    // have real logos in this grid -- nothing outstanding to source here.
   },
 
   // Real Figma copy (node 387:498 desktop, 387:511 mobile), replacing the
@@ -530,6 +563,14 @@ export const home = {
   // 8 items, confirmed via get_design_context against both the desktop
   // (409:5309) and mobile (409:5342) frames -- a 9th, "Safe, audited
   // workplace", was trimmed 2026-08-24 to match: no real design has it.
+  // "OEKO-TEX materials" swapped to "SGS tested" 2026-09-11 (owner
+  // correction, confirmed with the team: Capriowear does not hold
+  // OEKO-TEX -- drop it sitewide, text and schema). This is no longer a
+  // byte-exact match to the original Figma frame's own wording (that
+  // frame predates the correction and still shows the now-false claim),
+  // kept at 8 items and the same real-cert tone rather than left blank --
+  // flagged for the owner to confirm the exact replacement wording
+  // whenever this ticker's own Figma frame is next revised.
   complianceTicker: {
     title: "STANDARD ON EVERY ORDER",
     items: [
@@ -540,7 +581,7 @@ export const home = {
       "ISO 9001 certified",
       "BSCI ethical audit",
       "No child labor",
-      "OEKO-TEX materials",
+      "SGS tested",
     ],
   },
 
@@ -623,7 +664,7 @@ export const home = {
       },
       {
         q: "What certifications do you hold?",
-        a: "We hold ISO 9001, ISO 45001 and ISO 14001, plus CE and BSCI, with no child labor monitoring (IMAC). We are members of PSGMEA, PRGMEA and WFSGI, and we welcome third-party inspection.",
+        a: "We hold ISO 9001, ISO 45001 and ISO 14001, plus BSCI, IMAC and SGS, we're WFSGI members, and we welcome third-party inspection.",
       },
       {
         q: "Will my designs stay protected?",

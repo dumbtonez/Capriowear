@@ -121,6 +121,10 @@ import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 
 const CANONICAL = `${SITE_URL}/our-factory`;
+// og:title/twitter:title aren't templated by the root layout the way the
+// bare `title` string below is, so the suffix is built explicitly here --
+// same pattern as every other page (e.g. app/download-catalog/page.tsx).
+const FULL_TITLE = `${ourFactory.metaTitle} | ${SITE_NAME}`;
 
 export const metadata: Metadata = {
   title: ourFactory.metaTitle,
@@ -129,7 +133,7 @@ export const metadata: Metadata = {
     canonical: CANONICAL,
   },
   openGraph: {
-    title: ourFactory.metaTitle,
+    title: FULL_TITLE,
     description: ourFactory.metaDescription,
     url: CANONICAL,
     siteName: SITE_NAME,
@@ -137,7 +141,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: ourFactory.metaTitle,
+    title: FULL_TITLE,
     description: ourFactory.metaDescription,
   },
 };

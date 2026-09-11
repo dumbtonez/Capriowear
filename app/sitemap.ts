@@ -63,6 +63,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.3,
     },
+    // /teamwear (2026-09-11): the Teamwear Landing Hub, a browse/directory
+    // page one level above the sport PLPs enumerated below -- hand-added
+    // the same way /services and /our-factory are, since it isn't itself
+    // part of the `sports` registry loop.
+    {
+      url: `${SITE_URL}/teamwear`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    // /activewear (2026-09-11): the Activewear Landing Hub, a browse/
+    // directory page one level above the category PLPs enumerated below --
+    // hand-added the same way /teamwear is, since it isn't itself part of
+    // the `categories` registry loop.
+    {
+      url: `${SITE_URL}/activewear`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
     // Running Wear (owner spec, 2026-09-03): a real, indexable curated
     // collection page, but NOT in the `categories` registry (see
     // CuratedCollection's own comment, content/activewear/types.ts) -- so

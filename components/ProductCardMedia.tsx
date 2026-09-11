@@ -32,6 +32,7 @@
 "use client";
 
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 
 import { cx } from "@/components/ui/cx";
@@ -46,6 +47,18 @@ export type ProductCardMediaProps = {
   primary?: ProductCardImage;
   /** `images[1]` off the StyleCard -- desktop-hover only, loaded lazily. */
   hover?: ProductCardImage;
+  /**
+   * Wraps the rendered image/placeholder in the same one-time "zoom and
+   * settle" scroll reveal `ParallaxMedia.tsx` uses on the Our Factory page
+   * (`scale-[1.12]` -> `scale-100` once in view) -- reuses this
+   * component's own existing `inView` flag (the same IntersectionObserver
+   * that already gates the lazy hover image) as the reveal trigger,
+   * rather than a second observer. Added 2026-09-11 for the Teamwear
+   * hub's sport cards, owner feedback: "add the parallax effect that we
+   * created for factory page, use that on images." Optional, off by
+   * default -- every real PLP grid usage renders exactly as before.
+   */
+  parallax?: boolean;
   className?: string;
 };
 
@@ -55,7 +68,7 @@ export type ProductCardMediaProps = {
 // box this small.
 const SIZES = "(min-width: 1280px) 33vw, 50vw";
 
-export function ProductCardMedia({ label, primary, hover, className }: ProductCardMediaProps) {
+export function ProductCardMedia({ label, primary, hover, parallax, className }: ProductCardMediaProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
   // Lazy initializer, not `useEffect` + `setState` (a lint error --
@@ -87,6 +100,25 @@ export function ProductCardMedia({ label, primary, hover, className }: ProductCa
 
   const showHover = canHover && inView && Boolean(hover?.src);
 
+  // Same "zoom and settle" transform ParallaxMedia.tsx uses (scale-[1.12]
+  // translate-y-[3%] -> scale-100 translate-y-0, 1400ms ease-out), reusing
+  // this component's own `inView` flag as the reveal trigger. Only wraps
+  // in the extra transform layer when `parallax` is set -- every real PLP
+  // usage renders its original flat structure, unchanged.
+  const parallaxWrap = (children: ReactNode) =>
+    parallax ? (
+      <div
+        className={cx(
+          "absolute inset-0 transition-transform duration-[1400ms] ease-out",
+          inView ? "scale-100 translate-y-0" : "scale-[1.12] translate-y-[3%]",
+        )}
+      >
+        {children}
+      </div>
+    ) : (
+      children
+    );
+
   if (!primary?.src) {
     // No label text (owner, 2026-09-02: "Remove the placeholder texts for
     // all PLPs, just have a image placeholder container") -- an empty
@@ -94,7 +126,7 @@ export function ProductCardMedia({ label, primary, hover, className }: ProductCa
     // span rendered inside it.
     return (
       <div ref={rootRef} className={cx(media.shell, media.ratio["79:100"], media.radius.none, className)}>
-        <div className={cx(media.placeholder, media.placeholderCentred, media.placeholderLight)} />
+        {parallaxWrap(<div className={cx(media.placeholder, media.placeholderCentred, media.placeholderLight)} />)}
       </div>
     );
   }
@@ -104,24 +136,28 @@ export function ProductCardMedia({ label, primary, hover, className }: ProductCa
       ref={rootRef}
       className={cx(media.shell, media.ratio["79:100"], media.radius.none, showHover && "group", className)}
     >
-      <Image
-        src={primary.src}
-        alt={primary.alt || label}
-        fill
-        sizes={SIZES}
-        loading="lazy"
-        className={cx(media.imageFill, showHover && "transition-opacity duration-[175ms] group-hover:opacity-0")}
-      />
-      {showHover ? (
-        <Image
-          src={hover!.src!}
-          alt={hover!.alt || label}
-          fill
-          sizes={SIZES}
-          loading="lazy"
-          className={cx(media.imageFill, "opacity-0 transition-opacity duration-[175ms] group-hover:opacity-100")}
-        />
-      ) : null}
+      {parallaxWrap(
+        <>
+          <Image
+            src={primary.src}
+            alt={primary.alt || label}
+            fill
+            sizes={SIZES}
+            loading="lazy"
+            className={cx(media.imageFill, showHover && "transition-opacity duration-[175ms] group-hover:opacity-0")}
+          />
+          {showHover ? (
+            <Image
+              src={hover!.src!}
+              alt={hover!.alt || label}
+              fill
+              sizes={SIZES}
+              loading="lazy"
+              className={cx(media.imageFill, "opacity-0 transition-opacity duration-[175ms] group-hover:opacity-100")}
+            />
+          ) : null}
+        </>,
+      )}
     </div>
   );
 }

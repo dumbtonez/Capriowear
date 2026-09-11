@@ -35,10 +35,55 @@ import Link from "next/link";
 
 import { ProductCardMedia } from "@/components/ProductCardMedia";
 import { cx } from "@/components/ui/cx";
-import { productCard } from "@/components/ui/styles";
+import { card, productCard } from "@/components/ui/styles";
 import type { StyleCard } from "@/content/activewear/types";
 
-export function ProductCard({ status, cardTitle, cardSubline, image, imageAlt, images, href }: StyleCard) {
+export type ProductCardProps = StyleCard & {
+  /**
+   * Full replacement (not appended) for the title's own class string --
+   * same "replace the whole string, don't layer a second font-size class
+   * on top" convention `CapabilityCard`'s own `titleClassName` already
+   * uses (two competing `text-*` utilities aren't guaranteed to cascade
+   * predictably). Added 2026-09-11 for the Teamwear hub's own sport
+   * cards, owner feedback: "make tht product titles 22px" -- every real
+   * PLP grid usage omits this and keeps the shared `productCard.title`
+   * size (18px desktop), unaffected.
+   */
+  titleClassName?: string;
+  /**
+   * Adds the same shadow "card lift" hover already used by `Card`'s own
+   * `mediaHover` (What We Make's tiles) -- `group` on the root, `card.
+   * mediaHover` on the media. Added 2026-09-11 for the Teamwear hub's
+   * sport cards, owner feedback: "add hover animation on products."
+   * Optional, off by default -- every real PLP grid usage is unaffected.
+   */
+  hoverLift?: boolean;
+  /**
+   * Wraps the media in the same one-time "zoom and settle" scroll reveal
+   * `ParallaxMedia.tsx` uses on the Our Factory page (scale-[1.12] ->
+   * scale-100 once in view), applied here via `ProductCardMedia`'s own
+   * `parallax` prop rather than swapping in `ParallaxMedia` itself, since
+   * this card's dual-image hover cross-fade lives only in
+   * `ProductCardMedia`. Added 2026-09-11, owner feedback: "add the
+   * parallax effect that we created for factory page, use that on
+   * images." Optional, off by default -- every real PLP grid usage is
+   * unaffected.
+   */
+  parallax?: boolean;
+};
+
+export function ProductCard({
+  status,
+  cardTitle,
+  cardSubline,
+  image,
+  imageAlt,
+  images,
+  href,
+  titleClassName,
+  hoverLift,
+  parallax,
+}: ProductCardProps) {
   const published = status === "published";
   const primary = images?.[0] ?? (image ? { alt: imageAlt, src: image } : undefined);
   const hover = images?.[1];
@@ -48,7 +93,8 @@ export function ProductCard({ status, cardTitle, cardSubline, image, imageAlt, i
       label={cardTitle}
       primary={primary}
       hover={hover}
-      className={cx(productCard.image, !published && productCard.draftImage)}
+      parallax={parallax}
+      className={cx(productCard.image, !published && productCard.draftImage, hoverLift && card.mediaHover)}
     />
   );
 
@@ -59,7 +105,7 @@ export function ProductCard({ status, cardTitle, cardSubline, image, imageAlt, i
           (CategoryMetaStrip), the same "h2 section -> h3 sub-item"
           pattern already used for WhatWeMake's category tiles and Trust
           Signals' entries. className unchanged, so nothing visual moves. */}
-      <h3 className={productCard.title}>{cardTitle}</h3>
+      <h3 className={titleClassName ?? productCard.title}>{cardTitle}</h3>
       {/* Now shown at every breakpoint (owner correction, 2026-09-02:
           "mobile does not have subline that shows on the desktop") -- was
           `max-xl:hidden` from an earlier, unrelated era of this card's
@@ -84,7 +130,7 @@ export function ProductCard({ status, cardTitle, cardSubline, image, imageAlt, i
 
   if (published) {
     return (
-      <Link href={href} className={productCard.root}>
+      <Link href={href} className={cx(productCard.root, hoverLift && "group")}>
         {media}
         {body}
       </Link>
@@ -92,7 +138,7 @@ export function ProductCard({ status, cardTitle, cardSubline, image, imageAlt, i
   }
 
   return (
-    <div className={cx(productCard.root, productCard.rootDraft)} aria-disabled="true">
+    <div className={cx(productCard.root, productCard.rootDraft, hoverLift && "group")} aria-disabled="true">
       {media}
       {body}
     </div>

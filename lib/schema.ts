@@ -3,7 +3,7 @@
 // from content/site.ts (or, per-page, from whatever content that page
 // already renders as visible copy) -- never hand-typed a second time here.
 // See docs/06-seo.md. Render the result via components/JsonLd.tsx.
-import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
+import { CERTIFICATIONS, MEMBERSHIPS, ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 
 export type ProductSchemaInput = {
   name: string;
@@ -32,6 +32,28 @@ export function organizationSchema() {
       ...ORGANIZATION.address,
     },
     sameAs: ORGANIZATION.sameAs,
+    // The confirmed, sitewide certification list (content/site.ts's
+    // CERTIFICATIONS -- the single source of truth every visible mention
+    // of certifications also reads from) as schema.org credentials, added
+    // 2026-09-11 (site audit finding: this field didn't exist, so the
+    // Organization schema made no certification claim at all). Each entry
+    // is a minimal, valid EducationalOccupationalCredential: just a name
+    // and the org that recognizes it -- no invented issuing body, issue
+    // date, or credential ID, since none of that is a confirmed fact.
+    hasCredential: CERTIFICATIONS.map((name) => ({
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "certification",
+      name,
+    })),
+    // Industry-body membership(s) (content/site.ts's MEMBERSHIPS), added
+    // 2026-09-11 alongside a correction to the certification list above:
+    // belonging to WFSGI is a membership, not a third-party audit of the
+    // factory, so it gets schema.org's own `memberOf` shape (an
+    // Organization entity) rather than being folded into `hasCredential`.
+    memberOf: MEMBERSHIPS.map((name) => ({
+      "@type": "Organization",
+      name,
+    })),
   };
 }
 
@@ -172,6 +194,37 @@ export function collectionPageSchema(name: string, url: string, description: str
   };
 }
 
+// A directory/hub page's own list of OTHER PAGES (not products) -- for the
+// Teamwear hub (app/teamwear/page.tsx), whose 10 cards each link to a sport
+// PLP, not a product. Deliberately `WebPage` entities, not `Product` --
+// unlike `collectionPageSchema` above, every PDP under every one of these
+// PLPs is still draft (no route, not indexed), so describing these list
+// items as Product would claim products that don't have a real page yet.
+// Same CollectionPage/ItemList wrapper shape as `collectionPageSchema`,
+// just a different, non-Product leaf entity.
+export function collectionOfPagesSchema(name: string, url: string, description: string, items: CollectionPageItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name,
+    url,
+    description,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: items.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "WebPage",
+          name: item.name,
+          url: item.url,
+          ...(item.image ? { image: item.image } : {}),
+        },
+      })),
+    },
+  };
+}
+
 // The PDP's own Product entity (app/activewear/[category]/[style]/page.tsx)
 // -- fed by the exact same fields the page renders (heading, description,
 // gallery, material). Deliberately no `offers`/`priceSpecification`: this
@@ -179,6 +232,15 @@ export function collectionPageSchema(name: string, url: string, description: str
 // valid Product without an Offer rather than publishing invented pricing
 // -- same "no price data" precedent collectionPageSchema() already sets
 // for the PLP's own lightweight Product entities.
+//
+// Re-confirmed 2026-09-11 (cleanup pass, after the sitewide certifications
+// correction): the two are unrelated facts -- certifications describe the
+// factory's own compliance, an Offer describes a price for this specific
+// product -- so fixing the former has no bearing on this decision. This is
+// a deliberate, signed-off choice, not a gap the audit should keep
+// re-flagging: Capriowear has no fixed public per-unit price to publish
+// (quote-based, made-to-order), so omitting `offers` is the only schema.org
+// -valid option here, not an incomplete implementation.
 export function productSchema({ name, description, image, material }: ProductSchemaInput) {
   return {
     "@context": "https://schema.org",

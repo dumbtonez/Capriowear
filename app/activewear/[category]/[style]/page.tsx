@@ -24,6 +24,7 @@ import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
 import { FINAL_CTA_MARKER_ID, ProductCtas, ProductCtasMobileBar } from "@/components/sections/ProductCtas";
+import { ProductCategoryLinks } from "@/components/sections/ProductCategoryLinks";
 import { ProductGallery } from "@/components/sections/ProductGallery";
 import { ProductHighlights } from "@/components/sections/ProductHighlights";
 import { ProductInfo } from "@/components/sections/ProductInfo";
@@ -451,6 +452,23 @@ export default async function StylePage({ params }: PageProps<"/activewear/[cate
             "Questions about this style". */}
         <Faq content={{ h2: "Top questions from B2B buyers", items: faqItems }} />
         <JsonLd data={faqSchema(faqItems)} />
+
+        {/* ProductCategoryLinks (SEO audit, 2026-09-02, rule 6) -- built
+            alongside this page but never actually rendered here until now
+            (found while auditing this file for orphaned components):
+            `productCategoryLinks.root` is itself `hidden` at every
+            breakpoint by deliberate owner choice (2026-09-08: "keep it only
+            on the backend for crawling"), so this has zero visible effect,
+            only a crawlable "Back to all [Category]" link plus sibling-PDP
+            links in the DOM. Siblings are this style's own published
+            category-mates, itself excluded. */}
+        <ProductCategoryLinks
+          categoryLabel={data.category.menuLabel}
+          categoryHref={`/activewear/${data.category.slug}`}
+          siblings={data.category.styleCards
+            .filter((card) => card.status === "published" && card.slug !== data.product.slug)
+            .map((card) => ({ label: card.cardTitle, href: card.href }))}
+        />
 
         {/* Closing CTA (owner spec, 2026-09-01: "put the same cta from
             PLP") -- the exact same FinalCta component/heading/button/ticker

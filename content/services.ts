@@ -188,17 +188,21 @@ export const services = {
   // rows instead of the PLP's 5. Copy is the design's own real text layer,
   // read directly via Figma MCP (get_metadata + screenshot confirmed,
   // node 811:1156), same as every prior section on this page.
+  // "OEKO-TEX" dropped 2026-09-11 (owner correction, confirmed with the
+  // team: Capriowear does not hold OEKO-TEX) from both `subline` and
+  // `points` below -- this section's own real Figma text layer (node
+  // 811:1156) still shows the now-false claim, so this is no longer a
+  // byte-exact copy of that frame. Flagged for the owner to confirm
+  // replacement wording whenever this section is next revised in Figma.
   responsibleMake: {
     heading: "Responsible make",
-    subline:
-      "We offer recycled polyester and OEKO-TEX certified fabrics for brands that want them, and we source to a sustainability spec you set. ",
+    subline: "We offer recycled polyester fabrics for brands that want them, and we source to a sustainability spec you set. ",
     // Rendered semi bold (owner, 2026-09-08) -- split out of `subline`
     // above via `TrustPoints`' own new `sublineBold` prop, not a
     // hand-typed `<strong>` in this content file.
     sublineBold: "We name what is genuinely certified rather than making broad green claims.",
     points: [
       "Recycled polyester (rPET) across many knit and woven bases",
-      "OEKO-TEX certified fabrics on request",
       "BSCI and IMAC audited social and ethical compliance",
       "Sourcing and matching to your own sustainability requirements",
     ],
@@ -255,11 +259,11 @@ export const services = {
       },
       {
         q: "Do you offer sustainable or recycled fabrics?",
-        a: "Yes, recycled polyester and OEKO-TEX certified fabrics are available, and we can source to your own sustainability spec.",
+        a: "Yes, recycled polyester fabrics are available, and we can source to your own sustainability spec.",
       },
       {
         q: "What certifications do you hold?",
-        a: "ISO 9001, OEKO-TEX, BSCI, IMAC and SGS, covering quality, materials, social compliance and testing. Every run is also inspected to AQL 2.5.",
+        a: "ISO 9001, ISO 45001, ISO 14001, BSCI, IMAC and SGS, plus WFSGI membership, covering quality, materials, social compliance and testing. Every run is also inspected to AQL 2.5.",
       },
       {
         q: "Will my designs stay protected?",
