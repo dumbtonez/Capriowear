@@ -168,6 +168,14 @@ function DesktopGallery({
   // "Take a closer look" carousel): a forward click on the last shot wraps
   // back to the first instead of doing nothing. Every other section using
   // this same hook keeps the default clamped (non-looping) behaviour.
+  // `drag: { enabled: true, cardCount }` (owner, 2026-09-13: "build real
+  // pointer-drag with velocity/momentum ... not just a duration tweak on
+  // the click model") -- real click-and-drag/swipe via the Pointer Events
+  // API (unifies mouse and touch, so this also covers a touchscreen device
+  // wide enough to render this `xl:`-only gallery). `onClick` is dropped in
+  // favour of the pointer lifecycle below: `handlePointerUp` itself calls
+  // `handleClick` for a release that never crossed the drag threshold, so
+  // a plain click still advances exactly one card, same as before.
   const {
     wrapRef,
     trackRef,
@@ -179,18 +187,32 @@ function DesktopGallery({
     handleMouseMove,
     handleMouseEnter,
     handleMouseLeave,
-    handleClick,
-  } = useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP, true);
+    handlePointerDown,
+    handlePointerMoveDrag,
+    handlePointerUp,
+    handlePointerCancel,
+  } = useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP, true, {
+    enabled: true,
+    cardCount: shots.length,
+  });
 
   return (
     <>
       <div
         ref={wrapRef}
         className={insideFactory.desktopScrollerWrap}
-        onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onClick={handleClick}
+        onPointerDown={handlePointerDown}
+        onPointerMove={(event) => {
+          // `PointerEvent` covers `MouseEvent`'s own shape (clientX/Y,
+          // timeStamp), so the same event feeds both: the chevron's cursor
+          // tracking (unaffected by dragging) and the drag/momentum logic.
+          handleMouseMove(event);
+          handlePointerMoveDrag(event);
+        }}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerCancel}
       >
         <div ref={trackRef} className={insideFactory.desktopRow}>
           <div ref={reelRef} className={insideFactory.desktopReel}>

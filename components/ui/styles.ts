@@ -4439,7 +4439,16 @@ export const insideFactory = {
   // (`desktopOuter`/`desktopOuterLight`) stays a separate, unconstrained
   // full-bleed wrapper, untouched -- only the scrollable content is capped,
   // the same "background vs. content" split already established sitewide.
-  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-none overflow-hidden",
+  // `touch-pan-y` (owner, 2026-09-13, real click-and-drag/swipe rollout):
+  // this row now handles its own horizontal drag via Pointer Events, so a
+  // touch device must be told the browser's own native gesture handling
+  // should still own vertical panning -- without it, a touch that starts
+  // even slightly diagonal could get treated as page scroll instead of
+  // reaching our pointermove handler at all, or fight it if it does.
+  // `touch-pan-y` is this section's own addition, not rolled into the
+  // other five galleries sharing `desktopScrollerWrap`'s own base shape --
+  // none of them have drag, so none of them need it.
+  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-none overflow-hidden touch-pan-y",
   // snap-center at `xl:` (not How It Works' snap-start) -- the point there
   // is the active card centers in the viewport, not aligns to an edge.
   // Padding is calculated (half the card width, 475px) so the first/last
