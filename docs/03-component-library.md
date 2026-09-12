@@ -142,7 +142,9 @@ A wrapping, centred row of logos. Without image files each item falls back to a 
 ### Marquee — Built
 `components/Marquee.tsx` · recipe: `marquee` · animation in `app/globals.css`
 
-Scrolling ticker. Zero client JavaScript: the track holds the item list twice and travels exactly -50%, so the loop is seamless at any content width without measuring anything.
+Scrolling ticker. The track holds the item list twice and travels exactly -50%, so the loop is seamless at any content width without measuring anything.
+
+**Starts on scroll-into-view, not on page load (2026-09-12)**: was a zero-client-JS component whose CSS animation ran from mount, so a below-the-fold ticker (Client Logos, the compliance strip) had already been looping, off-screen, for however long it took a reader to scroll down to it (owner report). Now a client component, gated by the same shared `useRevealOnView` hook `TextReveal`/`RevealBox` already use — `.marquee-track` starts `animation-play-state: paused`; the one-shot `marquee-in-view` class (set on first intersection, 0.1 threshold) is the only thing that sets it running. Pause-on-hover/focus and `marquee-no-pause` are unaffected — they only ever apply once the ticker is already running.
 
 | Prop | Meaning |
 |---|---|

@@ -6,17 +6,31 @@
 // The animation itself lives in app/globals.css (.marquee-track), because it
 // needs @keyframes, which cannot be expressed as a utility class. The track
 // renders the item list twice and travels exactly -50%, so the loop is seamless
-// at any content width without measuring anything in JS: this stays a server
-// component with zero client JS. Pause on hover and on focus-within (so a
-// keyboard user tabbing through can read a moving item) are CSS too.
+// at any content width without measuring anything in JS. Pause on hover and on
+// focus-within (so a keyboard user tabbing through can read a moving item) are
+// CSS too.
+//
+// Client component, gated on scroll-into-view via the shared `useRevealOnView`
+// hook (components/TextReveal.tsx) -- same fix, same reasoning as TextReveal's
+// own header comment: a below-the-fold ticker (Client Logos, the compliance
+// strip) mounts the instant the page loads, so a play-on-mount CSS animation
+// had already been running, off-screen, for however long it took a reader to
+// scroll down to it (owner report: tickers "automatically start... when page
+// loads," wanted instead to start "when someone gets to that section"). The
+// track's own `.marquee-track` rule now starts paused; `marquee-in-view` (set
+// once, on first intersection, same one-shot trigger as every other reveal
+// here) is the only thing that starts it running.
 //
 // Accessibility: the visible track is aria-hidden and the same items are
 // exposed once, statically, to assistive tech. Otherwise a screen reader reads
 // the duplicated list twice.
+"use client";
+
 import { Sparkle } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { Eyebrow } from "./Eyebrow";
+import { useRevealOnView } from "./TextReveal";
 import { cx } from "./ui/cx";
 import { marquee } from "./ui/styles";
 
@@ -120,6 +134,8 @@ export function Marquee({
   // deliberately repeated.
   const passes = [0, 1];
 
+  const { ref, active } = useRevealOnView<HTMLDivElement>(0.1);
+
   const labelEl = label ? (
     labelVariant === "bold" ? (
       <span className={marquee.labelBold}>{label}</span>
@@ -175,12 +191,14 @@ export function Marquee({
 
   return (
     <div
+      ref={ref}
       className={cx(
         marquee.base,
         padded ? marquee.basePaddingDefault : marquee.basePaddingNone,
         divider && marquee.divider,
         tone === "dark" ? marquee.toneDark : marquee.toneLight,
         !pauseOnHover && "marquee-no-pause",
+        active && "marquee-in-view",
         className,
       )}
     >
