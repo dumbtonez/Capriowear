@@ -1979,21 +1979,23 @@ export const ourFactoryProcess = {
     sm: "min-[1420px]:w-[520px] min-[1420px]:shrink-0",
     full: "min-[1420px]:w-full",
   },
-  // max-w-[36rem] (576px, was max-w-[30rem]/480px, owner, 2026-09-09:
-  // "what we make titles some are in 2 lines whereas it can use the
-  // available space on the right side, fix it") -- this 480px cap had no
-  // real Figma justification recorded (a bare literal, unlike this file's
-  // other confirmed measurements), and live testing across every width a
-  // title can still wrap at (0-1279px -- `title`'s own `xl:whitespace-
-  // nowrap` prevents wrapping outright from 1280px up) found the longest
-  // title's own natural one-line width peaking at 476px, just under the
-  // old 480px cap -- so on some devices/font-rendering environments a few
-  // px of drift is enough to force an unnecessary wrap despite the item's
-  // real container having far more room (up to 1280px on the full-width
-  // row item). 576px gives real headroom above that measured peak while
-  // still capping the widest ("full"-width) row item's own body-copy line
-  // length to a comfortable reading width, not left unconstrained at the
-  // row's own full ~1280px+.
+  // max-w-[33.75rem] (540px, was max-w-[36rem]/576px, owner, 2026-09-12:
+  // "make it 540 for all" -- one shared cap, every station's own subline
+  // reads it, not a per-station value). Before that, was max-w-[30rem]/
+  // 480px, owner, 2026-09-09: "what we make titles some are in 2 lines
+  // whereas it can use the available space on the right side, fix it" --
+  // that 480px cap had no real Figma justification recorded (a bare
+  // literal, unlike this file's other confirmed measurements), and live
+  // testing across every width a title can still wrap at (0-1279px --
+  // `title`'s own `xl:whitespace-nowrap` prevents wrapping outright from
+  // 1280px up) found the longest title's own natural one-line width
+  // peaking at 476px, just under the old 480px cap -- so on some devices/
+  // font-rendering environments a few px of drift is enough to force an
+  // unnecessary wrap despite the item's real container having far more
+  // room (up to 1280px on the full-width row item). 540px still gives
+  // real headroom above that measured 476px peak while capping the widest
+  // ("full"-width) row item's own body-copy line length to a comfortable
+  // reading width, not left unconstrained at the row's own full ~1280px+.
   // `gap-2` (8px, was `gap-3`/12px, itself down from `gap-4`/16px) -- owner,
   // 2026-09-10, mobile-only review, in sequence: "'it starts with the right
   // cloth' to subline make the space 4px less for all titles for this
@@ -2002,7 +2004,7 @@ export const ourFactoryProcess = {
   // per-station override), so this fixes every title in the section at
   // once, not just the one named as an example. Now matches `labelGroup`'s
   // own eyebrow-to-title gap below, also 8px.
-  textCol: "flex max-w-[36rem] flex-col gap-2",
+  textCol: "flex max-w-[33.75rem] flex-col gap-2",
   labelGroup: "flex flex-col gap-2",
   // 16px, Figma's own #3c3c43 -- already this project's established literal
   // for this exact muted-label grey (see e.g. `desktopNav.item`/`chip` in
