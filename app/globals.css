@@ -281,7 +281,16 @@
 
 .marquee-track {
   animation: marquee-scroll var(--marquee-duration, 40s) linear infinite;
+  animation-play-state: paused;
   will-change: transform;
+}
+
+/* Starts the loop once the ticker has actually scrolled into view (set by
+   Marquee.tsx's own `useRevealOnView`, one-shot, same as every other
+   scroll-triggered reveal in this codebase) instead of running from page
+   load, off-screen, the whole time a reader hasn't scrolled to it yet. */
+.marquee-in-view .marquee-track {
+  animation-play-state: running;
 }
 
 .marquee:hover .marquee-track,

@@ -1080,7 +1080,7 @@ export const header = {
   // rather than all changing in lockstep -- a flat single fade on the whole
   // block reads as "nothing happening" the moment it's this quick, since
   // there's no visible stagger to track.
-  megaGroupReveal: "transition-[opacity,transform] duration-500 ease-out",
+  megaGroupReveal: "transition-[opacity,translate] duration-500 ease-out",
   megaGroupRevealOpen: "translate-y-0 opacity-100",
   megaGroupRevealClosed: "translate-y-2 opacity-0",
   // `min-w-[206px]`, not a fixed `w-[206px]` (owner report, 2026-08-27):
@@ -2353,7 +2353,7 @@ export const ourFactoryDetails = {
   // already established) so this now finishes in the same frame as the
   // chip's own width/radius transition, not a beat before it.
   itemIconWrap:
-    "flex h-6 shrink-0 items-center justify-center overflow-hidden transition-[opacity,transform,width,margin] ease-[cubic-bezier(0.33,1,0.68,1)] motion-reduce:transition-none",
+    "flex h-6 shrink-0 items-center justify-center overflow-hidden transition-[opacity,rotate,width,margin] ease-[cubic-bezier(0.33,1,0.68,1)] motion-reduce:transition-none",
   itemIconWrapClosed: "w-6 mr-2.5 rotate-0 opacity-100 duration-[260ms]",
   itemIconWrapOpen: "pointer-events-none w-0 mr-0 rotate-45 opacity-0 duration-[340ms]",
   itemIcon: "size-6 shrink-0 text-paper",
@@ -2466,9 +2466,9 @@ export const ourFactoryDetails = {
   // finishes at exactly 340ms, matching `detailGridOpen`'s own duration
   // precisely, so the box and the text always finish in the same frame.
   detailInner:
-    "px-6 pb-4 opacity-0 translate-y-3 transition-[opacity,transform] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none motion-reduce:translate-y-0",
+    "px-6 pb-4 opacity-0 translate-y-3 transition-[opacity,translate] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none motion-reduce:translate-y-0",
   detailInnerOpen:
-    "px-6 pb-4 opacity-100 translate-y-0 transition-[opacity,transform] delay-100 duration-[240ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none motion-reduce:delay-0",
+    "px-6 pb-4 opacity-100 translate-y-0 transition-[opacity,translate] delay-100 duration-[240ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none motion-reduce:delay-0",
   // md:max-w-[clamp(560px,65vw,780px)]/xl:max-w-none (owner, 2026-09-09:
   // "the subline width that we define on this page, apply it to all
   // paragraphs across pages, same way") -- this description sits in
@@ -4516,8 +4516,26 @@ export const insideFactory = {
   // 40px across the site") -- reverted the same day ("Factory 1 section on
   // homepage make it 24 too"). `DESKTOP_CARD_GAP` in InsideFactory.tsx
   // must match.
+  // Duration/easing only, 2026-09-12 (owner: chevron-click slide read as
+  // "fast", referencing store.google.com/us/category/phones's own "Get
+  // serious power and security" carousel as the target feel -- a slower,
+  // more gradually-decelerating glide, not a quick snap). Was
+  // `duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)]`, the same
+  // "premium settle" curve this codebase uses for crossfades/reveals
+  // elsewhere -- kept there since it still suits a quick opacity/scale
+  // settle, but its deceleration front-loads too fast for a slide this
+  // long a distance (six full 1200px cards) to read as unhurried. Now
+  // `cubic-bezier(0.16,1,0.3,1)` ("ease-out-expo"), which keeps easing
+  // visibly longer into the motion instead of mostly finishing in the
+  // first third, plus a longer 800ms duration -- the combination reads as
+  // a deliberate glide rather than a snap. The mouse-tracking chevron
+  // circle itself (`useDesktopChevronScroller`'s own `SMOOTHING` loop) is
+  // unrelated and untouched -- only this reel's own click-triggered slide
+  // changed. Scoped to this section only; every other `desktopReel` token
+  // in this file (Exhibitions, How It Works, Trust Signals, Product
+  // Customize Steps) keeps its own original timing.
   desktopReel:
-    "flex w-max items-center gap-6 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+    "flex w-max items-center gap-6 transition-transform duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none",
   // 1200px (owner, 2026-09-08: "increase the size to 1200px width by
   // 640") -- must match `DESKTOP_CARD_WIDTH` in InsideFactory.tsx and
   // `desktopRow`'s own gap above. The `md:`/tablet-tier 469px width is
@@ -4553,6 +4571,24 @@ export const insideFactory = {
   // gallery inside the same full-bleed wrap. 56px top gap from the gallery
   // (owner call, 2026-08-26, overriding the initial 48px default).
   desktopCtaWrap: "flex justify-center pt-14",
+  // Segmented pill progress indicator under the gallery, 2026-09-12 (owner,
+  // referencing apple.com/ae/macbook-pro's own "Take a closer look"
+  // segmented control) -- one dot per shot, the active one stretched into a
+  // pill rather than just enlarged, matching that reference's own shape
+  // language. `activeIndex` comes from `useDesktopChevronScroller`'s own new
+  // return value (Inside the Factory only; every other chevron gallery
+  // ignores it, unaffected). Static per-click, not an autoplay progress fill
+  // -- Apple's own control animates a fill because it's scrubbing a looping
+  // video; these are static photos advanced by a click, so there's no
+  // "progress" to animate, only "which one."
+  desktopDotsWrap: "flex justify-center pt-8",
+  desktopDotsPill: "flex items-center gap-2 rounded-full bg-paper/10 px-3 py-2.5",
+  desktopDotsPillLight: "flex items-center gap-2 rounded-full bg-ink/10 px-3 py-2.5",
+  desktopDotsSegment: "h-1.5 rounded-full transition-all duration-300 ease-out",
+  desktopDotsSegmentActive: "w-6 bg-paper",
+  desktopDotsSegmentInactive: "w-1.5 bg-paper/40",
+  desktopDotsSegmentActiveLight: "w-6 bg-ink",
+  desktopDotsSegmentInactiveLight: "w-1.5 bg-ink/30",
 
   // Standing rule for every dark full-bleed section (established on Hero,
   // 2026-08-24): content keeps a fixed 48px inset from the box's own top/

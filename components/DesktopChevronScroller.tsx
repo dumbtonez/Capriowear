@@ -42,7 +42,17 @@ const DOT_HALF = 3; // half of size-1.5 (6px) dot, to centre it on the cursor
 // comment already predicted; back to 0.22.
 const SMOOTHING = 0.22;
 
-export function useDesktopChevronScroller(cardPitch: number) {
+export function useDesktopChevronScroller(
+  cardPitch: number,
+  // Default false: every existing caller (How It Works, Exhibitions, Trust
+  // Signals, Product Customize Steps, Our Factory Team) keeps clamping to
+  // the row's real start/end, unchanged. `true` wraps instead of clamping --
+  // Inside the Factory's own owner request, 2026-09-12 (referencing Apple's
+  // "Take a closer look" carousel, which loops the same way): a forward
+  // click at the last card jumps back to the first, and a backward click at
+  // the first jumps to the last, rather than doing nothing.
+  loop = false,
+) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const reelRef = useRef<HTMLDivElement>(null);
@@ -73,6 +83,15 @@ export function useDesktopChevronScroller(cardPitch: number) {
   // element's own layout, so one measurement per hover session is enough.
   const wrapRectRef = useRef<{ left: number; top: number; width: number; height: number } | null>(null);
   const [direction, setDirection] = useState<1 | -1>(1);
+  // Which card is currently front-and-centre, 0-based -- Inside the
+  // Factory's own new pill/dot progress indicator (owner, 2026-09-12,
+  // referencing apple.com/ae/macbook-pro's own segmented control). Derived
+  // from `offsetRef` (a plain round-to-nearest-card, since every click
+  // always moves exactly one `cardPitch`) rather than kept as the source of
+  // truth itself -- `offsetRef`, not this, is what every existing caller's
+  // clamp/wrap math already depends on. Every other caller of this hook
+  // ignores the returned value, so this is additive, not a behaviour change.
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const applyTransform = () => {
     const chevron = chevronRef.current;
@@ -121,7 +140,10 @@ export function useDesktopChevronScroller(cardPitch: number) {
     // scroll back to, so the cursor-side check above is overridden to
     // forward-only until a real forward scroll (`handleClick`) moves
     // `offsetRef` off 0. `> 1`, not `> 0`, absorbs float rounding.
-    if (nextDirection === -1 && offsetRef.current <= 1) {
+    // Looping rows have no real "start" to strand the cursor-side check
+    // against -- a backward click at offset 0 is a valid wrap to the last
+    // card, so this forward-only override only applies to non-looping rows.
+    if (!loop && nextDirection === -1 && offsetRef.current <= 1) {
       nextDirection = 1;
     }
     if (nextDirection !== directionRef.current) {
@@ -191,7 +213,16 @@ export function useDesktopChevronScroller(cardPitch: number) {
     const reel = reelRef.current;
     if (!track || !reel) return;
     const maxOffset = Math.max(0, reel.getBoundingClientRect().width - track.clientWidth);
-    offsetRef.current = Math.min(Math.max(offsetRef.current + directionRef.current * cardPitch, 0), maxOffset);
+    // `> 1`/`< 1` (not `>=`/`<=` maxOffset/0) absorb the same float rounding
+    // `setTargetFromEvent`'s own start-of-row check already accounts for.
+    if (loop && directionRef.current === 1 && offsetRef.current > maxOffset - 1) {
+      offsetRef.current = 0;
+    } else if (loop && directionRef.current === -1 && offsetRef.current < 1) {
+      offsetRef.current = maxOffset;
+    } else {
+      offsetRef.current = Math.min(Math.max(offsetRef.current + directionRef.current * cardPitch, 0), maxOffset);
+    }
+    setActiveIndex(Math.round(offsetRef.current / cardPitch));
     reel.style.transform = `translateX(${-offsetRef.current}px)`;
   };
 
@@ -280,6 +311,7 @@ export function useDesktopChevronScroller(cardPitch: number) {
     chevronRef,
     dotRef,
     direction,
+    activeIndex,
     handleMouseMove,
     handleMouseEnter,
     handleMouseLeave,
