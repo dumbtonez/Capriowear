@@ -99,7 +99,7 @@ function renderMobileHeading(h2: string) {
 }
 
 const CARD_WIDTH = 469;
-const CARD_GAP = 40; // owner, 2026-09-12: "make it 40px across the site" (was 24, matching howItWorks.desktopReel)
+const CARD_GAP = 24; // owner, 2026-09-12: reverted to 24 the same day ("how it works on services make it 24px too") -- matching howItWorks.desktopReel
 
 function DesktopScroller({
   steps,

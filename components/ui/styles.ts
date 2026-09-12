@@ -1891,19 +1891,24 @@ export const ourFactoryProcess = {
   // <br />), which holds at every width -- no max-w needed at all.
   //
   // Row layout switches at a custom `min-[1420px]:`, not `xl:` (1280px) --
-  // real bug, found live, 2026-09-08: the widest row (700+520px items,
-  // 40px gap = 1260px) needs 1260px of content width, but `xl:`'s own
-  // `container-p` padding (80px each side) only leaves 1120px of content
-  // width at exactly 1280px -- a 140px shortfall that forced the whole
-  // page to horizontally scroll for any viewport between 1280 and 1419px.
-  // 1420px is the exact width where 1260px of content first fits (1420 -
-  // 160 = 1260, no margin needed, computed not guessed) -- already an
-  // established custom breakpoint in this codebase for the same class of
-  // "xl's own 1280px is too early" problem (see the desktop nav's own
-  // former use of a custom 1420px, `docs/05-plan.md`'s decision log,
-  // 2026-08-22). Below 1420px, items keep stacking to one column (already
-  // the established `xl:`-and-under fallback) rather than overflowing.
-  row: "flex flex-col gap-10 min-[1420px]:flex-row min-[1420px]:items-start",
+  // Real bug, found live, 2026-09-08, at this token's original 40px gap:
+  // the widest row (700+520px items, 40px gap = 1260px) needed 1260px of
+  // content width, but `xl:`'s own `container-p` padding (80px each side)
+  // only left 1120px of content width at exactly 1280px -- a 140px
+  // shortfall that forced the whole page to horizontally scroll for any
+  // viewport between 1280 and 1419px. `min-[1420px]` (1260 + 160px padding,
+  // computed not guessed) is the exact width where that 1260px of content
+  // first fit -- already an established custom breakpoint in this codebase
+  // for the same class of "xl's own 1280px is too early" problem (see the
+  // desktop nav's own former use of a custom 1420px, `docs/05-plan.md`'s
+  // decision log, 2026-08-22). Below it, items keep stacking to one column
+  // (already the established `xl:`-and-under fallback) rather than
+  // overflowing. `gap-6` (24px, was `gap-10`/40px, owner 2026-09-12: "what
+  // we make on factory tour, make the gap between 24px too") only shrinks
+  // the widest row's own real content-width need (now 1244px) -- the
+  // 1420px breakpoint stays correct (a smaller margin than the 40px case
+  // needed, never an overflow risk) without recomputing it.
+  row: "flex flex-col gap-6 min-[1420px]:flex-row min-[1420px]:items-start",
   // max-md:gap-6/md:gap-8 (owner, 2026-09-09, mobile-only review: "space
   // from top eyebrow fabric, cutting, etc should be 24px") -- this gap is
   // the image-to-textCol space, whose first child is the "01 Fabric"-style
@@ -3258,7 +3263,10 @@ export const servicesHowWeWork = {
   desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px]",
   // `px-[80px]` matches `container-p`'s own `xl:` inset. No `overflow`/
   // `scroll-smooth`/`no-scrollbar` any more -- nothing here scrolls.
-  desktopRow: "flex w-full justify-center gap-[44px] px-[80px]",
+  // gap-6 (24px), was gap-[44px] -- owner, 2026-09-12: "make the space
+  // between images 32px" then, same turn, "make it 24" (Services' own
+  // "How We Work" section only).
+  desktopRow: "flex w-full justify-center gap-6 px-[80px]",
   // 397px -- the section's own original, Figma-confirmed 3-column-grid
   // card width (get_metadata, node 750:770; also why `MediaPlaceholder`'s
   // `"397:234"` ratio option exists at all) restored (owner, 2026-09-10,
@@ -3388,11 +3396,11 @@ export const productRange = {
   // -- was stacked (`flex-col`) at every width below `xl:`, this
   // section's own "desktop-only for now, responsive-safe not confirmed-
   // mobile" caveat (see this file's own header comment) meaning tablet
-  // had never actually been checked/tuned. `md:gap-6` (24px, down from
-  // desktop's 40px) keeps both cards comfortably inside `container-p`'s
-  // own narrower `md:` content width (704px at the 768px minimum) once
-  // paired with `card`'s own smaller `md:` width below.
-  cardsRow: "flex w-full flex-col items-center gap-10 md:w-fit md:flex-row md:gap-6 xl:gap-10",
+  // had never actually been checked/tuned. `xl:gap-6` (24px, was
+  // `xl:gap-10`/40px, owner 2026-09-12: "services product range, make 24
+  // too") now matches `md:gap-6`, so desktop and tablet share one value
+  // instead of desktop being wider than tablet.
+  cardsRow: "flex w-full flex-col items-center gap-10 md:w-fit md:flex-row md:gap-6 xl:gap-6",
   // `md:max-w-[320px]` (owner, same request) -- a real size reduction, not
   // just a tighter row gap: two cards at the full 381px Figma width plus
   // any real gap exceed `container-p`'s own 704px `md:` content width at
@@ -3615,8 +3623,14 @@ export const trustSignals = {
   // dropped: scroll-padding is meaningless once this element can no longer
   // scroll at all.
   desktopRow: "overflow-clip px-8 xl:px-[80px]",
+  // gap-6 (24px) -- briefly moved to 40px along with every other desktop
+  // chevron gallery (owner, 2026-09-12: "make it 40px across the site"),
+  // reverted back to 24px the same day once this section was checked on
+  // its own ("make it 24px", same as Exhibitions' own reversion) --
+  // Inside the Factory/How It Works/PDP customize-steps stay at 40px.
+  // `CARD_GAP` in TrustSignals.tsx must match.
   desktopReel:
-    "flex w-max items-start gap-[24px] transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+    "flex w-max items-start gap-6 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
   // 380px fixed width (owner, 2026-09-10, referencing a Google Health/Pixel
   // marketing layout: "make the card size as per this reference, current
   // one is too big, no cornor radious though" -- was 500px; radius was
@@ -4468,8 +4482,12 @@ export const insideFactory = {
   // offset correctly. `w-max` (same fix `Marquee.tsx`'s own `track` already
   // established) shrinks the reel's own box to its content's real size.
   desktopRow: "overflow-clip w-full px-[80px]",
+  // gap-6 (24px), was gap-12 (48px) then briefly gap-10 (40px, "make it
+  // 40px across the site") -- reverted the same day ("Factory 1 section on
+  // homepage make it 24 too"). `DESKTOP_CARD_GAP` in InsideFactory.tsx
+  // must match.
   desktopReel:
-    "flex w-max items-center gap-12 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+    "flex w-max items-center gap-6 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
   // 1200px (owner, 2026-09-08: "increase the size to 1200px width by
   // 640") -- must match `DESKTOP_CARD_WIDTH` in InsideFactory.tsx and
   // `desktopRow`'s own gap above. The `md:`/tablet-tier 469px width is
@@ -5227,6 +5245,12 @@ export const howItWorks = {
   // comment in DesktopChevronScroller.tsx for the real fix, `overflow-clip`
   // plus an inner transform-driven `desktopReel`.
   desktopRow: "overflow-clip w-full px-[80px]",
+  // gap-6 (24px) -- briefly moved to 40px along with every other desktop
+  // chevron gallery (owner, 2026-09-12: "make it 40px across the site"),
+  // reverted back to 24px the same day ("how it works on services make it
+  // 24px too") -- this component is shared verbatim by the homepage and
+  // `/services` (see this file's own top comment), so the change applies
+  // to both. `CARD_GAP` in HowItWorks.tsx must match.
   desktopReel:
     "flex w-max gap-6 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
   // Widened from the Figma-confirmed 335px to match Exhibitions' own
@@ -5352,6 +5376,13 @@ export const exhibitions = {
   // in DesktopChevronScroller.tsx for the real fix, `overflow-clip` plus an
   // inner transform-driven `desktopReel`.
   desktopRow: "overflow-clip w-full px-[80px]",
+  // gap-6 (24px) -- briefly moved to 40px along with every other desktop
+  // chevron gallery (owner, 2026-09-12: "make it 40px across the site"),
+  // reverted back to 24px the same day once this section was checked on
+  // its own ("make it 24px") -- Exhibitions keeps its own original value,
+  // the other four galleries (Trust Signals/Inside the Factory/How It
+  // Works/PDP customize-steps) stay at 40px. `DESKTOP_CARD_GAP` in
+  // Exhibitions.tsx must match.
   desktopReel:
     "flex w-max gap-6 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
   desktopCard: "w-[469px] shrink-0",
@@ -7933,8 +7964,12 @@ export const productCustomizeSteps = {
   // DesktopChevronScroller.tsx for the real fix, `overflow-clip` plus an
   // inner transform-driven `desktopReel`.
   desktopRow: "overflow-clip w-full px-8 xl:px-[80px]",
+  // gap-10 (40px), was gap-6 (24px) -- owner, 2026-09-12: "make it 40px
+  // across the site" (see `trustSignals.desktopReel`'s own comment for the
+  // full before/after list). `CARD_GAP` in ProductCustomizeSteps.tsx must
+  // match.
   desktopReel:
-    "flex w-max gap-6 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+    "flex w-max gap-10 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
   // 469px -- owner correction, 2026-09-01: "you did not use the same
   // component how [it] works from the homepage. Use homepage component
   // size, overall." Was a section-specific 335px (Figma's own literal

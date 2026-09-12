@@ -117,7 +117,7 @@ function MobileBody({ segments }: { segments: BodySegment[] }) {
 const CARD_WIDTH = 380;
 // 24px (owner, 2026-09-10: "make it 32" then "make it 24" -- was 40px,
 // matching styles.ts's own `trustSignals.desktopRow`/`tabletRow`).
-const CARD_GAP = 40; // owner, 2026-09-12: "make it 40px across the site" (was 24, matching trustSignals.desktopReel)
+const CARD_GAP = 24; // owner, 2026-09-12: reverted to 24 the same day ("make it 24px") -- matching trustSignals.desktopReel
 
 function DesktopScroller({ items }: { items: typeof home.trustStrip }) {
   const { wrapRef, trackRef, reelRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
