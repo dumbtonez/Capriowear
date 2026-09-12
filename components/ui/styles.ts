@@ -2826,7 +2826,14 @@ export const ourFactoryTeam = {
   galleryWrap: "relative mx-auto hidden w-full max-w-[1440px] cursor-none overflow-hidden pt-[24px] xl:block",
   // `gap-[24px]` (owner, 2026-09-11: "gap between the images is 40px?"
   // then "make it 24" -- was 40px).
-  galleryRow: "no-scrollbar flex items-start gap-[24px] overflow-x-hidden scroll-smooth pl-[80px]",
+  // Split into a plain clipping wrap (`overflow-clip`, no scroll container
+  // at all) plus an inner transform-driven `galleryReel` -- see
+  // `useDesktopChevronScroller`'s own trailing comment in
+  // DesktopChevronScroller.tsx for why `overflow-x-hidden`/`scroll-smooth`
+  // aren't enough on their own.
+  galleryRow: "overflow-clip pl-[80px]",
+  galleryReel:
+    "flex w-max items-start gap-[24px] transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
   // 500px wide, fixed per-item height (600px "tall" / 420px "short",
   // alternating per this node's own real per-item measurements) -- not a
   // MediaRatio: the ratio itself differs per item at one shared width, so
@@ -3544,8 +3551,14 @@ export const trustSignals = {
   // aligned, each its own natural height.
   // 24px card gap (owner, 2026-09-10: "make it 32" then "make it 24" --
   // was 40px).
-  desktopRow:
-    "no-scrollbar flex items-start gap-[24px] overflow-x-hidden scroll-smooth px-8 xl:px-[80px] scroll-pl-8 xl:scroll-pl-[80px] scroll-pr-8 xl:scroll-pr-[80px]",
+  // Split into a plain clipping wrap (`overflow-clip`) plus an inner
+  // transform-driven `desktopReel` -- see `useDesktopChevronScroller`'s own
+  // trailing comment in DesktopChevronScroller.tsx. `scroll-pl`/`scroll-pr`
+  // dropped: scroll-padding is meaningless once this element can no longer
+  // scroll at all.
+  desktopRow: "overflow-clip px-8 xl:px-[80px]",
+  desktopReel:
+    "flex w-max items-start gap-[24px] transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
   // 380px fixed width (owner, 2026-09-10, referencing a Google Health/Pixel
   // marketing layout: "make the card size as per this reference, current
   // one is too big, no cornor radious though" -- was 500px; radius was
@@ -4382,7 +4395,23 @@ export const insideFactory = {
   // `xl:` now (see `desktopOuter`'s own comment), so the base/`md:`-tier
   // values that used to serve the tablet range are unreachable dead code.
   // Real, no-longer-conditional desktop-only values now.
-  desktopRow: "no-scrollbar flex w-full items-center gap-12 overflow-x-hidden scroll-smooth px-[80px]",
+  // Split into a plain clipping wrap (`overflow-clip`, never a real scroll
+  // container) plus an inner transform-driven `desktopReel` -- see
+  // `useDesktopChevronScroller`'s own trailing comment in
+  // DesktopChevronScroller.tsx for the vertical-scroll "stuck, needs a
+  // second gesture" bug this replaces `overflow-x-hidden scroll-smooth`
+  // (neither of which actually fixed it) to solve properly. `w-max` on the
+  // reel (real bug, found live building this fix): a flex container is
+  // still a block-level box by default, so without it the reel's own
+  // layout width just fills its parent (`track`'s 1280px content box) like
+  // any other block child, NOT the true ~6192px width its `shrink-0`
+  // children overflow it by -- `getBoundingClientRect()` on it then
+  // under-reports the real content width `handleClick` needs to clamp the
+  // offset correctly. `w-max` (same fix `Marquee.tsx`'s own `track` already
+  // established) shrinks the reel's own box to its content's real size.
+  desktopRow: "overflow-clip w-full px-[80px]",
+  desktopReel:
+    "flex w-max items-center gap-12 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
   // 1200px (owner, 2026-09-08: "increase the size to 1200px width by
   // 640") -- must match `DESKTOP_CARD_WIDTH` in InsideFactory.tsx and
   // `desktopRow`'s own gap above. The `md:`/tablet-tier 469px width is
@@ -5135,7 +5164,13 @@ export const howItWorks = {
   // row only renders at `xl:` any more (see `desktopOuter`'s own comment),
   // so the base tier that used to serve the tablet range is unreachable
   // dead code.
-  desktopRow: "no-scrollbar flex w-full gap-6 overflow-x-hidden scroll-smooth px-[80px]",
+  // `overflow-x-hidden scroll-smooth` here didn't fully fix the "requires
+  // 2 scrolls" bug either -- see `useDesktopChevronScroller`'s own trailing
+  // comment in DesktopChevronScroller.tsx for the real fix, `overflow-clip`
+  // plus an inner transform-driven `desktopReel`.
+  desktopRow: "overflow-clip w-full px-[80px]",
+  desktopReel:
+    "flex w-max gap-6 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
   // Widened from the Figma-confirmed 335px to match Exhibitions' own
   // desktop card width exactly (owner call, 2026-08-27: both sections'
   // media containers, and the space between them, should read as the same
@@ -5254,7 +5289,13 @@ export const exhibitions = {
   // `xl:` tier only now (`md:` tier removed, 2026-09-09) -- this row only
   // renders at `xl:` any more (see `desktopOuter`'s own comment), so the
   // base tier that used to serve the tablet range is unreachable dead code.
-  desktopRow: "no-scrollbar flex w-full gap-6 overflow-x-hidden scroll-smooth px-[80px]",
+  // `overflow-x-hidden scroll-smooth` didn't fully fix the "requires 2
+  // scrolls" bug -- see `useDesktopChevronScroller`'s own trailing comment
+  // in DesktopChevronScroller.tsx for the real fix, `overflow-clip` plus an
+  // inner transform-driven `desktopReel`.
+  desktopRow: "overflow-clip w-full px-[80px]",
+  desktopReel:
+    "flex w-max gap-6 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
   desktopCard: "w-[469px] shrink-0",
   // The floating chevron is the shared `chevronScroller` recipe -- see the
   // note on `howItWorks` above.
@@ -7829,9 +7870,13 @@ export const productCustomizeSteps = {
   // comment in DesktopChevronScroller.tsx for the full reasoning).
   // `snap-x`/`snap-mandatory`/`scroll-pl`/`scroll-pr` dropped in the same
   // pass (owner, 2026-09-08: "still requires 2 times scroll to go up or
-  // down, further make it smooth") -- see `insideFactory.desktopRow`'s own
-  // comment for the full reasoning.
-  desktopRow: "no-scrollbar flex w-full gap-6 overflow-x-hidden scroll-smooth px-8 xl:px-[80px]",
+  // down, further make it smooth") -- didn't fully fix it either. See
+  // `useDesktopChevronScroller`'s own trailing comment in
+  // DesktopChevronScroller.tsx for the real fix, `overflow-clip` plus an
+  // inner transform-driven `desktopReel`.
+  desktopRow: "overflow-clip w-full px-8 xl:px-[80px]",
+  desktopReel:
+    "flex w-max gap-6 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
   // 469px -- owner correction, 2026-09-01: "you did not use the same
   // component how [it] works from the homepage. Use homepage component
   // size, overall." Was a section-specific 335px (Figma's own literal

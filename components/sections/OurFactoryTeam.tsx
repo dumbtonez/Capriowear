@@ -87,7 +87,7 @@ function Subline({ segments }: { segments: NoteSegment[] }) {
 }
 
 function DesktopScroller({ media }: { media: typeof ourFactory.teamGallery.media }) {
-  const { wrapRef, trackRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
+  const { wrapRef, trackRef, reelRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
     useDesktopChevronScroller(ITEM_WIDTH + ITEM_GAP);
 
   return (
@@ -100,11 +100,13 @@ function DesktopScroller({ media }: { media: typeof ourFactory.teamGallery.media
       onClick={handleClick}
     >
       <div ref={trackRef} className={ourFactoryTeam.galleryRow}>
-        {media.map((item) => (
-          <div key={item.label} className={cx(ourFactoryTeam.item, ourFactoryTeam.itemHeight[item.size])}>
-            <ParallaxMedia label={item.label} radius="none" showLabel={false} className="h-full" />
-          </div>
-        ))}
+        <div ref={reelRef} className={ourFactoryTeam.galleryReel}>
+          {media.map((item) => (
+            <div key={item.label} className={cx(ourFactoryTeam.item, ourFactoryTeam.itemHeight[item.size])}>
+              <ParallaxMedia label={item.label} radius="none" showLabel={false} className="h-full" />
+            </div>
+          ))}
+        </div>
       </div>
       <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
     </div>

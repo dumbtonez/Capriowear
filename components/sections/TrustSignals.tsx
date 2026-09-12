@@ -119,7 +119,7 @@ const CARD_WIDTH = 380;
 const CARD_GAP = 24;
 
 function DesktopScroller({ items }: { items: typeof home.trustStrip }) {
-  const { wrapRef, trackRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
+  const { wrapRef, trackRef, reelRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
     useDesktopChevronScroller(CARD_WIDTH + CARD_GAP);
 
   return (
@@ -132,20 +132,22 @@ function DesktopScroller({ items }: { items: typeof home.trustStrip }) {
       onClick={handleClick}
     >
       <div ref={trackRef} className={trustSignals.desktopRow}>
-        {items.map((entry, index) => (
-          <div key={entry.title} className={trustSignals.desktopCard}>
-            <MediaPlaceholder
-              label={`${entry.title} artwork`}
-              ratio={index % 2 === 0 ? "5:6" : "25:21"}
-              radius="none"
-              showLabel={false}
-            />
-            <div className={trustSignals.desktopCardText}>
-              <h3 className={trustSignals.title}>{entry.title}</h3>
-              <Body segments={entry.body} />
+        <div ref={reelRef} className={trustSignals.desktopReel}>
+          {items.map((entry, index) => (
+            <div key={entry.title} className={trustSignals.desktopCard}>
+              <MediaPlaceholder
+                label={`${entry.title} artwork`}
+                ratio={index % 2 === 0 ? "5:6" : "25:21"}
+                radius="none"
+                showLabel={false}
+              />
+              <div className={trustSignals.desktopCardText}>
+                <h3 className={trustSignals.title}>{entry.title}</h3>
+                <Body segments={entry.body} />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
     </div>

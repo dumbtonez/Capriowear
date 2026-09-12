@@ -37,7 +37,7 @@ const CARD_WIDTH = 469;
 const CARD_GAP = 24;
 
 function DesktopScroller({ steps }: { steps: typeof pdpCustomizationSteps.steps }) {
-  const { wrapRef, trackRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
+  const { wrapRef, trackRef, reelRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
     useDesktopChevronScroller(CARD_WIDTH + CARD_GAP);
 
   return (
@@ -50,16 +50,18 @@ function DesktopScroller({ steps }: { steps: typeof pdpCustomizationSteps.steps 
       onClick={handleClick}
     >
       <div ref={trackRef} className={productCustomizeSteps.desktopRow}>
-        {steps.map((step) => (
-          <div key={step.title} className={productCustomizeSteps.desktopCard}>
-            <CapabilityCard
-              title={step.title}
-              body={step.body}
-              mediaAspectClassName={productCustomizeSteps.cardMediaRatio}
-              mediaRadius="none"
-            />
-          </div>
-        ))}
+        <div ref={reelRef} className={productCustomizeSteps.desktopReel}>
+          {steps.map((step) => (
+            <div key={step.title} className={productCustomizeSteps.desktopCard}>
+              <CapabilityCard
+                title={step.title}
+                body={step.body}
+                mediaAspectClassName={productCustomizeSteps.cardMediaRatio}
+                mediaRadius="none"
+              />
+            </div>
+          ))}
+        </div>
       </div>
       <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
     </div>

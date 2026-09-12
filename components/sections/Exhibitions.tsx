@@ -56,7 +56,7 @@ const DESKTOP_CARD_WIDTH = 469;
 const DESKTOP_CARD_GAP = 24;
 
 function DesktopScroller({ shots }: { shots: typeof home.exhibitions.media }) {
-  const { wrapRef, trackRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
+  const { wrapRef, trackRef, reelRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
     useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP);
 
   return (
@@ -69,11 +69,13 @@ function DesktopScroller({ shots }: { shots: typeof home.exhibitions.media }) {
       onClick={handleClick}
     >
       <div ref={trackRef} className={exhibitions.desktopRow}>
-        {shots.map((shot) => (
-          <div key={shot.label} className={exhibitions.desktopCard}>
-            <MediaPlaceholder label={shot.label} ratio="469:320" radius="none" tone="dark" />
-          </div>
-        ))}
+        <div ref={reelRef} className={exhibitions.desktopReel}>
+          {shots.map((shot) => (
+            <div key={shot.label} className={exhibitions.desktopCard}>
+              <MediaPlaceholder label={shot.label} ratio="469:320" radius="none" tone="dark" />
+            </div>
+          ))}
+        </div>
       </div>
       <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
     </div>

@@ -164,7 +164,7 @@ function DesktopGallery({
   shots: typeof home.insideFactory.media;
   tone: "light" | "dark";
 }) {
-  const { wrapRef, trackRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
+  const { wrapRef, trackRef, reelRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
     useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP);
 
   return (
@@ -177,22 +177,24 @@ function DesktopGallery({
       onClick={handleClick}
     >
       <div ref={trackRef} className={insideFactory.desktopRow}>
-        {shots.map((shot) => (
-          <div key={shot.label} className={insideFactory.desktopCard}>
-            <MediaPlaceholder
-              label={shot.label}
-              ratio="15:8"
-              radius="none"
-              tone={tone}
-              showLabel={false}
-              image={shot.image}
-              className={insideFactory.desktopCardMedia}
-            />
-            <p className={tone === "light" ? insideFactory.desktopCardLabelLight : insideFactory.desktopCardLabel}>
-              {shot.label}
-            </p>
-          </div>
-        ))}
+        <div ref={reelRef} className={insideFactory.desktopReel}>
+          {shots.map((shot) => (
+            <div key={shot.label} className={insideFactory.desktopCard}>
+              <MediaPlaceholder
+                label={shot.label}
+                ratio="15:8"
+                radius="none"
+                tone={tone}
+                showLabel={false}
+                image={shot.image}
+                className={insideFactory.desktopCardMedia}
+              />
+              <p className={tone === "light" ? insideFactory.desktopCardLabelLight : insideFactory.desktopCardLabel}>
+                {shot.label}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
       <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
     </div>

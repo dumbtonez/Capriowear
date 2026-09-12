@@ -108,7 +108,7 @@ function DesktopScroller({
   steps: typeof home.howItWorks.steps;
   tone: "light" | "dark";
 }) {
-  const { wrapRef, trackRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
+  const { wrapRef, trackRef, reelRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
     useDesktopChevronScroller(CARD_WIDTH + CARD_GAP);
 
   return (
@@ -121,17 +121,19 @@ function DesktopScroller({
       onClick={handleClick}
     >
       <div ref={trackRef} className={howItWorks.desktopRow}>
-        {steps.map((step) => (
-          <div key={step.title} className={howItWorks.desktopCard}>
-            <CapabilityCard
-              title={step.title}
-              body={step.body}
-              mediaAspectClassName={howItWorks.cardMediaRatio}
-              mediaRadius="none"
-              tone={tone}
-            />
-          </div>
-        ))}
+        <div ref={reelRef} className={howItWorks.desktopReel}>
+          {steps.map((step) => (
+            <div key={step.title} className={howItWorks.desktopCard}>
+              <CapabilityCard
+                title={step.title}
+                body={step.body}
+                mediaAspectClassName={howItWorks.cardMediaRatio}
+                mediaRadius="none"
+                tone={tone}
+              />
+            </div>
+          ))}
+        </div>
       </div>
       <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
     </div>

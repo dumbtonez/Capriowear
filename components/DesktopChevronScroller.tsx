@@ -45,6 +45,7 @@ const SMOOTHING = 0.22;
 export function useDesktopChevronScroller(cardPitch: number) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const reelRef = useRef<HTMLDivElement>(null);
   const chevronRef = useRef<HTMLDivElement>(null);
   const dotRef = useRef<HTMLDivElement>(null);
   const targetRef = useRef({ x: 0, y: 0 });
@@ -55,6 +56,10 @@ export function useDesktopChevronScroller(cardPitch: number) {
   // reason; it only needs to stay fully inside the clipped wrap.
   const dotTargetRef = useRef({ x: 0, y: 0 });
   const directionRef = useRef<1 | -1>(1);
+  // Current horizontal offset (px, 0 = start), the transform-based
+  // replacement for reading a real `scrollLeft` -- see `handleClick`'s own
+  // comment below for why this row no longer scrolls at all.
+  const offsetRef = useRef(0);
   const rafRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);
   // Cached on `handleMouseEnter`/resize, NOT read on every `mousemove`
@@ -114,10 +119,9 @@ export function useDesktopChevronScroller(cardPitch: number) {
     // backward icon since user can not go to left, untill he slides to the
     // right" -- at the very start of the row there's nowhere left to
     // scroll back to, so the cursor-side check above is overridden to
-    // forward-only until a real forward scroll (`handleClick`/native
-    // scroll-snap) moves `scrollLeft` off 0. `> 1`, not `> 0`, absorbs
-    // sub-pixel scroll positions some browsers report at rest.
-    if (nextDirection === -1 && (trackRef.current?.scrollLeft ?? 0) <= 1) {
+    // forward-only until a real forward scroll (`handleClick`) moves
+    // `offsetRef` off 0. `> 1`, not `> 0`, absorbs float rounding.
+    if (nextDirection === -1 && offsetRef.current <= 1) {
       nextDirection = 1;
     }
     if (nextDirection !== directionRef.current) {
@@ -172,8 +176,23 @@ export function useDesktopChevronScroller(cardPitch: number) {
     }
   };
 
+  // Moves the inner `reelRef` row via `transform: translateX`, not
+  // `scrollLeft`/`scrollBy` on `trackRef` -- see this hook's own trailing
+  // comment for why (owner report, 2026-09-12: "scrolling down while the
+  // cursor is over the image area gets stuck, requiring a second scroll
+  // gesture"). `trackRef` is now purely the clipping wrap: `clientWidth`
+  // (its own visible width, unaffected by `overflow: clip`) and the reel's
+  // real rendered width (`getBoundingClientRect().width` -- NOT
+  // `scrollWidth`, which a non-scrolling `overflow: visible` element like
+  // the reel doesn't reliably report) are all this needs to clamp the
+  // offset to the real start/end of the row.
   const handleClick = () => {
-    trackRef.current?.scrollBy({ left: directionRef.current * cardPitch, behavior: "smooth" });
+    const track = trackRef.current;
+    const reel = reelRef.current;
+    if (!track || !reel) return;
+    const maxOffset = Math.max(0, reel.getBoundingClientRect().width - track.clientWidth);
+    offsetRef.current = Math.min(Math.max(offsetRef.current + directionRef.current * cardPitch, 0), maxOffset);
+    reel.style.transform = `translateX(${-offsetRef.current}px)`;
   };
 
   // Stop a stray rAF loop if the component unmounts mid-hover.
@@ -214,22 +233,50 @@ export function useDesktopChevronScroller(cardPitch: number) {
   // replacement for the browser's own scroll handling is inherently a
   // worse, laggier version of it, not a neutral stand-in.
   //
-  // Real fix: don't intercept the gesture at all -- remove the track's own
-  // ability to respond to it. `insideFactory.desktopRow`/`howItWorks.
-  // desktopRow`/`exhibitions.desktopRow`/`productCustomizeSteps.desktopRow`
+  // First real fix: don't intercept the gesture at all -- remove the
+  // track's own ability to respond to it. Every row using this hook
   // switched from `overflow-x-auto` to `overflow-x-hidden` (see each
-  // token's own comment in styles.ts): an `overflow: hidden` element is
-  // still a real scroll container (CSS Scroll Snap and a plain `scrollLeft`/
-  // `scrollBy` write both still work on it, which is exactly what
-  // `handleClick` below already uses), it just no longer responds to wheel,
-  // trackpad, or click-drag input -- so the horizontal noise this section
-  // never wanted has nothing left to act on, and the page's own vertical
-  // scroll passes straight through untouched, at full native speed, with
-  // zero JS in the loop. "user can only scroll by clicking" is now
-  // literally true, not just intended.
+  // token's own comment in styles.ts), on the reasoning that an
+  // `overflow: hidden` element still lets a plain `scrollLeft`/`scrollBy`
+  // write move it (exactly what `handleClick` used to do) while no longer
+  // responding to wheel/trackpad/click-drag input at all.
+  //
+  // That reasoning had a real gap, found live, 2026-09-12 (owner: "gets
+  // stuck, requiring a second scroll gesture to pass through it," after
+  // `snap-x`/`snap-mandatory` removal and a `scroll-smooth` class had
+  // already both been tried and hadn't fully fixed it -- see the removed
+  // `insideFactory.desktopRow` comment history in git blame for both
+  // attempts): `overflow: hidden` on an element whose content genuinely
+  // overflows still makes it a real CSS "scroll container" by spec --
+  // hidden UI/input handling, not hidden EXISTENCE -- so it's still a
+  // candidate the browser's wheel-to-scroll-target resolution can hit-test
+  // and briefly claim before chaining the gesture up to the page, in at
+  // least some engines. That claim-then-release is exactly one lost wheel
+  // tick: the page doesn't move on the first gesture, then scrolls normally
+  // on the second once the browser has resolved that this element has
+  // nothing to actually do with the vertical delta. Neither the earlier
+  // `scroll-smooth` addition nor removing `snap-x` touches this at all --
+  // `scroll-behavior` and Scroll Snap only govern scrolls the browser
+  // itself performs (JS `scrollTo`/`scrollBy`/anchor jumps, or snapping
+  // after a real scroll), never whether an element gets hit-tested as a
+  // scroll target for an incoming wheel event in the first place.
+  //
+  // Real fix: stop being a scroll container at all, not just a
+  // hard-to-scroll one. `trackRef` is now `overflow: clip` (every row's own
+  // `desktopRow`/`galleryRow` token in styles.ts), which the spec defines
+  // as never creating a scrollable overflow region in the first place --
+  // guaranteed never hit-tested for wheel routing, unlike `hidden`. That
+  // also means a plain `scrollLeft`/`scrollBy` write on it does nothing any
+  // more (there's no scroll box left to move), so the actual card
+  // progression moved to a `transform: translateX` on a new inner `reelRef`
+  // row instead (`handleClick`'s own comment above) -- a transform never
+  // interacts with scroll routing, snap, or `scroll-behavior` at all, on
+  // either the reel or any ancestor, so there's nothing left here for a
+  // vertical gesture to ever contend with, every time, not just usually.
   return {
     wrapRef,
     trackRef,
+    reelRef,
     chevronRef,
     dotRef,
     direction,
