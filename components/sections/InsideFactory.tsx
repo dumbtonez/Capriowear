@@ -42,6 +42,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/Button";
 import { DesktopChevron, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
+import { ParallaxMedia } from "@/components/ParallaxMedia";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextReveal } from "@/components/TextReveal";
 import { cx } from "@/components/ui/cx";
@@ -105,19 +106,18 @@ export type InsideFactoryProps = {
   cardSize?: "wide" | "compact";
   /**
    * Defaults to true. false keeps the desktop gallery's own structure
-   * (cards, chevron, captions) but blanks each card's real `image` --
-   * /our-factory's own desktop-only correction (owner, 2026-09-11:
-   * "factory page, remove the factory shot 1, section images, keep them
-   * in the mobile" -- clarified after an over-eager first pass dropped
-   * the whole desktop block: "I ask to just remove the images from it not
-   * the section" / "Just remove the images testing from desktop, not
-   * mobile"), then applied to the homepage's own usage too the same way
-   * (owner: "same section is on hompege, remove the images from there
-   * too not the section, only desktop"). Mobile/tablet is unaffected by
-   * this prop on either page. `content.media` itself is never mutated --
-   * only the array `DesktopGallery` renders from here has each shot's
-   * `image` stripped, real "test placeholder" photos removed without
-   * touching the one content source every breakpoint/page reads from.
+   * (cards, chevron, captions) but blanks each card's real `image`.
+   * Briefly set on both real callers 2026-09-11 (owner: "remove the images
+   * testing from desktop, not mobile") while desktop had no real
+   * photography worth showing yet -- reversed 2026-09-12 once the same 5
+   * real (if still "test") factory photos proved the zoom-and-settle
+   * `ParallaxMedia` treatment was worth locking in for this gallery (owner:
+   * "keep them there as testing images, we will replace them with actual
+   * when ready"), so neither real caller passes `false` any more. Left in
+   * place, not deleted, as a real opt-out for a future gallery that needs
+   * it. Mobile/tablet is unaffected by this prop either way. `content.media`
+   * itself is never mutated -- only the array `DesktopGallery` renders from
+   * here has each shot's `image` stripped when this is false.
    */
   showDesktopImages?: boolean;
 };
@@ -180,11 +180,19 @@ function DesktopGallery({
         <div ref={reelRef} className={insideFactory.desktopReel}>
           {shots.map((shot) => (
             <div key={shot.label} className={insideFactory.desktopCard}>
-              <MediaPlaceholder
+              {/* Scroll-reveal zoom-and-settle, same `ParallaxMedia`
+                  treatment as What We Make/Our Factory Process/Our Factory
+                  Team -- locked in 2026-09-12 after a 2-card side-by-side
+                  comparison against plain `MediaPlaceholder` (owner: "this
+                  looks good, let's lock this style"). Plays once, the first
+                  time each card scrolls into view; it does not replay on
+                  chevron click/slide (`ParallaxMedia`'s own trigger is a
+                  one-shot IntersectionObserver, not keyed to this row's
+                  active card). */}
+              <ParallaxMedia
                 label={shot.label}
                 ratio="15:8"
                 radius="none"
-                tone={tone}
                 showLabel={false}
                 image={shot.image}
                 className={insideFactory.desktopCardMedia}
