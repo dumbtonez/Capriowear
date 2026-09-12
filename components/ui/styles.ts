@@ -2532,9 +2532,47 @@ export const ourFactoryDetails = {
   // (0.22,1,0.36,1)` matches this file's own established "smooth" curve
   // (`ourFactoryDetails.detailGrid`'s own comment: "chips animation is
   // very jerky" -- the same fix already applied to this section's
-  // accordion, reused here rather than a third curve).
+  // accordion, reused here rather than a third curve). This element's own
+  // `duration-[650ms]` opacity/transform pair is deliberately untouched by
+  // the "premium" enhancement pass below (owner, 2026-09-12: "do not touch
+  // the timing/duration/easing of the existing crossfade") -- the focus-
+  // rack blur those tokens add is a genuinely separate `filter` transition
+  // on its own shorter clock (`imageLayerBlur`), layered on top via `cx()`
+  // in `OurFactoryDetails.tsx`, never merged into this string.
+  //
+  // `scale` added to the transition-property list, 2026-09-12 (real bug,
+  // found live while verifying the enhancement above via
+  // `getComputedStyle` sampling): Tailwind v4 compiles `scale-[…]` to the
+  // standalone CSS `scale` property (a distinct property from `transform`
+  // since CSS Transforms Level 2), not folded into `transform` the way
+  // Tailwind v3 used to. `transition-[opacity,transform]` never actually
+  // covered it, so both this pair's own scale value AND `desktopImage
+  // LayerExiting`'s new one were snapping instantly instead of easing --
+  // confirmed live: `scale` read its final target value on the very first
+  // sampled frame, while `opacity` was still gradually ramping. Adding it
+  // here doesn't change the duration/easing values themselves, only which
+  // property they actually apply to -- the same 650ms/cubic-bezier now
+  // finally eases the scale motion the original 2026-09-11 "silk" fix
+  // always intended.
   imageLayer:
-    "absolute inset-0 transition-[opacity,transform] duration-[650ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+    "absolute inset-0 transition-[opacity,transform,scale] duration-[650ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+  // "Focus rack" blur (owner, 2026-09-12: enhance the already-correct chip
+  // crossfade so the brief double-exposure moment -- both photos partly
+  // visible around the ~50% overlap point -- reads as an intentional rack-
+  // focus rather than two unrelated images caught mid-swap). A true
+  // ramp-up-then-down hump needs three keyframes, which one CSS transition
+  // (only ever two: current value -> new value) can't express on its own,
+  // so `OurFactoryDetails.tsx` drives it as two chained halves instead: on
+  // every chip change, both the outgoing and incoming layers pick up
+  // `imageLayerBlurPeak` (blurring in over this token's own 325ms, half of
+  // the crossfade's 650ms) then swap to `imageLayerBlurRest` at the
+  // midpoint (blurring back out over the second 325ms) -- landing exactly
+  // at 0 blur when the opacity/scale crossfade above also finishes, same
+  // shared curve, its own separate `filter` transition property so it
+  // never touches that pair's own duration.
+  imageLayerBlur: "transition-[filter] duration-[325ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+  imageLayerBlurPeak: "blur-sm",
+  imageLayerBlurRest: "blur-none",
   // Mobile-only variant (owner, 2026-09-10: "tha paralax animation is not
   // working on the chip changing some jerky effect") -- the mobile crossfade
   // stack layers `mobileImageZoom`'s own 1400ms zoom-settle transform
@@ -2554,12 +2592,32 @@ export const ourFactoryDetails = {
   // `mobileImageZoom` scale on top of the plain opacity pair, so giving
   // the shared pair a scale too would double up two transforms on the
   // same mobile element). Incoming image settles from a gentle 102%
-  // (`scale-100`, was already full-size, just zoomed a hair); outgoing
-  // eases up to 102% as it fades rather than sitting pixel-static while
-  // its opacity drops -- both directions moving, not just fading, is
-  // what reads as "silk" instead of a flat crossfade.
+  // (`scale-100`, was already full-size, just zoomed a hair) -- this
+  // arrival value/direction is unchanged by the enhancement below (owner,
+  // 2026-09-12: keep it exactly as-is).
   desktopImageLayerActive: "opacity-100 scale-100",
+  // Rest state for every layer that ISN'T currently mid-crossfade (an
+  // idle layer waiting its turn to arrive, or one that finished leaving a
+  // beat ago) -- an arriving layer always starts its own transition from
+  // here (1.02), unchanged.
   desktopImageLayerInactive: "opacity-0 scale-[1.02]",
+  // The layer that's ACTIVELY leaving RIGHT NOW (this render's previous
+  // `openIndex`, tracked in `OurFactoryDetails.tsx` as `exitingIndex` for
+  // exactly one 650ms crossfade, then handed back to the plain
+  // `desktopImageLayerInactive` rest state above once settled) -- real
+  // enhancement, owner 2026-09-12: "give the outgoing layer a slight
+  // scale-down... mirroring the incoming layer's existing scale... Right
+  // now only the incoming image has any depth motion." `scale-[0.98]`, not
+  // `desktopImageLayerInactive`'s own `1.02` -- the two ends need to move
+  // in OPPOSITE directions (outgoing recedes/shrinks, incoming settles
+  // in/shrinks-to-100-from-above) for the swap to read as one image being
+  // replaced in physical space, not two flat dissolves that happen to
+  // share an idle resting scale. Deliberately a SEPARATE token from
+  // `desktopImageLayerInactive`, not a shared "not-active" scale value --
+  // reusing 0.98 as every idle layer's own permanent rest state would also
+  // change every future ARRIVAL's own starting point away from the
+  // untouched 1.02 above, which the owner explicitly asked to keep.
+  desktopImageLayerExiting: "opacity-0 scale-[0.98]",
 
   // ---------------------------------------------------------------------
   // Mobile/tablet only (below `xl:`), 2026-09-10 rebuild -- Apple's "Take a

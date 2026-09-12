@@ -55,6 +55,49 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
   const [openIndex, setOpenIndex] = useState(0);
   const baseId = useId();
 
+  // Desktop image crossfade "premium" pass (owner, 2026-09-12): the
+  // opacity/scale swap itself (`ourFactoryDetails.imageLayer`/
+  // `desktopImageLayerActive`/`Inactive`) is untouched -- this only adds
+  // two things on top, both scoped to exactly one 650ms window per chip
+  // change (matching that existing crossfade's own duration, never
+  // changing it).
+  //
+  // `exitingIndex`: which layer is the one actively LEAVING right now (the
+  // previous `openIndex`), so it can render `desktopImageLayerExiting`
+  // (a 0.98 scale-down, "receding") instead of the shared
+  // `desktopImageLayerInactive` every other, already-idle layer uses (a
+  // 1.02 scale-up "arrival start point") -- see that pair's own comment
+  // for why the two can't share one value. Reset back to the shared rest
+  // state after 650ms so a later arrival from this same item still starts
+  // from the untouched 1.02, not this transition's own 0.98.
+  //
+  // `blurPeak`: true for exactly the first half (325ms) of every chip
+  // change, applied to both the outgoing and incoming layers as
+  // `imageLayerBlurPeak`, then false for the second half
+  // (`imageLayerBlurRest`) -- a "focus rack" hump (blur ramps up, then
+  // back down) that a single two-state CSS transition can't express alone
+  // (see `imageLayerBlur`'s own comment), driven here as two chained
+  // halves instead, timed to land back at 0 blur exactly when the
+  // existing opacity/scale crossfade also finishes.
+  const [exitingIndex, setExitingIndex] = useState<number | null>(null);
+  const [blurPeak, setBlurPeak] = useState(false);
+  const prevOpenIndexRef = useRef(openIndex);
+  useEffect(() => {
+    const previous = prevOpenIndexRef.current;
+    prevOpenIndexRef.current = openIndex;
+    if (previous === openIndex) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
+    setExitingIndex(previous);
+    setBlurPeak(true);
+    const halfway = setTimeout(() => setBlurPeak(false), 325);
+    const settle = setTimeout(() => setExitingIndex(null), 650);
+    return () => {
+      clearTimeout(halfway);
+      clearTimeout(settle);
+    };
+  }, [openIndex]);
+
   // Desktop chip width used to need a real measured-pixel clone here too
   // (CSS `width: auto` can't be transitioned) -- removed, 2026-09-11
   // (performance-profiled report: convert the chip resize to a
@@ -244,28 +287,38 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
           </div>
 
           <div className={ourFactoryDetails.imageCol}>
-            {items.map((item, index) => (
-              <div
-                key={item.label}
-                className={cx(
-                  ourFactoryDetails.imageLayer,
-                  index === openIndex
-                    ? ourFactoryDetails.desktopImageLayerActive
-                    : ourFactoryDetails.desktopImageLayerInactive,
-                )}
-              >
-                <MediaPlaceholder
-                  label={item.imageAlt}
-                  image={item.image}
-                  ratio="730:644"
-                  radius="none"
-                  tone="dark"
-                  placeholderClassName={ourFactoryDetails.imagePlaceholderFill}
-                  showLabel={false}
-                  className="size-full"
-                />
-              </div>
-            ))}
+            {items.map((item, index) => {
+              const isOpen = index === openIndex;
+              const isExiting = index === exitingIndex;
+              return (
+                <div
+                  key={item.label}
+                  className={cx(
+                    ourFactoryDetails.imageLayer,
+                    isOpen
+                      ? ourFactoryDetails.desktopImageLayerActive
+                      : isExiting
+                        ? ourFactoryDetails.desktopImageLayerExiting
+                        : ourFactoryDetails.desktopImageLayerInactive,
+                    (isOpen || isExiting) && ourFactoryDetails.imageLayerBlur,
+                    (isOpen || isExiting) && blurPeak
+                      ? ourFactoryDetails.imageLayerBlurPeak
+                      : ourFactoryDetails.imageLayerBlurRest,
+                  )}
+                >
+                  <MediaPlaceholder
+                    label={item.imageAlt}
+                    image={item.image}
+                    ratio="730:644"
+                    radius="none"
+                    tone="dark"
+                    placeholderClassName={ourFactoryDetails.imagePlaceholderFill}
+                    showLabel={false}
+                    className="size-full"
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
