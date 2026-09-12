@@ -4468,8 +4468,26 @@ export const insideFactory = {
   // offset correctly. `w-max` (same fix `Marquee.tsx`'s own `track` already
   // established) shrinks the reel's own box to its content's real size.
   desktopRow: "overflow-clip w-full px-[80px]",
+  // Duration/easing only, 2026-09-12 (owner: chevron-click slide read as
+  // "fast", referencing store.google.com/us/category/phones's own "Get
+  // serious power and security" carousel as the target feel -- a slower,
+  // more gradually-decelerating glide, not a quick snap). Was
+  // `duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)]`, the same
+  // "premium settle" curve this codebase uses for crossfades/reveals
+  // elsewhere -- kept there since it still suits a quick opacity/scale
+  // settle, but its deceleration front-loads too fast for a slide this
+  // long a distance (six full 1200px cards) to read as unhurried. Now
+  // `cubic-bezier(0.16,1,0.3,1)` ("ease-out-expo"), which keeps easing
+  // visibly longer into the motion instead of mostly finishing in the
+  // first third, plus a longer 800ms duration -- the combination reads as
+  // a deliberate glide rather than a snap. The mouse-tracking chevron
+  // circle itself (`useDesktopChevronScroller`'s own `SMOOTHING` loop) is
+  // unrelated and untouched -- only this reel's own click-triggered slide
+  // changed. Scoped to this section only; every other `desktopReel` token
+  // in this file (Exhibitions, How It Works, Trust Signals, Product
+  // Customize Steps) keeps its own original timing.
   desktopReel:
-    "flex w-max items-center gap-12 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+    "flex w-max items-center gap-12 transition-transform duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none",
   // 1200px (owner, 2026-09-08: "increase the size to 1200px width by
   // 640") -- must match `DESKTOP_CARD_WIDTH` in InsideFactory.tsx and
   // `desktopRow`'s own gap above. The `md:`/tablet-tier 469px width is

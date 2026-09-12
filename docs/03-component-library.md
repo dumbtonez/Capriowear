@@ -1058,6 +1058,8 @@ The real fix: `trackRef` is now `overflow: clip` (every row's own `desktopRow`/`
 
 **`useDesktopScrollProgress`/`DesktopScrollProgress` (added 2026-09-11, removed 2026-09-12)** — a scrollbar-style progress track piloted under `InsideFactory.tsx`'s desktop gallery only, styled via the now-deleted `scrollProgress` token. Owner: "no need for this" — removed entirely (hook, component, and style token) rather than left dead; the chevron alone is the only scroll affordance on this row again, same as every other chevron-driven gallery on the site.
 
+**Inside the Factory's own `desktopReel` slide slowed and softened, 2026-09-12** (owner: chevron-click slide read as "fast," referencing store.google.com/us/category/phones's "Get serious power and security" carousel as the target feel — a slower, more gradually-decelerating glide). `insideFactory.desktopReel` only: `duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)]` → `duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)]` ("ease-out-expo" — keeps visibly easing for most of the motion instead of mostly finishing in the first third, over a longer 800ms). Verified live: `getComputedStyle` sampling on a real click shows the reel still ~50px short of its final position at 620ms, settling by ~750ms. Every other section's own `desktopReel`/`galleryReel` token (Exhibitions, How It Works, Trust Signals, Product Customize Steps, Our Factory Team) is untouched, still `550ms`/the original curve — this was a single-section owner call, not a mechanism change, and the shared `useDesktopChevronScroller` hook itself (including its unrelated cursor-tracking chevron `SMOOTHING` loop) wasn't touched.
+
 ### JsonLd — Built
 `components/JsonLd.tsx`
 
