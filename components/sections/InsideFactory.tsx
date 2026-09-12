@@ -40,12 +40,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/Button";
-import {
-  DesktopChevron,
-  DesktopScrollProgress,
-  useDesktopChevronScroller,
-  useDesktopScrollProgress,
-} from "@/components/DesktopChevronScroller";
+import { DesktopChevron, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextReveal } from "@/components/TextReveal";
@@ -171,39 +166,35 @@ function DesktopGallery({
 }) {
   const { wrapRef, trackRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
     useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP);
-  const { barRef, thumbRef } = useDesktopScrollProgress(trackRef);
 
   return (
-    <div>
-      <div
-        ref={wrapRef}
-        className={insideFactory.desktopScrollerWrap}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onClick={handleClick}
-      >
-        <div ref={trackRef} className={insideFactory.desktopRow}>
-          {shots.map((shot) => (
-            <div key={shot.label} className={insideFactory.desktopCard}>
-              <MediaPlaceholder
-                label={shot.label}
-                ratio="15:8"
-                radius="none"
-                tone={tone}
-                showLabel={false}
-                image={shot.image}
-                className={insideFactory.desktopCardMedia}
-              />
-              <p className={tone === "light" ? insideFactory.desktopCardLabelLight : insideFactory.desktopCardLabel}>
-                {shot.label}
-              </p>
-            </div>
-          ))}
-        </div>
-        <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
+    <div
+      ref={wrapRef}
+      className={insideFactory.desktopScrollerWrap}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
+    >
+      <div ref={trackRef} className={insideFactory.desktopRow}>
+        {shots.map((shot) => (
+          <div key={shot.label} className={insideFactory.desktopCard}>
+            <MediaPlaceholder
+              label={shot.label}
+              ratio="15:8"
+              radius="none"
+              tone={tone}
+              showLabel={false}
+              image={shot.image}
+              className={insideFactory.desktopCardMedia}
+            />
+            <p className={tone === "light" ? insideFactory.desktopCardLabelLight : insideFactory.desktopCardLabel}>
+              {shot.label}
+            </p>
+          </div>
+        ))}
       </div>
-      <DesktopScrollProgress barRef={barRef} thumbRef={thumbRef} tone={tone} className={insideFactory.desktopProgressBar} />
+      <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
     </div>
   );
 }

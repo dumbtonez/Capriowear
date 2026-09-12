@@ -25,8 +25,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState, type MouseEvent, type RefObject } from "react";
 
-import { cx } from "@/components/ui/cx";
-import { chevronScroller, scrollProgress } from "@/components/ui/styles";
+import { chevronScroller } from "@/components/ui/styles";
 
 const CHEVRON_HALF = 40; // half of size-20 (80px) circle, to centre it on the cursor
 const DOT_HALF = 3; // half of size-1.5 (6px) dot, to centre it on the cursor
@@ -239,89 +238,6 @@ export function useDesktopChevronScroller(cardPitch: number) {
     handleMouseLeave,
     handleClick,
   };
-}
-
-// Scroll-position track for a `useDesktopChevronScroller` row (owner,
-// 2026-09-11, comparing this project's chevron to store.google.com's own
-// Pixel Watch "What's new" carousel: "which one is more user friendly and
-// effective" -- recommended keeping the chevron, since it's the more
-// premium interaction and already carefully tuned, but adding Google's own
-// scrollbar-style progress track underneath it, since the chevron alone
-// gives no sense of "is there more content" or "how far through am I"
-// until you're already hovering. Google's own track is a proportional-
-// width thumb (like a scrollbar), not stepped pagination dots -- this
-// mirrors that exactly, driven by the track's real `scrollLeft`/
-// `scrollWidth`, not a fixed step count, so it stays correct regardless of
-// how many cards the row holds. Piloted on Inside the Factory first, not
-// applied everywhere yet.
-//
-// Writes width/transform straight to the thumb's own DOM style on a
-// rAF-throttled scroll listener, same pattern as this project's other
-// scroll-position-driven visuals (e.g. InsideFactory's own mobile card
-// height interpolation) -- a 1200px `scrollBy` glide shouldn't wait on a
-// React re-render either. Pixel math (not percentages) against the bar's
-// own measured width, not the track's -- the bar can be styled to any
-// width independently (it doesn't have to match the row's own card width),
-// so nothing here assumes the two happen to be equal.
-export function useDesktopScrollProgress(trackRef: RefObject<HTMLDivElement | null>) {
-  const barRef = useRef<HTMLDivElement>(null);
-  const thumbRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const track = trackRef.current;
-    const bar = barRef.current;
-    if (!track || !bar) return;
-
-    let ticking = false;
-    const update = () => {
-      const thumb = thumbRef.current;
-      if (thumb) {
-        const { scrollLeft, scrollWidth, clientWidth } = track;
-        const barWidth = bar.clientWidth;
-        const ratio = scrollWidth > 0 ? Math.min(clientWidth / scrollWidth, 1) : 1;
-        const maxScroll = scrollWidth - clientWidth;
-        const progress = maxScroll > 0 ? scrollLeft / maxScroll : 0;
-        const thumbWidth = ratio * barWidth;
-        thumb.style.width = `${thumbWidth}px`;
-        thumb.style.transform = `translateX(${progress * (barWidth - thumbWidth)}px)`;
-      }
-      ticking = false;
-    };
-    const onScroll = () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(update);
-      }
-    };
-
-    update();
-    track.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      track.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [trackRef]);
-
-  return { barRef, thumbRef };
-}
-
-export function DesktopScrollProgress({
-  barRef,
-  thumbRef,
-  tone = "dark",
-  className,
-}: {
-  barRef: RefObject<HTMLDivElement | null>;
-  thumbRef: RefObject<HTMLDivElement | null>;
-  tone?: "light" | "dark";
-  className?: string;
-}) {
-  return (
-    <div ref={barRef} className={cx(tone === "light" ? scrollProgress.trackLight : scrollProgress.track, className)}>
-      <div ref={thumbRef} className={tone === "light" ? scrollProgress.thumbLight : scrollProgress.thumb} />
-    </div>
-  );
 }
 
 export function DesktopChevron({

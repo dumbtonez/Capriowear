@@ -4387,19 +4387,10 @@ export const insideFactory = {
   // instead of `text-paper` now that the card sits on a white section.
   desktopCardLabelLight: "mt-8 text-[1.5rem] font-normal leading-[28px] text-text",
   // The floating chevron is the shared `chevronScroller` recipe -- see the
-  // note on `howItWorks` above.
-  // Scroll-position track, piloted here first (owner, 2026-09-11, see
-  // `scrollProgress`'s own comment). Went through two wrong widths before
-  // landing on a short, centred track: first matched `desktopCard`'s own
-  // 1200px ("this looks very bad, make it sleek ... follow exactly"), then
-  // widened to span edge-to-edge with the row ("but it still edge to edge,
-  // i want it small width in the middle of the content, not too big edge
-  // to edge") -- 320px confirmed correct. Doubled to 640px (owner: "make
-  // the new chevron under horizontal scroll thing we built, make it double
-  // the size" -- track height doubled to match, see `scrollProgress`'s own
-  // comment). Gap from the row stays 56px (`pt-14`) -- confirmed correct,
-  // more than Google's own modest ~24px, per the owner's explicit request.
-  desktopProgressBar: "mx-auto mt-14 w-[640px]",
+  // note on `howItWorks` above. The scroll-position progress track this
+  // gallery briefly carried underneath (`desktopProgressBar`) was removed
+  // 2026-09-12 (owner: "no need for this") -- the chevron alone is the only
+  // scroll affordance now.
   // CTA to Our Factory, added 2026-08-26 (owner request), sitting under the
   // gallery inside the same full-bleed wrap. 56px top gap from the gallery
   // (owner call, 2026-08-26, overriding the initial 48px default).
@@ -4984,38 +4975,6 @@ export const chevronScroller = {
   // own visible mark; still does real work (the instant-follow position
   // fix), just no longer reads as a separate design element.
   dot: "pointer-events-none absolute top-0 left-0 z-20 size-1.5 rounded-full bg-paper opacity-0 transition-opacity duration-200 ease-out",
-};
-
-// Scroll-position track piloted under Inside the Factory's own desktop
-// chevron row (owner, 2026-09-11, comparing to store.google.com's Pixel
-// Watch carousel) -- see `useDesktopScrollProgress`'s own comment in
-// DesktopChevronScroller.tsx for why. A thin rounded bar, the thumb's
-// width/position written directly by that hook (proportional to how much
-// of the row's content is visible/scrolled), not a fixed class here.
-// `h-1` (4px) -- was `h-0.5` (2px, a hairline matching store.google.com's
-// own reference) until the owner asked to double the whole track's size
-// (2026-09-11: "make the new chevron under horizontal scroll thing we
-// built, make it double the size") -- height doubled to match the track's
-// own width doubling (`insideFactory.desktopProgressBar`, 320px -> 640px),
-// so the bar's proportions stay the same, not just its footprint.
-// No width utility here (deliberately, not an oversight) -- every real
-// caller supplies its own exact width via `DesktopScrollProgress`'s own
-// `className` (see `insideFactory.desktopProgressBar`'s own comment for
-// its current 320px). A `w-full` here alongside a caller's `w-[…]` in the
-// same merged class string is the same class of bug already fixed once on
-// `CardMedia`'s radius (Card.tsx) -- two same-specificity width utilities
-// racing, cascade order (not source order) deciding the winner -- this
-// track hit that exact bug live (rendered full page width instead of the
-// intended 320px) before this comment was written.
-// `tone`-aware like every other chevron-row caller: `dark` (the homepage's
-// own ink section) needs a translucent-white track so it reads against
-// `bg-ink`, `light` (the /our-factory reuse) needs the sitewide `bg-line`
-// hairline instead.
-export const scrollProgress = {
-  track: "relative h-1 overflow-hidden rounded-full bg-paper/15",
-  thumb: "absolute inset-y-0 left-0 rounded-full bg-paper",
-  trackLight: "relative h-1 overflow-hidden rounded-full bg-line",
-  thumbLight: "absolute inset-y-0 left-0 rounded-full bg-ink",
 };
 
 /* --- HowItWorks (homepage section 12) --------------------------------- */
