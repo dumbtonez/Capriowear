@@ -3324,12 +3324,14 @@ export const servicesHowWeWork = {
   pathDetailItem: "flex flex-col gap-2",
   // Resized to the same new body scale as `pathSubtitleDesktop`/
   // `pathDetailBody` (2026-09-09, see that key's own comment) -- was
-  // 22px/1px-tracking. `font-medium`/letter-spacing kept: Our Services has
-  // no "field label" of its own to match against, and dropping the
-  // label's own weight/spacing distinction from its value below would
-  // remove this card's own real label-vs-value hierarchy, not something
-  // "text sizing" was asked to change.
-  pathDetailLabel: "text-[1.25rem] font-medium tracking-[1px] text-text",
+  // 22px/1px-tracking. Letter-spacing kept: Our Services has no "field
+  // label" of its own to match against, and dropping the label's own
+  // spacing distinction from its value below would remove this card's own
+  // real label-vs-value hierarchy, not something "text sizing" was asked
+  // to change. Weight bumped `font-medium` (500) -> `font-semibold` (600),
+  // 2026-09-12 (owner: "make the text 'What it means'/'Best for' 600
+  // weight").
+  pathDetailLabel: "text-[1.25rem] font-semibold tracking-[1px] text-text",
   // Matches `capabilityCard.text`'s own desktop tier exactly (2026-09-09,
   // see `pathSubtitleDesktop`'s own comment) -- was `text-[#17191e]`, the
   // same colour as `text-subline` but the raw literal instead of the

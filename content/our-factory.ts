@@ -388,13 +388,17 @@ export const ourFactory = {
     heading: "Skilled hands behind every stitch",
     subline: teamGallerySubline,
     hero: { label: "Factory floor at Capriowear's Sialkot facility, the full production team at work" },
+    // All 4 now `size: "tall"` -- owner, 2026-09-12: "make the images under
+    // the full bleed image same as the first left portrait card" (was an
+    // alternating tall/short stagger; every item now matches the first
+    // card's own portrait size, `ourFactoryTeam.itemHeight.tall`).
     media: [
       { label: "Cutting team preparing fabric panels at Capriowear's Sialkot factory", size: "tall" as const },
-      { label: "A machinist sewing a garment seam at Capriowear's Sialkot factory", size: "short" as const },
+      { label: "A machinist sewing a garment seam at Capriowear's Sialkot factory", size: "tall" as const },
       { label: "Printing and sublimation team at work at Capriowear's Sialkot factory", size: "tall" as const },
       {
         label: "A quality control inspector checking a finished garment at Capriowear's Sialkot factory",
-        size: "short" as const,
+        size: "tall" as const,
       },
     ],
   },
