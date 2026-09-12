@@ -1865,14 +1865,16 @@ export const ourFactoryIntro = {
 // each item's own fixed desktop width dropping to `w-full`.
 export const ourFactoryProcess = {
   section: "bg-paper",
-  // xl:pt-[160px]: this section's own real top inset (owner correction,
-  // 2026-09-08: "top should have 160px gap" -- get_metadata's own frame
-  // read no top padding at all, since the previous section, InsideFactory,
-  // already happened to close with a matching 120px bottom pad; that
-  // coincidence read as "close enough" but wasn't the real confirmed
-  // number, so this section now states its own 160px explicitly rather
-  // than depending on whatever the previous section's own padding happens
-  // to be).
+  // xl:pt-[96px]: this section's own real top inset. Was 160px (owner
+  // correction, 2026-09-08: "top should have 160px gap" -- get_metadata's
+  // own frame read no top padding at all, since the previous section,
+  // InsideFactory, already happened to close with a matching 120px bottom
+  // pad; that coincidence read as "close enough" but wasn't the real
+  // confirmed number, so this section stated its own 160px explicitly
+  // rather than depending on whatever the previous section's own padding
+  // happens to be). Reduced to 96px, 2026-09-12 (owner: "also make it to
+  // factory tour page what we make" -- the same 96px just applied to the
+  // homepage's own "What We Make", `whatWeMake.desktopSection`'s own top).
   // Back to `container-p` (owner, 2026-09-08, reversing the previous
   // correction: a flat edge-anchored 80px inset was tried, but at large
   // screens it left content pinned to the left with a growing dead zone
@@ -1882,7 +1884,7 @@ export const ourFactoryProcess = {
   // gives exactly 80px from the left at the page's own 1440px reference
   // width -- only diverges from a flat 80px past that width, which reads
   // as balanced instead of lopsided.
-  inner: "container-p flex flex-col gap-12 pt-12 pb-16 xl:gap-[104px] xl:pb-[120px] xl:pt-[160px]",
+  inner: "container-p flex flex-col gap-12 pt-12 pb-16 xl:gap-[104px] xl:pb-[120px] xl:pt-[96px]",
   // Heading block (eyebrow + H2) plus the first row, 72px apart -- the
   // real Figma nesting (get_metadata: node 857:1986 wraps the heading
   // block and row 1 together with its own 72px gap, separate from the
@@ -3781,9 +3783,12 @@ export const whatWeMake = {
   // corrected 2026-08-24 to the standard mobile section-to-section pattern:
   // 0 top, 72px bottom -- supersedes the earlier 64px top/100px bottom, now
   // that a sitewide standard exists (see clientLogos.mobileWrap for the full
-  // reasoning).
+  // reasoning). Top corrected again 2026-09-12 (owner: "make it 96px" --
+  // the gap from Trust Signals above), 120px -> 96px; bottom unchanged.
+  // `/our-factory`'s own "What We Make" (`ourFactoryProcess.inner`'s own
+  // `xl:pt-*`) got the same 96px the same request.
   mobileSection: "container-p pt-0 pb-[72px] xl:hidden",
-  desktopSection: "container-p hidden pt-[120px] pb-[120px] xl:block",
+  desktopSection: "container-p hidden pt-[96px] pb-[120px] xl:block",
   // 90px gap from the SectionHeading down to the first category group --
   // off-scale, kept exact. Mobile's equivalent gap (heading block to first
   // category group) is 48px, and 24px more down to the tile list -- both
