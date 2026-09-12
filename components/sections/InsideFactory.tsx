@@ -164,8 +164,12 @@ function DesktopGallery({
   shots: typeof home.insideFactory.media;
   tone: "light" | "dark";
 }) {
+  // `loop: true` (owner, 2026-09-12, referencing apple.com/ae/macbook-pro's
+  // "Take a closer look" carousel): a forward click on the last shot wraps
+  // back to the first instead of doing nothing. Every other section using
+  // this same hook keeps the default clamped (non-looping) behaviour.
   const { wrapRef, trackRef, reelRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
-    useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP);
+    useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP, true);
 
   return (
     <div
