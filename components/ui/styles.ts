@@ -3239,10 +3239,11 @@ export const servicesHowWeWork = {
   // during the "how we work" mobile-accordion redesign, had drifted
   // desktop away from the real frame too, the same "collapsible design is
   // for mobile only" scoping mistake already caught and fixed on the cards
-  // themselves). `xl:items-center`/`xl:pt-[160px]` restore the frame's own
-  // real top gap and centred alignment (mobile keeps `items-start`/`pt-6`,
-  // its own tuned values, unchanged).
-  inner: "container-p flex flex-col items-start pt-6 pb-12 xl:items-center xl:pt-[160px] xl:pb-20",
+  // themselves). `xl:items-center` restores the frame's own real centred
+  // alignment (mobile keeps `items-start`/`pt-6`, its own tuned values,
+  // unchanged). `xl:pt-[120px]`, was `xl:pt-[160px]` -- owner, 2026-09-12:
+  // "make it 120".
+  inner: "container-p flex flex-col items-start pt-6 pb-12 xl:items-center xl:pt-[120px] xl:pb-20",
   // 624px intro column in Figma -- kept as a max-width (not a fixed width)
   // so it can shrink below its own value on a narrow mobile viewport
   // instead of forcing horizontal overflow.
