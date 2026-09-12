@@ -7923,17 +7923,24 @@ export const whatsappFloating = {
   // blackish but visible, white on white background is not very visible"
   // then "make a balnce" -- one fixed grey compromise), then made
   // tone-adaptive via `getSurfaceToneAt` (owner: "make it a bit dark on
-  // white and should go white on blck bacground"). Superseded 2026-09-11
-  // (owner: "for insta sticky icon on desktop, use the brand color for the
-  // icon only", then "is this pink the offical color for instagram...use
-  // the right one") -- `InstagramIcon`'s own `gradient` prop now paints
-  // Meta's real published brand gradient directly in the SVG (see that
-  // component's own comment for the source/stops), not a single flat
-  // colour token here; `FloatingSocialButtons.tsx` no longer samples tone
-  // for this icon. The button's own frosted-glass background is unchanged.
+  // white and should go white on blck bacground"). Briefly superseded
+  // 2026-09-11 by `InstagramIcon`'s own `gradient` prop (Meta's real brand
+  // gradient painted directly in the SVG), then reverted back to this
+  // tone-adaptive version, 2026-09-13 (owner: "make it back to previous
+  // style when it gets white on black background and mid greish on white"
+  // -- "the same that we had before") -- `FloatingSocialButtons.tsx` samples
+  // `getSurfaceToneAt` again, switching `instagramIconLight`/
+  // `instagramIconDark` below. The button's own frosted-glass background is
+  // unchanged throughout.
   instagramButton:
     "flex size-14 items-center justify-center rounded-full border border-white/25 bg-ink/20 shadow-lg backdrop-blur-sm transition-transform hover:scale-105",
   instagramIcon: "size-6",
+  // `text-text` (`#1d1d1f`, this project's own near-black body-text
+  // colour) over a light section -- not pure black (owner: "not too
+  // blackish"). `text-paper` (white) over a dark section, same as
+  // `whatsappFloating.icon`'s own colour there.
+  instagramIconLight: "text-text",
+  instagramIconDark: "text-paper",
 };
 
 /* --- ProductCustomizeSteps (PDP) ----------------------------------------- */
