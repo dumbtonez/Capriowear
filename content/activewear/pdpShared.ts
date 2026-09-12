@@ -172,12 +172,17 @@ export const pdpCustomizationSteps = {
   mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
   // Fabric moved first (owner, 2026-09-10: "make fabric as first card") --
   // was 3rd.
+  // `image` on all 5, 2026-09-12: temporary test photography (Inside the
+  // Factory's own real shots, repeated) so this carousel's own
+  // zoom-and-settle `parallax` treatment (CapabilityCard) has something
+  // real to animate. Not a "product image" in the excluded PLP/PDP sense
+  // -- these are process-station photos, not the style's own catalog shots.
   steps: [
-    { title: "Fabric and material", body: "Any blend and weight, sourced to your reference" },
-    { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG" },
-    { title: "Branding", body: "Silicone, heat transfer, embroidery" },
-    { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags" },
-    { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec" },
+    { title: "Fabric and material", body: "Any blend and weight, sourced to your reference", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and material" } },
+    { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+    { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+    { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+    { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
   ],
 };
 

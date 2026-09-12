@@ -66,6 +66,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { DesktopChevron, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
+import { ParallaxMedia } from "@/components/ParallaxMedia";
 import { cardCarousel, trustSignals } from "@/components/ui/styles";
 import { cx } from "@/components/ui/cx";
 import type { home } from "@/content/home";
@@ -116,7 +117,7 @@ function MobileBody({ segments }: { segments: BodySegment[] }) {
 const CARD_WIDTH = 380;
 // 24px (owner, 2026-09-10: "make it 32" then "make it 24" -- was 40px,
 // matching styles.ts's own `trustSignals.desktopRow`/`tabletRow`).
-const CARD_GAP = 24;
+const CARD_GAP = 40; // owner, 2026-09-12: "make it 40px across the site" (was 24, matching trustSignals.desktopReel)
 
 function DesktopScroller({ items }: { items: typeof home.trustStrip }) {
   const { wrapRef, trackRef, reelRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
@@ -135,8 +136,9 @@ function DesktopScroller({ items }: { items: typeof home.trustStrip }) {
         <div ref={reelRef} className={trustSignals.desktopReel}>
           {items.map((entry, index) => (
             <div key={entry.title} className={trustSignals.desktopCard}>
-              <MediaPlaceholder
+              <ParallaxMedia
                 label={`${entry.title} artwork`}
+                image={entry.image}
                 ratio={index % 2 === 0 ? "5:6" : "25:21"}
                 radius="none"
                 showLabel={false}
@@ -212,6 +214,7 @@ function TabletCarousel({ items }: { items: typeof home.trustStrip }) {
           >
             <MediaPlaceholder
               label={`${entry.title} artwork`}
+              image={entry.image}
               ratio={index % 2 === 0 ? "5:6" : "25:21"}
               radius="none"
               showLabel={false}
@@ -256,6 +259,7 @@ export function TrustSignals({ items, pageVariant = "home" }: TrustSignalsProps)
       <div className={mobileWrap}>
         <MediaPlaceholder
           label="Trust signals artwork"
+          image={items[0]?.image}
           ratio="16:11"
           radius="none"
           className={trustSignals.mobileMedia}

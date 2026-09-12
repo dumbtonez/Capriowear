@@ -200,6 +200,19 @@ export const home = {
         src: "/factory-test/hero-video-test.jpg",
         alt: "Factory worker stitching a garment on an industrial sewing machine",
       },
+      // Test video pair (owner brief, 2026-09-12: hero teaser-loop -> full
+      // video pattern). No real footage yet -- `teaserSrc` is a 9s,
+      // ~2.2MB, muted stand-in loop (a self-crossfaded trim of a freely
+      // licensed sample park clip, chosen for its locked-off, low-motion
+      // shot -- see `components/TeaserVideo.tsx`'s own header comment and
+      // this task's report for the full sourcing/compression notes);
+      // `fullSrc` is the same source clip's full ~30s length, unmuted.
+      // Swap both for the real hero video once it exists -- same component,
+      // same shape, no code change needed.
+      video: {
+        teaserSrc: "/factory-test/hero-teaser-test.mp4",
+        fullSrc: "/factory-test/hero-full-test.mp4",
+      },
     },
   },
 
@@ -332,14 +345,20 @@ export const home = {
   // the two items with a real Figma bold span (Low MOQ, Private Label) can
   // mark it without a full rich-text system; a plain segment is just a
   // string.
+  // `image` on all 4, 2026-09-12: temporary test photography (Inside the
+  // Factory's own real shots, repeated) so TrustSignals' zoom-and-settle
+  // `ParallaxMedia` treatment has something real to animate -- see
+  // `howItWorks.steps`'s own comment above.
   trustStrip: [
     {
       title: "Product Development",
       body: ["We refine ideas through sampling, pattern development, and technical adjustments to meet your needs."],
+      image: { src: "/factory-test/inside-factory-1.jpg", alt: "Product Development" },
     },
     {
       title: "Private Label",
       body: ["Your designs, fabrics, labels and packaging. ", { bold: "Factory-direct, no middleman." }],
+      image: { src: "/factory-test/inside-factory-2.jpg", alt: "Private Label" },
     },
     {
       title: "Low MOQ",
@@ -347,10 +366,12 @@ export const home = {
       // previous copy (still sourced from the earlier frame) bolded "50
       // pieces per style" instead.
       body: ["Start from just 50 pieces per style. ", { bold: "From first samples to full bulk order." }],
+      image: { src: "/factory-test/inside-factory-3.jpg", alt: "Low MOQ" },
     },
     {
       title: "Worldwide Shipping",
       body: ["DDP to the USA, UK, Europe, Canada and Australia. GSP+ 0% EU import duty."],
+      image: { src: "/factory-test/inside-factory-4.jpg", alt: "Worldwide Shipping" },
     },
   ],
 
@@ -621,18 +642,42 @@ export const home = {
   services: {
     eyebrow: "OUR SERVICES",
     h2: "From raw fabric to retail-ready packaging",
+    // `image` on all 5, 2026-09-12: temporary test photography (Inside the
+    // Factory's own real shots, repeated) so the zoom-and-settle
+    // `parallax` treatment (OurServices.tsx, CapabilityCard) has something
+    // real to animate -- see `howItWorks.steps`'s own comment above.
     items: [
-      { title: "Custom Manufacturing", body: "Bring a tech pack or a sketch. We handle patterns, grading fit and development, from sample to bulk." },
-      { title: "Fabrics & Materials", body: "Sourcing premium raw fabrics and materials from textile mills that supply to leading global brands." },
-      { title: "Printing & Branding", body: "Sublimation, silicone, screen, DTG, DTF, embroidery and tackle twill, plus labels, hangtags & packaging." },
+      {
+        title: "Custom Manufacturing",
+        body: "Bring a tech pack or a sketch. We handle patterns, grading fit and development, from sample to bulk.",
+        image: { src: "/factory-test/inside-factory-1.jpg", alt: "Custom Manufacturing" },
+      },
+      {
+        title: "Fabrics & Materials",
+        body: "Sourcing premium raw fabrics and materials from textile mills that supply to leading global brands.",
+        image: { src: "/factory-test/inside-factory-2.jpg", alt: "Fabrics & Materials" },
+      },
+      {
+        title: "Printing & Branding",
+        body: "Sublimation, silicone, screen, DTG, DTF, embroidery and tackle twill, plus labels, hangtags & packaging.",
+        image: { src: "/factory-test/inside-factory-3.jpg", alt: "Printing & Branding" },
+      },
       // Bodies were swapped between these two items -- real bug, found
       // live, 2026-09-10 (owner: "quality and compliance subline is
       // swaped with logistics and fulfilment") -- confirmed by content:
       // "Quality & Compliance" had the packaging/freight/delivery body
       // (that's logistics), "Logistics & Fulfilment" had the inspections/
       // audits/documentation body (that's quality). Swapped back.
-      { title: "Quality & Compliance", body: "Inline and final inspections done by independent audits, shipments leave with proper documentation." },
-      { title: "Logistics & Fulfilment", body: "End-to-end handling of packaging, freight and delivery. We ensure your order arrives on schedule." },
+      {
+        title: "Quality & Compliance",
+        body: "Inline and final inspections done by independent audits, shipments leave with proper documentation.",
+        image: { src: "/factory-test/inside-factory-4.jpg", alt: "Quality & Compliance" },
+      },
+      {
+        title: "Logistics & Fulfilment",
+        body: "End-to-end handling of packaging, freight and delivery. We ensure your order arrives on schedule.",
+        image: { src: "/factory-test/inside-factory-5.jpg", alt: "Logistics & Fulfilment" },
+      },
     ],
   },
 
@@ -646,12 +691,39 @@ export const home = {
   howItWorks: {
     eyebrow: "HOW IT WORKS",
     h2: "From tech pack to shipped order in five easy steps",
+    // `image` on all 5 steps, 2026-09-12: temporary test photography
+    // (reusing Inside the Factory's own 5 real factory-floor shots,
+    // repeated -- owner: "use testing images from public folder, you can
+    // repeat them not an issue they are just for testing") so the
+    // zoom-and-settle `parallax` treatment (HowItWorks.tsx, CapabilityCard)
+    // has something real to animate ahead of this section's own dedicated
+    // photography.
     steps: [
-      { title: "Inquiry & Quote", body: "Send your tech pack or sketch. Clear quote, MOQs, bulk pricing and timeline in 24 hours." },
-      { title: "Sampling", body: "We develop your sample in 10 to 14 days. Refine the fit, fabric and finish with us until you're satisfied." },
-      { title: "Bulk Production", body: "Bulk runs factory-direct through our in-house line: cut, stitched, printed, finished." },
-      { title: "Quality Control", body: "Checked at multiple stages to AQL 2.5, third-party inspection is also welcome at our facility." },
-      { title: "Packaging & Shipping", body: "Packed to your spec and shipped: FOB, CIF or DDP, all the paperwork is managed in-house." },
+      {
+        title: "Inquiry & Quote",
+        body: "Send your tech pack or sketch. Clear quote, MOQs, bulk pricing and timeline in 24 hours.",
+        image: { src: "/factory-test/inside-factory-1.jpg", alt: "Inquiry & Quote" },
+      },
+      {
+        title: "Sampling",
+        body: "We develop your sample in 10 to 14 days. Refine the fit, fabric and finish with us until you're satisfied.",
+        image: { src: "/factory-test/inside-factory-2.jpg", alt: "Sampling" },
+      },
+      {
+        title: "Bulk Production",
+        body: "Bulk runs factory-direct through our in-house line: cut, stitched, printed, finished.",
+        image: { src: "/factory-test/inside-factory-3.jpg", alt: "Bulk Production" },
+      },
+      {
+        title: "Quality Control",
+        body: "Checked at multiple stages to AQL 2.5, third-party inspection is also welcome at our facility.",
+        image: { src: "/factory-test/inside-factory-4.jpg", alt: "Quality Control" },
+      },
+      {
+        title: "Packaging & Shipping",
+        body: "Packed to your spec and shipped: FOB, CIF or DDP, all the paperwork is managed in-house.",
+        image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging & Shipping" },
+      },
     ],
   },
 
@@ -720,12 +792,16 @@ export const home = {
   exhibitions: {
     eyebrow: "CAPRIOWEAR AT EXHIBITIONS",
     h2: "Global exhibitions, meet the factory in person",
+    // `image` on all 5, 2026-09-12: temporary test photography (Inside the
+    // Factory's own real shots, repeated) so this gallery's own
+    // zoom-and-settle `ParallaxMedia` treatment has something real to
+    // animate -- see `howItWorks.steps`'s own comment above.
     media: [
-      { label: "Exhibition shot 1" },
-      { label: "Exhibition shot 2" },
-      { label: "Exhibition shot 3" },
-      { label: "Exhibition shot 4" },
-      { label: "Exhibition shot 5" },
+      { label: "Exhibition shot 1", image: { src: "/factory-test/inside-factory-1.jpg" } },
+      { label: "Exhibition shot 2", image: { src: "/factory-test/inside-factory-2.jpg" } },
+      { label: "Exhibition shot 3", image: { src: "/factory-test/inside-factory-3.jpg" } },
+      { label: "Exhibition shot 4", image: { src: "/factory-test/inside-factory-4.jpg" } },
+      { label: "Exhibition shot 5", image: { src: "/factory-test/inside-factory-5.jpg" } },
     ],
   },
 

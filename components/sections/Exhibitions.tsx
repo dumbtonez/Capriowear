@@ -24,6 +24,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { DesktopChevron, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
+import { ParallaxMedia } from "@/components/ParallaxMedia";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextReveal } from "@/components/TextReveal";
 import { cx } from "@/components/ui/cx";
@@ -53,7 +54,7 @@ function lerp(from: number, to: number, t: number) {
 // InsideFactory.tsx's own gallery -- tablet moved to the swipe+dots
 // carousel below.
 const DESKTOP_CARD_WIDTH = 469;
-const DESKTOP_CARD_GAP = 24;
+const DESKTOP_CARD_GAP = 24; // owner, 2026-09-12: reverted to 24 the same day ("make it 24px") -- Exhibitions keeps its own value, unlike the other four chevron galleries (matching exhibitions.desktopReel)
 
 function DesktopScroller({ shots }: { shots: typeof home.exhibitions.media }) {
   const { wrapRef, trackRef, reelRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
@@ -72,7 +73,7 @@ function DesktopScroller({ shots }: { shots: typeof home.exhibitions.media }) {
         <div ref={reelRef} className={exhibitions.desktopReel}>
           {shots.map((shot) => (
             <div key={shot.label} className={exhibitions.desktopCard}>
-              <MediaPlaceholder label={shot.label} ratio="469:320" radius="none" tone="dark" />
+              <ParallaxMedia label={shot.label} image={shot.image} ratio="469:320" radius="none" />
             </div>
           ))}
         </div>
@@ -161,7 +162,7 @@ function MobileCarousel({ shots }: { shots: typeof home.exhibitions.media }) {
             className={exhibitions.mobileCard}
             style={{ height: index === 0 ? activeHeight : inactiveHeight }}
           >
-            <MediaPlaceholder label={shot.label} radius="none" tone="dark" className="h-full" />
+            <MediaPlaceholder label={shot.label} image={shot.image} radius="none" tone="dark" className="h-full" />
           </div>
         ))}
       </div>

@@ -99,7 +99,7 @@ function renderMobileHeading(h2: string) {
 }
 
 const CARD_WIDTH = 469;
-const CARD_GAP = 24;
+const CARD_GAP = 40; // owner, 2026-09-12: "make it 40px across the site" (was 24, matching howItWorks.desktopReel)
 
 function DesktopScroller({
   steps,
@@ -127,9 +127,11 @@ function DesktopScroller({
               <CapabilityCard
                 title={step.title}
                 body={step.body}
+                image={step.image}
                 mediaAspectClassName={howItWorks.cardMediaRatio}
                 mediaRadius="none"
                 tone={tone}
+                parallax
               />
             </div>
           ))}
@@ -197,6 +199,7 @@ export function HowItWorks({ content, tone = "light" }: HowItWorksProps) {
           cardMediaRatio={howItWorks.cardMediaRatio}
           tone={tone}
           cardClassName={howItWorks.mobileCardWidth}
+          parallax
         />
       </div>
     </section>

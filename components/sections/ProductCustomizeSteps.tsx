@@ -34,7 +34,7 @@ export type ProductCustomizeStepsProps = {
 };
 
 const CARD_WIDTH = 469;
-const CARD_GAP = 24;
+const CARD_GAP = 40; // owner, 2026-09-12: "make it 40px across the site" (was 24, matching productCustomizeSteps.desktopReel)
 
 function DesktopScroller({ steps }: { steps: typeof pdpCustomizationSteps.steps }) {
   const { wrapRef, trackRef, reelRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
@@ -56,8 +56,10 @@ function DesktopScroller({ steps }: { steps: typeof pdpCustomizationSteps.steps 
               <CapabilityCard
                 title={step.title}
                 body={step.body}
+                image={step.image}
                 mediaAspectClassName={productCustomizeSteps.cardMediaRatio}
                 mediaRadius="none"
+                parallax
               />
             </div>
           ))}
@@ -98,7 +100,7 @@ export function ProductCustomizeSteps({ content, align = "center" }: ProductCust
           align="center"
           headingClassName={productCustomizeSteps.mobileHeadingWidth}
         />
-        <CardCarousel items={content.steps} cardMediaRatio={productCustomizeSteps.cardMediaRatio} />
+        <CardCarousel items={content.steps} cardMediaRatio={productCustomizeSteps.cardMediaRatio} parallax />
       </div>
     </section>
   );

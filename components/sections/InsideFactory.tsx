@@ -155,7 +155,7 @@ function lerp(from: number, to: number, t: number) {
 // tablet branch needed here, since this component never renders below
 // `xl:` any more.
 const DESKTOP_CARD_WIDTH = 1200;
-const DESKTOP_CARD_GAP = 48;
+const DESKTOP_CARD_GAP = 40; // owner, 2026-09-12: "make it 40px across the site" (was 48, matching insideFactory.desktopReel)
 
 function DesktopGallery({
   shots,

@@ -90,11 +90,13 @@ export function OurServices({ content, pageVariant = "home", tone = "light" }: O
                 <CapabilityCard
                   title={item.title}
                   body={item.body}
+                  image={item.image}
                   mediaAspectClassName={ourServices.cardMediaRatio}
                   mediaRadius="none"
                   tone={tone}
                   rootClassName={cardRootClassName}
                   bodyClassName={cardBodyClassName}
+                  parallax
                 />
               </div>
             ))}
@@ -117,6 +119,7 @@ export function OurServices({ content, pageVariant = "home", tone = "light" }: O
             tone={tone}
             rootClassName={cardRootClassName}
             bodyClassName={cardBodyClassName}
+            parallax
           />
         </div>
       </div>

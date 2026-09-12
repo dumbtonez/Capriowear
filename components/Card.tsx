@@ -9,15 +9,19 @@
 // Passing `image` later swaps in a real next/image in its place with no other
 // code changes, so photography can land without a rebuild.
 //
-// `parallax` (Card only, owner 2026-09-11: "should we add the parallax
-// effect on the product category images, the one we used on factory page
-// images" -- confirmed) reuses the same one-time scale/settle-on-reveal
-// treatment as ParallaxMedia/OurFactoryProcess/OurFactoryTeam, via the same
+// `parallax` (owner 2026-09-11: "should we add the parallax effect on the
+// product category images, the one we used on factory page images" --
+// confirmed) reuses the same one-time scale/settle-on-reveal treatment as
+// ParallaxMedia/OurFactoryProcess/OurFactoryTeam, via the same
 // `useRevealOnView` IntersectionObserver hook -- not a second mechanism.
-// Card can't reuse ParallaxMedia itself (different token set: `cardMedia.*`
-// vs. `media.*`, plus Card's own hover shadow), so the reveal wrapper is
-// inlined here as its own small client boundary instead of making all of
-// Card client-side.
+// Neither Card variant can reuse ParallaxMedia itself (different token set:
+// `cardMedia.*` vs. `media.*`, plus Card's own hover shadow), so the reveal
+// wrapper is inlined here as its own small client boundary instead of
+// making all of Card client-side. Extended from Card-only to
+// CapabilityCard too, 2026-09-12 (owner: "use the same [zoom-and-settle]
+// where it perfectly makes sense... other than product images, PLP etc"),
+// once How It Works/Our Services/PDP Customize Steps were confirmed good
+// fits for the same treatment.
 "use client";
 
 import Image, { type StaticImageData } from "next/image";
@@ -197,6 +201,8 @@ export type CapabilityCardProps = {
    * whichever ambient text colour the section around it sets.
    */
   tone?: "light" | "dark";
+  /** See the file header comment. Default false: unchanged, no reveal wrapper. */
+  parallax?: boolean;
 };
 
 export function CapabilityCard({
@@ -210,6 +216,7 @@ export function CapabilityCard({
   bodyClassName = capabilityCard.body,
   titleClassName = capabilityCard.title,
   tone = "light",
+  parallax = false,
 }: CapabilityCardProps) {
   return (
     <article className={rootClassName}>
@@ -219,6 +226,7 @@ export function CapabilityCard({
         aspectClassName={mediaAspectClassName}
         radius={mediaRadius}
         tone={tone}
+        parallax={parallax}
       />
       <div className={bodyClassName}>
         <h3 className={titleClassName}>{title}</h3>

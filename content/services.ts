@@ -132,24 +132,30 @@ export const services = {
     heading: "How we work with you",
     subheading:
       "We manufacture three ways, depending on how much of the design you bring and how much you want us to develop.",
+    // `image` on all 3, 2026-09-12: temporary test photography (Inside the
+    // Factory's own real shots, repeated) so this row's own zoom-and-settle
+    // `ParallaxMedia` treatment has something real to animate.
     paths: [
       {
         title: "OEM Production",
         subtitle: "Fully make to your brand spec",
         whatItMeans: "You bring the design, tech pack or samples, we manufacture exactly to them",
         bestFor: "Brands with their own designs ready to produce",
+        image: { src: "/factory-test/inside-factory-1.jpg", alt: "OEM Production" },
       },
       {
         title: "ODM Development",
         subtitle: "Design & develop in-house",
         whatItMeans: "We design and develop from your brief or our proven blocks, you brand it",
         bestFor: "Brands that want design and development support, or a faster route to market",
+        image: { src: "/factory-test/inside-factory-2.jpg", alt: "ODM Development" },
       },
       {
         title: "Private Label",
         subtitle: "Our make, your brand",
         whatItMeans: "Our production, finished entirely under your brand, labels, tags and packaging",
         bestFor: "Brands, retailers and teamwear suppliers wanting a ready path to shelf",
+        image: { src: "/factory-test/inside-factory-3.jpg", alt: "Private Label" },
       },
     ],
     note: howWeWorkNote,

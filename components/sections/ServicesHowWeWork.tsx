@@ -75,7 +75,7 @@ import { useId, useState } from "react";
 
 import { FilterChevronIcon } from "@/components/icons/FilterChevronIcon";
 import { AsteriskIcon } from "@/components/icons/AsteriskIcon";
-import { MediaPlaceholder } from "@/components/MediaPlaceholder";
+import { ParallaxMedia } from "@/components/ParallaxMedia";
 import { TextReveal } from "@/components/TextReveal";
 import { cx } from "@/components/ui/cx";
 import { fabricOptions, servicesHowWeWork } from "@/components/ui/styles";
@@ -96,8 +96,9 @@ function DesktopRow({ paths }: { paths: typeof services.howWeWork.paths }) {
       <div className={servicesHowWeWork.desktopRow}>
         {paths.map((path) => (
           <article key={path.title} className={servicesHowWeWork.desktopCard}>
-            <MediaPlaceholder
+            <ParallaxMedia
               label={path.title}
+              image={path.image}
               ratio="397:234"
               radius="none"
               showLabel={false}

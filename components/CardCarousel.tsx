@@ -12,13 +12,14 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { CapabilityCard } from "./Card";
+import { CapabilityCard, type CardImage } from "./Card";
 import { cardCarousel } from "./ui/styles";
 import { cx } from "./ui/cx";
 
 export type CardCarouselItem = {
   title: string;
   body: string;
+  image?: CardImage;
 };
 
 export type CardCarouselProps = {
@@ -55,6 +56,11 @@ export type CardCarouselProps = {
    * constant, so a wider card needs no other change here.
    */
   cardClassName?: string;
+  /** Forwarded straight through to each `CapabilityCard`'s own `parallax`
+   *  (2026-09-12, mobile half of the same zoom-and-settle rollout its
+   *  desktop callers opted into -- see `CapabilityCard`'s own comment).
+   *  Default false: unchanged for any caller that hasn't opted in yet. */
+  parallax?: boolean;
 };
 
 export function CardCarousel({
@@ -64,6 +70,7 @@ export function CardCarousel({
   rootClassName,
   bodyClassName,
   cardClassName = cardCarousel.card,
+  parallax = false,
 }: CardCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -116,11 +123,13 @@ export function CardCarousel({
             <CapabilityCard
               title={item.title}
               body={item.body}
+              image={item.image}
               mediaAspectClassName={cardMediaRatio}
               mediaRadius="none"
               tone={tone}
               rootClassName={rootClassName}
               bodyClassName={bodyClassName}
+              parallax={parallax}
             />
           </div>
         ))}
