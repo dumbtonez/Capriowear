@@ -23,12 +23,33 @@
 // smoothing), so the motion is exactly as continuous as the display's own
 // refresh rate, never bursty, and never restarts an easing curve mid-move.
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useRef, useState, type MouseEvent, type RefObject } from "react";
+import { useEffect, useRef, useState, type MouseEvent, type PointerEvent, type RefObject } from "react";
 
 import { chevronScroller } from "@/components/ui/styles";
 
 const CHEVRON_HALF = 40; // half of size-20 (80px) circle, to centre it on the cursor
 const DOT_HALF = 3; // half of size-1.5 (6px) dot, to centre it on the cursor
+// Drag/momentum tuning (Inside the Factory only, owner 2026-09-13,
+// referencing native carousel/iOS feel) -- see `handlePointerUp`'s own
+// comment below for the exact formulas these feed.
+const DRAG_THRESHOLD_PX = 6; // movement past this before a pointerdown counts as a drag, not a click
+const VELOCITY_WINDOW_MS = 120; // only the last N ms of movement counts toward release velocity -- an old, slow start to a since-accelerated flick shouldn't drag the average down
+const RUBBER_BAND = 0.35; // fraction of past-the-edge drag distance that actually moves the reel, while still dragging
+const FLING_PROJECTION_MS = 200; // "how long the finger's exit velocity gets to keep carrying it" -- distance = velocity(px/ms) * this
+const MAX_FLING_CARDS = 1.5; // clamp: a flick can never skip more than 1.5 card-widths of extra travel past the release point
+const SETTLE_DURATION_MIN_MS = 220;
+const SETTLE_DURATION_MAX_MS = 520;
+// Slope from release speed to settle duration -- see `handlePointerUp`.
+// Calibrated live, 2026-09-13: a first pass at 260 floored out at the
+// 220ms minimum for anything past ~1.15px/ms, which live-testing showed is
+// itself a fairly modest, deliberate drag speed (a real fast flick lands
+// well past 5px/ms) -- meaning nearly every realistic release would have
+// hit the same minimum duration regardless of how it actually felt,
+// defeating the "proportional to speed" goal entirely. 100 instead: a slow
+// ~0.2px/ms drag lands near the 500ms ceiling, a ~3px/ms flick lands at
+// the 220ms floor, with real separation across the range in between.
+const SETTLE_DURATION_SPEED_FACTOR = 100;
+const SETTLE_EASE = "cubic-bezier(0.22,1,0.36,1)"; // this codebase's own established "premium settle" curve, reused rather than inventing a second one
 // Fraction of the remaining distance closed per 60fps-equivalent frame --
 // tuned by feel. Lowered 0.35 -> 0.22 (owner, 2026-09-10: "this chvron
 // component when you hover on the section is very tight not smooth... how
@@ -52,6 +73,19 @@ export function useDesktopChevronScroller(
   // click at the last card jumps back to the first, and a backward click at
   // the first jumps to the last, rather than doing nothing.
   loop = false,
+  // Opt-in real click-and-drag / touch-swipe with velocity-based momentum
+  // (Inside the Factory only, owner 2026-09-13 -- "build real pointer-drag
+  // with velocity/momentum ... not just a duration tweak"). `enabled:
+  // false`/omitted (every other caller) keeps the row click-only, exactly
+  // as before -- this whole block of state and the pointer handlers below
+  // are inert until a caller opts in. `cardCount` is needed only here (not
+  // by `handleClick`'s own clamp/wrap, which never needed to know how many
+  // stops there are, only the current/max offset) because settling to the
+  // "nearest slide" after a fling has to snap to one of the row's real
+  // stop positions, which -- like `handleClick`'s own last-card jump --
+  // are `min(index * cardPitch, maxOffset)`, not an even multiple of
+  // `cardPitch` all the way to the end.
+  drag: { enabled: boolean; cardCount: number } = { enabled: false, cardCount: 0 },
 ) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -92,6 +126,33 @@ export function useDesktopChevronScroller(
   // clamp/wrap math already depends on. Every other caller of this hook
   // ignores the returned value, so this is additive, not a behaviour change.
   const [activeIndex, setActiveIndex] = useState(0);
+
+  // --- Drag/momentum state (inert unless `drag.enabled`) ---
+  // `pointerDownRef`: a pointer is currently down, but may still turn out
+  // to be a plain click (see `DRAG_THRESHOLD_PX`). `isDraggingRef`: it has
+  // crossed that threshold and is now a real drag -- from here on, clicks
+  // are suppressed and the reel tracks the pointer 1:1.
+  const pointerDownRef = useRef(false);
+  const isDraggingRef = useRef(false);
+  const dragStartXRef = useRef(0);
+  const dragStartOffsetRef = useRef(0);
+  // Rolling buffer of recent {x, t} samples, pruned to `VELOCITY_WINDOW_MS`
+  // on every move -- release velocity is measured from only this recent
+  // window, not the whole gesture, so a slow start to a since-accelerated
+  // flick doesn't drag the average down (and vice versa).
+  const pointerSamplesRef = useRef<{ x: number; t: number }[]>([]);
+  const reducedMotionRef = useRef(false);
+
+  useEffect(() => {
+    if (!drag.enabled) return;
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    reducedMotionRef.current = query.matches;
+    const update = () => {
+      reducedMotionRef.current = query.matches;
+    };
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, [drag.enabled]);
 
   const applyTransform = () => {
     const chevron = chevronRef.current;
@@ -209,6 +270,11 @@ export function useDesktopChevronScroller(
   // the reel doesn't reliably report) are all this needs to clamp the
   // offset to the real start/end of the row.
   const handleClick = () => {
+    // A drag in progress owns the reel's position; a click that lands here
+    // mid-drag (shouldn't normally happen, since `handlePointerUp` is what
+    // calls this for a *non*-drag release, but guards regardless) must not
+    // also nudge it by a card.
+    if (isDraggingRef.current) return;
     const track = trackRef.current;
     const reel = reelRef.current;
     if (!track || !reel) return;
@@ -223,7 +289,179 @@ export function useDesktopChevronScroller(
       offsetRef.current = Math.min(Math.max(offsetRef.current + directionRef.current * cardPitch, 0), maxOffset);
     }
     setActiveIndex(Math.round(offsetRef.current / cardPitch));
+    reel.style.transition = "";
     reel.style.transform = `translateX(${-offsetRef.current}px)`;
+  };
+
+  // --- Drag/momentum handlers (only wired up by a caller that opts in) ---
+
+  const getMaxOffset = () => {
+    const track = trackRef.current;
+    const reel = reelRef.current;
+    if (!track || !reel) return 0;
+    return Math.max(0, reel.getBoundingClientRect().width - track.clientWidth);
+  };
+
+  // The row's real stop positions -- `min(index * cardPitch, maxOffset)`,
+  // same shape as `handleClick`'s own last-card jump above: the final stop
+  // is a shorter hop so the filmstrip's right edge always lands flush,
+  // rather than every stop being an even multiple of `cardPitch`.
+  const getSnapPositions = (maxOffset: number) =>
+    Array.from({ length: Math.max(1, drag.cardCount) }, (_, i) => Math.min(i * cardPitch, maxOffset));
+
+  // Interrupts whatever the reel is currently doing (mid `handleClick`
+  // transition or mid momentum-settle) and freezes it at its real,
+  // currently-rendered position, in sync with `offsetRef` -- so a new drag
+  // starting mid-animation begins from where the reel visually is, not
+  // from a stale pre-animation value (which would otherwise make the reel
+  // visibly jump the instant the new drag starts).
+  const freezeReelAtCurrentVisualOffset = () => {
+    const reel = reelRef.current;
+    if (!reel) return;
+    const computed = getComputedStyle(reel).transform;
+    let visualOffset = offsetRef.current;
+    if (computed && computed !== "none") {
+      const match = computed.match(/matrix\(1, 0, 0, 1, (-?\d+\.?\d*)/);
+      if (match) visualOffset = -Number(match[1]);
+    }
+    reel.style.transition = "none";
+    reel.style.transform = `translateX(${-visualOffset}px)`;
+    offsetRef.current = visualOffset;
+  };
+
+  const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    if (!drag.enabled) return;
+    freezeReelAtCurrentVisualOffset();
+    pointerDownRef.current = true;
+    isDraggingRef.current = false;
+    dragStartXRef.current = event.clientX;
+    dragStartOffsetRef.current = offsetRef.current;
+    pointerSamplesRef.current = [{ x: event.clientX, t: event.timeStamp }];
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMoveDrag = (event: PointerEvent<HTMLDivElement>) => {
+    if (!drag.enabled || !pointerDownRef.current) return;
+    const dx = event.clientX - dragStartXRef.current;
+    if (!isDraggingRef.current) {
+      if (Math.abs(dx) < DRAG_THRESHOLD_PX) return;
+      isDraggingRef.current = true;
+    }
+    pointerSamplesRef.current.push({ x: event.clientX, t: event.timeStamp });
+    const cutoff = event.timeStamp - VELOCITY_WINDOW_MS;
+    while (pointerSamplesRef.current.length > 2 && pointerSamplesRef.current[0].t < cutoff) {
+      pointerSamplesRef.current.shift();
+    }
+    const reel = reelRef.current;
+    if (!reel) return;
+    const maxOffset = getMaxOffset();
+    // Content follows the finger 1:1: dragging left (dx negative) reveals
+    // later cards, i.e. increases the offset. No transition here at all --
+    // direct 1:1 tracking is what makes a drag feel connected to the hand,
+    // exactly the behaviour a fixed-duration CSS transition can't give.
+    let next = dragStartOffsetRef.current - dx;
+    // Soft rubber-band past either edge (same idea as iOS's own overscroll)
+    // rather than a hard clamp -- `loop` rows can still fling-wrap on
+    // release (see `handlePointerUp`), so this is just the *live* drag
+    // feel at the edges, not a final answer about whether it wraps.
+    if (next < 0) next *= RUBBER_BAND;
+    else if (next > maxOffset) next = maxOffset + (next - maxOffset) * RUBBER_BAND;
+    reel.style.transition = "none";
+    reel.style.transform = `translateX(${-next}px)`;
+  };
+
+  // Shared by a real release and a cancelled gesture (`handlePointerCancel`)
+  // -- a cancel has no velocity to speak of, so it settles as if released
+  // at rest (`overrideVelocity = 0`), same nearest-slide snap either way.
+  const settleDragRelease = (overrideVelocity?: number) => {
+    const reel = reelRef.current;
+    if (!reel) return;
+    const maxOffset = getMaxOffset();
+    const samples = pointerSamplesRef.current;
+    const first = samples[0];
+    const last = samples[samples.length - 1];
+    // Pointer velocity, px/ms, positive = finger moved right. Converted to
+    // "content velocity" (negated) since content moves opposite the
+    // finger's own direction -- see `handlePointerMoveDrag`'s own mapping.
+    const dt = Math.max(1, last.t - first.t);
+    const pointerVelocity = overrideVelocity ?? (last.x - first.x) / dt;
+    const contentVelocity = -pointerVelocity;
+    const currentOffsetRaw = dragStartOffsetRef.current - (last.x - dragStartXRef.current);
+    // The rubber-banded value actually on screen right now (not the
+    // uncapped raw drag distance) is the real starting point for the fling
+    // projection below -- flinging further past an edge already being
+    // resisted shouldn't get a free pass around that resistance.
+    const currentOffset =
+      currentOffsetRaw < 0
+        ? currentOffsetRaw * RUBBER_BAND
+        : currentOffsetRaw > maxOffset
+          ? maxOffset + (currentOffsetRaw - maxOffset) * RUBBER_BAND
+          : currentOffsetRaw;
+
+    const reduced = reducedMotionRef.current;
+    const maxFling = cardPitch * MAX_FLING_CARDS;
+    // "How far the finger's exit speed keeps carrying it" -- distance =
+    // velocity(px/ms) x an assumed short coast window, clamped so a very
+    // fast flick still can't skip more than `MAX_FLING_CARDS` extra.
+    const flingDistance = reduced
+      ? 0
+      : Math.max(-maxFling, Math.min(maxFling, contentVelocity * FLING_PROJECTION_MS));
+    const projected = currentOffset + flingDistance;
+
+    const snapPositions = getSnapPositions(maxOffset);
+    let target: number;
+    if (loop && projected < -cardPitch * 0.4) {
+      target = maxOffset; // flung backward past the start -- wrap to the last stop
+    } else if (loop && projected > maxOffset + cardPitch * 0.4) {
+      target = 0; // flung forward past the end -- wrap to the first stop
+    } else {
+      target = snapPositions.reduce((closest, pos) =>
+        Math.abs(pos - projected) < Math.abs(closest - projected) ? pos : closest,
+      );
+    }
+
+    // Settle duration scales DOWN as release speed scales up -- a fast
+    // flick that still took the same fixed ~500ms to finish would read as
+    // sluggish; a slow deliberate drag settling in ~220ms would read as
+    // abrupt. See `SETTLE_DURATION_SPEED_FACTOR`'s own comment for the
+    // calibration -- each 1px/ms of release speed shaves that many ms off
+    // the settle, floored/ceilinged to a 220-520ms range either way.
+    const speed = Math.abs(contentVelocity);
+    const duration = reduced
+      ? 0
+      : Math.max(SETTLE_DURATION_MIN_MS, SETTLE_DURATION_MAX_MS - speed * SETTLE_DURATION_SPEED_FACTOR);
+
+    offsetRef.current = target;
+    setActiveIndex(Math.round(Math.min(target, maxOffset) / cardPitch));
+    reel.style.transition = duration > 0 ? `transform ${duration}ms ${SETTLE_EASE}` : "none";
+    reel.style.transform = `translateX(${-target}px)`;
+  };
+
+  const handlePointerUp = (event: PointerEvent<HTMLDivElement>) => {
+    if (!drag.enabled) return;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    pointerDownRef.current = false;
+    if (!isDraggingRef.current) {
+      // Never crossed the drag threshold -- a plain click, same one-card
+      // advance as before (direction already tracked by the existing
+      // cursor-position logic in `setTargetFromEvent`).
+      handleClick();
+      return;
+    }
+    settleDragRelease();
+    isDraggingRef.current = false;
+  };
+
+  const handlePointerCancel = (event: PointerEvent<HTMLDivElement>) => {
+    if (!drag.enabled) return;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    pointerDownRef.current = false;
+    if (isDraggingRef.current) settleDragRelease(0);
+    isDraggingRef.current = false;
   };
 
   // Stop a stray rAF loop if the component unmounts mid-hover.
@@ -316,6 +554,10 @@ export function useDesktopChevronScroller(
     handleMouseEnter,
     handleMouseLeave,
     handleClick,
+    handlePointerDown,
+    handlePointerMoveDrag,
+    handlePointerUp,
+    handlePointerCancel,
   };
 }
 
