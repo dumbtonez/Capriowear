@@ -83,6 +83,15 @@ export function useDesktopChevronScroller(
   // element's own layout, so one measurement per hover session is enough.
   const wrapRectRef = useRef<{ left: number; top: number; width: number; height: number } | null>(null);
   const [direction, setDirection] = useState<1 | -1>(1);
+  // Which card is currently front-and-centre, 0-based -- Inside the
+  // Factory's own new pill/dot progress indicator (owner, 2026-09-12,
+  // referencing apple.com/ae/macbook-pro's own segmented control). Derived
+  // from `offsetRef` (a plain round-to-nearest-card, since every click
+  // always moves exactly one `cardPitch`) rather than kept as the source of
+  // truth itself -- `offsetRef`, not this, is what every existing caller's
+  // clamp/wrap math already depends on. Every other caller of this hook
+  // ignores the returned value, so this is additive, not a behaviour change.
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const applyTransform = () => {
     const chevron = chevronRef.current;
@@ -213,6 +222,7 @@ export function useDesktopChevronScroller(
     } else {
       offsetRef.current = Math.min(Math.max(offsetRef.current + directionRef.current * cardPitch, 0), maxOffset);
     }
+    setActiveIndex(Math.round(offsetRef.current / cardPitch));
     reel.style.transform = `translateX(${-offsetRef.current}px)`;
   };
 
@@ -301,6 +311,7 @@ export function useDesktopChevronScroller(
     chevronRef,
     dotRef,
     direction,
+    activeIndex,
     handleMouseMove,
     handleMouseEnter,
     handleMouseLeave,

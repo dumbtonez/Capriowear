@@ -4523,6 +4523,24 @@ export const insideFactory = {
   // gallery inside the same full-bleed wrap. 56px top gap from the gallery
   // (owner call, 2026-08-26, overriding the initial 48px default).
   desktopCtaWrap: "flex justify-center pt-14",
+  // Segmented pill progress indicator under the gallery, 2026-09-12 (owner,
+  // referencing apple.com/ae/macbook-pro's own "Take a closer look"
+  // segmented control) -- one dot per shot, the active one stretched into a
+  // pill rather than just enlarged, matching that reference's own shape
+  // language. `activeIndex` comes from `useDesktopChevronScroller`'s own new
+  // return value (Inside the Factory only; every other chevron gallery
+  // ignores it, unaffected). Static per-click, not an autoplay progress fill
+  // -- Apple's own control animates a fill because it's scrubbing a looping
+  // video; these are static photos advanced by a click, so there's no
+  // "progress" to animate, only "which one."
+  desktopDotsWrap: "flex justify-center pt-8",
+  desktopDotsPill: "flex items-center gap-2 rounded-full bg-paper/10 px-3 py-2.5",
+  desktopDotsPillLight: "flex items-center gap-2 rounded-full bg-ink/10 px-3 py-2.5",
+  desktopDotsSegment: "h-1.5 rounded-full transition-all duration-300 ease-out",
+  desktopDotsSegmentActive: "w-6 bg-paper",
+  desktopDotsSegmentInactive: "w-1.5 bg-paper/40",
+  desktopDotsSegmentActiveLight: "w-6 bg-ink",
+  desktopDotsSegmentInactiveLight: "w-1.5 bg-ink/30",
 
   // Standing rule for every dark full-bleed section (established on Hero,
   // 2026-08-24): content keeps a fixed 48px inset from the box's own top/

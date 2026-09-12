@@ -168,40 +168,78 @@ function DesktopGallery({
   // "Take a closer look" carousel): a forward click on the last shot wraps
   // back to the first instead of doing nothing. Every other section using
   // this same hook keeps the default clamped (non-looping) behaviour.
-  const { wrapRef, trackRef, reelRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
-    useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP, true);
+  const {
+    wrapRef,
+    trackRef,
+    reelRef,
+    chevronRef,
+    dotRef,
+    direction,
+    activeIndex,
+    handleMouseMove,
+    handleMouseEnter,
+    handleMouseLeave,
+    handleClick,
+  } = useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP, true);
 
   return (
-    <div
-      ref={wrapRef}
-      className={insideFactory.desktopScrollerWrap}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
-    >
-      <div ref={trackRef} className={insideFactory.desktopRow}>
-        <div ref={reelRef} className={insideFactory.desktopReel}>
-          {shots.map((shot) => (
-            <div key={shot.label} className={insideFactory.desktopCard}>
-              <MediaPlaceholder
-                label={shot.label}
-                ratio="15:8"
-                radius="none"
-                tone={tone}
-                showLabel={false}
-                image={shot.image}
-                className={insideFactory.desktopCardMedia}
-              />
-              <p className={tone === "light" ? insideFactory.desktopCardLabelLight : insideFactory.desktopCardLabel}>
-                {shot.label}
-              </p>
-            </div>
+    <>
+      <div
+        ref={wrapRef}
+        className={insideFactory.desktopScrollerWrap}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
+      >
+        <div ref={trackRef} className={insideFactory.desktopRow}>
+          <div ref={reelRef} className={insideFactory.desktopReel}>
+            {shots.map((shot) => (
+              <div key={shot.label} className={insideFactory.desktopCard}>
+                <MediaPlaceholder
+                  label={shot.label}
+                  ratio="15:8"
+                  radius="none"
+                  tone={tone}
+                  showLabel={false}
+                  image={shot.image}
+                  className={insideFactory.desktopCardMedia}
+                />
+                <p className={tone === "light" ? insideFactory.desktopCardLabelLight : insideFactory.desktopCardLabel}>
+                  {shot.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
+      </div>
+      {/* Segmented pill progress indicator (owner, 2026-09-12, referencing
+          apple.com/ae/macbook-pro's "Take a closer look" segmented control)
+          -- a sibling of the click-to-page wrap above, not nested inside it,
+          so it isn't clipped by that wrap's own `overflow-hidden` and a
+          click here never accidentally pages the gallery via the wrap's own
+          onClick. */}
+      <div className={insideFactory.desktopDotsWrap}>
+        <div className={tone === "light" ? insideFactory.desktopDotsPillLight : insideFactory.desktopDotsPill}>
+          {shots.map((shot, index) => (
+            <span
+              key={shot.label}
+              className={cx(
+                insideFactory.desktopDotsSegment,
+                index === activeIndex
+                  ? tone === "light"
+                    ? insideFactory.desktopDotsSegmentActiveLight
+                    : insideFactory.desktopDotsSegmentActive
+                  : tone === "light"
+                    ? insideFactory.desktopDotsSegmentInactiveLight
+                    : insideFactory.desktopDotsSegmentInactive,
+              )}
+            />
           ))}
         </div>
       </div>
-      <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
-    </div>
+    </>
   );
 }
 
