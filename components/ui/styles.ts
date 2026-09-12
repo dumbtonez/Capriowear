@@ -1584,6 +1584,27 @@ export const hero = {
   // ServicesHero.tsx use.
 };
 
+/* --- TeaserVideo (Hero's own teaser-loop -> full-video pattern, 2026-09-12) */
+// Owner brief: the hero should autoplay a short muted loop once scrolled
+// into view (component: `components/TeaserVideo.tsx`), with a persistent
+// button overlaid on the video itself -- deliberately NOT `hero.playWrap`'s
+// own big centred circle (that stays reserved for the "not playing yet"
+// state, before the teaser has started or when it's gated out entirely).
+// This is a small pill in the corner instead, so it doesn't visually
+// collide with the moving footage sitting right behind it. Reuses the same
+// `bg-accent`/`text-accent-ink` pairing `playCircle` already established
+// for "the one interactive control on top of this video", not a new colour.
+export const teaserVideo = {
+  // Positioned relative to the video box itself (a sibling of the <video>
+  // element, inside the same `relative` wrapper `ScrollGrowVideo` already
+  // provides). Bottom-right, with enough inset that it clears this box's
+  // own rounded corners at every size Hero/OurFactoryHero use.
+  overlayButton:
+    "absolute bottom-4 right-4 xl:bottom-6 xl:right-6 inline-flex items-center gap-2 rounded-pill bg-accent px-4 py-2.5 text-accent-ink transition-colors hover:bg-accent/90 motion-reduce:transition-none",
+  overlayIcon: "size-4",
+  overlayLabel: "text-body font-medium",
+};
+
 /* --- OurFactoryHero (/our-factory sections 1-2) ----------------------------- */
 // Figma desktop node 854:1402 ("Youtube Video"): unlike the homepage Hero,
 // this video layer is the last thing in the dark box (no ticker follows it),

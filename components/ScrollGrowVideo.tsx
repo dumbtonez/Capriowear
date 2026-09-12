@@ -38,6 +38,7 @@ import { Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { MediaPlaceholder, type MediaPlaceholderProps } from "@/components/MediaPlaceholder";
+import { TeaserVideo } from "@/components/TeaserVideo";
 import { cx } from "@/components/ui/cx";
 import { hero } from "@/components/ui/styles";
 
@@ -113,9 +114,18 @@ export type ScrollGrowVideoProps = {
   wrapClassName: string;
   /** Swaps the placeholder fill for a real photo behind the play button. `label` still supplies the alt text unless this sets its own. */
   image?: MediaPlaceholderProps["image"];
+  /**
+   * Real video sources (owner brief, 2026-09-12: hero teaser-loop -> full
+   * video pattern, `components/TeaserVideo.tsx`). Both required together --
+   * when present, this box renders `TeaserVideo` instead of the plain
+   * placeholder+Play block below. Omit both (every call site except Hero's
+   * own, e.g. `OurFactoryHero.tsx`) to keep today's static placeholder
+   * behaviour completely unchanged.
+   */
+  video?: { teaserSrc: string; fullSrc: string };
 };
 
-export function ScrollGrowVideo({ label, wrapClassName, image }: ScrollGrowVideoProps) {
+export function ScrollGrowVideo({ label, wrapClassName, image, video }: ScrollGrowVideoProps) {
   const videoRef = useRef<HTMLDivElement>(null);
   const videoBox = useScrollGrowBox(videoRef);
 
@@ -138,23 +148,33 @@ export function ScrollGrowVideo({ label, wrapClassName, image }: ScrollGrowVideo
         )}
         style={videoBox ? { width: videoBox.width, height: videoBox.height } : undefined}
       >
-        <MediaPlaceholder
-          label={label}
-          tone="dark"
-          showLabel={false}
-          radius="none"
-          image={image}
-          imageSizes="100vw"
-          className="h-full w-full"
-          overlay={
-            <div className={hero.playWrap}>
-              <span className={hero.playCircle}>
-                <Play className={hero.playIcon} aria-hidden="true" fill="currentColor" />
-              </span>
-              <span className={hero.playLabel}>Play Video</span>
-            </div>
-          }
-        />
+        {video ? (
+          <TeaserVideo
+            label={label}
+            teaserSrc={video.teaserSrc}
+            fullSrc={video.fullSrc}
+            poster={typeof image?.src === "string" ? image.src : undefined}
+            className="size-full"
+          />
+        ) : (
+          <MediaPlaceholder
+            label={label}
+            tone="dark"
+            showLabel={false}
+            radius="none"
+            image={image}
+            imageSizes="100vw"
+            className="h-full w-full"
+            overlay={
+              <div className={hero.playWrap}>
+                <span className={hero.playCircle}>
+                  <Play className={hero.playIcon} aria-hidden="true" fill="currentColor" />
+                </span>
+                <span className={hero.playLabel}>Play Video</span>
+              </div>
+            }
+          />
+        )}
       </div>
     </div>
   );
