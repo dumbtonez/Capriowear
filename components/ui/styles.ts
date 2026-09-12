@@ -2284,10 +2284,30 @@ export const ourFactoryDetails = {
   // only carries what never differs between states (height, layout,
   // transition config); every property that actually changes lives
   // entirely in one or the other variant, never both.
+  // Duration/easing matched to the parent chip's own `motion.div layout`
+  // FLIP transition (340ms opening/260ms collapsing, `item`'s own
+  // `cubic-bezier(0.33,1,0.68,1)`), not a flat 200ms `ease-out` -- real bug,
+  // found live, owner report: "small jerk right as the card finishes
+  // expanding". Root cause: this icon's own width/margin shrink is a plain
+  // CSS transition running on its OWN independent 200ms clock, fully
+  // detached from the chip's outer FLIP transform, so the icon (part of the
+  // panel's real, measured content) finished collapsing well before the
+  // outer chip's transform-based grow/shrink caught up -- Framer Motion's
+  // `layout` prop measures the true before/after DOM size once at the start
+  // of the gesture and interpolates via `transform` for its own full
+  // duration, so a still-independently-animating child inside it drifts out
+  // of sync with what the outer transform is currently displaying, and the
+  // two only re-converge at the outer transition's real end -- reading as a
+  // snap right at that final handoff frame, the exact same shape of bug
+  // `detailInner`'s own duration-matching fix (see its comment) already
+  // solved for the text fade. Split into `itemIconWrapClosed`/`Open` below
+  // (same asymmetric-duration-split pattern `itemButtonClosed`/`Open`
+  // already established) so this now finishes in the same frame as the
+  // chip's own width/radius transition, not a beat before it.
   itemIconWrap:
-    "flex h-6 shrink-0 items-center justify-center overflow-hidden transition-[opacity,transform,width,margin] duration-200 ease-out motion-reduce:transition-none",
-  itemIconWrapClosed: "w-6 mr-2.5 rotate-0 opacity-100",
-  itemIconWrapOpen: "pointer-events-none w-0 mr-0 rotate-45 opacity-0",
+    "flex h-6 shrink-0 items-center justify-center overflow-hidden transition-[opacity,transform,width,margin] ease-[cubic-bezier(0.33,1,0.68,1)] motion-reduce:transition-none",
+  itemIconWrapClosed: "w-6 mr-2.5 rotate-0 opacity-100 duration-[260ms]",
+  itemIconWrapOpen: "pointer-events-none w-0 mr-0 rotate-45 opacity-0 duration-[340ms]",
   itemIcon: "size-6 shrink-0 text-paper",
   // text-body-lg (20px, fixed -- matches Figma's own confirmed size at
   // both label and description, `text-overline`'s sibling body-copy size)
