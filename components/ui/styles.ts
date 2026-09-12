@@ -2234,7 +2234,30 @@ export const ourFactoryDetails = {
   // `itemButton` fills it -- see that element's own "whole chip
   // clickable" fix, the same shape of coverage. Closed-only, per the
   // "open chip should not have a hover effect" ask above.
-  itemClosed: "rounded-pill duration-[260ms] hover:bg-[#25272d]",
+  // `rounded-[28px]`, not `rounded-pill` -- real bug, found live via
+  // frame-by-frame `getComputedStyle` sampling during the collapse/expand,
+  // owner report: "small jerk right as the card finishes expanding" (a
+  // second, distinct cause from the icon-duration mismatch already fixed
+  // above -- this one survived that fix). `rounded-pill` is `--radius-pill:
+  // 9999px` (app/globals.css), a sentinel "definitely more than half the
+  // height" value, not a real radius -- CSS clamps a rendered corner to at
+  // most half the box's own height, so anything from 9999px down to this
+  // chip's real half-height (28px, half its measured 56px closed height)
+  // renders as an IDENTICAL full pill. `border-radius`'s own linear
+  // interpolation, though, runs across the full literal 9999px -> 24px
+  // (open) range regardless of that clamp -- so ~99% of the transition's
+  // progress is spent gliding through values that all render as the same
+  // unchanged pill shape, and the entire real, visible unrounding (56px's
+  // true half-height down to 24px) gets compressed into the last sliver of
+  // the transition, reading as a snap right at the end, confirmed live: the
+  // 24px target was hardly ever reached gradually, it arrived in the final
+  // couple of frames. Starting the transition from this chip's own real
+  // half-height instead removes the dead 9999px->28px range entirely, so
+  // the interpolation is proportional across the FULL duration, matching
+  // the height animation's own smoothness -- the same fix shape as
+  // `itemIconWrap`'s own duration-mismatch comment above, a value that
+  // looked cosmetically fine at rest but broke the animation's own math.
+  itemClosed: "rounded-[28px] duration-[260ms] hover:bg-[#25272d]",
   // No `pb-*` on the shared base -- split into `itemButtonClosed`/`Open`
   // below (real bug, found live, owner: "the gap between the chip title
   // and subline should be 8px"): a flat `py-4` gave the button its own
