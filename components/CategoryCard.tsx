@@ -19,10 +19,19 @@
 // other image slot on this site already uses -- picks up the real photo
 // automatically once `lib/hubThumbnails.ts` finds the file, no further
 // code change.
+//
+// TEMPORARY `image.mobileSrc` branch (owner test, 2026-09-12, "sports
+// bras" only): when `hubThumbnails.ts` finds a `<slug>-mobile`/`<slug>
+// -desktop` pair, renders two separate <Image>s swapped by the same `md:`
+// breakpoint `thumb`'s own size jump uses, each hidden on the other
+// breakpoint, so two exactly-sized test crops can be compared at their
+// real render size instead of one file scaled by CSS. Remove alongside
+// `hubThumbnails.ts`'s own matching branch once this is resolved.
 import Image from "next/image";
 import Link from "next/link";
 
 import { NextArrowIcon } from "@/components/icons/NextArrowIcon";
+import { cx } from "@/components/ui/cx";
 import { categoryCard } from "@/components/ui/styles";
 import type { HubThumbnail } from "@/lib/hubThumbnails";
 
@@ -37,7 +46,12 @@ export function CategoryCard({ label, descriptor, href, image }: CategoryCardPro
   return (
     <Link href={href} className={categoryCard.root}>
       <div className={categoryCard.thumb}>
-        {image ? (
+        {image?.mobileSrc ? (
+          <>
+            <Image src={image.mobileSrc} alt={image.alt} fill sizes="48px" className={cx(categoryCard.thumbImage, "md:hidden")} />
+            <Image src={image.src} alt={image.alt} fill sizes="64px" className={cx(categoryCard.thumbImage, "max-md:hidden")} />
+          </>
+        ) : image ? (
           <Image src={image.src} alt={image.alt} fill sizes="64px" className={categoryCard.thumbImage} />
         ) : (
           <div className={categoryCard.thumbPlaceholder} aria-hidden="true" />
