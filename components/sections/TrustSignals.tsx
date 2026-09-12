@@ -110,11 +110,14 @@ function MobileBody({ segments }: { segments: BodySegment[] }) {
   );
 }
 
-// 380px (owner, 2026-09-10: "make the card size as per this reference,
-// current one is too big" -- was 500px, matching styles.ts's own
-// `trustSignals.desktopCard`/`tabletCard`). Used for the chevron's
-// scroll-by-one-card math, must stay equal to that class's real width.
-const CARD_WIDTH = 380;
+// 397px, was 380px (owner, 2026-09-12: "let's use this same card size for
+// product development, low moq section" -- matching Services' own "How We
+// Work" desktop card, `servicesHowWeWork.desktopCard`). Before that: 380px
+// (owner, 2026-09-10: "make the card size as per this reference, current
+// one is too big" -- was 500px), matching styles.ts's own `trustSignals.
+// desktopCard`/`tabletCard`. Used for the chevron's scroll-by-one-card
+// math, must stay equal to that class's real width.
+const CARD_WIDTH = 397;
 // 24px (owner, 2026-09-10: "make it 32" then "make it 24" -- was 40px,
 // matching styles.ts's own `trustSignals.desktopRow`/`tabletRow`).
 const CARD_GAP = 24; // owner, 2026-09-12: reverted to 24 the same day ("make it 24px") -- matching trustSignals.desktopReel
@@ -134,12 +137,12 @@ function DesktopScroller({ items }: { items: typeof home.trustStrip }) {
     >
       <div ref={trackRef} className={trustSignals.desktopRow}>
         <div ref={reelRef} className={trustSignals.desktopReel}>
-          {items.map((entry, index) => (
+          {items.map((entry) => (
             <div key={entry.title} className={trustSignals.desktopCard}>
               <ParallaxMedia
                 label={`${entry.title} artwork`}
                 image={entry.image}
-                ratio={index % 2 === 0 ? "5:6" : "25:21"}
+                ratio="397:260"
                 radius="none"
                 showLabel={false}
               />
@@ -215,7 +218,7 @@ function TabletCarousel({ items }: { items: typeof home.trustStrip }) {
             <MediaPlaceholder
               label={`${entry.title} artwork`}
               image={entry.image}
-              ratio={index % 2 === 0 ? "5:6" : "25:21"}
+              ratio="397:260"
               radius="none"
               showLabel={false}
             />

@@ -42,13 +42,11 @@ export type MediaRatio =
   | "469:320"
   | "79:100"
   | "575:612"
-  | "397:234"
+  | "397:260"
   | "520:480"
   | "600:640"
   | "1280:640"
-  | "730:644"
-  | "5:6"
-  | "25:21";
+  | "730:644";
 export type MediaRadius = "lg" | "xl" | "none";
 
 export type MediaPlaceholderProps = {

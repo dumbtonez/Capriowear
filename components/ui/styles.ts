@@ -356,11 +356,13 @@ export const media = {
     // common factor between 575 and 612), kept exact per this table's own
     // established precedent rather than rounded to an existing ratio.
     "575:612": "aspect-[575/612]",
-    // /services "How we work with you" path cards, 397x234 (Figma node
-    // 750:777, 2026-09-07) -- 397 is prime, so this fraction is already in
-    // its lowest terms; kept exact per this table's own established
-    // precedent rather than rounded to an existing ratio.
-    "397:234": "aspect-[397/234]",
+    // /services "How we work with you" path cards, originally 397x234
+    // (Figma node 750:777, 2026-09-07) -- 397 is prime, so that fraction
+    // was already in lowest terms; kept exact per this table's own
+    // established precedent rather than rounded to an existing ratio.
+    // Height changed to 260, 2026-09-12 (owner: "how we work, make it 397
+    // by 260").
+    "397:260": "aspect-[397/260]",
     // /our-factory "What We Make" process gallery (Figma node 857:2090,
     // 2026-09-08): 3 real image sizes confirmed via get_metadata, each kept
     // as its own exact fraction per this table's established precedent.
@@ -379,13 +381,6 @@ export const media = {
     // pixel pair per this table's established precedent, matching
     // "1280:640" above rather than reducing to a renamed ratio.
     "730:644": "aspect-[730/644]",
-    // Trust Signals' desktop cards, redesigned 2026-09-09 (Figma nodes
-    // 890:253/890:279): alternating 500x600/500x420 per card, reduced to
-    // their exact lowest terms rather than kept as the raw pixel pair --
-    // both share the same 500px width, so unlike "730:644" above there's a
-    // real common factor (100 and 20) worth simplifying.
-    "5:6": "aspect-[5/6]",
-    "25:21": "aspect-[25/21]",
   },
   radius: {
     lg: "rounded-lg",
@@ -3294,7 +3289,7 @@ export const servicesHowWeWork = {
   desktopRow: "flex w-full justify-center gap-6 px-[80px]",
   // 397px -- the section's own original, Figma-confirmed 3-column-grid
   // card width (get_metadata, node 750:770; also why `MediaPlaceholder`'s
-  // `"397:234"` ratio option exists at all) restored (owner, 2026-09-10,
+  // `"397:260"` ratio option exists at all) restored (owner, 2026-09-10,
   // see `desktopScrollerWrap`'s own comment) after a same-day-earlier pass
   // had grown it to Our Services' own 480px -- 3×397px + 2×44px gaps
   // (1279px) fits the 1280px content area at 1440px with room to spare,
@@ -3656,19 +3651,22 @@ export const trustSignals = {
   // `CARD_GAP` in TrustSignals.tsx must match.
   desktopReel:
     "flex w-max items-start gap-6 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-  // 380px fixed width (owner, 2026-09-10, referencing a Google Health/Pixel
-  // marketing layout: "make the card size as per this reference, current
-  // one is too big, no cornor radious though" -- was 500px; radius was
-  // already `none` on every `MediaPlaceholder` here, so only the width
-  // needed to shrink). Keep `TrustSignals.tsx`'s own `CARD_WIDTH` JS
-  // constant (used for the chevron's scroll-by-one-card math) equal to
-  // this value.
-  // Image-to-text gap 32px -> 24px (owner, same day: "make the product
+  // 397px fixed width, was 380px (owner, 2026-09-12: "let's use this same
+  // card size for product development, low moq section" -- matching
+  // Services' own "How We Work" desktop card, `servicesHowWeWork.
+  // desktopCard`). Before that: 380px (owner, 2026-09-10, referencing a
+  // Google Health/Pixel marketing layout: "make the card size as per this
+  // reference, current one is too big, no cornor radious though" -- was
+  // 500px; radius was already `none` on every `MediaPlaceholder` here, so
+  // only the width needed to shrink). Keep `TrustSignals.tsx`'s own
+  // `CARD_WIDTH` JS constant (used for the chevron's scroll-by-one-card
+  // math) equal to this value.
+  // Image-to-text gap 32px -> 24px (owner, 2026-09-10: "make the product
   // developemnt low moq also 24px") -- matches How It Works' own desktop
   // media-to-text gap (`capabilityCard.root`'s `xl:gap-6`), deliberately
   // brought in line rather than left at this section's own former
   // Figma-sourced 32px.
-  desktopCard: "flex w-[380px] shrink-0 flex-col gap-[24px]",
+  desktopCard: "flex w-[397px] shrink-0 flex-col gap-[24px]",
   // 12px title-to-body gap (owner, 2026-09-10: "make it 12" -- was 16px,
   // itself a change from an original 8px; overrides the redesign's own
   // Figma-confirmed 16px, deliberate owner value).
@@ -3727,10 +3725,11 @@ export const trustSignals = {
   tabletRow: "no-scrollbar flex snap-x snap-mandatory gap-[24px] overflow-x-auto px-8 scroll-pl-8 scroll-pr-8",
   // Same width and image-to-text gap as `desktopCard` (owner: "image size
   // can be the same as desktop") -- only `snap-start` is added, for the
-  // native scroll-snap this track uses instead of the chevron. Shrunk to
-  // 380px/24px alongside `desktopCard` (2026-09-10) to keep that parity
-  // intact, not a separate tablet-only change.
-  tabletCard: "flex w-[380px] shrink-0 snap-start flex-col gap-[24px]",
+  // native scroll-snap this track uses instead of the chevron. Kept in
+  // lockstep with `desktopCard` through every later resize too (397px,
+  // 2026-09-12; before that 380px/24px, 2026-09-10) rather than a separate
+  // tablet-only value.
+  tabletCard: "flex w-[397px] shrink-0 snap-start flex-col gap-[24px]",
   // First fix (owner report, 2026-09-03: "the image container looks big")
   // capped this box's width to phone size (`md:max-w-[420px] md:mx-auto`,
   // matching TrustPoints/WhatWeCover/WhatWeMake's own fix) -- owner
@@ -5281,29 +5280,35 @@ export const howItWorks = {
   // to both. `CARD_GAP` in HowItWorks.tsx must match.
   desktopReel:
     "flex w-max gap-6 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-  // Widened from the Figma-confirmed 335px to match Exhibitions' own
-  // desktop card width exactly (owner call, 2026-08-27: both sections'
-  // media containers, and the space between them, should read as the same
-  // size) -- a deliberate departure from the literal Figma frame's own
-  // number, not a correction to it. Card gap (24px, `desktopRow`'s
-  // `gap-6`) already matched Exhibitions before this change.
+  // 397px, was 469px (owner, 2026-09-12: "apply the same [397x260 card
+  // size] to how it works section on home and services page" -- matching
+  // Services' "How We Work"/Trust Signals' own desktop card,
+  // `servicesHowWeWork.desktopCard`/`trustSignals.desktopCard`). This
+  // supersedes the 469px width's own original rationale (widened from the
+  // Figma-confirmed 335px to match Exhibitions' own desktop card width
+  // exactly, owner call 2026-08-27: "both sections' media containers...
+  // should read as the same size") -- How It Works and Exhibitions no
+  // longer share a card width after this change, a deliberate owner
+  // choice, not an oversight. `CARD_WIDTH` in HowItWorks.tsx must match.
   // `snap-start` dropped along with `desktopRow`'s own `snap-x` above.
-  desktopCard: "w-[469px] shrink-0",
-  // `md:aspect-[469/320]` tablet tier moved to `xl:`, 2026-09-09 (owner:
-  // "how it works on services should follow the same image container size
-  // as our services section... same fix we did for home") -- Our
-  // Services' own mobile `CardCarousel` (which also covers tablet,
-  // `xl:hidden`) never overrides its own base ratio below `xl:`, so its
-  // tablet-tier image is just the shared `7:5`. This card's own tablet
-  // tier (now rendered by this same mobile `CardCarousel`, since the
-  // chevron gallery moved to `xl:`-only -- see `desktopOuter`'s own
-  // comment) falls through to that identical base `7:5` value instead of
-  // its former one-off `469:320` tablet ratio -- an exact match, not just
-  // a close one. True desktop (the chevron gallery, `xl:`+) keeps its own
-  // real `469:320` ratio, just re-scoped from `md:` to `xl:` since that's
-  // the only tier this class list needs to differ from the shared base at
-  // any more.
-  cardMediaRatio: "aspect-[7/5] xl:aspect-[469/320]",
+  desktopCard: "w-[397px] shrink-0",
+  // `xl:aspect-[397/260]`, was `xl:aspect-[469/320]` -- same 2026-09-12
+  // request as `desktopCard` above, true desktop (`xl:`+, the chevron
+  // gallery) only. Tablet/mobile (the shared `CardCarousel`, below `xl:`)
+  // keeps the base `7:5` untouched -- this request was scoped to the
+  // desktop chevron gallery, matching every other "make it 397x260"/gap
+  // request this same session. `md:aspect-[469/320]` was itself moved to
+  // `xl:`, 2026-09-09 (owner: "how it works on services should follow the
+  // same image container size as our services section... same fix we did
+  // for home") -- Our Services' own mobile `CardCarousel` (which also
+  // covers tablet, `xl:hidden`) never overrides its own base ratio below
+  // `xl:`, so its tablet-tier image is just the shared `7:5`. This card's
+  // own tablet tier (now rendered by that same mobile `CardCarousel`,
+  // since the chevron gallery moved to `xl:`-only -- see `desktopOuter`'s
+  // own comment) falls through to that identical base `7:5` value instead
+  // of its former one-off tablet ratio -- an exact match, not just a
+  // close one.
+  cardMediaRatio: "aspect-[7/5] xl:aspect-[397/260]",
   // The floating chevron: both its position (translate, tracking the
   // cursor on X *and* Y) and visibility are written directly to this
   // element's inline `style` from a mousemove/mouseenter/mouseleave

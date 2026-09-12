@@ -99,7 +99,7 @@ function DesktopRow({ paths }: { paths: typeof services.howWeWork.paths }) {
             <ParallaxMedia
               label={path.title}
               image={path.image}
-              ratio="397:234"
+              ratio="397:260"
               radius="none"
               showLabel={false}
               className={servicesHowWeWork.pathMedia}
