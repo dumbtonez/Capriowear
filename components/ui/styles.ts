@@ -1085,7 +1085,7 @@ export const header = {
   // rather than all changing in lockstep -- a flat single fade on the whole
   // block reads as "nothing happening" the moment it's this quick, since
   // there's no visible stagger to track.
-  megaGroupReveal: "transition-[opacity,transform] duration-500 ease-out",
+  megaGroupReveal: "transition-[opacity,translate] duration-500 ease-out",
   megaGroupRevealOpen: "translate-y-0 opacity-100",
   megaGroupRevealClosed: "translate-y-2 opacity-0",
   // `min-w-[206px]`, not a fixed `w-[206px]` (owner report, 2026-08-27):
@@ -2328,7 +2328,7 @@ export const ourFactoryDetails = {
   // already established) so this now finishes in the same frame as the
   // chip's own width/radius transition, not a beat before it.
   itemIconWrap:
-    "flex h-6 shrink-0 items-center justify-center overflow-hidden transition-[opacity,transform,width,margin] ease-[cubic-bezier(0.33,1,0.68,1)] motion-reduce:transition-none",
+    "flex h-6 shrink-0 items-center justify-center overflow-hidden transition-[opacity,rotate,width,margin] ease-[cubic-bezier(0.33,1,0.68,1)] motion-reduce:transition-none",
   itemIconWrapClosed: "w-6 mr-2.5 rotate-0 opacity-100 duration-[260ms]",
   itemIconWrapOpen: "pointer-events-none w-0 mr-0 rotate-45 opacity-0 duration-[340ms]",
   itemIcon: "size-6 shrink-0 text-paper",
@@ -2441,9 +2441,9 @@ export const ourFactoryDetails = {
   // finishes at exactly 340ms, matching `detailGridOpen`'s own duration
   // precisely, so the box and the text always finish in the same frame.
   detailInner:
-    "px-6 pb-4 opacity-0 translate-y-3 transition-[opacity,transform] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none motion-reduce:translate-y-0",
+    "px-6 pb-4 opacity-0 translate-y-3 transition-[opacity,translate] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none motion-reduce:translate-y-0",
   detailInnerOpen:
-    "px-6 pb-4 opacity-100 translate-y-0 transition-[opacity,transform] delay-100 duration-[240ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none motion-reduce:delay-0",
+    "px-6 pb-4 opacity-100 translate-y-0 transition-[opacity,translate] delay-100 duration-[240ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none motion-reduce:delay-0",
   // md:max-w-[clamp(560px,65vw,780px)]/xl:max-w-none (owner, 2026-09-09:
   // "the subline width that we define on this page, apply it to all
   // paragraphs across pages, same way") -- this description sits in
