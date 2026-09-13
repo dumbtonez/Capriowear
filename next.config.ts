@@ -36,13 +36,19 @@ const CSP = [
 // values on one response do not override each other, browsers intersect
 // them, which would silently break the Studio instead of loosening it).
 // Every other directive mirrors the sitewide CSP unchanged.
+//
+// core.sanity-cdn.com (the Studio's own cross-origin "bridge" script) and
+// design-system-static.sanity.io (its self-hosted Inter font files) were
+// added 2026-09-13 after wiring up a real project -- both were blocked
+// outright until then, confirmed via the browser console against the real
+// Studio login screen, not guessed ahead of time.
 const STUDIO_CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://core.sanity-cdn.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https:",
-  "font-src 'self' data:",
-  "connect-src 'self' https://*.api.sanity.io https://*.apicdn.sanity.io",
+  "font-src 'self' data: https://design-system-static.sanity.io",
+  "connect-src 'self' https://*.api.sanity.io https://*.apicdn.sanity.io https://core.sanity-cdn.com",
   "worker-src 'self' blob:",
   "frame-ancestors 'none'",
   "base-uri 'self'",
