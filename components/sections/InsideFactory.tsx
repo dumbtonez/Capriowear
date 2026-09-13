@@ -40,7 +40,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/Button";
-import { DesktopChevron, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
+import { useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -180,9 +180,6 @@ function DesktopGallery({
     wrapRef,
     trackRef,
     reelRef,
-    chevronRef,
-    dotRef,
-    direction,
     activeIndex,
     handleMouseMove,
     handleMouseEnter,
@@ -206,8 +203,12 @@ function DesktopGallery({
         onPointerDown={handlePointerDown}
         onPointerMove={(event) => {
           // `PointerEvent` covers `MouseEvent`'s own shape (clientX/Y,
-          // timeStamp), so the same event feeds both: the chevron's cursor
-          // tracking (unaffected by dragging) and the drag/momentum logic.
+          // timeStamp), so the same event feeds both: `handleMouseMove`'s
+          // own click-direction tracking (which half of the row a plain,
+          // non-drag click landed on -- still needed even though the
+          // floating chevron it also used to drive is gone here, see
+          // `desktopScrollerWrap`'s own comment) and the drag/momentum
+          // logic.
           handleMouseMove(event);
           handlePointerMoveDrag(event);
         }}
@@ -242,7 +243,6 @@ function DesktopGallery({
             ))}
           </div>
         </div>
-        <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
       </div>
       {/* Segmented pill progress indicator (owner, 2026-09-12, referencing
           apple.com/ae/macbook-pro's "Take a closer look" segmented control)

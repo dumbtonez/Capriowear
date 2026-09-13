@@ -49,6 +49,17 @@ const SETTLE_DURATION_MAX_MS = 520;
 // ~0.2px/ms drag lands near the 500ms ceiling, a ~3px/ms flick lands at
 // the 220ms floor, with real separation across the range in between.
 const SETTLE_DURATION_SPEED_FACTOR = 100;
+// A loop-wrap jump's own duration -- see `settleDragRelease`'s own comment
+// on why this is completely separate from `SETTLE_DURATION_*` above (a
+// wrap covers the *entire* track width, so squeezing it into a fast
+// flick's short settle window blurred every card in between). Fixed
+// glide speed (px/ms), not tied to release velocity at all -- every wrap
+// takes however long ITS OWN distance needs at this one pace, clamped to
+// a sensible min/max so a very short or very long track still reads as
+// one deliberate glide.
+const LOOP_WRAP_PX_PER_MS = 6;
+const LOOP_WRAP_DURATION_MIN_MS = 380;
+const LOOP_WRAP_DURATION_MAX_MS = 650;
 const SETTLE_EASE = "cubic-bezier(0.22,1,0.36,1)"; // this codebase's own established "premium settle" curve, reused rather than inventing a second one
 // Fraction of the remaining distance closed per 60fps-equivalent frame --
 // tuned by feel. Lowered 0.35 -> 0.22 (owner, 2026-09-10: "this chvron
@@ -410,10 +421,13 @@ export function useDesktopChevronScroller(
 
     const snapPositions = getSnapPositions(maxOffset);
     let target: number;
+    let isWrap = false;
     if (loop && projected < -cardPitch * 0.4) {
       target = maxOffset; // flung backward past the start -- wrap to the last stop
+      isWrap = true;
     } else if (loop && projected > maxOffset + cardPitch * 0.4) {
       target = 0; // flung forward past the end -- wrap to the first stop
+      isWrap = true;
     } else {
       target = snapPositions.reduce((closest, pos) =>
         Math.abs(pos - projected) < Math.abs(closest - projected) ? pos : closest,
@@ -426,10 +440,31 @@ export function useDesktopChevronScroller(
     // abrupt. See `SETTLE_DURATION_SPEED_FACTOR`'s own comment for the
     // calibration -- each 1px/ms of release speed shaves that many ms off
     // the settle, floored/ceilinged to a 220-520ms range either way.
+    //
+    // Real bug, found live testing the loop-wrap case specifically (owner
+    // report, 2026-09-13: "confirm it doesn't produce an unexpected large
+    // jump or jarring position snap at high drag velocity... test with a
+    // slow drag AND a fast flick past the edge"): a fast flick past the
+    // last card wraps the reel almost its FULL WIDTH (confirmed live,
+    // ~4656px) -- but the speed-derived duration above is calibrated for a
+    // normal one-card settle distance (~1200px), so at a fast flick's
+    // ~220ms floor it tried to slide the entire track width in that same
+    // ~220ms, reading as a blurry teleport/jump-cut, not a carousel loop.
+    // A wrap is structurally a different motion than a momentum settle --
+    // there's no real content continuity to preserve across it (unlike a
+    // normal settle, which really did just travel that fast), so it gets
+    // its own duration, derived from the actual distance it must cover at
+    // a fixed, deliberate glide speed, completely decoupled from release
+    // velocity -- confirmed live: a fast flick and a slow drag that both
+    // resolve to the same wrap now glide at the identical, always-smooth
+    // pace, instead of the flick's own short settle window blurring past
+    // every card in between.
     const speed = Math.abs(contentVelocity);
     const duration = reduced
       ? 0
-      : Math.max(SETTLE_DURATION_MIN_MS, SETTLE_DURATION_MAX_MS - speed * SETTLE_DURATION_SPEED_FACTOR);
+      : isWrap
+        ? Math.min(LOOP_WRAP_DURATION_MAX_MS, Math.max(LOOP_WRAP_DURATION_MIN_MS, Math.abs(target - currentOffset) / LOOP_WRAP_PX_PER_MS))
+        : Math.max(SETTLE_DURATION_MIN_MS, SETTLE_DURATION_MAX_MS - speed * SETTLE_DURATION_SPEED_FACTOR);
 
     offsetRef.current = target;
     setActiveIndex(Math.round(Math.min(target, maxOffset) / cardPitch));

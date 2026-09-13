@@ -4448,7 +4448,27 @@ export const insideFactory = {
   // `touch-pan-y` is this section's own addition, not rolled into the
   // other five galleries sharing `desktopScrollerWrap`'s own base shape --
   // none of them have drag, so none of them need it.
-  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-none overflow-hidden touch-pan-y",
+  //
+  // `cursor-grab active:cursor-grabbing`, not `cursor-none` any more --
+  // real affordance bug, found live (owner, 2026-09-13: "most visitors
+  // will never discover or experience the momentum feature... the primary
+  // hover state over the draggable area should read as 'drag me,' not
+  // 'click me'"). The floating cursor-tracking chevron this class's own
+  // `cursor-none` used to pair with (see the comment above it) was built
+  // for the OTHER five galleries sharing this same base shape, all of
+  // which are click-only -- a chevron icon is the right cue for "click to
+  // advance," but reused here it told visitors to click, not drag, on the
+  // one gallery whose real momentum feature only exists behind a drag
+  // gesture. Swapped for a native OS grab-hand cursor instead (open while
+  // hovering, closed/grabbing for as long as the mouse is actually held
+  // down, `active:` needs no JS state) -- `<DesktopChevron>` is no longer
+  // rendered for this gallery (`InsideFactory.tsx`'s own `DesktopGallery`),
+  // though its underlying cursor-position tracking (`handleMouseMove`)
+  // stays wired, since a plain click's own left/right direction still
+  // depends on it. The chevron BUTTON's click-to-advance behaviour itself
+  // is untouched -- clicking anywhere still pages one card, exactly as
+  // before -- only the hover affordance changed.
+  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-grab active:cursor-grabbing overflow-hidden touch-pan-y",
   // snap-center at `xl:` (not How It Works' snap-start) -- the point there
   // is the active card centers in the viewport, not aligns to an edge.
   // Padding is calculated (half the card width, 475px) so the first/last
