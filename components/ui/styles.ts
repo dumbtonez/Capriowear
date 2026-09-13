@@ -1621,20 +1621,21 @@ export const shortClipMedia = {
   // not `teaserVideo.overlayButton`'s persistent labelled pill (that one
   // stays visible the whole time a teaser plays, this only ever appears
   // once the clip has actually ended, so a quieter treatment reads as "an
-  // available action," not "a thing competing with the footage"). 56x56
-  // frosted-glass treatment (owner, 2026-09-13, two passes: first landed on
-  // 40x40/`backdrop-blur-md`, confirmed live via `getComputedStyle` as
-  // genuinely applied -- `blur(12px)`, not missing -- but read as subtle
-  // over a busy/high-detail backdrop like leaves; owner asked for a
-  // stronger, more visibly "glass" version) -- bumped to `size-14` (56px)
-  // and `backdrop-blur-xl`, both meaningfully stronger than the first pass,
-  // keeping the same `ink/50` tint (already dark enough on its own without
-  // leaning on the blur) and `paper/25` ring for the glass edge itself,
-  // which is what actually gives it a visible boundary over a same-tone
-  // dark photo the semi-transparent fill alone can't provide.
+  // available action," not "a thing competing with the footage"). Frosted-
+  // glass treatment (owner, 2026-09-13, three passes): first 40x40/
+  // `backdrop-blur-md`, confirmed live via `getComputedStyle` as genuinely
+  // applied (`blur(12px)`, not missing) but read as subtle over a busy/
+  // high-detail backdrop like leaves; bumped to a flat 56x56/
+  // `backdrop-blur-xl` (`blur(24px)`) next -- then split by breakpoint
+  // (owner: "on mobile treat it separately, make it 40x40 desktop 56x56"):
+  // `size-10` (40px) up to `xl:`, `size-14` (56px) from `xl:` on, matching
+  // this project's own standing mobile/desktop line everywhere else. The
+  // `paper/25` ring (an earlier "glass edge" attempt) is gone -- owner:
+  // "remove the outline from the icon too" -- the blur plus the `ink/50`
+  // tint alone is the whole effect now, no separate border.
   replayButton:
-    "absolute bottom-3 right-3 inline-flex size-14 items-center justify-center rounded-pill bg-ink/50 text-paper backdrop-blur-xl ring-1 ring-paper/25 transition-colors hover:bg-ink/65 motion-reduce:transition-none",
-  replayIcon: "size-6",
+    "absolute bottom-3 right-3 inline-flex size-10 xl:size-14 items-center justify-center rounded-pill bg-ink/50 text-paper backdrop-blur-xl transition-colors hover:bg-ink/65 motion-reduce:transition-none",
+  replayIcon: "size-5 xl:size-6",
   // Centred, for the `prefers-reduced-motion`/save-data click-to-play state
   // -- no icon-only treatment here, since this is the ONLY way that state
   // ever starts the clip at all (not a secondary "replay" action), so it
