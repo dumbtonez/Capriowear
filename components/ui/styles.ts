@@ -3625,7 +3625,16 @@ export const trustSignals = {
   // desktopScrollerWrap`'s own comment) -- a flat `px-[80px]` inset alone
   // only matches `container-p`'s own centring inset up to 1440px, drifting
   // wider apart above it.
-  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-none overflow-hidden",
+  // `cursor-grab active:cursor-grabbing`, not `cursor-none` -- real
+  // click-and-drag/swipe rollout, 2026-09-13 (owner: "apply this same
+  // transition ... that we built for [Inside the Factory]"), same
+  // affordance fix that section's own token already carries (see its
+  // comment): the floating chevron alone told visitors "click here," not
+  // "drag me," which is where the real momentum feature lives. `touch-
+  // pan-y`: this row now handles its own horizontal drag via Pointer
+  // Events, so a touch device needs to be told the browser's own native
+  // gesture handling should still own vertical panning.
+  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-grab active:cursor-grabbing overflow-hidden touch-pan-y",
   // `overflow-x-hidden`, not `-auto` (matching every other scroller here,
   // see `DesktopChevronScroller.tsx`'s own header comment: "user can only
   // scroll by clicking"). `px-8 xl:px-[80px]`/`scroll-pl`/`scroll-pr`:
@@ -5192,6 +5201,24 @@ export const chevronScroller = {
   // own visible mark; still does real work (the instant-follow position
   // fix), just no longer reads as a separate design element.
   dot: "pointer-events-none absolute top-0 left-0 z-20 size-1.5 rounded-full bg-paper opacity-0 transition-opacity duration-200 ease-out",
+  // Segmented pill progress indicator (owner, 2026-09-13: "apply this same
+  // transition with the counter on the bottom that we built for [Inside
+  // the Factory] to Exhibition, How It Works and Trust Signals"). Pulled
+  // out into this shared recipe rather than copy-pasted a third/fourth
+  // time -- values are byte-identical to what Inside the Factory's own
+  // `insideFactory.desktopDots*` tokens already established and shipped
+  // (2026-09-12, referencing apple.com/ae/macbook-pro's "Take a closer
+  // look" segmented control); that section's own tokens are left as-is
+  // (already shipped and verified), not migrated to this shared version,
+  // to avoid any regression risk on working code nothing asked to change.
+  dotsWrap: "flex justify-center pt-8",
+  dotsPill: "flex items-center gap-2 rounded-full bg-paper/10 px-3 py-2.5",
+  dotsPillLight: "flex items-center gap-2 rounded-full bg-ink/10 px-3 py-2.5",
+  dotsSegment: "h-1.5 rounded-full transition-all duration-300 ease-out",
+  dotsSegmentActive: "w-6 bg-paper",
+  dotsSegmentInactive: "w-1.5 bg-paper/40",
+  dotsSegmentActiveLight: "w-6 bg-ink",
+  dotsSegmentInactiveLight: "w-1.5 bg-ink/30",
 };
 
 /* --- HowItWorks (homepage section 12) --------------------------------- */
@@ -5305,7 +5332,16 @@ export const howItWorks = {
   // other section's own left edge above it. Capping this wrap at 1440px
   // makes the existing 80px padding behave exactly like `container-p` at
   // every width.
-  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-none overflow-hidden",
+  // `cursor-grab active:cursor-grabbing`, not `cursor-none` -- real
+  // click-and-drag/swipe rollout, 2026-09-13 (owner: "apply this same
+  // transition ... that we built for [Inside the Factory]"), same
+  // affordance fix that section's own token already carries (see its
+  // comment): the floating chevron alone told visitors "click here," not
+  // "drag me," which is where the real momentum feature lives. `touch-
+  // pan-y`: this row now handles its own horizontal drag via Pointer
+  // Events, so a touch device needs to be told the browser's own native
+  // gesture handling should still own vertical panning.
+  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-grab active:cursor-grabbing overflow-hidden touch-pan-y",
   // scroll-pl/pr match the visual px inset -- without them, scroll-snap's
   // own snap-point maths (each card's snap-start) doesn't know the
   // padding is "safe" space, so the browser auto-corrects the rest scroll
@@ -5455,7 +5491,16 @@ export const exhibitions = {
   // behave exactly like `container-p` at every width, matching this
   // project's own stated rule ("Max content width 1440px, centred,
   // sitewide, no exceptions", `docs/02-design-system.md`).
-  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-none overflow-hidden",
+  // `cursor-grab active:cursor-grabbing`, not `cursor-none` -- real
+  // click-and-drag/swipe rollout, 2026-09-13 (owner: "apply this same
+  // transition ... that we built for [Inside the Factory]"), same
+  // affordance fix that section's own token already carries (see its
+  // comment): the floating chevron alone told visitors "click here," not
+  // "drag me," which is where the real momentum feature lives. `touch-
+  // pan-y`: this row now handles its own horizontal drag via Pointer
+  // Events, so a touch device needs to be told the browser's own native
+  // gesture handling should still own vertical panning.
+  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-grab active:cursor-grabbing overflow-hidden touch-pan-y",
   // `overflow-x-hidden`, not `-auto` (owner, 2026-09-08: "user can only
   // scroll by clicking" -- see `useDesktopChevronScroller`'s own header
   // comment in DesktopChevronScroller.tsx for the full reasoning).

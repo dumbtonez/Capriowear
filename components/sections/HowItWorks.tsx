@@ -43,7 +43,7 @@
 
 import { CapabilityCard } from "@/components/Card";
 import { CardCarousel } from "@/components/CardCarousel";
-import { DesktopChevron, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
+import { DesktopChevron, DesktopPillIndicator, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextReveal } from "@/components/TextReveal";
 import { cx } from "@/components/ui/cx";
@@ -101,6 +101,12 @@ function renderMobileHeading(h2: string) {
 const CARD_WIDTH = 397; // owner, 2026-09-12: "apply the same [card size] to how it works section on home and services page" -- matching howItWorks.desktopCard
 const CARD_GAP = 24; // owner, 2026-09-12: reverted to 24 the same day ("how it works on services make it 24px too") -- matching howItWorks.desktopReel
 
+// Real click-and-drag/swipe with velocity-based momentum, plus a segmented
+// pill progress indicator below the row -- owner, 2026-09-13: "apply this
+// same transition with the counter on the bottom that we built for [Inside
+// the Factory]" (to this section, Exhibitions, and Trust Signals). `loop:
+// true` matches Inside the Factory's own carousel-loop behaviour rather than
+// the plain clamp this section (and Exhibitions/Trust Signals) used before.
 function DesktopScroller({
   steps,
   tone,
@@ -108,37 +114,62 @@ function DesktopScroller({
   steps: typeof home.howItWorks.steps;
   tone: "light" | "dark";
 }) {
-  const { wrapRef, trackRef, reelRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
-    useDesktopChevronScroller(CARD_WIDTH + CARD_GAP);
+  const {
+    wrapRef,
+    trackRef,
+    reelRef,
+    chevronRef,
+    dotRef,
+    direction,
+    activeIndex,
+    handleMouseMove,
+    handleMouseEnter,
+    handleMouseLeave,
+    handlePointerDown,
+    handlePointerMoveDrag,
+    handlePointerUp,
+    handlePointerCancel,
+  } = useDesktopChevronScroller(CARD_WIDTH + CARD_GAP, true, { enabled: true, cardCount: steps.length });
 
   return (
-    <div
-      ref={wrapRef}
-      className={howItWorks.desktopScrollerWrap}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
-    >
-      <div ref={trackRef} className={howItWorks.desktopRow}>
-        <div ref={reelRef} className={howItWorks.desktopReel}>
-          {steps.map((step) => (
-            <div key={step.title} className={howItWorks.desktopCard}>
-              <CapabilityCard
-                title={step.title}
-                body={step.body}
-                image={step.image}
-                mediaAspectClassName={howItWorks.cardMediaRatio}
-                mediaRadius="none"
-                tone={tone}
-                parallax
-              />
-            </div>
-          ))}
+    <>
+      <div
+        ref={wrapRef}
+        className={howItWorks.desktopScrollerWrap}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onPointerDown={handlePointerDown}
+        onPointerMove={(event) => {
+          // `PointerEvent` covers `MouseEvent`'s own shape (clientX/Y,
+          // timeStamp), so the same event feeds both: the chevron's cursor
+          // tracking (unaffected by dragging) and the drag/momentum logic.
+          handleMouseMove(event);
+          handlePointerMoveDrag(event);
+        }}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerCancel}
+      >
+        <div ref={trackRef} className={howItWorks.desktopRow}>
+          <div ref={reelRef} className={howItWorks.desktopReel}>
+            {steps.map((step) => (
+              <div key={step.title} className={howItWorks.desktopCard}>
+                <CapabilityCard
+                  title={step.title}
+                  body={step.body}
+                  image={step.image}
+                  mediaAspectClassName={howItWorks.cardMediaRatio}
+                  mediaRadius="none"
+                  tone={tone}
+                  parallax
+                />
+              </div>
+            ))}
+          </div>
         </div>
+        <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
       </div>
-      <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
-    </div>
+      <DesktopPillIndicator count={steps.length} activeIndex={activeIndex} tone={tone} />
+    </>
   );
 }
 

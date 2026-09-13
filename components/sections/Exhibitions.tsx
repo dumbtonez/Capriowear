@@ -22,7 +22,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { DesktopChevron, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
+import { DesktopChevron, DesktopPillIndicator, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -56,30 +56,63 @@ function lerp(from: number, to: number, t: number) {
 const DESKTOP_CARD_WIDTH = 469;
 const DESKTOP_CARD_GAP = 24; // owner, 2026-09-12: reverted to 24 the same day ("make it 24px") -- Exhibitions keeps its own value, unlike the other four chevron galleries (matching exhibitions.desktopReel)
 
+// Real click-and-drag/swipe with velocity-based momentum, plus a segmented
+// pill progress indicator below the row -- owner, 2026-09-13: "apply this
+// same transition with the counter on the bottom that we built for [Inside
+// the Factory]" (to this section, How It Works, and Trust Signals). `loop:
+// true` matches Inside the Factory's own carousel-loop behaviour rather than
+// the plain clamp this section used before. `tone="dark"` fixed, not a prop
+// -- this section has no light-section usage anywhere (`exhibitions.
+// desktopOuter`'s own `bg-ink`), unlike How It Works.
 function DesktopScroller({ shots }: { shots: typeof home.exhibitions.media }) {
-  const { wrapRef, trackRef, reelRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =
-    useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP);
+  const {
+    wrapRef,
+    trackRef,
+    reelRef,
+    chevronRef,
+    dotRef,
+    direction,
+    activeIndex,
+    handleMouseMove,
+    handleMouseEnter,
+    handleMouseLeave,
+    handlePointerDown,
+    handlePointerMoveDrag,
+    handlePointerUp,
+    handlePointerCancel,
+  } = useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP, true, { enabled: true, cardCount: shots.length });
 
   return (
-    <div
-      ref={wrapRef}
-      className={exhibitions.desktopScrollerWrap}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
-    >
-      <div ref={trackRef} className={exhibitions.desktopRow}>
-        <div ref={reelRef} className={exhibitions.desktopReel}>
-          {shots.map((shot) => (
-            <div key={shot.label} className={exhibitions.desktopCard}>
-              <ParallaxMedia label={shot.label} image={shot.image} ratio="469:320" radius="none" />
-            </div>
-          ))}
+    <>
+      <div
+        ref={wrapRef}
+        className={exhibitions.desktopScrollerWrap}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onPointerDown={handlePointerDown}
+        onPointerMove={(event) => {
+          // `PointerEvent` covers `MouseEvent`'s own shape (clientX/Y,
+          // timeStamp), so the same event feeds both: the chevron's cursor
+          // tracking (unaffected by dragging) and the drag/momentum logic.
+          handleMouseMove(event);
+          handlePointerMoveDrag(event);
+        }}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerCancel}
+      >
+        <div ref={trackRef} className={exhibitions.desktopRow}>
+          <div ref={reelRef} className={exhibitions.desktopReel}>
+            {shots.map((shot) => (
+              <div key={shot.label} className={exhibitions.desktopCard}>
+                <ParallaxMedia label={shot.label} image={shot.image} ratio="469:320" radius="none" />
+              </div>
+            ))}
+          </div>
         </div>
+        <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
       </div>
-      <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
-    </div>
+      <DesktopPillIndicator count={shots.length} activeIndex={activeIndex} tone="dark" />
+    </>
   );
 }
 

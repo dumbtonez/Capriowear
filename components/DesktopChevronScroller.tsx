@@ -25,6 +25,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState, type MouseEvent, type PointerEvent, type RefObject } from "react";
 
+import { cx } from "@/components/ui/cx";
 import { chevronScroller } from "@/components/ui/styles";
 
 const CHEVRON_HALF = 40; // half of size-20 (80px) circle, to centre it on the cursor
@@ -619,5 +620,46 @@ export function DesktopChevron({
         )}
       </div>
     </>
+  );
+}
+
+// Segmented pill progress indicator (owner, 2026-09-13: "apply this same
+// transition with the counter on the bottom that we built for [Inside the
+// Factory]" -- to Exhibitions, How It Works and Trust Signals). Shared here
+// rather than copy-pasted a third/fourth time; see `chevronScroller.dotsWrap`'s
+// own comment in styles.ts for why Inside the Factory's own original tokens
+// are untouched rather than migrated onto this. A sibling of the chevron
+// gallery's own click-to-page wrap, not nested inside it, so it isn't
+// clipped by that wrap's own `overflow-hidden` and a click here never
+// accidentally pages the gallery via the wrap's own click handler.
+export function DesktopPillIndicator({
+  count,
+  activeIndex,
+  tone = "dark",
+}: {
+  count: number;
+  activeIndex: number;
+  tone?: "light" | "dark";
+}) {
+  return (
+    <div className={chevronScroller.dotsWrap}>
+      <div className={tone === "light" ? chevronScroller.dotsPillLight : chevronScroller.dotsPill}>
+        {Array.from({ length: count }, (_, index) => (
+          <span
+            key={index}
+            className={cx(
+              chevronScroller.dotsSegment,
+              index === activeIndex
+                ? tone === "light"
+                  ? chevronScroller.dotsSegmentActiveLight
+                  : chevronScroller.dotsSegmentActive
+                : tone === "light"
+                  ? chevronScroller.dotsSegmentInactiveLight
+                  : chevronScroller.dotsSegmentInactive,
+            )}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
