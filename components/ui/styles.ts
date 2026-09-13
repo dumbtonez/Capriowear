@@ -1621,18 +1621,20 @@ export const shortClipMedia = {
   // not `teaserVideo.overlayButton`'s persistent labelled pill (that one
   // stays visible the whole time a teaser plays, this only ever appears
   // once the clip has actually ended, so a quieter treatment reads as "an
-  // available action," not "a thing competing with the footage"). 40x40
-  // frosted-glass treatment (owner, 2026-09-13: needs to stay legible over
-  // both dark and light frozen frames) -- a translucent `ink/50` tint (not
-  // the earlier `ink/70`, opaque enough to already read as "dark" over a
-  // light frame on its own without needing the blur to help) plus a real
-  // `backdrop-blur-md` and a `paper/25` ring for the glass edge itself:
-  // the combination is what reads as "frosted glass" rather than just "a
-  // dark chip" -- the ring alone gives it a visible boundary over a
-  // same-tone dark photo the semi-transparent fill can't provide by itself.
+  // available action," not "a thing competing with the footage"). 56x56
+  // frosted-glass treatment (owner, 2026-09-13, two passes: first landed on
+  // 40x40/`backdrop-blur-md`, confirmed live via `getComputedStyle` as
+  // genuinely applied -- `blur(12px)`, not missing -- but read as subtle
+  // over a busy/high-detail backdrop like leaves; owner asked for a
+  // stronger, more visibly "glass" version) -- bumped to `size-14` (56px)
+  // and `backdrop-blur-xl`, both meaningfully stronger than the first pass,
+  // keeping the same `ink/50` tint (already dark enough on its own without
+  // leaning on the blur) and `paper/25` ring for the glass edge itself,
+  // which is what actually gives it a visible boundary over a same-tone
+  // dark photo the semi-transparent fill alone can't provide.
   replayButton:
-    "absolute bottom-3 right-3 inline-flex size-10 items-center justify-center rounded-pill bg-ink/50 text-paper backdrop-blur-md ring-1 ring-paper/25 transition-colors hover:bg-ink/65 motion-reduce:transition-none",
-  replayIcon: "size-5",
+    "absolute bottom-3 right-3 inline-flex size-14 items-center justify-center rounded-pill bg-ink/50 text-paper backdrop-blur-xl ring-1 ring-paper/25 transition-colors hover:bg-ink/65 motion-reduce:transition-none",
+  replayIcon: "size-6",
   // Centred, for the `prefers-reduced-motion`/save-data click-to-play state
   // -- no icon-only treatment here, since this is the ONLY way that state
   // ever starts the clip at all (not a secondary "replay" action), so it
