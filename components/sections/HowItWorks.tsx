@@ -172,6 +172,7 @@ function DesktopScroller({
                   tone={tone}
                   parallax
                   revealRootRef={trackRef}
+                  eager
                 />
               </div>
             ))}

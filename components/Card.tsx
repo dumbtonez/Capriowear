@@ -72,6 +72,8 @@ type CardMediaProps = {
    * unaffected, still the default viewport root.
    */
   revealRootRef?: RefObject<HTMLElement | null>;
+  /** See `ParallaxMedia`'s own `eager` prop comment (components/ParallaxMedia.tsx) for the real bug this fixes. Default false: unchanged, `next/image`'s own default `loading="lazy"`. */
+  eager?: boolean;
   className?: string;
 };
 
@@ -83,6 +85,7 @@ function CardMedia({
   tone = "light",
   parallax = false,
   revealRootRef,
+  eager = false,
   className,
 }: CardMediaProps) {
   const classes = cx(aspectClassName, cardMedia.base, cardMedia.radius[radius], className);
@@ -104,6 +107,7 @@ function CardMedia({
               fill
               sizes={imageSizes}
               className={cardMedia.imageFill}
+              loading={eager ? "eager" : "lazy"}
             />
           </div>
         </div>
@@ -217,6 +221,8 @@ export type CapabilityCardProps = {
   parallax?: boolean;
   /** See `CardMediaProps.revealRootRef`'s own comment. Forwarded straight through. */
   revealRootRef?: RefObject<HTMLElement | null>;
+  /** See `CardMediaProps.eager`'s own comment. Forwarded straight through. */
+  eager?: boolean;
 };
 
 export function CapabilityCard({
@@ -232,6 +238,7 @@ export function CapabilityCard({
   tone = "light",
   parallax = false,
   revealRootRef,
+  eager = false,
 }: CapabilityCardProps) {
   return (
     <article className={rootClassName}>
@@ -243,6 +250,7 @@ export function CapabilityCard({
         tone={tone}
         parallax={parallax}
         revealRootRef={revealRootRef}
+        eager={eager}
       />
       <div className={bodyClassName}>
         <h3 className={titleClassName}>{title}</h3>

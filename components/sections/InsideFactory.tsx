@@ -231,7 +231,17 @@ function DesktopGallery({
                     against the default full-page root they never triggered
                     this reveal at all, stuck at their pre-reveal zoomed-in
                     crop (see `useRevealOnView`'s own comment,
-                    components/TextReveal.tsx, for the full mechanism). */}
+                    components/TextReveal.tsx, for the full mechanism).
+                    `eager` -- a SEPARATE real bug, found live on the
+                    deployed site the same day after the fix above still
+                    didn't fully resolve it: `next/image`'s own built-in
+                    lazy-loading is a second, independent observer (not
+                    `revealRootRef` above), still defaulting to the real
+                    page viewport -- an off-screen card's image never even
+                    started downloading, confirmed via `naturalWidth`/
+                    `currentSrc` on the live site, not just "not yet
+                    settled." See `ParallaxMedia`'s own `eager` prop
+                    comment for the full reasoning. */}
                 <ParallaxMedia
                   label={shot.label}
                   ratio="15:8"
@@ -240,6 +250,7 @@ function DesktopGallery({
                   image={shot.image}
                   className={insideFactory.desktopCardMedia}
                   revealRootRef={trackRef}
+                  eager
                 />
                 <p className={tone === "light" ? insideFactory.desktopCardLabelLight : insideFactory.desktopCardLabel}>
                   {shot.label}

@@ -58,6 +58,28 @@ export type ParallaxMediaProps = {
    * viewport root).
    */
   revealRootRef?: RefObject<HTMLElement | null>;
+  /**
+   * Default false: unchanged, `next/image`'s own default `loading="lazy"`
+   * (deferred until its OWN separate native lazy-load observer -- NOT
+   * `revealRootRef`/`useRevealOnView` above, a completely different
+   * mechanism -- decides it's near the real page viewport). Real bug,
+   * found live on the deployed site, owner 2026-09-13 (a follow-up to the
+   * `revealRootRef` fix above, which only addressed the zoom-and-settle
+   * reveal's own trigger): a card sitting outside the page's own viewport
+   * bounds in a horizontally click/drag-paged reel never scrolls into
+   * view in the way native lazy-loading expects, so its image never even
+   * started downloading, not just never "settled" -- confirmed live,
+   * `naturalWidth`/`naturalHeight` 0 and an empty `currentSrc` on the
+   * later cards of Exhibitions' own reel, verified via `getComputedStyle`/
+   * DOM inspection on the deployed site. Pass `true` for every card in a
+   * small, bounded, click/drag-paged carousel (Exhibitions/How It Works/
+   * Inside the Factory, 3-5 real images each) -- the same "preload every
+   * item so the swap is instant" reasoning `OurFactoryDetails.tsx`'s own
+   * always-mounted image stack already established, just via
+   * `loading="eager"` here instead of that component's "every image
+   * already mounted" approach.
+   */
+  eager?: boolean;
 };
 
 export function ParallaxMedia({
@@ -69,6 +91,7 @@ export function ParallaxMedia({
   showLabel = true,
   className,
   revealRootRef,
+  eager = false,
 }: ParallaxMediaProps) {
   const { ref, active } = useRevealOnView<HTMLDivElement>(0.3, revealRootRef);
 
@@ -81,7 +104,14 @@ export function ParallaxMedia({
         )}
       >
         {image ? (
-          <Image src={image.src} alt={image.alt ?? label} fill sizes={imageSizes} className={media.imageFill} />
+          <Image
+            src={image.src}
+            alt={image.alt ?? label}
+            fill
+            sizes={imageSizes}
+            className={media.imageFill}
+            loading={eager ? "eager" : "lazy"}
+          />
         ) : (
           <div className={cx(media.placeholder, media.placeholderCentred, media.placeholderLight, "h-full")}>
             {showLabel ? <span className={media.label}>{label}</span> : null}
