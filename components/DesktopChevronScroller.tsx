@@ -735,14 +735,17 @@ export function DesktopPillIndicator({
   count: number;
   activeIndex: number;
   tone?: "light" | "dark";
-  // "loose" is Exhibitions-only (owner, 2026-09-13: "add 16px more space for
-  // exhibition counter too") -- 48px vs. the shared 32px default every other
-  // caller (How It Works) keeps, so it's an opt-in variant, not a change to
-  // `dotsWrap` itself.
-  gap?: "default" | "loose";
+  // "loose" is Exhibitions-only, "tight" is How It Works-only (owner,
+  // 2026-09-13) -- each moved off the shared 32px `default`, in opposite
+  // directions, so neither token is a change to the other caller's gap.
+  gap?: "default" | "loose" | "tight";
 }) {
   return (
-    <div className={gap === "loose" ? chevronScroller.dotsWrapLoose : chevronScroller.dotsWrap}>
+    <div
+      className={
+        gap === "loose" ? chevronScroller.dotsWrapLoose : gap === "tight" ? chevronScroller.dotsWrapTight : chevronScroller.dotsWrap
+      }
+    >
       <div className={tone === "light" ? chevronScroller.dotsPillLight : chevronScroller.dotsPill}>
         {Array.from({ length: count }, (_, index) => (
           <span

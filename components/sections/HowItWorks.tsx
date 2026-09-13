@@ -181,7 +181,7 @@ function DesktopScroller({
         </div>
         <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
       </div>
-      <DesktopPillIndicator count={slideCount} activeIndex={activeIndex} tone={tone} />
+      <DesktopPillIndicator count={slideCount} activeIndex={activeIndex} tone={tone} gap="tight" />
     </>
   );
 }

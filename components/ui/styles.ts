@@ -5252,11 +5252,17 @@ export const chevronScroller = {
   // look" segmented control); that section's own tokens are left as-is
   // (already shipped and verified), not migrated to this shared version,
   // to avoid any regression risk on working code nothing asked to change.
+  // Base 32px -- now Trust Signals' own gap only (How It Works moved to
+  // `dotsWrapTight` below, owner 2026-09-13: "make the counter gap 24px
+  // less from the top").
   dotsWrap: "flex justify-center pt-8",
+  // How It Works-only variant (owner, 2026-09-13: "24px less from the
+  // top") -- 32px - 24px = 8px.
+  dotsWrapTight: "flex justify-center pt-2",
   // Exhibitions-only variant (owner, 2026-09-13: "add 16px more space for
-  // exhibition counter too") -- 48px vs. `dotsWrap`'s shared 32px. How It
-  // Works and any other caller keep the base token untouched.
-  dotsWrapLoose: "flex justify-center pt-12",
+  // exhibition counter too", then same day "add 8px more from the top")
+  // -- 32px + 16px + 8px = 56px.
+  dotsWrapLoose: "flex justify-center pt-14",
   dotsPill: "flex items-center gap-2 rounded-full bg-paper/10 px-3 py-2.5",
   dotsPillLight: "flex items-center gap-2 rounded-full bg-ink/10 px-3 py-2.5",
   dotsSegment: "h-1.5 rounded-full transition-all duration-300 ease-out",
