@@ -169,6 +169,7 @@ function DesktopScroller({
                   image={step.image}
                   mediaAspectClassName={howItWorks.cardMediaRatio}
                   mediaRadius="none"
+                  rootClassName={howItWorks.desktopCardArticle}
                   tone={tone}
                   parallax
                   revealRootRef={trackRef}

@@ -121,7 +121,7 @@ function DesktopScroller({ shots }: { shots: typeof home.exhibitions.media }) {
         </div>
         <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
       </div>
-      <DesktopPillIndicator count={slideCount} activeIndex={activeIndex} tone="dark" />
+      <DesktopPillIndicator count={slideCount} activeIndex={activeIndex} tone="dark" gap="loose" />
     </>
   );
 }

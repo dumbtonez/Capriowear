@@ -5245,6 +5245,10 @@ export const chevronScroller = {
   // (already shipped and verified), not migrated to this shared version,
   // to avoid any regression risk on working code nothing asked to change.
   dotsWrap: "flex justify-center pt-8",
+  // Exhibitions-only variant (owner, 2026-09-13: "add 16px more space for
+  // exhibition counter too") -- 48px vs. `dotsWrap`'s shared 32px. How It
+  // Works and any other caller keep the base token untouched.
+  dotsWrapLoose: "flex justify-center pt-12",
   dotsPill: "flex items-center gap-2 rounded-full bg-paper/10 px-3 py-2.5",
   dotsPillLight: "flex items-center gap-2 rounded-full bg-ink/10 px-3 py-2.5",
   dotsSegment: "h-1.5 rounded-full transition-all duration-300 ease-out",
@@ -5423,6 +5427,18 @@ export const howItWorks = {
   // choice, not an oversight. `CARD_WIDTH` in HowItWorks.tsx must match.
   // `snap-start` dropped along with `desktopRow`'s own `snap-x` above.
   desktopCard: "w-[397px] shrink-0",
+  // `CapabilityCard`'s `rootClassName` override for this row only (owner,
+  // 2026-09-13: shorter-body cards -- e.g. "Inquiry & Quote" at 2 lines vs.
+  // "Quality Control" at 3 -- left inconsistent dead space below the article
+  // before the pill indicator, since `desktopReel`'s row stretches every
+  // `desktopCard` wrapper to the tallest card's height but the article
+  // inside never filled it). `h-full` so the article actually claims that
+  // stretched height, `justify-between` so the media-to-text gap (not the
+  // text itself) absorbs the slack -- every card's text now ends at the
+  // same y-position regardless of line count, same 32px above the pill for
+  // all of them. Same gaps as `capabilityCard.root`, just h-full + between
+  // instead of a flat flex-col.
+  desktopCardArticle: "flex h-full flex-col justify-between max-xl:gap-4 xl:gap-6",
   // `xl:aspect-[397/260]`, was `xl:aspect-[469/320]` -- same 2026-09-12
   // request as `desktopCard` above, true desktop (`xl:`+, the chevron
   // gallery) only. Tablet/mobile (the shared `CardCarousel`, below `xl:`)
