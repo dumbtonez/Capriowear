@@ -28,6 +28,27 @@ const CSP = [
   "form-action 'self'",
 ].join("; ");
 
+// /studio (Sanity Studio, embedded 2026-09-13) needs a looser CSP than the
+// rest of the site: 'unsafe-eval' and a blob: worker-src for its bundled
+// editor. Scoped to this one route only via its own `headers()` entry below
+// (matched with a negative-lookahead source so the two entries never both
+// match the same path -- two separate Content-Security-Policy header
+// values on one response do not override each other, browsers intersect
+// them, which would silently break the Studio instead of loosening it).
+// Every other directive mirrors the sitewide CSP unchanged.
+const STUDIO_CSP = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: https:",
+  "font-src 'self' data:",
+  "connect-src 'self' https://*.api.sanity.io https://*.apicdn.sanity.io",
+  "worker-src 'self' blob:",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+].join("; ");
+
 const nextConfig: NextConfig = {
   images: {
     // AVIF first, WebP fallback (owner spec, 2026-09-02, PLP card hover
@@ -42,27 +63,34 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   async headers() {
+    const commonHeaders = [
+      { key: "X-Content-Type-Options", value: "nosniff" },
+      // DENY, not SAMEORIGIN -- nothing on this site is meant to be
+      // framed by anyone, including itself; revisit only if a real
+      // embed use case shows up.
+      { key: "X-Frame-Options", value: "DENY" },
+      { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+      // Camera/mic/geolocation are all genuinely unused sitewide --
+      // disabled outright rather than left at the browser default.
+      { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+      // 2 years + subdomains + preload -- the long-lived, "submit to
+      // the browser preload list" HSTS config, appropriate once a site
+      // is committed to HTTPS-only (Vercel serves this site over HTTPS
+      // by default; this header is what tells browsers to never even
+      // try plain HTTP again, for every subdomain too).
+      { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+    ];
+
     return [
       {
-        source: "/(.*)",
-        headers: [
-          { key: "Content-Security-Policy", value: CSP },
-          { key: "X-Content-Type-Options", value: "nosniff" },
-          // DENY, not SAMEORIGIN -- nothing on this site is meant to be
-          // framed by anyone, including itself; revisit only if a real
-          // embed use case shows up.
-          { key: "X-Frame-Options", value: "DENY" },
-          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-          // Camera/mic/geolocation are all genuinely unused sitewide --
-          // disabled outright rather than left at the browser default.
-          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
-          // 2 years + subdomains + preload -- the long-lived, "submit to
-          // the browser preload list" HSTS config, appropriate once a site
-          // is committed to HTTPS-only (Vercel serves this site over HTTPS
-          // by default; this header is what tells browsers to never even
-          // try plain HTTP again, for every subdomain too).
-          { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
-        ],
+        // Every real route except /studio -- see STUDIO_CSP above for why
+        // this must not also match /studio.
+        source: "/:path((?!studio).*)*",
+        headers: [{ key: "Content-Security-Policy", value: CSP }, ...commonHeaders],
+      },
+      {
+        source: "/studio/:path*",
+        headers: [{ key: "Content-Security-Policy", value: STUDIO_CSP }, ...commonHeaders],
       },
     ];
   },

@@ -1,8 +1,8 @@
 // app/robots.ts
-// Next's robots file convention -- served at /robots.txt. /styleguide is the
-// internal QA surface (see CLAUDE.md), not for search engines or AI
-// crawlers, so it's disallowed here rather than left to be indexed by
-// accident.
+// Next's robots file convention -- served at /robots.txt. /styleguide and
+// /studio are internal tooling (QA surface, Sanity Studio), not for search
+// engines or AI crawlers, so both are disallowed here rather than left to
+// be indexed by accident.
 //
 // Gated by ALLOW_INDEXING (SEO/metadata audit, 2026-09-06) -- see that
 // constant's own comment (content/site.ts). While off (the default, every
@@ -31,7 +31,10 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: "/styleguide",
+      // /studio is the Sanity Studio editing tool, never for crawlers,
+      // disallowed here unconditionally (not just while ALLOW_INDEXING is
+      // off) alongside /styleguide.
+      disallow: ["/styleguide", "/studio"],
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
   };
