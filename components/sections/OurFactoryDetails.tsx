@@ -45,6 +45,7 @@ import { TextReveal } from "@/components/TextReveal";
 import { cx } from "@/components/ui/cx";
 import { ourFactoryDetails } from "@/components/ui/styles";
 import type { ourFactory } from "@/content/our-factory";
+import { prefersReducedMotion } from "@/lib/motionPreference";
 
 export type OurFactoryDetailsProps = {
   content: typeof ourFactory.sampleDetails;
@@ -86,7 +87,7 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
     const previous = prevOpenIndexRef.current;
     prevOpenIndexRef.current = openIndex;
     if (previous === openIndex) return;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion = prefersReducedMotion();
     if (reduceMotion) return;
     setExitingIndex(previous);
     setBlurPeak(true);
@@ -171,7 +172,7 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
     const pill = pillRefs.current[openIndex];
     const row = pill?.parentElement;
     if (!pill || !row) return;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion = prefersReducedMotion();
     const target = pill.offsetLeft - row.clientWidth / 2 + pill.offsetWidth / 2;
     row.scrollTo({ left: target, behavior: reduceMotion ? "auto" : "smooth" });
   }, [openIndex]);

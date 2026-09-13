@@ -26,6 +26,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState, type MouseEvent, type PointerEvent, type RefObject } from "react";
 
 import { chevronScroller } from "@/components/ui/styles";
+import { hasReducedMotionOverride, prefersReducedMotion } from "@/lib/motionPreference";
 
 const CHEVRON_HALF = 40; // half of size-20 (80px) circle, to centre it on the cursor
 const DOT_HALF = 3; // half of size-1.5 (6px) dot, to centre it on the cursor
@@ -145,8 +146,13 @@ export function useDesktopChevronScroller(
 
   useEffect(() => {
     if (!drag.enabled) return;
+    reducedMotionRef.current = prefersReducedMotion();
+    // The `?reduceMotion=1`/`=0` diagnostic override (lib/motionPreference.ts)
+    // pins this for the whole page load -- skip the live OS-level listener
+    // entirely while it's active, so a real reduce-motion toggle firing
+    // mid-test can't silently overwrite a deliberately-forced test value.
+    if (hasReducedMotionOverride()) return;
     const query = window.matchMedia("(prefers-reduced-motion: reduce)");
-    reducedMotionRef.current = query.matches;
     const update = () => {
       reducedMotionRef.current = query.matches;
     };

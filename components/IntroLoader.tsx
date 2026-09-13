@@ -27,6 +27,7 @@ import { Logo } from "./Logo";
 import { cx } from "./ui/cx";
 import { introLoader } from "./ui/styles";
 import { getInitialPath } from "@/lib/pageEntry";
+import { prefersReducedMotion } from "@/lib/motionPreference";
 
 const SESSION_KEY = "cw-intro-seen";
 // Kept in sync with introLoader.wordmarkClip / .overlay's own duration
@@ -54,7 +55,7 @@ let shouldShowIntro = false;
 function decideOnce(): boolean {
   if (decided) return shouldShowIntro;
   decided = true;
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reducedMotion = prefersReducedMotion();
   const alreadySeenThisSession = sessionStorage.getItem(SESSION_KEY) === "1";
   // getInitialPath() is null only if this render somehow ran before
   // AppEntryMarker's (shouldn't happen -- the marker sits above {children}
