@@ -61,6 +61,17 @@ export type CardCarouselProps = {
    *  desktop callers opted into -- see `CapabilityCard`'s own comment).
    *  Default false: unchanged for any caller that hasn't opted in yet. */
   parallax?: boolean;
+  /**
+   * Forwarded straight through to each `CapabilityCard`'s own `eager` --
+   * see that prop's comment (components/Card.tsx) for the real "image
+   * never loads at all" bug this fixes on this track's OWN small, bounded
+   * item set (How It Works' mobile carousel, 2026-09-13: the desktop half
+   * of this same rollout wasn't enough, the identical native `next/image`
+   * lazy-load gap exists here too). Default false: unchanged for every
+   * other caller (Our Services, PDP Customize Steps, Trust Signals,
+   * Inside the Factory, Product Gallery).
+   */
+  eager?: boolean;
 };
 
 export function CardCarousel({
@@ -71,6 +82,7 @@ export function CardCarousel({
   bodyClassName,
   cardClassName = cardCarousel.card,
   parallax = false,
+  eager = false,
 }: CardCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -130,6 +142,7 @@ export function CardCarousel({
               rootClassName={rootClassName}
               bodyClassName={bodyClassName}
               parallax={parallax}
+              eager={eager}
             />
           </div>
         ))}

@@ -397,6 +397,7 @@ function MobileCarousel({
               showLabel={showLabel}
               image={shot.image}
               className="h-full"
+              eager
             />
           </div>
         ))}

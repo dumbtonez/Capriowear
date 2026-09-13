@@ -245,7 +245,7 @@ function MobileCarousel({ shots }: { shots: typeof home.exhibitions.media }) {
             className={exhibitions.mobileCard}
             style={{ height: index === 0 ? activeHeight : inactiveHeight }}
           >
-            <MediaPlaceholder label={shot.label} image={shot.image} radius="none" tone="dark" className="h-full" />
+            <MediaPlaceholder label={shot.label} image={shot.image} radius="none" tone="dark" className="h-full" eager />
           </div>
         ))}
       </div>

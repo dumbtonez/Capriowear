@@ -243,6 +243,7 @@ export function HowItWorks({ content, tone = "light" }: HowItWorksProps) {
           tone={tone}
           cardClassName={howItWorks.mobileCardWidth}
           parallax
+          eager
         />
       </div>
     </section>

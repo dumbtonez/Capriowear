@@ -90,6 +90,15 @@ export type MediaPlaceholderProps = {
    * box's size at all), no class-conflict risk.
    */
   style?: CSSProperties;
+  /**
+   * Default false: unchanged, `next/image`'s own default `loading="lazy"`.
+   * Set true for every card in a small, bounded, native-scroll or click/
+   * drag-paged carousel (Inside the Factory/Exhibitions' own mobile
+   * carousels, 2026-09-13) -- see `ParallaxMedia`'s own `eager` prop
+   * comment (components/ParallaxMedia.tsx) for the real "image never
+   * loads at all" bug this fixes.
+   */
+  eager?: boolean;
 };
 
 export function MediaPlaceholder({
@@ -104,6 +113,7 @@ export function MediaPlaceholder({
   placeholderClassName,
   className,
   style,
+  eager = false,
 }: MediaPlaceholderProps) {
   return (
     <div className={cx(media.shell, media.ratio[ratio], media.radius[radius], className)} style={style}>
@@ -114,6 +124,7 @@ export function MediaPlaceholder({
           fill
           sizes={imageSizes}
           className={media.imageFill}
+          loading={eager ? "eager" : "lazy"}
         />
       ) : (
         <div
