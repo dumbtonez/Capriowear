@@ -1600,6 +1600,39 @@ export const teaserVideo = {
   overlayLabel: "text-body font-medium",
 };
 
+/* --- ShortClipMedia (components/ShortClipMedia.tsx, 2026-09-13) ------------ */
+// The "play once on scroll-into-view, freeze on last frame, small replay
+// icon" pattern (owner brief, referencing Google Store's own short-clip
+// treatment) -- a genuinely different shape from `teaserVideo` above:
+// `TeaserVideo` swaps a looping teaser into a longer unmuted video on
+// click; this has no "full" version and no loop at all, just one pass then
+// a frozen frame. First real usage: Our Factory Process's 7 station clips.
+export const shortClipMedia = {
+  // The root box itself is `media.shell`/`media.ratio`/`media.radius`
+  // (the same `MediaPlaceholder`/`ParallaxMedia` contract, applied
+  // directly in ShortClipMedia.tsx) -- these are only the fill inside it.
+  // `<Image fill>` already applies its own absolute/inset/sizing via inline
+  // style (`media.imageFill`'s own established pattern), so the poster
+  // image needs only `object-cover`; a plain `<video>` has no such prop and
+  // needs all of it spelled out in the class itself.
+  posterImage: "object-cover",
+  video: "absolute inset-0 size-full object-cover",
+  // Small, unobtrusive icon-only circle, bottom-right corner -- deliberately
+  // not `teaserVideo.overlayButton`'s persistent labelled pill (that one
+  // stays visible the whole time a teaser plays, this only ever appears
+  // once the clip has actually ended, so a quieter treatment reads as "an
+  // available action," not "a thing competing with the footage").
+  replayButton:
+    "absolute bottom-3 right-3 inline-flex size-9 items-center justify-center rounded-pill bg-ink/70 text-paper backdrop-blur-sm transition-colors hover:bg-ink/85 motion-reduce:transition-none",
+  replayIcon: "size-4",
+  // Centred, for the `prefers-reduced-motion`/save-data click-to-play state
+  // -- no icon-only treatment here, since this is the ONLY way that state
+  // ever starts the clip at all (not a secondary "replay" action), so it
+  // gets the same visual weight `hero.playCircle` gives its own first-ever
+  // play control.
+  posterPlayButton: "absolute inset-0 flex items-center justify-center",
+};
+
 /* --- OurFactoryHero (/our-factory sections 1-2) ----------------------------- */
 // Figma desktop node 854:1402 ("Youtube Video"): unlike the homepage Hero,
 // this video layer is the last thing in the dark box (no ticker follows it),

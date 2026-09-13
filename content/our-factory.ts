@@ -36,6 +36,26 @@ type ProcessStation = {
   body: string;
   imageAlt: string;
   image?: { src: string };
+  /**
+   * Owner brief, 2026-09-13: each station's static image (or empty slot --
+   * stations 2-7 had none) becomes an independent short clip, using the
+   * "play once on scroll-into-view, freeze on last frame, small replay
+   * icon" pattern (`components/ShortClipMedia.tsx`, shared with any future
+   * section that wants the same treatment). `poster` reuses this or a
+   * dedicated still so there's zero visual change until the clip is
+   * actually visible/active -- see that component's own header comment.
+   * Optional so a station without a `video` yet falls back to its plain
+   * `image` (or the empty placeholder), same as before this field existed.
+   *
+   * **Test assets, 2026-09-13**: all 7 `src`/`poster` pairs below
+   * (`/factory-test/whatwemake-0N-<station>-test.mp4`/`-poster.jpg`) are
+   * generic stand-in footage, not real Capriowear factory content -- see
+   * this file's own trailing comment for the exact source/licensing and
+   * how they were made. Swap each pair for real per-station footage once
+   * it exists; no code change needed, same as this page's other test
+   * images.
+   */
+  video?: { src: string; poster: string };
   ratio: MediaRatio;
   width: "lg" | "md" | "sm" | "full";
 };
@@ -168,6 +188,7 @@ export const ourFactory = {
             body: "Knits, fleece, tricot, woven shells and sublimation polyester, sourced or matched to your reference, at the weight you approve on your sample.",
             imageAlt:
               "Rolls of knit, fleece and sublimation polyester fabric at Capriowear's cut-and-sew factory in Sialkot, Pakistan",
+            video: { src: "/factory-test/whatwemake-01-fabric-test.mp4", poster: "/factory-test/whatwemake-01-fabric-test-poster.jpg" },
             ratio: "520:480",
             width: "sm",
           },
@@ -181,8 +202,12 @@ export const ourFactory = {
             // images/Referne Image.png), dropped in 2026-09-08 purely so the
             // parallax effect on ParallaxMedia has something visible to
             // scroll-test against -- not real Capriowear factory content,
-            // swap for the real cutting-floor photo once it exists.
+            // swap for the real cutting-floor photo once it exists. Now
+            // superseded by `video` below for this station (2026-09-13);
+            // `image` stays as the documented fallback if `video` is ever
+            // removed.
             image: { src: "/Product%20images/Referne%20Image.png" },
+            video: { src: "/factory-test/whatwemake-02-cutting-test.mp4", poster: "/factory-test/whatwemake-02-cutting-test-poster.jpg" },
             ratio: "1:1",
             width: "lg",
           },
@@ -197,6 +222,7 @@ export const ourFactory = {
             body: "Skilled machinists assemble the garment with flatlock and reinforced seams built to hold, run after run.",
             imageAlt:
               "Machinist sewing a garment with flatlock seams at Capriowear's cut-and-sew factory in Sialkot, Pakistan",
+            video: { src: "/factory-test/whatwemake-03-sewing-test.mp4", poster: "/factory-test/whatwemake-03-sewing-test-poster.jpg" },
             ratio: "600:640",
             width: "md",
           },
@@ -206,6 +232,10 @@ export const ourFactory = {
             title: "Your design, dyed into the fabric",
             body: "Full-dye sublimation, screen, DTG and DTF, plus embroidery and tackle twill, all color-matched and done in-house.",
             imageAlt: "Full-dye sublimation printing at Capriowear's factory in Sialkot, Pakistan",
+            video: {
+              src: "/factory-test/whatwemake-04-printing-sublimation-test.mp4",
+              poster: "/factory-test/whatwemake-04-printing-sublimation-test-poster.jpg",
+            },
             ratio: "600:640",
             width: "md",
           },
@@ -219,6 +249,7 @@ export const ourFactory = {
             title: "Labels, tags and the last details",
             body: "Woven labels, size and care labels, hangtags and trims, applied so the garment arrives finished, not half-made.",
             imageAlt: "Woven labels and hangtags applied at Capriowear's apparel factory in Sialkot, Pakistan",
+            video: { src: "/factory-test/whatwemake-05-finishing-test.mp4", poster: "/factory-test/whatwemake-05-finishing-test-poster.jpg" },
             ratio: "1280:640",
             width: "full",
           },
@@ -232,6 +263,10 @@ export const ourFactory = {
             title: "Checked while it can still be fixed",
             body: "In-line inspection during production and a full check to AQL 2.5 before anything ships. Third-party inspection welcome.",
             imageAlt: "Quality control inspection of finished garments at Capriowear's factory in Sialkot, Pakistan",
+            video: {
+              src: "/factory-test/whatwemake-06-quality-control-test.mp4",
+              poster: "/factory-test/whatwemake-06-quality-control-test-poster.jpg",
+            },
             ratio: "520:480",
             width: "sm",
           },
@@ -242,12 +277,33 @@ export const ourFactory = {
             body: "Polybagged and boxed to your spec, then shipped DDP to 20+ countries, with GSP+ 0% duty into the EU.",
             imageAlt:
               "Retail-ready garments polybagged and boxed for shipping at Capriowear's factory in Sialkot, Pakistan",
+            video: {
+              src: "/factory-test/whatwemake-07-packed-shipped-test.mp4",
+              poster: "/factory-test/whatwemake-07-packed-shipped-test-poster.jpg",
+            },
             ratio: "1:1",
             width: "lg",
           },
         ],
       },
     ] as ProcessRow[],
+    // All 7 stations' `video`/`poster` pairs above are generic stand-in
+    // footage, added 2026-09-13 to test the new play-once/freeze/replay
+    // pattern end to end before real factory footage exists (same "test
+    // images, not real content" role this section's own `Referne Image.png`
+    // and `product-images/*` fallbacks already had for years). Source: a
+    // single freely-licensed (CC0) sample clip from samplelib.com
+    // (`sample-30s.mp4`, 1920x1080/h264/aac, ~30.4s -- the same source
+    // already used for Hero's own `hero-teaser-test.mp4`/`hero-full-test.mp4`,
+    // see that content's own comment), cut into 7 different ~9s, non-
+    // overlapping-start segments (0s/3.5s/7s/10.5s/14s/17.5s/21s) via
+    // `ffmpeg`, each downscaled to 960x540/CRF 30 with its audio track
+    // stripped entirely (muted playback only, per `ShortClipMedia`'s own
+    // contract -- no reason to ship bytes for sound nobody will hear).
+    // ~820-900KB per clip. Posters are each clip's own first frame
+    // (`ffmpeg -vframes 1`). Swap each `src`/`poster` pair for real
+    // per-station footage once it exists -- no code change needed, same as
+    // every other test asset on this page.
   },
 
   // Section 6, "The details you would check on a sample" -- see the
