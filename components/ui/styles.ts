@@ -2061,7 +2061,25 @@ export const ourFactoryProcess = {
   // height, none double (owner, 2026-09-08: "make it in one line",
   // flagged on this same title) -- that intent only ever applied to the
   // desktop layout's fixed item widths, so it stays desktop-only too.
-  title: "text-h3 text-subline xl:whitespace-nowrap",
+  // `max-xl:text-wrap` (owner, 2026-09-13: "some titles ... not taking the
+  // full space from the first line, looks like wrapping... follow the same
+  // structure for all titles"): the sitewide `h1,h2,h3{text-wrap:balance}`
+  // rule (globals.css) picks a genuinely lopsided split for the one title
+  // long enough to wrap on mobile ("Retail-ready, delivered to your
+  // door") -- measured live via canvas `measureText`: balance renders
+  // "Retail-ready," (132px) / "delivered to your door" (226px), while a
+  // plain greedy wrap fits "Retail-ready, delivered to your" (306px, 91%
+  // of the 335px line) before wrapping just "door". `balance`'s own
+  // minimize-the-longest-line heuristic isn't wrong on its own terms here
+  // (132/226 and 229/129 are both near-optimal by that metric), it just
+  // doesn't read as "using the available line" the way normal wrapping
+  // does -- and every other station title in this row happens to fit on
+  // one line regardless of which wrap mode is active, so this override
+  // doesn't change how they render, only makes the one exception consistent
+  // with the rest. `max-xl:`, not unconditional: at `xl:` every title is
+  // already forced single-line by `xl:whitespace-nowrap` below, so balance
+  // vs. normal wrap has nothing left to differ on there.
+  title: "text-h3 text-subline max-xl:text-wrap xl:whitespace-nowrap",
   // max-md:text-[1.125rem]/leading-6 (owner, 2026-09-09, mobile-only
   // review: "subline text under the titles should be 18px by 24px") --
   // 18px/24px below md; md:/xl: keep the original `text-body-lg leading-7`
