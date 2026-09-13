@@ -4453,21 +4453,15 @@ export const insideFactory = {
   // real affordance bug, found live (owner, 2026-09-13: "most visitors
   // will never discover or experience the momentum feature... the primary
   // hover state over the draggable area should read as 'drag me,' not
-  // 'click me'"). The floating cursor-tracking chevron this class's own
-  // `cursor-none` used to pair with (see the comment above it) was built
-  // for the OTHER five galleries sharing this same base shape, all of
-  // which are click-only -- a chevron icon is the right cue for "click to
-  // advance," but reused here it told visitors to click, not drag, on the
-  // one gallery whose real momentum feature only exists behind a drag
-  // gesture. Swapped for a native OS grab-hand cursor instead (open while
-  // hovering, closed/grabbing for as long as the mouse is actually held
-  // down, `active:` needs no JS state) -- `<DesktopChevron>` is no longer
-  // rendered for this gallery (`InsideFactory.tsx`'s own `DesktopGallery`),
-  // though its underlying cursor-position tracking (`handleMouseMove`)
-  // stays wired, since a plain click's own left/right direction still
-  // depends on it. The chevron BUTTON's click-to-advance behaviour itself
-  // is untouched -- clicking anywhere still pages one card, exactly as
-  // before -- only the hover affordance changed.
+  // 'click me'"). Briefly paired with dropping `<DesktopChevron>`'s own
+  // render for this gallery entirely, reversed the same day (owner:
+  // "don't remove the chevron icon, bring it back, rest keep as is") --
+  // the floating chevron and the native grab cursor now both show at
+  // once here: the chevron is still the "click to advance" cue, the
+  // native cursor underneath/around it is the added "or drag me" cue,
+  // layered rather than one replacing the other. The chevron BUTTON's
+  // click-to-advance behaviour itself was never touched by any of this --
+  // clicking anywhere still pages one card, exactly as before.
   desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-grab active:cursor-grabbing overflow-hidden touch-pan-y",
   // snap-center at `xl:` (not How It Works' snap-start) -- the point there
   // is the active card centers in the viewport, not aligns to an edge.
