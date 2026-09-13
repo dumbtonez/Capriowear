@@ -3669,16 +3669,15 @@ export const trustSignals = {
   // desktopScrollerWrap`'s own comment) -- a flat `px-[80px]` inset alone
   // only matches `container-p`'s own centring inset up to 1440px, drifting
   // wider apart above it.
-  // `cursor-grab active:cursor-grabbing`, not `cursor-none` -- real
-  // click-and-drag/swipe rollout, 2026-09-13 (owner: "apply this same
-  // transition ... that we built for [Inside the Factory]"), same
-  // affordance fix that section's own token already carries (see its
-  // comment): the floating chevron alone told visitors "click here," not
-  // "drag me," which is where the real momentum feature lives. `touch-
-  // pan-y`: this row now handles its own horizontal drag via Pointer
-  // Events, so a touch device needs to be told the browser's own native
-  // gesture handling should still own vertical panning.
-  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-grab active:cursor-grabbing overflow-hidden touch-pan-y",
+  // `cursor-none`: the floating chevron IS the cursor here -- briefly
+  // `cursor-grab active:cursor-grabbing` (2026-09-13, click-and-drag/swipe
+  // rollout) alongside it, reverted back same day (owner: "do we really
+  // need it? ... remove it" -- the native hand icon next to the custom
+  // chevron read as a redundant second cursor, not an added affordance).
+  // `touch-pan-y`: this row still handles its own horizontal drag via
+  // Pointer Events, so a touch device needs to be told the browser's own
+  // native gesture handling should still own vertical panning.
+  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-none overflow-hidden touch-pan-y",
   // `overflow-x-hidden`, not `-auto` (matching every other scroller here,
   // see `DesktopChevronScroller.tsx`'s own header comment: "user can only
   // scroll by clicking"). `px-8 xl:px-[80px]`/`scroll-pl`/`scroll-pr`:
@@ -4502,20 +4501,19 @@ export const insideFactory = {
   // other five galleries sharing `desktopScrollerWrap`'s own base shape --
   // none of them have drag, so none of them need it.
   //
-  // `cursor-grab active:cursor-grabbing`, not `cursor-none` any more --
-  // real affordance bug, found live (owner, 2026-09-13: "most visitors
-  // will never discover or experience the momentum feature... the primary
-  // hover state over the draggable area should read as 'drag me,' not
-  // 'click me'"). Briefly paired with dropping `<DesktopChevron>`'s own
-  // render for this gallery entirely, reversed the same day (owner:
-  // "don't remove the chevron icon, bring it back, rest keep as is") --
-  // the floating chevron and the native grab cursor now both show at
-  // once here: the chevron is still the "click to advance" cue, the
-  // native cursor underneath/around it is the added "or drag me" cue,
-  // layered rather than one replacing the other. The chevron BUTTON's
+  // Briefly `cursor-grab active:cursor-grabbing` (owner, 2026-09-13: "most
+  // visitors will never discover or experience the momentum feature... the
+  // primary hover state over the draggable area should read as 'drag me,'
+  // not 'click me'"), alongside the floating chevron -- also briefly paired
+  // with dropping `<DesktopChevron>`'s own render for this gallery
+  // entirely, reversed the same day (owner: "don't remove the chevron
+  // icon, bring it back, rest keep as is"). The native grab cursor next to
+  // the chevron then read as a redundant second indicator rather than an
+  // added cue, so reverted back to plain `cursor-none` same day (owner:
+  // "do we really need it? ... remove it"). The chevron BUTTON's
   // click-to-advance behaviour itself was never touched by any of this --
   // clicking anywhere still pages one card, exactly as before.
-  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-grab active:cursor-grabbing overflow-hidden touch-pan-y",
+  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-none overflow-hidden touch-pan-y",
   // snap-center at `xl:` (not How It Works' snap-start) -- the point there
   // is the active card centers in the viewport, not aligns to an edge.
   // Padding is calculated (half the card width, 475px) so the first/last
@@ -5386,16 +5384,15 @@ export const howItWorks = {
   // other section's own left edge above it. Capping this wrap at 1440px
   // makes the existing 80px padding behave exactly like `container-p` at
   // every width.
-  // `cursor-grab active:cursor-grabbing`, not `cursor-none` -- real
-  // click-and-drag/swipe rollout, 2026-09-13 (owner: "apply this same
-  // transition ... that we built for [Inside the Factory]"), same
-  // affordance fix that section's own token already carries (see its
-  // comment): the floating chevron alone told visitors "click here," not
-  // "drag me," which is where the real momentum feature lives. `touch-
-  // pan-y`: this row now handles its own horizontal drag via Pointer
-  // Events, so a touch device needs to be told the browser's own native
-  // gesture handling should still own vertical panning.
-  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-grab active:cursor-grabbing overflow-hidden touch-pan-y",
+  // `cursor-none`: the floating chevron IS the cursor here -- briefly
+  // `cursor-grab active:cursor-grabbing` (2026-09-13, click-and-drag/swipe
+  // rollout) alongside it, reverted back same day (owner: "do we really
+  // need it? ... remove it" -- the native hand icon next to the custom
+  // chevron read as a redundant second cursor, not an added affordance).
+  // `touch-pan-y`: this row still handles its own horizontal drag via
+  // Pointer Events, so a touch device needs to be told the browser's own
+  // native gesture handling should still own vertical panning.
+  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-none overflow-hidden touch-pan-y",
   // scroll-pl/pr match the visual px inset -- without them, scroll-snap's
   // own snap-point maths (each card's snap-start) doesn't know the
   // padding is "safe" space, so the browser auto-corrects the rest scroll
@@ -5557,16 +5554,15 @@ export const exhibitions = {
   // behave exactly like `container-p` at every width, matching this
   // project's own stated rule ("Max content width 1440px, centred,
   // sitewide, no exceptions", `docs/02-design-system.md`).
-  // `cursor-grab active:cursor-grabbing`, not `cursor-none` -- real
-  // click-and-drag/swipe rollout, 2026-09-13 (owner: "apply this same
-  // transition ... that we built for [Inside the Factory]"), same
-  // affordance fix that section's own token already carries (see its
-  // comment): the floating chevron alone told visitors "click here," not
-  // "drag me," which is where the real momentum feature lives. `touch-
-  // pan-y`: this row now handles its own horizontal drag via Pointer
-  // Events, so a touch device needs to be told the browser's own native
-  // gesture handling should still own vertical panning.
-  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-grab active:cursor-grabbing overflow-hidden touch-pan-y",
+  // `cursor-none`: the floating chevron IS the cursor here -- briefly
+  // `cursor-grab active:cursor-grabbing` (2026-09-13, click-and-drag/swipe
+  // rollout) alongside it, reverted back same day (owner: "do we really
+  // need it? ... remove it" -- the native hand icon next to the custom
+  // chevron read as a redundant second cursor, not an added affordance).
+  // `touch-pan-y`: this row still handles its own horizontal drag via
+  // Pointer Events, so a touch device needs to be told the browser's own
+  // native gesture handling should still own vertical panning.
+  desktopScrollerWrap: "relative mx-auto w-full max-w-[1440px] cursor-none overflow-hidden touch-pan-y",
   // `overflow-x-hidden`, not `-auto` (owner, 2026-09-08: "user can only
   // scroll by clicking" -- see `useDesktopChevronScroller`'s own header
   // comment in DesktopChevronScroller.tsx for the full reasoning).
