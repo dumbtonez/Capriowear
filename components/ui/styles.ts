@@ -5257,8 +5257,8 @@ export const chevronScroller = {
   // less from the top").
   dotsWrap: "flex justify-center pt-8",
   // How It Works-only variant (owner, 2026-09-13: "24px less from the
-  // top") -- 32px - 24px = 8px.
-  dotsWrapTight: "flex justify-center pt-2",
+  // top" to 8px, then same day "make it 0px").
+  dotsWrapTight: "flex justify-center pt-0",
   // Exhibitions-only variant (owner, 2026-09-13: "add 16px more space for
   // exhibition counter too", then same day "add 8px more from the top")
   // -- 32px + 16px + 8px = 56px.
