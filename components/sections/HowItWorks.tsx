@@ -104,9 +104,18 @@ const CARD_GAP = 24; // owner, 2026-09-12: reverted to 24 the same day ("how it 
 // Real click-and-drag/swipe with velocity-based momentum, plus a segmented
 // pill progress indicator below the row -- owner, 2026-09-13: "apply this
 // same transition with the counter on the bottom that we built for [Inside
-// the Factory]" (to this section, Exhibitions, and Trust Signals). `loop:
-// true` matches Inside the Factory's own carousel-loop behaviour rather than
-// the plain clamp this section (and Exhibitions/Trust Signals) used before.
+// the Factory]" (to this section and Exhibitions -- reverted on Trust
+// Signals the same day, "remove it from trustsignals"). `loop: true`
+// matches Inside the Factory's own carousel-loop behaviour rather than the
+// plain clamp this section (and Exhibitions) used before.
+//
+// Pill segment count is `slideCount` (the hook's own real, measured stop
+// count), NOT `steps.length` -- real bug, found live, owner: "the counter
+// should be based on the number of scrolls/slides needed... it should be
+// dynamic" -- unlike Inside the Factory's wide cards (one item really is
+// one page there), this row's narrower 397px cards fit more than one per
+// view, so the number of real clicks/flicks needed to reach the end is
+// fewer than the step count.
 function DesktopScroller({
   steps,
   tone,
@@ -122,6 +131,7 @@ function DesktopScroller({
     dotRef,
     direction,
     activeIndex,
+    slideCount,
     handleMouseMove,
     handleMouseEnter,
     handleMouseLeave,
@@ -129,7 +139,7 @@ function DesktopScroller({
     handlePointerMoveDrag,
     handlePointerUp,
     handlePointerCancel,
-  } = useDesktopChevronScroller(CARD_WIDTH + CARD_GAP, true, { enabled: true, cardCount: steps.length });
+  } = useDesktopChevronScroller(CARD_WIDTH + CARD_GAP, true, { enabled: true });
 
   return (
     <>
@@ -168,7 +178,7 @@ function DesktopScroller({
         </div>
         <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
       </div>
-      <DesktopPillIndicator count={steps.length} activeIndex={activeIndex} tone={tone} />
+      <DesktopPillIndicator count={slideCount} activeIndex={activeIndex} tone={tone} />
     </>
   );
 }

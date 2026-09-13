@@ -168,11 +168,11 @@ function DesktopGallery({
   // "Take a closer look" carousel): a forward click on the last shot wraps
   // back to the first instead of doing nothing. Every other section using
   // this same hook keeps the default clamped (non-looping) behaviour.
-  // `drag: { enabled: true, cardCount }` (owner, 2026-09-13: "build real
-  // pointer-drag with velocity/momentum ... not just a duration tweak on
-  // the click model") -- real click-and-drag/swipe via the Pointer Events
-  // API (unifies mouse and touch, so this also covers a touchscreen device
-  // wide enough to render this `xl:`-only gallery). `onClick` is dropped in
+  // `drag: { enabled: true }` (owner, 2026-09-13: "build real pointer-drag
+  // with velocity/momentum ... not just a duration tweak on the click
+  // model") -- real click-and-drag/swipe via the Pointer Events API
+  // (unifies mouse and touch, so this also covers a touchscreen device wide
+  // enough to render this `xl:`-only gallery). `onClick` is dropped in
   // favour of the pointer lifecycle below: `handlePointerUp` itself calls
   // `handleClick` for a release that never crossed the drag threshold, so
   // a plain click still advances exactly one card, same as before.
@@ -191,10 +191,7 @@ function DesktopGallery({
     handlePointerMoveDrag,
     handlePointerUp,
     handlePointerCancel,
-  } = useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP, true, {
-    enabled: true,
-    cardCount: shots.length,
-  });
+  } = useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP, true, { enabled: true });
 
   return (
     <>

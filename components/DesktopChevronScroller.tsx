@@ -90,14 +90,16 @@ export function useDesktopChevronScroller(
   // with velocity/momentum ... not just a duration tweak"). `enabled:
   // false`/omitted (every other caller) keeps the row click-only, exactly
   // as before -- this whole block of state and the pointer handlers below
-  // are inert until a caller opts in. `cardCount` is needed only here (not
-  // by `handleClick`'s own clamp/wrap, which never needed to know how many
-  // stops there are, only the current/max offset) because settling to the
-  // "nearest slide" after a fling has to snap to one of the row's real
-  // stop positions, which -- like `handleClick`'s own last-card jump --
-  // are `min(index * cardPitch, maxOffset)`, not an even multiple of
-  // `cardPitch` all the way to the end.
-  drag: { enabled: boolean; cardCount: number } = { enabled: false, cardCount: 0 },
+  // are inert until a caller opts in. No longer takes a `cardCount` (real
+  // bug, found live, owner 2026-09-13: "the counter should be based on the
+  // number of scrolls/slides needed... not [[the item count], which]
+  // works [for Inside the Factory] as it has that numbers of slides, but
+  // not for these 2 [narrower-card] sections... it should be dynamic" --
+  // see `slideCount`'s own comment above for the fix) -- both the nearest-
+  // slide snap math and the public `slideCount` this hook now returns
+  // derive the real stop count from measured widths instead of trusting a
+  // caller-supplied item count.
+  drag: { enabled: boolean } = { enabled: false },
 ) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -138,6 +140,25 @@ export function useDesktopChevronScroller(
   // clamp/wrap math already depends on. Every other caller of this hook
   // ignores the returned value, so this is additive, not a behaviour change.
   const [activeIndex, setActiveIndex] = useState(0);
+  // Real number of distinct scroll stops this row actually has, at the
+  // CURRENT rendered width -- NOT `drag.cardCount` (the item count).
+  // Real bug, found live (owner, 2026-09-13): Exhibitions/How It Works
+  // pass their own item count straight through as the pill indicator's
+  // segment count, which happened to be correct for Inside the Factory
+  // (its cards are wide enough that one item really does equal one
+  // "page"), but is wrong wherever multiple cards fit in view at once --
+  // a 5-item row that only ever needs 2 real clicks/flicks to reach the
+  // end should show 2 segments, not 5. Also has to stay dynamic, not a
+  // one-time item-count-based guess, since a future content update
+  // (e.g. "10 images instead of 5" for Exhibitions) changes how many
+  // cards fit per view without changing this calculation. Computed as
+  // `floor(maxOffset / cardPitch) + 1` (the same real stop count
+  // `getSnapPositions` below already derives per-render), re-measured via
+  // `ResizeObserver` on the reel (content width changes) and the track
+  // (viewport/container width changes) rather than once on mount, so a
+  // breakpoint resize or a future longer/shorter item list both stay
+  // correct with no manual recalculation.
+  const [slideCount, setSlideCount] = useState(1);
 
   // --- Drag/momentum state (inert unless `drag.enabled`) ---
   // `pointerDownRef`: a pointer is currently down, but may still turn out
@@ -314,12 +335,56 @@ export function useDesktopChevronScroller(
     return Math.max(0, reel.getBoundingClientRect().width - track.clientWidth);
   };
 
+  // How many real stops this row has at its current rendered width -- one
+  // more than however many `cardPitch`-widths of extra content exist past
+  // the first card, so a row that fits everything in one view (`maxOffset`
+  // 0) still reports 1, never 0. `Math.ceil`, not `floor` -- real bug,
+  // found live: Trust Signals' real `maxOffset` (220px) is LESS than one
+  // full `cardPitch` (421px), so `floor(220/421)+1` rounded down to 1,
+  // silently dropping the row's own real final stop (`getSnapPositions`'
+  // own "the final stop is a shorter hop, not an even multiple of
+  // cardPitch" case) -- a drag past that point had nothing to snap to but
+  // the start, confirmed live via `getBoundingClientRect` on the real
+  // reel/track. `ceil` correctly counts ANY leftover distance past a whole
+  // `cardPitch` as one more real stop, whether that leftover is a full
+  // card or a sliver. Shared by both the click/drag settle math below
+  // (`getSnapPositions`) and `slideCount` (the public value this hook
+  // exposes for a caller's own progress indicator) -- one real number, not
+  // a caller-supplied guess that can drift from what's actually on screen.
+  const getSlideCount = (maxOffset: number) => Math.max(1, Math.ceil(maxOffset / cardPitch) + 1);
+
   // The row's real stop positions -- `min(index * cardPitch, maxOffset)`,
   // same shape as `handleClick`'s own last-card jump above: the final stop
   // is a shorter hop so the filmstrip's right edge always lands flush,
   // rather than every stop being an even multiple of `cardPitch`.
   const getSnapPositions = (maxOffset: number) =>
-    Array.from({ length: Math.max(1, drag.cardCount) }, (_, i) => Math.min(i * cardPitch, maxOffset));
+    Array.from({ length: getSlideCount(maxOffset) }, (_, i) => Math.min(i * cardPitch, maxOffset));
+
+  // Keeps the public `slideCount` in sync with reality -- re-measured on
+  // BOTH the reel (content width changes: more/fewer items, a future data
+  // update) and the track (container/viewport width changes: a resize, a
+  // breakpoint change) via `ResizeObserver`, not a one-time calculation on
+  // mount or a plain `window.resize` listener (which would miss a content-
+  // only change with no viewport resize at all, e.g. Exhibitions someday
+  // shipping 10 real images instead of 3).
+  useEffect(() => {
+    const track = trackRef.current;
+    const reel = reelRef.current;
+    if (!track || !reel) return;
+    const update = () => setSlideCount(getSlideCount(getMaxOffset()));
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(track);
+    observer.observe(reel);
+    return () => observer.disconnect();
+    // `getSlideCount`/`getMaxOffset` close over `cardPitch`, a caller-
+    // supplied number that's stable in practice (every real caller passes a
+    // module-level constant sum) -- re-running this effect whenever those
+    // function identities change (they're redefined every render) would
+    // just re-attach the same observer to the same two elements for no
+    // reason, so this intentionally only re-subscribes on mount/unmount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Interrupts whatever the reel is currently doing (mid `handleClick`
   // transition or mid momentum-settle) and freezes it at its real,
@@ -586,6 +651,7 @@ export function useDesktopChevronScroller(
     dotRef,
     direction,
     activeIndex,
+    slideCount,
     handleMouseMove,
     handleMouseEnter,
     handleMouseLeave,

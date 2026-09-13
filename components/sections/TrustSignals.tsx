@@ -64,7 +64,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { DesktopChevron, DesktopPillIndicator, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
+import { DesktopChevron, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
 import { cardCarousel, trustSignals } from "@/components/ui/styles";
@@ -122,14 +122,13 @@ const CARD_WIDTH = 397;
 // matching styles.ts's own `trustSignals.desktopRow`/`tabletRow`).
 const CARD_GAP = 24; // owner, 2026-09-12: reverted to 24 the same day ("make it 24px") -- matching trustSignals.desktopReel
 
-// Real click-and-drag/swipe with velocity-based momentum, plus a segmented
-// pill progress indicator below the row -- owner, 2026-09-13: "apply this
-// same transition with the counter on the bottom that we built for [Inside
-// the Factory]" (to this section, Exhibitions, and How It Works). `loop:
-// true` matches Inside the Factory's own carousel-loop behaviour rather than
-// the plain clamp this section used before. `tone="light"` fixed, not a
-// prop -- this section renders on the default light/paper main background
-// (no `bg-ink` anywhere in this file), unlike How It Works.
+// Real click-and-drag/swipe with velocity-based momentum -- owner,
+// 2026-09-13: "apply this same transition ... that we built for [Inside
+// the Factory]" (to this section too). `loop: true` matches Inside the
+// Factory's own carousel-loop behaviour rather than the plain clamp this
+// section used before. No segmented pill indicator here -- briefly added
+// the same day, then reverted ("remove it from trustsignals") while
+// Exhibitions/How It Works kept theirs.
 function DesktopScroller({ items }: { items: typeof home.trustStrip }) {
   const {
     wrapRef,
@@ -138,7 +137,6 @@ function DesktopScroller({ items }: { items: typeof home.trustStrip }) {
     chevronRef,
     dotRef,
     direction,
-    activeIndex,
     handleMouseMove,
     handleMouseEnter,
     handleMouseLeave,
@@ -146,49 +144,46 @@ function DesktopScroller({ items }: { items: typeof home.trustStrip }) {
     handlePointerMoveDrag,
     handlePointerUp,
     handlePointerCancel,
-  } = useDesktopChevronScroller(CARD_WIDTH + CARD_GAP, true, { enabled: true, cardCount: items.length });
+  } = useDesktopChevronScroller(CARD_WIDTH + CARD_GAP, true, { enabled: true });
 
   return (
-    <>
-      <div
-        ref={wrapRef}
-        className={trustSignals.desktopScrollerWrap}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onPointerDown={handlePointerDown}
-        onPointerMove={(event) => {
-          // `PointerEvent` covers `MouseEvent`'s own shape (clientX/Y,
-          // timeStamp), so the same event feeds both: the chevron's cursor
-          // tracking (unaffected by dragging) and the drag/momentum logic.
-          handleMouseMove(event);
-          handlePointerMoveDrag(event);
-        }}
-        onPointerUp={handlePointerUp}
-        onPointerCancel={handlePointerCancel}
-      >
-        <div ref={trackRef} className={trustSignals.desktopRow}>
-          <div ref={reelRef} className={trustSignals.desktopReel}>
-            {items.map((entry) => (
-              <div key={entry.title} className={trustSignals.desktopCard}>
-                <ParallaxMedia
-                  label={`${entry.title} artwork`}
-                  image={entry.image}
-                  ratio="397:260"
-                  radius="none"
-                  showLabel={false}
-                />
-                <div className={trustSignals.desktopCardText}>
-                  <h3 className={trustSignals.title}>{entry.title}</h3>
-                  <Body segments={entry.body} />
-                </div>
+    <div
+      ref={wrapRef}
+      className={trustSignals.desktopScrollerWrap}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onPointerDown={handlePointerDown}
+      onPointerMove={(event) => {
+        // `PointerEvent` covers `MouseEvent`'s own shape (clientX/Y,
+        // timeStamp), so the same event feeds both: the chevron's cursor
+        // tracking (unaffected by dragging) and the drag/momentum logic.
+        handleMouseMove(event);
+        handlePointerMoveDrag(event);
+      }}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerCancel}
+    >
+      <div ref={trackRef} className={trustSignals.desktopRow}>
+        <div ref={reelRef} className={trustSignals.desktopReel}>
+          {items.map((entry) => (
+            <div key={entry.title} className={trustSignals.desktopCard}>
+              <ParallaxMedia
+                label={`${entry.title} artwork`}
+                image={entry.image}
+                ratio="397:260"
+                radius="none"
+                showLabel={false}
+              />
+              <div className={trustSignals.desktopCardText}>
+                <h3 className={trustSignals.title}>{entry.title}</h3>
+                <Body segments={entry.body} />
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-        <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
       </div>
-      <DesktopPillIndicator count={items.length} activeIndex={activeIndex} tone="light" />
-    </>
+      <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
+    </div>
   );
 }
 

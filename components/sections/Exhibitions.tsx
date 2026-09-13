@@ -64,6 +64,15 @@ const DESKTOP_CARD_GAP = 24; // owner, 2026-09-12: reverted to 24 the same day (
 // the plain clamp this section used before. `tone="dark"` fixed, not a prop
 // -- this section has no light-section usage anywhere (`exhibitions.
 // desktopOuter`'s own `bg-ink`), unlike How It Works.
+//
+// Pill segment count is `slideCount` (the hook's own real, measured stop
+// count), NOT `shots.length` -- real bug, found live, owner: "the counter
+// should be based on the number of scrolls/slides needed... it should be
+// dynamic" -- unlike Inside the Factory's wide cards (one item really is
+// one page there), this row's narrower 469px cards fit more than one per
+// view, so the number of real clicks/flicks needed to reach the end is
+// fewer than the item count -- and needs to stay correct automatically if
+// a future content update ships more/fewer real images.
 function DesktopScroller({ shots }: { shots: typeof home.exhibitions.media }) {
   const {
     wrapRef,
@@ -73,6 +82,7 @@ function DesktopScroller({ shots }: { shots: typeof home.exhibitions.media }) {
     dotRef,
     direction,
     activeIndex,
+    slideCount,
     handleMouseMove,
     handleMouseEnter,
     handleMouseLeave,
@@ -80,7 +90,7 @@ function DesktopScroller({ shots }: { shots: typeof home.exhibitions.media }) {
     handlePointerMoveDrag,
     handlePointerUp,
     handlePointerCancel,
-  } = useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP, true, { enabled: true, cardCount: shots.length });
+  } = useDesktopChevronScroller(DESKTOP_CARD_WIDTH + DESKTOP_CARD_GAP, true, { enabled: true });
 
   return (
     <>
@@ -111,7 +121,7 @@ function DesktopScroller({ shots }: { shots: typeof home.exhibitions.media }) {
         </div>
         <DesktopChevron chevronRef={chevronRef} dotRef={dotRef} direction={direction} />
       </div>
-      <DesktopPillIndicator count={shots.length} activeIndex={activeIndex} tone="dark" />
+      <DesktopPillIndicator count={slideCount} activeIndex={activeIndex} tone="dark" />
     </>
   );
 }
