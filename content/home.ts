@@ -894,6 +894,10 @@ export const home = {
         { label: "Request a Sample", href: "/request-a-sample" },
         { label: "Download Catalog", href: "/download-catalog" },
         { label: "Privacy Policy", href: "/privacy-policy" },
+        // Added 2026-09-13, next to Privacy Policy per the owner's own
+        // instruction -- same "nav link exists ahead of its page" precedent
+        // that link itself already established.
+        { label: "Terms of Service", href: "/terms-of-service" },
       ],
     },
     contact: { label: "Get in touch", email: "hello@capriosports.com" },

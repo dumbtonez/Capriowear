@@ -63,6 +63,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.3,
     },
+    // /terms-of-service (2026-09-13): same treatment as /privacy-policy
+    // above -- indexable, low priority, rare change frequency.
+    {
+      url: `${SITE_URL}/terms-of-service`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
     // /teamwear (2026-09-11): the Teamwear Landing Hub, a browse/directory
     // page one level above the sport PLPs enumerated below -- hand-added
     // the same way /services and /our-factory are, since it isn't itself

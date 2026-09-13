@@ -68,7 +68,20 @@ export function RequestSampleForm({ content }: RequestSampleFormProps) {
   const [interest, setInterest] = useState<string | null>(null);
   const [attachedFile, setAttachedFile] = useState<{ name: string; size: number } | null>(null);
   const [errors, setErrors] = useState<FieldErrors>({});
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  // "invalid" (server 400) is deliberately its own state, not folded into
+  // "error" -- real bug, found live: every non-2xx response used to throw
+  // the same generic `Error` and land on "error", which rendered
+  // `content.errorMessage` ("Something went wrong on our end...") even for
+  // a plain 400 validation rejection. That's a system-failure message on a
+  // bad-input problem -- misleading, and worse than the field-level errors
+  // this form already shows for the exact same problem when caught
+  // client-side. A 400 should only ever reach the server here if this
+  // form's own client-side `validate()` has a gap (or a non-browser client
+  // bypasses it entirely), so "invalid" re-runs that same validation
+  // against the submitted data to recover field-level messages; the
+  // fallback below only fires if even that finds nothing.
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error" | "invalid">("idle");
+  const [serverMessage, setServerMessage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Owner, 2026-09-10: "once something is attached, there should be an
@@ -152,6 +165,24 @@ export function RequestSampleForm({ content }: RequestSampleFormProps) {
     setStatus("submitting");
     try {
       const response = await fetch("/api/request-sample", { method: "POST", body: formData });
+      if (response.status === 400) {
+        // A 400 means the server rejected this as bad input, not a send
+        // failure -- try to recover field-level messages the same way a
+        // client-side failure would show them, rather than the alarming
+        // "something went wrong on our end" banner (see `status`'s own
+        // comment above).
+        const recovered = validate(formData);
+        if (Object.keys(recovered).length > 0) {
+          setErrors(recovered);
+          focusFirstError(recovered);
+          setStatus("idle");
+          return;
+        }
+        const body = await response.json().catch(() => null);
+        setServerMessage(body?.error || "Please check the form and try again.");
+        setStatus("invalid");
+        return;
+      }
       if (!response.ok) throw new Error("Request failed");
       setStatus("success");
     } catch {
@@ -341,6 +372,7 @@ export function RequestSampleForm({ content }: RequestSampleFormProps) {
             </div>
 
             {status === "error" ? <p className={requestSample.formError}>{content.errorMessage}</p> : null}
+            {status === "invalid" ? <p className={requestSample.formError}>{serverMessage}</p> : null}
 
             {/* Plain native button, not the shared `Button` component --
                 `Button` always applies its own `base`/`primary` classes

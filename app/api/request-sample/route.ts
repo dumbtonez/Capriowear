@@ -55,7 +55,21 @@ function escapeHtml(value: string) {
 }
 
 export async function POST(request: Request) {
-  const formData = await request.formData();
+  // `request.formData()` throws (not returns) on a malformed/empty
+  // multipart body -- confirmed live, real bug: a bare POST with no body,
+  // or one missing its multipart boundary, threw here uncaught, which
+  // Next.js turns into a raw framework 500 HTML page instead of this
+  // route's own JSON error contract. This is exactly the "empty/invalid
+  // input" case the rest of this route already handles gracefully below
+  // (missing fields, bad email, oversized file) -- parsing the body at all
+  // is really the same class of "invalid input," just one step earlier, so
+  // it gets the same clean 400 treatment, not a different failure mode.
+  let formData: FormData;
+  try {
+    formData = await request.formData();
+  } catch {
+    return Response.json({ ok: false, error: "Invalid form submission." }, { status: 400 });
+  }
 
   // Bot check first, before any real work -- same success response either
   // way (see lib/honeypot.ts's own comment on why this never surfaces as
@@ -89,7 +103,6 @@ export async function POST(request: Request) {
     if (file.size > MAX_FILE_BYTES) {
       return Response.json({ ok: false, error: "File exceeds the 10MB limit." }, { status: 400 });
     }
-    attachments.push({ filename: file.name, content: Buffer.from(await file.arrayBuffer()) });
   }
 
   const apiKey = process.env.RESEND_API_KEY;
@@ -98,27 +111,44 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, error: "Email service is not configured." }, { status: 500 });
   }
 
-  const resend = new Resend(apiKey);
-  const html = `
-    <p><strong>Full name:</strong> ${escapeHtml(name)}</p>
-    <p><strong>Work email:</strong> ${escapeHtml(email)}</p>
-    <p><strong>Company:</strong> ${escapeHtml(company)}</p>
-    <p><strong>Interested in:</strong> ${escapeHtml(interest)}</p>
-    <p><strong>Project:</strong><br />${escapeHtml(project).replace(/\n/g, "<br />")}</p>
-    ${phone ? `<p><strong>WhatsApp/phone:</strong> ${escapeHtml(phone)}</p>` : ""}
-  `;
+  // Everything past this point is genuine send-time work (reading the
+  // upload's bytes, calling out to Resend), not input validation -- any
+  // failure here is a real "we couldn't get this to you" case, not a bad
+  // submission, so it earns the frontend's own generic server-error
+  // message. Wrapped so an unexpected throw (Resend's client can throw on
+  // a network failure, not just return `{ error }` -- confirmed in its own
+  // docs) still comes back as this route's own clean JSON 500, not a raw
+  // framework error page.
+  try {
+    if (file instanceof File && file.size > 0) {
+      attachments.push({ filename: file.name, content: Buffer.from(await file.arrayBuffer()) });
+    }
 
-  const { error } = await resend.emails.send({
-    from: "Capriowear Website <onboarding@resend.dev>",
-    to: TO_ADDRESS,
-    replyTo: email,
-    subject: `New sample request: ${company}`,
-    html,
-    attachments: attachments.length > 0 ? attachments : undefined,
-  });
+    const resend = new Resend(apiKey);
+    const html = `
+      <p><strong>Full name:</strong> ${escapeHtml(name)}</p>
+      <p><strong>Work email:</strong> ${escapeHtml(email)}</p>
+      <p><strong>Company:</strong> ${escapeHtml(company)}</p>
+      <p><strong>Interested in:</strong> ${escapeHtml(interest)}</p>
+      <p><strong>Project:</strong><br />${escapeHtml(project).replace(/\n/g, "<br />")}</p>
+      ${phone ? `<p><strong>WhatsApp/phone:</strong> ${escapeHtml(phone)}</p>` : ""}
+    `;
 
-  if (error) {
-    console.error("Resend send failed", error);
+    const { error } = await resend.emails.send({
+      from: "Capriowear Website <onboarding@resend.dev>",
+      to: TO_ADDRESS,
+      replyTo: email,
+      subject: `New sample request: ${company}`,
+      html,
+      attachments: attachments.length > 0 ? attachments : undefined,
+    });
+
+    if (error) {
+      console.error("Resend send failed", error);
+      return Response.json({ ok: false, error: "Failed to send." }, { status: 502 });
+    }
+  } catch (sendError) {
+    console.error("Unexpected error sending request-a-sample submission", sendError);
     return Response.json({ ok: false, error: "Failed to send." }, { status: 502 });
   }
 
