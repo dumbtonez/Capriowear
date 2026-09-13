@@ -1621,10 +1621,18 @@ export const shortClipMedia = {
   // not `teaserVideo.overlayButton`'s persistent labelled pill (that one
   // stays visible the whole time a teaser plays, this only ever appears
   // once the clip has actually ended, so a quieter treatment reads as "an
-  // available action," not "a thing competing with the footage").
+  // available action," not "a thing competing with the footage"). 40x40
+  // frosted-glass treatment (owner, 2026-09-13: needs to stay legible over
+  // both dark and light frozen frames) -- a translucent `ink/50` tint (not
+  // the earlier `ink/70`, opaque enough to already read as "dark" over a
+  // light frame on its own without needing the blur to help) plus a real
+  // `backdrop-blur-md` and a `paper/25` ring for the glass edge itself:
+  // the combination is what reads as "frosted glass" rather than just "a
+  // dark chip" -- the ring alone gives it a visible boundary over a
+  // same-tone dark photo the semi-transparent fill can't provide by itself.
   replayButton:
-    "absolute bottom-3 right-3 inline-flex size-9 items-center justify-center rounded-pill bg-ink/70 text-paper backdrop-blur-sm transition-colors hover:bg-ink/85 motion-reduce:transition-none",
-  replayIcon: "size-4",
+    "absolute bottom-3 right-3 inline-flex size-10 items-center justify-center rounded-pill bg-ink/50 text-paper backdrop-blur-md ring-1 ring-paper/25 transition-colors hover:bg-ink/65 motion-reduce:transition-none",
+  replayIcon: "size-5",
   // Centred, for the `prefers-reduced-motion`/save-data click-to-play state
   // -- no icon-only treatment here, since this is the ONLY way that state
   // ever starts the clip at all (not a secondary "replay" action), so it
