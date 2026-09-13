@@ -40,6 +40,7 @@
 // `w-full`).
 import { Eyebrow } from "@/components/Eyebrow";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
+import { ShortClipMedia } from "@/components/ShortClipMedia";
 import { TextReveal } from "@/components/TextReveal";
 import { ourFactoryProcess } from "@/components/ui/styles";
 import type { ourFactory } from "@/content/our-factory";
@@ -54,13 +55,22 @@ type ProcessItem = ProcessRow["items"][number];
 function Item({ item }: { item: ProcessItem }) {
   return (
     <div className={`${ourFactoryProcess.item} ${ourFactoryProcess.itemWidth[item.width]}`}>
-      <ParallaxMedia
-        label={item.imageAlt}
-        image={item.image}
-        ratio={item.ratio}
-        showLabel={false}
-        className={ourFactoryProcess.itemMediaMobile}
-      />
+      {item.video ? (
+        <ShortClipMedia
+          label={item.imageAlt}
+          videoSrc={item.video.src}
+          posterSrc={item.video.poster}
+          className={ourFactoryProcess.itemMediaMobile}
+        />
+      ) : (
+        <ParallaxMedia
+          label={item.imageAlt}
+          image={item.image}
+          ratio={item.ratio}
+          showLabel={false}
+          className={ourFactoryProcess.itemMediaMobile}
+        />
+      )}
       <div className={ourFactoryProcess.textCol}>
         <div className={ourFactoryProcess.labelGroup}>
           <p className={ourFactoryProcess.label}>
