@@ -142,13 +142,16 @@ export const home = {
       { label: "Factory Tour", href: "/our-factory" },
     ],
     // The mobile drawer's own real design (Figma node 465:2817, 2026-08-27)
-    // is a flat list, not derived from `links` above: it adds a 5th item
-    // ("Our Story", not on desktop) and a `chevron` flag Figma shows on
-    // exactly two rows (Activewear, Teamwear & Uniforms), both of which now
-    // push a second in-drawer screen instead of navigating (see
-    // MobileNav.tsx). Kept as its own dataset rather than reusing `links` +
-    // desktop's `megaMenu` field directly so a future desktop-only nav
-    // change can't accidentally affect the drawer's shape.
+    // is a flat list, not derived from `links` above: it originally added a
+    // 5th item, "Our Story" (not on desktop), removed 2026-09-13 (owner:
+    // "the /our-story route doesn't exist and isn't being built right now
+    // -- remove the dead links pointing to it" -- add it back once a real
+    // page exists there). A `chevron` flag Figma shows on exactly two rows
+    // (Activewear, Teamwear & Uniforms) still pushes a second in-drawer
+    // screen instead of navigating (see MobileNav.tsx). Kept as its own
+    // dataset rather than reusing `links` + desktop's `megaMenu` field
+    // directly so a future desktop-only nav change can't accidentally
+    // affect the drawer's shape.
     mobileLinks: [
       {
         label: "Activewear",
@@ -164,11 +167,12 @@ export const home = {
       },
       { label: "Services", href: "/services", chevron: false },
       { label: "Factory Tour", href: "/our-factory", chevron: false },
-      { label: "Our Story", href: "/our-story", chevron: false },
       // Owner, 2026-09-10: "on the mobile menu, add request a catalog...
       // cta" then clarified: "add download catalog under our story" -- a
       // plain list item, not the special bottom CTA button the first
       // phrasing suggested. Same route `nav.secondaryCta` already links to.
+      // ("under our story" no longer applies literally now that Our Story
+      // itself is removed -- this item simply comes last.)
       { label: "Download Catalog", href: "/download-catalog", chevron: false },
     ],
     // "Get in touch" block at the foot of the mobile drawer -- same email
@@ -859,10 +863,11 @@ export const home = {
   // organizationSchema()), not duplicated here.
   //
   // hrefs reuse the same real routes as home.nav/home.insideFactory.cta
-  // where they overlap. "Our Story" is the one genuinely new link here --
-  // no page exists at /our-story yet, same "link ahead of the page" pattern
-  // already accepted elsewhere on this site (e.g. Header's own nav links
-  // before their pages existed).
+  // where they overlap. "Our Story" (a "link ahead of the page" -- no page
+  // existed at /our-story yet, the same pattern accepted elsewhere on this
+  // site) removed 2026-09-13 (owner: "the /our-story route doesn't exist
+  // and isn't being built right now -- remove the dead links pointing to
+  // it" -- add it back once a real page exists there).
   footer: {
     tagline: "Capriowear, a division of Caprio Sports",
     description:
@@ -878,14 +883,13 @@ export const home = {
         { label: "Teamwear & Uniforms", href: "/teamwear" },
         { label: "Services", href: "/services" },
         { label: "Our Factory", href: "/our-factory" },
-        { label: "Our Story", href: "/our-story" },
       ],
       // Request a Sample before Download Catalog (owner, 2026-09-10: "Make
       // request a sample first then download catalog" -- was the reverse
       // order). Privacy Policy appended the same turn ("add privacy policy
       // page link") -- no route built for it yet, same "nav link exists
-      // ahead of its page" precedent Our Story/Download Catalog/Request a
-      // Sample already established below and elsewhere on this site.
+      // ahead of its page" precedent Download Catalog/Request a Sample
+      // already established below and elsewhere on this site.
       columnTwo: [
         { label: "Request a Sample", href: "/request-a-sample" },
         { label: "Download Catalog", href: "/download-catalog" },
