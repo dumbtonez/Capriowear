@@ -1,5 +1,33 @@
 import type { NextConfig } from "next";
 
+// Sitewide security headers (owner brief, 2026-09-13: pre-launch hardening
+// pass -- "form abuse, missing security headers, dependency hygiene" for a
+// B2B lead-gen site with no logins/payments, not DDoS mitigation, which
+// Vercel's edge network already handles). Applied via `headers()` to every
+// route rather than per-page, so a new page never ships unprotected by
+// accident.
+//
+// CSP starts deliberately permissive, not maximally locked down -- this app
+// loads no third-party script today (checked app/layout.tsx: no GA/GTM/
+// Figma embed tags), so `script-src`/`style-src` only need to cover Next's
+// own inline hydration script and Tailwind's inline styles. `'unsafe-inline'`
+// is a known trade-off (a nonce-based CSP would be tighter) -- fine for a
+// first pass with no user-generated content or third-party scripts to
+// isolate from; revisit with nonces if/when an analytics or embed script is
+// added. `font-src`/`img-src` cover next/font's self-hosted Figtree files
+// and next/image's own optimized output plus any real `https:` photography.
+const CSP = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: https:",
+  "font-src 'self' data:",
+  "connect-src 'self'",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+].join("; ");
+
 const nextConfig: NextConfig = {
   images: {
     // AVIF first, WebP fallback (owner spec, 2026-09-02, PLP card hover
@@ -12,6 +40,31 @@ const nextConfig: NextConfig = {
     // components/ProductCardMedia.tsx) so every real `next/image` sitewide
     // benefits, not just the PLP card.
     formats: ["image/avif", "image/webp"],
+  },
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          { key: "Content-Security-Policy", value: CSP },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          // DENY, not SAMEORIGIN -- nothing on this site is meant to be
+          // framed by anyone, including itself; revisit only if a real
+          // embed use case shows up.
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          // Camera/mic/geolocation are all genuinely unused sitewide --
+          // disabled outright rather than left at the browser default.
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          // 2 years + subdomains + preload -- the long-lived, "submit to
+          // the browser preload list" HSTS config, appropriate once a site
+          // is committed to HTTPS-only (Vercel serves this site over HTTPS
+          // by default; this header is what tells browsers to never even
+          // try plain HTTP again, for every subdomain too).
+          { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+        ],
+      },
+    ];
   },
 };
 

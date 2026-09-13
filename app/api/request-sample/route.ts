@@ -25,10 +25,25 @@ import { Resend } from "resend";
 
 import { buildLeadEnrichment } from "@/lib/leadEnrichment";
 import { appendLead } from "@/lib/leadsSheet";
+import { isHoneypotFilled } from "@/lib/honeypot";
+import { checkRateLimit, getClientIp } from "@/lib/rateLimit";
 
 const MAX_FILE_BYTES = 10 * 1024 * 1024;
+const MAX_TEXT_LENGTH = 5000; // bounds email size/log spam -- no legitimate field here needs more
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
 const TO_ADDRESS = "hello@capriosports.com";
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function clean(value: string) {
+  // Strips CR/LF defensively before this ever reaches an email header field
+  // (`replyTo` below) -- `EMAIL_PATTERN` already rejects whitespace in a
+  // valid email, so this isn't reachable via `email` today, but every
+  // other field funnels into the HTML body via `escapeHtml` regardless;
+  // this is belt-and-braces against a future header use, not a fix for a
+  // live gap.
+  return value.replace(/[\r\n]/g, " ").slice(0, MAX_TEXT_LENGTH);
+}
 
 function escapeHtml(value: string) {
   return value
@@ -42,12 +57,24 @@ function escapeHtml(value: string) {
 export async function POST(request: Request) {
   const formData = await request.formData();
 
-  const name = String(formData.get("name") || "").trim();
-  const email = String(formData.get("email") || "").trim();
-  const company = String(formData.get("company") || "").trim();
-  const interest = String(formData.get("interest") || "").trim();
-  const project = String(formData.get("project") || "").trim();
-  const phone = String(formData.get("phone") || "").trim();
+  // Bot check first, before any real work -- same success response either
+  // way (see lib/honeypot.ts's own comment on why this never surfaces as
+  // an error).
+  if (isHoneypotFilled(formData)) {
+    return Response.json({ ok: true });
+  }
+
+  const ip = getClientIp(request);
+  if (!checkRateLimit(`request-sample:${ip}`, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS)) {
+    return Response.json({ ok: false, error: "Too many requests. Please try again later." }, { status: 429 });
+  }
+
+  const name = clean(String(formData.get("name") || "").trim());
+  const email = clean(String(formData.get("email") || "").trim());
+  const company = clean(String(formData.get("company") || "").trim());
+  const interest = clean(String(formData.get("interest") || "").trim());
+  const project = clean(String(formData.get("project") || "").trim());
+  const phone = clean(String(formData.get("phone") || "").trim());
   const file = formData.get("file");
 
   if (!name || !email || !company || !interest || !project) {

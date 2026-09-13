@@ -34,6 +34,7 @@ import { Paperclip, X } from "lucide-react";
 import type { FormEvent, MouseEvent } from "react";
 import { useId, useRef, useState } from "react";
 
+import { HoneypotField } from "@/components/HoneypotField";
 import { cx } from "@/components/ui/cx";
 import { requestSampleForm as requestSample } from "@/components/ui/styles";
 import type { requestASample } from "@/content/request-a-sample";
@@ -183,6 +184,7 @@ export function RequestSampleForm({ content }: RequestSampleFormProps) {
     <section className={requestSample.section}>
       <div className={requestSample.inner}>
         <form className={requestSample.form} onSubmit={handleSubmit} noValidate>
+          <HoneypotField />
           <div ref={(el) => { fieldRefs.current.name = el; }} className={requestSample.field}>
             <label htmlFor={`${baseId}-name`} className={requestSample.label}>
               {content.fields.name.label} <span className={requestSample.required}>*</span>

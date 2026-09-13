@@ -20,6 +20,7 @@
 import type { FormEvent } from "react";
 import { useId, useRef, useState } from "react";
 
+import { HoneypotField } from "@/components/HoneypotField";
 import { cx } from "@/components/ui/cx";
 import { requestSampleForm as darkForm } from "@/components/ui/styles";
 import type { downloadCatalog } from "@/content/download-catalog";
@@ -112,6 +113,7 @@ export function DownloadCatalogForm({ content }: DownloadCatalogFormProps) {
     <section className={darkForm.section}>
       <div className={darkForm.inner}>
         <form className={darkForm.form} onSubmit={handleSubmit} noValidate>
+          <HoneypotField />
           <div ref={(el) => { fieldRefs.current.firstName = el; }} className={darkForm.field}>
             <label htmlFor={`${baseId}-firstName`} className={darkForm.label}>
               {content.fields.firstName.label} <span className={darkForm.required}>*</span>

@@ -26,11 +26,25 @@ import { Resend } from "resend";
 
 import { downloadCatalog } from "@/content/download-catalog";
 import { SITE_URL } from "@/content/site";
+import { isHoneypotFilled } from "@/lib/honeypot";
 import { buildLeadEnrichment } from "@/lib/leadEnrichment";
 import { appendLead } from "@/lib/leadsSheet";
+import { checkRateLimit, getClientIp } from "@/lib/rateLimit";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const CATALOG_PDF_PATH = join(process.cwd(), "public", "catalog", "capriowear-catalog-placeholder.pdf");
+const MAX_TEXT_LENGTH = 5000;
+// This route emails whatever address it's given (`to: email` below), so a
+// rate limit here isn't just anti-spam noise reduction -- without it,
+// this endpoint is a free "send an email from our domain to any address
+// repeatedly" primitive (reputation damage, or straightforward harassment
+// of a third party's inbox), not merely a nuisance to us.
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+
+function clean(value: string) {
+  return value.replace(/[\r\n]/g, " ").slice(0, MAX_TEXT_LENGTH);
+}
 
 function escapeHtml(value: string) {
   return value
@@ -44,12 +58,22 @@ function escapeHtml(value: string) {
 export async function POST(request: Request) {
   const formData = await request.formData();
 
+  if (isHoneypotFilled(formData)) {
+    return Response.json({ ok: true });
+  }
+
+  const ip = getClientIp(request);
+  if (!checkRateLimit(`download-catalog:${ip}`, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS)) {
+    return Response.json({ ok: false, error: "Too many requests. Please try again later." }, { status: 429 });
+  }
+
   // "No capitalization correction or trimming beyond basic whitespace"
   // (doc) -- `.trim()` only, the name is used exactly as typed in the
-  // email greeting below.
-  const firstName = String(formData.get("firstName") || "").trim();
-  const email = String(formData.get("email") || "").trim();
-  const company = String(formData.get("company") || "").trim();
+  // email greeting below. `clean()` still caps length/strips CR-LF, same
+  // as request-sample's own route.
+  const firstName = clean(String(formData.get("firstName") || "").trim());
+  const email = clean(String(formData.get("email") || "").trim());
+  const company = clean(String(formData.get("company") || "").trim());
 
   if (!firstName || !email) {
     return Response.json({ ok: false, error: "Missing required fields." }, { status: 400 });
