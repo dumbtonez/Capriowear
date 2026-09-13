@@ -60,6 +60,7 @@ function Item({ item }: { item: ProcessItem }) {
           label={item.imageAlt}
           videoSrc={item.video.src}
           posterSrc={item.video.poster}
+          ratio={item.ratio}
           className={ourFactoryProcess.itemMediaMobile}
         />
       ) : (
