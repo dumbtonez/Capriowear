@@ -314,10 +314,14 @@ export function useDesktopChevronScroller(
     // calls this for a *non*-drag release, but guards regardless) must not
     // also nudge it by a card.
     if (isDraggingRef.current) return;
-    const track = trackRef.current;
     const reel = reelRef.current;
-    if (!track || !reel) return;
-    const maxOffset = Math.max(0, reel.getBoundingClientRect().width - track.clientWidth);
+    if (!trackRef.current || !reel) return;
+    // `getMaxOffset()` (below), not a second inline copy of the same
+    // calculation -- this used to duplicate the raw, buggy `clientWidth`
+    // formula `getMaxOffset`'s own comment documents fixing, so a plain
+    // click still overshot the last card even after dragging to it was
+    // corrected. One real calculation now, not two that can drift apart.
+    const maxOffset = getMaxOffset();
     // `> 1`/`< 1` (not `>=`/`<=` maxOffset/0) absorb the same float rounding
     // `setTargetFromEvent`'s own start-of-row check already accounts for.
     if (loop && directionRef.current === 1 && offsetRef.current > maxOffset - 1) {
@@ -334,11 +338,29 @@ export function useDesktopChevronScroller(
 
   // --- Drag/momentum handlers (only wired up by a caller that opts in) ---
 
+  // Real bug, found live, owner 2026-09-13: "even the content is cutting
+  // for the last" -- at the true last stop, the last card's own right edge
+  // landed *past* the visible viewport (confirmed live via
+  // `getBoundingClientRect`: 80px overshoot on a 397px card, exactly this
+  // track's own `px-[80px]` side inset -- and 160px, both sides, once
+  // `handleClick`'s own now-removed duplicate of this same bug is counted
+  // too). `track.clientWidth` includes BOTH the left AND right padding as
+  // if the reel could use the full padded box, but the reel needs to stop
+  // with its own right edge at the content box's inner edge (where the
+  // right padding begins), not the track's own outer edge -- using the
+  // raw `clientWidth` here let the reel travel exactly `paddingLeft +
+  // paddingRight` too far, overshooting the last card past the
+  // container's own right inset by that same amount every time. Subtracting
+  // both paddings gives the row's own real usable content width, matching
+  // every other section's own `container-p` inset math.
   const getMaxOffset = () => {
     const track = trackRef.current;
     const reel = reelRef.current;
     if (!track || !reel) return 0;
-    return Math.max(0, reel.getBoundingClientRect().width - track.clientWidth);
+    const trackStyle = getComputedStyle(track);
+    const horizontalPadding = parseFloat(trackStyle.paddingLeft) + parseFloat(trackStyle.paddingRight);
+    const contentWidth = track.clientWidth - (Number.isNaN(horizontalPadding) ? 0 : horizontalPadding);
+    return Math.max(0, reel.getBoundingClientRect().width - contentWidth);
   };
 
   // How many real stops this row has at its current rendered width -- one
