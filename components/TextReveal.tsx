@@ -27,7 +27,7 @@
 // uses.
 "use client";
 
-import type { ElementType } from "react";
+import type { ElementType, RefObject } from "react";
 import { Fragment, useEffect, useRef, useState } from "react";
 
 import { cx } from "./ui/cx";
@@ -67,8 +67,39 @@ export type TextRevealProps = {
  * since this is the component that first needed it, then exported for reuse
  * -- the same pattern useDesktopChevronScroller already established
  * (components/DesktopChevronScroller.tsx).
+ *
+ * `root` (default `null` -- the browser viewport, `IntersectionObserver`'s
+ * own default): real bug, found live, owner 2026-09-13: "exhibition and how
+ * it works last images are not the same aspect ratio as others" -- the box
+ * itself was always the correct, identical aspect ratio (confirmed live via
+ * `getComputedStyle`); the LATER cards in a horizontally click/drag-paged
+ * reel (`ParallaxMedia`'s own zoom-and-settle usage in Exhibitions/How It
+ * Works/Inside the Factory) sit far outside the page's own viewport bounds
+ * on first paint (only moved into view later by the reel's own `transform:
+ * translateX`, never a real page scroll) -- against the default full-page
+ * viewport root, those cards' real geometry never intersects at all until
+ * dragged into view, so they were stuck at their PRE-reveal state
+ * (`scale-[1.12]`, zoomed in and cropped tighter than a settled card) any
+ * time a user reached them before ever triggering a real page scroll past
+ * that point -- reading as "wrong aspect ratio" (a different, more zoomed-
+ * in crop of the same box), not a CSS sizing bug. Passing the reel's own
+ * clipping ancestor (`trackRef.current`) as `root` scopes the intersection
+ * check to that container instead of the whole page, so a card sliding
+ * into the track's own visible bounds via the drag/chevron transform
+ * reveals correctly, exactly like scrolling a normal page section into
+ * view already does for every other `useRevealOnView` caller.
+ *
+ * `rootRef` (not a resolved element -- reading a ref's `.current` during
+ * render, rather than inside this hook's own effect, is itself a real
+ * React footgun: the DOM node it points to may not be mounted yet on the
+ * very first render, and doing it in the caller's render body trips the
+ * `react-hooks/refs` rule) is read inside the effect below, once refs are
+ * guaranteed attached.
  */
-export function useRevealOnView<T extends HTMLElement>(threshold = 0.3) {
+export function useRevealOnView<T extends HTMLElement>(
+  threshold = 0.3,
+  rootRef?: RefObject<Element | Document | null>,
+) {
   const ref = useRef<T>(null);
   const [active, setActive] = useState(false);
 
@@ -83,11 +114,11 @@ export function useRevealOnView<T extends HTMLElement>(threshold = 0.3) {
           observer.disconnect();
         }
       },
-      { threshold },
+      { threshold, root: rootRef?.current ?? null },
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [threshold]);
+  }, [threshold, rootRef]);
 
   return { ref, active };
 }

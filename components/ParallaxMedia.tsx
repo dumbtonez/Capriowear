@@ -32,6 +32,7 @@
 "use client";
 
 import Image, { type StaticImageData } from "next/image";
+import type { RefObject } from "react";
 
 import type { MediaRadius, MediaRatio } from "./MediaPlaceholder";
 import { useRevealOnView } from "./TextReveal";
@@ -48,6 +49,15 @@ export type ParallaxMediaProps = {
   /** Set false for a bare placeholder box with no visible caption text. `label` still supplies the image alt text either way. Default true. */
   showLabel?: boolean;
   className?: string;
+  /**
+   * Scopes the one-shot reveal's `IntersectionObserver` to this element
+   * instead of the default full-page viewport -- see `useRevealOnView`'s
+   * own comment for the real bug this fixes. Pass a horizontally click/
+   * drag-paged reel's own clipping ancestor (its `trackRef`) here; omit for
+   * every plain vertically-scrolled usage (unaffected, still the default
+   * viewport root).
+   */
+  revealRootRef?: RefObject<HTMLElement | null>;
 };
 
 export function ParallaxMedia({
@@ -58,8 +68,9 @@ export function ParallaxMedia({
   imageSizes = "50vw",
   showLabel = true,
   className,
+  revealRootRef,
 }: ParallaxMediaProps) {
-  const { ref, active } = useRevealOnView<HTMLDivElement>();
+  const { ref, active } = useRevealOnView<HTMLDivElement>(0.3, revealRootRef);
 
   return (
     <div ref={ref} className={cx(media.shell, media.ratio[ratio], media.radius[radius], className)}>

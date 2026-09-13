@@ -114,7 +114,7 @@ function DesktopScroller({ shots }: { shots: typeof home.exhibitions.media }) {
           <div ref={reelRef} className={exhibitions.desktopReel}>
             {shots.map((shot) => (
               <div key={shot.label} className={exhibitions.desktopCard}>
-                <ParallaxMedia label={shot.label} image={shot.image} ratio="469:320" radius="none" />
+                <ParallaxMedia label={shot.label} image={shot.image} ratio="469:320" radius="none" revealRootRef={trackRef} />
               </div>
             ))}
           </div>
@@ -182,6 +182,46 @@ function MobileCarousel({ shots }: { shots: typeof home.exhibitions.media }) {
     track.addEventListener("scroll", onScroll, { passive: true });
     return () => track.removeEventListener("scroll", onScroll);
   }, [cardWidth, activeHeight, inactiveHeight]);
+
+  // Loop back to the first slide once a swipe pushes past the real last one
+  // (owner, 2026-09-13: "make the exhibition section start from the
+  // beginning if users slides after the images are finished") -- matches
+  // the desktop chevron/drag reel's own already-correct `loop: true` wrap
+  // (`useDesktopChevronScroller`), which this native-scroll mobile/tablet
+  // carousel has no equivalent of on its own. Native scroll just clamps
+  // `scrollLeft` at the end with no event marking "the user tried to keep
+  // going" -- detected here instead via a real touch gesture: a forward
+  // swipe (finger moves left, `deltaX` negative) that both STARTS and ENDS
+  // already at the true max scroll position is a swipe attempted past the
+  // last card, not just a swipe that happened to land on it. A swipe that
+  // only reaches the end DURING the gesture (starts short of it) is a
+  // normal "arrive at the last card" swipe and must not loop.
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    let touchStartX = 0;
+    let scrollAtTouchStart = 0;
+    const onTouchStart = (event: TouchEvent) => {
+      touchStartX = event.touches[0]?.clientX ?? 0;
+      scrollAtTouchStart = track.scrollLeft;
+    };
+    const onTouchEnd = (event: TouchEvent) => {
+      const touch = event.changedTouches[0];
+      if (!touch) return;
+      const deltaX = touch.clientX - touchStartX;
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      if (deltaX < -20 && scrollAtTouchStart >= maxScroll - 2 && track.scrollLeft >= maxScroll - 2) {
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        track.scrollTo({ left: 0, behavior: reduceMotion ? "auto" : "smooth" });
+      }
+    };
+    track.addEventListener("touchstart", onTouchStart, { passive: true });
+    track.addEventListener("touchend", onTouchEnd, { passive: true });
+    return () => {
+      track.removeEventListener("touchstart", onTouchStart);
+      track.removeEventListener("touchend", onTouchEnd);
+    };
+  }, []);
 
   return (
     // No `items-center` -- same real overflow bug as InsideFactory.tsx's

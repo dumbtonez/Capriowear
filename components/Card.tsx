@@ -26,6 +26,7 @@
 
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
+import type { RefObject } from "react";
 
 import { useRevealOnView } from "./TextReveal";
 import { cx } from "./ui/cx";
@@ -61,6 +62,16 @@ type CardMediaProps = {
   tone?: "light" | "dark";
   /** See the file header comment. Default false: unchanged, no reveal wrapper. */
   parallax?: boolean;
+  /**
+   * Scopes the `parallax` reveal's `IntersectionObserver` to this element
+   * instead of the default full-page viewport -- see `useRevealOnView`'s
+   * own comment (components/TextReveal.tsx) for the real bug this fixes on
+   * a horizontally click/drag-paged reel (How It Works' own desktop
+   * gallery). Pass that reel's own clipping ancestor (`trackRef`); omit
+   * for every other `parallax` usage (Our Services, PDP Customize Steps),
+   * unaffected, still the default viewport root.
+   */
+  revealRootRef?: RefObject<HTMLElement | null>;
   className?: string;
 };
 
@@ -71,10 +82,11 @@ function CardMedia({
   radius = "lg",
   tone = "light",
   parallax = false,
+  revealRootRef,
   className,
 }: CardMediaProps) {
   const classes = cx(aspectClassName, cardMedia.base, cardMedia.radius[radius], className);
-  const { ref, active } = useRevealOnView<HTMLDivElement>();
+  const { ref, active } = useRevealOnView<HTMLDivElement>(0.3, revealRootRef);
 
   if (image) {
     if (parallax) {
@@ -203,6 +215,8 @@ export type CapabilityCardProps = {
   tone?: "light" | "dark";
   /** See the file header comment. Default false: unchanged, no reveal wrapper. */
   parallax?: boolean;
+  /** See `CardMediaProps.revealRootRef`'s own comment. Forwarded straight through. */
+  revealRootRef?: RefObject<HTMLElement | null>;
 };
 
 export function CapabilityCard({
@@ -217,6 +231,7 @@ export function CapabilityCard({
   titleClassName = capabilityCard.title,
   tone = "light",
   parallax = false,
+  revealRootRef,
 }: CapabilityCardProps) {
   return (
     <article className={rootClassName}>
@@ -227,6 +242,7 @@ export function CapabilityCard({
         radius={mediaRadius}
         tone={tone}
         parallax={parallax}
+        revealRootRef={revealRootRef}
       />
       <div className={bodyClassName}>
         <h3 className={titleClassName}>{title}</h3>

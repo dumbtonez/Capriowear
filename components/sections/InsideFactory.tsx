@@ -223,7 +223,15 @@ function DesktopGallery({
                     first time each card scrolls into view; it does not
                     replay on chevron click/slide (`ParallaxMedia`'s own
                     trigger is a one-shot IntersectionObserver, not keyed to
-                    this row's active card). */}
+                    this row's active card). `revealRootRef={trackRef}` --
+                    real bug, found live, owner 2026-09-13: "last images are
+                    not the same aspect ratio as others" -- cards past the
+                    initially-visible window sit outside the page's own
+                    viewport bounds until dragged/paged into view, so
+                    against the default full-page root they never triggered
+                    this reveal at all, stuck at their pre-reveal zoomed-in
+                    crop (see `useRevealOnView`'s own comment,
+                    components/TextReveal.tsx, for the full mechanism). */}
                 <ParallaxMedia
                   label={shot.label}
                   ratio="15:8"
@@ -231,6 +239,7 @@ function DesktopGallery({
                   showLabel={false}
                   image={shot.image}
                   className={insideFactory.desktopCardMedia}
+                  revealRootRef={trackRef}
                 />
                 <p className={tone === "light" ? insideFactory.desktopCardLabelLight : insideFactory.desktopCardLabel}>
                   {shot.label}

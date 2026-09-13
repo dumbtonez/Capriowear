@@ -171,6 +171,7 @@ function DesktopScroller({
                   mediaRadius="none"
                   tone={tone}
                   parallax
+                  revealRootRef={trackRef}
                 />
               </div>
             ))}
