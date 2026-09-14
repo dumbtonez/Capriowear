@@ -1923,7 +1923,11 @@ export const ourFactoryProcess = {
   // gives exactly 80px from the left at the page's own 1440px reference
   // width -- only diverges from a flat 80px past that width, which reads
   // as balanced instead of lopsided.
-  inner: "container-p flex flex-col gap-12 pt-12 pb-16 xl:gap-[104px] xl:pb-[120px] xl:pt-[96px]",
+  // pt-12 (48px) mobile, md:pt-[96px] tablet, xl:pt-[140px] desktop (owner,
+  // 2026-09-14: "desktop make 140px top and tablet 96px" -- desktop up from
+  // the previous flat 96px shared with tablet; tablet keeps that 96px as
+  // its own explicit `md:` value now that desktop has split off higher).
+  inner: "container-p flex flex-col gap-12 pt-12 pb-16 md:pt-[96px] xl:gap-[104px] xl:pb-[120px] xl:pt-[140px]",
   // Heading block (eyebrow + H2) plus the first row, 72px apart -- the
   // real Figma nesting (get_metadata: node 857:1986 wraps the heading
   // block and row 1 together with its own 72px gap, separate from the
