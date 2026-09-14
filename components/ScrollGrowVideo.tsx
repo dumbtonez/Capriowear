@@ -111,9 +111,17 @@ export type ScrollGrowVideoProps = {
   label: string;
   /** The outer padded wrap token, e.g. `hero.videoWrap` or `ourFactoryHero.videoWrap`. */
   wrapClassName: string;
+  /**
+   * Forwarded to MediaPlaceholder's own `priority` (added 2026-09-11,
+   * image-pipeline readiness check). Both real callers of this component
+   * (Hero.tsx, OurFactoryHero.tsx) render it as their page's own hero
+   * media -- the single most above-the-fold image/poster on each page --
+   * so both pass `true` here rather than leaving it to default.
+   */
+  priority?: boolean;
 };
 
-export function ScrollGrowVideo({ label, wrapClassName }: ScrollGrowVideoProps) {
+export function ScrollGrowVideo({ label, wrapClassName, priority = false }: ScrollGrowVideoProps) {
   const videoRef = useRef<HTMLDivElement>(null);
   const videoBox = useScrollGrowBox(videoRef);
 
@@ -142,6 +150,13 @@ export function ScrollGrowVideo({ label, wrapClassName }: ScrollGrowVideoProps) 
           showLabel={false}
           radius="none"
           className="h-full w-full"
+          // Full-bleed width below `xl` (`hero.videoWrap`'s own `px-0`);
+          // 75% of the 1440px-capped, 80px-inset container at `xl:` and up
+          // (`hero.video`'s own `xl:w-[75%]`, `videoWrap`'s own `xl:px-20`)
+          // -- roughly 960px at that box's own widest real render, not the
+          // full viewport `next/image` would otherwise assume it needs.
+          imageSizes="(min-width: 1280px) 960px, 100vw"
+          priority={priority}
           overlay={
             <div className={hero.playWrap}>
               <span className={hero.playCircle}>

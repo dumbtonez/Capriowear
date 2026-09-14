@@ -71,7 +71,10 @@ function DesktopScroller({ shots }: { shots: typeof home.exhibitions.media }) {
       <div ref={trackRef} className={exhibitions.desktopRow}>
         {shots.map((shot) => (
           <div key={shot.label} className={exhibitions.desktopCard}>
-            <MediaPlaceholder label={shot.label} ratio="469:320" radius="none" tone="dark" />
+            {/* imageSizes: fixed 469px card, this row only renders at
+                `xl:` and up (see this file's own DesktopScroller/
+                MobileCarousel split). */}
+            <MediaPlaceholder label={shot.label} ratio="469:320" radius="none" tone="dark" imageSizes="469px" />
           </div>
         ))}
       </div>
@@ -159,7 +162,16 @@ function MobileCarousel({ shots }: { shots: typeof home.exhibitions.media }) {
             className={exhibitions.mobileCard}
             style={{ height: index === 0 ? activeHeight : inactiveHeight }}
           >
-            <MediaPlaceholder label={shot.label} radius="none" tone="dark" className="h-full" />
+            {/* imageSizes: `mobileCard`'s own real width, 300px below `md:`,
+                469px from `md:` up to `xl:` (where DesktopScroller takes
+                over instead). */}
+            <MediaPlaceholder
+              label={shot.label}
+              radius="none"
+              tone="dark"
+              className="h-full"
+              imageSizes="(min-width: 768px) 469px, 300px"
+            />
           </div>
         ))}
       </div>

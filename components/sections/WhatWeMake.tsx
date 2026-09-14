@@ -125,6 +125,11 @@ export function WhatWeMake({ content, mobileGridVariant = false }: WhatWeMakePro
                   </div>
                   <div className={whatWeMake.desktopGrid}>
                     {desktopTiles.map((tile) => (
+                      // imageSizes: 4-column grid (`desktopGrid`'s own
+                      // `grid-cols-4 gap-x-4`) inside `desktopSection`'s own
+                      // `container-p` (80px each side), xl-only (`hidden
+                      // xl:block`) -- each column is
+                      // (min(100vw,1440px) - 160(padding) - 48(3 gaps)) / 4.
                       <Card
                         key={tile.href}
                         label={tile.label}
@@ -132,6 +137,7 @@ export function WhatWeMake({ content, mobileGridVariant = false }: WhatWeMakePro
                         image={tile.image}
                         mediaRadius="none"
                         mediaAspectClassName={whatWeMake.desktopTileMedia}
+                        imageSizes="calc((min(100vw, 1440px) - 208px) / 4)"
                         parallax
                       />
                     ))}
@@ -169,12 +175,23 @@ export function WhatWeMake({ content, mobileGridVariant = false }: WhatWeMakePro
                   <div className={mobileGridVariant ? whatWeMake.mobileListGrid : whatWeMake.mobileList}>
                     {category.tiles.slice(0, mobileGridVariant ? MOBILE_TILE_LIMIT_GRID : MOBILE_TILE_LIMIT).map((tile) => (
                       <a key={tile.href} href={tile.href} className={whatWeMake.mobileTile}>
+                        {/* imageSizes: `mobileSection`'s own container-p
+                            (20px mobile / 32px tablet), only rendering below
+                            `xl:`. `mobileListGrid` is a flat 2-col grid
+                            (gap-x-2/8px) at every width in that range;
+                            `mobileList` is 1-col real mobile, 2-col
+                            (gap-x-6/24px) from `md:` up. */}
                         <ParallaxMedia
                           label={tile.label}
                           image={tile.image}
                           ratio={mobileGridVariant ? "79:100" : "1:1"}
                           radius="none"
                           className={mobileGridVariant ? undefined : whatWeMake.mobileTileMedia}
+                          imageSizes={
+                            mobileGridVariant
+                              ? "(min-width: 768px) calc((100vw - 72px) / 2), calc((100vw - 48px) / 2)"
+                              : "(min-width: 768px) calc((100vw - 88px) / 2), calc(100vw - 40px)"
+                          }
                         />
                         <span className={mobileGridVariant ? whatWeMake.mobileTileLabelGrid : whatWeMake.mobileTileLabel}>
                           {tile.label}

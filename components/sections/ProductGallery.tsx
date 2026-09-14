@@ -297,12 +297,16 @@ export function ProductGallery({ images, productTitle }: ProductGalleryProps) {
               // the question entirely rather than chasing it further.
               style={{ borderColor: index === activeIndex ? "var(--color-accent)" : "transparent" }}
             >
+              {/* imageSizes: fixed 109px thumbnail (`productGallery.rail`'s
+                  own `w-[109px]`), desktop-only (`desktopRoot`'s `hidden
+                  xl:flex`). */}
               <MediaPlaceholder
                 label={image.alt}
                 image={image.src ? { src: image.src, alt: image.alt } : undefined}
                 ratio="1:1"
                 radius="none"
                 showLabel={false}
+                imageSizes="109px"
               />
             </button>
           ))}
@@ -322,12 +326,17 @@ export function ProductGallery({ images, productTitle }: ProductGalleryProps) {
           <div ref={desktopTrackRef} className={productGallery.mainTrack}>
             {images.map((image, index) => (
               <div key={index} className={productGallery.mainSlide} aria-hidden={index !== activeIndex}>
+                {/* imageSizes: `desktopRoot` is a fixed `xl:w-[700px]`
+                    box holding `rail` (109px) + a `gap-4` (16px) + this
+                    flex-1 main image -- real width is 700-109-16=575px,
+                    desktop-only. */}
                 <MediaPlaceholder
                   label={image.alt ?? productTitle}
                   image={image.src ? { src: image.src, alt: image.alt ?? productTitle } : undefined}
                   ratio="575:612"
                   radius="none"
                   showLabel={false}
+                  imageSizes="575px"
                 />
               </div>
             ))}
@@ -401,12 +410,15 @@ export function ProductGallery({ images, productTitle }: ProductGalleryProps) {
                   className={productGallery.mobileThumb}
                   style={{ borderColor: index === activeIndex ? "var(--color-accent)" : "#e8ecf1" }}
                 >
+                  {/* imageSizes: fixed 56px thumbnail (`mobileThumb`'s own
+                      `size-14`). */}
                   <MediaPlaceholder
                     label={image.alt}
                     image={image.src ? { src: image.src, alt: image.alt } : undefined}
                     ratio="1:1"
                     radius="none"
                     showLabel={false}
+                    imageSizes="56px"
                   />
                 </button>
               ))}

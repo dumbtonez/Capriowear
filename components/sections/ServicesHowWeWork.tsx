@@ -96,12 +96,17 @@ function DesktopRow({ paths }: { paths: typeof services.howWeWork.paths }) {
       <div className={servicesHowWeWork.desktopRow}>
         {paths.map((path) => (
           <article key={path.title} className={servicesHowWeWork.desktopCard}>
+            {/* imageSizes: fixed 397px card (`desktopCard`'s own
+                `w-[397px]`), and this row only ever renders at `xl:` and up
+                (see this file's own "Desktop (xl+)" comment above) -- no
+                responsive variance needed. */}
             <MediaPlaceholder
               label={path.title}
               ratio="397:234"
               radius="none"
               showLabel={false}
               className={servicesHowWeWork.pathMedia}
+              imageSizes="397px"
             />
             <div className={servicesHowWeWork.pathTextCol}>
               <div className={servicesHowWeWork.pathTitleGroup}>

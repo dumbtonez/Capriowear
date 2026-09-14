@@ -179,6 +179,9 @@ function DesktopGallery({
       <div ref={trackRef} className={insideFactory.desktopRow}>
         {shots.map((shot) => (
           <div key={shot.label} className={insideFactory.desktopCard}>
+            {/* imageSizes: fixed 1200px card (`desktopCard`), this row only
+                renders at `xl:` and up (`desktopOuter`'s own `hidden
+                xl:block`). */}
             <MediaPlaceholder
               label={shot.label}
               ratio="15:8"
@@ -187,6 +190,7 @@ function DesktopGallery({
               showLabel={false}
               image={shot.image}
               className={insideFactory.desktopCardMedia}
+              imageSizes="1200px"
             />
             <p className={tone === "light" ? insideFactory.desktopCardLabelLight : insideFactory.desktopCardLabel}>
               {shot.label}
@@ -299,6 +303,11 @@ function MobileCarousel({
             )}
             style={{ height: index === 0 ? activeHeight : inactiveHeight }}
           >
+            {/* imageSizes: matches whichever card width this carousel is
+                actually rendering (`cardSize`'s own `mobileCardWide`/
+                `mobileCardCompact` -- 340/530px vs. 300/469px, real mobile
+                below `md:` vs. tablet at `md:` up to `xl:`, where the
+                desktop gallery above takes over instead). */}
             <MediaPlaceholder
               label={shot.label}
               radius="none"
@@ -306,6 +315,11 @@ function MobileCarousel({
               showLabel={showLabel}
               image={shot.image}
               className="h-full"
+              imageSizes={
+                cardSize === "compact"
+                  ? "(min-width: 768px) 469px, 300px"
+                  : "(min-width: 768px) 530px, 340px"
+              }
             />
           </div>
         ))}

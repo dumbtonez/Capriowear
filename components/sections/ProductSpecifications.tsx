@@ -34,12 +34,16 @@ export function ProductSpecifications({ heading, subline, rows, image }: Product
       </div>
 
       {image ? (
+        // imageSizes: this image is real-mobile-only (`productSpecifications.
+        // image`'s own `md:hidden`), full viewport width minus `section`'s
+        // own `container-p` side padding (20px each side below `md:`).
         <MediaPlaceholder
           label={image.alt}
           image={image.src ? { src: image.src, alt: image.alt } : undefined}
           ratio="1:1"
           radius="none"
           className={productSpecifications.image}
+          imageSizes="calc(100vw - 40px)"
         />
       ) : null}
 

@@ -49,7 +49,17 @@ export function WhatWeCover({ eyebrow, heading, items }: WhatWeCoverProps) {
           content inward (rendering visibly smaller/off-ratio) instead of
           inseting the box from the viewport edge. */}
       <div className={whatWeCover.artworkWrap}>
-        <MediaPlaceholder label={heading} ratio="16:11" radius="none" className={whatWeCover.artwork} />
+        {/* imageSizes: this block is real-mobile-only (`artworkWrap`'s own
+            `md:hidden`), full viewport width minus its own 20px side
+            padding (`artworkWrap`'s `px-5`) -- never renders at `md:` or
+            wider, so no larger-breakpoint clause is needed. */}
+        <MediaPlaceholder
+          label={heading}
+          ratio="16:11"
+          radius="none"
+          className={whatWeCover.artwork}
+          imageSizes="calc(100vw - 40px)"
+        />
       </div>
 
       {/* <ul>/<li>, not styled divs (SEO/AEO/GEO finalization pass,

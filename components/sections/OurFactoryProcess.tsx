@@ -51,6 +51,23 @@ export type OurFactoryProcessProps = {
 type ProcessRow = (typeof ourFactory.process)["rows"][number];
 type ProcessItem = ProcessRow["items"][number];
 
+// imageSizes per `item.width`, matching `itemWidth`'s own fixed desktop
+// pixel values (700/600/520, gated to `min-[1420px]:` same as that token) --
+// below that breakpoint every item is `w-full` of `inner`'s own
+// `container-p`-inset row, which shifts across three different padding
+// values (20/32/80px) as its own breakpoints; `calc(100vw - 64px)` (the
+// 32px-tablet figure) is used as one blended fallback below 1420px rather
+// than a third, near-1420px-specific media clause -- close enough for a
+// `sizes` hint (real mobile over-requests by ~24px of slack, 1280-1419px
+// under-requests by ~96px, neither meaningfully changes which generated
+// width next/image picks).
+const ITEM_SIZES: Record<ProcessItem["width"], string> = {
+  lg: "(min-width: 1420px) 700px, calc(100vw - 64px)",
+  md: "(min-width: 1420px) 600px, calc(100vw - 64px)",
+  sm: "(min-width: 1420px) 520px, calc(100vw - 64px)",
+  full: "(min-width: 1420px) calc(min(100vw, 1440px) - 160px), calc(100vw - 64px)",
+};
+
 function Item({ item }: { item: ProcessItem }) {
   return (
     <div className={`${ourFactoryProcess.item} ${ourFactoryProcess.itemWidth[item.width]}`}>
@@ -60,6 +77,7 @@ function Item({ item }: { item: ProcessItem }) {
         ratio={item.ratio}
         showLabel={false}
         className={ourFactoryProcess.itemMediaMobile}
+        imageSizes={ITEM_SIZES[item.width]}
       />
       <div className={ourFactoryProcess.textCol}>
         <div className={ourFactoryProcess.labelGroup}>

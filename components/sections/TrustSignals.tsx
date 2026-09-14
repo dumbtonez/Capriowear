@@ -134,11 +134,16 @@ function DesktopScroller({ items }: { items: typeof home.trustStrip }) {
       <div ref={trackRef} className={trustSignals.desktopRow}>
         {items.map((entry, index) => (
           <div key={entry.title} className={trustSignals.desktopCard}>
+            {/* imageSizes: fixed 380px card (`desktopCard`/`tabletCard`,
+                same width in both), each only visible in its own exclusive
+                breakpoint range (`desktopWrap`'s `hidden xl:block` /
+                `tabletWrap`'s `hidden md:block xl:hidden`). */}
             <MediaPlaceholder
               label={`${entry.title} artwork`}
               ratio={index % 2 === 0 ? "5:6" : "25:21"}
               radius="none"
               showLabel={false}
+              imageSizes="380px"
             />
             <div className={trustSignals.desktopCardText}>
               <h3 className={trustSignals.title}>{entry.title}</h3>
@@ -208,11 +213,16 @@ function TabletCarousel({ items }: { items: typeof home.trustStrip }) {
             }}
             className={trustSignals.tabletCard}
           >
+            {/* imageSizes: fixed 380px card (`desktopCard`/`tabletCard`,
+                same width in both), each only visible in its own exclusive
+                breakpoint range (`desktopWrap`'s `hidden xl:block` /
+                `tabletWrap`'s `hidden md:block xl:hidden`). */}
             <MediaPlaceholder
               label={`${entry.title} artwork`}
               ratio={index % 2 === 0 ? "5:6" : "25:21"}
               radius="none"
               showLabel={false}
+              imageSizes="380px"
             />
             <div className={trustSignals.desktopCardText}>
               <h3 className={trustSignals.title}>{entry.title}</h3>
@@ -252,12 +262,15 @@ export function TrustSignals({ items, pageVariant = "home" }: TrustSignalsProps)
 
       {/* Mobile: artwork on top, one divided list below */}
       <div className={mobileWrap}>
+        {/* imageSizes: real-mobile-only (`mobileWrap`'s own `md:hidden`),
+            full width within its own `container-p` inset (20px). */}
         <MediaPlaceholder
           label="Trust signals artwork"
           ratio="16:11"
           radius="none"
           className={trustSignals.mobileMedia}
           showLabel={false}
+          imageSizes="calc(100vw - 40px)"
         />
         <div className={trustSignals.mobileList}>
           {items.map((entry, index) => {

@@ -44,7 +44,16 @@ export function Stats({ items }: StatsProps) {
         <div className={stats.desktopSection}>
           <div className={stats.desktopInner}>
             <div className={stats.desktopMedia}>
-              <MediaPlaceholder label="Stats artwork" ratio="216:155" radius="none" tone="dark" />
+              {/* imageSizes: fixed 864px (`desktopMedia`), this block only
+                  renders at `xl:` and up (`desktopOuter`'s own `hidden
+                  xl:block`). */}
+              <MediaPlaceholder
+                label="Stats artwork"
+                ratio="216:155"
+                radius="none"
+                tone="dark"
+                imageSizes="864px"
+              />
             </div>
             <div className={stats.desktopList}>
               {items.map((stat, index) => (
@@ -64,7 +73,16 @@ export function Stats({ items }: StatsProps) {
       {/* Mobile: media on top, divided stat list below */}
       <div className={stats.mobileSection}>
         <div className={stats.mobileMedia}>
-          <MediaPlaceholder label="Stats artwork" ratio="16:11" radius="none" tone="dark" />
+          {/* imageSizes: full-width within `mobileSection`'s own
+              `container-p` inset (20px mobile / 32px tablet), only renders
+              below `xl:` (`mobileSection`'s own `xl:hidden`). */}
+          <MediaPlaceholder
+            label="Stats artwork"
+            ratio="16:11"
+            radius="none"
+            tone="dark"
+            imageSizes="(min-width: 768px) calc(100vw - 64px), calc(100vw - 40px)"
+          />
         </div>
         <div className={stats.mobileList}>
           {items.map((stat, index) => (

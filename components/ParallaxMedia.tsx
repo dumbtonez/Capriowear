@@ -45,6 +45,17 @@ export type ParallaxMediaProps = {
   radius?: MediaRadius;
   image?: { src: string | StaticImageData; alt?: string };
   imageSizes?: string;
+  /**
+   * Forwarded to next/image's own `priority`, same contract as
+   * `MediaPlaceholder`'s own prop (added 2026-09-11, image-pipeline
+   * readiness check). Default false: this component's own scale-on-reveal
+   * effect is triggered by scrolling INTO view, which by construction means
+   * every real usage today (Our Factory Team/Process, What We Make) is
+   * below the fold on first load -- so this stays unused for now, kept for
+   * the one future case (a hero-style usage) the readiness check asked to
+   * guard against, not a currently-live need.
+   */
+  priority?: boolean;
   /** Set false for a bare placeholder box with no visible caption text. `label` still supplies the image alt text either way. Default true. */
   showLabel?: boolean;
   className?: string;
@@ -56,6 +67,7 @@ export function ParallaxMedia({
   radius = "none",
   image,
   imageSizes = "50vw",
+  priority = false,
   showLabel = true,
   className,
 }: ParallaxMediaProps) {
@@ -70,7 +82,14 @@ export function ParallaxMedia({
         )}
       >
         {image ? (
-          <Image src={image.src} alt={image.alt ?? label} fill sizes={imageSizes} className={media.imageFill} />
+          <Image
+            src={image.src}
+            alt={image.alt ?? label}
+            fill
+            sizes={imageSizes}
+            priority={priority}
+            className={media.imageFill}
+          />
         ) : (
           <div className={cx(media.placeholder, media.placeholderCentred, media.placeholderLight, "h-full")}>
             {showLabel ? <span className={media.label}>{label}</span> : null}

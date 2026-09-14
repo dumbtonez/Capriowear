@@ -60,6 +60,16 @@ export type MediaPlaceholderProps = {
   image?: { src: string | StaticImageData; alt?: string };
   /** next/image sizes hint, only used when `image` is set. */
   imageSizes?: string;
+  /**
+   * Forwarded to next/image's own `priority` -- only used when `image` is
+   * set. Default false (next/image's own default: lazy-loaded). Set true
+   * for whichever real image is the page's own LCP candidate (e.g. the
+   * Hero's video-poster instance) -- added 2026-09-11 (image-pipeline
+   * readiness check) because there was previously no way to opt any
+   * MediaPlaceholder image out of lazy-loading at all, which would have
+   * silently hurt LCP the moment a real hero photo/poster landed here.
+   */
+  priority?: boolean;
   /** Rendered on top of the box, e.g. the hero play button. */
   overlay?: ReactNode;
   /**
@@ -100,6 +110,7 @@ export function MediaPlaceholder({
   radius = "lg",
   image,
   imageSizes = "100vw",
+  priority = false,
   overlay,
   showLabel = true,
   tone = "light",
@@ -115,6 +126,7 @@ export function MediaPlaceholder({
           alt={image.alt ?? label}
           fill
           sizes={imageSizes}
+          priority={priority}
           className={media.imageFill}
         />
       ) : (

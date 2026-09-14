@@ -102,7 +102,16 @@ function DesktopScroller({ media }: { media: typeof ourFactory.teamGallery.media
       <div ref={trackRef} className={ourFactoryTeam.galleryRow}>
         {media.map((item) => (
           <div key={item.label} className={cx(ourFactoryTeam.item, ourFactoryTeam.itemHeight[item.size])}>
-            <ParallaxMedia label={item.label} radius="none" showLabel={false} className="h-full" />
+            {/* imageSizes: fixed 500px item (`ourFactoryTeam.item`'s own
+                `w-[500px]`), this row only renders at `xl:` and up
+                (`galleryWrap`'s own `hidden xl:block`). */}
+            <ParallaxMedia
+              label={item.label}
+              radius="none"
+              showLabel={false}
+              className="h-full"
+              imageSizes="500px"
+            />
           </div>
         ))}
       </div>
@@ -180,7 +189,16 @@ function Slider({ media }: { media: typeof ourFactory.teamGallery.media }) {
             className={ourFactoryTeam.sliderItem}
             style={{ height: index === 0 ? activeHeight : inactiveHeight }}
           >
-            <MediaPlaceholder label={mediaItem.label} radius="none" showLabel={false} className="h-full" />
+            {/* imageSizes: `sliderItem`'s own real width, 300px below `md:`,
+                469px from `md:` up to `xl:` (where the desktop scroller
+                above takes over). */}
+            <MediaPlaceholder
+              label={mediaItem.label}
+              radius="none"
+              showLabel={false}
+              className="h-full"
+              imageSizes="(min-width: 768px) 469px, 300px"
+            />
           </div>
         ))}
       </div>

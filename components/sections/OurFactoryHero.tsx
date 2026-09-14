@@ -58,7 +58,10 @@ export function OurFactoryHero({ hero: content }: OurFactoryHeroProps) {
         </div>
       </div>
 
-      <ScrollGrowVideo label={content.media.label} wrapClassName={ourFactoryHero.videoWrap} />
+      {/* priority: same reasoning as Hero.tsx's own usage -- this page's
+          own most above-the-fold image/poster (image-pipeline readiness
+          check, 2026-09-11). */}
+      <ScrollGrowVideo label={content.media.label} wrapClassName={ourFactoryHero.videoWrap} priority />
     </section>
   );
 }

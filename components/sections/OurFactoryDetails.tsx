@@ -254,6 +254,12 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
                     : ourFactoryDetails.desktopImageLayerInactive,
                 )}
               >
+                {/* imageSizes: `imageCol` is `xl:flex-1` beside `listCol`'s
+                    fixed `xl:w-[320px]` inside `inner`'s own container-p
+                    (80px each side) + `gap-[72px]` row, only ever visible at
+                    `xl:` and up -- real width is
+                    min(100vw,1440px) - 160(padding) - 72(gap) - 320(listCol)
+                    = min(100vw,1440px) - 552px. */}
                 <MediaPlaceholder
                   label={item.imageAlt}
                   image={item.image}
@@ -263,6 +269,7 @@ export function OurFactoryDetails({ content }: OurFactoryDetailsProps) {
                   placeholderClassName={ourFactoryDetails.imagePlaceholderFill}
                   showLabel={false}
                   className="size-full"
+                  imageSizes="(min-width: 1280px) calc(min(100vw, 1440px) - 552px), 100vw"
                 />
               </div>
             ))}

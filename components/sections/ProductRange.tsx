@@ -45,12 +45,18 @@ export function ProductRange({ content }: ProductRangeProps) {
           {content.categories.map((category) => (
             <article key={category.href} className={productRange.card}>
               <Link href={category.href} className={productRange.cardMediaLink} aria-label={category.exploreLabel}>
+                {/* imageSizes: this card's own real max-width per breakpoint
+                    (`productRange.card`'s own `max-w-[381px] md:max-w-[320px]
+                    xl:max-w-[381px]`) -- real mobile stacks one per row up to
+                    that same 381px cap, so `calc(100vw - 40px)` (container-p's
+                    own 20px side padding) covers it below `md:`. */}
                 <MediaPlaceholder
                   label={category.title}
                   tone="dark"
                   radius="none"
                   style={{ aspectRatio: "381 / 440" }}
                   className={productRange.cardMedia}
+                  imageSizes="(min-width: 1280px) 381px, (min-width: 768px) 320px, calc(100vw - 40px)"
                 />
               </Link>
               <div className={productRange.cardTextCol}>

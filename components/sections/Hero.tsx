@@ -89,7 +89,11 @@ export function Hero({ hero: content, customOfferings }: HeroProps) {
           full-viewport scroll grow: "apply it on other pages where it
           exist"), see that file's own header comment for the full
           mechanism. */}
-      <ScrollGrowVideo label={content.media.label} wrapClassName={hero.videoWrap} />
+      {/* priority (image-pipeline readiness check, 2026-09-11): this is the
+          single most above-the-fold image/poster on the homepage -- once a
+          real hero poster lands here, it must not silently fall back to
+          next/image's default lazy-loading. */}
+      <ScrollGrowVideo label={content.media.label} wrapClassName={hero.videoWrap} priority />
 
       {/* Layer 3: Ticker. Desktop scrolls; mobile is a plain stacked list --
           real, different designs, not one component in two modes. Split at
