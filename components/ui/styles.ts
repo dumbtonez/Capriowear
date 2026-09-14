@@ -3790,7 +3790,9 @@ export const trustSignals = {
   // rule doesn't apply here. A separate variant rather than changing the
   // shared `mobileWrap` directly, since the homepage's own usage wasn't
   // part of this request.
-  mobileWrapServices: "container-p flex flex-col gap-6 pt-[40px] pb-[72px] md:hidden",
+  // 40px -> 20px (owner, 2026-09-14: "mobile services, trust signal, make
+  // it 20px gap from the top").
+  mobileWrapServices: "container-p flex flex-col gap-6 pt-[20px] pb-[72px] md:hidden",
   // Tablet only (owner, 2026-09-10: "on home, tablet, use the same section
   // as desktop for product development, low moq etc, but don't add the
   // chevron like desktop instead use the dots under it. image size can be
@@ -5229,7 +5231,9 @@ export const ourServices = {
   // `pb-[60px]` (owner, 2026-09-10, mobile-only review: "our services
   // section ends reduce 12px space from the bottom") -- was the standing
   // 72px, -12px here specifically; top gap and every other value unaffected.
-  mobileSectionServices: "container-p flex flex-col items-center gap-8 pt-[72px] pb-[60px] xl:hidden",
+  // 72px -> 20px (owner, 2026-09-14: "mobile services, trust signal, make
+  // it 20px gap from the top").
+  mobileSectionServices: "container-p flex flex-col items-center gap-8 pt-[20px] pb-[60px] xl:hidden",
 };
 
 // Shared by every mobile card carousel (Our Services first, How It Works
@@ -5682,8 +5686,12 @@ export const exhibitions = {
   // 2026-09-14: "treat the exhibition same as inside the factory, same
   // layout, only keep the image height as in the exhibition section now" --
   // height stays this section's own 340/532, untouched.
+  // Mobile cap 40px -> 20px (owner, 2026-09-14: "exhibition on mobile
+  // should also be 20px gap from the left" -- same fix already applied to
+  // `insideFactory.mobileTrackWide`/`ourFactoryTeam.sliderTrack`). `md:`
+  // tablet tier keeps its own 40px cap, untouched.
   mobileTrack:
-    "no-scrollbar flex h-[340px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-340px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-530px)/2))]",
+    "no-scrollbar flex h-[340px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(20px,calc((100%-340px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-530px)/2))]",
   mobileCard: "w-[340px] shrink-0 snap-center md:w-[530px]",
 };
 
