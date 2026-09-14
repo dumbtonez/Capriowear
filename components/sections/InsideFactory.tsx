@@ -46,7 +46,7 @@ import { ParallaxMedia } from "@/components/ParallaxMedia";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextReveal } from "@/components/TextReveal";
 import { cx } from "@/components/ui/cx";
-import { cardCarousel, insideFactory } from "@/components/ui/styles";
+import { insideFactory } from "@/components/ui/styles";
 import type { home } from "@/content/home";
 
 export type InsideFactoryProps = {
@@ -267,20 +267,20 @@ function DesktopGallery({
           so it isn't clipped by that wrap's own `overflow-hidden` and a
           click here never accidentally pages the gallery via the wrap's own
           onClick. */}
-      <div className={insideFactory.desktopDotsWrap}>
-        <div className={tone === "light" ? insideFactory.desktopDotsPillLight : insideFactory.desktopDotsPill}>
+      <div className={insideFactory.dotsWrap}>
+        <div className={tone === "light" ? insideFactory.dotsPillLight : insideFactory.dotsPill}>
           {shots.map((shot, index) => (
             <span
               key={shot.label}
               className={cx(
-                insideFactory.desktopDotsSegment,
+                insideFactory.dotsSegment,
                 index === activeIndex
                   ? tone === "light"
-                    ? insideFactory.desktopDotsSegmentActiveLight
-                    : insideFactory.desktopDotsSegmentActive
+                    ? insideFactory.dotsSegmentActiveLight
+                    : insideFactory.dotsSegmentActive
                   : tone === "light"
-                    ? insideFactory.desktopDotsSegmentInactiveLight
-                    : insideFactory.desktopDotsSegmentInactive,
+                    ? insideFactory.dotsSegmentInactiveLight
+                    : insideFactory.dotsSegmentInactive,
               )}
             />
           ))}
@@ -304,16 +304,17 @@ function MobileCarousel({
   const size = cardSize === "compact" ? CARD_SIZE_COMPACT : CARD_SIZE_WIDE;
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  // Dot pagination (owner, 2026-09-09: "under inside the factory and
-  // exhibition images, add dots for showing it has multiple images") --
-  // same `cardCarousel` dot recipe `CardCarousel.tsx` already uses for Our
-  // Services/How It Works' own mobile carousels, reused here rather than
-  // a new one-off, even though this carousel's own height-interpolation
-  // mechanism is bespoke (see the `update()` comment below). React state,
-  // not a direct DOM write like the height loop below -- a dot's active/
-  // inactive swap only needs to happen once per settled card, not every
-  // scroll frame, so it doesn't carry the same per-frame re-render cost
-  // the height write was written to avoid.
+  // Pagination indicator (owner, 2026-09-09: "under inside the factory and
+  // exhibition images, add dots for showing it has multiple images"; owner,
+  // 2026-09-14: swapped from a numeric counter to this section's own real
+  // desktop segmented pill, `insideFactory.dotsWrap`/`dotsPill`/
+  // `dotsSegment*`, same as `DesktopGallery`'s own indicator above) even
+  // though this carousel's own height-interpolation mechanism is bespoke
+  // (see the `update()` comment below). React state, not a direct DOM write
+  // like the height loop below -- a dot's active/inactive swap only needs
+  // to happen once per settled card, not every scroll frame, so it doesn't
+  // carry the same per-frame re-render cost the height write was written to
+  // avoid.
   const [activeIndex, setActiveIndex] = useState(0);
   // This carousel now also covers tablet width (owner, 2026-09-09: swap
   // the tablet chevron for swipe+dots, same mechanism as mobile, just at
@@ -402,10 +403,24 @@ function MobileCarousel({
           </div>
         ))}
       </div>
-      <div className={cx(cardCarousel.dotsRow, "justify-center")}>
-        <span className={cardCarousel.counter} aria-hidden="true">
-          {activeIndex + 1} / {shots.length}
-        </span>
+      <div className={insideFactory.dotsWrap}>
+        <div className={tone === "light" ? insideFactory.dotsPillLight : insideFactory.dotsPill}>
+          {shots.map((shot, index) => (
+            <span
+              key={shot.label}
+              className={cx(
+                insideFactory.dotsSegment,
+                index === activeIndex
+                  ? tone === "light"
+                    ? insideFactory.dotsSegmentActiveLight
+                    : insideFactory.dotsSegmentActive
+                  : tone === "light"
+                    ? insideFactory.dotsSegmentInactiveLight
+                    : insideFactory.dotsSegmentInactive,
+              )}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -3022,8 +3022,10 @@ export const ourFactoryTeam = {
   // `INACTIVE_HEIGHT`, the same technique `Exhibitions.tsx`'s own
   // `MobileCarousel` uses.
   sliderItem: "w-[300px] shrink-0 snap-center md:w-[469px]",
-  // Wraps the numeric `cardCarousel.counter` pill below the mobile/tablet
-  // slider track (dots replaced by the counter, owner request 2026-09-14).
+  // No longer used -- the mobile/tablet slider's own pagination is now
+  // `DesktopPillIndicator` directly (owner, 2026-09-14: match desktop's real
+  // segmented pill, not dots or a numeric counter), which brings its own
+  // wrapper. Left in place rather than deleted, unused.
   sliderDotsRow: "mt-8 flex items-center justify-center gap-1.5",
 };
 
@@ -4662,24 +4664,25 @@ export const insideFactory = {
   // gallery inside the same full-bleed wrap. 56px top gap from the gallery
   // (owner call, 2026-08-26, overriding the initial 48px default).
   desktopCtaWrap: "flex justify-center pt-14",
-  // Segmented pill progress indicator under the gallery, 2026-09-12 (owner,
-  // referencing apple.com/ae/macbook-pro's own "Take a closer look"
-  // segmented control) -- one dot per shot, the active one stretched into a
-  // pill rather than just enlarged, matching that reference's own shape
-  // language. `activeIndex` comes from `useDesktopChevronScroller`'s own new
-  // return value (Inside the Factory only; every other chevron gallery
-  // ignores it, unaffected). Static per-click, not an autoplay progress fill
-  // -- Apple's own control animates a fill because it's scrubbing a looping
-  // video; these are static photos advanced by a click, so there's no
-  // "progress" to animate, only "which one."
-  desktopDotsWrap: "flex justify-center pt-8",
-  desktopDotsPill: "flex items-center gap-2 rounded-full bg-paper/10 px-3 py-2.5",
-  desktopDotsPillLight: "flex items-center gap-2 rounded-full bg-ink/10 px-3 py-2.5",
-  desktopDotsSegment: "h-1.5 rounded-full transition-all duration-300 ease-out",
-  desktopDotsSegmentActive: "w-6 bg-paper",
-  desktopDotsSegmentInactive: "w-1.5 bg-paper/40",
-  desktopDotsSegmentActiveLight: "w-6 bg-ink",
-  desktopDotsSegmentInactiveLight: "w-1.5 bg-ink/30",
+  // Segmented pill progress indicator, originally added under the desktop
+  // gallery 2026-09-12 (owner, referencing apple.com/ae/macbook-pro's own
+  // "Take a closer look" segmented control) -- one dot per shot, the active
+  // one stretched into a pill rather than just enlarged, matching that
+  // reference's own shape language. Static per-click, not an autoplay
+  // progress fill -- Apple's own control animates a fill because it's
+  // scrubbing a looping video; these are static photos advanced by a click,
+  // so there's no "progress" to animate, only "which one." Reused as-is for
+  // the mobile/tablet carousel's own indicator, 2026-09-14 (owner: match
+  // desktop's real pill, not a numeric counter) -- no longer desktop-only,
+  // hence the plain `dots*` names rather than `desktopDots*`.
+  dotsWrap: "flex justify-center pt-8",
+  dotsPill: "flex items-center gap-2 rounded-full bg-paper/10 px-3 py-2.5",
+  dotsPillLight: "flex items-center gap-2 rounded-full bg-ink/10 px-3 py-2.5",
+  dotsSegment: "h-1.5 rounded-full transition-all duration-300 ease-out",
+  dotsSegmentActive: "w-6 bg-paper",
+  dotsSegmentInactive: "w-1.5 bg-paper/40",
+  dotsSegmentActiveLight: "w-6 bg-ink",
+  dotsSegmentInactiveLight: "w-1.5 bg-ink/30",
 
   // Standing rule for every dark full-bleed section (established on Hero,
   // 2026-08-24): content keeps a fixed 48px inset from the box's own top/
@@ -5222,10 +5225,6 @@ export const cardCarousel = {
   dot: "size-[6px] rounded-full transition-colors",
   dotActive: "bg-accent",
   dotInactive: "bg-[#D1D1D6]",
-  // Numeric "N / total" pill, matching `productGallery.counter`'s look
-  // without its `absolute` overlay positioning -- these carousels render
-  // their indicator in normal flow below the track, not over an image.
-  counter: "rounded-full bg-paper px-3 py-1.5 text-[0.875rem] font-medium text-text shadow-card",
 };
 
 /* --- Chevron scroller (shared) -------------------------------------------- */

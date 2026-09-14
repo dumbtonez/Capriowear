@@ -39,11 +39,11 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { DesktopChevron, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
+import { DesktopChevron, DesktopPillIndicator, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
 import { TextReveal } from "@/components/TextReveal";
-import { cardCarousel, ourFactoryTeam } from "@/components/ui/styles";
+import { ourFactoryTeam } from "@/components/ui/styles";
 import { cx } from "@/components/ui/cx";
 import type { NoteSegment } from "@/content/activewear/types";
 import type { ourFactory } from "@/content/our-factory";
@@ -186,11 +186,7 @@ function Slider({ media }: { media: typeof ourFactory.teamGallery.media }) {
           </div>
         ))}
       </div>
-      <div className={ourFactoryTeam.sliderDotsRow}>
-        <span className={cardCarousel.counter} aria-hidden="true">
-          {activeIndex + 1} / {media.length}
-        </span>
-      </div>
+      <DesktopPillIndicator count={media.length} activeIndex={activeIndex} tone="light" />
     </div>
   );
 }

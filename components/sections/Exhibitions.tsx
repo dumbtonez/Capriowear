@@ -27,8 +27,7 @@ import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextReveal } from "@/components/TextReveal";
-import { cx } from "@/components/ui/cx";
-import { cardCarousel, exhibitions } from "@/components/ui/styles";
+import { exhibitions } from "@/components/ui/styles";
 import type { home } from "@/content/home";
 
 export type ExhibitionsProps = {
@@ -249,11 +248,7 @@ function MobileCarousel({ shots }: { shots: typeof home.exhibitions.media }) {
           </div>
         ))}
       </div>
-      <div className={cx(cardCarousel.dotsRow, "justify-center")}>
-        <span className={cardCarousel.counter} aria-hidden="true">
-          {activeIndex + 1} / {shots.length}
-        </span>
-      </div>
+      <DesktopPillIndicator count={shots.length} activeIndex={activeIndex} tone="dark" gap="loose" />
     </div>
   );
 }

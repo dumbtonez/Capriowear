@@ -64,11 +64,10 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { DesktopChevron, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
+import { DesktopChevron, DesktopPillIndicator, useDesktopChevronScroller } from "@/components/DesktopChevronScroller";
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
-import { cardCarousel, trustSignals } from "@/components/ui/styles";
-import { cx } from "@/components/ui/cx";
+import { trustSignals } from "@/components/ui/styles";
 import type { home } from "@/content/home";
 
 type BodySegment = string | { bold: string };
@@ -126,9 +125,11 @@ const CARD_GAP = 24; // owner, 2026-09-12: reverted to 24 the same day ("make it
 // 2026-09-13: "apply this same transition ... that we built for [Inside
 // the Factory]" (to this section too). `loop: true` matches Inside the
 // Factory's own carousel-loop behaviour rather than the plain clamp this
-// section used before. No segmented pill indicator here -- briefly added
-// the same day, then reverted ("remove it from trustsignals") while
-// Exhibitions/How It Works kept theirs.
+// section used before. No segmented pill indicator on DESKTOP here --
+// briefly added the same day, then reverted ("remove it from trustsignals")
+// while Exhibitions/How It Works kept theirs. Owner, 2026-09-14: confirmed
+// this stands for desktop only -- the mobile/tablet carousel below (its own
+// separate component) DOES get the pill, matching the other sliders.
 function DesktopScroller({ items }: { items: typeof home.trustStrip }) {
   const {
     wrapRef,
@@ -231,8 +232,7 @@ function TabletCarousel({ items }: { items: typeof home.trustStrip }) {
   }, []);
 
   return (
-    // No `gap-*` -- the track-to-dots spacing now lives on the shared
-    // `cardCarousel.dotsRow` itself (`mt-[28px]`).
+    // No `gap-*` -- `DesktopPillIndicator` brings its own top spacing.
     <div className="flex w-full flex-col">
       <div ref={trackRef} className={trustSignals.tabletRow}>
         {items.map((entry, index) => (
@@ -257,11 +257,7 @@ function TabletCarousel({ items }: { items: typeof home.trustStrip }) {
           </div>
         ))}
       </div>
-      <div className={cx(cardCarousel.dotsRow, "justify-center")}>
-        <span className={cardCarousel.counter} aria-hidden="true">
-          {activeIndex + 1} / {items.length}
-        </span>
-      </div>
+      <DesktopPillIndicator count={items.length} activeIndex={activeIndex} tone="light" />
     </div>
   );
 }

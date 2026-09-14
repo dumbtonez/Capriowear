@@ -1,9 +1,12 @@
 // components/CardCarousel.tsx
 // Swipeable mobile card carousel: a native CSS scroll-snap track of
-// CapabilityCards plus a dot-per-card pagination row that tracks the
-// nearest-centred card live. First built for Our Services (2026-08-25),
-// extracted here once How It Works needed the exact same pattern -- "build
-// once, reuse everywhere," same reasoning as ScrollSpotlightList.
+// CapabilityCards plus a segmented-pill pagination indicator
+// (`DesktopPillIndicator`, same real desktop pill every chevron gallery
+// uses -- owner, 2026-09-14, replacing an earlier dot row/numeric counter)
+// that tracks the nearest-centred card live. First built for Our Services
+// (2026-08-25), extracted here once How It Works needed the exact same
+// pattern -- "build once, reuse everywhere," same reasoning as
+// ScrollSpotlightList.
 //
 // Client component: tracking which card is nearest the track's centre is a
 // scroll-position-driven visual state with no static-CSS equivalent, same
@@ -13,8 +16,8 @@
 import { useEffect, useRef, useState } from "react";
 
 import { CapabilityCard, type CardImage } from "./Card";
+import { DesktopPillIndicator } from "./DesktopChevronScroller";
 import { cardCarousel } from "./ui/styles";
-import { cx } from "./ui/cx";
 
 export type CardCarouselItem = {
   title: string;
@@ -28,9 +31,10 @@ export type CardCarouselProps = {
   cardMediaRatio: string;
   /**
    * `"light"` (default) or `"dark"` -- forwarded straight through to each
-   * `CapabilityCard`'s own `tone` (How It Works' dark variant, 2026-09-07).
-   * The dot pagination below is unaffected -- both its colours already read
-   * fine on either background.
+   * `CapabilityCard`'s own `tone` (How It Works' dark variant, 2026-09-07),
+   * and, since 2026-09-14, to the pagination indicator's own `tone` too
+   * (`DesktopPillIndicator`, matching desktop's real segmented pill instead
+   * of a dot row/numeric counter).
    */
   tone?: "light" | "dark";
   /**
@@ -147,11 +151,7 @@ export function CardCarousel({
           </div>
         ))}
       </div>
-      <div className={cx(cardCarousel.dotsRowTight, "justify-center")}>
-        <span className={cardCarousel.counter} aria-hidden="true">
-          {activeIndex + 1} / {items.length}
-        </span>
-      </div>
+      <DesktopPillIndicator count={items.length} activeIndex={activeIndex} tone={tone} gap="tight" />
     </>
   );
 }
