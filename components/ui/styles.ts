@@ -4798,14 +4798,21 @@ export const insideFactory = {
   // and tablet"), reverted the same day (owner: "on tablet, inside the
   // factory section revert it back to it was before image sizes") -- back
   // to its own separate, scaled-up 530x398 tablet size.
+  // Mobile cap 40px -> 20px (owner, 2026-09-14: "the factory section left
+  // page gap should be 20px, it looks more atm" -- on real phones wider
+  // than the 340px card + 40px*2 (420px), this formula's own centring
+  // padding was landing above 20px, e.g. 40px flat from ~420px wide up).
+  // `md:` tablet tier keeps its own 40px cap, untouched -- this was a
+  // mobile-width complaint only.
   mobileTrackWide:
-    "no-scrollbar flex h-[255px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-340px)/2))] md:h-[398px] md:px-[min(40px,calc((100%-530px)/2))]",
+    "no-scrollbar flex h-[255px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(20px,calc((100%-340px)/2))] md:h-[398px] md:px-[min(40px,calc((100%-530px)/2))]",
   mobileCardWide: "w-[340px] shrink-0 snap-center md:w-[530px]",
   // The original 300px mobile/469px tablet, 300x340 active ratio -- see
   // `mobileTrackWide`'s own comment above for why this is kept, not
   // dropped, now that `Wide` is the default.
+  // Mobile cap 40px -> 20px, same reasoning as `mobileTrackWide` above.
   mobileTrackCompact:
-    "no-scrollbar flex h-[340px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-300px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-469px)/2))]",
+    "no-scrollbar flex h-[340px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(20px,calc((100%-300px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-469px)/2))]",
   mobileCardCompact: "w-[300px] shrink-0 snap-center md:w-[469px]",
   // Track-to-dots gap: 28px (owner, 2026-09-10: "give 12px more space to
   // the dots from the top" -- was `gap-4`/16px). No `items-center` here
