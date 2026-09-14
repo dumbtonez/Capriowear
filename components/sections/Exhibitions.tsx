@@ -37,8 +37,13 @@ export type ExhibitionsProps = {
 // Mobile 300px, tablet 469px -- same values/reasoning as InsideFactory.tsx's
 // own identical constants (owner, 2026-09-09: tablet swipes with dots now,
 // keeping its own already-defined wider card size).
-const CARD_WIDTH_MOBILE = 300;
-const CARD_WIDTH_TABLET = 469;
+// Card width matches InsideFactory's own "wide" mobile/tablet carousel
+// exactly (owner, 2026-09-14: "treat the exhibition same as inside the
+// factory, same layout, only keep the image height as in the exhibition
+// section now") -- 340/530, not this section's previous 300/469. Height
+// stays this section's own already-confirmed numbers, untouched below.
+const CARD_WIDTH_MOBILE = 340;
+const CARD_WIDTH_TABLET = 530;
 const ACTIVE_HEIGHT_MOBILE = 340;
 const INACTIVE_HEIGHT_MOBILE = 248;
 const ACTIVE_HEIGHT_TABLET = 532;
@@ -128,10 +133,12 @@ function DesktopScroller({ shots }: { shots: typeof home.exhibitions.media }) {
 function MobileCarousel({ shots }: { shots: typeof home.exhibitions.media }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  // Dot pagination (owner, 2026-09-09: "under inside the factory and
-  // exhibition images, add dots for showing it has multiple images") --
-  // same shared `cardCarousel` dot recipe/mechanism as Inside the
-  // Factory's own identical carousel, see that file's own comment.
+  // Pagination indicator (owner, 2026-09-09: "under inside the factory and
+  // exhibition images, add dots for showing it has multiple images"; owner,
+  // 2026-09-14: "treat the exhibition same as inside the factory, same
+  // layout" -- `DesktopPillIndicator` below now renders at its own default
+  // `pt-8` gap, matching InsideFactory's own mobile/tablet pill spacing
+  // exactly, not this section's previous `gap="loose"`).
   const [activeIndex, setActiveIndex] = useState(0);
   // This carousel now also covers tablet width (owner, 2026-09-09: swap
   // the tablet chevron for swipe+dots) -- same `matchMedia` pattern
@@ -248,7 +255,7 @@ function MobileCarousel({ shots }: { shots: typeof home.exhibitions.media }) {
           </div>
         ))}
       </div>
-      <DesktopPillIndicator count={shots.length} activeIndex={activeIndex} tone="dark" gap="loose" />
+      <DesktopPillIndicator count={shots.length} activeIndex={activeIndex} tone="dark" />
     </div>
   );
 }

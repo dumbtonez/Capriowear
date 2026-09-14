@@ -5627,14 +5627,16 @@ export const exhibitions = {
   // exact `max-md:.../md:text-overline` split is now `eyebrow.size`'s own
   // sitewide default.
   mobileGalleryGap: "mt-8",
-  // Inside the Factory's exact carousel numbers, reused verbatim per the
-  // owner's explicit instruction -- see components/sections/Exhibitions.tsx.
   // `md:` tiers (532px height, 469px-card centring padding, both matching
   // InsideFactory.tsx's own identical tablet values) added 2026-09-09 for
-  // the same tablet swipe+dots swap.
+  // the same tablet swipe+dots swap. Card width matched to InsideFactory's
+  // own "wide" carousel exactly (340/530, `gap-3` between cards), owner,
+  // 2026-09-14: "treat the exhibition same as inside the factory, same
+  // layout, only keep the image height as in the exhibition section now" --
+  // height stays this section's own 340/532, untouched.
   mobileTrack:
-    "no-scrollbar flex h-[340px] items-center snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-300px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-469px)/2))]",
-  mobileCard: "w-[300px] shrink-0 snap-center md:w-[469px]",
+    "no-scrollbar flex h-[340px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-340px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-530px)/2))]",
+  mobileCard: "w-[340px] shrink-0 snap-center md:w-[530px]",
 };
 
 /* --- Footer (homepage section 15) ----------------------------------------- */
