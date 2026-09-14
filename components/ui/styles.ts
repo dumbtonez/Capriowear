@@ -5511,7 +5511,10 @@ export const howItWorks = {
   // `md:hidden` -> `xl:hidden` (owner, 2026-09-09: swap the tablet chevron
   // for swipe+dots) -- this carousel now covers real mobile and tablet
   // alike, the desktop chevron row above moved to `xl:` to match.
-  mobileSection: "container-p flex flex-col items-center gap-8 pt-12 pb-12 xl:hidden",
+  // Tablet top/bottom bumped to 96px (owner, 2026-09-14: "make it 96 both"),
+  // via `md:` overrides -- real mobile keeps its own 48px (`pt-12`/`pb-12`),
+  // unchanged.
+  mobileSection: "container-p flex flex-col items-center gap-8 pt-12 pb-12 md:pt-24 md:pb-24 xl:hidden",
   // 469px at `md:`, matching this section's own `desktopCard` width
   // exactly -- passed as `CardCarousel`'s new `cardClassName` override
   // (owner, 2026-09-09: tablet keeps its own already-defined wider card,

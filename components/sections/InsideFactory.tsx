@@ -373,6 +373,46 @@ function MobileCarousel({
     return () => track.removeEventListener("scroll", onScroll);
   }, [cardWidth, activeHeight, inactiveHeight]);
 
+  // Loop back to the first slide once a swipe pushes past the real last one
+  // (owner, 2026-09-14: "should also start the images from the beginning if
+  // user reach to the last and scrolls again") -- same mechanism as
+  // Exhibitions.tsx's own identical carousel (owner, 2026-09-13: "make the
+  // exhibition section start from the beginning if users slides after the
+  // images are finished"), copied here rather than re-derived: native
+  // scroll just clamps `scrollLeft` at the end with no event marking "the
+  // user tried to keep going," so it's detected via a real touch gesture --
+  // a forward swipe (finger moves left, `deltaX` negative) that both STARTS
+  // and ENDS already at the true max scroll position is a swipe attempted
+  // past the last card, not just a swipe that happened to land on it. A
+  // swipe that only reaches the end DURING the gesture (starts short of it)
+  // is a normal "arrive at the last card" swipe and must not loop.
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    let touchStartX = 0;
+    let scrollAtTouchStart = 0;
+    const onTouchStart = (event: TouchEvent) => {
+      touchStartX = event.touches[0]?.clientX ?? 0;
+      scrollAtTouchStart = track.scrollLeft;
+    };
+    const onTouchEnd = (event: TouchEvent) => {
+      const touch = event.changedTouches[0];
+      if (!touch) return;
+      const deltaX = touch.clientX - touchStartX;
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      if (deltaX < -20 && scrollAtTouchStart >= maxScroll - 2 && track.scrollLeft >= maxScroll - 2) {
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        track.scrollTo({ left: 0, behavior: reduceMotion ? "auto" : "smooth" });
+      }
+    };
+    track.addEventListener("touchstart", onTouchStart, { passive: true });
+    track.addEventListener("touchend", onTouchEnd, { passive: true });
+    return () => {
+      track.removeEventListener("touchstart", onTouchStart);
+      track.removeEventListener("touchend", onTouchEnd);
+    };
+  }, []);
+
   return (
     // See `insideFactory.mobileCarouselWrap`'s own comment for why this
     // wrapper has no `items-center` (a real bug, found live).
