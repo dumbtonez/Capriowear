@@ -169,10 +169,11 @@ export default function OurFactoryPage() {
         <OurFactoryIntro content={ourFactory.intro} />
         <InsideFactory
           content={home.insideFactory}
-          tone="light"
+          tone="dark"
           showHeading={false}
           showCta={false}
           showMediaLabel={false}
+          mobileTopGap="tight"
         />
         <OurFactoryProcess content={ourFactory.process} />
         <OurFactoryDetails content={ourFactory.sampleDetails} />

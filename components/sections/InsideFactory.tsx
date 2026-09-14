@@ -120,6 +120,16 @@ export type InsideFactoryProps = {
    * here has each shot's `image` stripped when this is false.
    */
   showDesktopImages?: boolean;
+  /**
+   * Mobile/tablet top gap, dark tone only (no effect when `tone="light"`,
+   * which always uses its own fixed `mobileSectionLight` gap). Defaults to
+   * `"default"` (the homepage's own 48px, `insideFactory.mobileSection`'s
+   * `pt-12`, unaffected). `"tight"` is /our-factory's own 40px request
+   * (owner, 2026-09-14, after switching this section's tone to dark there)
+   * -- `insideFactory.mobileSectionDarkTight`, a dark-tone token separate
+   * from the homepage's, so the homepage's 48px stays untouched.
+   */
+  mobileTopGap?: "default" | "tight";
 };
 
 // Two real, both-kept card size/height sets -- see `cardSize`'s own prop
@@ -478,6 +488,7 @@ export function InsideFactory({
   showMediaLabel = true,
   cardSize = "wide",
   showDesktopImages = true,
+  mobileTopGap = "default",
 }: InsideFactoryProps) {
   // Only the array DesktopGallery renders from -- `content.media` itself
   // (the homepage's own dark gallery, and this component's own mobile
@@ -515,7 +526,15 @@ export function InsideFactory({
       </div>
 
       {/* Mobile: finger-swipeable carousel, no auto-rotation */}
-      <div className={cx(tone === "light" ? insideFactory.mobileSectionLight : insideFactory.mobileSection)}>
+      <div
+        className={cx(
+          tone === "light"
+            ? insideFactory.mobileSectionLight
+            : mobileTopGap === "tight"
+              ? insideFactory.mobileSectionDarkTight
+              : insideFactory.mobileSection,
+        )}
+      >
         {showHeading ? (
           <div className={insideFactory.mobileHeadingWrap}>
             <SectionHeading

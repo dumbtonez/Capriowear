@@ -4697,6 +4697,12 @@ export const insideFactory = {
   // for swipe+dots) -- this carousel now covers real mobile and tablet
   // alike, the desktop chevron gallery above moved to `xl:` to match.
   mobileSection: "bg-ink text-paper pt-12 pb-12 xl:hidden",
+  // /our-factory's own dark-tone reuse (owner, 2026-09-14: switched this
+  // section's tone from "light" to "dark" there, then "make the space from
+  // the mobile top section 40px") -- a separate dark-tone token, not a
+  // change to `mobileSection` above, since that one is still the
+  // homepage's own dark instance and its 48px wasn't part of this request.
+  mobileSectionDarkTight: "bg-ink text-paper pt-[40px] pb-12 xl:hidden",
   // /our-factory's `tone="light"` reuse -- bg-paper/text-text instead of
   // the homepage's bg-ink/text-paper. `pt-[40px]` (owner, 2026-09-09,
   // mobile-only review: "factory shots ... top space should be 40px" --
