@@ -3015,17 +3015,23 @@ export const ourFactoryTeam = {
   // `md:h-[532px]` cap the track to the active card's own height at each
   // tier (`ACTIVE_HEIGHT_MOBILE`/`ACTIVE_HEIGHT_TABLET` in
   // `OurFactoryTeam.tsx`, kept in sync since both come from the same
-  // Exhibitions-derived values).
+  // Exhibitions-derived values). `gap-3` (owner, 2026-09-14: match
+  // Exhibitions' own mobile carousel exactly -- that section's cards have
+  // a real 12px breathing gap so real photography doesn't visually
+  // collapse into its neighbours; this track had none). 300/469px card
+  // widths -> 340/530px, same turn, matching Exhibitions' own 2026-09-14
+  // width change (see `exhibitions.mobileTrack`'s own comment).
   sliderTrack:
-    "no-scrollbar flex h-[340px] items-center snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-300px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-469px)/2))]",
-  // 300px mobile / 469px tablet -- Exhibitions' own exact card widths, not
-  // this section's previous 300/420px scaled-from-desktop guess. Height is
-  // no longer a Tailwind class at all (unlike the old `tall`/`short`
-  // tokens below): `Slider`'s own scroll handler sets it directly per
-  // frame via inline style, animating between `ACTIVE_HEIGHT`/
+    "no-scrollbar flex h-[340px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-340px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-530px)/2))]",
+  // 340px mobile / 530px tablet -- matches Exhibitions' own current card
+  // widths exactly (owner, 2026-09-14: "should be same as exhibition
+  // section on mobile homepage, for tablet follow tablet exhibition
+  // section"), not this section's previous 300/469px. Height is not a
+  // Tailwind class at all: `Slider`'s own scroll handler sets it directly
+  // per frame via inline style, animating between `ACTIVE_HEIGHT`/
   // `INACTIVE_HEIGHT`, the same technique `Exhibitions.tsx`'s own
   // `MobileCarousel` uses.
-  sliderItem: "w-[300px] shrink-0 snap-center md:w-[469px]",
+  sliderItem: "w-[340px] shrink-0 snap-center md:w-[530px]",
   // No longer used -- the mobile/tablet slider's own pagination is now
   // `DesktopPillIndicator` directly (owner, 2026-09-14: match desktop's real
   // segmented pill, not dots or a numeric counter), which brings its own

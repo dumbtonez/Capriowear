@@ -57,10 +57,14 @@ const ITEM_GAP = 40;
 
 // Mobile/tablet slider constants, identical to `Exhibitions.tsx`'s own
 // (owner, 2026-09-10: "for them use the same component we used for
-// homepage exhibition section images style") -- see `ourFactoryTeam.
+// homepage exhibition section images style"; owner, 2026-09-14: "should
+// be same as exhibition section on mobile homepage, for tablet follow
+// tablet exhibition section" -- widths updated 300/469 -> 340/530 to match
+// Exhibitions' own 2026-09-14 card-width change, see that file's own
+// `CARD_WIDTH_MOBILE`/`CARD_WIDTH_TABLET` comment). See `ourFactoryTeam.
 // sliderTrack`'s own comment in components/ui/styles.ts.
-const SLIDER_WIDTH_MOBILE = 300;
-const SLIDER_WIDTH_TABLET = 469;
+const SLIDER_WIDTH_MOBILE = 340;
+const SLIDER_WIDTH_TABLET = 530;
 const SLIDER_ACTIVE_HEIGHT_MOBILE = 340;
 const SLIDER_INACTIVE_HEIGHT_MOBILE = 248;
 const SLIDER_ACTIVE_HEIGHT_TABLET = 532;
