@@ -116,6 +116,7 @@ export function OurServices({ content, pageVariant = "home", tone = "light" }: O
           <CardCarousel
             items={content.items}
             cardMediaRatio={ourServices.cardMediaRatio}
+            cardClassName={ourServices.mobileCardWidth}
             tone={tone}
             rootClassName={cardRootClassName}
             bodyClassName={cardBodyClassName}

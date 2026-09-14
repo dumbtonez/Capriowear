@@ -5173,10 +5173,17 @@ export const ourServices = {
   mobileHeadingWidth: "max-w-[812px]",
   desktopList: "flex flex-1 flex-col gap-[60px]",
   desktopCardWidth: "w-[480px]",
-  // 8:5 desktop (480x300), 7:5 mobile (280x200) -- neither matches
-  // CapabilityCard's own aspect-video (16:9) default, confirmed via
-  // get_design_context, not a guess.
-  cardMediaRatio: "aspect-[7/5] xl:aspect-[8/5]",
+  // 8:5 desktop (480x300) -- confirmed via get_design_context, not a guess.
+  // Mobile/tablet moved from 7:5 (280x200) to 4:3 (340x255), owner,
+  // 2026-09-14: "our services image size does not look the same as how we
+  // work image size, why?" -> "I asked you to change it" -- matches How It
+  // Works/Inside the Factory's own identical mobile/tablet size exactly.
+  cardMediaRatio: "aspect-[4/3] xl:aspect-[8/5]",
+  // 340px, mobile and tablet alike -- same as How It Works'
+  // `mobileCardWidth`/InsideFactory's own mobile/tablet card, passed as
+  // `CardCarousel`'s `cardClassName` override (default falls through to
+  // `cardCarousel.card`'s 280px, which this section used before).
+  mobileCardWidth: "w-[340px] shrink-0 snap-start",
 
   // md:pt-[88px] (owner, 2026-09-04, tablet-width review: "Our services
   // eyebrow section should have 40px more space from the top") -- this
