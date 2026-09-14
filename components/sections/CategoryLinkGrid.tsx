@@ -18,7 +18,7 @@ import { hubThumbnail } from "@/lib/hubThumbnails";
 export type CategoryLinkGridProps = {
   group: CategoryGroup;
   /** Which `public/images/hub-thumbnails/<division>/` folder this group's cards resolve their thumbnails from. */
-  division: "activewear" | "teamwear";
+  division: "activewear" | "teamwear" | "lifting-gears" | "boxing-and-mma";
 };
 
 export function CategoryLinkGrid({ group, division }: CategoryLinkGridProps) {

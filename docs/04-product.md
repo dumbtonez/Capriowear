@@ -53,6 +53,7 @@ These need the owner's confirmation before launch. Each is also marked `// VERIF
 | ~~6~~ | ~~Nav structure~~ | **Resolved 2026-08-22.** The real Figma nav (node 316:1331) settles this: four plain links (Activewear, Teamwear & Uniforms, Services, Our Factory), no mega menu, logo only, no text brand. Neither the wireframe's four nor the copy doc's six-plus-mega-menu guess was quite right; the actual design wins now that it exists. Built in `content/home.ts` and [components/Header.tsx](../components/Header.tsx) |
 | 7 | Bulk production lead time | FAQ answer still reads "[X] days" |
 | 8 | Trust strip tile wording | Wireframe tiles (Product Development, Private Label, Low MOQ, Worldwide Shipping) differ from the copy doc's four (Low MOQ, Private Label, Trusted Since 2009, Worldwide Shipping) |
+| 9 | "CaprioGear" reference in `docs/source/Capriowear-Homepage-Content-FINAL.md` (e.g. "Looking for lifting or fight gear? Visit CaprioGear") | Confirmed by the owner (2026-09-14): stale/internal-naming only — there is no separate CaprioGear site. This copy should read as Capriosports' own Gear division once that page exists, not a link to an external site. Not fixed as part of Phase 1 (schema/routing scaffolding only) |
 
 ## Copy rules
 
@@ -83,5 +84,7 @@ Where wireframe and copy doc disagree, the copy doc's own instruction is that **
 | Our Factory, plus 4 sub-pages | Not started |
 | Catalog | Not started |
 | Contact / Request a Sample | Not started |
+| Capriosports Gear division (Lifting Gears, Boxing & MMA hubs + category PLPs/PDPs, `/lifting-gears/**`, `/boxing-and-mma/**`) | Phase 1 (schema/routing scaffolding) done, 2026-09-14 — one placeholder category per hub, no real copy. Separate division from Capriowear; not in Capriowear's nav. See `docs/05-plan.md`'s decision log |
+| Capriosports parent-site pages (`/`, `/services`, `/our-factory`, `/our-people`, `/responsible-manufacturing`, `/who-we-are`, `/contact`, `/privacy-policy`, `/terms`, `/request-a-sample`) | Deferred — the repo root is currently Capriowear's own homepage; needs a basePath/domain-mount decision before these can be scaffolded. See `docs/05-plan.md`'s Gear division entry |
 
 Links to unbuilt pages already exist in the nav and in the content file. They will 404 until those pages are built, which is expected at this stage.

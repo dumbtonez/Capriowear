@@ -6,6 +6,8 @@
 import type { MetadataRoute } from "next";
 
 import { categories } from "@/content/activewear/categories";
+import { boxingMmaCategories } from "@/content/gear/boxing-and-mma/categories";
+import { liftingGearsCategories } from "@/content/gear/lifting-gears/categories";
 import { SITE_URL } from "@/content/site";
 import { sports } from "@/content/teamwear/sports";
 
@@ -146,6 +148,57 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...Object.values(sports).flatMap((sport) =>
       sport.styleCards
+        .filter((card) => card.status === "published")
+        .map((card) => ({
+          url: `${SITE_URL}${card.href}`,
+          lastModified: new Date(),
+          changeFrequency: "weekly" as const,
+          priority: 0.7,
+        })),
+    ),
+    // /lifting-gears and /boxing-and-mma (Phase 1 scaffolding): the Gear
+    // division's two hub landing pages, hand-added the same way /teamwear
+    // and /activewear are above, since neither is itself part of a
+    // `categories` registry loop.
+    {
+      url: `${SITE_URL}/lifting-gears`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/boxing-and-mma`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    // Every real Lifting Gears / Boxing & MMA category PLP + PDP, same
+    // "one registry, never a second hand-typed list" rule as Activewear/
+    // Teamwear above.
+    ...Object.values(liftingGearsCategories).map((category) => ({
+      url: `${SITE_URL}/lifting-gears/${category.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
+    ...Object.values(liftingGearsCategories).flatMap((category) =>
+      category.styleCards
+        .filter((card) => card.status === "published")
+        .map((card) => ({
+          url: `${SITE_URL}${card.href}`,
+          lastModified: new Date(),
+          changeFrequency: "weekly" as const,
+          priority: 0.7,
+        })),
+    ),
+    ...Object.values(boxingMmaCategories).map((category) => ({
+      url: `${SITE_URL}/boxing-and-mma/${category.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
+    ...Object.values(boxingMmaCategories).flatMap((category) =>
+      category.styleCards
         .filter((card) => card.status === "published")
         .map((card) => ({
           url: `${SITE_URL}${card.href}`,

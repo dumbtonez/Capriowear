@@ -119,6 +119,30 @@ export const teamwearMegaMenu = [
   },
 ];
 
+// Lifting Gears' and Boxing & MMA's own category breakdowns -- same
+// shape/role as `activewearMegaMenu`/`teamwearMegaMenu` above, used by the
+// Gear division's own PLP `CategoryFilters` panel (app/lifting-gears/**,
+// app/boxing-and-mma/**). Deliberately NOT wired into `home.nav`/
+// `mobileLinks` below -- Capriowear is the apparel/teamwear division only;
+// Gear is a separate parent-site (Capriosports) division with its own nav,
+// connected to Capriowear via a persistent division switcher, not a merged
+// nav bar (owner correction, 2026-09-14). Phase 1 scaffolding: one
+// placeholder group/category each, matching content/gear/**/categories.ts's
+// own single stub category -- real categories are a later phase.
+export const liftingGearsMegaMenu = [
+  {
+    label: "LIFTING GEARS",
+    items: [{ label: "Weight Lifting Belts", href: "/lifting-gears/weight-lifting-belts" }],
+  },
+];
+
+export const boxingMmaMegaMenu = [
+  {
+    label: "BOXING & MMA",
+    items: [{ label: "Boxing Gloves", href: "/boxing-and-mma/boxing-gloves" }],
+  },
+];
+
 export const home = {
   nav: {
     // The logo mark reads "CAPRIO" (Caprio Sports' own mark), but this stays

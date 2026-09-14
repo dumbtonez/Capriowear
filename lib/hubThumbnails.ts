@@ -37,7 +37,11 @@ function findFile(division: string, filename: string): string | undefined {
   return undefined;
 }
 
-export function hubThumbnail(division: "activewear" | "teamwear", slug: string, alt: string): HubThumbnail | undefined {
+export function hubThumbnail(
+  division: "activewear" | "teamwear" | "lifting-gears" | "boxing-and-mma",
+  slug: string,
+  alt: string,
+): HubThumbnail | undefined {
   const desktopTest = findFile(division, `${slug}-desktop`);
   const mobileTest = findFile(division, `${slug}-mobile`);
   if (desktopTest && mobileTest) return { src: desktopTest, mobileSrc: mobileTest, alt };

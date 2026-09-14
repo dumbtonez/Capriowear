@@ -1,0 +1,162 @@
+// app/boxing-and-mma/[category]/page.tsx
+// The Boxing & MMA category PLP -- see app/lifting-gears/[category]/page.tsx's
+// own header comment for the full reasoning (same pattern, sibling
+// division).
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+
+import { JsonLd } from "@/components/JsonLd";
+import { CategoryBanner } from "@/components/sections/CategoryBanner";
+import { CategoryFilters } from "@/components/sections/CategoryFilters";
+import { CategoryMetaStrip } from "@/components/sections/CategoryMetaStrip";
+import { FabricOptions } from "@/components/sections/FabricOptions";
+import { Faq } from "@/components/sections/Faq";
+import { FinalCta } from "@/components/sections/FinalCta";
+import { Footer } from "@/components/sections/Footer";
+import { ProductGrid } from "@/components/sections/ProductGrid";
+import { FINAL_CTA_MARKER_ID, ProductCtasMobileBar } from "@/components/sections/ProductCtas";
+import { TrustPoints } from "@/components/sections/TrustPoints";
+import { WhatWeCover } from "@/components/sections/WhatWeCover";
+import { buildCtaSubline, categoryEntityFaq } from "@/content/activewear/pdpShared";
+import { home, boxingMmaMegaMenu } from "@/content/home";
+import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
+import { boxingMmaCategories } from "@/content/gear/boxing-and-mma/categories";
+import { breadcrumbSchema, collectionPageSchema, faqSchema } from "@/lib/schema";
+
+export function generateStaticParams() {
+  return Object.keys(boxingMmaCategories).map((category) => ({ category }));
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps<"/boxing-and-mma/[category]">): Promise<Metadata> {
+  const { category } = await params;
+  const data = boxingMmaCategories[category];
+  if (!data) return {};
+
+  const canonical = `${SITE_URL}/boxing-and-mma/${data.slug}`;
+  const fullTitle = `${data.metaTitle} | ${SITE_NAME}`;
+  return {
+    title: data.metaTitle,
+    description: data.metaDescription,
+    alternates: { canonical },
+    openGraph: {
+      title: fullTitle,
+      description: data.metaDescription,
+      url: canonical,
+      siteName: SITE_NAME,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: fullTitle,
+      description: data.metaDescription,
+    },
+  };
+}
+
+export default async function BoxingMmaCategoryPage({ params }: PageProps<"/boxing-and-mma/[category]">) {
+  const { category } = await params;
+  const data = boxingMmaCategories[category];
+  if (!data) notFound();
+
+  const faqItems = [categoryEntityFaq(data), ...data.faqs];
+  const publishedStyleCards = data.styleCards.filter((card) => card.status === "published");
+
+  return (
+    <>
+      {/* Bare, unstyled placeholder nav -- Phase 1 scaffolding only, see
+          app/lifting-gears/page.tsx's own comment for the full reasoning. */}
+      <nav className="p-4 text-sm">
+        <Link href="/lifting-gears">Lifting Gears</Link> | <Link href="/boxing-and-mma">Boxing & MMA</Link>
+      </nav>
+
+      <main className="relative z-10 bg-paper">
+        <CategoryBanner
+          breadcrumbItems={[
+            { label: "Home", href: "/" },
+            { label: "Boxing & MMA", href: "/boxing-and-mma" },
+            { label: data.menuLabel, href: `/boxing-and-mma/${data.slug}` },
+          ]}
+          h1={data.h1}
+          trustBullets={data.trustBullets}
+        />
+        <JsonLd
+          data={breadcrumbSchema([
+            { name: "Home", url: SITE_URL },
+            { name: "Boxing & MMA", url: `${SITE_URL}/boxing-and-mma` },
+            { name: data.menuLabel, url: `${SITE_URL}/boxing-and-mma/${data.slug}` },
+          ])}
+        />
+        {publishedStyleCards.length > 0 ? (
+          <JsonLd
+            data={collectionPageSchema(
+              data.menuLabel,
+              `${SITE_URL}/boxing-and-mma/${data.slug}`,
+              `${data.menuLabel} from ${ORGANIZATION.description}`,
+              publishedStyleCards.map((card) => ({
+                name: card.cardTitle,
+                url: `${SITE_URL}${card.href}`,
+                ...(card.image ? { image: `${SITE_URL}${card.image}` } : {}),
+              })),
+            )}
+          />
+        ) : null}
+        <div className="container-p">
+          <CategoryMetaStrip
+            categoryLabel={data.menuLabel}
+            categorySubline={data.gridSubline}
+            categorySublineMobile={data.gridSublineMobile}
+            showGenderFilter={data.showGenderFilter}
+            defaultChip={data.defaultGenderFilter}
+          />
+          <div id="plp-listing" className="flex flex-col gap-8 max-xl:pb-6 xl:pb-14 xl:flex-row xl:gap-12">
+            <CategoryFilters
+              activeSlug={data.slug}
+              menuGroups={boxingMmaMegaMenu}
+              basePath="/boxing-and-mma"
+              ariaLabel="Boxing & MMA categories"
+            />
+            <ProductGrid key={data.slug} cards={data.styleCards} />
+          </div>
+        </div>
+
+        <div className="mx-auto w-full max-w-[1440px]">
+          <div className="h-px bg-[#e8ecf1] xl:mb-[120px]" />
+        </div>
+
+        <WhatWeCover eyebrow={data.coverageEyebrow} heading={data.coverageHeading} items={data.coverageItems} />
+        <TrustPoints heading={data.qualityHeading} subline={data.qualitySubline} points={data.qualityPoints} />
+        <FabricOptions
+          eyebrow={data.fabricEyebrow}
+          heading={data.fabricHeading}
+          options={data.fabricOptions}
+          weightTiers={data.weightTiers}
+          weightTiersHeaders={data.weightTiersHeaders}
+          structuredBlock={data.structuredBlock}
+          note={data.fabricNote}
+        />
+
+        <Faq content={{ h2: data.faqHeading, items: faqItems }} />
+        <JsonLd data={faqSchema(faqItems)} />
+
+        <div id={FINAL_CTA_MARKER_ID} aria-hidden="true" />
+        <FinalCta
+          content={{
+            h2: home.finalCta.h2,
+            subline: buildCtaSubline(data.ctaReferenceNoun),
+            cta: home.finalCta.cta,
+          }}
+          ticker={home.complianceTicker}
+          compactMobileTop
+          secondaryCta={home.closingCta.secondaryCta}
+        />
+
+        <ProductCtasMobileBar primaryCta={home.nav.cta} />
+      </main>
+
+      <Footer content={home.footer} social={ORGANIZATION.sameAs} />
+    </>
+  );
+}

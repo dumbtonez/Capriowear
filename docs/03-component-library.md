@@ -1840,3 +1840,13 @@ Pre-launch hardening for a B2B lead-gen site with no logins/payments -- the real
 
 ### app/sitemap.ts — updated
 Gained `/download-catalog`, and the previously-missing `/request-a-sample` (a real pre-existing gap noticed while adding the new entry, fixed the same time rather than left).
+
+## Capriosports Gear division (`/lifting-gears`, `/boxing-and-mma`) — Phase 1 scaffolding, 2026-09-14
+
+No new components. Every hub/PLP/PDP section (`CategoryBanner`, `CategoryLinkGrid`, `CategoryFilters`, `CategoryMetaStrip`, `FabricOptions`, `ProductGrid`, `TrustPoints`, `WhatWeCover`, `Faq`, `FinalCta`, `Footer`, the full PDP set) is reused verbatim from the Activewear/Teamwear component set, same pattern Teamwear's own addition already followed. `content/activewear/types.ts`'s `Category`/`StyleCard` etc. needed no change (`group: "Gear"` is just another string value); `content/activewear/pdpShared.ts`'s `categoryEntityFaq`/`buildCtaSubline`/`pdpSpecHighlights` are reused unchanged.
+
+Two small, deliberately narrow type widenings to let Gear opt into two existing pieces without forking them: `lib/hubThumbnails.ts`'s `hubThumbnail()` and `CategoryLinkGrid`'s own `division` prop now accept `"lifting-gears" | "boxing-and-mma"` alongside the existing `"activewear" | "teamwear"` (still resolves to `public/images/hub-thumbnails/<division>/`, gracefully renders no image until real files land, same as every other division).
+
+**Not built, and not part of this pass:** any real Gear-division nav/header component. Each of the six new route files renders a bare, unstyled placeholder `<nav>` (two plain `next/link`s) instead of Capriowear's `<Header>` — Capriowear's own nav (`content/home.ts`'s `home.nav`) is untouched and does not reference Gear at all. The real division switcher and parent-site header composition are Phase 3 work (owner, 2026-09-14) — see `docs/05-plan.md`'s decision log for the correction that led here. `liftingGearsMegaMenu`/`boxingMmaMegaMenu` (`content/home.ts`) exist only to feed each Gear PLP's own local `CategoryFilters` panel, the same role `activewearMegaMenu`/`teamwearMegaMenu` play for their own PLPs — not shared/global nav data.
+
+Content: `content/gear/lifting-gears/{weight-lifting-belts,categories,hub}.ts`, `content/gear/boxing-and-mma/{boxing-gloves,categories,hub}.ts` — one placeholder `Category` and one placeholder hub `CategoryGroup` per division, every style `status: "draft"`, all copy literally "Placeholder." Real copy is a later phase.

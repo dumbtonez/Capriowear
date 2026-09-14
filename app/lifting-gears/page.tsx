@@ -1,0 +1,96 @@
+// app/lifting-gears/page.tsx
+// The Lifting Gears Landing Hub -- the exact same reusable template as
+// app/teamwear/page.tsx, pointed at content/gear/lifting-gears/hub.ts
+// instead. Phase 1 scaffolding: placeholder copy, proves the routing/schema
+// wiring only. See that file's own header comment for the full reasoning on
+// section order and schema choices (identical here).
+import type { Metadata } from "next";
+import Link from "next/link";
+
+import { CategoryLinkGrid } from "@/components/sections/CategoryLinkGrid";
+import { CategoryBanner } from "@/components/sections/CategoryBanner";
+import { Faq } from "@/components/sections/Faq";
+import { FinalCta } from "@/components/sections/FinalCta";
+import { Footer } from "@/components/sections/Footer";
+import { JsonLd } from "@/components/JsonLd";
+import { categoryGroupsSection } from "@/components/ui/styles";
+import { home } from "@/content/home";
+import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
+import { liftingGearsGroups, liftingGearsHub, LIFTING_GEARS_HUB_CANONICAL } from "@/content/gear/lifting-gears/hub";
+import { breadcrumbSchema, collectionOfPagesSchema, faqSchema } from "@/lib/schema";
+
+const allCategoryCards = liftingGearsGroups.flatMap((group) => group.categories);
+
+export const metadata: Metadata = {
+  title: liftingGearsHub.metaTitle,
+  description: liftingGearsHub.metaDescription,
+  alternates: { canonical: LIFTING_GEARS_HUB_CANONICAL },
+  openGraph: {
+    title: `${liftingGearsHub.metaTitle} | ${SITE_NAME}`,
+    description: liftingGearsHub.metaDescription,
+    url: LIFTING_GEARS_HUB_CANONICAL,
+    siteName: SITE_NAME,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${liftingGearsHub.metaTitle} | ${SITE_NAME}`,
+    description: liftingGearsHub.metaDescription,
+  },
+};
+
+export default function LiftingGearsHubPage() {
+  return (
+    <>
+      {/* Bare, unstyled placeholder nav -- Phase 1 scaffolding only, proves
+          routing wiring works. NOT the real Gear division nav: the division
+          switcher and parent-site header composition are Phase 3 work
+          (owner, 2026-09-14). Do not treat this as a component to reuse or
+          extend -- swap it out entirely once that phase builds the real
+          thing. */}
+      <nav className="p-4 text-sm">
+        <Link href="/lifting-gears">Lifting Gears</Link> | <Link href="/boxing-and-mma">Boxing & MMA</Link>
+      </nav>
+
+      <main className="relative z-10 bg-paper">
+        <CategoryBanner
+          breadcrumbItems={liftingGearsHub.hero.breadcrumbItems}
+          h1={liftingGearsHub.hero.h1}
+          trustBullets={liftingGearsHub.hero.trustBullets}
+        />
+
+        <section className={categoryGroupsSection.section}>
+          {liftingGearsGroups.map((group) => (
+            <CategoryLinkGrid key={group.eyebrow} group={group} division="lifting-gears" />
+          ))}
+        </section>
+
+        <Faq content={{ h2: liftingGearsHub.faq.h2, items: liftingGearsHub.faq.items }} />
+
+        <FinalCta
+          content={liftingGearsHub.finalCta}
+          ticker={{ title: "Standard on every order", items: liftingGearsHub.finalCta.complianceBar }}
+          compactMobileTop
+        />
+      </main>
+
+      <Footer content={home.footer} social={ORGANIZATION.sameAs} />
+
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: SITE_URL },
+          { name: "Lifting Gears", url: LIFTING_GEARS_HUB_CANONICAL },
+        ])}
+      />
+      <JsonLd
+        data={collectionOfPagesSchema(
+          liftingGearsHub.metaTitle,
+          LIFTING_GEARS_HUB_CANONICAL,
+          liftingGearsHub.metaDescription,
+          allCategoryCards.map((card) => ({ name: card.label, url: `${SITE_URL}${card.href}` })),
+        )}
+      />
+      <JsonLd data={faqSchema(liftingGearsHub.faq.items)} />
+    </>
+  );
+}
