@@ -3021,8 +3021,12 @@ export const ourFactoryTeam = {
   // collapse into its neighbours; this track had none). 300/469px card
   // widths -> 340/530px, same turn, matching Exhibitions' own 2026-09-14
   // width change (see `exhibitions.mobileTrack`'s own comment).
+  // Mobile cap 40px -> 20px (owner, 2026-09-14: "make it 20px from the left
+  // gap on mobile" -- same fix as `insideFactory.mobileTrackWide`'s own
+  // identical correction). `md:` tablet tier keeps its own 40px cap,
+  // untouched -- this was a mobile-width-only request.
   sliderTrack:
-    "no-scrollbar flex h-[340px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-340px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-530px)/2))]",
+    "no-scrollbar flex h-[340px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(20px,calc((100%-340px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-530px)/2))]",
   // 340px mobile / 530px tablet -- matches Exhibitions' own current card
   // widths exactly (owner, 2026-09-14: "should be same as exhibition
   // section on mobile homepage, for tablet follow tablet exhibition
