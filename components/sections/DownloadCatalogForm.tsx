@@ -161,7 +161,7 @@ export function DownloadCatalogForm({ content }: DownloadCatalogFormProps) {
             <div className={darkForm.consentRow}>
               <p className={darkForm.consentText}>
                 {content.consentPrefix}
-                <a href="/privacy-policy" className={darkForm.consentLink}>
+                <a href="/capriowear/privacy-policy" className={darkForm.consentLink}>
                   {content.consentLinkText}
                 </a>
                 {content.consentSuffix}

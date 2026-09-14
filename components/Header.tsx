@@ -412,7 +412,7 @@ export function Header({
               `header.inner` at `xl:` -- see that token's own comment for why
               the nav needs its own column (rather than being grouped with
               this link) to center inside. */}
-          <Link href="/" className={header.brand} aria-label={`${brand}, home`}>
+          <Link href="/capriowear" className={header.brand} aria-label={`${brand}, home`}>
             {logo ?? (
               <>
                 <span className={header.brandName}>{brand}</span>

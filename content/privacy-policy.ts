@@ -205,8 +205,8 @@ export const privacyPolicy = {
 
   hero: {
     breadcrumb: [
-      { label: "Home", href: "/" },
-      { label: "Privacy Policy", href: "/privacy-policy" },
+      { label: "Home", href: "/capriowear" },
+      { label: "Privacy Policy", href: "/capriowear/privacy-policy" },
     ],
     h1: "Privacy Policy",
     // Open item (doc): insert the real date at launch.

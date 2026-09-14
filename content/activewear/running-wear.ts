@@ -152,7 +152,7 @@ export const runningWear: CuratedCollection = {
       cardSubline: "Lightweight woven shell, side splits",
       image: "",
       imageAlt: "Custom running split shorts, lightweight woven shell, side splits",
-      href: "/activewear/shorts",
+      href: "/capriowear/activewear/shorts",
     },
     {
       status: "published",
@@ -161,7 +161,7 @@ export const runningWear: CuratedCollection = {
       cardSubline: "Outer short with built-in liner",
       image: "",
       imageAlt: "Custom 2-in-1 lined running shorts, outer short with built-in liner",
-      href: "/activewear/shorts",
+      href: "/capriowear/activewear/shorts",
     },
     {
       status: "published",
@@ -170,7 +170,7 @@ export const runningWear: CuratedCollection = {
       cardSubline: "Moisture-wicking, thumbholes",
       image: "",
       imageAlt: "Custom performance long-sleeve running top, moisture-wicking, thumbholes",
-      href: "/activewear/long-sleeve-tops",
+      href: "/capriowear/activewear/long-sleeve-tops",
     },
     {
       status: "published",
@@ -179,7 +179,7 @@ export const runningWear: CuratedCollection = {
       cardSubline: "Moisture-wicking poly, athletic cut",
       image: "",
       imageAlt: "Custom performance running tee, moisture-wicking poly, athletic cut",
-      href: "/activewear/t-shirts",
+      href: "/capriowear/activewear/t-shirts",
     },
     {
       status: "published",
@@ -188,7 +188,7 @@ export const runningWear: CuratedCollection = {
       cardSubline: "Documented mmHg, base-layer fit",
       image: "",
       imageAlt: "Custom running compression tights, documented mmHg, base-layer fit",
-      href: "/activewear/compression-base-layers",
+      href: "/capriowear/activewear/compression-base-layers",
     },
     {
       status: "published",
@@ -197,7 +197,7 @@ export const runningWear: CuratedCollection = {
       cardSubline: "Second-skin, moisture-wicking",
       image: "",
       imageAlt: "Custom running compression top, second-skin, moisture-wicking",
-      href: "/activewear/compression-base-layers",
+      href: "/capriowear/activewear/compression-base-layers",
     },
     {
       status: "published",
@@ -206,7 +206,7 @@ export const runningWear: CuratedCollection = {
       cardSubline: "Lightweight woven shell, DWR, packable",
       image: "",
       imageAlt: "Custom running windbreaker jacket, lightweight woven shell, DWR, packable",
-      href: "/activewear/jackets",
+      href: "/capriowear/activewear/jackets",
     },
     {
       status: "published",
@@ -215,7 +215,7 @@ export const runningWear: CuratedCollection = {
       cardSubline: "Sleeveless shell for layering",
       image: "",
       imageAlt: "Custom running vest or gilet, sleeveless shell for layering",
-      href: "/activewear/jackets",
+      href: "/capriowear/activewear/jackets",
     },
   ],
 };

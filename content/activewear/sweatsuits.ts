@@ -212,7 +212,7 @@ export const sweatsuits: Category = {
       cardSubline: "Pullover hoodie and matched sweatpant",
       image: "",
       imageAlt: "Custom hoodie and sweatpant set, pullover hoodie and matched sweatpant",
-      href: "/activewear/sweatsuits/hoodie-sweatpant",
+      href: "/capriowear/activewear/sweatsuits/hoodie-sweatpant",
     },
     {
       status: "draft",
@@ -221,7 +221,7 @@ export const sweatsuits: Category = {
       cardSubline: "Crewneck and matched sweatpant",
       image: "",
       imageAlt: "Custom crewneck and sweatpant set, crewneck and matched sweatpant",
-      href: "/activewear/sweatsuits/crewneck-sweatpant",
+      href: "/capriowear/activewear/sweatsuits/crewneck-sweatpant",
     },
     {
       status: "draft",
@@ -230,7 +230,7 @@ export const sweatsuits: Category = {
       cardSubline: "Full-zip hoodie and matched sweatpant",
       image: "",
       imageAlt: "Custom zip-hoodie and sweatpant set, full-zip hoodie and matched sweatpant",
-      href: "/activewear/sweatsuits/zip-hoodie",
+      href: "/capriowear/activewear/sweatsuits/zip-hoodie",
     },
     {
       status: "draft",
@@ -239,7 +239,7 @@ export const sweatsuits: Category = {
       cardSubline: "Boxy heavyweight fleece set",
       image: "",
       imageAlt: "Custom oversized sweatsuit, boxy heavyweight fleece set",
-      href: "/activewear/sweatsuits/oversized",
+      href: "/capriowear/activewear/sweatsuits/oversized",
     },
     {
       status: "draft",
@@ -248,7 +248,7 @@ export const sweatsuits: Category = {
       cardSubline: "Cropped hoodie and jogger, women's",
       image: "",
       imageAlt: "Custom cropped sweatsuit, cropped hoodie and jogger, women's",
-      href: "/activewear/sweatsuits/cropped",
+      href: "/capriowear/activewear/sweatsuits/cropped",
     },
     {
       status: "draft",
@@ -257,7 +257,7 @@ export const sweatsuits: Category = {
       cardSubline: "Hoodie or crewneck with fleece shorts",
       image: "",
       imageAlt: "Custom shorts sweatsuit set, hoodie or crewneck with fleece shorts",
-      href: "/activewear/sweatsuits/shorts-set",
+      href: "/capriowear/activewear/sweatsuits/shorts-set",
     },
   ],
   // Sibling Outwear & Suits-group category from content/home.ts's own
@@ -266,9 +266,9 @@ export const sweatsuits: Category = {
   // hrefs, no invented placeholder pages" rule every prior category's own
   // relatedLinks already follows).
   relatedLinks: [
-    { label: "Tracksuits", href: "/activewear/tracksuits" },
-    { label: "Hoodies", href: "/activewear/hoodies" },
-    { label: "Sweatshirts", href: "/activewear/sweatshirts" },
-    { label: "Joggers & Track Pants", href: "/activewear/joggers-track-pants" },
+    { label: "Tracksuits", href: "/capriowear/activewear/tracksuits" },
+    { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
+    { label: "Sweatshirts", href: "/capriowear/activewear/sweatshirts" },
+    { label: "Joggers & Track Pants", href: "/capriowear/activewear/joggers-track-pants" },
   ],
 };

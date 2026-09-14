@@ -162,8 +162,8 @@ export const home = {
     links: [
       { label: "Activewear", href: "/activewear", megaMenu: activewearMegaMenu },
       { label: "Teamwear & Uniforms", href: "/teamwear", megaMenu: teamwearMegaMenu },
-      { label: "Services", href: "/services" },
-      { label: "Factory Tour", href: "/our-factory" },
+      { label: "Services", href: "/capriowear/services" },
+      { label: "Factory Tour", href: "/capriowear/our-factory" },
     ],
     // The mobile drawer's own real design (Figma node 465:2817, 2026-08-27)
     // is a flat list, not derived from `links` above: it originally added a
@@ -189,28 +189,28 @@ export const home = {
         chevron: true,
         megaMenu: teamwearMegaMenu,
       },
-      { label: "Services", href: "/services", chevron: false },
-      { label: "Factory Tour", href: "/our-factory", chevron: false },
+      { label: "Services", href: "/capriowear/services", chevron: false },
+      { label: "Factory Tour", href: "/capriowear/our-factory", chevron: false },
       // Owner, 2026-09-10: "on the mobile menu, add request a catalog...
       // cta" then clarified: "add download catalog under our story" -- a
       // plain list item, not the special bottom CTA button the first
       // phrasing suggested. Same route `nav.secondaryCta` already links to.
       // ("under our story" no longer applies literally now that Our Story
       // itself is removed -- this item simply comes last.)
-      { label: "Download Catalog", href: "/download-catalog", chevron: false },
+      { label: "Download Catalog", href: "/capriowear/download-catalog", chevron: false },
     ],
     // "Get in touch" block at the foot of the mobile drawer -- same email
     // Footer already uses (content/home.ts's own footer.contact.email).
     contact: { label: "Get in touch", email: "hello@capriosports.com" },
-    cta: { label: "Request a Sample", href: "/request-a-sample" },
-    secondaryCta: { label: "Download Catalog", href: "/download-catalog" },
+    cta: { label: "Request a Sample", href: "/capriowear/request-a-sample" },
+    secondaryCta: { label: "Download Catalog", href: "/capriowear/download-catalog" },
   },
 
   hero: {
     eyebrow: "BASED IN SIALKOT, PAKISTAN", // matches the wireframe; the content doc says "MADE IN". VERIFY
     h1: "Custom OEM & ODM activewear & teamwear manufacturer", // VERIFY exact H1
-    ctaPrimary: { label: "Request a Sample", href: "/request-a-sample" },
-    ctaSecondary: { label: "Download Catalog", href: "/download-catalog" },
+    ctaPrimary: { label: "Request a Sample", href: "/capriowear/request-a-sample" },
+    ctaSecondary: { label: "Download Catalog", href: "/capriowear/download-catalog" },
     media: {
       type: "video",
       label: "Hero video, factory and product",
@@ -637,7 +637,7 @@ export const home = {
     // "Explore Our Factory" -> "Take Factory Tour" (owner call, 2026-08-28,
     // matching the nav's own "Our Factory" -> "Factory Tour" rename), href
     // unchanged -- still /our-factory.
-    cta: { label: "Take Factory Tour", href: "/our-factory" },
+    cta: { label: "Take Factory Tour", href: "/capriowear/our-factory" },
   },
 
   // 8 items, confirmed via get_design_context against both the desktop
@@ -843,12 +843,12 @@ export const home = {
     // reused verbatim on /services (its own first `FinalCta`, `home.
     // finalCta`), so this break applies there too, same content object.
     subline: "Tell us what you're making. We'll come back within 24 hours\nwith next steps.",
-    cta: { label: "Request a Sample", href: "/request-a-sample" },
+    cta: { label: "Request a Sample", href: "/capriowear/request-a-sample" },
     // Secondary "Download Catalog" button (owner, 2026-09-08: "on home,
     // under exhibition cta section add download catalog cta too") -- same
     // `FinalCta` prop already added everywhere else (`closingCta` above,
     // every PLP/PDP, Services).
-    secondaryCta: { label: "Download Catalog", href: "/download-catalog" },
+    secondaryCta: { label: "Download Catalog", href: "/capriowear/download-catalog" },
   },
 
   // A second CTA band, same component and styling as `finalCta` above
@@ -870,14 +870,14 @@ export const home = {
     // Owner call, 2026-08-27: "Let's Talk" over "Request a Sample" (the
     // sitewide default) -- still links to the same request-a-sample form as
     // every other CTA, not a new destination.
-    cta: { label: "Let's Talk", href: "/request-a-sample" },
+    cta: { label: "Let's Talk", href: "/capriowear/request-a-sample" },
     // Secondary "Download Catalog" button (owner, 2026-09-08: "wherever we
     // use cta in the middle of the page, add download catalog as you did
     // for services under faq section ... all plp, pdp, homepage, services")
     // -- same `FinalCta` prop already added for the Services page's own
     // FAQ-adjacent closing CTA (2026-09-07), now applied to every other
     // page's FAQ-adjacent CTA too (this one on the homepage, `app/page.tsx`).
-    secondaryCta: { label: "Download Catalog", href: "/download-catalog" },
+    secondaryCta: { label: "Download Catalog", href: "/capriowear/download-catalog" },
   },
 
   // Homepage section 15, the site footer. Figma desktop node 461:2650
@@ -905,8 +905,8 @@ export const home = {
       columnOne: [
         { label: "Activewear", href: "/activewear" },
         { label: "Teamwear & Uniforms", href: "/teamwear" },
-        { label: "Services", href: "/services" },
-        { label: "Our Factory", href: "/our-factory" },
+        { label: "Services", href: "/capriowear/services" },
+        { label: "Our Factory", href: "/capriowear/our-factory" },
       ],
       // Request a Sample before Download Catalog (owner, 2026-09-10: "Make
       // request a sample first then download catalog" -- was the reverse
@@ -915,13 +915,13 @@ export const home = {
       // ahead of its page" precedent Download Catalog/Request a Sample
       // already established below and elsewhere on this site.
       columnTwo: [
-        { label: "Request a Sample", href: "/request-a-sample" },
-        { label: "Download Catalog", href: "/download-catalog" },
-        { label: "Privacy Policy", href: "/privacy-policy" },
+        { label: "Request a Sample", href: "/capriowear/request-a-sample" },
+        { label: "Download Catalog", href: "/capriowear/download-catalog" },
+        { label: "Privacy Policy", href: "/capriowear/privacy-policy" },
         // Added 2026-09-13, next to Privacy Policy per the owner's own
         // instruction -- same "nav link exists ahead of its page" precedent
         // that link itself already established.
-        { label: "Terms of Service", href: "/terms-of-service" },
+        { label: "Terms of Service", href: "/capriowear/terms-of-service" },
       ],
     },
     contact: { label: "Get in touch", email: "hello@capriosports.com" },

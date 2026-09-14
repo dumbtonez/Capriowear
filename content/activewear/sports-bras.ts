@@ -211,7 +211,7 @@ export const sportsBras: Category = {
       cardSubline: "Encapsulation, removable cups, high hold",
       image: "",
       imageAlt: "Custom high-impact racerback sports bra manufacturer",
-      href: "/activewear/sports-bras/high-impact-racerback",
+      href: "/capriowear/activewear/sports-bras/high-impact-racerback",
     },
     {
       status: "draft",
@@ -220,7 +220,7 @@ export const sportsBras: Category = {
       cardSubline: "High support, front zip",
       image: "",
       imageAlt: "Custom zip-front sports bra manufacturer",
-      href: "/activewear/sports-bras/zip-front",
+      href: "/capriowear/activewear/sports-bras/zip-front",
     },
     {
       status: "draft",
@@ -229,7 +229,7 @@ export const sportsBras: Category = {
       cardSubline: "High support, full-coverage neckline",
       image: "",
       imageAlt: "Custom high-neck sports bra manufacturer",
-      href: "/activewear/sports-bras/high-neck",
+      href: "/capriowear/activewear/sports-bras/high-neck",
     },
     {
       status: "draft",
@@ -238,7 +238,7 @@ export const sportsBras: Category = {
       cardSubline: "Everyday racerback, removable pads",
       image: "",
       imageAlt: "Custom racerback scoop sports bra manufacturer",
-      href: "/activewear/sports-bras/racerback-scoop",
+      href: "/capriowear/activewear/sports-bras/racerback-scoop",
     },
     {
       status: "draft",
@@ -247,7 +247,7 @@ export const sportsBras: Category = {
       cardSubline: "Convertible crossback straps",
       image: "",
       imageAlt: "Custom crossback strappy sports bra manufacturer",
-      href: "/activewear/sports-bras/crossback-strappy",
+      href: "/capriowear/activewear/sports-bras/crossback-strappy",
     },
     {
       status: "draft",
@@ -256,7 +256,7 @@ export const sportsBras: Category = {
       cardSubline: "Molded padded cups",
       image: "",
       imageAlt: "Custom padded training bra manufacturer",
-      href: "/activewear/sports-bras/padded-training",
+      href: "/capriowear/activewear/sports-bras/padded-training",
     },
     {
       status: "draft",
@@ -265,7 +265,7 @@ export const sportsBras: Category = {
       cardSubline: "Longline band, bra-tank crossover",
       image: "",
       imageAlt: "Custom longline sports bra manufacturer",
-      href: "/activewear/sports-bras/longline",
+      href: "/capriowear/activewear/sports-bras/longline",
     },
     {
       status: "draft",
@@ -274,7 +274,7 @@ export const sportsBras: Category = {
       cardSubline: "Soft pullover, minimal structure",
       image: "",
       imageAlt: "Custom yoga pullover bra manufacturer",
-      href: "/activewear/sports-bras/yoga",
+      href: "/capriowear/activewear/sports-bras/yoga",
     },
     {
       status: "draft",
@@ -283,7 +283,7 @@ export const sportsBras: Category = {
       cardSubline: "Everyday, minimal structure",
       image: "",
       imageAlt: "Custom bralette manufacturer",
-      href: "/activewear/sports-bras/bralette",
+      href: "/capriowear/activewear/sports-bras/bralette",
     },
   ],
   // Sibling Tops-group categories from content/home.ts's own
@@ -293,9 +293,9 @@ export const sportsBras: Category = {
   // same as this category itself just did for Leggings' own
   // relatedLinks entry.
   relatedLinks: [
-    { label: "Tank Tops", href: "/activewear/tank-tops" },
-    { label: "T-Shirts", href: "/activewear/t-shirts" },
-    { label: "Long-Sleeve Tops", href: "/activewear/long-sleeve-tops" },
-    { label: "Leggings", href: "/activewear/leggings" },
+    { label: "Tank Tops", href: "/capriowear/activewear/tank-tops" },
+    { label: "T-Shirts", href: "/capriowear/activewear/t-shirts" },
+    { label: "Long-Sleeve Tops", href: "/capriowear/activewear/long-sleeve-tops" },
+    { label: "Leggings", href: "/capriowear/activewear/leggings" },
   ],
 };

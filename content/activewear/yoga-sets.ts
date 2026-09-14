@@ -165,7 +165,7 @@ export const yogaSets: Category = {
       cardSubline: "Matching bra and full-length legging",
       image: "",
       imageAlt: "Custom bra and legging yoga set manufacturer",
-      href: "/activewear/yoga-sets/bra-and-legging-set",
+      href: "/capriowear/activewear/yoga-sets/bra-and-legging-set",
     },
     {
       status: "draft",
@@ -174,7 +174,7 @@ export const yogaSets: Category = {
       cardSubline: "Matching bra and biker short",
       image: "",
       imageAlt: "Custom bra and short yoga set manufacturer",
-      href: "/activewear/yoga-sets/bra-and-short-set",
+      href: "/capriowear/activewear/yoga-sets/bra-and-short-set",
     },
     {
       status: "draft",
@@ -183,7 +183,7 @@ export const yogaSets: Category = {
       cardSubline: "Bra, legging and layering piece",
       image: "",
       imageAlt: "Custom three-piece yoga set manufacturer",
-      href: "/activewear/yoga-sets/three-piece-set",
+      href: "/capriowear/activewear/yoga-sets/three-piece-set",
     },
     {
       status: "draft",
@@ -192,7 +192,7 @@ export const yogaSets: Category = {
       cardSubline: "High-waisted legging, matching bra",
       image: "",
       imageAlt: "Custom high-waisted legging yoga set manufacturer",
-      href: "/activewear/yoga-sets/high-waisted-set",
+      href: "/capriowear/activewear/yoga-sets/high-waisted-set",
     },
     {
       status: "draft",
@@ -201,7 +201,7 @@ export const yogaSets: Category = {
       cardSubline: "Scrunch-seam legging, matching bra",
       image: "",
       imageAlt: "Custom scrunch-seam yoga set manufacturer",
-      href: "/activewear/yoga-sets/scrunch-seam-set",
+      href: "/capriowear/activewear/yoga-sets/scrunch-seam-set",
     },
     {
       status: "draft",
@@ -210,7 +210,7 @@ export const yogaSets: Category = {
       cardSubline: "Ribbed knit bra and legging",
       image: "",
       imageAlt: "Custom ribbed yoga set manufacturer",
-      href: "/activewear/yoga-sets/ribbed-set",
+      href: "/capriowear/activewear/yoga-sets/ribbed-set",
     },
     {
       status: "draft",
@@ -219,7 +219,7 @@ export const yogaSets: Category = {
       cardSubline: "Cropped jacket, bra and legging",
       image: "",
       imageAlt: "Custom cropped layering yoga set manufacturer",
-      href: "/activewear/yoga-sets/cropped-layering-set",
+      href: "/capriowear/activewear/yoga-sets/cropped-layering-set",
     },
     {
       status: "draft",
@@ -228,7 +228,7 @@ export const yogaSets: Category = {
       cardSubline: "Matching bra and bike short",
       image: "",
       imageAlt: "Custom bike short yoga set manufacturer",
-      href: "/activewear/yoga-sets/bike-short-set",
+      href: "/capriowear/activewear/yoga-sets/bike-short-set",
     },
   ],
   // Bodysuits and Jumpsuits, this category's own mega-menu siblings under
@@ -237,9 +237,9 @@ export const yogaSets: Category = {
   // Sports Bras), same "only real hrefs, no invented placeholder pages"
   // rule every prior category's own relatedLinks already follows.
   relatedLinks: [
-    { label: "Leggings", href: "/activewear/leggings" },
-    { label: "Sports Bras", href: "/activewear/sports-bras" },
-    { label: "Tank Tops", href: "/activewear/tank-tops" },
-    { label: "Shorts", href: "/activewear/shorts" },
+    { label: "Leggings", href: "/capriowear/activewear/leggings" },
+    { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
+    { label: "Tank Tops", href: "/capriowear/activewear/tank-tops" },
+    { label: "Shorts", href: "/capriowear/activewear/shorts" },
   ],
 };

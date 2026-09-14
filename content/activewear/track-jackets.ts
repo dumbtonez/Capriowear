@@ -177,7 +177,7 @@ export const trackJackets: Category = {
       cardSubline: "Brushed polyester tricot, full zip",
       image: "",
       imageAlt: "Custom tricot track jacket, brushed polyester tricot, full zip",
-      href: "/activewear/track-jackets/tricot",
+      href: "/capriowear/activewear/track-jackets/tricot",
     },
     {
       status: "draft",
@@ -186,7 +186,7 @@ export const trackJackets: Category = {
       cardSubline: "Standing collar, full zip",
       image: "",
       imageAlt: "Custom funnel-neck zip-up track jacket, standing collar, full zip",
-      href: "/activewear/track-jackets/funnel-neck",
+      href: "/capriowear/activewear/track-jackets/funnel-neck",
     },
     {
       status: "draft",
@@ -195,7 +195,7 @@ export const trackJackets: Category = {
       cardSubline: "Side-stripe heritage styling",
       image: "",
       imageAlt: "Custom retro striped track jacket, side-stripe heritage styling",
-      href: "/activewear/track-jackets/retro-striped",
+      href: "/capriowear/activewear/track-jackets/retro-striped",
     },
     {
       status: "draft",
@@ -204,7 +204,7 @@ export const trackJackets: Category = {
       cardSubline: "Partial zip, pullover",
       image: "",
       imageAlt: "Custom quarter-zip track top, partial zip, pullover",
-      href: "/activewear/track-jackets/quarter-zip",
+      href: "/capriowear/activewear/track-jackets/quarter-zip",
     },
     {
       status: "draft",
@@ -213,7 +213,7 @@ export const trackJackets: Category = {
       cardSubline: "Ventilated mesh lining, teamwear",
       image: "",
       imageAlt: "Custom mesh-lined track jacket, ventilated mesh lining, teamwear",
-      href: "/activewear/track-jackets/mesh-lined",
+      href: "/capriowear/activewear/track-jackets/mesh-lined",
     },
   ],
   // Sibling Outwear & Suits-group categories from content/home.ts's own
@@ -222,9 +222,9 @@ export const trackJackets: Category = {
   // instead (same "only real hrefs, no invented placeholder pages" rule
   // every prior category's own relatedLinks already follows).
   relatedLinks: [
-    { label: "Jackets", href: "/activewear/jackets" },
-    { label: "Hoodies", href: "/activewear/hoodies" },
-    { label: "Sweatshirts", href: "/activewear/sweatshirts" },
-    { label: "Joggers & Track Pants", href: "/activewear/joggers-track-pants" },
+    { label: "Jackets", href: "/capriowear/activewear/jackets" },
+    { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
+    { label: "Sweatshirts", href: "/capriowear/activewear/sweatshirts" },
+    { label: "Joggers & Track Pants", href: "/capriowear/activewear/joggers-track-pants" },
   ],
 };

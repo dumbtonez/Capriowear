@@ -243,7 +243,7 @@ export const hoodies: Category = {
       cardSubline: "Kangaroo pocket, French terry or brushed fleece",
       image: "",
       imageAlt: "Custom pullover hoodie, kangaroo pocket, French terry or brushed fleece",
-      href: "/activewear/hoodies/pullover",
+      href: "/capriowear/activewear/hoodies/pullover",
     },
     {
       status: "draft",
@@ -252,7 +252,7 @@ export const hoodies: Category = {
       cardSubline: "Heavyweight 400+ GSM, structured fit",
       image: "",
       imageAlt: "Custom oversized boxy hoodie, heavyweight 400+ GSM structured fit",
-      href: "/activewear/hoodies/oversized",
+      href: "/capriowear/activewear/hoodies/oversized",
     },
     {
       status: "draft",
@@ -261,7 +261,7 @@ export const hoodies: Category = {
       cardSubline: "Front zip, metal or molded hardware",
       image: "",
       imageAlt: "Custom full-zip hoodie, front zip, metal or molded hardware",
-      href: "/activewear/hoodies/full-zip",
+      href: "/capriowear/activewear/hoodies/full-zip",
     },
     {
       status: "draft",
@@ -270,7 +270,7 @@ export const hoodies: Category = {
       cardSubline: "Shortened body length",
       image: "",
       imageAlt: "Custom cropped hoodie, shortened body length",
-      href: "/activewear/hoodies/cropped",
+      href: "/capriowear/activewear/hoodies/cropped",
     },
     {
       status: "draft",
@@ -279,7 +279,7 @@ export const hoodies: Category = {
       cardSubline: "Partial zip, lighter hood",
       image: "",
       imageAlt: "Custom quarter-zip hoodie, partial zip, lighter hood",
-      href: "/activewear/hoodies/quarter-zip",
+      href: "/capriowear/activewear/hoodies/quarter-zip",
     },
     {
       status: "draft",
@@ -288,7 +288,7 @@ export const hoodies: Category = {
       cardSubline: "Clean front, no drawcord or pocket",
       image: "",
       imageAlt: "Custom stringless hoodie, clean front, no drawcord or pocket",
-      href: "/activewear/hoodies/stringless",
+      href: "/capriowear/activewear/hoodies/stringless",
     },
   ],
   // Sibling Tops-group categories from content/home.ts's own
@@ -297,9 +297,9 @@ export const hoodies: Category = {
   // establishes -- these become live the moment each one gets its own
   // content file.
   relatedLinks: [
-    { label: "Sweatshirts", href: "/activewear/sweatshirts" },
-    { label: "T-Shirts", href: "/activewear/t-shirts" },
-    { label: "Long-Sleeve Tops", href: "/activewear/long-sleeve-tops" },
-    { label: "Tank Tops", href: "/activewear/tank-tops" },
+    { label: "Sweatshirts", href: "/capriowear/activewear/sweatshirts" },
+    { label: "T-Shirts", href: "/capriowear/activewear/t-shirts" },
+    { label: "Long-Sleeve Tops", href: "/capriowear/activewear/long-sleeve-tops" },
+    { label: "Tank Tops", href: "/capriowear/activewear/tank-tops" },
   ],
 };

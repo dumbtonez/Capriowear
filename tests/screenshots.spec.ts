@@ -11,7 +11,12 @@ const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 const pages = [
   { name: "styleguide", path: "/styleguide" },
   // Homepage: nav only so far. More sections land as Phase 2 continues.
+  // Since 2026-09-14 this is the new Capriosports parent-site homepage
+  // stub, not Capriowear's -- see "capriowear-home" below for that.
   { name: "home", path: "/" },
+  // Capriowear's own real homepage, moved to /capriowear in the same
+  // routing restructure that freed up "/" for the parent site above.
+  { name: "capriowear-home", path: "/capriowear" },
   // Activewear PLP template: NOT in this permanent suite. Added briefly
   // 2026-08-28, reverted the same week (2026-08-30) -- several of this
   // page's sections (FabricOptions, TrustPoints, WhatWeCover) are real,

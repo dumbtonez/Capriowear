@@ -54,6 +54,7 @@ These need the owner's confirmation before launch. Each is also marked `// VERIF
 | 7 | Bulk production lead time | FAQ answer still reads "[X] days" |
 | 8 | Trust strip tile wording | Wireframe tiles (Product Development, Private Label, Low MOQ, Worldwide Shipping) differ from the copy doc's four (Low MOQ, Private Label, Trusted Since 2009, Worldwide Shipping) |
 | 9 | "CaprioGear" reference in `docs/source/Capriowear-Homepage-Content-FINAL.md` (e.g. "Looking for lifting or fight gear? Visit CaprioGear") | Confirmed by the owner (2026-09-14): stale/internal-naming only — there is no separate CaprioGear site. This copy should read as Capriosports' own Gear division once that page exists, not a link to an external site. Not fixed as part of Phase 1 (schema/routing scaffolding only) |
+| 10 | `/services`, `/our-factory`, `/privacy-policy`, `/request-a-sample` path collision | These four paths currently redirect to Capriowear's real `/capriowear/...` pages (owner call, 2026-09-14, protecting live indexed traffic). Does the Capriosports parent site eventually get its own distinct path names for these four, or reuse them once Capriowear's redirect map changes at final cutover? Open, not resolved |
 
 ## Copy rules
 
@@ -85,6 +86,8 @@ Where wireframe and copy doc disagree, the copy doc's own instruction is that **
 | Catalog | Not started |
 | Contact / Request a Sample | Not started |
 | Capriosports Gear division (Lifting Gears, Boxing & MMA hubs + category PLPs/PDPs, `/lifting-gears/**`, `/boxing-and-mma/**`) | Phase 1 (schema/routing scaffolding) done, 2026-09-14 — one placeholder category per hub, no real copy. Separate division from Capriowear; not in Capriowear's nav. See `docs/05-plan.md`'s decision log |
-| Capriosports parent-site pages (`/`, `/services`, `/our-factory`, `/our-people`, `/responsible-manufacturing`, `/who-we-are`, `/contact`, `/privacy-policy`, `/terms`, `/request-a-sample`) | Deferred — the repo root is currently Capriowear's own homepage; needs a basePath/domain-mount decision before these can be scaffolded. See `docs/05-plan.md`'s Gear division entry |
+| Capriowear (all routes) | Moved from the repo root to `/capriowear`, 2026-09-14. Every old URL 308-redirects to its new `/capriowear/...` equivalent. See `docs/05-plan.md`'s routing-restructure entry |
+| Capriosports parent-site homepage (`/`), `/contact`, `/terms`, `/responsible-manufacturing`, `/our-people`, `/who-we-are` | Phase 1 stub, 2026-09-14 — placeholder content only, root routing conflict resolved (Capriowear moved to make room). See `docs/05-plan.md` |
+| Capriosports parent-site `/services`, `/our-factory`, `/privacy-policy`, `/request-a-sample` | Not built — these paths redirect to Capriowear's real `/capriowear/...` pages instead (path collision, open IA question, see open question 10 and `docs/05-plan.md`'s decision log) |
 
 Links to unbuilt pages already exist in the nav and in the content file. They will 404 until those pages are built, which is expected at this stage.

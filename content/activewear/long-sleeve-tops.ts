@@ -269,7 +269,7 @@ export const longSleeveTops: Category = {
       cardSubline: "Cotton jersey, full-length sleeve",
       image: "",
       imageAlt: "Custom crew long-sleeve top, cotton jersey, full-length sleeve",
-      href: "/activewear/long-sleeve-tops/crew",
+      href: "/capriowear/activewear/long-sleeve-tops/crew",
     },
     {
       status: "draft",
@@ -278,7 +278,7 @@ export const longSleeveTops: Category = {
       cardSubline: "Moisture-wicking, thumbholes",
       image: "",
       imageAlt: "Custom performance long-sleeve top, moisture-wicking, thumbholes",
-      href: "/activewear/long-sleeve-tops/performance",
+      href: "/capriowear/activewear/long-sleeve-tops/performance",
     },
     {
       status: "draft",
@@ -287,7 +287,7 @@ export const longSleeveTops: Category = {
       cardSubline: "Button placket neckline",
       image: "",
       imageAlt: "Custom henley long-sleeve top, button placket neckline",
-      href: "/activewear/long-sleeve-tops/henley",
+      href: "/capriowear/activewear/long-sleeve-tops/henley",
     },
     {
       status: "draft",
@@ -296,7 +296,7 @@ export const longSleeveTops: Category = {
       cardSubline: "Mock neck, partial zip",
       image: "",
       imageAlt: "Custom quarter-zip long-sleeve top, mock neck, partial zip",
-      href: "/activewear/long-sleeve-tops/quarter-zip",
+      href: "/capriowear/activewear/long-sleeve-tops/quarter-zip",
     },
     {
       status: "draft",
@@ -305,7 +305,7 @@ export const longSleeveTops: Category = {
       cardSubline: "Long-sleeve tee with hood",
       image: "",
       imageAlt: "Custom hooded long-sleeve top, long-sleeve tee with hood",
-      href: "/activewear/long-sleeve-tops/hooded",
+      href: "/capriowear/activewear/long-sleeve-tops/hooded",
     },
     {
       status: "draft",
@@ -314,7 +314,7 @@ export const longSleeveTops: Category = {
       cardSubline: "Loose streetwear fit",
       image: "",
       imageAlt: "Custom oversized long-sleeve top, loose streetwear fit",
-      href: "/activewear/long-sleeve-tops/oversized",
+      href: "/capriowear/activewear/long-sleeve-tops/oversized",
     },
     {
       status: "draft",
@@ -323,7 +323,7 @@ export const longSleeveTops: Category = {
       cardSubline: "Raglan sleeve, flexible shoulder",
       image: "",
       imageAlt: "Custom raglan long-sleeve top, raglan sleeve, flexible shoulder",
-      href: "/activewear/long-sleeve-tops/raglan",
+      href: "/capriowear/activewear/long-sleeve-tops/raglan",
     },
     {
       status: "draft",
@@ -332,7 +332,7 @@ export const longSleeveTops: Category = {
       cardSubline: "Honeycomb knit, warmth",
       image: "",
       imageAlt: "Custom waffle thermal long-sleeve top, honeycomb knit, warmth",
-      href: "/activewear/long-sleeve-tops/waffle",
+      href: "/capriowear/activewear/long-sleeve-tops/waffle",
     },
   ],
   // Sibling Tops-group categories from content/home.ts's own
@@ -341,9 +341,9 @@ export const longSleeveTops: Category = {
   // establishes -- these become live the moment each one gets its own
   // content file.
   relatedLinks: [
-    { label: "T-Shirts", href: "/activewear/t-shirts" },
-    { label: "Hoodies", href: "/activewear/hoodies" },
-    { label: "Sweatshirts", href: "/activewear/sweatshirts" },
-    { label: "Tank Tops", href: "/activewear/tank-tops" },
+    { label: "T-Shirts", href: "/capriowear/activewear/t-shirts" },
+    { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
+    { label: "Sweatshirts", href: "/capriowear/activewear/sweatshirts" },
+    { label: "Tank Tops", href: "/capriowear/activewear/tank-tops" },
   ],
 };

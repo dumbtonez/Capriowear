@@ -208,7 +208,7 @@ export const cricket: Category = {
       cardSubline: "Full-dye sublimated, names and numbers in the print",
       image: "",
       imageAlt: "Custom colored cricket match jersey, short sleeve, full-dye sublimated",
-      href: "/teamwear/cricket/colored-match-jersey-short-sleeve",
+      href: "/capriowear/teamwear/cricket/colored-match-jersey-short-sleeve",
       pdpTitle: "Colored Match Jersey",
       sku: "CAP-CRK-01",
       pdpHeading: "Custom Cricket Match Jersey Manufacturer",
@@ -241,11 +241,11 @@ export const cricket: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Colored Match Jersey Long Sleeve", href: "/teamwear/cricket" },
-        { label: "Colored Trousers", href: "/teamwear/cricket" },
-        { label: "Whites Shirt", href: "/teamwear/cricket/whites-shirt" },
-        { label: "Training Tee", href: "/teamwear/cricket" },
-        { label: "See All", href: "/teamwear/cricket" },
+        { label: "Colored Match Jersey Long Sleeve", href: "/capriowear/teamwear/cricket" },
+        { label: "Colored Trousers", href: "/capriowear/teamwear/cricket" },
+        { label: "Whites Shirt", href: "/capriowear/teamwear/cricket/whites-shirt" },
+        { label: "Training Tee", href: "/capriowear/teamwear/cricket" },
+        { label: "See All", href: "/capriowear/teamwear/cricket" },
       ],
       specifications: [
         { label: "Style", value: "Colored cricket match jersey, short sleeve (base type)" },
@@ -280,7 +280,7 @@ export const cricket: Category = {
       cardSubline: "Polo collar, contrast trim, short or long sleeve",
       image: "",
       imageAlt: "Custom cricket whites shirt, polo collar, contrast trim",
-      href: "/teamwear/cricket/whites-shirt",
+      href: "/capriowear/teamwear/cricket/whites-shirt",
       pdpTitle: "Whites Shirt",
       sku: "CAP-CRK-02",
       pdpHeading: "Custom Cricket Whites Shirt Manufacturer",
@@ -313,10 +313,10 @@ export const cricket: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Whites Trousers", href: "/teamwear/cricket" },
-        { label: "Colored Match Jersey", href: "/teamwear/cricket/colored-match-jersey-short-sleeve" },
-        { label: "Training Tee", href: "/teamwear/cricket" },
-        { label: "See All", href: "/teamwear/cricket" },
+        { label: "Whites Trousers", href: "/capriowear/teamwear/cricket" },
+        { label: "Colored Match Jersey", href: "/capriowear/teamwear/cricket/colored-match-jersey-short-sleeve" },
+        { label: "Training Tee", href: "/capriowear/teamwear/cricket" },
+        { label: "See All", href: "/capriowear/teamwear/cricket" },
       ],
       specifications: [
         { label: "Style", value: "Traditional cricket whites shirt (base type)" },
@@ -339,7 +339,7 @@ export const cricket: Category = {
       cardSubline: "Long-sleeve sublimated match shirt",
       image: "",
       imageAlt: "Custom colored cricket match jersey, long sleeve, sublimated",
-      href: "/teamwear/cricket/colored-match-jersey-long-sleeve",
+      href: "/capriowear/teamwear/cricket/colored-match-jersey-long-sleeve",
     },
     {
       status: "draft",
@@ -348,7 +348,7 @@ export const cricket: Category = {
       cardSubline: "Sublimated or solid, elastic drawcord waist",
       image: "",
       imageAlt: "Custom colored cricket trousers, sublimated or solid",
-      href: "/teamwear/cricket/colored-trousers",
+      href: "/capriowear/teamwear/cricket/colored-trousers",
     },
     {
       status: "draft",
@@ -357,7 +357,7 @@ export const cricket: Category = {
       cardSubline: "Traditional whites, elastic drawcord waist",
       image: "",
       imageAlt: "Custom cricket whites trousers, elastic drawcord waist",
-      href: "/teamwear/cricket/whites-trousers",
+      href: "/capriowear/teamwear/cricket/whites-trousers",
     },
     {
       status: "draft",
@@ -366,7 +366,7 @@ export const cricket: Category = {
       cardSubline: "Lightweight practice shirt",
       image: "",
       imageAlt: "Custom cricket training tee, lightweight practice shirt",
-      href: "/teamwear/cricket/training-tee",
+      href: "/capriowear/teamwear/cricket/training-tee",
     },
     // Removed (owner spec, 2026-09-05, "cut-and-sew scope filter", a new
     // standing rule for the whole Teamwear group): Cricket Cap, Wide-Brim
@@ -384,8 +384,8 @@ export const cricket: Category = {
   // they do not exist yet and would 404"). Swap these for sibling sport
   // PLPs as more Teamwear categories publish.
   relatedLinks: [
-    { label: "Tracksuits", href: "/activewear/tracksuits" },
-    { label: "Track Jackets & Zip-Ups", href: "/activewear/track-jackets" },
-    { label: "T-Shirts", href: "/activewear/t-shirts" },
+    { label: "Tracksuits", href: "/capriowear/activewear/tracksuits" },
+    { label: "Track Jackets & Zip-Ups", href: "/capriowear/activewear/track-jackets" },
+    { label: "T-Shirts", href: "/capriowear/activewear/t-shirts" },
   ],
 };

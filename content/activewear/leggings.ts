@@ -241,7 +241,7 @@ export const leggings: Category = {
   styleCards: [
     {
       // Slug/href renamed from "high-waist-leggings" (owner spec,
-      // 2026-09-01: first real PDP URL is "/activewear/leggings/
+      // 2026-09-01: first real PDP URL is "/capriowear/activewear/leggings/
       // high-waisted-compression") -- safe now, before any PDP was ever
       // live at the old slug (confirmed via grep: nothing else in the
       // codebase referenced this href directly). Renaming a slug after a
@@ -269,7 +269,7 @@ export const leggings: Category = {
       // below for why only this one slot gets it.
       image: "/product-images/leggings-high-waisted-compression.png",
       imageAlt: "Custom high-waisted compression leggings",
-      href: "/activewear/leggings/high-waisted-compression",
+      href: "/capriowear/activewear/leggings/high-waisted-compression",
       // Figma-confirmed real copy (node 634:4952, PDP breadcrumb, 2026-08-31).
       pdpTitle: "High-Waisted Compression",
       // Figma-confirmed real copy (node 634:4988 desktop / 638:2541 mobile,
@@ -356,11 +356,11 @@ export const leggings: Category = {
       // Re-point each tag at its own real sibling PDP the moment that
       // style's own status flips to "published."
       relatedStyleTags: [
-        { label: "Flare & Wide-Leg", href: "/activewear/leggings" },
-        { label: "Scrunch & Ruched", href: "/activewear/leggings" },
-        { label: "V-Back & Crossover", href: "/activewear/leggings" },
-        { label: "Capri & Cropped", href: "/activewear/leggings" },
-        { label: "See All", href: "/activewear/leggings" },
+        { label: "Flare & Wide-Leg", href: "/capriowear/activewear/leggings" },
+        { label: "Scrunch & Ruched", href: "/capriowear/activewear/leggings" },
+        { label: "V-Back & Crossover", href: "/capriowear/activewear/leggings" },
+        { label: "Capri & Cropped", href: "/capriowear/activewear/leggings" },
+        { label: "See All", href: "/capriowear/activewear/leggings" },
       ],
       // Figma-confirmed real copy (node 634:5092, "Specifications",
       // 2026-09-02) -- this style's own build datasheet.
@@ -408,7 +408,7 @@ export const leggings: Category = {
       cardSubline: "High-rise flare, studio to street",
       image: "",
       imageAlt: "Custom flare and wide-leg leggings manufacturer",
-      href: "/activewear/leggings/flare-wide-leg",
+      href: "/capriowear/activewear/leggings/flare-wide-leg",
     },
     {
       status: "draft",
@@ -417,7 +417,7 @@ export const leggings: Category = {
       cardSubline: "Center-seam scrunch, shaping back",
       image: "",
       imageAlt: "Custom scrunch and ruched leggings manufacturer",
-      href: "/activewear/leggings/scrunch-ruched",
+      href: "/capriowear/activewear/leggings/scrunch-ruched",
     },
     {
       status: "draft",
@@ -426,7 +426,7 @@ export const leggings: Category = {
       cardSubline: "Contoured V-back waistband",
       image: "",
       imageAlt: "Custom V-back and crossover waistband leggings manufacturer",
-      href: "/activewear/leggings/v-back-crossover",
+      href: "/capriowear/activewear/leggings/v-back-crossover",
     },
     {
       status: "draft",
@@ -435,7 +435,7 @@ export const leggings: Category = {
       cardSubline: "Cropped length, squat-proof",
       image: "",
       imageAlt: "Custom capri and cropped length leggings manufacturer",
-      href: "/activewear/leggings/capri-cropped",
+      href: "/capriowear/activewear/leggings/capri-cropped",
     },
     {
       status: "draft",
@@ -444,7 +444,7 @@ export const leggings: Category = {
       cardSubline: "Side and waistband pockets",
       image: "",
       imageAlt: "Custom pocket leggings manufacturer",
-      href: "/activewear/leggings/pocket",
+      href: "/capriowear/activewear/leggings/pocket",
     },
     {
       status: "draft",
@@ -453,7 +453,7 @@ export const leggings: Category = {
       cardSubline: "Compression short, 5 to 9 inch inseam",
       image: "",
       imageAlt: "Custom biker short and compression short manufacturer",
-      href: "/activewear/leggings/biker",
+      href: "/capriowear/activewear/leggings/biker",
     },
     {
       status: "draft",
@@ -464,16 +464,16 @@ export const leggings: Category = {
       cardSubline: "Brushed thermal, cold-weather",
       image: "",
       imageAlt: "Custom fleece-lined thermal leggings manufacturer",
-      href: "/activewear/leggings/fleece-lined",
+      href: "/capriowear/activewear/leggings/fleece-lined",
     },
   ],
   // Real hrefs and labels, matching content/home.ts's own activewearMegaMenu
   // exactly (owner request, 2026-08-30) -- no PLACEHOLDER prefix, since
   // this is now a real, rendered internal-linking row (RelatedCategories).
   relatedLinks: [
-    { label: "Sports Bras", href: "/activewear/sports-bras" },
-    { label: "Shorts", href: "/activewear/shorts" },
-    { label: "Joggers & Track Pants", href: "/activewear/joggers-track-pants" },
-    { label: "Compression & Base Layers", href: "/activewear/compression-base-layers" },
+    { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
+    { label: "Shorts", href: "/capriowear/activewear/shorts" },
+    { label: "Joggers & Track Pants", href: "/capriowear/activewear/joggers-track-pants" },
+    { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
   ],
 };

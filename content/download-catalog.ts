@@ -21,8 +21,8 @@ export const downloadCatalog = {
 
   hero: {
     breadcrumb: [
-      { label: "Home", href: "/" },
-      { label: "Download Catalog", href: "/download-catalog" },
+      { label: "Home", href: "/capriowear" },
+      { label: "Download Catalog", href: "/capriowear/download-catalog" },
     ],
     h1: "Download the Catalog",
     subline: "Every category we manufacture, in one PDF, sent straight to your inbox.",
@@ -61,7 +61,7 @@ export const downloadCatalog = {
       "If anything catches your eye, request a sample and we will start developing it around your brand.",
     ],
     ctaLabel: "Request a Sample",
-    ctaHref: "/request-a-sample",
+    ctaHref: "/capriowear/request-a-sample",
     signOff: "Capriowear, the activewear and teamwear division of Caprio Sports, Sialkot, Pakistan.",
   },
 

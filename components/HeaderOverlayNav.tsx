@@ -118,7 +118,7 @@ export function HeaderOverlayNav({ brand, logo, links, cta, secondaryCta, social
     <header ref={headerRef} className={header.base}>
       <div className={header.inner}>
         <div className={header.brandNavGroup}>
-          <Link href="/" className={header.brand} aria-label={`${brand}, home`}>
+          <Link href="/capriowear" className={header.brand} aria-label={`${brand}, home`}>
             {logo ?? <span className={header.brandName}>{brand}</span>}
           </Link>
 

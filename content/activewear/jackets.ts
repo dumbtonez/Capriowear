@@ -224,7 +224,7 @@ export const jackets: Category = {
       cardSubline: "Lightweight woven shell, DWR, packable",
       image: "",
       imageAlt: "Custom windbreaker jacket, lightweight woven shell, DWR, packable",
-      href: "/activewear/jackets/windbreaker",
+      href: "/capriowear/activewear/jackets/windbreaker",
     },
     {
       status: "draft",
@@ -233,7 +233,7 @@ export const jackets: Category = {
       cardSubline: "Down or synthetic fill, quilted",
       image: "",
       imageAlt: "Custom puffer jacket, down or synthetic fill, quilted",
-      href: "/activewear/jackets/puffer",
+      href: "/capriowear/activewear/jackets/puffer",
     },
     {
       status: "draft",
@@ -242,7 +242,7 @@ export const jackets: Category = {
       cardSubline: "Bonded stretch woven, wind and water",
       image: "",
       imageAlt: "Custom softshell jacket, bonded stretch woven, wind and water",
-      href: "/activewear/jackets/softshell",
+      href: "/capriowear/activewear/jackets/softshell",
     },
     {
       status: "draft",
@@ -251,7 +251,7 @@ export const jackets: Category = {
       cardSubline: "Ultralight, stuffs into its pocket",
       image: "",
       imageAlt: "Custom packable anorak, ultralight, stuffs into its pocket",
-      href: "/activewear/jackets/packable",
+      href: "/capriowear/activewear/jackets/packable",
     },
     {
       status: "draft",
@@ -260,7 +260,7 @@ export const jackets: Category = {
       cardSubline: "Snap or zip front, teamwear staple",
       image: "",
       imageAlt: "Custom coaches jacket, snap or zip front, teamwear staple",
-      href: "/activewear/jackets/coaches",
+      href: "/capriowear/activewear/jackets/coaches",
     },
     {
       status: "draft",
@@ -269,7 +269,7 @@ export const jackets: Category = {
       cardSubline: "Waterproof shell, taped seams",
       image: "",
       imageAlt: "Custom rain shell jacket, waterproof shell, taped seams",
-      href: "/activewear/jackets/rain-shell",
+      href: "/capriowear/activewear/jackets/rain-shell",
     },
     {
       status: "draft",
@@ -278,7 +278,7 @@ export const jackets: Category = {
       cardSubline: "Sleeveless shell or insulated",
       image: "",
       imageAlt: "Custom vest or gilet, sleeveless shell or insulated",
-      href: "/activewear/jackets/vest",
+      href: "/capriowear/activewear/jackets/vest",
     },
   ],
   // Sibling Outwear & Suits-group categories from content/home.ts's own
@@ -288,9 +288,9 @@ export const jackets: Category = {
   // placeholder pages" rule every prior category's own relatedLinks
   // already follows).
   relatedLinks: [
-    { label: "Hoodies", href: "/activewear/hoodies" },
-    { label: "Sweatshirts", href: "/activewear/sweatshirts" },
-    { label: "Compression & Base Layers", href: "/activewear/compression-base-layers" },
-    { label: "Joggers & Track Pants", href: "/activewear/joggers-track-pants" },
+    { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
+    { label: "Sweatshirts", href: "/capriowear/activewear/sweatshirts" },
+    { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
+    { label: "Joggers & Track Pants", href: "/capriowear/activewear/joggers-track-pants" },
   ],
 };

@@ -25,8 +25,8 @@ export const requestASample = {
 
   hero: {
     breadcrumb: [
-      { label: "Home", href: "/" },
-      { label: "Request a Sample", href: "/request-a-sample" },
+      { label: "Home", href: "/capriowear" },
+      { label: "Request a Sample", href: "/capriowear/request-a-sample" },
     ],
     h1: "Request a Sample",
     facts: ["Reply within 24 hours", "MOQ from 50 pieces", "NDA before tech pack", "ISO 9001 certified"],

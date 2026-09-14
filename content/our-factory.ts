@@ -128,8 +128,8 @@ export const ourFactory = {
   hero: {
     eyebrow: "BASED IN SIALKOT, PAKISTAN",
     h1: "A cut-and-sew factory, not a middleman, your brand made under one roof",
-    ctaPrimary: { label: "Request a Sample", href: "/request-a-sample" },
-    ctaSecondary: { label: "Download Catalog", href: "/download-catalog" },
+    ctaPrimary: { label: "Request a Sample", href: "/capriowear/request-a-sample" },
+    ctaSecondary: { label: "Download Catalog", href: "/capriowear/download-catalog" },
     // Layer 2, Figma node 854:1402 ("Youtube Video") -- same video placeholder
     // block as the homepage Hero's own Layer 2 (home.hero.media), continuing
     // the same bg-ink box straight from the banner above (get_metadata: this

@@ -26,18 +26,18 @@ export const sportGroups: CategoryGroup[] = [
     eyebrow: "UNIFORMS",
     h2: "Match and training uniforms, sport by sport",
     categories: [
-      { label: "Cricket", descriptor: "Traditional whites and full-color match kits", href: "/teamwear/cricket" },
+      { label: "Cricket", descriptor: "Traditional whites and full-color match kits", href: "/capriowear/teamwear/cricket" },
       {
         label: "Basketball",
         descriptor: "Sublimated jerseys, reversible practice kits",
-        href: "/teamwear/basketball",
+        href: "/capriowear/teamwear/basketball",
       },
-      { label: "Rugby", descriptor: "Built for contact, grab-resistant construction", href: "/teamwear/rugby" },
-      { label: "Baseball", descriptor: "Button-front jerseys, double-knit pants", href: "/teamwear/baseball" },
-      { label: "Volleyball", descriptor: "Indoor jerseys, libero contrast kits", href: "/teamwear/volleyball" },
-      { label: "Soccer", descriptor: "Match jerseys, goalkeeper kits, home and away", href: "/teamwear/soccer" },
-      { label: "Football", descriptor: "Pro-cut jerseys built to fit over pads", href: "/teamwear/football" },
-      { label: "Ice Hockey", descriptor: "Cut roomy for pads, reinforced elbows", href: "/teamwear/ice-hockey" },
+      { label: "Rugby", descriptor: "Built for contact, grab-resistant construction", href: "/capriowear/teamwear/rugby" },
+      { label: "Baseball", descriptor: "Button-front jerseys, double-knit pants", href: "/capriowear/teamwear/baseball" },
+      { label: "Volleyball", descriptor: "Indoor jerseys, libero contrast kits", href: "/capriowear/teamwear/volleyball" },
+      { label: "Soccer", descriptor: "Match jerseys, goalkeeper kits, home and away", href: "/capriowear/teamwear/soccer" },
+      { label: "Football", descriptor: "Pro-cut jerseys built to fit over pads", href: "/capriowear/teamwear/football" },
+      { label: "Ice Hockey", descriptor: "Cut roomy for pads, reinforced elbows", href: "/capriowear/teamwear/ice-hockey" },
     ],
   },
   {
@@ -47,12 +47,12 @@ export const sportGroups: CategoryGroup[] = [
       {
         label: "Cycling",
         descriptor: "Aero jerseys, bib shorts with a fitted chamois",
-        href: "/teamwear/cycling",
+        href: "/capriowear/teamwear/cycling",
       },
       {
         label: "Rash Guards & Fight Wear",
         descriptor: "IBJJF-legal rash guards and fight shorts",
-        href: "/teamwear/fight-wear",
+        href: "/capriowear/teamwear/fight-wear",
       },
     ],
   },
@@ -76,7 +76,7 @@ export const teamwearHub = {
   hero: {
     breadcrumbItems: [
       { label: "Home", href: "/" },
-      { label: "Teamwear", href: "/teamwear" },
+      { label: "Teamwear", href: "/capriowear/teamwear" },
     ],
     h1: "Custom Teamwear Manufacturer",
     trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "10 sports", "DDP to 20+ countries"],
@@ -186,7 +186,7 @@ export const teamwearHub = {
   finalCta: {
     h2: "Let's build your custom collection",
     subline: "Share your team's colors, sizing, and timeline, and get a sample in 10 to 14 days.",
-    cta: { label: "Request a Sample", href: "/request-a-sample" },
+    cta: { label: "Request a Sample", href: "/capriowear/request-a-sample" },
     // Cross-links to /activewear, /our-factory, /services removed (owner
     // feedback, 2026-09-11: "remove activewear, services, etc links from
     // the cta") -- `FinalCta`'s own `crossLinks` prop stays available for
@@ -201,4 +201,4 @@ export const teamwearHub = {
   },
 };
 
-export const TEAMWEAR_HUB_CANONICAL = `${SITE_URL}/teamwear`;
+export const TEAMWEAR_HUB_CANONICAL = `${SITE_URL}/capriowear/teamwear`;

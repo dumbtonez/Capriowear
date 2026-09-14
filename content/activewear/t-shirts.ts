@@ -261,7 +261,7 @@ export const tShirts: Category = {
       cardSubline: "Universal crew, cotton or performance",
       image: "",
       imageAlt: "Custom crew neck t-shirt manufacturer",
-      href: "/activewear/t-shirts/crew-neck",
+      href: "/capriowear/activewear/t-shirts/crew-neck",
     },
     {
       status: "draft",
@@ -270,7 +270,7 @@ export const tShirts: Category = {
       cardSubline: "Moisture-wicking poly, athletic cut",
       image: "",
       imageAlt: "Custom performance t-shirt manufacturer",
-      href: "/activewear/t-shirts/performance",
+      href: "/capriowear/activewear/t-shirts/performance",
     },
     {
       status: "draft",
@@ -279,7 +279,7 @@ export const tShirts: Category = {
       cardSubline: "Heavyweight, structured streetwear fit",
       image: "",
       imageAlt: "Custom oversized boxy t-shirt manufacturer",
-      href: "/activewear/t-shirts/oversized",
+      href: "/capriowear/activewear/t-shirts/oversized",
     },
     {
       status: "draft",
@@ -288,7 +288,7 @@ export const tShirts: Category = {
       cardSubline: "V-neckline, cotton or blend",
       image: "",
       imageAlt: "Custom v-neck t-shirt manufacturer",
-      href: "/activewear/t-shirts/v-neck",
+      href: "/capriowear/activewear/t-shirts/v-neck",
     },
     {
       status: "draft",
@@ -297,7 +297,7 @@ export const tShirts: Category = {
       cardSubline: "Closer cut through the body",
       image: "",
       imageAlt: "Custom slim-fit t-shirt manufacturer",
-      href: "/activewear/t-shirts/slim-fit",
+      href: "/capriowear/activewear/t-shirts/slim-fit",
     },
     {
       status: "draft",
@@ -306,7 +306,7 @@ export const tShirts: Category = {
       cardSubline: "Dropped shoulder, streetwear staple",
       image: "",
       imageAlt: "Custom drop-shoulder t-shirt manufacturer",
-      href: "/activewear/t-shirts/drop-shoulder",
+      href: "/capriowear/activewear/t-shirts/drop-shoulder",
     },
     {
       status: "draft",
@@ -315,7 +315,7 @@ export const tShirts: Category = {
       cardSubline: "Diagonal raglan sleeve, vintage-athletic",
       image: "",
       imageAlt: "Custom raglan t-shirt manufacturer",
-      href: "/activewear/t-shirts/raglan",
+      href: "/capriowear/activewear/t-shirts/raglan",
     },
     {
       status: "draft",
@@ -324,7 +324,7 @@ export const tShirts: Category = {
       cardSubline: "Chest pocket detail",
       image: "",
       imageAlt: "Custom pocket t-shirt manufacturer",
-      href: "/activewear/t-shirts/pocket",
+      href: "/capriowear/activewear/t-shirts/pocket",
     },
     {
       status: "draft",
@@ -333,7 +333,7 @@ export const tShirts: Category = {
       cardSubline: "Extended body length",
       image: "",
       imageAlt: "Custom longline t-shirt manufacturer",
-      href: "/activewear/t-shirts/longline",
+      href: "/capriowear/activewear/t-shirts/longline",
     },
   ],
   // Sibling Tops-group categories from content/home.ts's own
@@ -342,9 +342,9 @@ export const tShirts: Category = {
   // establishes -- these become live the moment each one gets its own
   // content file.
   relatedLinks: [
-    { label: "Sports Bras", href: "/activewear/sports-bras" },
-    { label: "Tank Tops", href: "/activewear/tank-tops" },
-    { label: "Long-Sleeve Tops", href: "/activewear/long-sleeve-tops" },
-    { label: "Shorts", href: "/activewear/shorts" },
+    { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
+    { label: "Tank Tops", href: "/capriowear/activewear/tank-tops" },
+    { label: "Long-Sleeve Tops", href: "/capriowear/activewear/long-sleeve-tops" },
+    { label: "Shorts", href: "/capriowear/activewear/shorts" },
   ],
 };

@@ -51,7 +51,7 @@ export type StyleCard = {
    * for a screen reader or image search with no card context around it.
    */
   imageAlt: string;
-  /** Root-relative, e.g. "/activewear/leggings/high-waisted-compression". */
+  /** Root-relative, e.g. "/capriowear/activewear/leggings/high-waisted-compression". */
   href: string;
   /**
    * The PDP's own product name, e.g. "High-Waisted Compression" (Figma node

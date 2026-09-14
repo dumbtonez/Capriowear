@@ -131,8 +131,8 @@ export const termsOfService = {
 
   hero: {
     breadcrumb: [
-      { label: "Home", href: "/" },
-      { label: "Terms of Service", href: "/terms-of-service" },
+      { label: "Home", href: "/capriowear" },
+      { label: "Terms of Service", href: "/capriowear/terms-of-service" },
     ],
     h1: "Terms of Service",
     // Open item, same as privacyPolicy.hero.lastUpdated: insert the real

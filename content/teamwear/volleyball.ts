@@ -205,7 +205,7 @@ export const volleyball: Category = {
       cardSubline: "Close-fit, short or long sleeve, fully sublimated",
       image: "",
       imageAlt: "Custom volleyball jersey, close-fit, short or long sleeve, fully sublimated",
-      href: "/teamwear/volleyball/indoor-jersey",
+      href: "/capriowear/teamwear/volleyball/indoor-jersey",
       pdpTitle: "Volleyball Jersey",
       sku: "CAP-VOL-01",
       pdpHeading: "Custom Volleyball Jersey Manufacturer",
@@ -238,10 +238,10 @@ export const volleyball: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Women's Volleyball Shorts", href: "/teamwear/volleyball/fitted-shorts" },
-        { label: "Libero Jersey", href: "/teamwear/volleyball" },
-        { label: "Men's Shorts", href: "/teamwear/volleyball" },
-        { label: "See All", href: "/teamwear/volleyball" },
+        { label: "Women's Volleyball Shorts", href: "/capriowear/teamwear/volleyball/fitted-shorts" },
+        { label: "Libero Jersey", href: "/capriowear/teamwear/volleyball" },
+        { label: "Men's Shorts", href: "/capriowear/teamwear/volleyball" },
+        { label: "See All", href: "/capriowear/teamwear/volleyball" },
       ],
       specifications: [
         { label: "Style", value: "Indoor volleyball jersey (base type)" },
@@ -267,7 +267,7 @@ export const volleyball: Category = {
       cardSubline: "Fitted poly-spandex, four-way stretch",
       image: "",
       imageAlt: "Custom women's volleyball shorts, fitted poly-spandex, four-way stretch",
-      href: "/teamwear/volleyball/fitted-shorts",
+      href: "/capriowear/teamwear/volleyball/fitted-shorts",
       pdpTitle: "Women's Volleyball Shorts",
       sku: "CAP-VOL-02",
       pdpHeading: "Custom Volleyball Shorts Manufacturer",
@@ -299,10 +299,10 @@ export const volleyball: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Volleyball Jersey", href: "/teamwear/volleyball/indoor-jersey" },
-        { label: "Libero Jersey", href: "/teamwear/volleyball" },
-        { label: "Men's Shorts", href: "/teamwear/volleyball" },
-        { label: "See All", href: "/teamwear/volleyball" },
+        { label: "Volleyball Jersey", href: "/capriowear/teamwear/volleyball/indoor-jersey" },
+        { label: "Libero Jersey", href: "/capriowear/teamwear/volleyball" },
+        { label: "Men's Shorts", href: "/capriowear/teamwear/volleyball" },
+        { label: "See All", href: "/capriowear/teamwear/volleyball" },
       ],
       specifications: [
         { label: "Style", value: "Women's fitted volleyball short or brief (base type)" },
@@ -324,7 +324,7 @@ export const volleyball: Category = {
       cardSubline: "Legal contrast colorway of the team jersey",
       image: "",
       imageAlt: "Custom libero jersey, legal contrast colorway of the team jersey",
-      href: "/teamwear/volleyball/libero-jersey",
+      href: "/capriowear/teamwear/volleyball/libero-jersey",
     },
     {
       status: "draft",
@@ -333,7 +333,7 @@ export const volleyball: Category = {
       cardSubline: "Looser athletic cut",
       image: "",
       imageAlt: "Custom men's volleyball shorts, looser athletic cut",
-      href: "/teamwear/volleyball/mens-shorts",
+      href: "/capriowear/teamwear/volleyball/mens-shorts",
     },
     {
       status: "draft",
@@ -342,7 +342,7 @@ export const volleyball: Category = {
       cardSubline: "Tank and brief, or two-piece",
       image: "",
       imageAlt: "Custom beach volleyball uniform, tank and brief, or two-piece",
-      href: "/teamwear/volleyball/beach-uniform",
+      href: "/capriowear/teamwear/volleyball/beach-uniform",
     },
     {
       status: "draft",
@@ -351,7 +351,7 @@ export const volleyball: Category = {
       cardSubline: "Zip warm-up, tricot or fleece",
       image: "",
       imageAlt: "Custom volleyball warm-up jacket, zip warm-up, tricot or fleece",
-      href: "/teamwear/volleyball/warm-up-jacket",
+      href: "/capriowear/teamwear/volleyball/warm-up-jacket",
     },
     {
       status: "draft",
@@ -360,7 +360,7 @@ export const volleyball: Category = {
       cardSubline: "Straight or tapered, tricot or fleece",
       image: "",
       imageAlt: "Custom volleyball warm-up pants, straight or tapered, tricot or fleece",
-      href: "/teamwear/volleyball/warm-up-pants",
+      href: "/capriowear/teamwear/volleyball/warm-up-pants",
     },
   ],
   // Only live pages (owner spec: "Never link an unbuilt PLP or unpublished
@@ -368,11 +368,11 @@ export const volleyball: Category = {
   // Basketball, Rugby and Baseball PLPs and real Activewear PLPs are linked
   // instead. Add more sibling sport PLPs here as they publish.
   relatedLinks: [
-    { label: "Cricket", href: "/teamwear/cricket" },
-    { label: "Basketball", href: "/teamwear/basketball" },
-    { label: "Rugby", href: "/teamwear/rugby" },
-    { label: "Baseball", href: "/teamwear/baseball" },
-    { label: "Compression & Base Layers", href: "/activewear/compression-base-layers" },
-    { label: "Track Jackets & Zip-Ups", href: "/activewear/track-jackets" },
+    { label: "Cricket", href: "/capriowear/teamwear/cricket" },
+    { label: "Basketball", href: "/capriowear/teamwear/basketball" },
+    { label: "Rugby", href: "/capriowear/teamwear/rugby" },
+    { label: "Baseball", href: "/capriowear/teamwear/baseball" },
+    { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
+    { label: "Track Jackets & Zip-Ups", href: "/capriowear/activewear/track-jackets" },
   ],
 };

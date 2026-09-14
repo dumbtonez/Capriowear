@@ -100,6 +100,34 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // Capriowear's routes moved from the repo root to /capriowear (2026-09-14
+  // Capriosports parent-site routing task) -- this site is live with real
+  // indexed search traffic, so every old URL 301s (the doc term; Next's
+  // `permanent: true` actually issues a 308, which preserves the original
+  // HTTP method across the redirect and is the framework's own stated
+  // reason it doesn't offer a literal 301/302 here -- functionally
+  // equivalent for SEO). `:path*` matches zero or more segments in one
+  // rule, so both the bare old path and every sub-path redirect together
+  // (confirmed against Next's own redirects() docs, which give this exact
+  // shape as the way to cover a whole moved section in one entry).
+  //
+  // No rule for "/" itself -- that URL now serves the new Capriosports
+  // parent-site homepage (app/page.tsx), not a redirect to Capriowear.
+  // Gear (/lifting-gears, /boxing-and-mma) and every other root-level
+  // route (/styleguide, /studio, /api/*) are unaffected by this move and
+  // have no redirect here.
+  async redirects() {
+    return [
+      { source: "/activewear/:path*", destination: "/capriowear/activewear/:path*", permanent: true },
+      { source: "/teamwear/:path*", destination: "/capriowear/teamwear/:path*", permanent: true },
+      { source: "/services", destination: "/capriowear/services", permanent: true },
+      { source: "/our-factory", destination: "/capriowear/our-factory", permanent: true },
+      { source: "/download-catalog", destination: "/capriowear/download-catalog", permanent: true },
+      { source: "/request-a-sample", destination: "/capriowear/request-a-sample", permanent: true },
+      { source: "/privacy-policy", destination: "/capriowear/privacy-policy", permanent: true },
+      { source: "/terms-of-service", destination: "/capriowear/terms-of-service", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

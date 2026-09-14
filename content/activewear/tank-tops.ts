@@ -236,7 +236,7 @@ export const tankTops: Category = {
       cardSubline: "Standard armhole, straight or racerback",
       image: "",
       imageAlt: "Custom classic athletic tank top, standard armhole, straight or racerback",
-      href: "/activewear/tank-tops/athletic",
+      href: "/capriowear/activewear/tank-tops/athletic",
     },
     {
       status: "draft",
@@ -245,7 +245,7 @@ export const tankTops: Category = {
       cardSubline: "Y-back, 180 to 220 GSM, stretch fit",
       image: "",
       imageAlt: "Custom racerback tank top, Y-back, 180 to 220 GSM stretch fit",
-      href: "/activewear/tank-tops/racerback",
+      href: "/capriowear/activewear/tank-tops/racerback",
     },
     {
       status: "draft",
@@ -254,7 +254,7 @@ export const tankTops: Category = {
       cardSubline: "Deep-cut armhole, ultra-narrow strap",
       image: "",
       imageAlt: "Custom stringer tank top, deep-cut armhole, ultra-narrow strap",
-      href: "/activewear/tank-tops/stringer",
+      href: "/capriowear/activewear/tank-tops/stringer",
     },
     {
       status: "draft",
@@ -263,7 +263,7 @@ export const tankTops: Category = {
       cardSubline: "Dropped armhole, wider than a tee",
       image: "",
       imageAlt: "Custom muscle tank top, dropped armhole, wider than a tee",
-      href: "/activewear/tank-tops/muscle",
+      href: "/capriowear/activewear/tank-tops/muscle",
     },
     {
       status: "draft",
@@ -272,7 +272,7 @@ export const tankTops: Category = {
       cardSubline: "Shortened body length",
       image: "",
       imageAlt: "Custom cropped tank top, shortened body length",
-      href: "/activewear/tank-tops/cropped",
+      href: "/capriowear/activewear/tank-tops/cropped",
     },
     {
       status: "draft",
@@ -281,7 +281,7 @@ export const tankTops: Category = {
       cardSubline: "Loose streetwear fit",
       image: "",
       imageAlt: "Custom oversized tank top, loose streetwear fit",
-      href: "/activewear/tank-tops/oversized",
+      href: "/capriowear/activewear/tank-tops/oversized",
     },
     {
       status: "draft",
@@ -290,7 +290,7 @@ export const tankTops: Category = {
       cardSubline: "Rib-knit, fitted layering",
       image: "",
       imageAlt: "Custom ribbed tank top, rib-knit, fitted layering",
-      href: "/activewear/tank-tops/ribbed",
+      href: "/capriowear/activewear/tank-tops/ribbed",
     },
     {
       status: "draft",
@@ -299,7 +299,7 @@ export const tankTops: Category = {
       cardSubline: "Extended body length",
       image: "",
       imageAlt: "Custom longline tank top, extended body length",
-      href: "/activewear/tank-tops/longline",
+      href: "/capriowear/activewear/tank-tops/longline",
     },
     {
       status: "draft",
@@ -308,7 +308,7 @@ export const tankTops: Category = {
       cardSubline: "Built-in support, women's",
       image: "",
       imageAlt: "Custom shelf-bra tank top, built-in support, women's",
-      href: "/activewear/tank-tops/shelf-bra",
+      href: "/capriowear/activewear/tank-tops/shelf-bra",
     },
   ],
   // Sibling Tops-group categories from content/home.ts's own
@@ -317,9 +317,9 @@ export const tankTops: Category = {
   // establishes -- these become live the moment each one gets its own
   // content file.
   relatedLinks: [
-    { label: "Sports Bras", href: "/activewear/sports-bras" },
-    { label: "T-Shirts", href: "/activewear/t-shirts" },
-    { label: "Long-Sleeve Tops", href: "/activewear/long-sleeve-tops" },
-    { label: "Shorts", href: "/activewear/shorts" },
+    { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
+    { label: "T-Shirts", href: "/capriowear/activewear/t-shirts" },
+    { label: "Long-Sleeve Tops", href: "/capriowear/activewear/long-sleeve-tops" },
+    { label: "Shorts", href: "/capriowear/activewear/shorts" },
   ],
 };

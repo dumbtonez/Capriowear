@@ -364,7 +364,7 @@ export function RequestSampleForm({ content }: RequestSampleFormProps) {
             <div className={requestSample.consentRow}>
               <p className={requestSample.consentText}>
                 {content.consentPrefix}
-                <a href="/privacy-policy" className={requestSample.consentLink}>
+                <a href="/capriowear/privacy-policy" className={requestSample.consentLink}>
                   {content.consentLinkText}
                 </a>
                 {content.consentSuffix}

@@ -4,12 +4,25 @@
 // piece of structured data, and the default page title/description reads
 // from here -- never hand-typed a second time elsewhere. See docs/06-seo.md.
 //
-// SITE_URL is the real public URL, not this app's own internal routing root.
-// This Next app is mounted at /capriowear on www.capriosports.com (the
-// parent domain splits into "capriogear", the existing WordPress site, and
-// "capriowear", this app) -- so every canonical/OG/sitemap URL must read
-// https://www.capriosports.com/capriowear..., even though every route inside
-// this app itself still starts at "/". Confirmed by the owner, 2026-08-25.
+// SITE_URL is the bare production domain -- www.capriosports.com now serves
+// several real divisions from this one Next app: Capriowear (apparel/
+// teamwear) under a real app/capriowear/ route tree, Gear (Lifting Gears,
+// Boxing & MMA) at root (app/lifting-gears, app/boxing-and-mma), and the
+// Capriosports parent site itself at root. Every division builds its own
+// canonical/OG/sitemap URLs as `${SITE_URL}${its own real route path}` --
+// Capriowear's own path-building explicitly includes its "/capriowear"
+// segment (it isn't baked into this constant), since that segment is real
+// routing now, not a virtual prefix.
+//
+// Corrected 2026-09-14 (Capriosports parent-site routing task): this used to
+// hardcode ".../capriowear" here, back when that segment was a virtual
+// prefix layered on top of a non-existent mount (see docs/05-plan.md's
+// decision log) -- no route in this app ever actually lived under
+// /capriowear at the time. Now that Capriowear's routes have really moved
+// under app/capriowear/, keeping the suffix here would double it in every
+// Capriowear URL; removing it happens to also fix Gear's own canonical URLs,
+// which were incorrectly resolving to .../capriowear/lifting-gears even
+// though Gear has always rendered at the real root /lifting-gears.
 //
 // Reads from NEXT_PUBLIC_SITE_URL (SEO/metadata audit, 2026-09-06) so a
 // Vercel preview/staging deploy can point this at its own URL without
@@ -17,7 +30,7 @@
 // to this exact literal -- canonical/sitemap/OG URLs never silently break
 // to localhost or a *.vercel.app preview URL just because the env var
 // wasn't configured yet.
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.capriosports.com/capriowear";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.capriosports.com";
 
 export const SITE_NAME = "Capriowear";
 

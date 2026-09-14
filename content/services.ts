@@ -76,8 +76,8 @@ export const services = {
   // for this page yet, so this is read directly off the Figma text layer.
   hero: {
     h1: "Custom activewear and teamwear, from fabric to packaging",
-    ctaPrimary: { label: "Request a Sample", href: "/request-a-sample" },
-    ctaSecondary: { label: "Download Catalog", href: "/download-catalog" },
+    ctaPrimary: { label: "Request a Sample", href: "/capriowear/request-a-sample" },
+    ctaSecondary: { label: "Download Catalog", href: "/capriowear/download-catalog" },
     // Mobile-only ticker copy (owner, 2026-09-07): the same 9 items
     // `home.customOfferings.items` lists individually (Design, Fabric, Fit,
     // Color, Print & Embroidery, Branding, Trims, Labels, Packaging),
@@ -299,8 +299,8 @@ export const services = {
   finalCta: {
     h2: "Let's build your custom collection",
     subline: "Share your tech pack, sketch or a reference. We'll come back within 24 hours with next steps.",
-    cta: { label: "Request a Sample", href: "/request-a-sample" },
-    secondaryCta: { label: "Download Catalog", href: "/download-catalog" },
+    cta: { label: "Request a Sample", href: "/capriowear/request-a-sample" },
+    secondaryCta: { label: "Download Catalog", href: "/capriowear/download-catalog" },
   },
 
   // The 5 items are owner-specified verbatim, a shorter list than home.ts's

@@ -201,7 +201,7 @@ export const tracksuits: Category = {
       cardSubline: "Brushed tricot jacket and pant, full zip",
       image: "",
       imageAlt: "Custom classic tricot tracksuit, brushed tricot jacket and pant, full zip",
-      href: "/activewear/tracksuits/classic",
+      href: "/capriowear/activewear/tracksuits/classic",
     },
     {
       status: "draft",
@@ -210,7 +210,7 @@ export const tracksuits: Category = {
       cardSubline: "Contrast stripes and piping",
       image: "",
       imageAlt: "Custom retro striped tracksuit, contrast stripes and piping",
-      href: "/activewear/tracksuits/retro-striped",
+      href: "/capriowear/activewear/tracksuits/retro-striped",
     },
     {
       status: "draft",
@@ -219,7 +219,7 @@ export const tracksuits: Category = {
       cardSubline: "Closer-cut jacket and pant",
       image: "",
       imageAlt: "Custom slim tapered tracksuit, closer-cut jacket and pant",
-      href: "/activewear/tracksuits/slim",
+      href: "/capriowear/activewear/tracksuits/slim",
     },
     {
       status: "draft",
@@ -228,7 +228,7 @@ export const tracksuits: Category = {
       cardSubline: "Streetwear fit",
       image: "",
       imageAlt: "Custom oversized tracksuit, streetwear fit",
-      href: "/activewear/tracksuits/oversized",
+      href: "/capriowear/activewear/tracksuits/oversized",
     },
     {
       status: "draft",
@@ -237,7 +237,7 @@ export const tracksuits: Category = {
       cardSubline: "Funnel-collar jacket, tapered pant",
       image: "",
       imageAlt: "Custom funnel-neck tracksuit, funnel-collar jacket, tapered pant",
-      href: "/activewear/tracksuits/funnel-neck",
+      href: "/capriowear/activewear/tracksuits/funnel-neck",
     },
     {
       status: "draft",
@@ -246,7 +246,7 @@ export const tracksuits: Category = {
       cardSubline: "Flexible pieces, team roster",
       image: "",
       imageAlt: "Custom warm-up tracksuit, flexible pieces, team roster",
-      href: "/activewear/tracksuits/warm-up",
+      href: "/capriowear/activewear/tracksuits/warm-up",
     },
     {
       status: "draft",
@@ -255,7 +255,7 @@ export const tracksuits: Category = {
       cardSubline: "Satin nylon, varsity-style jacket",
       image: "",
       imageAlt: "Custom satin tracksuit, satin nylon, varsity-style jacket",
-      href: "/activewear/tracksuits/satin",
+      href: "/capriowear/activewear/tracksuits/satin",
     },
   ],
   // Sibling Outwear & Suits-group categories from content/home.ts's own
@@ -264,9 +264,9 @@ export const tracksuits: Category = {
   // "only real hrefs, no invented placeholder pages" rule every prior
   // category's own relatedLinks already follows).
   relatedLinks: [
-    { label: "Jackets", href: "/activewear/jackets" },
-    { label: "Track Jackets & Zip-Ups", href: "/activewear/track-jackets" },
-    { label: "Hoodies", href: "/activewear/hoodies" },
-    { label: "Joggers & Track Pants", href: "/activewear/joggers-track-pants" },
+    { label: "Jackets", href: "/capriowear/activewear/jackets" },
+    { label: "Track Jackets & Zip-Ups", href: "/capriowear/activewear/track-jackets" },
+    { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
+    { label: "Joggers & Track Pants", href: "/capriowear/activewear/joggers-track-pants" },
   ],
 };

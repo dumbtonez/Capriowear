@@ -202,7 +202,7 @@ export const baseball: Category = {
       cardSubline: "Full-button or two-button placket, fully sublimated",
       image: "",
       imageAlt: "Custom button-front baseball jersey, full-button or two-button placket, fully sublimated",
-      href: "/teamwear/baseball/button-front-jersey",
+      href: "/capriowear/teamwear/baseball/button-front-jersey",
       pdpTitle: "Button-Front Jersey",
       sku: "CAP-BSB-01",
       pdpHeading: "Custom Baseball Jersey Manufacturer",
@@ -235,10 +235,10 @@ export const baseball: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Baseball Pants", href: "/teamwear/baseball/double-knit-pants" },
-        { label: "Pullover Jersey", href: "/teamwear/baseball" },
-        { label: "Batting-Practice Jersey", href: "/teamwear/baseball" },
-        { label: "See All", href: "/teamwear/baseball" },
+        { label: "Baseball Pants", href: "/capriowear/teamwear/baseball/double-knit-pants" },
+        { label: "Pullover Jersey", href: "/capriowear/teamwear/baseball" },
+        { label: "Batting-Practice Jersey", href: "/capriowear/teamwear/baseball" },
+        { label: "See All", href: "/capriowear/teamwear/baseball" },
       ],
       specifications: [
         { label: "Style", value: "Button-front baseball jersey (base type)" },
@@ -263,7 +263,7 @@ export const baseball: Category = {
       cardSubline: "Double-knit, reinforced knee option, full-length or knicker",
       image: "",
       imageAlt: "Custom double-knit baseball pants, reinforced knee option, full-length or knicker",
-      href: "/teamwear/baseball/double-knit-pants",
+      href: "/capriowear/teamwear/baseball/double-knit-pants",
       pdpTitle: "Baseball Pants",
       sku: "CAP-BSB-02",
       pdpHeading: "Custom Baseball Pants Manufacturer",
@@ -295,10 +295,10 @@ export const baseball: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Knicker Pants", href: "/teamwear/baseball" },
-        { label: "Button-Front Jersey", href: "/teamwear/baseball/button-front-jersey" },
-        { label: "Sliding Shorts", href: "/teamwear/baseball" },
-        { label: "See All", href: "/teamwear/baseball" },
+        { label: "Knicker Pants", href: "/capriowear/teamwear/baseball" },
+        { label: "Button-Front Jersey", href: "/capriowear/teamwear/baseball/button-front-jersey" },
+        { label: "Sliding Shorts", href: "/capriowear/teamwear/baseball" },
+        { label: "See All", href: "/capriowear/teamwear/baseball" },
       ],
       specifications: [
         { label: "Style", value: "Baseball pants, double-knit (base type)" },
@@ -321,7 +321,7 @@ export const baseball: Category = {
       cardSubline: "Simpler placket, common softball style",
       image: "",
       imageAlt: "Custom pullover baseball jersey, simpler placket, common softball style",
-      href: "/teamwear/baseball/pullover-jersey",
+      href: "/capriowear/teamwear/baseball/pullover-jersey",
     },
     {
       status: "draft",
@@ -330,7 +330,7 @@ export const baseball: Category = {
       cardSubline: "Knee-length, worn with stirrup socks",
       image: "",
       imageAlt: "Custom knicker baseball pants, knee-length, worn with stirrup socks",
-      href: "/teamwear/baseball/knicker-pants",
+      href: "/capriowear/teamwear/baseball/knicker-pants",
     },
     {
       status: "draft",
@@ -339,7 +339,7 @@ export const baseball: Category = {
       cardSubline: "Lightweight practice top",
       image: "",
       imageAlt: "Custom batting-practice jersey, lightweight practice top",
-      href: "/teamwear/baseball/batting-practice-jersey",
+      href: "/capriowear/teamwear/baseball/batting-practice-jersey",
     },
     {
       status: "draft",
@@ -348,7 +348,7 @@ export const baseball: Category = {
       cardSubline: "Padded slide protection under the pant",
       image: "",
       imageAlt: "Custom sliding shorts, padded slide protection under the pant",
-      href: "/teamwear/baseball/sliding-shorts",
+      href: "/capriowear/teamwear/baseball/sliding-shorts",
     },
     {
       status: "draft",
@@ -357,7 +357,7 @@ export const baseball: Category = {
       cardSubline: "Dugout zip jacket, tricot or fleece",
       image: "",
       imageAlt: "Custom baseball warm-up jacket, dugout zip jacket, tricot or fleece",
-      href: "/teamwear/baseball/warm-up-jacket",
+      href: "/capriowear/teamwear/baseball/warm-up-jacket",
     },
   ],
   // Only live pages (owner spec: "Never link an unbuilt PLP or unpublished
@@ -365,10 +365,10 @@ export const baseball: Category = {
   // Basketball and Rugby PLPs and real Activewear PLPs are linked instead.
   // Add more sibling sport PLPs here as they publish.
   relatedLinks: [
-    { label: "Cricket", href: "/teamwear/cricket" },
-    { label: "Basketball", href: "/teamwear/basketball" },
-    { label: "Rugby", href: "/teamwear/rugby" },
-    { label: "T-Shirts", href: "/activewear/t-shirts" },
-    { label: "Track Jackets & Zip-Ups", href: "/activewear/track-jackets" },
+    { label: "Cricket", href: "/capriowear/teamwear/cricket" },
+    { label: "Basketball", href: "/capriowear/teamwear/basketball" },
+    { label: "Rugby", href: "/capriowear/teamwear/rugby" },
+    { label: "T-Shirts", href: "/capriowear/activewear/t-shirts" },
+    { label: "Track Jackets & Zip-Ups", href: "/capriowear/activewear/track-jackets" },
   ],
 };

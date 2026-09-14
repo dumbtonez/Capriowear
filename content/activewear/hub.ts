@@ -25,24 +25,24 @@ export const categoryGroups: CategoryGroup[] = [
     eyebrow: "TOPS",
     h2: "Everyday tops, built for performance",
     categories: [
-      { label: "Sports Bras", descriptor: "High, medium and light support", href: "/activewear/sports-bras" },
-      { label: "Tank Tops", descriptor: "Racerback to stringer cuts", href: "/activewear/tank-tops" },
-      { label: "T-Shirts", descriptor: "Performance and everyday knits", href: "/activewear/t-shirts" },
-      { label: "Long-Sleeve Tops", descriptor: "Fitted performance layers", href: "/activewear/long-sleeve-tops" },
-      { label: "Hoodies", descriptor: "French terry to brushed fleece", href: "/activewear/hoodies" },
-      { label: "Sweatshirts", descriptor: "Crewneck and half-zip fleece", href: "/activewear/sweatshirts" },
+      { label: "Sports Bras", descriptor: "High, medium and light support", href: "/capriowear/activewear/sports-bras" },
+      { label: "Tank Tops", descriptor: "Racerback to stringer cuts", href: "/capriowear/activewear/tank-tops" },
+      { label: "T-Shirts", descriptor: "Performance and everyday knits", href: "/capriowear/activewear/t-shirts" },
+      { label: "Long-Sleeve Tops", descriptor: "Fitted performance layers", href: "/capriowear/activewear/long-sleeve-tops" },
+      { label: "Hoodies", descriptor: "French terry to brushed fleece", href: "/capriowear/activewear/hoodies" },
+      { label: "Sweatshirts", descriptor: "Crewneck and half-zip fleece", href: "/capriowear/activewear/sweatshirts" },
     ],
   },
   {
     eyebrow: "BOTTOMS",
     h2: "Leggings, shorts and everything between",
     categories: [
-      { label: "Leggings", descriptor: "Compression to flare and scrunch", href: "/activewear/leggings" },
-      { label: "Shorts", descriptor: "Training, running and lined styles", href: "/activewear/shorts" },
+      { label: "Leggings", descriptor: "Compression to flare and scrunch", href: "/capriowear/activewear/leggings" },
+      { label: "Shorts", descriptor: "Training, running and lined styles", href: "/capriowear/activewear/shorts" },
       {
         label: "Joggers & Track Pants",
         descriptor: "Fleece joggers to woven track pants",
-        href: "/activewear/joggers-track-pants",
+        href: "/capriowear/activewear/joggers-track-pants",
       },
     ],
   },
@@ -50,31 +50,31 @@ export const categoryGroups: CategoryGroup[] = [
     eyebrow: "SETS AND ONE-PIECES",
     h2: "Matched sets and one-piece builds",
     categories: [
-      { label: "Yoga Sets", descriptor: "Cut and dyed together for a true match", href: "/activewear/yoga-sets" },
-      { label: "Bodysuits", descriptor: "Fitted one-piece, hip-length closure", href: "/activewear/bodysuits" },
-      { label: "Jumpsuits", descriptor: "Full-length and cropped unitards", href: "/activewear/jumpsuits" },
+      { label: "Yoga Sets", descriptor: "Cut and dyed together for a true match", href: "/capriowear/activewear/yoga-sets" },
+      { label: "Bodysuits", descriptor: "Fitted one-piece, hip-length closure", href: "/capriowear/activewear/bodysuits" },
+      { label: "Jumpsuits", descriptor: "Full-length and cropped unitards", href: "/capriowear/activewear/jumpsuits" },
     ],
   },
   {
     eyebrow: "OUTERWEAR AND SUITS",
     h2: "Jackets, tracksuits and warm-up wear",
     categories: [
-      { label: "Jackets", descriptor: "Woven shells, water-repellent to waterproof", href: "/activewear/jackets" },
+      { label: "Jackets", descriptor: "Woven shells, water-repellent to waterproof", href: "/capriowear/activewear/jackets" },
       {
         label: "Track Jackets & Zip-Ups",
         descriptor: "Brushed tricot, full and quarter zip",
-        href: "/activewear/track-jackets",
+        href: "/capriowear/activewear/track-jackets",
       },
-      { label: "Tracksuits", descriptor: "Matched tricot warm-up sets", href: "/activewear/tracksuits" },
+      { label: "Tracksuits", descriptor: "Matched tricot warm-up sets", href: "/capriowear/activewear/tracksuits" },
       {
         label: "Sweatsuits",
         descriptor: "Matched fleece hoodie and sweatpant sets",
-        href: "/activewear/sweatsuits",
+        href: "/capriowear/activewear/sweatsuits",
       },
       {
         label: "Running Wear",
         descriptor: "A curated running edit across categories",
-        href: "/activewear/running-wear",
+        href: "/capriowear/activewear/running-wear",
       },
     ],
   },
@@ -85,7 +85,7 @@ export const categoryGroups: CategoryGroup[] = [
       {
         label: "Compression & Base Layers",
         descriptor: "Documented mmHg, zonal panelling",
-        href: "/activewear/compression-base-layers",
+        href: "/capriowear/activewear/compression-base-layers",
       },
     ],
   },
@@ -108,7 +108,7 @@ export const activewearHub = {
   hero: {
     breadcrumbItems: [
       { label: "Home", href: "/" },
-      { label: "Activewear", href: "/activewear" },
+      { label: "Activewear", href: "/capriowear/activewear" },
     ],
     h1: "Custom Activewear Manufacturer",
     trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "18 categories", "DDP to 20+ countries"],
@@ -193,11 +193,11 @@ export const activewearHub = {
   finalCta: {
     h2: "Let's build your custom collection",
     subline: "Share your tech pack, sketch or a reference. We'll come back within 24 hours with next steps.",
-    cta: { label: "Request a Sample", href: "/request-a-sample" },
+    cta: { label: "Request a Sample", href: "/capriowear/request-a-sample" },
     crossLinks: [
-      { label: "Teamwear", href: "/teamwear" },
-      { label: "Our Factory", href: "/our-factory" },
-      { label: "Services", href: "/services" },
+      { label: "Teamwear", href: "/capriowear/teamwear" },
+      { label: "Our Factory", href: "/capriowear/our-factory" },
+      { label: "Services", href: "/capriowear/services" },
     ],
     complianceBar: [
       "NDA before tech pack",
@@ -209,4 +209,4 @@ export const activewearHub = {
   },
 };
 
-export const ACTIVEWEAR_HUB_CANONICAL = `${SITE_URL}/activewear`;
+export const ACTIVEWEAR_HUB_CANONICAL = `${SITE_URL}/capriowear/activewear`;

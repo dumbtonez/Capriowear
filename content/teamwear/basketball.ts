@@ -206,7 +206,7 @@ export const basketball: Category = {
       cardSubline: "Sleeveless sublimated, crew or V-neck",
       image: "",
       imageAlt: "Custom basketball game jersey, sleeveless sublimated, crew or V-neck",
-      href: "/teamwear/basketball/game-jersey",
+      href: "/capriowear/teamwear/basketball/game-jersey",
       pdpTitle: "Game Jersey",
       sku: "CAP-BKB-01",
       pdpHeading: "Custom Basketball Jersey Manufacturer",
@@ -242,11 +242,11 @@ export const basketball: Category = {
       // sibling style stays draft (owner spec) -- no dead links to a PDP
       // that doesn't exist yet.
       relatedStyleTags: [
-        { label: "Basketball Shorts", href: "/teamwear/basketball" },
-        { label: "Reversible Practice Jersey", href: "/teamwear/basketball" },
-        { label: "Shooting Shirt", href: "/teamwear/basketball" },
-        { label: "Scrimmage Vest", href: "/teamwear/basketball" },
-        { label: "See All", href: "/teamwear/basketball" },
+        { label: "Basketball Shorts", href: "/capriowear/teamwear/basketball" },
+        { label: "Reversible Practice Jersey", href: "/capriowear/teamwear/basketball" },
+        { label: "Shooting Shirt", href: "/capriowear/teamwear/basketball" },
+        { label: "Scrimmage Vest", href: "/capriowear/teamwear/basketball" },
+        { label: "See All", href: "/capriowear/teamwear/basketball" },
       ],
       specifications: [
         { label: "Style", value: "Basketball game jersey, sleeveless (base type)" },
@@ -285,7 +285,7 @@ export const basketball: Category = {
       cardSubline: "Longer inseam, mesh side panels, drawcord waist",
       image: "",
       imageAlt: "Custom basketball shorts, longer inseam, mesh side panels",
-      href: "/teamwear/basketball/shorts",
+      href: "/capriowear/teamwear/basketball/shorts",
     },
     {
       status: "draft",
@@ -294,7 +294,7 @@ export const basketball: Category = {
       cardSubline: "Two layers, a colorway on each side",
       image: "",
       imageAlt: "Custom reversible basketball practice jersey, two layers, a colorway on each side",
-      href: "/teamwear/basketball/reversible-practice-jersey",
+      href: "/capriowear/teamwear/basketball/reversible-practice-jersey",
       pdpTitle: "Reversible Practice Jersey",
       sku: "CAP-BKB-02",
       pdpHeading: "Custom Reversible Basketball Jersey Manufacturer",
@@ -326,11 +326,11 @@ export const basketball: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Game Jersey", href: "/teamwear/basketball" },
-        { label: "Basketball Shorts", href: "/teamwear/basketball" },
-        { label: "Scrimmage Vest", href: "/teamwear/basketball" },
-        { label: "Shooting Shirt", href: "/teamwear/basketball" },
-        { label: "See All", href: "/teamwear/basketball" },
+        { label: "Game Jersey", href: "/capriowear/teamwear/basketball" },
+        { label: "Basketball Shorts", href: "/capriowear/teamwear/basketball" },
+        { label: "Scrimmage Vest", href: "/capriowear/teamwear/basketball" },
+        { label: "Shooting Shirt", href: "/capriowear/teamwear/basketball" },
+        { label: "See All", href: "/capriowear/teamwear/basketball" },
       ],
       specifications: [
         { label: "Style", value: "Reversible basketball practice jersey, sleeveless (base type)" },
@@ -359,7 +359,7 @@ export const basketball: Category = {
       cardSubline: "Warm-up top on the fleece platform",
       image: "",
       imageAlt: "Custom basketball shooting shirt, warm-up top on the fleece platform",
-      href: "/teamwear/basketball/shooting-shirt",
+      href: "/capriowear/teamwear/basketball/shooting-shirt",
     },
     {
       status: "draft",
@@ -368,7 +368,7 @@ export const basketball: Category = {
       cardSubline: "Mesh training pinnie",
       image: "",
       imageAlt: "Custom basketball scrimmage vest, mesh training pinnie",
-      href: "/teamwear/basketball/scrimmage-vest",
+      href: "/capriowear/teamwear/basketball/scrimmage-vest",
     },
     {
       status: "draft",
@@ -377,7 +377,7 @@ export const basketball: Category = {
       cardSubline: "Zip warm-up, tricot or fleece",
       image: "",
       imageAlt: "Custom basketball warm-up jacket, zip warm-up, tricot or fleece",
-      href: "/teamwear/basketball/warm-up-jacket",
+      href: "/capriowear/teamwear/basketball/warm-up-jacket",
     },
     {
       status: "draft",
@@ -386,7 +386,7 @@ export const basketball: Category = {
       cardSubline: "Straight or tapered, tricot or fleece",
       image: "",
       imageAlt: "Custom basketball warm-up pants, straight or tapered, tricot or fleece",
-      href: "/teamwear/basketball/warm-up-pants",
+      href: "/capriowear/teamwear/basketball/warm-up-pants",
     },
   ],
   // Only live pages (owner spec: "Never link an unbuilt PLP or an
@@ -395,8 +395,8 @@ export const basketball: Category = {
   // real page to link; the live Cricket PLP and real Activewear PLPs are.
   // Add more sibling sport PLPs here as they publish.
   relatedLinks: [
-    { label: "Cricket", href: "/teamwear/cricket" },
-    { label: "Tracksuits", href: "/activewear/tracksuits" },
-    { label: "T-Shirts", href: "/activewear/t-shirts" },
+    { label: "Cricket", href: "/capriowear/teamwear/cricket" },
+    { label: "Tracksuits", href: "/capriowear/activewear/tracksuits" },
+    { label: "T-Shirts", href: "/capriowear/activewear/t-shirts" },
   ],
 };

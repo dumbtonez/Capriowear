@@ -202,7 +202,7 @@ export const rugby: Category = {
       cardSubline: "Bodyfit grab-resistant cut, reinforced seams",
       image: "",
       imageAlt: "Custom rugby match jersey, bodyfit grab-resistant cut, reinforced seams",
-      href: "/teamwear/rugby/match-jersey",
+      href: "/capriowear/teamwear/rugby/match-jersey",
       pdpTitle: "Match Jersey",
       sku: "CAP-RGB-01",
       pdpHeading: "Custom Rugby Jersey Manufacturer",
@@ -235,10 +235,10 @@ export const rugby: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Reinforced Rugby Shorts", href: "/teamwear/rugby" },
-        { label: "Training Jersey", href: "/teamwear/rugby" },
-        { label: "Base Layer", href: "/teamwear/rugby" },
-        { label: "See All", href: "/teamwear/rugby" },
+        { label: "Reinforced Rugby Shorts", href: "/capriowear/teamwear/rugby" },
+        { label: "Training Jersey", href: "/capriowear/teamwear/rugby" },
+        { label: "Base Layer", href: "/capriowear/teamwear/rugby" },
+        { label: "See All", href: "/capriowear/teamwear/rugby" },
       ],
       specifications: [
         { label: "Style", value: "Rugby match jersey, bodyfit (base type)" },
@@ -266,7 +266,7 @@ export const rugby: Category = {
       cardSubline: "Heavier woven shell, reinforced waistband and seams",
       image: "",
       imageAlt: "Custom reinforced rugby shorts, heavier woven shell, reinforced waistband and seams",
-      href: "/teamwear/rugby/reinforced-shorts",
+      href: "/capriowear/teamwear/rugby/reinforced-shorts",
       pdpTitle: "Reinforced Shorts",
       sku: "CAP-RGB-02",
       pdpHeading: "Custom Rugby Shorts Manufacturer",
@@ -298,10 +298,10 @@ export const rugby: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Match Jersey", href: "/teamwear/rugby/match-jersey" },
-        { label: "Training Jersey", href: "/teamwear/rugby" },
-        { label: "Base Layer", href: "/teamwear/rugby" },
-        { label: "See All", href: "/teamwear/rugby" },
+        { label: "Match Jersey", href: "/capriowear/teamwear/rugby/match-jersey" },
+        { label: "Training Jersey", href: "/capriowear/teamwear/rugby" },
+        { label: "Base Layer", href: "/capriowear/teamwear/rugby" },
+        { label: "See All", href: "/capriowear/teamwear/rugby" },
       ],
       specifications: [
         { label: "Style", value: "Reinforced rugby shorts (base type)" },
@@ -326,7 +326,7 @@ export const rugby: Category = {
       cardSubline: "Looser cut, durable everyday fabric",
       image: "",
       imageAlt: "Custom rugby training jersey, looser cut, durable everyday fabric",
-      href: "/teamwear/rugby/training-jersey",
+      href: "/capriowear/teamwear/rugby/training-jersey",
     },
     {
       status: "draft",
@@ -335,7 +335,7 @@ export const rugby: Category = {
       cardSubline: "Close-fit poly-spandex under-kit layer",
       image: "",
       imageAlt: "Custom rugby base layer, close-fit poly-spandex under-kit layer",
-      href: "/teamwear/rugby/base-layer",
+      href: "/capriowear/teamwear/rugby/base-layer",
     },
     {
       status: "draft",
@@ -344,7 +344,7 @@ export const rugby: Category = {
       cardSubline: "Zip warm-up, tricot or fleece",
       image: "",
       imageAlt: "Custom rugby warm-up jacket, zip warm-up, tricot or fleece",
-      href: "/teamwear/rugby/warm-up-jacket",
+      href: "/capriowear/teamwear/rugby/warm-up-jacket",
     },
     {
       status: "draft",
@@ -353,7 +353,7 @@ export const rugby: Category = {
       cardSubline: "Straight or tapered, tricot or fleece",
       image: "",
       imageAlt: "Custom rugby warm-up pants, straight or tapered, tricot or fleece",
-      href: "/teamwear/rugby/warm-up-pants",
+      href: "/capriowear/teamwear/rugby/warm-up-pants",
     },
   ],
   // Only live pages (owner spec: "Never link an unbuilt PLP or unpublished
@@ -361,9 +361,9 @@ export const rugby: Category = {
   // Basketball PLPs and real Activewear PLPs are linked instead. Add more
   // sibling sport PLPs here as they publish.
   relatedLinks: [
-    { label: "Cricket", href: "/teamwear/cricket" },
-    { label: "Basketball", href: "/teamwear/basketball" },
-    { label: "Compression & Base Layers", href: "/activewear/compression-base-layers" },
-    { label: "Track Jackets & Zip-Ups", href: "/activewear/track-jackets" },
+    { label: "Cricket", href: "/capriowear/teamwear/cricket" },
+    { label: "Basketball", href: "/capriowear/teamwear/basketball" },
+    { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
+    { label: "Track Jackets & Zip-Ups", href: "/capriowear/activewear/track-jackets" },
   ],
 };

@@ -255,7 +255,7 @@ export const sweatshirts: Category = {
       cardSubline: "Round rib collar, no hood",
       image: "",
       imageAlt: "Custom classic crewneck sweatshirt, round rib collar, no hood",
-      href: "/activewear/sweatshirts/crewneck",
+      href: "/capriowear/activewear/sweatshirts/crewneck",
     },
     {
       status: "draft",
@@ -264,7 +264,7 @@ export const sweatshirts: Category = {
       cardSubline: "Standing collar, partial zip",
       image: "",
       imageAlt: "Custom half-zip sweatshirt, standing collar, partial zip",
-      href: "/activewear/sweatshirts/half-zip",
+      href: "/capriowear/activewear/sweatshirts/half-zip",
     },
     {
       status: "draft",
@@ -273,7 +273,7 @@ export const sweatshirts: Category = {
       cardSubline: "Short zip, raised collar",
       image: "",
       imageAlt: "Custom quarter-zip sweatshirt, short zip, raised collar",
-      href: "/activewear/sweatshirts/quarter-zip",
+      href: "/capriowear/activewear/sweatshirts/quarter-zip",
     },
     {
       status: "draft",
@@ -282,7 +282,7 @@ export const sweatshirts: Category = {
       cardSubline: "Heavyweight, structured fit",
       image: "",
       imageAlt: "Custom oversized boxy sweatshirt, heavyweight, structured fit",
-      href: "/activewear/sweatshirts/oversized",
+      href: "/capriowear/activewear/sweatshirts/oversized",
     },
     {
       status: "draft",
@@ -291,7 +291,7 @@ export const sweatshirts: Category = {
       cardSubline: "Shortened body length",
       image: "",
       imageAlt: "Custom cropped sweatshirt, shortened body length",
-      href: "/activewear/sweatshirts/cropped",
+      href: "/capriowear/activewear/sweatshirts/cropped",
     },
     {
       status: "draft",
@@ -300,7 +300,7 @@ export const sweatshirts: Category = {
       cardSubline: "Raglan sleeve, athletic build",
       image: "",
       imageAlt: "Custom raglan sweatshirt, raglan sleeve, athletic build",
-      href: "/activewear/sweatshirts/raglan",
+      href: "/capriowear/activewear/sweatshirts/raglan",
     },
     {
       status: "draft",
@@ -309,7 +309,7 @@ export const sweatshirts: Category = {
       cardSubline: "Extended hem length",
       image: "",
       imageAlt: "Custom longline sweatshirt, extended hem length",
-      href: "/activewear/sweatshirts/longline",
+      href: "/capriowear/activewear/sweatshirts/longline",
     },
     {
       status: "draft",
@@ -318,7 +318,7 @@ export const sweatshirts: Category = {
       cardSubline: "Short standing collar",
       image: "",
       imageAlt: "Custom mock-neck sweatshirt, short standing collar",
-      href: "/activewear/sweatshirts/mock-neck",
+      href: "/capriowear/activewear/sweatshirts/mock-neck",
     },
   ],
   // Sibling Tops-group categories from content/home.ts's own
@@ -327,9 +327,9 @@ export const sweatshirts: Category = {
   // establishes -- these become live the moment each one gets its own
   // content file.
   relatedLinks: [
-    { label: "Hoodies", href: "/activewear/hoodies" },
-    { label: "T-Shirts", href: "/activewear/t-shirts" },
-    { label: "Long-Sleeve Tops", href: "/activewear/long-sleeve-tops" },
-    { label: "Tank Tops", href: "/activewear/tank-tops" },
+    { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
+    { label: "T-Shirts", href: "/capriowear/activewear/t-shirts" },
+    { label: "Long-Sleeve Tops", href: "/capriowear/activewear/long-sleeve-tops" },
+    { label: "Tank Tops", href: "/capriowear/activewear/tank-tops" },
   ],
 };

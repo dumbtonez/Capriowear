@@ -295,7 +295,7 @@ export const compressionBaseLayers: Category = {
       cardSubline: "Second-skin, short or long sleeve",
       image: "",
       imageAlt: "Custom compression top, second-skin, short or long sleeve",
-      href: "/activewear/compression-base-layers/compression-top",
+      href: "/capriowear/activewear/compression-base-layers/compression-top",
     },
     {
       status: "draft",
@@ -304,7 +304,7 @@ export const compressionBaseLayers: Category = {
       cardSubline: "Documented mmHg, base-layer fit",
       image: "",
       imageAlt: "Custom compression tights, documented mmHg, base-layer fit",
-      href: "/activewear/compression-base-layers/compression-tights",
+      href: "/capriowear/activewear/compression-base-layers/compression-tights",
     },
     {
       status: "draft",
@@ -313,7 +313,7 @@ export const compressionBaseLayers: Category = {
       cardSubline: "Second-skin hip and thigh support",
       image: "",
       imageAlt: "Custom compression shorts, second-skin hip and thigh support",
-      href: "/activewear/compression-base-layers/compression-shorts",
+      href: "/capriowear/activewear/compression-base-layers/compression-shorts",
     },
     {
       status: "draft",
@@ -322,7 +322,7 @@ export const compressionBaseLayers: Category = {
       cardSubline: "Standing collar, cold-weather",
       image: "",
       imageAlt: "Custom mock-neck base layer, standing collar, cold-weather",
-      href: "/activewear/compression-base-layers/mock-neck",
+      href: "/capriowear/activewear/compression-base-layers/mock-neck",
     },
     {
       status: "draft",
@@ -331,7 +331,7 @@ export const compressionBaseLayers: Category = {
       cardSubline: "Matched top and bottom",
       image: "",
       imageAlt: "Custom base-layer set, matched top and bottom",
-      href: "/activewear/compression-base-layers/base-layer-set",
+      href: "/capriowear/activewear/compression-base-layers/base-layer-set",
     },
     {
       status: "draft",
@@ -340,7 +340,7 @@ export const compressionBaseLayers: Category = {
       cardSubline: "Grid or fleece-back, cold-weather",
       image: "",
       imageAlt: "Custom thermal base layer, grid or fleece-back, cold-weather",
-      href: "/activewear/compression-base-layers/thermal",
+      href: "/capriowear/activewear/compression-base-layers/thermal",
     },
   ],
   // Sibling Bottoms-group categories from content/home.ts's own
@@ -349,9 +349,9 @@ export const compressionBaseLayers: Category = {
   // establishes -- these become live the moment each one gets its own
   // content file.
   relatedLinks: [
-    { label: "Leggings", href: "/activewear/leggings" },
-    { label: "Shorts", href: "/activewear/shorts" },
-    { label: "Joggers & Track Pants", href: "/activewear/joggers-track-pants" },
-    { label: "Sports Bras", href: "/activewear/sports-bras" },
+    { label: "Leggings", href: "/capriowear/activewear/leggings" },
+    { label: "Shorts", href: "/capriowear/activewear/shorts" },
+    { label: "Joggers & Track Pants", href: "/capriowear/activewear/joggers-track-pants" },
+    { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
   ],
 };

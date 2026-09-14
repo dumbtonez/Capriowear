@@ -272,7 +272,7 @@ export const joggersTrackPants: Category = {
       cardSubline: "Tapered leg, ribbed ankle cuff",
       image: "",
       imageAlt: "Custom classic cuffed jogger, tapered leg, ribbed ankle cuff",
-      href: "/activewear/joggers-track-pants/cuffed-jogger",
+      href: "/capriowear/activewear/joggers-track-pants/cuffed-jogger",
     },
     {
       status: "draft",
@@ -281,7 +281,7 @@ export const joggersTrackPants: Category = {
       cardSubline: "Tricot shell, open hem or ankle zip",
       image: "",
       imageAlt: "Custom woven track pant, tricot shell, open hem or ankle zip",
-      href: "/activewear/joggers-track-pants/track-pant",
+      href: "/capriowear/activewear/joggers-track-pants/track-pant",
     },
     {
       status: "draft",
@@ -290,7 +290,7 @@ export const joggersTrackPants: Category = {
       cardSubline: "Jogger taper, straight hem",
       image: "",
       imageAlt: "Custom open-hem jogger, jogger taper, straight hem",
-      href: "/activewear/joggers-track-pants/open-hem",
+      href: "/capriowear/activewear/joggers-track-pants/open-hem",
     },
     {
       status: "draft",
@@ -299,7 +299,7 @@ export const joggersTrackPants: Category = {
       cardSubline: "Cargo pockets, utility fit",
       image: "",
       imageAlt: "Custom cargo jogger, cargo pockets, utility fit",
-      href: "/activewear/joggers-track-pants/cargo",
+      href: "/capriowear/activewear/joggers-track-pants/cargo",
     },
     {
       status: "draft",
@@ -308,7 +308,7 @@ export const joggersTrackPants: Category = {
       cardSubline: "Closer cut through the leg",
       image: "",
       imageAlt: "Custom slim tapered jogger, closer cut through the leg",
-      href: "/activewear/joggers-track-pants/slim",
+      href: "/capriowear/activewear/joggers-track-pants/slim",
     },
     {
       status: "draft",
@@ -317,7 +317,7 @@ export const joggersTrackPants: Category = {
       cardSubline: "Loose or flared, heavyweight fleece",
       image: "",
       imageAlt: "Custom wide-leg jogger, loose or flared, heavyweight fleece",
-      href: "/activewear/joggers-track-pants/wide-leg",
+      href: "/capriowear/activewear/joggers-track-pants/wide-leg",
     },
     {
       status: "draft",
@@ -326,7 +326,7 @@ export const joggersTrackPants: Category = {
       cardSubline: "Heavier fleece, straight leg",
       image: "",
       imageAlt: "Custom sweatpant, heavier fleece, straight leg",
-      href: "/activewear/joggers-track-pants/sweatpant",
+      href: "/capriowear/activewear/joggers-track-pants/sweatpant",
     },
   ],
   // Sibling Bottoms-group categories from content/home.ts's own
@@ -335,9 +335,9 @@ export const joggersTrackPants: Category = {
   // establishes -- these become live the moment each one gets its own
   // content file.
   relatedLinks: [
-    { label: "Leggings", href: "/activewear/leggings" },
-    { label: "Shorts", href: "/activewear/shorts" },
-    { label: "Sports Bras", href: "/activewear/sports-bras" },
-    { label: "Compression & Base Layers", href: "/activewear/compression-base-layers" },
+    { label: "Leggings", href: "/capriowear/activewear/leggings" },
+    { label: "Shorts", href: "/capriowear/activewear/shorts" },
+    { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
+    { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
   ],
 };

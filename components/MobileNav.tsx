@@ -292,7 +292,7 @@ export function MobileNav({ open, onClose, brand, logo, links, contact, social, 
           flips to false in the same render the element is still mounted at
           opacity-100, so the class change has something to transition from. */}
       <div className={cx(header.inner, drawer.head, open ? drawer.headRevealed : drawer.headHidden)}>
-        <Link href="/" className={header.brand} aria-label={`${brand}, home`}>
+        <Link href="/capriowear" className={header.brand} aria-label={`${brand}, home`}>
           {logo}
         </Link>
         <button

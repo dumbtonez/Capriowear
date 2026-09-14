@@ -206,7 +206,7 @@ export const shorts: Category = {
       cardSubline: "Women's, 3 to 5 inch, compressive",
       image: "",
       imageAlt: "Custom high-waisted biker shorts manufacturer",
-      href: "/activewear/shorts/high-waisted-biker",
+      href: "/capriowear/activewear/shorts/high-waisted-biker",
     },
     {
       status: "draft",
@@ -215,7 +215,7 @@ export const shorts: Category = {
       cardSubline: "Outer short with built-in brief liner",
       image: "",
       imageAlt: "Custom 2-in-1 lined shorts manufacturer",
-      href: "/activewear/shorts/2-in-1-lined",
+      href: "/capriowear/activewear/shorts/2-in-1-lined",
     },
     {
       status: "draft",
@@ -224,7 +224,7 @@ export const shorts: Category = {
       cardSubline: "Lightweight woven shell, side splits",
       image: "",
       imageAlt: "Custom running split shorts manufacturer",
-      href: "/activewear/shorts/running-split",
+      href: "/capriowear/activewear/shorts/running-split",
     },
     {
       status: "draft",
@@ -233,7 +233,7 @@ export const shorts: Category = {
       cardSubline: "Snug single-layer base short",
       image: "",
       imageAlt: "Custom compression shorts manufacturer",
-      href: "/activewear/shorts/compression",
+      href: "/capriowear/activewear/shorts/compression",
     },
     {
       status: "draft",
@@ -242,7 +242,7 @@ export const shorts: Category = {
       cardSubline: "5 to 9 inch, looser training fit",
       image: "",
       imageAlt: "Custom gym training shorts manufacturer",
-      href: "/activewear/shorts/gym-training",
+      href: "/capriowear/activewear/shorts/gym-training",
     },
     {
       status: "draft",
@@ -251,7 +251,7 @@ export const shorts: Category = {
       cardSubline: "French terry or brushed fleece, drawcord",
       image: "",
       imageAlt: "Custom fleece shorts manufacturer",
-      href: "/activewear/shorts/fleece",
+      href: "/capriowear/activewear/shorts/fleece",
     },
   ],
   // Sibling Bottoms-group categories from content/home.ts's own
@@ -260,9 +260,9 @@ export const shorts: Category = {
   // establish -- these become live the moment each one gets its own
   // content file.
   relatedLinks: [
-    { label: "Leggings", href: "/activewear/leggings" },
-    { label: "Joggers & Track Pants", href: "/activewear/joggers-track-pants" },
-    { label: "Sports Bras", href: "/activewear/sports-bras" },
-    { label: "Compression & Base Layers", href: "/activewear/compression-base-layers" },
+    { label: "Leggings", href: "/capriowear/activewear/leggings" },
+    { label: "Joggers & Track Pants", href: "/capriowear/activewear/joggers-track-pants" },
+    { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
+    { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
   ],
 };
