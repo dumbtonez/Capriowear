@@ -3023,10 +3023,12 @@ export const ourFactoryTeam = {
   // width change (see `exhibitions.mobileTrack`'s own comment).
   // Mobile cap 40px -> 20px (owner, 2026-09-14: "make it 20px from the left
   // gap on mobile" -- same fix as `insideFactory.mobileTrackWide`'s own
-  // identical correction). `md:` tablet tier keeps its own 40px cap,
-  // untouched -- this was a mobile-width-only request.
+  // identical correction). Tablet cap 40px -> 32px, same day ("make
+  // everything consistent at 32px" -- this gallery's own tablet peek
+  // didn't match `container-p`'s real 32px tablet inset every other
+  // section on the page uses, see globals.css).
   sliderTrack:
-    "no-scrollbar flex h-[340px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(20px,calc((100%-340px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-530px)/2))]",
+    "no-scrollbar flex h-[340px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(20px,calc((100%-340px)/2))] md:h-[532px] md:px-[min(32px,calc((100%-530px)/2))]",
   // 340px mobile / 530px tablet -- matches Exhibitions' own current card
   // widths exactly (owner, 2026-09-14: "should be same as exhibition
   // section on mobile homepage, for tablet follow tablet exhibition
@@ -4814,17 +4816,19 @@ export const insideFactory = {
   // page gap should be 20px, it looks more atm" -- on real phones wider
   // than the 340px card + 40px*2 (420px), this formula's own centring
   // padding was landing above 20px, e.g. 40px flat from ~420px wide up).
-  // `md:` tablet tier keeps its own 40px cap, untouched -- this was a
-  // mobile-width complaint only.
+  // Tablet cap 40px -> 32px (owner, 2026-09-14: "make everything
+  // consistent at 32px" -- matches `container-p`'s own real 32px tablet
+  // inset, globals.css, that every other section on the page already uses).
   mobileTrackWide:
-    "no-scrollbar flex h-[255px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(20px,calc((100%-340px)/2))] md:h-[398px] md:px-[min(40px,calc((100%-530px)/2))]",
+    "no-scrollbar flex h-[255px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(20px,calc((100%-340px)/2))] md:h-[398px] md:px-[min(32px,calc((100%-530px)/2))]",
   mobileCardWide: "w-[340px] shrink-0 snap-center md:w-[530px]",
   // The original 300px mobile/469px tablet, 300x340 active ratio -- see
   // `mobileTrackWide`'s own comment above for why this is kept, not
   // dropped, now that `Wide` is the default.
-  // Mobile cap 40px -> 20px, same reasoning as `mobileTrackWide` above.
+  // Mobile cap 40px -> 20px, tablet cap 40px -> 32px, same reasoning as
+  // `mobileTrackWide` above.
   mobileTrackCompact:
-    "no-scrollbar flex h-[340px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(20px,calc((100%-300px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-469px)/2))]",
+    "no-scrollbar flex h-[340px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(20px,calc((100%-300px)/2))] md:h-[532px] md:px-[min(32px,calc((100%-469px)/2))]",
   mobileCardCompact: "w-[300px] shrink-0 snap-center md:w-[469px]",
   // Track-to-dots gap: 28px (owner, 2026-09-10: "give 12px more space to
   // the dots from the top" -- was `gap-4`/16px). No `items-center` here
@@ -5688,10 +5692,11 @@ export const exhibitions = {
   // height stays this section's own 340/532, untouched.
   // Mobile cap 40px -> 20px (owner, 2026-09-14: "exhibition on mobile
   // should also be 20px gap from the left" -- same fix already applied to
-  // `insideFactory.mobileTrackWide`/`ourFactoryTeam.sliderTrack`). `md:`
-  // tablet tier keeps its own 40px cap, untouched.
+  // `insideFactory.mobileTrackWide`/`ourFactoryTeam.sliderTrack`). Tablet
+  // cap 40px -> 32px, same day ("make everything consistent at 32px" --
+  // matches `container-p`'s own real 32px tablet inset).
   mobileTrack:
-    "no-scrollbar flex h-[340px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(20px,calc((100%-340px)/2))] md:h-[532px] md:px-[min(40px,calc((100%-530px)/2))]",
+    "no-scrollbar flex h-[340px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(20px,calc((100%-340px)/2))] md:h-[532px] md:px-[min(32px,calc((100%-530px)/2))]",
   mobileCard: "w-[340px] shrink-0 snap-center md:w-[530px]",
 };
 
