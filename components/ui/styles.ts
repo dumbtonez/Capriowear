@@ -4784,12 +4784,13 @@ export const insideFactory = {
   // card's own shadow below (`mobileCardActiveShadow`) are the two pieces
   // of that fix, and apply to both sizes -- this one is real space, not
   // implied by the shadow alone.
-  // No `md:` tier any more (owner, 2026-09-14: "let's make it 340x255 and
-  // same for mobile and tablet") -- tablet used to be a scaled-up 530x398;
-  // now identical to mobile at every width this carousel covers.
+  // Briefly dropped the `md:` tablet tier on 2026-09-14 ("same for mobile
+  // and tablet"), reverted the same day (owner: "on tablet, inside the
+  // factory section revert it back to it was before image sizes") -- back
+  // to its own separate, scaled-up 530x398 tablet size.
   mobileTrackWide:
-    "no-scrollbar flex h-[255px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-340px)/2))]",
-  mobileCardWide: "w-[340px] shrink-0 snap-center",
+    "no-scrollbar flex h-[255px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-340px)/2))] md:h-[398px] md:px-[min(40px,calc((100%-530px)/2))]",
+  mobileCardWide: "w-[340px] shrink-0 snap-center md:w-[530px]",
   // The original 300px mobile/469px tablet, 300x340 active ratio -- see
   // `mobileTrackWide`'s own comment above for why this is kept, not
   // dropped, now that `Wide` is the default.
@@ -5315,7 +5316,7 @@ export const howItWorks = {
   // half of that 2026-09-04 change undone; the card sizing it also
   // brought in (`desktopCard`'s 469px) lives on in the mobile carousel's
   // own new `md:` tier instead (`mobileCardWidth`, `HowItWorks.tsx`).
-  desktopOuter: "hidden xl:flex xl:flex-col xl:items-center xl:gap-[72px] pb-[120px]",
+  desktopOuter: "hidden xl:flex xl:flex-col xl:items-center xl:gap-[72px]",
   // `pt-*` split out of `desktopOuter` above into these two tone-specific
   // tokens (2026-09-07) rather than living there as a shared default --
   // `desktopOuterLight` (the homepage's own original 60px) and
@@ -5325,9 +5326,13 @@ export const howItWorks = {
   // "two conflicting utilities" bug class this project's own comments
   // already flag elsewhere -- so each tone gets its own single, complete
   // `pt-*`, never two in the same class list at once.
-  // 160px (owner, 2026-09-09: "how it works, make 160px gap from the
-  // top") -- was the homepage's own original 60px.
-  desktopOuterLight: "pt-[160px]",
+  // 72px top/bottom (owner, 2026-09-14: "how it works on desktop should
+  // have 72px space from top and bottom", homepage/light variant only) --
+  // was 160px top with a shared 120px bottom (moved off `desktopOuter`
+  // above, split per-tone the same way `pt-*` already was, since the dark
+  // /services variant keeps its own separate, deliberately different
+  // 120px top/bottom -- see `desktopOuterDark` below).
+  desktopOuterLight: "pt-[72px] pb-[72px]",
   // Dark variant, colour only (owner, 2026-09-07, Figma node 767:868,
   // /services page: "same section... changed the background to black") --
   // appended via `cx()` on BOTH `desktopOuter` and `mobileSection` when the
@@ -5360,7 +5365,11 @@ export const howItWorks = {
   // applying it to `mobileSection` too would roughly triple that
   // breakpoint's own standing gap rhythm (40-72px sitewide) for a value
   // the owner never asked for there.
-  desktopOuterDark: "pt-[120px]",
+  // `pb-[120px]` added here 2026-09-14 once the shared `desktopOuter`'s own
+  // bottom padding was split per-tone (see `desktopOuterLight`'s own
+  // comment) -- preserves this variant's previously-shared 120px bottom
+  // unchanged; only the light/homepage variant moved to 72px.
+  desktopOuterDark: "pt-[120px] pb-[120px]",
   // Services page's own eyebrow size (owner, 2026-09-08: "product range,
   // how it works all eyebrows should be 16px by auto line height", then
   // corrected the same day: "on desktop it should be 20px as on home. All
