@@ -156,7 +156,7 @@ export const tankTops: Category = {
     },
     {
       q: "What is the difference between a muscle tank, a stringer, and a racerback?",
-      a: "It is mainly the armhole and back. A standard tank has a moderate armhole. A muscle tank has a wider, dropped armhole. A stringer has the deepest cut armhole with ultra-narrow straps and a Y-back. Racerback describes the back (straps converging between the shoulder blades) and can be paired with different armhole depths. We build all of these to your spec.",
+      a: "It is mainly the armhole and back. A standard tank has a moderate armhole. A muscle tank has a wider, dropped armhole. A stringer has the deepest cut armhole with ultra-narrow straps and a Y-back. Racerback describes the back (straps converging between the shoulder blades) and can be paired with different armhole depths. We build all of these to your spec, a common request from brands sourcing through a tank top manufacturer.",
     },
     {
       q: "What GSM weight do performance tanks use?",

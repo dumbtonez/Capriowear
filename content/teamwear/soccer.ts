@@ -143,7 +143,7 @@ export const soccer: Category = {
   faqs: [
     {
       q: "What is your MOQ for a sublimated soccer kit?",
-      a: "From 50 pieces per style, and you can mix sizes, names and numbers freely within a colorway. Scales to full bulk.",
+      a: "From 50 pieces per style, and you can mix sizes, names and numbers freely within a colorway. Scales to full bulk. We work as a football kit manufacturer for clubs across the UK and international markets, alongside soccer uniform programs for US-based teams.",
     },
     {
       q: "How are home, away and third colorways made in one order?",

@@ -42,7 +42,7 @@ export const sweatshirts: Category = {
   productNounPlural: "sweatshirts",
   entityExampleStyles: "crewneck, half-zip, oversized, and cropped styles",
   entityFabrics: "French terry and brushed fleece",
-  h1: "Custom Sweatshirt Manufacturer",
+  h1: "Custom Crewneck Sweatshirt Manufacturer",
   // metaTitle leads with "Crewneck Sweatshirt" (SEO/AEO refresh, owner
   // spec: "own crewneck sweatshirt manufacturer as its own head term") --
   // H1 stays the broader "Sweatshirt" (not in this pass's H1-change list),
@@ -173,7 +173,7 @@ export const sweatshirts: Category = {
     },
     {
       q: "What is the difference between a crewneck sweatshirt and a hoodie?",
-      a: "A crewneck is the same fleece body and sleeve as a hoodie, without the hood, drawcord and kangaroo pocket, keeping the round ribbed collar. It uses less fabric and simpler construction, so it is often the more cost-efficient first SKU. Many brands start with a midweight crewneck in core colors, then add hoodies in the best sellers.",
+      a: "A crewneck is the same fleece body and sleeve as a hoodie, without the hood, drawcord and kangaroo pocket, keeping the round ribbed collar. It uses less fabric and simpler construction, so it is often the more cost-efficient first SKU. Many brands start with a midweight crewneck in core colors, then add hoodies in the best sellers. It is one of the most common requests we get as a sweatshirt manufacturer.",
     },
     {
       q: "What is the standard GSM for a crewneck sweatshirt?",

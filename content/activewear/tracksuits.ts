@@ -143,7 +143,7 @@ export const tracksuits: Category = {
     },
     {
       q: "What is tricot fabric, and why is it used for tracksuits?",
-      a: "Brushed polyester tricot for the classic tracksuit, poly-spandex for a competitive stretch set, and satin-finish nylon for a varsity-style jacket, with quilted or mesh lining options.",
+      a: "Brushed polyester tricot for the classic tracksuit, poly-spandex for a competitive stretch set, and satin-finish nylon for a varsity-style jacket, with quilted or mesh lining options — the core fabric choices we work with as a tracksuit manufacturer.",
     },
     {
       q: "Can you color-match retro stripes and piping exactly?",

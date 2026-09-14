@@ -182,7 +182,7 @@ export const joggersTrackPants: Category = {
     },
     {
       q: "What is the difference between a fleece jogger and a tricot track pant?",
-      a: "A jogger is knit fleece or French terry with a tapered leg and a ribbed ankle cuff, for athleisure. A track pant is woven tricot or nylon with a straight leg and an open hem or ankle zip, for athletic warm-ups. A sweatpant is heavier knit fleece with a straight leg, for warmth and lounge. We make all three.",
+      a: "A jogger is knit fleece or French terry with a tapered leg and a ribbed ankle cuff, for athleisure. A track pant is woven tricot or nylon with a straight leg and an open hem or ankle zip, for athletic warm-ups. A sweatpant is heavier knit fleece with a straight leg, for warmth and lounge. We make all three, as a joggers manufacturer and track pants manufacturer serving activewear and teamwear brands worldwide.",
     },
     {
       q: "Is a track pant woven or knit fabric?",

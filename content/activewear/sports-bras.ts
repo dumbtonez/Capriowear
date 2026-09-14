@@ -161,7 +161,7 @@ export const sportsBras: Category = {
     },
     {
       q: "Who makes private label sports bras for gym and activewear brands?",
-      a: "Yes, all three, made under your brand.",
+      a: "Capriowear does, as a sports bra manufacturer producing private label programs for gym and activewear brands worldwide, with OEM, ODM and private label production all made under your brand.",
     },
     {
       q: "How long do samples and bulk take?",
