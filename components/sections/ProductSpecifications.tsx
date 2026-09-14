@@ -39,6 +39,7 @@ export function ProductSpecifications({ heading, subline, rows, image }: Product
           image={image.src ? { src: image.src, alt: image.alt } : undefined}
           ratio="1:1"
           radius="none"
+          showLabel={false}
           className={productSpecifications.image}
         />
       ) : null}

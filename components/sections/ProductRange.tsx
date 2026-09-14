@@ -49,6 +49,7 @@ export function ProductRange({ content }: ProductRangeProps) {
                   label={category.title}
                   tone="dark"
                   radius="none"
+                  showLabel={false}
                   style={{ aspectRatio: "381 / 440" }}
                   className={productRange.cardMedia}
                 />

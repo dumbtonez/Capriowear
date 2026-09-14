@@ -3022,9 +3022,8 @@ export const ourFactoryTeam = {
   // `INACTIVE_HEIGHT`, the same technique `Exhibitions.tsx`'s own
   // `MobileCarousel` uses.
   sliderItem: "w-[300px] shrink-0 snap-center md:w-[469px]",
-  // Reuses `cardCarousel.dot`/`dotActive`/`dotInactive` directly for the
-  // dots themselves (same one-dot-per-real-item pattern already
-  // established there) -- only this row-layout wrapper is new.
+  // Wraps the numeric `cardCarousel.counter` pill below the mobile/tablet
+  // slider track (dots replaced by the counter, owner request 2026-09-14).
   sliderDotsRow: "mt-8 flex items-center justify-center gap-1.5",
 };
 
@@ -5223,6 +5222,10 @@ export const cardCarousel = {
   dot: "size-[6px] rounded-full transition-colors",
   dotActive: "bg-accent",
   dotInactive: "bg-[#D1D1D6]",
+  // Numeric "N / total" pill, matching `productGallery.counter`'s look
+  // without its `absolute` overlay positioning -- these carousels render
+  // their indicator in normal flow below the track, not over an image.
+  counter: "rounded-full bg-paper px-3 py-1.5 text-[0.875rem] font-medium text-text shadow-card",
 };
 
 /* --- Chevron scroller (shared) -------------------------------------------- */

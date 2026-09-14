@@ -402,13 +402,10 @@ function MobileCarousel({
           </div>
         ))}
       </div>
-      <div className={cx(cardCarousel.dotsRow, "mx-auto")}>
-        {shots.map((shot, index) => (
-          <span
-            key={shot.label}
-            className={cx(cardCarousel.dot, index === activeIndex ? cardCarousel.dotActive : cardCarousel.dotInactive)}
-          />
-        ))}
+      <div className={cx(cardCarousel.dotsRow, "justify-center")}>
+        <span className={cardCarousel.counter} aria-hidden="true">
+          {activeIndex + 1} / {shots.length}
+        </span>
       </div>
     </div>
   );

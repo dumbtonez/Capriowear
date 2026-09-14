@@ -187,12 +187,9 @@ function Slider({ media }: { media: typeof ourFactory.teamGallery.media }) {
         ))}
       </div>
       <div className={ourFactoryTeam.sliderDotsRow}>
-        {media.map((mediaItem, index) => (
-          <span
-            key={mediaItem.label}
-            className={cx(cardCarousel.dot, index === activeIndex ? cardCarousel.dotActive : cardCarousel.dotInactive)}
-          />
-        ))}
+        <span className={cardCarousel.counter} aria-hidden="true">
+          {activeIndex + 1} / {media.length}
+        </span>
       </div>
     </div>
   );

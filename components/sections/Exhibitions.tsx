@@ -114,7 +114,7 @@ function DesktopScroller({ shots }: { shots: typeof home.exhibitions.media }) {
           <div ref={reelRef} className={exhibitions.desktopReel}>
             {shots.map((shot) => (
               <div key={shot.label} className={exhibitions.desktopCard}>
-                <ParallaxMedia label={shot.label} image={shot.image} ratio="469:320" radius="none" revealRootRef={trackRef} eager />
+                <ParallaxMedia label={shot.label} image={shot.image} ratio="469:320" radius="none" showLabel={false} revealRootRef={trackRef} eager />
               </div>
             ))}
           </div>
@@ -245,17 +245,14 @@ function MobileCarousel({ shots }: { shots: typeof home.exhibitions.media }) {
             className={exhibitions.mobileCard}
             style={{ height: index === 0 ? activeHeight : inactiveHeight }}
           >
-            <MediaPlaceholder label={shot.label} image={shot.image} radius="none" tone="dark" className="h-full" eager />
+            <MediaPlaceholder label={shot.label} image={shot.image} radius="none" tone="dark" showLabel={false} className="h-full" eager />
           </div>
         ))}
       </div>
-      <div className={cx(cardCarousel.dotsRow, "mx-auto")}>
-        {shots.map((shot, index) => (
-          <span
-            key={shot.label}
-            className={cx(cardCarousel.dot, index === activeIndex ? cardCarousel.dotActive : cardCarousel.dotInactive)}
-          />
-        ))}
+      <div className={cx(cardCarousel.dotsRow, "justify-center")}>
+        <span className={cardCarousel.counter} aria-hidden="true">
+          {activeIndex + 1} / {shots.length}
+        </span>
       </div>
     </div>
   );

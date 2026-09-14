@@ -147,13 +147,10 @@ export function CardCarousel({
           </div>
         ))}
       </div>
-      <div className={cardCarousel.dotsRowTight}>
-        {items.map((item, index) => (
-          <span
-            key={item.title}
-            className={cx(cardCarousel.dot, index === activeIndex ? cardCarousel.dotActive : cardCarousel.dotInactive)}
-          />
-        ))}
+      <div className={cx(cardCarousel.dotsRowTight, "justify-center")}>
+        <span className={cardCarousel.counter} aria-hidden="true">
+          {activeIndex + 1} / {items.length}
+        </span>
       </div>
     </>
   );

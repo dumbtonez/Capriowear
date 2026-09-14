@@ -49,7 +49,7 @@ export function WhatWeCover({ eyebrow, heading, items }: WhatWeCoverProps) {
           content inward (rendering visibly smaller/off-ratio) instead of
           inseting the box from the viewport edge. */}
       <div className={whatWeCover.artworkWrap}>
-        <MediaPlaceholder label={heading} ratio="16:11" radius="none" className={whatWeCover.artwork} />
+        <MediaPlaceholder label={heading} ratio="16:11" radius="none" showLabel={false} className={whatWeCover.artwork} />
       </div>
 
       {/* <ul>/<li>, not styled divs (SEO/AEO/GEO finalization pass,

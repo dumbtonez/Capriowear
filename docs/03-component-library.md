@@ -1072,6 +1072,8 @@ The shared mobile swipeable-card-slider-plus-dots: a native CSS scroll-snap trac
 | `items` | `{title, body}[]`, rendered as `CapabilityCard`s |
 | `cardMediaRatio` | This section's own confirmed media aspect ratio classes (mobile/desktop) |
 
+**Dot row replaced with a numeric counter, 2026-09-14** (owner: match `ProductGallery`'s "N / total" counter on every mobile/tablet slider that used to show dots). The dot indicator (`cardCarousel.dot`/`dotActive`/`dotInactive`) is no longer rendered here — replaced by the new `cardCarousel.counter` token, the same pill look as `productGallery.counter`/`mobileCounter` (`rounded-full bg-paper px-3 py-1.5 text-[0.875rem] font-medium text-text shadow-card`) but without the `absolute` overlay positioning, since these carousels render their indicator in normal flow below the track rather than over an image. Same change applied to every other mobile/tablet dot-row slider in the codebase: `Exhibitions.tsx`, `InsideFactory.tsx`, `OurFactoryTeam.tsx`, and `TrustSignals.tsx`'s tablet carousel — all now show `{activeIndex + 1} / {total}` instead of dots. The old dot tokens are left in `styles.ts` unused rather than deleted (nothing currently renders them).
+
 ### DesktopChevronScroller — Built
 `components/DesktopChevronScroller.tsx` · recipe: `chevronScroller`
 

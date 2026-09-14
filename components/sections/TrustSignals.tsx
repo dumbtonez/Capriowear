@@ -257,13 +257,10 @@ function TabletCarousel({ items }: { items: typeof home.trustStrip }) {
           </div>
         ))}
       </div>
-      <div className={cx(cardCarousel.dotsRow, "mx-auto")}>
-        {items.map((entry, index) => (
-          <span
-            key={entry.title}
-            className={cx(cardCarousel.dot, index === activeIndex ? cardCarousel.dotActive : cardCarousel.dotInactive)}
-          />
-        ))}
+      <div className={cx(cardCarousel.dotsRow, "justify-center")}>
+        <span className={cardCarousel.counter} aria-hidden="true">
+          {activeIndex + 1} / {items.length}
+        </span>
       </div>
     </div>
   );

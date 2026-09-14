@@ -44,7 +44,7 @@ export function Stats({ items }: StatsProps) {
         <div className={stats.desktopSection}>
           <div className={stats.desktopInner}>
             <div className={stats.desktopMedia}>
-              <MediaPlaceholder label="Stats artwork" ratio="216:155" radius="none" tone="dark" />
+              <MediaPlaceholder label="Stats artwork" ratio="216:155" radius="none" tone="dark" showLabel={false} />
             </div>
             <div className={stats.desktopList}>
               {items.map((stat, index) => (
@@ -64,7 +64,7 @@ export function Stats({ items }: StatsProps) {
       {/* Mobile: media on top, divided stat list below */}
       <div className={stats.mobileSection}>
         <div className={stats.mobileMedia}>
-          <MediaPlaceholder label="Stats artwork" ratio="16:11" radius="none" tone="dark" />
+          <MediaPlaceholder label="Stats artwork" ratio="16:11" radius="none" tone="dark" showLabel={false} />
         </div>
         <div className={stats.mobileList}>
           {items.map((stat, index) => (

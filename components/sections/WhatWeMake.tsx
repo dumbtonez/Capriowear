@@ -174,6 +174,7 @@ export function WhatWeMake({ content, mobileGridVariant = false }: WhatWeMakePro
                           image={tile.image}
                           ratio={mobileGridVariant ? "79:100" : "1:1"}
                           radius="none"
+                          showLabel={false}
                           className={mobileGridVariant ? undefined : whatWeMake.mobileTileMedia}
                         />
                         <span className={mobileGridVariant ? whatWeMake.mobileTileLabelGrid : whatWeMake.mobileTileLabel}>
