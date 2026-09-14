@@ -6,18 +6,15 @@
 // redirect to Capriowear's real pages and get no stub here). Every string
 // below is placeholder copy, same discipline as content/gear/**'s own
 // stub content -- real copy is a later phase.
+//
+// The homepage (/) got its real content build 2026-09-15 -- see
+// content/capriosports/home.ts instead; capriosportsHomeStub was removed
+// from here the same day.
 export type StubPageContent = {
   h1: string;
   body: string;
   metaTitle: string;
   metaDescription: string;
-};
-
-export const capriosportsHomeStub: StubPageContent = {
-  h1: "Capriosports (placeholder)",
-  body: "Placeholder homepage -- real copy is a later phase.",
-  metaTitle: "Capriosports",
-  metaDescription: "Placeholder meta description -- real copy is a later phase.",
 };
 
 export const contactStub: StubPageContent = {

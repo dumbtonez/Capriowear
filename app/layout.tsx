@@ -5,7 +5,7 @@ import { AppEntryMarker } from "@/components/AppEntryMarker";
 import { FloatingSocialButtons } from "@/components/FloatingSocialButtons";
 import { JsonLd } from "@/components/JsonLd";
 import { ScrollReset } from "@/components/ScrollReset";
-import { ALLOW_INDEXING, DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from "@/content/site";
+import { ALLOW_INDEXING, DEFAULT_DESCRIPTION, PARENT_SITE_NAME, SITE_URL } from "@/content/site";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import "./globals.css";
 
@@ -24,11 +24,18 @@ const figtree = Figtree({
 // Next auto-detects app/opengraph-image.tsx and generates that metadata
 // itself, which takes priority over (and would just conflict with) a
 // manually duplicated entry in the same segment.
+// This is the sitewide default -- every route under /capriowear/** re-scopes
+// it back to "Capriowear" via its own nested layout (app/capriowear/
+// layout.tsx). Was hardcoded to Capriowear's own name here before the
+// Capriosports parent-site homepage existed (2026-09-14 fix) -- Gear
+// (/lifting-gears, /boxing-and-mma) and the parent-site's own pages
+// (app/page.tsx, /contact, etc.) have no nested layout of their own, so
+// they inherit this default directly, correctly, for the first time.
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: SITE_NAME,
-    template: `%s | ${SITE_NAME}`,
+    default: PARENT_SITE_NAME,
+    template: `%s | ${PARENT_SITE_NAME}`,
   },
   description: DEFAULT_DESCRIPTION,
   // Sitewide noindex switch (SEO/metadata audit, 2026-09-06) -- see
@@ -40,7 +47,7 @@ export const metadata: Metadata = {
   // is off -- every page inherits this root layout value untouched.
   ...(ALLOW_INDEXING ? {} : { robots: { index: false, follow: false } }),
   openGraph: {
-    siteName: SITE_NAME,
+    siteName: PARENT_SITE_NAME,
     type: "website",
   },
   twitter: {

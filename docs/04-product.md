@@ -62,6 +62,7 @@ These need the owner's confirmation before launch. Each is also marked `// VERIF
 - All copy lives in typed files in `/content`. Never write copy directly into a component.
 - Primary CTA label is **"Request a Sample"** everywhere.
 - Numbers and claims must be traceable to the table above. No invented specifics.
+- **No trailing period on titles, H1/H2 headings, eyebrows, or short labels.** Periods only inside real sentences (lead paragraphs, FAQ answers, body copy). Documented here 2026-09-15 (Capriosports homepage task) as the already-observed, previously-unwritten sitewide pattern — confirmed by scanning existing content files, not a new rule.
 
 ## Sources of truth
 
@@ -87,7 +88,8 @@ Where wireframe and copy doc disagree, the copy doc's own instruction is that **
 | Contact / Request a Sample | Not started |
 | Capriosports Gear division (Lifting Gears, Boxing & MMA hubs + category PLPs/PDPs, `/lifting-gears/**`, `/boxing-and-mma/**`) | Phase 1 (schema/routing scaffolding) done, 2026-09-14 — one placeholder category per hub, no real copy. Separate division from Capriowear; not in Capriowear's nav. See `docs/05-plan.md`'s decision log |
 | Capriowear (all routes) | Moved from the repo root to `/capriowear`, 2026-09-14. Every old URL 308-redirects to its new `/capriowear/...` equivalent. See `docs/05-plan.md`'s routing-restructure entry |
-| Capriosports parent-site homepage (`/`), `/contact`, `/terms`, `/responsible-manufacturing`, `/our-people`, `/who-we-are` | Phase 1 stub, 2026-09-14 — placeholder content only, root routing conflict resolved (Capriowear moved to make room). See `docs/05-plan.md` |
+| Capriosports parent-site homepage (`/`) | Built, 2026-09-15 — real content, reusing Capriowear's own locked components (see `docs/03-component-library.md`). See `docs/05-plan.md` |
+| `/contact`, `/terms`, `/responsible-manufacturing`, `/our-people`, `/who-we-are` | Phase 1 stub, 2026-09-14 — placeholder content only, root routing conflict resolved (Capriowear moved to make room). See `docs/05-plan.md` |
 | Capriosports parent-site `/services`, `/our-factory`, `/privacy-policy`, `/request-a-sample` | Not built — these paths redirect to Capriowear's real `/capriowear/...` pages instead (path collision, open IA question, see open question 10 and `docs/05-plan.md`'s decision log) |
 
 Links to unbuilt pages already exist in the nav and in the content file. They will 404 until those pages are built, which is expected at this stage.

@@ -3,7 +3,8 @@
 // from content/site.ts (or, per-page, from whatever content that page
 // already renders as visible copy) -- never hand-typed a second time here.
 // See docs/06-seo.md. Render the result via components/JsonLd.tsx.
-import { CERTIFICATIONS, MEMBERSHIPS, ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
+import { CAPRIOSPORTS_CERTIFICATIONS, CAPRIOSPORTS_MEMBERSHIPS, CAPRIOSPORTS_ORGANIZATION } from "@/content/capriosports/organization";
+import { ORGANIZATION, SITE_URL } from "@/content/site";
 
 export type ProductSchemaInput = {
   name: string;
@@ -14,55 +15,80 @@ export type ProductSchemaInput = {
   material?: string;
 };
 
+// Sitewide root Organization entity -- Capriosports, the parent company
+// (content/capriosports/organization.ts), not Capriowear (2026-09-14
+// Capriosports homepage task; before this, the root entity was Capriowear
+// itself with Capriosports/Caprio Sports only as its `parentOrganization`
+// name string, no real node of its own). Called argument-less from the root
+// layout (app/layout.tsx), so every page sitewide -- Capriowear included --
+// renders the same single, correct entity graph, never a per-page variant.
+// Capriowear is represented as a `subOrganization` node, its own real name
+// and URL (content/site.ts's existing ORGANIZATION, untouched otherwise).
 export function organizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: ORGANIZATION.name,
-    description: ORGANIZATION.description,
-    foundingDate: ORGANIZATION.foundingDate,
-    parentOrganization: {
-      "@type": "Organization",
-      name: ORGANIZATION.legalName,
-    },
-    url: ORGANIZATION.url,
-    logo: ORGANIZATION.logo,
+    name: CAPRIOSPORTS_ORGANIZATION.name,
+    legalName: CAPRIOSPORTS_ORGANIZATION.legalName,
+    description: CAPRIOSPORTS_ORGANIZATION.identityLine.gear,
+    foundingDate: CAPRIOSPORTS_ORGANIZATION.foundingDate,
+    url: CAPRIOSPORTS_ORGANIZATION.url,
+    logo: CAPRIOSPORTS_ORGANIZATION.logo,
+    email: CAPRIOSPORTS_ORGANIZATION.contactEmail,
     address: {
       "@type": "PostalAddress",
-      ...ORGANIZATION.address,
+      ...CAPRIOSPORTS_ORGANIZATION.address,
     },
-    sameAs: ORGANIZATION.sameAs,
-    // The confirmed, sitewide certification list (content/site.ts's
-    // CERTIFICATIONS -- the single source of truth every visible mention
-    // of certifications also reads from) as schema.org credentials, added
-    // 2026-09-11 (site audit finding: this field didn't exist, so the
-    // Organization schema made no certification claim at all). Each entry
-    // is a minimal, valid EducationalOccupationalCredential: just a name
-    // and the org that recognizes it -- no invented issuing body, issue
-    // date, or credential ID, since none of that is a confirmed fact.
-    hasCredential: CERTIFICATIONS.map((name) => ({
+    // Omitted entirely while empty (no confirmed Capriosports-specific
+    // profiles exist yet) rather than emitting an empty array -- see
+    // CAPRIOSPORTS_ORGANIZATION.sameAs's own comment.
+    ...(CAPRIOSPORTS_ORGANIZATION.sameAs.length > 0 ? { sameAs: CAPRIOSPORTS_ORGANIZATION.sameAs } : {}),
+    subOrganization: [
+      {
+        "@type": "Organization",
+        name: ORGANIZATION.name,
+        url: ORGANIZATION.url,
+      },
+    ],
+    // The confirmed, sitewide certification list
+    // (content/capriosports/organization.ts's CAPRIOSPORTS_CERTIFICATIONS --
+    // the same real facts content/site.ts's own CERTIFICATIONS represents
+    // for Capriowear, one factory, one set of audits) as schema.org
+    // credentials, added 2026-09-11 (site audit finding: this field didn't
+    // exist, so the Organization schema made no certification claim at
+    // all). Each entry is a minimal, valid EducationalOccupationalCredential:
+    // just a name and the org that recognizes it -- no invented issuing
+    // body, issue date, or credential ID, since none of that is a confirmed
+    // fact.
+    hasCredential: CAPRIOSPORTS_CERTIFICATIONS.map((name) => ({
       "@type": "EducationalOccupationalCredential",
       credentialCategory: "certification",
       name,
     })),
-    // Industry-body membership(s) (content/site.ts's MEMBERSHIPS), added
-    // 2026-09-11 alongside a correction to the certification list above:
-    // belonging to WFSGI is a membership, not a third-party audit of the
-    // factory, so it gets schema.org's own `memberOf` shape (an
-    // Organization entity) rather than being folded into `hasCredential`.
-    memberOf: MEMBERSHIPS.map((name) => ({
+    // Industry-body membership(s), added 2026-09-11 alongside a correction
+    // to the certification list above: belonging to WFSGI is a membership,
+    // not a third-party audit of the factory, so it gets schema.org's own
+    // `memberOf` shape (an Organization entity) rather than being folded
+    // into `hasCredential`.
+    memberOf: CAPRIOSPORTS_MEMBERSHIPS.map((name) => ({
       "@type": "Organization",
       name,
     })),
   };
 }
 
+// Sitewide root WebSite entity -- Capriosports (the bare domain), not
+// Capriowear (2026-09-15 Capriosports homepage task, same rationale as
+// organizationSchema()'s own restructure and the root layout's
+// title.template fix: called argument-less from the root layout, so this
+// was leaking "Capriowear" as the WebSite name onto every page, Gear and
+// the new parent-site pages included).
 export function websiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: SITE_NAME,
-    url: SITE_URL,
+    name: CAPRIOSPORTS_ORGANIZATION.name,
+    url: CAPRIOSPORTS_ORGANIZATION.url,
   };
 }
 

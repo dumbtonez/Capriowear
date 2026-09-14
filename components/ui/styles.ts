@@ -6137,7 +6137,17 @@ export const categoryBanner = {
   // same tablet-width font-size treatment used on the homepage to
   // PLP/PDP) -- both fixed values, desktop always larger, pure threshold
   // change, no new size invented.
-  h1: "text-[1.875rem] leading-[38px] font-normal text-paper md:text-[3.375rem] md:leading-[64px] md:whitespace-nowrap",
+  //
+  // `md:whitespace-nowrap` removed (2026-09-15, Capriosports homepage
+  // task): every category H1 built so far ("Custom Leggings Manufacturer,"
+  // etc.) was short enough to sit on one line regardless, so this
+  // constraint was never actually load-bearing -- confirmed as a real bug
+  // once the Capriosports homepage's own longer H1 ("Custom sportswear
+  // manufacturer in Sialkot, Pakistan") hit it, overflowing at 1024px (a
+  // required target viewport). Removing it only ever allows a long H1 to
+  // wrap onto a second line; it cannot change how any existing, already
+  // one-line-fitting H1 renders.
+  h1: "text-[1.875rem] leading-[38px] font-normal text-paper md:text-[3.375rem] md:leading-[64px]",
   // max-xl: a single column, gap-4 (16px) -- mobile Figma stacks the 4 trust
   // bullets vertically (gap-[16px]), not the desktop's wrapped row. xl
   // keeps the original wrapped-row layout untouched.

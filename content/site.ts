@@ -34,6 +34,16 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.caprios
 
 export const SITE_NAME = "Capriowear";
 
+// The Capriosports parent-site's own name, used ONLY by the root layout
+// (app/layout.tsx)'s title/openGraph defaults -- SITE_NAME above stays
+// "Capriowear" unchanged, since dozens of Capriowear/Gear pages already
+// build their own `openGraph.title` as `${x} | ${SITE_NAME}` and would
+// silently mislabel themselves if that constant's meaning changed. The
+// root layout's `title.template` is scoped back to "Capriowear" for every
+// route under /capriowear/** by its own nested app/capriowear/layout.tsx
+// (2026-09-14 Capriosports homepage task) -- see that file's own comment.
+export const PARENT_SITE_NAME = "Capriosports";
+
 // The single site-wide indexing switch (SEO/metadata audit, 2026-09-06):
 // this site is currently staging on Vercel, ahead of the real launch on
 // capriosports.com/capriowear, and must NOT be indexed by Google until that
@@ -125,7 +135,12 @@ export const ORGANIZATION = {
   // same way every other Organization field already is, not a second,
   // independently-maintained fact.
   foundingDate: "2009",
-  url: SITE_URL,
+  // Capriowear's own real URL, `${SITE_URL}/capriowear` -- bug found and
+  // fixed 2026-09-15 (Capriosports homepage task, surfaced via the new
+  // Organization schema's `subOrganization` entry): this was left as bare
+  // `SITE_URL` when Capriowear's routes moved under /capriowear
+  // (2026-09-14), a gap in that same task, not a new regression.
+  url: `${SITE_URL}/capriowear`,
   logo: `${SITE_URL}/opengraph-image`,
   address: {
     addressLocality: "Sialkot",
