@@ -4784,9 +4784,12 @@ export const insideFactory = {
   // card's own shadow below (`mobileCardActiveShadow`) are the two pieces
   // of that fix, and apply to both sizes -- this one is real space, not
   // implied by the shadow alone.
+  // No `md:` tier any more (owner, 2026-09-14: "let's make it 340x255 and
+  // same for mobile and tablet") -- tablet used to be a scaled-up 530x398;
+  // now identical to mobile at every width this carousel covers.
   mobileTrackWide:
-    "no-scrollbar flex h-[255px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-340px)/2))] md:h-[398px] md:px-[min(40px,calc((100%-530px)/2))]",
-  mobileCardWide: "w-[340px] shrink-0 snap-center md:w-[530px]",
+    "no-scrollbar flex h-[255px] items-center gap-3 snap-x snap-mandatory overflow-x-auto px-[min(40px,calc((100%-340px)/2))]",
+  mobileCardWide: "w-[340px] shrink-0 snap-center",
   // The original 300px mobile/469px tablet, 300x340 active ratio -- see
   // `mobileTrackWide`'s own comment above for why this is kept, not
   // dropped, now that `Wide` is the default.
@@ -5489,7 +5492,11 @@ export const howItWorks = {
   // own comment) falls through to that identical base `7:5` value instead
   // of its former one-off tablet ratio -- an exact match, not just a
   // close one.
-  cardMediaRatio: "aspect-[7/5] xl:aspect-[397/260]",
+  // `4/3` (340x255 at the card's own 340px width) replaces the shared `7/5`
+  // base, mobile and tablet alike (owner, 2026-09-14: "let's make it
+  // 340x255 and same for mobile and tablet ... apply the same for how it
+  // works section") -- `xl:` desktop ratio is untouched.
+  cardMediaRatio: "aspect-[4/3] xl:aspect-[397/260]",
   // The floating chevron: both its position (translate, tracking the
   // cursor on X *and* Y) and visibility are written directly to this
   // element's inline `style` from a mousemove/mouseenter/mouseleave
@@ -5515,13 +5522,11 @@ export const howItWorks = {
   // via `md:` overrides -- real mobile keeps its own 48px (`pt-12`/`pb-12`),
   // unchanged.
   mobileSection: "container-p flex flex-col items-center gap-8 pt-12 pb-12 md:pt-24 md:pb-24 xl:hidden",
-  // 469px at `md:`, matching this section's own `desktopCard` width
-  // exactly -- passed as `CardCarousel`'s new `cardClassName` override
-  // (owner, 2026-09-09: tablet keeps its own already-defined wider card,
-  // just swipes with dots instead of using the chevron). Base tier
-  // (`w-[280px] shrink-0 snap-start`) matches `cardCarousel.card`'s own
-  // default exactly, real mobile only.
-  mobileCardWidth: "w-[280px] shrink-0 snap-start md:w-[469px]",
+  // 340px, mobile and tablet alike (owner, 2026-09-14: "let's make it
+  // 340x255 and same for mobile and tablet ... apply the same for how it
+  // works section") -- no more `md:` tier widening to 469px; matches
+  // InsideFactory's own identical 340px mobile/tablet card exactly.
+  mobileCardWidth: "w-[340px] shrink-0 snap-start",
 };
 
 /* --- Exhibitions ---------------------------------------------------------- */

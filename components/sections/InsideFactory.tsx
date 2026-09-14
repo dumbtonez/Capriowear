@@ -123,16 +123,17 @@ export type InsideFactoryProps = {
 };
 
 // Two real, both-kept card size/height sets -- see `cardSize`'s own prop
-// comment above for why both exist. `Wide`'s tablet values scale by the
-// same width/height ratios `Compact`'s original mobile/tablet pair already
-// used (340/255 active, 340/186 inactive), not re-derived independently.
+// comment above for why both exist. `Wide`'s tablet tier matches its own
+// mobile tier exactly (340x255 active / 340x186 inactive), not a separate
+// scaled-up size -- owner, 2026-09-14: "let's make it 340x255 and same for
+// mobile and tablet."
 const CARD_SIZE_WIDE = {
   mobileWidth: 340,
-  tabletWidth: 530,
+  tabletWidth: 340,
   activeHeightMobile: 255,
   inactiveHeightMobile: 186,
-  activeHeightTablet: 398,
-  inactiveHeightTablet: 290,
+  activeHeightTablet: 255,
+  inactiveHeightTablet: 186,
 };
 const CARD_SIZE_COMPACT = {
   mobileWidth: 300,
