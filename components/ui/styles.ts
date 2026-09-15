@@ -4271,6 +4271,18 @@ export const certified = {
   // real desktop value explicit and unchanged.
   root: "flex flex-col items-center md:gap-6 xl:gap-[72px]",
   rootMobile: "flex flex-col items-center gap-8",
+  // "Plus a WFSGI member"-style caption (2026-09-15, Capriosports homepage
+  // rebuild's merged Certified & Compliant section) -- a real membership,
+  // not a certification, so it renders as a small caption under the
+  // heading rather than another logo in the row.
+  membershipNote: "text-body-sm text-muted",
+  // Optional stat-card row (2026-09-15) -- reuses `stats.value`/`caption`'s
+  // own typography tokens directly (Stats.tsx), not a duplicate set, since
+  // this is the exact same stat-card shape, just laid out as a wrapping
+  // row instead of Stats' own media+list split (this merged section has no
+  // separate media column to split against).
+  statsRow: "mt-12 flex w-full max-w-[960px] flex-wrap justify-center gap-x-12 gap-y-8 border-t border-line pt-12 xl:mt-16 xl:pt-16",
+  statItem: "flex min-w-[160px] flex-1 flex-col items-center gap-2 text-center",
   // 812px -- this section's real desktop heading column width (node
   // 369:267), confirmed to wrap the real copy to exactly 2 lines (height
   // 128px = 2 x the 64px line-height). Unconstrained, it ran the full
@@ -8638,4 +8650,86 @@ export const requestSampleForm = {
   successIconWrap: "flex size-16 items-center justify-center rounded-full bg-[#16A34A] text-paper form-success-icon",
   successCheck: "form-success-check",
   successMessage: "text-lg font-medium text-paper form-success-message",
+};
+
+/* --- CapriosportsFactory (Capriosports homepage, "One Factory") ----------- */
+
+// 2026-09-15, Capriosports homepage rebuild -- the text+video+supporting-
+// block half of this section (the photo slider itself reuses InsideFactory
+// directly, unstyled by this token group). Follows `activewearOverview`'s
+// own spacing rhythm (72px section gap, 780px lead column) rather than
+// inventing a new one, since this is the same "eyebrow+H2+lead,
+// credibility-first paragraph" shape that section already established for
+// this exact copy before the component swap.
+export const capriosportsFactory = {
+  section: "container-p flex flex-col items-center gap-12 pt-[72px] pb-[72px] xl:gap-16",
+  textBlock: "flex w-full max-w-[780px] flex-col items-center gap-6 text-center",
+  lead: "max-w-[780px] max-md:text-[1.125rem] max-md:leading-[1.3333] md:text-[1.25rem] md:leading-7 font-normal text-subline",
+  leadBold: "font-semibold",
+  videoWrap: "w-full",
+  videoInnerWrap: "w-full",
+  supportingGrid: "grid w-full max-w-[960px] grid-cols-1 gap-8 md:grid-cols-2",
+  supportingCard: "flex flex-col gap-2 border-t border-line pt-6",
+  supportingTitle: "text-h5 font-semibold",
+  supportingBody: "text-body text-muted",
+};
+
+/* --- WhatWeMakeRange (Capriosports homepage, "What We Make") -------------- */
+
+// 2026-09-15 -- two range-card boxes (lead + real ul/li highlights + CTA),
+// a shape no existing component combines in one (ProductRange has a CTA
+// but no bullets; WhatWeCover has bullets but no CTA/card). New, small,
+// composed from the same section-heading/card/button primitives every
+// other section already uses.
+export const whatWeMakeRange = {
+  section: "container-p flex flex-col items-center gap-12 pt-[72px] pb-[72px]",
+  headingBlock: "flex w-full max-w-[780px] flex-col items-center gap-4 text-center",
+  lead: "max-w-[780px] text-body-lg text-subline",
+  grid: "grid w-full grid-cols-1 gap-8 xl:grid-cols-2",
+  box: "flex flex-col gap-6 rounded-sm border border-line p-8",
+  boxTitle: "text-h3",
+  boxLead: "text-body text-muted",
+  list: "flex flex-col gap-4 border-t border-line pt-6",
+  item: "flex flex-col gap-1",
+  itemTitle: "text-body font-semibold",
+  itemBody: "text-body-sm text-muted",
+  cta: "mt-2 self-start",
+};
+
+/* --- FullCustomization (Capriosports homepage) ---------------------------- */
+
+// 2026-09-15 -- 5-item icon grid, "raw material to retail-ready packaging"
+// pattern. No such section is actually built on the Services page yet (the
+// phrase only exists as that page's own metaDescription string) -- new,
+// adapting WhatWeCover's real ul/li grid shape with an icon slot added.
+export const fullCustomization = {
+  section: "container-p flex flex-col items-center gap-12 pt-[72px] pb-[72px]",
+  headingBlock: "flex w-full max-w-[780px] flex-col items-center gap-4 text-center",
+  lead: "max-w-[780px] text-body-lg text-subline",
+  grid: "grid w-full max-w-[1200px] grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-5",
+  item: "flex flex-col items-center gap-3 text-center",
+  iconWrap: "flex size-12 items-center justify-center rounded-full border border-line",
+  icon: "size-6",
+  itemTitle: "text-body font-semibold",
+  itemBody: "text-body-sm text-muted",
+};
+
+/* --- WhyCapriosports (Capriosports homepage) ------------------------------- */
+
+// 2026-09-15 -- numbered 01-05 list, replacing the earlier
+// FeatureNumbered-shaped ask (that component was deliberately deleted
+// 2026-08-25, "never matched the real design"). New, small, reusing
+// TrustPoints' own bordered-row list language (`trustPoints.list`/`row`)
+// rather than a second unrelated list treatment, with a number column
+// swapped in for that component's Sparkle glyph.
+export const whyCapriosports = {
+  section: "container-p flex flex-col items-center gap-12 pt-[72px] pb-[72px]",
+  headingBlock: "flex w-full max-w-[780px] flex-col items-center gap-4 text-center",
+  subline: "max-w-[780px] text-body-lg text-subline",
+  list: "flex w-full max-w-[960px] flex-col divide-y divide-line border-y border-line",
+  row: "flex items-start gap-6 py-6",
+  number: "text-h5 font-bold text-muted",
+  rowText: "flex flex-col gap-1",
+  rowTitle: "text-body font-semibold",
+  rowBody: "text-body-sm text-muted",
 };

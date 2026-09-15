@@ -72,16 +72,47 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import type { ReactNode } from "react";
+
 import { FacebookIcon, InstagramIcon, LinkedinIcon } from "@/components/icons/SocialIcons";
 import { Logo } from "@/components/Logo";
 import { useRevealOnView } from "@/components/TextReveal";
 import { cx } from "@/components/ui/cx";
 import { footer } from "@/components/ui/styles";
-import type { home } from "@/content/home";
+
+// Widened from `typeof home.footer` (2026-09-15, Capriosports homepage
+// rebuild) so this one real component can render either site's real
+// content: Capriowear's own `home.footer` (unchanged shape) and
+// `capriosportsHome.footer` (content/capriosports/home.ts), which adds one
+// extra optional field, `externalLink` (Capriosports' own footer cross-links
+// to Capriowear, a genuinely external destination under a different
+// basePath -- see that field's own comment there for the external-link
+// rule this follows).
+export type FooterContent = {
+  tagline: string;
+  description: string;
+  nav: {
+    columnOne: readonly { label: string; href: string }[];
+    columnTwo: readonly { label: string; href: string }[];
+  };
+  externalLink?: { label: string; href: string };
+  contact: { label: string; email: string };
+  address: string;
+  copyright: string;
+};
 
 export type FooterProps = {
-  content: typeof home.footer;
+  content: FooterContent;
   social: readonly string[];
+  /**
+   * Overrides the brand mark rendered at the top of the footer (default:
+   * Capriowear's own `<Logo footer/>`/`<Logo stacked/>` wordmark, unchanged
+   * for every existing caller). Capriosports' own homepage passes a plain
+   * text wordmark here (`CapriosportsWordmark`) -- no dedicated Capriosports
+   * logo asset exists yet (content/capriosports/organization.ts's own
+   * comment), so this is real text, not a fabricated graphic.
+   */
+  brandMark?: { desktop: ReactNode; mobile: ReactNode };
 };
 
 const SOCIAL_ICON = [
@@ -110,7 +141,7 @@ function SocialLinks({ social }: { social: readonly string[] }) {
   );
 }
 
-export function Footer({ content, social }: FooterProps) {
+export function Footer({ content, social, brandMark }: FooterProps) {
   const { ref, active } = useRevealOnView<HTMLElement>(0.05);
   // Bounded safety net: `useRevealOnView`'s `IntersectionObserver` is the
   // same one every other reveal on this site already relies on, but if it
@@ -155,7 +186,7 @@ export function Footer({ content, social }: FooterProps) {
         <div className={footer.desktopInner}>
           <div className={footer.desktopRow1}>
             <div className={footer.desktopBrandGroup}>
-              <Logo footer className={footer.desktopBrandLogo} />
+              {brandMark ? brandMark.desktop : <Logo footer className={footer.desktopBrandLogo} />}
             </div>
             <div className={footer.desktopSocialGroup}>
               <SocialLinks social={social} />
@@ -179,6 +210,14 @@ export function Footer({ content, social }: FooterProps) {
                     {link.label}
                   </Link>
                 ))}
+                {/* Genuinely external destination (a different basePath),
+                    per this file's own header comment's link rule -- a
+                    plain absolute <a>, never next/link. */}
+                {content.externalLink ? (
+                  <a href={content.externalLink.href} className={footer.desktopNavLink}>
+                    {content.externalLink.label}
+                  </a>
+                ) : null}
               </div>
             </div>
             <div className={footer.desktopDescriptionGroup}>
@@ -205,7 +244,7 @@ export function Footer({ content, social }: FooterProps) {
       {/* Mobile: one flat stacked column -- see the styles.ts header comment. */}
       <div className={footer.mobileOuter}>
         <div className={footer.mobileBrandGroup}>
-          <Logo stacked className={footer.mobileBrandLogo} />
+          {brandMark ? brandMark.mobile : <Logo stacked className={footer.mobileBrandLogo} />}
         </div>
 
         <div className={footer.mobileDescriptionGroup}>
@@ -218,6 +257,11 @@ export function Footer({ content, social }: FooterProps) {
               {link.label}
             </Link>
           ))}
+          {content.externalLink ? (
+            <a href={content.externalLink.href} className={footer.mobileNavLink}>
+              {content.externalLink.label}
+            </a>
+          ) : null}
         </div>
 
         <div className={footer.mobileDivider} />

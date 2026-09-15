@@ -43,11 +43,22 @@ import Image from "next/image";
 import { Marquee } from "@/components/Marquee";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextReveal } from "@/components/TextReveal";
-import { certified } from "@/components/ui/styles";
+import { certified, stats as statsTokens } from "@/components/ui/styles";
 import type { home } from "@/content/home";
 
 export type CertifiedCompliantProps = {
-  content: typeof home.certified;
+  content: typeof home.certified & { membershipNote?: string };
+  /**
+   * Folds a stat-card row (Since/sq ft/monthly capacity/etc.) directly
+   * into this same section, right under the logos -- added 2026-09-15 for
+   * the Capriosports homepage rebuild, which wanted one merged section
+   * instead of two disconnected black ones (this component's own logos +
+   * a separate `<Stats>`). Reuses `Stats.tsx`'s own `value`/`caption`
+   * typography tokens, not a duplicate set. Omitted (default): unchanged,
+   * byte-for-byte identical to every existing caller (Capriowear's own
+   * homepage/services/our-factory instances).
+   */
+  stats?: typeof home.stats;
   /** `"services"` gives mobile its own 72px top gap (`certified.
    *  mobileSectionServices`) instead of the homepage's `pt-0`, and zeroes
    *  every breakpoint's own bottom padding (`desktopSectionServices`/
@@ -69,7 +80,20 @@ export type CertifiedCompliantProps = {
   showHeading?: boolean;
 };
 
-export function CertifiedCompliant({ content, pageVariant = "default", showHeading = true }: CertifiedCompliantProps) {
+function StatsRow({ items }: { items: typeof home.stats }) {
+  return (
+    <div className={certified.statsRow}>
+      {items.map((stat) => (
+        <div key={stat.value} className={certified.statItem}>
+          <p className={statsTokens.value}>{stat.value}</p>
+          <p className={statsTokens.caption}>{stat.caption}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function CertifiedCompliant({ content, stats, pageVariant = "default", showHeading = true }: CertifiedCompliantProps) {
   const isServices = pageVariant === "services";
   const isOurFactory = pageVariant === "ourFactory";
   const desktopSection = isOurFactory
@@ -101,6 +125,7 @@ export function CertifiedCompliant({ content, pageVariant = "default", showHeadi
               align="center"
             />
           ) : null}
+          {content.membershipNote ? <p className={certified.membershipNote}>{content.membershipNote}</p> : null}
           {/* Marquee, not the earlier static row (owner, 2026-09-10: "make
               them move marquee sitewide desktop and tablet") -- same
               mechanism tablet already used below, `<Marquee>` with
@@ -123,6 +148,7 @@ export function CertifiedCompliant({ content, pageVariant = "default", showHeadi
             pauseOnHover={false}
             edgeFade
           />
+          {stats ? <StatsRow items={stats} /> : null}
         </div>
       </div>
 
@@ -144,6 +170,7 @@ export function CertifiedCompliant({ content, pageVariant = "default", showHeadi
               align="center"
             />
           ) : null}
+          {content.membershipNote ? <p className={certified.membershipNote}>{content.membershipNote}</p> : null}
           <Marquee
             items={content.logos.map((logo) => (
               <Image key={logo.name} src={logo.src} alt={logo.name} width={logo.width} height={logo.height} />
@@ -154,6 +181,7 @@ export function CertifiedCompliant({ content, pageVariant = "default", showHeadi
             pauseOnHover={false}
             edgeFade
           />
+          {stats ? <StatsRow items={stats} /> : null}
         </div>
       </div>
 
@@ -167,6 +195,7 @@ export function CertifiedCompliant({ content, pageVariant = "default", showHeadi
               align="center"
             />
           ) : null}
+          {content.membershipNote ? <p className={certified.membershipNote}>{content.membershipNote}</p> : null}
           {/* Real mobile switched from the bordered 2-column grid to a
               scrolling Marquee, 2026-09-11 (owner: "for the mobile, let's
               apply marquee style too, wherever its been used") -- matching
@@ -203,6 +232,7 @@ export function CertifiedCompliant({ content, pageVariant = "default", showHeadi
             pauseOnHover={false}
             edgeFade
           />
+          {stats ? <StatsRow items={stats} /> : null}
         </div>
       </div>
     </section>

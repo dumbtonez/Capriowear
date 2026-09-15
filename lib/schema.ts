@@ -181,6 +181,43 @@ export function megaMenuSchema(name: string, href: string, groups: MegaMenuGroup
   };
 }
 
+export type ProductRangeHighlight = { title: string; body: string };
+export type ProductRangeBox = { title: string; href: string; highlights: ProductRangeHighlight[] };
+
+// Capriosports homepage's own "What We Make" range cards (WhatWeMakeRange.tsx,
+// content/capriosports/home.ts's `whatWeMake.boxes`) -- a plain ItemList of
+// Service entities, one per real visible highlight (SEO/AEO/GEO discipline:
+// this is fed by the exact same array the page renders as real `<ul>/<li>`
+// markup, never a second, hand-typed list). `Service`, not `Product`: these
+// are manufacturing capabilities/categories (e.g. "Weight Lifting Belts"),
+// not individually priced, orderable SKUs -- the same reasoning
+// `collectionPageSchema`'s own header comment gives for staying price-free,
+// one level more conservative here since there's no per-item URL either,
+// only each parent box's own division page.
+export function productRangeItemListSchema(siteUrl: string, boxes: ProductRangeBox[]) {
+  let position = 0;
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: boxes.flatMap((box) =>
+      box.highlights.map((highlight) => {
+        position += 1;
+        return {
+          "@type": "ListItem",
+          position,
+          item: {
+            "@type": "Service",
+            name: highlight.title,
+            description: highlight.body,
+            category: box.title,
+            url: `${siteUrl}${box.href}`,
+          },
+        };
+      }),
+    ),
+  };
+}
+
 export type CollectionPageItem = {
   name: string;
   url: string;
