@@ -371,6 +371,12 @@ export const home = {
   // Factory's own real shots, repeated) so TrustSignals' zoom-and-settle
   // `ParallaxMedia` treatment has something real to animate -- see
   // `howItWorks.steps`'s own comment above.
+  // Private Label and Worldwide Shipping copy updated 2026-09-15 (owner-
+  // supplied text, not a Figma re-read): "fabrics" -> "materials" in
+  // Private Label; Worldwide Shipping replaced its USA/UK/Europe/Canada/
+  // Australia + GSP+ duty wording with "DDP worldwide, from Sialkot,
+  // Pakistan. Export paperwork handled in house." Product Development and
+  // Low MOQ unchanged -- the owner's supplied text matched verbatim.
   trustStrip: [
     {
       title: "Product Development",
@@ -379,7 +385,7 @@ export const home = {
     },
     {
       title: "Private Label",
-      body: ["Your designs, fabrics, labels and packaging. ", { bold: "Factory-direct, no middleman." }],
+      body: ["Your designs, materials, labels and packaging. ", { bold: "Factory-direct, no middleman." }],
       image: { src: "/factory-test/inside-factory-2.jpg", alt: "Private Label" },
     },
     {
@@ -392,7 +398,7 @@ export const home = {
     },
     {
       title: "Worldwide Shipping",
-      body: ["DDP to the USA, UK, Europe, Canada and Australia. GSP+ 0% EU import duty."],
+      body: ["DDP worldwide, from Sialkot, Pakistan. Export paperwork handled in house."],
       image: { src: "/factory-test/inside-factory-4.jpg", alt: "Worldwide Shipping" },
     },
   ],
