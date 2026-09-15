@@ -277,34 +277,41 @@ export const capriosportsHome = {
   // Images reused from the same factory-test set, matched by meaning to
   // Capriowear's own existing usage of these files (e.g. inside-factory-4
   // already reads "Worldwide Shipping" there too).
+  // Copy replaced 2026-09-15 (owner-supplied text, verbatim, matching
+  // Capriowear's own homepage trust strip word for word -- see
+  // content/home.ts's own trustStrip and its comment for the same
+  // update) -- was gear-specific wording ("Low MOQ, Sample to Bulk",
+  // "Private Label, OEM & ODM", "Trusted Since 2009"); the owner's given
+  // text applies to both divisions as a shared service description, not
+  // product-specific, so it's used here verbatim rather than re-adapted.
   trustStrip: [
     {
-      title: "Low MOQ, Sample to Bulk",
-      body: ["Start from just 50 units per style, then scale to full bulk, all made to your spec."],
+      title: "Product Development",
+      body: ["We refine ideas through sampling, pattern development, and technical adjustments to meet your needs."],
+      image: {
+        src: "/factory-test/inside-factory-1.jpg",
+        alt: "Capriosports product development: sampling and pattern development in Sialkot, Pakistan",
+      },
+    },
+    {
+      title: "Private Label",
+      body: ["Your designs, materials, labels and packaging. ", { bold: "Factory-direct, no middleman." }],
+      image: {
+        src: "/factory-test/inside-factory-2.jpg",
+        alt: "Capriosports private label lifting gear and boxing and MMA equipment produced factory-direct in Sialkot, Pakistan",
+      },
+    },
+    {
+      title: "Low MOQ",
+      body: ["Start from just 50 pieces per style. ", { bold: "From first samples to full bulk order." }],
       image: {
         src: "/factory-test/inside-factory-3.jpg",
         alt: "Capriosports sample lifting gear ready for low-MOQ bulk production in Sialkot, Pakistan",
       },
     },
     {
-      title: "Private Label, OEM & ODM",
-      body: ["Custom lifting gear and boxing and MMA equipment, factory-direct. ", { bold: "No middlemen." }],
-      image: {
-        src: "/factory-test/inside-factory-2.jpg",
-        alt: "Capriosports private label boxing and MMA equipment produced factory-direct in Sialkot, Pakistan",
-      },
-    },
-    {
-      title: "Trusted Since 2009",
-      body: ["Export quality, 20+ countries."],
-      image: {
-        src: "/factory-test/inside-factory-1.jpg",
-        alt: "Capriosports lifting gear and boxing and MMA equipment manufactured since 2009 in Sialkot, Pakistan",
-      },
-    },
-    {
       title: "Worldwide Shipping",
-      body: ["DDP worldwide, from Sialkot, Pakistan."],
+      body: ["DDP worldwide, from Sialkot, Pakistan. Export paperwork handled in house."],
       image: {
         src: "/factory-test/inside-factory-4.jpg",
         alt: "Capriosports lifting gear and boxing and MMA equipment shipped DDP worldwide from Sialkot, Pakistan",

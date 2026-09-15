@@ -35,8 +35,15 @@ export type DivisionCardsProps = {
    *   shrinks to a fixed-ratio top portion (not full-bleed), with a real
    *   solid `bg-ink` box below it (not an overlay) holding the text --
    *   a hard photo/box seam, no gradient at all.
+   * - `"flat"` (2026-09-15, owner: "remove the images from the cards, use
+   *   a light black background instead that can be seen on the black
+   *   background") -- no photo at all, the whole card is one solid
+   *   `bg-ink-2` block (the same "secondary dark surface on an ink
+   *   section" token `card`/`cardBox` already use, so it's visible as its
+   *   own container against the section's `bg-ink`) holding just the
+   *   title/descriptor/link, full height.
    */
-  variant?: "scrim" | "merge" | "box";
+  variant?: "scrim" | "merge" | "box" | "flat";
 };
 
 export function DivisionCards({ categories, variant = "scrim" }: DivisionCardsProps) {
@@ -44,18 +51,26 @@ export function DivisionCards({ categories, variant = "scrim" }: DivisionCardsPr
     <section className={divisionCards.section}>
       <div className={divisionCards.grid}>
         {categories.map((category) => (
-          <Link key={category.href} href={category.href} className={variant === "box" ? divisionCards.cardBox : divisionCards.card}>
-            <div className={variant === "box" ? divisionCards.boxImageWrap : divisionCards.fullBleedImageWrap}>
-              <Image
-                src={category.image.src}
-                alt={category.image.alt}
-                fill
-                sizes="(min-width: 768px) 33vw, 320px"
-                className={cx(divisionCards.image, variant === "merge" && divisionCards.imageMerge)}
-              />
-              {variant === "scrim" ? <div className={divisionCards.scrim} aria-hidden="true" /> : null}
-            </div>
-            <div className={variant === "box" ? divisionCards.textBox : divisionCards.textWrap}>
+          <Link
+            key={category.href}
+            href={category.href}
+            className={variant === "flat" ? divisionCards.cardFlat : variant === "box" ? divisionCards.cardBox : divisionCards.card}
+          >
+            {variant === "flat" ? (
+              <div className={divisionCards.imageFlatWrap} aria-hidden="true" />
+            ) : (
+              <div className={variant === "box" ? divisionCards.boxImageWrap : divisionCards.fullBleedImageWrap}>
+                <Image
+                  src={category.image.src}
+                  alt={category.image.alt}
+                  fill
+                  sizes="(min-width: 768px) 33vw, 320px"
+                  className={cx(divisionCards.image, variant === "merge" && divisionCards.imageMerge)}
+                />
+                {variant === "scrim" ? <div className={divisionCards.scrim} aria-hidden="true" /> : null}
+              </div>
+            )}
+            <div className={variant === "flat" ? divisionCards.textFlat : variant === "box" ? divisionCards.textBox : divisionCards.textWrap}>
               <p className={divisionCards.title}>{category.label}</p>
               <p className={divisionCards.descriptor}>{category.descriptor}</p>
               {"linkLabel" in category && category.linkLabel ? (

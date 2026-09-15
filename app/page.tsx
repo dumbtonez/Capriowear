@@ -92,17 +92,32 @@ export default function CapriosportsHomePage() {
             "fully custom offering put it under video... same like we did
             on mobile wear") -- same real mechanism as Capriowear's own
             Hero, not a second copy of it. */}
-        <Hero hero={capriosportsHome.hero} customOfferings={capriosportsHome.customOfferings} showTickerDesktop={false} showTickerMobile />
+        <Hero
+          hero={capriosportsHome.hero}
+          customOfferings={capriosportsHome.customOfferings}
+          showTickerDesktop={false}
+          showTickerMobile
+          tickerMobileUntilTablet
+        />
 
-        {/* 2/3. DIVISION CARDS + FULLY CUSTOM OFFERING STRIP (desktop/
-            tablet only now -- mobile's own copy moved into Hero, directly
-            under the video, see above) -- one continuous dark surface
-            (real design, confirmed via screenshot, Figma node 981:1208):
-            3 full-bleed division cards, then the offerings strip right
-            below with no section break. */}
+        {/* 2/3. DIVISION CARDS + FULLY CUSTOM OFFERING STRIP (desktop only
+            now -- tablet's own copy moved into Hero too, alongside mobile's,
+            directly under the video, see `tickerMobileUntilTablet` above)
+            -- one continuous dark surface (real design, confirmed via
+            screenshot, Figma node 981:1208): 3 full-bleed division cards,
+            then the offerings strip right below with no section break.
+            `xl:block` (was `md:block`), owner, 2026-09-15: "video on tablet
+            will behave same as mobile same like on capriowear" -- narrowed
+            in the same change that extended Hero's own mobile ticker
+            through tablet, so the two never both show at tablet width. */}
         <div className="bg-ink text-paper">
-          <DivisionCards categories={capriosportsHome.divisions.categories} variant="box" />
-          <div className="hidden md:block">
+          <DivisionCards categories={capriosportsHome.divisions.categories} variant="flat" />
+          {/* xl:pt-4 (16px) tops up Marquee's own built-in 40px (`padded`
+              default true, `marquee.basePaddingDefault`, shared sitewide --
+              not overridden at its source) to a real 80px from the division
+              cards row, owner, 2026-09-15: "make fully custom offerings
+              desktop space from top 80px". */}
+          <div className="hidden xl:block xl:pt-4">
             <Marquee
               items={capriosportsHome.customOfferings.items}
               label={capriosportsHome.customOfferings.label}

@@ -3186,6 +3186,13 @@ export const servicesHero = {
   // content ... on mobile only" -- was pb-12/48px; desktop Marquee's own
   // spacing is untouched). Applies to both pages now too.
   tickerMobile: "container-p flex flex-col gap-8 pt-12 pb-[60px] md:hidden",
+  // Capriosports homepage's own Hero (`tickerMobileUntilTablet`, 2026-09-15)
+  // -- identical to `tickerMobile` above except `xl:hidden` instead of
+  // `md:hidden`, so the mobile list ticker stays visible through tablet
+  // too, since that page's desktop Marquee ticker only takes over at `xl:`
+  // there (its own wrapper in `app/page.tsx` narrowed from `md:block` to
+  // `xl:block` in the same change) instead of `md:`.
+  tickerMobileUntilTablet: "container-p flex flex-col gap-8 pt-12 pb-[60px] xl:hidden",
   tickerMobileLabel: "text-[1.5rem] font-medium leading-normal",
   // 28px (owner, 2026-09-08: "16px more" then "reduce 8px" -- net +8px on
   // the gap-5/20px, 2026-09-07 baseline).
@@ -7501,17 +7508,20 @@ export const divisionCards = {
   // strip right after it sit on one continuous dark surface in the real
   // design (no white gap between Hero's video block and this row of
   // cards) -- both rendered inside one shared dark wrapper in app/page.tsx.
-  // pt-5 (20px, owner: "on mobile... make 20px space from top") mobile,
-  // xl:pt-16 (64px, owner's own earlier spec) desktop -- was a flat pt-16
-  // at both breakpoints. pb-4/xl:pb-6 (16px/24px) are NOT the real gap
-  // down to the Fully Custom Offerings label below -- Marquee itself
-  // (`padded` default true) already contributes its own fixed 40px top
-  // padding above its label (`marquee.base`'s own comment), and the
-  // mobile ScrollSpotlightList ticker (`servicesHero.tickerMobile`)
-  // already contributes its own 48px (`pt-12`). 16+48=64 and 24+40=64
-  // exactly -- tuned here, not there, so those two shared components' own
-  // established padding stays untouched for every other real caller.
-  section: "container-p pt-5 pb-4 xl:pt-16 xl:pb-6",
+  // pt-5 (20px, owner: "on mobile... make 20px space from top") real
+  // mobile only; md:pt-[72px] tablet AND desktop (owner, 2026-09-15:
+  // "lifting gear image top space should be 72px" / "make it 20px on
+  // mobile" -- was a further xl:-only split, xl:pt-16/64px, replaced here
+  // since the owner's 72px applies from tablet up, not desktop only).
+  // pb-4/xl:pb-6 (16px/24px) are NOT the real gap down to the Fully Custom
+  // Offerings label below -- Marquee itself (`padded` default true)
+  // already contributes its own fixed 40px top padding above its label
+  // (`marquee.base`'s own comment), and the mobile/tablet
+  // ScrollSpotlightList ticker (`servicesHero.tickerMobileUntilTablet`)
+  // already contributes its own 48px (`pt-12`) -- tuned here, not there,
+  // so those shared components' own established padding stays untouched
+  // for every other real caller.
+  section: "container-p pt-5 pb-4 md:pt-[72px] xl:pb-6",
   // md: (768px), not xl: (owner, 2026-09-15: "on tablet we should treat
   // those 3 cards as desktop, not mobile" -- the same real rule Hero.tsx's
   // own ticker already documents for this identical "does it read fine at
@@ -7557,6 +7567,24 @@ export const divisionCards = {
   // Same 2-tier sizing as `card` above (320x395 mobile, fluid from md:) --
   // see that token's own comment for the full reasoning.
   cardBox: "group relative flex w-[320px] h-[395px] flex-col overflow-hidden bg-ink-2 md:h-auto md:w-full md:flex-1 md:aspect-[657/958]",
+  // `flat` variant only (2026-09-15, owner: "remove the images from the
+  // cards, use a light black background instead that can be seen on the
+  // black background") -- same structure as `cardBox` (a placeholder area
+  // on top, real text box below in normal flow), not the photo itself
+  // replaced by a colour -- an owner follow-up corrected an earlier
+  // vertically-centred, no-placeholder pass ("cards text has gone up in
+  // the middle, it should stay on the same place, the image background
+  // container should get some light color"): the text must stay exactly
+  // where it sat in `cardBox` (bottom, natural height), and the former
+  // image area gets its own lighter fill (`imageFlatWrap`) rather than
+  // vanishing.
+  cardFlat: "group relative flex w-[320px] h-[395px] flex-col overflow-hidden bg-ink-2 md:h-auto md:w-full md:flex-1 md:aspect-[657/958]",
+  // `bg-paper/5` -- a translucent white overlay on top of the card's own
+  // `bg-ink-2`, not a second hardcoded hex: reads as a subtly lighter box
+  // distinguishing the former image area from the text box below it
+  // (which stays plain `bg-ink-2`, see `textFlat`), using only existing
+  // tokens rather than inventing a new one.
+  imageFlatWrap: "relative flex-1 min-h-0 bg-paper/5",
   // `scrim`/`merge`: the image layer fills the whole card (the card itself
   // is already `relative`, so plain `absolute inset-0` is enough -- no
   // second positioning context needed).
@@ -7619,6 +7647,10 @@ export const divisionCards = {
   // Same mobile/md:-up split as `textWrap` above (mobile: 24px left/
   // right, 16px top/bottom; md: up: 32px left/right, 24px top/bottom).
   textBox: "flex flex-col gap-2 bg-ink-2 px-6 py-4 md:px-8 md:py-6",
+  // `flat` variant only -- same padding rhythm as `textWrap`/`textBox`
+  // above, no `bg-ink-2` of its own since `cardFlat` already carries it on
+  // the whole card.
+  textFlat: "flex flex-col gap-2 px-6 py-4 md:px-8 md:py-6",
   // 24px/auto from md: up, 22px/auto mobile (owner spec) -- "auto"
   // line-height, not a fixed px value, so a plain `leading-normal` rather
   // than an arbitrary `leading-[Npx]` like the descriptor below gets.

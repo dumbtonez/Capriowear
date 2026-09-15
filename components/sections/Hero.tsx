@@ -68,9 +68,29 @@ export type HeroProps = {
    */
   showTickerDesktop?: boolean;
   showTickerMobile?: boolean;
+  /**
+   * When the desktop ticker is off (`showTickerDesktop={false}`, i.e. the
+   * Capriosports homepage, which renders its own desktop ticker as a later,
+   * separate section instead), the mobile list ticker stays visible through
+   * tablet too, not just real mobile (<768px) -- owner, 2026-09-15: "video
+   * on tablet will behave same as mobile same like on capriowear". On
+   * Capriowear itself (`showTickerDesktop` true, the default) tablet
+   * already gets the scrolling Marquee via `showTickerDesktop`, so this
+   * only changes anything when the desktop ticker is turned off. The
+   * matching desktop-ticker wrapper in `app/page.tsx` (Capriosports' own,
+   * under the division cards) narrows from `md:block` to `xl:block` at the
+   * same time, so the two never both show at tablet width.
+   */
+  tickerMobileUntilTablet?: boolean;
 };
 
-export function Hero({ hero: content, customOfferings, showTickerDesktop = true, showTickerMobile = true }: HeroProps) {
+export function Hero({
+  hero: content,
+  customOfferings,
+  showTickerDesktop = true,
+  showTickerMobile = true,
+  tickerMobileUntilTablet = false,
+}: HeroProps) {
   return (
     <section className={hero.section}>
       {/* Layer 1: Banner */}
@@ -132,7 +152,7 @@ export function Hero({ hero: content, customOfferings, showTickerDesktop = true,
             </div>
           ) : null}
           {showTickerMobile ? (
-            <div className={servicesHero.tickerMobile}>
+            <div className={tickerMobileUntilTablet ? servicesHero.tickerMobileUntilTablet : servicesHero.tickerMobile}>
               <span className={servicesHero.tickerMobileLabel}>{customOfferings.label}</span>
               <ScrollSpotlightList
                 items={customOfferings.mobileItems}
