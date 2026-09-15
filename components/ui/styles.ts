@@ -4400,12 +4400,18 @@ export const stats = {
   // however much space happens to be left after the media block, which had
   // been stretching the caption text far wider than the real design.
   // 40px gap between stats (was 48px, owner, 2026-09-09 revision, along
-  // with the new divider line below -- see `item`'s own comment). `pb-
-  // [40px]` (owner, same day, later follow-up: "100000 monthly capacity
-  // should have 40px gap from the bottom") -- the last stat (no divider
-  // of its own) otherwise sat flush with this list's own bottom edge,
-  // confirmed live (0px gap) before this was added.
-  desktopList: "flex w-[300px] shrink-0 flex-col gap-[40px] pb-[40px]",
+  // with the new divider line below -- see `item`'s own comment).
+  // `pb-[40px]` (owner, same day, later follow-up: "100000 monthly
+  // capacity should have 40px gap from the bottom") was removed again
+  // 2026-09-15 (owner: "the stat section content pills should be center
+  // aligned to the image on the left on desktop") -- with `desktopInner`'s
+  // own `items-center`, that trailing bottom-only padding made the list's
+  // *box* centre correctly against the media (confirmed via measured
+  // rects: both centred at the same y) while the *visible text* inside it
+  // sat ~20px above that centre, since the padding was invisible weight
+  // only at the bottom. No trailing element follows this list within the
+  // centred row, so nothing else relied on that bottom gap.
+  desktopList: "flex w-[300px] shrink-0 flex-col gap-[40px]",
   // Each stat: text block + a gradient divider line (except the last
   // stat, which has none -- confirmed via get_metadata, node 894:331 has
   // no "Line" child) -- 32px between them (owner, 2026-09-09 revision,
