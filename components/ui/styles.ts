@@ -8882,26 +8882,66 @@ export const requestSampleForm = {
 
 /* --- CapriosportsFactory (Capriosports homepage, "One Factory") ----------- */
 
-// 2026-09-15, Capriosports homepage rebuild -- the text+video+supporting-
-// block half of this section (the photo slider itself reuses InsideFactory
-// directly, unstyled by this token group). Follows `activewearOverview`'s
-// own spacing rhythm (72px section gap, 780px lead column) rather than
-// inventing a new one, since this is the same "eyebrow+H2+lead,
-// credibility-first paragraph" shape that section already established for
-// this exact copy before the component swap.
+// Rebuilt 2026-09-15 to match the real Figma frame exactly (node 985:133,
+// owner: "under that build this section. use the same spacings") -- the
+// photo slider below this block still reuses InsideFactory directly,
+// unstyled by this token group; this frame doesn't include it. No eyebrow
+// in the real frame (dropped from this block's own markup, still passed
+// through to InsideFactory's props below, unused there too since
+// `showHeading={false}`).
+//
+// Section padding: Figma's own `px-[75px] py-[120px]` -- `py-[120px]` maps
+// exactly onto the design system's own spacing scale (`py-30`, still
+// written as the literal px value here for readability against the
+// Figma number); `px-[75px]` is close enough to this project's standard
+// 80px desktop container inset (`.container-p`) that reusing the existing
+// token reads as the intended match, not a real 5px design disagreement --
+// per docs/02-design-system.md's own "map every Figma value onto an
+// existing token" rule, so this uses `container-p` rather than a bespoke
+// 75px value with no other use anywhere else sitewide.
 export const capriosportsFactory = {
-  section: "container-p flex flex-col items-center gap-12 pt-[72px] pb-[72px] xl:gap-16",
-  textBlock: "flex w-full max-w-[780px] flex-col items-center gap-6 text-center",
-  lead: "max-w-[780px] max-md:text-[1.125rem] max-md:leading-[1.3333] md:text-[1.25rem] md:leading-7 font-normal text-subline",
-  leadBold: "font-semibold",
+  // `bg-ink text-paper` -- the real frame's own dark surface (`#121317`,
+  // the exact `ink` token), added here since this section previously had
+  // no background of its own at all (a real, pre-existing gap: only
+  // `InsideFactory`'s own slider portion below carried a dark background,
+  // this upper text+video+cards block rendered on plain white).
+  section: "container-p flex flex-col items-center gap-16 bg-ink py-[120px] text-paper",
+  // Figma's own `gap-[72px]` between the text+video group and the cards
+  // row below it.
+  contentGroup: "flex w-full flex-col items-center gap-[72px]",
+  // Figma's own `gap-[24px]`, `w-[812px]` (text column) -- centred, no
+  // eyebrow.
+  textBlock: "flex w-full max-w-[812px] flex-col items-center gap-6 text-center",
+  // 54px/64px, matches this project's own Heading 1 token exactly (Figma
+  // node's own text style) -- `text-h1`, not a bespoke size.
+  heading: "text-h1 text-paper",
+  // 26px/36px -- confirmed off-scale (Figma's own literal text style, not
+  // Body Large's 20px/24px or any other named token), recorded here as its
+  // own value per docs/02-design-system.md's "Reading Figma" rule rather
+  // than rounded to the nearest existing size.
+  lead: "max-w-[812px] text-[1.625rem] leading-[36px] font-normal text-[#838d97]",
+  // Figma's own `h-[620px]` fixed height, full width, `bg-[#17191e]` --
+  // `bg-ink-2`, the existing token for that exact hex, not a new one.
   videoWrap: "w-full",
-  videoInnerWrap: "w-full",
-  // Supporting blocks render via CapabilityCard now (2026-09-15
-  // visual-review fix: real image + card treatment, matching every other
-  // title+body+image block sitewide, instead of bare stacked text under a
-  // thin divider) -- this grid wrapper is the only bespoke class left,
-  // CapabilityCard's own tokens (`capabilityCard.*`) handle the rest.
-  supportingGrid: "grid w-full max-w-[960px] grid-cols-1 gap-8 md:grid-cols-2",
+  videoInnerWrap: "aspect-[16/9] w-full xl:aspect-auto xl:h-[620px]",
+  // Figma's own `gap-[63px]` between the 3 cards, 3-up row -- desktop only
+  // (`xl:`); no mobile frame given for this section, so mobile/tablet
+  // fall back to a plain stacked column like every other 3-item text list
+  // sitewide (e.g. `whyCapriosports`'s own numbered list) rather than
+  // guessing a squeezed 3-up row at narrow widths.
+  supportingGrid: "flex w-full flex-col gap-8 xl:flex-row xl:items-start xl:gap-[63px]",
+  // Figma's own `gap-[16px]`, `w-[385px]` per card.
+  supportingCard: "flex flex-col items-start gap-4 xl:w-[385px]",
+  // 30px medium, matches this project's own Heading 3 token (Figma's real
+  // text style) -- `text-h3`, not a bespoke size. `whitespace-pre-line` so
+  // the "Fabric to finished packaging, one factory" title can carry the
+  // frame's own real 2-line break via `\n` in content, same technique as
+  // any other multi-line title sitewide.
+  supportingTitle: "whitespace-pre-line text-h3 font-medium text-paper",
+  // 20px/28px -- confirmed off-scale (Figma's own literal text style, same
+  // reasoning as `lead` above; Body Large's 20px/24px line-height doesn't
+  // match).
+  supportingBody: "text-[1.25rem] leading-[28px] font-normal text-[#838d97]",
 };
 
 /* --- WhyCapriosports (Capriosports homepage) ------------------------------- */

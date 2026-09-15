@@ -1,38 +1,26 @@
 // components/sections/CapriosportsFactory.tsx
-// Capriosports homepage section 5, "One Factory" -- 2026-09-15 rebuild,
-// revised same day after visual review. Composition of real, already-
-// shipping components:
-//   1. This section's own heading+lead text block (small, new -- no
-//      existing component combines heading+lead in exactly this shape).
-//   2. `ScrollGrowVideo` -- the same block Capriowear's own Hero.tsx uses,
-//      as this section's lead visual. No `video` pair is passed (visual
-//      review: the previous pass's placeholder video was an unrelated
-//      stock clip of a park, which read as broken) -- omitting `video`
-//      makes it fall back to its own plain labelled placeholder + Play
-//      button over a real factory photo, which reads as intentional.
-//   3. `CapabilityCard` -- the same title+body+image card Our Services/How
-//      It Works use sitewide, for the two supporting blocks (previously
-//      bare stacked text under a thin divider, floating with no real
-//      transition into the photo slider below).
+// Capriosports homepage section, "One Factory" -- rebuilt 2026-09-15 to
+// match the real Figma frame exactly (node 985:133, owner: "under that
+// build this section. use the same spacings"). Composition:
+//   1. Plain centred heading+lead (no eyebrow, no SectionHeading -- the
+//      real frame has neither; see `capriosportsFactory` in
+//      components/ui/styles.ts for the exact type/spacing values).
+//   2. A plain full-width `MediaPlaceholder` video block, fixed 620px tall
+//      at desktop (the frame's own static box, not Hero's scroll-grow
+//      mechanic -- that effect belongs to a narrow-box-grows-on-scroll
+//      moment neither this frame nor its copy describe).
+//   3. 3 plain title+body cards (no images), 3-up at desktop per the
+//      frame's own `gap-[63px]` row; no mobile frame exists for this
+//      section, so mobile/tablet stack like any other 3-item text list.
 //   4. `InsideFactory` -- reused directly (not forked) for the real
-//      factory-shots slider, `showHeading`/`showCta` both false since this
-//      section supplies its own heading and has no separate CTA here.
-//
-// A true "sticky text pinned beside a taller scrolling column" composition
-// (OurServices' own mechanism) does not actually fit here: OurServices
-// pins text against a column of vertically STACKED cards taller than the
-// viewport, while InsideFactory's gallery is a horizontally chevron-paged
-// carousel with no extra vertical height to pin against -- the two
-// mechanisms have nothing to compose against each other. This stacked
-// layout is the honest fit for what these two real components can
-// actually do together.
-import { Fragment } from "react";
+//      factory-shots slider, `showHeading`/`showCta` both false. Not part
+//      of this Figma frame (which ends after the 3 cards), kept as-is
+//      immediately after it -- the real design's own next section.
+import { Play } from "lucide-react";
 
-import { CapabilityCard } from "@/components/Card";
-import { ScrollGrowVideo } from "@/components/ScrollGrowVideo";
-import { SectionHeading } from "@/components/SectionHeading";
+import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { TextReveal } from "@/components/TextReveal";
-import { capriosportsFactory } from "@/components/ui/styles";
+import { capriosportsFactory, hero } from "@/components/ui/styles";
 import type { capriosportsHome } from "@/content/capriosports/home";
 
 import { InsideFactory } from "./InsideFactory";
@@ -41,43 +29,41 @@ export type CapriosportsFactoryProps = {
   content: typeof capriosportsHome.factory;
 };
 
-type BodySegment = string | { bold: string };
-
 export function CapriosportsFactory({ content }: CapriosportsFactoryProps) {
   return (
     <section className={capriosportsFactory.section}>
-      <div className={capriosportsFactory.textBlock}>
-        <SectionHeading
-          eyebrow={<TextReveal text={content.eyebrow} />}
-          heading={<TextReveal as="span" text={content.h2} />}
-          eyebrowTone="light"
-          align="center"
-        />
-        <p className={capriosportsFactory.lead}>
-          {(content.lead as BodySegment[]).map((segment, index) =>
-            typeof segment === "string" ? (
-              <Fragment key={index}>{segment}</Fragment>
-            ) : (
-              <span key={index} className={capriosportsFactory.leadBold}>
-                {segment.bold}
-              </span>
-            ),
-          )}
-        </p>
+      <div className={capriosportsFactory.contentGroup}>
+        <div className={capriosportsFactory.textBlock}>
+          <TextReveal as="h2" text={content.h2} className={capriosportsFactory.heading} />
+          <p className={capriosportsFactory.lead}>{content.lead}</p>
+        </div>
+
+        <div className={capriosportsFactory.videoWrap}>
+          <MediaPlaceholder
+            label={content.video.label}
+            tone="dark"
+            showLabel={false}
+            radius="none"
+            imageSizes="100vw"
+            className={capriosportsFactory.videoInnerWrap}
+            overlay={
+              <div className={hero.playWrap}>
+                <span className={hero.playCircle}>
+                  <Play className={hero.playIcon} fill="currentColor" aria-hidden="true" />
+                </span>
+                <span className={hero.playLabel}>Play Video</span>
+              </div>
+            }
+          />
+        </div>
       </div>
 
-      <div className={capriosportsFactory.videoWrap}>
-        <ScrollGrowVideo label={content.video.label} wrapClassName={capriosportsFactory.videoInnerWrap} />
-      </div>
-
-      {/* Real CapabilityCard treatment (image + title + body), not bare
-          stacked text under a divider (2026-09-15 visual-review fix) --
-          same card component/spacing Our Services and How It Works
-          already use sitewide, so this reads as a real transition into
-          the photo slider below, not a disconnected floating block. */}
       <div className={capriosportsFactory.supportingGrid}>
         {content.supportingBlocks.map((block) => (
-          <CapabilityCard key={block.title} title={block.title} body={block.body} mediaAspectClassName="aspect-[8/5]" />
+          <div key={block.title} className={capriosportsFactory.supportingCard}>
+            <p className={capriosportsFactory.supportingTitle}>{block.title}</p>
+            <p className={capriosportsFactory.supportingBody}>{block.body}</p>
+          </div>
         ))}
       </div>
 

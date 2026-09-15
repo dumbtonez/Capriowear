@@ -170,20 +170,34 @@ export const capriosportsHome = {
     // which is the section actually named "Why Capriosports" in the brief.
     // `h2`/`lead`/`supportingBlocks` are the exact locked copy, unchanged.
     eyebrow: "ONE FACTORY",
+    // h2/lead/supportingBlocks re-built to match the real Figma frame
+    // exactly, node 985:133 (owner, 2026-09-15: "under that build this
+    // section. use the same spacings") -- see `CapriosportsFactory.tsx`
+    // and `capriosportsFactory` (components/ui/styles.ts) for the matching
+    // layout/spacing rebuild. `lead` dropped its own bold span and em dash
+    // (this project's own "no en/em dashes" content rule, docs/02-design-
+    // system.md) to match the frame's plain sentence exactly -- "Caprio"
+    // in the frame's own text widened to "Capriosports", this project's
+    // established full name everywhere else. Third supporting block ("Your
+    // design, always protected") is new -- the frame shows 3 cards, the
+    // previous pass only built 2.
     h2: "One factory, lifting gear and boxing and MMA equipment",
-    lead: [
-      "Capriosports has manufactured from ",
-      { bold: "Sialkot, Pakistan" },
-      " since 2009 — one company, one factory. Today that means custom lifting gear and boxing and MMA equipment, private label and wholesale, from raw material to finished packaging.",
-    ],
+    lead: "Capriosports has manufactured lifting gear and boxing and MMA equipment in Sialkot, Pakistan, since 2009.",
     supportingBlocks: [
       {
-        title: "Fabric to finished packaging, one factory",
-        body: "One factory, from raw material to finished packaging, not a trading agent placing your order elsewhere.",
+        // "\n" -- the real frame breaks this title across 2 lines
+        // ("Fabric to finished packaging" / "one factory"), read by
+        // `capriosportsFactory.supportingTitle`'s own `whitespace-pre-line`.
+        title: "Fabric to finished packaging\none factory",
+        body: "Made in-house, start to finish, every step under one roof, always. No trading agent placing your order elsewhere.",
       },
       {
         title: "The same factory behind Capriowear",
-        body: "The same facility, certifications and quality system already trusted for Capriowear's own activewear and teamwear.",
+        body: "Same facility and same quality system already trusted for Capriowear's activewear and teamwear.",
+      },
+      {
+        title: "Your design, always protected",
+        body: "NDA signed before any tech pack changes hands, so your product stays yours from first sketch to final shipment.",
       },
     ],
     // Photo slider -- same 5 factory-floor shots InsideFactory already uses
