@@ -173,14 +173,20 @@ export default function CapriosportsHomePage() {
             than duplicated: same content, one instance. */}
         <OurServices content={capriosportsHome.services} tone="dark" />
 
+        {/* Stats -- moved directly under Full Customization (owner,
+            2026-09-15: "under the services section add stats section"),
+            was between One Factory and Full Customization; Full
+            Customization itself was later moved up next to Certified &
+            Compliant (see that section's own comment above), so Stats
+            follows it here instead. Same real component/markup as
+            Capriowear's own homepage, not a custom stat-card row bolted
+            onto Certified & Compliant. Down to 3 stats (owner, same turn:
+            "remove 20+ piece" -- the "20+ Countries" 4th stat dropped). */}
+        <Stats items={capriosportsHome.stats} />
+
         {/* 5. ONE FACTORY -- text/video/CapabilityCard-supporting-blocks/
             photo-slider composition. */}
         <CapriosportsFactory content={capriosportsHome.factory} />
-
-        {/* Stats reused as its OWN section again (visual-review fix) --
-            same real component/markup as Capriowear's own homepage, not a
-            custom stat-card row bolted onto Certified & Compliant. */}
-        <Stats items={capriosportsHome.stats} />
 
         {/* 9. WHY CAPRIOSPORTS -- numbered 01-05 list. */}
         <WhyCapriosports content={capriosportsHome.why} />

@@ -289,15 +289,17 @@ export const capriosportsHome = {
     logos: home.certified.logos.filter((logo) => logo.name !== "WFSGI"),
   },
 
-  // 4 stats now (added "20+ Countries" per the brief) -- rendered via the
-  // real `Stats` component (components/sections/Stats.tsx), same
-  // markup/visual style as Capriowear's own homepage, not a custom
-  // stat-card row bolted onto `CertifiedCompliant`.
+  // 3 stats (owner, 2026-09-15: "remove 20+ piece" -- the "20+ Countries"
+  // 4th stat dropped, back to the original 3) -- rendered via the real
+  // `Stats` component (components/sections/Stats.tsx), same markup/visual
+  // style as Capriowear's own homepage, not a custom stat-card row bolted
+  // onto `CertifiedCompliant`. Section moved under Full Customization
+  // (`OurServices`) in app/page.tsx, same owner turn ("under the services
+  // section add stats section").
   stats: [
     { value: "Since 2009", caption: "Manufacturing lifting gear and boxing and MMA equipment for brands worldwide." },
     { value: `${CAPRIOSPORTS_ORGANIZATION.facilitySqFt} sq ft`, caption: "A fully in-house production facility to take on your bulk order." },
     { value: CAPRIOSPORTS_ORGANIZATION.monthlyCapacity, caption: "Monthly capacity that scales with your brand, from first sample to bulk order." },
-    { value: CAPRIOSPORTS_ORGANIZATION.exportCountries, caption: "Countries Capriosports already ships lifting gear and boxing and MMA equipment to." },
   ],
 
   // WHAT WE MAKE / "PRODUCT RANGE" -- reuses Capriowear's OWN real
