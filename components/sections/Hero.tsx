@@ -53,10 +53,24 @@ import type { home } from "@/content/home";
 
 export type HeroProps = {
   hero: typeof home.hero;
-  customOfferings: typeof home.customOfferings;
+  customOfferings?: typeof home.customOfferings;
+  /**
+   * Both default true (every existing Capriowear usage, unaffected --
+   * that page wants Layer 3 at every breakpoint). Split into independent
+   * desktop/mobile toggles 2026-09-15 for the Capriosports homepage: its
+   * desktop ticker already lives as a separate, later section (under the
+   * division cards, not duplicated here -- `showTickerDesktop={false}`),
+   * while its mobile ticker DOES belong right here, directly under the
+   * video (owner: "put it under video... same like we did on mobile
+   * wear" -- `showTickerMobile={true}`, the default, reusing this exact
+   * Layer 3 mechanism rather than a second copy of it elsewhere on the
+   * page).
+   */
+  showTickerDesktop?: boolean;
+  showTickerMobile?: boolean;
 };
 
-export function Hero({ hero: content, customOfferings }: HeroProps) {
+export function Hero({ hero: content, customOfferings, showTickerDesktop = true, showTickerMobile = true }: HeroProps) {
   return (
     <section className={hero.section}>
       {/* Layer 1: Banner */}
@@ -103,24 +117,32 @@ export function Hero({ hero: content, customOfferings }: HeroProps) {
           768-1279px") -- the scrolling Marquee reads fine at tablet width,
           so real mobile only (<768px) gets the plain stacked-list fallback
           now, not every width below 1280px. */}
-      <div className="hidden md:block">
-        <Marquee
-          label={customOfferings.label}
-          labelVariant="bold"
-          separator="sparkle"
-          tone="dark"
-          items={customOfferings.items}
-          pauseOnHover={false}
-        />
-      </div>
-      <div className={servicesHero.tickerMobile}>
-        <span className={servicesHero.tickerMobileLabel}>{customOfferings.label}</span>
-        <ScrollSpotlightList
-          items={customOfferings.mobileItems}
-          listClassName={servicesHero.tickerMobileList}
-          itemClassName={servicesHero.tickerMobileItem}
-        />
-      </div>
+      {customOfferings ? (
+        <>
+          {showTickerDesktop ? (
+            <div className="hidden md:block">
+              <Marquee
+                label={customOfferings.label}
+                labelVariant="bold"
+                separator="sparkle"
+                tone="dark"
+                items={customOfferings.items}
+                pauseOnHover={false}
+              />
+            </div>
+          ) : null}
+          {showTickerMobile ? (
+            <div className={servicesHero.tickerMobile}>
+              <span className={servicesHero.tickerMobileLabel}>{customOfferings.label}</span>
+              <ScrollSpotlightList
+                items={customOfferings.mobileItems}
+                listClassName={servicesHero.tickerMobileList}
+                itemClassName={servicesHero.tickerMobileItem}
+              />
+            </div>
+          ) : null}
+        </>
+      ) : null}
     </section>
   );
 }

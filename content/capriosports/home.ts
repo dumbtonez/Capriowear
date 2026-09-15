@@ -31,15 +31,59 @@ export const capriosportsHome = {
   metaDescription:
     "Capriosports manufactures custom lifting gear and boxing and MMA equipment, private label and wholesale, from Sialkot, Pakistan, since 2009. Parent company of Capriowear, our activewear and teamwear division.",
 
+  // Real sitewide Header, replacing the Phase 1 placeholder <nav> (2026-09-15
+  // visual-review fix) -- no persistent division switcher yet (still
+  // correctly deferred to Phase 3, per the owner's own plan), just the same
+  // Header component every other page already uses, with plain links (no
+  // `megaMenu`) and no `logo`/`desktopLogo` (falls back to Header's own
+  // plain-text brand, since no dedicated Capriosports logo asset exists).
+  nav: {
+    brand: "Capriosports",
+    links: [
+      { label: "Lifting Gear", href: "/lifting-gears" },
+      { label: "Boxing & MMA", href: "/boxing-and-mma" },
+      { label: "Capriowear", href: "/capriowear" },
+      { label: "Who We Are", href: "/who-we-are" },
+      { label: "Contact", href: "/contact" },
+    ],
+    mobileLinks: [
+      { label: "Lifting Gear", href: "/lifting-gears", chevron: false },
+      { label: "Boxing & MMA", href: "/boxing-and-mma", chevron: false },
+      { label: "Capriowear", href: "/capriowear", chevron: false },
+      { label: "Who We Are", href: "/who-we-are", chevron: false },
+      { label: "Contact", href: "/contact", chevron: false },
+    ],
+    contact: { label: "Get in touch", email: CAPRIOSPORTS_ORGANIZATION.contactEmail },
+    cta: { label: "Request a Sample", href: "/capriowear/request-a-sample" },
+  },
+
+  // Real Figma hero (desktop node 973:297, mobile node 981:1207, confirmed
+  // via screenshot 2026-09-15 once the Dev Mode MCP connection couldn't be
+  // reached) -- this page now reuses Capriowear's own real `Hero.tsx`
+  // directly (`showTicker={false}`, since this page already renders its
+  // own equivalent "Fully Custom Offerings" ticker as a separate section
+  // further down, not Hero's own bundled Layer 3), rather than the
+  // earlier CategoryBanner-composition fallback. Eyebrow simplified back
+  // to the real design's own short form (was a longer, invented SEO-eyebrow
+  // string with no Figma backing). `ctaSecondary`/`media` match Hero's own
+  // real `typeof home.hero` shape exactly. `media` carries no `image`/
+  // `video` yet (owner, 2026-09-15: "we will always have video there...
+  // even we don't have the footage for now" -- same real functionality as
+  // Capriowear's own hero, just no footage plugged in yet either; swap in
+  // a real image/video pair here the moment it exists, no code change).
   hero: {
-    eyebrow: "CUSTOM LIFTING GEAR & BOXING AND MMA MANUFACTURER IN SIALKOT, PAKISTAN",
+    eyebrow: "BASED IN SIALKOT, PAKISTAN",
     // LOCKED -- do not edit without explicit owner sign-off.
     h1: "Custom OEM & ODM lifting gear & boxing and MMA manufacturer",
-    cta: { label: "Request a Sample", href: "/capriowear/request-a-sample" },
-    // Reuses Hero.tsx's own Marquee ticker mechanism (rendered directly in
-    // app/page.tsx, since this page's hero is a CategoryBanner fallback,
-    // not Hero.tsx itself -- see that file's own header comment).
-    attributeTicker: ["Precision", "Durability", "Consistency", "Scale"],
+    ctaPrimary: { label: "Request a Sample", href: "/capriowear/request-a-sample" },
+    // No root-level Capriosports "Download Catalog" page exists yet (only
+    // Capriowear's own /capriowear/download-catalog) -- linking there
+    // rather than to a 404, same rule this file's own footer nav follows.
+    ctaSecondary: { label: "Download Catalog", href: "/capriowear/download-catalog" },
+    media: {
+      type: "video" as const,
+      label: "Capriosports factory and product video, Sialkot, Pakistan",
+    },
   },
 
   // "Fully Custom Offerings"-pattern chip strip, gear-specific chips.
@@ -49,6 +93,15 @@ export const capriosportsHome = {
   customOfferings: {
     label: "Fully Custom Offerings",
     items: ["Material", "Weight/Oz", "Padding", "Closure", "Color", "Branding", "Packaging"],
+    // Mobile-only paired regrouping of the same 7 words above (owner,
+    // 2026-09-15: "put it under video with text like this, same like we
+    // did on mobile wear" -- same real pattern `content/home.ts`'s own
+    // `customOfferings.mobileItems` already uses: the desktop Marquee's
+    // flat word list regrouped into pairs for Hero's own mobile
+    // ScrollSpotlightList ticker, not new copy). 7 words don't pair
+    // evenly -- "Packaging" stays alone, same shape as any odd-count
+    // pairing.
+    mobileItems: ["Material & Weight/Oz", "Padding & Closure", "Color & Branding", "Packaging"],
   },
 
   // Division-switcher band -- three cards, one per real division landing
@@ -61,18 +114,58 @@ export const capriosportsHome = {
     categories: [
       {
         label: "Lifting Gear",
-        descriptor: "Custom weight lifting belts, gloves, wraps, straps and bands, private label and wholesale.",
+        // +"training" (owner, 2026-09-15: "add one more word... make it 3
+        // lines too") -- matches the Capriowear card's own naturally
+        // 3-line descriptor height (that card's extra CTA line pushes it
+        // to 3 lines already); live-tested against this card's real
+        // rendered width to confirm the 1-word addition actually crosses
+        // into a 3rd line, not just a guess.
+        descriptor: "Custom weight lifting belts, training gloves, wraps, straps and bands, private label and wholesale.",
         href: "/lifting-gears",
+        // Explicit `image` (via CategoryLinkGrid's own new optional field,
+        // 2026-09-15) -- these 3 cards don't share one real division
+        // folder for `hubThumbnail`'s usual slug-lookup convention, so a
+        // direct image avoids that plumbing. Real photos, not blank
+        // placeholders (visual-review fix).
+        image: {
+          src: "/factory-test/inside-factory-1.jpg",
+          alt: "Capriosports lifting gear manufacturing in Sialkot, Pakistan",
+        },
+        // All 3 cards get a visible CTA now (owner, 2026-09-15) -- short,
+        // and doesn't have to match Capriowear's own "Visit X" wording.
+        // Static white arrow (not animated) -- only Capriowear's own link
+        // keeps the continuous "always pointing" animation.
+        linkLabel: "Explore Gear",
       },
       {
         label: "Boxing & MMA",
+        // "gear" restored after "coaching" (owner, 2026-09-15: briefly
+        // removed, then "bring gear word back after coaching in mma") --
+        // this card is 3 lines again as a result, matching Lifting Gear
+        // and Capriowear's own real 3-line descriptor height (owner
+        // separately asked for that same 3-line consistency on Lifting
+        // Gear), so the earlier 2-line trim is no longer needed either.
         descriptor: "Custom boxing and MMA gloves, coaching gear and protective gear, private label and wholesale.",
         href: "/boxing-and-mma",
+        image: {
+          src: "/factory-test/inside-factory-2.jpg",
+          alt: "Capriosports boxing and MMA equipment manufacturing in Sialkot, Pakistan",
+        },
+        linkLabel: "Explore Boxing",
       },
       {
         label: "Capriowear",
         descriptor: "Custom, private-label activewear and teamwear, made to your brand's spec, from sample to bulk.",
         href: "/capriowear",
+        image: {
+          src: "/factory-test/inside-factory-3.jpg",
+          alt: "Capriowear activewear and teamwear manufacturing, Capriosports' Sialkot, Pakistan factory",
+        },
+        linkLabel: "Visit Capriowear",
+        // Only this card's arrow keeps the continuous "always pointing"
+        // animation (owner: "make the wear arrow white too but pointing") --
+        // the other two get the same white arrow, static.
+        linkAnimated: true,
       },
     ],
   },
@@ -99,10 +192,18 @@ export const capriosportsHome = {
       {
         title: "Fabric to finished packaging, one factory",
         body: "One factory, from raw material to finished packaging, not a trading agent placing your order elsewhere.",
+        image: {
+          src: "/factory-test/inside-factory-1.jpg",
+          alt: "Capriosports factory floor, raw material to finished packaging, Sialkot, Pakistan",
+        },
       },
       {
         title: "The same factory behind Capriowear",
         body: "The same facility, certifications and quality system already trusted for Capriowear's own activewear and teamwear.",
+        image: {
+          src: "/factory-test/inside-factory-2.jpg",
+          alt: "Capriosports and Capriowear shared factory facility, Sialkot, Pakistan",
+        },
       },
     ],
     // Photo slider -- same 5 factory-floor shots InsideFactory already uses
@@ -147,27 +248,27 @@ export const capriosportsHome = {
         },
       },
     ],
-    // Placeholder loop, same ScrollGrowVideo+TeaserVideo mechanism Capriowear's
-    // own Hero.tsx uses (muted, playsinline, autoplay only in view, loop,
-    // poster as LCP, pauses offscreen, prefers-reduced-motion falls back to
-    // the static poster) -- reuses an existing test clip/poster pair
-    // already in public/factory-test/ rather than sourcing a new binary
-    // asset for a placeholder. Swap `video`/`image` for real Capriosports
-        // factory footage once it exists -- same component, no code change.
     // Required by InsideFactory's own `content` shape (reused directly for
     // this section's photo slider) even though `showCta={false}` hides it
     // here -- Request a Sample is still the right destination if this CTA
     // is ever turned back on.
     cta: { label: "Request a Sample", href: "/capriowear/request-a-sample" },
+    // Static placeholder, not a video (visual-review fix, 2026-09-15): the
+    // previous pass's placeholder video/poster pair was an unrelated CC0
+    // stock clip of a park/trees, which read as a broken/mismatched video
+    // rather than an intentional placeholder. No `video` field here at
+    // all -- `ScrollGrowVideo` (components/ScrollGrowVideo.tsx) falls back
+    // to its plain labelled placeholder + Play button whenever `video` is
+    // omitted, same as `/our-factory`'s own hero already does, using the
+    // photo slider's own first real poster frame below rather than a
+    // generic empty box. Swap in a real `video` pair (teaserSrc/fullSrc)
+    // the moment real factory footage exists -- same component, no code
+    // change needed.
     video: {
-      label: "Capriosports factory floor, Sialkot, Pakistan",
+      label: "Factory video coming soon — Capriosports lifting gear and boxing and MMA manufacturing, Sialkot, Pakistan",
       image: {
-        src: "/factory-test/whatwemake-01-fabric-test-poster.jpg",
-        alt: "Capriosports factory floor producing lifting gear and boxing and MMA equipment in Sialkot, Pakistan",
-      },
-      video: {
-        teaserSrc: "/factory-test/whatwemake-01-fabric-test.mp4",
-        fullSrc: "/factory-test/whatwemake-01-fabric-test.mp4",
+        src: "/factory-test/inside-factory-1.jpg",
+        alt: "Capriosports factory floor producing lifting gear and boxing and MMA equipment in Sialkot, Pakistan — factory video coming soon",
       },
     },
   },
@@ -211,19 +312,26 @@ export const capriosportsHome = {
     },
   ],
 
-  // CERTIFIED & COMPLIANT -- one merged section (logos + stats), not two
-  // disconnected black sections. `logos` reads straight from Capriowear's
-  // own `home.certified.logos` (same real factory, same real audits, one
-  // stored source, not a second copy).
+  // CERTIFIED & COMPLIANT -- logos only (real Stats component reused as
+  // its own separate section again, see `stats` below -- 2026-09-15
+  // visual-review fix reverted the earlier merged stat-card row). `logos`
+  // reads straight from Capriowear's own `home.certified.logos` (same real
+  // factory, same real audits, one stored source, not a second copy) --
+  // WFSGI filtered OUT of that array here: it's a real membership, not a
+  // certification, represented instead by `membershipNote` below. Passing
+  // WFSGI through as a 7th logo also overflowed this section's logo row on
+  // desktop (visual-review fix).
   certified: {
     eyebrow: "CERTIFIED & COMPLIANT",
     h2: "Certified and inspected",
     membershipNote: "Plus a WFSGI member",
-    logos: home.certified.logos,
+    logos: home.certified.logos.filter((logo) => logo.name !== "WFSGI"),
   },
 
-  // 4 stats now (added "20+ Countries" per the brief) -- `CertifiedCompliant`
-  // renders these as its own stat-card row once `stats` is passed in.
+  // 4 stats now (added "20+ Countries" per the brief) -- rendered via the
+  // real `Stats` component (components/sections/Stats.tsx), same
+  // markup/visual style as Capriowear's own homepage, not a custom
+  // stat-card row bolted onto `CertifiedCompliant`.
   stats: [
     { value: "Since 2009", caption: "Manufacturing lifting gear and boxing and MMA equipment for brands worldwide." },
     { value: `${CAPRIOSPORTS_ORGANIZATION.facilitySqFt} sq ft`, caption: "A fully in-house production facility to take on your bulk order." },
@@ -231,69 +339,126 @@ export const capriosportsHome = {
     { value: CAPRIOSPORTS_ORGANIZATION.exportCountries, caption: "Countries Capriosports already ships lifting gear and boxing and MMA equipment to." },
   ],
 
-  // WHAT WE MAKE -- new range-card section (WhatWeMakeRange.tsx), 2 boxes,
-  // each with a lead + real ul/li highlights + "Request a Sample" CTA.
-  // Same content array feeds this section's visible copy and its ItemList
-  // JSON-LD (lib/schema.ts's productRangeItemListSchema()) -- never a
-  // second, hand-typed list.
+  // WHAT WE MAKE -- reuses Capriowear's OWN real `WhatWeMake` component
+  // (components/sections/WhatWeMake.tsx) directly, same `Card` category
+  // tiles/grid Capriowear's own homepage uses for Activewear/Teamwear
+  // sub-categories -- not the bordered ul/li box pattern the previous pass
+  // built (`WhatWeMakeRange.tsx`, removed). Only `weight-lifting-belts` and
+  // `boxing-gloves` have real PLP pages today (content/gear/*/categories.ts) --
+  // every other tile links to its parent division hub page instead of a
+  // 404, per this project's own "protect real, already-indexed content
+  // over a placeholder with no page yet" rule (docs/05-plan.md, 2026-09-14).
+  // Images are explicit per tile (this content shape carries them directly,
+  // same as `content/home.ts`'s own `whatWeMake.categories[].tiles[].image`
+  // -- no `hubThumbnail` lookup involved here).
   whatWeMake: {
     eyebrow: "PRODUCT RANGE",
     h2: "Custom lifting gear and boxing and MMA equipment, one factory.",
-    lead: "Private label and wholesale, from raw material to finished packaging.",
-    boxes: [
+    categories: [
       {
         title: "Lifting Gear",
+        body: ["Custom weight lifting belts, gloves, wraps and bands, in leather, nylon and neoprene."],
         href: "/lifting-gears",
-        lead: "Custom weight lifting belts, gloves, wraps and bands, in leather, nylon and neoprene.",
-        highlights: [
-          { title: "Weight Lifting Belts", body: "Leather, nylon and neoprene, lever and prong buckle" },
-          { title: "Weightlifting Gloves and Grips", body: "Training gloves, private label grips" },
-          { title: "Wraps and Straps", body: "Wrist wraps, lifting straps, knee sleeves" },
-          { title: "Bands and Accessories", body: "Resistance bands, gym bags, barbell pads" },
+        tiles: [
+          {
+            label: "Weight Lifting Belts",
+            href: "/lifting-gears/weight-lifting-belts",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Capriosports weight lifting belts, Sialkot, Pakistan" },
+          },
+          {
+            // No real PLP yet -- links to the parent hub page, same rule
+            // as `weight-lifting-belts`' siblings below. `href` carries a
+            // unique `#slug` anchor (not just the bare hub URL, shared by
+            // 3 of these 4 tiles) since `WhatWeMake`'s own `Card` keys its
+            // list by `href` -- three identical keys in one array is a
+            // real React bug (found live, console "same key" warning), not
+            // just cosmetic.
+            label: "Weightlifting Gloves and Grips",
+            href: "/lifting-gears#weightlifting-gloves-and-grips",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Capriosports weightlifting gloves and grips, Sialkot, Pakistan" },
+          },
+          {
+            label: "Wraps and Straps",
+            href: "/lifting-gears#wraps-and-straps",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Capriosports wraps and straps, Sialkot, Pakistan" },
+          },
+          {
+            label: "Bands and Accessories",
+            href: "/lifting-gears#bands-and-accessories",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Capriosports bands and accessories, Sialkot, Pakistan" },
+          },
         ],
-        cta: { label: "Request a Sample", href: "/capriowear/request-a-sample" },
       },
       {
         title: "Boxing & MMA",
+        body: ["Custom boxing gloves and MMA equipment, cowhide leather and synthetic PU, 8oz to 16oz."],
         href: "/boxing-and-mma",
-        lead: "Custom boxing gloves and MMA equipment, cowhide leather and synthetic PU, 8oz to 16oz.",
-        highlights: [
-          { title: "Boxing Gloves", body: "Bag, sparring, training and competition lace-up styles" },
-          { title: "MMA Gloves and Apparel", body: "Training gloves, MMA shorts" },
-          { title: "Coaching Gears", body: "Focus mitts, Thai pads, kick shields" },
-          { title: "Protective Gears", body: "Head guards, shin guards, hand wraps, mouth guards" },
+        tiles: [
+          {
+            label: "Boxing Gloves",
+            href: "/boxing-and-mma/boxing-gloves",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Capriosports boxing gloves, Sialkot, Pakistan" },
+          },
+          {
+            // See the Lifting Gear group's own "Weightlifting Gloves and
+            // Grips" comment above -- same reasoning, unique `#slug` anchor.
+            label: "MMA Gloves and Apparel",
+            href: "/boxing-and-mma#mma-gloves-and-apparel",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Capriosports MMA gloves and apparel, Sialkot, Pakistan" },
+          },
+          {
+            label: "Coaching Gears",
+            href: "/boxing-and-mma#coaching-gears",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Capriosports coaching gears, Sialkot, Pakistan" },
+          },
+          {
+            label: "Protective Gears",
+            href: "/boxing-and-mma#protective-gears",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Capriosports protective gears, Sialkot, Pakistan" },
+          },
         ],
-        cta: { label: "Request a Sample", href: "/capriowear/request-a-sample" },
       },
     ],
   },
 
-  // FULL CUSTOMIZATION -- new 5-item icon grid (FullCustomization.tsx),
-  // placed between What We Make and Why Capriosports.
-  fullCustomization: {
+  // FULL CUSTOMIZATION -- reuses Capriowear's OWN real "Our Services"
+  // homepage section (components/sections/OurServices.tsx, fed by
+  // content/home.ts's own `services` field, h2 "From raw fabric to
+  // retail-ready packaging") directly, gear-adapted copy -- not the new
+  // icon-grid component the previous pass built (`FullCustomization.tsx`,
+  // removed): that section was never actually built on the Services page,
+  // this IS the real, already-shipping 5-item section it was meant to be.
+  services: {
     eyebrow: "FULL CUSTOMIZATION",
     h2: "From raw material to retail-ready packaging",
-    lead: "Every order is private label and fully customized, start to finish.",
     items: [
       {
         title: "Custom Manufacturing",
         body: "Private label lifting gear and boxing and MMA equipment, OEM and ODM, made to your spec.",
+        image: { src: "/factory-test/inside-factory-1.jpg", alt: "Capriosports custom manufacturing, Sialkot, Pakistan" },
       },
       {
         title: "Materials and Construction",
         body: "Cowhide leather, synthetic PU, nylon and neoprene, with multi-layer foam padding and reinforced stitching.",
+        image: { src: "/factory-test/inside-factory-2.jpg", alt: "Capriosports materials and construction, Sialkot, Pakistan" },
       },
       {
         title: "Branding and Customization",
         body: "Logo, colorway, labels and packaging, all under your brand.",
+        image: {
+          src: "/factory-test/inside-factory-3.jpg",
+          alt: "Capriosports branding and customization, Sialkot, Pakistan",
+        },
       },
       {
         title: "Quality and Compliance",
         body: "AQL 2.5 inspection on every run. ISO 9001, ISO 45001, ISO 14001, BSCI, IMAC and SGS certified.",
+        image: { src: "/factory-test/inside-factory-4.jpg", alt: "Capriosports quality and compliance, Sialkot, Pakistan" },
       },
       {
         title: "Logistics and Fulfillment",
         body: "Worldwide shipping, DDP, from Sialkot, Pakistan.",
+        image: { src: "/factory-test/inside-factory-5.jpg", alt: "Capriosports logistics and fulfillment, Sialkot, Pakistan" },
       },
     ],
   },

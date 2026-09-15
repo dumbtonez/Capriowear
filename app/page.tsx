@@ -1,49 +1,45 @@
 // app/page.tsx
 // The real Capriosports parent-site homepage -- 2026-09-15 full content +
-// structure rebuild (owner's consolidated prompt). Every section below
-// reuses a real, already-shipping Capriowear/Our Factory component
-// wherever an exact match exists; a small number of new section components
-// were built only where nothing in the codebase combines the needed shape
-// (WhatWeMakeRange, FullCustomization, WhyCapriosports, CapriosportsFactory)
-// -- see docs/03-component-library.md for the full reuse map and
-// docs/05-plan.md's 2026-09-15 entries for the research findings that
-// shaped each decision.
+// structure rebuild, revised same day after visual review. Every section
+// below reuses a real, already-shipping Capriowear component wherever an
+// exact match exists; only `CapriosportsFactory` and `WhyCapriosports`
+// stay as small new compositions where nothing sitewide actually combines
+// the needed shape (see docs/03-component-library.md for the full
+// section-by-section reuse map, including what changed in this visual-
+// review pass: real `Header` swapped in for the Phase 1 placeholder
+// <nav>, `WhatWeMakeRange`/`FullCustomization` deleted in favour of
+// Capriowear's own real `WhatWeMake`/`OurServices` sections, `Stats`
+// reused as its own section again instead of a custom stat-card row).
 //
-// Hero fallback (unchanged from the earlier pass): components/sections/
-// Hero.tsx has no text-only variant -- it unconditionally renders a video
-// layer plus a "Fully Custom Offerings" ticker layer with its own specific
-// shape. Falling back to CategoryBanner (the same component every PLP/hub
-// banner already uses), composed with the plain Eyebrow/Button/Marquee
-// atoms Hero itself uses internally, is a page-level composition of
-// existing atoms, not a new section component.
-//
-// Footer bug fix: this page previously rendered Capriowear's OWN footer
-// content verbatim (`home.footer` from content/home.ts) -- Capriowear
-// logo, "Activewear/Teamwear" nav, "division of Caprio Sports" tagline,
-// Capriowear's copyright. It now renders `capriosportsHome.footer`, a real
-// Capriosports content object, with a plain text `CapriosportsWordmark`
-// brand mark (no dedicated Capriosports logo asset exists yet).
+// Hero (2026-09-15, real Figma hero confirmed via screenshot -- see
+// content/capriosports/home.ts's own `hero` field comment): reuses
+// Capriowear's own real `Hero.tsx` directly now, `showTicker={false}`
+// since this page already renders its own equivalent "Fully Custom
+// Offerings" ticker as a separate section (2 below) rather than Hero's
+// own bundled Layer 3. Replaces the earlier CategoryBanner-composition
+// fallback, which was a stand-in built before the real hero design (with
+// its 2-CTA/video-block shape) had been confirmed.
 import type { Metadata } from "next";
-import Link from "next/link";
 
-import { Button } from "@/components/Button";
 import { CapriosportsWordmark } from "@/components/CapriosportsWordmark";
-import { Eyebrow } from "@/components/Eyebrow";
+import { Header } from "@/components/Header";
 import { Marquee } from "@/components/Marquee";
 import { CapriosportsFactory } from "@/components/sections/CapriosportsFactory";
-import { CategoryBanner } from "@/components/sections/CategoryBanner";
-import { CategoryLinkGrid } from "@/components/sections/CategoryLinkGrid";
 import { CertifiedCompliant } from "@/components/sections/CertifiedCompliant";
+import { ClientLogos } from "@/components/sections/ClientLogos";
+import { DivisionCards } from "@/components/sections/DivisionCards";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
-import { FullCustomization } from "@/components/sections/FullCustomization";
+import { Hero } from "@/components/sections/Hero";
+import { OurServices } from "@/components/sections/OurServices";
+import { Stats } from "@/components/sections/Stats";
 import { TrustSignals } from "@/components/sections/TrustSignals";
-import { WhatWeMakeRange } from "@/components/sections/WhatWeMakeRange";
+import { WhatWeMake } from "@/components/sections/WhatWeMake";
 import { WhyCapriosports } from "@/components/sections/WhyCapriosports";
 import { JsonLd } from "@/components/JsonLd";
-import { categoryGroupsSection } from "@/components/ui/styles";
 import { capriosportsHome } from "@/content/capriosports/home";
+import { home } from "@/content/home";
 import { ORGANIZATION, PARENT_SITE_NAME, SITE_URL } from "@/content/site";
 import { breadcrumbSchema, faqSchema, productRangeItemListSchema } from "@/lib/schema";
 
@@ -67,35 +63,46 @@ export const metadata: Metadata = {
   },
 };
 
-const divisionGroup = {
-  eyebrow: capriosportsHome.divisions.eyebrow,
-  h2: capriosportsHome.divisions.h2,
-  categories: capriosportsHome.divisions.categories,
-};
-
 export default function CapriosportsHomePage() {
   return (
     <>
-      {/* Bare, unstyled placeholder nav -- Phase 1 scaffolding only, same
-          pattern as the Gear division's own placeholder nav
-          (app/lifting-gears/page.tsx). NOT the real division switcher/
-          parent-site header -- that's Phase 3 work. */}
-      <nav className="p-4 text-sm">
-        <Link href="/capriowear">Capriowear</Link> | <Link href="/lifting-gears">Lifting Gears</Link> |{" "}
-        <Link href="/boxing-and-mma">Boxing & MMA</Link> | <Link href="/contact">Contact</Link>
-      </nav>
+      {/* Real sitewide Header (visual-review fix, 2026-09-15) -- replaces
+          the earlier Phase 1 placeholder <nav>. No `logo`/`desktopLogo`
+          (falls back to Header's own plain-text brand -- no dedicated
+          Capriosports logo asset exists yet) and no `megaMenu` on any
+          link -- the persistent division switcher stays correctly
+          deferred to Phase 3. */}
+      <Header
+        brand={capriosportsHome.nav.brand}
+        links={capriosportsHome.nav.links}
+        mobileLinks={capriosportsHome.nav.mobileLinks}
+        contact={capriosportsHome.nav.contact}
+        social={ORGANIZATION.sameAs}
+        cta={capriosportsHome.nav.cta}
+      />
 
       <main className="relative z-10 bg-paper">
-        {/* 1. HERO -- locked H1/title/meta; new eyebrow + attribute ticker. */}
-        <div className="bg-ink">
-          <Eyebrow tone="dark" className="container-p pt-8">
-            {capriosportsHome.hero.eyebrow}
-          </Eyebrow>
-          <CategoryBanner breadcrumbItems={[{ label: "Home", href: "/" }]} h1={capriosportsHome.hero.h1} trustBullets={[]} />
-          <div className="container-p flex flex-col gap-10 pb-10">
-            <Button href={capriosportsHome.hero.cta.href}>{capriosportsHome.hero.cta.label}</Button>
+        {/* 1. HERO -- locked H1/title/meta; real Hero.tsx reuse. Desktop's
+            own Layer 3 ticker stays off (this page's desktop offerings
+            strip lives separately, under the division cards, section 2/3
+            below); mobile's Layer 3 ticker stays ON (owner, 2026-09-15:
+            "fully custom offering put it under video... same like we did
+            on mobile wear") -- same real mechanism as Capriowear's own
+            Hero, not a second copy of it. */}
+        <Hero hero={capriosportsHome.hero} customOfferings={capriosportsHome.customOfferings} showTickerDesktop={false} showTickerMobile />
+
+        {/* 2/3. DIVISION CARDS + FULLY CUSTOM OFFERING STRIP (desktop/
+            tablet only now -- mobile's own copy moved into Hero, directly
+            under the video, see above) -- one continuous dark surface
+            (real design, confirmed via screenshot, Figma node 981:1208):
+            3 full-bleed division cards, then the offerings strip right
+            below with no section break. */}
+        <div className="bg-ink text-paper">
+          <DivisionCards categories={capriosportsHome.divisions.categories} variant="box" />
+          <div className="hidden md:block">
             <Marquee
-              items={capriosportsHome.hero.attributeTicker}
+              items={capriosportsHome.customOfferings.items}
+              label={capriosportsHome.customOfferings.label}
               labelVariant="bold"
               separator="sparkle"
               tone="dark"
@@ -104,37 +111,39 @@ export default function CapriosportsHomePage() {
           </div>
         </div>
 
-        {/* 2. FULLY CUSTOM OFFERING STRIP -- same Marquee mechanism as
-            Capriowear's Hero.tsx ticker, gear-specific chips. */}
-        <Marquee
-          items={capriosportsHome.customOfferings.items}
-          label={capriosportsHome.customOfferings.label}
-          labelVariant="bold"
-          separator="sparkle"
-          pauseOnHover={false}
-        />
-
-        {/* 3. DIVISION BAND -- unchanged. */}
-        <section className={categoryGroupsSection.section}>
-          <CategoryLinkGrid group={divisionGroup} division="lifting-gears" />
-        </section>
+        {/* Trusted clients -- same real component/content as Capriowear's
+            own homepage (owner: "add trusted clients marquee as we have
+            on wear"). Reuses `home.brandLogos` directly (same real logo
+            registry, same "Trusted by top brands worldwide" title) rather
+            than a second copy -- one company, one real client list. */}
+        <ClientLogos brandLogos={home.brandLogos} />
 
         {/* 4. TRUST STRIP */}
         <TrustSignals items={capriosportsHome.trustStrip} />
 
-        {/* 5. ONE FACTORY -- sticky-text/video/photo-slider composition,
-            replacing the earlier CapabilityCard placeholder-box layout. */}
+        {/* 5. ONE FACTORY -- text/video/CapabilityCard-supporting-blocks/
+            photo-slider composition. */}
         <CapriosportsFactory content={capriosportsHome.factory} />
 
-        {/* 6. CERTIFIED & COMPLIANT -- merged logos + stats, one section. */}
-        <CertifiedCompliant content={capriosportsHome.certified} stats={capriosportsHome.stats} />
+        {/* 6. CERTIFIED & COMPLIANT -- logos only (WFSGI membership note,
+            not a 7th logo -- fixes the desktop overflow/clipping). */}
+        <CertifiedCompliant content={capriosportsHome.certified} />
 
-        {/* 7. WHAT WE MAKE -- 2-box range cards, real ul/li highlights + CTA. */}
-        <WhatWeMakeRange content={capriosportsHome.whatWeMake} />
+        {/* Stats reused as its OWN section again (visual-review fix) --
+            same real component/markup as Capriowear's own homepage, not a
+            custom stat-card row bolted onto Certified & Compliant. */}
+        <Stats items={capriosportsHome.stats} />
 
-        {/* 8. FULL CUSTOMIZATION -- 5-item icon grid, between What We Make
-            and Why Capriosports. */}
-        <FullCustomization content={capriosportsHome.fullCustomization} />
+        {/* 7. WHAT WE MAKE -- Capriowear's OWN real WhatWeMake component
+            (Card category tiles), not a bespoke ul/li box (visual-review
+            fix, replacing the previous pass's WhatWeMakeRange). */}
+        <WhatWeMake content={capriosportsHome.whatWeMake} />
+
+        {/* 8. FULL CUSTOMIZATION -- Capriowear's OWN real OurServices
+            section ("From raw fabric to retail-ready packaging"),
+            gear-adapted copy, not a new icon-grid pattern (visual-review
+            fix, replacing the previous pass's FullCustomization). */}
+        <OurServices content={capriosportsHome.services} />
 
         {/* 9. WHY CAPRIOSPORTS -- numbered 01-05 list. */}
         <WhyCapriosports content={capriosportsHome.why} />
@@ -146,8 +155,7 @@ export default function CapriosportsHomePage() {
         <FinalCta content={capriosportsHome.finalCta} compactMobileTop />
       </main>
 
-      {/* Real Capriosports footer content -- see this file's own header
-          comment for the bug this fixes. */}
+      {/* Real Capriosports footer content. */}
       <Footer
         content={capriosportsHome.footer}
         social={ORGANIZATION.sameAs}
@@ -159,7 +167,7 @@ export default function CapriosportsHomePage() {
 
       <JsonLd data={breadcrumbSchema([{ name: "Home", url: SITE_URL }])} />
       <JsonLd data={faqSchema(capriosportsHome.faq.items)} />
-      <JsonLd data={productRangeItemListSchema(SITE_URL, capriosportsHome.whatWeMake.boxes)} />
+      <JsonLd data={productRangeItemListSchema(SITE_URL, capriosportsHome.whatWeMake.categories)} />
     </>
   );
 }

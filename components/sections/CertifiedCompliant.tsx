@@ -43,22 +43,15 @@ import Image from "next/image";
 import { Marquee } from "@/components/Marquee";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextReveal } from "@/components/TextReveal";
-import { certified, stats as statsTokens } from "@/components/ui/styles";
+import { certified } from "@/components/ui/styles";
 import type { home } from "@/content/home";
 
 export type CertifiedCompliantProps = {
+  // Widened (not `typeof home.certified` alone) to also allow an optional
+  // `membershipNote` -- a real membership (e.g. WFSGI), not a certification
+  // logo, shown as a small caption under the heading. Capriowear's own
+  // callers omit it, unaffected.
   content: typeof home.certified & { membershipNote?: string };
-  /**
-   * Folds a stat-card row (Since/sq ft/monthly capacity/etc.) directly
-   * into this same section, right under the logos -- added 2026-09-15 for
-   * the Capriosports homepage rebuild, which wanted one merged section
-   * instead of two disconnected black ones (this component's own logos +
-   * a separate `<Stats>`). Reuses `Stats.tsx`'s own `value`/`caption`
-   * typography tokens, not a duplicate set. Omitted (default): unchanged,
-   * byte-for-byte identical to every existing caller (Capriowear's own
-   * homepage/services/our-factory instances).
-   */
-  stats?: typeof home.stats;
   /** `"services"` gives mobile its own 72px top gap (`certified.
    *  mobileSectionServices`) instead of the homepage's `pt-0`, and zeroes
    *  every breakpoint's own bottom padding (`desktopSectionServices`/
@@ -80,20 +73,7 @@ export type CertifiedCompliantProps = {
   showHeading?: boolean;
 };
 
-function StatsRow({ items }: { items: typeof home.stats }) {
-  return (
-    <div className={certified.statsRow}>
-      {items.map((stat) => (
-        <div key={stat.value} className={certified.statItem}>
-          <p className={statsTokens.value}>{stat.value}</p>
-          <p className={statsTokens.caption}>{stat.caption}</p>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-export function CertifiedCompliant({ content, stats, pageVariant = "default", showHeading = true }: CertifiedCompliantProps) {
+export function CertifiedCompliant({ content, pageVariant = "default", showHeading = true }: CertifiedCompliantProps) {
   const isServices = pageVariant === "services";
   const isOurFactory = pageVariant === "ourFactory";
   const desktopSection = isOurFactory
@@ -148,7 +128,6 @@ export function CertifiedCompliant({ content, stats, pageVariant = "default", sh
             pauseOnHover={false}
             edgeFade
           />
-          {stats ? <StatsRow items={stats} /> : null}
         </div>
       </div>
 
@@ -181,7 +160,6 @@ export function CertifiedCompliant({ content, stats, pageVariant = "default", sh
             pauseOnHover={false}
             edgeFade
           />
-          {stats ? <StatsRow items={stats} /> : null}
         </div>
       </div>
 
@@ -232,7 +210,6 @@ export function CertifiedCompliant({ content, stats, pageVariant = "default", sh
             pauseOnHover={false}
             edgeFade
           />
-          {stats ? <StatsRow items={stats} /> : null}
         </div>
       </div>
     </section>

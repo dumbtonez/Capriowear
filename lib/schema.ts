@@ -181,36 +181,36 @@ export function megaMenuSchema(name: string, href: string, groups: MegaMenuGroup
   };
 }
 
-export type ProductRangeHighlight = { title: string; body: string };
-export type ProductRangeBox = { title: string; href: string; highlights: ProductRangeHighlight[] };
+export type ProductRangeTile = { label: string; href: string };
+export type ProductRangeCategory = { title: string; tiles: ProductRangeTile[] };
 
-// Capriosports homepage's own "What We Make" range cards (WhatWeMakeRange.tsx,
-// content/capriosports/home.ts's `whatWeMake.boxes`) -- a plain ItemList of
-// Service entities, one per real visible highlight (SEO/AEO/GEO discipline:
-// this is fed by the exact same array the page renders as real `<ul>/<li>`
-// markup, never a second, hand-typed list). `Service`, not `Product`: these
-// are manufacturing capabilities/categories (e.g. "Weight Lifting Belts"),
-// not individually priced, orderable SKUs -- the same reasoning
-// `collectionPageSchema`'s own header comment gives for staying price-free,
-// one level more conservative here since there's no per-item URL either,
-// only each parent box's own division page.
-export function productRangeItemListSchema(siteUrl: string, boxes: ProductRangeBox[]) {
+// Capriosports homepage's own "What We Make" section (WhatWeMake.tsx,
+// reused directly, fed by content/capriosports/home.ts's `whatWeMake.
+// categories`) -- a plain ItemList of Service entities, one per real
+// visible tile (SEO/AEO/GEO discipline: fed by the exact same array the
+// page renders as real `Card` tiles, never a second, hand-typed list).
+// `Service`, not `Product`: these are manufacturing capabilities/categories
+// (e.g. "Weight Lifting Belts"), not individually priced, orderable SKUs --
+// the same reasoning `collectionPageSchema`'s own header comment gives for
+// staying price-free. Each tile's own real `href` (its real PLP when one
+// exists, its parent division hub page otherwise) is used directly, not
+// re-derived, since it's already the exact URL the page links to.
+export function productRangeItemListSchema(siteUrl: string, categories: ProductRangeCategory[]) {
   let position = 0;
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    itemListElement: boxes.flatMap((box) =>
-      box.highlights.map((highlight) => {
+    itemListElement: categories.flatMap((category) =>
+      category.tiles.map((tile) => {
         position += 1;
         return {
           "@type": "ListItem",
           position,
           item: {
             "@type": "Service",
-            name: highlight.title,
-            description: highlight.body,
-            category: box.title,
-            url: `${siteUrl}${box.href}`,
+            name: tile.label,
+            category: category.title,
+            url: `${siteUrl}${tile.href}`,
           },
         };
       }),

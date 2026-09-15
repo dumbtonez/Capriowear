@@ -4271,18 +4271,10 @@ export const certified = {
   // real desktop value explicit and unchanged.
   root: "flex flex-col items-center md:gap-6 xl:gap-[72px]",
   rootMobile: "flex flex-col items-center gap-8",
-  // "Plus a WFSGI member"-style caption (2026-09-15, Capriosports homepage
-  // rebuild's merged Certified & Compliant section) -- a real membership,
-  // not a certification, so it renders as a small caption under the
-  // heading rather than another logo in the row.
+  // "Plus a WFSGI member"-style caption (2026-09-15, Capriosports homepage) --
+  // a real membership, not a certification, so it renders as a small
+  // caption under the heading rather than another logo in the row.
   membershipNote: "text-body-sm text-muted",
-  // Optional stat-card row (2026-09-15) -- reuses `stats.value`/`caption`'s
-  // own typography tokens directly (Stats.tsx), not a duplicate set, since
-  // this is the exact same stat-card shape, just laid out as a wrapping
-  // row instead of Stats' own media+list split (this merged section has no
-  // separate media column to split against).
-  statsRow: "mt-12 flex w-full max-w-[960px] flex-wrap justify-center gap-x-12 gap-y-8 border-t border-line pt-12 xl:mt-16 xl:pt-16",
-  statItem: "flex min-w-[160px] flex-1 flex-col items-center gap-2 text-center",
   // 812px -- this section's real desktop heading column width (node
   // 369:267), confirmed to wrap the real copy to exactly 2 lines (height
   // 128px = 2 x the 64px line-height). Unconstrained, it ran the full
@@ -7474,6 +7466,190 @@ export const categoryGroupsSection = {
   section: "container-p flex flex-col gap-16 pt-10 pb-0 xl:gap-20 xl:pt-[80px] xl:pb-[120px]",
 };
 
+/* --- DivisionCards (Capriosports homepage) --------------------------------- */
+
+// 2026-09-15, real Figma design confirmed via screenshot (node 981:1208):
+// 3 full-bleed photo cards (Lifting Gear, Caprio Boxing & MMA, Capriowear),
+// each with a soft bottom gradient scrim and title+descriptor overlaid on
+// the image itself -- not `CategoryLinkGrid`/`CategoryCard`'s own small-
+// thumbnail-beside-text pattern (that stays exactly as-is for the real
+// Activewear/Teamwear hub category grids it was built for). No existing
+// component combines "full-bleed image card + bottom gradient scrim +
+// overlaid title/descriptor" at this size -- `ServicesHowWeWork.tsx`'s own
+// `mobileScrim` is the closest real precedent for the gradient technique
+// itself (a plain bg-gradient-to-t, "for pill/caption legibility over
+// arbitrary photography"), reused here at 3 stops for a softer, taller
+// blend (owner: "very soft and smooth ... top side of the gradient is
+// 100% opacity, not colour" -- i.e. the gradient's own top edge starts
+// fully transparent, easing down to solid black, not a hard-edged tint).
+export const divisionCards = {
+  // `bg-ink`/`text-paper`: this section and the Fully Custom Offerings
+  // strip right after it sit on one continuous dark surface in the real
+  // design (no white gap between Hero's video block and this row of
+  // cards) -- both rendered inside one shared dark wrapper in app/page.tsx.
+  // pt-5 (20px, owner: "on mobile... make 20px space from top") mobile,
+  // xl:pt-16 (64px, owner's own earlier spec) desktop -- was a flat pt-16
+  // at both breakpoints. pb-4/xl:pb-6 (16px/24px) are NOT the real gap
+  // down to the Fully Custom Offerings label below -- Marquee itself
+  // (`padded` default true) already contributes its own fixed 40px top
+  // padding above its label (`marquee.base`'s own comment), and the
+  // mobile ScrollSpotlightList ticker (`servicesHero.tickerMobile`)
+  // already contributes its own 48px (`pt-12`). 16+48=64 and 24+40=64
+  // exactly -- tuned here, not there, so those two shared components' own
+  // established padding stays untouched for every other real caller.
+  section: "container-p pt-5 pb-4 xl:pt-16 xl:pb-6",
+  // md: (768px), not xl: (owner, 2026-09-15: "on tablet we should treat
+  // those 3 cards as desktop, not mobile" -- the same real rule Hero.tsx's
+  // own ticker already documents for this identical "does it read fine at
+  // tablet width" judgment call: "Split at md: (768px), not xl:... the
+  // scrolling Marquee reads fine at tablet width, so real mobile only
+  // (<768px) gets the plain stacked-list fallback." A 3-card row is the
+  // same kind of content -- no swipe/carousel mechanics to lose at
+  // tablet, unlike InsideFactory/TrustSignals' own xl:-only chevron
+  // galleries (a genuinely different case: those need real carousel
+  // interaction below xl:, this doesn't).
+  grid: "flex flex-col items-center gap-4 md:flex-row md:items-stretch",
+  // Mobile: exact 320x360 (owner spec). Desktop: portrait tile, flexible
+  // width (3-up row), no fixed px -- no Figma frame width was given, only
+  // the mobile card's exact size and the desktop type scale.
+  // `bg-ink-2` (#17191e, owner spec -- the real "secondary dark surface,
+  // a container on top of an ink section" token, not `bg-ink` itself,
+  // which is a slightly different near-black, `#121317`): for `scrim`/
+  // `merge`, only actually visible once `imageMerge` masks the photo to
+  // transparent near the bottom -- reads as a container sitting on the
+  // section's own `bg-ink`, not a hard rectangular card edge. Invisible/
+  // no-op for `scrim`, since the opaque photo covers it completely. For
+  // `box` (below), this same colour is what the real, solid text box
+  // below the photo sits on.
+  // 2-tier, not 3 (owner correction, 2026-09-15: "on tablet we should
+  // treat those 3 cards as desktop, not mobile" -- superseding the
+  // previous pass's InsideFactory-precedent 530x654 fixed tablet size,
+  // which was the wrong rule for this content; see `grid`'s own comment
+  // above for why the Fully Custom Offerings ticker's md:-split precedent
+  // applies here instead). Mobile: fixed 320x395 (height raised from an
+  // original 360px, owner: "current image height is small make it 20%
+  // large than now"). `md:h-auto`/`md:aspect-[657/958]` take over at
+  // 768px -- the exact same fluid desktop treatment as before, just
+  // triggered from `md:` instead of `xl:`, so tablet gets 3 real
+  // (narrower) columns rather than a single scaled-up card.
+  card: "group relative block w-[320px] h-[395px] overflow-hidden bg-ink-2 md:h-auto md:w-full md:flex-1 md:aspect-[657/958]",
+  // `box` variant only: same overall card footprint as `card`, but a real
+  // flex column (photo on top, solid text box below) instead of one
+  // full-bleed layer with an absolute-positioned overlay -- a completely
+  // different internal structure, not an appended override on `card`
+  // (two competing `block`/`flex` display utilities in one class string
+  // isn't guaranteed to cascade predictably, the same class of risk this
+  // file's own `cardMedia` radius comment already documents elsewhere).
+  // Same 2-tier sizing as `card` above (320x395 mobile, fluid from md:) --
+  // see that token's own comment for the full reasoning.
+  cardBox: "group relative flex w-[320px] h-[395px] flex-col overflow-hidden bg-ink-2 md:h-auto md:w-full md:flex-1 md:aspect-[657/958]",
+  // `scrim`/`merge`: the image layer fills the whole card (the card itself
+  // is already `relative`, so plain `absolute inset-0` is enough -- no
+  // second positioning context needed).
+  fullBleedImageWrap: "absolute inset-0",
+  // `box` variant only: the image takes whatever space is left once the
+  // text box below has taken its own natural (content-sized) height --
+  // not a fixed px/% split (no Figma frame width existed to read an exact
+  // ratio from, only the owner's own reference screenshot, whose 515/650
+  // proportion won't hold once the Capriowear card's extra "Visit
+  // Capriowear" line makes its own text box taller than the other two).
+  // `min-h-0` is required on a flex child that itself contains an
+  // `absolute`-filled `next/image` -- without it, a flex item's default
+  // `min-height: auto` can refuse to shrink below its content's intrinsic
+  // size in some browsers, silently breaking the `flex-1` shrink.
+  boxImageWrap: "relative flex-1 min-h-0",
+  image: "object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105",
+  // EXPERIMENTAL (owner, 2026-09-15: "just for experiment... how will that
+  // look?") -- fades the actual photo pixels to transparent near the
+  // bottom via a mask (not just an opaque overlay on top of them), so the
+  // card's own `bg-ink` shows through and reads as one continuous dark
+  // surface with the section behind it, rather than a hard card-bottom
+  // edge. Applied instead of (not alongside) `scrim` when on -- the two
+  // are alternate ways of solving the same "legible text over a photo"
+  // problem, not additive. Standard `mask-image` plus the `-webkit-`
+  // prefix Safari still needs for it.
+  // 5-stop, taller (72%, was a single-ramp 45%) -- owner, 2026-09-15: the
+  // Capriowear card's extra "Visit Capriowear" line needs more coverage
+  // than the other two cards' shorter text block, and the fade should
+  // read as "more black, still smooth," not a harder-edged cutoff. A small
+  // flat fully-transparent zone at the very bottom (0-8%) avoids a single
+  // hard seam right at the card edge; the remaining climb to fully opaque
+  // is graduated across 3 intermediate stops rather than one straight
+  // ramp, for a softer ease despite covering more of the card.
+  imageMerge:
+    "[mask-image:linear-gradient(to_top,transparent_0%,transparent_8%,rgba(0,0,0,0.55)_35%,rgba(0,0,0,0.85)_55%,black_72%)] [-webkit-mask-image:linear-gradient(to_top,transparent_0%,transparent_8%,rgba(0,0,0,0.55)_35%,rgba(0,0,0,0.85)_55%,black_72%)]",
+  // 4-stop, taller (h-4/5, was h-2/3) and darker near the bottom -- owner,
+  // 2026-09-15: "the text is not very visible, adjust the gradient." Still
+  // a soft ease, not a hard 2-stop cutoff: the top of the band starts
+  // fully transparent (real photography, not a colour tint) and ramps
+  // through 3 intermediate stops to near-opaque black right behind the
+  // text, per the original "very soft and smooth" spec -- just carried
+  // further down/darker than the first pass.
+  scrim:
+    "pointer-events-none absolute inset-x-0 bottom-0 h-4/5 bg-[linear-gradient(to_top,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.72)_28%,rgba(0,0,0,0.32)_60%,rgba(0,0,0,0)_100%)]",
+  // Mobile: px-6 (24px) / py-4 (16px top+bottom, owner: "make text top
+  // bottom 16px" -- was 24px, the same flat `p-6` every side). From `md:`
+  // (768px) up -- tablet now included, not just desktop, see `grid`'s own
+  // comment above -- 32px left/right, 24px top/bottom (tuned over several
+  // owner passes).
+  textWrap: "absolute inset-x-0 bottom-0 flex flex-col gap-2 px-6 py-4 md:px-8 md:py-6",
+  // `box` variant only: a real solid block in normal flow below the photo
+  // (owner reference screenshot, 2026-09-15) -- `bg-ink-2` (#17191e, owner
+  // spec; opaque, matching `cardBox`'s own colour, so there's no visible
+  // seam colour mismatch), not absolutely positioned over anything, no
+  // gradient at all. Height is whatever this content needs (title +
+  // descriptor, + the Capriowear card's extra link line) --
+  // `boxImageWrap`'s own `flex-1` on the photo above absorbs the
+  // remaining space, so this box's height never has to match a fixed
+  // ratio across all 3 cards.
+  // Same mobile/md:-up split as `textWrap` above (mobile: 24px left/
+  // right, 16px top/bottom; md: up: 32px left/right, 24px top/bottom).
+  textBox: "flex flex-col gap-2 bg-ink-2 px-6 py-4 md:px-8 md:py-6",
+  // 24px/auto from md: up, 22px/auto mobile (owner spec) -- "auto"
+  // line-height, not a fixed px value, so a plain `leading-normal` rather
+  // than an arbitrary `leading-[Npx]` like the descriptor below gets.
+  title: "text-[1.375rem] leading-normal font-medium text-paper md:text-[1.5rem]",
+  // 15px/20px mobile, 17px/23px from md: up (owner spec, exact px
+  // line-heights given, unlike the title). `#838d97` -- this project's own established
+  // "secondary text on a dark surface" colour sitewide (e.g. `capabilityCard.
+  // textDark`, `certified`/`stats` captions, FAQ answers, mega-menu labels
+  // -- always this exact grey, never the light-surface `text-muted` token,
+  // #6b6b74), not a translucent `text-paper/*` (owner, 2026-09-15: "make
+  // the subline as secondary subline color that we use").
+  descriptor: "text-[0.9375rem] leading-[20px] text-[#838d97] md:text-[17px] md:leading-[23px]",
+  // No underline (owner, 2026-09-15) -- the arrow is the affordance now,
+  // not a text decoration. All 3 cards get this same link/arrow now (was
+  // Capriowear-only); white (`text-paper`) by default, not orange.
+  // `hover:text-accent` (owner: "hovering on the cta make the text orange
+  // primary") -- the link's own `:hover`, not `group-hover` off the whole
+  // card, since this should react to hovering the CTA itself, not
+  // anywhere on the card. `group/cta` names this span as its own hover
+  // group (distinct from `card`'s own unnamed `group`, which the whole
+  // card link already uses for its image zoom) so the icon below can key
+  // off THIS hover specifically via `group-hover/cta:*`.
+  // Mobile: 14px (owner: "mobile cta make 14px text" -- was the shared
+  // `text-button-sm` token's own 16px at every breakpoint). From `md:` up
+  // (tablet included, see `grid`'s own comment above): the real
+  // `text-button-sm` token (16px/24px line-height/700 weight) -- the
+  // mobile override restates weight/line-height explicitly since an
+  // arbitrary `text-[...]` value doesn't carry `text-button-sm`'s own
+  // paired line-height/font-weight the way the named token does.
+  link: "group/cta mt-1 inline-flex w-fit items-center gap-1.5 text-[0.875rem] font-bold leading-6 uppercase md:text-button-sm text-paper transition-colors hover:text-accent",
+  // Static by default -- Lifting Gear/Boxing & MMA (owner: "arrow white
+  // not pointing" [at rest]). On hover of the CTA: turns orange AND starts
+  // the same continuous point animation `linkIconAnimated`/`.arrow-point`
+  // uses (owner: "arrow should also get orange when hover" + "arrow
+  // pointing for other 2 when hover not in default state") -- an inline
+  // arbitrary `[animation:...]` value (not the `.arrow-point` class
+  // itself), since it must only apply on `group-hover/cta`, not always.
+  linkIcon:
+    "h-[11.667px] w-[7px] shrink-0 text-paper transition-colors group-hover/cta:text-accent group-hover/cta:[animation:arrow-point_1.2s_ease-in-out_infinite]",
+  // Animated always -- Capriowear only (owner: "make the wear arrow white
+  // too but pointing"), same continuous loop as before (`.arrow-point`,
+  // app/globals.css). Also turns orange on hover, same as the static icon.
+  linkIconAnimated: "h-[11.667px] w-[7px] shrink-0 text-paper arrow-point transition-colors group-hover/cta:text-accent",
+};
+
 export const categoryLinkGrid = {
   group: "flex flex-col gap-8 xl:gap-10",
   grid: "grid grid-cols-1 gap-4 xl:grid-cols-3",
@@ -8668,50 +8844,12 @@ export const capriosportsFactory = {
   leadBold: "font-semibold",
   videoWrap: "w-full",
   videoInnerWrap: "w-full",
+  // Supporting blocks render via CapabilityCard now (2026-09-15
+  // visual-review fix: real image + card treatment, matching every other
+  // title+body+image block sitewide, instead of bare stacked text under a
+  // thin divider) -- this grid wrapper is the only bespoke class left,
+  // CapabilityCard's own tokens (`capabilityCard.*`) handle the rest.
   supportingGrid: "grid w-full max-w-[960px] grid-cols-1 gap-8 md:grid-cols-2",
-  supportingCard: "flex flex-col gap-2 border-t border-line pt-6",
-  supportingTitle: "text-h5 font-semibold",
-  supportingBody: "text-body text-muted",
-};
-
-/* --- WhatWeMakeRange (Capriosports homepage, "What We Make") -------------- */
-
-// 2026-09-15 -- two range-card boxes (lead + real ul/li highlights + CTA),
-// a shape no existing component combines in one (ProductRange has a CTA
-// but no bullets; WhatWeCover has bullets but no CTA/card). New, small,
-// composed from the same section-heading/card/button primitives every
-// other section already uses.
-export const whatWeMakeRange = {
-  section: "container-p flex flex-col items-center gap-12 pt-[72px] pb-[72px]",
-  headingBlock: "flex w-full max-w-[780px] flex-col items-center gap-4 text-center",
-  lead: "max-w-[780px] text-body-lg text-subline",
-  grid: "grid w-full grid-cols-1 gap-8 xl:grid-cols-2",
-  box: "flex flex-col gap-6 rounded-sm border border-line p-8",
-  boxTitle: "text-h3",
-  boxLead: "text-body text-muted",
-  list: "flex flex-col gap-4 border-t border-line pt-6",
-  item: "flex flex-col gap-1",
-  itemTitle: "text-body font-semibold",
-  itemBody: "text-body-sm text-muted",
-  cta: "mt-2 self-start",
-};
-
-/* --- FullCustomization (Capriosports homepage) ---------------------------- */
-
-// 2026-09-15 -- 5-item icon grid, "raw material to retail-ready packaging"
-// pattern. No such section is actually built on the Services page yet (the
-// phrase only exists as that page's own metaDescription string) -- new,
-// adapting WhatWeCover's real ul/li grid shape with an icon slot added.
-export const fullCustomization = {
-  section: "container-p flex flex-col items-center gap-12 pt-[72px] pb-[72px]",
-  headingBlock: "flex w-full max-w-[780px] flex-col items-center gap-4 text-center",
-  lead: "max-w-[780px] text-body-lg text-subline",
-  grid: "grid w-full max-w-[1200px] grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-5",
-  item: "flex flex-col items-center gap-3 text-center",
-  iconWrap: "flex size-12 items-center justify-center rounded-full border border-line",
-  icon: "size-6",
-  itemTitle: "text-body font-semibold",
-  itemBody: "text-body-sm text-muted",
 };
 
 /* --- WhyCapriosports (Capriosports homepage) ------------------------------- */

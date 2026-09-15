@@ -41,7 +41,7 @@ export function CategoryLinkGrid({ group, division }: CategoryLinkGridProps) {
               label={category.label}
               descriptor={category.descriptor}
               href={category.href}
-              image={hubThumbnail(division, slug, category.label)}
+              image={category.image ?? hubThumbnail(division, slug, category.label)}
             />
           );
         })}

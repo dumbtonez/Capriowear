@@ -602,6 +602,32 @@ header[data-tone="light"] {
   animation: field-shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97);
 }
 
+/* "Always pointing" nudge for a real, always-on (not hover-gated) arrow --
+   DivisionCards' own "Visit Capriowear" link, 2026-09-15 (owner: "should
+   have a pointing arrow, always pointing, animated"). Distinct from the
+   sitewide `group-hover:translate-x-0.5` arrow nudge (productRange.
+   exploreIcon et al) -- that one is a static icon that only moves on
+   hover; this one loops continuously on its own. */
+@keyframes arrow-point {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+.arrow-point {
+  animation: arrow-point 1.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow-point {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .field-shake {
     animation: none;

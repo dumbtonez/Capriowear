@@ -1,15 +1,20 @@
 // components/sections/CapriosportsFactory.tsx
-// Capriosports homepage section 5, "One Factory" -- 2026-09-15 rebuild.
-// Replaces the earlier CapabilityCard/TextReveal placeholder-box layout
-// (content/capriosports/home.ts's own former `overview` field, now
-// `factory`) with a composition of three already-real, already-tested
-// components rather than a new mechanism:
-//   1. This section's own heading/lead/supporting-block text block (small,
-//      new -- no existing component combines heading+lead+two plain text
-//      tiles in this exact shape).
-//   2. `ScrollGrowVideo` -- the same narrow-to-full-viewport video block
-//      Capriowear's own Hero.tsx uses, as this section's lead visual.
-//   3. `InsideFactory` -- reused directly (not forked) for the real
+// Capriosports homepage section 5, "One Factory" -- 2026-09-15 rebuild,
+// revised same day after visual review. Composition of real, already-
+// shipping components:
+//   1. This section's own heading+lead text block (small, new -- no
+//      existing component combines heading+lead in exactly this shape).
+//   2. `ScrollGrowVideo` -- the same block Capriowear's own Hero.tsx uses,
+//      as this section's lead visual. No `video` pair is passed (visual
+//      review: the previous pass's placeholder video was an unrelated
+//      stock clip of a park, which read as broken) -- omitting `video`
+//      makes it fall back to its own plain labelled placeholder + Play
+//      button over a real factory photo, which reads as intentional.
+//   3. `CapabilityCard` -- the same title+body+image card Our Services/How
+//      It Works use sitewide, for the two supporting blocks (previously
+//      bare stacked text under a thin divider, floating with no real
+//      transition into the photo slider below).
+//   4. `InsideFactory` -- reused directly (not forked) for the real
 //      factory-shots slider, `showHeading`/`showCta` both false since this
 //      section supplies its own heading and has no separate CTA here.
 //
@@ -23,6 +28,7 @@
 // actually do together.
 import { Fragment } from "react";
 
+import { CapabilityCard } from "@/components/Card";
 import { ScrollGrowVideo } from "@/components/ScrollGrowVideo";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextReveal } from "@/components/TextReveal";
@@ -65,16 +71,23 @@ export function CapriosportsFactory({ content }: CapriosportsFactoryProps) {
           label={content.video.label}
           wrapClassName={capriosportsFactory.videoInnerWrap}
           image={content.video.image}
-          video={content.video.video}
         />
       </div>
 
+      {/* Real CapabilityCard treatment (image + title + body), not bare
+          stacked text under a divider (2026-09-15 visual-review fix) --
+          same card component/spacing Our Services and How It Works
+          already use sitewide, so this reads as a real transition into
+          the photo slider below, not a disconnected floating block. */}
       <div className={capriosportsFactory.supportingGrid}>
         {content.supportingBlocks.map((block) => (
-          <div key={block.title} className={capriosportsFactory.supportingCard}>
-            <h3 className={capriosportsFactory.supportingTitle}>{block.title}</h3>
-            <p className={capriosportsFactory.supportingBody}>{block.body}</p>
-          </div>
+          <CapabilityCard
+            key={block.title}
+            title={block.title}
+            body={block.body}
+            image={block.image}
+            mediaAspectClassName="aspect-[8/5]"
+          />
         ))}
       </div>
 
