@@ -306,6 +306,23 @@ export type Category = {
   /** Label as it appears in the left-panel category nav / mega menu. */
   menuLabel: string;
   /**
+   * Category-level draft gate (owner spec, 2026-09-15, Gear/Weight Lifting
+   * Belts) -- a genuinely stronger gate than `StyleCard.status`: while
+   * `"draft"`, the whole PLP is noindexed (its own `generateMetadata` adds
+   * `robots: {index:false, follow:false}`, independent of the sitewide
+   * `ALLOW_INDEXING` switch), excluded from `app/sitemap.ts` entirely, and
+   * its `FAQPage`/`CollectionPage`/`ItemList` schema is withheld -- unlike
+   * every prior all-draft category (Fight Wear, etc.), whose PLP still
+   * ships indexable with `FAQPage` always on once it has real copy.
+   * `BreadcrumbList` schema and the visible page itself still render (a
+   * draft category isn't unbuilt, just not ready to be found by search).
+   * Optional, no default read as `"draft"` -- every existing category
+   * (Activewear, Teamwear) leaves this unset and keeps its current,
+   * unchanged indexable behavior; only a category explicitly not ready to
+   * be found yet sets `"draft"`.
+   */
+  status?: "published" | "draft";
+  /**
    * Four optional overrides for `pdpShared.ts`'s `categoryEntityFaq()`
    * (owner spec, 2026-09-02, Sports Bras category), all falling back to
    * `menuLabel`/`styleCards` when omitted so an existing category (e.g.
@@ -349,6 +366,22 @@ export type Category = {
   entityExampleStyles?: string;
   entityFabrics?: string;
   audienceClause?: string;
+  /**
+   * Verbatim override pair for `categoryEntityFaq()`'s own returned
+   * `FaqEntry` (owner spec, 2026-09-15, Gear/Weight Lifting Belts) -- when
+   * BOTH are set, they're returned as-is instead of the templated
+   * "Capriowear is a custom [noun] manufacturer..." sentence built from
+   * `manufacturerNoun`/`productNounPlural`/`entityExampleStyles`/
+   * `entityFabrics`/`audienceClause` above. For a category outside the
+   * Capriowear brand (the Gear division is Capriosports) whose entity
+   * answer is a locked, hand-authored string that the template's fixed
+   * clause wording ("from fabric to packaging", "private label [X]", the
+   * Capriowear `companyIdentity` closer) can't reproduce. Every existing
+   * Activewear/Teamwear category leaves both unset and keeps the templated
+   * sentence, byte-identical to before.
+   */
+  entityQuestion?: string;
+  entityAnswer?: string;
   /** Page H1. Form: "Custom [Product] Manufacturer". */
   h1: string;
   /**
@@ -424,6 +457,19 @@ export type Category = {
   /** FabricOptions' own H2, e.g. "The fabrics behind the big brands". */
   fabricHeading: string;
   fabricOptions: FabricOption[];
+  /**
+   * Column-header override for `fabricOptions`' own main table (owner spec,
+   * 2026-09-15, Gear/Weight Lifting Belts) -- defaults to "Fabric"/"Best
+   * for"/"Performance" (`FabricOptions.tsx`'s own
+   * `DEFAULT_OPTIONS_HEADERS`) when omitted, so every existing category
+   * renders unchanged. Same "relabel the 3 generic columns" pattern
+   * `weightTiersHeaders` already established for the secondary table --
+   * e.g. a material table (not a fabric one) sets this to
+   * `{fabric: "Material", bestFor: "Best for", performance: "Notes"}` and
+   * reuses `FabricOption`'s existing `{fabric, bestFor, performance}` shape
+   * as-is.
+   */
+  fabricOptionsHeaders?: { fabric: string; bestFor: string; performance: string };
   /**
    * FabricOptions' own optional secondary table (owner spec, 2026-09-02,
    * T-Shirts category) -- a compact Tier/GSM/Best-for breakdown rendered

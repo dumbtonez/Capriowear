@@ -1852,6 +1852,14 @@ Two small, deliberately narrow type widenings to let Gear opt into two existing 
 
 Content: `content/gear/lifting-gears/{weight-lifting-belts,categories,hub}.ts`, `content/gear/boxing-and-mma/{boxing-gloves,categories,hub}.ts` — one placeholder `Category` and one placeholder hub `CategoryGroup` per division, every style `status: "draft"`, all copy literally "Placeholder." Real copy is a later phase.
 
+## Weight Lifting Belts PLP — real content, first Gear category, 2026-09-15
+
+Supersedes `content/gear/lifting-gears/weight-lifting-belts.ts`'s placeholder above — real, locked B2B copy, still `status: "draft"` (every style card too) pending owner sampling confirmation. See `docs/05-plan.md`'s decision log entry of the same date for the full change list. Three small, additive, backward-compatible extensions to the shared Activewear/Teamwear/Gear template, every existing category unaffected:
+
+- `Category.status?: "published" | "draft"` (`content/activewear/types.ts`) — a new category-level draft gate, stronger than the existing `StyleCard.status`: noindexes the whole PLP (`app/lifting-gears/[category]/page.tsx`'s `generateMetadata`), excludes it from `app/sitemap.ts`, and withholds its `FAQPage`/`CollectionPage` JSON-LD, all while the page and its `BreadcrumbList` schema still render normally. Optional, undefined = today's existing "always indexable once it has real copy" behavior.
+- `Category.entityQuestion?`/`entityAnswer?` — a verbatim override pair `categoryEntityFaq()` (`content/activewear/pdpShared.ts`) returns as-is instead of its templated "Capriowear is a custom..." sentence, for a category outside the Capriowear brand (Gear/Capriosports) whose entity answer is a locked, hand-authored string.
+- `Category.fabricOptionsHeaders?` / `FabricOptions`' new `optionsHeaders` prop (`components/sections/FabricOptions.tsx`) — relabels the main table's 3 column headers (default "Fabric"/"Best for"/"Performance"), same pattern `weightTiersHeaders` already established for the secondary table. This category uses "Material"/"Best for"/"Notes".
+
 ## Capriosports parent-site homepage (`/`) — full content + structure rebuild, 2026-09-15
 
 Supersedes the 2026-09-15 placeholder pass above. Revised the same day after a visual review found several real bugs and a few sections that should have reused an existing Capriowear component but instead built a bespoke one. Full section-by-section reuse map (current state):

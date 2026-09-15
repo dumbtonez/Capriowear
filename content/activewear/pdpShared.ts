@@ -37,8 +37,18 @@ export function categoryEntityFaq(
     | "entityExampleStyles"
     | "entityFabrics"
     | "audienceClause"
+    | "entityQuestion"
+    | "entityAnswer"
   >,
 ): FaqEntry {
+  // Verbatim override (owner spec, 2026-09-15, Gear/Weight Lifting Belts) --
+  // see `Category.entityQuestion`/`entityAnswer`'s own comment. Bypasses
+  // every clause below entirely for a category outside the Capriowear
+  // brand.
+  if (category.entityQuestion && category.entityAnswer) {
+    return { q: category.entityQuestion, a: category.entityAnswer };
+  }
+
   // Four optional overrides on `Category` itself (owner spec, 2026-09-02,
   // Sports Bras category), read straight off the same object every call
   // site already passes -- no change needed at either call site

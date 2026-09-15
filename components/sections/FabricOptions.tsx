@@ -61,6 +61,9 @@ import type { FabricOption, NoteSegment, StructuredBlock, WeightTier, WeightTier
 
 const DEFAULT_WEIGHT_TIERS_HEADERS: WeightTiersHeaders = { tier: "Tier", value: "GSM", bestFor: "Best for" };
 
+type OptionsHeaders = { fabric: string; bestFor: string; performance: string };
+const DEFAULT_OPTIONS_HEADERS: OptionsHeaders = { fabric: "Fabric", bestFor: "Best for", performance: "Performance" };
+
 type SecondaryTableRow = { key: string; title: string; col2: string; col3: string };
 
 /**
@@ -174,6 +177,8 @@ export type FabricOptionsProps = {
   eyebrow: string;
   heading: string;
   options: FabricOption[];
+  /** Column-header override for the main table above -- see `Category.fabricOptionsHeaders`' own comment. Defaults to "Fabric"/"Best for"/"Performance". */
+  optionsHeaders?: OptionsHeaders;
   /** Optional secondary Tier/GSM/Best-for table -- omit for a category with no tiered-by-weight (or by-level) fabric range. Prefer `structuredBlock` (type "weightTiers") for a NEW category; this pair stays as the direct path every existing category already uses, unchanged. */
   weightTiers?: WeightTier[];
   /** Optional column-header override for `weightTiers` above (e.g. Compression & Base Layers' "Level"/"mmHg"/"Used for") -- defaults to "Tier"/"GSM"/"Best for". */
@@ -187,6 +192,7 @@ export function FabricOptions({
   eyebrow,
   heading,
   options,
+  optionsHeaders = DEFAULT_OPTIONS_HEADERS,
   weightTiers,
   weightTiersHeaders = DEFAULT_WEIGHT_TIERS_HEADERS,
   structuredBlock,
@@ -230,15 +236,15 @@ export function FabricOptions({
         <thead>
           <tr className={fabricOptions.headerRow}>
             <th scope="col" className={fabricOptions.colFabric}>
-              <p className={fabricOptions.colHeader}>Fabric</p>
+              <p className={fabricOptions.colHeader}>{optionsHeaders.fabric}</p>
               <p className={fabricOptions.fabricCell}>{firstRow.fabric}</p>
             </th>
             <th scope="col" className={fabricOptions.col}>
-              <p className={fabricOptions.colHeader}>Best for</p>
+              <p className={fabricOptions.colHeader}>{optionsHeaders.bestFor}</p>
               <p className={fabricOptions.bodyCell}>{firstRow.bestFor}</p>
             </th>
             <th scope="col" className={fabricOptions.col}>
-              <p className={fabricOptions.colHeader}>Performance</p>
+              <p className={fabricOptions.colHeader}>{optionsHeaders.performance}</p>
               <p className={fabricOptions.bodyCell}>{firstRow.performance}</p>
             </th>
           </tr>
@@ -307,11 +313,11 @@ export function FabricOptions({
                 <div className={fabricOptions.accordionDetailClip}>
                   <div className={fabricOptions.accordionDetail}>
                     <div className={fabricOptions.accordionField}>
-                      <p className={fabricOptions.accordionLabel}>Best for</p>
+                      <p className={fabricOptions.accordionLabel}>{optionsHeaders.bestFor}</p>
                       <p className={fabricOptions.accordionValue}>{option.bestFor}</p>
                     </div>
                     <div className={fabricOptions.accordionField}>
-                      <p className={fabricOptions.accordionLabel}>Performance</p>
+                      <p className={fabricOptions.accordionLabel}>{optionsHeaders.performance}</p>
                       <p className={fabricOptions.accordionValue}>{option.performance}</p>
                     </div>
                   </div>

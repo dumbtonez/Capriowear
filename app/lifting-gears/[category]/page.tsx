@@ -44,6 +44,10 @@ export async function generateMetadata({
     title: data.metaTitle,
     description: data.metaDescription,
     alternates: { canonical },
+    // Category-level draft gate (owner spec, 2026-09-15) -- independent of
+    // the sitewide ALLOW_INDEXING switch in the root layout, see
+    // `Category.status`'s own comment.
+    ...(data.status === "draft" ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       title: fullTitle,
       description: data.metaDescription,
@@ -92,7 +96,7 @@ export default async function LiftingGearsCategoryPage({ params }: PageProps<"/l
             { name: data.menuLabel, url: `${SITE_URL}/lifting-gears/${data.slug}` },
           ])}
         />
-        {publishedStyleCards.length > 0 ? (
+        {data.status !== "draft" && publishedStyleCards.length > 0 ? (
           <JsonLd
             data={collectionPageSchema(
               data.menuLabel,
@@ -135,6 +139,7 @@ export default async function LiftingGearsCategoryPage({ params }: PageProps<"/l
           eyebrow={data.fabricEyebrow}
           heading={data.fabricHeading}
           options={data.fabricOptions}
+          optionsHeaders={data.fabricOptionsHeaders}
           weightTiers={data.weightTiers}
           weightTiersHeaders={data.weightTiersHeaders}
           structuredBlock={data.structuredBlock}
@@ -142,7 +147,7 @@ export default async function LiftingGearsCategoryPage({ params }: PageProps<"/l
         />
 
         <Faq content={{ h2: data.faqHeading, items: faqItems }} />
-        <JsonLd data={faqSchema(faqItems)} />
+        {data.status !== "draft" ? <JsonLd data={faqSchema(faqItems)} /> : null}
 
         <div id={FINAL_CTA_MARKER_ID} aria-hidden="true" />
         <FinalCta

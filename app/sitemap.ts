@@ -235,23 +235,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     // Every real Lifting Gears / Boxing & MMA category PLP + PDP, same
     // "one registry, never a second hand-typed list" rule as Activewear/
-    // Teamwear above.
-    ...Object.values(liftingGearsCategories).map((category) => ({
-      url: `${SITE_URL}/lifting-gears/${category.slug}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    })),
-    ...Object.values(liftingGearsCategories).flatMap((category) =>
-      category.styleCards
-        .filter((card) => card.status === "published")
-        .map((card) => ({
-          url: `${SITE_URL}${card.href}`,
-          lastModified: new Date(),
-          changeFrequency: "weekly" as const,
-          priority: 0.7,
-        })),
-    ),
+    // Teamwear above. Lifting Gears categories additionally filter out a
+    // `status: "draft"` category entirely (owner spec, 2026-09-15,
+    // Weight Lifting Belts) -- a stronger gate than the Activewear/Teamwear
+    // registries above, which have no category-level `status` at all and
+    // always list their PLP once it has real copy.
+    ...Object.values(liftingGearsCategories)
+      .filter((category) => category.status !== "draft")
+      .map((category) => ({
+        url: `${SITE_URL}/lifting-gears/${category.slug}`,
+        lastModified: new Date(),
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      })),
+    ...Object.values(liftingGearsCategories)
+      .filter((category) => category.status !== "draft")
+      .flatMap((category) =>
+        category.styleCards
+          .filter((card) => card.status === "published")
+          .map((card) => ({
+            url: `${SITE_URL}${card.href}`,
+            lastModified: new Date(),
+            changeFrequency: "weekly" as const,
+            priority: 0.7,
+          })),
+      ),
     ...Object.values(boxingMmaCategories).map((category) => ({
       url: `${SITE_URL}/boxing-and-mma/${category.slug}`,
       lastModified: new Date(),
