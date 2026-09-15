@@ -417,6 +417,7 @@ export const capriosportsHome = {
   services: {
     eyebrow: "FULL CUSTOMIZATION",
     h2: "From raw material to retail-ready packaging",
+    lead: "Every order is private label and fully customized, start to finish.",
     items: [
       {
         title: "Custom Manufacturing",

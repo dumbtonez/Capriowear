@@ -163,6 +163,16 @@ export default function CapriosportsHomePage() {
             "as is from wear", not the adapted version. */}
         <CertifiedCompliant content={home.certified} />
 
+        {/* FULL CUSTOMIZATION -- Capriowear's OWN real OurServices section
+            ("From raw fabric to retail-ready packaging"), gear-adapted
+            copy, dark `tone` (owner, 2026-09-15: "under the certified
+            section add services section in black same as built on wear
+            home") -- same placement/variant Capriowear's own homepage
+            uses directly after its own Certified & Compliant. Moved here
+            from further down the page (was section 8, light tone) rather
+            than duplicated: same content, one instance. */}
+        <OurServices content={capriosportsHome.services} tone="dark" />
+
         {/* 5. ONE FACTORY -- text/video/CapabilityCard-supporting-blocks/
             photo-slider composition. */}
         <CapriosportsFactory content={capriosportsHome.factory} />
@@ -171,12 +181,6 @@ export default function CapriosportsHomePage() {
             same real component/markup as Capriowear's own homepage, not a
             custom stat-card row bolted onto Certified & Compliant. */}
         <Stats items={capriosportsHome.stats} />
-
-        {/* 8. FULL CUSTOMIZATION -- Capriowear's OWN real OurServices
-            section ("From raw fabric to retail-ready packaging"),
-            gear-adapted copy, not a new icon-grid pattern (visual-review
-            fix, replacing the previous pass's FullCustomization). */}
-        <OurServices content={capriosportsHome.services} />
 
         {/* 9. WHY CAPRIOSPORTS -- numbered 01-05 list. */}
         <WhyCapriosports content={capriosportsHome.why} />

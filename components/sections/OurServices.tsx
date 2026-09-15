@@ -35,7 +35,13 @@ import { ourServices } from "@/components/ui/styles";
 import type { home } from "@/content/home";
 
 export type OurServicesProps = {
-  content: typeof home.services;
+  // Widened (not `typeof home.services` alone) to also allow an optional
+  // `lead` -- a short intro line directly under the heading (Capriosports'
+  // own dark homepage reuse, 2026-09-15: "Every order is private label and
+  // fully customized, start to finish."). Capriowear's own callers omit
+  // it, unaffected -- same widening pattern `CertifiedCompliant`'s own
+  // `membershipNote` already established.
+  content: typeof home.services & { lead?: string };
   pageVariant?: "home" | "services";
   /**
    * `"light"` (default) or `"dark"` -- the homepage's own dark variant
@@ -65,6 +71,7 @@ export function OurServices({ content, pageVariant = "home", tone = "light" }: O
   const eyebrowSize = ourServices.eyebrowSize;
   const cardRootClassName = tone === "dark" ? ourServices.cardRootDark : undefined;
   const cardBodyClassName = tone === "dark" ? ourServices.cardBodyDark : undefined;
+  const leadClassName = tone === "dark" ? ourServices.leadDark : ourServices.lead;
 
   return (
     <section>
@@ -83,6 +90,7 @@ export function OurServices({ content, pageVariant = "home", tone = "light" }: O
               eyebrowSize={eyebrowSize}
               headingClassName={ourServices.desktopHeadingWidth}
             />
+            {content.lead ? <p className={leadClassName}>{content.lead}</p> : null}
           </div>
           <div className={ourServices.desktopList}>
             {content.items.map((item) => (
@@ -113,6 +121,7 @@ export function OurServices({ content, pageVariant = "home", tone = "light" }: O
             headingClassName={ourServices.mobileHeadingWidth}
             align="center"
           />
+          {content.lead ? <p className={leadClassName}>{content.lead}</p> : null}
           <CardCarousel
             items={content.items}
             cardMediaRatio={ourServices.cardMediaRatio}

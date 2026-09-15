@@ -5141,6 +5141,25 @@ export const ourServices = {
   // needs no new token: `capabilityCard.textDark` already resolves to the
   // sitewide `#838D97` muted-on-dark literal once `tone` is forwarded.
   cardBodyDark: "flex flex-col gap-3",
+  // Optional intro line directly under the heading (Capriosports' own dark
+  // homepage reuse, 2026-09-15: "Every order is private label and fully
+  // customized, start to finish.") -- Capriowear's own callers pass no
+  // `lead`, so this token is unused there, unaffected. Same 18px/24px
+  // mobile, 20px/28px desktop type scale as this section's own card body
+  // (`capabilityCard.text`/`textDark`), for visual consistency with the
+  // cards it introduces. `text-center xl:text-left`: this one class string
+  // covers both renders -- the mobile block's own centred heading (below
+  // `xl:`) and the desktop sticky column's left-aligned one (`xl:` up).
+  // Tablet text-width house rule (docs/02-design-system.md's "Grid and
+  // container"): `md:max-w-[clamp(560px,65vw,780px)]` keeps the mobile-
+  // block render (centred, full container width at tablet) from
+  // stretching past a comfortable line length; `xl:max-w-none` reverts to
+  // unconstrained for the desktop sticky render, whose own flex-shrink
+  // math already caps it near 579px (see `desktopHeadingWidth`'s own
+  // comment) well inside the clamp's own 780px ceiling.
+  lead: "max-md:text-[1.125rem] max-md:leading-[24px] md:max-w-[clamp(560px,65vw,780px)] md:text-[1.25rem] md:leading-[28px] xl:max-w-none text-center font-normal text-subline xl:text-left",
+  leadDark:
+    "max-md:text-[1.125rem] max-md:leading-[24px] md:max-w-[clamp(560px,65vw,780px)] md:text-[1.25rem] md:leading-[28px] xl:max-w-none text-center font-normal text-[#838D97] xl:text-left",
   desktopSection: "container-p hidden gap-[221px] pt-[120px] pb-[120px] xl:flex xl:items-start",
   // Dark-tone desktop variant, homepage only (owner, same day: "next
   // section gap should be 160px") -- a complete, self-contained string
@@ -5191,7 +5210,11 @@ export const ourServices = {
   // (gap) + 480 (card) doesn't fit the available width, so this column
   // must be allowed to shrink narrower (the heading just wraps to more
   // lines; its own min-content is far smaller than 579px).
-  desktopSticky: "sticky top-[56px] min-w-0 self-start",
+  // `flex flex-col gap-6` (added for the optional `lead` line, Capriosports'
+  // own dark homepage reuse, 2026-09-15) -- a no-op for every existing
+  // caller that omits `lead`: a flex column with one child lays out
+  // identically to a plain block.
+  desktopSticky: "sticky top-[56px] flex min-w-0 flex-col gap-6 self-start",
   // This column's actual rendered width isn't governed by max-w-[579px] at
   // all -- confirmed by measurement (raising the max-width to 2000px live
   // didn't move it) -- it's set by flex-shrink math: container-p's content
