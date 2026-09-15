@@ -31,6 +31,10 @@ export const weightLiftingBelts: Category = {
   metaDescription:
     "Custom weight lifting belts manufacturer, private label and wholesale. Lever, powerlifting, prong, nylon and dip belts, low MOQ. Sialkot, Pakistan.",
   trustBullets: ["MOQ from 50 pieces", "10mm & 13mm thickness tiers", "OEM, ODM & Private label", "DDP to 20+ countries"],
+  // No All/Women/Men gender filter on any Capriosports Gear PLP (owner
+  // spec, 2026-09-15) -- a B2B gym-equipment buyer, unlike Capriowear's own
+  // Activewear/Teamwear categories, has no gender split to filter by.
+  showGenderFilter: false,
   gridSubline: "Every style, every thickness tier, made to your brand spec",
   gridSublineMobile: "Every style, every thickness tier, made to your brand spec",
   fabricEyebrow: "MATERIAL OPTIONS",

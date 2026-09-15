@@ -15,6 +15,9 @@ export const boxingGloves: Category = {
   metaTitle: "Custom Boxing Glove Manufacturer",
   metaDescription: "Placeholder meta description -- real copy is a later phase.",
   trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private label", "DDP to 20+ countries"],
+  // No All/Women/Men gender filter on any Capriosports Gear PLP (owner
+  // spec, 2026-09-15) -- see weight-lifting-belts.ts's own comment.
+  showGenderFilter: false,
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style, made to your brand spec",
   fabricEyebrow: "OPTIONS",

@@ -2612,6 +2612,10 @@ Real content for the Capriosports parent-site homepage (`/`), replacing the plac
 
 `npm run build`, `npx tsc --noEmit`, `npx eslint .` all clean. Verified in-browser: homepage renders full content with correct title/canonical/JSON-LD (Organization rooted at Capriosports with a correct Capriowear `subOrganization` URL, WebSite entity correctly named "Capriosports"); `/capriowear` and Capriowear category pages still title "| Capriowear"; `/lifting-gears`/`/boxing-and-mma`/the other parent stubs now title "| Capriosports"; no regression on existing one-line category H1s. `npx playwright test tests/screenshots.spec.ts` — 45/45 pass, no overflow at any target viewport.
 
+## Gear PLPs: gender filter chips removed sitewide, 2026-09-15
+
+`showGenderFilter: false` set on both Gear-division categories (`content/gear/lifting-gears/weight-lifting-belts.ts`, `content/gear/boxing-and-mma/boxing-gloves.ts`, the latter still a placeholder) — no code change, the `Category.showGenderFilter`/`CategoryMetaStrip` flag already existed for exactly this. Confirmed live: the All/Women/Men chip row is gone from `/lifting-gears/weight-lifting-belts`'s listing. Capriowear's own Activewear/Teamwear categories are untouched (still default `true` where unset) — this only scopes to the Capriosports Gear division, a B2B gym-equipment buyer with no gender split to filter by | Owner: "all men women remove it from capriosports, we will not use this functionality on any plp"
+
 ## Weight Lifting Belts PLP: real content + new category-level draft gate, 2026-09-15
 
 First real (non-placeholder) content on any Gear category, replacing the Phase 1 stub at `content/gear/lifting-gears/weight-lifting-belts.ts`. Same reused PLP template as Teamwear's Football PLP, gear-flavored content only — no new sections, no layout changes.
