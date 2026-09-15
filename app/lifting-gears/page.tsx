@@ -5,15 +5,17 @@
 // wiring only. See that file's own header comment for the full reasoning on
 // section order and schema choices (identical here).
 import type { Metadata } from "next";
-import Link from "next/link";
 
+import { Header } from "@/components/Header";
+import { Logo } from "@/components/Logo";
 import { CategoryLinkGrid } from "@/components/sections/CategoryLinkGrid";
 import { CategoryBanner } from "@/components/sections/CategoryBanner";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { categoryGroupsSection } from "@/components/ui/styles";
+import { categoryGroupsSection, header } from "@/components/ui/styles";
+import { capriosportsHome } from "@/content/capriosports/home";
 import { home } from "@/content/home";
 import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 import { liftingGearsGroups, liftingGearsHub, LIFTING_GEARS_HUB_CANONICAL } from "@/content/gear/lifting-gears/hub";
@@ -42,15 +44,23 @@ export const metadata: Metadata = {
 export default function LiftingGearsHubPage() {
   return (
     <>
-      {/* Bare, unstyled placeholder nav -- Phase 1 scaffolding only, proves
-          routing wiring works. NOT the real Gear division nav: the division
-          switcher and parent-site header composition are Phase 3 work
-          (owner, 2026-09-14). Do not treat this as a component to reuse or
-          extend -- swap it out entirely once that phase builds the real
-          thing. */}
-      <nav className="p-4 text-sm">
-        <Link href="/lifting-gears">Lifting Gears</Link> | <Link href="/boxing-and-mma">Boxing & MMA</Link>
-      </nav>
+      {/* Real sitewide Header, Capriosports' own nav content (owner spec,
+          2026-09-16) -- replaces the Phase 1 placeholder <nav>, same exact
+          Header call the Capriosports homepage (app/page.tsx) already uses.
+          Still no persistent division switcher (active-division
+          highlighting across Lifting Gears/Boxing & MMA/Capriowear stays
+          Phase 3) -- just the same component every Capriowear page already
+          uses, fed Capriosports' own plain-links content instead. */}
+      <Header
+        brand={capriosportsHome.nav.brand}
+        logo={<Logo caprioOnly className={header.brandLogoCapriosports} />}
+        desktopLogo={<Logo caprioOnly className={header.brandLogoDesktopCapriosports} />}
+        links={capriosportsHome.nav.links}
+        mobileLinks={capriosportsHome.nav.mobileLinks}
+        contact={capriosportsHome.nav.contact}
+        social={ORGANIZATION.sameAs}
+        cta={capriosportsHome.nav.cta}
+      />
 
       <main className="relative z-10 bg-paper">
         <CategoryBanner

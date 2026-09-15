@@ -5,10 +5,11 @@
 // instead. Breadcrumb trail: Home > Lifting Gears > [Category] > [Style].
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
+import { Logo } from "@/components/Logo";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
@@ -31,6 +32,8 @@ import {
   pdpSpecHighlights,
   pdpSpecificationsCopy,
 } from "@/content/activewear/pdpShared";
+import { header } from "@/components/ui/styles";
+import { capriosportsHome } from "@/content/capriosports/home";
 import { home } from "@/content/home";
 import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 import { liftingGearsCategories } from "@/content/gear/lifting-gears/categories";
@@ -112,11 +115,18 @@ export default async function LiftingGearsStylePage({
 
   return (
     <>
-      {/* Bare, unstyled placeholder nav -- Phase 1 scaffolding only, see
+      {/* Real sitewide Header, Capriosports' own nav content -- see
           app/lifting-gears/page.tsx's own comment for the full reasoning. */}
-      <nav className="p-4 text-sm">
-        <Link href="/lifting-gears">Lifting Gears</Link> | <Link href="/boxing-and-mma">Boxing & MMA</Link>
-      </nav>
+      <Header
+        brand={capriosportsHome.nav.brand}
+        logo={<Logo caprioOnly className={header.brandLogoCapriosports} />}
+        desktopLogo={<Logo caprioOnly className={header.brandLogoDesktopCapriosports} />}
+        links={capriosportsHome.nav.links}
+        mobileLinks={capriosportsHome.nav.mobileLinks}
+        contact={capriosportsHome.nav.contact}
+        social={ORGANIZATION.sameAs}
+        cta={capriosportsHome.nav.cta}
+      />
 
       <main className="relative z-10 bg-paper">
         <Breadcrumb items={breadcrumbItems} className="mt-[68px] hidden md:block" />

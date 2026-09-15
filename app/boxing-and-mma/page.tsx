@@ -2,15 +2,17 @@
 // The Boxing & MMA Landing Hub -- see app/lifting-gears/page.tsx's own
 // header comment for the full reasoning (same pattern, sibling division).
 import type { Metadata } from "next";
-import Link from "next/link";
 
+import { Header } from "@/components/Header";
+import { Logo } from "@/components/Logo";
 import { CategoryLinkGrid } from "@/components/sections/CategoryLinkGrid";
 import { CategoryBanner } from "@/components/sections/CategoryBanner";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { categoryGroupsSection } from "@/components/ui/styles";
+import { categoryGroupsSection, header } from "@/components/ui/styles";
+import { capriosportsHome } from "@/content/capriosports/home";
 import { home } from "@/content/home";
 import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 import { boxingMmaGroups, boxingMmaHub, BOXING_MMA_HUB_CANONICAL } from "@/content/gear/boxing-and-mma/hub";
@@ -39,11 +41,18 @@ export const metadata: Metadata = {
 export default function BoxingMmaHubPage() {
   return (
     <>
-      {/* Bare, unstyled placeholder nav -- Phase 1 scaffolding only, see
+      {/* Real sitewide Header, Capriosports' own nav content -- see
           app/lifting-gears/page.tsx's own comment for the full reasoning. */}
-      <nav className="p-4 text-sm">
-        <Link href="/lifting-gears">Lifting Gears</Link> | <Link href="/boxing-and-mma">Boxing & MMA</Link>
-      </nav>
+      <Header
+        brand={capriosportsHome.nav.brand}
+        logo={<Logo caprioOnly className={header.brandLogoCapriosports} />}
+        desktopLogo={<Logo caprioOnly className={header.brandLogoDesktopCapriosports} />}
+        links={capriosportsHome.nav.links}
+        mobileLinks={capriosportsHome.nav.mobileLinks}
+        contact={capriosportsHome.nav.contact}
+        social={ORGANIZATION.sameAs}
+        cta={capriosportsHome.nav.cta}
+      />
 
       <main className="relative z-10 bg-paper">
         <CategoryBanner
