@@ -346,18 +346,36 @@ export const capriosportsHome = {
     { value: CAPRIOSPORTS_ORGANIZATION.exportCountries, caption: "Countries Capriosports already ships lifting gear and boxing and MMA equipment to." },
   ],
 
-  // WHAT WE MAKE -- reuses Capriowear's OWN real `WhatWeMake` component
-  // (components/sections/WhatWeMake.tsx) directly, same `Card` category
-  // tiles/grid Capriowear's own homepage uses for Activewear/Teamwear
-  // sub-categories -- not the bordered ul/li box pattern the previous pass
-  // built (`WhatWeMakeRange.tsx`, removed). Only `weight-lifting-belts` and
-  // `boxing-gloves` have real PLP pages today (content/gear/*/categories.ts) --
-  // every other tile links to its parent division hub page instead of a
-  // 404, per this project's own "protect real, already-indexed content
-  // over a placeholder with no page yet" rule (docs/05-plan.md, 2026-09-14).
-  // Images are explicit per tile (this content shape carries them directly,
-  // same as `content/home.ts`'s own `whatWeMake.categories[].tiles[].image`
-  // -- no `hubThumbnail` lookup involved here).
+  // WHAT WE MAKE / "PRODUCT RANGE" -- reuses Capriowear's OWN real
+  // `WhatWeMake` component (components/sections/WhatWeMake.tsx) directly,
+  // same `Card` category tiles/grid Capriowear's own homepage uses for
+  // Activewear/Teamwear sub-categories -- not the bordered ul/li box
+  // pattern the previous pass built (`WhatWeMakeRange.tsx`, removed).
+  // Rendered directly under Trust Strip on the homepage (owner, 2026-09-15:
+  // "under trust strip add categories section same like wear activewear
+  // and teamwear section"), not in its earlier position near the bottom --
+  // see app/page.tsx's own section order comment.
+  // 7 tiles per category (owner-supplied list, replacing the previous
+  // pass's shorter 4-tile lists) -- `WhatWeMake`'s own desktop grid fills
+  // exactly 2 rows (8 cells: 7 tiles + 1 CTA), the same "CTA completes the
+  // last row" rule Activewear's own 7-tile list already exercises on
+  // Capriowear's homepage. CTA copy is "See the Full Range" (owner-given,
+  // not the component's own default "View All {title}" wording) via
+  // `WhatWeMake`'s new `ctaText` prop, passed once in app/page.tsx for
+  // both categories.
+  // Only `weight-lifting-belts` and `boxing-gloves` have real PLP pages
+  // today (content/gear/*/categories.ts) -- every other tile links to its
+  // parent division hub page via a unique `#slug` anchor instead of a 404,
+  // per this project's own "protect real, already-indexed content over a
+  // placeholder with no page yet" rule (docs/05-plan.md, 2026-09-14) --
+  // `WhatWeMake`'s own `Card`/tile list keys by `href`, so each anchor must
+  // be unique, not a bare repeated hub URL (a real React "same key" bug
+  // the previous pass already hit once, see git history).
+  // Images are explicit per tile (this content shape carries them
+  // directly, same as `content/home.ts`'s own
+  // `whatWeMake.categories[].tiles[].image`) -- cycled through the same 5
+  // factory-test photos every other Capriosports section already reuses,
+  // no per-tile photography yet.
   whatWeMake: {
     eyebrow: "PRODUCT RANGE",
     h2: "Custom lifting gear and boxing and MMA equipment, one factory.",
@@ -373,26 +391,34 @@ export const capriosportsHome = {
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Capriosports weight lifting belts, Sialkot, Pakistan" },
           },
           {
-            // No real PLP yet -- links to the parent hub page, same rule
-            // as `weight-lifting-belts`' siblings below. `href` carries a
-            // unique `#slug` anchor (not just the bare hub URL, shared by
-            // 3 of these 4 tiles) since `WhatWeMake`'s own `Card` keys its
-            // list by `href` -- three identical keys in one array is a
-            // real React bug (found live, console "same key" warning), not
-            // just cosmetic.
-            label: "Weightlifting Gloves and Grips",
-            href: "/lifting-gears#weightlifting-gloves-and-grips",
-            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Capriosports weightlifting gloves and grips, Sialkot, Pakistan" },
+            label: "Weightlifting Gloves",
+            href: "/lifting-gears#weightlifting-gloves",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Capriosports weightlifting gloves, Sialkot, Pakistan" },
           },
           {
-            label: "Wraps and Straps",
-            href: "/lifting-gears#wraps-and-straps",
-            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Capriosports wraps and straps, Sialkot, Pakistan" },
+            label: "Wrist Wraps",
+            href: "/lifting-gears#wrist-wraps",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Capriosports wrist wraps, Sialkot, Pakistan" },
           },
           {
-            label: "Bands and Accessories",
-            href: "/lifting-gears#bands-and-accessories",
-            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Capriosports bands and accessories, Sialkot, Pakistan" },
+            label: "Lifting Straps",
+            href: "/lifting-gears#lifting-straps",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Capriosports lifting straps, Sialkot, Pakistan" },
+          },
+          {
+            label: "Knee Sleeves",
+            href: "/lifting-gears#knee-sleeves",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Capriosports knee sleeves, Sialkot, Pakistan" },
+          },
+          {
+            label: "Resistance Bands",
+            href: "/lifting-gears#resistance-bands",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Capriosports resistance bands, Sialkot, Pakistan" },
+          },
+          {
+            label: "Gym Accessories",
+            href: "/lifting-gears#gym-accessories",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Capriosports gym accessories, Sialkot, Pakistan" },
           },
         ],
       },
@@ -407,21 +433,34 @@ export const capriosportsHome = {
             image: { src: "/factory-test/inside-factory-5.jpg", alt: "Capriosports boxing gloves, Sialkot, Pakistan" },
           },
           {
-            // See the Lifting Gear group's own "Weightlifting Gloves and
-            // Grips" comment above -- same reasoning, unique `#slug` anchor.
-            label: "MMA Gloves and Apparel",
-            href: "/boxing-and-mma#mma-gloves-and-apparel",
-            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Capriosports MMA gloves and apparel, Sialkot, Pakistan" },
+            label: "MMA Gloves",
+            href: "/boxing-and-mma#mma-gloves",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Capriosports MMA gloves, Sialkot, Pakistan" },
           },
           {
-            label: "Coaching Gears",
-            href: "/boxing-and-mma#coaching-gears",
-            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Capriosports coaching gears, Sialkot, Pakistan" },
+            label: "Coaching Mitts & Pads",
+            href: "/boxing-and-mma#coaching-mitts-and-pads",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Capriosports coaching mitts and pads, Sialkot, Pakistan" },
           },
           {
-            label: "Protective Gears",
-            href: "/boxing-and-mma#protective-gears",
-            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Capriosports protective gears, Sialkot, Pakistan" },
+            label: "Kick Shields",
+            href: "/boxing-and-mma#kick-shields",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Capriosports kick shields, Sialkot, Pakistan" },
+          },
+          {
+            label: "Head Guards",
+            href: "/boxing-and-mma#head-guards",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Capriosports head guards, Sialkot, Pakistan" },
+          },
+          {
+            label: "Shin Guards",
+            href: "/boxing-and-mma#shin-guards",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Capriosports shin guards, Sialkot, Pakistan" },
+          },
+          {
+            label: "Hand Wraps",
+            href: "/boxing-and-mma#hand-wraps",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Capriosports hand wraps, Sialkot, Pakistan" },
           },
         ],
       },

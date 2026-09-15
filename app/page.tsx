@@ -139,6 +139,17 @@ export default function CapriosportsHomePage() {
         {/* 4. TRUST STRIP */}
         <TrustSignals items={capriosportsHome.trustStrip} />
 
+        {/* 4b. PRODUCT RANGE -- Capriowear's OWN real WhatWeMake component
+            (Card category tiles), not a bespoke ul/li box. Moved here,
+            directly under Trust Strip (owner, 2026-09-15: "under trust
+            strip add categories section same like wear activewear and
+            teamwear section") -- was further down, between Stats and Full
+            Customization; see content/capriosports/home.ts's own
+            `whatWeMake` comment for the 7-tiles-per-category content and
+            the `ctaText` override ("See the Full Range", not the
+            component's own default "View All {title}" wording). */}
+        <WhatWeMake content={capriosportsHome.whatWeMake} ctaText="See the Full Range" />
+
         {/* 5. ONE FACTORY -- text/video/CapabilityCard-supporting-blocks/
             photo-slider composition. */}
         <CapriosportsFactory content={capriosportsHome.factory} />
@@ -151,11 +162,6 @@ export default function CapriosportsHomePage() {
             same real component/markup as Capriowear's own homepage, not a
             custom stat-card row bolted onto Certified & Compliant. */}
         <Stats items={capriosportsHome.stats} />
-
-        {/* 7. WHAT WE MAKE -- Capriowear's OWN real WhatWeMake component
-            (Card category tiles), not a bespoke ul/li box (visual-review
-            fix, replacing the previous pass's WhatWeMakeRange). */}
-        <WhatWeMake content={capriosportsHome.whatWeMake} />
 
         {/* 8. FULL CUSTOMIZATION -- Capriowear's OWN real OurServices
             section ("From raw fabric to retail-ready packaging"),

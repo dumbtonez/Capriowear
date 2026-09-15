@@ -76,6 +76,14 @@ export type WhatWeMakeProps = {
    * away from each other for a real side-by-side comparison.
    */
   mobileGridVariant?: boolean;
+  /**
+   * Override the per-category "View All {title}" CTA text with one shared
+   * label used for every category (owner, 2026-09-15, Capriosports' own
+   * "Product Range" section reuse: "CTA card: See the Full Range"). Default
+   * (omitted): the existing per-category wording, unaffected -- every
+   * Capriowear usage.
+   */
+  ctaText?: string;
 };
 
 function Body({ segments, className }: { segments: BodySegment[]; className: string }) {
@@ -94,7 +102,7 @@ function Body({ segments, className }: { segments: BodySegment[]; className: str
   );
 }
 
-export function WhatWeMake({ content, mobileGridVariant = false }: WhatWeMakeProps) {
+export function WhatWeMake({ content, mobileGridVariant = false, ctaText }: WhatWeMakeProps) {
   return (
     <section>
       <div className={whatWeMake.desktopSection}>
@@ -136,7 +144,7 @@ export function WhatWeMake({ content, mobileGridVariant = false }: WhatWeMakePro
                       />
                     ))}
                     <Link href={category.href} className={whatWeMake.desktopGridCta}>
-                      View All {ctaLabel(category)}
+                      {ctaText ?? `View All ${ctaLabel(category)}`}
                       <NextArrowIcon className={whatWeMake.desktopCtaIcon} />
                     </Link>
                   </div>
@@ -184,7 +192,7 @@ export function WhatWeMake({ content, mobileGridVariant = false }: WhatWeMakePro
                     ))}
                   </div>
                   <Button href={category.href} variant="secondary" className={whatWeMake.mobileGroupCta}>
-                    View All {ctaLabel(category)}
+                    {ctaText ?? `View All ${ctaLabel(category)}`}
                     <ChevronRight className={whatWeMake.ctaIcon} aria-hidden="true" />
                   </Button>
                 </div>
