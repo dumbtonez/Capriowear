@@ -10,13 +10,13 @@
 import { CAPRIOSPORTS_ORGANIZATION } from "./organization";
 
 export const capriosportsHome = {
-  metaTitle: "Custom Sportswear Manufacturer in Pakistan | Capriosports",
+  metaTitle: "Custom Lifting Gear & Boxing/MMA Manufacturer | Capriosports",
   metaDescription:
-    "Capriosports manufactures custom lifting gear and boxing and MMA equipment, private label and wholesale, from Sialkot, Pakistan, since 2009.",
+    "Capriosports manufactures custom lifting gear and boxing and MMA equipment, private label and wholesale, from Sialkot, Pakistan, since 2009. Parent company of Capriowear, our activewear and teamwear division.",
 
   hero: {
     eyebrow: "BASED IN SIALKOT, PAKISTAN",
-    h1: "Custom sportswear manufacturer in Sialkot, Pakistan",
+    h1: "Custom OEM & ODM lifting gear & boxing and MMA manufacturer",
     cta: { label: "Request a Sample", href: "/capriowear/request-a-sample" },
   },
 
@@ -52,9 +52,9 @@ export const capriosportsHome = {
     eyebrow: "WHY CAPRIOSPORTS",
     h2: "One factory, lifting gear and boxing and MMA equipment",
     lead: [
-      "Capriosports manufactures custom lifting gear and boxing and MMA equipment, private label and wholesale, from raw material to finished packaging, in our own cut-and-sew facility in ",
+      "Capriosports has manufactured from ",
       { bold: "Sialkot, Pakistan" },
-      ".",
+      " since 2009 — one company, one factory. Today that means custom lifting gear and boxing and MMA equipment, private label and wholesale, from raw material to finished packaging.",
     ],
     differentiators: [
       {

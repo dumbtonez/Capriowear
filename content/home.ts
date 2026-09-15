@@ -13,6 +13,20 @@ import { companyIdentity } from "./site";
 // `image` prop; `WhatWeMake.tsx` passes it straight through.
 type WhatWeMakeTile = { label: string; href: string; image?: { src: string; alt: string } };
 
+// Hero's own media shape -- `image`/`video` optional and widened explicitly
+// here (via an `as` cast below, not `satisfies`, which keeps the literal's
+// own narrower inferred type -- same reasoning as `WhatWeMakeTile` above:
+// otherwise TS would infer the narrower "no image/video" literal type from
+// today's placeholder-only object, and Hero.tsx's `content.media.image`/
+// `.video` reads (typed against `typeof home.hero`) would stop compiling
+// the moment a real image/video pair is added back.
+type HeroMedia = {
+  type: "video";
+  label: string;
+  image?: { src: string; alt: string };
+  video?: { teaserSrc: string; fullSrc: string };
+};
+
 // Inside the Factory's own shot shape -- `image` is optional and widened
 // explicitly here (via an `as` cast below, not `satisfies`, which keeps the
 // literal's own narrower inferred type rather than widening it), same
@@ -214,34 +228,14 @@ export const home = {
     media: {
       type: "video",
       label: "Hero video, factory and product",
-      // Test photo (owner, 2026-09-11: "there is a test images i added for
-      // home hero banner video. take it from the test folder from public"
-      // -- provided via the main checkout's own public/Test/RED01277.JPG,
-      // copied into this worktree as public/factory-test/hero-video-test.jpg,
-      // the established "test/reference photo, not final photography"
-      // location this project already uses for factory-test-*.png). Real
-      // resolution (7952x5304) is well above the "at least 1920x1080"
-      // recommendation given when this section's own image size was asked
-      // about, since ScrollGrowVideo scales this box up to the full
-      // viewport on scroll, not just its small starting box.
-      image: {
-        src: "/factory-test/hero-video-test.jpg",
-        alt: "Factory worker stitching a garment on an industrial sewing machine",
-      },
-      // Test video pair (owner brief, 2026-09-12: hero teaser-loop -> full
-      // video pattern). No real footage yet -- `teaserSrc` is a 9s,
-      // ~2.2MB, muted stand-in loop (a self-crossfaded trim of a freely
-      // licensed sample park clip, chosen for its locked-off, low-motion
-      // shot -- see `components/TeaserVideo.tsx`'s own header comment and
-      // this task's report for the full sourcing/compression notes);
-      // `fullSrc` is the same source clip's full ~30s length, unmuted.
-      // Swap both for the real hero video once it exists -- same component,
-      // same shape, no code change needed.
-      video: {
-        teaserSrc: "/factory-test/hero-teaser-test.mp4",
-        fullSrc: "/factory-test/hero-full-test.mp4",
-      },
-    },
+      // Test image/video pair removed 2026-09-15 once it had served its
+      // purpose (owner: "we have tested them, keep the functionality but
+      // remove the footages"). No `image`/`video` here renders
+      // ScrollGrowVideo's plain labelled placeholder box (same fallback
+      // `our-factory.ts`'s own hero media already uses) -- swap in the
+      // real hero image/video pair here once it exists, no code change
+      // needed.
+    } as HeroMedia,
   },
 
   customOfferings: {
