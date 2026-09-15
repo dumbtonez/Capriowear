@@ -8971,7 +8971,15 @@ export const capriosportsFactory = {
   // its own for these cards, so it borrows the established sitewide
   // subline-on-dark pattern rather than staying at the desktop size on
   // every width.
-  supportingBody: "max-md:text-[1.125rem] max-md:leading-[24px] md:text-[1.25rem] md:leading-[28px] font-normal text-[#838d97]",
+  // Tablet text-width house rule (docs/02-design-system.md's "Grid and
+  // container") -- below `xl:`, `supportingGrid` stacks these cards in a
+  // plain full-width column (`supportingCard`'s own `xl:w-[385px]` only
+  // applies from `xl:` up), so this body text had no width cap of its own
+  // at tablet and stretched to the section's full ~700-900px measure.
+  // `xl:max-w-none` reverts to unconstrained there, where `supportingCard`'s
+  // fixed 385px column already governs the line length.
+  supportingBody:
+    "max-md:text-[1.125rem] max-md:leading-[24px] md:max-w-[clamp(560px,65vw,780px)] md:text-[1.25rem] md:leading-[28px] xl:max-w-none font-normal text-[#838d97]",
 };
 
 /* --- WhyCapriosports (Capriosports homepage) ------------------------------- */
@@ -8985,7 +8993,15 @@ export const capriosportsFactory = {
 export const whyCapriosports = {
   section: "container-p flex flex-col items-center gap-12 pt-[72px] pb-[72px]",
   headingBlock: "flex w-full max-w-[780px] flex-col items-center gap-4 text-center",
-  subline: "max-w-[780px] text-body-lg text-subline",
+  // Tablet text-width house rule (owner, 2026-08/09, see docs/02-design-
+  // system.md's "Grid and container": a subline directly under a heading
+  // gets its own tablet-only clamp) -- the flat `max-w-[780px]` this
+  // subline used to carry alone let it stretch to the block's full 780px
+  // width at tablet, longer than the comfortable reading range; `xl:max-w-
+  // none` reverts to unconstrained there since `headingBlock`'s own
+  // `max-w-[780px]` already governs the block (and therefore this text) at
+  // that width.
+  subline: "md:max-w-[clamp(560px,65vw,780px)] xl:max-w-none text-body-lg text-subline",
   list: "flex w-full max-w-[960px] flex-col divide-y divide-line border-y border-line",
   row: "flex items-start gap-6 py-6",
   number: "text-h5 font-bold text-muted",
