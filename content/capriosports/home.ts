@@ -416,8 +416,12 @@ export const capriosportsHome = {
   // icon-grid component the previous pass built (`FullCustomization.tsx`,
   // removed): that section was never actually built on the Services page,
   // this IS the real, already-shipping 5-item section it was meant to be.
+  // Eyebrow corrected "FULL CUSTOMIZATION" -> "OUR SERVICES" and
+  // Materials and Construction's body reworded (owner, 2026-09-15,
+  // explicit content update) -- matches Capriowear's own `home.services`
+  // eyebrow exactly now too, not a gear-specific label.
   services: {
-    eyebrow: "FULL CUSTOMIZATION",
+    eyebrow: "OUR SERVICES",
     h2: "From raw material to retail-ready packaging",
     lead: "Every order is private label and fully customized, start to finish.",
     items: [
@@ -427,7 +431,7 @@ export const capriosportsHome = {
       },
       {
         title: "Materials and Construction",
-        body: "Cowhide leather, synthetic PU, nylon and neoprene, with multi-layer foam padding and reinforced stitching.",
+        body: "Cowhide leather and synthetic PU for boxing and MMA, nylon and neoprene for lifting gear, with multi-layer foam padding and reinforced stitching throughout.",
       },
       {
         title: "Branding and Customization",
