@@ -158,20 +158,41 @@ export const teamwearMegaMenu = [
 // `mobileLinks` below -- Capriowear is the apparel/teamwear division only;
 // Gear is a separate parent-site (Capriosports) division with its own nav,
 // connected to Capriowear via a persistent division switcher, not a merged
-// nav bar (owner correction, 2026-09-14). Phase 1 scaffolding: one
-// placeholder group/category each, matching content/gear/**/categories.ts's
-// own single stub category -- real categories are a later phase.
+// nav bar (owner correction, 2026-09-14).
+//
+// Full real taxonomy, not just the one built category (owner spec,
+// 2026-09-16) -- was Phase 1 scaffolding's single placeholder item each,
+// matching that phase's own single stub `Category`; corrected once the
+// real 5-/4-item taxonomy was known, same reasoning `activewearMegaMenu`
+// above already follows (the full category list renders regardless of
+// which ones have a live PLP yet). Every item without a real
+// `content/gear/**/categories.ts` entry yet is `status: "draft"`
+// (`CategoryFilters.tsx`'s own `MegaMenuItem.status` -- renders in the
+// list, "Coming soon", never a link to a route that 404s) -- flip to
+// `"published"` (or just omit the field) the same turn its real category
+// content and route ship, no other change needed.
 export const liftingGearsMegaMenu = [
   {
     label: "LIFTING GEARS",
-    items: [{ label: "Weight Lifting Belts", href: "/lifting-gears/weight-lifting-belts" }],
+    items: [
+      { label: "Weight Lifting Belts", href: "/lifting-gears/weight-lifting-belts" },
+      { label: "Weight Lifting Gloves and Grips", href: "/lifting-gears/weight-lifting-gloves-and-grips", status: "draft" as const },
+      { label: "Wraps and Straps", href: "/lifting-gears/wraps-and-straps", status: "draft" as const },
+      { label: "Bands", href: "/lifting-gears/bands", status: "draft" as const },
+      { label: "Accessories", href: "/lifting-gears/accessories", status: "draft" as const },
+    ],
   },
 ];
 
 export const boxingMmaMegaMenu = [
   {
     label: "BOXING & MMA",
-    items: [{ label: "Boxing Gloves", href: "/boxing-and-mma/boxing-gloves" }],
+    items: [
+      { label: "Boxing Gloves", href: "/boxing-and-mma/boxing-gloves" },
+      { label: "Coaching Gears", href: "/boxing-and-mma/coaching-gears", status: "draft" as const },
+      { label: "Protective Gears", href: "/boxing-and-mma/protective-gears", status: "draft" as const },
+      { label: "MMA", href: "/boxing-and-mma/mma", status: "draft" as const },
+    ],
   },
 ];
 

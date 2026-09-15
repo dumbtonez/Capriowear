@@ -6428,6 +6428,14 @@ export const categoryFilters = {
   itemList: "flex flex-col gap-4 px-4 pb-6 pt-4",
   item: "text-[1rem] leading-5 font-medium text-[#3c3c43] transition-colors hover:text-accent",
   itemActive: "text-[1rem] leading-5 font-semibold text-accent",
+  // A draft/not-yet-built sub-category (owner spec, 2026-09-16, Lifting
+  // Gears filter panel) -- same size/weight as `item`, muted colour and no
+  // hover (not a real link), a small trailing badge instead of the
+  // "coming soon" wording ProductCard's own draft cards dropped in favour
+  // of a purely visual cue -- kept as text here since this list has no
+  // second visual signal (a whole non-clickable tile) to lean on instead.
+  itemDraft: "flex items-center justify-between gap-2 text-[1rem] leading-5 font-medium text-[#a6acb4] cursor-default",
+  itemDraftBadge: "text-xs font-normal text-[#a6acb4]",
   // Mobile filter access (2026-08-30, owner: reference screenshot of a
   // Babyshop-style filter FAB) -- below xl the sidebar above is `hidden`
   // entirely; this pill + the drawer below are how filters are reached

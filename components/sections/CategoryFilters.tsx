@@ -50,7 +50,17 @@ import { cx } from "@/components/ui/cx";
 import { categoryFilters } from "@/components/ui/styles";
 import { activewearMegaMenu } from "@/content/home";
 
-type MegaMenuGroup = { label: string; items: { label: string; href: string }[] };
+/**
+ * `status` (owner spec, 2026-09-16, Lifting Gears filter panel) -- mirrors
+ * `StyleCard.status`'s own "draft" meaning, applied to a filter/nav entry
+ * instead of a product card: the real, full category taxonomy can be
+ * listed here even before every sub-category has a live PLP, without ever
+ * linking to a route that 404s. Optional, undefined = "published" (every
+ * existing Activewear/Teamwear mega-menu item omits this and renders
+ * exactly as before, a plain clickable link).
+ */
+type MegaMenuItem = { label: string; href: string; status?: "published" | "draft" };
+type MegaMenuGroup = { label: string; items: MegaMenuItem[] };
 
 export type CategoryFiltersProps = {
   /** Category.slug of the current page, e.g. "leggings". */
@@ -144,17 +154,29 @@ function FilterGroupList({
             <div className={isOpen ? categoryFilters.itemListGridOpen : categoryFilters.itemListGrid}>
               <div className={categoryFilters.itemListClip}>
                 <ul className={categoryFilters.itemList}>
-                  {group.items.map((item) => (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        onClick={onNavigate}
-                        className={item.href === activeHref ? categoryFilters.itemActive : categoryFilters.item}
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  ))}
+                  {group.items.map((item) =>
+                    item.status === "draft" ? (
+                      // No route exists yet -- rendered so the real
+                      // taxonomy is visible, but never a link (see
+                      // `MegaMenuItem.status`'s own comment above).
+                      <li key={item.href}>
+                        <span aria-disabled="true" className={categoryFilters.itemDraft}>
+                          {item.label}
+                          <span className={categoryFilters.itemDraftBadge}>Coming soon</span>
+                        </span>
+                      </li>
+                    ) : (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          onClick={onNavigate}
+                          className={item.href === activeHref ? categoryFilters.itemActive : categoryFilters.item}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ),
+                  )}
                 </ul>
               </div>
             </div>
