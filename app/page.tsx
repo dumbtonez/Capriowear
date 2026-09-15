@@ -152,13 +152,20 @@ export default function CapriosportsHomePage() {
             component's own default "View All {title}" wording). */}
         <WhatWeMake content={capriosportsHome.whatWeMake} ctaText="See the Full Range" hideCtaIcon />
 
+        {/* 4c. CERTIFIED & COMPLIANT -- moved here, directly under Product
+            Range (owner, 2026-09-15: "under categories section add
+            certified section as is from wear") -- was further down
+            (section 6), and used Capriosports' own gear-adapted content
+            (`capriosportsHome.certified`, WFSGI filtered out, its own
+            membership-note wording). Now reads Capriowear's own
+            `home.certified` verbatim instead -- full logo set (WFSGI
+            included), Capriowear's own eyebrow/h2, no membership note --
+            "as is from wear", not the adapted version. */}
+        <CertifiedCompliant content={home.certified} />
+
         {/* 5. ONE FACTORY -- text/video/CapabilityCard-supporting-blocks/
             photo-slider composition. */}
         <CapriosportsFactory content={capriosportsHome.factory} />
-
-        {/* 6. CERTIFIED & COMPLIANT -- logos only (WFSGI membership note,
-            not a 7th logo -- fixes the desktop overflow/clipping). */}
-        <CertifiedCompliant content={capriosportsHome.certified} />
 
         {/* Stats reused as its OWN section again (visual-review fix) --
             same real component/markup as Capriowear's own homepage, not a
