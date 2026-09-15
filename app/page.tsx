@@ -23,6 +23,7 @@ import type { Metadata } from "next";
 
 import { CapriosportsWordmark } from "@/components/CapriosportsWordmark";
 import { Header } from "@/components/Header";
+import { Logo } from "@/components/Logo";
 import { Marquee } from "@/components/Marquee";
 import { CapriosportsFactory } from "@/components/sections/CapriosportsFactory";
 import { CertifiedCompliant } from "@/components/sections/CertifiedCompliant";
@@ -38,6 +39,7 @@ import { TrustSignals } from "@/components/sections/TrustSignals";
 import { WhatWeMake } from "@/components/sections/WhatWeMake";
 import { WhyCapriosports } from "@/components/sections/WhyCapriosports";
 import { JsonLd } from "@/components/JsonLd";
+import { header } from "@/components/ui/styles";
 import { capriosportsHome } from "@/content/capriosports/home";
 import { home } from "@/content/home";
 import { ORGANIZATION, PARENT_SITE_NAME, SITE_URL } from "@/content/site";
@@ -66,14 +68,15 @@ export const metadata: Metadata = {
 export default function CapriosportsHomePage() {
   return (
     <>
-      {/* Real sitewide Header (visual-review fix, 2026-09-15) -- replaces
-          the earlier Phase 1 placeholder <nav>. No `logo`/`desktopLogo`
-          (falls back to Header's own plain-text brand -- no dedicated
-          Capriosports logo asset exists yet) and no `megaMenu` on any
-          link -- the persistent division switcher stays correctly
+      {/* Real sitewide Header. Real Capriosports mark now wired in (Figma
+          nodes 973:695 desktop / 977:1163 mobile, `<Logo caprioOnly />`) --
+          replaces the earlier plain-text brand fallback. No `megaMenu` on
+          any link -- the persistent division switcher stays correctly
           deferred to Phase 3. */}
       <Header
         brand={capriosportsHome.nav.brand}
+        logo={<Logo caprioOnly className={header.brandLogoCapriosports} />}
+        desktopLogo={<Logo caprioOnly className={header.brandLogoDesktopCapriosports} />}
         links={capriosportsHome.nav.links}
         mobileLinks={capriosportsHome.nav.mobileLinks}
         contact={capriosportsHome.nav.contact}

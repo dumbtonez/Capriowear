@@ -913,6 +913,20 @@ export const header = {
   // it again") -- Figma's own node had shrunk slightly since the first
   // pull (38px -> 37px); height corrected to match.
   brandLogoDesktop: "hidden h-[37px] w-auto xl:block",
+  // Capriosports' own mark (`<Logo caprioOnly />`, Figma nodes 973:695
+  // desktop / 977:1163 mobile) -- CAPRIO only, no WEAR sub-mark. Both Figma
+  // frames render the mark at its real native size, 22.3948px tall
+  // (137.29px wide), and use the identical asset and size for mobile and
+  // desktop, so unlike `brandLogo`/`brandLogoDesktop` there's no size
+  // difference between the two -- but the `xl:hidden` / `hidden xl:block`
+  // split is still required, matching that same pair exactly: `logo` and
+  // `desktopLogo` both render in the DOM at once (Header.tsx's own mobile
+  // bar and desktop row), and only the recipe's own breakpoint classes
+  // decide which one is visible at a given width. A single shared class
+  // with no visibility toggle showed both marks stacked at once, confirmed
+  // live via screenshot.
+  brandLogoCapriosports: "h-[22px] w-auto xl:hidden",
+  brandLogoDesktopCapriosports: "hidden h-[22px] w-auto xl:block",
   // Text fallback, for a page with no logo asset passed. Not used by the real
   // header content, which always passes `logo`.
   brandName: "text-h3 uppercase",
