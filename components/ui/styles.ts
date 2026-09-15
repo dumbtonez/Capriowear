@@ -8915,11 +8915,27 @@ export const capriosportsFactory = {
   // 54px/64px, matches this project's own Heading 1 token exactly (Figma
   // node's own text style) -- `text-h1`, not a bespoke size.
   heading: "text-h1 text-paper",
-  // 26px/36px -- confirmed off-scale (Figma's own literal text style, not
-  // Body Large's 20px/24px or any other named token), recorded here as its
-  // own value per docs/02-design-system.md's "Reading Figma" rule rather
-  // than rounded to the nearest existing size.
-  lead: "max-w-[812px] text-[1.625rem] leading-[36px] font-normal text-[#838d97]",
+  // 26px/36px at `md:`+ -- confirmed off-scale (Figma's own literal text
+  // style, not Body Large's 20px/24px or any other named token), recorded
+  // here as its own value per docs/02-design-system.md's "Reading Figma"
+  // rule rather than rounded to the nearest existing size. Mobile
+  // downsized to 18px/24px, same as `supportingBody` below -- owner,
+  // 2026-09-15: "fix all the sublines for this section" (the mobile-
+  // subline-size request extended from the 3 cards to this lead
+  // paragraph too, the section's other subline-under-a-title text).
+  // `md:max-w-[clamp(560px,65vw,780px)] xl:max-w-none` -- the same
+  // sitewide tablet text-width house rule every other body/subline text
+  // block under a heading already follows (e.g. `activewearOverview.lead`,
+  // `ourServices.lead`, `howItWorks.lead`, `trustSignals.mobileBody`; owner,
+  // 2026-09-09: "apply the same to subline"), owner 2026-09-15: "on tablet,
+  // see the house rule for text width which we have decided across the
+  // site, should apply this to the entire homepage and pages after this" --
+  // this paragraph had no tablet-specific clamp of its own, only the
+  // parent block's flat `max-w-[812px]`, so at tablet it read as a
+  // container-wide, unusually long line rather than the shorter, more
+  // readable measure every other section's own lead paragraph already
+  // gets at that width.
+  lead: "max-w-[812px] max-md:text-[1.125rem] max-md:leading-[24px] md:max-w-[clamp(560px,65vw,780px)] md:text-[1.625rem] md:leading-[36px] xl:max-w-[812px] font-normal text-[#838d97]",
   // Figma's own `h-[620px]` fixed height, full width, `bg-[#17191e]` --
   // `bg-ink-2`, the existing token for that exact hex, not a new one.
   videoWrap: "w-full",
@@ -8933,14 +8949,19 @@ export const capriosportsFactory = {
   // Figma's own `gap-[16px]`, `w-[385px]` per card.
   supportingCard: "flex flex-col items-start gap-4 xl:w-[385px]",
   // 30px medium, matches this project's own Heading 3 token (Figma's real
-  // text style) -- `text-h3`, not a bespoke size. `xl:whitespace-pre-line`
-  // so the "Fabric to finished packaging\none factory" title only breaks
-  // at desktop (matching the real frame's own 2-line desktop layout, a
-  // narrow `w-[385px]` column); below `xl:` the card is full-width (no
-  // mobile/tablet frame exists for this section), plenty wide for one
-  // line, so `max-xl:whitespace-normal` collapses the `\n` back to a plain
-  // space there -- owner, 2026-09-15: "on tablet make it in 1 line".
-  supportingTitle: "max-xl:whitespace-normal xl:whitespace-pre-line text-h3 font-medium text-paper",
+  // text style) -- `text-h3`, not a bespoke size. Whitespace handling is
+  // 3-way, not a flat below-xl/xl: split: real mobile keeps the explicit
+  // `\n` break (`whitespace-pre-line`) -- at a real mobile width, 30px
+  // text left to wrap naturally split mid-phrase ("Fabric to finished
+  // packaging one" / "factory"), an objectively worse break than the
+  // intended one (owner, 2026-09-15: "can not this be in 2 lines... if
+  // not remove one factory word" -- confirmed live, fixed by restoring the
+  // explicit break here rather than removing a word). `md:whitespace-
+  // normal` (tablet, card is full-width and plenty wide) collapses it to
+  // one clean line ("on tablet make it in 1 line"). `xl:whitespace-pre-
+  // line` (desktop, narrow `w-[385px]` column) restores the frame's own
+  // real 2-line break.
+  supportingTitle: "whitespace-pre-line md:whitespace-normal xl:whitespace-pre-line text-h3 font-medium text-paper",
   // 20px/28px at desktop -- confirmed off-scale (Figma's own literal text
   // style, same reasoning as `lead` above; Body Large's 20px/24px line-
   // height doesn't match). Mobile downsized to 18px/24px, matching
