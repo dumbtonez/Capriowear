@@ -97,27 +97,29 @@ export default function CapriosportsHomePage() {
           customOfferings={capriosportsHome.customOfferings}
           showTickerDesktop={false}
           showTickerMobile
-          tickerMobileUntilTablet
         />
 
-        {/* 2/3. DIVISION CARDS + FULLY CUSTOM OFFERING STRIP (desktop only
-            now -- tablet's own copy moved into Hero too, alongside mobile's,
-            directly under the video, see `tickerMobileUntilTablet` above)
-            -- one continuous dark surface (real design, confirmed via
-            screenshot, Figma node 981:1208): 3 full-bleed division cards,
-            then the offerings strip right below with no section break.
-            `xl:block` (was `md:block`), owner, 2026-09-15: "video on tablet
-            will behave same as mobile same like on capriowear" -- narrowed
-            in the same change that extended Hero's own mobile ticker
-            through tablet, so the two never both show at tablet width. */}
+        {/* 2/3. DIVISION CARDS + FULLY CUSTOM OFFERING STRIP -- one
+            continuous dark surface (real design, confirmed via screenshot,
+            Figma node 981:1208): 3 full-bleed division cards, then the
+            offerings strip right below with no section break. `md:block`
+            (tablet gets the same Marquee treatment as Capriowear's own
+            homepage, not the mobile list -- owner, 2026-09-15: "fully
+            custom should follow the same as wear on tablet", reverting an
+            earlier same-day pass that had extended Hero's own mobile list
+            ticker through tablet instead; `tickerMobileUntilTablet` stays
+            on `Hero` as a real, working prop, just unused by this page
+            now). */}
         <div className="bg-ink text-paper">
           <DivisionCards categories={capriosportsHome.divisions.categories} variant="flat" />
           {/* xl:pt-4 (16px) tops up Marquee's own built-in 40px (`padded`
               default true, `marquee.basePaddingDefault`, shared sitewide --
               not overridden at its source) to a real 80px from the division
-              cards row, owner, 2026-09-15: "make fully custom offerings
-              desktop space from top 80px". */}
-          <div className="hidden xl:block xl:pt-4">
+              cards row at desktop specifically (owner, 2026-09-15: "make
+              fully custom offerings desktop space from top 80px") -- only
+              applies from `xl:` up, so tablet's own spacing still matches
+              Capriowear's unmodified Marquee exactly. */}
+          <div className="hidden md:block xl:pt-4">
             <Marquee
               items={capriosportsHome.customOfferings.items}
               label={capriosportsHome.customOfferings.label}
@@ -148,7 +150,7 @@ export default function CapriosportsHomePage() {
             `whatWeMake` comment for the 7-tiles-per-category content and
             the `ctaText` override ("See the Full Range", not the
             component's own default "View All {title}" wording). */}
-        <WhatWeMake content={capriosportsHome.whatWeMake} ctaText="See the Full Range" />
+        <WhatWeMake content={capriosportsHome.whatWeMake} ctaText="See the Full Range" hideCtaIcon />
 
         {/* 5. ONE FACTORY -- text/video/CapabilityCard-supporting-blocks/
             photo-slider composition. */}

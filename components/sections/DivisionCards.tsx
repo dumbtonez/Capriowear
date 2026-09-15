@@ -17,8 +17,19 @@ import { cx } from "@/components/ui/cx";
 import { divisionCards } from "@/components/ui/styles";
 import type { capriosportsHome } from "@/content/capriosports/home";
 
+// `image` widened to optional here, not read off `capriosportsHome`
+// directly -- the content itself dropped `image` from every category
+// entirely (2026-09-15, owner: "remove the images, dont use images for
+// any section"), so the real shipped `"flat"` variant needs none; the
+// unused `"scrim"`/`"merge"`/`"box"` variants below still reference it,
+// so it stays a real (optional) field on this component's own prop type
+// rather than being deleted outright.
+type DivisionCategory = (typeof capriosportsHome.divisions.categories)[number] & {
+  image?: { src: string; alt: string };
+};
+
 export type DivisionCardsProps = {
-  categories: typeof capriosportsHome.divisions.categories;
+  categories: DivisionCategory[];
   /**
    * EXPERIMENTAL variants, all owner-requested tries at the same "text
    * over a photo" problem -- default `"scrim"` is the real shipped
@@ -56,8 +67,8 @@ export function DivisionCards({ categories, variant = "scrim" }: DivisionCardsPr
             href={category.href}
             className={variant === "flat" ? divisionCards.cardFlat : variant === "box" ? divisionCards.cardBox : divisionCards.card}
           >
-            {variant === "flat" ? (
-              <div className={divisionCards.imageFlatWrap} aria-hidden="true" />
+            {variant === "flat" || !category.image ? (
+              <div className={variant === "box" ? divisionCards.boxImageWrap : divisionCards.imageFlatWrap} aria-hidden="true" />
             ) : (
               <div className={variant === "box" ? divisionCards.boxImageWrap : divisionCards.fullBleedImageWrap}>
                 <Image

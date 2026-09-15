@@ -13,6 +13,24 @@ import { companyIdentity } from "./site";
 // `image` prop; `WhatWeMake.tsx` passes it straight through.
 type WhatWeMakeTile = { label: string; href: string; image?: { src: string; alt: string } };
 
+// Trust Strip's own item shape -- `image` optional and widened explicitly
+// here (via an `as` cast below, not `satisfies`, same reasoning as
+// `HeroMedia`/`InsideFactoryShot` further down: every item here happens to
+// carry a real `image` today, which would otherwise infer it as required).
+// 2026-09-15: Capriosports' own reuse of this section
+// (`content/capriosports/home.ts`'s own `trustStrip`) dropped its
+// placeholder photography sitewide (owner: "remove the images, dont use
+// images for any section"), so `TrustSignals`' `MediaPlaceholder` needs to
+// render its plain light-black box, which only happens when `image` is
+// entirely absent, not merely falsy -- this type is what lets that
+// narrower object still satisfy `TrustSignalsProps.items`.
+type TrustStripItem = { title: string; body: (string | { bold: string })[]; image?: { src: string; alt: string } };
+
+// Our Services' own item shape -- same `image?`/`as`-cast reasoning as
+// `TrustStripItem` above, for the same Capriosports reuse
+// (`content/capriosports/home.ts`'s own `services`).
+type ServiceItem = { title: string; body: string; image?: { src: string; alt: string } };
+
 // Hero's own media shape -- `image`/`video` optional and widened explicitly
 // here (via an `as` cast below, not `satisfies`, which keeps the literal's
 // own narrower inferred type -- same reasoning as `WhatWeMakeTile` above:
@@ -401,7 +419,7 @@ export const home = {
       body: ["DDP worldwide, from Sialkot, Pakistan. Export paperwork handled in house."],
       image: { src: "/factory-test/inside-factory-4.jpg", alt: "Worldwide Shipping" },
     },
-  ],
+  ] as TrustStripItem[],
 
   // body is a segment array (see trustStrip's own note above for why) --
   // Activewear's real Figma copy carries one bold span ("from sample to
@@ -706,7 +724,7 @@ export const home = {
         body: "End-to-end handling of packaging, freight and delivery. We ensure your order arrives on schedule.",
         image: { src: "/factory-test/inside-factory-5.jpg", alt: "Logistics & Fulfilment" },
       },
-    ],
+    ] as ServiceItem[],
   },
 
   // Body copy is shared across both breakpoints (owner call, 2026-08-25);

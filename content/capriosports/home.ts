@@ -127,10 +127,6 @@ export const capriosportsHome = {
         // folder for `hubThumbnail`'s usual slug-lookup convention, so a
         // direct image avoids that plumbing. Real photos, not blank
         // placeholders (visual-review fix).
-        image: {
-          src: "/factory-test/inside-factory-1.jpg",
-          alt: "Capriosports lifting gear manufacturing in Sialkot, Pakistan",
-        },
         // All 3 cards get a visible CTA now (owner, 2026-09-15) -- short,
         // and doesn't have to match Capriowear's own "Visit X" wording.
         // Static white arrow (not animated) -- only Capriowear's own link
@@ -147,20 +143,12 @@ export const capriosportsHome = {
         // Gear), so the earlier 2-line trim is no longer needed either.
         descriptor: "Custom boxing and MMA gloves, coaching gear and protective gear, private label and wholesale.",
         href: "/boxing-and-mma",
-        image: {
-          src: "/factory-test/inside-factory-2.jpg",
-          alt: "Capriosports boxing and MMA equipment manufacturing in Sialkot, Pakistan",
-        },
         linkLabel: "Explore Boxing",
       },
       {
         label: "Capriowear",
         descriptor: "Custom, private-label activewear and teamwear, made to your brand's spec, from sample to bulk.",
         href: "/capriowear",
-        image: {
-          src: "/factory-test/inside-factory-3.jpg",
-          alt: "Capriowear activewear and teamwear manufacturing, Capriosports' Sialkot, Pakistan factory",
-        },
         linkLabel: "Visit Capriowear",
         // Only this card's arrow keeps the continuous "always pointing"
         // animation (owner: "make the wear arrow white too but pointing") --
@@ -192,18 +180,10 @@ export const capriosportsHome = {
       {
         title: "Fabric to finished packaging, one factory",
         body: "One factory, from raw material to finished packaging, not a trading agent placing your order elsewhere.",
-        image: {
-          src: "/factory-test/inside-factory-1.jpg",
-          alt: "Capriosports factory floor, raw material to finished packaging, Sialkot, Pakistan",
-        },
       },
       {
         title: "The same factory behind Capriowear",
         body: "The same facility, certifications and quality system already trusted for Capriowear's own activewear and teamwear.",
-        image: {
-          src: "/factory-test/inside-factory-2.jpg",
-          alt: "Capriosports and Capriowear shared factory facility, Sialkot, Pakistan",
-        },
       },
     ],
     // Photo slider -- same 5 factory-floor shots InsideFactory already uses
@@ -214,38 +194,18 @@ export const capriosportsHome = {
     media: [
       {
         label: "Leather cutting",
-        image: {
-          src: "/factory-test/inside-factory-1.jpg",
-          alt: "Capriosports factory worker cutting leather for lifting gear in Sialkot, Pakistan",
-        },
       },
       {
         label: "Stitching and reinforcement",
-        image: {
-          src: "/factory-test/inside-factory-2.jpg",
-          alt: "Capriosports factory worker reinforcing stitching on boxing and MMA equipment in Sialkot, Pakistan",
-        },
       },
       {
         label: "Padding and construction",
-        image: {
-          src: "/factory-test/inside-factory-3.jpg",
-          alt: "Capriosports factory worker fitting multi-layer foam padding into boxing gloves in Sialkot, Pakistan",
-        },
       },
       {
         label: "Quality inspection",
-        image: {
-          src: "/factory-test/inside-factory-4.jpg",
-          alt: "Capriosports quality inspector checking lifting gear and boxing and MMA equipment in Sialkot, Pakistan",
-        },
       },
       {
         label: "Packed and shipped",
-        image: {
-          src: "/factory-test/inside-factory-5.jpg",
-          alt: "Capriosports lifting gear and boxing and MMA equipment packed for shipping from Sialkot, Pakistan",
-        },
       },
     ],
     // Required by InsideFactory's own `content` shape (reused directly for
@@ -266,10 +226,6 @@ export const capriosportsHome = {
     // change needed.
     video: {
       label: "Factory video coming soon — Capriosports lifting gear and boxing and MMA manufacturing, Sialkot, Pakistan",
-      image: {
-        src: "/factory-test/inside-factory-1.jpg",
-        alt: "Capriosports factory floor producing lifting gear and boxing and MMA equipment in Sialkot, Pakistan — factory video coming soon",
-      },
     },
   },
 
@@ -288,34 +244,18 @@ export const capriosportsHome = {
     {
       title: "Product Development",
       body: ["We refine ideas through sampling, pattern development, and technical adjustments to meet your needs."],
-      image: {
-        src: "/factory-test/inside-factory-1.jpg",
-        alt: "Capriosports product development: sampling and pattern development in Sialkot, Pakistan",
-      },
     },
     {
       title: "Private Label",
       body: ["Your designs, materials, labels and packaging. ", { bold: "Factory-direct, no middleman." }],
-      image: {
-        src: "/factory-test/inside-factory-2.jpg",
-        alt: "Capriosports private label lifting gear and boxing and MMA equipment produced factory-direct in Sialkot, Pakistan",
-      },
     },
     {
       title: "Low MOQ",
       body: ["Start from just 50 pieces per style. ", { bold: "From first samples to full bulk order." }],
-      image: {
-        src: "/factory-test/inside-factory-3.jpg",
-        alt: "Capriosports sample lifting gear ready for low-MOQ bulk production in Sialkot, Pakistan",
-      },
     },
     {
       title: "Worldwide Shipping",
       body: ["DDP worldwide, from Sialkot, Pakistan. Export paperwork handled in house."],
-      image: {
-        src: "/factory-test/inside-factory-4.jpg",
-        alt: "Capriosports lifting gear and boxing and MMA equipment shipped DDP worldwide from Sialkot, Pakistan",
-      },
     },
   ],
 
@@ -388,37 +328,30 @@ export const capriosportsHome = {
           {
             label: "Weight Lifting Belts",
             href: "/lifting-gears/weight-lifting-belts",
-            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Capriosports weight lifting belts, Sialkot, Pakistan" },
           },
           {
             label: "Weightlifting Gloves",
             href: "/lifting-gears#weightlifting-gloves",
-            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Capriosports weightlifting gloves, Sialkot, Pakistan" },
           },
           {
             label: "Wrist Wraps",
             href: "/lifting-gears#wrist-wraps",
-            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Capriosports wrist wraps, Sialkot, Pakistan" },
           },
           {
             label: "Lifting Straps",
             href: "/lifting-gears#lifting-straps",
-            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Capriosports lifting straps, Sialkot, Pakistan" },
           },
           {
             label: "Knee Sleeves",
             href: "/lifting-gears#knee-sleeves",
-            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Capriosports knee sleeves, Sialkot, Pakistan" },
           },
           {
             label: "Resistance Bands",
             href: "/lifting-gears#resistance-bands",
-            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Capriosports resistance bands, Sialkot, Pakistan" },
           },
           {
             label: "Gym Accessories",
             href: "/lifting-gears#gym-accessories",
-            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Capriosports gym accessories, Sialkot, Pakistan" },
           },
         ],
       },
@@ -430,37 +363,30 @@ export const capriosportsHome = {
           {
             label: "Boxing Gloves",
             href: "/boxing-and-mma/boxing-gloves",
-            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Capriosports boxing gloves, Sialkot, Pakistan" },
           },
           {
             label: "MMA Gloves",
             href: "/boxing-and-mma#mma-gloves",
-            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Capriosports MMA gloves, Sialkot, Pakistan" },
           },
           {
             label: "Coaching Mitts & Pads",
             href: "/boxing-and-mma#coaching-mitts-and-pads",
-            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Capriosports coaching mitts and pads, Sialkot, Pakistan" },
           },
           {
             label: "Kick Shields",
             href: "/boxing-and-mma#kick-shields",
-            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Capriosports kick shields, Sialkot, Pakistan" },
           },
           {
             label: "Head Guards",
             href: "/boxing-and-mma#head-guards",
-            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Capriosports head guards, Sialkot, Pakistan" },
           },
           {
             label: "Shin Guards",
             href: "/boxing-and-mma#shin-guards",
-            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Capriosports shin guards, Sialkot, Pakistan" },
           },
           {
             label: "Hand Wraps",
             href: "/boxing-and-mma#hand-wraps",
-            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Capriosports hand wraps, Sialkot, Pakistan" },
           },
         ],
       },
@@ -481,30 +407,22 @@ export const capriosportsHome = {
       {
         title: "Custom Manufacturing",
         body: "Private label lifting gear and boxing and MMA equipment, OEM and ODM, made to your spec.",
-        image: { src: "/factory-test/inside-factory-1.jpg", alt: "Capriosports custom manufacturing, Sialkot, Pakistan" },
       },
       {
         title: "Materials and Construction",
         body: "Cowhide leather, synthetic PU, nylon and neoprene, with multi-layer foam padding and reinforced stitching.",
-        image: { src: "/factory-test/inside-factory-2.jpg", alt: "Capriosports materials and construction, Sialkot, Pakistan" },
       },
       {
         title: "Branding and Customization",
         body: "Logo, colorway, labels and packaging, all under your brand.",
-        image: {
-          src: "/factory-test/inside-factory-3.jpg",
-          alt: "Capriosports branding and customization, Sialkot, Pakistan",
-        },
       },
       {
         title: "Quality and Compliance",
         body: "AQL 2.5 inspection on every run. ISO 9001, ISO 45001, ISO 14001, BSCI, IMAC and SGS certified.",
-        image: { src: "/factory-test/inside-factory-4.jpg", alt: "Capriosports quality and compliance, Sialkot, Pakistan" },
       },
       {
         title: "Logistics and Fulfillment",
         body: "Worldwide shipping, DDP, from Sialkot, Pakistan.",
-        image: { src: "/factory-test/inside-factory-5.jpg", alt: "Capriosports logistics and fulfillment, Sialkot, Pakistan" },
       },
     ],
   },

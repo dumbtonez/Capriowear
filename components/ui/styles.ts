@@ -7508,20 +7508,26 @@ export const divisionCards = {
   // strip right after it sit on one continuous dark surface in the real
   // design (no white gap between Hero's video block and this row of
   // cards) -- both rendered inside one shared dark wrapper in app/page.tsx.
-  // pt-5 (20px, owner: "on mobile... make 20px space from top") real
-  // mobile only; md:pt-[72px] tablet AND desktop (owner, 2026-09-15:
-  // "lifting gear image top space should be 72px" / "make it 20px on
-  // mobile" -- was a further xl:-only split, xl:pt-16/64px, replaced here
-  // since the owner's 72px applies from tablet up, not desktop only).
-  // pb-4/xl:pb-6 (16px/24px) are NOT the real gap down to the Fully Custom
-  // Offerings label below -- Marquee itself (`padded` default true)
-  // already contributes its own fixed 40px top padding above its label
-  // (`marquee.base`'s own comment), and the mobile/tablet
-  // ScrollSpotlightList ticker (`servicesHero.tickerMobileUntilTablet`)
-  // already contributes its own 48px (`pt-12`) -- tuned here, not there,
-  // so those shared components' own established padding stays untouched
-  // for every other real caller.
-  section: "container-p pt-5 pb-4 md:pt-[72px] xl:pb-6",
+  // Real mobile only: `max-md:pt-1` (4px) tops up Hero's own mobile ticker
+  // (`servicesHero.tickerMobile`'s fixed `pb-[60px]`) to a real 64px total
+  // gap down to this row's first card (owner, 2026-09-15: "make it 64 from
+  // top" -- was `pt-5`/20px, for an 80px total, before the owner's own
+  // "72px" request below had been applied). `max-md:pb-10` (40px, was
+  // `pb-4`/16px, owner same turn: "total bottom make it 40px") is this
+  // row's own bottom gap down to the dark section's own edge, real mobile
+  // only. `md:pt-[72px]` tablet AND desktop (owner, 2026-09-15: "lifting
+  // gear image top space should be 72px" / "make it 20px on mobile" -- was
+  // a further `xl:`-only split, `xl:pt-16`/64px, replaced here since the
+  // owner's 72px applies from tablet up, not desktop only). `md:pb-4`
+  // preserves tablet's own original bottom value (unaffected by the real-
+  // mobile-only 40px change above); `xl:pb-6` is desktop's own separate
+  // value, unchanged. None of `pb-10`/`pb-4`/`pb-6` are the real gap down
+  // to the Fully Custom Offerings label below -- Marquee itself (`padded`
+  // default true) already contributes its own fixed 40px top padding above
+  // its label (`marquee.base`'s own comment) -- tuned here, not there, so
+  // that shared component's own established padding stays untouched for
+  // every other real caller.
+  section: "container-p max-md:pt-1 max-md:pb-10 md:pt-[72px] md:pb-4 xl:pb-6",
   // md: (768px), not xl: (owner, 2026-09-15: "on tablet we should treat
   // those 3 cards as desktop, not mobile" -- the same real rule Hero.tsx's
   // own ticker already documents for this identical "does it read fine at

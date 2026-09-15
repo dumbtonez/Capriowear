@@ -84,6 +84,17 @@ export type WhatWeMakeProps = {
    * Capriowear usage.
    */
   ctaText?: string;
+  /**
+   * Drops the trailing `ChevronRight` from the mobile/tablet CTA button
+   * (owner, 2026-09-15, Capriosports: "on mobile, remove the chevron from
+   * ctas" / "on the tablet, remove the chevron from ctas" -- one and the
+   * same button, since this section's own `mobileSection` covers real
+   * mobile through tablet in one block, `xl:hidden`, not two separate
+   * elements per breakpoint). Default `false`: every Capriowear usage,
+   * unaffected. The desktop grid's own `NextArrowIcon` CTA (`xl:`+) is a
+   * separate element, untouched either way.
+   */
+  hideCtaIcon?: boolean;
 };
 
 function Body({ segments, className }: { segments: BodySegment[]; className: string }) {
@@ -102,7 +113,7 @@ function Body({ segments, className }: { segments: BodySegment[]; className: str
   );
 }
 
-export function WhatWeMake({ content, mobileGridVariant = false, ctaText }: WhatWeMakeProps) {
+export function WhatWeMake({ content, mobileGridVariant = false, ctaText, hideCtaIcon = false }: WhatWeMakeProps) {
   return (
     <section>
       <div className={whatWeMake.desktopSection}>
@@ -193,7 +204,7 @@ export function WhatWeMake({ content, mobileGridVariant = false, ctaText }: What
                   </div>
                   <Button href={category.href} variant="secondary" className={whatWeMake.mobileGroupCta}>
                     {ctaText ?? `View All ${ctaLabel(category)}`}
-                    <ChevronRight className={whatWeMake.ctaIcon} aria-hidden="true" />
+                    {hideCtaIcon ? null : <ChevronRight className={whatWeMake.ctaIcon} aria-hidden="true" />}
                   </Button>
                 </div>
               );

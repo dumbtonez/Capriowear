@@ -67,11 +67,7 @@ export function CapriosportsFactory({ content }: CapriosportsFactoryProps) {
       </div>
 
       <div className={capriosportsFactory.videoWrap}>
-        <ScrollGrowVideo
-          label={content.video.label}
-          wrapClassName={capriosportsFactory.videoInnerWrap}
-          image={content.video.image}
-        />
+        <ScrollGrowVideo label={content.video.label} wrapClassName={capriosportsFactory.videoInnerWrap} />
       </div>
 
       {/* Real CapabilityCard treatment (image + title + body), not bare
@@ -81,13 +77,7 @@ export function CapriosportsFactory({ content }: CapriosportsFactoryProps) {
           the photo slider below, not a disconnected floating block. */}
       <div className={capriosportsFactory.supportingGrid}>
         {content.supportingBlocks.map((block) => (
-          <CapabilityCard
-            key={block.title}
-            title={block.title}
-            body={block.body}
-            image={block.image}
-            mediaAspectClassName="aspect-[8/5]"
-          />
+          <CapabilityCard key={block.title} title={block.title} body={block.body} mediaAspectClassName="aspect-[8/5]" />
         ))}
       </div>
 
