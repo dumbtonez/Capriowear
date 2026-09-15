@@ -5,10 +5,12 @@
 //   1. Plain centred heading+lead (no eyebrow, no SectionHeading -- the
 //      real frame has neither; see `capriosportsFactory` in
 //      components/ui/styles.ts for the exact type/spacing values).
-//   2. A plain full-width `MediaPlaceholder` video block, fixed 620px tall
+//   2. A plain full-width `MediaPlaceholder` image block, fixed 620px tall
 //      at desktop (the frame's own static box, not Hero's scroll-grow
 //      mechanic -- that effect belongs to a narrow-box-grows-on-scroll
-//      moment neither this frame nor its copy describe).
+//      moment neither this frame nor its copy describe). No Play button --
+//      owner correction, 2026-09-15: "its not a video, only image, remove
+//      play video".
 //   3. 3 plain title+body cards (no images), 3-up at desktop per the
 //      frame's own `gap-[63px]` row; no mobile frame exists for this
 //      section, so mobile/tablet stack like any other 3-item text list.
@@ -16,11 +18,9 @@
 //      factory-shots slider, `showHeading`/`showCta` both false. Not part
 //      of this Figma frame (which ends after the 3 cards), kept as-is
 //      immediately after it -- the real design's own next section.
-import { Play } from "lucide-react";
-
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { TextReveal } from "@/components/TextReveal";
-import { capriosportsFactory, hero } from "@/components/ui/styles";
+import { capriosportsFactory } from "@/components/ui/styles";
 import type { capriosportsHome } from "@/content/capriosports/home";
 
 import { InsideFactory } from "./InsideFactory";
@@ -46,14 +46,6 @@ export function CapriosportsFactory({ content }: CapriosportsFactoryProps) {
             radius="none"
             imageSizes="100vw"
             className={capriosportsFactory.videoInnerWrap}
-            overlay={
-              <div className={hero.playWrap}>
-                <span className={hero.playCircle}>
-                  <Play className={hero.playIcon} fill="currentColor" aria-hidden="true" />
-                </span>
-                <span className={hero.playLabel}>Play Video</span>
-              </div>
-            }
           />
         </div>
       </div>

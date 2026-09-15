@@ -8933,15 +8933,24 @@ export const capriosportsFactory = {
   // Figma's own `gap-[16px]`, `w-[385px]` per card.
   supportingCard: "flex flex-col items-start gap-4 xl:w-[385px]",
   // 30px medium, matches this project's own Heading 3 token (Figma's real
-  // text style) -- `text-h3`, not a bespoke size. `whitespace-pre-line` so
-  // the "Fabric to finished packaging, one factory" title can carry the
-  // frame's own real 2-line break via `\n` in content, same technique as
-  // any other multi-line title sitewide.
-  supportingTitle: "whitespace-pre-line text-h3 font-medium text-paper",
-  // 20px/28px -- confirmed off-scale (Figma's own literal text style, same
-  // reasoning as `lead` above; Body Large's 20px/24px line-height doesn't
-  // match).
-  supportingBody: "text-[1.25rem] leading-[28px] font-normal text-[#838d97]",
+  // text style) -- `text-h3`, not a bespoke size. `xl:whitespace-pre-line`
+  // so the "Fabric to finished packaging\none factory" title only breaks
+  // at desktop (matching the real frame's own 2-line desktop layout, a
+  // narrow `w-[385px]` column); below `xl:` the card is full-width (no
+  // mobile/tablet frame exists for this section), plenty wide for one
+  // line, so `max-xl:whitespace-normal` collapses the `\n` back to a plain
+  // space there -- owner, 2026-09-15: "on tablet make it in 1 line".
+  supportingTitle: "max-xl:whitespace-normal xl:whitespace-pre-line text-h3 font-medium text-paper",
+  // 20px/28px at desktop -- confirmed off-scale (Figma's own literal text
+  // style, same reasoning as `lead` above; Body Large's 20px/24px line-
+  // height doesn't match). Mobile downsized to 18px/24px, matching
+  // Capriowear's own `capabilityCard.textDark` mobile subline size exactly
+  // (owner, 2026-09-15: "on mobile use the font size for sublines same as
+  // we used on wear mobile") -- this Figma frame gave no mobile spec of
+  // its own for these cards, so it borrows the established sitewide
+  // subline-on-dark pattern rather than staying at the desktop size on
+  // every width.
+  supportingBody: "max-md:text-[1.125rem] max-md:leading-[24px] md:text-[1.25rem] md:leading-[28px] font-normal text-[#838d97]",
 };
 
 /* --- WhyCapriosports (Capriosports homepage) ------------------------------- */
