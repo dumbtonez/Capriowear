@@ -301,12 +301,13 @@ export const wrapsStrapsSleeves: Category = {
       ],
       // Per `relatedStyleTags`' own comment (weight-lifting-belts.ts) -- a
       // tag with no matching reachable sibling PDP links to the parent
-      // category PLP instead of an invented/404ing URL. Wrist Wraps is the
-      // first PDP in this category, so all 3 re-point at the PLP for now;
-      // re-point each at its own PDP href as soon as that style is built.
+      // category PLP instead of an invented/404ing URL. Elbow Wraps is now
+      // built, re-pointed at its own PDP; Knee Wraps and Knee Sleeves
+      // aren't built yet, so they stay on the PLP for now -- re-point each
+      // as it's built.
       relatedStyleTags: [
         { label: "Knee Wraps", href: "/lifting-gears/wraps-straps-sleeves" },
-        { label: "Elbow Wraps", href: "/lifting-gears/wraps-straps-sleeves" },
+        { label: "Elbow Wraps", href: "/lifting-gears/wraps-straps-sleeves/elbow-wraps" },
         { label: "Knee Sleeves", href: "/lifting-gears/wraps-straps-sleeves" },
         { label: "See All", href: "/lifting-gears/wraps-straps-sleeves" },
       ],
@@ -335,13 +336,132 @@ export const wrapsStrapsSleeves: Category = {
       href: "/lifting-gears/wraps-straps-sleeves/knee-wraps",
     },
     {
+      // Third of the 10 Wraps, Straps & Sleeves PDPs (owner brief,
+      // 2026-09-16), same pattern as Wrist Wraps -- see that styleCard's
+      // own comment. `status: "draft"` until sampled specs are confirmed
+      // real.
       status: "draft",
+      internalPreview: true,
       slug: "elbow-wraps",
+      sku: "CAP-WRP-03",
       cardTitle: "Custom Elbow Wraps",
       cardSubline: "Same construction as our knee wraps, sized for the elbow",
       image: "",
       imageAlt: "Custom elbow wraps",
       href: "/lifting-gears/wraps-straps-sleeves/elbow-wraps",
+      pdpTitle: "Elbow Wraps",
+      images: [
+        { alt: "Custom elbow wraps, front view" },
+        { alt: "Custom elbow wraps, worn on model, in use" },
+        { alt: "Custom elbow wraps, hook-and-loop closure detail" },
+        { alt: "Custom elbow wraps, hook-and-loop closure detail" },
+        { alt: "Custom elbow wraps, stitching detail" },
+        { alt: "Custom elbow wraps, material close-up" },
+        { alt: "Custom elbow wraps, rolled, flat lay" },
+        { alt: "Custom elbow wraps, color range" },
+        { alt: "Custom elbow wraps, private label packaging" },
+      ],
+      pdpHeading: "Custom Elbow Wraps Manufacturer",
+      pdpDescription:
+        "A custom and private label elbow wrap, cotton elastic construction with a hook-and-loop closure, length and stiffness built to your spec, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Elbow Wraps Manufacturer",
+      pdpMetaDescription: "Custom elbow wraps manufacturer, length and stiffness built to your spec. Private label, low MOQ. Sialkot, Pakistan.",
+      material: "Cotton elastic",
+      pdpFabricPills: ["Cotton elastic", "Hook-and-loop closure", "3in width"],
+      pdpCustomizationPills: ["Length", "Stiffness", "Color", "Private label"],
+      pdpQualityHeading: "A real spec sheet, not a size letter",
+      pdpQualitySubline: "We confirm the length, the stiffness, and the stitching on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Length and width checked against your spec",
+        "Stiffness confirmed against your reference sample or stated tier",
+        "Hook-and-loop closure and stitching tested under tension",
+        "Digital proof and sample approved before we cut your production run",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "ruler", text: "Length 12in to 36in" },
+        { icon: "arrowDownAZ", text: "Flexible, medium or stiff" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          {
+            title: "Length",
+            body: "12in to 36in, built to your spec",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Length" },
+          },
+          {
+            title: "Stiffness",
+            body: "Flexible, medium, or stiff, matched to your reference sample",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Stiffness" },
+          },
+          {
+            title: "Material",
+            body: "Cotton elastic, or cotton and rubber blend",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Material" },
+          },
+          {
+            title: "Branding",
+            body: "Woven label, printed logo, custom colorway",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Branding" },
+          },
+          {
+            title: "Color",
+            body: "Full color range, matched to your brand palette",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Color" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, hangtags",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and finish" },
+          },
+          {
+            title: "Packaging",
+            body: "Polybags, boxes, retail-ready to your spec",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Packaging" },
+          },
+        ],
+      },
+      specifications: [
+        { label: "Style", value: "Elbow wrap (base type)" },
+        { label: "Material", value: "Cotton elastic, or cotton and rubber blend, your choice" },
+        { label: "Length", value: "12in, 18in, 24in, or 36in, built to your spec" },
+        { label: "Width", value: "3in standard" },
+        { label: "Stiffness", value: "Flexible, medium, or stiff, chosen independently of length" },
+        { label: "Closure", value: "Hook-and-loop" },
+        { label: "Color", value: "Full color range" },
+        { label: "Branding", value: "Woven or printed logo, custom labels, packaging" },
+      ],
+      // Per `relatedStyleTags`' own comment (weight-lifting-belts.ts) -- a
+      // tag with no matching reachable sibling PDP links to the parent
+      // category PLP instead of an invented/404ing URL. Wrist Wraps is
+      // already built, so it's re-pointed at its own PDP; Knee Wraps and
+      // Knee Sleeves aren't built yet, so they stay on the PLP for now --
+      // re-point each as it's built.
+      relatedStyleTags: [
+        { label: "Wrist Wraps", href: "/lifting-gears/wraps-straps-sleeves/wrist-wraps" },
+        { label: "Knee Wraps", href: "/lifting-gears/wraps-straps-sleeves" },
+        { label: "Knee Sleeves", href: "/lifting-gears/wraps-straps-sleeves" },
+        { label: "See All", href: "/lifting-gears/wraps-straps-sleeves" },
+      ],
+      faqs: [
+        {
+          q: "What length should I choose?",
+          a: "Shorter wraps, 12in to 18in, suit lifters who want more mobility and a faster wrap. Longer wraps, 24in to 36in, suit heavier pressing work where more turns and tighter compression matter. Tell us your athlete profile and we recommend a length, or supply your own spec.",
+        },
+        {
+          q: "What is the difference between the stiffness tiers?",
+          a: "Flexible wraps flex with the elbow for general training. Stiff wraps hold their wrap and add near-rigid support for heavy pressing work. Medium sits between the two.",
+        },
+        {
+          q: "Are elbow wraps used in competition?",
+          a: "Elbow wraps are not part of the standard powerlifting equipment list the way wrist wraps and knee wraps are, so there is no published federation dimension limit for them. We build them primarily for training support, matched to your spec.",
+        },
+      ],
     },
     {
       status: "draft",
@@ -353,13 +473,167 @@ export const wrapsStrapsSleeves: Category = {
       href: "/lifting-gears/wraps-straps-sleeves/ankle-straps",
     },
     {
+      // Fifth of the 10 Wraps, Straps & Sleeves PDPs (owner brief,
+      // 2026-09-17), same pattern as Wrist Wraps/Elbow Wraps -- see Wrist
+      // Wraps' own styleCard comment. `status: "draft"` until sampled
+      // specs (hook coating, attachment types) are confirmed real.
+      //
+      // Product distinction (owner spec, 2026-09-17) -- a lifting hook is
+      // genuinely NOT a lifting strap or a wrap: it's a wrist strap with a
+      // rigid/semi-rigid steel hook that catches the bar directly, so
+      // there's no re-gripping between reps (a strap must be unwrapped and
+      // rewrapped each set; a wrap never touches the bar at all). No thumb
+      // loop language, stiffness tiers, or "wraps around the bar" phrasing
+      // anywhere on this style -- those belong to the wrap/strap styles,
+      // not this one.
       status: "draft",
+      internalPreview: true,
       slug: "lifting-hook",
+      sku: "CAP-WRP-05",
       cardTitle: "Custom Lifting Hook",
       cardSubline: "Wrist strap and hook, no re-gripping on heavy pulls",
       image: "",
       imageAlt: "Custom lifting hook",
       href: "/lifting-gears/wraps-straps-sleeves/lifting-hook",
+      pdpTitle: "Lifting Hook",
+      images: [
+        { alt: "Custom lifting hook, cotton webbing wrist strap with steel hook, front view" },
+        { alt: "Custom lifting hook, worn on model, hooked onto the bar, in use" },
+        { alt: "Custom lifting hook, steel hook attachment detail" },
+        { alt: "Custom lifting hook, hook-and-loop wrist strap closure detail" },
+        { alt: "Custom lifting hook, padded wrist strap detail" },
+        { alt: "Custom lifting hook, webbing material close-up" },
+        { alt: "Custom lifting hook, flat lay" },
+        { alt: "Custom lifting hook, color range" },
+        { alt: "Custom lifting hook, private label packaging" },
+      ],
+      pdpHeading: "Custom Lifting Hook Manufacturer",
+      pdpDescription:
+        "A custom and private label lifting hook, a wrist strap with a steel hook attachment for heavy pulls, built to your spec, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Lifting Hook Manufacturer",
+      pdpMetaDescription:
+        "Custom lifting hook manufacturer, wrist strap and steel hook, fixed or swivel, no re-gripping on heavy pulls. Private label, low MOQ. Sialkot, Pakistan.",
+      material: "Cotton or nylon webbing strap, steel hook",
+      pdpFabricPills: ["Cotton or nylon webbing strap", "Steel hook", "Padded option", "Hook-and-loop closure"],
+      pdpCustomizationPills: ["Webbing material", "Hook coating", "Attachment type", "Private label"],
+      pdpQualityHeading: "A real spec sheet, not a size letter",
+      pdpQualitySubline:
+        "We confirm the strap material, the hook coating, and the attachment type on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Strap stitching and closure checked against your spec",
+        "Hook weld and coating tested under load",
+        "Fixed and swivel attachments checked for smooth, secure engagement on the bar",
+        "Digital proof and sample approved before we cut your production run",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "lock", text: "Fixed or swivel hook" },
+        { icon: "arrowDownAZ", text: "Coated or uncoated steel" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          {
+            title: "Strap material",
+            body: "Cotton or nylon webbing, matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Strap material" },
+          },
+          {
+            title: "Padding",
+            body: "Optional, thickness and density matched to your reference",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Padding" },
+          },
+          {
+            title: "Hook coating",
+            body: "Coated or uncoated steel, to your spec",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Hook coating" },
+          },
+          {
+            title: "Attachment",
+            body: "Fixed or swivel hook, to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Attachment" },
+          },
+          {
+            title: "Branding",
+            body: "Woven label, printed logo, custom colorway",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Branding" },
+          },
+          {
+            title: "Color",
+            body: "Full color range, matched to your brand palette",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Color" },
+          },
+          {
+            title: "Packaging",
+            body: "Polybags, boxes, retail-ready to your spec",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Packaging" },
+          },
+        ],
+      },
+      specifications: [
+        { label: "Style", value: "Lifting hook (base type)" },
+        { label: "Strap material", value: "Cotton or nylon webbing, or your reference material" },
+        { label: "Padding", value: "Optional padded wrist strap, thickness to your spec" },
+        { label: "Hook material", value: "Steel" },
+        { label: "Hook coating", value: "Coated or uncoated, to your spec" },
+        { label: "Attachment", value: "Fixed or swivel hook" },
+        { label: "Closure", value: "Hook-and-loop wrist strap, adjustable" },
+        { label: "Color", value: "Full color range" },
+        { label: "Branding", value: "Woven or printed logo, custom labels, packaging" },
+      ],
+      // Per `relatedStyleTags`' own comment (weight-lifting-belts.ts) -- a
+      // tag with no matching reachable sibling PDP links to the parent
+      // category PLP instead of an invented/404ing URL. Cotton/Nylon
+      // Lifting Straps and Ankle Straps aren't built yet, so all 3 stay on
+      // the PLP for now; re-point each as it's built.
+      relatedStyleTags: [
+        { label: "Cotton Lifting Straps", href: "/lifting-gears/wraps-straps-sleeves" },
+        { label: "Nylon Lifting Straps", href: "/lifting-gears/wraps-straps-sleeves" },
+        { label: "Ankle Straps", href: "/lifting-gears/wraps-straps-sleeves" },
+        { label: "See All", href: "/lifting-gears/wraps-straps-sleeves" },
+      ],
+      // Verbatim PDP shared block override (owner spec, 2026-09-17) --
+      // this style's own operational FAQ wording ("mix strap materials,
+      // hook coatings, and attachment types") doesn't fit the category's
+      // default wrap-specific block ("mix lengths or colors"), same
+      // per-style-override pattern Weight Lifting Belts' own Nylon/Dip/
+      // Neoprene belts already established.
+      pdpFaqOperational: [
+        {
+          q: "What is the MOQ and can I mix straps or hook types?",
+          a: "From 50 pieces per style. Mix strap materials, hook coatings, and attachment types within the same order.",
+        },
+        {
+          q: "Will my design and spec sheet stay protected?",
+          a: "Yes. NDA before any tech pack or spec sheet is shared.",
+        },
+        {
+          q: "How do I get started?",
+          a: "Send your tech pack, sketch, or a reference piece by email or WhatsApp. We reply within 24 hours with next steps.",
+        },
+      ],
+      faqs: [
+        {
+          q: "What is a lifting hook used for?",
+          a: "Heavy pulls, deadlifts, shrugs, and rack pulls, where a lifter's grip would otherwise fail before the target muscle. The hook stays engaged on the bar, so there is no re-gripping between reps.",
+        },
+        {
+          q: "What is the difference between a lifting hook and a lifting strap?",
+          a: "Both extend your grip on a pull. A strap wraps around the bar and locks under tension, and must be unwrapped and rewrapped between sets. A hook uses a rigid or semi-rigid hook that catches the bar directly, so there is no wrapping or re-gripping at all.",
+        },
+        {
+          q: "What is the difference between a fixed and a swivel hook?",
+          a: "A fixed hook is set at one angle. A swivel hook rotates on the wrist strap, which some lifters prefer for a more natural bar path on certain pulls. Tell us your preference and we confirm it on your sample.",
+        },
+        {
+          q: "Is a lifting hook allowed in powerlifting competition?",
+          a: "No. Lifting hooks are not permitted in powerlifting competition under any federation.",
+        },
+      ],
     },
     {
       status: "draft",

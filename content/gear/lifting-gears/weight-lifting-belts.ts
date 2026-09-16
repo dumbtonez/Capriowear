@@ -37,7 +37,7 @@ export const weightLiftingBelts: Category = {
   metaTitle: "Custom Weight Lifting Belts Manufacturer",
   metaDescription:
     "Custom weight lifting belts manufacturer, private label and wholesale. Lever, powerlifting, prong, nylon and dip belts, low MOQ. Sialkot, Pakistan.",
-  trustBullets: ["MOQ from 50 pieces", "7mm to 13mm thickness range", "OEM, ODM & Private label", "DDP to 20+ countries"],
+  trustBullets: ["MOQ from 50 pieces", "Six belt styles, one factory", "OEM, ODM & Private label", "DDP to 20+ countries"],
   // No All/Women/Men gender filter on any Capriosports Gear PLP (owner
   // spec, 2026-09-15) -- a B2B gym-equipment buyer, unlike Capriowear's own
   // Activewear/Teamwear categories, has no gender split to filter by.
@@ -60,7 +60,7 @@ export const weightLiftingBelts: Category = {
     {
       fabric: "Nylon webbing",
       bestFor: "Quick-lock and self-locking belts",
-      performance: "Lighter, wider adjustable range, roller or Velcro closure",
+      performance: "Lighter, wider adjustable range, self-locking roller buckle",
     },
     {
       fabric: "Neoprene",
@@ -87,7 +87,7 @@ export const weightLiftingBelts: Category = {
   coverageEyebrow: "CUSTOMIZATION",
   coverageHeading: "From raw material to finished packaging",
   coverageItems: [
-    { title: "Thickness and width", body: "7mm to 13mm leather, 4in and 6in width, built to your spec" },
+    { title: "Thickness and width", body: "7mm to 13mm leather at 4in width, up to 6in width on nylon and neoprene, built to your spec" },
     { title: "Material", body: "Genuine leather, nylon webbing, or neoprene, matched to your reference" },
     { title: "Branding", body: "Embossing, debossing, embroidery, woven labels, and private label" },
     { title: "Finishing", body: "Your labels, hangtags, and retail-ready packaging" },
@@ -851,6 +851,11 @@ export const weightLiftingBelts: Category = {
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Closure" },
           },
           {
+            title: "Width",
+            body: "4in to 6in, to your spec",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Width" },
+          },
+          {
             title: "Padding",
             body: "Thickness and density matched to your reference",
             image: { src: "/factory-test/inside-factory-2.jpg", alt: "Padding" },
@@ -885,6 +890,7 @@ export const weightLiftingBelts: Category = {
       specifications: [
         { label: "Style", value: "Neoprene padded belt (base type)" },
         { label: "Material", value: "Neoprene, padded shell" },
+        { label: "Width", value: "4in to 6in" },
         { label: "Closure", value: "Hook-and-loop, adjustable" },
         { label: "Backing", value: "Padded interior for comfort" },
         { label: "Color", value: "Full color range, logo patch or printed branding" },
@@ -1005,9 +1011,9 @@ export const weightLiftingBelts: Category = {
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Cut" },
           },
           {
-            title: "Material and buckle",
-            body: "Leather or nylon, lever, prong, or self-locking, to your spec",
-            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Material and buckle" },
+            title: "Material, width, and buckle",
+            body: "Leather at 4in or nylon up to 6in, lever, prong, or self-locking, to your spec",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Material, width, and buckle" },
           },
           {
             title: "Branding",
@@ -1039,6 +1045,7 @@ export const weightLiftingBelts: Category = {
       specifications: [
         { label: "Style", value: "Women's weight lifting belt (base type)" },
         { label: "Material", value: "Genuine leather or nylon webbing, your choice" },
+        { label: "Width", value: "4in on the leather build, up to 6in on the nylon build" },
         { label: "Cut", value: "Tapered, narrower at the front, built for a women's fit" },
         { label: "Closure", value: "Lever, prong, or self-locking buckle, to your spec" },
         { label: "Fit", value: "A narrower size run than the unisex line, built to your pattern or a reference belt" },
