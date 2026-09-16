@@ -73,6 +73,7 @@ export default async function BoxingMmaCategoryPage({ params }: PageProps<"/boxi
           app/lifting-gears/page.tsx's own comment for the full reasoning. */}
       <Header
         brand={capriosportsHome.nav.brand}
+        brandHref="/"
         logo={<Logo caprioOnly className={header.brandLogoCapriosports} />}
         desktopLogo={<Logo caprioOnly className={header.brandLogoDesktopCapriosports} />}
         links={capriosportsHome.nav.links}

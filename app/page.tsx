@@ -75,6 +75,7 @@ export default function CapriosportsHomePage() {
           deferred to Phase 3. */}
       <Header
         brand={capriosportsHome.nav.brand}
+        brandHref="/"
         logo={<Logo caprioOnly className={header.brandLogoCapriosports} />}
         desktopLogo={<Logo caprioOnly className={header.brandLogoDesktopCapriosports} />}
         links={capriosportsHome.nav.links}

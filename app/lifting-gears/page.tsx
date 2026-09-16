@@ -52,6 +52,7 @@ export default function LiftingGearsHubPage() {
           uses, fed Capriosports' own plain-links content instead. */}
       <Header
         brand={capriosportsHome.nav.brand}
+        brandHref="/"
         logo={<Logo caprioOnly className={header.brandLogoCapriosports} />}
         desktopLogo={<Logo caprioOnly className={header.brandLogoDesktopCapriosports} />}
         links={capriosportsHome.nav.links}

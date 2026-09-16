@@ -100,6 +100,15 @@ export type HeaderProps = {
    */
   desktopLogo?: ReactNode;
   brandParent?: string;
+  /**
+   * Where the logo/brand link points. Defaults to "/capriowear" (every
+   * Capriowear page). Capriosports pages (the parent site's own header,
+   * fed `capriosportsHome` nav content) pass "/" so the logo returns to
+   * the Capriosports home, not the Capriowear division's landing page --
+   * owner report, 2026-09-16: clicking the logo on a Capriosports page
+   * (Boxing & MMA, Lifting Gears) wrongly landed on Capriowear.
+   */
+  brandHref?: string;
   links: NavLink[];
   /** The mobile drawer's own link set -- see MobileNav's own props. */
   mobileLinks: MobileNavLink[];
@@ -126,6 +135,7 @@ export function Header({
   logo,
   desktopLogo,
   brandParent,
+  brandHref = "/capriowear",
   links,
   mobileLinks,
   contact,
@@ -412,7 +422,7 @@ export function Header({
               `header.inner` at `xl:` -- see that token's own comment for why
               the nav needs its own column (rather than being grouped with
               this link) to center inside. */}
-          <Link href="/capriowear" className={header.brand} aria-label={`${brand}, home`}>
+          <Link href={brandHref} className={header.brand} aria-label={`${brand}, home`}>
             {logo ?? (
               <>
                 <span className={header.brandName}>{brand}</span>
