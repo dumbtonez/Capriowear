@@ -74,6 +74,7 @@ export type ProductCardProps = StyleCard & {
 
 export function ProductCard({
   status,
+  internalPreview,
   cardTitle,
   cardSubline,
   image,
@@ -85,6 +86,12 @@ export function ProductCard({
   parallax,
 }: ProductCardProps) {
   const published = status === "published";
+  // `internalPreview` (see `StyleCard.internalPreview`'s own comment): an
+  // owner-only escape hatch to click through to a still-draft PDP for
+  // review -- the card still gets the draft visual treatment below (it
+  // isn't actually published), only the `<Link>` vs. plain `<div>`
+  // decision changes.
+  const clickable = published || internalPreview === true;
   const primary = images?.[0] ?? (image ? { alt: imageAlt, src: image } : undefined);
   const hover = images?.[1];
 
@@ -128,7 +135,7 @@ export function ProductCard({
     </div>
   );
 
-  if (published) {
+  if (clickable) {
     return (
       <Link href={href} className={cx(productCard.root, hoverLift && "group")}>
         {media}

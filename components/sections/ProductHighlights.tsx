@@ -11,7 +11,7 @@
 // WhatWeCover's coverage grid and the PLP's quality-points list: a real
 // fact list renders as a real HTML list, not a div grid dressed up to look
 // like one.
-import { ArrowDownAZ, CalendarDays, Package, Ship } from "lucide-react";
+import { ArrowDownAZ, CalendarDays, Lock, Package, Ruler, Ship } from "lucide-react";
 
 import { productHighlights } from "@/components/ui/styles";
 import type { PdpSpecHighlight } from "@/content/activewear/types";
@@ -24,6 +24,8 @@ const ICONS = {
   calendarDays: CalendarDays,
   arrowDownAZ: ArrowDownAZ,
   ship: Ship,
+  ruler: Ruler,
+  lock: Lock,
 };
 
 export type ProductHighlightsProps = {

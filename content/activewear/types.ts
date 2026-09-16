@@ -29,6 +29,20 @@ export type StyleCard = {
    * entry, 2026-09-02, "Parked, not fixed" in docs/05-plan.md.
    */
   status: "published" | "draft";
+  /**
+   * Owner-only escape hatch (2026-09-16, Lever Belt PDP) for reviewing a
+   * still-`"draft"` PDP before its specs are confirmed real: the PLP card
+   * becomes a real clickable `<Link>` and the PDP route renders, but
+   * every other `"draft"` gate stays exactly as `status`'s own comment
+   * describes -- noindex/nofollow (an explicit override, not just
+   * inherited from the sitewide `ALLOW_INDEXING` default, so this stays
+   * noindexed even after real launch), excluded from `app/sitemap.ts`
+   * (unaffected -- that filter only ever reads `status`, never this
+   * field), and `Product`/`FAQPage` JSON-LD withheld. Never set this to
+   * make a draft page publicly reachable -- flip `status` to
+   * `"published"` for that instead, once specs are sampled and real.
+   */
+  internalPreview?: boolean;
   /** Matches the PDP's own slug, e.g. "high-waisted-compression". Treat a draft card's slug as not-yet-final -- it becomes the real, permanent URL only once its status flips to "published"; renaming it after that needs a real 301, not a silent edit. */
   slug: string;
   cardTitle: string;
@@ -166,6 +180,17 @@ export type StyleCard = {
    * `images` above.
    */
   specificationsImage?: { alt: string; src?: string };
+  /**
+   * Per-style override of the PDP's icon spec-highlights strip (see
+   * `PdpSpecHighlight`'s own comment) -- falls back to the shared
+   * `pdpSpecHighlights` (content/activewear/pdpShared.ts) when unset, same
+   * "MOQ / lead time / sizes / DDP" 4 facts every Activewear/Teamwear style
+   * shows. A Gear style (e.g. a weight lifting belt) sets this instead,
+   * since it has no clothing size range to show and its buckle/closure and
+   * thickness genuinely differ by style (owner spec, 2026-09-16, Lever
+   * Belt PDP).
+   */
+  pdpSpecHighlights?: PdpSpecHighlight[];
 };
 
 // 3 fields, matching the real design (Figma node 579:5632) exactly -- every
@@ -278,12 +303,30 @@ export type StructuredBlock =
  * "package", text: "MOQ from 50 pieces"}`. `icon` is a fixed key, not a
  * component reference -- content stays plain data; `ProductHighlights.tsx`
  * maps the key to the real lucide icon. Shared, standing PDP content (see
- * `content/activewear/pdpShared.ts`'s own `pdpSpecHighlights`), not
- * per-style data -- every PDP shows the same 4 facts.
+ * `content/activewear/pdpShared.ts`'s own `pdpSpecHighlights`) on every
+ * Activewear/Teamwear PDP, which genuinely share the same 4 facts
+ * (including a clothing size range). A Gear PDP (see `StyleCard.
+ * pdpSpecHighlights` below) overrides this per style instead, since "XS to
+ * 5XL sizes" doesn't apply to a weight lifting belt or other gear with no
+ * sizing chart -- `ruler`/`lock` added 2026-09-16 for that override
+ * (thickness and buckle/closure facts).
  */
 export type PdpSpecHighlight = {
-  icon: "package" | "calendarDays" | "arrowDownAZ" | "ship";
+  icon: "package" | "calendarDays" | "arrowDownAZ" | "ship" | "ruler" | "lock";
   text: string;
+};
+
+/**
+ * Shape of the PDP's "How we customize" carousel content (see
+ * `pdpCustomizationSteps`, content/activewear/pdpShared.ts, and
+ * `Category.pdpCustomizationSteps`'s own comment above for the Gear
+ * override of it).
+ */
+export type PdpCustomizeStepsContent = {
+  eyebrow: string;
+  heading: string;
+  mobileHeading: string;
+  steps: { title: string; body: string; image: { src: string; alt: string } }[];
 };
 
 export type FaqEntry = {
@@ -535,6 +578,24 @@ export type Category = {
   /** Faq's own H2, e.g. "Top questions from B2B buyers" (Figma node 579:5660). Same field name Faq.tsx expects (`content.h2`), so `<Faq content={{ h2: faqHeading, items: faqs }} />` needs no adapter. */
   faqHeading: string;
   faqs: FaqEntry[];
+  /**
+   * Per-category override of the PDP's shared "operational" FAQ block
+   * (`pdpFaqOperational`, content/activewear/pdpShared.ts) -- that block's
+   * own wording ("mix sizes," "reference garment") is Activewear/Teamwear-
+   * specific and wrong on a Gear PDP (a belt has no size run). Falls back
+   * to the shared block when unset. Owner spec, 2026-09-16, Weight Lifting
+   * Belts: "identical wording used on every weight lifting belt PDP,"
+   * i.e. one category-level block, not a per-style one.
+   */
+  pdpFaqOperational?: FaqEntry[];
+  /**
+   * Per-category override of the PDP's shared "How we customize" carousel
+   * (`pdpCustomizationSteps`, content/activewear/pdpShared.ts) -- same
+   * reasoning as `pdpFaqOperational` above: the shared steps (print
+   * methods, fabric blends) don't apply to a leather/nylon/neoprene Gear
+   * product. Falls back to the shared steps when unset.
+   */
+  pdpCustomizationSteps?: PdpCustomizeStepsContent;
   /**
    * The one word (or short phrase) that fills "a reference [X]" in the
    * closing CTA's own subline (Figma node 579:5710, base copy "Share your

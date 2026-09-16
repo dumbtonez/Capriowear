@@ -8476,8 +8476,15 @@ export const productCustomizeSteps = {
   // treatment to PDP -- this carousel is the same shape as Inside the
   // Factory/Exhibitions/How It Works, already fixed there; see
   // `desktopRow`/`desktopCard`/`cardMediaRatio` below for the matching
-  // padding/width changes).
-  desktopOuter: "hidden md:flex md:flex-col md:items-center md:gap-[72px] pt-[120px] pb-0 xl:pb-[200px]",
+  // padding/width changes). -- Reverted back to `xl:`, 2026-09-16 (owner:
+  // tablet should swipe with dots, not use the chevron -- same "How It
+  // Works reverted 2026-09-09" correction this recipe never got at the
+  // time; see `mobileSection`'s own comment below). Tablet now gets the
+  // same real `CardCarousel` swipe+dots mobile already uses, same fixed
+  // `cardCarousel.track`/`gap-4` card spacing at both widths -- so this
+  // now matches Capriowear's own PDPs too, since they render through this
+  // exact same shared recipe/component, not a separate copy.
+  desktopOuter: "hidden xl:flex xl:flex-col xl:items-center xl:gap-[72px] pt-[120px] pb-0 xl:pb-[200px]",
   desktopHeadingWrap: "container-p",
   // Reverted to Eyebrow's own default Overline size (20px/600), 2026-09-01
   // (owner: "make the eyebrow heading back to 20px wherever you changed")
@@ -8545,7 +8552,10 @@ export const productCustomizeSteps = {
   // `useDesktopChevronScroller`'s own trailing comment in
   // DesktopChevronScroller.tsx for the real fix, `overflow-clip` plus an
   // inner transform-driven `desktopReel`.
-  desktopRow: "overflow-clip w-full px-8 xl:px-[80px]",
+  // `px-8` (tablet's own inset) is now unreachable dead weight -- this row
+  // only ever mounts at `xl:` any more (see `desktopOuter`'s own comment
+  // above), so only the true-desktop `px-[80px]` inset is left.
+  desktopRow: "overflow-clip w-full px-[80px]",
   // gap-10 (40px), was gap-6 (24px) -- owner, 2026-09-12: "make it 40px
   // across the site" (see `trustSignals.desktopReel`'s own comment for the
   // full before/after list). `CARD_GAP` in ProductCustomizeSteps.tsx must
@@ -8560,12 +8570,13 @@ export const productCustomizeSteps = {
   // used to widen off its own literal Figma value (reads as the same size
   // as its sibling carousel sections).
   desktopCard: "w-[469px] shrink-0",
-  // 469:320 desktop, matching `howItWorks.cardMediaRatio` exactly (see
-  // `desktopCard`'s own comment for why). Mobile stays the shared 7:5
-  // CardCarousel default, same as How It Works' own mobile cards.
-  // xl: -> md: (2026-09-04) -- identical ratio at both tiers, so no
-  // separate xl: value needed, same as How It Works' own fix.
-  cardMediaRatio: "aspect-[7/5] md:aspect-[469/320]",
+  // 469:320 true desktop only, matching `howItWorks.cardMediaRatio`
+  // exactly (see `desktopCard`'s own comment for why). Mobile AND tablet
+  // now share the plain 7:5 CardCarousel default -- `md:` reverted to
+  // `xl:` alongside `desktopOuter`/`mobileSection` above, 2026-09-16, same
+  // final shape `howItWorks.cardMediaRatio` itself settled on (its own
+  // 2026-09-14 "same for mobile and tablet" correction).
+  cardMediaRatio: "aspect-[7/5] xl:aspect-[469/320]",
   // No title/body overrides here anymore (owner: "use homepage component
   // size") -- both breakpoints now render through CapabilityCard's own
   // plain defaults (`capabilityCard.title`/`capabilityCard.text`), exactly
@@ -8582,8 +8593,15 @@ export const productCustomizeSteps = {
   // bottom padding of its own on mobile, so this top padding is the entire
   // gap from its last row's own divider up to this section's heading,
   // confirmed via getBoundingClientRect() (was 48px before this fix).
-  // xl:hidden -> md:hidden (2026-09-04, same review).
-  mobileSection: "container-p flex flex-col items-center gap-8 pt-[72px] pb-[72px] md:hidden",
+  // xl:hidden -> md:hidden (2026-09-04, same review). -- `md:hidden` ->
+  // `xl:hidden` (owner, 2026-09-16: swap the tablet chevron for swipe+dots,
+  // same correction How It Works already got 2026-09-09) -- this carousel
+  // now covers real mobile and tablet alike, the desktop chevron row above
+  // moved back to `xl:` to match. Card spacing between cards is
+  // `cardCarousel.track`'s own fixed `gap-4`, identical at every width
+  // this renders at (real mobile and tablet alike) and identical on every
+  // PDP that uses this shared recipe/component, Gear and Capriowear both.
+  mobileSection: "container-p flex flex-col items-center gap-8 pt-[72px] pb-[72px] xl:hidden",
 };
 
 /* --- ProductRelatedStyles (PDP) ------------------------------------------ */
