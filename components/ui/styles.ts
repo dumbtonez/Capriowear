@@ -6981,7 +6981,25 @@ export const fabricOptions = {
   // top to heading-block top, not just eyebrow-text position). This is a
   // genuinely separate value, not a same-string override, so there's no
   // generation-order race to lose.
-  sectionFlushBottom: "mx-auto w-full max-w-[1440px] px-5 pb-20 md:px-8 xl:px-[138px] xl:pb-[120px]",
+  // Below `xl` (owner spec, 2026-09-16: "fix the sections spacing on
+  // tablet... same for mobile", "follow the same spacing structure that we
+  // used on lifting belts") -- `pt-[72px]`/no `pb` (not `section`'s own
+  // flat mobile/tablet `pb-20`, "page-end" spacing correct for
+  // FabricOptions at the END of a category's content but wrong for
+  // ComparisonTable, which sits mid-page): this component's own top
+  // padding supplies the listing-to-ComparisonTable gap (there is no
+  // divider below `xl` to do it, same standard 72px inter-section gap
+  // `whatWeCover.section`'s own `py-[72px]` already establishes), while its
+  // bottom is left at 0 so `whatWeCover.section`'s own `py-[72px]` TOP half
+  // supplies the ComparisonTable-to-Customization gap by itself -- exactly
+  // the single-source-of-gap pattern already confirmed live on the Weight
+  // Lifting Belts PLP at 768px (grid to Customization measures 73px, not
+  // 73+72, because only WhatWeCover's own padding contributes on that
+  // seam). A first attempt kept the original `pb-20` and only added
+  // `xl:pb-[120px]`, which instead measured 152px (80 + 72) on this page --
+  // `whatWeCover.section`'s own padding stacking on top of this one's,
+  // confirmed live before this fix.
+  sectionFlushBottom: "mx-auto w-full max-w-[1440px] px-5 pt-[72px] md:px-8 xl:px-[138px] xl:pt-0 xl:pb-[120px]",
   // max-xl:gap-4/px-0 (mobile Figma node 590:1488's own Title frame: 16px
   // gap, no side inset of its own -- headingBlock's parent `section`
   // already carries px-5).

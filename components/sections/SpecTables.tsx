@@ -143,13 +143,17 @@ export function SpecTables({ tables, note }: { tables: SpecTable[]; note?: NoteS
     <section className={fabricOptions.section}>
       {tables.map((table, index) => (
         // First table sits directly under TrustPoints with the section's
-        // own top padding; every table after that gets a flat 120px top
-        // margin (owner spec, 2026-09-16: "HOOK SPECS/STRAP SPECS/SLEEVE
-        // SPECS should have 120px space from the top") -- same "every
-        // section 120px from the top" convention the page-level dividers
-        // above this section already establish, not FabricOptions' own
-        // smaller 44/60px weightTiersWrap gap.
-        <OneSpecTable key={table.heading} table={table} spacingClassName={index === 0 ? "" : "mt-[120px]"} />
+        // own top padding (0 below `xl`, matched by TrustPoints' own
+        // `pb-[72px]` -- a real, deliberate 72px gap, same standard used
+        // everywhere else on this page). Every table after that gets the
+        // same flat 72px below `xl` (owner spec, 2026-09-16: "make 72px
+        // each section, keep it consistent" -- an earlier pass set this to
+        // `mt-[97px]`, matching a text-to-text measurement that turned out
+        // to include a text node's own line-height/descender space on top
+        // of the real 72px box-to-box gap, not a genuine second value).
+        // `xl:mt-[120px]` unchanged -- still the explicitly requested
+        // desktop-only value.
+        <OneSpecTable key={table.heading} table={table} spacingClassName={index === 0 ? "" : "mt-[72px] xl:mt-[120px]"} />
       ))}
       {note ? <NoteParagraph segments={note} /> : null}
     </section>
