@@ -7772,30 +7772,29 @@ export const categoryGroupsSection = {
 // blend (owner: "very soft and smooth ... top side of the gradient is
 // 100% opacity, not colour" -- i.e. the gradient's own top edge starts
 // fully transparent, easing down to solid black, not a hard-edged tint).
+// Capriosports homepage division-switcher cards -- started as 5 selectable
+// variants (`scrim`/`merge`/`box`/`flat`/`stack`), each an owner-requested
+// try at the same "text over/under a photo" problem. Once `stack` was
+// confirmed as the real shipped design, the owner asked to "delete all
+// and keep the one we just have now" (2026-09-16) -- the other 4
+// geometries' own recipes (`grid`/`card`/`cardBox`/`cardFlat`/
+// `imageFlatWrap`/`fullBleedImageWrap`/`boxImageWrap`/`image`/
+// `imageMerge`/`scrim`/`textWrap`/`textBox`/`textFlat`/`title`/
+// `descriptor`/`link`) were removed here, not just left unused -- see git
+// history on this file/`components/sections/DivisionCards.tsx` if any of
+// them are ever wanted again.
+// Capriosports homepage division-switcher cards -- started as 5 selectable
+// variants (`scrim`/`merge`/`box`/`flat`/`stack`), each an owner-requested
+// try at the same "text over/under a photo" problem. Once `stack` was
+// confirmed as the real shipped design, the owner asked to "delete all
+// and keep the one we just have now" (2026-09-16) -- the other 4
+// geometries' own recipes (`grid`/`card`/`cardBox`/`cardFlat`/
+// `imageFlatWrap`/`fullBleedImageWrap`/`boxImageWrap`/`image`/
+// `imageMerge`/`scrim`/`textWrap`/`textBox`/`textFlat`/`title`/
+// `descriptor`/`link`) were removed here, not just left unused -- see git
+// history on this file/`components/sections/DivisionCards.tsx` if any of
+// them are ever wanted again.
 export const divisionCards = {
-  // `bg-ink`/`text-paper`: this section and the Fully Custom Offerings
-  // strip right after it sit on one continuous dark surface in the real
-  // design (no white gap between Hero's video block and this row of
-  // cards) -- both rendered inside one shared dark wrapper in app/page.tsx.
-  // Real mobile only: `max-md:pt-1` (4px) tops up Hero's own mobile ticker
-  // (`servicesHero.tickerMobile`'s fixed `pb-[60px]`) to a real 64px total
-  // gap down to this row's first card (owner, 2026-09-15: "make it 64 from
-  // top" -- was `pt-5`/20px, for an 80px total, before the owner's own
-  // "72px" request below had been applied). `max-md:pb-10` (40px, was
-  // `pb-4`/16px, owner same turn: "total bottom make it 40px") is this
-  // row's own bottom gap down to the dark section's own edge, real mobile
-  // only. `md:pt-[72px]` tablet AND desktop (owner, 2026-09-15: "lifting
-  // gear image top space should be 72px" / "make it 20px on mobile" -- was
-  // a further `xl:`-only split, `xl:pt-16`/64px, replaced here since the
-  // owner's 72px applies from tablet up, not desktop only). `md:pb-4`
-  // preserves tablet's own original bottom value (unaffected by the real-
-  // mobile-only 40px change above); `xl:pb-6` is desktop's own separate
-  // value, unchanged. None of `pb-10`/`pb-4`/`pb-6` are the real gap down
-  // to the Fully Custom Offerings label below -- Marquee itself (`padded`
-  // default true) already contributes its own fixed 40px top padding above
-  // its label (`marquee.base`'s own comment) -- tuned here, not there, so
-  // that shared component's own established padding stays untouched for
-  // every other real caller.
   // `max-md:-mt-3` (owner, 2026-09-16: "what we built should have same
   // gap from bottom as the top" -- the mobile ticker's own fixed 60px
   // bottom padding (`servicesHero.tickerMobile`, shared with Capriowear's
@@ -7819,115 +7818,6 @@ export const divisionCards = {
   // `md:pt-[72px]` covering both tablet and desktop; desktop's own 72px
   // value, still real and owner-specified, is now `xl:`-scoped instead).
   section: "container-p max-md:-mt-3 max-md:pb-0 md:pt-8 md:pb-4 xl:pt-[72px] xl:pb-6",
-  // md: (768px), not xl: (owner, 2026-09-15: "on tablet we should treat
-  // those 3 cards as desktop, not mobile" -- the same real rule Hero.tsx's
-  // own ticker already documents for this identical "does it read fine at
-  // tablet width" judgment call: "Split at md: (768px), not xl:... the
-  // scrolling Marquee reads fine at tablet width, so real mobile only
-  // (<768px) gets the plain stacked-list fallback." A 3-card row is the
-  // same kind of content -- no swipe/carousel mechanics to lose at
-  // tablet, unlike InsideFactory/TrustSignals' own xl:-only chevron
-  // galleries (a genuinely different case: those need real carousel
-  // interaction below xl:, this doesn't).
-  grid: "flex flex-col items-center gap-4 md:flex-row md:items-stretch",
-  // Mobile: exact 320x360 (owner spec). Desktop: portrait tile, flexible
-  // width (3-up row), no fixed px -- no Figma frame width was given, only
-  // the mobile card's exact size and the desktop type scale.
-  // `bg-ink-2` (#17191e, owner spec -- the real "secondary dark surface,
-  // a container on top of an ink section" token, not `bg-ink` itself,
-  // which is a slightly different near-black, `#121317`): for `scrim`/
-  // `merge`, only actually visible once `imageMerge` masks the photo to
-  // transparent near the bottom -- reads as a container sitting on the
-  // section's own `bg-ink`, not a hard rectangular card edge. Invisible/
-  // no-op for `scrim`, since the opaque photo covers it completely. For
-  // `box` (below), this same colour is what the real, solid text box
-  // below the photo sits on.
-  // 2-tier, not 3 (owner correction, 2026-09-15: "on tablet we should
-  // treat those 3 cards as desktop, not mobile" -- superseding the
-  // previous pass's InsideFactory-precedent 530x654 fixed tablet size,
-  // which was the wrong rule for this content; see `grid`'s own comment
-  // above for why the Fully Custom Offerings ticker's md:-split precedent
-  // applies here instead). Mobile: fixed 320x395 (height raised from an
-  // original 360px, owner: "current image height is small make it 20%
-  // large than now"). `md:h-auto`/`md:aspect-[657/958]` take over at
-  // 768px -- the exact same fluid desktop treatment as before, just
-  // triggered from `md:` instead of `xl:`, so tablet gets 3 real
-  // (narrower) columns rather than a single scaled-up card.
-  card: "group relative block w-[320px] h-[395px] overflow-hidden bg-ink-2 md:h-auto md:w-full md:flex-1 md:aspect-[657/958]",
-  // `box` variant only: same overall card footprint as `card`, but a real
-  // flex column (photo on top, solid text box below) instead of one
-  // full-bleed layer with an absolute-positioned overlay -- a completely
-  // different internal structure, not an appended override on `card`
-  // (two competing `block`/`flex` display utilities in one class string
-  // isn't guaranteed to cascade predictably, the same class of risk this
-  // file's own `cardMedia` radius comment already documents elsewhere).
-  // Same 2-tier sizing as `card` above (320x395 mobile, fluid from md:) --
-  // see that token's own comment for the full reasoning.
-  cardBox: "group relative flex w-[320px] h-[395px] flex-col overflow-hidden bg-ink-2 md:h-auto md:w-full md:flex-1 md:aspect-[657/958]",
-  // `flat` variant only (2026-09-15, owner: "remove the images from the
-  // cards, use a light black background instead that can be seen on the
-  // black background") -- same structure as `cardBox` (a placeholder area
-  // on top, real text box below in normal flow), not the photo itself
-  // replaced by a colour -- an owner follow-up corrected an earlier
-  // vertically-centred, no-placeholder pass ("cards text has gone up in
-  // the middle, it should stay on the same place, the image background
-  // container should get some light color"): the text must stay exactly
-  // where it sat in `cardBox` (bottom, natural height), and the former
-  // image area gets its own lighter fill (`imageFlatWrap`) rather than
-  // vanishing.
-  cardFlat: "group relative flex w-[320px] h-[395px] flex-col overflow-hidden bg-ink-2 md:h-auto md:w-full md:flex-1 md:aspect-[657/958]",
-  // `bg-paper/5` -- a translucent white overlay on top of the card's own
-  // `bg-ink-2`, not a second hardcoded hex: reads as a subtly lighter box
-  // distinguishing the former image area from the text box below it
-  // (which stays plain `bg-ink-2`, see `textFlat`), using only existing
-  // tokens rather than inventing a new one.
-  imageFlatWrap: "relative flex-1 min-h-0 bg-paper/5",
-  // `scrim`/`merge`: the image layer fills the whole card (the card itself
-  // is already `relative`, so plain `absolute inset-0` is enough -- no
-  // second positioning context needed).
-  fullBleedImageWrap: "absolute inset-0",
-  // `box` variant only: the image takes whatever space is left once the
-  // text box below has taken its own natural (content-sized) height --
-  // not a fixed px/% split (no Figma frame width existed to read an exact
-  // ratio from, only the owner's own reference screenshot, whose 515/650
-  // proportion won't hold once the Capriowear card's extra "Visit
-  // Capriowear" line makes its own text box taller than the other two).
-  // `min-h-0` is required on a flex child that itself contains an
-  // `absolute`-filled `next/image` -- without it, a flex item's default
-  // `min-height: auto` can refuse to shrink below its content's intrinsic
-  // size in some browsers, silently breaking the `flex-1` shrink.
-  boxImageWrap: "relative flex-1 min-h-0",
-  image: "object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105",
-  // `stack` variant (2026-09-16, owner: "try this new style for division
-  // cards... on hover the following animation will happen," referencing a
-  // shopify.design case-study card whose stacked photo tiles fan out on
-  // hover; sizing/rotation since corrected to the owner's own Figma
-  // reference, node 1021:143, "Group 4" 1021:168) -- ADDITIVE only,
-  // doesn't touch `flat`'s own recipes above. Same solid `bg-ink-2` card
-  // shell as `flat` (still no real photography, per the earlier "remove
-  // the images... use a light black background" request) -- the
-  // placeholder area holds 3 decoy panels, all 205x205 (owner correction,
-  // 2026-09-16 -- Figma's own `get_metadata` on node 1021:168 originally
-  // measured the back/front tiles at 236.32sq, but the owner specified
-  // 205x205 uniform), rotated -9.6deg/0deg/+9.6deg (top/middle/bottom)
-  // instead of real photography.
-  // On `group-hover` all 3 fan out further with a spring-overshoot easing
-  // (`cubic-bezier(0.175, 0.885, 0.32, 1.275)`, read directly off the
-  // reference site's own card-media hover transition), mirroring its
-  // "cards spreading like a hand of playing cards" feel without needing
-  // real photo assets this site doesn't have wired up.
-  // Edge-to-edge on real mobile only (owner: "on mobile, use edge to edge
-  // cards and adjust the height that looks balanced") -- `w-full` plus
-  // `gridEdgeToEdge`'s own `-mx-5` below cancels `container-p`'s mobile
-  // 20px inset (same cancellation technique `mobileRoot` already uses
-  // elsewhere in this file). `h-auto` (not a literal copy of Figma's own
-  // 523px number) -- that figure came from an ambiguous multi-card Figma
-  // export whose frame bounds don't cleanly enclose all 3 cards, not a
-  // confirmed single-card height; letting the card size itself from its
-  // own content (282x259 photo group + padding + text block) is the
-  // "balanced" height the owner actually asked for. `md:`+ unchanged --
-  // still the existing fluid `aspect-[657/958]` card, not edge-to-edge
-  // (owner's request named mobile only).
   // Real mobile: `bg-ink` (owner: "use the same background color as what
   // we built background" -- the Marquee/"What We Build On" strip right
   // below this section sits directly on the shared `bg-ink` wrapper, no
@@ -8051,86 +7941,6 @@ export const divisionCards = {
   // `link` (arrow affordance, orange on hover, `group/cta` hover scope).
   linkStack:
     "group/cta mt-4 inline-flex w-fit items-center gap-1.5 text-[15px] font-bold leading-6 uppercase text-paper transition-colors hover:text-accent",
-  // EXPERIMENTAL (owner, 2026-09-15: "just for experiment... how will that
-  // look?") -- fades the actual photo pixels to transparent near the
-  // bottom via a mask (not just an opaque overlay on top of them), so the
-  // card's own `bg-ink` shows through and reads as one continuous dark
-  // surface with the section behind it, rather than a hard card-bottom
-  // edge. Applied instead of (not alongside) `scrim` when on -- the two
-  // are alternate ways of solving the same "legible text over a photo"
-  // problem, not additive. Standard `mask-image` plus the `-webkit-`
-  // prefix Safari still needs for it.
-  // 5-stop, taller (72%, was a single-ramp 45%) -- owner, 2026-09-15: the
-  // Capriowear card's extra "Visit Capriowear" line needs more coverage
-  // than the other two cards' shorter text block, and the fade should
-  // read as "more black, still smooth," not a harder-edged cutoff. A small
-  // flat fully-transparent zone at the very bottom (0-8%) avoids a single
-  // hard seam right at the card edge; the remaining climb to fully opaque
-  // is graduated across 3 intermediate stops rather than one straight
-  // ramp, for a softer ease despite covering more of the card.
-  imageMerge:
-    "[mask-image:linear-gradient(to_top,transparent_0%,transparent_8%,rgba(0,0,0,0.55)_35%,rgba(0,0,0,0.85)_55%,black_72%)] [-webkit-mask-image:linear-gradient(to_top,transparent_0%,transparent_8%,rgba(0,0,0,0.55)_35%,rgba(0,0,0,0.85)_55%,black_72%)]",
-  // 4-stop, taller (h-4/5, was h-2/3) and darker near the bottom -- owner,
-  // 2026-09-15: "the text is not very visible, adjust the gradient." Still
-  // a soft ease, not a hard 2-stop cutoff: the top of the band starts
-  // fully transparent (real photography, not a colour tint) and ramps
-  // through 3 intermediate stops to near-opaque black right behind the
-  // text, per the original "very soft and smooth" spec -- just carried
-  // further down/darker than the first pass.
-  scrim:
-    "pointer-events-none absolute inset-x-0 bottom-0 h-4/5 bg-[linear-gradient(to_top,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.72)_28%,rgba(0,0,0,0.32)_60%,rgba(0,0,0,0)_100%)]",
-  // Mobile: px-6 (24px) / py-4 (16px top+bottom, owner: "make text top
-  // bottom 16px" -- was 24px, the same flat `p-6` every side). From `md:`
-  // (768px) up -- tablet now included, not just desktop, see `grid`'s own
-  // comment above -- 32px left/right, 24px top/bottom (tuned over several
-  // owner passes).
-  textWrap: "absolute inset-x-0 bottom-0 flex flex-col gap-2 px-6 py-4 md:px-8 md:py-6",
-  // `box` variant only: a real solid block in normal flow below the photo
-  // (owner reference screenshot, 2026-09-15) -- `bg-ink-2` (#17191e, owner
-  // spec; opaque, matching `cardBox`'s own colour, so there's no visible
-  // seam colour mismatch), not absolutely positioned over anything, no
-  // gradient at all. Height is whatever this content needs (title +
-  // descriptor, + the Capriowear card's extra link line) --
-  // `boxImageWrap`'s own `flex-1` on the photo above absorbs the
-  // remaining space, so this box's height never has to match a fixed
-  // ratio across all 3 cards.
-  // Same mobile/md:-up split as `textWrap` above (mobile: 24px left/
-  // right, 16px top/bottom; md: up: 32px left/right, 24px top/bottom).
-  textBox: "flex flex-col gap-2 bg-ink-2 px-6 py-4 md:px-8 md:py-6",
-  // `flat` variant only -- same padding rhythm as `textWrap`/`textBox`
-  // above, no `bg-ink-2` of its own since `cardFlat` already carries it on
-  // the whole card.
-  textFlat: "flex flex-col gap-2 px-6 py-4 md:px-8 md:py-6",
-  // 24px/auto from md: up, 22px/auto mobile (owner spec) -- "auto"
-  // line-height, not a fixed px value, so a plain `leading-normal` rather
-  // than an arbitrary `leading-[Npx]` like the descriptor below gets.
-  title: "text-[1.375rem] leading-normal font-medium text-paper md:text-[1.5rem]",
-  // 15px/20px mobile, 17px/23px from md: up (owner spec, exact px
-  // line-heights given, unlike the title). `#838d97` -- this project's own established
-  // "secondary text on a dark surface" colour sitewide (e.g. `capabilityCard.
-  // textDark`, `certified`/`stats` captions, FAQ answers, mega-menu labels
-  // -- always this exact grey, never the light-surface `text-muted` token,
-  // #6b6b74), not a translucent `text-paper/*` (owner, 2026-09-15: "make
-  // the subline as secondary subline color that we use").
-  descriptor: "text-[0.9375rem] leading-[20px] text-[#838d97] md:text-[17px] md:leading-[23px]",
-  // No underline (owner, 2026-09-15) -- the arrow is the affordance now,
-  // not a text decoration. All 3 cards get this same link/arrow now (was
-  // Capriowear-only); white (`text-paper`) by default, not orange.
-  // `hover:text-accent` (owner: "hovering on the cta make the text orange
-  // primary") -- the link's own `:hover`, not `group-hover` off the whole
-  // card, since this should react to hovering the CTA itself, not
-  // anywhere on the card. `group/cta` names this span as its own hover
-  // group (distinct from `card`'s own unnamed `group`, which the whole
-  // card link already uses for its image zoom) so the icon below can key
-  // off THIS hover specifically via `group-hover/cta:*`.
-  // Mobile: 14px (owner: "mobile cta make 14px text" -- was the shared
-  // `text-button-sm` token's own 16px at every breakpoint). From `md:` up
-  // (tablet included, see `grid`'s own comment above): the real
-  // `text-button-sm` token (16px/24px line-height/700 weight) -- the
-  // mobile override restates weight/line-height explicitly since an
-  // arbitrary `text-[...]` value doesn't carry `text-button-sm`'s own
-  // paired line-height/font-weight the way the named token does.
-  link: "group/cta mt-1 inline-flex w-fit items-center gap-1.5 text-[0.875rem] font-bold leading-6 uppercase md:text-button-sm text-paper transition-colors hover:text-accent",
   // Static by default -- Lifting Gear/Boxing & MMA (owner: "arrow white
   // not pointing" [at rest]). On hover of the CTA: turns orange AND starts
   // the same continuous point animation `linkIconAnimated`/`.arrow-point`
@@ -9480,22 +9290,57 @@ export const capriosportsFactory = {
 // TrustPoints' own bordered-row list language (`trustPoints.list`/`row`)
 // rather than a second unrelated list treatment, with a number column
 // swapped in for that component's Sparkle glyph.
+// "Why Caprio" -- dark-tone only (2026-09-17, owner: "remove white Why
+// Capriosports section under services and delete from your memory" --
+// the earlier light-tone "Why Capriosports" instance and every recipe
+// below with no `Dark` suffix, which only it ever used, were deleted
+// outright, not left unused). See `components/sections/WhyCapriosports.tsx`'s
+// own header comment for the full history.
 export const whyCapriosports = {
-  section: "container-p flex flex-col items-center gap-12 pt-[72px] pb-[72px]",
+  // Background lives on the separate outer `sectionDarkBg` wrapper below,
+  // not here (owner: "give full width to background" -- `container-p`
+  // caps this element at 1440px and centres it, so a `bg-*` set directly
+  // on it never actually reaches true edge-to-edge; the fix is a separate
+  // unconstrained outer element for the fill colour, with `container-p`
+  // staying only on the inner content). `gap-[72px]` (was `gap-12`/48px,
+  // owner: "title to under section gap 72px") -- the space from the
+  // heading block down to the numbered list.
+  sectionDark: "container-p flex flex-col items-center gap-[72px] pt-[72px] pb-[72px]",
+  // The outer full-width wrapper `sectionDark` renders inside (see that
+  // token's own comment). `text-paper` here (not on `sectionDark`) so
+  // `SectionHeading`'s own "inherits the section's colour" rule (that
+  // component's header comment) still finds it on an actual ancestor.
+  sectionDarkBg: "w-full bg-ink text-paper",
   headingBlock: "flex w-full max-w-[780px] flex-col items-center gap-4 text-center",
-  // Tablet text-width house rule (owner, 2026-08/09, see docs/02-design-
-  // system.md's "Grid and container": a subline directly under a heading
-  // gets its own tablet-only clamp) -- the flat `max-w-[780px]` this
-  // subline used to carry alone let it stretch to the block's full 780px
-  // width at tablet, longer than the comfortable reading range; `xl:max-w-
-  // none` reverts to unconstrained there since `headingBlock`'s own
-  // `max-w-[780px]` already governs the block (and therefore this text) at
-  // that width.
-  subline: "md:max-w-[clamp(560px,65vw,780px)] xl:max-w-none text-body-lg text-subline",
-  list: "flex w-full max-w-[960px] flex-col divide-y divide-line border-y border-line",
-  row: "flex items-start gap-6 py-6",
-  number: "text-h5 font-bold text-muted",
-  rowText: "flex flex-col gap-1",
-  rowTitle: "text-body font-semibold",
-  rowBody: "text-body-sm text-muted",
+  listDark: "flex w-full max-w-[960px] flex-col divide-y divide-line-dark border-y border-line-dark",
+  // `py-[42px]` (owner, in two passes: first "increase the height between
+  // each row 12px more" from an original `py-6`/24px to `py-[30px]`, then
+  // "add 12px more from top and bottom of each row" on top of that) --
+  // 18px more than the original `py-6` per side, so two adjacent rows
+  // gain a real 36px more space between them at the shared hairline.
+  rowDark: "flex items-start gap-6 py-[42px]",
+  // `#838d97` -- this project's own established secondary-text-on-a-dark-
+  // surface literal (e.g. `divisionCards.descriptorStack`). `text-[30px]`
+  // (owner: "make the number font size 30 from 24") -- was the shared
+  // `text-h5` token's own 24px.
+  numberDark: "text-[30px] font-bold text-[#838d97]",
+  // `gap-3` (12px, owner: "title and subline space increase 8px more" --
+  // "subline" here means the row body text below each row title, not a
+  // section-level subline, which this section doesn't render at all) --
+  // was `gap-1`/4px.
+  rowTextDark: "flex flex-col gap-3",
+  // `24px` flat (owner: "make the title 24px" quoting a row title
+  // verbatim) -- was the shared `text-body` token's own smaller size.
+  rowTitleDark: "text-[24px] font-semibold",
+  // `#838d97` (see `numberDark` above). `text-[20px] leading-[28px]`
+  // (owner: "make the subline 20 by 28, always use this line height when
+  // use 20px font" -- a standing pairing for this project, not just this
+  // one spot; use `text-[20px] leading-[28px]` again anywhere else a flat
+  // 20px size is wanted, rather than the named `text-body-lg` token,
+  // which pairs 20px with its own 1.2/24px line-height instead).
+  // `max-w-[85%]` (owner: "subline text width make 15% lesser") -- shrinks
+  // just this paragraph's own width, not the row title beside it, since
+  // `rowTextDark`'s flex-shrink already gives it a definite containing-
+  // block width to compute the percentage against.
+  rowBodyDark: "text-[20px] leading-[28px] text-[#838d97] max-w-[85%]",
 };

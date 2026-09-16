@@ -168,11 +168,9 @@ export const capriosportsHome = {
         // separately asked for that same 3-line consistency on Lifting
         // Gear), so the earlier 2-line trim is no longer needed either.
         descriptor: "Custom boxing and MMA gloves, coaching gear and protective gear, private label and wholesale.",
-        // See Lifting Gear's own comment above -- Figma node 1021:161,
-        // used verbatim even though it reads generically (matches
-        // Capriowear's own `descriptorShort` below word-for-word in the
-        // Figma file, not a copy/paste mistake on this end).
-        descriptorShort: "Custom activewear and teamwear, sample to bulk",
+        // Owner correction, 2026-09-16 -- replaces the Figma-verbatim
+        // generic wording above with a Boxing & MMA-specific line.
+        descriptorShort: "Custom boxing and MMA gloves, private label and wholesale",
         // `stack` variant only -- see Lifting Gear's own `stackImages` comment above.
         stackImages: [
           { src: "https://placehold.co/205x205/2a2e35/f5f5f5?text=Boxing+Gloves", alt: "Placeholder photo of boxing gloves" },
@@ -567,44 +565,52 @@ export const capriosportsHome = {
     ],
   },
 
-  // WHY CAPRIOSPORTS -- numbered 01-05 list (WhyCapriosports.tsx), replacing
-  // the earlier 2-column CapabilityCard block (that copy now lives in
-  // `factory.supportingBlocks` above, inside the One Factory section).
-  // `subline` reuses the organization's own already-locked identity line
-  // verbatim (same sentence content/capriosports/home.ts's footer
-  // description also uses) rather than inventing new heading copy.
-  why: {
-    eyebrow: "WHY CAPRIOSPORTS",
-    h2: "Why Capriosports",
-    subline: CAPRIOSPORTS_ORGANIZATION.identityLine.gear,
+  // WHY CAPRIO -- reinstated 2026-09-16, same numbered 01-05 list
+  // component/pattern as `why` below (`WhyCapriosports.tsx`, `tone="dark"`
+  // this time) -- a separate content object, not a rewrite of `why`
+  // itself, since both sections render on this same page (this one
+  // between Our Story and Our Services, `why` further down, unchanged).
+  // No `subline` (owner: "No subline under the title, go straight from
+  // the H2 into the numbered list") -- the field itself is optional on
+  // `WhyCapriosportsProps` for exactly this reason. `h2`'s own `\n` breaks
+  // it across 2 lines (owner-specified line break), rendered via
+  // `headingClassName`'s `whitespace-pre-line`.
+  whyCaprio: {
+    eyebrow: "HOW WE WORK",
+    h2: "Why Caprio,\nnot just another factory",
     items: [
       {
         number: "01",
-        title: "Material and construction behind competition-grade gear",
-        body: "Cowhide leather, precision stitching and reinforced construction, on every run.",
+        title: "A real spec sheet, not a size letter",
+        body: "Length, width, thickness and material stated on every product, confirmed on your sample, not hidden behind an inquiry form.",
       },
       {
         number: "02",
-        title: "In-house, cut to carton",
-        body: "75,000 sq ft, 100,000+ units a month, under one roof.",
+        title: "Mix your order, not just your MOQ",
+        body: "Combine styles, materials and colors within a single production run, no separate minimum per SKU.",
       },
       {
         number: "03",
-        title: "Quality you can put your name on",
-        body: "AQL 2.5 on every run. ISO 9001 certified.",
+        title: "A sample before a production run",
+        body: "Your physical sample is confirmed against your spec before your bulk order is cut, not a digital proof alone.",
       },
       {
         number: "04",
-        title: "On time, one team on your account",
-        body: "A dedicated manager, inquiry to shipment.",
+        title: "One person on your order, start to finish",
+        body: "A dedicated account manager from inquiry to shipment, not a rotating support queue.",
       },
       {
         number: "05",
-        title: "One house for gear and apparel",
-        body: "Apparel, lifting gear and fight gear from one Caprio Sports factory.",
+        title: "Bring your own inspector",
+        body: "Independent QC or a pre-shipment inspection welcome on any order, alongside our own.",
       },
     ],
   },
+
+  // The light-tone "Why Capriosports" section this `why` object once fed
+  // was removed entirely (owner, 2026-09-17: "remove white Why
+  // Capriosports section under services and delete from your memory") --
+  // `whyCaprio` above is now the only numbered 01-05 list on this page.
 
   faq: {
     h2: "Top questions from B2B buyers",
