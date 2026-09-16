@@ -11,7 +11,7 @@ import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { categoryGroupsSection, header } from "@/components/ui/styles";
+import { categoryGroupsSection, footer, header } from "@/components/ui/styles";
 import { capriosportsHome } from "@/content/capriosports/home";
 import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 import { boxingMmaGroups, boxingMmaHub, BOXING_MMA_HUB_CANONICAL } from "@/content/gear/boxing-and-mma/hub";
@@ -76,7 +76,14 @@ export default function BoxingMmaHubPage() {
         />
       </main>
 
-      <Footer content={capriosportsHome.footer} social={ORGANIZATION.sameAs} />
+      <Footer
+        content={capriosportsHome.footer}
+        social={ORGANIZATION.sameAs}
+        brandMark={{
+          desktop: <Logo caprioOnly className={footer.capriosportsDesktopBrandLogo} />,
+          mobile: <Logo caprioOnly className={footer.capriosportsMobileBrandLogo} />,
+        }}
+      />
 
       <JsonLd
         data={breadcrumbSchema([

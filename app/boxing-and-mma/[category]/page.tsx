@@ -19,7 +19,7 @@ import { ProductGrid } from "@/components/sections/ProductGrid";
 import { FINAL_CTA_MARKER_ID, ProductCtasMobileBar } from "@/components/sections/ProductCtas";
 import { TrustPoints } from "@/components/sections/TrustPoints";
 import { WhatWeCover } from "@/components/sections/WhatWeCover";
-import { header } from "@/components/ui/styles";
+import { footer, header } from "@/components/ui/styles";
 import { buildCtaSubline, categoryEntityFaq } from "@/content/activewear/pdpShared";
 import { capriosportsHome } from "@/content/capriosports/home";
 import { home, boxingMmaMegaMenu } from "@/content/home";
@@ -167,7 +167,14 @@ export default async function BoxingMmaCategoryPage({ params }: PageProps<"/boxi
         <ProductCtasMobileBar primaryCta={home.nav.cta} />
       </main>
 
-      <Footer content={capriosportsHome.footer} social={ORGANIZATION.sameAs} />
+      <Footer
+        content={capriosportsHome.footer}
+        social={ORGANIZATION.sameAs}
+        brandMark={{
+          desktop: <Logo caprioOnly className={footer.capriosportsDesktopBrandLogo} />,
+          mobile: <Logo caprioOnly className={footer.capriosportsMobileBrandLogo} />,
+        }}
+      />
     </>
   );
 }

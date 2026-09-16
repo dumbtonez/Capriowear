@@ -21,7 +21,6 @@
 // its 2-CTA/video-block shape) had been confirmed.
 import type { Metadata } from "next";
 
-import { CapriosportsWordmark } from "@/components/CapriosportsWordmark";
 import { Header } from "@/components/Header";
 import { Logo } from "@/components/Logo";
 import { Marquee } from "@/components/Marquee";
@@ -39,7 +38,7 @@ import { TrustSignals } from "@/components/sections/TrustSignals";
 import { WhatWeMake } from "@/components/sections/WhatWeMake";
 import { WhyCapriosports } from "@/components/sections/WhyCapriosports";
 import { JsonLd } from "@/components/JsonLd";
-import { header } from "@/components/ui/styles";
+import { footer, header } from "@/components/ui/styles";
 import { capriosportsHome } from "@/content/capriosports/home";
 import { home } from "@/content/home";
 import { ORGANIZATION, PARENT_SITE_NAME, SITE_URL } from "@/content/site";
@@ -220,8 +219,8 @@ export default function CapriosportsHomePage() {
         content={capriosportsHome.footer}
         social={ORGANIZATION.sameAs}
         brandMark={{
-          desktop: <CapriosportsWordmark className="text-h5" />,
-          mobile: <CapriosportsWordmark className="text-body-lg" />,
+          desktop: <Logo caprioOnly className={footer.capriosportsDesktopBrandLogo} />,
+          mobile: <Logo caprioOnly className={footer.capriosportsMobileBrandLogo} />,
         }}
       />
 

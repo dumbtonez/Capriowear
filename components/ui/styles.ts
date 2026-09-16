@@ -6007,6 +6007,15 @@ export const footer = {
   // asset). Renders ~224px wide at this height, comfortably inside row 1's
   // own 60px-tall Content frame.
   desktopBrandLogo: "h-[57.69px] w-auto",
+  // Capriosports' own footer mark (Figma node 1011:170 "CAPRIO", inside
+  // "Content" 1011:124) -- owner, 2026-09-16: "update this logo in the
+  // footer", replacing the plain-text `CapriosportsWordmark` placeholder
+  // (see that component's own file header: "swap this for a real `<Logo>`-
+  // style SVG the moment a real Capriosports mark exists"). 36.539px is
+  // this node's own measured height (get_design_context: 224x36.539px,
+  // same 6.131:1 aspect ratio as `Logo`'s existing `caprioOnly` geometry --
+  // confirmed the same asset, just rendered larger here, not a new mark).
+  capriosportsDesktopBrandLogo: "h-[36.539px] w-auto",
   // Was rendered right next to the logo in row 1's brand group; owner,
   // 2026-09-06: move it to sit above row 2's description paragraph instead
   // -- see `desktopDescriptionGroup` below. Style itself (1.25rem/normal)
@@ -6147,6 +6156,12 @@ export const footer = {
   // not the old 51px this had been carrying over from before). Renders
   // ~167px wide at this height, matching Figma's own frame width.
   mobileBrandLogo: "h-[44.51px] w-auto",
+  // Capriosports' own footer mark, mobile size (Figma node 1021:132/1021:133
+  // "CAPRIO") -- 27.242px is this node's own measured height
+  // (get_design_context: 167.002x27.242px), same asset/aspect ratio as
+  // `capriosportsDesktopBrandLogo` above, just Figma's own smaller mobile
+  // frame size.
+  capriosportsMobileBrandLogo: "h-[27.242px] w-auto",
   mobileTagline: "text-[1.125rem] font-normal text-text",
   mobileDivider: "w-full border-t border-line",
   // Tagline + the description paragraph, 12px gap, no divider between them
