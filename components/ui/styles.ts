@@ -7922,12 +7922,12 @@ export const divisionCards = {
   // (the tinted `bg-paper/*` fill each `stackPanel*` class already
   // carries stays harmlessly underneath the opaque `<img>`).
   stackPanelImage: "object-cover",
-  // `pb-6` flat at every breakpoint (owner: "make 24px from bottom" --
-  // settled here after trying 40/48px) -- the gap from the CTA (the last
-  // element in this flex column) down to the card's own bottom edge /
-  // the `gridStack` hairline below it. Top padding (`pt-4`/`md:pt-6`)
-  // unchanged, was never part of this request.
-  textStack: "flex flex-col gap-2 px-6 pt-4 pb-6 md:px-8 md:pt-6",
+  // `pb-8` flat at every breakpoint (owner: "make the bottom from cta
+  // 32px" -- settled here after trying 40/48px, then 24px) -- the gap
+  // from the CTA (the last element in this flex column) down to the
+  // card's own bottom edge / the `gridStack` hairline below it. Top
+  // padding (`pt-4`/`md:pt-6`) unchanged, was never part of this request.
+  textStack: "flex flex-col gap-2 px-6 pt-4 pb-8 md:px-8 md:pt-6",
   // Full replacement for `grid` above on the `stack` variant, not a
   // `cx`-merged addition -- `grid`'s own `gap-4` and this variant's own
   // gap value both target the same CSS property, and which one actually
