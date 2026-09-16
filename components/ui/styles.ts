@@ -7923,14 +7923,20 @@ export const divisionCards = {
   // automatically, so no stray line at the very top of the section).
   // `md:`+ unchanged, real `gap-4` and no divider, since cards aren't
   // edge-to-edge there.
-  // `border-y border-line` (owner: "use the separator... to starting of
-  // the 3 cards" then "add separator under [this section]... to cards" --
-  // hairlines marking both where this 3-card section starts AND where it
-  // ends, i.e. the boundary against Hero above and the "What We Build On"
-  // Marquee below) plus `divide-y`'s own separators between each card,
-  // real mobile only.
+  // `border-y border-line-dark` (owner: "use the separator... to starting
+  // of the 3 cards" then "add separator under [this section]... to
+  // cards" -- hairlines marking both where this 3-card section starts
+  // AND where it ends, i.e. the boundary against Hero above and the
+  // "What We Build On" Marquee below) plus `divide-y`'s own separators
+  // between each card, real mobile only. `-dark` (real bug, found live:
+  // "i can not see the separator on mobile") -- `border-line`/`divide-
+  // line` resolve to `--color-line`, a hairline tuned for LIGHT surfaces
+  // (`rgba(0,0,0,0.1)`, invisible against this card's own dark `bg-ink`);
+  // `border-line-dark` is this project's own dark-surface hairline token
+  // (`rgba(255,255,255,0.12)`, e.g. `header.dark`/`navLink`'s bottom
+  // border), the one every other dark-surface divider sitewide uses.
   gridStack:
-    "flex flex-col items-center gap-0 divide-y divide-line border-y border-line -mx-5 md:mx-0 md:flex-row md:items-stretch md:gap-4 md:divide-y-0 md:border-y-0",
+    "flex flex-col items-center gap-0 divide-y divide-line-dark border-y border-line-dark -mx-5 md:mx-0 md:flex-row md:items-stretch md:gap-4 md:divide-y-0 md:border-y-0",
   // 24px flat at every breakpoint (owner: "make the title 24px") --
   // deliberately not reusing `title` below (22px mobile / 24px from
   // `md:`), which the other variants still use unchanged.
