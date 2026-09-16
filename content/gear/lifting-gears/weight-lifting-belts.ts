@@ -296,11 +296,12 @@ export const weightLiftingBelts: Category = {
       ],
       // Prong/Nylon Quick-Lock/Dip belt PDPs aren't built yet (still bare
       // draft styleCards below) -- per `relatedStyleTags`'s own comment,
-      // a tag with no matching published sibling PDP links to the parent
-      // category PLP instead of an invented/404ing URL. Re-point each at
-      // its own PDP href as soon as that style is published.
+      // a tag with no matching reachable sibling PDP links to the parent
+      // category PLP instead of an invented/404ing URL. Prong Belt is now
+      // built (draft + internalPreview, same as this style) so it's
+      // re-pointed at its own PDP; re-point the rest as each is built.
       relatedStyleTags: [
-        { label: "Prong Belt", href: "/lifting-gears/weight-lifting-belts" },
+        { label: "Prong Belt", href: "/lifting-gears/weight-lifting-belts/prong-belt" },
         { label: "Nylon Quick-Lock Belt", href: "/lifting-gears/weight-lifting-belts" },
         { label: "Dip Belt", href: "/lifting-gears/weight-lifting-belts" },
         { label: "See All", href: "/lifting-gears/weight-lifting-belts" },
