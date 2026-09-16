@@ -7915,7 +7915,15 @@ export const divisionCards = {
   // (the tinted `bg-paper/*` fill each `stackPanel*` class already
   // carries stays harmlessly underneath the opaque `<img>`).
   stackPanelImage: "object-cover",
-  textStack: "flex flex-col gap-2 px-6 py-4 md:px-8 md:py-6",
+  // `pb-10`/`md:pb-12` (was the flat `py-4`/`md:py-6` every side) --
+  // owner: "add 24px more gap from the separator within the cards...
+  // from cta add more 24px" -- 24px added to the BOTTOM padding only (top
+  // unchanged), so the extra space lives inside each card, between its
+  // own CTA and the `gridStack` hairline below it, not as a gap between
+  // the card boxes themselves (the earlier `gridStack` gap-6 attempt
+  // didn't read as "from the CTA," since that space sat outside the card,
+  // above the next card's hairline, not below this card's own content).
+  textStack: "flex flex-col gap-2 px-6 pt-4 pb-10 md:px-8 md:pt-6 md:pb-12",
   // Full replacement for `grid` above on the `stack` variant, not a
   // `cx`-merged addition -- `grid`'s own `gap-4` and this variant's own
   // gap value both target the same CSS property, and which one actually
@@ -7950,15 +7958,15 @@ export const divisionCards = {
   // a scoped opacity modifier rather than editing the shared token
   // itself, since every other dark-surface divider sitewide still wants
   // the brighter default.
-  // `gap-6` (24px, owner: "add 24px more gap from the separator within
-  // the cards not [the border against] how we built" -- real mobile
-  // only, between each card, around its own `divide-y` hairline; the
-  // outer `border-y` above/below the whole row -- the boundary against
-  // Hero and the "What We Build On" Marquee -- is a `border` on the
-  // container itself, not part of this inter-child `gap`, so it stays
-  // flush exactly as before) -- was `gap-0` (cards butted flush together).
+  // `gap-0` (owner follow-up: "this is not applied... 24px [should be]
+  // from cta" -- reverted the earlier `gap-6` attempt, which put the
+  // extra 24px OUTSIDE the card, above the next card's own hairline, not
+  // "from the CTA" as asked; that 24px now lives inside each card
+  // instead, as `textStack`'s own extra bottom padding, so cards butt
+  // flush together again here and the hairline sits right where the
+  // previous card's own (now taller) bottom padding ends).
   gridStack:
-    "flex flex-col items-center gap-6 divide-y divide-line-dark/50 border-y border-line-dark/50 -mx-5 md:mx-0 md:flex-row md:items-stretch md:gap-4 md:divide-y-0 md:border-y-0",
+    "flex flex-col items-center gap-0 divide-y divide-line-dark/50 border-y border-line-dark/50 -mx-5 md:mx-0 md:flex-row md:items-stretch md:gap-4 md:divide-y-0 md:border-y-0",
   // 24px flat at every breakpoint (owner: "make the title 24px") --
   // deliberately not reusing `title` below (22px mobile / 24px from
   // `md:`), which the other variants still use unchanged.
