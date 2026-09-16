@@ -7826,6 +7826,40 @@ export const divisionCards = {
   // size in some browsers, silently breaking the `flex-1` shrink.
   boxImageWrap: "relative flex-1 min-h-0",
   image: "object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105",
+  // `stack` variant (2026-09-16, owner: "try this new style for division
+  // cards... on hover the following animation will happen," referencing a
+  // shopify.design case-study card whose 2-3 stacked photo tiles fan out
+  // on hover) -- ADDITIVE only, doesn't touch `flat`'s own recipes above.
+  // Same solid `bg-ink-2` card shell as `flat` (still no real photography,
+  // per the earlier "remove the images... use a light black background"
+  // request) -- the placeholder area holds 2 extra decoy panels stacked
+  // directly behind the front one instead. At rest they sit tucked
+  // exactly behind the front panel (same position, invisible underneath
+  // it); on `group-hover` they fan out to either side with a spring-
+  // overshoot easing (`cubic-bezier(0.175, 0.885, 0.32, 1.275)`, read
+  // directly off the reference site's own card-media hover transition),
+  // mirroring its "cards spreading like a hand of playing cards" feel
+  // without needing real photo assets this site doesn't have wired up.
+  cardStack: "group relative flex w-[320px] h-[395px] flex-col overflow-hidden bg-ink-2 md:h-auto md:w-full md:flex-1 md:aspect-[657/958]",
+  stackImageWrap: "relative flex-1 min-h-0 overflow-hidden",
+  // Front panel: always on top (`z-10`), lifts slightly on hover too so
+  // the whole stack reads as one gesture, not just the two decoys under
+  // it moving.
+  stackPanelFront:
+    "absolute inset-6 z-10 rounded-[10px] border border-paper/10 bg-paper/[0.07] transition-transform duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:-translate-y-1",
+  // Tucked exactly behind the front panel at rest; fans out left on
+  // hover. `delay-75` on the right-hand decoy (not this one) staggers the
+  // two very slightly so they don't move as one rigid unit.
+  stackPanelLeft:
+    "absolute inset-6 rounded-[10px] border border-paper/10 bg-paper/[0.045] transition-transform duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:-translate-x-5 group-hover:translate-y-2 group-hover:-rotate-6",
+  stackPanelRight:
+    "absolute inset-6 rounded-[10px] border border-paper/10 bg-paper/[0.045] transition-transform delay-75 duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:translate-x-5 group-hover:translate-y-2 group-hover:rotate-6",
+  textStack: "flex flex-col gap-2 px-6 py-4 md:px-8 md:py-6",
+  // 16px sitewide, one line via `line-clamp-1` -- owner: "the subline has
+  // been shortened in 1 line with 16 font size" -- deliberately not
+  // reusing `descriptor` above (still 15/17px depending on breakpoint, up
+  // to 3 lines on the other variants).
+  descriptorStack: "text-[16px] leading-[22px] text-[#838d97] line-clamp-1",
   // EXPERIMENTAL (owner, 2026-09-15: "just for experiment... how will that
   // look?") -- fades the actual photo pixels to transparent near the
   // bottom via a mask (not just an opaque overlay on top of them), so the

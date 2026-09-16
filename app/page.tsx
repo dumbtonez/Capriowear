@@ -111,7 +111,12 @@ export default function CapriosportsHomePage() {
             on `Hero` as a real, working prop, just unused by this page
             now). */}
         <div className="bg-ink text-paper">
-          <DivisionCards categories={capriosportsHome.divisions.categories} variant="flat" />
+          {/* `stack` variant on trial (owner, 2026-09-16: "I want to try
+              this new style for division cards on the hero banner") --
+              `flat` (the previous live variant) is untouched in
+              DivisionCards.tsx/styles.ts, just not the active choice here
+              right now; swap this literal back to revert. */}
+          <DivisionCards categories={capriosportsHome.divisions.categories} variant="stack" />
           {/* xl:pt-4 (16px) tops up Marquee's own built-in 40px (`padded`
               default true, `marquee.basePaddingDefault`, shared sitewide --
               not overridden at its source) to a real 80px from the division

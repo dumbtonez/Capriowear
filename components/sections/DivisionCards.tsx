@@ -53,8 +53,15 @@ export type DivisionCardsProps = {
    *   section" token `card`/`cardBox` already use, so it's visible as its
    *   own container against the section's `bg-ink`) holding just the
    *   title/descriptor/link, full height.
+   * - `"stack"` (2026-09-16, owner: "try this new style... on hover the
+   *   following animation will happen," a shopify.design case-study card
+   *   reference) -- same solid `flat`-style card shell, but the
+   *   placeholder area holds 2 decoy panels tucked behind the front one
+   *   that fan out on hover, plus a shortened (1-line, 16px) descriptor.
+   *   See `divisionCards.cardStack`'s own comment in components/ui/
+   *   styles.ts for the full reasoning. Additive -- `flat` is untouched.
    */
-  variant?: "scrim" | "merge" | "box" | "flat";
+  variant?: "scrim" | "merge" | "box" | "flat" | "stack";
 };
 
 export function DivisionCards({ categories, variant = "scrim" }: DivisionCardsProps) {
@@ -65,9 +72,23 @@ export function DivisionCards({ categories, variant = "scrim" }: DivisionCardsPr
           <Link
             key={category.href}
             href={category.href}
-            className={variant === "flat" ? divisionCards.cardFlat : variant === "box" ? divisionCards.cardBox : divisionCards.card}
+            className={
+              variant === "stack"
+                ? divisionCards.cardStack
+                : variant === "flat"
+                  ? divisionCards.cardFlat
+                  : variant === "box"
+                    ? divisionCards.cardBox
+                    : divisionCards.card
+            }
           >
-            {variant === "flat" || !category.image ? (
+            {variant === "stack" ? (
+              <div className={divisionCards.stackImageWrap} aria-hidden="true">
+                <div className={divisionCards.stackPanelLeft} />
+                <div className={divisionCards.stackPanelRight} />
+                <div className={divisionCards.stackPanelFront} />
+              </div>
+            ) : variant === "flat" || !category.image ? (
               <div className={variant === "box" ? divisionCards.boxImageWrap : divisionCards.imageFlatWrap} aria-hidden="true" />
             ) : (
               <div className={variant === "box" ? divisionCards.boxImageWrap : divisionCards.fullBleedImageWrap}>
@@ -81,9 +102,19 @@ export function DivisionCards({ categories, variant = "scrim" }: DivisionCardsPr
                 {variant === "scrim" ? <div className={divisionCards.scrim} aria-hidden="true" /> : null}
               </div>
             )}
-            <div className={variant === "flat" ? divisionCards.textFlat : variant === "box" ? divisionCards.textBox : divisionCards.textWrap}>
+            <div
+              className={
+                variant === "stack"
+                  ? divisionCards.textStack
+                  : variant === "flat"
+                    ? divisionCards.textFlat
+                    : variant === "box"
+                      ? divisionCards.textBox
+                      : divisionCards.textWrap
+              }
+            >
               <p className={divisionCards.title}>{category.label}</p>
-              <p className={divisionCards.descriptor}>{category.descriptor}</p>
+              <p className={variant === "stack" ? divisionCards.descriptorStack : divisionCards.descriptor}>{category.descriptor}</p>
               {"linkLabel" in category && category.linkLabel ? (
                 <span className={divisionCards.link}>
                   {category.linkLabel}
