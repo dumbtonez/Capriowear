@@ -7834,10 +7834,11 @@ export const divisionCards = {
   // doesn't touch `flat`'s own recipes above. Same solid `bg-ink-2` card
   // shell as `flat` (still no real photography, per the earlier "remove
   // the images... use a light black background" request) -- the
-  // placeholder area holds 3 decoy panels at Figma's own exact size/
-  // rotation/offset (236x236 back/front tiles at -9.6deg/+9.6deg, a
-  // 205x205 middle tile at 0deg, all inside a 282x259 group -- `get_
-  // metadata` on node 1021:168, not a guess) instead of real photography.
+  // placeholder area holds 3 decoy panels, all 205x205 (owner correction,
+  // 2026-09-16 -- Figma's own `get_metadata` on node 1021:168 originally
+  // measured the back/front tiles at 236.32sq, but the owner specified
+  // 205x205 uniform), rotated -9.6deg/0deg/+9.6deg (top/middle/bottom)
+  // instead of real photography.
   // On `group-hover` all 3 fan out further with a spring-overshoot easing
   // (`cubic-bezier(0.175, 0.885, 0.32, 1.275)`, read directly off the
   // reference site's own card-media hover transition), mirroring its
@@ -7855,41 +7856,81 @@ export const divisionCards = {
   // "balanced" height the owner actually asked for. `md:`+ unchanged --
   // still the existing fluid `aspect-[657/958]` card, not edge-to-edge
   // (owner's request named mobile only).
-  cardStack: "group relative flex w-full h-auto flex-col overflow-hidden bg-ink-2 md:w-full md:flex-1 md:aspect-[657/958]",
+  // Real mobile: `bg-ink` (owner: "use the same background color as what
+  // we built background" -- the Marquee/"What We Build On" strip right
+  // below this section sits directly on the shared `bg-ink` wrapper, no
+  // `-2` tint, so the cards now match it exactly instead of standing out
+  // as their own lighter container). `md:`+: unchanged `bg-ink-2`, same
+  // dark card as `flat` -- no complaint at that breakpoint, so left as it
+  // already was through this whole trial.
+  cardStack: "group relative flex w-full h-auto flex-col overflow-hidden bg-ink md:bg-ink-2 md:w-full md:flex-1 md:aspect-[657/958]",
   // Centers the fixed-size photo group within whatever space is left
   // after the text block below (`flex-1`) -- `py-10` gives the 259px-tall
   // group room to breathe above/below at any card width, mobile or
   // desktop, rather than stretching/cropping it to fill the row.
   stackImageWrap: "relative flex flex-1 min-h-0 items-center justify-center overflow-hidden py-10",
-  // The group itself: Figma's own exact 282x259 footprint (node 1021:168,
-  // "Group 4") -- same size at every breakpoint, since no separate
-  // desktop Figma frame exists for this card to read a different number
-  // from (same "only a mobile frame was given" situation `card`'s own
-  // comment above already documents for this section).
-  stackGroup: "relative mx-auto h-[259px] w-[282px]",
-  // Back tile (drawn first, lowest z): Figma's own measured offset inside
-  // the group (`get_metadata` node 1021:148: left 0, top 34.19, 236.32sq,
-  // -9.6deg) -- fans further out and rotates more on hover.
+  // The group itself: tall/wide enough to hold the fanned tiles at their
+  // own offsets below without clipping. Real mobile: 160x160 tiles
+  // (owner: "make the images 160x160," correcting an earlier 180x180
+  // pass) -> leftmost spans to 0+160=160, rightmost to 80+160=240,
+  // tallest to 34+160=194, so 240x194. `md:`+: 205x205 tiles (unchanged)
+  // -> 285x239, same as before.
+  stackGroup: "relative mx-auto h-[194px] w-[240px] md:h-[239px] md:w-[285px]",
+  // Back tile (drawn first, lowest z), -9.6deg -- 160x160 real mobile,
+  // 205x205 from `md:` (owner correction above; desktop size was itself
+  // an earlier owner correction, 2026-09-16, from Figma's original
+  // 236.32sq measurement). Offset kept from that same Figma reading at
+  // every breakpoint, just the tile size changes. Fans further out and
+  // rotates more on hover.
+  // `border-ink/10`/`bg-ink/[N]` (was `border-paper/10`/`bg-paper/[N]`) --
+  // `cardStack` switched to a white (`bg-paper`) card above, so the
+  // `border-paper/10`/`bg-paper/[N]` (reverted, matching `cardStack`'s
+  // own revert back to a dark card) -- reads against dark `bg-ink-2`
+  // again.
   stackPanelBack:
-    "absolute left-0 top-[34px] h-[236px] w-[236px] -rotate-[9.6deg] rounded-[10px] border border-paper/10 bg-paper/[0.045] transition-transform duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:-translate-x-3 group-hover:-translate-y-1 group-hover:-rotate-[18deg]",
-  // Middle tile (drawn second): node 1021:150, left 39, top 15.27, 205sq,
-  // 0deg -- lifts straight up on hover, no rotation, staying the visual
-  // anchor between the two rotated outer tiles.
+    "absolute left-0 top-[34px] h-[160px] w-[160px] -rotate-[9.6deg] rounded-[10px] border border-paper/10 bg-paper/[0.045] transition-transform duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:-translate-x-3 group-hover:-translate-y-1 group-hover:-rotate-[18deg] md:h-[205px] md:w-[205px]",
+  // Middle tile (drawn second), 0deg -- lifts straight up on hover, no
+  // rotation, staying the visual anchor between the two rotated outer
+  // tiles. Same responsive sizing as the back/front tiles.
   stackPanelMid:
-    "absolute left-[39px] top-[15px] z-[5] h-[205px] w-[205px] rounded-[10px] border border-paper/10 bg-paper/[0.06] transition-transform delay-75 duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:-translate-y-3",
-  // Front tile (drawn last, highest z): node 1021:151, left 80.16, top
-  // 22.69, 236.32sq, +9.6deg -- fans the opposite direction from the back
-  // tile, mirroring it.
+    "absolute left-[39px] top-[15px] z-[5] h-[160px] w-[160px] rounded-[10px] border border-paper/10 bg-paper/[0.06] transition-transform delay-75 duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:-translate-y-3 md:h-[205px] md:w-[205px]",
+  // Front tile (drawn last, highest z), +9.6deg -- fans the opposite
+  // direction from the back tile, mirroring it. Same responsive sizing.
   stackPanelFront:
-    "absolute left-[80px] top-[23px] z-10 h-[236px] w-[236px] rotate-[9.6deg] rounded-[10px] border border-paper/10 bg-paper/[0.08] transition-transform delay-150 duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:translate-x-3 group-hover:-translate-y-1 group-hover:rotate-[18deg]",
+    "absolute left-[80px] top-[23px] z-10 h-[160px] w-[160px] rotate-[9.6deg] rounded-[10px] border border-paper/10 bg-paper/[0.08] transition-transform delay-150 duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:translate-x-3 group-hover:-translate-y-1 group-hover:rotate-[18deg] md:h-[205px] md:w-[205px]",
+  // Applied alongside each `stackPanel*` position/rotation class above
+  // when a dummy `stackImages` photo is provided -- `object-cover` so a
+  // non-square placeholder image still fills the tile without distortion
+  // (the tinted `bg-paper/*` fill each `stackPanel*` class already
+  // carries stays harmlessly underneath the opaque `<img>`).
+  stackPanelImage: "object-cover",
   textStack: "flex flex-col gap-2 px-6 py-4 md:px-8 md:py-6",
-  // `-mx-5` cancels `container-p`'s real-mobile 20px inset (`app/
-  // globals.css`), same technique `mobileRoot` elsewhere in this file
-  // already uses for the identical "break a mobile row out to true edge-
-  // to-edge" need -- see `cardStack`'s own comment above for why. `md:`+
-  // untouched (`mx-0`), so tablet/desktop keep the section's normal
-  // container inset.
-  gridEdgeToEdge: "max-md:-mx-5 md:mx-0",
+  // Full replacement for `grid` above on the `stack` variant, not a
+  // `cx`-merged addition -- `grid`'s own `gap-4` and this variant's own
+  // gap value both target the same CSS property, and which one actually
+  // wins when both are present in one class string depends on generated
+  // stylesheet order, not source order (the same "two competing
+  // utilities" risk this file's own `cardMedia`/display-utility comments
+  // already warn about elsewhere) -- a full replacement sidesteps that
+  // entirely. `-mx-5` cancels `container-p`'s real-mobile 20px inset
+  // (`app/globals.css`), same technique `mobileRoot` elsewhere in this
+  // file already uses, so cards still span true edge-to-edge on real
+  // mobile. `gap-0` plus `divide-y divide-line` (owner: "use the
+  // separator between these 3 cards mobile," after trying and reverting
+  // both a plain dark gap and a white-card-with-gap version) -- cards
+  // butt flush together with a hairline `border-line` rule drawn only
+  // BETWEEN them (Tailwind's `divide-y` skips the first child
+  // automatically, so no stray line at the very top of the section).
+  // `md:`+ unchanged, real `gap-4` and no divider, since cards aren't
+  // edge-to-edge there.
+  // `border-y border-line` (owner: "use the separator... to starting of
+  // the 3 cards" then "add separator under [this section]... to cards" --
+  // hairlines marking both where this 3-card section starts AND where it
+  // ends, i.e. the boundary against Hero above and the "What We Build On"
+  // Marquee below) plus `divide-y`'s own separators between each card,
+  // real mobile only.
+  gridStack:
+    "flex flex-col items-center gap-0 divide-y divide-line border-y border-line -mx-5 md:mx-0 md:flex-row md:items-stretch md:gap-4 md:divide-y-0 md:border-y-0",
   // 24px flat at every breakpoint (owner: "make the title 24px") --
   // deliberately not reusing `title` below (22px mobile / 24px from
   // `md:`), which the other variants still use unchanged.
@@ -7898,7 +7939,18 @@ export const divisionCards = {
   // been shortened in 1 line with 16 font size" -- deliberately not
   // reusing `descriptor` above (still 15/17px depending on breakpoint, up
   // to 3 lines on the other variants).
-  descriptorStack: "text-[16px] leading-[22px] text-[#838d97] line-clamp-1",
+  // 17px (owner correction, 2026-09-16, from an initial 16px) -- one line
+  // via `line-clamp-1`.
+  descriptorStack: "text-[17px] leading-[23px] text-[#838d97] line-clamp-1",
+  // `stack` variant's own CTA -- 15px flat (owner: "make the cta font
+  // 15px"), not the shared `link` token's 14px mobile / 16px `md:`+ split.
+  // `mt-4` (16px), not `link`'s own `mt-1` (4px) -- on top of `textStack`'s
+  // shared `gap-2` (8px) between every child, that's a real 24px from the
+  // descriptor above (owner: "add 12px more space from the top subline" --
+  // was 8+4=12px total, now 8+16=24px). Otherwise identical behaviour to
+  // `link` (arrow affordance, orange on hover, `group/cta` hover scope).
+  linkStack:
+    "group/cta mt-4 inline-flex w-fit items-center gap-1.5 text-[15px] font-bold leading-6 uppercase text-paper transition-colors hover:text-accent",
   // EXPERIMENTAL (owner, 2026-09-15: "just for experiment... how will that
   // look?") -- fades the actual photo pixels to transparent near the
   // bottom via a mask (not just an opaque overlay on top of them), so the

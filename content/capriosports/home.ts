@@ -136,6 +136,17 @@ export const capriosportsHome = {
         // `descriptor`'s own comment on why that exact wording hits 3
         // lines on those variants).
         descriptorShort: "Custom lifting gear, private label and wholesale",
+        // `stack` variant only -- dummy placeholder photos (owner: "Add
+        // some dummy fitness products in the placeholders"), NOT real
+        // product photography (none exists for Gear yet, per this
+        // section's own "no images sitewide" history above) -- a
+        // generated placehold.co tile per panel, swap for real photos
+        // once shot.
+        stackImages: [
+          { src: "https://placehold.co/205x205/2a2e35/f5f5f5?text=Weight+Belt", alt: "Placeholder photo of a weight lifting belt" },
+          { src: "https://placehold.co/205x205/23262c/f5f5f5?text=Training+Gloves", alt: "Placeholder photo of training gloves" },
+          { src: "https://placehold.co/205x205/33373f/f5f5f5?text=Wraps", alt: "Placeholder photo of lifting wraps" },
+        ],
         href: "/lifting-gears",
         // Explicit `image` (via CategoryLinkGrid's own new optional field,
         // 2026-09-15) -- these 3 cards don't share one real division
@@ -162,6 +173,12 @@ export const capriosportsHome = {
         // Capriowear's own `descriptorShort` below word-for-word in the
         // Figma file, not a copy/paste mistake on this end).
         descriptorShort: "Custom activewear and teamwear, sample to bulk",
+        // `stack` variant only -- see Lifting Gear's own `stackImages` comment above.
+        stackImages: [
+          { src: "https://placehold.co/205x205/2a2e35/f5f5f5?text=Boxing+Gloves", alt: "Placeholder photo of boxing gloves" },
+          { src: "https://placehold.co/205x205/23262c/f5f5f5?text=Hand+Wraps", alt: "Placeholder photo of hand wraps" },
+          { src: "https://placehold.co/205x205/33373f/f5f5f5?text=Headgear", alt: "Placeholder photo of MMA headgear" },
+        ],
         href: "/boxing-and-mma",
         linkLabel: "Explore Boxing",
       },
@@ -170,6 +187,12 @@ export const capriosportsHome = {
         descriptor: "Custom, private-label activewear and teamwear, made to your brand's spec, from sample to bulk.",
         // Figma node 1021:164 -- see Lifting Gear's own comment above.
         descriptorShort: "Custom activewear and teamwear, sample to bulk",
+        // `stack` variant only -- see Lifting Gear's own `stackImages` comment above.
+        stackImages: [
+          { src: "https://placehold.co/205x205/2a2e35/f5f5f5?text=Leggings", alt: "Placeholder photo of leggings" },
+          { src: "https://placehold.co/205x205/23262c/f5f5f5?text=Hoodie", alt: "Placeholder photo of a hoodie" },
+          { src: "https://placehold.co/205x205/33373f/f5f5f5?text=T-Shirt", alt: "Placeholder photo of a t-shirt" },
+        ],
         href: "/capriowear",
         linkLabel: "Visit Capriowear",
         // Only this card's arrow keeps the continuous "always pointing"

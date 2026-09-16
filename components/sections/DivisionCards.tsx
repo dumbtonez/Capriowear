@@ -28,6 +28,8 @@ type DivisionCategory = (typeof capriosportsHome.divisions.categories)[number] &
   image?: { src: string; alt: string };
   /** `stack` variant only -- see that field's own comment in content/capriosports/home.ts. */
   descriptorShort?: string;
+  /** `stack` variant only, dummy placeholder photos -- see that field's own comment in content/capriosports/home.ts. */
+  stackImages?: { src: string; alt: string }[];
 };
 
 export type DivisionCardsProps = {
@@ -77,7 +79,7 @@ export type DivisionCardsProps = {
 export function DivisionCards({ categories, variant = "scrim" }: DivisionCardsProps) {
   return (
     <section className={divisionCards.section}>
-      <div className={cx(divisionCards.grid, variant === "stack" && divisionCards.gridEdgeToEdge)}>
+      <div className={variant === "stack" ? divisionCards.gridStack : divisionCards.grid}>
         {categories.map((category) => (
           <Link
             key={category.href}
@@ -95,9 +97,26 @@ export function DivisionCards({ categories, variant = "scrim" }: DivisionCardsPr
             {variant === "stack" ? (
               <div className={divisionCards.stackImageWrap} aria-hidden="true">
                 <div className={divisionCards.stackGroup}>
-                  <div className={divisionCards.stackPanelBack} />
-                  <div className={divisionCards.stackPanelMid} />
-                  <div className={divisionCards.stackPanelFront} />
+                  {(
+                    [
+                      { cls: divisionCards.stackPanelBack, image: category.stackImages?.[0] },
+                      { cls: divisionCards.stackPanelMid, image: category.stackImages?.[1] },
+                      { cls: divisionCards.stackPanelFront, image: category.stackImages?.[2] },
+                    ] as const
+                  ).map(({ cls, image }, i) =>
+                    image ? (
+                      // Dummy placeholder photos (owner: "add some dummy
+                      // fitness products"), not real product photography --
+                      // plain <img>, not next/image, since these are
+                      // temporary placehold.co placeholders on an external
+                      // domain not worth wiring into next.config.ts's
+                      // image `remotePatterns` for a trial variant.
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img key={i} src={image.src} alt={image.alt} className={cx(cls, divisionCards.stackPanelImage)} />
+                    ) : (
+                      <div key={i} className={cls} />
+                    ),
+                  )}
                 </div>
               </div>
             ) : variant === "flat" || !category.image ? (
@@ -130,7 +149,7 @@ export function DivisionCards({ categories, variant = "scrim" }: DivisionCardsPr
                 {variant === "stack" ? category.descriptorShort ?? category.descriptor : category.descriptor}
               </p>
               {"linkLabel" in category && category.linkLabel ? (
-                <span className={divisionCards.link}>
+                <span className={variant === "stack" ? divisionCards.linkStack : divisionCards.link}>
                   {category.linkLabel}
                   <NextArrowIcon
                     className={"linkAnimated" in category && category.linkAnimated ? divisionCards.linkIconAnimated : divisionCards.linkIcon}
