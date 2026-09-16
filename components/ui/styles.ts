@@ -7764,7 +7764,11 @@ export const divisionCards = {
   // mobile, so this extra 40px after it just read as unexplained dead
   // space before the "What We Build On" Marquee below, not a real gap
   // anyone asked to keep.
-  section: "container-p max-md:-mt-3 max-md:pb-0 md:pt-[72px] md:pb-4 xl:pb-6",
+  // `md:pt-8` tablet only, `xl:pt-[72px]` desktop only (owner: "tablet,
+  // on the top of the section outside space make it 32px" -- was a flat
+  // `md:pt-[72px]` covering both tablet and desktop; desktop's own 72px
+  // value, still real and owner-specified, is now `xl:`-scoped instead).
+  section: "container-p max-md:-mt-3 max-md:pb-0 md:pt-8 md:pb-4 xl:pt-[72px] xl:pb-6",
   // md: (768px), not xl: (owner, 2026-09-15: "on tablet we should treat
   // those 3 cards as desktop, not mobile" -- the same real rule Hero.tsx's
   // own ticker already documents for this identical "does it read fine at
@@ -7888,34 +7892,40 @@ export const divisionCards = {
   // desktop, rather than stretching/cropping it to fill the row.
   stackImageWrap: "relative flex flex-1 min-h-0 items-center justify-center overflow-hidden py-10",
   // The group itself: tall/wide enough to hold the fanned tiles at their
-  // own offsets below without clipping. Real mobile: 160x160 tiles
-  // (owner: "make the images 160x160," correcting an earlier 180x180
-  // pass) -> leftmost spans to 0+160=160, rightmost to 80+160=240,
-  // tallest to 34+160=194, so 240x194. `md:`+: 205x205 tiles (unchanged)
-  // -> 285x239, same as before.
-  stackGroup: "relative mx-auto h-[194px] w-[240px] md:h-[239px] md:w-[285px]",
-  // Back tile (drawn first, lowest z), -9.6deg -- 160x160 real mobile,
-  // 205x205 from `md:` (owner correction above; desktop size was itself
-  // an earlier owner correction, 2026-09-16, from Figma's original
-  // 236.32sq measurement). Offset kept from that same Figma reading at
-  // every breakpoint, just the tile size changes. Fans further out and
-  // rotates more on hover.
+  // own offsets below without clipping. Mobile AND tablet: 160x160 tiles
+  // (owner: "on tablet, images in the card should follow mobile size,
+  // 160x160" -- extended tablet's own tiles down to the mobile size,
+  // `xl:` now the only breakpoint that still gets the bigger 205x205 --
+  // was `md:`, matching the same "on tablet we should treat those 3
+  // cards as desktop" row-layout switch this section's own `md:flex-row`
+  // still keeps; that switch is about LAYOUT, not image size, so it
+  // stays put -- only the tile-size breakpoint moved) -> leftmost spans
+  // to 0+160=160, rightmost to 80+160=240, tallest to 34+160=194, so
+  // 240x194. `xl:`+: 205x205 tiles (unchanged) -> 285x239, same as
+  // before.
+  stackGroup: "relative mx-auto h-[194px] w-[240px] xl:h-[239px] xl:w-[285px]",
+  // Back tile (drawn first, lowest z), -9.6deg -- 160x160 mobile AND
+  // tablet, 205x205 from `xl:` only (owner correction above; desktop
+  // size was itself an earlier owner correction, 2026-09-16, from
+  // Figma's original 236.32sq measurement). Offset kept from that same
+  // Figma reading at every breakpoint, just the tile size changes. Fans
+  // further out and rotates more on hover.
   // `border-ink/10`/`bg-ink/[N]` (was `border-paper/10`/`bg-paper/[N]`) --
   // `cardStack` switched to a white (`bg-paper`) card above, so the
   // `border-paper/10`/`bg-paper/[N]` (reverted, matching `cardStack`'s
   // own revert back to a dark card) -- reads against dark `bg-ink-2`
   // again.
   stackPanelBack:
-    "absolute left-0 top-[34px] h-[160px] w-[160px] -rotate-[9.6deg] rounded-[10px] border border-paper/10 bg-paper/[0.045] transition-transform duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:-translate-x-3 group-hover:-translate-y-1 group-hover:-rotate-[18deg] md:h-[205px] md:w-[205px]",
+    "absolute left-0 top-[34px] h-[160px] w-[160px] -rotate-[9.6deg] rounded-[10px] border border-paper/10 bg-paper/[0.045] transition-transform duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:-translate-x-3 group-hover:-translate-y-1 group-hover:-rotate-[18deg] xl:h-[205px] xl:w-[205px]",
   // Middle tile (drawn second), 0deg -- lifts straight up on hover, no
   // rotation, staying the visual anchor between the two rotated outer
   // tiles. Same responsive sizing as the back/front tiles.
   stackPanelMid:
-    "absolute left-[39px] top-[15px] z-[5] h-[160px] w-[160px] rounded-[10px] border border-paper/10 bg-paper/[0.06] transition-transform delay-75 duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:-translate-y-3 md:h-[205px] md:w-[205px]",
+    "absolute left-[39px] top-[15px] z-[5] h-[160px] w-[160px] rounded-[10px] border border-paper/10 bg-paper/[0.06] transition-transform delay-75 duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:-translate-y-3 xl:h-[205px] xl:w-[205px]",
   // Front tile (drawn last, highest z), +9.6deg -- fans the opposite
   // direction from the back tile, mirroring it. Same responsive sizing.
   stackPanelFront:
-    "absolute left-[80px] top-[23px] z-10 h-[160px] w-[160px] rotate-[9.6deg] rounded-[10px] border border-paper/10 bg-paper/[0.08] transition-transform delay-150 duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:translate-x-3 group-hover:-translate-y-1 group-hover:rotate-[18deg] md:h-[205px] md:w-[205px]",
+    "absolute left-[80px] top-[23px] z-10 h-[160px] w-[160px] rotate-[9.6deg] rounded-[10px] border border-paper/10 bg-paper/[0.08] transition-transform delay-150 duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:translate-x-3 group-hover:-translate-y-1 group-hover:rotate-[18deg] xl:h-[205px] xl:w-[205px]",
   // Applied alongside each `stackPanel*` position/rotation class above
   // when a dummy `stackImages` photo is provided -- `object-cover` so a
   // non-square placeholder image still fills the tile without distortion
