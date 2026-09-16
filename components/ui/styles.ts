@@ -5294,6 +5294,148 @@ export const ourServices = {
   mobileSectionServices: "container-p flex flex-col items-center gap-8 pt-[20px] pb-[60px] xl:hidden",
 };
 
+// OurStory.tsx -- the homepage's 10-milestone company timeline. Black
+// surface, sticky-year scroll mechanic (plain CSS `position: sticky`, same
+// pattern as `ourServices.desktopSticky` above -- no scroll listener). Sits
+// directly after Our Services on the page (owner, 2026-09-16), so this
+// reuses the exact same `bg-ink text-paper` unconstrained-wrapper split
+// `ourServices.darkSurface` already established, for the same edge-to-edge
+// reasoning.
+export const ourStory = {
+  darkSurface: "bg-ink text-paper",
+  section: "container-p flex flex-col gap-12 pt-[120px] pb-[120px] xl:pb-[160px]",
+  // Owner, 2026-09-16 (desktop only): force the H2 to wrap to 2 lines and
+  // add 32px below it, on top of `section`'s own gap-12 down to the first
+  // row -- a real max-width constraint, not a manual line break, so it
+  // still re-wraps correctly if the copy ever changes. Mobile/tablet
+  // (below `md:`) keep the unconstrained default heading width/spacing.
+  // 560px wrapped this copy to 3 lines instead of 2 -- widened to 680px
+  // (owner, 2026-09-16: "make the section title in 2 lines not 3").
+  heading: "md:max-w-[680px] md:mb-8",
+  // Owner, 2026-09-16 (desktop only): originally centered (`md:mx-auto`)
+  // to fix the row's content column stretching edge-to-edge across
+  // `container-p`'s full width. Reverted to left-aligned (no `mx-auto`) --
+  // owner, same day: "align the section to our story title, same left
+  // alignment" -- the centered block didn't share the heading's left edge,
+  // which reads better than centering independently of it. `max-w-[1100px]`
+  // stays, still capping the row at a sane width on very wide viewports
+  // instead of stretching to `container-p`'s full ~1280px. Mobile/tablet
+  // (below `md:`) render `mobileRow` instead, unaffected either way.
+  // `gap-12 md:gap-0`: 48px between milestones on mobile only -- bumped
+  // from the sitewide-standard `gap-8` (32px, confirmed correct via a
+  // live measurement, but read as too tight for this section specifically:
+  // each row carries far more visual weight (image + title + subline)
+  // than a typical mobile card, owner, 2026-09-16). `md:gap-0` cancels it
+  // at `md:` up, where each desktop `row` already owns its own spacing
+  // via `md:py-[34px]`.
+  rows: "flex flex-col gap-12 md:gap-0 md:max-w-[1100px]",
+  // Grid only from `md:` up -- mobile (below `md:`) collapses to a single
+  // column via `mobileRow` instead (year goes inline, static, above the
+  // image -- no second column to stick against on mobile).
+  //
+  // Owner, 2026-09-16 (desktop only): year column widened 110px -> 180px
+  // ("2013–2014 should not be in 2 lines" -- doesn't fit the original
+  // 110px column at the now-larger `text-h2` year size) and the gap
+  // widened 26px -> 90px ("add 64px more space between year and images").
+  row: "hidden md:grid md:grid-cols-[180px_1fr] md:gap-[90px] md:py-[34px]",
+  // Owner, 2026-09-16: "on mobile, spacing are very less... follow the
+  // spacing structure we follow on mobile capriowear similar sections" --
+  // was `gap-2 py-[22px]` (8px uniform gap, cramped). No shared `gap` any
+  // more, same reasoning as desktop's own `body`/`titleSpacing`/
+  // `descSpacing` split below: `mobileYear`/`mobileImage` need their own
+  // spacing via `mt-*` on `mobileImageSpacing`/`titleSpacing`/
+  // `descSpacing`, not one flex `gap` applied uniformly to all four
+  // children. Between-row spacing now lives on `rows`' own `gap-8` below
+  // (32px, this project's genuinely established sitewide mobile card gap
+  // -- `ourServices.mobileSection`, `certified.mobileSection`,
+  // `stats.mobileSection`, and a dozen others all use the same `gap-8`;
+  // an earlier `py-10` here guessed 40px without checking, confirmed
+  // wrong against the real convention).
+  mobileRow: "flex flex-col md:hidden",
+  // `mobileImageSpacing` (16px, matching `capabilityCard.root`'s own
+  // established sitewide mobile media-to-text gap) sits between the year
+  // label and the image. `mobileTitleSpacing` (image to title) bumped to
+  // 24px (owner, 2026-09-16: "image to title make 24px" -- was 16px).
+  // Title-to-subline reuses the shared `descSpacing` below (12px at both
+  // breakpoints already, `capabilityCard.body`'s own established value --
+  // no separate mobile token needed).
+  mobileImageSpacing: "mt-4",
+  mobileTitleSpacing: "mt-6",
+  // `top-[88px]` clears the sticky Header's own height (see Header.tsx) so
+  // the pinned year never sits underneath the nav bar.
+  yearCol: "sticky top-[88px] self-start",
+  // Owner, 2026-09-16 (desktop only): bumped from `text-h4` (28px @1440)
+  // to `text-h2` (36px @1440) -- "increase the font size for the year".
+  // Mobile's own `mobileYearNum` (text-body-lg) is unaffected. Owner,
+  // 2026-09-16: "make the year text 500 weight" -- `font-medium` (500),
+  // was `font-semibold` (600).
+  yearNum: "text-h2 font-medium leading-none text-paper",
+  yearNumCurrent: "text-h2 font-medium leading-none text-accent",
+  // `text-overline` carries its own 600 (semibold) weight by default --
+  // `font-medium` overrides it to 500 (owner, 2026-09-16: "make text year
+  // also 500 weight", i.e. the "Year" label, matching `yearNum`'s own
+  // 500 weight above).
+  yearTag: "mt-2 block text-overline font-medium text-[#838D97]",
+  mobileYear: "flex items-baseline gap-2",
+  mobileYearNum: "text-body-lg font-medium leading-none text-paper",
+  mobileYearNumCurrent: "text-body-lg font-medium leading-none text-accent",
+  mobileYearTag: "text-overline font-medium text-[#838D97]",
+  // Desktop only -- no uniform `gap` here on purpose: image-to-title and
+  // title-to-subline need different spacing, applied as explicit `mt-*` on
+  // `titleSpacing`/`descSpacing` below rather than a flex `gap` that would
+  // apply the same value to both. Mobile's `mobileRow` keeps its own
+  // uniform `gap-2` (unaffected, not part of this request).
+  body: "flex min-w-0 flex-col",
+  // 24px -> 32px (owner, 2026-09-16, revised same day: "from title to
+  // image make it 32 px").
+  titleSpacing: "mt-8",
+  // 12px (owner, 2026-09-16: "title like founded and subline gap should
+  // be 12 px").
+  descSpacing: "mt-3",
+  // Owner, 2026-09-16 (desktop only): originally halved to `md:w-1/2`
+  // ("image size is too big... make it half the size"), `rounded-none`
+  // drops the corner radius, border/outline removed entirely (was `border
+  // border-line-dark`). Doubled back to `md:w-full` (owner, same day:
+  // "the image size is still small make it double the size" -- full width
+  // of the `body` column is exactly 2x the previous `w-1/2`). 16:9 aspect
+  // ratio unchanged. Mobile's own `mobileImage` (full-width, rounded,
+  // bordered) is unaffected -- request was scoped to desktop only.
+  image: "relative aspect-[16/9] overflow-hidden rounded-none bg-ink-2 md:w-full",
+  // 4:3 on mobile -- the brief's own call ("if that reads better with the
+  // available width"). Owner, 2026-09-16: "make changes that we decided
+  // on desktop like no corner radius, outline, placeholder text" -- now
+  // matches `image`'s own treatment exactly (`rounded-none`, no border).
+  mobileImage: "relative aspect-[4/3] overflow-hidden rounded-none bg-ink-2",
+  // `text-h5` (24px @1440) stays the mobile size; `md:text-h3` (30px
+  // @1440) overrides it from `md:` up (owner, 2026-09-16: "title font make
+  // it 30 not 24" -- desktop only, mobile unaffected).
+  title: "text-h5 font-semibold text-paper md:text-h3",
+  // `#838D97` is this project's own established muted-on-dark literal
+  // (`ourServices.leadDark`/`cardBodyDark` above use the same value) --
+  // 5.50:1 against `--color-ink` (#121317), passing WCAG AA (4.5:1) for
+  // this section's body-copy size (contrast-checker verified, not
+  // eyeballed).
+  // Owner, 2026-09-16 (desktop only): "subline width should be 15% less
+  // than the image width" and "make it 2 lines where applicable". `image`
+  // is now `md:w-full` of this same `body` column (doubled from its
+  // earlier `w-1/2`), so 15% narrower than that is `85%` (`100% * 0.85`)
+  // -- kept as a percentage of the same parent, not a fixed px, so this
+  // stays correct if `image`'s own width changes again. Mobile's own
+  // render is unaffected (no width constraint below `md:`).
+  // `text-body` (18px, no fixed line-height override) stays the mobile
+  // size; `md:text-[1.25rem] md:leading-[28px]` (20px/28px, same literal
+  // pattern `ourServices.lead`/`leadDark` already use) overrides it from
+  // `md:` up (owner, 2026-09-16: "make subline 20 by 28 px" -- desktop
+  // only, mobile unaffected).
+  desc: "text-body text-[#838D97] md:w-[85%] md:text-[1.25rem] md:leading-[28px]",
+  // Pulse marker, current milestone only -- `motion-safe:` is Tailwind's
+  // built-in `prefers-reduced-motion` gate (no JS, no `lib/
+  // motionPreference.ts` needed: there's no imperative playback here to
+  // gate, just a CSS animation that Tailwind itself skips registering
+  // under `prefers-reduced-motion: reduce`).
+  pulseDot: "inline-block h-2 w-2 rounded-pill bg-accent motion-safe:animate-pulse",
+};
+
 // Shared by every mobile card carousel (Our Services first, How It Works
 // second) -- extracted into components/CardCarousel.tsx once a second
 // section needed the exact same swipeable-track-plus-dots pattern, same
@@ -8565,12 +8707,16 @@ export const productCustomizeSteps = {
   // only ever mounts at `xl:` any more (see `desktopOuter`'s own comment
   // above), so only the true-desktop `px-[80px]` inset is left.
   desktopRow: "overflow-clip w-full px-[80px]",
-  // gap-10 (40px), was gap-6 (24px) -- owner, 2026-09-12: "make it 40px
-  // across the site" (see `trustSignals.desktopReel`'s own comment for the
-  // full before/after list). `CARD_GAP` in ProductCustomizeSteps.tsx must
-  // match.
+  // gap-6 (24px) -- briefly moved to 40px along with every other desktop
+  // chevron gallery (owner, 2026-09-12: "make it 40px across the site"),
+  // but unlike `howItWorks`/`trustSignals`/Exhibitions this one never got
+  // the same-day revert back to 24px -- found live on the Lever Belt PDP
+  // (owner, 2026-09-16: "double check [homepage uses 24px] and apply the
+  // same on Caprio and Capriowear PDPs" -- this recipe is the shared PDP
+  // "How We Customize" carousel both brands render through, so one fix
+  // covers every PDP). `CARD_GAP` in ProductCustomizeSteps.tsx must match.
   desktopReel:
-    "flex w-max gap-10 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+    "flex w-max gap-6 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
   // 469px -- owner correction, 2026-09-01: "you did not use the same
   // component how [it] works from the homepage. Use homepage component
   // size, overall." Was a section-specific 335px (Figma's own literal

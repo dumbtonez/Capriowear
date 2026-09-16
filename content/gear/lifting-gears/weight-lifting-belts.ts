@@ -165,7 +165,7 @@ export const weightLiftingBelts: Category = {
       internalPreview: true,
       slug: "lever-belt",
       cardTitle: "Custom Leather Lever Belt",
-      cardSubline: "10mm and 13mm, 4in width, the flagship competition style",
+      cardSubline: "7mm to 13mm, 4in width, the flagship competition style",
       image: "",
       imageAlt: "Custom leather lever weight lifting belt",
       href: "/lifting-gears/weight-lifting-belts/lever-belt",
@@ -193,20 +193,32 @@ export const weightLiftingBelts: Category = {
       ],
       pdpHeading: "Custom Powerlifting Lever Belt Manufacturer",
       pdpDescription:
-        "A custom and private label leather lever belt, built in 10mm and 13mm thickness at 4in width, genuine leather with a quick-release lever buckle, our competition-adjacent, powerlifting-style build, made to your brand in Sialkot, Pakistan.",
-      // "Powerlifting" appears here and in pdpMetaTitle/pdpMetaDescription
-      // only (owner spec) -- the one belt style that actually competes on
-      // that term. Never added to the PLP or the other 5 belt PDPs.
-      pdpMetaTitle: "Custom Powerlifting Lever Belt Manufacturer",
+        "Genuine leather lever belt built for one-motion bracing under max load. Available in 7mm to 13mm thickness, sized and stitched to your spec, with your branding on the lever itself.",
+      // "Powerlifting" appears here and in pdpMetaDescription only (owner
+      // spec) -- the one belt style that actually competes on that term.
+      // Never added to the PLP or the other 5 belt PDPs.
+      // No "| Caprio"/"| Capriosports" suffix baked into this string --
+      // the root layout's title template (`%s | Capriosports`, see
+      // app/layout.tsx) already appends " | Capriosports" to every page's
+      // title automatically; the owner's given string ended in "| Caprio"
+      // literally, which would have doubled up into "...| Caprio |
+      // Capriosports" and also broken the sitewide naming rule that
+      // "Capriosports" (not "Caprio") is the metadata-register name
+      // (content/capriosports/organization.ts). Dropped the suffix here so
+      // the template's own "| Capriosports" is the only one that renders.
+      pdpMetaTitle: "Lever Belt | 7mm–13mm Leather Powerlifting Belt",
+      // "MOQ from [X]" in the brief -- filled in as 50, matching this
+      // style's own already-published MOQ everywhere else on the page
+      // (pdpSpecHighlights, entityAnswer, category-wide trustBullets).
       pdpMetaDescription:
-        "Custom leather lever and powerlifting belt manufacturer, 10mm and 13mm, 4in width, private label. Full customization, low MOQ. Sialkot, Pakistan.",
+        "Custom lever belts in 7mm to 13mm leather, private-label ready. Quick-release buckle, your branding, MOQ from 50. Samples in 10–14 days.",
       material: "Genuine leather, cowhide-based",
       // Per-style override (see `StyleCard.pdpFabricPills`'s own comment)
       // -- the category's own shared `fabricPills` lists every material
       // tier the whole Weight Lifting Belts line offers (leather/nylon/
       // neoprene), not this specific style's own build, which also
       // includes its width and buckle type (owner spec, 2026-09-16).
-      pdpFabricPills: ["Genuine leather", "10mm or 13mm", "4in width", "Lever buckle"],
+      pdpFabricPills: ["Genuine Leather (7mm–13mm)", "4in width", "Lever buckle"],
       // Per-style override (see `StyleCard.pdpCustomizationSteps`'s own
       // comment) -- this content was previously sitting at the category
       // level, wrongly labeled as shared across every belt style, when
@@ -222,7 +234,7 @@ export const weightLiftingBelts: Category = {
         steps: [
           {
             title: "Material & thickness",
-            body: "Genuine leather sourced to your reference, 10mm or 13mm thickness at 4in width as standard",
+            body: "Choose your thickness across the 7mm to 13mm range, buckle finish, and branding placement — we build to your spec sheet, not a fixed catalog size.",
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Material and thickness" },
           },
           {
@@ -261,7 +273,7 @@ export const weightLiftingBelts: Category = {
       pdpQualitySubline:
         "We confirm the thickness, the buckle action, and the stitching on your sample before the full order is produced.",
       pdpQualityPoints: [
-        "Thickness measured and confirmed against your 10mm or 13mm spec",
+        "Every lever belt is genuine leather only, tested for stitch and rivet strength at your specified thickness (7mm–13mm) before it ships",
         "Lever buckle action tested for smooth, secure release under load",
         "Stitching checked for even tension around the full perimeter",
         "Digital proof and sample approved before we cut your production run",
@@ -277,15 +289,15 @@ export const weightLiftingBelts: Category = {
       // Powerlifting LEVER Belt Manufacturer" already says it), and the
       // real sample lead-time fact was missing from this strip entirely.
       pdpSpecHighlights: [
-        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "ruler", text: "Genuine leather, 7mm to 13mm thickness" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
-        { icon: "ruler", text: "10mm & 13mm thickness" },
+        { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "ship", text: "DDP to 20+ countries" },
       ],
       specifications: [
         { label: "Style", value: "Leather lever belt (base type)" },
         { label: "Material", value: "Genuine leather, cowhide-based" },
-        { label: "Thickness", value: "10mm or 13mm, confirmed on your sample" },
+        { label: "Thickness", value: "7mm to 13mm (specify tier)" },
         { label: "Width", value: "4in" },
         { label: "Closure", value: "Quick-release lever buckle" },
         { label: "Lining", value: "Suede or leather backing, to your spec" },
@@ -302,14 +314,14 @@ export const weightLiftingBelts: Category = {
       // re-pointed at its own PDP; re-point the rest as each is built.
       relatedStyleTags: [
         { label: "Prong Belt", href: "/lifting-gears/weight-lifting-belts/prong-belt" },
-        { label: "Nylon Quick-Lock Belt", href: "/lifting-gears/weight-lifting-belts" },
-        { label: "Dip Belt", href: "/lifting-gears/weight-lifting-belts" },
+        { label: "Nylon Quick-Lock Belt", href: "/lifting-gears/weight-lifting-belts/nylon-quick-lock-belt" },
+        { label: "Dip Belt", href: "/lifting-gears/weight-lifting-belts/dip-belt" },
         { label: "See All", href: "/lifting-gears/weight-lifting-belts" },
       ],
       faqs: [
         {
-          q: "What is the difference between a 10mm and a 13mm belt?",
-          a: "The 13mm belt is thicker and more rigid, built for maximum back support under a heavy competition lift. The 10mm belt is slightly more flexible, suited to everyday heavy training. We confirm both on sample so you can choose or offer both.",
+          q: "What thickness should I choose across the 7mm to 13mm range?",
+          a: "Thinner belts (7mm–10mm) suit lifters who want more mobility and faster bracing feedback; thicker belts (10mm–13mm) suit max-effort squat and deadlift work where rigidity matters most. Tell us your athlete profile and we'll recommend a tier — or supply your own spec.",
         },
         {
           q: "Why a lever buckle instead of a prong?",
@@ -331,7 +343,7 @@ export const weightLiftingBelts: Category = {
       slug: "prong-belt",
       sku: "CAP-BLT-02",
       cardTitle: "Custom Leather Prong Belt",
-      cardSubline: "Single and double prong, 7mm to 10mm",
+      cardSubline: "Single and double prong, 7mm to 13mm",
       image: "",
       imageAlt: "Custom leather prong weight lifting belt",
       href: "/lifting-gears/weight-lifting-belts/prong-belt",
@@ -349,12 +361,16 @@ export const weightLiftingBelts: Category = {
       ],
       pdpHeading: "Custom Leather Prong Belt Manufacturer",
       pdpDescription:
-        "A custom and private label leather prong belt, built in single and double prong at 7mm to 10mm thickness, genuine leather, adjustable across a waist range on one belt, made to your brand in Sialkot, Pakistan.",
+        "Genuine leather prong belt in the classic powerlifting silhouette, built in 7mm to 13mm thickness and stitched to your spec, with your branding on the buckle or leather.",
       pdpMetaTitle: "Custom Leather Prong Belt Manufacturer",
+      // "MOQ from [X]" in the brief -- filled in as 50, matching this
+      // style's own already-published MOQ everywhere else on the page
+      // (pdpSpecHighlights, entityAnswer, category-wide trustBullets) --
+      // same fill applied to the Lever Belt's own meta description.
       pdpMetaDescription:
-        "Custom leather prong belt manufacturer, single and double prong, 7mm to 10mm, private label. Full customization, low MOQ. Sialkot, Pakistan.",
+        "Custom prong belts in 7mm to 13mm leather, private-label ready. Classic single/double-prong buckle, your branding, MOQ from 50. Samples in 10–14 days.",
       material: "Genuine leather, cowhide-based",
-      pdpFabricPills: ["Genuine leather", "7mm to 10mm", "Single or double prong", "4in width"],
+      pdpFabricPills: ["Genuine Leather (7mm–13mm)", "Single or double prong", "4in width"],
       // Per-style override (see `StyleCard.pdpCustomizationSteps`'s own
       // comment) -- this style's own 7 "How we customize" bullets (owner
       // brief, 2026-09-16), not the Lever Belt's content that was
@@ -370,7 +386,7 @@ export const weightLiftingBelts: Category = {
         steps: [
           {
             title: "Thickness and prong count",
-            body: "7mm to 10mm, single or double prong, to your spec",
+            body: "Choose your thickness across the 7mm to 13mm range, prong style (single or double), and branding — built to your spec sheet, not a fixed catalog size.",
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Thickness and prong count" },
           },
           {
@@ -413,7 +429,7 @@ export const weightLiftingBelts: Category = {
       pdpQualitySubline:
         "We confirm the thickness, the prong action, and the stitching on your sample before the full order is produced.",
       pdpQualityPoints: [
-        "Thickness measured and confirmed against your 7mm to 10mm spec",
+        "Every prong belt is genuine leather only, tested for stitch and prong-hole strength at your specified thickness (7mm–13mm) before it ships",
         "Prong and hole spacing tested for a secure, consistent fit across the adjustment range",
         "Stitching checked for even tension around the full perimeter",
         "Digital proof and sample approved before we cut your production run",
@@ -421,14 +437,14 @@ export const weightLiftingBelts: Category = {
       ],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
-        { icon: "ruler", text: "7mm to 10mm thickness" },
+        { icon: "ruler", text: "Genuine leather, 7mm to 13mm thickness" },
         { icon: "lock", text: "Single or double prong" },
         { icon: "ship", text: "DDP to 20+ countries" },
       ],
       specifications: [
         { label: "Style", value: "Leather prong belt (base type)" },
         { label: "Material", value: "Genuine leather, cowhide-based" },
-        { label: "Thickness", value: "7mm to 10mm, confirmed on your sample" },
+        { label: "Thickness", value: "7mm to 13mm (specify tier)" },
         { label: "Width", value: "4in" },
         { label: "Closure", value: "Single or double prong buckle" },
         { label: "Lining", value: "Suede or leather backing, to your spec" },
@@ -439,8 +455,8 @@ export const weightLiftingBelts: Category = {
       ],
       relatedStyleTags: [
         { label: "Lever Belt", href: "/lifting-gears/weight-lifting-belts/lever-belt" },
-        { label: "Nylon Quick-Lock Belt", href: "/lifting-gears/weight-lifting-belts" },
-        { label: "Dip Belt", href: "/lifting-gears/weight-lifting-belts" },
+        { label: "Nylon Quick-Lock Belt", href: "/lifting-gears/weight-lifting-belts/nylon-quick-lock-belt" },
+        { label: "Dip Belt", href: "/lifting-gears/weight-lifting-belts/dip-belt" },
         { label: "See All", href: "/lifting-gears/weight-lifting-belts" },
       ],
       faqs: [
@@ -459,31 +475,468 @@ export const weightLiftingBelts: Category = {
       ],
     },
     {
+      // Third of the 6 belt PDPs (owner brief, 2026-09-16). Same
+      // `internalPreview` escape hatch as the Lever/Prong Belts -- see
+      // Lever Belt styleCard's own comment. `status: "draft"` until
+      // sampled specs are confirmed real.
       status: "draft",
+      internalPreview: true,
       slug: "nylon-quick-lock-belt",
+      sku: "CAP-BLT-03",
       cardTitle: "Custom Nylon Quick-Lock Belt",
       cardSubline: "Self-locking roller buckle, adjustable",
       image: "",
       imageAlt: "Custom nylon quick-lock weight lifting belt",
       href: "/lifting-gears/weight-lifting-belts/nylon-quick-lock-belt",
+      pdpTitle: "Nylon Quick-Lock Belt",
+      images: [
+        { alt: "Custom nylon quick-lock weight lifting belt, front view" },
+        { alt: "Custom nylon quick-lock weight lifting belt, worn on model, in use" },
+        { alt: "Custom nylon quick-lock weight lifting belt, side profile" },
+        { alt: "Custom nylon quick-lock weight lifting belt, roller buckle detail" },
+        { alt: "Custom nylon quick-lock weight lifting belt, stitching detail" },
+        { alt: "Custom nylon quick-lock weight lifting belt, webbing close-up" },
+        { alt: "Custom nylon quick-lock weight lifting belt, back view" },
+        { alt: "Custom nylon quick-lock weight lifting belt, flat lay" },
+        { alt: "Custom nylon quick-lock weight lifting belt, private label packaging" },
+      ],
+      pdpHeading: "Custom Nylon Weight Lifting Belt Manufacturer",
+      pdpDescription:
+        "A custom and private label nylon weight lifting belt with a self-locking roller buckle, built in reinforced nylon webbing, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Nylon Weight Lifting Belt Manufacturer",
+      pdpMetaDescription:
+        "Custom nylon quick-lock weight lifting belt manufacturer, self-locking roller buckle, private label, low MOQ. Sialkot, Pakistan.",
+      material: "Reinforced nylon webbing",
+      pdpFabricPills: ["Reinforced nylon webbing", "Self-locking roller buckle", "4in to 6in width", "Machine washable"],
+      // Per-style override (see `StyleCard.pdpFaqOperational`'s own
+      // comment) -- only the MOQ question's wording changes ("mix colors,"
+      // not "mix thickness or colors": this style has no thickness tiers),
+      // the other 3 questions stay identical to the category-level block
+      // (owner spec, 2026-09-16).
+      pdpFaqOperational: [
+        {
+          q: "What is the MOQ and can I mix colors in one run?",
+          a: "From 50 pieces per style. Mix colors freely within the same order.",
+        },
+        {
+          q: "Can you match a specific competition or federation width?",
+          a: "Yes. Share your governing body's specification and we build and confirm your belt against it on sample.",
+        },
+        {
+          q: "Will my design and spec sheet stay protected?",
+          a: "Yes. NDA before any tech pack or spec sheet is shared.",
+        },
+        {
+          q: "How do I get started?",
+          a: "Send your tech pack, sketch, or a reference belt by email or WhatsApp. We reply within 24 hours with next steps.",
+        },
+      ],
+      pdpCustomizationPills: ["Color", "Logo patch or print", "Private label", "Custom labels"],
+      // Per-style override -- this style is nylon webbing only, never
+      // leather or neoprene (owner spec, 2026-09-16).
+      pdpQualityHeading: "A real spec sheet, not a size letter",
+      pdpQualitySubline:
+        "We confirm the buckle action, the webbing tension, and the fit range on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Roller buckle tested for smooth lock and one-hand release under load",
+        "Webbing checked for even tension and stitch integrity at the buckle anchor",
+        "Fit range confirmed against the spec you send",
+        "Digital proof and sample approved before we cut your production run",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "ruler", text: "4in to 6in width" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      // Per-style override (see `StyleCard.pdpCustomizationSteps`'s own
+      // comment) -- this style's own 7 "How we customize" bullets (owner
+      // brief, 2026-09-16), never the Lever Belt's leather-specific
+      // content that was previously leaking onto every belt PDP via the
+      // category level.
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          {
+            title: "Buckle",
+            body: "Self-locking roller as standard, alternative hardware on request",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Buckle" },
+          },
+          {
+            title: "Width",
+            body: "4in to 6in, to your spec",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Width" },
+          },
+          {
+            title: "Material",
+            body: "Nylon webbing weight and weave matched to your reference",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Material" },
+          },
+          {
+            title: "Branding",
+            body: "Woven or printed logo patch, full color print on request",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Branding" },
+          },
+          {
+            title: "Color",
+            body: "Full color range, matched to your brand palette",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Color" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, size and care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and finish" },
+          },
+          {
+            title: "Packaging",
+            body: "Polybags, boxes, retail-ready to your spec",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Packaging" },
+          },
+        ],
+      },
+      specifications: [
+        { label: "Style", value: "Nylon quick-lock belt (base type)" },
+        { label: "Material", value: "Reinforced nylon webbing" },
+        { label: "Width", value: "4in to 6in" },
+        { label: "Closure", value: "Self-locking roller buckle, one-hand tightening" },
+        { label: "Backing", value: "Foam-core or padded interior, to your spec" },
+        { label: "Color", value: "Full color range, logo patch or printed branding" },
+        { label: "Fit", value: "Adjustable range built to your spec, confirmed on sample" },
+        { label: "Branding", value: "Woven or printed logo patch, custom labels, packaging" },
+      ],
+      relatedStyleTags: [
+        { label: "Lever Belt", href: "/lifting-gears/weight-lifting-belts/lever-belt" },
+        { label: "Prong Belt", href: "/lifting-gears/weight-lifting-belts/prong-belt" },
+        { label: "Dip Belt", href: "/lifting-gears/weight-lifting-belts/dip-belt" },
+        { label: "See All", href: "/lifting-gears/weight-lifting-belts" },
+      ],
+      faqs: [
+        {
+          q: "How is a nylon quick-lock belt different from a leather lever belt?",
+          a: "The nylon belt uses a self-locking roller buckle that adjusts across a wide range on one belt, so it suits a broader size spread with fewer SKUs. The leather lever belt is set to one fixed size and built for maximum rigidity. Many buyers carry both.",
+        },
+        {
+          q: "Can the nylon belt take a full-color print, not just a logo patch?",
+          a: "Yes. We can print across the webbing itself in addition to a woven or printed patch, confirmed on your digital proof.",
+        },
+        {
+          q: "Is the nylon belt washable?",
+          a: "Yes. Nylon webbing and a foam-core backing hold up to regular washing better than a leather belt, worth noting for gym or team-issue programs.",
+        },
+      ],
     },
     {
+      // Fourth of the 6 belt PDPs (owner brief, 2026-09-16). Same
+      // `internalPreview` escape hatch as the Lever/Prong/Nylon Belts --
+      // see Lever Belt styleCard's own comment. `status: "draft"` until
+      // sampled specs are confirmed real; not linked from the PLP card
+      // while draft (internalPreview only reopens the click, nothing else).
       status: "draft",
+      internalPreview: true,
       slug: "dip-belt",
+      sku: "CAP-BLT-04",
       cardTitle: "Custom Dip Belt",
       cardSubline: "Leather or nylon pad with a steel chain, for weighted pull-ups and dips",
       image: "",
       imageAlt: "Custom dip belt with steel chain",
       href: "/lifting-gears/weight-lifting-belts/dip-belt",
+      pdpTitle: "Dip Belt",
+      images: [
+        { alt: "Custom dip belt with steel chain, front view" },
+        { alt: "Custom dip belt with steel chain, worn on model, in use" },
+        { alt: "Custom dip belt with steel chain, side profile" },
+        { alt: "Custom dip belt with steel chain, chain and attachment detail" },
+        { alt: "Custom dip belt with steel chain, stitching detail" },
+        { alt: "Custom dip belt with steel chain, pad material close-up" },
+        { alt: "Custom dip belt with steel chain, back view" },
+        { alt: "Custom dip belt with steel chain, flat lay" },
+        { alt: "Custom dip belt with steel chain, private label packaging" },
+      ],
+      pdpHeading: "Custom Dip Belt Manufacturer",
+      pdpDescription:
+        "A custom and private label dip belt, a leather or nylon waist pad paired with a steel chain, built for weighted pull-ups, dips, and loaded carries, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Dip Belt Manufacturer",
+      pdpMetaDescription:
+        "Custom dip belt manufacturer, leather or nylon pad with a steel chain, for weighted pull-ups and dips. Private label, low MOQ. Sialkot, Pakistan.",
+      material: "Leather or nylon, your choice",
+      pdpFabricPills: ["Leather or nylon pad", "Steel chain", "Padded backing", "Clip or carabiner attachment"],
+      pdpCustomizationPills: ["Embossed or printed logo", "Private label", "Chain length", "Custom labels"],
+      // Per-style override -- this style is leather or nylon only, never
+      // neoprene or the PLP's own "genuine leather, nylon, and neoprene"
+      // category-wide claim (owner spec, 2026-09-16).
+      pdpQualityHeading: "A real spec sheet, not a size letter",
+      pdpQualitySubline:
+        "We confirm the pad comfort, the chain strength, and the attachment hardware on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Chain and attachment hardware tested under load",
+        "Pad checked for comfort and stability against the hip under a loaded chain",
+        "Stitching and edge finishing checked around the full pad",
+        "Digital proof and sample approved before we cut your production run",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "arrowDownAZ", text: "Leather or nylon pad" },
+        { icon: "lock", text: "Steel chain included" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      // Per-style override (see `StyleCard.pdpCustomizationSteps`'s own
+      // comment) -- this style's own 7 "How we customize" bullets (owner
+      // brief, 2026-09-16), never a shared/generic default.
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          {
+            title: "Pad material",
+            body: "Leather or nylon, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Pad material" },
+          },
+          {
+            title: "Chain length and gauge",
+            body: "Built to your spec",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Chain length and gauge" },
+          },
+          {
+            title: "Attachment hardware",
+            body: "Clip or carabiner, to your spec",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Attachment hardware" },
+          },
+          {
+            title: "Branding",
+            body: "Embossed or printed logo, woven or leather patch labels",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Branding" },
+          },
+          {
+            title: "Color",
+            body: "Black standard, custom colors matched to your spec",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Color" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, size and care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and finish" },
+          },
+          {
+            title: "Packaging",
+            body: "Polybags, boxes, retail-ready to your spec",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Packaging" },
+          },
+        ],
+      },
+      specifications: [
+        { label: "Style", value: "Dip belt (base type)" },
+        { label: "Pad material", value: "Leather or nylon, your choice" },
+        { label: "Chain", value: "Steel chain, length built to your spec" },
+        { label: "Backing", value: "Padded interior for comfort under load" },
+        { label: "Attachment", value: "Clip or carabiner, to your spec" },
+        { label: "Color", value: "Black standard, additional colors on request" },
+        { label: "Use case", value: "Weighted pull-ups, dips, and loaded carries, not a waist-support lifting belt" },
+        { label: "Branding", value: "Embossed or printed logo, woven labels, hangtags, packaging" },
+      ],
+      relatedStyleTags: [
+        { label: "Lever Belt", href: "/lifting-gears/weight-lifting-belts/lever-belt" },
+        { label: "Prong Belt", href: "/lifting-gears/weight-lifting-belts/prong-belt" },
+        { label: "Nylon Quick-Lock Belt", href: "/lifting-gears/weight-lifting-belts/nylon-quick-lock-belt" },
+        { label: "See All", href: "/lifting-gears/weight-lifting-belts" },
+      ],
+      // Per-style override (see `StyleCard.pdpFaqOperational`'s own
+      // comment) -- this style's own operational FAQ wording ("mix pad
+      // materials or chain lengths," "chain gauge or load rating") doesn't
+      // fit the category-level block's leather-belt-specific phrasing
+      // ("mix thickness or colors") -- owner brief, 2026-09-16.
+      pdpFaqOperational: [
+        {
+          q: "What is the MOQ and can I mix pad materials or chain lengths?",
+          a: "From 50 pieces per style. Mix pad materials, colors, and chain lengths within the same order.",
+        },
+        {
+          q: "Can you match a specific chain gauge or load rating?",
+          a: "Share your reference and we source and confirm chain strength on your sample.",
+        },
+        {
+          q: "Will my design and spec sheet stay protected?",
+          a: "Yes. NDA before any tech pack or spec sheet is shared.",
+        },
+        {
+          q: "How do I get started?",
+          a: "Send your tech pack, sketch, or a reference belt by email or WhatsApp. We reply within 24 hours with next steps.",
+        },
+      ],
+      faqs: [
+        {
+          q: "Is a dip belt the same as a weight lifting belt?",
+          a: "No. A dip belt is a waist pad and chain for adding weight to pull-ups, dips, and carries. A weight lifting belt supports the core under a barbell lift like a squat or deadlift. They serve different exercises and most gyms stock both.",
+        },
+        {
+          q: "Can the chain be swapped for a strap?",
+          a: "Yes. Some buyers prefer a webbing strap over a steel chain for a lighter, quieter build. Tell us your preference and we build to it.",
+        },
+        {
+          q: "What pad material holds up best under repeated loading?",
+          a: "Leather is the more durable option for heavy, frequent use; nylon is lighter and often preferred for a lower price point. We build both to the same construction standard.",
+        },
+      ],
     },
     {
+      // Fifth of the 6 belt PDPs (owner brief, 2026-09-16). Same
+      // `internalPreview` escape hatch as the other 4 built belts -- see
+      // Lever Belt styleCard's own comment. `status: "draft"` until
+      // sampled specs are confirmed real.
       status: "draft",
+      internalPreview: true,
       slug: "neoprene-padded-belt",
+      sku: "CAP-BLT-05",
       cardTitle: "Custom Neoprene Padded Belt",
       cardSubline: "Padded comfort tier, hook-and-loop closure",
       image: "",
       imageAlt: "Custom neoprene padded weight lifting belt",
       href: "/lifting-gears/weight-lifting-belts/neoprene-padded-belt",
+      pdpTitle: "Neoprene Padded Belt",
+      images: [
+        { alt: "Custom neoprene padded weight lifting belt, front view" },
+        { alt: "Custom neoprene padded weight lifting belt, worn on model, in use" },
+        { alt: "Custom neoprene padded weight lifting belt, side profile" },
+        { alt: "Custom neoprene padded weight lifting belt, hook-and-loop closure detail" },
+        { alt: "Custom neoprene padded weight lifting belt, stitching detail" },
+        { alt: "Custom neoprene padded weight lifting belt, material close-up" },
+        { alt: "Custom neoprene padded weight lifting belt, back view" },
+        { alt: "Custom neoprene padded weight lifting belt, flat lay" },
+        { alt: "Custom neoprene padded weight lifting belt, private label packaging" },
+      ],
+      pdpHeading: "Custom Neoprene Lifting Belt Manufacturer",
+      pdpDescription:
+        "A custom and private label neoprene padded weight lifting belt with a hook-and-loop closure, a softer comfort tier for everyday training, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Neoprene Lifting Belt Manufacturer",
+      pdpMetaDescription:
+        "Custom neoprene lifting belt manufacturer, padded shell, hook-and-loop closure, private label, low MOQ. Sialkot, Pakistan.",
+      material: "Neoprene, padded shell",
+      pdpFabricPills: ["Neoprene", "Hook-and-loop closure", "Padded interior", "Machine washable"],
+      pdpCustomizationPills: ["Color", "Logo patch or print", "Private label", "Custom labels"],
+      // Per-style override -- this style is neoprene and hook-and-loop
+      // only, never leather or nylon webbing, never the PLP's own "genuine
+      // leather, nylon, and neoprene" category-wide claim (owner spec,
+      // 2026-09-16).
+      pdpQualityHeading: "A real spec sheet, not a size letter",
+      pdpQualitySubline:
+        "We confirm the closure, the padding, and the fit range on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Hook-and-loop closure tested for hold and consistent adjustment",
+        "Padding checked for comfort and even density across the belt",
+        "Fit range confirmed against the spec you send",
+        "Digital proof and sample approved before we cut your production run",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "lock", text: "Hook-and-loop closure" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      // Per-style override (see `StyleCard.pdpCustomizationSteps`'s own
+      // comment) -- this style's own 7 "How we customize" bullets (owner
+      // brief, 2026-09-16), never a shared/generic default.
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          {
+            title: "Closure",
+            body: "Hook-and-loop as standard, alternative hardware on request",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Closure" },
+          },
+          {
+            title: "Padding",
+            body: "Thickness and density matched to your reference",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Padding" },
+          },
+          {
+            title: "Material",
+            body: "Neoprene weight and finish matched to your reference",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Material" },
+          },
+          {
+            title: "Branding",
+            body: "Woven or printed logo patch, full color print on request",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Branding" },
+          },
+          {
+            title: "Color",
+            body: "Full color range, matched to your brand palette",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Color" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, size and care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and finish" },
+          },
+          {
+            title: "Packaging",
+            body: "Polybags, boxes, retail-ready to your spec",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Packaging" },
+          },
+        ],
+      },
+      specifications: [
+        { label: "Style", value: "Neoprene padded belt (base type)" },
+        { label: "Material", value: "Neoprene, padded shell" },
+        { label: "Closure", value: "Hook-and-loop, adjustable" },
+        { label: "Backing", value: "Padded interior for comfort" },
+        { label: "Color", value: "Full color range, logo patch or printed branding" },
+        { label: "Fit", value: "Adjustable range built to your spec, confirmed on sample" },
+        { label: "Positioning", value: "A comfort-focused everyday tier, not a competition-grade belt" },
+        { label: "Branding", value: "Woven or printed logo patch, custom labels, packaging" },
+      ],
+      relatedStyleTags: [
+        { label: "Lever Belt", href: "/lifting-gears/weight-lifting-belts/lever-belt" },
+        { label: "Nylon Quick-Lock Belt", href: "/lifting-gears/weight-lifting-belts/nylon-quick-lock-belt" },
+        { label: "Dip Belt", href: "/lifting-gears/weight-lifting-belts/dip-belt" },
+        { label: "See All", href: "/lifting-gears/weight-lifting-belts" },
+      ],
+      // Per-style override (see `StyleCard.pdpFaqOperational`'s own
+      // comment) -- this style's own operational FAQ wording ("mix colors
+      // in one run," "built to a competition standard") doesn't fit the
+      // category-level block's leather-belt-specific phrasing ("mix
+      // thickness or colors," federation thickness/width matching) --
+      // same pattern as the Nylon Quick-Lock Belt's own override, owner
+      // brief 2026-09-16.
+      pdpFaqOperational: [
+        {
+          q: "What is the MOQ and can I mix colors in one run?",
+          a: "From 50 pieces per style. Mix colors freely within the same order.",
+        },
+        {
+          q: "Is the neoprene belt built to a competition standard?",
+          a: "No. It is a comfort-focused everyday tier. For a competition-adjacent build, see our leather lever or prong belts.",
+        },
+        {
+          q: "Will my design and spec sheet stay protected?",
+          a: "Yes. NDA before any tech pack or spec sheet is shared.",
+        },
+        {
+          q: "How do I get started?",
+          a: "Send your tech pack, sketch, or a reference belt by email or WhatsApp. We reply within 24 hours with next steps.",
+        },
+      ],
+      faqs: [
+        {
+          q: "Who is the neoprene belt best suited for?",
+          a: "Everyday gym-goers and general fitness programs that want core support and comfort without the rigidity of a competition belt. It is a lighter, softer alternative to leather or nylon.",
+        },
+        {
+          q: "Is the neoprene belt washable?",
+          a: "Yes. Neoprene holds up well to regular washing, a practical advantage for gym rental or team-issue programs.",
+        },
+        {
+          q: "Can the padding be made firmer for more support?",
+          a: "Yes. We can increase padding density or add an internal support panel to your spec, confirmed on sample.",
+        },
+      ],
     },
     {
       status: "draft",

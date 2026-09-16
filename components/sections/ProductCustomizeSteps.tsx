@@ -34,7 +34,7 @@ export type ProductCustomizeStepsProps = {
 };
 
 const CARD_WIDTH = 469;
-const CARD_GAP = 40; // owner, 2026-09-12: "make it 40px across the site" (was 24, matching productCustomizeSteps.desktopReel)
+const CARD_GAP = 24; // matches productCustomizeSteps.desktopReel (gap-6) -- see that recipe's own comment
 
 function DesktopScroller({ steps }: { steps: typeof pdpCustomizationSteps.steps }) {
   const { wrapRef, trackRef, reelRef, chevronRef, dotRef, direction, handleMouseMove, handleMouseEnter, handleMouseLeave, handleClick } =

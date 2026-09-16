@@ -240,6 +240,22 @@ export type StyleCard = {
    * category-level block is safe to leave unchecked.
    */
   pdpCustomizationSteps?: PdpCustomizeStepsContent;
+  /**
+   * Per-style override of the PDP's "operational" FAQ block -- falls back
+   * to the category's own `pdpFaqOperational` (see `Category`'s own field
+   * of the same name), then the shared, sitewide `pdpFaqOperational`
+   * (content/activewear/pdpShared.ts), when unset. The category-level
+   * block is owner-locked verbatim across every style in most cases (e.g.
+   * "mix thickness or colors" applies to every leather belt), but the
+   * Nylon Quick-Lock Belt has no thickness tiers, so that exact question
+   * doesn't fit -- owner spec, 2026-09-16: swap just the one question's
+   * wording for this style rather than rewording the category-level block
+   * (which would incorrectly drop "thickness" from the Lever/Prong Belt
+   * PDPs too). Set this only for the specific style whose operational
+   * facts genuinely differ; leave every other style on the category
+   * fallback.
+   */
+  pdpFaqOperational?: FaqEntry[];
 };
 
 // 3 fields, matching the real design (Figma node 579:5632) exactly -- every

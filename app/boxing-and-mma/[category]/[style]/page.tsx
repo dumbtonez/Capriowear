@@ -108,7 +108,11 @@ export default async function BoxingMmaStylePage({
     { label: productTitle, href: data.product.href },
   ];
 
-  const faqItems = [categoryEntityFaq(data.category), ...(data.product.faqs ?? []), ...pdpFaqOperational];
+  const faqItems = [
+    categoryEntityFaq(data.category),
+    ...(data.product.faqs ?? []),
+    ...(data.product.pdpFaqOperational ?? data.category.pdpFaqOperational ?? pdpFaqOperational),
+  ];
 
   const productImage = data.product.images?.[0]?.src ? `${SITE_URL}${data.product.images[0].src}` : undefined;
 

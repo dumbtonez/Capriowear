@@ -127,7 +127,7 @@ export default async function LiftingGearsStylePage({
   const faqItems = [
     categoryEntityFaq(data.category),
     ...(data.product.faqs ?? []),
-    ...(data.category.pdpFaqOperational ?? pdpFaqOperational),
+    ...(data.product.pdpFaqOperational ?? data.category.pdpFaqOperational ?? pdpFaqOperational),
   ];
 
   const productImage = data.product.images?.[0]?.src ? `${SITE_URL}${data.product.images[0].src}` : undefined;
