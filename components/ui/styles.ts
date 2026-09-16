@@ -7757,7 +7757,14 @@ export const divisionCards = {
   // which only this one page renders, so the shared ticker token itself
   // -- confirmed intentional elsewhere, "12px more space from the bottom
   // ... applies to both pages now too" -- stays untouched.
-  section: "container-p max-md:-mt-3 max-md:pb-10 md:pt-[72px] md:pb-4 xl:pb-6",
+  // `max-md:pb-0` (was `max-md:pb-10`/40px, real bug found live: "capriowear
+  // haev extra balck space after the separator, remove that") --
+  // `gridStack`'s own `border-y` hairline (added since this padding was
+  // originally tuned) now marks the section's real visual bottom edge on
+  // mobile, so this extra 40px after it just read as unexplained dead
+  // space before the "What We Build On" Marquee below, not a real gap
+  // anyone asked to keep.
+  section: "container-p max-md:-mt-3 max-md:pb-0 md:pt-[72px] md:pb-4 xl:pb-6",
   // md: (768px), not xl: (owner, 2026-09-15: "on tablet we should treat
   // those 3 cards as desktop, not mobile" -- the same real rule Hero.tsx's
   // own ticker already documents for this identical "does it read fine at
@@ -7915,15 +7922,12 @@ export const divisionCards = {
   // (the tinted `bg-paper/*` fill each `stackPanel*` class already
   // carries stays harmlessly underneath the opaque `<img>`).
   stackPanelImage: "object-cover",
-  // `pb-10`/`md:pb-12` (was the flat `py-4`/`md:py-6` every side) --
-  // owner: "add 24px more gap from the separator within the cards...
-  // from cta add more 24px" -- 24px added to the BOTTOM padding only (top
-  // unchanged), so the extra space lives inside each card, between its
-  // own CTA and the `gridStack` hairline below it, not as a gap between
-  // the card boxes themselves (the earlier `gridStack` gap-6 attempt
-  // didn't read as "from the CTA," since that space sat outside the card,
-  // above the next card's hairline, not below this card's own content).
-  textStack: "flex flex-col gap-2 px-6 pt-4 pb-10 md:px-8 md:pt-6 md:pb-12",
+  // `pb-6` flat at every breakpoint (owner: "make 24px from bottom" --
+  // settled here after trying 40/48px) -- the gap from the CTA (the last
+  // element in this flex column) down to the card's own bottom edge /
+  // the `gridStack` hairline below it. Top padding (`pt-4`/`md:pt-6`)
+  // unchanged, was never part of this request.
+  textStack: "flex flex-col gap-2 px-6 pt-4 pb-6 md:px-8 md:pt-6",
   // Full replacement for `grid` above on the `stack` variant, not a
   // `cx`-merged addition -- `grid`'s own `gap-4` and this variant's own
   // gap value both target the same CSS property, and which one actually
