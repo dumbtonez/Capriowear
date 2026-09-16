@@ -364,7 +364,7 @@ export const capriosportsHome = {
   // no per-tile photography yet.
   whatWeMake: {
     eyebrow: "PRODUCT RANGE",
-    h2: "Custom lifting gear and boxing and MMA equipment, one factory.",
+    h2: "Custom lifting gear and boxing and MMA equipment, one factory",
     categories: [
       {
         title: "Lifting Gear",

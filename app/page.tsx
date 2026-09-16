@@ -193,21 +193,6 @@ export default function CapriosportsHomePage() {
             2026-09-16: "remove the stats section"). */}
         <OurStory content={capriosportsHome.ourStory} />
 
-        {/* WHY CAPRIO -- reinstated 2026-09-16 (owner: "Reinstate a 'Why
-            Caprio' section... using the same numbered-block design the
-            old Why Caprio section already used"). That earlier component,
-            `FeatureNumbered`, was deleted 2026-08-25 and unrecoverable
-            from git history (confirmed via a full repo/history search) --
-            rebuilt on `WhyCapriosports.tsx` instead, on a black surface
-            since this section sits between two other dark sections (Our
-            Story above, Our Services below) -- see that component's own
-            header comment. `headingClassName="whitespace-pre-line"`
-            renders the owner's own literal 2-line H2 break. The earlier
-            light-tone "Why Capriosports" instance further down the page
-            (`capriosportsHome.why`) has since been removed entirely
-            (owner, 2026-09-17) -- this is the only remaining caller. */}
-        <WhyCapriosports content={capriosportsHome.whyCaprio} headingClassName="whitespace-pre-line" />
-
         {/* FULL CUSTOMIZATION -- Capriowear's OWN real OurServices section
             ("From raw fabric to retail-ready packaging"), gear-adapted
             copy, dark `tone` (owner, 2026-09-15: "under the certified
@@ -225,14 +210,22 @@ export default function CapriosportsHomePage() {
             rather than deleted outright, in case this section is wanted
             back. */}
 
-        {/* Light-tone "Why Capriosports" section removed entirely (owner,
-            2026-09-17: "remove white Why Capriosports section under
-            services and delete from your memory") -- `WhyCapriosports.tsx`
-            itself is now dark-tone only (the "Why Caprio" instance above
-            is the only remaining caller); `capriosportsHome.why`'s
-            content and every light-tone recipe in `whyCapriosports`
-            (components/ui/styles.ts) were deleted outright, not left
-            unused. */}
+        {/* WHY CAPRIO -- reinstated 2026-09-16 (owner: "Reinstate a 'Why
+            Caprio' section... using the same numbered-block design the
+            old Why Caprio section already used"). That earlier component,
+            `FeatureNumbered`, was deleted 2026-08-25 and unrecoverable
+            from git history (confirmed via a full repo/history search) --
+            rebuilt on `WhyCapriosports.tsx` instead, on a black surface,
+            same continuous dark run as Our Story/Our Services above it --
+            see that component's own header comment. Moved from directly
+            above Our Services to directly below it instead (owner,
+            2026-09-17: "make why caprio under services section").
+            `headingClassName="whitespace-pre-line"` renders the owner's
+            own literal 2-line H2 break. The earlier light-tone "Why
+            Capriosports" instance further down the page
+            (`capriosportsHome.why`) has since been removed entirely
+            (owner, 2026-09-17) -- this is the only remaining caller. */}
+        <WhyCapriosports content={capriosportsHome.whyCaprio} headingClassName="whitespace-pre-line" />
 
         {/* 10. FAQ -- unchanged. */}
         <Faq content={{ h2: capriosportsHome.faq.h2, items: capriosportsHome.faq.items }} />

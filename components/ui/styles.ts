@@ -9313,34 +9313,46 @@ export const whyCapriosports = {
   sectionDarkBg: "w-full bg-ink text-paper",
   headingBlock: "flex w-full max-w-[780px] flex-col items-center gap-4 text-center",
   listDark: "flex w-full max-w-[960px] flex-col divide-y divide-line-dark border-y border-line-dark",
+  // CSS grid, not flex (owner: "numbers 01 should be aligned to the
+  // title center aligned" -- with the earlier flex layout, the number was
+  // a sibling of a title+body column, so centring it against that whole
+  // column also pulled it down by half the body's own height; grid fixes
+  // this structurally instead of eyeballing an offset). 2 columns (`auto`
+  // for the number, `1fr` for the rest); number and title occupy row 1
+  // together (`items-center` centres them against each other specifically,
+  // ignoring row 2 entirely); body is pushed to row 2's second column
+  // (`rowBodyDark`'s own `col-start-2`), with row 1's first column empty
+  // beneath the number -- exactly the "aligned to the title, not the
+  // whole block" the owner asked for. `gap-x-6` matches the old flex
+  // gap; `gap-y-3` is the title-to-body space (see `rowTextDark`'s old
+  // comment, now folded in here).
+  //
   // `py-[42px]` (owner, in two passes: first "increase the height between
   // each row 12px more" from an original `py-6`/24px to `py-[30px]`, then
   // "add 12px more from top and bottom of each row" on top of that) --
   // 18px more than the original `py-6` per side, so two adjacent rows
   // gain a real 36px more space between them at the shared hairline.
-  rowDark: "flex items-start gap-6 py-[42px]",
+  rowDark: "grid grid-cols-[auto_1fr] items-center gap-x-6 gap-y-3 py-[42px]",
   // `#838d97` -- this project's own established secondary-text-on-a-dark-
   // surface literal (e.g. `divisionCards.descriptorStack`). `text-[30px]`
   // (owner: "make the number font size 30 from 24") -- was the shared
   // `text-h5` token's own 24px.
   numberDark: "text-[30px] font-bold text-[#838d97]",
-  // `gap-3` (12px, owner: "title and subline space increase 8px more" --
-  // "subline" here means the row body text below each row title, not a
-  // section-level subline, which this section doesn't render at all) --
-  // was `gap-1`/4px.
-  rowTextDark: "flex flex-col gap-3",
   // `24px` flat (owner: "make the title 24px" quoting a row title
   // verbatim) -- was the shared `text-body` token's own smaller size.
   rowTitleDark: "text-[24px] font-semibold",
-  // `#838d97` (see `numberDark` above). `text-[20px] leading-[28px]`
-  // (owner: "make the subline 20 by 28, always use this line height when
-  // use 20px font" -- a standing pairing for this project, not just this
-  // one spot; use `text-[20px] leading-[28px]` again anywhere else a flat
+  // `col-start-2` (see `rowDark`'s own comment above) -- forces this into
+  // row 2's second column instead of grid auto-flow's default (which
+  // would otherwise wrap back to column 1, under the number). `#838d97`
+  // (see `numberDark` above). `text-[20px] leading-[28px]` (owner: "make
+  // the subline 20 by 28, always use this line height when use 20px
+  // font" -- a standing pairing for this project, not just this one
+  // spot; use `text-[20px] leading-[28px]` again anywhere else a flat
   // 20px size is wanted, rather than the named `text-body-lg` token,
   // which pairs 20px with its own 1.2/24px line-height instead).
   // `max-w-[85%]` (owner: "subline text width make 15% lesser") -- shrinks
-  // just this paragraph's own width, not the row title beside it, since
-  // `rowTextDark`'s flex-shrink already gives it a definite containing-
-  // block width to compute the percentage against.
-  rowBodyDark: "text-[20px] leading-[28px] text-[#838d97] max-w-[85%]",
+  // just this paragraph's own width, not the row title beside it -- a
+  // grid item's default `justify-self: stretch` gives it a definite
+  // column-width box to compute the percentage against.
+  rowBodyDark: "col-start-2 text-[20px] leading-[28px] text-[#838d97] max-w-[85%]",
 };

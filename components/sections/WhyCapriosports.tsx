@@ -53,10 +53,8 @@ export function WhyCapriosports({ content, headingClassName }: WhyCapriosportsPr
               <span className={whyCapriosports.numberDark} aria-hidden="true">
                 {item.number}
               </span>
-              <div className={whyCapriosports.rowTextDark}>
-                <p className={whyCapriosports.rowTitleDark}>{item.title}</p>
-                <p className={whyCapriosports.rowBodyDark}>{item.body}</p>
-              </div>
+              <p className={whyCapriosports.rowTitleDark}>{item.title}</p>
+              <p className={whyCapriosports.rowBodyDark}>{item.body}</p>
             </li>
           ))}
         </ul>
