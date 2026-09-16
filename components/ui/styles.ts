@@ -7828,33 +7828,72 @@ export const divisionCards = {
   image: "object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105",
   // `stack` variant (2026-09-16, owner: "try this new style for division
   // cards... on hover the following animation will happen," referencing a
-  // shopify.design case-study card whose 2-3 stacked photo tiles fan out
-  // on hover) -- ADDITIVE only, doesn't touch `flat`'s own recipes above.
-  // Same solid `bg-ink-2` card shell as `flat` (still no real photography,
-  // per the earlier "remove the images... use a light black background"
-  // request) -- the placeholder area holds 2 extra decoy panels stacked
-  // directly behind the front one instead. At rest they sit tucked
-  // exactly behind the front panel (same position, invisible underneath
-  // it); on `group-hover` they fan out to either side with a spring-
-  // overshoot easing (`cubic-bezier(0.175, 0.885, 0.32, 1.275)`, read
-  // directly off the reference site's own card-media hover transition),
-  // mirroring its "cards spreading like a hand of playing cards" feel
-  // without needing real photo assets this site doesn't have wired up.
-  cardStack: "group relative flex w-[320px] h-[395px] flex-col overflow-hidden bg-ink-2 md:h-auto md:w-full md:flex-1 md:aspect-[657/958]",
-  stackImageWrap: "relative flex-1 min-h-0 overflow-hidden",
-  // Front panel: always on top (`z-10`), lifts slightly on hover too so
-  // the whole stack reads as one gesture, not just the two decoys under
-  // it moving.
+  // shopify.design case-study card whose stacked photo tiles fan out on
+  // hover; sizing/rotation since corrected to the owner's own Figma
+  // reference, node 1021:143, "Group 4" 1021:168) -- ADDITIVE only,
+  // doesn't touch `flat`'s own recipes above. Same solid `bg-ink-2` card
+  // shell as `flat` (still no real photography, per the earlier "remove
+  // the images... use a light black background" request) -- the
+  // placeholder area holds 3 decoy panels at Figma's own exact size/
+  // rotation/offset (236x236 back/front tiles at -9.6deg/+9.6deg, a
+  // 205x205 middle tile at 0deg, all inside a 282x259 group -- `get_
+  // metadata` on node 1021:168, not a guess) instead of real photography.
+  // On `group-hover` all 3 fan out further with a spring-overshoot easing
+  // (`cubic-bezier(0.175, 0.885, 0.32, 1.275)`, read directly off the
+  // reference site's own card-media hover transition), mirroring its
+  // "cards spreading like a hand of playing cards" feel without needing
+  // real photo assets this site doesn't have wired up.
+  // Edge-to-edge on real mobile only (owner: "on mobile, use edge to edge
+  // cards and adjust the height that looks balanced") -- `w-full` plus
+  // `gridEdgeToEdge`'s own `-mx-5` below cancels `container-p`'s mobile
+  // 20px inset (same cancellation technique `mobileRoot` already uses
+  // elsewhere in this file). `h-auto` (not a literal copy of Figma's own
+  // 523px number) -- that figure came from an ambiguous multi-card Figma
+  // export whose frame bounds don't cleanly enclose all 3 cards, not a
+  // confirmed single-card height; letting the card size itself from its
+  // own content (282x259 photo group + padding + text block) is the
+  // "balanced" height the owner actually asked for. `md:`+ unchanged --
+  // still the existing fluid `aspect-[657/958]` card, not edge-to-edge
+  // (owner's request named mobile only).
+  cardStack: "group relative flex w-full h-auto flex-col overflow-hidden bg-ink-2 md:w-full md:flex-1 md:aspect-[657/958]",
+  // Centers the fixed-size photo group within whatever space is left
+  // after the text block below (`flex-1`) -- `py-10` gives the 259px-tall
+  // group room to breathe above/below at any card width, mobile or
+  // desktop, rather than stretching/cropping it to fill the row.
+  stackImageWrap: "relative flex flex-1 min-h-0 items-center justify-center overflow-hidden py-10",
+  // The group itself: Figma's own exact 282x259 footprint (node 1021:168,
+  // "Group 4") -- same size at every breakpoint, since no separate
+  // desktop Figma frame exists for this card to read a different number
+  // from (same "only a mobile frame was given" situation `card`'s own
+  // comment above already documents for this section).
+  stackGroup: "relative mx-auto h-[259px] w-[282px]",
+  // Back tile (drawn first, lowest z): Figma's own measured offset inside
+  // the group (`get_metadata` node 1021:148: left 0, top 34.19, 236.32sq,
+  // -9.6deg) -- fans further out and rotates more on hover.
+  stackPanelBack:
+    "absolute left-0 top-[34px] h-[236px] w-[236px] -rotate-[9.6deg] rounded-[10px] border border-paper/10 bg-paper/[0.045] transition-transform duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:-translate-x-3 group-hover:-translate-y-1 group-hover:-rotate-[18deg]",
+  // Middle tile (drawn second): node 1021:150, left 39, top 15.27, 205sq,
+  // 0deg -- lifts straight up on hover, no rotation, staying the visual
+  // anchor between the two rotated outer tiles.
+  stackPanelMid:
+    "absolute left-[39px] top-[15px] z-[5] h-[205px] w-[205px] rounded-[10px] border border-paper/10 bg-paper/[0.06] transition-transform delay-75 duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:-translate-y-3",
+  // Front tile (drawn last, highest z): node 1021:151, left 80.16, top
+  // 22.69, 236.32sq, +9.6deg -- fans the opposite direction from the back
+  // tile, mirroring it.
   stackPanelFront:
-    "absolute inset-6 z-10 rounded-[10px] border border-paper/10 bg-paper/[0.07] transition-transform duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:-translate-y-1",
-  // Tucked exactly behind the front panel at rest; fans out left on
-  // hover. `delay-75` on the right-hand decoy (not this one) staggers the
-  // two very slightly so they don't move as one rigid unit.
-  stackPanelLeft:
-    "absolute inset-6 rounded-[10px] border border-paper/10 bg-paper/[0.045] transition-transform duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:-translate-x-5 group-hover:translate-y-2 group-hover:-rotate-6",
-  stackPanelRight:
-    "absolute inset-6 rounded-[10px] border border-paper/10 bg-paper/[0.045] transition-transform delay-75 duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:translate-x-5 group-hover:translate-y-2 group-hover:rotate-6",
+    "absolute left-[80px] top-[23px] z-10 h-[236px] w-[236px] rotate-[9.6deg] rounded-[10px] border border-paper/10 bg-paper/[0.08] transition-transform delay-150 duration-[450ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:translate-x-3 group-hover:-translate-y-1 group-hover:rotate-[18deg]",
   textStack: "flex flex-col gap-2 px-6 py-4 md:px-8 md:py-6",
+  // `-mx-5` cancels `container-p`'s real-mobile 20px inset (`app/
+  // globals.css`), same technique `mobileRoot` elsewhere in this file
+  // already uses for the identical "break a mobile row out to true edge-
+  // to-edge" need -- see `cardStack`'s own comment above for why. `md:`+
+  // untouched (`mx-0`), so tablet/desktop keep the section's normal
+  // container inset.
+  gridEdgeToEdge: "max-md:-mx-5 md:mx-0",
+  // 24px flat at every breakpoint (owner: "make the title 24px") --
+  // deliberately not reusing `title` below (22px mobile / 24px from
+  // `md:`), which the other variants still use unchanged.
+  titleStack: "text-[24px] leading-normal font-medium text-paper",
   // 16px sitewide, one line via `line-clamp-1` -- owner: "the subline has
   // been shortened in 1 line with 16 font size" -- deliberately not
   // reusing `descriptor` above (still 15/17px depending on breakpoint, up

@@ -26,6 +26,8 @@ import type { capriosportsHome } from "@/content/capriosports/home";
 // rather than being deleted outright.
 type DivisionCategory = (typeof capriosportsHome.divisions.categories)[number] & {
   image?: { src: string; alt: string };
+  /** `stack` variant only -- see that field's own comment in content/capriosports/home.ts. */
+  descriptorShort?: string;
 };
 
 export type DivisionCardsProps = {
@@ -55,11 +57,19 @@ export type DivisionCardsProps = {
    *   title/descriptor/link, full height.
    * - `"stack"` (2026-09-16, owner: "try this new style... on hover the
    *   following animation will happen," a shopify.design case-study card
-   *   reference) -- same solid `flat`-style card shell, but the
-   *   placeholder area holds 2 decoy panels tucked behind the front one
-   *   that fan out on hover, plus a shortened (1-line, 16px) descriptor.
-   *   See `divisionCards.cardStack`'s own comment in components/ui/
-   *   styles.ts for the full reasoning. Additive -- `flat` is untouched.
+   *   reference; sizing/positions since corrected to the owner's own
+   *   Figma reference, node 1021:143/1021:168) -- same solid `flat`-style
+   *   card shell, but the placeholder area holds a 3-photo fanned stack at
+   *   Figma's own exact size/rotation/offsets, which fans out further on
+   *   hover. Card is edge-to-edge (full-bleed, no `container-p` inset) on
+   *   real mobile only (owner: "on mobile, use edge to edge cards and
+   *   adjust the height that looks balanced" -- height is `h-auto`, not a
+   *   literal copy of Figma's own single-card-export frame height, since
+   *   that number came from an ambiguous multi-card Figma export, not a
+   *   real intended card height). Tablet/desktop keep the existing
+   *   aspect-based sizing, unchanged. See `divisionCards.cardStack`'s own
+   *   comment in components/ui/styles.ts for the full reasoning.
+   *   Additive -- `flat` is untouched.
    */
   variant?: "scrim" | "merge" | "box" | "flat" | "stack";
 };
@@ -67,7 +77,7 @@ export type DivisionCardsProps = {
 export function DivisionCards({ categories, variant = "scrim" }: DivisionCardsProps) {
   return (
     <section className={divisionCards.section}>
-      <div className={divisionCards.grid}>
+      <div className={cx(divisionCards.grid, variant === "stack" && divisionCards.gridEdgeToEdge)}>
         {categories.map((category) => (
           <Link
             key={category.href}
@@ -84,9 +94,11 @@ export function DivisionCards({ categories, variant = "scrim" }: DivisionCardsPr
           >
             {variant === "stack" ? (
               <div className={divisionCards.stackImageWrap} aria-hidden="true">
-                <div className={divisionCards.stackPanelLeft} />
-                <div className={divisionCards.stackPanelRight} />
-                <div className={divisionCards.stackPanelFront} />
+                <div className={divisionCards.stackGroup}>
+                  <div className={divisionCards.stackPanelBack} />
+                  <div className={divisionCards.stackPanelMid} />
+                  <div className={divisionCards.stackPanelFront} />
+                </div>
               </div>
             ) : variant === "flat" || !category.image ? (
               <div className={variant === "box" ? divisionCards.boxImageWrap : divisionCards.imageFlatWrap} aria-hidden="true" />
@@ -113,8 +125,10 @@ export function DivisionCards({ categories, variant = "scrim" }: DivisionCardsPr
                       : divisionCards.textWrap
               }
             >
-              <p className={divisionCards.title}>{category.label}</p>
-              <p className={variant === "stack" ? divisionCards.descriptorStack : divisionCards.descriptor}>{category.descriptor}</p>
+              <p className={variant === "stack" ? divisionCards.titleStack : divisionCards.title}>{category.label}</p>
+              <p className={variant === "stack" ? divisionCards.descriptorStack : divisionCards.descriptor}>
+                {variant === "stack" ? category.descriptorShort ?? category.descriptor : category.descriptor}
+              </p>
               {"linkLabel" in category && category.linkLabel ? (
                 <span className={divisionCards.link}>
                   {category.linkLabel}

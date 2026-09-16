@@ -128,6 +128,14 @@ export const capriosportsHome = {
         // rendered width to confirm the 1-word addition actually crosses
         // into a 3rd line, not just a guess.
         descriptor: "Custom weight lifting belts, training gloves, wraps, straps and bands, private label and wholesale.",
+        // `stack` variant only (2026-09-16, owner: "use the new text that I
+        // have in figma" for the trial hover-fan style, Figma node
+        // 1021:145) -- a shorter, single-line rewrite, not a replacement
+        // for `descriptor` above: the `flat`/`scrim`/`merge`/`box` variants
+        // keep their own existing 3-line-tuned copy untouched (see
+        // `descriptor`'s own comment on why that exact wording hits 3
+        // lines on those variants).
+        descriptorShort: "Custom lifting gear, private label and wholesale",
         href: "/lifting-gears",
         // Explicit `image` (via CategoryLinkGrid's own new optional field,
         // 2026-09-15) -- these 3 cards don't share one real division
@@ -149,12 +157,19 @@ export const capriosportsHome = {
         // separately asked for that same 3-line consistency on Lifting
         // Gear), so the earlier 2-line trim is no longer needed either.
         descriptor: "Custom boxing and MMA gloves, coaching gear and protective gear, private label and wholesale.",
+        // See Lifting Gear's own comment above -- Figma node 1021:161,
+        // used verbatim even though it reads generically (matches
+        // Capriowear's own `descriptorShort` below word-for-word in the
+        // Figma file, not a copy/paste mistake on this end).
+        descriptorShort: "Custom activewear and teamwear, sample to bulk",
         href: "/boxing-and-mma",
         linkLabel: "Explore Boxing",
       },
       {
         label: "Capriowear",
         descriptor: "Custom, private-label activewear and teamwear, made to your brand's spec, from sample to bulk.",
+        // Figma node 1021:164 -- see Lifting Gear's own comment above.
+        descriptorShort: "Custom activewear and teamwear, sample to bulk",
         href: "/capriowear",
         linkLabel: "Visit Capriowear",
         // Only this card's arrow keeps the continuous "always pointing"
