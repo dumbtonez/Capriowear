@@ -34,7 +34,7 @@ import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { OurServices } from "@/components/sections/OurServices";
-import { Stats } from "@/components/sections/Stats";
+import { OurStory } from "@/components/sections/OurStory";
 import { TrustSignals } from "@/components/sections/TrustSignals";
 import { WhatWeMake } from "@/components/sections/WhatWeMake";
 import { WhyCapriosports } from "@/components/sections/WhyCapriosports";
@@ -149,8 +149,18 @@ export default function CapriosportsHomePage() {
             Customization; see content/capriosports/home.ts's own
             `whatWeMake` comment for the 7-tiles-per-category content and
             the `ctaText` override ("See the Full Range", not the
-            component's own default "View All {title}" wording). */}
-        <WhatWeMake content={capriosportsHome.whatWeMake} ctaText="See the Full Range" hideCtaIcon />
+            component's own default "View All {title}" wording).
+            `mobileGridVariant` added 2026-09-16 (owner: "product category
+            will follow the same 2 items in one row as applied in wear")
+            -- matches `app/capriowear/page.tsx`'s own call exactly
+            (2-column mobile tile grid, `whatWeMake.mobileListGrid`,
+            instead of the single-column `mobileList` default). */}
+        <WhatWeMake
+          content={capriosportsHome.whatWeMake}
+          ctaText="See the Full Range"
+          hideCtaIcon
+          mobileGridVariant
+        />
 
         {/* 4c. CERTIFIED & COMPLIANT -- moved here, directly under Product
             Range (owner, 2026-09-15: "under categories section add
@@ -163,6 +173,23 @@ export default function CapriosportsHomePage() {
             "as is from wear", not the adapted version. */}
         <CertifiedCompliant content={home.certified} />
 
+        {/* OUR STORY -- 10-milestone company timeline, sticky-year scroll
+            mechanic. Originally placed after Our Services (owner,
+            2026-09-16: "add it after services section" -- the brief's own
+            stated order, "Trust strip -> Our Story -> Trusted by," doesn't
+            match this page's actual live order, Trusted By/`ClientLogos`
+            already rendering before Trust Strip/`TrustSignals` above, so
+            that placement was the owner's own call instead of reordering
+            that unrelated existing pair). Moved again, same day, above
+            Our Services instead (owner: "put the story section above
+            services"). Same dark surface as Our Services directly below
+            it, so the three sections (Our Story, Our Services, One
+            Factory) still read as one continuous dark run -- Stats
+            (previously between Our Services and One Factory, light
+            content on the same dark surface) was removed entirely (owner,
+            2026-09-16: "remove the stats section"). */}
+        <OurStory content={capriosportsHome.ourStory} />
+
         {/* FULL CUSTOMIZATION -- Capriowear's OWN real OurServices section
             ("From raw fabric to retail-ready packaging"), gear-adapted
             copy, dark `tone` (owner, 2026-09-15: "under the certified
@@ -172,17 +199,6 @@ export default function CapriosportsHomePage() {
             from further down the page (was section 8, light tone) rather
             than duplicated: same content, one instance. */}
         <OurServices content={capriosportsHome.services} tone="dark" />
-
-        {/* Stats -- moved directly under Full Customization (owner,
-            2026-09-15: "under the services section add stats section"),
-            was between One Factory and Full Customization; Full
-            Customization itself was later moved up next to Certified &
-            Compliant (see that section's own comment above), so Stats
-            follows it here instead. Same real component/markup as
-            Capriowear's own homepage, not a custom stat-card row bolted
-            onto Certified & Compliant. Down to 3 stats (owner, same turn:
-            "remove 20+ piece" -- the "20+ Countries" 4th stat dropped). */}
-        <Stats items={capriosportsHome.stats} />
 
         {/* 5. ONE FACTORY -- text/video/CapabilityCard-supporting-blocks/
             photo-slider composition. */}

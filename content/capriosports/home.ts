@@ -97,17 +97,18 @@ export const capriosportsHome = {
   // uses -- content/home.ts's customOfferings field is the direct
   // precedent for this shape.
   customOfferings: {
-    label: "Fully Custom Offerings",
-    items: ["Material", "Weight/Oz", "Padding", "Closure", "Color", "Branding", "Packaging"],
-    // Mobile-only paired regrouping of the same 7 words above (owner,
-    // 2026-09-15: "put it under video with text like this, same like we
-    // did on mobile wear" -- same real pattern `content/home.ts`'s own
-    // `customOfferings.mobileItems` already uses: the desktop Marquee's
-    // flat word list regrouped into pairs for Hero's own mobile
-    // ScrollSpotlightList ticker, not new copy). 7 words don't pair
-    // evenly -- "Packaging" stays alone, same shape as any odd-count
-    // pairing.
-    mobileItems: ["Material & Weight/Oz", "Padding & Closure", "Color & Branding", "Packaging"],
+    // "Fully Custom Offerings" -> "What We Build On" (owner, 2026-09-16).
+    label: "What We Build On",
+    // Replaced wholesale (owner, 2026-09-16) -- was the 7 spec-attribute
+    // words ("Material", "Weight/Oz", etc.); now 6 capability words. Same
+    // object feeds Hero's own mobile ticker (`showTickerMobile`) and this
+    // desktop/tablet Marquee strip below, so one edit covers every
+    // breakpoint (owner: "same apply on mobile and tablet").
+    items: ["Precision", "Durability", "Craftsmanship", "Consistency", "Scale", "Compliance"],
+    // One word per line on mobile, not paired (owner, 2026-09-16: "on
+    // mobile, make them 1 by 1, don't combine") -- was paired into 3
+    // "X & Y" groups; now the same 6 words as `items` above, unchanged.
+    mobileItems: ["Precision", "Durability", "Craftsmanship", "Consistency", "Scale", "Compliance"],
   },
 
   // Division-switcher band -- three cards, one per real division landing
@@ -245,7 +246,7 @@ export const capriosportsHome = {
     // the moment real factory footage exists -- same component, no code
     // change needed.
     video: {
-      label: "Factory video coming soon — Capriosports lifting gear and boxing and MMA manufacturing, Sialkot, Pakistan",
+      label: "Factory video coming soon, Capriosports lifting gear and boxing and MMA manufacturing, Sialkot, Pakistan",
     },
   },
 
@@ -294,19 +295,6 @@ export const capriosportsHome = {
     membershipNote: "Plus a WFSGI member",
     logos: home.certified.logos.filter((logo) => logo.name !== "WFSGI"),
   },
-
-  // 3 stats (owner, 2026-09-15: "remove 20+ piece" -- the "20+ Countries"
-  // 4th stat dropped, back to the original 3) -- rendered via the real
-  // `Stats` component (components/sections/Stats.tsx), same markup/visual
-  // style as Capriowear's own homepage, not a custom stat-card row bolted
-  // onto `CertifiedCompliant`. Section moved under Full Customization
-  // (`OurServices`) in app/page.tsx, same owner turn ("under the services
-  // section add stats section").
-  stats: [
-    { value: "Since 2009", caption: "Manufacturing lifting gear and boxing and MMA equipment for brands worldwide." },
-    { value: `${CAPRIOSPORTS_ORGANIZATION.facilitySqFt} sq ft`, caption: "A fully in-house production facility to take on your bulk order." },
-    { value: CAPRIOSPORTS_ORGANIZATION.monthlyCapacity, caption: "Monthly capacity that scales with your brand, from first sample to bulk order." },
-  ],
 
   // WHAT WE MAKE / "PRODUCT RANGE" -- reuses Capriowear's OWN real
   // `WhatWeMake` component (components/sections/WhatWeMake.tsx) directly,
@@ -429,7 +417,10 @@ export const capriosportsHome = {
   services: {
     eyebrow: "OUR SERVICES",
     h2: "From raw material to retail-ready packaging",
-    lead: "Every order is private label and fully customized, start to finish.",
+    // `lead` removed (owner, 2026-09-16: "remove the subline under the
+    // services title") -- was "Every order is private label and fully
+    // customized, start to finish." `OurServices.tsx`'s `lead` prop stays
+    // optional, so omitting it here is a no-op for the component itself.
     items: [
       {
         title: "Custom Manufacturing",
@@ -450,6 +441,90 @@ export const capriosportsHome = {
       {
         title: "Logistics and Fulfillment",
         body: "Worldwide shipping, DDP, from Sialkot, Pakistan.",
+      },
+    ],
+  },
+
+  // OUR STORY -- 11-milestone company timeline (OurStory.tsx), sticky-year
+  // scroll mechanic, black surface. Placed after Our Services on the page
+  // (owner, 2026-09-16: "add it after services section") -- the brief's
+  // originally-stated order ("Trust strip -> Our Story -> Trusted by")
+  // didn't match this page's actual live order (Trusted By already renders
+  // before Trust Strip), so the owner picked this placement instead rather
+  // than reordering the unrelated existing pair. `current: true` on the
+  // last ("Today") item is a static designation, not scroll-computed -- no
+  // JS tracks which milestone is "active", only CSS `position: sticky` for
+  // the year-pin mechanic itself. No `image` set on any item yet (no
+  // milestone-specific photography confidently on hand -- `public/
+  // factory-test/*` is unlabeled test imagery, not verifiably tied to a
+  // specific year) -- OurStory.tsx renders a clearly-styled placeholder
+  // when `image` is absent; swap in real photos per milestone later.
+  //
+  // Copy replaced wholesale 2026-09-16 (owner-supplied full rewrite) --
+  // gained an 11th milestone (2013, Capriowear's own origin as a side
+  // experiment alongside the lifting gear line, distinct from the existing
+  // 2013-14 "rented hall" entry) and every title/body rewritten in a more
+  // narrative voice. Verbatim, not paraphrased.
+  //
+  // Revised again same day: the standalone "2019-2024 -- Trust,
+  // compounding" card (a separate milestone between 2019 and 2020) was
+  // dropped -- it overlapped the 2020 and 2024 cards that followed it,
+  // breaking the sequential read of the timeline. Its idea folded into the
+  // 2024 card instead ("Past 500, and staying"). Back down to 10 items.
+  ourStory: {
+    eyebrow: "OUR STORY",
+    h2: "From a single room to a 75,000 sq ft factory floor",
+    items: [
+      {
+        year: "2009",
+        title: "Ground zero",
+        body: "Caprio starts in Sialkot with one focus: lifting gear, made right. No shortcuts on stitching, no shortcuts on leather.",
+      },
+      {
+        year: "2012",
+        title: "Working out of one room",
+        body: "The first production wasn't a factory, it was a room. Every belt cut and stitched by hand, order by order, before there was a floor to call our own.",
+      },
+      {
+        year: "2013",
+        title: "A second idea takes shape",
+        body: "Watching activewear and teamwear demand grow, we start experimenting alongside the lifting gear line, small runs, no factory of its own yet, just a bet worth testing. That bet becomes Capriowear.",
+      },
+      {
+        year: "2013-14",
+        title: "Into a real hall",
+        body: "The room becomes a rented production hall, bigger, but still building the footing for what a real bulk order would demand.",
+      },
+      {
+        year: "2014",
+        title: "The order that changed the math",
+        body: "A breakthrough order lands from the United States, proof the model could hold up at export scale, not just survive it.",
+      },
+      {
+        year: "2018",
+        title: "Stepping into the ring",
+        body: "Caprio moves beyond lifting gear into boxing and MMA equipment, becoming a two-line manufacturer built on the same cut-and-sew discipline.",
+      },
+      {
+        year: "2019",
+        title: "Room to grow",
+        body: "Year over year, the floor, the machines and the team outgrow the hall. Caprio moves into a 75,000 sq ft facility built for real volume.",
+      },
+      {
+        year: "2020",
+        title: "Capriowear goes global",
+        body: "What started as a side experiment in 2013 earns its own scale: large orders start arriving from America, Europe and Australia, putting Capriowear on the map alongside Caprio's gear business.",
+      },
+      {
+        year: "2024",
+        title: "Past 500, and staying",
+        body: "The workforce crosses 500, more than double what it was a decade earlier. And the brands that started with small private-label test runs are still here, turned into long-term partnerships across the US and Europe.",
+      },
+      {
+        year: "Today",
+        title: "One factory, every line",
+        body: "700+ people, 100,000+ units of monthly capacity, lifting gear, boxing and MMA equipment, and activewear shipped to 20+ countries, one factory, start to finish.",
+        current: true,
       },
     ],
   },

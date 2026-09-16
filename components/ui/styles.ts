@@ -5302,8 +5302,33 @@ export const ourServices = {
 // `ourServices.darkSurface` already established, for the same edge-to-edge
 // reasoning.
 export const ourStory = {
-  darkSurface: "bg-ink text-paper",
-  section: "container-p flex flex-col gap-12 pt-[120px] pb-[120px] xl:pb-[160px]",
+  // Our Story follows a light section (Certified & Compliant), so it
+  // needs this project's standing sitewide 72px mobile inter-section gap
+  // -- but `certified.mobileSection` (`pt-0 pb-8`, components/ui/
+  // styles.ts ~4254) already contributes its own 32px via `pb-8`, a
+  // documented deliberate exception, not the standard 72px. Adding a full
+  // 72px margin here on top of that would double-stack to 104px (owner,
+  // 2026-09-16, caught exactly this: "remove the above section space if
+  // any, combine should be 72"). `mt-[40px]` is the remainder
+  // (72 - 32 = 40) so the two sections' combined gap lands on exactly
+  // 72px, not more -- same "one boundary, one correct total" reasoning
+  // already used elsewhere in this file (see certified's own
+  // `mobileSectionServices` comment for the identical pattern). `md:mt-0`:
+  // at `md:` up, `section`'s own existing `md:pt-[120px]` below is
+  // already more than enough separation, no extra margin needed there.
+  darkSurface: "bg-ink text-paper mt-[40px] md:mt-0",
+  // Mobile-only internal padding corrected to `pt-12 pb-12` (48px, this
+  // project's real established dark-section mobile default -- confirmed
+  // against Stats/InsideFactory/Exhibitions, all `pt-12 pb-12`) -- was a
+  // flat `pt-[120px] pb-[120px]` with no mobile override at all, a desktop
+  // value applied unintentionally at every width. `pb-12` (48px) on
+  // mobile also correctly leaves the Our Story -> Our Services boundary
+  // flush (both dark, 0 extra margin, matching the project's own
+  // documented "two adjacent dark sections read as one continuous band"
+  // rule) -- Our Services' own mobile top padding (64px) supplies that
+  // boundary's real breathing room, not a margin added here.
+  // `md:pt-[120px] md:pb-[120px] xl:pb-[160px]` (unchanged desktop values).
+  section: "container-p flex flex-col gap-12 pt-12 pb-12 md:pt-[120px] md:pb-[120px] xl:pb-[160px]",
   // Owner, 2026-09-16 (desktop only): force the H2 to wrap to 2 lines and
   // add 32px below it, on top of `section`'s own gap-12 down to the first
   // row -- a real max-width constraint, not a manual line break, so it
