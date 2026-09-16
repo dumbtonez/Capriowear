@@ -7746,7 +7746,18 @@ export const divisionCards = {
   // its label (`marquee.base`'s own comment) -- tuned here, not there, so
   // that shared component's own established padding stays untouched for
   // every other real caller.
-  section: "container-p max-md:pt-1 max-md:pb-10 md:pt-[72px] md:pb-4 xl:pb-6",
+  // `max-md:-mt-3` (owner, 2026-09-16: "what we built should have same
+  // gap from bottom as the top" -- the mobile ticker's own fixed 60px
+  // bottom padding (`servicesHero.tickerMobile`, shared with Capriowear's
+  // homepage/Services page and left untouched there) plus this section's
+  // OLD `pt-1` (4px) totalled a 64px gap down to the first card, wider
+  // than the ticker's own 48px top gap above its "What We Build On"
+  // label; a -12px margin here (replacing that +4px padding) brings the
+  // total down to 48px, matching. Scoped entirely to this component,
+  // which only this one page renders, so the shared ticker token itself
+  // -- confirmed intentional elsewhere, "12px more space from the bottom
+  // ... applies to both pages now too" -- stays untouched.
+  section: "container-p max-md:-mt-3 max-md:pb-10 md:pt-[72px] md:pb-4 xl:pb-6",
   // md: (768px), not xl: (owner, 2026-09-15: "on tablet we should treat
   // those 3 cards as desktop, not mobile" -- the same real rule Hero.tsx's
   // own ticker already documents for this identical "does it read fine at
