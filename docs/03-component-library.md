@@ -1911,3 +1911,36 @@ No milestone photography is wired in yet — `public/factory-test/*` exists but 
 Body-copy contrast verified, not eyeballed: `#838D97` (this project's established muted-on-dark literal, same value `ourServices.leadDark`/`cardBodyDark` already use) against `--color-ink` (`#121317`) measures 5.50:1, passing WCAG AA (4.5:1) for normal text.
 
 No schema/JSON-LD for this section — pure homepage narrative content, not a product/FAQ page.
+
+## Wraps, Straps & Sleeves PLP — real content, second Gear category, plus two new sections, 2026-09-16
+
+Real, locked B2B copy at `content/gear/lifting-gears/wraps-straps-sleeves.ts`, replacing the earlier "Wraps and Straps" placeholder nav entry (`content/home.ts`'s `liftingGearsMegaMenu`, relabeled and re-hrefed alongside this file). `status: "draft"` (every one of its 10 style cards too, none with `internalPreview` — no PDP content exists yet for any of them, so every card renders non-clickable and no `[style]` route is generated, unlike Weight Lifting Belts' own `internalPreview: true` cards). Not linked from the `/lifting-gears` hub page (`content/gear/lifting-gears/hub.ts`'s `liftingGearsGroups` untouched) — that list has no `status` filtering of its own, so omission is the only gate.
+
+Two new sections, both new to this category only — every existing category (Weight Lifting Belts, every Activewear/Teamwear category) sets neither field and renders unaffected:
+
+### ComparisonTable — Built
+`components/sections/ComparisonTable.tsx` · reuses recipe: `fabricOptions` (no new tokens)
+
+An arbitrary-column comparison table ("Three jobs, ten styles": Wraps vs. Straps and hooks vs. Sleeves), rendered directly under the hero, before the style listing (`app/lifting-gears/[category]/page.tsx`, right after the `BreadcrumbList`/`CollectionPage` schema block). Content: `Category.comparisonTable?: ComparisonTableContent` (`content/activewear/types.ts`) — `{eyebrow, heading, headers: string[], rows: {label, values: string[]}[]}`. Genuinely different shape from `FabricOption` (fixed 3 columns) since this table's column count varies per category (3 product families here).
+
+Desktop: real `<table>`, reusing `FabricOptions`' own `weightTiers*` cell recipe classes as-is (already column-count-agnostic utility strings — first column semibold via `weightTiersTierCell`, every middle column via `weightTiersGsmCell`, last column via `weightTiersBestForCell`'s `pr-0`). Mobile: single-open accordion, same `accordion*` recipe keys and 0fr/1fr grid-rows mechanic `FabricOptions`' own secondary table already uses — no horizontal scroll, matching the standing house rule for this kind of table.
+
+### SpecTables — Built
+`components/sections/SpecTables.tsx` · reuses recipe: `fabricOptions` (no new tokens)
+
+An array of standalone 2-column "Spec"/"Options" tables (wrap specs, strap specs, hook specs, sleeve specs — 4 for this category), rendered after the trust block, before the FAQ. Content: `Category.specTables?: SpecTable[]` (`{eyebrow, heading, rows: {label, value}[]}[]`) plus a single shared `Category.specTablesNote?: NoteSegment[]` rendered once after the last table. Exists because `FabricOptions` hard-caps at one main table plus one secondary table (`weightTiers`/`structuredBlock`), both fixed at 3 columns — this category genuinely needs 4 independent 2-column tables, each with its own eyebrow + H2, so a new component was the smaller change over generalizing `FabricOptions` itself. Same desktop-table/mobile-accordion split and recipe reuse as `ComparisonTable` above.
+
+### `app/lifting-gears/[category]/page.tsx` — updated
+`FabricOptions` is now called conditionally (`data.fabricOptions ? <FabricOptions .../> : null`) instead of unconditionally — Wraps, Straps & Sleeves has no single material table and omits `fabricOptions` entirely, using `ComparisonTable`/`SpecTables` instead. `Category.fabricEyebrow`/`fabricHeading`/`fabricOptions`/`fabricNote`/`fabricPills` all became optional (`content/activewear/types.ts`) to allow this — every other division's own category page (`app/boxing-and-mma/[category]/page.tsx`, `app/capriowear/activewear/[category]/page.tsx`, `app/capriowear/teamwear/[sport]/page.tsx`, and their own `[style]` siblings) still calls `FabricOptions` unconditionally and asserts these fields non-null (`!`) at each call site, since every category in those divisions always sets all of them together — a mechanical, backward-compatible type-safety fix with no behavior change there, confirmed via `npx tsc --noEmit` and unchanged rendered output on `/lifting-gears/weight-lifting-belts` and every Activewear/Teamwear PLP.
+
+Content: `content/gear/lifting-gears/wraps-straps-sleeves.ts` (new), registered in `content/gear/lifting-gears/categories.ts`. `relatedLinks` set (Lifting Gear, Weight Lifting Belts, Boxing and MMA — all live pages) but, same pre-existing gap noted for Weight Lifting Belts, still not rendered anywhere on the real category route (`RelatedCategories` is only wired on `app/styleguide/page.tsx`).
+
+## Wrist Wraps PDP — first PDP in Wraps, Straps & Sleeves, 2026-09-16
+
+Real PDP content for the `wrist-wraps` style card in `content/gear/lifting-gears/wraps-straps-sleeves.ts` — same shape, components, and draft/publish gating as every belt PDP, no new components or types. `status: "draft"`, `internalPreview: true` (clickable PLP card, reachable route, still noindexed/no-schema/no-sitemap), `sku: "CAP-WRP-01"`. Owner brief: "the recommended style to publish first since it's the most comparable across every competitor catalog checked."
+
+**Category-level `pdpFaqOperational` replaced**, not appended — the owner's brief for this style explicitly said its 3-question operational block ("MOQ and can I mix lengths or colors," NDA, get started) "will be reused verbatim on every Wraps, Straps & Sleeves PDP," so it belongs at the category level (same mechanism `Category.pdpFaqOperational` already provides for Weight Lifting Belts), not copied per style. This is narrower than the block it replaced (which the PLP build had invented with a 4th, competition-dimensions question) — that question now lives as a per-style FAQ instead, since its answer genuinely varies by style's own federation dimension limit (Wrist Wraps: 1m by 8cm).
+
+**`relatedStyleTags` point at the category PLP, not invented PDP URLs** — Knee Wraps, Elbow Wraps, and Knee Sleeves have no PDP yet (same "a tag with no matching reachable sibling PDP links to the parent category PLP instead of an invented/404ing URL" rule Lever Belt's own first build established); re-point each at its own PDP href as soon as that style is built.
+
+`npx tsc --noEmit`, `npx eslint .`, `npm run build` all clean — the `wrist-wraps` PDP route is now generated (was absent). Verified in-browser: full content renders (H1, 4 key facts, material/customization chips, specifications table, "How we customize" 7 steps, quality section scoped to length/stiffness/stitching only, FAQ in entity → per-style → shared-operational order, no en/em dashes); `<title>` renders exactly "Custom Wrist Wraps Manufacturer | Capriosports"; `robots: noindex, nofollow` present; `BreadcrumbList` JSON-LD present, `Product`/`FAQPage` JSON-LD absent; `wrist-wraps` absent from `sitemap.xml`; on the PLP, the Wrist Wraps card alone is now a real clickable link, the other 9 unchanged (non-clickable).

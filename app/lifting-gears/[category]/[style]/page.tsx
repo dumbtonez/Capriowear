@@ -176,7 +176,7 @@ export default async function LiftingGearsStylePage({
             <ProductHighlights items={data.product.pdpSpecHighlights ?? pdpSpecHighlights} />
             <ProductOptions
               groups={[
-                { heading: "Material options", items: data.product.pdpFabricPills ?? data.category.fabricPills },
+                { heading: "Material options", items: data.product.pdpFabricPills ?? data.category.fabricPills ?? [] },
                 { heading: "Customization", items: data.product.pdpCustomizationPills ?? pdpCustomizationPills },
               ]}
             />

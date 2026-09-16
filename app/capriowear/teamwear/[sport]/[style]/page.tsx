@@ -167,7 +167,7 @@ export default async function TeamwearStylePage({ params }: PageProps<"/capriowe
             <ProductHighlights items={pdpSpecHighlights} />
             <ProductOptions
               groups={[
-                { heading: "Fabric options", items: data.category.fabricPills },
+                { heading: "Fabric options", items: data.category.fabricPills! },
                 { heading: "Customization", items: pdpCustomizationPills },
               ]}
             />

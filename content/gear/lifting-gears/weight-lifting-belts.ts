@@ -37,7 +37,7 @@ export const weightLiftingBelts: Category = {
   metaTitle: "Custom Weight Lifting Belts Manufacturer",
   metaDescription:
     "Custom weight lifting belts manufacturer, private label and wholesale. Lever, powerlifting, prong, nylon and dip belts, low MOQ. Sialkot, Pakistan.",
-  trustBullets: ["MOQ from 50 pieces", "10mm & 13mm thickness tiers", "OEM, ODM & Private label", "DDP to 20+ countries"],
+  trustBullets: ["MOQ from 50 pieces", "7mm to 13mm thickness range", "OEM, ODM & Private label", "DDP to 20+ countries"],
   // No All/Women/Men gender filter on any Capriosports Gear PLP (owner
   // spec, 2026-09-15) -- a B2B gym-equipment buyer, unlike Capriowear's own
   // Activewear/Teamwear categories, has no gender split to filter by.
@@ -48,14 +48,14 @@ export const weightLiftingBelts: Category = {
   fabricHeading: "The material behind every belt tier",
   fabricOptions: [
     {
-      fabric: "Genuine leather, 10mm",
-      bestFor: "Lever and prong belts, everyday heavy training",
-      performance: "The standard competition-adjacent thickness",
+      fabric: "Genuine leather, 7mm to 10mm",
+      bestFor: "Lever and prong belts, lifters who want more mobility and faster bracing feedback",
+      performance: "The lighter end of our thickness range",
     },
     {
-      fabric: "Genuine leather, 13mm",
+      fabric: "Genuine leather, 10mm to 13mm",
       bestFor: "Lever belts, maximum-rigidity competition use",
-      performance: "The thickest, most rigid tier we build",
+      performance: "The thickest, most rigid end of our range",
     },
     {
       fabric: "Nylon webbing",
@@ -74,7 +74,7 @@ export const weightLiftingBelts: Category = {
       text: "Width runs 4in on the lever and prong line and up to 6in on the nylon and neoprene lines. Final thickness and width are confirmed on your sample, since belt specs vary by market and by governing body.",
     },
   ],
-  fabricPills: ["Genuine leather, 10mm", "Genuine leather, 13mm", "Nylon webbing", "Neoprene"],
+  fabricPills: ["Genuine leather, 7mm to 10mm", "Genuine leather, 10mm to 13mm", "Nylon webbing", "Neoprene"],
   qualityHeading: "A real spec sheet, not a size letter",
   qualitySubline:
     "Most belt manufacturers list a belt by material and a letter size alone. We publish the thickness, the width, and the material on every style, and confirm it on your sample before bulk.",
@@ -87,7 +87,7 @@ export const weightLiftingBelts: Category = {
   coverageEyebrow: "CUSTOMIZATION",
   coverageHeading: "From raw material to finished packaging",
   coverageItems: [
-    { title: "Thickness and width", body: "10mm and 13mm leather, 4in and 6in width, built to your spec" },
+    { title: "Thickness and width", body: "7mm to 13mm leather, 4in and 6in width, built to your spec" },
     { title: "Material", body: "Genuine leather, nylon webbing, or neoprene, matched to your reference" },
     { title: "Branding", body: "Embossing, debossing, embroidery, woven labels, and private label" },
     { title: "Finishing", body: "Your labels, hangtags, and retail-ready packaging" },
@@ -124,7 +124,7 @@ export const weightLiftingBelts: Category = {
     },
     {
       q: "What thickness and width do you manufacture, and can you match a specific competition or federation spec?",
-      a: "We build 10mm and 13mm leather at 4in width as standard, plus wider nylon and neoprene tiers. If your market has a specific governing-body thickness or width limit, share the specification and we build and confirm your belt against it on sample.",
+      a: "We build 7mm to 13mm leather at 4in width as standard, plus wider nylon and neoprene tiers. If your market has a specific governing body thickness or width limit, share the specification and we build and confirm your belt against it on sample.",
     },
     {
       q: "What leather do you use, and can I request a different grade?",
@@ -939,13 +939,156 @@ export const weightLiftingBelts: Category = {
       ],
     },
     {
+      // Sixth and final of the 6 belt PDPs (owner brief, 2026-09-16). Same
+      // `internalPreview` escape hatch as the other 5 built belts -- see
+      // Lever Belt styleCard's own comment. `status: "draft"` until
+      // sampled specs are confirmed real.
       status: "draft",
+      internalPreview: true,
       slug: "womens-belt",
+      sku: "CAP-BLT-06",
       cardTitle: "Custom Women's Weight Lifting Belt",
       cardSubline: "A narrower run and taper built for a women's fit",
       image: "",
       imageAlt: "Custom women's weight lifting belt",
       href: "/lifting-gears/weight-lifting-belts/womens-belt",
+      pdpTitle: "Women's Belt",
+      images: [
+        { alt: "Custom women's weight lifting belt, front view" },
+        { alt: "Custom women's weight lifting belt, worn on model, in use" },
+        { alt: "Custom women's weight lifting belt, side profile" },
+        { alt: "Custom women's weight lifting belt, buckle detail" },
+        { alt: "Custom women's weight lifting belt, stitching detail" },
+        { alt: "Custom women's weight lifting belt, material close-up" },
+        { alt: "Custom women's weight lifting belt, back view" },
+        { alt: "Custom women's weight lifting belt, flat lay" },
+        { alt: "Custom women's weight lifting belt, private label packaging" },
+      ],
+      pdpHeading: "Custom Women's Weight Lifting Belt Manufacturer",
+      pdpDescription:
+        "A custom and private label weight lifting belt built on a tapered cut and a narrower size run for a women's fit, in leather or nylon, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Women's Weight Lifting Belt Manufacturer",
+      pdpMetaDescription:
+        "Custom women's weight lifting belt manufacturer, tapered fit, narrower run, leather or nylon. Private label, low MOQ. Sialkot, Pakistan.",
+      material: "Genuine leather or nylon webbing",
+      pdpFabricPills: [
+        "Genuine leather or nylon webbing",
+        "Tapered cut",
+        "Narrower size run",
+        "Lever, prong, or self-locking buckle",
+      ],
+      pdpCustomizationPills: ["Embossed or printed logo", "Private label", "Color", "Custom labels"],
+      pdpQualityHeading: "A real spec sheet, not a size letter",
+      pdpQualitySubline:
+        "We confirm the taper, the fit range, and the buckle action on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Taper and front width checked against your reference or pattern",
+        "Buckle action tested for smooth, secure operation",
+        "Fit range confirmed against the spec you send",
+        "Digital proof and sample approved before we cut your production run",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "ruler", text: "Tapered fit" },
+        { icon: "arrowDownAZ", text: "Leather or nylon build" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          {
+            title: "Cut",
+            body: "Taper and front width matched to your reference or pattern",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Cut" },
+          },
+          {
+            title: "Material and buckle",
+            body: "Leather or nylon, lever, prong, or self-locking, to your spec",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Material and buckle" },
+          },
+          {
+            title: "Branding",
+            body: "Embossed, debossed, or printed logo, woven or leather patch labels",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" },
+          },
+          {
+            title: "Color",
+            body: "Full color range, matched to your brand palette",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Color" },
+          },
+          {
+            title: "Stitching and lining",
+            body: "Thread color, stitch pattern, and lining material to your brief",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Stitching and lining" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, size and care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and finish" },
+          },
+          {
+            title: "Packaging",
+            body: "Polybags, boxes, retail-ready to your spec",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Packaging" },
+          },
+        ],
+      },
+      specifications: [
+        { label: "Style", value: "Women's weight lifting belt (base type)" },
+        { label: "Material", value: "Genuine leather or nylon webbing, your choice" },
+        { label: "Cut", value: "Tapered, narrower at the front, built for a women's fit" },
+        { label: "Closure", value: "Lever, prong, or self-locking buckle, to your spec" },
+        { label: "Fit", value: "A narrower size run than the unisex line, built to your pattern or a reference belt" },
+        { label: "Color", value: "Full color range, including finishes beyond the standard black line" },
+        { label: "Branding", value: "Embossed, debossed, or printed logo, woven labels, hangtags, packaging" },
+      ],
+      relatedStyleTags: [
+        { label: "Lever Belt", href: "/lifting-gears/weight-lifting-belts/lever-belt" },
+        { label: "Prong Belt", href: "/lifting-gears/weight-lifting-belts/prong-belt" },
+        { label: "Nylon Quick-Lock Belt", href: "/lifting-gears/weight-lifting-belts/nylon-quick-lock-belt" },
+        { label: "See All", href: "/lifting-gears/weight-lifting-belts" },
+      ],
+      // Per-style override (see `StyleCard.pdpFaqOperational`'s own
+      // comment) -- this style's own operational FAQ wording ("mix
+      // materials or colors," "federation spec for a women's belt")
+      // doesn't fit the category-level block's leather-belt-specific
+      // phrasing ("mix thickness or colors," federation thickness/width
+      // matching), owner brief 2026-09-16.
+      pdpFaqOperational: [
+        {
+          q: "What is the MOQ and can I mix materials or colors?",
+          a: "From 50 pieces per style. Mix leather and nylon builds, colors, and buckle types within the same order.",
+        },
+        {
+          q: "Can you match a specific competition or federation spec for a women's belt?",
+          a: "Yes. Share your governing body's specification and we build and confirm the belt against it on sample.",
+        },
+        {
+          q: "Will my design and spec sheet stay protected?",
+          a: "Yes. NDA before any tech pack or spec sheet is shared.",
+        },
+        {
+          q: "How do I get started?",
+          a: "Send your tech pack, sketch, or a reference belt by email or WhatsApp. We reply within 24 hours with next steps.",
+        },
+      ],
+      faqs: [
+        {
+          q: "How is the women's belt different from the unisex line beyond sizing?",
+          a: "The cut is tapered, narrower at the front, rather than a straight-width belt scaled down. This is a construction difference, not just a smaller version of the same pattern.",
+        },
+        {
+          q: "Can I offer the women's belt in the same buckle types as the rest of the line?",
+          a: "Yes. We build it in lever, prong, or self-locking nylon, matching whichever buckle system the rest of your catalog uses.",
+        },
+        {
+          q: "Is this belt built to a lower thickness than the men's line by default?",
+          a: "No. Thickness and width are set by your spec, the same as any other style. The difference here is the cut and the size run, not a reduced construction standard.",
+        },
+      ],
     },
   ],
   relatedLinks: [

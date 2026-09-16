@@ -299,7 +299,7 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
                 shared `gap-8` reasoning as ProductHighlights above. */}
             <ProductOptions
               groups={[
-                { heading: "Fabric options", items: data.category.fabricPills },
+                { heading: "Fabric options", items: data.category.fabricPills! },
                 { heading: "Customization", items: pdpCustomizationPills },
               ]}
             />

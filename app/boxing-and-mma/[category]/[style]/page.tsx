@@ -158,7 +158,7 @@ export default async function BoxingMmaStylePage({
             <ProductHighlights items={pdpSpecHighlights} />
             <ProductOptions
               groups={[
-                { heading: "Material options", items: data.category.fabricPills },
+                { heading: "Material options", items: data.category.fabricPills! },
                 { heading: "Customization", items: pdpCustomizationPills },
               ]}
             />

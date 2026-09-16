@@ -6961,6 +6961,27 @@ export const fabricOptions = {
   // and xl:pb-[120px] (unchanged -- this is page-end spacing, a separate
   // concern from the inter-section gap above it).
   section: "mx-auto w-full max-w-[1440px] px-5 pb-20 md:px-8 xl:px-[138px] xl:pt-[80px] xl:pb-[120px]",
+  // Same horizontal shell as `section` above, no top padding of its own
+  // (owner spec, 2026-09-16, Wraps, Straps & Sleeves: ComparisonTable sits
+  // directly under a page-level hairline divider that already supplies its
+  // own `xl:mb-[120px]`, so a `pt` here would double-count that gap -- same
+  // "the divider is the sole source of this gap" pattern `whatWeCover.
+  // section` already established, see that recipe's own comment). `xl:pb-
+  // [120px]` kept (not zeroed) -- "CUSTOMIZATION section should have 120px
+  // from the top space," but with no visible divider between the two (a
+  // divider was tried there, then explicitly removed) -- this section's
+  // own bottom padding is the only remaining source of that gap.
+  //
+  // A same-string override (`cx(section, "xl:pt-0")`) was tried first and
+  // looked right in the JSX, but Tailwind's generated CSS order is NOT the
+  // order classes appear in the class attribute -- `xl:pt-[80px]` (already
+  // emitted earlier in the stylesheet, from every other caller of
+  // `section`) still won over the newer `xl:pt-0`, leaving a real,
+  // invisible-in-code 80px gap live (found via direct measurement: section
+  // top to heading-block top, not just eyebrow-text position). This is a
+  // genuinely separate value, not a same-string override, so there's no
+  // generation-order race to lose.
+  sectionFlushBottom: "mx-auto w-full max-w-[1440px] px-5 pb-20 md:px-8 xl:px-[138px] xl:pb-[120px]",
   // max-xl:gap-4/px-0 (mobile Figma node 590:1488's own Title frame: 16px
   // gap, no side inset of its own -- headingBlock's parent `section`
   // already carries px-5).
@@ -7110,6 +7131,17 @@ export const fabricOptions = {
   // already uses. `w-full` (no more `min-w-[520px]`) since this element no
   // longer needs to force its own scroll container at any width.
   weightTiersWrap: "mt-[44px] hidden w-full xl:mt-[60px] xl:block",
+  // Same shell, `xl:mt-[72px]` instead of `[60px]` (owner spec, 2026-09-16,
+  // Wraps, Straps & Sleeves: "make it 72px for all the section titles to
+  // the below content") -- a genuinely separate key, not a `weightTiersWrap`
+  // override, so `FabricOptions.tsx`'s own secondary-table callers (Weight
+  // Lifting Belts, T-Shirts, Compression & Base Layers, Cricket, etc.) keep
+  // their original 60px unaffected. Used by `ComparisonTable.tsx`/
+  // `SpecTables.tsx` only, for the gap under every one of this page's own
+  // section titles (the "Three jobs, ten styles" heading and each of the 4
+  // spec-table headings). Mobile/tablet `mt-[44px]` unchanged -- the
+  // request measured the desktop (1440px) render specifically.
+  weightTiersWrapWide: "mt-[44px] hidden w-full xl:mt-[72px] xl:block",
   weightTiersTable: "w-full border-collapse text-left",
   weightTiersHeaderRow: "border-b border-[#e8ecf1]",
   // text-[1.5rem] (24px), font-medium (owner, 2026-09-02: "make these

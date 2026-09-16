@@ -14,12 +14,14 @@ import { Logo } from "@/components/Logo";
 import { CategoryBanner } from "@/components/sections/CategoryBanner";
 import { CategoryFilters } from "@/components/sections/CategoryFilters";
 import { CategoryMetaStrip } from "@/components/sections/CategoryMetaStrip";
+import { ComparisonTable } from "@/components/sections/ComparisonTable";
 import { FabricOptions } from "@/components/sections/FabricOptions";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
 import { ProductGrid } from "@/components/sections/ProductGrid";
 import { FINAL_CTA_MARKER_ID, ProductCtasMobileBar } from "@/components/sections/ProductCtas";
+import { SpecTables } from "@/components/sections/SpecTables";
 import { TrustPoints } from "@/components/sections/TrustPoints";
 import { WhatWeCover } from "@/components/sections/WhatWeCover";
 import { footer, header } from "@/components/ui/styles";
@@ -140,22 +142,60 @@ export default async function LiftingGearsCategoryPage({ params }: PageProps<"/l
           </div>
         </div>
 
+        {/* Section divider under the product grid/pagination (owner spec,
+            2026-09-16, Wraps, Straps & Sleeves: "follow same in
+            capriowear") -- same hairline + xl:mb-[120px] pattern
+            app/capriowear/activewear/[category]/page.tsx's own divider
+            already uses under its own product grid, same #e8ecf1 colour,
+            same 1440px-wide wrapper. Every category renders this divider
+            regardless of `comparisonTable` -- it's the listing's own
+            boundary, not specific to that field. This is the ONLY divider
+            for a category with no `comparisonTable` (e.g. Weight Lifting
+            Belts) -- it sits directly above WhatWeCover exactly as it did
+            before `comparisonTable` existed, confirmed unchanged live. */}
         <div className="mx-auto w-full max-w-[1440px]">
           <div className="h-px bg-[#e8ecf1] xl:mb-[120px]" />
         </div>
 
+        {/* Optional comparison table (owner spec, 2026-09-16, Wraps, Straps
+            & Sleeves; moved below the style listing 2026-09-16 -- "should
+            come under the product tiles," was originally directly under the
+            hero). Every other category leaves `comparisonTable` unset and
+            renders nothing extra here.
+            No closing divider below (owner spec, 2026-09-16: "section end
+            should not have a separator... 0 space under this section") --
+            a divider was tried here first, then removed on explicit
+            instruction; `ComparisonTable`'s own section shell already
+            carries no bottom padding and `WhatWeCover` below carries no top
+            padding of its own (see that recipe's own comment), so removing
+            the divider (rather than just hiding it) is what actually
+            yields a real, flush 0px gap between the two, not a hidden
+            element still reserving space. */}
+        {data.comparisonTable ? <ComparisonTable content={data.comparisonTable} /> : null}
+
         <WhatWeCover eyebrow={data.coverageEyebrow} heading={data.coverageHeading} items={data.coverageItems} />
         <TrustPoints heading={data.qualityHeading} subline={data.qualitySubline} points={data.qualityPoints} />
-        <FabricOptions
-          eyebrow={data.fabricEyebrow}
-          heading={data.fabricHeading}
-          options={data.fabricOptions}
-          optionsHeaders={data.fabricOptionsHeaders}
-          weightTiers={data.weightTiers}
-          weightTiersHeaders={data.weightTiersHeaders}
-          structuredBlock={data.structuredBlock}
-          note={data.fabricNote}
-        />
+        {/* Optional -- a category with no fabric-options table (e.g. Wraps,
+            Straps & Sleeves, which uses `specTables` below instead) omits
+            `fabricOptions` entirely and renders nothing here. */}
+        {data.fabricOptions ? (
+          <FabricOptions
+            eyebrow={data.fabricEyebrow!}
+            heading={data.fabricHeading!}
+            options={data.fabricOptions}
+            optionsHeaders={data.fabricOptionsHeaders}
+            weightTiers={data.weightTiers}
+            weightTiersHeaders={data.weightTiersHeaders}
+            structuredBlock={data.structuredBlock}
+            note={data.fabricNote!}
+          />
+        ) : null}
+        {/* Optional array of standalone spec tables (owner spec, 2026-09-16,
+            Wraps, Straps & Sleeves) -- every other category leaves
+            `specTables` unset and renders nothing extra here. */}
+        {data.specTables && data.specTables.length > 0 ? (
+          <SpecTables tables={data.specTables} note={data.specTablesNote} />
+        ) : null}
 
         <Faq content={{ h2: data.faqHeading, items: faqItems }} />
         {data.status !== "draft" ? <JsonLd data={faqSchema(faqItems)} /> : null}

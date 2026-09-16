@@ -298,12 +298,12 @@ export default async function CategoryPage({ params }: PageProps<"/capriowear/ac
         />
         <TrustPoints heading={data.qualityHeading} subline={data.qualitySubline} points={data.qualityPoints} />
         <FabricOptions
-          eyebrow={data.fabricEyebrow}
-          heading={data.fabricHeading}
-          options={data.fabricOptions}
+          eyebrow={data.fabricEyebrow!}
+          heading={data.fabricHeading!}
+          options={data.fabricOptions!}
           weightTiers={data.weightTiers}
           weightTiersHeaders={data.weightTiersHeaders}
-          note={data.fabricNote}
+          note={data.fabricNote!}
         />
 
         {/* FAQ (Figma node 579:5660 layout, node 579:5753 full Q&A copy,

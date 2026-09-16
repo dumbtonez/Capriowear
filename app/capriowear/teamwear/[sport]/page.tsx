@@ -146,13 +146,13 @@ export default async function SportPage({ params }: PageProps<"/capriowear/teamw
         <WhatWeCover eyebrow={data.coverageEyebrow} heading={data.coverageHeading} items={data.coverageItems} />
         <TrustPoints heading={data.qualityHeading} subline={data.qualitySubline} points={data.qualityPoints} />
         <FabricOptions
-          eyebrow={data.fabricEyebrow}
-          heading={data.fabricHeading}
-          options={data.fabricOptions}
+          eyebrow={data.fabricEyebrow!}
+          heading={data.fabricHeading!}
+          options={data.fabricOptions!}
           weightTiers={data.weightTiers}
           weightTiersHeaders={data.weightTiersHeaders}
           structuredBlock={data.structuredBlock}
-          note={data.fabricNote}
+          note={data.fabricNote!}
         />
 
         <Faq content={{ h2: data.faqHeading, items: faqItems }} />

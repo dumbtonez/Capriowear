@@ -19,6 +19,19 @@ export const liftingGearsGroups: CategoryGroup[] = [
         descriptor: "Placeholder -- real copy is a later phase",
         href: "/lifting-gears/weight-lifting-belts",
       },
+      // Category itself stays `status: "draft"` (content/gear/lifting-
+      // gears/wraps-straps-sleeves.ts) -- this hub list has no draft
+      // gating of its own, so adding this card only makes it visible and
+      // clickable HERE, for internal review (owner request, 2026-09-16).
+      // The PLP and every style card stay noindexed, excluded from
+      // sitemap.ts, and without Product/FAQPage/CollectionPage schema
+      // until the owner flips that category's own `status` to
+      // "published".
+      {
+        label: "Wraps, Straps & Sleeves",
+        descriptor: "Wrist wraps, knee wraps, lifting straps, hooks, and knee sleeves, ten styles, one factory",
+        href: "/lifting-gears/wraps-straps-sleeves",
+      },
     ],
   },
 ];

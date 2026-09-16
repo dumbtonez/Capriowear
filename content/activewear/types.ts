@@ -348,6 +348,68 @@ export type DecorationRow = {
  *   kept for a category that wants to be explicit about having no second
  *   table rather than just leaving the field unset.
  */
+/**
+ * One row of the PLP's optional comparison table (owner spec, 2026-09-16,
+ * Wraps, Straps & Sleeves) -- e.g. `{label: "What it does", values: [
+ * "Compresses the joint...", "Extends grip...", "Provides constant
+ * compression..."]}`. `values` has one entry per `Category.comparisonTable`
+ * header (excluding the blank first header cell), a genuinely different
+ * shape from `FabricOption`'s fixed 3-column row -- this table's own
+ * column count varies per category (3 product families here, could be a
+ * different count elsewhere), so it isn't folded into `FabricOption`.
+ */
+export type ComparisonRow = {
+  label: string;
+  values: string[];
+};
+
+/**
+ * The PLP's optional comparison table (owner spec, 2026-09-16, Wraps,
+ * Straps & Sleeves: "Three jobs, ten styles" -- Wraps vs. Straps and hooks
+ * vs. Sleeves). Rendered by `ComparisonTable.tsx` directly under the hero,
+ * before the style listing -- see that component's own comment. `headers`
+ * includes the leading blank label-column header (e.g. `["", "Wraps",
+ * "Straps and hooks", "Sleeves"]`) so the table stays a plain N-column grid
+ * with no implicit first column. Optional -- every category that doesn't
+ * set this (every one so far except Wraps, Straps & Sleeves) renders no
+ * comparison table at all.
+ */
+export type ComparisonTableContent = {
+  eyebrow: string;
+  heading: string;
+  headers: string[];
+  rows: ComparisonRow[];
+};
+
+/**
+ * One row of a `Category.specTables` entry (owner spec, 2026-09-16, Wraps,
+ * Straps & Sleeves) -- a plain "Spec"/"Options" 2-column row, e.g.
+ * `{label: "Length", value: "12in, 18in, 24in, 36in..."}`. Deliberately not
+ * `FabricOption` (which is fixed at 3 columns, fabric/bestFor/performance)
+ * -- this table describes one product family's own spec sheet, not a
+ * fabric comparison.
+ */
+export type SpecTableRow = {
+  label: string;
+  value: string;
+};
+
+/**
+ * One of the PLP's optional standalone spec tables (owner spec, 2026-09-16,
+ * Wraps, Straps & Sleeves) -- that category needs 4 independent tables
+ * (wraps, straps and hooks, lifting hook, sleeves), each with its own
+ * eyebrow + H2, rather than the single main/secondary table pair
+ * `fabricOptions`/`weightTiers` support. Rendered by `SpecTables.tsx`,
+ * `.map()`-ing over `Category.specTables` in order, positioned after the
+ * trust block and before the FAQ. Optional -- every category that doesn't
+ * set this renders none of these tables.
+ */
+export type SpecTable = {
+  eyebrow: string;
+  heading: string;
+  rows: SpecTableRow[];
+};
+
 export type StructuredBlock =
   | { type: "weightTiers"; tiers: WeightTier[]; headers?: WeightTiersHeaders }
   /**
@@ -560,11 +622,20 @@ export type Category = {
    * built; until then, omit it.
    */
   overview?: string;
-  /** FabricOptions' own eyebrow, e.g. "FABRIC OPTIONS" (Figma node 579:5632). */
-  fabricEyebrow: string;
-  /** FabricOptions' own H2, e.g. "The fabrics behind the big brands". */
-  fabricHeading: string;
-  fabricOptions: FabricOption[];
+  /**
+   * FabricOptions' own eyebrow, e.g. "FABRIC OPTIONS" (Figma node
+   * 579:5632). Optional (owner spec, 2026-09-16, Wraps, Straps & Sleeves)
+   * -- that category has no single fabric/material table at all (its
+   * material info instead lives in the four `specTables` below), so
+   * `FabricOptions` simply isn't rendered when `fabricOptions` is unset.
+   * Every existing category still sets this alongside `fabricOptions` and
+   * renders unchanged.
+   */
+  fabricEyebrow?: string;
+  /** FabricOptions' own H2, e.g. "The fabrics behind the big brands". Optional, see `fabricEyebrow`'s own comment. */
+  fabricHeading?: string;
+  /** Optional, see `fabricEyebrow`'s own comment -- omit entirely (along with `fabricEyebrow`/`fabricHeading`/`fabricNote`) for a category with no fabric-options table. */
+  fabricOptions?: FabricOption[];
   /**
    * Column-header override for `fabricOptions`' own main table (owner spec,
    * 2026-09-15, Gear/Weight Lifting Belts) -- defaults to "Fabric"/"Best
@@ -605,8 +676,14 @@ export type Category = {
    * this instead.
    */
   structuredBlock?: StructuredBlock;
-  /** FabricOptions' own closing note, e.g. "Weights from **300 to 500 GSM**...". */
-  fabricNote: NoteSegment[];
+  /** FabricOptions' own closing note, e.g. "Weights from **300 to 500 GSM**...". Optional, see `fabricEyebrow`'s own comment. */
+  fabricNote?: NoteSegment[];
+  /** The PLP's optional comparison table, rendered under the hero before the style listing -- see `ComparisonTableContent`'s own comment. */
+  comparisonTable?: ComparisonTableContent;
+  /** The PLP's optional array of standalone spec tables, rendered after the trust block, before the FAQ -- see `SpecTable`'s own comment. */
+  specTables?: SpecTable[];
+  /** Shared reference note rendered once, after every `specTables` entry -- same segment-run shape as `fabricNote`. */
+  specTablesNote?: NoteSegment[];
   /**
    * Short pill labels for the PDP's own "Fabric options" tag group (Figma
    * node 634:5034 desktop / 645:2905 mobile, "Content", 2026-09-01) --
@@ -620,7 +697,8 @@ export type Category = {
    * shorthand, not a truncation). Category-level, not per-style: every PDP
    * in a category offers the same fabric range.
    */
-  fabricPills: string[];
+  /** Optional, see `fabricEyebrow`'s own comment -- a category with no fabric-options table has no PDP-facing fabric pill either. */
+  fabricPills?: string[];
   /** TrustPoints' own H2, e.g. "Built to pass the squat test" (Figma node 579:5493). */
   qualityHeading: string;
   /** TrustPoints' own subline, e.g. "We confirm it all on your sample before a single bulk piece is cut." */
