@@ -175,8 +175,8 @@ export default async function LiftingGearsStylePage({
             <ProductHighlights items={data.product.pdpSpecHighlights ?? pdpSpecHighlights} />
             <ProductOptions
               groups={[
-                { heading: "Fabric options", items: data.category.fabricPills },
-                { heading: "Customization", items: pdpCustomizationPills },
+                { heading: "Material options", items: data.product.pdpFabricPills ?? data.category.fabricPills },
+                { heading: "Customization", items: data.product.pdpCustomizationPills ?? pdpCustomizationPills },
               ]}
             />
             <ProductCtas primaryCta={home.nav.cta} secondaryCta={home.nav.secondaryCta} />
@@ -195,12 +195,14 @@ export default async function LiftingGearsStylePage({
           />
         ) : null}
 
-        <ProductCustomizeSteps content={data.category.pdpCustomizationSteps ?? pdpCustomizationSteps} />
+        <ProductCustomizeSteps
+          content={data.product.pdpCustomizationSteps ?? data.category.pdpCustomizationSteps ?? pdpCustomizationSteps}
+        />
 
         <TrustPoints
-          heading={data.category.qualityHeading}
-          subline={data.category.qualitySubline}
-          points={data.category.qualityPoints}
+          heading={data.product.pdpQualityHeading ?? data.category.qualityHeading}
+          subline={data.product.pdpQualitySubline ?? data.category.qualitySubline}
+          points={data.product.pdpQualityPoints ?? data.category.qualityPoints}
           sidePadding="pdp"
         />
 

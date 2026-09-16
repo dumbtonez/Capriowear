@@ -191,6 +191,55 @@ export type StyleCard = {
    * Belt PDP).
    */
   pdpSpecHighlights?: PdpSpecHighlight[];
+  /**
+   * Per-style override of the PDP's "Fabric options" pill group -- falls
+   * back to the category's own `fabricPills` when unset, same as every
+   * Activewear/Teamwear/Gear style today. A style whose real material or
+   * hardware genuinely differs from its own category's shared tier list
+   * (e.g. Lever Belt's "Lever buckle," not shared with Prong Belt) sets
+   * this instead (owner spec, 2026-09-16, Lever Belt PDP).
+   */
+  pdpFabricPills?: string[];
+  /**
+   * Per-style override of the PDP's "Customization" pill group -- falls
+   * back to the shared, sitewide `pdpCustomizationPills`
+   * (content/activewear/pdpShared.ts) when unset, same generic capability
+   * tags every PDP shows today. A Gear style needs its own real
+   * capabilities here instead of the generic apparel-oriented set (owner
+   * spec, 2026-09-16, Lever Belt PDP).
+   */
+  pdpCustomizationPills?: string[];
+  /**
+   * Per-style override of the PDP's "Quality/tested" trust section
+   * (`TrustPoints`) -- falls back to the category's own `qualityHeading`/
+   * `qualitySubline`/`qualityPoints` when unset, same content the PLP
+   * shows today (every PDP in the category currently renders that exact
+   * PLP-wide block verbatim, no per-style content of its own at all). A
+   * category-wide claim ("genuine leather, nylon, and neoprene, built to
+   * the tier you specify") is true across the whole PLP but wrong on a
+   * single-style PDP that only uses one of those materials -- found live
+   * on the Lever Belt PDP (genuine leather only, no nylon/neoprene), owner
+   * spec 2026-09-16: set real per-style content whenever a style's
+   * quality/tested facts genuinely differ from the category-wide claim,
+   * never leave the PLP's own wording to leak onto a PDP unchanged.
+   */
+  pdpQualityHeading?: string;
+  pdpQualitySubline?: string;
+  pdpQualityPoints?: string[];
+  /**
+   * Per-style override of the PDP's "How we customize" carousel -- falls
+   * back to the category's own `pdpCustomizationSteps` (see `Category`'s
+   * own field of the same name), then the shared, sitewide
+   * `pdpCustomizationSteps` (content/activewear/pdpShared.ts), when unset.
+   * Found live on the Prong Belt PDP (owner spec, 2026-09-16): the
+   * category-level override actually held the Lever Belt's own content
+   * ("Lever as standard, prong on request"), not real shared-across-the-
+   * category copy, so every other belt style was silently inheriting one
+   * style's build steps. Set this whenever a style's own customization
+   * steps genuinely differ from its siblings -- never assume the
+   * category-level block is safe to leave unchecked.
+   */
+  pdpCustomizationSteps?: PdpCustomizeStepsContent;
 };
 
 // 3 fields, matching the real design (Figma node 579:5632) exactly -- every

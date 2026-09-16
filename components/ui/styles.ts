@@ -7993,7 +7993,16 @@ export const productGallery = {
   // page margin.
   // xl:hidden -> md:hidden -> xl:hidden (2026-09-04, then reverted
   // 2026-09-07, pairs with desktopRoot's own threshold above).
-  mobileRoot: "relative -mx-5 xl:-mx-8 xl:hidden",
+  // `-mx-5` only cancels `container-p`'s real-mobile 20px inset -- at
+  // tablet that inset grows to 32px (`container-p`'s own `md:` tier,
+  // app/globals.css), so the gallery stopped short of true edge-to-edge
+  // there, leaving a 12px gap each side (owner, 2026-09-16: "master image
+  // ... edge to edge, no gap from left and right" on tablet). `xl:-mx-8`
+  // -> `md:-mx-8` -- correct value, wrong breakpoint (this whole block is
+  // `xl:hidden`, so the old `xl:` tier was dead code that never actually
+  // applied). Same shared `ProductGallery` component on every PDP route
+  // (Gear and Capriowear alike), so this fixes all of them at once.
+  mobileRoot: "relative -mx-5 md:-mx-8 xl:hidden",
   // Was a fixed 450px (owner correction, 2026-09-01: "the main image
   // height is 450px", replacing the earlier `ratio="4:5"` aspect-driven
   // height, which computed ~469px at a 375px viewport). Split into a
@@ -8601,7 +8610,22 @@ export const productCustomizeSteps = {
   // `cardCarousel.track`'s own fixed `gap-4`, identical at every width
   // this renders at (real mobile and tablet alike) and identical on every
   // PDP that uses this shared recipe/component, Gear and Capriowear both.
-  mobileSection: "container-p flex flex-col items-center gap-8 pt-[72px] pb-[72px] xl:hidden",
+  // `md:pt-[120px]` added 2026-09-16 (owner: tablet top gap should match
+  // Specifications above it and TrustPoints below it) -- this section had
+  // never actually received the 2026-09-07 "120px from the top of each
+  // section, for Specifications, HOW WE CUSTOMIZE, and TrustPoints
+  // specifically" rule (`productSpecifications.section`'s own `md:pt-
+  // [120px]` and `trustPoints.sidePaddingPdp`'s own `md:pt-[120px]` both
+  // already have it -- see each one's own comment); real mobile keeps its
+  // own unrelated 72px. `md:pb-0` added same day (owner: remove the 72px
+  // gap under the segmented counter on tablet) -- TrustPoints' own `md:pt-
+  // [120px]` (`sidePaddingPdp`) already owns the entire tablet gap down to
+  // it, same "this section's bottom stays 0 at tablet, the next section
+  // supplies the whole gap" pattern `productSpecifications.section` itself
+  // already uses; real mobile's own `pb-[72px]` is unaffected (TrustPoints
+  // has no `pt` of its own at real mobile, so this bottom padding is still
+  // that gap's only source there).
+  mobileSection: "container-p flex flex-col items-center gap-8 pt-[72px] pb-[72px] md:pb-0 md:pt-[120px] xl:hidden",
 };
 
 /* --- ProductRelatedStyles (PDP) ------------------------------------------ */

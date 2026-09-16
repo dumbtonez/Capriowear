@@ -92,49 +92,6 @@ export const weightLiftingBelts: Category = {
     { title: "Branding", body: "Embossing, debossing, embroidery, woven labels, and private label" },
     { title: "Finishing", body: "Your labels, hangtags, and retail-ready packaging" },
   ],
-  // Gear override of the PDP's shared "How we customize" carousel (see
-  // `Category.pdpCustomizationSteps`'s own comment) -- the shared steps
-  // are apparel-specific (fabric blends, DTF/DTG print), wrong for a belt.
-  // Same eyebrow/heading as the shared block (owner brief, 2026-09-16,
-  // Lever Belt PDP: identical wording), reuses the same 5 real "Inside the
-  // Factory" photos every PDP's carousel uses -- one real factory, not a
-  // second photoshoot -- with belt-specific titles/copy. The brief's own
-  // 8 bullet points (thickness/width, buckle, material, branding, color,
-  // stitching/lining, trims/finish, packaging) are condensed into these 5
-  // cards to keep the carousel's own fixed 5-slot shape rather than
-  // reworking the component for one category.
-  pdpCustomizationSteps: {
-    eyebrow: "HOW WE CUSTOMIZE",
-    heading: "Your brand, applied\nin-house, no outsourcing",
-    mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
-    steps: [
-      {
-        title: "Material & thickness",
-        body: "Genuine leather sourced to your reference, 10mm or 13mm thickness at 4in width as standard",
-        image: { src: "/factory-test/inside-factory-1.jpg", alt: "Material and thickness" },
-      },
-      {
-        title: "Buckle",
-        body: "Lever as standard, prong on request",
-        image: { src: "/factory-test/inside-factory-2.jpg", alt: "Buckle" },
-      },
-      {
-        title: "Branding & color",
-        body: "Embossed or debossed logo, woven or leather patch labels, black standard or custom colors matched to your spec",
-        image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding and color" },
-      },
-      {
-        title: "Stitching & lining",
-        body: "Thread color, stitch pattern, and lining material to your brief",
-        image: { src: "/factory-test/inside-factory-4.jpg", alt: "Stitching and lining" },
-      },
-      {
-        title: "Trims & packaging",
-        body: "Woven labels, size and care labels, hangtags, polybags, boxes, retail-ready to your spec",
-        image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and packaging" },
-      },
-    ],
-  },
   // Gear override of the PDP's shared "operational" FAQ block (see
   // `Category.pdpFaqOperational`'s own comment) -- the shared block's own
   // wording ("mix sizes," "reference garment") is Activewear/Teamwear-
@@ -244,15 +201,85 @@ export const weightLiftingBelts: Category = {
       pdpMetaDescription:
         "Custom leather lever and powerlifting belt manufacturer, 10mm and 13mm, 4in width, private label. Full customization, low MOQ. Sialkot, Pakistan.",
       material: "Genuine leather, cowhide-based",
+      // Per-style override (see `StyleCard.pdpFabricPills`'s own comment)
+      // -- the category's own shared `fabricPills` lists every material
+      // tier the whole Weight Lifting Belts line offers (leather/nylon/
+      // neoprene), not this specific style's own build, which also
+      // includes its width and buckle type (owner spec, 2026-09-16).
+      pdpFabricPills: ["Genuine leather", "10mm or 13mm", "4in width", "Lever buckle"],
+      // Per-style override (see `StyleCard.pdpCustomizationSteps`'s own
+      // comment) -- this content was previously sitting at the category
+      // level, wrongly labeled as shared across every belt style, when
+      // "Lever as standard, prong on request" is this style's own content
+      // only (found live on the Prong Belt PDP, owner spec, 2026-09-16).
+      // Reuses the same 5 real "Inside the Factory" photos every PDP's
+      // carousel uses -- one real factory, not a second photoshoot -- with
+      // the brief's own 8 bullet points condensed into these 5 cards.
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          {
+            title: "Material & thickness",
+            body: "Genuine leather sourced to your reference, 10mm or 13mm thickness at 4in width as standard",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Material and thickness" },
+          },
+          {
+            title: "Buckle",
+            body: "Lever as standard, prong on request",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Buckle" },
+          },
+          {
+            title: "Branding & color",
+            body: "Embossed or debossed logo, woven or leather patch labels, black standard or custom colors matched to your spec",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding and color" },
+          },
+          {
+            title: "Stitching & lining",
+            body: "Thread color, stitch pattern, and lining material to your brief",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Stitching and lining" },
+          },
+          {
+            title: "Trims & packaging",
+            body: "Woven labels, size and care labels, hangtags, polybags, boxes, retail-ready to your spec",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and packaging" },
+          },
+        ],
+      },
+      // Per-style override (see `StyleCard.pdpCustomizationPills`'s own
+      // comment) -- the shared, sitewide pill set is generic apparel
+      // capability tags ("Custom fabric," "Your fit"), not this belt's own
+      // real customization options (owner spec, 2026-09-16).
+      pdpCustomizationPills: ["Embossed or debossed logo", "Private label", "Color and stitching", "Custom labels"],
+      // Per-style override (see `StyleCard.pdpQualityHeading`'s own
+      // comment) -- the category's own shared `qualityPoints` states
+      // "genuine leather, nylon, and neoprene," true across the whole
+      // Weight Lifting Belts PLP but wrong here: the Lever Belt is genuine
+      // leather only (owner spec, 2026-09-16, found live on this PDP).
+      pdpQualityHeading: "A real spec sheet, not a size letter",
+      pdpQualitySubline:
+        "We confirm the thickness, the buckle action, and the stitching on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Thickness measured and confirmed against your 10mm or 13mm spec",
+        "Lever buckle action tested for smooth, secure release under load",
+        "Stitching checked for even tension around the full perimeter",
+        "Digital proof and sample approved before we cut your production run",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
       // Per-style override (see `StyleCard.pdpSpecHighlights`'s own
       // comment) -- the shared 4-fact strip's "XS to 5XL sizes" doesn't
       // apply to a belt (no sizing chart on any Gear PDP, B2B buyers spec
       // against their own pattern/reference belt instead); thickness and
       // buckle type genuinely differ by belt style too.
+      // "Lever buckle" swapped for "Samples in 10 to 14 days" (owner spec,
+      // 2026-09-16) -- redundant with the page's own identity ("Custom
+      // Powerlifting LEVER Belt Manufacturer" already says it), and the
+      // real sample lead-time fact was missing from this strip entirely.
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
         { icon: "ruler", text: "10mm & 13mm thickness" },
-        { icon: "lock", text: "Lever buckle" },
         { icon: "ship", text: "DDP to 20+ countries" },
       ],
       specifications: [
@@ -294,13 +321,141 @@ export const weightLiftingBelts: Category = {
       ],
     },
     {
+      // Second of the 6 belt PDPs (owner brief, 2026-09-16). Same
+      // `internalPreview` escape hatch as the Lever Belt -- see that
+      // styleCard's own comment. `status: "draft"` until sampled specs are
+      // confirmed real.
       status: "draft",
+      internalPreview: true,
       slug: "prong-belt",
+      sku: "CAP-BLT-02",
       cardTitle: "Custom Leather Prong Belt",
       cardSubline: "Single and double prong, 7mm to 10mm",
       image: "",
       imageAlt: "Custom leather prong weight lifting belt",
       href: "/lifting-gears/weight-lifting-belts/prong-belt",
+      pdpTitle: "Prong Belt",
+      images: [
+        { alt: "Custom leather prong weight lifting belt, front view" },
+        { alt: "Custom leather prong weight lifting belt, worn on model, in use" },
+        { alt: "Custom leather prong weight lifting belt, side profile" },
+        { alt: "Custom leather prong weight lifting belt, prong buckle detail" },
+        { alt: "Custom leather prong weight lifting belt, stitching detail" },
+        { alt: "Custom leather prong weight lifting belt, leather grain close-up" },
+        { alt: "Custom leather prong weight lifting belt, back view" },
+        { alt: "Custom leather prong weight lifting belt, flat lay" },
+        { alt: "Custom leather prong weight lifting belt, private label packaging" },
+      ],
+      pdpHeading: "Custom Leather Prong Belt Manufacturer",
+      pdpDescription:
+        "A custom and private label leather prong belt, built in single and double prong at 7mm to 10mm thickness, genuine leather, adjustable across a waist range on one belt, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Leather Prong Belt Manufacturer",
+      pdpMetaDescription:
+        "Custom leather prong belt manufacturer, single and double prong, 7mm to 10mm, private label. Full customization, low MOQ. Sialkot, Pakistan.",
+      material: "Genuine leather, cowhide-based",
+      pdpFabricPills: ["Genuine leather", "7mm to 10mm", "Single or double prong", "4in width"],
+      // Per-style override (see `StyleCard.pdpCustomizationSteps`'s own
+      // comment) -- this style's own 7 "How we customize" bullets (owner
+      // brief, 2026-09-16), not the Lever Belt's content that was
+      // previously leaking onto every belt PDP via the category level.
+      // Reuses the same 5 real "Inside the Factory" photos every PDP's
+      // carousel uses; only 5 photo slots exist today, cycled for the 2
+      // extra cards (`ProductCustomizeSteps`'s own `steps.map` has no fixed
+      // card-count limit, so all 7 bullets render, verbatim).
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          {
+            title: "Thickness and prong count",
+            body: "7mm to 10mm, single or double prong, to your spec",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Thickness and prong count" },
+          },
+          {
+            title: "Material",
+            body: "Genuine leather, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Material" },
+          },
+          {
+            title: "Branding",
+            body: "Embossed or debossed logo, woven or leather patch labels",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" },
+          },
+          {
+            title: "Color",
+            body: "Black standard, custom colors matched to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Color" },
+          },
+          {
+            title: "Stitching and lining",
+            body: "Thread color, stitch pattern, and lining material to your brief",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Stitching and lining" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, size and care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and finish" },
+          },
+          {
+            title: "Packaging",
+            body: "Polybags, boxes, retail-ready to your spec",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Packaging" },
+          },
+        ],
+      },
+      pdpCustomizationPills: ["Embossed or debossed logo", "Private label", "Color and stitching", "Custom labels"],
+      // Per-style override, same pattern as the Lever Belt -- this style is
+      // genuine leather only, never nylon or neoprene (owner spec,
+      // 2026-09-16).
+      pdpQualityHeading: "A real spec sheet, not a size letter",
+      pdpQualitySubline:
+        "We confirm the thickness, the prong action, and the stitching on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Thickness measured and confirmed against your 7mm to 10mm spec",
+        "Prong and hole spacing tested for a secure, consistent fit across the adjustment range",
+        "Stitching checked for even tension around the full perimeter",
+        "Digital proof and sample approved before we cut your production run",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "ruler", text: "7mm to 10mm thickness" },
+        { icon: "lock", text: "Single or double prong" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      specifications: [
+        { label: "Style", value: "Leather prong belt (base type)" },
+        { label: "Material", value: "Genuine leather, cowhide-based" },
+        { label: "Thickness", value: "7mm to 10mm, confirmed on your sample" },
+        { label: "Width", value: "4in" },
+        { label: "Closure", value: "Single or double prong buckle" },
+        { label: "Lining", value: "Suede or leather backing, to your spec" },
+        { label: "Stitching", value: "Multi-row reinforced stitching around the full perimeter" },
+        { label: "Color", value: "Black standard, additional colors on request" },
+        { label: "Fit", value: "Adjustable across a waist range on one belt, confirmed on sample" },
+        { label: "Branding", value: "Embossed or debossed logo, woven labels, hangtags, packaging" },
+      ],
+      relatedStyleTags: [
+        { label: "Lever Belt", href: "/lifting-gears/weight-lifting-belts/lever-belt" },
+        { label: "Nylon Quick-Lock Belt", href: "/lifting-gears/weight-lifting-belts" },
+        { label: "Dip Belt", href: "/lifting-gears/weight-lifting-belts" },
+        { label: "See All", href: "/lifting-gears/weight-lifting-belts" },
+      ],
+      faqs: [
+        {
+          q: "What is the difference between single and double prong?",
+          a: "A double prong spreads the load across two points and is generally the stiffer, more supportive option; a single prong is simpler and slightly more flexible. We build both, and can advise based on your target thickness.",
+        },
+        {
+          q: "Why choose a prong belt over a lever belt?",
+          a: "A prong belt adjusts across a wider waist range on the same belt, useful for a broader size run with fewer SKUs. A lever belt is set to one fixed size and releases faster under load. Many buyers carry both.",
+        },
+        {
+          q: "Can I request a different hole spacing or prong placement?",
+          a: "Yes. Send your reference spec and we confirm hole count and spacing on your sample.",
+        },
+      ],
     },
     {
       status: "draft",

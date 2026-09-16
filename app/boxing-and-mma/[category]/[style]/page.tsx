@@ -153,7 +153,7 @@ export default async function BoxingMmaStylePage({
             <ProductHighlights items={pdpSpecHighlights} />
             <ProductOptions
               groups={[
-                { heading: "Fabric options", items: data.category.fabricPills },
+                { heading: "Material options", items: data.category.fabricPills },
                 { heading: "Customization", items: pdpCustomizationPills },
               ]}
             />
@@ -173,12 +173,14 @@ export default async function BoxingMmaStylePage({
           />
         ) : null}
 
-        <ProductCustomizeSteps content={pdpCustomizationSteps} />
+        <ProductCustomizeSteps
+          content={data.product.pdpCustomizationSteps ?? data.category.pdpCustomizationSteps ?? pdpCustomizationSteps}
+        />
 
         <TrustPoints
-          heading={data.category.qualityHeading}
-          subline={data.category.qualitySubline}
-          points={data.category.qualityPoints}
+          heading={data.product.pdpQualityHeading ?? data.category.qualityHeading}
+          subline={data.product.pdpQualitySubline ?? data.category.qualitySubline}
+          points={data.product.pdpQualityPoints ?? data.category.qualityPoints}
           sidePadding="pdp"
         />
 
