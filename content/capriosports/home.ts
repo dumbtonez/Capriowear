@@ -13,9 +13,16 @@
 // boxing and MMA equipment", "Sialkot, Pakistan") repeated verbatim rather
 // than paraphrased, per the AEO/GEO discipline the brief spelled out --
 // answer engines and agents match on exact repeated entity phrasing, not
-// synonyms. `hero.h1`/`metaTitle`/`metaDescription` are LOCKED -- do not
-// edit those three fields without explicit owner sign-off; everything else
-// here was rebuilt this pass.
+// synonyms. `hero.h1`/`metaTitle` are LOCKED -- do not edit without
+// explicit owner sign-off; everything else here was rebuilt this pass.
+//
+// `metaDescription` was ALSO locked at this pass, but replaced 2026-09-16
+// (owner-supplied canonical entity-intro spec, superseding that lock): the
+// prior string ran 208 characters, over Google's ~155 char truncation
+// point and getting cut off in search results. Now
+// CAPRIOSPORTS_ORGANIZATION.metaIntro (organization.ts), the locked
+// 152-char "meta-length intro" variant -- imported, not retyped, same
+// "one stored source" rule every other entity-intro variant follows.
 //
 // Certification logos are NOT retyped here -- `certified.logos` reads
 // straight from `content/home.ts`'s own `certified.logos` (the real,
@@ -28,8 +35,7 @@ import { CAPRIOSPORTS_ORGANIZATION } from "./organization";
 export const capriosportsHome = {
   // LOCKED -- do not edit without explicit owner sign-off.
   metaTitle: "Custom Lifting Gear & Boxing/MMA Manufacturer | Capriosports",
-  metaDescription:
-    "Capriosports manufactures custom lifting gear and boxing and MMA equipment, private label and wholesale, from Sialkot, Pakistan, since 2009. Parent company of Capriowear, our activewear and teamwear division.",
+  metaDescription: CAPRIOSPORTS_ORGANIZATION.metaIntro,
 
   // Real sitewide Header, replacing the Phase 1 placeholder <nav> (2026-09-15
   // visual-review fix) -- no persistent division switcher yet (still
@@ -534,8 +540,13 @@ export const capriosportsHome = {
   // basePath (per Footer.tsx's own documented external-link rule), so it
   // carries the real absolute URL, not a root-relative Next Link href.
   footer: {
-    tagline: "Caprio Sports, established 2009",
-    description: CAPRIOSPORTS_ORGANIZATION.identityLine.gear,
+    // 2026-09-16 owner spec: tagline + description no longer both state
+    // "established" (that fact was repeated across the two lines) --
+    // tagline now names the parent/division relationship, description
+    // carries the one-liner (frontend register, "Caprio" -- visible copy
+    // a visitor reads, not the schema-register "Capriosports" name).
+    tagline: "Caprio, parent company of Capriowear",
+    description: CAPRIOSPORTS_ORGANIZATION.identityLine.gearFrontend,
     nav: {
       columnOne: [
         { label: "Lifting Gear", href: "/lifting-gears" },

@@ -39,11 +39,19 @@ import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 import { liftingGearsCategories } from "@/content/gear/lifting-gears/categories";
 import { breadcrumbSchema, faqSchema, productSchema } from "@/lib/schema";
 
+// A style is reachable (route generated, page renders) if it's published
+// OR carries the owner-only `internalPreview` escape hatch (see
+// `StyleCard.internalPreview`'s own comment) -- everything else gated by
+// `status` (sitemap, schema, indexing) still reads `status` alone, never
+// this helper, so a draft-but-previewable style stays noindexed/schema-
+// less/out of the sitemap exactly like any other draft.
+function isReachable(card: { status: "published" | "draft"; internalPreview?: boolean }) {
+  return card.status === "published" || card.internalPreview === true;
+}
+
 export function generateStaticParams() {
   return Object.values(liftingGearsCategories).flatMap((category) =>
-    category.styleCards
-      .filter((card) => card.status === "published")
-      .map((card) => ({ category: category.slug, style: card.slug })),
+    category.styleCards.filter(isReachable).map((card) => ({ category: category.slug, style: card.slug })),
   );
 }
 
@@ -62,7 +70,7 @@ export async function generateMetadata({
 }: PageProps<"/lifting-gears/[category]/[style]">): Promise<Metadata> {
   const { category, style } = await params;
   const data = getData(category, style);
-  if (!data || data.product.status !== "published") return {};
+  if (!data || !isReachable(data.product)) return {};
 
   const shortTitle = data.product.pdpTitle ?? data.product.cardTitle;
   const title = data.product.pdpMetaTitle ?? `Custom ${shortTitle} Manufacturer`;
@@ -75,6 +83,13 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical },
+    // Internal-preview-only pages stay noindexed even after real launch
+    // (`NEXT_PUBLIC_ALLOW_INDEXING`) -- an explicit override here, same
+    // pattern the category-level draft gate already uses
+    // (app/lifting-gears/[category]/page.tsx), since omitting `robots`
+    // would otherwise just inherit the root layout's sitewide default,
+    // which flips to indexable at real launch.
+    ...(data.product.status !== "published" ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       title: fullTitle,
       description,
@@ -96,7 +111,7 @@ export default async function LiftingGearsStylePage({
 }: PageProps<"/lifting-gears/[category]/[style]">) {
   const { category, style } = await params;
   const data = getData(category, style);
-  if (!data || data.product.status !== "published") notFound();
+  if (!data || !isReachable(data.product)) notFound();
 
   const productTitle = data.product.pdpTitle ?? data.product.cardTitle;
   const heading = data.product.pdpHeading ?? productTitle;
@@ -109,7 +124,11 @@ export default async function LiftingGearsStylePage({
     { label: productTitle, href: data.product.href },
   ];
 
-  const faqItems = [categoryEntityFaq(data.category), ...(data.product.faqs ?? []), ...pdpFaqOperational];
+  const faqItems = [
+    categoryEntityFaq(data.category),
+    ...(data.product.faqs ?? []),
+    ...(data.category.pdpFaqOperational ?? pdpFaqOperational),
+  ];
 
   const productImage = data.product.images?.[0]?.src ? `${SITE_URL}${data.product.images[0].src}` : undefined;
 
@@ -138,20 +157,22 @@ export default async function LiftingGearsStylePage({
             })),
           )}
         />
-        <JsonLd
-          data={productSchema({
-            name: heading,
-            description,
-            image: productImage,
-            material: data.product.material,
-          })}
-        />
+        {data.product.status === "published" ? (
+          <JsonLd
+            data={productSchema({
+              name: heading,
+              description,
+              image: productImage,
+              material: data.product.material,
+            })}
+          />
+        ) : null}
 
         <div className="container-p flex flex-col gap-6 pt-0 md:pt-6 xl:flex-row xl:items-start xl:gap-[66px] xl:pt-6">
           {data.product.images ? <ProductGallery images={data.product.images} productTitle={productTitle} /> : null}
           <div className="flex w-full min-w-0 flex-col gap-8 xl:w-[514px] xl:flex-none">
             <ProductInfo sku={data.product.sku} heading={heading} description={description} />
-            <ProductHighlights items={pdpSpecHighlights} />
+            <ProductHighlights items={data.product.pdpSpecHighlights ?? pdpSpecHighlights} />
             <ProductOptions
               groups={[
                 { heading: "Fabric options", items: data.category.fabricPills },
@@ -174,7 +195,7 @@ export default async function LiftingGearsStylePage({
           />
         ) : null}
 
-        <ProductCustomizeSteps content={pdpCustomizationSteps} />
+        <ProductCustomizeSteps content={data.category.pdpCustomizationSteps ?? pdpCustomizationSteps} />
 
         <TrustPoints
           heading={data.category.qualityHeading}
@@ -190,7 +211,7 @@ export default async function LiftingGearsStylePage({
         ) : null}
 
         <Faq content={{ h2: "Top questions from B2B buyers", items: faqItems }} />
-        <JsonLd data={faqSchema(faqItems)} />
+        {data.product.status === "published" ? <JsonLd data={faqSchema(faqItems)} /> : null}
 
         <ProductCategoryLinks
           categoryLabel={data.category.menuLabel}
@@ -215,7 +236,7 @@ export default async function LiftingGearsStylePage({
         <ProductCtasMobileBar primaryCta={home.nav.cta} />
       </main>
 
-      <Footer content={home.footer} social={ORGANIZATION.sameAs} />
+      <Footer content={capriosportsHome.footer} social={ORGANIZATION.sameAs} />
     </>
   );
 }

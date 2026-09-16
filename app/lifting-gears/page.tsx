@@ -16,7 +16,6 @@ import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { categoryGroupsSection, header } from "@/components/ui/styles";
 import { capriosportsHome } from "@/content/capriosports/home";
-import { home } from "@/content/home";
 import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 import { liftingGearsGroups, liftingGearsHub, LIFTING_GEARS_HUB_CANONICAL } from "@/content/gear/lifting-gears/hub";
 import { breadcrumbSchema, collectionOfPagesSchema, faqSchema } from "@/lib/schema";
@@ -84,7 +83,7 @@ export default function LiftingGearsHubPage() {
         />
       </main>
 
-      <Footer content={home.footer} social={ORGANIZATION.sameAs} />
+      <Footer content={capriosportsHome.footer} social={ORGANIZATION.sameAs} />
 
       <JsonLd
         data={breadcrumbSchema([

@@ -34,12 +34,53 @@ export const CAPRIOSPORTS_ORGANIZATION = {
     { key: "gear" as const, displayName: "Caprio Sports", url: SITE_URL },
     { key: "wear" as const, displayName: "Capriowear", url: `${SITE_URL}/capriowear` },
   ],
-  // Only the "gear" variant exists today -- this site's own identity line.
-  // Capriowear keeps its own separate companyIdentity (content/site.ts),
-  // not a second copy here.
+  // The entity intro, locked by the owner 2026-09-16 across four lengths and
+  // two naming registers (same "one stored source, several variants"
+  // discipline content/site.ts's own companyIdentity/companyIntroShort/
+  // companyIntroMeta already enforce for Capriowear). Naming rule: schema
+  // register uses "Capriosports" (schema/metadata contexts only --
+  // <title>, <meta name="description">, JSON-LD Organization legalName/
+  // description); frontend register uses "Caprio" alone (all visible
+  // frontend copy a visitor actually reads). Exact owner text, never
+  // reworded -- every file that needs one of these imports it from here.
+  //
+  // - identityLine.gear / .gearFrontend: the one-liner (~115/109 chars),
+  //   pure identity, no Capriowear mention. Schema variant feeds
+  //   organizationSchema()'s `description` (lib/schema.ts); frontend
+  //   variant goes on the Capriosports/Gear footer and anywhere a single
+  //   identity sentence prints inline for a visitor.
+  // - introShort.schema / .frontend: the 3-sentence "who we are" text,
+  //   including the Capriowear division mention as standard. Used where
+  //   there's no hard character cap (About-style sections, social "about"
+  //   fields).
+  // - metaIntro: 152 chars, built to fit inside Google's ~155 char
+  //   truncation point without running over -- schema register only. Feeds
+  //   the homepage's own <meta name="description"> (content/capriosports/
+  //   home.ts's metaDescription). Never paste introShort into a meta tag,
+  //   it will truncate mid-sentence.
+  //
+  // The full 4-sentence category-entity-FAQ template ("What does Caprio
+  // manufacture?") is deliberately NOT a fourth stored constant here --
+  // same reasoning as Capriowear's own categoryEntityFaq(): built per
+  // category from that category's own real content, ending with
+  // identityLine.gearFrontend + the standard Capriowear-division closing
+  // sentence, appended unchanged. See categoryEntityFaq() in
+  // content/activewear/pdpShared.ts (the `group === "Gear"` branch).
   identityLine: {
     gear: "Capriosports is a lifting gear and boxing and MMA equipment manufacturer in Sialkot, Pakistan, established in 2009.",
+    gearFrontend: "Caprio is a lifting gear and boxing and MMA equipment manufacturer in Sialkot, Pakistan, established in 2009.",
   },
+  introShort: {
+    schema:
+      "Capriosports is a lifting gear and boxing and MMA equipment manufacturer in Sialkot, Pakistan, established in 2009. We manufacture private label lifting gear and boxing and MMA equipment for gyms, retailers, and private label brands worldwide, from raw material to finished, retail-ready packaging. Capriowear, our activewear and teamwear division, is built in the same facility.",
+    frontend:
+      "Caprio is a lifting gear and boxing and MMA equipment manufacturer in Sialkot, Pakistan, established in 2009. We manufacture private label lifting gear and boxing and MMA equipment for gyms, retailers, and private label brands worldwide, from raw material to finished, retail-ready packaging. Capriowear, our activewear and teamwear division, is built in the same facility.",
+  },
+  // Meta-length intro (152 chars) -- always schema register, the ONLY
+  // variant sized to fit inside the actual <meta name="description"> tag
+  // without truncation.
+  metaIntro:
+    "Capriosports manufactures custom lifting gear and boxing and MMA equipment, private label, in Sialkot, Pakistan. Parent of Capriowear, apparel division.",
   workforceCount: "700+",
   machineCount: "600+",
   exportCountries: "20+",

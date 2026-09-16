@@ -214,7 +214,7 @@ export default async function BoxingMmaStylePage({
         <ProductCtasMobileBar primaryCta={home.nav.cta} />
       </main>
 
-      <Footer content={home.footer} social={ORGANIZATION.sameAs} />
+      <Footer content={capriosportsHome.footer} social={ORGANIZATION.sameAs} />
     </>
   );
 }

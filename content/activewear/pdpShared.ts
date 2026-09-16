@@ -12,8 +12,60 @@
 // see that page's own comment). Same array feeds both the visible Faq
 // render and faqSchema() wherever it's used, so the two can never drift
 // apart.
+import { CAPRIOSPORTS_ORGANIZATION } from "../capriosports/organization";
 import { companyIdentity } from "../site";
 import type { Category, FaqEntry, PdpSpecHighlight } from "./types";
+
+// Shared by categoryEntityFaq() and buildCaprioEntityAnswer() below -- the
+// same noun/example-styles/fabrics/audience derivation either brand's
+// sentence needs, factored out so the two builders can't drift apart on
+// this part of the sentence the way only their subject noun and closing
+// line are meant to.
+function deriveEntitySentenceParts(
+  category: Pick<
+    Category,
+    "menuLabel" | "styleCards" | "manufacturerNoun" | "productNounPlural" | "entityExampleStyles" | "entityFabrics" | "audienceClause"
+  >,
+  defaultAudienceClause: string,
+) {
+  const manufacturerNoun = (category.manufacturerNoun ?? category.menuLabel).toLowerCase();
+  const productNounPlural = (category.productNounPlural ?? category.menuLabel).toLowerCase();
+  const exampleStyles =
+    category.entityExampleStyles ??
+    `styles like ${category.styleCards
+      .slice(0, 4)
+      .map((card) => card.cardTitle)
+      .join(", ")}`;
+  const fabricsClause = category.entityFabrics ? ` in ${category.entityFabrics}` : "";
+  const audienceClause = category.audienceClause ?? defaultAudienceClause;
+  return { manufacturerNoun, productNounPlural, exampleStyles, fabricsClause, audienceClause };
+}
+
+// The Gear/Boxing-MMA equivalent of categoryEntityFaq() below, for
+// categories outside the Capriowear brand (owner spec, 2026-09-15, Gear/
+// Weight Lifting Belts; standardized to the locked 4-sentence template,
+// 2026-09-16). Same mechanical sentence shape, "Caprio" as the subject
+// instead of "Capriowear", closing with CAPRIOSPORTS_ORGANIZATION.
+// identityLine.gearFrontend (frontend register -- this is visible FAQ
+// copy, never schema) plus the standard "Capriowear, our activewear and
+// teamwear division, is built in the same facility." sentence, both
+// imported/appended verbatim, never retyped. Wired as the automatic
+// default for every `group: "Gear"` category via categoryEntityFaq()
+// below, so a future Gear category never needs to hand-type this
+// template -- only a hand-locked exception (weight-lifting-belts) still
+// uses the entityQuestion/entityAnswer verbatim override.
+export function buildCaprioEntityAnswer(
+  category: Pick<
+    Category,
+    "menuLabel" | "styleCards" | "manufacturerNoun" | "productNounPlural" | "entityExampleStyles" | "entityFabrics" | "audienceClause"
+  >,
+): string {
+  const { manufacturerNoun, productNounPlural, exampleStyles, fabricsClause, audienceClause } = deriveEntitySentenceParts(
+    category,
+    "for gyms, retailers, and private label brands worldwide",
+  );
+  return `Caprio is a custom ${manufacturerNoun} manufacturer ${audienceClause}. We produce private label ${productNounPlural} from raw material to finished packaging, including ${exampleStyles}${fabricsClause}, with full customization. ${CAPRIOSPORTS_ORGANIZATION.identityLine.gearFrontend} Capriowear, our activewear and teamwear division, is built in the same facility.`;
+}
 
 // The PLP/PDP entity FAQ answer, built per category rather than stored as
 // one constant (owner spec, 2026-09-01: "The full 3-sentence category
@@ -39,7 +91,7 @@ export function categoryEntityFaq(
     | "audienceClause"
     | "entityQuestion"
     | "entityAnswer"
-  >,
+  > & { group?: string },
 ): FaqEntry {
   // Verbatim override (owner spec, 2026-09-15, Gear/Weight Lifting Belts) --
   // see `Category.entityQuestion`/`entityAnswer`'s own comment. Bypasses
@@ -47,6 +99,14 @@ export function categoryEntityFaq(
   // brand.
   if (category.entityQuestion && category.entityAnswer) {
     return { q: category.entityQuestion, a: category.entityAnswer };
+  }
+
+  // Gear/Boxing-MMA default (owner spec, 2026-09-16): a category outside
+  // the Capriowear brand gets the locked 4-sentence Caprio template
+  // automatically, with no per-category override needed -- see
+  // buildCaprioEntityAnswer()'s own comment above.
+  if (category.group === "Gear") {
+    return { q: "What does Caprio manufacture?", a: buildCaprioEntityAnswer(category) };
   }
 
   // Four optional overrides on `Category` itself (owner spec, 2026-09-02,
@@ -81,16 +141,10 @@ export function categoryEntityFaq(
   // entirely, since Leggings' prior sentence shape never had one; a
   // category that doesn't set any of these four fields (Leggings today)
   // renders byte-identical output to before this function existed.
-  const manufacturerNoun = (category.manufacturerNoun ?? category.menuLabel).toLowerCase();
-  const productNounPlural = (category.productNounPlural ?? category.menuLabel).toLowerCase();
-  const exampleStyles =
-    category.entityExampleStyles ??
-    `styles like ${category.styleCards
-      .slice(0, 4)
-      .map((card) => card.cardTitle)
-      .join(", ")}`;
-  const fabricsClause = category.entityFabrics ? ` in ${category.entityFabrics}` : "";
-  const audienceClause = category.audienceClause ?? "for activewear brands and teamwear suppliers worldwide";
+  const { manufacturerNoun, productNounPlural, exampleStyles, fabricsClause, audienceClause } = deriveEntitySentenceParts(
+    category,
+    "for activewear brands and teamwear suppliers worldwide",
+  );
   return {
     q: "What does Capriowear manufacture?",
     a: `Capriowear is a custom ${manufacturerNoun} manufacturer ${audienceClause}. We produce private label ${productNounPlural} from fabric to packaging, including ${exampleStyles}${fabricsClause}, with low minimums and full customization. ${companyIdentity}`,

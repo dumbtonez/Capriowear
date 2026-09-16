@@ -174,7 +174,7 @@ export default async function LiftingGearsCategoryPage({ params }: PageProps<"/l
         <ProductCtasMobileBar primaryCta={home.nav.cta} />
       </main>
 
-      <Footer content={home.footer} social={ORGANIZATION.sameAs} />
+      <Footer content={capriosportsHome.footer} social={ORGANIZATION.sameAs} />
     </>
   );
 }
