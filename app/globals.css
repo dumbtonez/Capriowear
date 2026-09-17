@@ -52,6 +52,15 @@
      which sits on a dark bg-ink band, not white. */
   --color-subline: #17191e;
 
+  /* Global Reach homepage section only (owner-confirmed hex values,
+     2026-09-17): copper is the route/ship-container/legend-swatch accent,
+     distinct from --color-accent's brighter brand orange -- copper-dim is
+     the same hue for the static (non-animated) route line layer, steel is
+     the landmass gradient only. No other section uses these. */
+  --color-copper: #e08e4a;
+  --color-copper-dim: #8a5a30;
+  --color-steel: #4a6572;
+
   /* --- Type scale ------------------------------------------------------ */
   /* SOURCE OF TRUTH: the Figma file "Caprio Website", node 284:333, which
      registers all thirteen styles below as local text styles. Sizes, weights,
@@ -890,6 +899,296 @@ header[data-tone="light"] {
 @media (prefers-reduced-motion: reduce) {
   .cta-primary-shimmer {
     animation: none;
+  }
+}
+
+/* Global Reach homepage section (components/sections/GlobalReach.tsx,
+   components/GlobalReachStage.tsx). Every rule below is scoped under the
+   `.gr-inview` ancestor class, added once by `GlobalReachStage`'s
+   `useRevealOnView` trigger -- nothing animates, pulses, or reveals a
+   ship before the section has actually scrolled into view. Per-route
+   `animation-delay`/`animation-duration` values are set inline (see
+   GlobalReach.tsx), computed once in lib/geo/global-reach.ts, not
+   hardcoded per class. Techniques ported from the approved prototype,
+   docs/audits/shipping-routes-reference.html. */
+
+.gr-route-line {
+  fill: none;
+  stroke: var(--color-copper-dim);
+  stroke-width: 1.4px;
+  stroke-linecap: round;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+}
+.gr-inview .gr-route-line {
+  animation-name: gr-draw;
+  animation-duration: 1.8s;
+  animation-timing-function: cubic-bezier(0.16, 0.8, 0.4, 1);
+  animation-fill-mode: forwards;
+}
+@keyframes gr-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.gr-route-flow {
+  fill: none;
+  stroke: var(--color-copper);
+  stroke-width: 1.6px;
+  stroke-linecap: round;
+  stroke-dasharray: 2 10;
+  opacity: 0;
+}
+.gr-inview .gr-route-flow {
+  animation-name: gr-flow-in, gr-flow;
+  animation-duration: 0.01s, 2.6s;
+  animation-timing-function: linear, linear;
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: forwards, none;
+}
+@keyframes gr-flow-in {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes gr-flow {
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+
+.gr-ship {
+  opacity: 0;
+  filter: drop-shadow(0 0 4px rgba(224, 142, 74, 0.55));
+}
+.gr-inview .gr-ship {
+  animation-name: gr-ship-in;
+  animation-duration: 0.01s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes gr-ship-in {
+  to {
+    opacity: 1;
+  }
+}
+.gr-ship-wake {
+  fill: url(#gr-wake-gradient);
+}
+
+.gr-node-pulse {
+  fill: none;
+  stroke: var(--color-copper);
+  stroke-width: 1.5px;
+  opacity: 0;
+  transform-origin: center;
+}
+.gr-inview .gr-node-pulse {
+  animation-name: gr-pulse;
+  animation-duration: 2.6s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+@keyframes gr-pulse {
+  0% {
+    opacity: 0.9;
+    r: 5;
+  }
+  100% {
+    opacity: 0;
+    r: 22;
+  }
+}
+
+.gr-arrive-ring {
+  fill: none;
+  stroke: var(--color-copper);
+  stroke-width: 2.2px;
+  opacity: 0;
+}
+.gr-inview .gr-arrive-ring {
+  animation-name: gr-arrive-ring;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.16, 0.8, 0.3, 1);
+}
+.gr-inview .gr-arrive-ring-echo {
+  animation-name: gr-arrive-ring-echo;
+}
+@keyframes gr-arrive-ring {
+  0% {
+    opacity: 0;
+    r: 4;
+    stroke-width: 2.6px;
+  }
+  8% {
+    opacity: 1;
+    r: 5;
+    stroke-width: 2.4px;
+  }
+  45% {
+    opacity: 0.5;
+    r: 22;
+    stroke-width: 1px;
+  }
+  78% {
+    opacity: 0;
+    r: 30;
+    stroke-width: 0.3px;
+  }
+  100% {
+    opacity: 0;
+    r: 30;
+  }
+}
+@keyframes gr-arrive-ring-echo {
+  0% {
+    opacity: 0;
+    r: 4;
+  }
+  16% {
+    opacity: 0;
+    r: 4;
+  }
+  24% {
+    opacity: 0.8;
+    r: 6;
+    stroke-width: 2px;
+  }
+  58% {
+    opacity: 0.35;
+    r: 24;
+    stroke-width: 0.8px;
+  }
+  86% {
+    opacity: 0;
+    r: 32;
+    stroke-width: 0.3px;
+  }
+  100% {
+    opacity: 0;
+    r: 32;
+  }
+}
+
+.gr-arrive-flash {
+  fill: #fdf8f0;
+  opacity: 0;
+}
+.gr-inview .gr-arrive-flash {
+  animation-name: gr-arrive-flash;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-out;
+}
+@keyframes gr-arrive-flash {
+  0% {
+    opacity: 0;
+    r: 3.5;
+  }
+  8% {
+    opacity: 1;
+    r: 10;
+  }
+  28% {
+    opacity: 0.9;
+    r: 7;
+  }
+  55% {
+    opacity: 0;
+    r: 5;
+  }
+  100% {
+    opacity: 0;
+    r: 3.5;
+  }
+}
+
+.gr-arrive-mark {
+  fill: var(--color-copper);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.gr-inview .gr-arrive-mark {
+  animation-name: gr-arrive-mark;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.16, 0.8, 0.4, 1);
+}
+@keyframes gr-arrive-mark {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.4);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.2);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-17px) scale(1);
+  }
+  78% {
+    opacity: 0;
+    transform: translateY(-28px) scale(0.9);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* "RECEIVED" label -- held visible from 16% to 55% of its own cycle,
+   which at this route's shortest duration (4.5s, the European routes)
+   is still just under 1.8s on screen, comfortably clearing the >=1s
+   readability bar the owner's brief called out as a past bug. */
+.gr-arrive-label {
+  fill: var(--color-paper);
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  opacity: 0;
+}
+.gr-inview .gr-arrive-label {
+  animation-name: gr-arrive-label;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.16, 0.8, 0.4, 1);
+}
+@keyframes gr-arrive-label {
+  0%,
+  10% {
+    opacity: 0;
+  }
+  16%,
+  55% {
+    opacity: 1;
+  }
+  78%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gr-route-line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .gr-route-flow {
+    animation: none;
+    opacity: 0;
+  }
+  .gr-ship {
+    animation: none;
+    opacity: 0;
+  }
+  .gr-node-pulse {
+    animation: none;
+    opacity: 0;
+  }
+  .gr-arrive-ring,
+  .gr-arrive-flash,
+  .gr-arrive-mark,
+  .gr-arrive-label {
+    animation: none;
+    opacity: 0;
   }
 }
 

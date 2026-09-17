@@ -9282,6 +9282,59 @@ export const capriosportsFactory = {
     "max-md:text-[1.125rem] max-md:leading-[24px] md:max-w-[clamp(560px,65vw,780px)] md:text-[1.25rem] md:leading-[28px] xl:max-w-none font-normal text-[#838d97]",
 };
 
+/* --- GlobalReach (Capriosports homepage) ----------------------------------- */
+
+// New section, 2026-09-17 -- animated shipping-routes map between Our
+// Services and Why Caprio (see components/sections/GlobalReach.tsx's own
+// header comment). Structure modeled directly on `teamwearOverview`
+// above (SectionHeading + lead, same standing 72px mobile section-gap
+// rule) and `categoryBanner.trustBullets`' wrapping-row pattern for the
+// footline stats -- no new one-off spacing scale.
+export const globalReach = {
+  // Full-width outer wrapper for the fill colour, same split
+  // `sectionDarkBg`/`section` pattern `whyCapriosports` uses below, so
+  // `container-p`'s 1440px cap never clips the background.
+  sectionDarkBg: "w-full bg-ink text-paper",
+  // pt-[72px] at every breakpoint (standing mobile-gap rule, confirmed
+  // sitewide -- see `teamwearOverview.section`'s own comment for the
+  // full history of this exact value). pb-[72px] mirrors `whyCapriosports
+  // .sectionDark`'s own bottom gap, since this section sits directly
+  // above it, same continuous dark run.
+  section: "container-p flex flex-col gap-[72px] pt-[72px] pb-[72px]",
+  textGroup: "flex flex-col max-md:gap-5 md:gap-6",
+  headingGap: "flex flex-col max-md:gap-4 md:gap-5",
+  lead: "max-w-[780px] max-md:text-[1.125rem] max-md:leading-[1.3333] md:text-[1.25rem] md:leading-7 font-normal text-[#838D97]",
+  // The map stage panel: vertical gradient from the site's own secondary
+  // dark surface (`--color-ink-2`) down to the base `--color-ink` --
+  // reuses existing tokens rather than a new one-off "surface" token, per
+  // the design-system rule.
+  stage: "relative overflow-hidden rounded-xl border border-line-dark bg-gradient-to-b from-ink-2 to-ink p-4 md:p-6 xl:p-9",
+  map: "block h-auto w-full",
+  // `auto-fit`/`minmax(150px,1fr)` (owner feedback, 2026-09-17, matching
+  // the approved reference prototype's own `.legend` grid exactly) --
+  // was forced breakpoint column counts (`grid-cols-2 sm:grid-cols-3
+  // md:grid-cols-4`), which jumped between fixed counts instead of
+  // wrapping naturally at any width.
+  legend: "mt-2 grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-2.5",
+  legendItem: "flex items-center gap-2.5 rounded-md border border-line-dark bg-ink-2 px-3.5 py-3",
+  legendSwatch: "size-2 shrink-0 rounded-full bg-copper",
+  legendName: "text-[0.8125rem] font-medium text-paper",
+  originLabel: "text-[0.625rem] font-medium fill-paper",
+  originLabelDim: "text-[0.625rem] fill-paper opacity-60",
+  // A single wrapping row at every width (owner feedback, 2026-09-17,
+  // matching the approved reference prototype's own `.footline` exactly:
+  // `display:flex; flex-wrap:wrap`, no column stack at any breakpoint) --
+  // was `flex-col` below `xl:`, which read as a vertical stack rather
+  // than the intended quiet data strip. `eyebrow.size`'s own uppercase/
+  // overline treatment (the site's real label typography, used for every
+  // eyebrow) stands in for the prototype's mono label look, without
+  // adding a second font family (owner declined one for this section
+  // during the original build).
+  footline: "flex flex-wrap items-center gap-x-7 gap-y-2 border-t border-line-dark pt-5",
+  footlineStat: "uppercase tracking-[0.08em] text-[0.6875rem] text-[#838D97]",
+  footlineStatValue: "font-semibold text-copper",
+};
+
 /* --- WhyCapriosports (Capriosports homepage) ------------------------------- */
 
 // 2026-09-15 -- numbered 01-05 list, replacing the earlier

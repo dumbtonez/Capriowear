@@ -575,6 +575,39 @@ export const capriosportsHome = {
   // `WhyCapriosportsProps` for exactly this reason. `h2`'s own `\n` breaks
   // it across 2 lines (owner-specified line break), rendered via
   // `headingClassName`'s `whitespace-pre-line`.
+  // GLOBAL REACH -- new section, 2026-09-17 (owner: animated shipping-routes
+  // map between Our Services and Why Caprio, direct visual follow-through
+  // on Our Services' own "Logistics and Fulfillment: Worldwide shipping,
+  // DDP, from Sialkot, Pakistan" bullet). Copy locked verbatim from the
+  // owner's brief (claude/capriosports-homepage-content-final.md section
+  // 12) -- not rephrased. `legend` order is the owner's own locked order
+  // and also drives route rendering order in
+  // `lib/geo/global-reach.ts`'s `GLOBAL_REACH_DESTINATIONS`. `stats`'
+  // optional `value` renders as a bold lead-in (e.g. "8") before `label`;
+  // the last stat ("Sialkot, Pakistan") has no `value`, rendered as plain
+  // text, same as the prototype's own un-bolded 4th footline item.
+  globalReach: {
+    eyebrow: "GLOBAL REACH",
+    h2: "Sialkot to the world, by sea.",
+    lead: "DDP to 20+ countries, shipped by sea from our own factory floor in Sialkot. Germany, France, the United Kingdom, Canada, the United States, Mexico, Brazil, and Australia shown here as proof, not the whole list.",
+    legend: [
+      "Germany",
+      "France",
+      "United Kingdom",
+      "Canada",
+      "United States",
+      "Mexico",
+      "Brazil",
+      "Australia",
+    ],
+    stats: [
+      { value: "8", label: "markets shown" },
+      { value: "20+", label: "countries served worldwide" },
+      { value: "DDP", label: "shipping terms" },
+      { label: "Sialkot, Pakistan" },
+    ],
+  },
+
   whyCaprio: {
     eyebrow: "HOW WE WORK",
     h2: "Why Caprio,\nnot just another factory",
