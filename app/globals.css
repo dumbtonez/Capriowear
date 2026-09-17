@@ -915,7 +915,10 @@ header[data-tone="light"] {
 .gr-route-line {
   fill: none;
   stroke: var(--color-copper-dim);
-  stroke-width: 1.4px;
+  /* 2px, was 1.4px -- bumped for real visual presence (owner feedback,
+     2026-09-17, third pass: the map read as thin/flat at this section's
+     actual rendered size). */
+  stroke-width: 2px;
   stroke-linecap: round;
   stroke-dasharray: 2000;
   stroke-dashoffset: 2000;
@@ -935,9 +938,9 @@ header[data-tone="light"] {
 .gr-route-flow {
   fill: none;
   stroke: var(--color-copper);
-  stroke-width: 1.6px;
+  stroke-width: 2.2px;
   stroke-linecap: round;
-  stroke-dasharray: 2 10;
+  stroke-dasharray: 2.5 11;
   opacity: 0;
 }
 .gr-inview .gr-route-flow {
@@ -980,7 +983,7 @@ header[data-tone="light"] {
 .gr-node-pulse {
   fill: none;
   stroke: var(--color-copper);
-  stroke-width: 1.5px;
+  stroke-width: 2px;
   opacity: 0;
   transform-origin: center;
 }
@@ -993,18 +996,18 @@ header[data-tone="light"] {
 @keyframes gr-pulse {
   0% {
     opacity: 0.9;
-    r: 5;
+    r: 7;
   }
   100% {
     opacity: 0;
-    r: 22;
+    r: 27;
   }
 }
 
 .gr-arrive-ring {
   fill: none;
   stroke: var(--color-copper);
-  stroke-width: 2.2px;
+  stroke-width: 2.8px;
   opacity: 0;
 }
 .gr-inview .gr-arrive-ring {
@@ -1015,59 +1018,62 @@ header[data-tone="light"] {
 .gr-inview .gr-arrive-ring-echo {
   animation-name: gr-arrive-ring-echo;
 }
+/* Ring/echo/flash/mark radii and stroke widths bumped ~20-25% (owner
+   feedback, 2026-09-17, third pass) for real visual presence at this
+   section's actual rendered size -- same shape/timing as before. */
 @keyframes gr-arrive-ring {
   0% {
     opacity: 0;
-    r: 4;
-    stroke-width: 2.6px;
+    r: 5;
+    stroke-width: 3.2px;
   }
   8% {
     opacity: 1;
-    r: 5;
-    stroke-width: 2.4px;
+    r: 6;
+    stroke-width: 3px;
   }
   45% {
     opacity: 0.5;
-    r: 22;
-    stroke-width: 1px;
+    r: 27;
+    stroke-width: 1.2px;
   }
   78% {
     opacity: 0;
-    r: 30;
-    stroke-width: 0.3px;
+    r: 36;
+    stroke-width: 0.4px;
   }
   100% {
     opacity: 0;
-    r: 30;
+    r: 36;
   }
 }
 @keyframes gr-arrive-ring-echo {
   0% {
     opacity: 0;
-    r: 4;
+    r: 5;
   }
   16% {
     opacity: 0;
-    r: 4;
+    r: 5;
   }
   24% {
     opacity: 0.8;
-    r: 6;
-    stroke-width: 2px;
+    r: 7;
+    stroke-width: 2.4px;
   }
   58% {
     opacity: 0.35;
-    r: 24;
-    stroke-width: 0.8px;
+    r: 29;
+    stroke-width: 1px;
   }
   86% {
     opacity: 0;
-    r: 32;
-    stroke-width: 0.3px;
+    r: 38;
+    stroke-width: 0.4px;
   }
   100% {
     opacity: 0;
-    r: 32;
+    r: 38;
   }
 }
 
@@ -1083,23 +1089,23 @@ header[data-tone="light"] {
 @keyframes gr-arrive-flash {
   0% {
     opacity: 0;
-    r: 3.5;
+    r: 4.5;
   }
   8% {
     opacity: 1;
-    r: 10;
+    r: 13;
   }
   28% {
     opacity: 0.9;
-    r: 7;
+    r: 9;
   }
   55% {
     opacity: 0;
-    r: 5;
+    r: 6.5;
   }
   100% {
     opacity: 0;
-    r: 3.5;
+    r: 4.5;
   }
 }
 
@@ -1121,15 +1127,15 @@ header[data-tone="light"] {
   }
   10% {
     opacity: 1;
-    transform: translateY(-2px) scale(1.2);
+    transform: translateY(-3px) scale(1.2);
   }
   50% {
     opacity: 1;
-    transform: translateY(-17px) scale(1);
+    transform: translateY(-21px) scale(1);
   }
   78% {
     opacity: 0;
-    transform: translateY(-28px) scale(0.9);
+    transform: translateY(-34px) scale(0.9);
   }
   100% {
     opacity: 0;
@@ -1139,10 +1145,12 @@ header[data-tone="light"] {
 /* "RECEIVED" label -- held visible from 16% to 55% of its own cycle,
    which at this route's shortest duration (4.5s, the European routes)
    is still just under 1.8s on screen, comfortably clearing the >=1s
-   readability bar the owner's brief called out as a past bug. */
+   readability bar the owner's brief called out as a past bug. Font size
+   11.5px, was 9.5px (owner feedback, 2026-09-17, third pass). */
 .gr-arrive-label {
   fill: var(--color-paper);
-  font-size: 9.5px;
+  font-size: 11.5px;
+  font-weight: 600;
   letter-spacing: 0.06em;
   opacity: 0;
 }

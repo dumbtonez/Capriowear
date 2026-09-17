@@ -19,18 +19,19 @@ import landTopology from "world-atlas/land-110m.json";
 
 import { MARKETS, SIALKOT } from "./markets";
 
-// 1000x430 (was 1000x480) -- re-tuned to the new, less-elongated content
-// bounding box's own aspect ratio (~2.44:1) once the dead space below is
-// cropped out, so the map fills the panel rather than leaving vertical
-// letterboxing.
-export const GLOBAL_REACH_VIEWBOX = { width: 1000, height: 430 } as const;
+// 1000x415 -- re-tuned to the tightened content bounding box's own aspect
+// ratio (~2.53:1, third pass) so the map fills the panel rather than
+// leaving vertical letterboxing.
+export const GLOBAL_REACH_VIEWBOX = { width: 1000, height: 415 } as const;
 
 const FRAME_PADDING = 16;
 // Modest fixed-degree padding around the real content bbox -- enough
 // breathing room that no node sits at the very edge, not a window sized
-// for a much larger, mostly-empty world view.
-const LON_PADDING_DEG = 14;
-const LAT_PADDING_DEG = 10;
+// for a much larger, mostly-empty world view. Tightened again (owner
+// feedback, 2026-09-17, third pass: the map still read as small/flat
+// with avoidable empty margin at the frame edges) from 14/10 to 9/6.
+const LON_PADDING_DEG = 9;
+const LAT_PADDING_DEG = 6;
 
 const contentLons = [SIALKOT.lon, ...MARKETS.map((m) => m.lon)];
 const contentLats = [SIALKOT.lat, ...MARKETS.map((m) => m.lat)];

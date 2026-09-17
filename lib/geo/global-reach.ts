@@ -32,6 +32,13 @@
 // point, so line/ship/label stay visually consistent with each other;
 // only the isolated Brazil/Australia/Sialkot points render at their true
 // projected coordinates (no collision risk, no dodge needed).
+//
+// Third pass (owner feedback, 2026-09-17): confirmed against the actual
+// deployed section (capriowear.vercel.app) that the destination clusters
+// themselves read fine, but the shared Sialkot origin -- where all 8
+// curves converge -- still reads as a small tangle. Bow magnitudes and
+// node-offset distances bumped up (not restructured) so the fan-out
+// reads with more real separation even right at the shared launch point.
 import { MARKETS, SIALKOT } from "./markets";
 import { projectPoint } from "./projection";
 
@@ -58,15 +65,24 @@ export type GlobalReachDestination = {
   labelOffset: { dx: number; dy: number };
 };
 
+// Label-offset directions below are computed radially outward from the
+// 8-node cluster's own centroid (owner feedback, 2026-09-17, third pass:
+// bigger "RECEIVED" label text at this section's new scale reintroduced
+// a couple of cross-cluster collisions -- e.g. France's and Brazil's
+// labels landing on top of each other -- that the earlier per-cluster
+// hand-picked directions didn't anticipate). Pointing each label away
+// from the shared centroid, scaled to clear the label's own ~60-unit
+// width, keeps all 8 labels mutually clear without hand-tuning every
+// pair.
 const MARKET_VISUALS: Record<string, Omit<GlobalReachDestination, "code" | "name" | "lon" | "lat">> = {
-  de: { bow: -30, duration: 4.5, drawDelay: 0, nodeOffset: { dx: 40, dy: 8 }, labelOffset: { dx: 16, dy: -12 } },
-  fr: { bow: -45, duration: 4.6, drawDelay: 0.15, nodeOffset: { dx: -5, dy: 45 }, labelOffset: { dx: 16, dy: 16 } },
-  uk: { bow: -60, duration: 4.7, drawDelay: 0.3, nodeOffset: { dx: -35, dy: -28 }, labelOffset: { dx: 16, dy: -16 } },
-  ca: { bow: -70, duration: 6, drawDelay: 0.45, nodeOffset: { dx: -15, dy: -20 }, labelOffset: { dx: -16, dy: -14 } },
-  us: { bow: -95, duration: 5.6, drawDelay: 0.6, nodeOffset: { dx: 25, dy: 10 }, labelOffset: { dx: -16, dy: 16 } },
-  mx: { bow: -120, duration: 6.2, drawDelay: 0.75, nodeOffset: { dx: -20, dy: 25 }, labelOffset: { dx: 16, dy: 16 } },
-  br: { bow: 65, duration: 7, drawDelay: 0.9, nodeOffset: { dx: 0, dy: 0 }, labelOffset: { dx: 16, dy: -12 } },
-  au: { bow: -50, duration: 6.5, drawDelay: 1.05, nodeOffset: { dx: 0, dy: 0 }, labelOffset: { dx: 16, dy: -12 } },
+  de: { bow: -36, duration: 4.5, drawDelay: 0, nodeOffset: { dx: 46, dy: 10 }, labelOffset: { dx: 52, dy: -17 } },
+  fr: { bow: -55, duration: 4.6, drawDelay: 0.15, nodeOffset: { dx: -6, dy: 52 }, labelOffset: { dx: 33, dy: 44 } },
+  uk: { bow: -72, duration: 4.7, drawDelay: 0.3, nodeOffset: { dx: -40, dy: -32 }, labelOffset: { dx: -14, dy: -53 } },
+  ca: { bow: -85, duration: 6, drawDelay: 0.45, nodeOffset: { dx: -18, dy: -24 }, labelOffset: { dx: -44, dy: -33 } },
+  us: { bow: -115, duration: 5.6, drawDelay: 0.6, nodeOffset: { dx: 29, dy: 12 }, labelOffset: { dx: -53, dy: -14 } },
+  mx: { bow: -145, duration: 6.2, drawDelay: 0.75, nodeOffset: { dx: -24, dy: 29 }, labelOffset: { dx: -52, dy: 18 } },
+  br: { bow: 80, duration: 7, drawDelay: 0.9, nodeOffset: { dx: 0, dy: 0 }, labelOffset: { dx: -29, dy: 47 } },
+  au: { bow: -60, duration: 6.5, drawDelay: 1.05, nodeOffset: { dx: 0, dy: 0 }, labelOffset: { dx: 51, dy: 20 } },
 };
 
 // Order matches the locked legend order in content/capriosports/home.ts.

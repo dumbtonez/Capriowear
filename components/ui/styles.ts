@@ -9307,8 +9307,10 @@ export const globalReach = {
   // The map stage panel: vertical gradient from the site's own secondary
   // dark surface (`--color-ink-2`) down to the base `--color-ink` --
   // reuses existing tokens rather than a new one-off "surface" token, per
-  // the design-system rule.
-  stage: "relative overflow-hidden rounded-xl border border-line-dark bg-gradient-to-b from-ink-2 to-ink p-4 md:p-6 xl:p-9",
+  // the design-system rule. Padding trimmed (owner feedback, 2026-09-17,
+  // third pass: "small gutter, not the current large one") so the map
+  // canvas itself gets more of the panel's real estate.
+  stage: "relative overflow-hidden rounded-xl border border-line-dark bg-gradient-to-b from-ink-2 to-ink p-2.5 md:p-3.5 xl:p-5",
   map: "block h-auto w-full",
   // `auto-fit`/`minmax(150px,1fr)` (owner feedback, 2026-09-17, matching
   // the approved reference prototype's own `.legend` grid exactly) --
@@ -9317,22 +9319,31 @@ export const globalReach = {
   // wrapping naturally at any width.
   legend: "mt-2 grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-2.5",
   legendItem: "flex items-center gap-2.5 rounded-md border border-line-dark bg-ink-2 px-3.5 py-3",
-  legendSwatch: "size-2 shrink-0 rounded-full bg-copper",
+  // Real per-country flags (owner feedback, 2026-09-17, third pass,
+  // referencing sheikhangroup.com's "Our Global Footprint"), replacing
+  // the plain copper dot -- `country-flag-icons`' React SVG components,
+  // no emoji/network fetch. 3:2 aspect sized to the pill's own compact
+  // height, rounded corner matching the pill's own `rounded-md` language.
+  legendFlag: "h-3.5 w-5 shrink-0 rounded-[2px] object-cover",
   legendName: "text-[0.8125rem] font-medium text-paper",
-  originLabel: "text-[0.625rem] font-medium fill-paper",
-  originLabelDim: "text-[0.625rem] fill-paper opacity-60",
+  originLabel: "text-[0.75rem] font-medium fill-paper",
+  originLabelDim: "text-[0.75rem] fill-paper opacity-60",
   // A single wrapping row at every width (owner feedback, 2026-09-17,
   // matching the approved reference prototype's own `.footline` exactly:
   // `display:flex; flex-wrap:wrap`, no column stack at any breakpoint) --
   // was `flex-col` below `xl:`, which read as a vertical stack rather
-  // than the intended quiet data strip. `eyebrow.size`'s own uppercase/
-  // overline treatment (the site's real label typography, used for every
-  // eyebrow) stands in for the prototype's mono label look, without
-  // adding a second font family (owner declined one for this section
-  // during the original build).
-  footline: "flex flex-wrap items-center gap-x-7 gap-y-2 border-t border-line-dark pt-5",
-  footlineStat: "uppercase tracking-[0.08em] text-[0.6875rem] text-[#838D97]",
-  footlineStatValue: "font-semibold text-copper",
+  // than the intended quiet data strip.
+  footline: "flex flex-wrap items-start gap-x-9 gap-y-5 border-t border-line-dark pt-6",
+  // Restyled for real visual weight (owner feedback, 2026-09-17, third
+  // pass: "too quiet... doesn't need full bordered stat cards, just
+  // enough size/hierarchy it doesn't disappear") -- a stacked
+  // value-over-label pair per stat, the same "big number, small caption"
+  // language the homepage's own `Stats` band already establishes via
+  // `stat.value`/`stat.caption` (`text-h1`/`text-body-lg`), scaled down
+  // to fit this inline strip rather than a full stat band.
+  footlineStat: "flex flex-col gap-1",
+  footlineStatValue: "text-h5 font-semibold text-copper",
+  footlineStatLabel: "uppercase tracking-[0.08em] text-[0.6875rem] text-[#838D97]",
 };
 
 /* --- WhyCapriosports (Capriosports homepage) ------------------------------- */

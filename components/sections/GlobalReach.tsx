@@ -20,6 +20,8 @@
 // Typography: Figtree only, the site's existing type system (owner
 // decision, 2026-09-17) -- the prototype's Big Shoulders Display/IBM
 // Plex fonts were its own placeholder direction, not adopted.
+import * as Flags from "country-flag-icons/react/3x2";
+
 import { GlobalReachStage } from "@/components/GlobalReachStage";
 import { SectionHeading } from "@/components/SectionHeading";
 import { globalReach } from "@/components/ui/styles";
@@ -30,6 +32,20 @@ import { getLandPathData, GLOBAL_REACH_VIEWBOX, projectPoint } from "@/lib/geo/p
 
 export type GlobalReachProps = {
   content: typeof capriosportsHome.globalReach;
+};
+
+// ISO 3166-1 alpha-2 codes for `country-flag-icons` -- keyed by the exact
+// country name strings in content/capriosports/home.ts's locked `legend`
+// copy, so the flag swap needs no change to that content.
+const LEGEND_FLAG_CODES: Record<string, keyof typeof Flags> = {
+  Germany: "DE",
+  France: "FR",
+  "United Kingdom": "GB",
+  Canada: "CA",
+  "United States": "US",
+  Mexico: "MX",
+  Brazil: "BR",
+  Australia: "AU",
 };
 
 export function GlobalReach({ content }: GlobalReachProps) {
@@ -141,7 +157,7 @@ export function GlobalReach({ content }: GlobalReachProps) {
 
             <g>
               <path d={landPath} fill="url(#gr-land-gradient)" stroke="rgba(11,15,20,.55)" strokeWidth={0.6} strokeLinejoin="round" />
-              <circle cx={origin.x} cy={origin.y} r={120} fill="url(#gr-origin-glow)" />
+              <circle cx={origin.x} cy={origin.y} r={140} fill="url(#gr-origin-glow)" />
             </g>
 
             <g>
@@ -155,7 +171,7 @@ export function GlobalReach({ content }: GlobalReachProps) {
 
             <g>
               {routes.map((route) => (
-                <g key={`${route.pathId}-ship`} className="gr-ship" transform="scale(1.15)" style={{ animationDelay: `${route.shipBegin}s` }}>
+                <g key={`${route.pathId}-ship`} className="gr-ship" transform="scale(1.6)" style={{ animationDelay: `${route.shipBegin}s` }}>
                   <path className="gr-ship-wake" d="M-13,1.6 C-24,2.6 -38,2.1 -54,0 C-38,-2.1 -24,-2.6 -13,-1.6 Z" />
                   <use href="#gr-ship-icon" />
                   <animateMotion dur={`${route.duration}s`} begin={`${route.shipBegin}s`} repeatCount="indefinite" rotate="auto">
@@ -166,18 +182,17 @@ export function GlobalReach({ content }: GlobalReachProps) {
             </g>
 
             <g>
-              <circle cx={origin.x} cy={origin.y} r={5} fill="none" stroke="var(--color-copper)" className="gr-node-pulse" />
-              <circle cx={origin.x} cy={origin.y} r={5} fill="var(--color-copper)" />
+              <circle cx={origin.x} cy={origin.y} r={6.5} fill="none" stroke="var(--color-copper)" className="gr-node-pulse" />
+              <circle cx={origin.x} cy={origin.y} r={6.5} fill="var(--color-copper)" />
               {/* Backing scrim so a ship passing behind the origin label
                   (every route launches from this point) stays legible --
-                  owner feedback, 2026-09-17. Offset further from the node
-                  than before (16px, was 12px) to sit clearer of the
-                  routes' shared launch point. */}
-              <rect x={origin.x + 12} y={origin.y - 16} width={86} height={30} rx={4} fill="var(--color-ink)" opacity={0.72} />
-              <text x={origin.x + 16} y={origin.y - 4} className={globalReach.originLabel}>
+                  owner feedback, 2026-09-17. Sized up to match the larger
+                  label text (third pass). */}
+              <rect x={origin.x + 14} y={origin.y - 19} width={104} height={36} rx={5} fill="var(--color-ink)" opacity={0.75} />
+              <text x={origin.x + 19} y={origin.y - 5} className={globalReach.originLabel}>
                 SIALKOT, PK
               </text>
-              <text x={origin.x + 16} y={origin.y + 10} className={globalReach.originLabelDim}>
+              <text x={origin.x + 19} y={origin.y + 12} className={globalReach.originLabelDim}>
                 Origin
               </text>
             </g>
@@ -201,30 +216,30 @@ export function GlobalReach({ content }: GlobalReachProps) {
               const anchor = dx < 0 ? "end" : "start";
               return (
                 <g key={`${route.pathId}-node`}>
-                  <circle cx={route.point.x} cy={route.point.y} r={3.5} fill="var(--color-paper)" />
+                  <circle cx={route.point.x} cy={route.point.y} r={4.5} fill="var(--color-paper)" />
                   <circle
                     cx={route.point.x}
                     cy={route.point.y}
-                    r={4}
+                    r={5}
                     className="gr-arrive-ring"
                     style={{ animationDuration: `${route.duration}s`, animationDelay: `${arriveDelay}s` }}
                   />
                   <circle
                     cx={route.point.x}
                     cy={route.point.y}
-                    r={4}
+                    r={5}
                     className="gr-arrive-ring gr-arrive-ring-echo"
                     style={{ animationDuration: `${route.duration}s`, animationDelay: `${arriveDelay}s` }}
                   />
                   <circle
                     cx={route.point.x}
                     cy={route.point.y}
-                    r={3.5}
+                    r={4.5}
                     className="gr-arrive-flash"
                     style={{ animationDuration: `${route.duration}s`, animationDelay: `${arriveDelay}s` }}
                   />
                   <path
-                    d={`M${markX},${markY - 3} L${markX + 3},${markY} L${markX},${markY + 3} L${markX - 3},${markY} Z`}
+                    d={`M${markX},${markY - 4} L${markX + 4},${markY} L${markX},${markY + 4} L${markX - 4},${markY} Z`}
                     className="gr-arrive-mark"
                     style={{ animationDuration: `${route.duration}s`, animationDelay: `${arriveDelay}s` }}
                   />
@@ -244,21 +259,23 @@ export function GlobalReach({ content }: GlobalReachProps) {
         </GlobalReachStage>
 
         <div className={globalReach.legend}>
-          {content.legend.map((name) => (
-            <div key={name} className={globalReach.legendItem}>
-              <span className={globalReach.legendSwatch} aria-hidden="true" />
-              <span className={globalReach.legendName}>{name}</span>
-            </div>
-          ))}
+          {content.legend.map((name) => {
+            const Flag = Flags[LEGEND_FLAG_CODES[name]];
+            return (
+              <div key={name} className={globalReach.legendItem}>
+                <Flag title={name} className={globalReach.legendFlag} aria-hidden="true" />
+                <span className={globalReach.legendName}>{name}</span>
+              </div>
+            );
+          })}
         </div>
 
         <div className={globalReach.footline}>
           {content.stats.map((stat) => (
-            <span key={stat.label} className={globalReach.footlineStat}>
+            <div key={stat.label} className={globalReach.footlineStat}>
               {stat.value ? <span className={globalReach.footlineStatValue}>{stat.value}</span> : null}
-              {stat.value ? " " : ""}
-              {stat.label}
-            </span>
+              <span className={globalReach.footlineStatLabel}>{stat.label}</span>
+            </div>
           ))}
         </div>
       </section>
