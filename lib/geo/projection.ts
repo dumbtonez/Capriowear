@@ -5,13 +5,15 @@
 // destination markets (lib/geo/markets.ts), with modest fixed-degree
 // padding -- rather than a fixed world-sized window, so the map fills
 // its panel instead of leaving a large empty band of open ocean/
-// Antarctica below content that doesn't reach that far south (owner
-// feedback, 2026-09-17: the original fixed lon -140..160/lat -45..78
-// window left most of the bottom of the canvas empty). Projects the
-// real `world-atlas` land-110m coastline data through the same
+// Antarctica below content that doesn't reach that far south. Projects
+// the real `world-atlas` land-110m coastline data through the same
 // projection. Runs at render time in a Server Component, so d3-geo/
 // topojson-client never reach the client bundle -- only the resulting
 // static SVG path/point data does.
+//
+// The viewBox height is derived from the frame's own true projected
+// aspect ratio (below), not hand-picked -- see that ratio's own comment
+// for why a fixed guessed height reintroduces letterboxing.
 import { geoMercator, geoPath } from "d3-geo";
 import type { GeometryCollection, Topology } from "topojson-specification";
 import { feature } from "topojson-client";
@@ -19,17 +21,10 @@ import landTopology from "world-atlas/land-110m.json";
 
 import { MARKETS, SIALKOT } from "./markets";
 
-// 1000x415 -- re-tuned to the tightened content bounding box's own aspect
-// ratio (~2.53:1, third pass) so the map fills the panel rather than
-// leaving vertical letterboxing.
-export const GLOBAL_REACH_VIEWBOX = { width: 1000, height: 415 } as const;
-
 const FRAME_PADDING = 16;
 // Modest fixed-degree padding around the real content bbox -- enough
 // breathing room that no node sits at the very edge, not a window sized
-// for a much larger, mostly-empty world view. Tightened again (owner
-// feedback, 2026-09-17, third pass: the map still read as small/flat
-// with avoidable empty margin at the frame edges) from 14/10 to 9/6.
+// for a much larger, mostly-empty world view.
 const LON_PADDING_DEG = 9;
 const LAT_PADDING_DEG = 6;
 
@@ -43,23 +38,61 @@ const FRAME_BOUNDS = {
   south: Math.min(...contentLats) - LAT_PADDING_DEG,
 };
 
+// GeoJSON's right-hand rule requires an exterior ring to wind
+// counter-clockwise (west,south -> east,south -> east,north -> west,north
+// -> close). An earlier version of this file wound it the other way
+// (north -> east -> south -> west), which is backwards -- d3's
+// antimeridian preclip then treated the polygon as its complement (the
+// rest of the sphere) for `fitExtent`'s own internal `path.bounds()`
+// call, silently fitting the WRONG region. The visible symptom (found by
+// the owner, confirmed with a temporary debug rect compared against the
+// rendered land path's real `getBBox()`) was the projected content
+// filling only ~40% of the viewBox's width while filling ~100% of its
+// height: `fitExtent` had picked a scale/translate sized for a
+// differently-shaped (near-square) region instead of this frame's real,
+// much wider one.
+const framePolygon = {
+  type: "Polygon" as const,
+  coordinates: [
+    [
+      [FRAME_BOUNDS.west, FRAME_BOUNDS.south],
+      [FRAME_BOUNDS.east, FRAME_BOUNDS.south],
+      [FRAME_BOUNDS.east, FRAME_BOUNDS.north],
+      [FRAME_BOUNDS.west, FRAME_BOUNDS.north],
+      [FRAME_BOUNDS.west, FRAME_BOUNDS.south],
+    ],
+  ],
+};
+
+// The frame's true projected aspect ratio, measured by directly
+// projecting its 4 corners through an unscaled Mercator projection
+// (immune to the winding/preclip issue above, since a bare point
+// projection does no polygon clipping at all) -- not approximated from
+// raw lon/lat degree spans, which is a materially different (and wrong)
+// number under Mercator's non-linear latitude scaling. The viewBox
+// height is derived from this ratio (fixed width 1000) so `fitExtent`'s
+// single uniform scale fills both axes with no leftover margin on
+// either side, by construction, rather than a separately hand-picked
+// height that happens to approximately match.
+const measuringProjection = geoMercator().scale(1).translate([0, 0]);
+const frameCorners = framePolygon.coordinates[0]
+  .slice(0, 4)
+  .map(([lon, lat]) => measuringProjection([lon, lat]) as [number, number]);
+const frameRawWidth = Math.max(...frameCorners.map((c) => c[0])) - Math.min(...frameCorners.map((c) => c[0]));
+const frameRawHeight = Math.max(...frameCorners.map((c) => c[1])) - Math.min(...frameCorners.map((c) => c[1]));
+const FRAME_ASPECT = frameRawWidth / frameRawHeight;
+
+const VIEWBOX_WIDTH = 1000;
+const VIEWBOX_HEIGHT = Math.round((VIEWBOX_WIDTH - 2 * FRAME_PADDING) / FRAME_ASPECT + 2 * FRAME_PADDING);
+
+export const GLOBAL_REACH_VIEWBOX = { width: VIEWBOX_WIDTH, height: VIEWBOX_HEIGHT } as const;
+
 const projection = geoMercator().fitExtent(
   [
     [FRAME_PADDING, FRAME_PADDING],
     [GLOBAL_REACH_VIEWBOX.width - FRAME_PADDING, GLOBAL_REACH_VIEWBOX.height - FRAME_PADDING],
   ],
-  {
-    type: "Polygon",
-    coordinates: [
-      [
-        [FRAME_BOUNDS.west, FRAME_BOUNDS.north],
-        [FRAME_BOUNDS.east, FRAME_BOUNDS.north],
-        [FRAME_BOUNDS.east, FRAME_BOUNDS.south],
-        [FRAME_BOUNDS.west, FRAME_BOUNDS.south],
-        [FRAME_BOUNDS.west, FRAME_BOUNDS.north],
-      ],
-    ],
-  },
+  framePolygon,
 );
 
 const path = geoPath(projection);

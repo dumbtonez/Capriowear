@@ -82,7 +82,11 @@ const MARKET_VISUALS: Record<string, Omit<GlobalReachDestination, "code" | "name
   us: { bow: -115, duration: 5.6, drawDelay: 0.6, nodeOffset: { dx: 29, dy: 12 }, labelOffset: { dx: -53, dy: -14 } },
   mx: { bow: -145, duration: 6.2, drawDelay: 0.75, nodeOffset: { dx: -24, dy: 29 }, labelOffset: { dx: -52, dy: 18 } },
   br: { bow: 80, duration: 7, drawDelay: 0.9, nodeOffset: { dx: 0, dy: 0 }, labelOffset: { dx: -29, dy: 47 } },
-  au: { bow: -60, duration: 6.5, drawDelay: 1.05, nodeOffset: { dx: 0, dy: 0 }, labelOffset: { dx: 51, dy: 20 } },
+  // dx negative (was +51) -- the corrected, wider projection (see
+  // lib/geo/projection.ts's winding-order fix) now places Australia much
+  // closer to the frame's right edge, so its label needs to point back
+  // toward the map's interior instead of further off the right side.
+  au: { bow: -60, duration: 6.5, drawDelay: 1.05, nodeOffset: { dx: 0, dy: 0 }, labelOffset: { dx: -51, dy: 20 } },
 };
 
 // Order matches the locked legend order in content/capriosports/home.ts.
