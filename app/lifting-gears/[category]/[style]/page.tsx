@@ -165,6 +165,7 @@ export default async function LiftingGearsStylePage({
               description,
               image: productImage,
               material: data.product.material,
+              group: data.category.group,
             })}
           />
         ) : null}

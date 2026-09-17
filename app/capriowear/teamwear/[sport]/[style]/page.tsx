@@ -157,6 +157,7 @@ export default async function TeamwearStylePage({ params }: PageProps<"/capriowe
             description,
             image: productImage,
             material: data.product.material,
+            group: data.category.group,
           })}
         />
 

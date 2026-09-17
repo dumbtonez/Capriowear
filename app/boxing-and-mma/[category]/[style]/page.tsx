@@ -148,6 +148,7 @@ export default async function BoxingMmaStylePage({
             description,
             image: productImage,
             material: data.product.material,
+            group: data.category.group,
           })}
         />
 

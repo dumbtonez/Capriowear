@@ -13,6 +13,17 @@ export type ProductSchemaInput = {
   image?: string;
   /** Short spec line, e.g. "Nylon or polyamide + elastane, 4-way stretch" -- StyleCard.material. */
   material?: string;
+  /**
+   * The calling PDP's own `Category.group` (already the sitewide Capriowear
+   * vs. Gear discriminator -- "Activewear"/"Teamwear" vs. "Gear", see every
+   * content/activewear/*.ts, content/teamwear/*.ts, and
+   * content/gear/**\/*.ts category file's own `group` field). Drives
+   * `brand.name` below: fixed 2026-09-17, this field previously didn't
+   * exist here at all, so every Gear PDP's Product schema (Weight Lifting
+   * Belts, Wrist Wraps, Elbow Wraps, Lifting Hook, Knee Wraps, Ankle
+   * Straps) wrongly claimed the sibling Capriowear brand once published.
+   */
+  group: string;
 };
 
 // Sitewide root Organization entity -- Capriosports, the parent company
@@ -20,10 +31,17 @@ export type ProductSchemaInput = {
 // Capriosports homepage task; before this, the root entity was Capriowear
 // itself with Capriosports/Caprio Sports only as its `parentOrganization`
 // name string, no real node of its own). Called argument-less from the root
-// layout (app/layout.tsx), so every page sitewide -- Capriowear included --
-// renders the same single, correct entity graph, never a per-page variant.
-// Capriowear is represented as a `subOrganization` node, its own real name
-// and URL (content/site.ts's existing ORGANIZATION, untouched otherwise).
+// layout (app/layout.tsx), so every page sitewide -- Capriowear and Gear
+// included -- renders the same single, correct entity graph, never a
+// per-page variant. Both real divisions are represented as their own
+// `subOrganization` node, built from CAPRIOSPORTS_ORGANIZATION.divisions
+// (not a second, independently hardcoded list) -- fixed 2026-09-17: this
+// used to only ever include Capriowear, so Gear had no subOrganization
+// node at all despite `divisions` already tracking both. Gear's node uses
+// "Caprio," its own plain customer-facing name (matching `productSchema()`'s
+// own `brand.name` fix of the same date), not `divisions`' own
+// "Caprio Sports" displayName, which stays reserved for
+// `productSchema()`'s `manufacturer.name` only.
 export function organizationSchema() {
   return {
     "@context": "https://schema.org",
@@ -43,13 +61,11 @@ export function organizationSchema() {
     // profiles exist yet) rather than emitting an empty array -- see
     // CAPRIOSPORTS_ORGANIZATION.sameAs's own comment.
     ...(CAPRIOSPORTS_ORGANIZATION.sameAs.length > 0 ? { sameAs: CAPRIOSPORTS_ORGANIZATION.sameAs } : {}),
-    subOrganization: [
-      {
-        "@type": "Organization",
-        name: ORGANIZATION.name,
-        url: ORGANIZATION.url,
-      },
-    ],
+    subOrganization: CAPRIOSPORTS_ORGANIZATION.divisions.map((division) => ({
+      "@type": "Organization",
+      name: division.key === "gear" ? "Caprio" : division.displayName,
+      url: division.url,
+    })),
     // The confirmed, sitewide certification list
     // (content/capriosports/organization.ts's CAPRIOSPORTS_CERTIFICATIONS --
     // the same real facts content/site.ts's own CERTIFICATIONS represents
@@ -304,13 +320,22 @@ export function collectionOfPagesSchema(name: string, url: string, description: 
 // re-flagging: Capriowear has no fixed public per-unit price to publish
 // (quote-based, made-to-order), so omitting `offers` is the only schema.org
 // -valid option here, not an incomplete implementation.
-export function productSchema({ name, description, image, material }: ProductSchemaInput) {
+export function productSchema({ name, description, image, material, group }: ProductSchemaInput) {
+  // Gear (group: "Gear" -- Lifting Gears, Boxing & MMA) has its own brand
+  // identity, "Caprio," separate from its sibling division Capriowear
+  // (group: "Activewear"/"Teamwear"), matching the "Caprio" name already
+  // used in every visible frontend copy on Gear pages (see
+  // content/capriosports/organization.ts's own identityLine.gearFrontend).
+  // `manufacturer.name` stays `ORGANIZATION.legalName` ("Caprio Sports")
+  // unchanged for both divisions -- one factory, one manufacturing entity,
+  // not a brand-identity question.
+  const brandName = group === "Gear" ? "Caprio" : ORGANIZATION.name;
   return {
     "@context": "https://schema.org",
     "@type": "Product",
     name,
     description,
-    brand: { "@type": "Brand", name: ORGANIZATION.name },
+    brand: { "@type": "Brand", name: brandName },
     manufacturer: { "@type": "Organization", name: ORGANIZATION.legalName },
     ...(image ? { image } : {}),
     ...(material ? { material } : {}),
