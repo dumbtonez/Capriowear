@@ -11,8 +11,6 @@
   "dependencies": {
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^6.13.2",
-    "country-flag-icons": "^1.6.20",
-    "d3-geo": "^3.1.1",
     "framer-motion": "^13.2.0",
     "googleapis": "^178.1.1",
     "lucide-react": "^1.33.0",
@@ -21,18 +19,14 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "resend": "^6.27.0",
-    "sanity": "^6.13.2",
-    "topojson-client": "^3.1.0",
-    "world-atlas": "^2.0.2"
+    "sanity": "^6.13.2"
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4",
-    "@types/d3-geo": "^3.1.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@types/topojson-client": "^3.1.5",
     "eslint": "^9",
     "eslint-config-next": "16.3.2",
     "tailwindcss": "^4",

@@ -30,7 +30,6 @@ import { DivisionCards } from "@/components/sections/DivisionCards";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
-import { GlobalReach } from "@/components/sections/GlobalReach";
 import { Hero } from "@/components/sections/Hero";
 import { OurServices } from "@/components/sections/OurServices";
 import { OurStory } from "@/components/sections/OurStory";
@@ -203,16 +202,6 @@ export default function CapriosportsHomePage() {
             from further down the page (was section 8, light tone) rather
             than duplicated: same content, one instance. */}
         <OurServices content={capriosportsHome.services} tone="dark" />
-
-        {/* GLOBAL REACH -- new section, 2026-09-17 (owner: animated
-            shipping-routes map, direct visual follow-through on Our
-            Services' own "Logistics and Fulfillment: Worldwide shipping,
-            DDP, from Sialkot, Pakistan" bullet directly above -- kept
-            immediately adjacent to it, before Why Caprio). Same
-            continuous dark run as Our Services/Why Caprio around it --
-            see components/sections/GlobalReach.tsx's own header comment
-            for the full build. */}
-        <GlobalReach content={capriosportsHome.globalReach} />
 
         {/* ONE FACTORY section removed entirely (owner, 2026-09-16:
             "remove this section, One factory, lifting gear and boxing and
