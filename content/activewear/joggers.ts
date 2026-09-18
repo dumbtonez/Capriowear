@@ -81,6 +81,16 @@ export const joggers: Category = {
       bestFor: "Premium and streetwear joggers, wide-leg",
       performance: "Structured, substantial (up to 400+ GSM)",
     },
+    // Added with the Wide-Leg Woven Jogger draft style below (owner spec,
+    // 2026-09-18): the category's first non-fleece row -- a lightweight
+    // woven shell, not knit. Weight is confirmed against that style's own
+    // real reference; exact weave (plain vs. tricot) isn't, so "quick-dry"
+    // and the GSM figure are the only performance claims made here.
+    {
+      fabric: "Polyester (lightweight woven)",
+      bestFor: "Wide-leg, open-hem joggers, everyday athletic wear",
+      performance: "Lightweight shell, quick-dry (110 GSM; weave confirmed on sample)",
+    },
   ],
   // Weight tiers as their own real, liftable table (FabricOptions.tsx's
   // own `weightTiers` prop).
@@ -122,7 +132,14 @@ export const joggers: Category = {
   coverageEyebrow: "CUSTOMIZATION",
   coverageHeading: "From custom fabric to packaging design",
   coverageItems: [
-    { title: "Fabric", body: "French terry, brushed fleece, cotton-poly or heavyweight cotton fleece" },
+    {
+      title: "Fabric",
+      body: "French terry, brushed fleece, cotton-poly, lightweight polyester, polyester tricot or poly-spandex woven",
+    },
+    {
+      title: "Detailing",
+      body: "Contrast piping, paneling or color-blocking to your spec",
+    },
     { title: "Weight and fit", body: "240 to 400+ GSM fleece, tapered, slim, wide-leg or straight" },
     { title: "Hem and cuff", body: "Ribbed ankle cuff or open hem" },
     {
@@ -238,6 +255,100 @@ export const joggers: Category = {
       image: "",
       imageAlt: "Custom open-hem jogger, jogger taper, straight hem",
       href: "/capriowear/activewear/joggers/open-hem",
+    },
+    // Sourced from a real reference product (owner spec, 2026-09-18): a
+    // youngla.com wide-leg woven pant. No reference product name or
+    // numbering appears anywhere below -- that's the reference's own
+    // proprietary naming, not a generic industry term. Only facts stated
+    // in the reference's own text or visually confirmed in its photos are
+    // stated as fact here (composition, weight, fit, waistband being
+    // adjustable, the contrast piping, the open hem); the reference never
+    // says "woven" outright (it says "lightweight construction") and never
+    // states an exact waistband mechanism, pocket count/placement, or seam
+    // type, so those stay framed as customizable/sample-confirmed rather
+    // than locked specs, both in `specifications` and `faqs` below. Full
+    // PDP content authored now even though `status` stays "draft" (owner
+    // spec) -- unlike this category's other 5 cards (card-only, no PDP
+    // content yet), this one's ready to flip to "published" once real
+    // photography and a confirmed sample exist.
+    //
+    // `internalPreview: true` (owner spec, 2026-09-18) -- the same
+    // owner-only escape hatch already used on 5 Gear/Weight Lifting Belts
+    // styles (see `StyleCard.internalPreview`'s own comment): the PLP card
+    // becomes a real clickable link and the PDP route renders for internal
+    // review, but every other "draft" gate stays exactly as `status`'s own
+    // comment describes -- noindex/nofollow, excluded from app/sitemap.ts,
+    // Product/FAQPage JSON-LD withheld. No other card in this file carries
+    // this flag. Remove it (leaving `status: "draft"`, or flip to
+    // "published") once this style is ready for real launch.
+    {
+      status: "draft",
+      internalPreview: true,
+      slug: "wide-leg-woven-jogger",
+      cardTitle: "Custom Wide-Leg Woven Jogger",
+      cardSubline: "Lightweight woven, 110 GSM, adjustable waist",
+      image: "",
+      imageAlt: "Custom wide-leg woven jogger with adjustable waistband and open hem",
+      href: "/capriowear/activewear/joggers/wide-leg-woven-jogger",
+      pdpTitle: "Wide-Leg Woven Jogger",
+      sku: "CAP-JOG-01",
+      pdpHeading: "Custom Wide-Leg Woven Jogger Manufacturer",
+      pdpDescription:
+        "Wide-leg woven jogger, custom and private label, in a lightweight 100% polyester shell at 110 GSM with an adjustable waistband and open hem, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Wide-Leg Woven Jogger Manufacturer",
+      pdpMetaDescription:
+        "Custom wide-leg woven jogger manufacturer, 100% polyester, lightweight 110 GSM, adjustable waist, open hem, low MOQ, full customization. DDP worldwide.",
+      material: "100% polyester, lightweight construction",
+      // Offered fabric options for this style, not claims about the
+      // reference itself -- only "Lightweight polyester (110 GSM)" is a
+      // confirmed fact; tricot and poly-spandex are customization options.
+      pdpFabricPills: ["Lightweight polyester (110 GSM)", "Polyester tricot", "Poly-spandex woven"],
+      pdpCustomizationPills: ["Your fit", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "What fabric and weight is the wide-leg woven jogger?",
+          a: "100% polyester in a lightweight construction at 110 GSM. The exact weave and hand are confirmed and matched on your first sample.",
+        },
+        {
+          q: "Can I customize the leg, hem, waistband, and pockets?",
+          a: "Yes. Wide-leg width, an open hem or ankle zip, waistband mechanism, and pocket placement are all made to your tech pack.",
+        },
+        {
+          q: "What's the difference between this and your fleece joggers?",
+          a: "The wide-leg woven jogger uses a lightweight polyester shell with a loose leg and open hem. Our fleece joggers use knit fabric with a tapered leg and ribbed cuff. We make both.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Cuffed Jogger", href: "/capriowear/activewear/joggers/cuffed-jogger" },
+        { label: "Open-Hem", href: "/capriowear/activewear/joggers/open-hem" },
+        { label: "Cargo", href: "/capriowear/activewear/joggers/cargo" },
+        { label: "Slim", href: "/capriowear/activewear/joggers/slim" },
+        { label: "Wide-Leg", href: "/capriowear/activewear/joggers/wide-leg" },
+        { label: "See All", href: "/capriowear/activewear/joggers" },
+      ],
+      specifications: [
+        { label: "Style", value: "Wide-leg woven jogger, loose fit (base type)" },
+        { label: "Fabric", value: "100% polyester, lightweight construction" },
+        { label: "Weight", value: "110 GSM" },
+        { label: "Leg", value: "Wide-leg, loose fit; thigh, knee and calf width to your spec" },
+        { label: "Hem", value: "Open hem, no cuff; ankle zip available on request" },
+        { label: "Waistband", value: "Adjustable elastic waistband; exact mechanism (drawcord or tunnel) confirmed on your sample" },
+        { label: "Detailing", value: "Contrast piping running through the leg, to your color and placement" },
+        {
+          label: "Weave, pockets and construction",
+          value: "Not shown on the reference build; fabric weave, pocket placement and seam type confirmed against your tech pack and sample",
+        },
+        { label: "Branding", value: "Sublimation, screen, DTF, embroidery, custom labels and packaging" },
+      ],
+      pdpQualityHeading: "The fit you approve, at every size",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut",
+      pdpQualityPoints: [
+        "Wide-leg width graded proportional across the size range",
+        "Open hem finish clean and consistent, no fraying",
+        "Piping placement and stitching checked for durability",
+        "GSM and hand confirmed against your sample before bulk cut",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",

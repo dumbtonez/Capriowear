@@ -53,11 +53,22 @@ import { breadcrumbSchema, faqSchema, productSchema } from "@/lib/schema";
 // sitemap, and are indexable") -- a draft style still shows as a
 // (non-clickable) card on the PLP, but has no real PDP content yet, so it
 // gets no route at all here.
+//
+// A style is reachable (route generated, page renders) if it's published
+// OR carries the owner-only `internalPreview` escape hatch (see
+// `StyleCard.internalPreview`'s own comment) -- everything else gated by
+// `status` (sitemap, schema, indexing) still reads `status` alone, never
+// this helper, so a draft-but-previewable style stays noindexed/schema-
+// less/out of the sitemap exactly like any other draft. Ported from the
+// Gear route's own identical helper (app/lifting-gears/[category]/
+// [style]/page.tsx), owner spec 2026-09-18, Wide-Leg Woven Jogger.
+function isReachable(card: { status: "published" | "draft"; internalPreview?: boolean }) {
+  return card.status === "published" || card.internalPreview === true;
+}
+
 export function generateStaticParams() {
   return Object.values(categories).flatMap((category) =>
-    category.styleCards
-      .filter((card) => card.status === "published")
-      .map((card) => ({ category: category.slug, style: card.slug })),
+    category.styleCards.filter(isReachable).map((card) => ({ category: category.slug, style: card.slug })),
   );
 }
 
@@ -86,7 +97,7 @@ export async function generateMetadata({
 }: PageProps<"/capriowear/activewear/[category]/[style]">): Promise<Metadata> {
   const { category, style } = await params;
   const data = getData(category, style);
-  if (!data || data.product.status !== "published") return {};
+  if (!data || !isReachable(data.product)) return {};
 
   const shortTitle = data.product.pdpTitle ?? data.product.cardTitle;
   // No " | Capriowear" suffix here -- same reasoning as Category.metaTitle's
@@ -111,6 +122,12 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical },
+    // Owner-only preview (2026-09-18, Wide-Leg Woven Jogger): a style that's
+    // reachable via `internalPreview` but still `status: "draft"` stays
+    // explicitly noindexed -- reads `status`, never `internalPreview`, so
+    // this is a no-op for every genuinely `"published"` PDP. Ported
+    // verbatim from the Gear route's own identical override.
+    ...(data.product.status !== "published" ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       title: fullTitle,
       description,
@@ -130,7 +147,7 @@ export async function generateMetadata({
 export default async function StylePage({ params }: PageProps<"/capriowear/activewear/[category]/[style]">) {
   const { category, style } = await params;
   const data = getData(category, style);
-  if (!data || data.product.status !== "published") notFound();
+  if (!data || !isReachable(data.product)) notFound();
 
   const productTitle = data.product.pdpTitle ?? data.product.cardTitle;
   const heading = data.product.pdpHeading ?? productTitle;
@@ -222,16 +239,21 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
             Product stays schema-valid without an Offer rather than
             publishing invented pricing (same "no price data" precedent
             already set by the PLP's own CollectionPage/Product entities,
-            lib/schema.ts's collectionPageSchema()). */}
-        <JsonLd
-          data={productSchema({
-            name: heading,
-            description,
-            image: productImage,
-            material: data.product.material,
-            group: data.category.group,
-          })}
-        />
+            lib/schema.ts's collectionPageSchema()). Withheld for a
+            draft-but-`internalPreview` style (owner spec, 2026-09-18) --
+            gated on `status` alone, never `isReachable()`, so a page that's
+            reachable for internal review still ships no Product JSON-LD. */}
+        {data.product.status === "published" ? (
+          <JsonLd
+            data={productSchema({
+              name: heading,
+              description,
+              image: productImage,
+              material: data.product.material,
+              group: data.category.group,
+            })}
+          />
+        ) : null}
 
         {/* ProductGallery (Figma node 634:4961 desktop / 638:860 mobile,
             2026-08-31) + ProductInfo (node 634:4988/638:2541) -- gallery
@@ -452,7 +474,9 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
             "Top questions from B2B buyers") -- was a PDP-specific
             "Questions about this style". */}
         <Faq content={{ h2: "Top questions from B2B buyers", items: faqItems }} />
-        <JsonLd data={faqSchema(faqItems)} />
+        {/* Withheld for a draft-but-`internalPreview` style, same reasoning
+            as the Product schema above (owner spec, 2026-09-18). */}
+        {data.product.status === "published" ? <JsonLd data={faqSchema(faqItems)} /> : null}
 
         {/* ProductCategoryLinks (SEO audit, 2026-09-02, rule 6) -- built
             alongside this page but never actually rendered here until now
