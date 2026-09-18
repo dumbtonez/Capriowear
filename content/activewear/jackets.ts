@@ -291,6 +291,6 @@ export const jackets: Category = {
     { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
     { label: "Sweatshirts", href: "/capriowear/activewear/sweatshirts" },
     { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
-    { label: "Joggers & Track Pants", href: "/capriowear/activewear/joggers-track-pants" },
+    { label: "Joggers", href: "/capriowear/activewear/joggers" },
   ],
 };

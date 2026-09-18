@@ -40,9 +40,9 @@ export const categoryGroups: CategoryGroup[] = [
       { label: "Leggings", descriptor: "Compression to flare and scrunch", href: "/capriowear/activewear/leggings" },
       { label: "Shorts", descriptor: "Training, running and lined styles", href: "/capriowear/activewear/shorts" },
       {
-        label: "Joggers & Track Pants",
-        descriptor: "Fleece joggers to woven track pants",
-        href: "/capriowear/activewear/joggers-track-pants",
+        label: "Joggers",
+        descriptor: "Tapered joggers, cuffed to wide-leg",
+        href: "/capriowear/activewear/joggers",
       },
     ],
   },

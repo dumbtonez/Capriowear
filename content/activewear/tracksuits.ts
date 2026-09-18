@@ -267,6 +267,6 @@ export const tracksuits: Category = {
     { label: "Jackets", href: "/capriowear/activewear/jackets" },
     { label: "Track Jackets & Zip-Ups", href: "/capriowear/activewear/track-jackets" },
     { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
-    { label: "Joggers & Track Pants", href: "/capriowear/activewear/joggers-track-pants" },
+    { label: "Joggers", href: "/capriowear/activewear/joggers" },
   ],
 };

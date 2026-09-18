@@ -10,7 +10,7 @@
 // Uses the reusable `weightTiers` block for fleece GSM (owner spec,
 // 2026-09-03), the default "Tier"/"GSM"/"Best for" headers -- no
 // `weightTiersHeaders` override needed, same shape T-Shirts/Hoodies/
-// Sweatshirts/Long-Sleeve Tops/Joggers & Track Pants already use.
+// Sweatshirts/Long-Sleeve Tops/Joggers already use.
 // Explicit category boundary, carried into the fabric note and one FAQ
 // answer below: a sweatsuit is the fleece set (French terry or brushed
 // fleece); the tricot/woven warm-up set is Tracksuits, a separate
@@ -269,6 +269,6 @@ export const sweatsuits: Category = {
     { label: "Tracksuits", href: "/capriowear/activewear/tracksuits" },
     { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
     { label: "Sweatshirts", href: "/capriowear/activewear/sweatshirts" },
-    { label: "Joggers & Track Pants", href: "/capriowear/activewear/joggers-track-pants" },
+    { label: "Joggers", href: "/capriowear/activewear/joggers" },
   ],
 };

@@ -10,7 +10,7 @@
 // value: "mmHg", bestFor: "Used for"}` and stores "Light"/"Medium"/"Firm"
 // in each row's own `tier` field, the mmHg range in `gsm`. Every prior
 // category using `weightTiers` (Hoodies, Sweatshirts, Long-Sleeve Tops,
-// Joggers & Track Pants) omits this new prop, so their own "Tier"/"GSM"/
+// Joggers) omits this new prop, so their own "Tier"/"GSM"/
 // "Best for" headers render exactly as before -- confirmed unchanged.
 //
 // Otherwise the same pure content/data-drop pattern as every prior
@@ -28,7 +28,7 @@
 // wording, NOT the per-category line this brief's own copy gave ("Share
 // your tech pack, target mmHg or a reference garment, we'll develop it
 // with you.") -- standing rule, owner spec, 2026-09-02 (see Sweatshirts',
-// Long-Sleeve Tops', and Joggers & Track Pants' own header comments and
+// Long-Sleeve Tops', and Joggers' own header comments and
 // the decision log entries of the same date): every category file uses
 // Leggings' own ctaSubline verbatim, regardless of what a category's own
 // brief supplies here.
@@ -283,7 +283,7 @@ export const compressionBaseLayers: Category = {
   // gallery) exists, same as every prior category's own pilot styles.
   //
   // cardTitle form is "Custom [Style]" here, not "Custom [Style]
-  // [Category]" (same reasoning as Joggers & Track Pants) -- the owner's
+  // [Category]" (same reasoning as Joggers) -- the owner's
   // own given titles already name the specific garment type per card
   // (top, tights, shorts, set), since this category covers more than one
   // garment shape.
@@ -351,7 +351,7 @@ export const compressionBaseLayers: Category = {
   relatedLinks: [
     { label: "Leggings", href: "/capriowear/activewear/leggings" },
     { label: "Shorts", href: "/capriowear/activewear/shorts" },
-    { label: "Joggers & Track Pants", href: "/capriowear/activewear/joggers-track-pants" },
+    { label: "Joggers", href: "/capriowear/activewear/joggers" },
     { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
   ],
 };

@@ -261,7 +261,7 @@ export const shorts: Category = {
   // content file.
   relatedLinks: [
     { label: "Leggings", href: "/capriowear/activewear/leggings" },
-    { label: "Joggers & Track Pants", href: "/capriowear/activewear/joggers-track-pants" },
+    { label: "Joggers", href: "/capriowear/activewear/joggers" },
     { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
     { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
   ],

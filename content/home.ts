@@ -63,7 +63,7 @@ type InsideFactoryShot = { label: string; image?: { src: string } };
 // source instead of two copies that could quietly drift apart. hrefs follow
 // the site's existing `/activewear/[slug]` convention, reusing the exact
 // slugs already used by whatWeMake's own Activewear tiles for the same real
-// products (Sports Bras, Hoodies, Leggings, Shorts, Joggers & Track Pants,
+// products (Sports Bras, Hoodies, Leggings, Shorts, Joggers,
 // Tracksuits, the Base Layers entry).
 export const activewearMegaMenu = [
   {
@@ -82,7 +82,7 @@ export const activewearMegaMenu = [
     items: [
       { label: "Leggings", href: "/activewear/leggings" },
       { label: "Shorts", href: "/activewear/shorts" },
-      { label: "Joggers & Track Pants", href: "/activewear/joggers-track-pants" },
+      { label: "Joggers", href: "/activewear/joggers" },
     ],
   },
   {
@@ -484,7 +484,7 @@ export const home = {
           { label: "Sports Bras", href: "/activewear/sports-bras" },
           { label: "Shorts", href: "/activewear/shorts" },
           { label: "Hoodies", href: "/activewear/hoodies" },
-          { label: "Joggers & Track Pants", href: "/activewear/joggers-track-pants" },
+          { label: "Joggers", href: "/activewear/joggers" },
           { label: "Tracksuits", href: "/activewear/tracksuits" },
           { label: "Base Layers", href: "/activewear/compression-base-layers" },
         ] satisfies WhatWeMakeTile[],

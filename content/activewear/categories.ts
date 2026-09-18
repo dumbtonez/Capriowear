@@ -8,7 +8,7 @@ import { bodysuits } from "./bodysuits";
 import { compressionBaseLayers } from "./compression-base-layers";
 import { hoodies } from "./hoodies";
 import { jackets } from "./jackets";
-import { joggersTrackPants } from "./joggers-track-pants";
+import { joggers } from "./joggers";
 import { jumpsuits } from "./jumpsuits";
 import { leggings } from "./leggings";
 import { longSleeveTops } from "./long-sleeve-tops";
@@ -33,7 +33,7 @@ export const categories: Record<string, Category> = {
   jackets,
   sweatshirts,
   "long-sleeve-tops": longSleeveTops,
-  "joggers-track-pants": joggersTrackPants,
+  joggers,
   "compression-base-layers": compressionBaseLayers,
   "yoga-sets": yogaSets,
   "track-jackets": trackJackets,

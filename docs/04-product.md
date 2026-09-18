@@ -28,7 +28,7 @@ These are the claims the site makes. Anything marked ⚠️ is unconfirmed and m
 
 | Fact | Detail |
 |---|---|
-| Product range | Activewear: leggings, sports bras, shorts, hoodies, joggers and track pants, tracksuits, base layers. Teamwear: soccer, basketball, football uniforms, fight wear |
+| Product range | Activewear: leggings, sports bras, shorts, hoodies, joggers, tracksuits, base layers. Teamwear: soccer, basketball, football uniforms, fight wear |
 | MOQ | From 50 pieces per style for new brands ⚠️; from 500 for custom fabrics and specs; prototypes from 1 to 10 |
 | Services | Custom manufacturing, fabrics and materials, printing and branding, quality and compliance, logistics and fulfilment |
 | Sampling | 10 to 14 days |

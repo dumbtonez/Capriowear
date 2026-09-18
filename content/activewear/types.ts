@@ -305,7 +305,7 @@ export type WeightTier = {
  * "Tier"/"GSM"/"Best for" (FabricOptions.tsx's own
  * `DEFAULT_WEIGHT_TIERS_HEADERS`) when omitted, so every prior category
  * that already uses `weightTiers` (Hoodies, Sweatshirts, Long-Sleeve
- * Tops, Joggers & Track Pants) renders unchanged. The underlying
+ * Tops, Joggers) renders unchanged. The underlying
  * `WeightTier` data shape itself is reused as-is, not extended -- e.g.
  * Compression & Base Layers' own table sets this to `{tier: "Level",
  * value: "mmHg", bestFor: "Used for"}` and stores "Light"/"Medium"/"Firm"

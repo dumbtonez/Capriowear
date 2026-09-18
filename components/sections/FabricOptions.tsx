@@ -45,7 +45,7 @@
 // -- same 3 generic columns, just relabeled and re-purposed for a
 // genuinely different kind of tiered data, not a new table type). Every
 // prior category that already uses `weightTiers` (Hoodies, Sweatshirts,
-// Long-Sleeve Tops, Joggers & Track Pants) omits this prop, so their own
+// Long-Sleeve Tops, Joggers) omits this prop, so their own
 // "Tier"/"GSM"/"Best for" headers render exactly as before -- confirmed
 // unchanged.
 "use client";

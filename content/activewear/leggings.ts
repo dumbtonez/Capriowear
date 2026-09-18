@@ -473,7 +473,7 @@ export const leggings: Category = {
   relatedLinks: [
     { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
     { label: "Shorts", href: "/capriowear/activewear/shorts" },
-    { label: "Joggers & Track Pants", href: "/capriowear/activewear/joggers-track-pants" },
+    { label: "Joggers", href: "/capriowear/activewear/joggers" },
     { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
   ],
 };

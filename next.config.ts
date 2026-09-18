@@ -118,6 +118,16 @@ const nextConfig: NextConfig = {
   // have no redirect here.
   async redirects() {
     return [
+      // "Joggers & Track Pants" renamed to "Joggers" and track pants removed
+      // as a product line (owner spec, 2026-09-18) -- these two rules must
+      // come before the generic /activewear/:path* rule below, since Next
+      // matches redirects in array order and the wildcard would otherwise
+      // catch these first and forward to the old, now-gone slug. `:path*`
+      // covers both the bare old category URL and any old PDP sub-path
+      // (including the track-pant style, which never had a live page) in
+      // one rule, all landing on the category page.
+      { source: "/activewear/joggers-track-pants/:path*", destination: "/capriowear/activewear/joggers", permanent: true },
+      { source: "/capriowear/activewear/joggers-track-pants/:path*", destination: "/capriowear/activewear/joggers", permanent: true },
       { source: "/activewear/:path*", destination: "/capriowear/activewear/:path*", permanent: true },
       { source: "/teamwear/:path*", destination: "/capriowear/teamwear/:path*", permanent: true },
       { source: "/services", destination: "/capriowear/services", permanent: true },
