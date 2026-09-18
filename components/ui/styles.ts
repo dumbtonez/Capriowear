@@ -7139,8 +7139,16 @@ export const fabricOptions = {
      confirmed live at 360px (no page-level overflow). Sits inside the
      same `mx-auto` content column as the main table/heading, so it lines
      up with them rather than running edge to edge. */
-  // mt-[44px]/xl:mt-[60px] -- 12px more than the original mt-8/xl:mt-12
-  // (owner, 2026-09-02: "add 12px more space from the top").
+  // mt-[44px]/xl:mt-[72px] (owner spec, 2026-09-18: "use 72px everywhere
+  // across all PDPs" for this gap -- desktop/tablet only, scoped to the
+  // xl:mt value below, since this element is `hidden` below `xl` entirely
+  // (no separate tablet-width render exists to change; mobile's own
+  // `mt-[44px]` stays as originally set, 2026-09-02: "add 12px more space
+  // from the top"). Was `xl:mt-[60px]` -- now matches `weightTiersWrapWide`
+  // below exactly, so the two keys are identical; kept as two separate
+  // recipe keys rather than merged, since `FabricOptions.tsx` and
+  // `ComparisonTable.tsx`/`SpecTables.tsx` each reference their own name
+  // and a merge is a bigger, unrelated refactor.
   // hidden xl:block (owner spec, 2026-09-06: no horizontal scroll on
   // mobile for this table) -- was `overflow-x-auto` at every breakpoint;
   // the mobile accordion below (reusing the main table's own
@@ -7148,17 +7156,14 @@ export const fabricOptions = {
   // "real table at xl+, accordion below it" split the main fabric table
   // already uses. `w-full` (no more `min-w-[520px]`) since this element no
   // longer needs to force its own scroll container at any width.
-  weightTiersWrap: "mt-[44px] hidden w-full xl:mt-[60px] xl:block",
-  // Same shell, `xl:mt-[72px]` instead of `[60px]` (owner spec, 2026-09-16,
-  // Wraps, Straps & Sleeves: "make it 72px for all the section titles to
-  // the below content") -- a genuinely separate key, not a `weightTiersWrap`
-  // override, so `FabricOptions.tsx`'s own secondary-table callers (Weight
-  // Lifting Belts, T-Shirts, Compression & Base Layers, Cricket, etc.) keep
-  // their original 60px unaffected. Used by `ComparisonTable.tsx`/
-  // `SpecTables.tsx` only, for the gap under every one of this page's own
-  // section titles (the "Three jobs, ten styles" heading and each of the 4
-  // spec-table headings). Mobile/tablet `mt-[44px]` unchanged -- the
-  // request measured the desktop (1440px) render specifically.
+  weightTiersWrap: "mt-[44px] hidden w-full xl:mt-[72px] xl:block",
+  // Same shell as `weightTiersWrap` above, now byte-identical after the
+  // 2026-09-18 72px-everywhere change -- kept as its own key (see that
+  // comment) rather than merged. Originally diverged 2026-09-16, Wraps,
+  // Straps & Sleeves: "make it 72px for all the section titles to the below
+  // content", used by `ComparisonTable.tsx`/`SpecTables.tsx` only, for the
+  // gap under every one of this page's own section titles (the "Three
+  // jobs, ten styles" heading and each of the 4 spec-table headings).
   weightTiersWrapWide: "mt-[44px] hidden w-full xl:mt-[72px] xl:block",
   weightTiersTable: "w-full border-collapse text-left",
   weightTiersHeaderRow: "border-b border-[#e8ecf1]",
