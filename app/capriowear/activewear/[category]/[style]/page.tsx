@@ -322,8 +322,8 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
                 shared `gap-8` reasoning as ProductHighlights above. */}
             <ProductOptions
               groups={[
-                { heading: "Fabric options", items: data.category.fabricPills! },
-                { heading: "Customization", items: pdpCustomizationPills },
+                { heading: "Fabric options", items: data.product.pdpFabricPills ?? data.category.fabricPills! },
+                { heading: "Customization", items: data.product.pdpCustomizationPills ?? pdpCustomizationPills },
               ]}
             />
             {/* ProductCtas (node 634:5065 desktop / 638:1645 mobile,
@@ -435,9 +435,9 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
             2026-09-01: "80px gap from right and left" here, vs. the PLP's
             own 138px default), via the `sidePadding` variant. */}
         <TrustPoints
-          heading={data.category.qualityHeading}
-          subline={data.category.qualitySubline}
-          points={data.category.qualityPoints}
+          heading={data.product.pdpQualityHeading ?? data.category.qualityHeading}
+          subline={data.product.pdpQualitySubline ?? data.category.qualitySubline}
+          points={data.product.pdpQualityPoints ?? data.category.qualityPoints}
           sidePadding="pdp"
         />
 

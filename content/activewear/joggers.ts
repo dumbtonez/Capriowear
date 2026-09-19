@@ -295,6 +295,16 @@ export const joggers: Category = {
       pdpHeading: "Custom Wide-Leg Woven Jogger Manufacturer",
       pdpDescription:
         "Wide-leg woven jogger, custom and private label, in a lightweight 100% polyester shell at 110 GSM with an adjustable waistband and open hem, made to your brand in Sialkot, Pakistan.",
+      // Alt-only placeholder slots (no real photography yet, same
+      // "reserve the slot, real src later" state as Leggings' own
+      // unfilled entries) so the PDP gallery renders its empty state.
+      images: [
+        { alt: "Custom wide-leg woven jogger, front view" },
+        { alt: "Custom wide-leg woven jogger, side view with contrast piping" },
+        { alt: "Custom wide-leg woven jogger, open hem at the ankle" },
+        { alt: "Custom wide-leg woven jogger, adjustable waistband detail" },
+        { alt: "Custom wide-leg woven jogger, lightweight polyester fabric close-up" },
+      ],
       pdpMetaTitle: "Custom Wide-Leg Woven Jogger Manufacturer",
       pdpMetaDescription:
         "Custom wide-leg woven jogger manufacturer, 100% polyester, lightweight 110 GSM, adjustable waist, open hem, low MOQ, full customization. DDP worldwide.",

@@ -3232,3 +3232,11 @@ Owner: "use 72px everywhere across all PDPs" for the gap above the optional "Tie
 `components/ui/styles.ts`: `weightTiersWrap` (`xl:mt-[60px]` -> `xl:mt-[72px]`) and `weightTiersWrapWide` (already `xl:mt-[72px]`, unchanged) are now byte-identical -- kept as two separate recipe keys rather than merged (`FabricOptions.tsx` and `ComparisonTable.tsx`/`SpecTables.tsx` each reference their own name; a merge is a bigger, unrelated refactor). Mobile/below-xl value (`mt-[44px]`) untouched, per scope. Affects every category with a `weightTiers` table (Hoodies, Sweatshirts, Joggers, T-Shirts, Compression & Base Layers, Cricket) and every category already using `weightTiersWrapWide` (Weight Lifting Belts, Wraps/Straps/Sleeves) -- the latter see no visible change since they were already at 72px.
 
 `npx tsc --noEmit`, `npx eslint .`, `npm run build` clean; `npx playwright test tests/screenshots.spec.ts` -- 45/45 pass. Verified in-browser at 1440px: Joggers PLP's table gap now computes 72px (was 60px); Wraps, Straps & Sleeves' own secondary tables (which use `weightTiersWrapWide`) still compute 72px, confirming no regression there.
+
+## Wide-Leg Woven Jogger PDP: gallery placeholders and per-style overrides honored, 2026-09-19
+
+Owner report: top gallery missing on mobile. Cause: the style had no `images` array, so `ProductGallery` never rendered. Added 5 alt-only placeholder entries in `content/activewear/joggers.ts` (no real photography yet; owner confirmed keep as placeholders until photos are supplied).
+
+Also fixed a real route gap found while checking: `app/capriowear/activewear/[category]/[style]/page.tsx` ignored the per-style `pdpFabricPills`, `pdpCustomizationPills`, `pdpQualityHeading`/`pdpQualitySubline`/`pdpQualityPoints` overrides (only the Gear route honored them), so this PDP showed the fleece fabric pills and the category's "ankle cuff rib" quality claim. All three now fall back to the category values when a style sets no override, so every other PDP is unchanged.
+
+`npx tsc --noEmit`, `npx eslint`, `npm run build` clean. Verified in-browser at 375px: gallery slot and 5 thumbnails render; page HTML has the woven pills and new quality heading, and no "Ankle cuff rib" text.
