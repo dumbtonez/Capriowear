@@ -384,7 +384,7 @@ export const leggings: Category = {
         {
           label: "Fabric",
           value:
-            "Directional category-research range only, not a confirmed spec for this product: Nylon/Spandex 70 to 86% nylon / 14 to 30% spandex, or Polyester/Spandex 72 to 89% poly / 11 to 28% spandex. This product's own confirmed composition is pending sample confirmation.",
+            "Nylon/Spandex 70 to 85% / 15 to 30%, or Polyester/Spandex 72 to 89% / 11 to 28% — directional research range, pending confirmed spec on sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample" },
         { label: "Stretch and support", value: "4-way stretch, squat-proof, compression hold" },
@@ -476,7 +476,7 @@ export const leggings: Category = {
         {
           label: "Fabric",
           value:
-            "Directional category-research range only, not a confirmed spec for this product: Nylon/Spandex 70 to 86% nylon / 14 to 30% spandex, or Polyester/Spandex 72 to 89% poly / 11 to 28% spandex. This product's own confirmed composition is pending sample confirmation.",
+            "Nylon/Spandex 70 to 85% / 15 to 30%, or Polyester/Spandex 72 to 89% / 11 to 28% — directional research range, pending confirmed spec on sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample" },
         { label: "Stretch and support", value: "4-way stretch, squat-proof, compression hold" },
@@ -566,7 +566,7 @@ export const leggings: Category = {
         {
           label: "Fabric",
           value:
-            "Directional category-research range only, not a confirmed spec for this product: Nylon/Spandex 70 to 86% nylon / 14 to 30% spandex, or Polyester/Spandex 72 to 89% poly / 11 to 28% spandex. This product's own confirmed composition is pending sample confirmation.",
+            "Nylon/Spandex 70 to 85% / 15 to 30%, or Polyester/Spandex 72 to 89% / 11 to 28% — directional research range, pending confirmed spec on sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample" },
         { label: "Stretch and support", value: "4-way stretch, squat-proof, compression through the leg to the knee" },
@@ -666,7 +666,7 @@ export const leggings: Category = {
         {
           label: "Fabric",
           value:
-            "Directional category-research range only, not a confirmed spec for this product: Nylon/Spandex 70 to 86% nylon / 14 to 30% spandex, or Polyester/Spandex 72 to 89% poly / 11 to 28% spandex. This product's own confirmed composition is pending sample confirmation.",
+            "Nylon/Spandex 70 to 85% / 15 to 30%, or Polyester/Spandex 72 to 89% / 11 to 28% — directional research range, pending confirmed spec on sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample" },
         {
