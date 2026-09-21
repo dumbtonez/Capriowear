@@ -3270,3 +3270,7 @@ Removed the hardcoded `robots: { index: true, follow: true }` from `app/page.tsx
 ## sitemap.xml gated behind ALLOW_INDEXING, 2026-09-21
 
 `app/sitemap.ts` now returns an empty urlset while `NEXT_PUBLIC_ALLOW_INDEXING` is not `"true"`, matching `app/robots.ts` and the root layout's robots meta. Its URLs point at `www.capriosports.com`, which is the WordPress site until the routing is set up, and a populated sitemap is a discoverability signal even under a disallow-all robots.txt. With the flag on it populates exactly as before (45 URLs, no draft Gear pages); the per-page and per-category draft filtering is untouched.
+
+## Production source maps disabled, 2026-09-21
+
+`next.config.ts`: `experimental.turbopackSourceMaps: false` and `serverSourceMaps: false` (the build is Turbopack; browser production maps were already off by default). `.next/server` drops from 252 MB to 79 MB and contains no `.map` files. Tradeoff: runtime errors in Vercel logs now show compiled chunk positions instead of original file/line; nothing in the project consumes maps (no Sentry or similar). Revert the two flags if error tracking is added.

@@ -68,6 +68,16 @@ const nextConfig: NextConfig = {
     // benefits, not just the PLP card.
     formats: ["image/avif", "image/webp"],
   },
+  // No error-tracking service consumes source maps in this project, and the
+  // production server maps alone were ~173 MB of a ~252 MB .next/server
+  // (deployment size). Turbopack (the default builder here) emits them via
+  // `turbopackSourceMaps` (defaults to true); `serverSourceMaps` is the
+  // webpack-side equivalent. Browser production maps are already off by
+  // default (`productionBrowserSourceMaps`), left unset.
+  experimental: {
+    turbopackSourceMaps: false,
+    serverSourceMaps: false,
+  },
   async headers() {
     const commonHeaders = [
       { key: "X-Content-Type-Options", value: "nosniff" },
