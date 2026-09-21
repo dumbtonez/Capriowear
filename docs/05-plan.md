@@ -3292,3 +3292,15 @@ No Gear page rendered `og:image`: `app/opengraph-image.tsx` (Capriowear-branded)
 `content/capriosports/home.ts` "Product Range": Weightlifting Gloves now links to `/lifting-gears/weight-lifting-gloves-and-grips` and Wrist Wraps to `/lifting-gears/wraps-straps-sleeves` instead of hub anchors. Still anchors (not requested): Lifting Straps and Knee Sleeves (both belong to Wraps, Straps & Sleeves), Resistance Bands, Gym Accessories, and every Boxing & MMA tile except Boxing Gloves.
 
 Follow-up, same day: Lifting Straps and Knee Sleeves tiles now also link to `/lifting-gears/wraps-straps-sleeves`. Remaining anchors are deliberate (categories that don't exist yet): Resistance Bands, Gym Accessories, and the Boxing & MMA tiles other than Boxing Gloves.
+
+## Leggings PLP: real 11-SKU catalog, gender filter removed, 2026-09-21
+
+`content/activewear/leggings.ts`: the 8 placeholder cards were replaced by the locked 11-SKU catalog in the given order. Card 1 keeps its slug, SKU, PDP content and photo and stays the only `"published"` card; its `cardTitle`/`cardSubline` now use the catalog wording ("High-Rise Compression, Full-Length, Standard Waistband" / "4-way stretch, squat-proof, standard waistband"), replacing "Custom High-Waisted Compression Leggings". Cards 2 to 11 are `"draft"` (non-clickable, no route, out of the sitemap and ItemList schema) via the existing `status` gating; no new mechanism. `v-back-crossover` is the only slug carried over from the old list.
+
+The category's `showGenderFilter` is now `false` (existing flag): the All/Women/Men chip row does not render on desktop, tablet or mobile. The chips never filtered `styleCards` (no per-style gender field exists), so there was no filtering logic to remove.
+
+Side effect prevented: with no `entityExampleStyles`, the entity FAQ derives its example styles from the first four `cardTitle`s, so the rename would have rewritten the FAQ. `entityExampleStyles` is now pinned to the previous wording; the rendered FAQ text was compared before and after and is identical.
+
+Flagged, not changed: the published card's placeholder photo (`/product-images/leggings-high-waisted-compression.png`) is a wrong asset; the published PDP's `relatedStyleTags` still name the old styles (Flare & Wide-Leg, Scrunch & Ruched, V-Back & Crossover, Capri & Cropped), all pointing at the PLP.
+
+`npx tsc --noEmit`, `npx eslint`, `npm run build` clean. In-browser: 11 cards in order (9 then 2 on desktop, 8 per page on tablet/mobile), only card 1 an `<a>`, zero gender chips and no horizontal overflow at 375, 820 and 1440.

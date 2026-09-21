@@ -26,6 +26,12 @@ export const leggings: Category = {
   group: "Activewear",
   menuLabel: "Leggings",
   h1: "Custom Leggings Manufacturer",
+  // Pins the entity FAQ's example-styles clause to its live wording; without
+  // it categoryEntityFaq() derives this from the first 4 cardTitles, which
+  // the 11-SKU card rename (2026-09-21) would silently rewrite. FAQ copy is
+  // explicitly out of scope for that change.
+  entityExampleStyles:
+    "styles like Custom High-Waisted Compression Leggings, Custom Flare / Wide-Leg Leggings, Custom Scrunch / Ruched Leggings, Custom V-Back / Crossover Leggings",
   // No "| Capriowear" suffix here -- unlike app/page.tsx (which sits at the
   // same route segment as the root layout's title template and so is used
   // verbatim), this page is a nested child segment, and the root layout's
@@ -69,7 +75,9 @@ export const leggings: Category = {
   // split (owner, 2026-08-30: "this chips may come on some of the
   // categories but not applicable for all"), so this is written out rather
   // than left implicit.
-  showGenderFilter: true,
+  // Women's-only line (owner spec, 2026-09-21): the All/Women/Men chip row
+  // does not render at any breakpoint.
+  showGenderFilter: false,
   overview:
     "PLACEHOLDER: Capriowear manufactures custom leggings for activewear brands, from a first sketch or tech pack through to packaged, retail ready product. Every order runs through our own factory floor in Sialkot, Pakistan, with fabric sourcing, pattern grading, fit sampling, bulk production, printing and branding, quality control and packaging all handled in house, under one roof.",
   // Figma-confirmed real copy (node 579:5632, 2026-08-29), same treatment
@@ -258,8 +266,10 @@ export const leggings: Category = {
       // distinguishing spec line "Squat-proof compression, 4-way stretch"
       // (was "Squat-proof, 4-way stretch, compression hold", close but not
       // the exact given wording).
-      cardTitle: "Custom High-Waisted Compression Leggings",
-      cardSubline: "Squat-proof compression, 4-way stretch",
+      // Card name and spec line replaced with the locked 11-SKU catalog's own
+      // wording (owner spec, 2026-09-21); slug, PDP fields and photo unchanged.
+      cardTitle: "High-Rise Compression, Full-Length, Standard Waistband",
+      cardSubline: "4-way stretch, squat-proof, standard waistband",
       // Placeholder/QA photo (owner, 2026-09-07: "add a dummy product
       // image ... see how it would look across home, PLP, PDP, all
       // platforms") -- a real photo supplied for visual QA of the
@@ -403,68 +413,93 @@ export const leggings: Category = {
     // matched the given spec lines exactly, unchanged.
     {
       status: "draft",
-      slug: "flare-wide-leg",
-      cardTitle: "Custom Flare / Wide-Leg Leggings",
-      cardSubline: "High-rise flare, studio to street",
+      slug: "mid-rise-compression",
+      cardTitle: "Mid-Rise Compression, Full-Length, Standard Waistband",
+      cardSubline: "4-way stretch, squat-proof, mid-rise waistband",
       image: "",
-      imageAlt: "Custom flare and wide-leg leggings manufacturer",
-      href: "/capriowear/activewear/leggings/flare-wide-leg",
+      imageAlt: "Custom mid-rise compression leggings manufacturer, full-length, standard waistband",
+      href: "/capriowear/activewear/leggings/mid-rise-compression",
     },
     {
       status: "draft",
-      slug: "scrunch-ruched",
-      cardTitle: "Custom Scrunch / Ruched Leggings",
-      cardSubline: "Center-seam scrunch, shaping back",
+      slug: "flare",
+      cardTitle: "High-Rise Flare, Full-Length",
+      cardSubline: "Flared leg from the knee, high-rise",
       image: "",
-      imageAlt: "Custom scrunch and ruched leggings manufacturer",
-      href: "/capriowear/activewear/leggings/scrunch-ruched",
+      imageAlt: "Custom high-rise flare leggings manufacturer, full-length",
+      href: "/capriowear/activewear/leggings/flare",
+    },
+    {
+      status: "draft",
+      slug: "structured-waistband",
+      cardTitle: "High-Rise Compression, Full-Length, Structured Wide Waistband",
+      cardSubline: "Wide, structured waistband panel",
+      image: "",
+      imageAlt: "Custom high-rise compression leggings manufacturer, structured wide waistband",
+      href: "/capriowear/activewear/leggings/structured-waistband",
+    },
+    {
+      status: "draft",
+      slug: "capri",
+      cardTitle: "High-Rise Compression, Capri or 7/8 Length",
+      cardSubline: "7/8 length, high-rise compression",
+      image: "",
+      imageAlt: "Custom high-rise capri and 7/8 length compression leggings manufacturer",
+      href: "/capriowear/activewear/leggings/capri",
     },
     {
       status: "draft",
       slug: "v-back-crossover",
-      cardTitle: "Custom V-Back / Crossover Leggings",
-      cardSubline: "Contoured V-back waistband",
+      cardTitle: "High-Rise Compression, Full-Length, V-Back or Crossover Waistband",
+      cardSubline: "V-back or crossover waistband seam",
       image: "",
-      imageAlt: "Custom V-back and crossover waistband leggings manufacturer",
+      imageAlt: "Custom high-rise V-back and crossover waistband leggings manufacturer",
       href: "/capriowear/activewear/leggings/v-back-crossover",
     },
     {
       status: "draft",
-      slug: "capri-cropped",
-      cardTitle: "Custom Capri / Cropped Leggings",
-      cardSubline: "Cropped length, squat-proof",
+      slug: "foldover-waistband",
+      cardTitle: "High-Rise Compression, Full-Length, Foldover Waistband",
+      cardSubline: "Foldover waistband, two wearable rises",
       image: "",
-      imageAlt: "Custom capri and cropped length leggings manufacturer",
-      href: "/capriowear/activewear/leggings/capri-cropped",
+      imageAlt: "Custom high-rise foldover waistband leggings manufacturer",
+      href: "/capriowear/activewear/leggings/foldover-waistband",
     },
     {
       status: "draft",
-      slug: "pocket",
-      cardTitle: "Custom Pocket Leggings",
-      cardSubline: "Side and waistband pockets",
+      slug: "mid-rise-capri",
+      cardTitle: "Mid-Rise Compression, Capri or Cropped Length",
+      cardSubline: "Cropped length, mid-rise compression",
       image: "",
-      imageAlt: "Custom pocket leggings manufacturer",
-      href: "/capriowear/activewear/leggings/pocket",
+      imageAlt: "Custom mid-rise capri and cropped length compression leggings manufacturer",
+      href: "/capriowear/activewear/leggings/mid-rise-capri",
     },
     {
       status: "draft",
-      slug: "biker",
-      cardTitle: "Custom Biker / Short Leggings",
-      cardSubline: "Compression short, 5 to 9 inch inseam",
+      slug: "straight-leg",
+      cardTitle: "Mid-Rise Straight-Leg, Full-Length",
+      cardSubline: "Straight, non-tapered leg, mid-rise",
       image: "",
-      imageAlt: "Custom biker short and compression short manufacturer",
-      href: "/capriowear/activewear/leggings/biker",
+      imageAlt: "Custom mid-rise straight-leg leggings manufacturer, full-length",
+      href: "/capriowear/activewear/leggings/straight-leg",
     },
     {
       status: "draft",
-      slug: "fleece-lined",
-      // "Custom Fleece-Lined Leggings" (owner's exact given title) -- was
-      // "Fleece-Lined / Thermal", an extra qualifier not in the given spec.
-      cardTitle: "Custom Fleece-Lined Leggings",
-      cardSubline: "Brushed thermal, cold-weather",
+      slug: "drawcord",
+      cardTitle: "Drawcord Waistband, High-Rise, Full-Length",
+      cardSubline: "Exposed drawcord over the waistband",
       image: "",
-      imageAlt: "Custom fleece-lined thermal leggings manufacturer",
-      href: "/capriowear/activewear/leggings/fleece-lined",
+      imageAlt: "Custom high-rise drawcord waistband leggings manufacturer, full-length",
+      href: "/capriowear/activewear/leggings/drawcord",
+    },
+    {
+      status: "draft",
+      slug: "mid-rise-flare",
+      cardTitle: "Mid-Rise Flare, Full-Length",
+      cardSubline: "Flared leg from the knee, mid-rise",
+      image: "",
+      imageAlt: "Custom mid-rise flare leggings manufacturer, full-length",
+      href: "/capriowear/activewear/leggings/mid-rise-flare",
     },
   ],
   // Real hrefs and labels, matching content/home.ts's own activewearMegaMenu
