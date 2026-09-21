@@ -1211,6 +1211,104 @@ export const leggings: Category = {
       image: "",
       imageAlt: "Custom high-rise drawcord waistband leggings manufacturer, full-length",
       href: "/capriowear/activewear/leggings/drawcord",
+      // Full PDP content for SKU 10 (owner spec, 2026-09-21), draft.
+      // Reachable by URL and a clickable PLP card via the sitewide draft-PDP
+      // rule (`isDraftPdpReachable()`), still noindex/nofollow, out of the
+      // sitemap, no Product/FAQPage JSON-LD. Limited/accent SKU (1 of 4
+      // researched brands, Under Armour only): a real, low-cost
+      // differentiator (a drawcord channel added over the standard
+      // waistband), not a heavily cross-brand-validated core style, so the
+      // copy does not overstate its validation. No GSM figure of any kind
+      // (weight is "pending, confirmed on your sample"), composition is a
+      // directional research range pending sample confirmation. `images`
+      // are alt-only placeholders: real product photography is needed
+      // before this can go live.
+      pdpTitle: "Drawcord",
+      sku: "CAP-LEG-10",
+      pdpHeading: "Custom Drawcord Waistband Leggings Manufacturer",
+      pdpDescription:
+        "High-rise compression leggings with an exposed drawcord channel over the waistband, custom and private label, in a squat-proof Nylon/Spandex or Polyester/Spandex 4-way stretch blend, full-length, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Drawcord waistband leggings, front view" },
+        { alt: "Drawcord waistband leggings, drawcord and eyelet detail" },
+        { alt: "Drawcord waistband leggings, side profile" },
+        { alt: "Drawcord waistband leggings, fabric close-up" },
+        { alt: "Drawcord waistband leggings, worn on model" },
+        { alt: "Drawcord waistband leggings, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Drawcord Waistband Leggings Manufacturer",
+      pdpMetaDescription:
+        "Custom drawcord waistband leggings manufacturer, OEM, ODM and private label, exposed drawcord over a high-rise compression waistband, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+      faqs: [
+        {
+          q: "What fabric is the drawcord waistband legging made from?",
+          a: "A Nylon/Spandex or Polyester/Spandex 4-way stretch blend, in the composition range typical of comparable premium compression leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "Is the drawcord functional or purely visual?",
+          a: "Functional. It's a real drawcord and eyelet channel added over the standard waistband, and we confirm the pull and hold on your sample.",
+        },
+        {
+          q: "Is this the same base legging as your High-Rise Compression style?",
+          a: "Same core silhouette and fabric family, with the drawcord channel as the distinguishing feature. Both are separately validated, real styles.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "High-Rise Compression", slug: "high-waisted-compression", href: "/capriowear/activewear/leggings" },
+        { label: "V-Back / Crossover", slug: "v-back-crossover", href: "/capriowear/activewear/leggings" },
+        { label: "Structured Waistband", slug: "structured-waistband", href: "/capriowear/activewear/leggings" },
+        { label: "Foldover Waistband", slug: "foldover-waistband", href: "/capriowear/activewear/leggings" },
+        { label: "See All", href: "/capriowear/activewear/leggings" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "High-rise compression legging, full-length, standard elastic waistband with an exposed drawcord channel (base type)",
+        },
+        {
+          label: "Fabric",
+          value:
+            "Nylon/Spandex 70 to 85% / 15 to 30%, or Polyester/Spandex 72 to 89% / 11 to 28%, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample" },
+        { label: "Stretch and support", value: "4-way stretch, squat-proof, compression hold" },
+        { label: "Waistband", value: "High-rise, standard elastic waistband with an added exposed drawcord channel" },
+        {
+          label: "Construction",
+          value:
+            "Cut-and-sew, drawcord channel and eyelets added over the standard waistband construction, side or princess seams through the leg, not knit-to-shape. Gusset and flatlock finishing available.",
+        },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Drawcord waistband leggings, construction detail" },
+      pdpQualityPoints: [
+        "Opacity tested, squat-proof",
+        "Seams reinforced and stress-tested",
+        "Drawcord and eyelets checked for secure anchoring and pull strength",
+        "Waistbands hold their recovery",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, size and care labels, hangtags, drawcord and eyelet hardware",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
