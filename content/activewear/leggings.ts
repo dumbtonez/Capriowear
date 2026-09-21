@@ -714,6 +714,95 @@ export const leggings: Category = {
       image: "",
       imageAlt: "Custom high-rise capri and 7/8 length compression leggings manufacturer",
       href: "/capriowear/activewear/leggings/capri",
+      // Full PDP content for SKU 5 (owner spec, 2026-09-21), draft. Reachable
+      // by URL and a clickable PLP card via the sitewide draft-PDP rule
+      // (`isDraftPdpReachable()`), still noindex/nofollow, out of the
+      // sitemap, no Product/FAQPage JSON-LD. Only facts from the SKU 5 spec:
+      // no GSM figure of any kind (weight is "pending, confirmed on your
+      // sample"), composition is a directional research range pending
+      // sample confirmation, and the waistband is the standard elastic
+      // waistband only (SKU 4's structured wide panel and SKU 6's
+      // V-back/crossover are separate). `images` are alt-only placeholders:
+      // real product photography is needed before this can go live.
+      pdpTitle: "High-Rise Capri",
+      sku: "CAP-LEG-05",
+      pdpHeading: "Custom High-Rise Capri Leggings Manufacturer",
+      pdpDescription:
+        "High-rise compression leggings, custom and private label, in a squat-proof Nylon/Spandex or Polyester/Spandex 4-way stretch blend, 7/8 or capri length ending at or just above the ankle, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "High-rise capri leggings, front view" },
+        { alt: "High-rise capri leggings, side profile" },
+        { alt: "High-rise capri leggings, 7/8 hem detail" },
+        { alt: "High-rise capri leggings, fabric close-up" },
+        { alt: "High-rise capri leggings, worn on model" },
+        { alt: "High-rise capri leggings, flat lay" },
+      ],
+      pdpMetaTitle: "Custom High-Rise Capri Leggings Manufacturer",
+      pdpMetaDescription:
+        "Custom high-rise 7/8 or capri leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+      faqs: [
+        {
+          q: "What fabric is the high-rise capri legging made from?",
+          a: "A Nylon/Spandex or Polyester/Spandex 4-way stretch blend, in the composition range typical of comparable premium compression leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "What's the exact length, 7/8 or capri?",
+          a: "We build to your tech pack. Standard is 7/8, ending just above the ankle, and we can adjust to a shorter capri length or your own exact measurement on your sample.",
+        },
+        {
+          q: "Is this available full-length too?",
+          a: "Yes, as a separate style, our High-Rise Compression legging (full-length). This SKU is the 7/8 or capri version of the same core construction.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "High-Rise Compression", slug: "high-waisted-compression", href: "/capriowear/activewear/leggings" },
+        { label: "Mid-Rise Compression", slug: "mid-rise-compression", href: "/capriowear/activewear/leggings" },
+        { label: "Flare", slug: "flare", href: "/capriowear/activewear/leggings" },
+        { label: "Structured Waistband", slug: "structured-waistband", href: "/capriowear/activewear/leggings" },
+        { label: "See All", href: "/capriowear/activewear/leggings" },
+      ],
+      specifications: [
+        { label: "Style", value: "High-rise compression legging, 7/8 or capri length, standard elastic waistband (base type)" },
+        {
+          label: "Fabric",
+          value:
+            "Nylon/Spandex 70 to 85% / 15 to 30%, or Polyester/Spandex 72 to 89% / 11 to 28%, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample" },
+        { label: "Stretch and support", value: "4-way stretch, squat-proof, compression hold" },
+        { label: "Waistband", value: "High-rise, standard elastic waistband, no secondary waistband construction" },
+        {
+          label: "Construction",
+          value:
+            "Cut-and-sew, side or princess seams, not knit-to-shape. 7/8 or capri length ending at or just above the ankle. Gusset and flatlock finishing available.",
+        },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "High-rise capri leggings, construction detail" },
+      pdpQualityPoints: [
+        "Opacity tested, squat-proof",
+        "Seams reinforced and stress-tested",
+        "Hem finish checked for roll and curl at the 7/8 length",
+        "Waistbands hold their recovery",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin house, no outsourcing",
+        mobileHeading: "Your brand, applied in\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",

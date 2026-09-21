@@ -3401,3 +3401,9 @@ Flagged: no shared constant generates blend names; the chip row inherits from th
 ## Leggings PDPs: fabric composition line reconciled with the PLP, 2026-09-21
 
 The Fabric spec row on SKU 1 to 4 now reads, identically: "Nylon/Spandex 70 to 85% / 15 to 30%, or Polyester/Spandex 72 to 89% / 11 to 28% — directional research range, pending confirmed spec on sample." The nylon figure matches the PLP fabric table (70 to 85% / 15 to 30%), replacing the unsourced 70 to 86% / 14 to 30%; the old two-sentence caveat is gone. The percentages appeared only in these four spec rows (FAQs, meta descriptions and JSON-LD carry none).
+
+## Leggings SKU 5 (High-Rise Capri, CAP-LEG-05) draft PDP added, 2026-09-21
+
+Full PDP content for the existing `capri` draft card in `content/activewear/leggings.ts`, same shape as SKU 2 to 4. Draft, reachable and clickable via `isDraftPdpReachable()`; noindex/nofollow, out of the sitemap, BreadcrumbList only. No GSM; composition is the directional research range pending sample confirmation; standard elastic waistband only; Nylon/Spandex slash format, no dashes. Per-style quality points (7/8 hem roll and curl) and customize steps. Related chips resolve to the four built pages via slug. Gallery is alt-only placeholders: real photography needed.
+
+Flagged: shared operational FAQ block used as live (not reworded); the Fabric chip row inherits "Brushed / fleece-lined" from the category (the brief wrote "fleece lined").
