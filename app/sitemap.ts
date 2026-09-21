@@ -10,10 +10,17 @@ import type { MetadataRoute } from "next";
 import { categories } from "@/content/activewear/categories";
 import { boxingMmaCategories } from "@/content/gear/boxing-and-mma/categories";
 import { liftingGearsCategories } from "@/content/gear/lifting-gears/categories";
-import { SITE_URL } from "@/content/site";
+import { ALLOW_INDEXING, SITE_URL } from "@/content/site";
 import { sports } from "@/content/teamwear/sports";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  // Same sitewide switch as app/robots.ts and the root layout's robots meta
+  // (content/site.ts's ALLOW_INDEXING): while off, serve an empty urlset. A
+  // populated sitemap is a discoverability signal even when robots.txt
+  // disallows crawling. The per-page/per-category draft filtering below is
+  // unchanged and still applies once the switch is on.
+  if (!ALLOW_INDEXING) return [];
+
   return [
     // Capriosports parent-site homepage (2026-09-14 routing restructure):
     // this URL used to be Capriowear's own homepage before Capriowear's

@@ -3266,3 +3266,7 @@ Scan of all Gear content (Belts, Wraps, Gloves & Grips) found dashes only in `co
 ## Homepage inherits the sitewide indexing switch, 2026-09-21
 
 Removed the hardcoded `robots: { index: true, follow: true }` from `app/page.tsx`, which bypassed `ALLOW_INDEXING` and left the live homepage `index, follow` while every other page was `noindex`. The homepage now renders `noindex, nofollow` until `NEXT_PUBLIC_ALLOW_INDEXING=true`.
+
+## sitemap.xml gated behind ALLOW_INDEXING, 2026-09-21
+
+`app/sitemap.ts` now returns an empty urlset while `NEXT_PUBLIC_ALLOW_INDEXING` is not `"true"`, matching `app/robots.ts` and the root layout's robots meta. Its URLs point at `www.capriosports.com`, which is the WordPress site until the routing is set up, and a populated sitemap is a discoverability signal even under a disallow-all robots.txt. With the flag on it populates exactly as before (45 URLs, no draft Gear pages); the per-page and per-category draft filtering is untouched.
