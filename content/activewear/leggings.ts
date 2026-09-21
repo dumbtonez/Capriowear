@@ -95,17 +95,17 @@ export const leggings: Category = {
   fabricHeading: "The fabrics behind the\nbig brands",
   fabricOptions: [
     {
-      fabric: "Nylon or polyamide + spandex (70 to 85% / 15 to 30%)",
+      fabric: "Nylon or Polyamide/Spandex (70 to 85% / 15 to 30%)",
       bestFor: "Gym, yoga, everyday compression",
       performance: "Soft hand, 4-way stretch, squat-proof, strong recovery",
     },
     {
-      fabric: "Recycled polyester + spandex",
+      fabric: "Recycled Polyester/Spandex",
       bestFor: "Sustainable lines",
       performance: "Eco-positioning, moisture management, 4-way stretch",
     },
     {
-      fabric: "Polyester + spandex",
+      fabric: "Polyester/Spandex",
       bestFor: "Running, high-sweat training",
       performance: "Durable, quick-dry, moisture-wicking",
     },
@@ -125,7 +125,7 @@ export const leggings: Category = {
   // Figma-confirmed real copy (node 634:5034, 2026-09-01) -- short PDP pill
   // labels for the same 4 fabrics `fabricOptions` above describes in full,
   // same order.
-  fabricPills: ["Nylon spandex", "Recycled polyester spandex", "Polyester spandex", "Brushed / fleece-lined"],
+  fabricPills: ["Nylon/Spandex", "Recycled Polyester/Spandex", "Polyester/Spandex", "Brushed / fleece-lined"],
   // Figma-confirmed real copy (node 579:5493, 2026-08-29), same treatment
   // as h1/trustBullets/fabricOptions -- not a placeholder.
   qualityHeading: "Built to pass the squat test",
@@ -286,7 +286,7 @@ export const leggings: Category = {
       sku: "CAP-LEG-01",
       pdpHeading: "Custom High-Rise Compression Leggings Manufacturer",
       pdpDescription:
-        "High-rise compression leggings, custom and private label, in a squat-proof nylon spandex or polyester spandex 4-way stretch blend, full-length with a standard elastic waistband, made to your brand in Sialkot, Pakistan.",
+        "High-rise compression leggings, custom and private label, in a squat-proof Nylon/Spandex or Polyester/Spandex 4-way stretch blend, full-length with a standard elastic waistband, made to your brand in Sialkot, Pakistan.",
       // Figma node 634:4961 (desktop) / 638:860 (mobile), 2026-08-31 -- 6
       // entries so the desktop rail's "show more" chevron (5 visible, 1
       // hidden) has something real to demonstrate.
@@ -329,12 +329,12 @@ export const leggings: Category = {
       // also drops "nylon or polyamide," redundant since polyamide is
       // nylon.
       pdpMetaDescription:
-        "Custom high-rise compression leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch nylon spandex or polyester spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom high-rise compression leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
       material: "Nylon/Spandex or Polyester/Spandex, 4-way stretch",
       faqs: [
         {
           q: "What fabric is the high-rise compression legging made from?",
-          a: "A nylon spandex or polyester spandex 4-way stretch blend, in the composition range typical of comparable premium compression leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+          a: "A Nylon/Spandex or Polyester/Spandex 4-way stretch blend, in the composition range typical of comparable premium compression leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
         },
         {
           q: "Are these leggings squat-proof?",
@@ -438,7 +438,7 @@ export const leggings: Category = {
       sku: "CAP-LEG-02",
       pdpHeading: "Custom Mid-Rise Compression Leggings Manufacturer",
       pdpDescription:
-        "Mid-rise compression leggings, custom and private label, in a squat-proof nylon spandex or polyester spandex 4-way stretch blend, full-length with a standard elastic waistband, made to your brand in Sialkot, Pakistan.",
+        "Mid-rise compression leggings, custom and private label, in a squat-proof Nylon/Spandex or Polyester/Spandex 4-way stretch blend, full-length with a standard elastic waistband, made to your brand in Sialkot, Pakistan.",
       images: [
         { alt: "Mid-rise compression leggings, front view" },
         { alt: "Mid-rise compression leggings, side profile" },
@@ -449,11 +449,11 @@ export const leggings: Category = {
       ],
       pdpMetaTitle: "Custom Mid-Rise Compression Leggings Manufacturer",
       pdpMetaDescription:
-        "Custom mid-rise compression leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch nylon spandex or polyester spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom mid-rise compression leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
       faqs: [
         {
           q: "What fabric is the mid-rise compression legging made from?",
-          a: "A nylon spandex or polyester spandex 4-way stretch blend, in the composition range typical of comparable premium compression leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+          a: "A Nylon/Spandex or Polyester/Spandex 4-way stretch blend, in the composition range typical of comparable premium compression leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
         },
         {
           q: "Is this style squat-proof?",
@@ -476,7 +476,7 @@ export const leggings: Category = {
         {
           label: "Fabric",
           value:
-            "Directional category-research range only, not a confirmed spec for this product: nylon spandex 70 to 86% nylon / 14 to 30% spandex, or polyester spandex 72 to 89% poly / 11 to 28% spandex. This product's own confirmed composition is pending sample confirmation.",
+            "Directional category-research range only, not a confirmed spec for this product: Nylon/Spandex 70 to 86% nylon / 14 to 30% spandex, or Polyester/Spandex 72 to 89% poly / 11 to 28% spandex. This product's own confirmed composition is pending sample confirmation.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample" },
         { label: "Stretch and support", value: "4-way stretch, squat-proof, compression hold" },
@@ -494,7 +494,7 @@ export const leggings: Category = {
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
           {
             title: "Fabric",
-            body: "Nylon spandex or polyester spandex, any weight, sourced or matched to your reference",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
           },
           { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
@@ -525,7 +525,7 @@ export const leggings: Category = {
       sku: "CAP-LEG-03",
       pdpHeading: "Custom High-Rise Flare Leggings Manufacturer",
       pdpDescription:
-        "High-rise flare leggings, custom and private label, in a squat-proof nylon spandex or polyester spandex 4-way stretch blend, flared leg opening from the knee, made to your brand in Sialkot, Pakistan.",
+        "High-rise flare leggings, custom and private label, in a squat-proof Nylon/Spandex or Polyester/Spandex 4-way stretch blend, flared leg opening from the knee, made to your brand in Sialkot, Pakistan.",
       images: [
         { alt: "High-rise flare leggings, front view" },
         { alt: "High-rise flare leggings, side profile" },
@@ -536,11 +536,11 @@ export const leggings: Category = {
       ],
       pdpMetaTitle: "Custom High-Rise Flare Leggings Manufacturer",
       pdpMetaDescription:
-        "Custom high-rise flare leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch nylon spandex or polyester spandex, flared leg from the knee, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom high-rise flare leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, flared leg from the knee, from 50 pieces, any fabric and color, DDP worldwide.",
       faqs: [
         {
           q: "What fabric is the high-rise flare legging made from?",
-          a: "A nylon spandex or polyester spandex 4-way stretch blend, in the composition range typical of comparable premium compression leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+          a: "A Nylon/Spandex or Polyester/Spandex 4-way stretch blend, in the composition range typical of comparable premium compression leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
         },
         {
           q: "Is this style squat-proof through the fitted leg?",
@@ -566,7 +566,7 @@ export const leggings: Category = {
         {
           label: "Fabric",
           value:
-            "Directional category-research range only, not a confirmed spec for this product: nylon spandex 70 to 86% nylon / 14 to 30% spandex, or polyester spandex 72 to 89% poly / 11 to 28% spandex. This product's own confirmed composition is pending sample confirmation.",
+            "Directional category-research range only, not a confirmed spec for this product: Nylon/Spandex 70 to 86% nylon / 14 to 30% spandex, or Polyester/Spandex 72 to 89% poly / 11 to 28% spandex. This product's own confirmed composition is pending sample confirmation.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample" },
         { label: "Stretch and support", value: "4-way stretch, squat-proof, compression through the leg to the knee" },
@@ -596,7 +596,7 @@ export const leggings: Category = {
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
           {
             title: "Fabric",
-            body: "Nylon spandex or polyester spandex, any weight, sourced or matched to your reference",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
           },
           { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
@@ -628,7 +628,7 @@ export const leggings: Category = {
       sku: "CAP-LEG-04",
       pdpHeading: "Custom Structured Waistband Leggings Manufacturer",
       pdpDescription:
-        "High-rise compression leggings with a wide, structured waistband panel, custom and private label, in a squat-proof nylon spandex or polyester spandex 4-way stretch blend, full-length, made to your brand in Sialkot, Pakistan.",
+        "High-rise compression leggings with a wide, structured waistband panel, custom and private label, in a squat-proof Nylon/Spandex or Polyester/Spandex 4-way stretch blend, full-length, made to your brand in Sialkot, Pakistan.",
       images: [
         { alt: "Structured waistband leggings, front view" },
         { alt: "Structured waistband leggings, side profile" },
@@ -639,11 +639,11 @@ export const leggings: Category = {
       ],
       pdpMetaTitle: "Custom Structured Waistband Leggings Manufacturer",
       pdpMetaDescription:
-        "Custom structured wide waistband leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch nylon spandex or polyester spandex, wide structured waistband panel, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom structured wide waistband leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, wide structured waistband panel, from 50 pieces, any fabric and color, DDP worldwide.",
       faqs: [
         {
           q: "What fabric is the structured waistband legging made from?",
-          a: "A nylon spandex or polyester spandex 4-way stretch blend, in the composition range typical of comparable premium compression leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+          a: "A Nylon/Spandex or Polyester/Spandex 4-way stretch blend, in the composition range typical of comparable premium compression leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
         },
         {
           q: "What makes this waistband different from your standard style?",
@@ -666,7 +666,7 @@ export const leggings: Category = {
         {
           label: "Fabric",
           value:
-            "Directional category-research range only, not a confirmed spec for this product: nylon spandex 70 to 86% nylon / 14 to 30% spandex, or polyester spandex 72 to 89% poly / 11 to 28% spandex. This product's own confirmed composition is pending sample confirmation.",
+            "Directional category-research range only, not a confirmed spec for this product: Nylon/Spandex 70 to 86% nylon / 14 to 30% spandex, or Polyester/Spandex 72 to 89% poly / 11 to 28% spandex. This product's own confirmed composition is pending sample confirmation.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample" },
         {
@@ -698,7 +698,7 @@ export const leggings: Category = {
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
           {
             title: "Fabric",
-            body: "Nylon spandex or polyester spandex, any weight, sourced or matched to your reference",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
           },
           { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
