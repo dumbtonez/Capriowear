@@ -384,7 +384,7 @@ export const leggings: Category = {
         { label: "Fabric", value: "Nylon or polyamide with spandex, 70 to 85% / 15 to 30%, recycled polyester option" },
         { label: "Weight", value: "300 to 500 GSM" },
         { label: "Stretch and support", value: "4-way stretch, squat-proof, compression hold" },
-        { label: "Waistband", value: "High-rise; plain, wide, or V-back / crossover" },
+        { label: "Waistband", value: "High-rise, standard elastic waistband, no secondary waistband construction" },
         { label: "Construction", value: "Gusset, flatlock finishing, optional pockets and drawcord" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
