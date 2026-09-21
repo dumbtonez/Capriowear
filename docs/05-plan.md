@@ -3443,3 +3443,9 @@ Full PDP content for the existing `v-panel-capri` draft card in `content/activew
 ## Leggings SKU 13: internal-methodology FAQ removed, PLP card checked, 2026-09-21
 
 Removed the "Is this a limited or design-forward style?" FAQ from the SKU 13 PDP (accordion and FAQPage data both come from `faqs`, so it left both); the other two style FAQs and the entity/operational blocks are unchanged. The reported "SKU 13 card is not clickable" was not a bug: the PLP paginates client-side (8 cards per page below 1280px, 9 at desktop), so the static HTML only carries page one's links. Verified in a browser that SKU 13 is a real link on page 2, with `skirt-overlay` (card-only) the only non-clickable tile there.
+
+## Leggings SKU 14 (Skirt-Overlay, CAP-LEG-14) draft PDP added, 2026-09-21
+
+Full PDP content for the existing `skirt-overlay` draft card in `content/activewear/leggings.ts`, same shape as SKU 2 to 13. A Design-Forward, single-brand SKU (one Nike/NikeSKIMS reference product), not convergence-validated and not a compression legging: a relaxed straight-leg pant with a draped skirt overlay at the hip. Evidence tier stays out of buyer-facing copy; exactly two style FAQs (no "limited or design-forward" question). "Tight", "snug" and "form-fitting" appear nowhere in its copy (the reference product's own fit label uses them, but its photography shows a relaxed cut). Draft, reachable and clickable via `isDraftPdpReachable()` (all 13 cards on the grid now link to a real page); noindex/nofollow, out of the sitemap, BreadcrumbList only. No GSM; composition is the directional research range. Not added to the entity FAQ example styles or the styles FAQ. SKU 12 is intentionally skipped. Gallery is alt-only placeholders: real photography needed.
+
+Flagged: the brief's second FAQ question read "Is this a tight legging fit or a relaxed pant?", which contains a banned word, so it reads "Is this a compression fit or a relaxed pant?" (answer unchanged).

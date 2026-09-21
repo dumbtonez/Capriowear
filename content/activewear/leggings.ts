@@ -1533,6 +1533,103 @@ export const leggings: Category = {
       image: "",
       imageAlt: "Custom skirt-overlay leggings manufacturer, layered skirt overlay, mid-rise",
       href: "/capriowear/activewear/leggings/skirt-overlay",
+      // Full PDP content for SKU 14 (owner spec, 2026-09-21), draft. A
+      // Design-Forward, single-brand SKU (one Nike/NikeSKIMS reference
+      // product), NOT convergence-validated, and not a compression legging:
+      // a relaxed straight-leg pant with a draped skirt overlay panel at the
+      // hip. That evidence tier is internal research-methodology tracking
+      // and stays out of buyer-facing copy (no "limited" or "design-forward"
+      // FAQ, exactly 2 style FAQs). The reference product's own fit label
+      // reads tight/snug/form-fitting but its photography shows a relaxed
+      // straight cut, so none of those words may appear in this SKU's copy.
+      // Reachable by URL and a clickable PLP card via the sitewide
+      // draft-PDP rule (`isDraftPdpReachable()`), still noindex/nofollow,
+      // out of the sitemap, no Product/FAQPage JSON-LD. No GSM figure of any
+      // kind. Deliberately NOT added to `entityExampleStyles` or the "What
+      // legging styles can you make?" FAQ. `images` are alt-only
+      // placeholders: real product photography is needed before this can go
+      // live. SKU 12 is intentionally skipped on this grid.
+      pdpTitle: "Skirt-Overlay",
+      sku: "CAP-LEG-14",
+      pdpHeading: "Custom Skirt-Overlay Leggings Manufacturer",
+      pdpDescription:
+        "Mid-rise leggings with a straight, relaxed leg and a layered skirt overlay panel at the hip, custom and private label, in a squat-proof Nylon/Spandex or Polyester/Spandex 4-way stretch blend, full-length, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Skirt-overlay leggings, front view" },
+        { alt: "Skirt-overlay leggings, draped skirt panel at the hip" },
+        { alt: "Skirt-overlay leggings, side profile" },
+        { alt: "Skirt-overlay leggings, fabric close-up" },
+        { alt: "Skirt-overlay leggings, worn on model" },
+        { alt: "Skirt-overlay leggings, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Skirt-Overlay Leggings Manufacturer",
+      pdpMetaDescription:
+        "Custom skirt-overlay leggings manufacturer, OEM, ODM and private label, relaxed straight leg with a draped skirt panel at the hip, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+      faqs: [
+        {
+          q: "What fabric is the skirt-overlay legging made from?",
+          a: "A Nylon/Spandex or Polyester/Spandex 4-way stretch blend, in the composition range typical of comparable premium leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "Is this a compression fit or a relaxed pant?",
+          a: "A relaxed, straight leg, not a compression fit, with a draped skirt overlay panel at the hip. It's a different silhouette from our High-Rise and Mid-Rise Compression styles.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Mid-Rise Compression", slug: "mid-rise-compression", href: "/capriowear/activewear/leggings" },
+        { label: "Straight-Leg", slug: "straight-leg", href: "/capriowear/activewear/leggings" },
+        { label: "Mid-Rise Flare", slug: "mid-rise-flare", href: "/capriowear/activewear/leggings" },
+        { label: "High-Rise Compression", slug: "high-waisted-compression", href: "/capriowear/activewear/leggings" },
+        { label: "See All", href: "/capriowear/activewear/leggings" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Mid-rise legging with straight, relaxed leg and layered skirt overlay panel at the hip, full-length (base type)",
+        },
+        {
+          label: "Fabric",
+          value:
+            "Nylon/Spandex 70 to 85% / 15 to 30%, or Polyester/Spandex 72 to 89% / 11 to 28%, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample" },
+        {
+          label: "Stretch and support",
+          value: "4-way stretch, squat-proof. Relaxed straight leg, not a compression fit through the leg, and not the flared silhouette used on SKU 3 and SKU 11.",
+        },
+        { label: "Waistband", value: "Mid-rise, standard elastic waistband, no secondary waistband construction" },
+        {
+          label: "Construction",
+          value:
+            "Cut-and-sew, straight relaxed leg panel with a draped skirt overlay panel attached at the hip. Side or princess seams, not knit-to-shape. Gusset and flatlock finishing available.",
+        },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Skirt-overlay leggings, construction detail" },
+      pdpQualityPoints: [
+        "Opacity tested, squat-proof",
+        "Seams reinforced and stress-tested",
+        "Skirt overlay panel attachment checked for drape and movement",
+        "Waistbands hold their recovery",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
   ],
   // Real hrefs and labels, matching content/home.ts's own activewearMegaMenu
