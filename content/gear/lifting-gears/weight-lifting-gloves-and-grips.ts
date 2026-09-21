@@ -454,13 +454,131 @@ export const weightLiftingGlovesAndGrips: Category = {
       ],
     },
     {
+      // Third Gloves & Grips PDP built (owner brief, 2026-09-21): a fit and
+      // material variant of the fingerless glove, not a different
+      // construction. Same `internalPreview` escape hatch and draft gating
+      // as the other two. Fingerless Training Gloves and Full-Finger
+      // Gloves are real PDPs; Grip Pads has none yet, so its related tag
+      // points at the category PLP. `status: "draft"` until fit, material,
+      // and padding are confirmed against a real factory sample.
       status: "draft",
+      internalPreview: true,
       slug: "womens-training-gloves",
+      sku: "CAP-GLV-03",
       cardTitle: "Custom Women's Training Gloves",
       cardSubline: "A narrower fit and palette built for a women's line",
       image: "",
       imageAlt: "Custom women's training gloves",
       href: "/lifting-gears/weight-lifting-gloves-and-grips/womens-training-gloves",
+      pdpTitle: "Women's Training Gloves",
+      images: [
+        { alt: "Custom women's training glove, front view" },
+        { alt: "Custom women's training glove, worn on model, in use" },
+        { alt: "Custom women's training glove, amara palm, foam cushion detail" },
+        { alt: "Custom women's training glove, cotton knit back detail" },
+        { alt: "Custom women's training glove, narrower fit, side profile" },
+        { alt: "Custom women's training glove, hook-and-loop wrist strap closure detail" },
+        { alt: "Custom women's training glove, stitching detail" },
+        { alt: "Custom women's training glove, color range" },
+        { alt: "Custom women's training glove, private label packaging" },
+      ],
+      pdpHeading: "Custom Women's Training Gloves Manufacturer",
+      pdpDescription:
+        "A custom and private label women's training glove, a narrower fit in amara and cotton knit with foam palm cushions, built to your spec, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Women's Training Gloves Manufacturer",
+      pdpMetaDescription:
+        "Custom women's training gloves manufacturer, narrower fit, amara and cotton knit, foam palm cushions. Private label, low MOQ. Sialkot, Pakistan.",
+      material: "Amara (synthetic suede) palm with cotton knit back and foam palm cushions",
+      pdpFabricPills: ["Amara (synthetic suede)", "Cotton knit back", "Foam palm cushions"],
+      pdpCustomizationPills: ["Fit", "Material", "Branding", "Private label"],
+      pdpQualityHeading: "A real spec sheet, not a letter size alone",
+      pdpQualitySubline:
+        "We confirm the fit, the material, and the stitching on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Fit and grading checked against your reference sizing",
+        "Palm material and cotton knit back checked against your spec",
+        "Foam palm cushions checked for placement and comfort",
+        "Digital proof and sample approved before we cut your production run",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "ruler", text: "Narrower, women's-specific fit" },
+        { icon: "lock", text: "Foam palm cushions" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          {
+            title: "Fit",
+            body: "Narrower profile, graded to your size range",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fit" },
+          },
+          {
+            title: "Palm material",
+            body: "Amara or your reference material",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Palm material" },
+          },
+          {
+            title: "Palm cushioning",
+            body: "Foam placement and density matched to your reference",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Palm cushioning" },
+          },
+          {
+            title: "Branding",
+            body: "Embroidery, screen print, silicone print, custom colorway",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Branding" },
+          },
+          {
+            title: "Color",
+            body: "Full color range, matched to your brand palette",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Color" },
+          },
+          {
+            title: "Packaging",
+            body: "Polybags, boxes, retail-ready to your spec",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" },
+          },
+        ],
+      },
+      specifications: [
+        { label: "Style", value: "Fingerless training glove, women's fit (base type)" },
+        { label: "Finger coverage", value: "Half-finger, palm and back of hand covered, fingers exposed" },
+        { label: "Fit", value: "Narrower profile, cut for smaller hand proportions" },
+        { label: "Palm material", value: "Amara (synthetic suede), or your reference material" },
+        { label: "Back of hand", value: "Cotton knit" },
+        { label: "Palm cushioning", value: "Foam palm cushions" },
+        { label: "Closure", value: "Hook-and-loop wrist strap" },
+        { label: "Color", value: "Full color range" },
+        { label: "Branding", value: "Embroidery, screen print, silicone print, custom labels, packaging" },
+      ],
+      relatedStyleTags: [
+        { label: "Fingerless Training Gloves", href: "/lifting-gears/weight-lifting-gloves-and-grips/fingerless-training-gloves" },
+        { label: "Full-Finger Gloves", href: "/lifting-gears/weight-lifting-gloves-and-grips/full-finger-gloves" },
+        { label: "Grip Pads", href: "/lifting-gears/weight-lifting-gloves-and-grips" },
+        { label: "See All", href: "/lifting-gears/weight-lifting-gloves-and-grips" },
+      ],
+      faqs: [
+        {
+          q: "How is this different from the standard fingerless training glove?",
+          a: "Same fingerless construction, cut to a narrower fit for smaller hand proportions, with a material combination (amara palm, cotton knit back, foam palm cushions) specific to this line.",
+        },
+        {
+          q: "Can you match this to my brand's existing size range?",
+          a: "Yes, send your reference sizing or an existing sample and we grade the fit to match.",
+        },
+        {
+          q: "Is there a padding thickness spec?",
+          a: "No manufacturer in this category publishes a padding thickness figure, including us at this stage. Foam cushion placement and density are confirmed on your sample.",
+        },
+        {
+          q: "Is there a competition-legal training glove?",
+          a: "No governing body regulates gloves in powerlifting or weightlifting, so there is no dimension or construction standard to build to.",
+        },
+      ],
     },
     {
       status: "draft",

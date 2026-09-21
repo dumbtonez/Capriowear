@@ -3343,3 +3343,7 @@ Copy-accuracy fix removing stale non-catalog style names, not a content rewrite.
 Verified on the built site: "scrunch", "biker" and "ruched" appear nowhere on the Leggings PLP or the Activewear hub, and "pocket" nowhere on the hub. The Leggings PLP HTML still contains "pocket" twice, both inside the published SKU 1 card's serialized data, not PLP copy: a placeholder gallery image alt ("pocket detail") and the spec row "optional pockets" (a construction option, not a style). Left as is; both belong to the PDP.
 
 `npx tsc --noEmit`, `npx eslint`, `npm run build` clean.
+
+## Women's Training Gloves PDP added (Gloves & Grips, draft), 2026-09-21
+
+`womens-training-gloves` (CAP-GLV-03) added as a typed entry in `content/gear/lifting-gears/weight-lifting-gloves-and-grips.ts`: a narrower-fit variant of the fingerless glove (amara palm, cotton knit back, foam palm cushions, hook-and-loop strap), same `status: "draft"` + `internalPreview: true` gating, reusing the category `pdpFaqOperational`. Related tags: Fingerless Training Gloves and Full-Finger Gloves real; Grip Pads points at the PLP. Fingerless and Full-Finger do not link back to this page yet. Falls back to the Gear default OG image.
