@@ -3327,3 +3327,11 @@ Added "What fabric is the high-rise compression legging made from?" as the first
 Flagged: the given answer says "the same directional composition range used by the leading brands we researched", an internal-research reference in public copy; used verbatim as supplied. The PLP meta description still lists "scrunch and pocket styles", which are no longer in the catalog (not requested).
 
 `npx tsc --noEmit`, `npx eslint`, `npm run build` clean.
+
+## Leggings: stale "scrunch" in PLP meta description, fabric FAQ wording, 2026-09-21
+
+Copy-accuracy fix, not a content rewrite, in `content/activewear/leggings.ts`. The PLP meta description said "scrunch and pocket styles"; "scrunch" is not in the locked 11-SKU catalog, so it now reads "capri and pocket styles". The SKU 1 PDP fabric FAQ's first sentence no longer references internal research: it now reads "...in the composition range typical of comparable premium compression leggings." (second sentence unchanged), in both the accordion and the FAQPage JSON-LD.
+
+The "WHAT WE MAKE" overview lead described in the request does not exist on the rendered PLP: `Category.overview` is an unrendered "PLACEHOLDER" field, and that eyebrow belongs to the homepage/factory pages. Flagged, not fixed: the PLP's own FAQ ("What is a scrunch legging, and what other styles can you make?") still asks about and lists scrunch/ruched, pocket, biker and fleece-lined styles, none in the 11-SKU set, and the meta description still says "pocket". Also "Compression to flare and scrunch" on the Activewear hub card (`content/activewear/hub.ts`). Each needs real replacement wording.
+
+`npx tsc --noEmit`, `npx eslint`, `npm run build` clean.
