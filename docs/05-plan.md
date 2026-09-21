@@ -3381,3 +3381,9 @@ Flagged: the shared operational FAQ block is used as live on every PDP (not the 
 ## Leggings PDPs: "spandex" not "elastane", consistent blend naming, 2026-09-21
 
 Terminology-consistency fix across SKU 1, 2 and 3 in `content/activewear/leggings.ts` (13 lines): every "elastane" is now "spandex", and "nylon-elastane" / "polyester-elastane" now read "nylon spandex" / "polyester spandex", matching the fabric chip row. Covers descriptions, meta descriptions, the fabric FAQ, the spec Fabric row and the customize Fabric step. No other copy changed.
+
+## Leggings SKU 4 (Structured Waistband, CAP-LEG-04) draft PDP added, 2026-09-21
+
+Full PDP content for the existing `structured-waistband` draft card in `content/activewear/leggings.ts`, same shape as SKU 2 and 3. Draft, reachable by URL and a clickable PLP card via `isDraftPdpReachable()`; noindex/nofollow, out of the sitemap, BreadcrumbList only. No GSM figure; composition ranges labeled directional research; "spandex" throughout, blend names space-separated. The wide, structured waistband panel is this SKU's differentiator (not standard elastic). Per-style `pdpQualityPoints` adds the panel-bonding line. Gallery is alt-only placeholders: real photography needed, must show the full-length build.
+
+Flagged: shared operational FAQ block used as live on every PDP (not the reworded operational questions in the brief); entity FAQ is the generated one.

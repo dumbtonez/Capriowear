@@ -608,6 +608,99 @@ export const leggings: Category = {
       image: "",
       imageAlt: "Custom high-rise compression leggings manufacturer, structured wide waistband",
       href: "/capriowear/activewear/leggings/structured-waistband",
+      // Full PDP content for SKU 4 (owner spec, 2026-09-21), draft. Reachable
+      // by URL and a clickable PLP card via the sitewide draft-PDP rule
+      // (`isDraftPdpReachable()`), still noindex/nofollow, out of the
+      // sitemap, no Product/FAQPage JSON-LD. Only facts from the SKU 4 spec:
+      // no GSM figure of any kind (weight is "pending, confirmed on your
+      // sample"), composition ranges labeled directional category research
+      // and never this product's own confirmed spec. The wide, structured
+      // waistband panel IS this SKU's differentiator (unlike SKU 1/2/3's
+      // standard elastic band); foldover, drawcord and V-back/crossover
+      // belong to other SKUs. `images` are alt-only placeholders: real
+      // photography is needed before launch and must show the full-length
+      // build, not the cropped locked-reference product.
+      pdpTitle: "Structured Waistband",
+      sku: "CAP-LEG-04",
+      pdpHeading: "Custom Structured Waistband Leggings Manufacturer",
+      pdpDescription:
+        "High-rise compression leggings with a wide, structured waistband panel, custom and private label, in a squat-proof nylon spandex or polyester spandex 4-way stretch blend, full-length, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Structured waistband leggings, front view" },
+        { alt: "Structured waistband leggings, side profile" },
+        { alt: "Structured waistband leggings, wide waistband panel detail" },
+        { alt: "Structured waistband leggings, fabric close-up" },
+        { alt: "Structured waistband leggings, worn on model" },
+        { alt: "Structured waistband leggings, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Structured Waistband Leggings Manufacturer",
+      pdpMetaDescription:
+        "Custom structured wide waistband leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch nylon spandex or polyester spandex, wide structured waistband panel, from 50 pieces, any fabric and color, DDP worldwide.",
+      faqs: [
+        {
+          q: "What fabric is the structured waistband legging made from?",
+          a: "A nylon spandex or polyester spandex 4-way stretch blend, in the composition range typical of comparable premium compression leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "What makes this waistband different from your standard style?",
+          a: "A wide, structured panel, bonded or two-piece construction, rather than a single standard elastic band. We confirm the panel width and construction on your sample before bulk.",
+        },
+        {
+          q: "Is this style available in a cropped length too?",
+          a: "Full-length is the standard build for this SKU. Cropped and capri lengths are separate styles in our catalog, and we can also build this waistband treatment at a cropped length on request.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "High-Rise Compression", href: "/capriowear/activewear/leggings/high-waisted-compression" },
+        { label: "Mid-Rise Compression", href: "/capriowear/activewear/leggings" },
+        { label: "Flare", href: "/capriowear/activewear/leggings" },
+        { label: "V-Back / Crossover", href: "/capriowear/activewear/leggings" },
+        { label: "See All", href: "/capriowear/activewear/leggings" },
+      ],
+      specifications: [
+        { label: "Style", value: "High-rise compression legging, full-length, wide structured waistband panel (base type)" },
+        {
+          label: "Fabric",
+          value:
+            "Directional category-research range only, not a confirmed spec for this product: nylon spandex 70 to 86% nylon / 14 to 30% spandex, or polyester spandex 72 to 89% poly / 11 to 28% spandex. This product's own confirmed composition is pending sample confirmation.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample" },
+        {
+          label: "Waistband",
+          value: "Wide, structured or double-layered waistband panel, bonded or two-piece construction",
+        },
+        { label: "Stretch and support", value: "4-way stretch, squat-proof, compression hold" },
+        {
+          label: "Construction",
+          value: "Cut-and-sew, side or princess seams, not knit-to-shape; full-length leg; gusset and flatlock finishing available",
+        },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Structured waistband leggings, construction detail" },
+      pdpQualityPoints: [
+        "Opacity tested, squat-proof",
+        "Seams reinforced and stress-tested",
+        "Waistband panel bonding checked for edge lift and roll after repeated wear",
+        "Waistbands hold their recovery",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon spandex or polyester spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
