@@ -16,26 +16,29 @@ import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { categoryGroupsSection, footer, header } from "@/components/ui/styles";
 import { capriosportsHome } from "@/content/capriosports/home";
-import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
+import { ORGANIZATION, SITE_URL, siteNameForGroup } from "@/content/site";
 import { liftingGearsGroups, liftingGearsHub, LIFTING_GEARS_HUB_CANONICAL } from "@/content/gear/lifting-gears/hub";
 import { breadcrumbSchema, collectionOfPagesSchema, faqSchema } from "@/lib/schema";
 
 const allCategoryCards = liftingGearsGroups.flatMap((group) => group.categories);
+
+// Gear division hub: Capriosports in link-preview metadata (see siteNameForGroup).
+const GEAR_SITE_NAME = siteNameForGroup("Gear");
 
 export const metadata: Metadata = {
   title: liftingGearsHub.metaTitle,
   description: liftingGearsHub.metaDescription,
   alternates: { canonical: LIFTING_GEARS_HUB_CANONICAL },
   openGraph: {
-    title: `${liftingGearsHub.metaTitle} | ${SITE_NAME}`,
+    title: `${liftingGearsHub.metaTitle} | ${GEAR_SITE_NAME}`,
     description: liftingGearsHub.metaDescription,
     url: LIFTING_GEARS_HUB_CANONICAL,
-    siteName: SITE_NAME,
+    siteName: GEAR_SITE_NAME,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${liftingGearsHub.metaTitle} | ${SITE_NAME}`,
+    title: `${liftingGearsHub.metaTitle} | ${GEAR_SITE_NAME}`,
     description: liftingGearsHub.metaDescription,
   },
 };

@@ -3250,3 +3250,7 @@ Also: `liftingGearsMegaMenu` entry relabelled "Gloves & Grips", nav-level `statu
 ## Standing policy: Gear categories stay internal-review-only in the public nav, 2026-09-21
 
 Every Gear category stays `status: "draft"` in `liftingGearsMegaMenu`/`boxingMmaMegaMenu` (`content/home.ts`) until the owner says to publish it, so the PLP sidebar never renders it as a link. `CategoryFilters.tsx` now shows a draft item as the highlighted active item (non-link, `aria-current="page"`) when it is the page being viewed, instead of dropping `status` to get the highlight. Weight Lifting Belts and Boxing Gloves were the two draft categories still rendering as live sidebar links; both now `draft`. Not changed, flagged: the `/lifting-gears` and `/boxing-and-mma` hub cards and the Capriosports homepage "What We Make" links still link to Belts, Wraps and Boxing Gloves.
+
+## Gear pages: Open Graph / Twitter site name is now division-aware, 2026-09-21
+
+Gear PLP/PDP/hub pages were building `openGraph.title`/`twitter.title`/`siteName` from `SITE_NAME` ("Capriowear"). New `siteNameForGroup(group)` in `content/site.ts` (same `Category.group` discriminator as `productSchema()`'s `brand.name`): "Gear" gives "Capriosports", everything else keeps "Capriowear". Wired into the 4 Gear category/style routes and the 2 Gear hubs. Still on `SITE_NAME`, flagged not fixed: the five Capriosports parent stub pages (`/contact`, `/terms`, `/responsible-manufacturing`, `/our-people`, `/who-we-are`).

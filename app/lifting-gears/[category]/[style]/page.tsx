@@ -35,7 +35,7 @@ import {
 import { footer, header } from "@/components/ui/styles";
 import { capriosportsHome } from "@/content/capriosports/home";
 import { home } from "@/content/home";
-import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
+import { ORGANIZATION, SITE_URL, siteNameForGroup } from "@/content/site";
 import { liftingGearsCategories } from "@/content/gear/lifting-gears/categories";
 import { breadcrumbSchema, faqSchema, productSchema } from "@/lib/schema";
 
@@ -76,7 +76,8 @@ export async function generateMetadata({
   const title = data.product.pdpMetaTitle ?? `Custom ${shortTitle} Manufacturer`;
   const description = data.product.pdpMetaDescription ?? data.product.pdpDescription ?? data.product.cardSubline;
   const canonical = `${SITE_URL}${data.product.href}`;
-  const fullTitle = `${title} | ${SITE_NAME}`;
+  const siteName = siteNameForGroup(data.category.group);
+  const fullTitle = `${title} | ${siteName}`;
   const image = data.product.images?.[0]?.src;
 
   return {
@@ -94,7 +95,7 @@ export async function generateMetadata({
       title: fullTitle,
       description,
       url: canonical,
-      siteName: SITE_NAME,
+      siteName,
       type: "website",
       ...(image ? { images: [image] } : {}),
     },

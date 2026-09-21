@@ -44,6 +44,17 @@ export const SITE_NAME = "Capriowear";
 // (2026-09-14 Capriosports homepage task) -- see that file's own comment.
 export const PARENT_SITE_NAME = "Capriosports";
 
+// Division-aware site name for Open Graph/Twitter `siteName` and the
+// "| [name]" suffix in `openGraph.title`/`twitter.title` (link-preview
+// metadata, where the "Capriosports" schema/metadata register applies).
+// Same discriminator `productSchema()` uses for `brand.name`
+// (`Category.group`): Gear is the Capriosports parent brand's own division,
+// everything else stays "Capriowear". Pass "Gear" directly from a page with
+// no Category (the two Gear hubs).
+export function siteNameForGroup(group: string): string {
+  return group === "Gear" ? PARENT_SITE_NAME : SITE_NAME;
+}
+
 // The single site-wide indexing switch (SEO/metadata audit, 2026-09-06):
 // this site is currently staging on Vercel, ahead of the real launch on
 // capriosports.com/capriowear, and must NOT be indexed by Google until that

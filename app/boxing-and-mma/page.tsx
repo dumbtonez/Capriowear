@@ -13,26 +13,29 @@ import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { categoryGroupsSection, footer, header } from "@/components/ui/styles";
 import { capriosportsHome } from "@/content/capriosports/home";
-import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
+import { ORGANIZATION, SITE_URL, siteNameForGroup } from "@/content/site";
 import { boxingMmaGroups, boxingMmaHub, BOXING_MMA_HUB_CANONICAL } from "@/content/gear/boxing-and-mma/hub";
 import { breadcrumbSchema, collectionOfPagesSchema, faqSchema } from "@/lib/schema";
 
 const allCategoryCards = boxingMmaGroups.flatMap((group) => group.categories);
+
+// Gear division hub: Capriosports in link-preview metadata (see siteNameForGroup).
+const GEAR_SITE_NAME = siteNameForGroup("Gear");
 
 export const metadata: Metadata = {
   title: boxingMmaHub.metaTitle,
   description: boxingMmaHub.metaDescription,
   alternates: { canonical: BOXING_MMA_HUB_CANONICAL },
   openGraph: {
-    title: `${boxingMmaHub.metaTitle} | ${SITE_NAME}`,
+    title: `${boxingMmaHub.metaTitle} | ${GEAR_SITE_NAME}`,
     description: boxingMmaHub.metaDescription,
     url: BOXING_MMA_HUB_CANONICAL,
-    siteName: SITE_NAME,
+    siteName: GEAR_SITE_NAME,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${boxingMmaHub.metaTitle} | ${SITE_NAME}`,
+    title: `${boxingMmaHub.metaTitle} | ${GEAR_SITE_NAME}`,
     description: boxingMmaHub.metaDescription,
   },
 };
