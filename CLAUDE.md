@@ -102,6 +102,13 @@ tests/screenshots.spec.ts  screenshot + overflow QA across all target viewports
 - Canonical URLs, sitemap.xml, and Open Graph URLs must use the real production domain, not localhost. Confirm the site base URL comes from an environment variable (e.g. NEXT_PUBLIC_SITE_URL) set in Vercel, not a hardcoded value.
 - Do not change vercel config, basePath, or environment handling without flagging it to me first — those affect the live deployment.
 
+## Deployment size discipline (standing rule)
+Keep every build and deployment as light as possible. This project already hit Vercel's free-tier Deployment Storage limit once (15.6GB against a 10GB cap), root-caused to accumulated old deployments plus unnecessarily heavy individual builds, not the git repo itself. Follow these without being asked:
+1. **No production source maps.** `next.config.ts` sets `turbopackSourceMaps: false` and `serverSourceMaps: false` (this alone cut about 173MB off every build). Never re-enable either without an explicit request.
+2. **Gitignore large or duplicate media before it is tracked.** Before adding any image, video or screenshot, decide whether it belongs in version control at all or in `.gitignore` (reference footage, test screenshots, duplicate exports). Do not let the already-ignored kinds recur under new names (`public/Product images 2/`, `public/Test/`, `tests/*.JPG`, `Claude outputs/`, `/reference`).
+3. **Prefer `next/image`-optimized assets over raw static uploads.** When adding product photography or any image under `public/`, render it through `next/image` rather than shipping an unoptimized raw file where there is a choice.
+4. **Flag it if storage looks like it is climbing again.** Vercel's deployment retention (project Settings, the retention window for canceled/errored/preview deployments) is dashboard-only: it cannot be set from `vercel.json` or any file in this repo. If build output grows unusually large, or the owner mentions nearing a Vercel limit, remind them to check that setting instead of assuming it is handled.
+
 ## Multi-machine sync
 - This project is worked on from more than one computer. GitHub (origin/main) is the single source of truth; the machines sync only through it.
 - At the START of every session, run `git pull origin main` before making any changes, so this machine has the latest.
