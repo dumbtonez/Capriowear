@@ -27,27 +27,27 @@ export const contactStub: StubPageContent = {
 export const termsStub: StubPageContent = {
   h1: "Terms (placeholder)",
   body: "Placeholder terms page -- real copy is a later phase.",
-  metaTitle: "Terms | Capriosports",
+  metaTitle: "Terms",
   metaDescription: "Placeholder meta description -- real copy is a later phase.",
 };
 
 export const responsibleManufacturingStub: StubPageContent = {
   h1: "Responsible Manufacturing (placeholder)",
   body: "Placeholder responsible manufacturing page -- real copy is a later phase.",
-  metaTitle: "Responsible Manufacturing | Capriosports",
+  metaTitle: "Responsible Manufacturing",
   metaDescription: "Placeholder meta description -- real copy is a later phase.",
 };
 
 export const ourPeopleStub: StubPageContent = {
   h1: "Our People (placeholder)",
   body: "Placeholder our people page -- real copy is a later phase.",
-  metaTitle: "Our People | Capriosports",
+  metaTitle: "Our People",
   metaDescription: "Placeholder meta description -- real copy is a later phase.",
 };
 
 export const whoWeAreStub: StubPageContent = {
   h1: "Who We Are (placeholder)",
   body: "Placeholder who we are page -- real copy is a later phase.",
-  metaTitle: "Who We Are | Capriosports",
+  metaTitle: "Who We Are",
   metaDescription: "Placeholder meta description -- real copy is a later phase.",
 };

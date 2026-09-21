@@ -31,36 +31,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // pages (next.config.ts's redirects()), and a redirect and a sitemap
     // entry can't both claim the same URL -- see docs/05-plan.md's decision
     // log for the open IA question this leaves flagged.
-    {
-      url: `${SITE_URL}/contact`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/terms`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
-    {
-      url: `${SITE_URL}/responsible-manufacturing`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/our-people`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/who-we-are`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
+    // /contact, /terms, /responsible-manufacturing, /our-people and
+    // /who-we-are are placeholder pages, noindexed and deliberately absent
+    // from the sitemap until real content ships.
     // /capriowear (2026-09-14 routing restructure): Capriowear's own real
     // homepage, moved here from the bare domain -- see content/site.ts's
     // own comment on SITE_URL.

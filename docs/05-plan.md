@@ -3258,3 +3258,7 @@ Owner correction: nobody outside the team has these URLs, so hiding draft Gear c
 ## En/em dashes removed from Belts copy, 2026-09-21
 
 Scan of all Gear content (Belts, Wraps, Gloves & Grips) found dashes only in `content/gear/lifting-gears/weight-lifting-belts.ts` (Lever Belt and Prong Belt); ranges now read "7mm to 13mm" / "10 to 14 days", two em dashes became a comma and a period. The Gear hubs and Boxing Gloves placeholder copy still contains "--" ("Placeholder -- real copy is a later phase"), left as the existing placeholder pattern.
+
+## Capriosports parent stub pages: noindexed, out of sitemap, Capriosports metadata, 2026-09-21
+
+`/contact`, `/terms`, `/responsible-manufacturing`, `/our-people`, `/who-we-are` (root-level placeholder pages, no Capriowear counterparts): explicit `robots: { index: false, follow: false }` per page, removed from `app/sitemap.ts`, OG/Twitter `siteName` and title suffix switched from `SITE_NAME` to `PARENT_SITE_NAME` (no `group` exists here to key `siteNameForGroup` on). Four `metaTitle`s in `content/capriosports/stubPages.ts` had "| Capriosports" baked in, doubling it with the layout template; stripped. Still linked normally from the homepage; no draft/status field is involved.
