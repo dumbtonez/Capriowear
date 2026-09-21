@@ -911,6 +911,97 @@ export const leggings: Category = {
       image: "",
       imageAlt: "Custom high-rise foldover waistband leggings manufacturer",
       href: "/capriowear/activewear/leggings/foldover-waistband",
+      // Full PDP content for SKU 7 (owner spec, 2026-09-21), draft. Reachable
+      // by URL and a clickable PLP card via the sitewide draft-PDP rule
+      // (`isDraftPdpReachable()`), still noindex/nofollow, out of the
+      // sitemap, no Product/FAQPage JSON-LD. Only facts from the SKU 7 spec:
+      // no GSM figure of any kind (weight is "pending, confirmed on your
+      // sample"), composition is a directional research range pending
+      // sample confirmation. The foldover, doubled-fabric waistband panel,
+      // wearable at two rise heights, is this SKU's differentiator
+      // (distinct from the plain standard elastic band on SKU 1/2/3/5,
+      // SKU 4's structured wide panel and SKU 6's V-back/crossover seam).
+      // `images` are alt-only placeholders: real product photography is
+      // needed before this can go live.
+      pdpTitle: "Foldover Waistband",
+      sku: "CAP-LEG-07",
+      pdpHeading: "Custom Foldover Waistband Leggings Manufacturer",
+      pdpDescription:
+        "High-rise compression leggings with a foldover, adjustable waistband panel wearable at two rise heights, custom and private label, in a squat-proof Nylon/Spandex or Polyester/Spandex 4-way stretch blend, full-length, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Foldover waistband leggings, front view" },
+        { alt: "Foldover waistband leggings, waistband folded down" },
+        { alt: "Foldover waistband leggings, waistband unfolded high rise" },
+        { alt: "Foldover waistband leggings, fabric close-up" },
+        { alt: "Foldover waistband leggings, worn on model" },
+        { alt: "Foldover waistband leggings, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Foldover Waistband Leggings Manufacturer",
+      pdpMetaDescription:
+        "Custom foldover waistband leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, wearable at two rise heights, from 50 pieces, any fabric and color, DDP worldwide.",
+      faqs: [
+        {
+          q: "What fabric is the foldover waistband legging made from?",
+          a: "A Nylon/Spandex or Polyester/Spandex 4-way stretch blend, in the composition range typical of comparable premium compression leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How does the foldover waistband work?",
+          a: "It's a doubled fabric panel that folds down or up, letting you wear it at two different rise heights on the same pair. We confirm the fold depth and hold on your sample.",
+        },
+        {
+          q: "Is this the same base legging as your High-Rise Compression style?",
+          a: "Same core silhouette and fabric family, with the foldover waistband panel as the distinguishing feature. Both are separately validated, real styles.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "High-Rise Compression", slug: "high-waisted-compression", href: "/capriowear/activewear/leggings" },
+        { label: "V-Back / Crossover", slug: "v-back-crossover", href: "/capriowear/activewear/leggings" },
+        { label: "Structured Waistband", slug: "structured-waistband", href: "/capriowear/activewear/leggings" },
+        { label: "Capri", slug: "capri", href: "/capriowear/activewear/leggings" },
+        { label: "See All", href: "/capriowear/activewear/leggings" },
+      ],
+      specifications: [
+        { label: "Style", value: "High-rise compression legging, full-length, foldover adjustable waistband panel (base type)" },
+        {
+          label: "Fabric",
+          value:
+            "Nylon/Spandex 70 to 85% / 15 to 30%, or Polyester/Spandex 72 to 89% / 11 to 28%, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample" },
+        { label: "Stretch and support", value: "4-way stretch, squat-proof, compression hold" },
+        { label: "Waistband", value: "Foldover, doubled fabric panel, adjustable and wearable at two rise heights" },
+        {
+          label: "Construction",
+          value:
+            "Cut-and-sew, foldover waistband panel constructed as doubled fabric, side or princess seams through the leg, not knit-to-shape. Gusset and flatlock finishing available.",
+        },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Foldover waistband leggings, construction detail" },
+      pdpQualityPoints: [
+        "Opacity tested, squat-proof",
+        "Seams reinforced and stress-tested",
+        "Foldover panel checked for hold and recovery at both wearable heights",
+        "Waistbands hold their recovery",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
