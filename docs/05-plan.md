@@ -3286,3 +3286,7 @@ Removed the hardcoded `robots: { index: true, follow: true }` from `app/page.tsx
 ## Gear pages get a Capriosports default OG/Twitter image, 2026-09-21
 
 No Gear page rendered `og:image`: `app/opengraph-image.tsx` (Capriowear-branded) only reaches routes whose own metadata doesn't set `openGraph`, and every Gear route does. New `app/og/gear/route.tsx` (1200x630, CAPRIO + orange SPORTS) and `GEAR_DEFAULT_OG_IMAGE` in `content/site.ts`, wired as `openGraph.images`/`twitter.images` on all six Gear routes (both hubs, category PLPs, style PDPs) as the fallback; a style's own first gallery image still wins. All 22 Gear style cards are alt-only placeholders today, so all use the fallback. Still without any og:image, not touched: `/contact`, `/terms`, `/responsible-manufacturing`, `/our-people`, `/who-we-are`, `/capriowear`, and Capriowear teamwear pages.
+
+## Homepage Gloves and Wraps tiles link to the real PLPs, 2026-09-21
+
+`content/capriosports/home.ts` "Product Range": Weightlifting Gloves now links to `/lifting-gears/weight-lifting-gloves-and-grips` and Wrist Wraps to `/lifting-gears/wraps-straps-sleeves` instead of hub anchors. Still anchors (not requested): Lifting Straps and Knee Sleeves (both belong to Wraps, Straps & Sleeves), Resistance Bands, Gym Accessories, and every Boxing & MMA tile except Boxing Gloves.

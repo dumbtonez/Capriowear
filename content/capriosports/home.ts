@@ -377,11 +377,11 @@ export const capriosportsHome = {
           },
           {
             label: "Weightlifting Gloves",
-            href: "/lifting-gears#weightlifting-gloves",
+            href: "/lifting-gears/weight-lifting-gloves-and-grips",
           },
           {
             label: "Wrist Wraps",
-            href: "/lifting-gears#wrist-wraps",
+            href: "/lifting-gears/wraps-straps-sleeves",
           },
           {
             label: "Lifting Straps",
