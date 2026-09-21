@@ -789,8 +789,8 @@ export const leggings: Category = {
       ],
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
-        heading: "Your brand, applied\nin house, no outsourcing",
-        mobileHeading: "Your brand, applied in\nhouse, no outsourcing",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -800,7 +800,7 @@ export const leggings: Category = {
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
           },
           { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
-          { title: "Packaging", body: "Polybags, boxes, retail ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
         ],
       },
     },

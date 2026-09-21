@@ -425,7 +425,7 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
             (`high-waisted-compression`), not sitewide, until confirmed;
             every other PDP keeps the component's own default `"center"`. */}
         <ProductCustomizeSteps
-          content={pdpCustomizationSteps}
+          content={data.product.pdpCustomizationSteps ?? data.category.pdpCustomizationSteps ?? pdpCustomizationSteps}
           align={data.product.slug === "high-waisted-compression" ? "left" : "center"}
         />
 
