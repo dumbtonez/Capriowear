@@ -176,7 +176,7 @@ export const liftingGearsMegaMenu = [
     label: "LIFTING GEARS",
     items: [
       { label: "Weight Lifting Belts", href: "/lifting-gears/weight-lifting-belts" },
-      { label: "Weight Lifting Gloves and Grips", href: "/lifting-gears/weight-lifting-gloves-and-grips", status: "draft" as const },
+      { label: "Gloves & Grips", href: "/lifting-gears/weight-lifting-gloves-and-grips", status: "draft" as const },
       { label: "Wraps, Straps & Sleeves", href: "/lifting-gears/wraps-straps-sleeves", status: "draft" as const },
       { label: "Bands", href: "/lifting-gears/bands", status: "draft" as const },
       { label: "Accessories", href: "/lifting-gears/accessories", status: "draft" as const },

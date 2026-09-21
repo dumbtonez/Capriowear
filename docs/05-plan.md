@@ -3240,3 +3240,9 @@ Owner report: top gallery missing on mobile. Cause: the style had no `images` ar
 Also fixed a real route gap found while checking: `app/capriowear/activewear/[category]/[style]/page.tsx` ignored the per-style `pdpFabricPills`, `pdpCustomizationPills`, `pdpQualityHeading`/`pdpQualitySubline`/`pdpQualityPoints` overrides (only the Gear route honored them), so this PDP showed the fleece fabric pills and the category's "ankle cuff rib" quality claim. All three now fall back to the category values when a style sets no override, so every other PDP is unchanged.
 
 `npx tsc --noEmit`, `npx eslint`, `npm run build` clean. Verified in-browser at 375px: gallery slot and 5 thumbnails render; page HTML has the woven pills and new quality heading, and no "Ankle cuff rib" text.
+
+## Gloves & Grips category PLP added (Lifting Gears, draft), 2026-09-21
+
+New `content/gear/lifting-gears/weight-lifting-gloves-and-grips.ts`, registered in `categories.ts` under key `weight-lifting-gloves-and-grips`, the URL the existing nav stub already used (not `gloves-grips`). Five style cards (fingerless-training-gloves, full-finger-gloves, womens-training-gloves, grip-pads, finger-hole-hand-grips), all `draft`, no `internalPreview`, no PDP routes yet. Category `status: "draft"`: noindex/nofollow verified in the rendered HTML, absent from `sitemap.xml`, BreadcrumbList only (no FAQPage/CollectionPage). Not added, by owner scope: Weightlifting Hooks (already Lifting Hook under Wraps, Straps & Sleeves), Palm Protectors, Arm Blasters, Head Harness, Ab Slings.
+
+Also: `liftingGearsMegaMenu` entry relabelled "Gloves & Grips", nav-level `status: "draft"` kept (not a public link). No hub card added.

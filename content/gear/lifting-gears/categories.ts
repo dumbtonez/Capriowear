@@ -6,9 +6,11 @@
 // line in this registry, same pattern every other division already follows.
 import type { Category } from "../../activewear/types";
 import { weightLiftingBelts } from "./weight-lifting-belts";
+import { weightLiftingGlovesAndGrips } from "./weight-lifting-gloves-and-grips";
 import { wrapsStrapsSleeves } from "./wraps-straps-sleeves";
 
 export const liftingGearsCategories: Record<string, Category> = {
   "weight-lifting-belts": weightLiftingBelts,
+  "weight-lifting-gloves-and-grips": weightLiftingGlovesAndGrips,
   "wraps-straps-sleeves": wrapsStrapsSleeves,
 };
