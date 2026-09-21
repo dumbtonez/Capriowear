@@ -1318,6 +1318,100 @@ export const leggings: Category = {
       image: "",
       imageAlt: "Custom mid-rise flare leggings manufacturer, full-length",
       href: "/capriowear/activewear/leggings/mid-rise-flare",
+      // Full PDP content for SKU 11 (owner spec, 2026-09-21), draft, the last
+      // SKU of the original 11-slot grid. Reachable by URL and a clickable
+      // PLP card via the sitewide draft-PDP rule (`isDraftPdpReachable()`),
+      // still noindex/nofollow, out of the sitemap, no Product/FAQPage
+      // JSON-LD. Limited/test SKU (1 of 4 researched brands, Gymshark only):
+      // the mid-rise counterpart to SKU 3's high-rise flare, reusing the same
+      // flare panel pattern, recommended for low incremental tooling cost and
+      // not for cross-brand validation, so the copy does not overstate its
+      // validation. No GSM figure of any kind (weight is "pending, confirmed
+      // on your sample"), composition is a directional research range
+      // pending sample confirmation. `images` are alt-only placeholders: real
+      // product photography is needed before this can go live.
+      pdpTitle: "Mid-Rise Flare",
+      sku: "CAP-LEG-11",
+      pdpHeading: "Custom Mid-Rise Flare Leggings Manufacturer",
+      pdpDescription:
+        "Mid-rise flare leggings, custom and private label, in a squat-proof Nylon/Spandex or Polyester/Spandex 4-way stretch blend, flared leg opening from the knee, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Mid-rise flare leggings, front view" },
+        { alt: "Mid-rise flare leggings, side profile" },
+        { alt: "Mid-rise flare leggings, flared leg opening" },
+        { alt: "Mid-rise flare leggings, fabric close-up" },
+        { alt: "Mid-rise flare leggings, worn on model" },
+        { alt: "Mid-rise flare leggings, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Mid-Rise Flare Leggings Manufacturer",
+      pdpMetaDescription:
+        "Custom mid-rise flare leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, flared leg from the knee, from 50 pieces, any fabric and color, DDP worldwide.",
+      faqs: [
+        {
+          q: "What fabric is the mid-rise flare legging made from?",
+          a: "A Nylon/Spandex or Polyester/Spandex 4-way stretch blend, in the composition range typical of comparable premium compression leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How is this different from your high-rise flare style?",
+          a: "Same flare panel construction as our High-Rise Flare legging, just set at a mid-rise waistband. Both are separately validated, real styles.",
+        },
+        {
+          q: "Can I adjust the flare width or where it starts on the leg?",
+          a: "Yes. Flare width and the point where it opens from the leg are adjustable to your tech pack, confirmed on your sample before bulk.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "High-Rise Flare", slug: "flare", href: "/capriowear/activewear/leggings" },
+        { label: "Mid-Rise Compression", slug: "mid-rise-compression", href: "/capriowear/activewear/leggings" },
+        { label: "High-Rise Compression", slug: "high-waisted-compression", href: "/capriowear/activewear/leggings" },
+        { label: "Straight-Leg", slug: "straight-leg", href: "/capriowear/activewear/leggings" },
+        { label: "See All", href: "/capriowear/activewear/leggings" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Mid-rise flare legging, full-length, standard elastic waistband, flared leg opening from the knee (base type)",
+        },
+        {
+          label: "Fabric",
+          value:
+            "Nylon/Spandex 70 to 85% / 15 to 30%, or Polyester/Spandex 72 to 89% / 11 to 28%, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample" },
+        { label: "Stretch and support", value: "4-way stretch, squat-proof, compression through the leg to the knee" },
+        { label: "Waistband", value: "Mid-rise, standard elastic waistband, no secondary waistband construction" },
+        {
+          label: "Construction",
+          value:
+            "Cut-and-sew, flare achieved through pattern pieces from the knee to hem, the same flare panel pattern as SKU 3, side or princess seams above the flare, not knit-to-shape. Gusset and flatlock finishing available.",
+        },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Mid-rise flare leggings, construction detail" },
+      pdpQualityPoints: [
+        "Opacity tested, squat-proof",
+        "Seams reinforced and stress-tested",
+        "Flare panel seams checked for consistent drape across the size run",
+        "Waistbands hold their recovery",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     // Two design-forward, card-only drafts (owner spec, 2026-09-21), NOT
     // convergence-validated like the 11 styles above: each is a single-brand,
