@@ -1109,6 +1109,99 @@ export const leggings: Category = {
       image: "",
       imageAlt: "Custom mid-rise straight-leg leggings manufacturer, full-length",
       href: "/capriowear/activewear/leggings/straight-leg",
+      // Full PDP content for SKU 9 (owner spec, 2026-09-21), draft. Reachable
+      // by URL and a clickable PLP card via the sitewide draft-PDP rule
+      // (`isDraftPdpReachable()`), still noindex/nofollow, out of the
+      // sitemap, no Product/FAQPage JSON-LD. Weakest-evidenced SKU in the
+      // catalog (1 of 4 researched brands, Gymshark only), included for
+      // completeness: keep the copy modest, never framed as a heavily
+      // validated style. No GSM figure of any kind (weight is "pending,
+      // confirmed on your sample"), composition is a directional research
+      // range pending sample confirmation. `images` are alt-only
+      // placeholders: real product photography is needed before this can
+      // go live.
+      pdpTitle: "Straight-Leg",
+      sku: "CAP-LEG-09",
+      pdpHeading: "Custom Mid-Rise Straight-Leg Leggings Manufacturer",
+      pdpDescription:
+        "Mid-rise leggings with a straight, non-tapered leg, custom and private label, in a squat-proof Nylon/Spandex or Polyester/Spandex 4-way stretch blend, full-length, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Mid-rise straight-leg leggings, front view" },
+        { alt: "Mid-rise straight-leg leggings, side profile" },
+        { alt: "Mid-rise straight-leg leggings, leg opening detail" },
+        { alt: "Mid-rise straight-leg leggings, fabric close-up" },
+        { alt: "Mid-rise straight-leg leggings, worn on model" },
+        { alt: "Mid-rise straight-leg leggings, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Mid-Rise Straight-Leg Leggings Manufacturer",
+      pdpMetaDescription:
+        "Custom mid-rise straight-leg leggings manufacturer, OEM, ODM and private label, non-tapered leg, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+      faqs: [
+        {
+          q: "What fabric is the straight-leg legging made from?",
+          a: "A Nylon/Spandex or Polyester/Spandex 4-way stretch blend, in the composition range typical of comparable premium leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How is this different from your compression leggings?",
+          a: "This style has a straight, non-tapered leg rather than a fitted compression leg, a relaxed alternative to our High-Rise and Mid-Rise Compression styles. Same fabric family and construction standard.",
+        },
+        {
+          q: "Is this style squat-proof like the rest of your leggings?",
+          a: "Yes. We test opacity on your sample before bulk and confirm it holds under stretch and movement, the same standard applied across the catalog.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Mid-Rise Compression", slug: "mid-rise-compression", href: "/capriowear/activewear/leggings" },
+        { label: "High-Rise Compression", slug: "high-waisted-compression", href: "/capriowear/activewear/leggings" },
+        { label: "Flare", slug: "flare", href: "/capriowear/activewear/leggings" },
+        { label: "Mid-Rise Capri", slug: "mid-rise-capri", href: "/capriowear/activewear/leggings" },
+        { label: "See All", href: "/capriowear/activewear/leggings" },
+      ],
+      specifications: [
+        { label: "Style", value: "Mid-rise straight-leg legging, full-length, standard elastic waistband (base type)" },
+        {
+          label: "Fabric",
+          value:
+            "Nylon/Spandex 70 to 85% / 15 to 30%, or Polyester/Spandex 72 to 89% / 11 to 28%, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample" },
+        {
+          label: "Stretch and support",
+          value: "4-way stretch, squat-proof. Not a compression fit through the leg, and not flared; a straight, non-tapered leg from hip to hem.",
+        },
+        { label: "Waistband", value: "Mid-rise, standard elastic waistband, no secondary waistband construction" },
+        {
+          label: "Construction",
+          value:
+            "Cut-and-sew, straight non-tapered leg panel, not compression-fitted through the calf, not flared, side or princess seams, not knit-to-shape. Gusset and flatlock finishing available.",
+        },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Mid-rise straight-leg leggings, construction detail" },
+      pdpQualityPoints: [
+        "Opacity tested, squat-proof",
+        "Seams reinforced and stress-tested",
+        "Leg panel checked for a consistent straight line across the size run",
+        "Waistbands hold their recovery",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
