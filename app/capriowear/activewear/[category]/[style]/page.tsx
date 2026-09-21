@@ -62,13 +62,24 @@ import { breadcrumbSchema, faqSchema, productSchema } from "@/lib/schema";
 // less/out of the sitemap exactly like any other draft. Ported from the
 // Gear route's own identical helper (app/lifting-gears/[category]/
 // [style]/page.tsx), owner spec 2026-09-18, Wide-Leg Woven Jogger.
-function isReachable(card: { status: "published" | "draft"; internalPreview?: boolean }) {
-  return card.status === "published" || card.internalPreview === true;
+//
+// Per-category opt-in (`Category.draftPdpReachable`, Leggings only today): a
+// draft card that already carries real PDP content (heading + spec table)
+// is also reachable by direct URL, WITHOUT `internalPreview` -- so the PLP
+// card stays a non-clickable tile (ProductCard only reads `status`/
+// `internalPreview`, never this) while the page can still be reviewed.
+// Every other category leaves the flag unset, so nothing changes for them.
+function isReachable(
+  card: { status: "published" | "draft"; internalPreview?: boolean; pdpHeading?: string; specifications?: unknown[] },
+  category: { draftPdpReachable?: boolean },
+) {
+  if (card.status === "published" || card.internalPreview === true) return true;
+  return category.draftPdpReachable === true && Boolean(card.pdpHeading) && Boolean(card.specifications?.length);
 }
 
 export function generateStaticParams() {
   return Object.values(categories).flatMap((category) =>
-    category.styleCards.filter(isReachable).map((card) => ({ category: category.slug, style: card.slug })),
+    category.styleCards.filter((card) => isReachable(card, category)).map((card) => ({ category: category.slug, style: card.slug })),
   );
 }
 
@@ -97,7 +108,7 @@ export async function generateMetadata({
 }: PageProps<"/capriowear/activewear/[category]/[style]">): Promise<Metadata> {
   const { category, style } = await params;
   const data = getData(category, style);
-  if (!data || !isReachable(data.product)) return {};
+  if (!data || !isReachable(data.product, data.category)) return {};
 
   const shortTitle = data.product.pdpTitle ?? data.product.cardTitle;
   // No " | Capriowear" suffix here -- same reasoning as Category.metaTitle's
@@ -147,7 +158,7 @@ export async function generateMetadata({
 export default async function StylePage({ params }: PageProps<"/capriowear/activewear/[category]/[style]">) {
   const { category, style } = await params;
   const data = getData(category, style);
-  if (!data || !isReachable(data.product)) notFound();
+  if (!data || !isReachable(data.product, data.category)) notFound();
 
   const productTitle = data.product.pdpTitle ?? data.product.cardTitle;
   const heading = data.product.pdpHeading ?? productTitle;
