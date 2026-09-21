@@ -3304,3 +3304,16 @@ Side effect prevented: with no `entityExampleStyles`, the entity FAQ derives its
 Flagged, not changed: the published card's placeholder photo (`/product-images/leggings-high-waisted-compression.png`) is a wrong asset; the published PDP's `relatedStyleTags` still name the old styles (Flare & Wide-Leg, Scrunch & Ruched, V-Back & Crossover, Capri & Cropped), all pointing at the PLP.
 
 `npx tsc --noEmit`, `npx eslint`, `npm run build` clean. In-browser: 11 cards in order (9 then 2 on desktop, 8 per page on tablet/mobile), only card 1 an `<a>`, zero gender chips and no horizontal overflow at 375, 820 and 1440.
+
+## Leggings naming correction: "High-Rise", "Custom [Style] Leggings" card names, 2026-09-21
+
+Naming correction to align with the locked 11-SKU research, not a content rebuild. In `content/activewear/leggings.ts`:
+
+- "High-Waisted Compression" is now "High-Rise Compression" on card 1 and its live PDP: card title/subline, `pdpTitle` (breadcrumb), H1, title tag, meta description, description line, the "squat-proof" FAQ answer, the spec table's Style row, and image alt text. Slug (`high-waisted-compression`), SKU, photo paths and URL are unchanged; no redirect added.
+- Cards 2 to 11 use the "Custom [Style] Leggings" convention with the rise kept visible in the two close-variant pairs (Mid-Rise/High-Rise Compression, Mid-Rise/High-Rise Flare, Mid-Rise/High-Rise Capri). Slugs and draft status unchanged.
+- The published PDP's related-style chips now name Mid-Rise Compression, High-Rise Flare, V-Back / Crossover and High-Rise Capri (plus "See All"). They point at the PLP because the sibling PDPs are drafts with no route, so a per-style link would 404; the chip component always renders a link, so there is no non-clickable mode.
+- The entity FAQ ("What does Capriowear manufacture?") reads its example styles from `Category.entityExampleStyles`, set once to "high-rise compression, flare, V-back and crossover, and capri styles"; the PLP and PDP both render it. This intentionally replaces the "styles like Custom High-Waisted Compression Leggings, ..." text pinned in the previous commit.
+
+Not changed, still say "high-waisted": the PLP `metaDescription` and the PLP's own "what styles" FAQ answer.
+
+`npx tsc --noEmit`, `npx eslint`, `npm run build` clean; screenshot suite 45/45. Verified against the built site: PDP title, meta description, H1, breadcrumb JSON-LD name and description line render the new text; the only remaining "high-waisted" strings on the PDP are the slug and image URLs; PLP renders all 11 new card names.

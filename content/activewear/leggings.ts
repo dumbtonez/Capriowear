@@ -26,12 +26,11 @@ export const leggings: Category = {
   group: "Activewear",
   menuLabel: "Leggings",
   h1: "Custom Leggings Manufacturer",
-  // Pins the entity FAQ's example-styles clause to its live wording; without
-  // it categoryEntityFaq() derives this from the first 4 cardTitles, which
-  // the 11-SKU card rename (2026-09-21) would silently rewrite. FAQ copy is
-  // explicitly out of scope for that change.
-  entityExampleStyles:
-    "styles like Custom High-Waisted Compression Leggings, Custom Flare / Wide-Leg Leggings, Custom Scrunch / Ruched Leggings, Custom V-Back / Crossover Leggings",
+  // Pinned so the entity FAQ's example-styles clause does not depend on the
+  // first 4 cardTitles (categoryEntityFaq()'s fallback). "High-rise"
+  // replaces "high-waisted" (owner spec, 2026-09-21, naming aligned with the
+  // locked 11-SKU research); edit here once and the PLP and every PDP follow.
+  entityExampleStyles: "high-rise compression, flare, V-back and crossover, and capri styles",
   // No "| Capriowear" suffix here -- unlike app/page.tsx (which sits at the
   // same route segment as the root layout's title template and so is used
   // verbatim), this page is a nested child segment, and the root layout's
@@ -266,9 +265,9 @@ export const leggings: Category = {
       // distinguishing spec line "Squat-proof compression, 4-way stretch"
       // (was "Squat-proof, 4-way stretch, compression hold", close but not
       // the exact given wording).
-      // Card name and spec line replaced with the locked 11-SKU catalog's own
-      // wording (owner spec, 2026-09-21); slug, PDP fields and photo unchanged.
-      cardTitle: "High-Rise Compression, Full-Length, Standard Waistband",
+      // "High-Waisted" renamed "High-Rise" (owner spec, 2026-09-21, naming
+      // aligned with the locked 11-SKU research); slug, SKU and photo unchanged.
+      cardTitle: "Custom High-Rise Compression Leggings",
       cardSubline: "4-way stretch, squat-proof, standard waistband",
       // Placeholder/QA photo (owner, 2026-09-07: "add a dummy product
       // image ... see how it would look across home, PLP, PDP, all
@@ -278,16 +277,16 @@ export const leggings: Category = {
       // real photography once available; see `images[0]`'s own comment
       // below for why only this one slot gets it.
       image: "/product-images/leggings-high-waisted-compression.png",
-      imageAlt: "Custom high-waisted compression leggings",
+      imageAlt: "Custom high-rise compression leggings",
       href: "/capriowear/activewear/leggings/high-waisted-compression",
       // Figma-confirmed real copy (node 634:4952, PDP breadcrumb, 2026-08-31).
-      pdpTitle: "High-Waisted Compression",
+      pdpTitle: "High-Rise Compression",
       // Figma-confirmed real copy (node 634:4988 desktop / 638:2541 mobile,
       // PDP product info text block, 2026-08-31).
       sku: "CAP-LEG-01",
-      pdpHeading: "Custom High-Waisted Compression Leggings Manufacturer",
+      pdpHeading: "Custom High-Rise Compression Leggings Manufacturer",
       pdpDescription:
-        "High-waisted compression leggings, custom and private label, a squat-proof 70 to 85% nylon or polyamide and 15 to 30% spandex blend, made to your brand in Sialkot, Pakistan.",
+        "High-rise compression leggings, custom and private label, in a squat-proof nylon-elastane or polyester-elastane 4-way stretch blend, full-length with a standard elastic waistband, made to your brand in Sialkot, Pakistan.",
       // Figma node 634:4961 (desktop) / 638:860 (mobile), 2026-08-31 -- 6
       // entries so the desktop rail's "show more" chevron (5 visible, 1
       // hidden) has something real to demonstrate.
@@ -309,38 +308,33 @@ export const leggings: Category = {
         // filling; alt text describes what the photo actually shows
         // (worn, in motion), not a mismatched reuse of the original
         // "back view" placeholder label.
-        { alt: "High-waisted compression leggings, front view", src: "/product-images/leggings-high-waisted-compression.png" },
+        { alt: "High-rise compression leggings, front view", src: "/product-images/leggings-high-waisted-compression.png" },
         {
-          alt: "High-waisted compression leggings, worn on model, in motion",
+          alt: "High-rise compression leggings, worn on model, in motion",
           src: "/product-images/leggings-high-waisted-compression-2.png",
         },
-        { alt: "High-waisted compression leggings, side profile" },
-        { alt: "High-waisted compression leggings, waistband detail" },
-        { alt: "High-waisted compression leggings, fabric close-up" },
-        { alt: "High-waisted compression leggings, worn on model" },
-        { alt: "High-waisted compression leggings, flat lay" },
-        { alt: "High-waisted compression leggings, pocket detail" },
-        { alt: "High-waisted compression leggings, stretch in motion" },
+        { alt: "High-rise compression leggings, side profile" },
+        { alt: "High-rise compression leggings, waistband detail" },
+        { alt: "High-rise compression leggings, fabric close-up" },
+        { alt: "High-rise compression leggings, worn on model" },
+        { alt: "High-rise compression leggings, flat lay" },
+        { alt: "High-rise compression leggings, pocket detail" },
+        { alt: "High-rise compression leggings, stretch in motion" },
       ],
-      // Shortened title tag (owner spec, 2026-09-04, QA audit fix): the
-      // prior form ("Custom High-Waisted Compression Leggings Manufacturer
-      // | Capriowear") ran 66 rendered chars, over the ~60 char target --
-      // deliberately DIFFERENT from `pdpHeading`/the H1 now (both of which
-      // stay unchanged, "Custom High-Waisted Compression Leggings
-      // Manufacturer"), a genuine exception to this field's usual "same as
-      // pdpHeading" rule, made explicitly to fix the title length without
-      // touching the on-page H1 or the slug.
-      pdpMetaTitle: "Custom Compression Leggings Manufacturer",
+      // Now identical to `pdpHeading` minus the layout's " | Capriowear" suffix
+      // (owner spec, 2026-09-21: "Custom High-Rise Compression Leggings
+      // Manufacturer | Capriowear"); supersedes the 2026-09-04 shortened form.
+      pdpMetaTitle: "Custom High-Rise Compression Leggings Manufacturer",
       // Trimmed from 202 chars (owner spec, 2026-09-04, QA audit fix) --
       // also drops "nylon or polyamide," redundant since polyamide is
       // nylon.
       pdpMetaDescription:
-        "Custom high-waisted compression leggings manufacturer, squat-proof four-way stretch nylon and spandex, from 50 pieces, samples in 10 to 14 days. Capriowear.",
+        "Custom high-rise compression leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch nylon-elastane or polyester-elastane, from 50 pieces, any fabric and color, DDP worldwide.",
       material: "70 to 85% nylon or polyamide, 15 to 30% spandex, 4-way stretch",
       faqs: [
         {
           q: "Are these leggings squat-proof?",
-          a: "Yes. Every High-Waisted Compression run is opacity tested on the sample before bulk production, and we hold every production run to the same standard.",
+          a: "Yes. Every High-Rise Compression run is opacity tested on the sample before bulk production, and we hold every production run to the same standard.",
         },
         {
           q: "Can I customize the waistband height and compression level?",
@@ -366,16 +360,16 @@ export const leggings: Category = {
       // Re-point each tag at its own real sibling PDP the moment that
       // style's own status flips to "published."
       relatedStyleTags: [
-        { label: "Flare & Wide-Leg", href: "/capriowear/activewear/leggings" },
-        { label: "Scrunch & Ruched", href: "/capriowear/activewear/leggings" },
-        { label: "V-Back & Crossover", href: "/capriowear/activewear/leggings" },
-        { label: "Capri & Cropped", href: "/capriowear/activewear/leggings" },
+        { label: "Custom Mid-Rise Compression Leggings", href: "/capriowear/activewear/leggings" },
+        { label: "Custom High-Rise Flare Leggings", href: "/capriowear/activewear/leggings" },
+        { label: "Custom V-Back / Crossover Leggings", href: "/capriowear/activewear/leggings" },
+        { label: "Custom High-Rise Capri Leggings", href: "/capriowear/activewear/leggings" },
         { label: "See All", href: "/capriowear/activewear/leggings" },
       ],
       // Figma-confirmed real copy (node 634:5092, "Specifications",
       // 2026-09-02) -- this style's own build datasheet.
       specifications: [
-        { label: "Style", value: "High-waisted compression legging (base type)" },
+        { label: "Style", value: "High-rise compression legging (base type)" },
         // Fixed, owner report, 2026-09-02: "Fabric row says 'Sustainable
         // lines'. That is wrong, it is a 'best for' value that leaked from
         // the fabric table" -- was copy-pasted from `fabricOptions[1]`'s
@@ -390,7 +384,7 @@ export const leggings: Category = {
         { label: "Construction", value: "Gusset, flatlock finishing, optional pockets and drawcord" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "High-waisted compression leggings, construction detail" },
+      specificationsImage: { alt: "High-rise compression leggings, construction detail" },
     },
     // The remaining 7 cards (owner spec, 2026-09-02, Leggings PLP pilot)
     // are all "draft": a real style name and one-line spec, but no PDP
@@ -414,7 +408,7 @@ export const leggings: Category = {
     {
       status: "draft",
       slug: "mid-rise-compression",
-      cardTitle: "Mid-Rise Compression, Full-Length, Standard Waistband",
+      cardTitle: "Custom Mid-Rise Compression Leggings",
       cardSubline: "4-way stretch, squat-proof, mid-rise waistband",
       image: "",
       imageAlt: "Custom mid-rise compression leggings manufacturer, full-length, standard waistband",
@@ -423,7 +417,7 @@ export const leggings: Category = {
     {
       status: "draft",
       slug: "flare",
-      cardTitle: "High-Rise Flare, Full-Length",
+      cardTitle: "Custom High-Rise Flare Leggings",
       cardSubline: "Flared leg from the knee, high-rise",
       image: "",
       imageAlt: "Custom high-rise flare leggings manufacturer, full-length",
@@ -432,7 +426,7 @@ export const leggings: Category = {
     {
       status: "draft",
       slug: "structured-waistband",
-      cardTitle: "High-Rise Compression, Full-Length, Structured Wide Waistband",
+      cardTitle: "Custom Structured Waistband Leggings",
       cardSubline: "Wide, structured waistband panel",
       image: "",
       imageAlt: "Custom high-rise compression leggings manufacturer, structured wide waistband",
@@ -441,7 +435,7 @@ export const leggings: Category = {
     {
       status: "draft",
       slug: "capri",
-      cardTitle: "High-Rise Compression, Capri or 7/8 Length",
+      cardTitle: "Custom High-Rise Capri Leggings",
       cardSubline: "7/8 length, high-rise compression",
       image: "",
       imageAlt: "Custom high-rise capri and 7/8 length compression leggings manufacturer",
@@ -450,7 +444,7 @@ export const leggings: Category = {
     {
       status: "draft",
       slug: "v-back-crossover",
-      cardTitle: "High-Rise Compression, Full-Length, V-Back or Crossover Waistband",
+      cardTitle: "Custom V-Back / Crossover Leggings",
       cardSubline: "V-back or crossover waistband seam",
       image: "",
       imageAlt: "Custom high-rise V-back and crossover waistband leggings manufacturer",
@@ -459,7 +453,7 @@ export const leggings: Category = {
     {
       status: "draft",
       slug: "foldover-waistband",
-      cardTitle: "High-Rise Compression, Full-Length, Foldover Waistband",
+      cardTitle: "Custom Foldover Waistband Leggings",
       cardSubline: "Foldover waistband, two wearable rises",
       image: "",
       imageAlt: "Custom high-rise foldover waistband leggings manufacturer",
@@ -468,7 +462,7 @@ export const leggings: Category = {
     {
       status: "draft",
       slug: "mid-rise-capri",
-      cardTitle: "Mid-Rise Compression, Capri or Cropped Length",
+      cardTitle: "Custom Mid-Rise Capri Leggings",
       cardSubline: "Cropped length, mid-rise compression",
       image: "",
       imageAlt: "Custom mid-rise capri and cropped length compression leggings manufacturer",
@@ -477,7 +471,7 @@ export const leggings: Category = {
     {
       status: "draft",
       slug: "straight-leg",
-      cardTitle: "Mid-Rise Straight-Leg, Full-Length",
+      cardTitle: "Custom Straight-Leg Leggings",
       cardSubline: "Straight, non-tapered leg, mid-rise",
       image: "",
       imageAlt: "Custom mid-rise straight-leg leggings manufacturer, full-length",
@@ -486,7 +480,7 @@ export const leggings: Category = {
     {
       status: "draft",
       slug: "drawcord",
-      cardTitle: "Drawcord Waistband, High-Rise, Full-Length",
+      cardTitle: "Custom Drawcord Waistband Leggings",
       cardSubline: "Exposed drawcord over the waistband",
       image: "",
       imageAlt: "Custom high-rise drawcord waistband leggings manufacturer, full-length",
@@ -495,7 +489,7 @@ export const leggings: Category = {
     {
       status: "draft",
       slug: "mid-rise-flare",
-      cardTitle: "Mid-Rise Flare, Full-Length",
+      cardTitle: "Custom Mid-Rise Flare Leggings",
       cardSubline: "Flared leg from the knee, mid-rise",
       image: "",
       imageAlt: "Custom mid-rise flare leggings manufacturer, full-length",
