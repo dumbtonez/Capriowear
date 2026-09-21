@@ -98,7 +98,8 @@ export function ProductCardMedia({ label, primary, hover, parallax, className }:
     return () => observer.disconnect();
   }, [inView]);
 
-  const showHover = canHover && inView && Boolean(hover?.src);
+  const hoverSrc = canHover && inView ? hover?.src : undefined;
+  const showHover = Boolean(hoverSrc);
 
   // Same "zoom and settle" transform ParallaxMedia.tsx uses (scale-[1.12]
   // translate-y-[3%] -> scale-100 translate-y-0, 1400ms ease-out), reusing
@@ -146,10 +147,10 @@ export function ProductCardMedia({ label, primary, hover, parallax, className }:
             loading="lazy"
             className={cx(media.imageFill, showHover && "transition-opacity duration-[175ms] group-hover:opacity-0")}
           />
-          {showHover ? (
+          {hoverSrc ? (
             <Image
-              src={hover!.src!}
-              alt={hover!.alt || label}
+              src={hoverSrc}
+              alt={hover?.alt || label}
               fill
               sizes={SIZES}
               loading="lazy"

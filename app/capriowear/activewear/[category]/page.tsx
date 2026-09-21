@@ -25,7 +25,7 @@ import { TrustPoints } from "@/components/sections/TrustPoints";
 import { WhatWeCover } from "@/components/sections/WhatWeCover";
 import { header } from "@/components/ui/styles";
 import { categories } from "@/content/activewear/categories";
-import { buildCtaSubline, categoryEntityFaq, isDraftPdpReachable } from "@/content/activewear/pdpShared";
+import { buildCtaSubline, categoryEntityFaq, isDraftPdpReachable, isPublished } from "@/content/activewear/pdpShared";
 import { home } from "@/content/home";
 import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 import { breadcrumbSchema, collectionPageSchema, faqSchema } from "@/lib/schema";
@@ -96,7 +96,7 @@ export default async function CategoryPage({ params }: PageProps<"/capriowear/ac
   // exist, and an empty ItemList is exactly that: a listing schema for a
   // list of nothing. The PLP itself stays live/indexed regardless; only
   // this one schema block is conditional.
-  const publishedStyleCards = data.styleCards.filter((card) => card.status === "published");
+  const publishedStyleCards = data.styleCards.filter(isPublished);
 
   return (
     <>

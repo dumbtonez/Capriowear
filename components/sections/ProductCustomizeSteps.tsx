@@ -22,13 +22,9 @@ import type { pdpCustomizationSteps } from "@/content/activewear/pdpShared";
 export type ProductCustomizeStepsProps = {
   content: typeof pdpCustomizationSteps;
   /**
-   * Owner trial, 2026-09-04: "For Customization the title and eyebrow
-   * might can align on the left, let's try it on one page and lock if all
-   * good." Defaults to `"center"` (this section's own confirmed Figma
-   * layout, unchanged everywhere else) -- only the one PDP the owner is
-   * trialling this on passes `"left"`. Roll out sitewide (drop this prop
-   * back to a plain `align="center"` call, or flip the default) once
-   * confirmed.
+   * Title/eyebrow alignment. Defaults to `"center"` (this section's own
+   * confirmed Figma layout), which is what every PDP uses: the 2026-09-04
+   * single-page `"left"` trial was ended and its hardcoded call site removed.
    */
   align?: "left" | "center";
 };

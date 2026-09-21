@@ -287,6 +287,16 @@ export const pdpFaqOperational: FaqEntry[] = [
 ];
 
 /**
+ * The single "is this style live?" check. Every place that gates on
+ * publication (robots/noindex, Product and FAQPage JSON-LD, sitemap, the PLP
+ * ItemList, sibling links, route reachability) calls this instead of
+ * repeating `status === "published"`, so the gate cannot drift.
+ */
+export function isPublished(card: { status: "published" | "draft" }): boolean {
+  return card.status === "published";
+}
+
+/**
  * The one sitewide rule for a draft PDP that is ready to review: a
  * `"draft"` activewear style with real PDP content (a `pdpHeading` and
  * `specifications`) renders by direct URL and its PLP card is a real link.

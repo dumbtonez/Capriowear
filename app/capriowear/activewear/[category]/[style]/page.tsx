@@ -38,6 +38,7 @@ import { categories } from "@/content/activewear/categories";
 import {
   buildCtaSubline,
   isDraftPdpReachable,
+  isPublished,
   categoryEntityFaq,
   pdpCustomizationPills,
   pdpCustomizationSteps,
@@ -64,7 +65,7 @@ import { breadcrumbSchema, faqSchema, productSchema } from "@/lib/schema";
 // this helper, so a reachable draft stays noindexed/schema-less/out of the
 // sitemap exactly like any other draft.
 function isReachable(card: { status: "published" | "draft"; pdpHeading?: string; specifications?: unknown[] }) {
-  return card.status === "published" || isDraftPdpReachable(card);
+  return isPublished(card) || isDraftPdpReachable(card);
 }
 
 export function generateStaticParams() {
@@ -127,7 +128,7 @@ export async function generateMetadata({
     // explicitly noindexed -- reads `status`, never `internalPreview`, so
     // this is a no-op for every genuinely `"published"` PDP. Ported
     // verbatim from the Gear route's own identical override.
-    ...(data.product.status !== "published" ? { robots: { index: false, follow: false } } : {}),
+    ...(!isPublished(data.product) ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       title: fullTitle,
       description,
@@ -247,7 +248,7 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
             draft-with-content style (owner spec, 2026-09-18) --
             gated on `status` alone, never `isReachable()`, so a page that's
             reachable for internal review still ships no Product JSON-LD. */}
-        {data.product.status === "published" ? (
+        {isPublished(data.product) ? (
           <JsonLd
             data={productSchema({
               name: heading,
@@ -420,14 +421,8 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
             style-specific -- content lives in pdpShared.ts. Node ID order
             (634:5070 ProductRelatedStyles above, 634:5153 this section,
             634:5189 TrustPoints below) places it here, between the two. */}
-        {/* align="left" trial (owner, 2026-09-04: "the title and eyebrow
-            might can align on the left, let's try it on one page and lock
-            if all good") -- scoped to this one published style only
-            (`high-waisted-compression`), not sitewide, until confirmed;
-            every other PDP keeps the component's own default `"center"`. */}
         <ProductCustomizeSteps
           content={data.product.pdpCustomizationSteps ?? data.category.pdpCustomizationSteps ?? pdpCustomizationSteps}
-          align={data.product.slug === "high-waisted-compression" ? "left" : "center"}
         />
 
         {/* TrustPoints (Figma node 634:5189, 2026-09-01) -- the exact same
@@ -481,7 +476,7 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
         <Faq content={{ h2: "Top questions from B2B buyers", items: faqItems }} />
         {/* Withheld for a draft-with-content style, same reasoning
             as the Product schema above (owner spec, 2026-09-18). */}
-        {data.product.status === "published" ? <JsonLd data={faqSchema(faqItems)} /> : null}
+        {isPublished(data.product) ? <JsonLd data={faqSchema(faqItems)} /> : null}
 
         {/* ProductCategoryLinks (SEO audit, 2026-09-02, rule 6) -- built
             alongside this page but never actually rendered here until now
@@ -496,7 +491,7 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
           categoryLabel={data.category.menuLabel}
           categoryHref={`/capriowear/activewear/${data.category.slug}`}
           siblings={data.category.styleCards
-            .filter((card) => card.status === "published" && card.slug !== data.product.slug)
+            .filter((card) => isPublished(card) && card.slug !== data.product.slug)
             .map((card) => ({ label: card.cardTitle, href: card.href }))}
         />
 

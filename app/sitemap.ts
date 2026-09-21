@@ -8,6 +8,7 @@
 import type { MetadataRoute } from "next";
 
 import { categories } from "@/content/activewear/categories";
+import { isPublished } from "@/content/activewear/pdpShared";
 import { boxingMmaCategories } from "@/content/gear/boxing-and-mma/categories";
 import { liftingGearsCategories } from "@/content/gear/lifting-gears/categories";
 import { ALLOW_INDEXING, SITE_URL } from "@/content/site";
@@ -167,7 +168,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // what's actually live.
     ...Object.values(categories).flatMap((category) =>
       category.styleCards
-        .filter((card) => card.status === "published")
+        .filter(isPublished)
         .map((card) => ({
           url: `${SITE_URL}${card.href}`,
           lastModified: new Date(),
@@ -189,7 +190,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...Object.values(sports).flatMap((sport) =>
       sport.styleCards
-        .filter((card) => card.status === "published")
+        .filter(isPublished)
         .map((card) => ({
           url: `${SITE_URL}${card.href}`,
           lastModified: new Date(),
@@ -232,7 +233,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       .filter((category) => category.status !== "draft")
       .flatMap((category) =>
         category.styleCards
-          .filter((card) => card.status === "published")
+          .filter(isPublished)
           .map((card) => ({
             url: `${SITE_URL}${card.href}`,
             lastModified: new Date(),
@@ -250,7 +251,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       })),
     ...Object.values(boxingMmaCategories).filter((category) => category.status !== "draft").flatMap((category) =>
       category.styleCards
-        .filter((card) => card.status === "published")
+        .filter(isPublished)
         .map((card) => ({
           url: `${SITE_URL}${card.href}`,
           lastModified: new Date(),
