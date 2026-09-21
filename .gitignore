@@ -61,3 +61,12 @@ next-env.d.ts
 # unused files by name rather than the whole directory.
 /public/Product images/Placeholder 2 .png
 /public/Product images/Placeholder Image.png
+
+# Local-only duplicates (2026-09-21): byte-identical copies of tracked or
+# historical files (public/factory-test/*, product-images/*), kept on disk
+# for local reference. Ignored so a CLI deploy or an accidental `git add .`
+# can never sweep ~27 MB of duplicates into a deployment.
+/public/Product images 2/
+/public/Test/
+/tests/*.JPG
+/Claude outputs/
