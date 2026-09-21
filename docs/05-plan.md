@@ -3377,3 +3377,7 @@ Replaces the Leggings-only `Category.draftPdpReachable` flag and Joggers' `inter
 Full PDP content for the existing `flare` draft card in `content/activewear/leggings.ts`, same shape as SKU 2. Draft, reachable by URL and a clickable PLP card via the sitewide `isDraftPdpReachable()` rule; noindex/nofollow, out of the sitemap, BreadcrumbList only. No GSM figure (weight "Pending, confirmed on your sample"); composition ranges labeled directional research; standard elastic waistband only. Per-style `pdpQualityPoints` adds the flare-seam drape line; per-style customize steps as on SKU 2. Gallery is alt-only placeholders: real photography needed before launch.
 
 Flagged: the shared operational FAQ block is used as live on every PDP (not the reworded operational questions in the brief); the entity FAQ is the generated one; the brief's "Leggings-scoped `draftPdpReachable`, card stays non-clickable" is superseded by the sitewide rule, so the card is now a link.
+
+## Leggings PDPs: "spandex" not "elastane", consistent blend naming, 2026-09-21
+
+Terminology-consistency fix across SKU 1, 2 and 3 in `content/activewear/leggings.ts` (13 lines): every "elastane" is now "spandex", and "nylon-elastane" / "polyester-elastane" now read "nylon spandex" / "polyester spandex", matching the fabric chip row. Covers descriptions, meta descriptions, the fabric FAQ, the spec Fabric row and the customize Fabric step. No other copy changed.
