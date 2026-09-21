@@ -3254,3 +3254,7 @@ Gear PLP/PDP/hub pages were building `openGraph.title`/`twitter.title`/`siteName
 ## Nav lockdown reverted; noindex/nofollow/sitemap exclusion is the only draft protection, 2026-09-21
 
 Owner correction: nobody outside the team has these URLs, so hiding draft Gear categories in the sidebar was unnecessary. Reverted a4cc53f (`CategoryFilters` active-draft branch removed; Belts and Boxing Gloves nav flags removed) and removed the `status: "draft"` flag from the Wraps and Gloves & Grips nav entries, so Belts, Wraps, Gloves & Grips and Boxing Gloves are all normal sidebar links; Gloves & Grips hub card restored. Category/style `status` now drives noindex, nofollow, sitemap exclusion and schema withholding only, never link visibility. Nav entries with no route (Bands, Accessories, Coaching Gears, Protective Gears, MMA) keep `status: "draft"` purely so they do not link to a 404.
+
+## En/em dashes removed from Belts copy, 2026-09-21
+
+Scan of all Gear content (Belts, Wraps, Gloves & Grips) found dashes only in `content/gear/lifting-gears/weight-lifting-belts.ts` (Lever Belt and Prong Belt); ranges now read "7mm to 13mm" / "10 to 14 days", two em dashes became a comma and a period. The Gear hubs and Boxing Gloves placeholder copy still contains "--" ("Placeholder -- real copy is a later phase"), left as the existing placeholder pattern.

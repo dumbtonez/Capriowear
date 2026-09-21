@@ -206,19 +206,19 @@ export const weightLiftingBelts: Category = {
       // "Capriosports" (not "Caprio") is the metadata-register name
       // (content/capriosports/organization.ts). Dropped the suffix here so
       // the template's own "| Capriosports" is the only one that renders.
-      pdpMetaTitle: "Lever Belt | 7mm–13mm Leather Powerlifting Belt",
+      pdpMetaTitle: "Lever Belt | 7mm to 13mm Leather Powerlifting Belt",
       // "MOQ from [X]" in the brief -- filled in as 50, matching this
       // style's own already-published MOQ everywhere else on the page
       // (pdpSpecHighlights, entityAnswer, category-wide trustBullets).
       pdpMetaDescription:
-        "Custom lever belts in 7mm to 13mm leather, private-label ready. Quick-release buckle, your branding, MOQ from 50. Samples in 10–14 days.",
+        "Custom lever belts in 7mm to 13mm leather, private-label ready. Quick-release buckle, your branding, MOQ from 50. Samples in 10 to 14 days.",
       material: "Genuine leather, cowhide-based",
       // Per-style override (see `StyleCard.pdpFabricPills`'s own comment)
       // -- the category's own shared `fabricPills` lists every material
       // tier the whole Weight Lifting Belts line offers (leather/nylon/
       // neoprene), not this specific style's own build, which also
       // includes its width and buckle type (owner spec, 2026-09-16).
-      pdpFabricPills: ["Genuine Leather (7mm–13mm)", "4in width", "Lever buckle"],
+      pdpFabricPills: ["Genuine Leather (7mm to 13mm)", "4in width", "Lever buckle"],
       // Per-style override (see `StyleCard.pdpCustomizationSteps`'s own
       // comment) -- this content was previously sitting at the category
       // level, wrongly labeled as shared across every belt style, when
@@ -234,7 +234,7 @@ export const weightLiftingBelts: Category = {
         steps: [
           {
             title: "Material & thickness",
-            body: "Choose your thickness across the 7mm to 13mm range, buckle finish, and branding placement — we build to your spec sheet, not a fixed catalog size.",
+            body: "Choose your thickness across the 7mm to 13mm range, buckle finish, and branding placement. We build to your spec sheet, not a fixed catalog size.",
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Material and thickness" },
           },
           {
@@ -273,7 +273,7 @@ export const weightLiftingBelts: Category = {
       pdpQualitySubline:
         "We confirm the thickness, the buckle action, and the stitching on your sample before the full order is produced.",
       pdpQualityPoints: [
-        "Every lever belt is genuine leather only, tested for stitch and rivet strength at your specified thickness (7mm–13mm) before it ships",
+        "Every lever belt is genuine leather only, tested for stitch and rivet strength at your specified thickness (7mm to 13mm) before it ships",
         "Lever buckle action tested for smooth, secure release under load",
         "Stitching checked for even tension around the full perimeter",
         "Digital proof and sample approved before we cut your production run",
@@ -321,7 +321,7 @@ export const weightLiftingBelts: Category = {
       faqs: [
         {
           q: "What thickness should I choose across the 7mm to 13mm range?",
-          a: "Thinner belts (7mm–10mm) suit lifters who want more mobility and faster bracing feedback; thicker belts (10mm–13mm) suit max-effort squat and deadlift work where rigidity matters most. Tell us your athlete profile and we'll recommend a tier — or supply your own spec.",
+          a: "Thinner belts (7mm to 10mm) suit lifters who want more mobility and faster bracing feedback; thicker belts (10mm to 13mm) suit max-effort squat and deadlift work where rigidity matters most. Tell us your athlete profile and we'll recommend a tier, or supply your own spec.",
         },
         {
           q: "Why a lever buckle instead of a prong?",
@@ -368,9 +368,9 @@ export const weightLiftingBelts: Category = {
       // (pdpSpecHighlights, entityAnswer, category-wide trustBullets) --
       // same fill applied to the Lever Belt's own meta description.
       pdpMetaDescription:
-        "Custom prong belts in 7mm to 13mm leather, private-label ready. Classic single/double-prong buckle, your branding, MOQ from 50. Samples in 10–14 days.",
+        "Custom prong belts in 7mm to 13mm leather, private-label ready. Classic single/double-prong buckle, your branding, MOQ from 50. Samples in 10 to 14 days.",
       material: "Genuine leather, cowhide-based",
-      pdpFabricPills: ["Genuine Leather (7mm–13mm)", "Single or double prong", "4in width"],
+      pdpFabricPills: ["Genuine Leather (7mm to 13mm)", "Single or double prong", "4in width"],
       // Per-style override (see `StyleCard.pdpCustomizationSteps`'s own
       // comment) -- this style's own 7 "How we customize" bullets (owner
       // brief, 2026-09-16), not the Lever Belt's content that was
@@ -386,7 +386,7 @@ export const weightLiftingBelts: Category = {
         steps: [
           {
             title: "Thickness and prong count",
-            body: "Choose your thickness across the 7mm to 13mm range, prong style (single or double), and branding — built to your spec sheet, not a fixed catalog size.",
+            body: "Choose your thickness across the 7mm to 13mm range, prong style (single or double), and branding, built to your spec sheet, not a fixed catalog size.",
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Thickness and prong count" },
           },
           {
@@ -429,7 +429,7 @@ export const weightLiftingBelts: Category = {
       pdpQualitySubline:
         "We confirm the thickness, the prong action, and the stitching on your sample before the full order is produced.",
       pdpQualityPoints: [
-        "Every prong belt is genuine leather only, tested for stitch and prong-hole strength at your specified thickness (7mm–13mm) before it ships",
+        "Every prong belt is genuine leather only, tested for stitch and prong-hole strength at your specified thickness (7mm to 13mm) before it ships",
         "Prong and hole spacing tested for a secure, consistent fit across the adjustment range",
         "Stitching checked for even tension around the full perimeter",
         "Digital proof and sample approved before we cut your production run",
