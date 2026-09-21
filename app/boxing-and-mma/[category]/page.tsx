@@ -44,6 +44,8 @@ export async function generateMetadata({
     title: data.metaTitle,
     description: data.metaDescription,
     alternates: { canonical },
+    // Category-level draft gate, same as app/lifting-gears/[category]/page.tsx.
+    ...(data.status === "draft" ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       title: fullTitle,
       description: data.metaDescription,

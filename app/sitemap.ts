@@ -260,13 +260,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.7,
           })),
       ),
-    ...Object.values(boxingMmaCategories).map((category) => ({
-      url: `${SITE_URL}/boxing-and-mma/${category.slug}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    })),
-    ...Object.values(boxingMmaCategories).flatMap((category) =>
+    ...Object.values(boxingMmaCategories)
+      .filter((category) => category.status !== "draft")
+      .map((category) => ({
+        url: `${SITE_URL}/boxing-and-mma/${category.slug}`,
+        lastModified: new Date(),
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      })),
+    ...Object.values(boxingMmaCategories).filter((category) => category.status !== "draft").flatMap((category) =>
       category.styleCards
         .filter((card) => card.status === "published")
         .map((card) => ({

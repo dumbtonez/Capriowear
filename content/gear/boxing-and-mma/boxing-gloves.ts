@@ -6,6 +6,7 @@ import type { Category } from "../../activewear/types";
 export const boxingGloves: Category = {
   slug: "boxing-gloves",
   group: "Gear",
+  status: "draft",
   menuLabel: "Boxing Gloves",
   manufacturerNoun: "Boxing Glove",
   productNounPlural: "boxing gloves",
