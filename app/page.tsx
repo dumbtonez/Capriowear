@@ -48,7 +48,6 @@ export const metadata: Metadata = {
   title: capriosportsHome.metaTitle,
   description: capriosportsHome.metaDescription,
   alternates: { canonical: SITE_URL },
-  robots: { index: true, follow: true },
   openGraph: {
     title: `${capriosportsHome.metaTitle} | ${PARENT_SITE_NAME}`,
     description: capriosportsHome.metaDescription,

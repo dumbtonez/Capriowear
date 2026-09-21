@@ -3262,3 +3262,7 @@ Scan of all Gear content (Belts, Wraps, Gloves & Grips) found dashes only in `co
 ## Capriosports parent stub pages: noindexed, out of sitemap, Capriosports metadata, 2026-09-21
 
 `/contact`, `/terms`, `/responsible-manufacturing`, `/our-people`, `/who-we-are` (root-level placeholder pages, no Capriowear counterparts): explicit `robots: { index: false, follow: false }` per page, removed from `app/sitemap.ts`, OG/Twitter `siteName` and title suffix switched from `SITE_NAME` to `PARENT_SITE_NAME` (no `group` exists here to key `siteNameForGroup` on). Four `metaTitle`s in `content/capriosports/stubPages.ts` had "| Capriosports" baked in, doubling it with the layout template; stripped. Still linked normally from the homepage; no draft/status field is involved.
+
+## Homepage inherits the sitewide indexing switch, 2026-09-21
+
+Removed the hardcoded `robots: { index: true, follow: true }` from `app/page.tsx`, which bypassed `ALLOW_INDEXING` and left the live homepage `index, follow` while every other page was `noindex`. The homepage now renders `noindex, nofollow` until `NEXT_PUBLIC_ALLOW_INDEXING=true`.
