@@ -13,6 +13,8 @@ export type ProductSchemaInput = {
   image?: string;
   /** Short spec line, e.g. "Nylon or polyamide + elastane, 4-way stretch" -- StyleCard.material. */
   material?: string;
+  /** The style's own code, e.g. "CAP-LEG-01" -- StyleCard.sku. Omitted from the schema when a style has none. */
+  sku?: string;
   /**
    * The calling PDP's own `Category.group` (already the sitewide Capriowear
    * vs. Gear discriminator -- "Activewear"/"Teamwear" vs. "Gear", see every
@@ -320,7 +322,7 @@ export function collectionOfPagesSchema(name: string, url: string, description: 
 // re-flagging: Capriowear has no fixed public per-unit price to publish
 // (quote-based, made-to-order), so omitting `offers` is the only schema.org
 // -valid option here, not an incomplete implementation.
-export function productSchema({ name, description, image, material, group }: ProductSchemaInput) {
+export function productSchema({ name, description, image, material, sku, group }: ProductSchemaInput) {
   // Gear (group: "Gear" -- Lifting Gears, Boxing & MMA) has its own brand
   // identity, "Caprio," separate from its sibling division Capriowear
   // (group: "Activewear"/"Teamwear"), matching the "Caprio" name already
@@ -339,6 +341,7 @@ export function productSchema({ name, description, image, material, group }: Pro
     manufacturer: { "@type": "Organization", name: ORGANIZATION.legalName },
     ...(image ? { image } : {}),
     ...(material ? { material } : {}),
+    ...(sku ? { sku } : {}),
   };
 }
 

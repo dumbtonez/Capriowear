@@ -254,6 +254,7 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
               description,
               image: productImage,
               material: data.product.material,
+              sku: data.product.sku,
               group: data.category.group,
             })}
           />

@@ -329,7 +329,7 @@ export const leggings: Category = {
       // also drops "nylon or polyamide," redundant since polyamide is
       // nylon.
       pdpMetaDescription:
-        "Custom high-rise compression leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom high-rise compression leggings manufacturer, OEM, ODM and private label. Squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, DDP worldwide.",
       material: "Nylon/Spandex or Polyester/Spandex, 4-way stretch",
       faqs: [
         {
@@ -449,7 +449,7 @@ export const leggings: Category = {
       ],
       pdpMetaTitle: "Custom Mid-Rise Compression Leggings Manufacturer",
       pdpMetaDescription:
-        "Custom mid-rise compression leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom mid-rise compression leggings manufacturer, OEM, ODM and private label. Squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, DDP worldwide.",
       faqs: [
         {
           q: "What fabric is the mid-rise compression legging made from?",
@@ -536,7 +536,7 @@ export const leggings: Category = {
       ],
       pdpMetaTitle: "Custom High-Rise Flare Leggings Manufacturer",
       pdpMetaDescription:
-        "Custom high-rise flare leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, flared leg from the knee, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom high-rise flare leggings manufacturer, OEM, ODM and private label. Squat-proof 4-way stretch, flared leg from the knee, DDP worldwide.",
       faqs: [
         {
           q: "What fabric is the high-rise flare legging made from?",
@@ -639,7 +639,7 @@ export const leggings: Category = {
       ],
       pdpMetaTitle: "Custom Structured Waistband Leggings Manufacturer",
       pdpMetaDescription:
-        "Custom structured wide waistband leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, wide structured waistband panel, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom structured waistband leggings manufacturer, OEM, ODM and private label. Squat-proof 4-way stretch, wide structured waistband panel, DDP worldwide.",
       faqs: [
         {
           q: "What fabric is the structured waistband legging made from?",
@@ -739,7 +739,7 @@ export const leggings: Category = {
       ],
       pdpMetaTitle: "Custom High-Rise Capri Leggings Manufacturer",
       pdpMetaDescription:
-        "Custom high-rise 7/8 or capri leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom high-rise capri or 7/8 leggings manufacturer, OEM, ODM and private label. Squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, DDP worldwide.",
       faqs: [
         {
           q: "What fabric is the high-rise capri legging made from?",
@@ -838,7 +838,7 @@ export const leggings: Category = {
       ],
       pdpMetaTitle: "Custom V-Back / Crossover Leggings Manufacturer",
       pdpMetaDescription:
-        "Custom V-back or crossover waistband leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom V-back or crossover waistband leggings manufacturer, OEM, ODM and private label. Squat-proof 4-way stretch, DDP worldwide.",
       faqs: [
         {
           q: "What fabric is the V-back or crossover legging made from?",
@@ -938,7 +938,7 @@ export const leggings: Category = {
       ],
       pdpMetaTitle: "Custom Foldover Waistband Leggings Manufacturer",
       pdpMetaDescription:
-        "Custom foldover waistband leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, wearable at two rise heights, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom foldover waistband leggings manufacturer, OEM, ODM and private label. Squat-proof 4-way stretch, wearable at two rise heights, DDP worldwide.",
       faqs: [
         {
           q: "What fabric is the foldover waistband legging made from?",
@@ -1036,7 +1036,7 @@ export const leggings: Category = {
       ],
       pdpMetaTitle: "Custom Mid-Rise Capri Leggings Manufacturer",
       pdpMetaDescription:
-        "Custom mid-rise capri or cropped leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom mid-rise capri or cropped leggings manufacturer, OEM, ODM and private label. Squat-proof 4-way stretch, DDP worldwide.",
       faqs: [
         {
           q: "What fabric is the mid-rise capri legging made from?",
@@ -1135,7 +1135,7 @@ export const leggings: Category = {
       ],
       pdpMetaTitle: "Custom Mid-Rise Straight-Leg Leggings Manufacturer",
       pdpMetaDescription:
-        "Custom mid-rise straight-leg leggings manufacturer, OEM, ODM and private label, non-tapered leg, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom mid-rise straight-leg leggings manufacturer, OEM, ODM and private label. Non-tapered leg, squat-proof 4-way stretch, DDP worldwide.",
       faqs: [
         {
           q: "What fabric is the straight-leg legging made from?",
@@ -1238,7 +1238,7 @@ export const leggings: Category = {
       ],
       pdpMetaTitle: "Custom Drawcord Waistband Leggings Manufacturer",
       pdpMetaDescription:
-        "Custom drawcord waistband leggings manufacturer, OEM, ODM and private label, exposed drawcord over a high-rise compression waistband, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom drawcord waistband leggings manufacturer, OEM, ODM and private label. Exposed drawcord over a compression waistband, DDP worldwide.",
       faqs: [
         {
           q: "What fabric is the drawcord waistband legging made from?",
@@ -1345,7 +1345,7 @@ export const leggings: Category = {
       ],
       pdpMetaTitle: "Custom Mid-Rise Flare Leggings Manufacturer",
       pdpMetaDescription:
-        "Custom mid-rise flare leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, flared leg from the knee, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom mid-rise flare leggings manufacturer, OEM, ODM and private label. Squat-proof 4-way stretch, flared leg from the knee, DDP worldwide.",
       faqs: [
         {
           q: "What fabric is the mid-rise flare legging made from?",
@@ -1457,7 +1457,7 @@ export const leggings: Category = {
       ],
       pdpMetaTitle: "Custom V-Panel Capri Leggings Manufacturer",
       pdpMetaDescription:
-        "Custom V-panel capri leggings manufacturer, OEM, ODM and private label, double-layered semi-sheer front panel, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom V-panel capri leggings manufacturer, OEM, ODM and private label. Double-layered semi-sheer front panel, squat-proof 4-way stretch, DDP worldwide.",
       faqs: [
         {
           q: "What fabric is the V-panel capri legging made from?",
@@ -1564,7 +1564,7 @@ export const leggings: Category = {
       ],
       pdpMetaTitle: "Custom Skirt-Overlay Leggings Manufacturer",
       pdpMetaDescription:
-        "Custom skirt-overlay leggings manufacturer, OEM, ODM and private label, relaxed straight leg with a draped skirt panel at the hip, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom skirt-overlay leggings manufacturer, OEM, ODM and private label. Relaxed straight leg with a draped skirt panel at the hip, DDP worldwide.",
       faqs: [
         {
           q: "What fabric is the skirt-overlay legging made from?",
