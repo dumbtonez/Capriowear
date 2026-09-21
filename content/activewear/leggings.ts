@@ -55,7 +55,7 @@ export const leggings: Category = {
   // truncation point even though it fit this project's own ~270-char AEO
   // allowance. Owner's exact given copy.
   metaDescription:
-    "Custom leggings manufacturer, high-rise compression, squat-proof, flare and capri styles, 300 to 500 GSM, low MOQ. Capriowear.",
+    "Custom leggings manufacturer, high-rise compression, squat-proof, flare and capri styles, low MOQ. Capriowear.",
   // Figma-confirmed real copy (node 502:3310, revised 2026-08-28), same
   // treatment as h1 -- not a placeholder. Replaces the earlier single
   // quickAnswer subline, dropped from this design entirely.
@@ -116,8 +116,8 @@ export const leggings: Category = {
     },
   ],
   fabricNote: [
-    { text: "Weights from " },
-    { text: "300 to 500 GSM", bold: true },
+    { text: "Fabric weight " },
+    { text: "confirmed on your sample", bold: true },
     { text: ". Swatches before every bulk run, and we can source or match a " },
     { text: "specific fabric", bold: true },
     { text: " from your reference." },
@@ -141,7 +141,7 @@ export const leggings: Category = {
   coverageEyebrow: "CUSTOMIZATION",
   coverageHeading: "From custom fabric to packaging design",
   coverageItems: [
-    { title: "Fabric", body: "Nylon, poly and recycled blends, 300 to 500 GSM" },
+    { title: "Fabric", body: "Nylon, poly and recycled blends, weight confirmed on your sample" },
     { title: "Color and print", body: "Custom colors with Pantone matching, sublimation, screen, DTF" },
     { title: "Style and fit", body: "Patterns, waistband, length, graded XS to 5XL." },
     { title: "Branding", body: "Your logos by print, silicone, heat transfer or embroidery" },
@@ -180,7 +180,7 @@ export const leggings: Category = {
     },
     {
       q: "What is the ideal GSM for compression leggings?",
-      a: "Nylon or polyamide with spandex, the 70 to 85% to 15 to 30% blend used by leading brands, plus recycled polyester options, in weights from 300 to 500 GSM, the range that holds a true compression fit.",
+      a: "Fabric weight is confirmed on your sample, not fixed to a single number. We build compression leggings in Nylon/Spandex or Polyester/Spandex 4-way stretch blends, plus Recycled Polyester/Spandex options, and confirm the weight that holds a true compression fit on your sample before bulk.",
     },
     {
       q: "What legging styles can you make?",
@@ -330,7 +330,7 @@ export const leggings: Category = {
       // nylon.
       pdpMetaDescription:
         "Custom high-rise compression leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch nylon spandex or polyester spandex, from 50 pieces, any fabric and color, DDP worldwide.",
-      material: "70 to 85% nylon or polyamide, 15 to 30% spandex, 4-way stretch",
+      material: "Nylon/Spandex or Polyester/Spandex, 4-way stretch",
       faqs: [
         {
           q: "What fabric is the high-rise compression legging made from?",
@@ -381,8 +381,12 @@ export const leggings: Category = {
         // polyester + spandex", not this style's actual composition). Now
         // the real composition, matching `fabricOptions[0]`'s own `fabric`
         // field for this style's base fabric, plus the recycled option.
-        { label: "Fabric", value: "Nylon or polyamide with spandex, 70 to 85% / 15 to 30%, recycled polyester option" },
-        { label: "Weight", value: "300 to 500 GSM" },
+        {
+          label: "Fabric",
+          value:
+            "Directional category-research range only, not a confirmed spec for this product: Nylon/Spandex 70 to 86% nylon / 14 to 30% spandex, or Polyester/Spandex 72 to 89% poly / 11 to 28% spandex. This product's own confirmed composition is pending sample confirmation.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample" },
         { label: "Stretch and support", value: "4-way stretch, squat-proof, compression hold" },
         { label: "Waistband", value: "High-rise, standard elastic waistband, no secondary waistband construction" },
         { label: "Construction", value: "Gusset, flatlock finishing, optional pockets and drawcord" },
