@@ -812,6 +812,96 @@ export const leggings: Category = {
       image: "",
       imageAlt: "Custom high-rise V-back and crossover waistband leggings manufacturer",
       href: "/capriowear/activewear/leggings/v-back-crossover",
+      // Full PDP content for SKU 6 (owner spec, 2026-09-21), draft. Reachable
+      // by URL and a clickable PLP card via the sitewide draft-PDP rule
+      // (`isDraftPdpReachable()`), still noindex/nofollow, out of the
+      // sitemap, no Product/FAQPage JSON-LD. Only facts from the SKU 6 spec:
+      // no GSM figure of any kind (weight is "pending, confirmed on your
+      // sample"), composition is a directional research range pending
+      // sample confirmation. The V-back or crossover seam at the waistband
+      // is this SKU's differentiator (distinct from the plain standard
+      // elastic band on SKU 1/2/3/5 and SKU 4's structured wide panel).
+      // `images` are alt-only placeholders: real product photography is
+      // needed before this can go live.
+      pdpTitle: "V-Back / Crossover",
+      sku: "CAP-LEG-06",
+      pdpHeading: "Custom V-Back / Crossover Leggings Manufacturer",
+      pdpDescription:
+        "High-rise compression leggings with a V-back or crossover waistband seam, custom and private label, in a squat-proof Nylon/Spandex or Polyester/Spandex 4-way stretch blend, full-length, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "V-back crossover leggings, front view" },
+        { alt: "V-back crossover leggings, back view showing waistband seam" },
+        { alt: "V-back crossover leggings, side profile" },
+        { alt: "V-back crossover leggings, fabric close-up" },
+        { alt: "V-back crossover leggings, worn on model" },
+        { alt: "V-back crossover leggings, flat lay" },
+      ],
+      pdpMetaTitle: "Custom V-Back / Crossover Leggings Manufacturer",
+      pdpMetaDescription:
+        "Custom V-back or crossover waistband leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+      faqs: [
+        {
+          q: "What fabric is the V-back or crossover legging made from?",
+          a: "A Nylon/Spandex or Polyester/Spandex 4-way stretch blend, in the composition range typical of comparable premium compression leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "What does the V-back or crossover waistband actually look like?",
+          a: "A visible seam detail at the back of the waistband, either a V shape or a crossover, built into the cut-and-sew pattern rather than added afterward. We confirm the exact shape and seam placement on your sample.",
+        },
+        {
+          q: "Is this the same base legging as your High-Rise Compression style?",
+          a: "Same core silhouette and fabric family, with the V-back or crossover waistband seam as the distinguishing feature. Both are separately validated, real styles.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "High-Rise Compression", slug: "high-waisted-compression", href: "/capriowear/activewear/leggings" },
+        { label: "Flare", slug: "flare", href: "/capriowear/activewear/leggings" },
+        { label: "Structured Waistband", slug: "structured-waistband", href: "/capriowear/activewear/leggings" },
+        { label: "Capri", slug: "capri", href: "/capriowear/activewear/leggings" },
+        { label: "See All", href: "/capriowear/activewear/leggings" },
+      ],
+      specifications: [
+        { label: "Style", value: "High-rise compression legging, full-length, V-back or crossover waistband seam (base type)" },
+        {
+          label: "Fabric",
+          value:
+            "Nylon/Spandex 70 to 85% / 15 to 30%, or Polyester/Spandex 72 to 89% / 11 to 28%, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample" },
+        { label: "Stretch and support", value: "4-way stretch, squat-proof, compression hold" },
+        { label: "Waistband", value: "High-rise, V-back or crossover seam detail at the waistband" },
+        {
+          label: "Construction",
+          value:
+            "Cut-and-sew, V-back or crossover seam achieved through pattern pieces at the waistband, side or princess seams through the leg, not knit-to-shape. Gusset and flatlock finishing available.",
+        },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "V-back crossover leggings, construction detail" },
+      pdpQualityPoints: [
+        "Opacity tested, squat-proof",
+        "Seams reinforced and stress-tested",
+        "Waistband seam checked for strength and lie flat under stretch",
+        "Waistbands hold their recovery",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
