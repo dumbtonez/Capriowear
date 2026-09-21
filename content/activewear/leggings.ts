@@ -506,6 +506,99 @@ export const leggings: Category = {
       image: "",
       imageAlt: "Custom high-rise flare leggings manufacturer, full-length",
       href: "/capriowear/activewear/leggings/flare",
+      // Full PDP content for SKU 3 (owner spec, 2026-09-21), draft. Reachable
+      // by URL and a clickable PLP card via the sitewide draft-PDP rule
+      // (`isDraftPdpReachable()`), still noindex/nofollow, out of the
+      // sitemap, no Product/FAQPage JSON-LD. Only facts from the SKU 3 spec:
+      // no GSM figure of any kind (weight is "pending, confirmed on your
+      // sample"), composition ranges labeled directional category research
+      // and never this product's own confirmed spec, and the waistband is
+      // the standard elastic waistband only (structured/wide, foldover,
+      // drawcord and V-back/crossover belong to other SKUs). `images` are
+      // alt-only placeholders: real product photography is needed before
+      // this can go live.
+      pdpTitle: "High-Rise Flare",
+      sku: "CAP-LEG-03",
+      pdpHeading: "Custom High-Rise Flare Leggings Manufacturer",
+      pdpDescription:
+        "High-rise flare leggings, custom and private label, in a squat-proof nylon-elastane or polyester-elastane 4-way stretch blend, flared leg opening from the knee, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "High-rise flare leggings, front view" },
+        { alt: "High-rise flare leggings, side profile" },
+        { alt: "High-rise flare leggings, flared leg opening" },
+        { alt: "High-rise flare leggings, fabric close-up" },
+        { alt: "High-rise flare leggings, worn on model" },
+        { alt: "High-rise flare leggings, flat lay" },
+      ],
+      pdpMetaTitle: "Custom High-Rise Flare Leggings Manufacturer",
+      pdpMetaDescription:
+        "Custom high-rise flare leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch nylon-elastane or polyester-elastane, flared leg from the knee, from 50 pieces, any fabric and color, DDP worldwide.",
+      faqs: [
+        {
+          q: "What fabric is the high-rise flare legging made from?",
+          a: "A nylon-elastane or polyester-elastane 4-way stretch blend, in the composition range typical of comparable premium compression leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "Is this style squat-proof through the fitted leg?",
+          a: "Yes. We test opacity on your sample before bulk and confirm it holds under stretch and movement, from the waist through the flare.",
+        },
+        {
+          q: "Can I adjust the flare width or where it starts on the leg?",
+          a: "Yes. Flare width and the point where it opens from the leg are adjustable to your tech pack, confirmed on your sample before bulk.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "High-Rise Compression", href: "/capriowear/activewear/leggings/high-waisted-compression" },
+        { label: "Mid-Rise Compression", href: "/capriowear/activewear/leggings" },
+        { label: "V-Back / Crossover", href: "/capriowear/activewear/leggings" },
+        { label: "Capri", href: "/capriowear/activewear/leggings" },
+        { label: "See All", href: "/capriowear/activewear/leggings" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "High-rise flare legging, full-length, standard elastic waistband, flared leg opening from the knee (base type)",
+        },
+        {
+          label: "Fabric",
+          value:
+            "Directional category-research range only, not a confirmed spec for this product: nylon-elastane 70 to 86% nylon / 14 to 30% elastane, or polyester-elastane 72 to 89% poly / 11 to 28% elastane. This product's own confirmed composition is pending sample confirmation.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample" },
+        { label: "Stretch and support", value: "4-way stretch, squat-proof, compression through the leg to the knee" },
+        { label: "Waistband", value: "High-rise, standard elastic waistband, no secondary waistband construction" },
+        {
+          label: "Construction",
+          value:
+            "Cut-and-sew, flare achieved through pattern pieces from the knee to hem, side or princess seams above the flare, gusset and flatlock finishing available",
+        },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "High-rise flare leggings, construction detail" },
+      pdpQualityPoints: [
+        "Opacity tested, squat-proof",
+        "Seams reinforced and stress-tested",
+        "Flare panel seams checked for consistent drape across the size run",
+        "Waistbands hold their recovery",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon-elastane or polyester-elastane, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
