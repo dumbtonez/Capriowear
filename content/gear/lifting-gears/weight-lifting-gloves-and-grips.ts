@@ -187,18 +187,141 @@ export const weightLiftingGlovesAndGrips: Category = {
   ctaReferenceNoun: "piece",
   styleCards: [
     {
+      // Second Gloves & Grips PDP built (owner brief, 2026-09-21), same
+      // `internalPreview` escape hatch and draft gating as Full-Finger
+      // Gloves above. Grip Pads and Finger-Hole Hand Grips have no PDP yet,
+      // so their related-style tags point at the category PLP. `status:
+      // "draft"` until palm material options, padding, and closure
+      // construction are confirmed against a real factory sample.
       status: "draft",
+      internalPreview: true,
       slug: "fingerless-training-gloves",
+      sku: "CAP-GLV-01",
       cardTitle: "Custom Fingerless Training Gloves",
       cardSubline: "Half-finger coverage, padded palm, built to your spec",
       image: "",
       imageAlt: "Custom fingerless training gloves",
       href: "/lifting-gears/weight-lifting-gloves-and-grips/fingerless-training-gloves",
+      pdpTitle: "Fingerless Training Gloves",
+      images: [
+        { alt: "Custom fingerless training glove, front view" },
+        { alt: "Custom fingerless training glove, worn on model, in use" },
+        { alt: "Custom fingerless training glove, palm, padding detail" },
+        { alt: "Custom fingerless training glove, breathable mesh back detail" },
+        { alt: "Custom fingerless training glove, hook-and-loop wrist strap closure detail" },
+        { alt: "Custom fingerless training glove, optional built-in wrist wrap" },
+        { alt: "Custom fingerless training glove, stitching detail" },
+        { alt: "Custom fingerless training glove, color range" },
+        { alt: "Custom fingerless training glove, private label packaging" },
+      ],
+      pdpHeading: "Custom Fingerless Training Gloves Manufacturer",
+      pdpDescription:
+        "A custom and private label fingerless training glove, leather or synthetic palm with a breathable mesh back, built to your spec, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Fingerless Training Gloves Manufacturer",
+      pdpMetaDescription:
+        "Custom fingerless training gloves manufacturer, leather or synthetic palm, hook-and-loop closure. Private label, low MOQ. Sialkot, Pakistan.",
+      material: "Genuine leather, synthetic leather, or neoprene with mesh palm, with breathable mesh back",
+      pdpFabricPills: ["Genuine or synthetic leather", "Neoprene and mesh option", "Breathable mesh back"],
+      pdpCustomizationPills: ["Palm material", "Wrist wrap integration", "Branding", "Private label"],
+      pdpQualityHeading: "A real spec sheet, not a letter size alone",
+      pdpQualitySubline:
+        "We confirm the palm material, the padding, and the stitching on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Palm material and stitching checked against your spec",
+        "Hook-and-loop closure and wrist strap tested under repeated use",
+        "Padding placement and density checked for comfort and durability",
+        "Digital proof and sample approved before we cut your production run",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "ruler", text: "Genuine or synthetic leather palm" },
+        { icon: "lock", text: "Hook-and-loop closure" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          {
+            title: "Palm material",
+            body: "Genuine leather, synthetic leather, or neoprene with mesh, matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Palm material" },
+          },
+          {
+            title: "Padding",
+            body: "Placement and density matched to your reference sample",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Padding" },
+          },
+          {
+            title: "Wrist wrap integration",
+            body: "Optional built-in wrap, to your spec",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Wrist wrap integration" },
+          },
+          {
+            title: "Branding",
+            body: "Embroidery, screen print, silicone print, custom colorway",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Branding" },
+          },
+          {
+            title: "Color",
+            body: "Full color range, matched to your brand palette",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Color" },
+          },
+          {
+            title: "Packaging",
+            body: "Polybags, boxes, retail-ready to your spec",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" },
+          },
+        ],
+      },
+      specifications: [
+        { label: "Style", value: "Fingerless training glove (base type)" },
+        { label: "Finger coverage", value: "Half-finger, palm and back of hand covered, fingers exposed" },
+        {
+          label: "Palm material",
+          value: "Genuine leather, synthetic leather, or neoprene with mesh, or your reference material",
+        },
+        { label: "Back of hand", value: "Breathable mesh" },
+        {
+          label: "Padding",
+          value: "Included at the palm, thickness confirmed on sample, no industry-standard figure exists",
+        },
+        { label: "Closure", value: "Hook-and-loop wrist strap" },
+        { label: "Wrist wrap integration", value: "Optional built-in wrist wrap, to your spec" },
+        { label: "Color", value: "Full color range" },
+        { label: "Branding", value: "Embroidery, screen print, silicone print, custom labels, packaging" },
+      ],
+      relatedStyleTags: [
+        { label: "Full-Finger Gloves", href: "/lifting-gears/weight-lifting-gloves-and-grips/full-finger-gloves" },
+        { label: "Grip Pads", href: "/lifting-gears/weight-lifting-gloves-and-grips" },
+        { label: "Finger-Hole Hand Grips", href: "/lifting-gears/weight-lifting-gloves-and-grips" },
+        { label: "See All", href: "/lifting-gears/weight-lifting-gloves-and-grips" },
+      ],
+      faqs: [
+        {
+          q: "What is the difference between fingerless and full-finger gloves?",
+          a: "Fingerless gloves cover the palm and back of hand with the fingers exposed for grip feel and ventilation, the default style across the industry. Full-finger gloves add knuckle and finger coverage, more commonly positioned for CrossFit-style training. We build both, tell us your preference.",
+        },
+        {
+          q: "Is there a padding thickness spec?",
+          a: "No manufacturer in this category publishes a padding thickness figure, including us at this stage. Padding placement and density are confirmed together on your sample rather than quoted as a number up front.",
+        },
+        {
+          q: "Can you add a built-in wrist wrap?",
+          a: "Yes, a built-in wrist wrap can be added for extra wrist support, tell us if your brand wants this feature.",
+        },
+        {
+          q: "Is there a competition-legal training glove?",
+          a: "No governing body regulates gloves in powerlifting or weightlifting, so there is no dimension or construction standard to build to.",
+        },
+      ],
     },
     {
-      // First Gloves & Grips PDP built (owner brief, 2026-09-21). Fingerless
-      // Training Gloves, Grip Pads and Finger-Hole Hand Grips have no PDP
-      // yet, so their related-style tags point at the category PLP, per
+      // First Gloves & Grips PDP built (owner brief, 2026-09-21). Grip Pads
+      // and Finger-Hole Hand Grips have no PDP yet, so their related-style
+      // tags point at the category PLP, per
       // `relatedStyleTags`' own comment (weight-lifting-belts.ts). Same
       // `internalPreview` escape hatch as every other Gear PDP: reachable by
       // direct URL, noindexed, out of the sitemap, no Product/FAQPage
@@ -306,7 +429,7 @@ export const weightLiftingGlovesAndGrips: Category = {
         { label: "Branding", value: "Embroidery, screen print, silicone print, custom labels, packaging" },
       ],
       relatedStyleTags: [
-        { label: "Fingerless Training Gloves", href: "/lifting-gears/weight-lifting-gloves-and-grips" },
+        { label: "Fingerless Training Gloves", href: "/lifting-gears/weight-lifting-gloves-and-grips/fingerless-training-gloves" },
         { label: "Grip Pads", href: "/lifting-gears/weight-lifting-gloves-and-grips" },
         { label: "Finger-Hole Hand Grips", href: "/lifting-gears/weight-lifting-gloves-and-grips" },
         { label: "See All", href: "/lifting-gears/weight-lifting-gloves-and-grips" },
