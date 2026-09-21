@@ -364,10 +364,10 @@ export const leggings: Category = {
       // Re-point each tag at its own real sibling PDP the moment that
       // style's own status flips to "published."
       relatedStyleTags: [
-        { label: "Custom Mid-Rise Compression Leggings", href: "/capriowear/activewear/leggings" },
-        { label: "Custom High-Rise Flare Leggings", href: "/capriowear/activewear/leggings" },
-        { label: "Custom V-Back / Crossover Leggings", href: "/capriowear/activewear/leggings" },
-        { label: "Custom High-Rise Capri Leggings", href: "/capriowear/activewear/leggings" },
+        { label: "Custom Mid-Rise Compression Leggings", slug: "mid-rise-compression", href: "/capriowear/activewear/leggings" },
+        { label: "Custom High-Rise Flare Leggings", slug: "flare", href: "/capriowear/activewear/leggings" },
+        { label: "Custom V-Back / Crossover Leggings", slug: "v-back-crossover", href: "/capriowear/activewear/leggings" },
+        { label: "Custom High-Rise Capri Leggings", slug: "capri", href: "/capriowear/activewear/leggings" },
         { label: "See All", href: "/capriowear/activewear/leggings" },
       ],
       // Figma-confirmed real copy (node 634:5092, "Specifications",
@@ -461,10 +461,10 @@ export const leggings: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "High-Rise Compression", href: "/capriowear/activewear/leggings/high-waisted-compression" },
-        { label: "Flare", href: "/capriowear/activewear/leggings" },
-        { label: "V-Back / Crossover", href: "/capriowear/activewear/leggings" },
-        { label: "Capri", href: "/capriowear/activewear/leggings" },
+        { label: "High-Rise Compression", slug: "high-waisted-compression", href: "/capriowear/activewear/leggings/high-waisted-compression" },
+        { label: "Flare", slug: "flare", href: "/capriowear/activewear/leggings" },
+        { label: "V-Back / Crossover", slug: "v-back-crossover", href: "/capriowear/activewear/leggings" },
+        { label: "Capri", slug: "capri", href: "/capriowear/activewear/leggings" },
         { label: "See All", href: "/capriowear/activewear/leggings" },
       ],
       specifications: [
@@ -548,10 +548,10 @@ export const leggings: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "High-Rise Compression", href: "/capriowear/activewear/leggings/high-waisted-compression" },
-        { label: "Mid-Rise Compression", href: "/capriowear/activewear/leggings" },
-        { label: "V-Back / Crossover", href: "/capriowear/activewear/leggings" },
-        { label: "Capri", href: "/capriowear/activewear/leggings" },
+        { label: "High-Rise Compression", slug: "high-waisted-compression", href: "/capriowear/activewear/leggings/high-waisted-compression" },
+        { label: "Mid-Rise Compression", slug: "mid-rise-compression", href: "/capriowear/activewear/leggings" },
+        { label: "V-Back / Crossover", slug: "v-back-crossover", href: "/capriowear/activewear/leggings" },
+        { label: "Capri", slug: "capri", href: "/capriowear/activewear/leggings" },
         { label: "See All", href: "/capriowear/activewear/leggings" },
       ],
       specifications: [
@@ -651,10 +651,10 @@ export const leggings: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "High-Rise Compression", href: "/capriowear/activewear/leggings/high-waisted-compression" },
-        { label: "Mid-Rise Compression", href: "/capriowear/activewear/leggings" },
-        { label: "Flare", href: "/capriowear/activewear/leggings" },
-        { label: "V-Back / Crossover", href: "/capriowear/activewear/leggings" },
+        { label: "High-Rise Compression", slug: "high-waisted-compression", href: "/capriowear/activewear/leggings/high-waisted-compression" },
+        { label: "Mid-Rise Compression", slug: "mid-rise-compression", href: "/capriowear/activewear/leggings" },
+        { label: "Flare", slug: "flare", href: "/capriowear/activewear/leggings" },
+        { label: "V-Back / Crossover", slug: "v-back-crossover", href: "/capriowear/activewear/leggings" },
         { label: "See All", href: "/capriowear/activewear/leggings" },
       ],
       specifications: [

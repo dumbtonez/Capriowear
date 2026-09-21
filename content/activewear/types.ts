@@ -159,7 +159,7 @@ export type StyleCard = {
    * the first real Figma frame gets real copy" pattern as
    * `sku`/`pdpHeading` above.
    */
-  relatedStyleTags?: { label: string; href: string }[];
+  relatedStyleTags?: RelatedStyleTag[];
   /**
    * The PDP's own "Specifications" datasheet (Figma node 634:5092 desktop /
    * same node mobile, 2026-09-02) -- a label/value fact row per real build
@@ -467,6 +467,16 @@ export type RelatedLink = {
   label: string;
   href: string;
 };
+
+/**
+ * One "Related styles" chip. `href` is the fallback (a sibling PDP, or the
+ * parent PLP). If `slug` names a style in the same category whose page is
+ * reachable (published, or a draft with PDP content), the PDP route links
+ * the chip to that style's own `href` instead (`resolveRelatedStyleTags()`
+ * in ./pdpShared.ts), so a new reachable style is cross-linked
+ * automatically. Optional: a chip without a slug is never rewritten.
+ */
+export type RelatedStyleTag = { label: string; href: string; slug?: string };
 
 export type Category = {
   /** URL segment: matches the mega-menu href and app/activewear/[category]. */

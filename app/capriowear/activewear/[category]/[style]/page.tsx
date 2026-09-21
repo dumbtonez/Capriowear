@@ -44,6 +44,7 @@ import {
   pdpFaqOperational,
   pdpSpecHighlights,
   pdpSpecificationsCopy,
+  resolveRelatedStyleTags,
 } from "@/content/activewear/pdpShared";
 import { home } from "@/content/home";
 import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
@@ -164,6 +165,10 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
   // both the visible Faq render below and faqSchema(), so they can never
   // drift apart. Rendered/schema'd together as one FAQ, not the two
   // separate arrays they're authored as.
+  const relatedStyleTags = data.product.relatedStyleTags
+    ? resolveRelatedStyleTags(data.product.relatedStyleTags, data.category.styleCards)
+    : undefined;
+
   const faqItems = [categoryEntityFaq(data.category), ...(data.product.faqs ?? []), ...pdpFaqOperational];
 
   // Absolute URL for Product schema's own `image` (SEO audit, 2026-09-07):
@@ -378,8 +383,8 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
                 what shows through tablet, so this instance now waits for
                 `xl` again -- the column split itself (`md:flex-row`, etc.)
                 is untouched. */}
-            {data.product.relatedStyleTags ? (
-              <ProductRelatedStyles tags={data.product.relatedStyleTags} className="hidden xl:flex" />
+            {relatedStyleTags ? (
+              <ProductRelatedStyles tags={relatedStyleTags} className="hidden xl:flex" />
             ) : null}
           </div>
         </div>
@@ -457,9 +462,9 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
             `xl:hidden` so this 72px/no-divider treatment now covers
             tablet too, not just phone widths -- see the sibling instance's
             own comment above for the full reasoning. */}
-        {data.product.relatedStyleTags ? (
+        {relatedStyleTags ? (
           <div className="container-p block xl:hidden">
-            <ProductRelatedStyles tags={data.product.relatedStyleTags} topRule="none" />
+            <ProductRelatedStyles tags={relatedStyleTags} topRule="none" />
           </div>
         ) : null}
 

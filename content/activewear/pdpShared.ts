@@ -14,7 +14,7 @@
 // apart.
 import { CAPRIOSPORTS_ORGANIZATION } from "../capriosports/organization";
 import { companyIdentity } from "../site";
-import type { Category, FaqEntry, PdpSpecHighlight } from "./types";
+import type { Category, FaqEntry, PdpSpecHighlight, RelatedStyleTag } from "./types";
 
 // Shared by categoryEntityFaq() and buildCaprioEntityAnswer() below -- the
 // same noun/example-styles/fabrics/audience derivation either brand's
@@ -301,4 +301,29 @@ export function isDraftPdpReachable(card: {
   specifications?: unknown[];
 }): boolean {
   return card.status === "draft" && Boolean(card.pdpHeading) && Boolean(card.specifications?.length);
+}
+
+/**
+ * Resolves each related-style chip that names a `slug` to that style's own
+ * page whenever the target is reachable (published, or a draft with PDP
+ * content via `isDraftPdpReachable()`). Any other chip (no slug, unknown
+ * slug, or a still card-only target) keeps its own fallback `href`.
+ */
+export function resolveRelatedStyleTags(
+  tags: RelatedStyleTag[],
+  styleCards: {
+    slug: string;
+    href: string;
+    status: "published" | "draft";
+    pdpHeading?: string;
+    specifications?: unknown[];
+  }[],
+): RelatedStyleTag[] {
+  return tags.map((tag) => {
+    const target = tag.slug ? styleCards.find((card) => card.slug === tag.slug) : undefined;
+    if (target && (target.status === "published" || isDraftPdpReachable(target))) {
+      return { ...tag, href: target.href };
+    }
+    return tag;
+  });
 }
