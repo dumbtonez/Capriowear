@@ -580,6 +580,30 @@ export const leggings: Category = {
       imageAlt: "Custom mid-rise flare leggings manufacturer, full-length",
       href: "/capriowear/activewear/leggings/mid-rise-flare",
     },
+    // Two design-forward, card-only drafts (owner spec, 2026-09-21), NOT
+    // convergence-validated like the 11 styles above: each is a single-brand,
+    // single-product reference (Nike/NikeSKIMS only), included as a judgment
+    // call. No PDP content, no composition or GSM figure, and deliberately
+    // left out of `entityExampleStyles` and the "What legging styles can you
+    // make?" FAQ until they have cross-brand backing and a real PDP.
+    {
+      status: "draft",
+      slug: "v-panel-capri",
+      cardTitle: "Custom V-Panel Capri Leggings",
+      cardSubline: "Double-layered V-panel, capri length",
+      image: "",
+      imageAlt: "Custom V-panel capri leggings manufacturer, double-layered V-panel, high-rise",
+      href: "/capriowear/activewear/leggings/v-panel-capri",
+    },
+    {
+      status: "draft",
+      slug: "skirt-overlay",
+      cardTitle: "Custom Skirt-Overlay Leggings",
+      cardSubline: "Layered skirt overlay, mid-rise",
+      image: "",
+      imageAlt: "Custom skirt-overlay leggings manufacturer, layered skirt overlay, mid-rise",
+      href: "/capriowear/activewear/leggings/skirt-overlay",
+    },
   ],
   // Real hrefs and labels, matching content/home.ts's own activewearMegaMenu
   // exactly (owner request, 2026-08-30) -- no PLACEHOLDER prefix, since
