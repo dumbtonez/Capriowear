@@ -1429,8 +1429,10 @@ export const leggings: Category = {
       href: "/capriowear/activewear/leggings/v-panel-capri",
       // Full PDP content for SKU 13 (owner spec, 2026-09-21), draft. A
       // Design-Forward, single-brand SKU (one Nike/NikeSKIMS reference
-      // product), NOT convergence-validated like SKU 1 to 11: the copy must
-      // never present it as core range, and the FAQ says so explicitly.
+      // product), NOT convergence-validated like SKU 1 to 11. That evidence
+      // tier is internal research-methodology tracking, so it stays out of
+      // buyer-facing copy (the "limited or design-forward" FAQ was removed,
+      // owner correction 2026-09-21); never present it as core range.
       // Reachable by URL and a clickable PLP card via the sitewide
       // draft-PDP rule (`isDraftPdpReachable()`), still noindex/nofollow,
       // out of the sitemap, no Product/FAQPage JSON-LD. No GSM figure of any
@@ -1464,10 +1466,6 @@ export const leggings: Category = {
         {
           q: "Is the front panel actually sheer, or just visually layered?",
           a: "It's a genuine semi-sheer outer layer over a fully opaque base layer, not a printed or simulated effect. We confirm opacity and coverage on your sample before bulk.",
-        },
-        {
-          q: "Is this a limited or design-forward style?",
-          a: "Yes. This is a single-brand-inspired, design-forward construction, not our core convergence-validated range, and we recommend testing it as a limited run before committing to full bulk.",
         },
       ],
       relatedStyleTags: [
