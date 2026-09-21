@@ -385,11 +385,11 @@ export const capriosportsHome = {
           },
           {
             label: "Lifting Straps",
-            href: "/lifting-gears#lifting-straps",
+            href: "/lifting-gears/wraps-straps-sleeves",
           },
           {
             label: "Knee Sleeves",
-            href: "/lifting-gears#knee-sleeves",
+            href: "/lifting-gears/wraps-straps-sleeves",
           },
           {
             label: "Resistance Bands",

@@ -3290,3 +3290,5 @@ No Gear page rendered `og:image`: `app/opengraph-image.tsx` (Capriowear-branded)
 ## Homepage Gloves and Wraps tiles link to the real PLPs, 2026-09-21
 
 `content/capriosports/home.ts` "Product Range": Weightlifting Gloves now links to `/lifting-gears/weight-lifting-gloves-and-grips` and Wrist Wraps to `/lifting-gears/wraps-straps-sleeves` instead of hub anchors. Still anchors (not requested): Lifting Straps and Knee Sleeves (both belong to Wraps, Straps & Sleeves), Resistance Bands, Gym Accessories, and every Boxing & MMA tile except Boxing Gloves.
+
+Follow-up, same day: Lifting Straps and Knee Sleeves tiles now also link to `/lifting-gears/wraps-straps-sleeves`. Remaining anchors are deliberate (categories that don't exist yet): Resistance Bands, Gym Accessories, and the Boxing & MMA tiles other than Boxing Gloves.
