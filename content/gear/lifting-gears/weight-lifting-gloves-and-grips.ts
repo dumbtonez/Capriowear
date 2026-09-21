@@ -167,6 +167,23 @@ export const weightLiftingGlovesAndGrips: Category = {
       a: "Send your tech pack, sketch, or a reference piece by email or WhatsApp. We reply within 24 hours with next steps.",
     },
   ],
+  // Shared PDP FAQ block for every Gloves & Grips PDP (rendered after the
+  // entity answer and the style's own `faqs`) -- same mechanism as
+  // Wraps, Straps & Sleeves' own `pdpFaqOperational`.
+  pdpFaqOperational: [
+    {
+      q: "What is your MOQ, and can I mix finger coverage or materials?",
+      a: "From 50 pieces per style. Mix finger coverage, hole counts, and materials across styles within the same order.",
+    },
+    {
+      q: "Will my design and spec sheet stay protected?",
+      a: "Yes. NDA before any tech pack or spec sheet is shared.",
+    },
+    {
+      q: "How do I get started?",
+      a: "Send your tech pack, sketch, or a reference piece by email or WhatsApp. We reply within 24 hours with next steps.",
+    },
+  ],
   ctaReferenceNoun: "piece",
   styleCards: [
     {
@@ -179,13 +196,139 @@ export const weightLiftingGlovesAndGrips: Category = {
       href: "/lifting-gears/weight-lifting-gloves-and-grips/fingerless-training-gloves",
     },
     {
+      // First Gloves & Grips PDP built (owner brief, 2026-09-21). Fingerless
+      // Training Gloves, Grip Pads and Finger-Hole Hand Grips have no PDP
+      // yet, so their related-style tags point at the category PLP, per
+      // `relatedStyleTags`' own comment (weight-lifting-belts.ts). Same
+      // `internalPreview` escape hatch as every other Gear PDP: reachable by
+      // direct URL, noindexed, out of the sitemap, no Product/FAQPage
+      // schema. `status: "draft"` until palm material, padding, and closure
+      // construction are confirmed against a real factory sample.
       status: "draft",
+      internalPreview: true,
       slug: "full-finger-gloves",
+      sku: "CAP-GLV-02",
       cardTitle: "Custom Full-Finger Gloves",
       cardSubline: "Full coverage with knuckle protection, for CrossFit-style training",
       image: "",
       imageAlt: "Custom full-finger gloves",
       href: "/lifting-gears/weight-lifting-gloves-and-grips/full-finger-gloves",
+      pdpTitle: "Full-Finger Gloves",
+      images: [
+        { alt: "Custom full-finger training glove, front view" },
+        { alt: "Custom full-finger training glove, worn on model, in use" },
+        { alt: "Custom full-finger training glove, knuckle protection detail" },
+        { alt: "Custom full-finger training glove, palm, anti-slip finish" },
+        { alt: "Custom full-finger training glove, breathable mesh back detail" },
+        { alt: "Custom full-finger training glove, double wrist strap closure detail" },
+        { alt: "Custom full-finger training glove, stitching detail" },
+        { alt: "Custom full-finger training glove, color range" },
+        { alt: "Custom full-finger training glove, private label packaging" },
+      ],
+      pdpHeading: "Custom Full-Finger Gloves Manufacturer",
+      pdpDescription:
+        "A custom and private label full-finger training glove, knuckle protection and an anti-slip palm, built to your spec, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Full-Finger Gloves Manufacturer",
+      pdpMetaDescription:
+        "Custom full-finger training gloves manufacturer, knuckle protection, double wrist strap. Private label, low MOQ. Sialkot, Pakistan.",
+      material: "Genuine or synthetic leather, or synthetic suede (amara), with breathable mesh back",
+      pdpFabricPills: ["Genuine or synthetic leather", "Synthetic suede (amara) option", "Breathable mesh back"],
+      pdpCustomizationPills: ["Palm material", "Knuckle protection", "Branding", "Private label"],
+      pdpQualityHeading: "A real spec sheet, not a letter size alone",
+      pdpQualitySubline:
+        "We confirm the palm material, the knuckle protection, and the stitching on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Palm material and stitching checked against your spec",
+        "Knuckle protection checked for coverage and flexibility",
+        "Double wrist strap closure tested under repeated use",
+        "Digital proof and sample approved before we cut your production run",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "ruler", text: "Full finger and knuckle coverage" },
+        { icon: "lock", text: "Double wrist strap closure" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          {
+            title: "Palm material",
+            body: "Genuine leather, synthetic leather, or synthetic suede, matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Palm material" },
+          },
+          {
+            title: "Knuckle protection",
+            body: "Coverage and material matched to your reference",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Knuckle protection" },
+          },
+          {
+            title: "Padding",
+            body: "Placement and density matched to your reference sample",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Padding" },
+          },
+          {
+            title: "Branding",
+            body: "Embroidery, screen print, silicone print, custom colorway",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Branding" },
+          },
+          {
+            title: "Color",
+            body: "Full color range, matched to your brand palette",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Color" },
+          },
+          {
+            title: "Packaging",
+            body: "Polybags, boxes, retail-ready to your spec",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" },
+          },
+        ],
+      },
+      specifications: [
+        { label: "Style", value: "Full-finger training glove (base type)" },
+        { label: "Finger coverage", value: "Full, all fingers and knuckles covered" },
+        {
+          label: "Palm material",
+          value: "Genuine leather, synthetic leather, or synthetic suede (amara), or your reference material",
+        },
+        { label: "Palm treatment", value: "Anti-slip finish" },
+        { label: "Knuckle protection", value: "Included, positioned for CrossFit-style training" },
+        { label: "Back of hand", value: "Breathable mesh" },
+        {
+          label: "Padding",
+          value: "Included at the palm, thickness confirmed on sample, no industry-standard figure exists",
+        },
+        { label: "Closure", value: "Double hook-and-loop wrist strap" },
+        { label: "Color", value: "Full color range" },
+        { label: "Branding", value: "Embroidery, screen print, silicone print, custom labels, packaging" },
+      ],
+      relatedStyleTags: [
+        { label: "Fingerless Training Gloves", href: "/lifting-gears/weight-lifting-gloves-and-grips" },
+        { label: "Grip Pads", href: "/lifting-gears/weight-lifting-gloves-and-grips" },
+        { label: "Finger-Hole Hand Grips", href: "/lifting-gears/weight-lifting-gloves-and-grips" },
+        { label: "See All", href: "/lifting-gears/weight-lifting-gloves-and-grips" },
+      ],
+      faqs: [
+        {
+          q: "What is the difference between full-finger and fingerless gloves?",
+          a: "Full-finger gloves cover the entire hand including knuckle protection, more commonly used for CrossFit-style training. Fingerless gloves leave the fingers exposed for grip feel and ventilation, the more common style for general weightlifting. We build both, tell us your use case.",
+        },
+        {
+          q: "Why a double wrist strap instead of one?",
+          a: "A double hook-and-loop strap gives a more secure, adjustable fit for the heavier coverage of a full-finger glove. Tell us if your brand wants a single-strap version instead.",
+        },
+        {
+          q: "Is there a padding thickness spec?",
+          a: "No manufacturer in this category publishes a padding thickness figure, including us at this stage. Padding placement and density are confirmed together on your sample.",
+        },
+        {
+          q: "Is there a competition-legal training glove?",
+          a: "No governing body regulates gloves in powerlifting or weightlifting, so there is no dimension or construction standard to build to.",
+        },
+      ],
     },
     {
       status: "draft",

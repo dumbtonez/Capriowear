@@ -3274,3 +3274,7 @@ Removed the hardcoded `robots: { index: true, follow: true }` from `app/page.tsx
 ## Production source maps disabled, 2026-09-21
 
 `next.config.ts`: `experimental.turbopackSourceMaps: false` and `serverSourceMaps: false` (the build is Turbopack; browser production maps were already off by default). `.next/server` drops from 252 MB to 79 MB and contains no `.map` files. Tradeoff: runtime errors in Vercel logs now show compiled chunk positions instead of original file/line; nothing in the project consumes maps (no Sentry or similar). Revert the two flags if error tracking is added.
+
+## Full-Finger Gloves PDP added (Gloves & Grips, draft), 2026-09-21
+
+`full-finger-gloves` (CAP-GLV-02) is now a full typed entry in `content/gear/lifting-gears/weight-lifting-gloves-and-grips.ts`, rendered by the existing Lifting Gears style route. `status: "draft"` + `internalPreview: true` (reachable by direct URL, noindex/nofollow, out of the sitemap, no Product/FAQPage schema, BreadcrumbList kept), same as every other Gear PDP. Added a category-level `pdpFaqOperational` (MOQ, NDA, get started) for all Gloves & Grips PDPs. Related-style tags all point at the category PLP: Fingerless Training Gloves has no PDP yet (only a PLP card), nor do Grip Pads or Finger-Hole Hand Grips. Palm material, padding and closure still to be confirmed against a real sample before publishing. No branded material terms, padding thickness, leather grade or sizing chart.
