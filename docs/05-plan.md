@@ -3245,12 +3245,12 @@ Also fixed a real route gap found while checking: `app/capriowear/activewear/[ca
 
 New `content/gear/lifting-gears/weight-lifting-gloves-and-grips.ts`, registered in `categories.ts` under key `weight-lifting-gloves-and-grips`, the URL the existing nav stub already used (not `gloves-grips`). Five style cards (fingerless-training-gloves, full-finger-gloves, womens-training-gloves, grip-pads, finger-hole-hand-grips), all `draft`, no `internalPreview`, no PDP routes yet. Category `status: "draft"`: noindex/nofollow verified in the rendered HTML, absent from `sitemap.xml`, BreadcrumbList only (no FAQPage/CollectionPage). Not added, by owner scope: Weightlifting Hooks (already Lifting Hook under Wraps, Straps & Sleeves), Palm Protectors, Arm Blasters, Head Harness, Ab Slings.
 
-Also: `liftingGearsMegaMenu` entry relabelled "Gloves & Grips", nav-level `status: "draft"` kept (not a public link). No hub card added.
-
-## Standing policy: Gear categories stay internal-review-only in the public nav, 2026-09-21
-
-Every Gear category stays `status: "draft"` in `liftingGearsMegaMenu`/`boxingMmaMegaMenu` (`content/home.ts`) until the owner says to publish it, so the PLP sidebar never renders it as a link. `CategoryFilters.tsx` now shows a draft item as the highlighted active item (non-link, `aria-current="page"`) when it is the page being viewed, instead of dropping `status` to get the highlight. Weight Lifting Belts and Boxing Gloves were the two draft categories still rendering as live sidebar links; both now `draft`. Not changed, flagged: the `/lifting-gears` and `/boxing-and-mma` hub cards and the Capriosports homepage "What We Make" links still link to Belts, Wraps and Boxing Gloves.
+Also: `liftingGearsMegaMenu` entry relabelled "Gloves & Grips", (nav-level `status` handling superseded by the 2026-09-21 revert entry below).
 
 ## Gear pages: Open Graph / Twitter site name is now division-aware, 2026-09-21
 
 Gear PLP/PDP/hub pages were building `openGraph.title`/`twitter.title`/`siteName` from `SITE_NAME` ("Capriowear"). New `siteNameForGroup(group)` in `content/site.ts` (same `Category.group` discriminator as `productSchema()`'s `brand.name`): "Gear" gives "Capriosports", everything else keeps "Capriowear". Wired into the 4 Gear category/style routes and the 2 Gear hubs. Still on `SITE_NAME`, flagged not fixed: the five Capriosports parent stub pages (`/contact`, `/terms`, `/responsible-manufacturing`, `/our-people`, `/who-we-are`).
+
+## Nav lockdown reverted; noindex/nofollow/sitemap exclusion is the only draft protection, 2026-09-21
+
+Owner correction: nobody outside the team has these URLs, so hiding draft Gear categories in the sidebar was unnecessary. Reverted a4cc53f (`CategoryFilters` active-draft branch removed; Belts and Boxing Gloves nav flags removed) and removed the `status: "draft"` flag from the Wraps and Gloves & Grips nav entries, so Belts, Wraps, Gloves & Grips and Boxing Gloves are all normal sidebar links; Gloves & Grips hub card restored. Category/style `status` now drives noindex, nofollow, sitemap exclusion and schema withholding only, never link visibility. Nav entries with no route (Bands, Accessories, Coaching Gears, Protective Gears, MMA) keep `status: "draft"` purely so they do not link to a 404.

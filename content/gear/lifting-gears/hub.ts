@@ -28,6 +28,11 @@ export const liftingGearsGroups: CategoryGroup[] = [
       // until the owner flips that category's own `status` to
       // "published".
       {
+        label: "Gloves & Grips",
+        descriptor: "Training gloves, grip pads, and finger-hole grips, five styles, one factory",
+        href: "/lifting-gears/weight-lifting-gloves-and-grips",
+      },
+      {
         label: "Wraps, Straps & Sleeves",
         descriptor: "Wrist wraps, knee wraps, lifting straps, hooks, and knee sleeves, ten styles, one factory",
         href: "/lifting-gears/wraps-straps-sleeves",

@@ -168,19 +168,16 @@ export const teamwearMegaMenu = [
 // which ones have a live PLP yet). Every item without a real
 // `content/gear/**/categories.ts` entry yet is `status: "draft"`
 // (`CategoryFilters.tsx`'s own `MegaMenuItem.status` -- renders in the
-// list, "Coming soon", never a link) -- STANDING POLICY (owner, 2026-09-21):
-// every Gear category stays `status: "draft"` here, whether or not its route
-// exists, until the owner explicitly says to publish it; a draft category
-// viewed by direct URL still shows as the active item (CategoryFilters). Flip to
+// list, "Coming soon", never a link to a route that 404s) -- flip to
 // `"published"` (or just omit the field) the same turn its real category
 // content and route ship, no other change needed.
 export const liftingGearsMegaMenu = [
   {
     label: "LIFTING GEARS",
     items: [
-      { label: "Weight Lifting Belts", href: "/lifting-gears/weight-lifting-belts", status: "draft" as const },
-      { label: "Gloves & Grips", href: "/lifting-gears/weight-lifting-gloves-and-grips", status: "draft" as const },
-      { label: "Wraps, Straps & Sleeves", href: "/lifting-gears/wraps-straps-sleeves", status: "draft" as const },
+      { label: "Weight Lifting Belts", href: "/lifting-gears/weight-lifting-belts" },
+      { label: "Gloves & Grips", href: "/lifting-gears/weight-lifting-gloves-and-grips" },
+      { label: "Wraps, Straps & Sleeves", href: "/lifting-gears/wraps-straps-sleeves" },
       { label: "Bands", href: "/lifting-gears/bands", status: "draft" as const },
       { label: "Accessories", href: "/lifting-gears/accessories", status: "draft" as const },
     ],
@@ -191,7 +188,7 @@ export const boxingMmaMegaMenu = [
   {
     label: "BOXING & MMA",
     items: [
-      { label: "Boxing Gloves", href: "/boxing-and-mma/boxing-gloves", status: "draft" as const },
+      { label: "Boxing Gloves", href: "/boxing-and-mma/boxing-gloves" },
       { label: "Coaching Gears", href: "/boxing-and-mma/coaching-gears", status: "draft" as const },
       { label: "Protective Gears", href: "/boxing-and-mma/protective-gears", status: "draft" as const },
       { label: "MMA", href: "/boxing-and-mma/mma", status: "draft" as const },
