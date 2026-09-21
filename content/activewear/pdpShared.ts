@@ -285,3 +285,23 @@ export const pdpFaqOperational: FaqEntry[] = [
     a: "Send your tech pack, sketch, or a reference garment through our contact form. We come back within 24 hours with next steps, including a quote and sample timeline.",
   },
 ];
+
+/**
+ * True for a card that is reachable-by-URL only because its category opted
+ * in via `Category.draftPdpReachable` (Leggings only): a `"draft"` style with
+ * real PDP content (a `pdpHeading` and `specifications`). The single
+ * condition behind both the PDP route's `isReachable()` and the PLP card
+ * being a real link, so they can never drift apart. Never affects
+ * noindex/nofollow, the sitemap or schema, which all read `status` alone.
+ */
+export function isDraftPdpReachable(
+  card: { status: "published" | "draft"; pdpHeading?: string; specifications?: unknown[] },
+  category: { draftPdpReachable?: boolean },
+): boolean {
+  return (
+    category.draftPdpReachable === true &&
+    card.status === "draft" &&
+    Boolean(card.pdpHeading) &&
+    Boolean(card.specifications?.length)
+  );
+}

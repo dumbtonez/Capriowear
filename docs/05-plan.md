@@ -3361,3 +3361,7 @@ New optional `Category.draftPdpReachable` (set only on Leggings). The Activewear
 ## Leggings: 2 card-only draft SKUs added, 2026-09-21
 
 `v-panel-capri` (Custom V-Panel Capri Leggings) and `skirt-overlay` (Custom Skirt-Overlay Leggings) appended after the existing 11 in `content/activewear/leggings.ts`: `status: "draft"`, card-only, no PDP content, no route. Single-brand (Nike/NikeSKIMS) design-forward judgment calls, not convergence-validated, so they are deliberately left out of `entityExampleStyles` and the "What legging styles can you make?" FAQ, with no composition or GSM figure.
+
+## Leggings: draft-with-content PLP cards now clickable, 2026-09-21
+
+New shared helper `isDraftPdpReachable()` (`content/activewear/pdpShared.ts`) is the one condition (category opts in via `draftPdpReachable`, card is `draft`, has `pdpHeading` and `specifications`). The PDP route's `isReachable()` and the category PLP now both use it, and the PLP passes such cards to `ProductGrid` with `internalPreview: true` so the card is a real link (Leggings only; `mid-rise-compression` today, any future Leggings draft built the same way automatically). noindex/nofollow, sitemap exclusion and Product/FAQPage withholding still read `status` alone. Card-only drafts and every other category are unchanged.

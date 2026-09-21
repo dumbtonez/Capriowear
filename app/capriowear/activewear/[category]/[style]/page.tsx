@@ -37,6 +37,7 @@ import { header } from "@/components/ui/styles";
 import { categories } from "@/content/activewear/categories";
 import {
   buildCtaSubline,
+  isDraftPdpReachable,
   categoryEntityFaq,
   pdpCustomizationPills,
   pdpCustomizationSteps,
@@ -74,7 +75,7 @@ function isReachable(
   category: { draftPdpReachable?: boolean },
 ) {
   if (card.status === "published" || card.internalPreview === true) return true;
-  return category.draftPdpReachable === true && Boolean(card.pdpHeading) && Boolean(card.specifications?.length);
+  return isDraftPdpReachable(card, category);
 }
 
 export function generateStaticParams() {
