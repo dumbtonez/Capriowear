@@ -155,10 +155,22 @@ function FilterGroupList({
               <div className={categoryFilters.itemListClip}>
                 <ul className={categoryFilters.itemList}>
                   {group.items.map((item) =>
-                    item.status === "draft" ? (
-                      // No route exists yet -- rendered so the real
-                      // taxonomy is visible, but never a link (see
-                      // `MegaMenuItem.status`'s own comment above).
+                    item.status === "draft" && item.href === activeHref ? (
+                      // The page being viewed is this draft category
+                      // (reached by direct URL for internal review):
+                      // show it as the active item, still not a link --
+                      // a draft entry is never navigable from anywhere
+                      // else, and linking to the current page is pointless.
+                      <li key={item.href}>
+                        <span aria-current="page" className={categoryFilters.itemActive}>
+                          {item.label}
+                        </span>
+                      </li>
+                    ) : item.status === "draft" ? (
+                      // Draft (no live route, or internal-review-only) --
+                      // rendered so the real taxonomy is visible, but never
+                      // a link (see `MegaMenuItem.status`'s own comment
+                      // above).
                       <li key={item.href}>
                         <span aria-disabled="true" className={categoryFilters.itemDraft}>
                           {item.label}
