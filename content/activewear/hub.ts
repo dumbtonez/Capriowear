@@ -37,7 +37,7 @@ export const categoryGroups: CategoryGroup[] = [
     eyebrow: "BOTTOMS",
     h2: "Leggings, shorts and everything between",
     categories: [
-      { label: "Leggings", descriptor: "Compression to flare and scrunch", href: "/capriowear/activewear/leggings" },
+      { label: "Leggings", descriptor: "Compression to flare and capri", href: "/capriowear/activewear/leggings" },
       { label: "Shorts", descriptor: "Training, running and lined styles", href: "/capriowear/activewear/shorts" },
       {
         label: "Joggers",

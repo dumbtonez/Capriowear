@@ -55,7 +55,7 @@ export const leggings: Category = {
   // truncation point even though it fit this project's own ~270-char AEO
   // allowance. Owner's exact given copy.
   metaDescription:
-    "Custom leggings manufacturer, high-rise compression, squat-proof, capri and pocket styles, 300 to 500 GSM, low MOQ. Capriowear.",
+    "Custom leggings manufacturer, high-rise compression, squat-proof, flare and capri styles, 300 to 500 GSM, low MOQ. Capriowear.",
   // Figma-confirmed real copy (node 502:3310, revised 2026-08-28), same
   // treatment as h1 -- not a placeholder. Replaces the earlier single
   // quickAnswer subline, dropped from this design entirely.
@@ -183,8 +183,8 @@ export const leggings: Category = {
       a: "Nylon or polyamide with spandex, the 70 to 85% to 15 to 30% blend used by leading brands, plus recycled polyester options, in weights from 300 to 500 GSM, the range that holds a true compression fit.",
     },
     {
-      q: "What is a scrunch legging, and what other styles can you make?",
-      a: "High-rise compression, flare and wide-leg, scrunch and ruched (a center-seam construction that shapes and lifts), V-back and crossover waistband, capri and cropped, pocket, biker and fleece-lined.",
+      q: "What legging styles can you make?",
+      a: "High-rise and mid-rise compression, flare in both rises, capri and cropped lengths, V-back and crossover waistband, structured wide and foldover waistbands, straight-leg, and a drawcord waistband build. Every style is fully customizable to your fabric, waistband and branding.",
     },
     {
       q: "What makes leggings squat proof?",

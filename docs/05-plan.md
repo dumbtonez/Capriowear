@@ -3335,3 +3335,11 @@ Copy-accuracy fix, not a content rewrite, in `content/activewear/leggings.ts`. T
 The "WHAT WE MAKE" overview lead described in the request does not exist on the rendered PLP: `Category.overview` is an unrendered "PLACEHOLDER" field, and that eyebrow belongs to the homepage/factory pages. Flagged, not fixed: the PLP's own FAQ ("What is a scrunch legging, and what other styles can you make?") still asks about and lists scrunch/ruched, pocket, biker and fleece-lined styles, none in the 11-SKU set, and the meta description still says "pocket". Also "Compression to flare and scrunch" on the Activewear hub card (`content/activewear/hub.ts`). Each needs real replacement wording.
 
 `npx tsc --noEmit`, `npx eslint`, `npm run build` clean.
+
+## Leggings: remaining non-catalog style names removed, 2026-09-21
+
+Copy-accuracy fix removing stale non-catalog style names, not a content rewrite. `content/activewear/leggings.ts`: the PLP FAQ entry "What is a scrunch legging, and what other styles can you make?" (listing scrunch/ruched, pocket, biker, fleece-lined) is replaced by "What legging styles can you make?" with an answer built from the 11-SKU set, updated once in `faqs` so the accordion and FAQPage JSON-LD both follow. The PLP meta description now reads "squat-proof, flare and capri styles" ("and pocket" removed; "flare" added, a catalog style, so the list still reads naturally). `content/activewear/hub.ts`: the Leggings card descriptor is now "Compression to flare and capri".
+
+Verified on the built site: "scrunch", "biker" and "ruched" appear nowhere on the Leggings PLP or the Activewear hub, and "pocket" nowhere on the hub. The Leggings PLP HTML still contains "pocket" twice, both inside the published SKU 1 card's serialized data, not PLP copy: a placeholder gallery image alt ("pocket detail") and the spec row "optional pockets" (a construction option, not a style). Left as is; both belong to the PDP.
+
+`npx tsc --noEmit`, `npx eslint`, `npm run build` clean.
