@@ -241,7 +241,7 @@ export default async function CategoryPage({ params }: PageProps<"/capriowear/ac
             <ProductGrid
               key={data.slug}
               cards={data.styleCards.map((card) =>
-                isDraftPdpReachable(card, data) ? { ...card, internalPreview: true } : card,
+                isDraftPdpReachable(card) ? { ...card, internalPreview: true } : card,
               )}
             />
           </div>

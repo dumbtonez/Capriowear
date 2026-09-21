@@ -3365,3 +3365,9 @@ New optional `Category.draftPdpReachable` (set only on Leggings). The Activewear
 ## Leggings: draft-with-content PLP cards now clickable, 2026-09-21
 
 New shared helper `isDraftPdpReachable()` (`content/activewear/pdpShared.ts`) is the one condition (category opts in via `draftPdpReachable`, card is `draft`, has `pdpHeading` and `specifications`). The PDP route's `isReachable()` and the category PLP now both use it, and the PLP passes such cards to `ProductGrid` with `internalPreview: true` so the card is a real link (Leggings only; `mid-rise-compression` today, any future Leggings draft built the same way automatically). noindex/nofollow, sitemap exclusion and Product/FAQPage withholding still read `status` alone. Card-only drafts and every other category are unchanged.
+
+## Draft-PDP reachability generalized to every activewear category, 2026-09-21
+
+Replaces the Leggings-only `Category.draftPdpReachable` flag and Joggers' `internalPreview` with one content-based rule, `isDraftPdpReachable(card)` (`content/activewear/pdpShared.ts`): a `draft` style with `pdpHeading` and `specifications` renders by URL and its PLP card is a real link, in every activewear category. Card-only drafts stay 404 and non-clickable. noindex/nofollow, sitemap exclusion and Product/FAQPage withholding still read `status` alone. Joggers' `wide-leg-woven-jogger` migrated off `internalPreview`.
+
+`internalPreview` is NOT removed from the codebase: the Gear lifting-gears route (`app/lifting-gears/[category]/[style]/page.tsx`), 20 Gear entries (weight-lifting belts, gloves and grips, wraps/straps/sleeves), the shared `StyleCard` type and `ProductCard` still depend on it. Retiring it sitewide needs a separate Gear migration. The activewear PLP still passes a matching card to `ProductGrid` with `internalPreview: true` so `ProductCard` renders it as a link.

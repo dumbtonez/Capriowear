@@ -469,15 +469,6 @@ export type RelatedLink = {
 };
 
 export type Category = {
-  /**
-   * Opt-in (Leggings only): a `"draft"` style with real PDP content (a
-   * `pdpHeading` and `specifications`) gets its route generated and
-   * renders by direct URL without `internalPreview`, so its PLP card stays
-   * a non-clickable tile. Still noindex/nofollow, out of the sitemap, and
-   * without Product/FAQPage JSON-LD (all gated on `status`). Unset on
-   * every other category.
-   */
-  draftPdpReachable?: boolean;
   /** URL segment: matches the mega-menu href and app/activewear/[category]. */
   slug: string;
   /** Parent group this category belongs to, e.g. "Activewear". */

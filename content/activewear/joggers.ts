@@ -272,18 +272,13 @@ export const joggers: Category = {
     // content yet), this one's ready to flip to "published" once real
     // photography and a confirmed sample exist.
     //
-    // `internalPreview: true` (owner spec, 2026-09-18) -- the same
-    // owner-only escape hatch already used on 5 Gear/Weight Lifting Belts
-    // styles (see `StyleCard.internalPreview`'s own comment): the PLP card
-    // becomes a real clickable link and the PDP route renders for internal
-    // review, but every other "draft" gate stays exactly as `status`'s own
-    // comment describes -- noindex/nofollow, excluded from app/sitemap.ts,
-    // Product/FAQPage JSON-LD withheld. No other card in this file carries
-    // this flag. Remove it (leaving `status: "draft"`, or flip to
-    // "published") once this style is ready for real launch.
+    // Reachable by URL and a clickable PLP card via the sitewide draft-PDP
+    // rule (`isDraftPdpReachable()` in ./pdpShared.ts: draft + `pdpHeading` +
+    // `specifications`), migrated off the old `internalPreview` flag
+    // (2026-09-21). Still noindex/nofollow, out of the sitemap, no
+    // Product/FAQPage JSON-LD: all governed by `status`.
     {
       status: "draft",
-      internalPreview: true,
       slug: "wide-leg-woven-jogger",
       cardTitle: "Custom Wide-Leg Woven Jogger",
       cardSubline: "Lightweight woven, 110 GSM, adjustable waist",

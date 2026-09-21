@@ -287,21 +287,18 @@ export const pdpFaqOperational: FaqEntry[] = [
 ];
 
 /**
- * True for a card that is reachable-by-URL only because its category opted
- * in via `Category.draftPdpReachable` (Leggings only): a `"draft"` style with
- * real PDP content (a `pdpHeading` and `specifications`). The single
- * condition behind both the PDP route's `isReachable()` and the PLP card
- * being a real link, so they can never drift apart. Never affects
- * noindex/nofollow, the sitemap or schema, which all read `status` alone.
+ * The one sitewide rule for a draft PDP that is ready to review: a
+ * `"draft"` activewear style with real PDP content (a `pdpHeading` and
+ * `specifications`) renders by direct URL and its PLP card is a real link.
+ * Used by both the PDP route's `isReachable()` and the category PLP, so the
+ * page and the card can never drift apart. Card-only drafts (no PDP
+ * content) stay non-clickable and 404. Never affects noindex/nofollow, the
+ * sitemap or Product/FAQPage schema, which all read `status` alone.
  */
-export function isDraftPdpReachable(
-  card: { status: "published" | "draft"; pdpHeading?: string; specifications?: unknown[] },
-  category: { draftPdpReachable?: boolean },
-): boolean {
-  return (
-    category.draftPdpReachable === true &&
-    card.status === "draft" &&
-    Boolean(card.pdpHeading) &&
-    Boolean(card.specifications?.length)
-  );
+export function isDraftPdpReachable(card: {
+  status: "published" | "draft";
+  pdpHeading?: string;
+  specifications?: unknown[];
+}): boolean {
+  return card.status === "draft" && Boolean(card.pdpHeading) && Boolean(card.specifications?.length);
 }

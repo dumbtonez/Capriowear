@@ -25,7 +25,6 @@ export const leggings: Category = {
   slug: "leggings",
   group: "Activewear",
   menuLabel: "Leggings",
-  draftPdpReachable: true,
   h1: "Custom Leggings Manufacturer",
   // Pinned so the entity FAQ's example-styles clause does not depend on the
   // first 4 cardTitles (categoryEntityFaq()'s fallback). "High-rise"
