@@ -35,7 +35,7 @@ import {
 import { footer, header } from "@/components/ui/styles";
 import { capriosportsHome } from "@/content/capriosports/home";
 import { home } from "@/content/home";
-import { ORGANIZATION, SITE_URL, siteNameForGroup } from "@/content/site";
+import { GEAR_DEFAULT_OG_IMAGE, ORGANIZATION, SITE_URL, siteNameForGroup } from "@/content/site";
 import { liftingGearsCategories } from "@/content/gear/lifting-gears/categories";
 import { breadcrumbSchema, faqSchema, productSchema } from "@/lib/schema";
 
@@ -97,12 +97,13 @@ export async function generateMetadata({
       url: canonical,
       siteName,
       type: "website",
-      ...(image ? { images: [image] } : {}),
+      images: [image ?? GEAR_DEFAULT_OG_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
+      images: [image ?? GEAR_DEFAULT_OG_IMAGE],
     },
   };
 }

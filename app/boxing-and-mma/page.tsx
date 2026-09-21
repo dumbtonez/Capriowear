@@ -13,7 +13,7 @@ import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { categoryGroupsSection, footer, header } from "@/components/ui/styles";
 import { capriosportsHome } from "@/content/capriosports/home";
-import { ORGANIZATION, SITE_URL, siteNameForGroup } from "@/content/site";
+import { GEAR_DEFAULT_OG_IMAGE, ORGANIZATION, SITE_URL, siteNameForGroup } from "@/content/site";
 import { boxingMmaGroups, boxingMmaHub, BOXING_MMA_HUB_CANONICAL } from "@/content/gear/boxing-and-mma/hub";
 import { breadcrumbSchema, collectionOfPagesSchema, faqSchema } from "@/lib/schema";
 
@@ -32,11 +32,13 @@ export const metadata: Metadata = {
     url: BOXING_MMA_HUB_CANONICAL,
     siteName: GEAR_SITE_NAME,
     type: "website",
+    images: [GEAR_DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: `${boxingMmaHub.metaTitle} | ${GEAR_SITE_NAME}`,
     description: boxingMmaHub.metaDescription,
+    images: [GEAR_DEFAULT_OG_IMAGE],
   },
 };
 

@@ -3282,3 +3282,7 @@ Removed the hardcoded `robots: { index: true, follow: true }` from `app/page.tsx
 ## Fingerless Training Gloves PDP added (Gloves & Grips, draft), 2026-09-21
 
 `fingerless-training-gloves` (CAP-GLV-01) added as a typed entry in `content/gear/lifting-gears/weight-lifting-gloves-and-grips.ts`, same `status: "draft"` + `internalPreview: true` gating as Full-Finger Gloves, reusing the category's `pdpFaqOperational`. Wrist wrap integration is an option, not a base spec. Related tags: Full-Finger Gloves is a real link (and Full-Finger's Fingerless chip now points here); Grip Pads and Finger-Hole Hand Grips still point at the PLP. Title renders at 61 characters (brief said ~50 to 60; kept the exact wording).
+
+## Gear pages get a Capriosports default OG/Twitter image, 2026-09-21
+
+No Gear page rendered `og:image`: `app/opengraph-image.tsx` (Capriowear-branded) only reaches routes whose own metadata doesn't set `openGraph`, and every Gear route does. New `app/og/gear/route.tsx` (1200x630, CAPRIO + orange SPORTS) and `GEAR_DEFAULT_OG_IMAGE` in `content/site.ts`, wired as `openGraph.images`/`twitter.images` on all six Gear routes (both hubs, category PLPs, style PDPs) as the fallback; a style's own first gallery image still wins. All 22 Gear style cards are alt-only placeholders today, so all use the fallback. Still without any og:image, not touched: `/contact`, `/terms`, `/responsible-manufacturing`, `/our-people`, `/who-we-are`, `/capriowear`, and Capriowear teamwear pages.

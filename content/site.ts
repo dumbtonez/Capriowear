@@ -125,6 +125,13 @@ export const DEFAULT_DESCRIPTION = companyIntroMeta;
 
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/opengraph-image`;
 
+// Capriosports-branded default share image for Gear division pages with no
+// product photography of their own yet (app/og/gear/route.tsx). Separate
+// from DEFAULT_OG_IMAGE above, which is Capriowear-branded and never
+// reached Gear pages (their own `openGraph` metadata replaces the
+// file-convention one).
+export const GEAR_DEFAULT_OG_IMAGE = `${SITE_URL}/og/gear`;
+
 // Organization identity, feeding schema.org Organization/LocalBusiness
 // structured data (lib/schema.ts) -- the same facts that render as visible
 // copy elsewhere on the site (e.g. content/home.ts's "BASED IN SIALKOT,
