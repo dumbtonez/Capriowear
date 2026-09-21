@@ -1427,6 +1427,105 @@ export const leggings: Category = {
       image: "",
       imageAlt: "Custom V-panel capri leggings manufacturer, double-layered V-panel, high-rise",
       href: "/capriowear/activewear/leggings/v-panel-capri",
+      // Full PDP content for SKU 13 (owner spec, 2026-09-21), draft. A
+      // Design-Forward, single-brand SKU (one Nike/NikeSKIMS reference
+      // product), NOT convergence-validated like SKU 1 to 11: the copy must
+      // never present it as core range, and the FAQ says so explicitly.
+      // Reachable by URL and a clickable PLP card via the sitewide
+      // draft-PDP rule (`isDraftPdpReachable()`), still noindex/nofollow,
+      // out of the sitemap, no Product/FAQPage JSON-LD. No GSM figure of any
+      // kind, and no fabric, fiber or weight is stated for the semi-sheer
+      // outer V-panel (pending sample confirmation). Deliberately NOT added
+      // to `entityExampleStyles` or the "What legging styles can you make?"
+      // FAQ. `images` are alt-only placeholders: real product photography
+      // is needed before this can go live. SKU 12 is intentionally skipped
+      // on this grid.
+      pdpTitle: "V-Panel Capri",
+      sku: "CAP-LEG-13",
+      pdpHeading: "Custom V-Panel Capri Leggings Manufacturer",
+      pdpDescription:
+        "High-rise compression leggings with a double-layered, semi-sheer V-panel at the front for coverage, custom and private label, in a squat-proof Nylon/Spandex or Polyester/Spandex 4-way stretch blend, capri or 7/8 length, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "V-panel capri leggings, front view" },
+        { alt: "V-panel capri leggings, semi-sheer V-panel detail" },
+        { alt: "V-panel capri leggings, side profile" },
+        { alt: "V-panel capri leggings, fabric close-up" },
+        { alt: "V-panel capri leggings, worn on model" },
+        { alt: "V-panel capri leggings, flat lay" },
+      ],
+      pdpMetaTitle: "Custom V-Panel Capri Leggings Manufacturer",
+      pdpMetaDescription:
+        "Custom V-panel capri leggings manufacturer, OEM, ODM and private label, double-layered semi-sheer front panel, squat-proof 4-way stretch Nylon/Spandex or Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+      faqs: [
+        {
+          q: "What fabric is the V-panel capri legging made from?",
+          a: "A Nylon/Spandex or Polyester/Spandex 4-way stretch blend for the opaque base layer, with a semi-sheer outer V-panel. We confirm the exact blends and weights on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "Is the front panel actually sheer, or just visually layered?",
+          a: "It's a genuine semi-sheer outer layer over a fully opaque base layer, not a printed or simulated effect. We confirm opacity and coverage on your sample before bulk.",
+        },
+        {
+          q: "Is this a limited or design-forward style?",
+          a: "Yes. This is a single-brand-inspired, design-forward construction, not our core convergence-validated range, and we recommend testing it as a limited run before committing to full bulk.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "High-Rise Compression", slug: "high-waisted-compression", href: "/capriowear/activewear/leggings" },
+        { label: "Capri", slug: "capri", href: "/capriowear/activewear/leggings" },
+        { label: "Structured Waistband", slug: "structured-waistband", href: "/capriowear/activewear/leggings" },
+        { label: "V-Back / Crossover", slug: "v-back-crossover", href: "/capriowear/activewear/leggings" },
+        { label: "See All", href: "/capriowear/activewear/leggings" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "High-rise compression legging, capri or 7/8 length, double-layered V-panel at front (base type)",
+        },
+        {
+          label: "Fabric",
+          value:
+            "Base layer: Nylon/Spandex 70 to 85% / 15 to 30%, or Polyester/Spandex 72 to 89% / 11 to 28%, directional research range, pending confirmed spec on sample. Outer V-panel: semi-sheer construction, exact fabric and weight pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample" },
+        { label: "Stretch and support", value: "4-way stretch, squat-proof, compression hold on the opaque base layer" },
+        { label: "Waistband", value: "High-rise, standard elastic waistband, no secondary waistband construction" },
+        {
+          label: "Construction",
+          value:
+            "Cut-and-sew, double-layered V-panel at the front combining a semi-sheer outer layer over an opaque base layer, cotton gusset, capri or 7/8 length, optional reflective detailing. Side or princess seams, not knit-to-shape. Gusset and flatlock finishing available.",
+        },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "V-panel capri leggings, construction detail" },
+      pdpQualityPoints: [
+        "Opacity tested on the base layer, squat-proof",
+        "Seams reinforced and stress-tested",
+        "V-panel layer alignment and edge finish checked for consistency",
+        "Waistbands hold their recovery",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, size and care labels, hangtags, reflective detailing",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
