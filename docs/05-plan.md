@@ -3317,3 +3317,13 @@ Naming correction to align with the locked 11-SKU research, not a content rebuil
 Not changed, still say "high-waisted": the PLP `metaDescription` and the PLP's own "what styles" FAQ answer.
 
 `npx tsc --noEmit`, `npx eslint`, `npm run build` clean; screenshot suite 45/45. Verified against the built site: PDP title, meta description, H1, breadcrumb JSON-LD name and description line render the new text; the only remaining "high-waisted" strings on the PDP are the slug and image URLs; PLP renders all 11 new card names.
+
+## Leggings: PLP naming leftovers and SKU 1 fabric FAQ, 2026-09-21
+
+Naming-consistency fix plus one added FAQ entry, not a content rewrite, both in `content/activewear/leggings.ts`. The PLP `metaDescription` and the PLP styles FAQ answer said "high-waisted compression"; both now say "high-rise compression". A sweep of the built PLP (including JSON-LD) finds no other "high-waisted" text; the only remaining hits are the unchanged slug and image URLs.
+
+Added "What fabric is the high-rise compression legging made from?" as the first style-specific FAQ on the SKU 1 PDP (after the entity question, before the squat-proof question). It renders in the accordion and in the FAQPage JSON-LD from the same `faqs` array.
+
+Flagged: the given answer says "the same directional composition range used by the leading brands we researched", an internal-research reference in public copy; used verbatim as supplied. The PLP meta description still lists "scrunch and pocket styles", which are no longer in the catalog (not requested).
+
+`npx tsc --noEmit`, `npx eslint`, `npm run build` clean.

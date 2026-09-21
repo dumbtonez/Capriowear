@@ -55,7 +55,7 @@ export const leggings: Category = {
   // truncation point even though it fit this project's own ~270-char AEO
   // allowance. Owner's exact given copy.
   metaDescription:
-    "Custom leggings manufacturer, high-waisted compression, squat-proof, scrunch and pocket styles, 300 to 500 GSM, low MOQ. Capriowear.",
+    "Custom leggings manufacturer, high-rise compression, squat-proof, scrunch and pocket styles, 300 to 500 GSM, low MOQ. Capriowear.",
   // Figma-confirmed real copy (node 502:3310, revised 2026-08-28), same
   // treatment as h1 -- not a placeholder. Replaces the earlier single
   // quickAnswer subline, dropped from this design entirely.
@@ -184,7 +184,7 @@ export const leggings: Category = {
     },
     {
       q: "What is a scrunch legging, and what other styles can you make?",
-      a: "High-waisted compression, flare and wide-leg, scrunch and ruched (a center-seam construction that shapes and lifts), V-back and crossover waistband, capri and cropped, pocket, biker and fleece-lined.",
+      a: "High-rise compression, flare and wide-leg, scrunch and ruched (a center-seam construction that shapes and lifts), V-back and crossover waistband, capri and cropped, pocket, biker and fleece-lined.",
     },
     {
       q: "What makes leggings squat proof?",
@@ -332,6 +332,10 @@ export const leggings: Category = {
         "Custom high-rise compression leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch nylon-elastane or polyester-elastane, from 50 pieces, any fabric and color, DDP worldwide.",
       material: "70 to 85% nylon or polyamide, 15 to 30% spandex, 4-way stretch",
       faqs: [
+        {
+          q: "What fabric is the high-rise compression legging made from?",
+          a: "A nylon-elastane or polyester-elastane 4-way stretch blend, in the same directional composition range used by the leading brands we researched. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
         {
           q: "Are these leggings squat-proof?",
           a: "Yes. Every High-Rise Compression run is opacity tested on the sample before bulk production, and we hold every production run to the same standard.",
