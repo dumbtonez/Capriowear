@@ -3347,3 +3347,9 @@ Verified on the built site: "scrunch", "biker" and "ruched" appear nowhere on th
 ## Women's Training Gloves PDP added (Gloves & Grips, draft), 2026-09-21
 
 `womens-training-gloves` (CAP-GLV-03) added as a typed entry in `content/gear/lifting-gears/weight-lifting-gloves-and-grips.ts`: a narrower-fit variant of the fingerless glove (amara palm, cotton knit back, foam palm cushions, hook-and-loop strap), same `status: "draft"` + `internalPreview: true` gating, reusing the category `pdpFaqOperational`. Related tags: Fingerless Training Gloves and Full-Finger Gloves real; Grip Pads points at the PLP. Fingerless and Full-Finger do not link back to this page yet. Falls back to the Gear default OG image.
+
+## Leggings SKU 2 (Mid-Rise Compression, CAP-LEG-02) draft PDP added, 2026-09-21
+
+Full PDP content for the existing `mid-rise-compression` draft card in `content/activewear/leggings.ts`. `status: "draft"`, no `internalPreview`: the PLP card stays non-clickable and the route is not generated (404) until the owner flips it to published. When rendered (checked with a temporary `internalPreview`, then reverted): noindex/nofollow, BreadcrumbList only, no Product/FAQPage JSON-LD, absent from the sitemap. No GSM figure anywhere (weight "Pending, confirmed on your sample"); composition ranges labeled directional category research, this product's own composition pending sample confirmation; waistband is the standard mid-rise elastic waistband only. Gallery is alt-only placeholders: real photography is needed before launch. Added a per-style `pdpCustomizationSteps` (owner's method wording, Fabric step names nylon-elastane or polyester-elastane).
+
+Flagged: the shared operational FAQ block (`pdpShared.ts`) is used as live on every PDP, not the differently worded operational questions in the SKU 2 brief; the entity FAQ is the generated one (same as SKU 1).

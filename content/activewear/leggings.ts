@@ -417,6 +417,86 @@ export const leggings: Category = {
       image: "",
       imageAlt: "Custom mid-rise compression leggings manufacturer, full-length, standard waistband",
       href: "/capriowear/activewear/leggings/mid-rise-compression",
+      // Full PDP content for SKU 2 (owner spec, 2026-09-21), authored while
+      // `status` stays "draft" and with NO `internalPreview`: the card
+      // stays a non-clickable "Coming soon" tile and this route is not
+      // generated (a direct hit 404s) until the owner flips it to
+      // "published" -- same gate as every other draft. Facts here are only
+      // those in the owner's SKU 2 spec: no GSM figure of any kind (weight
+      // is "pending, confirmed on your sample"), the composition ranges
+      // are labeled directional category research, never this product's
+      // own confirmed spec, and the waistband is the standard mid-rise
+      // elastic waistband only (wide / foldover / drawcord / V-back /
+      // crossover belong to separate catalog SKUs). Needs real product
+      // photography before it can go live: `images` are alt-only
+      // placeholders.
+      pdpTitle: "Mid-Rise Compression",
+      sku: "CAP-LEG-02",
+      pdpHeading: "Custom Mid-Rise Compression Leggings Manufacturer",
+      pdpDescription:
+        "Mid-rise compression leggings, custom and private label, in a squat-proof nylon-elastane or polyester-elastane 4-way stretch blend, full-length with a standard elastic waistband, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Mid-rise compression leggings, front view" },
+        { alt: "Mid-rise compression leggings, side profile" },
+        { alt: "Mid-rise compression leggings, waistband detail" },
+        { alt: "Mid-rise compression leggings, fabric close-up" },
+        { alt: "Mid-rise compression leggings, worn on model" },
+        { alt: "Mid-rise compression leggings, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Mid-Rise Compression Leggings Manufacturer",
+      pdpMetaDescription:
+        "Custom mid-rise compression leggings manufacturer, OEM, ODM and private label, squat-proof 4-way stretch nylon-elastane or polyester-elastane, from 50 pieces, any fabric and color, DDP worldwide.",
+      faqs: [
+        {
+          q: "What fabric is the mid-rise compression legging made from?",
+          a: "A nylon-elastane or polyester-elastane 4-way stretch blend, in the composition range typical of comparable premium compression leggings. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "Is this style squat-proof?",
+          a: "Yes. We test opacity on your sample before bulk and confirm it holds under stretch and movement.",
+        },
+        {
+          q: "How is this different from the high-rise version?",
+          a: "Same construction and fabric family as our High-Rise Compression legging, just set at a mid-rise waistband. Both are separately validated, real styles, not a lesser variant of one another.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "High-Rise Compression", href: "/capriowear/activewear/leggings/high-waisted-compression" },
+        { label: "Flare", href: "/capriowear/activewear/leggings" },
+        { label: "V-Back / Crossover", href: "/capriowear/activewear/leggings" },
+        { label: "Capri", href: "/capriowear/activewear/leggings" },
+        { label: "See All", href: "/capriowear/activewear/leggings" },
+      ],
+      specifications: [
+        { label: "Style", value: "Mid-rise compression legging, full-length, standard elastic waistband (base type)" },
+        {
+          label: "Fabric",
+          value:
+            "Directional category-research range only, not a confirmed spec for this product: nylon-elastane 70 to 86% nylon / 14 to 30% elastane, or polyester-elastane 72 to 89% poly / 11 to 28% elastane. This product's own confirmed composition is pending sample confirmation.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample" },
+        { label: "Stretch and support", value: "4-way stretch, squat-proof, compression hold" },
+        { label: "Waistband", value: "Mid-rise, standard elastic waistband, no secondary waistband construction" },
+        { label: "Construction", value: "Cut-and-sew, side or princess seams, not knit-to-shape; gusset and flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Mid-rise compression leggings, construction detail" },
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon-elastane or polyester-elastane, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
