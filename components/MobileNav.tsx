@@ -411,20 +411,27 @@ export function MobileNav({ open, onClose, brand, logo, links, contact, social, 
           broke on the next. Moving it into this fixed footer makes it
           visible in full on every device by construction, with no scroll
           dependency at all. */}
-      <div className={cx(drawer.ctaWrap, "transition-opacity duration-[900ms] ease-in-out", open ? drawer.headRevealed : drawer.headHidden)}>
-        <div className={drawer.contactGroup}>
-          <p className={drawer.contactLabel}>{contact.label}</p>
-          <a href={`mailto:${contact.email}`} className={drawer.contactEmail}>
-            {contact.email}
-          </a>
+      {/* Owner, 2026-09-22: "cta and social icon will only be shown in the
+          main menu not in the l2 level" -- hidden outright (not just faded)
+          once a mega menu is pushed on screen, since this bar sits outside
+          the `screens` transform and would otherwise stay visible over the
+          L2 category list too. */}
+      {activeMegaMenuHref === null ? (
+        <div className={cx(drawer.ctaWrap, "transition-opacity duration-[900ms] ease-in-out", open ? drawer.headRevealed : drawer.headHidden)}>
+          <div className={drawer.contactGroup}>
+            <p className={drawer.contactLabel}>{contact.label}</p>
+            <a href={`mailto:${contact.email}`} className={drawer.contactEmail}>
+              {contact.email}
+            </a>
+          </div>
+          <div className={drawer.socialRow}>
+            <SocialLinks social={social} />
+          </div>
+          <Button href={cta.href} onClick={onClose} className={drawer.cta}>
+            {cta.label}
+          </Button>
         </div>
-        <div className={drawer.socialRow}>
-          <SocialLinks social={social} />
-        </div>
-        <Button href={cta.href} onClick={onClose} className={drawer.cta}>
-          {cta.label}
-        </Button>
-      </div>
+      ) : null}
     </div>,
     document.body,
   );
