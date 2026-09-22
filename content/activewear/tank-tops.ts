@@ -179,6 +179,11 @@ export const tankTops: Category = {
   // any card here.
   styleCards: [
     {
+      // Full PDP content for SKU 1 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 4 to 16. The only tank besides SKU 5 with a
+      // real stated GSM (260, attributed to a confirmed comparable-range,
+      // not a specific competitor product, per the owner's own no-brand-
+      // attribution note).
       status: "draft",
       slug: "oversized-cutoff",
       cardTitle: "Custom Oversized Cut-Off Tank",
@@ -187,8 +192,86 @@ export const tankTops: Category = {
       image: "",
       imageAlt: "Custom oversized cut-off tank manufacturer",
       href: "/capriowear/activewear/tank-tops/oversized-cutoff",
+      sku: "CAP-TNK-01",
+      pdpTitle: "Oversized Cut-Off",
+      pdpHeading: "Custom Oversized Cut-Off Tank Manufacturer",
+      pdpDescription:
+        "Men's oversized, boxy tank with a dropped shoulder and wide raw-cut armhole, custom and private label, in cotton or cotton-blend jersey, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Oversized cut-off tank, front view" },
+        { alt: "Oversized cut-off tank, armhole detail" },
+        { alt: "Oversized cut-off tank, back view" },
+        { alt: "Oversized cut-off tank, fabric close-up" },
+        { alt: "Oversized cut-off tank, worn on model" },
+        { alt: "Oversized cut-off tank, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Oversized Cut-Off Tank Manufacturer",
+      pdpMetaDescription:
+        "Custom oversized cut-off tank manufacturer, OEM, ODM and private label, boxy dropped-shoulder fit, wide raw-cut armhole, cotton and cotton-blend jersey, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "Cotton or cotton-blend jersey, 260 GSM",
+      pdpFabricPills: ["Cotton", "Cotton-Poly Blend", "Recycled Polyester", "Ribbed Cotton Knit"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the oversized cut-off tank made from?",
+          a: "Cotton or cotton-blend jersey, in the composition range typical of comparable oversized cut-off tanks. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "Can I get a raw, unfinished armhole and hem, or a finished edge?",
+          a: "Both. Raw-cut is a deliberate style choice on this construction, and we can also build a finished bound or hemmed edge if you prefer, confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted Tank", slug: "fitted-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Relaxed Tank", slug: "relaxed-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Muscle-Cut Tank", slug: "muscle-cut", href: "/capriowear/activewear/tank-tops" },
+        { label: "Stringer Tank", slug: "stringer", href: "/capriowear/activewear/tank-tops" },
+        { label: "See All", href: "/capriowear/activewear/tank-tops" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's oversized, boxy tank, dropped shoulder, wide raw-cut armhole (base type)" },
+        { label: "Fabric", value: "Cotton or cotton-blend jersey, directional research range, pending confirmed spec on sample." },
+        { label: "Weight", value: "260 GSM, per the confirmed range on comparable cotton cut-off builds. Final weight confirmed on your sample." },
+        { label: "Fit", value: "Oversized, boxy, dropped-shoulder seam. Not fitted, not compression." },
+        { label: "Armhole", value: "Wide raw-cut or cut-off armhole, unfinished edge option available" },
+        { label: "Hem", value: "Straight, raw-cut edge option available" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Oversized cut-off tank, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Armhole width and dropped-shoulder placement checked for consistency across the size run",
+        "Raw-cut hem checked for clean, consistent edge finishing",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Cotton or cotton-blend jersey, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 2 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1 above. Slug `fitted-mens` confirmed distinct
+      // from women's `fitted-womens` (already live) -- no collision.
       status: "draft",
       slug: "fitted-mens",
       cardTitle: "Custom Fitted Tank",
@@ -197,8 +280,85 @@ export const tankTops: Category = {
       image: "",
       imageAlt: "Custom fitted tank manufacturer, men's",
       href: "/capriowear/activewear/tank-tops/fitted-mens",
+      sku: "CAP-TNK-02",
+      pdpTitle: "Fitted",
+      pdpHeading: "Custom Fitted Tank Manufacturer",
+      pdpDescription:
+        "Men's close-fitting, compression tank with a standard neckline and armhole, custom and private label, in poly-spandex, nylon-elastane, or fitted cotton, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Fitted tank, front view" },
+        { alt: "Fitted tank, armhole detail" },
+        { alt: "Fitted tank, back view" },
+        { alt: "Fitted tank, fabric close-up" },
+        { alt: "Fitted tank, worn on model" },
+        { alt: "Fitted tank, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Fitted Tank Manufacturer",
+      pdpMetaDescription:
+        "Custom fitted tank manufacturer, OEM, ODM and private label, close-fitting compression build, standard neckline and armhole, poly-spandex or nylon-elastane, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton", "Recycled Polyester"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the fitted tank made from?",
+          a: "Poly-spandex, nylon-elastane, or fitted cotton, in the composition range typical of comparable compression tanks. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How is this different from your Athletic Tank?",
+          a: "This uses a closer, compression-level fit through the body. Our Athletic Tank uses a true-to-size, less body-hugging cut for general training and running use.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Oversized Cut-Off Tank", slug: "oversized-cutoff", href: "/capriowear/activewear/tank-tops" },
+        { label: "Athletic Tank", slug: "athletic", href: "/capriowear/activewear/tank-tops" },
+        { label: "Muscle-Cut Tank", slug: "muscle-cut", href: "/capriowear/activewear/tank-tops" },
+        { label: "Ribbed Tank", slug: "ribbed-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "See All", href: "/capriowear/activewear/tank-tops" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's close-fitting, compression tank, standard neckline and armhole (base type)" },
+        { label: "Fabric", value: "Poly-spandex, nylon-elastane, or fitted cotton, directional research range, pending confirmed spec on sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Fitted, compression fit, not oversized, not relaxed. A close-to-body silhouette through the torso." },
+        { label: "Armhole", value: "Standard armhole, finished edge" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Fitted tank, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Compression fit checked for consistent recovery across the size run",
+        "Armhole and neckline checked for chafe-free wear",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Poly-spandex, nylon-elastane, or fitted cotton, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 3 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1/2 above. Slug `relaxed-mens` confirmed
+      // distinct from women's `relaxed-womens` (already live) -- no
+      // collision.
       status: "draft",
       slug: "relaxed-mens",
       cardTitle: "Custom Relaxed Tank",
@@ -207,6 +367,79 @@ export const tankTops: Category = {
       image: "",
       imageAlt: "Custom relaxed tank manufacturer, men's",
       href: "/capriowear/activewear/tank-tops/relaxed-mens",
+      sku: "CAP-TNK-03",
+      pdpTitle: "Relaxed",
+      pdpHeading: "Custom Relaxed Tank Manufacturer",
+      pdpDescription:
+        "Men's relaxed, softer-fit tank with a standard finished armhole and neckline, custom and private label, in recycled polyester or cotton jersey, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Relaxed tank, front view" },
+        { alt: "Relaxed tank, armhole detail" },
+        { alt: "Relaxed tank, back view" },
+        { alt: "Relaxed tank, fabric close-up" },
+        { alt: "Relaxed tank, worn on model" },
+        { alt: "Relaxed tank, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Relaxed Tank Manufacturer",
+      pdpMetaDescription:
+        "Custom relaxed tank manufacturer, OEM, ODM and private label, softer roomier fit, finished armhole and neckline, recycled polyester or cotton jersey, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Recycled Polyester", "Cotton", "Cotton-Poly Blend", "Poly-Spandex"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the relaxed tank made from?",
+          a: "Recycled polyester or cotton jersey, in the composition range typical of comparable relaxed tanks. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How is this different from your Oversized Cut-Off Tank?",
+          a: "This uses a standard, finished armhole and neckline in a softer relaxed fit. Our Oversized Cut-Off Tank uses a boxier, dropped-shoulder cut with a wide raw-cut armhole.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Oversized Cut-Off Tank", slug: "oversized-cutoff", href: "/capriowear/activewear/tank-tops" },
+        { label: "Fitted Tank", slug: "fitted-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Athletic Tank", slug: "athletic", href: "/capriowear/activewear/tank-tops" },
+        { label: "Ribbed Tank", slug: "ribbed-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "See All", href: "/capriowear/activewear/tank-tops" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's relaxed, softer fit tank, standard finished armhole and neckline (base type)" },
+        { label: "Fabric", value: "Recycled polyester or cotton jersey, directional research range, pending confirmed spec on sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Relaxed, softer through the body. Not oversized-boxy, not fitted-compression." },
+        { label: "Armhole", value: "Standard, finished edge, not raw-cut" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Relaxed tank, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Relaxed fit checked for consistent drape across the size run",
+        "Armhole and neckline checked for chafe-free wear",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Recycled polyester or cotton jersey, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
@@ -1440,6 +1673,99 @@ export const tankTops: Category = {
       image: "",
       imageAlt: "Custom ribbed tank manufacturer, women's",
       href: "/capriowear/activewear/tank-tops/ribbed-womens",
+      // Full PDP content for SKU 16 (owner spec, 2026-09-22), draft, the
+      // final SKU of the 16-SKU Tank Tops catalog. Card name "Ribbed
+      // Tank" is shared with men's SKU 8 by design -- slug
+      // `ribbed-womens` stays distinct from `ribbed-mens`, no collision.
+      // No "(plus waist-inch sizing)" qualifier on this women's SKU's
+      // key facts (men's-only). Reachable by URL and a clickable PLP
+      // card via the sitewide draft-PDP rule (`isDraftPdpReachable()`):
+      // still noindex/nofollow, out of the sitemap, no Product/FAQPage
+      // JSON-LD. Do not flip `status` to "published". No GSM sourced
+      // (Weight stays "Pending, confirmed on your sample."). `images`
+      // are alt-only placeholders: real product photography is needed
+      // before this can go live. CTA is Request a Sample only.
+      pdpTitle: "Ribbed",
+      sku: "CAP-TNK-16",
+      pdpHeading: "Custom Ribbed Tank Manufacturer",
+      pdpDescription:
+        "Women's fitted tank with ribbed-knit color-blocked side panels, custom and private label, in poly-elastane blend, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Ribbed tank, front view" },
+        { alt: "Ribbed tank, side panel detail" },
+        { alt: "Ribbed tank, side profile" },
+        { alt: "Ribbed tank, fabric close-up" },
+        { alt: "Ribbed tank, worn on model" },
+        { alt: "Ribbed tank, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Ribbed Tank Manufacturer",
+      pdpMetaDescription:
+        "Custom ribbed tank manufacturer, OEM, ODM and private label, ribbed knit with color-blocked side panels, poly-elastane body, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Cotton-Elastane Rib Knit", "Viscose-Elastane Rib Knit", "Poly-Spandex", "Nylon-Elastane"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the ribbed tank made from?",
+          a: "A poly-elastane body with ribbed-knit color-blocked side panels, in the composition range typical of comparable ribbed tanks. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "Can the ribbed panel be a solid color instead of color-blocked?",
+          a: "Yes. Panel placement and color are fully customizable, including a solid-color or tonal option, confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Relaxed Tank", slug: "relaxed-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
+        { label: "Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "See All", href: "/capriowear/activewear/tank-tops" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Women's fitted tank, ribbed-knit color-blocked side panels (base type)",
+        },
+        {
+          label: "Fabric",
+          value:
+            "Poly-elastane body with cotton-elastane or viscose-elastane rib knit side panels, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Fitted, close-to-body." },
+        { label: "Panel detail", value: "Ribbed-knit color-blocked side panels" },
+        { label: "Neckline", value: "Standard, finished" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Ribbed tank, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Rib-knit panel stretch recovery, shrinkage, and color-block alignment tested before bulk",
+        "Fitted silhouette checked for consistent recovery across the size run",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Poly-elastane body with ribbed-knit panels, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
   ],
   relatedLinks: [
