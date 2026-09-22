@@ -1451,6 +1451,103 @@ export const shorts: Category = {
       image: "",
       imageAlt: "Custom mid-rise mini shorts manufacturer",
       href: "/capriowear/activewear/shorts/mid-rise-mini",
+      // Full PDP content for SKU 13 (owner spec, 2026-09-22), draft, same
+      // shape as SKU 1 to 12. Card title and slug already used "Mini,"
+      // matching SKU 10's own naming convention, never "Short Shorts"
+      // (see the earlier 2026-09-22 rename entry). Reachable by URL and
+      // a clickable PLP card via the sitewide draft-PDP rule
+      // (`isDraftPdpReachable()`): still noindex/nofollow, out of the
+      // sitemap, no Product/FAQPage JSON-LD. Do not flip `status` to
+      // "published". No GSM sourced (Weight stays "Pending, confirmed
+      // on your sample."). `images` are alt-only placeholders: real
+      // product photography is needed before this can go live. CTA is
+      // Request a Sample only. `pdpSpecHighlights` drops the "(plus
+      // waist-inch sizing)" qualifier the men's SKUs use -- women's-only,
+      // same as SKU 8 to 12.
+      pdpTitle: "Mid-Rise Mini",
+      pdpHeading: "Custom Mid-Rise Mini Shorts Manufacturer",
+      pdpDescription:
+        "Women's mid-rise, fitted short, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 4 inch or under inseam, no-front-seam construction, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Mid-rise mini shorts, front view" },
+        { alt: "Mid-rise mini shorts, no-front-seam detail" },
+        { alt: "Mid-rise mini shorts, side profile" },
+        { alt: "Mid-rise mini shorts, fabric close-up" },
+        { alt: "Mid-rise mini shorts, worn on model" },
+        { alt: "Mid-rise mini shorts, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Mid-Rise Mini Shorts Manufacturer",
+      pdpMetaDescription:
+        "Custom mid-rise mini shorts manufacturer, OEM, ODM and private label, fitted, 4 inch or under inseam, no front seam, Polyester/Spandex or Nylon/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the mid-rise mini short made from?",
+          a: "A Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, in the composition range typical of comparable fitted compression shorts. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How is this different from your High-Rise Mini short?",
+          a: "Same 4 inch or under inseam and fitted, compression cut. This uses a mid-rise waistband instead of the taller high-rise waistband on our High-Rise Mini short.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "High-Rise Biker Shorts", slug: "high-rise-biker", href: "/capriowear/activewear/shorts" },
+        { label: "Mid-Rise Biker Shorts", slug: "mid-rise-biker", href: "/capriowear/activewear/shorts" },
+        { label: "High-Rise Mini Shorts", slug: "high-rise-mini", href: "/capriowear/activewear/shorts" },
+        { label: "Mid-Rise Sweat Shorts", slug: "relaxed-short", href: "/capriowear/activewear/shorts" },
+        { label: "See All", href: "/capriowear/activewear/shorts" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Women's mid-rise, fitted short, 4 inch or under inseam (base type)",
+        },
+        {
+          label: "Fabric",
+          value:
+            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        {
+          label: "Stretch and support",
+          value: "Fitted, compression fit, not relaxed, not loose. A close-to-body silhouette at the shortest inseam length in the catalog.",
+        },
+        { label: "Seam", value: "No-front-seam construction, following the locked reference" },
+        { label: "Waistband", value: "Mid-rise elastic waistband" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Mid-rise mini shorts, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Compression fit checked for consistent recovery across the size run",
+        "No-front-seam construction checked for chafe-free wear",
+        "Mid-rise waistband checked for hold and no roll-down under movement",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Polyester/Spandex or Nylon/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
@@ -1461,6 +1558,98 @@ export const shorts: Category = {
       image: "",
       imageAlt: "Custom mid-rise sweat shorts manufacturer",
       href: "/capriowear/activewear/shorts/relaxed-short",
+      // Full PDP content for SKU 14 (owner spec, 2026-09-22), draft, same
+      // shape as SKU 1 to 13, the last of the 14-SKU Shorts catalog.
+      // Reachable by URL and a clickable PLP card via the sitewide
+      // draft-PDP rule (`isDraftPdpReachable()`): still noindex/nofollow,
+      // out of the sitemap, no Product/FAQPage JSON-LD. Do not flip
+      // `status` to "published". No GSM sourced (Weight stays "Pending,
+      // confirmed on your sample."). `images` are alt-only placeholders:
+      // real product photography is needed before this can go live. CTA
+      // is Request a Sample only. `pdpSpecHighlights` drops the "(plus
+      // waist-inch sizing)" qualifier the men's SKUs use -- women's-only,
+      // same as SKU 8 to 13.
+      pdpTitle: "Mid-Rise Sweat",
+      pdpHeading: "Custom Mid-Rise Sweat Shorts Manufacturer",
+      pdpDescription:
+        "Women's mid-rise, relaxed fleece sweatshort, custom and private label, in a cotton fleece or cotton/poly blend brushed knit, short inseam, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Mid-rise sweat shorts, front view" },
+        { alt: "Mid-rise sweat shorts, waistband and drawcord detail" },
+        { alt: "Mid-rise sweat shorts, side profile" },
+        { alt: "Mid-rise sweat shorts, fabric close-up" },
+        { alt: "Mid-rise sweat shorts, worn on model" },
+        { alt: "Mid-rise sweat shorts, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Mid-Rise Sweat Shorts Manufacturer",
+      pdpMetaDescription:
+        "Custom mid-rise sweat shorts manufacturer, OEM, ODM and private label, relaxed fleece short, short inseam, cotton fleece or cotton/poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Cotton fleece", "Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the mid-rise sweat short made from?",
+          a: "A cotton fleece or cotton/poly blend with a brushed finish, in the composition range typical of comparable sweatshorts. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How is this different from your Mid-Rise Relaxed short?",
+          a: "This is a fleece sweatshort at a short inseam, built for comfort and off-duty wear. Our Mid-Rise Relaxed short uses a woven fabric instead of fleece, at an unfixed, brief-set inseam.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Mid-Rise Relaxed Shorts", slug: "mid-rise-relaxed", href: "/capriowear/activewear/shorts" },
+        { label: "Mid-Rise Mini Shorts", slug: "mid-rise-mini", href: "/capriowear/activewear/shorts" },
+        { label: "High-Rise Mini Shorts", slug: "high-rise-mini", href: "/capriowear/activewear/shorts" },
+        { label: "Relaxed Long Shorts", slug: "relaxed-long", href: "/capriowear/activewear/shorts" },
+        { label: "See All", href: "/capriowear/activewear/shorts" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Women's mid-rise, relaxed fleece sweatshort, short inseam (base type)",
+        },
+        {
+          label: "Fabric",
+          value: "Cotton fleece or cotton/poly blend, brushed finish, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        {
+          label: "Stretch and support",
+          value: "Relaxed, loose fleece fit, not fitted, not compression.",
+        },
+        { label: "Waistband", value: "Mid-rise elastic waistband, drawcord closure" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Mid-rise sweat shorts, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Fleece checked for consistent hand feel and brushed finish across the run",
+        "Drawcord and waistband checked for secure hold",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Cotton fleece or cotton/poly blend, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
   ],
   relatedLinks: [

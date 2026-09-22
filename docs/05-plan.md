@@ -3531,3 +3531,9 @@ Urgent fix (owner report, "internal disclaimer text live"): both PLPs' `FabricOp
 ## Sports Bras coverage eyebrow reverted to "CUSTOMIZATION", 2026-09-22
 
 Owner correction: `coverageEyebrow` had briefly been set to "CUSTOM FROM FABRIC TO PACKAGING" (plan-review fix earlier the same day) — reverted to "CUSTOMIZATION", matching Leggings/Shorts' own eyebrow for this section. `coverageHeading`/`coverageItems` unchanged.
+
+## Shorts SKU 13 (Mid-Rise Mini, CAP-SHO-13) and SKU 14 (Mid-Rise Sweat, CAP-SHO-14) draft PDPs added, 2026-09-22
+
+Full PDP content for the existing `mid-rise-mini`/`relaxed-short` draft cards in `content/activewear/shorts.ts`, same shape as SKU 1 to 12 -- the final two SKUs of the 14-SKU Shorts catalog. Both women's-only, draft, reachable and clickable via `isDraftPdpReachable()`; noindex/nofollow, out of the sitemap, BreadcrumbList only, no Product/FAQPage JSON-LD. No GSM sourced for either. `pdpSpecHighlights` drops the men's-only "(plus waist-inch sizing)" qualifier on both. Card title/slug for SKU 13 already used "Mini" (from the earlier 2026-09-22 rename), confirmed unchanged. Gallery is alt-only placeholders: real photography needed.
+
+All 14 Shorts SKUs now have full PDP content. Final catalog pass confirmed live: All shows exactly 14 cards across 2 pages (8 then 6, mobile page size), Men shows exactly 7 (CAP-SHO-01 to 07, all clickable), Women shows exactly 7 (CAP-SHO-08 to 14, all clickable). The Shorts category build (PLP + all 14 PDPs) is complete.
