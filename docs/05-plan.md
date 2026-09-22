@@ -3628,3 +3628,17 @@ Confirmed live: Men filter shows all 8 cards, exactly 5 clickable (SKU 4 to 8); 
 ## Leggings PLP: added "Do you manufacture yoga leggings?" FAQ, 2026-09-22
 
 Owner spec: single content addition to `content/activewear/leggings.ts`'s category-level `faqs` array, inserted between "What makes leggings squat proof?" and "Can you match a specific fabric or a reference legging?" -- no other field on this file touched. Same array feeds both the visible `Faq` render and `faqSchema()`'s `FAQPage` JSON-LD automatically, so no schema code changed; confirmed live, the new Q&A appears in both the rendered FAQ list and `mainEntity` in the correct position.
+
+## Tank Tops SKU 10 (Relaxed), SKU 11 (Cropped Fitted), SKU 12 (Racerback) draft PDPs added, 2026-09-22
+
+Full PDP content for the existing `relaxed-womens`/`cropped-fitted`/`racerback-womens` draft cards in `content/activewear/tank-tops.ts`. All three women's, draft, reachable and clickable via `isDraftPdpReachable()`; noindex/nofollow, out of the sitemap, BreadcrumbList only, no Product/FAQPage JSON-LD. No GSM sourced on any of the three, all key facts correctly omit the men's-only "(plus waist-inch sizing)" qualifier. Card names "Relaxed Tank" and "Racerback Tank" intentionally match their men's siblings (SKU 3, SKU 6) but slugs stay gender-scoped with no collision, confirmed live.
+
+SKU 11's PLP card was renamed from "Custom Cropped Tank" to "Custom Cropped Fitted Tank" (`cardTitle`, plus the matching related-style label on SKU 9's own tags), per the brief's own explicit note: this SKU is deliberately distinct from a future, not-yet-built "Cropped Tank" (SKU 15, a cropped-length cross-silhouette construction feature), and the two names must not collapse into one when SKU 15 eventually lands. No slug or content was pre-created for SKU 15 itself.
+
+Confirmed live: Women filter shows all 8 cards, exactly 4 clickable (SKU 9 to 12); SKU 13 to 16 remain non-clickable draft tiles, not yet built. No dashes, prices, "seamless" claims, or sourcing-language leaks found on any of the three new pages via text scan. With this build, 9 of 16 Tank Tops SKUs total have full PDP content: SKU 4 to 8 of the 8 men's SKUs (SKU 1 to 3 still card-only) plus SKU 9 to 12 of the 8 women's SKUs (SKU 13 to 16 still card-only).
+
+## Tank Tops PLP: meta description keyword re-target, 2026-09-22
+
+Metadata-only change (owner spec, SERP check): re-targeted the PLP's meta description from the low-volume, wrong-intent "custom tank top manufacturer" (10/mo, dominated by print-on-demand sites) to the higher-volume, correct B2B-intent "tank top manufacturer" (260/mo, dominated by real manufacturers) -- same pattern requested for T-Shirts, though no prior T-Shirts re-target entry exists yet in this log or that category's own `metaDescription`, so that precedent isn't independently confirmed in this codebase; flagging rather than assuming. No separate "target keyword" field or tracking mechanism exists anywhere in `Category`/the codebase to update alongside it -- `metaDescription` was the only field in scope.
+
+Confirmed live: `<title>` unchanged ("Custom Tank Top Manufacturer | Capriowear"), H1 unchanged ("Custom Tank Top Manufacturer"), URL unchanged, meta description/og:description/twitter:description all match the new copy exactly (same source field, generated automatically, no manual duplication), BreadcrumbList/FAQPage/Organization/WebSite schema types unchanged, section order and heading text on the page unchanged. No other field, section, or SKU card touched.
