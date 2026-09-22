@@ -1102,6 +1102,27 @@ export const tShirts: Category = {
       },
     },
     {
+      // Full PDP content for SKU 10 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1/2/3/4/6/9. Women's sibling of SKU 2
+      // (`oversized-mens`) -- gender-scoped slug, own women's-block
+      // pattern, not a scaled-down men's tee.
+      //
+      // Internal research provenance, comment-only, never visible copy
+      // (same rule Leggings' own SKU comments already establish, and the
+      // reason the V-Panel Capri's internal-methodology FAQ was removed):
+      // evidence tier 4 of 4 brands (Nike, Gymshark, YoungLA, Under
+      // Armour all validated); locked reference product Nike Sportswear
+      // Classic Oversized; directional heavyweight to ultra-heavyweight,
+      // 180 to 280+ GSM, confirmed on the sample.
+      //
+      // `pdpHeading`/`pdpMetaTitle` use the gender-scoped "Women's ..."
+      // form the owner's own brief specifies for SKU 10 to 13, rather
+      // than the un-gendered "Custom ..." form every prior SKU uses --
+      // this also removes the duplicate-H1 collision with SKU 2. SKU 9
+      // and all of Tank Tops still use the old form (flagged, not
+      // changed here: out of this task's scope).
+      // `pdpSpecHighlights` left unset so the shared "DDP to 20+
+      // countries" default applies, same call as SKU 3.
       status: "draft",
       slug: "oversized-womens",
       cardTitle: "Custom Oversized T-Shirt",
@@ -1111,8 +1132,94 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/oversized-womens",
       gender: "Women",
       sku: "CAP-TEE-10",
+      pdpTitle: "Oversized",
+      pdpHeading: "Women's Oversized T-Shirt Manufacturer",
+      pdpDescription:
+        "Women's boxy, dropped-shoulder oversized tee, custom and private label, in combed cotton or a heavyweight cotton-poly blend, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Oversized t-shirt, front view, women's" },
+        { alt: "Oversized t-shirt, shoulder detail, women's" },
+        { alt: "Oversized t-shirt, back view, women's" },
+        { alt: "Oversized t-shirt, fabric close-up, women's" },
+        { alt: "Oversized t-shirt, worn on model, women's" },
+        { alt: "Oversized t-shirt, flat lay, women's" },
+      ],
+      pdpMetaTitle: "Women's Oversized T-Shirt Manufacturer",
+      pdpMetaDescription:
+        "Women's oversized t-shirt manufacturer, OEM, ODM and private label, dropped-shoulder fit, heavyweight cotton or cotton-poly, from 50 pieces, DDP worldwide.",
+      material: "Combed cotton or heavyweight cotton-poly blend",
+      pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Tri-blend", "Recycled polyester"],
+      pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "What fabric is the women's oversized tee made from?",
+          a: "Combed cotton or a heavyweight cotton-poly blend, weighted toward the heavier end of our GSM range for a structured oversized drape. We confirm the exact blend and weight on your sample.",
+        },
+        {
+          q: "How does the women's cut differ from the men's Oversized tee?",
+          a: "Same fabric options and construction quality, drafted on a women's block with a shorter body and a narrower shoulder before the drop is added, so the boxy volume reads intentional rather than like a scaled-down men's tee.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Relaxed", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Dropped-Shoulder", slug: "dropped-shoulder-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Cropped", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "See All", href: "/capriowear/activewear/t-shirts" },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's boxy, oversized tee, dropped-shoulder construction (base type)" },
+        { label: "Fabric", value: "Combed cotton or heavyweight cotton-poly blend, directional research range" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Oversized, boxy through the body" },
+        { label: "Construction", value: "Cut-and-sew, dropped-shoulder seam, side-seam or tubular body, double-needle stitching" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, puff, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Oversized t-shirt, construction detail, women's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Shrinkage tested after wash, preshrink status stated",
+        "Print durability tested for your fabric and method",
+        "Dropped-shoulder placement checked for consistency at every size",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, puff, silicone, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric and weight",
+            body: "Any blend and GSM, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" },
+          },
+          {
+            title: "Fit and build",
+            body: "Dropped-shoulder placement, body length, side-seam or tubular, to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit and build" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven, printed or tear-away labels, care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 11 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 10 above. Women's sibling of SKU 3
+      // (`relaxed-mens`).
+      //
+      // Internal research provenance, comment-only, never visible copy:
+      // evidence tier 2 of 4 brands (Gymshark and YoungLA absent from the
+      // validated set); locked reference product Under Armour Simple
+      // Branded SS; directional midweight, 150 to 190 GSM, confirmed on
+      // the sample.
       status: "draft",
       slug: "relaxed-womens",
       cardTitle: "Custom Relaxed T-Shirt",
@@ -1122,8 +1229,98 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/relaxed-womens",
       gender: "Women",
       sku: "CAP-TEE-11",
+      pdpTitle: "Relaxed",
+      pdpHeading: "Women's Relaxed T-Shirt Manufacturer",
+      pdpDescription:
+        "Women's softer, roomier everyday tee, custom and private label, in a 50/50 cotton-poly or CVC blend, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Relaxed t-shirt, front view, women's" },
+        { alt: "Relaxed t-shirt, back view, women's" },
+        { alt: "Relaxed t-shirt, side profile, women's" },
+        { alt: "Relaxed t-shirt, fabric close-up, women's" },
+        { alt: "Relaxed t-shirt, worn on model, women's" },
+        { alt: "Relaxed t-shirt, flat lay, women's" },
+      ],
+      pdpMetaTitle: "Women's Relaxed T-Shirt Manufacturer",
+      pdpMetaDescription:
+        "Women's relaxed t-shirt manufacturer, OEM, ODM and private label, roomier everyday fit, midweight cotton-poly or CVC blend, from 50 pieces, DDP worldwide.",
+      material: "50/50 or CVC cotton-poly blend",
+      pdpFabricPills: ["50/50 cotton-poly", "CVC cotton-poly", "Combed cotton", "Tri-blend"],
+      pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "What fabric is the women's relaxed tee made from?",
+          a: "A 50/50 or CVC cotton-poly blend as the default, for less shrink and a durable everyday hand. Straight cotton or a tri-blend option is also available. We confirm the exact blend and weight on your sample.",
+        },
+        {
+          q: "How does the women's cut differ from the men's Relaxed tee?",
+          a: "Same fabric options and construction quality, drafted on a women's block with a shorter body and a narrower shoulder. Roomier through the body than the Fitted SKU, without the boxy volume of the Oversized SKU.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Oversized", slug: "oversized-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Athletic", slug: "athletic-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Dropped-Shoulder", slug: "dropped-shoulder-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "See All", href: "/capriowear/activewear/t-shirts" },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's relaxed, everyday tee (base type)" },
+        { label: "Fabric", value: "50/50 or CVC cotton-poly blend, directional research range" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Relaxed, roomier through the body than the Fitted SKU, not as boxy as the Oversized SKU" },
+        { label: "Construction", value: "Cut-and-sew, side-seam or tubular body, double-needle stitched sleeves, hem and neck" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Relaxed t-shirt, construction detail, women's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Shrinkage tested after wash, preshrink status stated",
+        "Print durability tested for your fabric and method",
+        "Collar and hem hold their shape after repeated washing",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, puff, silicone, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric and weight",
+            body: "Any blend and GSM, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" },
+          },
+          {
+            title: "Fit and build",
+            body: "Body width, length, side-seam or tubular, to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit and build" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven, printed or tear-away labels, care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 12 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 10/11 above. Women's sibling of SKU 4
+      // (`athletic-mens`).
+      //
+      // Internal research provenance, comment-only, never visible copy:
+      // evidence tier 2 of 4 brands (Nike and YoungLA absent from the
+      // validated set); locked reference product Under Armour Tech Twist
+      // SS; directional lightweight, 100 to 155 GSM, confirmed on the
+      // sample.
+      //
+      // `relatedStyleTags` cannot mirror SKU 4's own (Raglan and
+      // Curved-Hem are men-only SKUs, 5 and 8) -- uses the women's-set
+      // siblings instead, same rule every other chip row follows.
       status: "draft",
       slug: "athletic-womens",
       cardTitle: "Custom Athletic T-Shirt",
@@ -1133,8 +1330,95 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/athletic-womens",
       gender: "Women",
       sku: "CAP-TEE-12",
+      pdpTitle: "Athletic",
+      pdpHeading: "Women's Athletic T-Shirt Manufacturer",
+      pdpDescription:
+        "Women's true-to-size athletic and training tee, custom and private label, in 100% performance polyester, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Athletic t-shirt, front view, women's" },
+        { alt: "Athletic t-shirt, back view, women's" },
+        { alt: "Athletic t-shirt, side profile, women's" },
+        { alt: "Athletic t-shirt, fabric close-up, women's" },
+        { alt: "Athletic t-shirt, worn on model, women's" },
+        { alt: "Athletic t-shirt, flat lay, women's" },
+      ],
+      pdpMetaTitle: "Women's Athletic T-Shirt Manufacturer",
+      pdpMetaDescription:
+        "Women's athletic t-shirt manufacturer, OEM, ODM and private label, true-to-size training cut, moisture-wicking polyester, from 50 pieces, DDP worldwide.",
+      material: "100% performance polyester",
+      pdpFabricPills: ["Performance polyester", "Recycled polyester", "Poly-spandex blend", "Cotton-poly blend"],
+      pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "What fabric is the women's athletic tee made from?",
+          a: "100% performance polyester as the default, chosen for moisture-wicking and quick-dry performance. This is also the fabric that takes true sublimation printing. We confirm the exact weight on your sample.",
+        },
+        {
+          q: "How does the women's cut differ from the men's Athletic tee?",
+          a: "Same fabric and construction quality, drafted on a women's block with a shorter body, a narrower shoulder and a slight taper through the waist. Cut true to size for training, not compressive.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Relaxed", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "V-Neck", slug: "v-neck", href: "/capriowear/activewear/t-shirts" },
+        { label: "Cropped", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "See All", href: "/capriowear/activewear/t-shirts" },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's athletic, true-to-size training tee (base type)" },
+        { label: "Fabric", value: "100% performance polyester, directional research range" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "True-to-size, athletic cut" },
+        { label: "Construction", value: "Cut-and-sew, side-seam or tubular body, double-needle stitched sleeves, hem and neck" },
+        { label: "Branding", value: "Sublimation, screen, DTF, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Athletic t-shirt, construction detail, women's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Moisture-wicking performance tested for your exact fabric",
+        "Print durability tested for your exact fabric and method",
+        "Collar and hem hold their shape after repeated washing",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation on polyester, screen, DTF", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, silicone, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric and weight",
+            body: "Any blend and GSM, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" },
+          },
+          {
+            title: "Fit and build",
+            body: "Body width, length, side-seam or tubular, to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit and build" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven, printed or tear-away labels, care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 13 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 10/11/12 above. Women's sibling of SKU 6
+      // (`dropped-shoulder-mens`). Completes the women's set (SKU 9 to
+      // 13 built; 14 Cropped, 15 Ringer, 16 V-Neck still card-only).
+      //
+      // Internal research provenance, comment-only, never visible copy:
+      // evidence tier 4 of 4 brands (Nike, Gymshark, YoungLA, Under
+      // Armour all validated); locked reference product Gymshark
+      // Training Oversized; directional midweight to heavyweight, 150 to
+      // 260 GSM, confirmed on the sample.
       status: "draft",
       slug: "dropped-shoulder-womens",
       cardTitle: "Custom Dropped-Shoulder T-Shirt",
@@ -1144,6 +1428,83 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/dropped-shoulder-womens",
       gender: "Women",
       sku: "CAP-TEE-13",
+      pdpTitle: "Dropped-Shoulder",
+      pdpHeading: "Women's Dropped-Shoulder T-Shirt Manufacturer",
+      pdpDescription:
+        "Women's dropped-shoulder tee, seam sits below the natural shoulder line, custom and private label, in combed cotton or a cotton-poly blend, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Dropped-shoulder t-shirt, front view, women's" },
+        { alt: "Dropped-shoulder t-shirt, shoulder seam detail, women's" },
+        { alt: "Dropped-shoulder t-shirt, back view, women's" },
+        { alt: "Dropped-shoulder t-shirt, fabric close-up, women's" },
+        { alt: "Dropped-shoulder t-shirt, worn on model, women's" },
+        { alt: "Dropped-shoulder t-shirt, flat lay, women's" },
+      ],
+      pdpMetaTitle: "Women's Dropped-Shoulder T-Shirt Manufacturer",
+      pdpMetaDescription:
+        "Women's dropped-shoulder t-shirt manufacturer, OEM, ODM and private label, dropped shoulder seam, cotton or cotton-poly blend, from 50 pieces, DDP worldwide.",
+      material: "Combed cotton or cotton-poly blend",
+      pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Tri-blend", "Recycled polyester"],
+      pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "How is this different from the women's Oversized T-Shirt?",
+          a: "Related but distinct. This SKU is specified at a moderate shoulder drop on a relaxed, not fully boxy, body. Our women's Oversized T-Shirt combines a deeper shoulder drop with a fully boxy body. Both are adjustable to your tech pack.",
+        },
+        {
+          q: "What fabric is the women's dropped-shoulder tee made from?",
+          a: "Combed cotton or a cotton-poly blend as the default, midweight through heavyweight depending on the drape you want. We confirm the exact blend and weight on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Oversized", slug: "oversized-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Relaxed", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Fitted", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Cropped", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "See All", href: "/capriowear/activewear/t-shirts" },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's dropped-shoulder tee (base type)" },
+        { label: "Fabric", value: "Combed cotton or cotton-poly blend, directional research range" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Relaxed through the body, moderate shoulder drop" },
+        { label: "Construction", value: "Cut-and-sew, dropped-shoulder seam, side-seam or tubular body, double-needle stitching" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, puff, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Dropped-shoulder t-shirt, construction detail, women's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Shoulder-drop placement checked for consistency at every size",
+        "Print durability tested for your fabric and method",
+        "Shrinkage tested after wash, preshrink status stated",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, puff, silicone, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric and weight",
+            body: "Any blend and GSM, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" },
+          },
+          {
+            title: "Fit and build",
+            body: "Shoulder-drop depth, body length, side-seam or tubular, to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit and build" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven, printed or tear-away labels, care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
