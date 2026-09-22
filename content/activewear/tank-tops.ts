@@ -1138,6 +1138,97 @@ export const tankTops: Category = {
       image: "",
       imageAlt: "Custom shelf-bra tank manufacturer",
       href: "/capriowear/activewear/tank-tops/shelf-bra",
+      // Full PDP content for SKU 13 (owner spec, 2026-09-22), draft, same
+      // shape as SKU 1 to 12. A Tank Tops category SKU (an integrated
+      // bra built into a tank), deliberately kept distinct from the
+      // Sports Bras category's own built-in products -- no cross-link
+      // or content duplication with that category. Reachable by URL and
+      // a clickable PLP card via the sitewide draft-PDP rule
+      // (`isDraftPdpReachable()`): still noindex/nofollow, out of the
+      // sitemap, no Product/FAQPage JSON-LD. Do not flip `status` to
+      // "published". No GSM sourced (Weight stays "Pending, confirmed
+      // on your sample."). `images` are alt-only placeholders: real
+      // product photography is needed before this can go live. CTA is
+      // Request a Sample only.
+      pdpTitle: "Shelf-Bra",
+      sku: "CAP-TNK-13",
+      pdpHeading: "Custom Shelf-Bra Tank Manufacturer",
+      pdpDescription:
+        "Women's tank with a built-in shelf bra, removable pads, and adjustable straps, custom and private label, in stretch poly blend, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Shelf-bra tank, front view" },
+        { alt: "Shelf-bra tank, built-in shelf bra detail" },
+        { alt: "Shelf-bra tank, side profile" },
+        { alt: "Shelf-bra tank, fabric close-up" },
+        { alt: "Shelf-bra tank, worn on model" },
+        { alt: "Shelf-bra tank, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Shelf-Bra Tank Manufacturer",
+      pdpMetaDescription:
+        "Custom shelf-bra tank manufacturer, OEM, ODM and private label, built-in shelf bra, removable pads, adjustable straps, stretch poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton-Poly Blend", "Recycled Polyester"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "Can I skip a separate sports bra with this tank?",
+          a: "For light activity, many wearers do, though support level depends on your fabric and pad choice. For high-impact use, we recommend pairing with a dedicated sports bra from our Sports Bras category.",
+        },
+        {
+          q: "Are the pads removable and can straps be adjusted?",
+          a: "Yes. Pads are removable and straps are adjustable, confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Halter Tank", slug: "halter", href: "/capriowear/activewear/tank-tops" },
+        { label: "Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
+        { label: "See All", href: "/capriowear/activewear/tank-tops" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Women's tank, built-in shelf bra, adjustable straps (base type)",
+        },
+        {
+          label: "Fabric",
+          value: "Stretch poly blend, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Fitted body, scoop neckline." },
+        { label: "Support", value: "Built-in shelf bra with removable pads, adjustable back straps" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Shelf-bra tank, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Shelf bra and strap adjustment tested for support and hold",
+        "Removable pad fit checked across the size run",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Stretch poly blend, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
@@ -1148,16 +1239,197 @@ export const tankTops: Category = {
       image: "",
       imageAlt: "Custom halter tank manufacturer",
       href: "/capriowear/activewear/tank-tops/halter",
+      // Full PDP content for SKU 14 (owner spec, 2026-09-22), draft, same
+      // shape as SKU 1 to 13. Reachable by URL and a clickable PLP card
+      // via the sitewide draft-PDP rule (`isDraftPdpReachable()`): still
+      // noindex/nofollow, out of the sitemap, no Product/FAQPage
+      // JSON-LD. Do not flip `status` to "published". No GSM sourced
+      // (Weight stays "Pending, confirmed on your sample."). `images`
+      // are alt-only placeholders: real product photography is needed
+      // before this can go live. CTA is Request a Sample only.
+      pdpTitle: "Halter",
+      sku: "CAP-TNK-14",
+      pdpHeading: "Custom Halter Tank Manufacturer",
+      pdpDescription:
+        "Women's halter-neck tank with a deep scoop back, custom and private label, in stretch poly blend, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Halter tank, front view" },
+        { alt: "Halter tank, neckline and back detail" },
+        { alt: "Halter tank, side profile" },
+        { alt: "Halter tank, fabric close-up" },
+        { alt: "Halter tank, worn on model" },
+        { alt: "Halter tank, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Halter Tank Manufacturer",
+      pdpMetaDescription:
+        "Custom halter tank manufacturer, OEM, ODM and private label, halterneck front, deep scoop back, stretch poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton-Poly Blend", "Recycled Polyester"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the halter tank made from?",
+          a: "Stretch poly blend, in the composition range typical of comparable halter tanks. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How does the halter neckline close?",
+          a: "Ties or clips behind the neck, confirmed on your sample. Both closures are available on request.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
+        { label: "Shelf-Bra Tank", slug: "shelf-bra", href: "/capriowear/activewear/tank-tops" },
+        { label: "See All", href: "/capriowear/activewear/tank-tops" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Women's halter-neck tank, deep scoop back (base type)",
+        },
+        {
+          label: "Fabric",
+          value: "Stretch poly blend, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Fitted through the body." },
+        { label: "Neckline", value: "Halter, ties or clips behind the neck" },
+        { label: "Back", value: "Deep scoop" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Halter tank, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Halter tie and neckline hardware tested for hold",
+        "Back panel checked for chafe-free fit",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Stretch poly blend, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
       slug: "cropped-length",
-      cardTitle: "Custom Cropped Length Tank",
+      cardTitle: "Custom Cropped Tank",
       cardSubline: "Cropped hem length, cross-silhouette construction feature",
       gender: "Women",
       image: "",
-      imageAlt: "Custom cropped length tank manufacturer",
+      imageAlt: "Custom cropped tank manufacturer, cross-silhouette",
       href: "/capriowear/activewear/tank-tops/cropped-length",
+      // Full PDP content for SKU 15 (owner spec, 2026-09-22), draft, same
+      // shape as SKU 1 to 14. Card name "Cropped Tank" is deliberately
+      // distinct from SKU 11's "Cropped Fitted Tank" -- SKU 11 is a
+      // fitted body with a cropped hem, this SKU is the cropped hem as
+      // a standalone, layerable construction feature on a relaxed base.
+      // Slugs `cropped-length` (this SKU) and `cropped-fitted` (SKU 11)
+      // stay distinct, confirmed no collision. Reachable by URL and a
+      // clickable PLP card via the sitewide draft-PDP rule
+      // (`isDraftPdpReachable()`): still noindex/nofollow, out of the
+      // sitemap, no Product/FAQPage JSON-LD. Do not flip `status` to
+      // "published". No GSM sourced (Weight stays "Pending, confirmed
+      // on your sample."). `images` are alt-only placeholders: real
+      // product photography is needed before this can go live. CTA is
+      // Request a Sample only.
+      pdpTitle: "Cropped",
+      sku: "CAP-TNK-15",
+      pdpHeading: "Custom Cropped Tank Manufacturer",
+      pdpDescription:
+        "Women's relaxed tank with a cropped, midriff-baring hem, custom and private label, in stretch poly blend, made to your brand in Sialkot, Pakistan. The cropped hem length can also be layered onto other silhouettes on request.",
+      images: [
+        { alt: "Cropped tank, front view" },
+        { alt: "Cropped tank, hem detail" },
+        { alt: "Cropped tank, side profile" },
+        { alt: "Cropped tank, fabric close-up" },
+        { alt: "Cropped tank, worn on model" },
+        { alt: "Cropped tank, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Cropped Tank Manufacturer",
+      pdpMetaDescription:
+        "Custom cropped tank manufacturer, OEM, ODM and private label, relaxed fit, cropped midriff-baring hem, stretch poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Poly-Spandex", "Cotton-Poly Blend", "Nylon-Elastane", "Recycled Polyester"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "How is this different from your Cropped Fitted Tank?",
+          a: "This uses a relaxed body with the cropped hem. Our Cropped Fitted Tank pairs the same cropped hem with a close-fitting, body-hugging silhouette.",
+        },
+        {
+          q: "Can I get this cropped hem on a different style, not this exact tank?",
+          a: "Yes. The cropped length is not tied to this one silhouette. We can build it into fitted or racerback styles in the catalog, confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
+        { label: "Relaxed Tank", slug: "relaxed-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "See All", href: "/capriowear/activewear/tank-tops" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Women's relaxed tank, cropped midriff-baring hem (base type)",
+        },
+        {
+          label: "Fabric",
+          value: "Stretch poly blend, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Relaxed. Cropped hem length." },
+        { label: "Hem length", value: "Cropped, midriff-baring" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Cropped tank, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Hem length checked for consistency across the size run",
+        "Relaxed fit checked for consistent drape",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Stretch poly blend, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
