@@ -282,7 +282,7 @@ export const tankTops: Category = {
       href: "/capriowear/activewear/tank-tops/fitted-mens",
       sku: "CAP-TNK-02",
       pdpTitle: "Fitted",
-      pdpHeading: "Custom Fitted Tank Manufacturer",
+      pdpHeading: "Men's Fitted Tank Manufacturer",
       pdpDescription:
         "Men's close-fitting, compression tank with a standard neckline and armhole, custom and private label, in poly-spandex, nylon-elastane, or fitted cotton, made to your brand in Sialkot, Pakistan.",
       images: [
@@ -293,7 +293,7 @@ export const tankTops: Category = {
         { alt: "Fitted tank, worn on model" },
         { alt: "Fitted tank, flat lay" },
       ],
-      pdpMetaTitle: "Custom Fitted Tank Manufacturer",
+      pdpMetaTitle: "Men's Fitted Tank Manufacturer",
       pdpMetaDescription:
         "Custom fitted tank manufacturer, OEM, ODM and private label, close-fitting compression build, standard neckline and armhole, poly-spandex or nylon-elastane, from 50 pieces, any fabric and color, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton", "Recycled Polyester"],
@@ -369,7 +369,7 @@ export const tankTops: Category = {
       href: "/capriowear/activewear/tank-tops/relaxed-mens",
       sku: "CAP-TNK-03",
       pdpTitle: "Relaxed",
-      pdpHeading: "Custom Relaxed Tank Manufacturer",
+      pdpHeading: "Men's Relaxed Tank Manufacturer",
       pdpDescription:
         "Men's relaxed, softer-fit tank with a standard finished armhole and neckline, custom and private label, in recycled polyester or cotton jersey, made to your brand in Sialkot, Pakistan.",
       images: [
@@ -380,7 +380,7 @@ export const tankTops: Category = {
         { alt: "Relaxed tank, worn on model" },
         { alt: "Relaxed tank, flat lay" },
       ],
-      pdpMetaTitle: "Custom Relaxed Tank Manufacturer",
+      pdpMetaTitle: "Men's Relaxed Tank Manufacturer",
       pdpMetaDescription:
         "Custom relaxed tank manufacturer, OEM, ODM and private label, softer roomier fit, finished armhole and neckline, recycled polyester or cotton jersey, from 50 pieces, any fabric and color, DDP worldwide.",
       pdpFabricPills: ["Recycled Polyester", "Cotton", "Cotton-Poly Blend", "Poly-Spandex"],
@@ -876,7 +876,7 @@ export const tankTops: Category = {
       // is Request a Sample only.
       pdpTitle: "Ribbed",
       sku: "CAP-TNK-08",
-      pdpHeading: "Custom Ribbed Tank Manufacturer",
+      pdpHeading: "Men's Ribbed Tank Manufacturer",
       pdpDescription:
         "Men's fitted tank in a full-body ribbed knit, custom and private label, in cotton-elastane rib knit, lay-flat chafe-free side seams, made to your brand in Sialkot, Pakistan.",
       images: [
@@ -887,7 +887,7 @@ export const tankTops: Category = {
         { alt: "Ribbed tank, worn on model" },
         { alt: "Ribbed tank, flat lay" },
       ],
-      pdpMetaTitle: "Custom Ribbed Tank Manufacturer",
+      pdpMetaTitle: "Men's Ribbed Tank Manufacturer",
       pdpMetaDescription:
         "Custom ribbed tank manufacturer, OEM, ODM and private label, full-body rib knit, fitted through the torso, cotton-elastane rib knit, from 50 pieces, any fabric and color, DDP worldwide.",
       pdpFabricPills: ["Cotton-Elastane Rib Knit", "Viscose-Elastane Rib Knit", "Cotton", "Poly-Spandex"],
@@ -977,7 +977,7 @@ export const tankTops: Category = {
       // Sample only.
       pdpTitle: "Fitted",
       sku: "CAP-TNK-09",
-      pdpHeading: "Custom Fitted Tank Manufacturer",
+      pdpHeading: "Women's Fitted Tank Manufacturer",
       pdpDescription:
         "Women's close-fitting tank with a high scoop neckline and standard back, custom and private label, in stretch poly blend, made to your brand in Sialkot, Pakistan.",
       images: [
@@ -988,7 +988,7 @@ export const tankTops: Category = {
         { alt: "Fitted tank, worn on model" },
         { alt: "Fitted tank, flat lay" },
       ],
-      pdpMetaTitle: "Custom Fitted Tank Manufacturer",
+      pdpMetaTitle: "Women's Fitted Tank Manufacturer",
       pdpMetaDescription:
         "Custom fitted tank manufacturer, OEM, ODM and private label, close-fitting, high scoop neckline, standard back, stretch poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton-Poly Blend", "Recycled Polyester"],
@@ -1079,7 +1079,7 @@ export const tankTops: Category = {
       // Sample only.
       pdpTitle: "Relaxed",
       sku: "CAP-TNK-10",
-      pdpHeading: "Custom Relaxed Tank Manufacturer",
+      pdpHeading: "Women's Relaxed Tank Manufacturer",
       pdpDescription:
         "Women's relaxed, non-compression tank with a standard finished neckline and armhole, custom and private label, in stretch poly blend, made to your brand in Sialkot, Pakistan.",
       images: [
@@ -1090,7 +1090,7 @@ export const tankTops: Category = {
         { alt: "Relaxed tank, worn on model" },
         { alt: "Relaxed tank, flat lay" },
       ],
-      pdpMetaTitle: "Custom Relaxed Tank Manufacturer",
+      pdpMetaTitle: "Women's Relaxed Tank Manufacturer",
       pdpMetaDescription:
         "Custom relaxed tank manufacturer, OEM, ODM and private label, roomier non-compression fit, standard finished neckline and armhole, stretch poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Cotton-Poly Blend", "Nylon-Elastane", "Recycled Polyester"],
@@ -1687,7 +1687,7 @@ export const tankTops: Category = {
       // before this can go live. CTA is Request a Sample only.
       pdpTitle: "Ribbed",
       sku: "CAP-TNK-16",
-      pdpHeading: "Custom Ribbed Tank Manufacturer",
+      pdpHeading: "Women's Ribbed Tank Manufacturer",
       pdpDescription:
         "Women's fitted tank with ribbed-knit color-blocked side panels, custom and private label, in poly-elastane blend, made to your brand in Sialkot, Pakistan.",
       images: [
@@ -1698,7 +1698,7 @@ export const tankTops: Category = {
         { alt: "Ribbed tank, worn on model" },
         { alt: "Ribbed tank, flat lay" },
       ],
-      pdpMetaTitle: "Custom Ribbed Tank Manufacturer",
+      pdpMetaTitle: "Women's Ribbed Tank Manufacturer",
       pdpMetaDescription:
         "Custom ribbed tank manufacturer, OEM, ODM and private label, ribbed knit with color-blocked side panels, poly-elastane body, from 50 pieces, any fabric and color, DDP worldwide.",
       pdpFabricPills: ["Cotton-Elastane Rib Knit", "Viscose-Elastane Rib Knit", "Poly-Spandex", "Nylon-Elastane"],
