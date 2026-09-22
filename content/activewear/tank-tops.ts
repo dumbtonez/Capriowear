@@ -208,6 +208,92 @@ export const tankTops: Category = {
       image: "",
       imageAlt: "Custom athletic tank manufacturer",
       href: "/capriowear/activewear/tank-tops/athletic",
+      // Full PDP content for SKU 4 (owner spec, 2026-09-22), draft, same
+      // shape as SKU 1 to 3. Reachable by URL and a clickable PLP card
+      // via the sitewide draft-PDP rule (`isDraftPdpReachable()`): still
+      // noindex/nofollow, out of the sitemap, no Product/FAQPage
+      // JSON-LD. Do not flip `status` to "published". No GSM sourced
+      // (Weight stays "Pending, confirmed on your sample."). `images`
+      // are alt-only placeholders: real product photography is needed
+      // before this can go live. CTA is Request a Sample only.
+      pdpTitle: "Athletic",
+      pdpHeading: "Custom Athletic Tank Manufacturer",
+      pdpDescription:
+        "Men's true-to-size, performance training tank with a deep scoop neckline, custom and private label, in recycled polyester or moisture-wicking knit, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Athletic tank, front view" },
+        { alt: "Athletic tank, neckline detail" },
+        { alt: "Athletic tank, side profile" },
+        { alt: "Athletic tank, fabric close-up" },
+        { alt: "Athletic tank, worn on model" },
+        { alt: "Athletic tank, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Athletic Tank Manufacturer",
+      pdpMetaDescription:
+        "Custom athletic tank manufacturer, OEM, ODM and private label, true-to-size training and running cut, deep scoop neckline, recycled polyester, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Recycled Polyester", "Poly-Spandex", "Cotton-Poly Blend", "Nylon-Elastane"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the athletic tank made from?",
+          a: "Recycled polyester or moisture-wicking knit, in the composition range typical of comparable performance training tanks. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How is this different from your Fitted Tank?",
+          a: "This uses a true-to-size cut, not a compression fit. Our Fitted Tank uses a closer, body-hugging compression construction.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted Tank", slug: "fitted-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Relaxed Tank", slug: "relaxed-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Racerback Singlet", slug: "racerback-singlet", href: "/capriowear/activewear/tank-tops" },
+        { label: "Ribbed Tank", slug: "ribbed-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "See All", href: "/capriowear/activewear/tank-tops" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Men's true-to-size, performance training tank, deep scoop neckline (base type)",
+        },
+        {
+          label: "Fabric",
+          value: "Recycled polyester or moisture-wicking knit, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Athletic, true-to-size. Not fitted-compression, not oversized-boxy." },
+        { label: "Armhole", value: "Standard armhole, finished edge" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Athletic tank, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "True-to-size fit checked for consistency across the size run",
+        "Moisture-wicking performance checked before bulk",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Recycled polyester or moisture-wicking knit, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
@@ -218,6 +304,98 @@ export const tankTops: Category = {
       image: "",
       imageAlt: "Custom stringer tank manufacturer",
       href: "/capriowear/activewear/tank-tops/stringer",
+      // Full PDP content for SKU 5 (owner spec, 2026-09-22), draft, same
+      // shape as SKU 1 to 4. Reachable by URL and a clickable PLP card
+      // via the sitewide draft-PDP rule (`isDraftPdpReachable()`): still
+      // noindex/nofollow, out of the sitemap, no Product/FAQPage
+      // JSON-LD. Do not flip `status` to "published". Real GSM figure
+      // (165, attributed to "the confirmed range on comparable stringer
+      // builds," not a brand name, per the brief). `images` are alt-only
+      // placeholders: real product photography is needed before this can
+      // go live. CTA is Request a Sample only.
+      pdpTitle: "Stringer",
+      pdpHeading: "Custom Stringer Tank Manufacturer",
+      pdpDescription:
+        "Men's stringer tank with narrow straps and a deep-cut racerback armhole, custom and private label, in cotton/lyocell/elastane jersey, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Stringer tank, front view" },
+        { alt: "Stringer tank, armhole and strap detail" },
+        { alt: "Stringer tank, side profile" },
+        { alt: "Stringer tank, fabric close-up" },
+        { alt: "Stringer tank, worn on model" },
+        { alt: "Stringer tank, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Stringer Tank Manufacturer",
+      pdpMetaDescription:
+        "Custom stringer tank manufacturer, OEM, ODM and private label, narrow straps, deep-cut racerback armhole, cotton/lyocell/elastane jersey, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Cotton/Lyocell/Elastane", "Cotton", "Poly-Spandex", "Nylon-Elastane"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the stringer tank made from?",
+          a: "Cotton/lyocell/elastane jersey, in the composition range typical of comparable stringer tanks. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "What is the difference between a stringer and your Racerback Singlet?",
+          a: "Armhole depth and strap width. A stringer uses the deepest, most extreme armhole cut paired with ultra-narrow straps. Our Racerback Singlet uses a full racerback with a more moderate armhole and wider straps.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Racerback Singlet", slug: "racerback-singlet", href: "/capriowear/activewear/tank-tops" },
+        { label: "Muscle-Cut Tank", slug: "muscle-cut", href: "/capriowear/activewear/tank-tops" },
+        { label: "Fitted Tank", slug: "fitted-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Oversized Cut-Off Tank", slug: "oversized-cutoff", href: "/capriowear/activewear/tank-tops" },
+        { label: "See All", href: "/capriowear/activewear/tank-tops" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Men's stringer tank, narrow straps, deep-cut racerback armhole (base type)",
+        },
+        {
+          label: "Fabric",
+          value: "Cotton/lyocell/elastane jersey, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "165 GSM. Final weight confirmed on your sample." },
+        { label: "Fit", value: "Fitted. Deep-scooped stringer armholes, racerback (Y-back) construction." },
+        { label: "Strap width", value: "Ultra-narrow, scales with armhole depth" },
+        {
+          label: "Armhole",
+          value: "Confirmation needed on target market and exposure level before bulk, per standard stringer construction guidance",
+        },
+        { label: "Hem", value: "Straight, curved or raw-cut hem option available" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Stringer tank, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Armhole depth and strap width checked for consistency at every size",
+        "Racerback construction checked for hold and fit stability",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Cotton/lyocell/elastane jersey, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
@@ -228,6 +406,92 @@ export const tankTops: Category = {
       image: "",
       imageAlt: "Custom racerback singlet manufacturer",
       href: "/capriowear/activewear/tank-tops/racerback-singlet",
+      // Full PDP content for SKU 6 (owner spec, 2026-09-22), draft, same
+      // shape as SKU 1 to 5. Reachable by URL and a clickable PLP card
+      // via the sitewide draft-PDP rule (`isDraftPdpReachable()`): still
+      // noindex/nofollow, out of the sitemap, no Product/FAQPage
+      // JSON-LD. Do not flip `status` to "published". No GSM sourced
+      // (Weight stays "Pending, confirmed on your sample."). `images`
+      // are alt-only placeholders: real product photography is needed
+      // before this can go live. CTA is Request a Sample only.
+      pdpTitle: "Racerback Singlet",
+      pdpHeading: "Custom Racerback Singlet Manufacturer",
+      pdpDescription:
+        "Men's fitted running and training singlet with a full racerback construction, custom and private label, in stretch compression knit, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Racerback singlet, front view" },
+        { alt: "Racerback singlet, back construction detail" },
+        { alt: "Racerback singlet, side profile" },
+        { alt: "Racerback singlet, fabric close-up" },
+        { alt: "Racerback singlet, worn on model" },
+        { alt: "Racerback singlet, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Racerback Singlet Manufacturer",
+      pdpMetaDescription:
+        "Custom racerback singlet manufacturer, OEM, ODM and private label, fitted running and training singlet, full racerback construction, stretch compression knit, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Recycled Polyester", "Cotton-Lyocell-Elastane"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the racerback singlet made from?",
+          a: "Stretch compression knit, in the composition range typical of comparable running and training singlets. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "What is the difference between this and your Stringer Tank?",
+          a: "Armhole depth and strap width. This uses a full racerback with a more moderate armhole and wider straps. Our Stringer Tank uses the deepest, most extreme armhole cut paired with ultra-narrow straps.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Stringer Tank", slug: "stringer", href: "/capriowear/activewear/tank-tops" },
+        { label: "Muscle-Cut Tank", slug: "muscle-cut", href: "/capriowear/activewear/tank-tops" },
+        { label: "Fitted Tank", slug: "fitted-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Athletic Tank", slug: "athletic", href: "/capriowear/activewear/tank-tops" },
+        { label: "See All", href: "/capriowear/activewear/tank-tops" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Men's fitted running and training singlet, full racerback construction (base type)",
+        },
+        {
+          label: "Fabric",
+          value: "Stretch compression knit, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Fitted, close-to-body. Full racerback, not a stringer's narrow strap." },
+        { label: "Back construction", value: "Full racerback (Y-back)" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Racerback singlet, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Racerback construction checked for hold and fit stability",
+        "Compression fit checked for consistent recovery across the size run",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Stretch compression knit, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
