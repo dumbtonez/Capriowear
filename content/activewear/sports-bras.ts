@@ -152,11 +152,10 @@ export const sportsBras: Category = {
   // All 15 styles stay "draft" (owner spec) -- flip to "published" only
   // once sampled, photographed, and confirmed real, same rule every other
   // category's draft cards already follow. No `gender` field on any card
-  // (women's-only category, nothing to filter). SKU 1 (CAP-SPB-01) through
-  // SKU 12 (CAP-SPB-12) got full PDP content 2026-09-22 (owner spec) --
-  // reachable by URL and a clickable PLP card via `isDraftPdpReachable()`,
-  // still noindex/nofollow, out of the sitemap, no Product/FAQPage
-  // JSON-LD. The other 3 cards are card-only, no PDP content.
+  // (women's-only category, nothing to filter). All 15 SKUs got full PDP
+  // content 2026-09-22 (owner spec) -- reachable by URL and a clickable
+  // PLP card via `isDraftPdpReachable()`, still noindex/nofollow, out of
+  // the sitemap, no Product/FAQPage JSON-LD.
   styleCards: [
     {
       // Full PDP content for SKU 1 (owner spec, 2026-09-22), draft.
@@ -1151,15 +1150,94 @@ export const sportsBras: Category = {
       },
     },
     {
+      // Full PDP content for SKU 13 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1 to 12 above. Design-Forward SKU (single-brand
+      // reference, not convergence-gated) -- same honest, confident
+      // pending-spec framing as every other SKU, no internal classification
+      // ("unvalidated"/"design-forward") ever surfaces in rendered copy.
+      // cardTitle/pdpTitle/pdpHeading use the "Custom [Style] Manufacturer"
+      // convention (owner-confirmed) rather than the brief's own
+      // no-"Custom" phrasing, matching SKU 1 to 12 and every other category
+      // sitewide with zero drift.
       status: "draft",
       slug: "plunge-convertible",
-      cardTitle: "Custom Plunge Convertible Sports Bra",
+      cardTitle: "Custom Deep Plunge Convertible Sports Bra",
       cardSubline: "Deep plunge front, medium support, convertible straps",
       image: "",
-      imageAlt: "Custom plunge convertible sports bra manufacturer",
+      imageAlt: "Custom deep plunge convertible sports bra manufacturer",
       href: "/capriowear/activewear/sports-bras/plunge-convertible",
+      sku: "CAP-SPB-13",
+      pdpTitle: "Deep Plunge Convertible",
+      pdpHeading: "Custom Deep Plunge Convertible Sports Bra Manufacturer",
+      pdpDescription:
+        "Medium-support sports bra with a deep plunge front and convertible straps that switch from classic to crossback, custom and private label, removable pads, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Deep plunge convertible sports bra, front view" },
+        { alt: "Deep plunge convertible sports bra, convertible strap detail" },
+        { alt: "Deep plunge convertible sports bra, back view" },
+        { alt: "Deep plunge convertible sports bra, fabric close-up" },
+        { alt: "Deep plunge convertible sports bra, worn on model" },
+        { alt: "Deep plunge convertible sports bra, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Deep Plunge Convertible Sports Bra Manufacturer",
+      pdpMetaDescription:
+        "Custom deep plunge convertible sports bra manufacturer, OEM, ODM and private label, medium support, convertible straps, removable pads, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "Can the straps be customized further?",
+          a: "Yes, crossback and classic convertible hardware can be adjusted, and strap width or hardware finish can be modified for your brand.",
+        },
+        {
+          q: "What support level is this style built for?",
+          a: "Medium support, suited for low-to-moderate impact training and everyday wear.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Medium-Support Sports Bra", slug: "medium-support-full-coverage", href: "/capriowear/activewear/sports-bras" },
+        { label: "Twist-Front Sports Bra", slug: "twist-front", href: "/capriowear/activewear/sports-bras" },
+        { label: "Removable-Pad Sports Bra", slug: "removable-padding", href: "/capriowear/activewear/sports-bras" },
+        { label: "See All", href: "/capriowear/activewear/sports-bras" },
+      ],
+      specifications: [
+        { label: "Style", value: "Medium support sports bra with deep plunge front and convertible straps (construction-feature base type)" },
+        { label: "Fabric", value: "Composition pending confirmation on sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Support and coverage", value: "Medium support, deep plunge front coverage" },
+        { label: "Closure", value: "Pull-on, convertible straps switch between classic and crossback" },
+        { label: "Band", value: "Standard band" },
+        { label: "Padding", value: "Removable, foam insert" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape; flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Deep plunge convertible sports bra, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Strap hardware checked for hold and smooth conversion between classic and crossback",
+        "Removable pad pocket checked for a secure, snag-free fit",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 14 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1 to 13 above.
       status: "draft",
       slug: "high-support-cutout",
       cardTitle: "Custom High-Support Cutout Sports Bra",
@@ -1167,8 +1245,82 @@ export const sportsBras: Category = {
       image: "",
       imageAlt: "Custom high-support cutout sports bra manufacturer",
       href: "/capriowear/activewear/sports-bras/high-support-cutout",
+      sku: "CAP-SPB-14",
+      pdpTitle: "High-Support Cutout",
+      pdpHeading: "Custom High-Support Cutout Sports Bra Manufacturer",
+      pdpDescription:
+        "High-support sports bra with a front cutout detail and racerback, custom and private label, encapsulated cups, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "High-support cutout sports bra, front view" },
+        { alt: "High-support cutout sports bra, cutout detail" },
+        { alt: "High-support cutout sports bra, back racerback detail" },
+        { alt: "High-support cutout sports bra, fabric close-up" },
+        { alt: "High-support cutout sports bra, worn on model" },
+        { alt: "High-support cutout sports bra, flat lay" },
+      ],
+      pdpMetaTitle: "Custom High-Support Cutout Sports Bra Manufacturer",
+      pdpMetaDescription:
+        "Custom high-support cutout sports bra manufacturer, OEM, ODM and private label, front cutout detail, racerback, encapsulated support, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "Is the cutout structural or purely visual?",
+          a: "The cutout is a styling detail; support comes from the encapsulated cups and underband, so fit performance isn't compromised.",
+        },
+        {
+          q: "What support level is this style built for?",
+          a: "High support, suited for running and high-impact training.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "High-Support Sports Bra", slug: "high-support-full-coverage", href: "/capriowear/activewear/sports-bras" },
+        { label: "Medium-Support Cutout Sports Bra", slug: "medium-support-cutout", href: "/capriowear/activewear/sports-bras" },
+        { label: "Wide-Band Sports Bra", slug: "wide-band", href: "/capriowear/activewear/sports-bras" },
+        { label: "See All", href: "/capriowear/activewear/sports-bras" },
+      ],
+      specifications: [
+        { label: "Style", value: "High support sports bra with front cutout and racerback (construction-feature base type)" },
+        { label: "Fabric", value: "Composition pending confirmation on sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Support and coverage", value: "High support, front cutout coverage, not full coverage or minimal" },
+        { label: "Closure", value: "Pull-over racerback" },
+        { label: "Band", value: "Wide, structured compression band" },
+        { label: "Padding", value: "Molded, fixed cups" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape; flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "High-support cutout sports bra, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Encapsulated cups checked for consistent shape and support across the size run",
+        "Underband checked for stability and recovery under repeated wear",
+        "Cutout edges checked for a clean, snag-free finish",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 15 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1 to 14 above. Shares its base silhouette family
+      // with SKU 4 (Medium-Support Cutout) -- differentiated below by
+      // construction feature (twist-front bust vs. cutout), not silhouette,
+      // per the owner's own note.
       status: "draft",
       slug: "twist-front",
       cardTitle: "Custom Twist-Front Sports Bra",
@@ -1176,6 +1328,75 @@ export const sportsBras: Category = {
       image: "",
       imageAlt: "Custom twist-front sports bra manufacturer",
       href: "/capriowear/activewear/sports-bras/twist-front",
+      sku: "CAP-SPB-15",
+      pdpTitle: "Twist-Front",
+      pdpHeading: "Custom Twist-Front Sports Bra Manufacturer",
+      pdpDescription:
+        "Medium-support sports bra with a twist-front bust detail, custom and private label, adjustable straps, removable padding, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Twist-front sports bra, front view" },
+        { alt: "Twist-front sports bra, twist detail" },
+        { alt: "Twist-front sports bra, back view" },
+        { alt: "Twist-front sports bra, fabric close-up" },
+        { alt: "Twist-front sports bra, worn on model" },
+        { alt: "Twist-front sports bra, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Twist-Front Sports Bra Manufacturer",
+      pdpMetaDescription:
+        "Custom twist-front sports bra manufacturer, OEM, ODM and private label, medium support, twist bust detail, adjustable straps, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "Does the twist detail affect support or fit?",
+          a: "No, the twist is a front styling detail; support and fit come from the underband and strap construction, confirmed on your sample.",
+        },
+        {
+          q: "What support level is this style built for?",
+          a: "Medium support, suited for low-to-moderate impact training and everyday wear.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Medium-Support Cutout Sports Bra", slug: "medium-support-cutout", href: "/capriowear/activewear/sports-bras" },
+        { label: "Deep Plunge Convertible Sports Bra", slug: "plunge-convertible", href: "/capriowear/activewear/sports-bras" },
+        { label: "Medium-Support Sports Bra", slug: "medium-support-full-coverage", href: "/capriowear/activewear/sports-bras" },
+        { label: "See All", href: "/capriowear/activewear/sports-bras" },
+      ],
+      specifications: [
+        { label: "Style", value: "Medium support sports bra with twist-front bust detail (construction-feature base type)" },
+        { label: "Fabric", value: "Composition pending confirmation on sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Support and coverage", value: "Medium support, full coverage" },
+        { label: "Closure", value: "Pull-on, twist-front bust detail" },
+        { label: "Band", value: "Standard band" },
+        { label: "Padding", value: "Removable, foam insert" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape; flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Twist-front sports bra, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Twist-front seam checked for strength and consistent shape across the size run",
+        "Strap hardware checked for hold under movement",
+        "Removable pad pocket checked for a secure, snag-free fit",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
   ],
   relatedLinks: [
