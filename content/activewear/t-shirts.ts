@@ -33,7 +33,19 @@ export const tShirts: Category = {
   // categoryEntityFaq()'s own comment in ./pdpShared.ts.
   manufacturerNoun: "T-Shirt",
   productNounPlural: "t-shirts",
-  entityExampleStyles: "crew neck, performance, oversized, and v-neck styles",
+  // Updated to the real, locked 16-SKU catalog (owner spec, 2026-09-22,
+  // T-Shirts SKU 1) -- was the pre-catalog placeholder list ("crew neck,
+  // performance, oversized, and v-neck styles"). One field drives the
+  // entity FAQ answer sitewide (categoryEntityFaq(), pdpShared.ts), so
+  // this single edit keeps the PLP and every PDP byte-identical, same as
+  // before.
+  // Trailing comma is deliberate: `categoryEntityFaq()` concatenates this
+  // directly with ` in ${entityFabrics}` below, no comma of its own (see
+  // that function's own `fabricsClause` in ./pdpShared.ts) -- the given
+  // sentence needs "...for women, in combed cotton...", not "...for
+  // women in combed cotton...".
+  entityExampleStyles:
+    "fitted, oversized, relaxed, athletic, raglan-sleeve, dropped-shoulder, cropped, and curved-hem styles for men, and fitted, oversized, relaxed, athletic, dropped-shoulder, cropped, ringer, and v-neck styles for women,",
   entityFabrics: "combed cotton, cotton blends and performance polyester",
   h1: "Custom T-Shirt Manufacturer",
   // metaTitle: the owner's own request this time is already the short
@@ -266,6 +278,12 @@ export const tShirts: Category = {
   // sibling on the other gender, so their slugs stay unsuffixed.
   styleCards: [
     {
+      // Full PDP content for SKU 1 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 3/6/9. This SKU's own brief gave the entity
+      // FAQ answer with the real 16-SKU style list (not the old
+      // placeholder) -- updated `entityExampleStyles` at the top of this
+      // file instead of overriding per-style, so the PLP and every PDP
+      // stay byte-identical automatically, same mechanism as before.
       status: "draft",
       slug: "fitted-mens",
       cardTitle: "Custom Fitted T-Shirt",
@@ -275,8 +293,87 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/fitted-mens",
       gender: "Men",
       sku: "CAP-TEE-01",
+      pdpTitle: "Fitted",
+      pdpHeading: "Custom Fitted T-Shirt Manufacturer",
+      pdpDescription:
+        "Men's close-fitting, compression-leaning tee with a standard crew neckline, custom and private label, in performance polyester, a poly-spandex blend, or combed cotton, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Fitted t-shirt, front view, men's" },
+        { alt: "Fitted t-shirt, back view, men's" },
+        { alt: "Fitted t-shirt, side profile, men's" },
+        { alt: "Fitted t-shirt, fabric close-up, men's" },
+        { alt: "Fitted t-shirt, worn on model, men's" },
+        { alt: "Fitted t-shirt, flat lay, men's" },
+      ],
+      pdpMetaTitle: "Custom Fitted T-Shirt Manufacturer",
+      pdpMetaDescription:
+        "Custom fitted t-shirt manufacturer, OEM, ODM and private label, close-fitting compression cut, standard crew neckline, performance polyester or cotton blend, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "Performance polyester, poly-spandex blend, or combed cotton",
+      pdpFabricPills: ["Performance polyester", "Poly-spandex blend", "Combed cotton", "Cotton-poly blend"],
+      pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "What fabric is the fitted tee made from?",
+          a: "Performance polyester or a poly-spandex blend for the compression-leaning build, or combed cotton for a softer fitted cotton version. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How close is the fit, and does it hold its shape?",
+          a: "Close-fitting through the body and sleeve, built to hold its shape wash after wash. Stretch recovery is tested on your sample before bulk, especially on any poly-spandex build.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Oversized", slug: "oversized-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Relaxed", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Athletic", slug: "athletic-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Raglan", slug: "raglan", href: "/capriowear/activewear/t-shirts" },
+        { label: "See All", href: "/capriowear/activewear/t-shirts" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's fitted, compression-leaning tee, standard crew neckline (base type)" },
+        { label: "Fabric", value: "Performance polyester, poly-spandex blend, or combed cotton, directional research range" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Close-fitting through the body, standard crew neckline" },
+        { label: "Construction", value: "Cut-and-sew, side-seam or tubular body, double-needle stitched sleeves, hem and neck" },
+        { label: "Branding", value: "Screen, DTG, DTF, sublimation on poly, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Fitted t-shirt, construction detail, men's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Shrinkage tested after wash, preshrink status stated",
+        "Print durability tested for your fabric and method",
+        "Fit and stretch recovery checked across the size run",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF, sublimation on polyester", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, puff, silicone, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric and weight",
+            body: "Any blend and GSM, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" },
+          },
+          {
+            title: "Fit and build",
+            body: "Neckline, fit, side-seam or tubular, taping and stitching to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit and build" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven, printed or tear-away labels, care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 2 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1 above.
       status: "draft",
       slug: "oversized-mens",
       cardTitle: "Custom Oversized T-Shirt",
@@ -286,6 +383,83 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/oversized-mens",
       gender: "Men",
       sku: "CAP-TEE-02",
+      pdpTitle: "Oversized",
+      pdpHeading: "Custom Oversized T-Shirt Manufacturer",
+      pdpDescription:
+        "Men's boxy, dropped-shoulder oversized tee, custom and private label, in combed cotton or a heavyweight cotton-poly blend, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Oversized t-shirt, front view, men's" },
+        { alt: "Oversized t-shirt, shoulder detail, men's" },
+        { alt: "Oversized t-shirt, back view, men's" },
+        { alt: "Oversized t-shirt, fabric close-up, men's" },
+        { alt: "Oversized t-shirt, worn on model, men's" },
+        { alt: "Oversized t-shirt, flat lay, men's" },
+      ],
+      pdpMetaTitle: "Custom Oversized T-Shirt Manufacturer",
+      pdpMetaDescription:
+        "Custom oversized t-shirt manufacturer, OEM, ODM and private label, boxy dropped-shoulder streetwear fit, heavyweight cotton or cotton-poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "Combed cotton or heavyweight cotton-poly blend",
+      pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Tri-blend", "Recycled polyester"],
+      pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "What fabric is the oversized tee made from?",
+          a: "Combed cotton or a heavyweight cotton-poly blend, weighted toward the heavier end of our GSM range for a structured streetwear drape. We confirm the exact blend and weight on your sample.",
+        },
+        {
+          q: "How boxy is the fit, and can I adjust the proportions?",
+          a: "Boxy through the body with a dropped-shoulder seam. Body width, length, and shoulder drop are all adjustable to your tech pack or reference garment.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted", slug: "fitted-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Relaxed", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Dropped-Shoulder", slug: "dropped-shoulder-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Cropped", slug: "cropped-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "See All", href: "/capriowear/activewear/t-shirts" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's boxy, oversized tee, dropped-shoulder construction (base type)" },
+        { label: "Fabric", value: "Combed cotton or heavyweight cotton-poly blend, directional research range" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Oversized, boxy through the body" },
+        { label: "Construction", value: "Cut-and-sew, dropped-shoulder seam, side-seam or tubular body, double-needle stitching" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, puff, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Oversized t-shirt, construction detail, men's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Shrinkage tested after wash, preshrink status stated",
+        "Print durability tested for your fabric and method",
+        "Dropped-shoulder placement checked for consistency at every size",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, puff, silicone, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric and weight",
+            body: "Any blend and GSM, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" },
+          },
+          {
+            title: "Fit and build",
+            body: "Dropped-shoulder placement, body length, side-seam or tubular, to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit and build" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven, printed or tear-away labels, care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
