@@ -93,7 +93,7 @@ export const shorts: Category = {
     "Every run inspected to AQL 2.5",
     "Third-party inspection welcome",
   ],
-  coverageEyebrow: "CUSTOM FROM FABRIC TO PACKAGING",
+  coverageEyebrow: "CUSTOMIZATION",
   coverageHeading: "From custom fabric to packaging design",
   coverageItems: [
     { title: "Fabric", body: "Polyester/Spandex, Nylon/Spandex, recycled polyester, and cotton fleece blends" },
@@ -968,7 +968,7 @@ export const shorts: Category = {
       ],
       relatedStyleTags: [
         { label: "Mid-Rise Biker Shorts", slug: "mid-rise-biker", href: "/capriowear/activewear/shorts" },
-        { label: "High-Rise Short Shorts", slug: "high-rise-short", href: "/capriowear/activewear/shorts" },
+        { label: "High-Rise Mini Shorts", slug: "high-rise-mini", href: "/capriowear/activewear/shorts" },
         { label: "Zip-Pocket Shorts", slug: "zip-pocket", href: "/capriowear/activewear/shorts" },
         { label: "Mid-Rise Relaxed Shorts", slug: "mid-rise-relaxed", href: "/capriowear/activewear/shorts" },
         { label: "See All", href: "/capriowear/activewear/shorts" },
@@ -1029,13 +1029,13 @@ export const shorts: Category = {
     },
     {
       status: "draft",
-      slug: "high-rise-short",
-      cardTitle: "Custom High-Rise Short Shorts",
+      slug: "high-rise-mini",
+      cardTitle: "Custom High-Rise Mini Shorts",
       cardSubline: "High-rise, fitted, 4 inch or under",
       gender: "Women",
       image: "",
-      imageAlt: "Custom high-rise short shorts manufacturer",
-      href: "/capriowear/activewear/shorts/high-rise-short",
+      imageAlt: "Custom high-rise mini shorts manufacturer",
+      href: "/capriowear/activewear/shorts/high-rise-mini",
     },
     {
       status: "draft",
@@ -1059,13 +1059,13 @@ export const shorts: Category = {
     },
     {
       status: "draft",
-      slug: "mid-rise-short",
-      cardTitle: "Custom Mid-Rise Short Shorts",
+      slug: "mid-rise-mini",
+      cardTitle: "Custom Mid-Rise Mini Shorts",
       cardSubline: "Short, fitted mid-rise cut, 4 inch or under",
       gender: "Women",
       image: "",
-      imageAlt: "Custom mid-rise short shorts manufacturer",
-      href: "/capriowear/activewear/shorts/mid-rise-short",
+      imageAlt: "Custom mid-rise mini shorts manufacturer",
+      href: "/capriowear/activewear/shorts/mid-rise-mini",
     },
     {
       status: "draft",

@@ -145,6 +145,7 @@ export default async function CategoryPage({ params }: PageProps<"/capriowear/ac
             { label: data.menuLabel, href: `/capriowear/activewear/${data.slug}` },
           ]}
           h1={data.h1}
+          heroSubline={data.heroSubline}
           trustBullets={data.trustBullets}
         />
         {/* Structured data (SEO/AEO/GEO finalization pass, 2026-08-30):
@@ -258,24 +259,18 @@ export default async function CategoryPage({ params }: PageProps<"/capriowear/ac
           <div className="h-px bg-[#e8ecf1] xl:mb-[120px]" />
         </div>
 
-        {/* Order swapped 2026-08-30 (owner: "make the 3rd section...
-            1st and [FabricOptions] as 3rd") -- WhatWeCover first,
-            FabricOptions last, TrustPoints unchanged in the middle. Each
-            section's own top/bottom padding was reassigned to match:
-            WhatWeCover (now first) has no top padding of its own -- the
-            divider above already supplies that gap -- and its own
-            bottom padding is the 52px half of the 104px gap to
-            TrustPoints, not page-end spacing anymore. FabricOptions (now
-            last) gained a 52px top padding to pair with TrustPoints'
-            own 52px above it, and its own bottom padding became the
-            page-end spacing (120px) WhatWeCover used to carry. See each
-            recipe's own `section` key for the exact values. */}
-        <WhatWeCover
-          eyebrow={data.coverageEyebrow}
-          heading={data.coverageHeading}
-          items={data.coverageItems}
-        />
-        <TrustPoints heading={data.qualityHeading} subline={data.qualitySubline} points={data.qualityPoints} />
+        {/* Order swapped again 2026-09-22 (owner spec, site-wide: "Fabric
+            options -> Customization -> Trust/proof block", applies to
+            every category, not a per-category override) -- FabricOptions
+            first, WhatWeCover (Customization) middle, TrustPoints last.
+            This reverts the 2026-08-30 "WhatWeCover 1st, FabricOptions
+            3rd" order on this same shared template. Each section's own
+            top/bottom padding was reassigned to match its new position,
+            same "whichever section leads carries no top padding of its
+            own, whichever section trails carries the page-end bottom
+            padding" pattern the 2026-08-30 swap already established --
+            see each recipe's own `section`/`sidePaddingPlp` key
+            (components/ui/styles.ts) for the exact values. */}
         <FabricOptions
           eyebrow={data.fabricEyebrow!}
           heading={data.fabricHeading!}
@@ -284,6 +279,12 @@ export default async function CategoryPage({ params }: PageProps<"/capriowear/ac
           weightTiersHeaders={data.weightTiersHeaders}
           note={data.fabricNote!}
         />
+        <WhatWeCover
+          eyebrow={data.coverageEyebrow}
+          heading={data.coverageHeading}
+          items={data.coverageItems}
+        />
+        <TrustPoints heading={data.qualityHeading} subline={data.qualitySubline} points={data.qualityPoints} />
 
         {/* FAQ (Figma node 579:5660 layout, node 579:5753 full Q&A copy,
             2026-08-30) -- owner request: "Use the same component used on

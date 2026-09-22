@@ -6385,6 +6385,11 @@ export const categoryBanner = {
   // wrap onto a second line; it cannot change how any existing, already
   // one-line-fitting H1 renders.
   h1: "text-[1.875rem] leading-[38px] font-normal text-paper md:text-[3.375rem] md:leading-[64px]",
+  // Optional line under h1 (owner spec, 2026-09-22, Sports Bras) -- same
+  // 1.25rem/28px size as trustBulletText below (this section's own existing
+  // secondary-text scale), solid text-paper rather than that row's muted
+  // #abb5c0 since this is primary supporting copy, not a secondary trust list.
+  subline: "text-[1.25rem] leading-[28px] font-normal text-paper",
   // max-xl: a single column, gap-4 (16px) -- mobile Figma stacks the 4 trust
   // bullets vertically (gap-[16px]), not the desktop's wrapped row. xl
   // keeps the original wrapped-row layout untouched.
@@ -6955,13 +6960,18 @@ export const fabricOptions = {
   // (matches container-page); 138px padding on a 1440-wide box is what
   // correctly nets out to 1164px of content (found live, owner report:
   // "separator width is 1164px" -- measured 888px before this fix).
-  // Now the LAST of the 3 sections (order swapped 2026-08-30, owner:
-  // "make [WhatWeCover] 1st and [this] as 3rd"). xl:pt-[80px] (owner,
-  // 2026-09-01: "change its gap from 100px to 80px from top on desktop" --
-  // was `pt-[100px]`, itself a correction of `pt-[120px]` the same day)
-  // and xl:pb-[120px] (unchanged -- this is page-end spacing, a separate
-  // concern from the inter-section gap above it).
-  section: "mx-auto w-full max-w-[1440px] px-5 pb-20 md:px-8 xl:px-[138px] xl:pt-[80px] xl:pb-[120px]",
+  // Now the FIRST of the 3 sections (order swapped again, owner spec
+  // 2026-09-22: "Fabric options -> Customization -> Trust/proof", site-
+  // wide, reverting the 2026-08-30 "WhatWeCover 1st, this 3rd" order).
+  // First-role padding, same pattern the 2026-08-30 swap already
+  // established for whichever section leads: own mobile pt/pb-[72px]
+  // (the page-level divider above carries no mobile margin of its own,
+  // so the first section must supply its own top gap there; its own
+  // bottom gap here hands off to WhatWeCover, now second), zero padding
+  // at xl (the divider's own `xl:mb-[120px]` supplies the top gap at
+  // desktop, and WhatWeCover's own new `xl:pt-[120px]` supplies the gap
+  // below, so this section owns no desktop padding of its own any more).
+  section: "mx-auto w-full max-w-[1440px] px-5 pt-[72px] pb-[72px] md:px-8 xl:px-[138px] xl:pt-0 xl:pb-0",
   // Same horizontal shell as `section` above, no top padding of its own
   // (owner spec, 2026-09-16, Wraps, Straps & Sleeves: ComparisonTable sits
   // directly under a page-level hairline divider that already supplies its
@@ -7310,29 +7320,31 @@ export const whatWeCover = {
   // and fixed on TrustPoints the same day (owner report there: "sparator
   // width is 1164px"), caught here by re-measuring this section too rather
   // than assuming it was fine because it built without error.
-  // Now the FIRST of the 3 sections (order swapped 2026-08-30, owner:
-  // "make [this] 1st"). No top padding of its own -- the section divider
-  // above (built for the product-grid boundary) already supplies that
-  // gap, so an extra pt here would stack a second gap on top of it, same
-  // mistake already made and fixed once on this page (see the page-level
-  // divider's own comment in app/activewear/[category]/page.tsx). No `pb`
-  // here either now (owner, 2026-09-01: "built to pass and fabric section
-  // has no space from the top, make both 120px") -- was `pb-1.5`/6px,
-  // pairing with TrustPoints' own `pt-1.5` to net a 12px gap; that gap is
-  // now entirely TrustPoints' own `pt-[120px]` below it, one side owning
-  // the full value rather than two 6px halves.
+  // Now the MIDDLE of the 3 sections (order swapped again, owner spec
+  // 2026-09-22: "Fabric options -> Customization -> Trust/proof", site-
+  // wide, reverting the 2026-08-30 "this 1st" order -- FabricOptions
+  // leads now). Middle-role padding: no top padding of its own at mobile
+  // (FabricOptions' own new mobile pb-[72px] above already supplies that
+  // gap), `pb-[72px]` at mobile (hands the gap down to TrustPoints,
+  // unchanged value from the 2026-08-30 swap, just now owned by this
+  // section's own bottom instead of the top). At xl this section now
+  // owns the FIRST->MIDDLE gap itself via its own `xl:pt-[120px]` (was
+  // FabricOptions' partner TrustPoints owning that value when this
+  // section led; the number itself, 120px, carries over unchanged), with
+  // `xl:pb-0` (TrustPoints, now last, owns the gap below via its own
+  // top padding instead).
   // max-xl: mobile Figma frame (node 590:1217, 360px), read 2026-08-30 --
-  // its own py-[72px] wrapper and no side padding of its own
-  // (headingBlock/artwork/grid each carry their own px-5 instead, matching
-  // Figma's own nested-inset structure -- see each one's own comment
-  // below). No `gap` here: the owner wants a different gap above the
-  // artwork (32px) than below it (24px, owner correction 2026-08-30: "the
-  // gap between media image and the fabric title... should be 24px"),
-  // which a single flex `gap` can't express -- headingBlock/artworkWrap
-  // each carry their own margin-bottom instead. xl keeps the original
-  // desktop values (including its own gap-[72px]) untouched.
+  // side padding of its own is still none (headingBlock/artwork/grid each
+  // carry their own px-5 instead, matching Figma's own nested-inset
+  // structure -- see each one's own comment below). No `gap` here: the
+  // owner wants a different gap above the artwork (32px) than below it
+  // (24px, owner correction 2026-08-30: "the gap between media image and
+  // the fabric title... should be 24px"), which a single flex `gap` can't
+  // express -- headingBlock/artworkWrap each carry their own margin-bottom
+  // instead. xl keeps the original desktop values (including its own
+  // gap-[72px]) untouched.
   section:
-    "mx-auto flex w-full max-w-[1440px] flex-col items-center px-0 py-[72px] xl:gap-[72px] xl:px-[138px] xl:py-0",
+    "mx-auto flex w-full max-w-[1440px] flex-col items-center px-0 pt-0 pb-[72px] xl:gap-[72px] xl:px-[138px] xl:pt-[120px] xl:pb-0",
   // max-xl:gap-4 (16px, mobile Title frame's own gap)/px-5 (20px, mobile's
   // own inset -- the section itself carries none below xl)/mb-8 (32px, the
   // gap down to the artwork below -- see the section comment above for why
@@ -7488,14 +7500,22 @@ export const trustPoints = {
   // one-token-per-variant treatment instead of living in both places.
   section: "mx-auto flex w-full max-w-[1440px] flex-col items-start px-0 xl:gap-[72px]",
   // Default/PLP desktop side padding (app/activewear/[category]/page.tsx) --
-  // the original 138px value. xl:pt-[120px] (owner, 2026-09-01, see the
-  // section comment above) is the PLP's own full top gap now, not half of
-  // a 12px pair with WhatWeCover. `pb-[72px]` (unprefixed, so it's this
-  // page's bottom gap at every breakpoint including desktop) is the value
-  // that used to live directly on `section` above -- moved here unchanged
-  // when `sidePaddingPdp` needed its own different mobile value (see that
-  // token's own comment).
-  sidePaddingPlp: "pb-[72px] xl:px-[138px] xl:pt-[120px]",
+  // the original 138px value.
+  // Now the LAST of the 3 sections (order swapped again, owner spec
+  // 2026-09-22: "Fabric options -> Customization -> Trust/proof",
+  // site-wide, reverting the 2026-08-30 order where this component sat
+  // in the middle). Last-role padding: `pb-[80px]` at mobile (was
+  // `pb-[72px]` -- this section is now the page-end section, so its own
+  // mobile bottom matches the 80px page-end value FabricOptions used to
+  // carry when it was last, not the 72px inter-section value). At xl,
+  // `xl:pt-[80px]` (this section's own top now owns the WhatWeCover->
+  // TrustPoints gap, the same 80px value FabricOptions' own former
+  // `xl:pt-[80px]` carried when it sat in this position) and
+  // `xl:pb-[120px]` (this section's own new page-end bottom gap,
+  // matching the divider's own top `xl:mb-[120px]` for symmetry, the
+  // same value FabricOptions used to carry as page-end when it was
+  // last).
+  sidePaddingPlp: "pb-[80px] xl:px-[138px] xl:pt-[80px] xl:pb-[120px]",
   // PDP desktop side padding (app/activewear/[category]/[style]/page.tsx,
   // owner, 2026-09-01) -- the site's own standard 80px content margin
   // (same value as `.container-p`'s desktop inset, app/globals.css), not a
