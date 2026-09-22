@@ -520,6 +520,10 @@ export const tShirts: Category = {
     },
     {
       status: "draft",
+      // Full PDP content for SKU 9 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 3/6. Slug `fitted-womens` confirmed distinct
+      // from men's `fitted-mens` (already live) -- no collision, same
+      // gender-scoped-slug pattern already established on Tank Tops.
       slug: "fitted-womens",
       cardTitle: "Custom Fitted T-Shirt",
       cardSubline: "Close-fitting, standard crew neckline",
@@ -528,6 +532,83 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/fitted-womens",
       gender: "Women",
       sku: "CAP-TEE-09",
+      pdpTitle: "Fitted",
+      pdpHeading: "Custom Fitted T-Shirt Manufacturer",
+      pdpDescription:
+        "Women's close-fitting standard tee with a standard crew neckline, custom and private label, in combed cotton or a cotton-poly blend, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Fitted t-shirt, front view, women's" },
+        { alt: "Fitted t-shirt, back view, women's" },
+        { alt: "Fitted t-shirt, side profile, women's" },
+        { alt: "Fitted t-shirt, fabric close-up" },
+        { alt: "Fitted t-shirt, worn on model, women's" },
+        { alt: "Fitted t-shirt, flat lay, women's" },
+      ],
+      pdpMetaTitle: "Custom Fitted T-Shirt Manufacturer",
+      pdpMetaDescription:
+        "Custom fitted t-shirt manufacturer, OEM, ODM and private label, close-fitting standard crew neckline, combed cotton or cotton-poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "Combed cotton or cotton-poly blend",
+      pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Tri-blend", "Performance polyester"],
+      pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "What fabric is the fitted tee made from?",
+          a: "Combed cotton or a cotton-poly blend as the default, for a soft, tapered fitted cut. A performance polyester option is also available. We confirm the exact blend and weight on your sample.",
+        },
+        {
+          q: "How does the women's cut differ from the men's Fitted tee?",
+          a: "Same fabric options and construction quality, tapered through the waist rather than straight, a genuinely different pattern block, not just a scaled-down men's tee.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Oversized", slug: "oversized-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Relaxed", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Athletic", slug: "athletic-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Cropped", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "See All", href: "/capriowear/activewear/t-shirts" },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's fitted tee, standard crew neckline (base type)" },
+        { label: "Fabric", value: "Combed cotton or cotton-poly blend, directional research range" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Close-fitting through the body, tapered cut" },
+        { label: "Construction", value: "Cut-and-sew, side-seam or tubular body, double-needle stitched sleeves, hem and neck" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Fitted t-shirt, construction detail, women's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Shrinkage tested after wash, preshrink status stated",
+        "Print durability tested for your fabric and method",
+        "Collar and hem hold their shape after repeated washing",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, puff, silicone, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric and weight",
+            body: "Any blend and GSM, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" },
+          },
+          {
+            title: "Fit and build",
+            body: "Neckline, fit, side-seam or tubular, taping and stitching to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit and build" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven, printed or tear-away labels, care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
