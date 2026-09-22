@@ -289,6 +289,15 @@ export const tShirts: Category = {
     },
     {
       status: "draft",
+      // Full PDP content for SKU 3 (owner spec, 2026-09-22), draft.
+      // Reachable by URL and a clickable PLP card via the sitewide
+      // draft-PDP rule (`isDraftPdpReachable()`), still noindex/nofollow,
+      // out of the sitemap, no Product/FAQPage JSON-LD. `pdpSpecHighlights`
+      // left unset (owner-confirmed "DDP to 20+ countries" over the
+      // brief's own "40+", matching the shared sitewide default and every
+      // other page's own fact exactly, rather than a one-off inconsistent
+      // claim). `pdpCustomizationPills` overridden to the brief's own
+      // 4-pill set (narrower than the shared 6-pill default).
       slug: "relaxed-mens",
       cardTitle: "Custom Relaxed T-Shirt",
       cardSubline: "Softer, roomier everyday cut",
@@ -297,6 +306,83 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/relaxed-mens",
       gender: "Men",
       sku: "CAP-TEE-03",
+      pdpTitle: "Relaxed",
+      pdpHeading: "Custom Relaxed T-Shirt Manufacturer",
+      pdpDescription:
+        "Men's softer, roomier everyday tee, custom and private label, in a 50/50 cotton-poly or CVC blend, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Relaxed t-shirt, front view" },
+        { alt: "Relaxed t-shirt, back view" },
+        { alt: "Relaxed t-shirt, side profile" },
+        { alt: "Relaxed t-shirt, fabric close-up" },
+        { alt: "Relaxed t-shirt, worn on model" },
+        { alt: "Relaxed t-shirt, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Relaxed T-Shirt Manufacturer",
+      pdpMetaDescription:
+        "Custom relaxed t-shirt manufacturer, OEM, ODM and private label, softer roomier everyday fit, cotton-poly or CVC blend, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "50/50 or CVC cotton-poly blend",
+      pdpFabricPills: ["50/50 cotton-poly", "CVC cotton-poly", "Combed cotton", "Tri-blend"],
+      pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "What fabric is the relaxed tee made from?",
+          a: "A 50/50 or CVC cotton-poly blend as the default, for less shrink and a durable everyday hand. Straight cotton or a tri-blend option is also available. We confirm the exact blend and weight on your sample.",
+        },
+        {
+          q: "How does the fit compare to your Fitted and Oversized tees?",
+          a: "Relaxed sits between the two: roomier through the body than the Fitted SKU, but not as boxy or dropped in the shoulder as the Oversized SKU. A true everyday fit.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted", slug: "fitted-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Oversized", slug: "oversized-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Athletic", slug: "athletic-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Dropped-Shoulder", slug: "dropped-shoulder-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "See All", href: "/capriowear/activewear/t-shirts" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's relaxed, everyday tee (base type)" },
+        { label: "Fabric", value: "50/50 or CVC cotton-poly blend, directional research range" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Relaxed, roomier through the body than the Fitted SKU, not as boxy as the Oversized SKU" },
+        { label: "Construction", value: "Cut-and-sew, side-seam or tubular body, double-needle stitched sleeves, hem and neck" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Relaxed t-shirt, construction detail" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Shrinkage tested after wash, preshrink status stated",
+        "Print durability tested for your fabric and method",
+        "Collar and hem hold their shape after repeated washing",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, puff, silicone, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric and weight",
+            body: "Any blend and GSM, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" },
+          },
+          {
+            title: "Fit and build",
+            body: "Body width, length, side-seam or tubular, to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit and build" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven, printed or tear-away labels, care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
