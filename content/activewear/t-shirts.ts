@@ -408,6 +408,8 @@ export const tShirts: Category = {
     },
     {
       status: "draft",
+      // Full PDP content for SKU 6 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 3.
       slug: "dropped-shoulder-mens",
       cardTitle: "Custom Dropped-Shoulder T-Shirt",
       cardSubline: "Dropped shoulder seam, streetwear staple",
@@ -416,6 +418,83 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/dropped-shoulder-mens",
       gender: "Men",
       sku: "CAP-TEE-06",
+      pdpTitle: "Dropped-Shoulder",
+      pdpHeading: "Custom Dropped-Shoulder T-Shirt Manufacturer",
+      pdpDescription:
+        "Men's dropped-shoulder tee, seam sits below the natural shoulder line, custom and private label, in combed cotton or a cotton-poly blend, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Dropped-shoulder t-shirt, front view" },
+        { alt: "Dropped-shoulder t-shirt, shoulder seam detail" },
+        { alt: "Dropped-shoulder t-shirt, back view" },
+        { alt: "Dropped-shoulder t-shirt, fabric close-up" },
+        { alt: "Dropped-shoulder t-shirt, worn on model" },
+        { alt: "Dropped-shoulder t-shirt, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Dropped-Shoulder T-Shirt Manufacturer",
+      pdpMetaDescription:
+        "Custom dropped-shoulder t-shirt manufacturer, OEM, ODM and private label, streetwear-staple dropped shoulder seam, combed cotton or cotton-poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "Combed cotton or cotton-poly blend",
+      pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Tri-blend", "Recycled polyester"],
+      pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "How is this different from your Oversized T-Shirt?",
+          a: "Related but distinct. This SKU is specified at a moderate shoulder drop on a relaxed, not fully boxy, body. Our Oversized T-Shirt combines a deeper shoulder drop with a fully boxy body. Both are adjustable to your tech pack.",
+        },
+        {
+          q: "What fabric is the dropped-shoulder tee made from?",
+          a: "Combed cotton or a cotton-poly blend as the default. We confirm the exact blend and weight on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Oversized", slug: "oversized-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Relaxed", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Raglan", slug: "raglan", href: "/capriowear/activewear/t-shirts" },
+        { label: "Cropped", slug: "cropped-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "See All", href: "/capriowear/activewear/t-shirts" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's dropped-shoulder tee (base type)" },
+        { label: "Fabric", value: "Combed cotton or cotton-poly blend, directional research range" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Relaxed through the body, moderate shoulder drop" },
+        { label: "Construction", value: "Cut-and-sew, dropped-shoulder seam, side-seam or tubular body, double-needle stitching" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, puff, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Dropped-shoulder t-shirt, construction detail" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Shoulder-drop placement checked for consistency at every size",
+        "Print durability tested for your fabric and method",
+        "Shrinkage tested after wash, preshrink status stated",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, puff, silicone, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric and weight",
+            body: "Any blend and GSM, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" },
+          },
+          {
+            title: "Fit and build",
+            body: "Shoulder-drop depth, body length, side-seam or tubular, to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit and build" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven, printed or tear-away labels, care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
