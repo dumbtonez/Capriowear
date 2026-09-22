@@ -153,10 +153,10 @@ export const sportsBras: Category = {
   // once sampled, photographed, and confirmed real, same rule every other
   // category's draft cards already follow. No `gender` field on any card
   // (women's-only category, nothing to filter). SKU 1 (CAP-SPB-01) through
-  // SKU 6 (CAP-SPB-06) got full PDP content 2026-09-22 (owner spec) --
+  // SKU 9 (CAP-SPB-09) got full PDP content 2026-09-22 (owner spec) --
   // reachable by URL and a clickable PLP card via `isDraftPdpReachable()`,
   // still noindex/nofollow, out of the sitemap, no Product/FAQPage
-  // JSON-LD. The other 9 cards are card-only, no PDP content.
+  // JSON-LD. The other 6 cards are card-only, no PDP content.
   styleCards: [
     {
       // Full PDP content for SKU 1 (owner spec, 2026-09-22), draft.
@@ -655,6 +655,9 @@ export const sportsBras: Category = {
       },
     },
     {
+      // Full PDP content for SKU 7 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1 to 6 above. No blend name in the Fabric row --
+      // the locked reference doesn't disclose composition, none estimated.
       status: "draft",
       slug: "hook-and-eye",
       cardTitle: "Custom Hook-and-Eye Sports Bra",
@@ -662,8 +665,83 @@ export const sportsBras: Category = {
       image: "",
       imageAlt: "Custom hook-and-eye sports bra manufacturer",
       href: "/capriowear/activewear/sports-bras/hook-and-eye",
+      sku: "CAP-SPB-07",
+      pdpTitle: "Hook-and-Eye",
+      pdpHeading: "Custom Hook-and-Eye Sports Bra Manufacturer",
+      pdpDescription:
+        "High-support sports bra with a back hook-and-eye closure, custom and private label, wide compression band, molded padding, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Hook-and-eye sports bra, front view" },
+        { alt: "Hook-and-eye sports bra, back closure detail" },
+        { alt: "Hook-and-eye sports bra, side profile" },
+        { alt: "Hook-and-eye sports bra, fabric close-up" },
+        { alt: "Hook-and-eye sports bra, worn on model" },
+        { alt: "Hook-and-eye sports bra, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Hook-and-Eye Sports Bra Manufacturer",
+      pdpMetaDescription:
+        "Custom hook-and-eye sports bra manufacturer, back closure for high-support builds, OEM, ODM and private label, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "What fabric is the hook-and-eye sports bra made from?",
+          a: "We confirm the exact composition and weight on your sample, matched to your reference if you have one. Standard offering runs Nylon/Spandex or Polyester/Spandex blends.",
+        },
+        {
+          q: "Can the hook-and-eye closure be applied to other silhouettes?",
+          a: "Yes. It's a construction feature we can apply to most support levels and coverages in the catalog, not only this base build, useful anywhere a pull-over band would limit adjustability.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "High-Support Sports Bra", slug: "high-support-full-coverage", href: "/capriowear/activewear/sports-bras" },
+        { label: "Wide-Band Sports Bra", slug: "wide-band", href: "/capriowear/activewear/sports-bras" },
+        { label: "Crossback Sports Bra", slug: "crossback", href: "/capriowear/activewear/sports-bras" },
+        { label: "See All", href: "/capriowear/activewear/sports-bras" },
+      ],
+      specifications: [
+        { label: "Style", value: "High support sports bra with back hook-and-eye closure (construction-feature base type)" },
+        { label: "Fabric", value: "Composition pending confirmation on sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Support and coverage", value: "High support, full coverage" },
+        { label: "Closure", value: "Back hook-and-eye" },
+        { label: "Band", value: "Wide, structured compression band" },
+        { label: "Padding", value: "Molded, fixed cups" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape; flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Hook-and-eye sports bra, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Band checked for recovery under repeated wear",
+        "Hook-and-eye closure checked for hold under movement across the size run",
+        "Molded cups checked for consistent shape",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 8 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1 to 7 above. No blend name in the Fabric row --
+      // the locked reference doesn't disclose composition, none estimated.
+      // Note (owner): shares its locked reference product with SKU 9, but
+      // is a distinct construction-feature SKU (padding, not straps) --
+      // copy kept differentiated, not merged or treated as a duplicate.
       status: "draft",
       slug: "removable-padding",
       cardTitle: "Custom Removable-Pad Sports Bra",
@@ -671,8 +749,83 @@ export const sportsBras: Category = {
       image: "",
       imageAlt: "Custom removable-pad sports bra manufacturer",
       href: "/capriowear/activewear/sports-bras/removable-padding",
+      sku: "CAP-SPB-08",
+      pdpTitle: "Removable Padding",
+      pdpHeading: "Custom Removable-Pad Sports Bra Manufacturer",
+      pdpDescription:
+        "Medium-support sports bra with an internal removable pad pocket, custom and private label, crossback closure, standard band, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Removable-pad sports bra, front view" },
+        { alt: "Removable-pad sports bra, pad pocket detail" },
+        { alt: "Removable-pad sports bra, back crossback detail" },
+        { alt: "Removable-pad sports bra, fabric close-up" },
+        { alt: "Removable-pad sports bra, worn on model" },
+        { alt: "Removable-pad sports bra, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Removable-Pad Sports Bra Manufacturer",
+      pdpMetaDescription:
+        "Custom removable-pad sports bra manufacturer, internal pad pocket with adjustable foam insert, OEM, ODM and private label, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "What fabric is the removable-pad sports bra made from?",
+          a: "We confirm the exact composition and weight on your sample, matched to your reference if you have one. Standard offering runs Nylon/Spandex or Polyester/Spandex blends.",
+        },
+        {
+          q: "Can the removable-pad pocket be applied to other silhouettes?",
+          a: "Yes. It's a construction feature we can apply to most support levels and coverages in the catalog, not only this base build, labeled Right/Left for a consistent fit.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Medium-Support Sports Bra", slug: "medium-support-full-coverage", href: "/capriowear/activewear/sports-bras" },
+        { label: "Crossback Sports Bra", slug: "crossback", href: "/capriowear/activewear/sports-bras" },
+        { label: "Medium-Support Cutout Sports Bra", slug: "medium-support-cutout", href: "/capriowear/activewear/sports-bras" },
+        { label: "See All", href: "/capriowear/activewear/sports-bras" },
+      ],
+      specifications: [
+        { label: "Style", value: "Medium support sports bra with removable pad pocket (construction-feature base type)" },
+        { label: "Fabric", value: "Composition pending confirmation on sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Support and coverage", value: "Medium support, full coverage" },
+        { label: "Closure", value: "Crossback" },
+        { label: "Band", value: "Standard band" },
+        { label: "Padding", value: "Removable, foam insert, labeled Right/Left" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape; flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Removable-pad sports bra, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Band checked for recovery under repeated wear",
+        "Removable pad pocket checked for a secure, snag-free fit and correct Right/Left orientation",
+        "Crossback closure checked for hold under movement",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 9 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1 to 8 above. No blend name in the Fabric row --
+      // the locked reference doesn't disclose composition, none estimated.
+      // Note (owner): shares its locked reference product with SKU 8, but
+      // is a distinct construction-feature SKU (straps, not padding) --
+      // copy kept differentiated, not merged or treated as a duplicate.
       status: "draft",
       slug: "crossback",
       cardTitle: "Custom Crossback Sports Bra",
@@ -680,6 +833,75 @@ export const sportsBras: Category = {
       image: "",
       imageAlt: "Custom crossback sports bra manufacturer",
       href: "/capriowear/activewear/sports-bras/crossback",
+      sku: "CAP-SPB-09",
+      pdpTitle: "Crossback",
+      pdpHeading: "Custom Crossback Sports Bra Manufacturer",
+      pdpDescription:
+        "Medium-support sports bra with crossed straps and a keyhole cutout at the back, custom and private label, removable padding, standard band, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Crossback sports bra, front view" },
+        { alt: "Crossback sports bra, back keyhole cutout detail" },
+        { alt: "Crossback sports bra, side profile" },
+        { alt: "Crossback sports bra, fabric close-up" },
+        { alt: "Crossback sports bra, worn on model" },
+        { alt: "Crossback sports bra, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Crossback Sports Bra Manufacturer",
+      pdpMetaDescription:
+        "Custom crossback sports bra manufacturer, crossed straps with keyhole cutout, OEM, ODM and private label, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "What fabric is the crossback sports bra made from?",
+          a: "We confirm the exact composition and weight on your sample, matched to your reference if you have one. Standard offering runs Nylon/Spandex or Polyester/Spandex blends.",
+        },
+        {
+          q: "How is a crossback different from a racerback?",
+          a: "A crossback uses two straps that cross at the back, often with a keyhole cutout at the crossing point. A racerback uses a single fixed panel with no crossing straps. We offer both as separate construction options.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Medium-Support Sports Bra", slug: "medium-support-full-coverage", href: "/capriowear/activewear/sports-bras" },
+        { label: "Removable-Pad Sports Bra", slug: "removable-padding", href: "/capriowear/activewear/sports-bras" },
+        { label: "Racerback Sports Bra", slug: "racerback", href: "/capriowear/activewear/sports-bras" },
+        { label: "See All", href: "/capriowear/activewear/sports-bras" },
+      ],
+      specifications: [
+        { label: "Style", value: "Medium support sports bra with crossback straps (construction-feature base type)" },
+        { label: "Fabric", value: "Composition pending confirmation on sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Support and coverage", value: "Medium support, full coverage" },
+        { label: "Closure", value: "Pull-over, crossed straps with keyhole cutout" },
+        { label: "Band", value: "Standard band" },
+        { label: "Padding", value: "Removable, foam insert" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape; flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Crossback sports bra, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Band checked for recovery under repeated wear",
+        "Crossback straps and keyhole cutout checked for hold under movement",
+        "Removable pad pocket checked for a secure, snag-free fit",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
