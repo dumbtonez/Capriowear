@@ -32,7 +32,7 @@ import {
   pdpSpecHighlights,
   pdpSpecificationsCopy,
 } from "@/content/activewear/pdpShared";
-import { footer, header } from "@/components/ui/styles";
+import { footer, header, productTopRow } from "@/components/ui/styles";
 import { capriosportsHome } from "@/content/capriosports/home";
 import { home } from "@/content/home";
 import { GEAR_DEFAULT_OG_IMAGE, ORGANIZATION, SITE_URL, siteNameForGroup } from "@/content/site";
@@ -172,9 +172,9 @@ export default async function LiftingGearsStylePage({
           />
         ) : null}
 
-        <div className="container-p flex flex-col gap-6 pt-0 md:pt-6 xl:flex-row xl:items-start xl:gap-[66px] xl:pt-6">
+        <div className={productTopRow.root}>
           {data.product.images ? <ProductGallery images={data.product.images} productTitle={productTitle} /> : null}
-          <div className="flex w-full min-w-0 flex-col gap-8 xl:w-[514px] xl:flex-none">
+          <div className={productTopRow.infoColumn}>
             <ProductInfo sku={data.product.sku} heading={heading} description={description} />
             <ProductHighlights items={data.product.pdpSpecHighlights ?? pdpSpecHighlights} />
             <ProductOptions

@@ -33,7 +33,7 @@ import { ProductOptions } from "@/components/sections/ProductOptions";
 import { ProductRelatedStyles } from "@/components/sections/ProductRelatedStyles";
 import { ProductSpecifications } from "@/components/sections/ProductSpecifications";
 import { TrustPoints } from "@/components/sections/TrustPoints";
-import { header } from "@/components/ui/styles";
+import { header, productTopRow } from "@/components/ui/styles";
 import { categories } from "@/content/activewear/categories";
 import {
   buildCtaSubline,
@@ -304,7 +304,7 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
             gap from the gallery image's own bottom edge to the SKU text.
             `xl:gap-[66px]` overrides it in the horizontal direction at
             desktop, unaffected. */}
-        <div className="container-p flex flex-col gap-6 pt-0 md:pt-6 xl:flex-row xl:items-start xl:gap-[66px] xl:pt-6">
+        <div className={productTopRow.root}>
           {data.product.images ? (
             <ProductGallery images={data.product.images} productTitle={productTitle} />
           ) : null}
@@ -318,7 +318,7 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
               productGallery.mainWrap's own reasoning for why a column
               beside a fixed-width sibling still allows shrinking below its
               content's intrinsic width. */}
-          <div className="flex w-full min-w-0 flex-col gap-8 xl:w-[514px] xl:flex-none">
+          <div className={productTopRow.infoColumn}>
             <ProductInfo sku={data.product.sku} heading={heading} description={description} />
             <ProductHighlights items={data.product.pdpSpecHighlights ?? pdpSpecHighlights} />
             {/* ProductOptions (node 634:5034/645:2905, 2026-09-01) --

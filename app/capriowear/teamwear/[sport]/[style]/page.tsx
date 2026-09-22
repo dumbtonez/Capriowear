@@ -29,7 +29,7 @@ import { ProductOptions } from "@/components/sections/ProductOptions";
 import { ProductRelatedStyles } from "@/components/sections/ProductRelatedStyles";
 import { ProductSpecifications } from "@/components/sections/ProductSpecifications";
 import { TrustPoints } from "@/components/sections/TrustPoints";
-import { header } from "@/components/ui/styles";
+import { header, productTopRow } from "@/components/ui/styles";
 import {
   buildCtaSubline,
   categoryEntityFaq,
@@ -161,9 +161,9 @@ export default async function TeamwearStylePage({ params }: PageProps<"/capriowe
           })}
         />
 
-        <div className="container-p flex flex-col gap-6 pt-0 md:pt-6 xl:flex-row xl:items-start xl:gap-[66px] xl:pt-6">
+        <div className={productTopRow.root}>
           {data.product.images ? <ProductGallery images={data.product.images} productTitle={productTitle} /> : null}
-          <div className="flex w-full min-w-0 flex-col gap-8 xl:w-[514px] xl:flex-none">
+          <div className={productTopRow.infoColumn}>
             <ProductInfo sku={data.product.sku} heading={heading} description={description} />
             <ProductHighlights items={pdpSpecHighlights} />
             <ProductOptions

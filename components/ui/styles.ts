@@ -8124,6 +8124,47 @@ export const activewearOverview = {
   cardTitle: "text-h3 md:text-[1.875rem]",
 };
 
+/* --- ProductTopRow (PDP gallery + info row) --------------------------------- */
+
+// The PDP's top row: ProductGallery beside the ProductInfo column on
+// desktop, stacked on mobile. Extracted here 2026-09-23 -- this exact
+// markup was duplicated verbatim across all four PDP page files
+// (activewear, teamwear, lifting-gears, boxing-and-mma), so the same
+// layout bug existed four times and had to be fixed four times. One
+// recipe now, per "build once, reuse everywhere".
+//
+// THE BUG THIS FIXES (logged in docs/03-component-library.md): the row
+// used to be a fixed 700px gallery + a fixed 66px gap + a fixed 514px
+// text column = exactly 1280px. `.container-p` caps content at 1440px
+// AND applies `padding-inline: 80px` from 1280px up, so its inner width
+// is `min(viewport, 1440) - 160`. That only reaches 1280px once the
+// viewport is 1440px or wider. At a 1280px viewport the inner width is
+// 1120px, so the 1280px row overflowed the page by exactly 80px
+// (scrollWidth 80 + 1280 = 1360 against a 1280 clientWidth). The broken
+// window was every viewport from 1280px up to 1359px -- 1366px only
+// escaped because 1360 happens to fit inside it, by 6px.
+//
+// THE FIX is proportional, not a patch at 1280: both columns are
+// `basis-0` with grow factors equal to their own Figma widths, so they
+// always divide `(inner width - 66px gap)` in the exact 700:514 ratio.
+// At viewport 1440+ the inner width is 1280, the split is 1214 and the
+// columns compute to precisely 700px and 514px -- pixel-identical to the
+// Figma frame, nothing about the intended design changes. At any
+// narrower width they scale together instead of overflowing, which is
+// why this cannot come back at some other breakpoint the way a
+// `min-[1280px]:` patch would. Deliberately NOT `clamp()`: the
+// constraint here is a ratio between two siblings sharing one container,
+// which flex already expresses exactly, whereas a clamp would re-hardcode
+// viewport numbers and reintroduce the same class of bug.
+export const productTopRow = {
+  root: "container-p flex flex-col gap-6 pt-0 md:pt-6 xl:flex-row xl:items-start xl:gap-[66px] xl:pt-6",
+  // `min-w-0` is what actually permits the shrink (a flex item's default
+  // `min-width: auto` would otherwise floor it at its content's intrinsic
+  // width and re-overflow). ProductGallery's own `desktopRoot` carries the
+  // matching `xl:grow-[700]`.
+  infoColumn: "flex w-full min-w-0 flex-col gap-8 xl:basis-0 xl:grow-[514]",
+};
+
 /* --- ProductGallery (PDP) -------------------------------------------------- */
 
 // Figma node 634:4961 (desktop, 700x612) / 638:860 (mobile, thumbnail strip
@@ -8172,7 +8213,15 @@ export const productGallery = {
   // read as too small live. Reverted to the original single `xl:` tier:
   // this column only renders from 1280px up again, `mobileRoot` below
   // covers the full 768-1279px tablet range with its own full-width image.
-  desktopRoot: "hidden xl:sticky xl:top-[24px] xl:flex xl:w-[700px] xl:shrink-0 xl:gap-4 xl:self-start",
+  // FLUID, not a fixed 700px (2026-09-23 overflow fix -- see
+  // `productTopRow` below for the full reasoning and the arithmetic).
+  // `basis-0 grow-[700]` beside the text column's own `grow-[514]`
+  // splits the row in the exact 700:514 Figma ratio at every width,
+  // reproducing a literal 700px here whenever the container is at its
+  // own 1280px inner max (viewport 1440+), and scaling down instead of
+  // overflowing below that. `min-w-0` lets it actually shrink.
+  desktopRoot:
+    "hidden xl:sticky xl:top-[24px] xl:flex xl:min-w-0 xl:basis-0 xl:grow-[700] xl:gap-4 xl:self-start",
   // h-[609px] = 5 x 109px thumbnail + 4 x 16px gap (owner, 2026-09-01:
   // "make it 16px" -- was 12px, itself a same-day correction down from an
   // original 16px, now reverted back) -- the exact height of a 5-visible

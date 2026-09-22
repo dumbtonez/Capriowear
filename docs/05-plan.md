@@ -3822,3 +3822,29 @@ Meta descriptions used exactly as supplied (147, 152, 147 chars). Evidence tier 
 **Duplicate sweep across all 150 rendered pages:** exactly one `<h1>` each; **zero duplicate H1s, zero duplicate `<title>`s, and zero duplicate meta descriptions** in T-Shirts and Tank Tops. Two duplicate-meta groups exist elsewhere and were left alone as deliberate: 8 pages sharing the explicit "Placeholder meta description -- real copy is a later phase." string (`/contact`, `/who-we-are`, `/our-people`, `/terms`, `/responsible-manufacturing`, `/lifting-gears`, `/boxing-and-mma`, `/boxing-and-mma/boxing-gloves`), and `/_not-found` inheriting `/capriowear`'s description, which is harmless since 404s are not indexed.
 
 **PLP grid confirmed in a real browser, not just the served HTML:** the server-rendered markup only contains the default Men tab's 8 links, so a curl-level check under-reports. Driving the live page and clicking the gender toggle shows **8 men's and 8 women's cards, all 16 clickable**. Draft gating re-confirmed on the three new PDPs: 200, one `<h1>`, noindex/nofollow, BreadcrumbList present, no Product and no FAQPage JSON-LD, absent from the sitemap.
+
+## ProductGallery 1280px overflow fixed at the component level; placeholder-meta audit, 2026-09-23
+
+### 1. The 80px overflow is fixed, and it was wider than logged
+
+Full technical record in `docs/03-component-library.md` under ProductGallery. Summary: the PDP top row was `700 + 66 + 514 = 1280px` of fixed widths, while `.container-p`'s inner width is `min(viewport, 1440) - 160`, which only reaches 1280px at a 1440px viewport. **The broken window was every viewport from 1280 to 1359px** -- 1366 escaped by 6px, so the original "clean at 1366/1440/1920" reading was marginal, not healthy.
+
+**Scope was larger than the original log said.** The row markup was duplicated verbatim across all four PDP page files, so the bug existed four times. Measured live on six categories, not one: T-Shirts, Leggings, Shorts, Sports Bras, Tank Tops and Lifting Gears each overflowed by exactly 80px at 1280. Teamwear and Boxing-and-MMA share the wrapper but have no built style PDPs yet, so nothing exhibited it there; fixed anyway, ahead of their first PDP.
+
+**Fixed once, at the component level**, as asked: a new `productTopRow` recipe in `components/ui/styles.ts` owns the row and the info column, and all four page files now consume it, deleting the duplicated markup. Both columns are `basis-0` with grow factors equal to their Figma widths (`grow-[700]` / `grow-[514]`, plus `min-w-0`), so they always divide the available width in the exact 700:514 ratio. Not a `min-[1280px]:` patch and not `clamp()` -- the constraint is a ratio between two siblings in one container, which flex expresses exactly, while a clamp would re-hardcode viewport numbers and reintroduce the same class of bug later.
+
+**At 1440 and 1920 the columns still compute to precisely 700px and 514px**, pixel-identical to Figma, so the intended design is unchanged; below that they scale together. Verified by measuring real column widths, not just asserting no overflow: 36/36 across six categories x six viewports (1024/1280/1300/1366/1440/1920). Full Playwright suite 68/68. Before/after screenshots at 1280x720 confirm the visible symptom: the H1 was previously cut mid-word ("Manufactur..."), the description and fabric chips ran off the right edge; after, the H1 wraps to two lines and everything sits inside the 80px right margin.
+
+### 2. The 8 placeholder-meta pages audited -- they are not one group
+
+Audited rather than assumed. They split three ways, and the split matters:
+
+**Genuine, untouched stubs (5)** -- `/contact`, `/our-people`, `/responsible-manufacturing`, `/terms`, `/who-we-are`. Roughly 320 to 341 words each, and the visible `<h1>` literally reads "Contact (placeholder)", "Our People (placeholder)", and so on. Content lives in `content/capriosports/stubPages.ts`. Correctly deferred, nothing to do.
+
+**Substantially built Gear pages still carrying the placeholder string (3)** -- `/lifting-gears` (5,596 words, `content/gear/lifting-gears/hub.ts`), `/boxing-and-mma` (5,390 words, `content/gear/boxing-and-mma/hub.ts`), `/boxing-and-mma/boxing-gloves` (6,134 words, `content/gear/boxing-and-mma/boxing-gloves.ts`). These have real `metaTitle`s ("Custom Lifting Gear Manufacturer", "Custom Boxing & MMA Gear Manufacturer", "Custom Boxing Glove Manufacturer") and `/lifting-gears` has 3 real child categories and 19 real PDPs beneath it. **These are the "live, built category we missed" case.**
+
+**They also render placeholder text to users, not just in metadata.** Both hub pages ship a literal `"Placeholder"` as the third `trustBullets` item, visible in the trust row, where every other category reads "OEM, ODM & Private label". And `boxing-gloves.ts` has `h1: "Custom Boxing Glove Manufacturer (placeholder)"`, so "(placeholder)" renders in that page's visible H1. A sitewide sweep of rendered body text found visible placeholder strings on 9 pages: the 8 above plus `/styleguide`, which is a QA harness and expected.
+
+**No live SEO harm today**, which is why this was not urgent: `ALLOW_INDEXING` defaults to false (`content/site.ts`), so the whole site is `noindex, nofollow` and out of the sitemap while it stages on Vercel. **But that flag is designed to be flipped by one env var at launch with no code change** -- if it flips while these three still carry the placeholder string, three real category pages go to Google with "Placeholder meta description -- real copy is a later phase." Worth fixing before launch, not after.
+
+**No content changed here.** The brief scoped this item to listing them, with a change only if one proved to be a built category -- three did, but the fixes are Gear copy decisions (a real meta description each, the third trust bullet, and boxing-gloves' H1), outside this task and plausibly mid-build elsewhere. Recommended, flagged, awaiting a go-ahead.
