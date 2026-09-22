@@ -68,7 +68,7 @@ export const sportsBras: Category = {
   ],
   fabricNote: [
     {
-      text: "No GSM or composition figure is stated here. Fabric weight is confirmed on your sample; where a locked reference states a composition percentage, it's on that SKU's own specification table, not here. Swatches before every bulk run, and we can source or match a ",
+      text: "No GSM or composition figure is stated here. Fabric weight is confirmed on your sample, and any composition percentage for a specific style is on that style's own specification table. Swatches before every bulk run, and we can source or match a ",
     },
     { text: "specific fabric", bold: true },
     { text: " from your reference." },
