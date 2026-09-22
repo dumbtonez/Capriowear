@@ -307,7 +307,7 @@ export const tShirts: Category = {
       ],
       pdpMetaTitle: "Men's Fitted T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom fitted t-shirt manufacturer, OEM, ODM and private label, close-fitting compression cut, standard crew neckline, performance polyester or cotton blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom men's fitted t-shirt manufacturer, private label, close-fitting compression cut, performance polyester or cotton blend, from 50 pieces, DDP worldwide.",
       material: "Performance polyester, poly-spandex blend, or combed cotton",
       pdpFabricPills: ["Performance polyester", "Poly-spandex blend", "Combed cotton", "Cotton-poly blend"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -397,7 +397,7 @@ export const tShirts: Category = {
       ],
       pdpMetaTitle: "Men's Oversized T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom oversized t-shirt manufacturer, OEM, ODM and private label, boxy dropped-shoulder streetwear fit, heavyweight cotton or cotton-poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom men's oversized t-shirt manufacturer, private label, boxy dropped-shoulder fit, heavyweight cotton or cotton-poly blend, from 50 pieces, DDP worldwide.",
       material: "Combed cotton or heavyweight cotton-poly blend",
       pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Tri-blend", "Recycled polyester"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -494,7 +494,7 @@ export const tShirts: Category = {
       ],
       pdpMetaTitle: "Men's Relaxed T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom relaxed t-shirt manufacturer, OEM, ODM and private label, softer roomier everyday fit, cotton-poly or CVC blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom men's relaxed t-shirt manufacturer, private label, softer roomier everyday fit, cotton-poly or CVC blend, from 50 pieces, DDP worldwide.",
       material: "50/50 or CVC cotton-poly blend",
       pdpFabricPills: ["50/50 cotton-poly", "CVC cotton-poly", "Combed cotton", "Tri-blend"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -584,7 +584,7 @@ export const tShirts: Category = {
       ],
       pdpMetaTitle: "Men's Athletic T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom athletic t-shirt manufacturer, OEM, ODM and private label, true-to-size training and running cut, moisture-wicking performance polyester, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom men's athletic t-shirt manufacturer, private label, true-to-size training and running cut, moisture-wicking polyester, from 50 pieces, DDP worldwide.",
       material: "100% performance polyester",
       pdpFabricPills: ["Performance polyester", "Recycled polyester", "Poly-spandex blend", "Cotton-poly blend"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -674,7 +674,7 @@ export const tShirts: Category = {
       ],
       pdpMetaTitle: "Custom Raglan T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom raglan t-shirt manufacturer, OEM, ODM and private label, diagonal raglan sleeve construction, performance polyester or poly-spandex blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom raglan t-shirt manufacturer, private label, diagonal raglan sleeve construction, polyester or Polyester/Spandex, from 50 pieces, DDP worldwide.",
       material: "Performance polyester or poly-spandex blend",
       pdpFabricPills: ["Performance polyester", "Poly-spandex blend", "Combed cotton", "Cotton-poly blend"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -764,7 +764,7 @@ export const tShirts: Category = {
       ],
       pdpMetaTitle: "Men's Dropped-Shoulder T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom dropped-shoulder t-shirt manufacturer, OEM, ODM and private label, streetwear-staple dropped shoulder seam, combed cotton or cotton-poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom men's dropped-shoulder t-shirt manufacturer, private label, dropped shoulder seam, combed cotton or cotton-poly blend, from 50 pieces, DDP worldwide.",
       material: "Combed cotton or cotton-poly blend",
       pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Tri-blend", "Recycled polyester"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -855,7 +855,7 @@ export const tShirts: Category = {
       ],
       pdpMetaTitle: "Men's Cropped T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom cropped t-shirt manufacturer, OEM, ODM and private label, cropped body length, combed cotton or cotton-poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom men's cropped t-shirt manufacturer, private label, cropped body length, combed cotton or cotton-poly blend, from 50 pieces, DDP worldwide.",
       material: "Combed cotton or cotton-poly blend",
       pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Tri-blend", "Recycled polyester"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -945,7 +945,7 @@ export const tShirts: Category = {
       ],
       pdpMetaTitle: "Custom Curved-Hem T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom curved-hem t-shirt manufacturer, OEM, ODM and private label, curved dropped hem construction, combed cotton or cotton-poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom curved-hem t-shirt manufacturer, private label, curved dropped hem construction, combed cotton or cotton-poly blend, from 50 pieces, DDP worldwide.",
       material: "Combed cotton or cotton-poly blend",
       pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Performance polyester", "Tri-blend"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -1037,7 +1037,7 @@ export const tShirts: Category = {
       ],
       pdpMetaTitle: "Women's Fitted T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom fitted t-shirt manufacturer, OEM, ODM and private label, close-fitting standard crew neckline, combed cotton or cotton-poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom women's fitted t-shirt manufacturer, private label, close-fitting crew neckline, combed cotton or cotton-poly blend, from 50 pieces, DDP worldwide.",
       material: "Combed cotton or cotton-poly blend",
       pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Tri-blend", "Performance polyester"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -1509,6 +1509,19 @@ export const tShirts: Category = {
       },
     },
     {
+      // Full PDP content for SKU 14 (owner spec, 2026-09-23), draft, same
+      // shape/rules as SKU 1 to 13. Women's sibling of SKU 7
+      // (`cropped-mens`) -- a genuine cross-gender name collision, so the
+      // gendered H1/title convention applies (see SKU 10's own comment
+      // and the 2026-09-22 sweep in docs/05-plan.md).
+      //
+      // Internal research provenance, comment-only, never visible copy:
+      // evidence tier 4 of 4 brands (Nike, Gymshark, YoungLA, Under
+      // Armour all validated); locked reference product Nike Sportswear
+      // Chill Knit Cropped T-Shirt; directional lightweight to midweight,
+      // 100 to 190 GSM, confirmed on the sample. Fabric route matches
+      // SKU 9 (Fitted, women's) deliberately -- that is the direct
+      // fitted comparison for this style.
       status: "draft",
       slug: "cropped-womens",
       cardTitle: "Custom Cropped T-Shirt",
@@ -1518,8 +1531,96 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/cropped-womens",
       gender: "Women",
       sku: "CAP-TEE-14",
+      pdpTitle: "Cropped",
+      pdpHeading: "Women's Cropped T-Shirt Manufacturer",
+      pdpDescription:
+        "Women's cropped-length tee, shortened body length at a baby-tee hem, custom and private label, in combed cotton or a cotton-poly blend, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Cropped t-shirt, front view, women's" },
+        { alt: "Cropped t-shirt, hem length detail, women's" },
+        { alt: "Cropped t-shirt, back view, women's" },
+        { alt: "Cropped t-shirt, fabric close-up, women's" },
+        { alt: "Cropped t-shirt, worn on model, women's" },
+        { alt: "Cropped t-shirt, flat lay, women's" },
+      ],
+      pdpMetaTitle: "Women's Cropped T-Shirt Manufacturer",
+      pdpMetaDescription:
+        "Custom cropped t-shirt manufacturer, private label, cropped length construction, combed cotton or cotton-poly blend, from 50 pieces, DDP worldwide.",
+      material: "Combed cotton or cotton-poly blend",
+      pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Tri-blend", "Performance polyester"],
+      pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "How much shorter is the cropped length compared to a standard tee?",
+          a: "Body length is shortened to a baby-tee hem; the exact drop is confirmed on your tech pack or reference garment, since there's no single industry-standard crop length.",
+        },
+        {
+          q: "What fabric is the cropped tee made from?",
+          a: "Combed cotton or a cotton-poly blend as the default, the same fabric route as our Fitted tee. We confirm the exact blend and weight on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Oversized", slug: "oversized-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Dropped-Shoulder", slug: "dropped-shoulder-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Relaxed", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "See All", href: "/capriowear/activewear/t-shirts" },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's cropped-length tee, baby-tee hem (base type)" },
+        { label: "Fabric", value: "Combed cotton or cotton-poly blend, directional research range" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Shortened body length, standard through the chest and shoulder" },
+        { label: "Construction", value: "Cut-and-sew, side-seam or tubular body, double-needle stitched sleeves, hem and neck" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Cropped t-shirt, construction detail, women's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Body length checked for consistency at every size",
+        "Print durability tested for your fabric and method",
+        "Shrinkage tested after wash, preshrink status stated",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, puff, silicone, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric and weight",
+            body: "Any blend and GSM, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" },
+          },
+          {
+            title: "Fit and build",
+            body: "Body length, side-seam or tubular, to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit and build" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven, printed or tear-away labels, care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 15 (owner spec, 2026-09-23), draft, same
+      // shape/rules as SKU 14 above. No men's counterpart -- the men's
+      // ringer was a 1-of-4-brand near-miss and was never built as a SKU,
+      // so there is no cross-gender collision and the H1/title stay in
+      // the un-gendered "Custom ..." form, per the same convention.
+      //
+      // Internal research provenance, comment-only, never visible copy:
+      // evidence tier 3 of 4 brands (Nike, Gymshark and YoungLA
+      // validated; Under Armour absent); locked reference product Nike
+      // Sportswear Ringer T-Shirt; directional midweight, 150 to 190
+      // GSM, confirmed on the sample.
       status: "draft",
       slug: "ringer",
       cardTitle: "Custom Ringer T-Shirt",
@@ -1529,8 +1630,96 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/ringer",
       gender: "Women",
       sku: "CAP-TEE-15",
+      pdpTitle: "Ringer",
+      pdpHeading: "Custom Ringer T-Shirt Manufacturer",
+      pdpDescription:
+        "Ringer tee with a contrast-color neckline and sleeve trim, custom and private label, in combed cotton or a cotton-poly blend, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Ringer t-shirt, front view" },
+        { alt: "Ringer t-shirt, contrast neckline trim detail" },
+        { alt: "Ringer t-shirt, contrast sleeve trim detail" },
+        { alt: "Ringer t-shirt, back view" },
+        { alt: "Ringer t-shirt, worn on model" },
+        { alt: "Ringer t-shirt, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Ringer T-Shirt Manufacturer",
+      pdpMetaDescription:
+        "Custom ringer t-shirt manufacturer, private label, contrast-trim ringer construction, combed cotton or cotton-poly blend, from 50 pieces, DDP worldwide.",
+      material: "Combed cotton or cotton-poly blend",
+      pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Tri-blend", "Recycled polyester"],
+      pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "Can I choose the contrast trim color separately from the body?",
+          a: "Yes. The neckline and sleeve trims are cut from their own fabric, so body and trim are specified as separate colors, Pantone matched to your spec.",
+        },
+        {
+          q: "What fabric is the ringer tee made from?",
+          a: "Combed cotton or a cotton-poly blend as the default, for both body and trim. We confirm the exact blend and weight on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Cropped", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Relaxed", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "V-Neck", slug: "v-neck", href: "/capriowear/activewear/t-shirts" },
+        { label: "See All", href: "/capriowear/activewear/t-shirts" },
+      ],
+      specifications: [
+        { label: "Style", value: "Ringer tee, contrast neckline and sleeve trim (base type)" },
+        { label: "Fabric", value: "Combed cotton or cotton-poly blend, directional research range" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Standard through the body, trim at neckline and sleeve opening" },
+        { label: "Construction", value: "Cut-and-sew, contrast-bound neckline and sleeve trim, side-seam or tubular body, double-needle stitching" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Ringer t-shirt, contrast trim construction detail" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Trim color matched to your Pantone, body and trim checked together",
+        "Trim width and neckline finish checked for consistency at every size",
+        "Shrinkage tested after wash, preshrink status stated",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, puff, silicone, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric and weight",
+            body: "Any blend and GSM, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" },
+          },
+          {
+            title: "Fit and build",
+            body: "Trim color and width, neckline finish, side-seam or tubular, to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit and build" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven, printed or tear-away labels, care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 16 (owner spec, 2026-09-23), draft, same
+      // shape/rules as SKU 14/15 above. No men's counterpart (the men's
+      // v-neck was a 1-of-4-brand near-miss, never built), so the
+      // un-gendered "Custom ..." H1/title form applies. Completes the
+      // full 16-SKU T-Shirts catalog: 8 men's, 8 women's, all built.
+      //
+      // Internal research provenance, comment-only, never visible copy:
+      // evidence tier 3 of 4 brands (Nike, Under Armour and YoungLA
+      // validated; Gymshark absent); locked reference product Under
+      // Armour Tech Twist V-Neck Short Sleeve; directional lightweight,
+      // 100 to 155 GSM, confirmed on the sample.
       status: "draft",
       slug: "v-neck",
       cardTitle: "Custom V-Neck T-Shirt",
@@ -1540,6 +1729,83 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/v-neck",
       gender: "Women",
       sku: "CAP-TEE-16",
+      pdpTitle: "V-Neck",
+      pdpHeading: "Custom V-Neck T-Shirt Manufacturer",
+      pdpDescription:
+        "V-neck tee in 100% performance polyester, custom and private label, moisture-wicking and quick-dry, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "V-neck t-shirt, front view" },
+        { alt: "V-neck t-shirt, neckline depth detail" },
+        { alt: "V-neck t-shirt, back view" },
+        { alt: "V-neck t-shirt, fabric close-up" },
+        { alt: "V-neck t-shirt, worn on model" },
+        { alt: "V-neck t-shirt, flat lay" },
+      ],
+      pdpMetaTitle: "Custom V-Neck T-Shirt Manufacturer",
+      pdpMetaDescription:
+        "Custom v-neck t-shirt manufacturer, private label, v-neck construction, performance polyester, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "100% performance polyester",
+      pdpFabricPills: ["Performance polyester", "Recycled polyester", "Poly-spandex blend", "Cotton-poly blend"],
+      pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "Can I specify how deep the V-neckline sits?",
+          a: "Yes. Neckline depth and width are both set on your tech pack or matched to a reference garment, and held consistent across every size in the run.",
+        },
+        {
+          q: "What fabric is the V-neck tee made from?",
+          a: "100% performance polyester as the default, chosen for moisture-wicking and quick-dry performance. We confirm the exact weight on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Athletic", slug: "athletic-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Fitted", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Ringer", slug: "ringer", href: "/capriowear/activewear/t-shirts" },
+        { label: "Cropped", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "See All", href: "/capriowear/activewear/t-shirts" },
+      ],
+      specifications: [
+        { label: "Style", value: "V-neck tee, V-neckline construction (base type)" },
+        { label: "Fabric", value: "100% performance polyester, directional research range" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Standard through the body, V-neckline depth to your spec" },
+        { label: "Construction", value: "Cut-and-sew, V-neck binding, side-seam or tubular body, double-needle stitched sleeves and hem" },
+        { label: "Branding", value: "Sublimation, screen, DTF, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "V-neck t-shirt, neckline construction detail" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "V-neckline depth and binding checked for consistency at every size",
+        "Moisture-wicking performance tested for your exact fabric",
+        "Print durability tested for your exact fabric and method",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation on polyester, screen, DTF", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, silicone, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric and weight",
+            body: "Any blend and GSM, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" },
+          },
+          {
+            title: "Fit and build",
+            body: "Neckline depth and width, body length, side-seam or tubular, to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit and build" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven, printed or tear-away labels, care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
   ],
   // Sibling Tops-group categories from content/home.ts's own

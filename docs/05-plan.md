@@ -3788,3 +3788,37 @@ Three owner follow-ups closing out the SKU 10 to 13 work, then pushed.
 **Verification, widened from PDPs to the whole site this time:** all 147 rendered pages scanned, every one has exactly one `<h1>`, and there are **zero duplicate `<h1>`s and zero duplicate `<title>`s sitewide** (not just within T-Shirts/Tank Tops). `npm run build` (Turbopack, no flags) green. `npx tsc --noEmit` and `npx eslint app/ content/` clean. Playwright 68/68. Draft gating re-confirmed on all four women's PDPs. SKU 10's FAQ 2 and SKU 11's meta description confirmed against the rendered HTML, and men's SKU 3's meta confirmed unchanged.
 
 Pushed to origin/main: the hold is lifted, and this is the first push since `6d3bf2e`.
+
+## T-Shirts SKU 14/15/16 built -- 16-SKU set complete -- plus meta description trim pass, 2026-09-23
+
+### SKU 14, 15, 16 (all women's)
+
+Checked first per the standing rule: all three were still card-only stubs, so all three were built. Same shape/rules as SKU 1 to 13.
+
+**SKU 14 Cropped** (`cropped-womens`): women's sibling of SKU 7, a genuine cross-gender name collision, so the gendered form applies -- "Women's Cropped T-Shirt Manufacturer". Fabric route deliberately matches SKU 9 (Fitted, women's), the direct fitted comparison for this style. Evidence 4 of 4 (Nike, Gymshark, YoungLA, Under Armour); reference Nike Sportswear Chill Knit Cropped T-Shirt; 100 to 190 GSM.
+
+**SKU 15 Ringer** (`ringer`): no men's counterpart (the men's ringer was a 1-of-4-brand near-miss, never built as a SKU), so no collision and the un-gendered "Custom Ringer T-Shirt Manufacturer" stays, per the convention. Evidence 3 of 4 (Nike, Gymshark, YoungLA; Under Armour absent); reference Nike Sportswear Ringer T-Shirt; 150 to 190 GSM. Style FAQs cover the one thing genuinely specific to this SKU, that body and contrast trim are specified as separate Pantone-matched colors.
+
+**SKU 16 V-Neck** (`v-neck`): same no-collision reasoning, "Custom V-Neck T-Shirt Manufacturer". Evidence 3 of 4 (Nike, Under Armour, YoungLA; Gymshark absent); reference Under Armour Tech Twist V-Neck Short Sleeve; 100% performance polyester, 100 to 155 GSM. Style FAQs cover neckline depth as the specifiable dimension.
+
+Meta descriptions used exactly as supplied (147, 152, 147 chars). Evidence tier and reference product recorded in per-SKU code comments only, never visible copy, same rule as every prior SKU. Entity FAQ and the operational block needed no per-SKU work, as before -- they compose at render time.
+
+**This completes the full 16-SKU T-Shirts catalog: 8 men's and 8 women's, every one with real PDP content.**
+
+### Meta description trim pass, T-Shirts SKU 1 to 9 and all 16 Tank Tops
+
+25 descriptions rewritten, every one landing in 140 to 160 chars (was 168 to 211). Template followed is the owner's own SKU 14 to 16 form rather than Leggings': `Custom [gender ]{style} {noun} manufacturer, private label, {differentiator}, {fabric}, from 50 pieces, DDP worldwide.` This drops "OEM, ODM and" in favour of "private label" and drops "any fabric and color", while keeping the four facts the brief said to keep (manufacturer positioning, fabric route, MOQ, DDP). Leggings' own audited form was not copied because it drops "from 50 pieces" entirely, which the brief explicitly ruled out.
+
+**Gendered where the style is a cross-gender pair**, matching the H1 convention and the owner's own SKU 11 rewrite ("Custom women's relaxed t-shirt manufacturer..."). Without this, trimming would have collided men's and women's Fitted/Relaxed/Ribbed/Cropped down to identical strings. Unpaired styles (Raglan, Curved-Hem, Oversized Cut-Off, Athletic tank, Stringer, Muscle-Cut, Cropped Fitted, Shelf-Bra, Halter, Cropped tank) keep the un-gendered form.
+
+**"elastane" replaced with "spandex"** in the strings being rewritten, and the house `Polyester/Spandex` / `Nylon/Spandex` capitalised-slash format used where a stretch blend is named -- both per the standing fabric-terminology rule, and consistent with the rest of the codebase (spandex outnumbers elastane 216 to 40; the slash format has 380+ uses, including Leggings' own audited meta descriptions). **Flagged:** 22 "elastane" occurrences remain in Tank Tops outside the meta descriptions (fabric options, spec rows). Not swept here -- out of this task's scope, and worth its own pass.
+
+**Flagged, brief was mistaken:** the brief said to exclude "SKU10-16 which are already in range". SKU 14 to 16 are (147 to 152), but **SKU 10 to 13 are 185 to 204 chars**, not in range -- they were restored to the owner's locked source copy on 2026-09-22 and that copy is long. Left untouched rather than silently rewritten, since it is owner-supplied source (and SKU 11's was hand-written by the owner specifically to de-duplicate). They are the only four T-Shirts SKUs still over the truncation point.
+
+### Verification
+
+`npm run build` (Turbopack) green, all 154 pages prerendered. `npx tsc --noEmit` and `npx eslint app/ content/` clean. Playwright 68/68. No em/en dashes in either content file.
+
+**Duplicate sweep across all 150 rendered pages:** exactly one `<h1>` each; **zero duplicate H1s, zero duplicate `<title>`s, and zero duplicate meta descriptions** in T-Shirts and Tank Tops. Two duplicate-meta groups exist elsewhere and were left alone as deliberate: 8 pages sharing the explicit "Placeholder meta description -- real copy is a later phase." string (`/contact`, `/who-we-are`, `/our-people`, `/terms`, `/responsible-manufacturing`, `/lifting-gears`, `/boxing-and-mma`, `/boxing-and-mma/boxing-gloves`), and `/_not-found` inheriting `/capriowear`'s description, which is harmless since 404s are not indexed.
+
+**PLP grid confirmed in a real browser, not just the served HTML:** the server-rendered markup only contains the default Men tab's 8 links, so a curl-level check under-reports. Driving the live page and clicking the gender toggle shows **8 men's and 8 women's cards, all 16 clickable**. Draft gating re-confirmed on the three new PDPs: 200, one `<h1>`, noindex/nofollow, BreadcrumbList present, no Product and no FAQPage JSON-LD, absent from the sitemap.

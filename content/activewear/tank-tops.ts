@@ -207,7 +207,7 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Custom Oversized Cut-Off Tank Manufacturer",
       pdpMetaDescription:
-        "Custom oversized cut-off tank manufacturer, OEM, ODM and private label, boxy dropped-shoulder fit, wide raw-cut armhole, cotton and cotton-blend jersey, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom oversized cut-off tank manufacturer, private label, boxy dropped-shoulder fit, wide raw-cut armhole, cotton-blend jersey, from 50 pieces, DDP worldwide.",
       material: "Cotton or cotton-blend jersey, 260 GSM",
       pdpFabricPills: ["Cotton", "Cotton-Poly Blend", "Recycled Polyester", "Ribbed Cotton Knit"],
       pdpSpecHighlights: [
@@ -295,7 +295,7 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Men's Fitted Tank Manufacturer",
       pdpMetaDescription:
-        "Custom fitted tank manufacturer, OEM, ODM and private label, close-fitting compression build, standard neckline and armhole, poly-spandex or nylon-elastane, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom men's fitted tank manufacturer, private label, close-fitting compression build, Polyester/Spandex or Nylon/Spandex, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
@@ -382,7 +382,7 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Men's Relaxed Tank Manufacturer",
       pdpMetaDescription:
-        "Custom relaxed tank manufacturer, OEM, ODM and private label, softer roomier fit, finished armhole and neckline, recycled polyester or cotton jersey, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom men's relaxed tank manufacturer, private label, softer roomier fit, finished armhole, recycled polyester or cotton jersey, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Recycled Polyester", "Cotton", "Cotton-Poly Blend", "Poly-Spandex"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
@@ -473,7 +473,7 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Custom Athletic Tank Manufacturer",
       pdpMetaDescription:
-        "Custom athletic tank manufacturer, OEM, ODM and private label, true-to-size training and running cut, deep scoop neckline, recycled polyester, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom athletic tank manufacturer, private label, true-to-size training and running cut, deep scoop neckline, recycled polyester, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Recycled Polyester", "Poly-Spandex", "Cotton-Poly Blend", "Nylon-Elastane"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
@@ -571,7 +571,7 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Custom Stringer Tank Manufacturer",
       pdpMetaDescription:
-        "Custom stringer tank manufacturer, OEM, ODM and private label, narrow straps, deep-cut racerback armhole, cotton/lyocell/elastane jersey, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom stringer tank manufacturer, private label, narrow straps, deep-cut racerback armhole, cotton/lyocell/spandex jersey, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Cotton/Lyocell/Elastane", "Cotton", "Poly-Spandex", "Nylon-Elastane"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
@@ -673,7 +673,7 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Men's Racerback Singlet Manufacturer",
       pdpMetaDescription:
-        "Custom racerback singlet manufacturer, OEM, ODM and private label, fitted running and training singlet, full racerback construction, stretch compression knit, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom men's racerback singlet manufacturer, private label, fitted running and training cut, full racerback, compression knit, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Recycled Polyester", "Cotton-Lyocell-Elastane"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
@@ -773,7 +773,7 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Custom Muscle-Cut Tank Manufacturer",
       pdpMetaDescription:
-        "Custom muscle-cut tank manufacturer, OEM, ODM and private label, wide dropped armhole, ribbed collar, raw-edge hem, cotton-poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom muscle-cut tank manufacturer, private label, wide dropped armhole, ribbed collar, raw-edge hem, cotton-poly blend, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Cotton-Poly Blend", "Cotton", "Poly-Spandex", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
@@ -889,7 +889,7 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Men's Ribbed Tank Manufacturer",
       pdpMetaDescription:
-        "Custom ribbed tank manufacturer, OEM, ODM and private label, full-body rib knit, fitted through the torso, cotton-elastane rib knit, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom men's ribbed tank manufacturer, private label, full-body rib knit, fitted through the torso, cotton-spandex rib, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Cotton-Elastane Rib Knit", "Viscose-Elastane Rib Knit", "Cotton", "Poly-Spandex"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
@@ -990,7 +990,7 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Women's Fitted Tank Manufacturer",
       pdpMetaDescription:
-        "Custom fitted tank manufacturer, OEM, ODM and private label, close-fitting, high scoop neckline, standard back, stretch poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom women's fitted tank manufacturer, private label, close-fitting, high scoop neckline, stretch Polyester/Spandex, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton-Poly Blend", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1092,7 +1092,7 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Women's Relaxed Tank Manufacturer",
       pdpMetaDescription:
-        "Custom relaxed tank manufacturer, OEM, ODM and private label, roomier non-compression fit, standard finished neckline and armhole, stretch poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom women's relaxed tank manufacturer, private label, roomier non-compression fit, finished neckline, stretch poly blend, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Cotton-Poly Blend", "Nylon-Elastane", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1194,7 +1194,7 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Custom Cropped Fitted Tank Manufacturer",
       pdpMetaDescription:
-        "Custom cropped fitted tank manufacturer, OEM, ODM and private label, close-fitting, midriff-baring cropped hem, stretch poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom cropped fitted tank manufacturer, private label, close-fitting, midriff-baring cropped hem, stretch poly blend, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton-Poly Blend", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1296,7 +1296,7 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Women's Racerback Tank Manufacturer",
       pdpMetaDescription:
-        "Custom racerback tank manufacturer, OEM, ODM and private label, fitted silhouette, true racerback with mesh paneling, stretch poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom women's racerback tank manufacturer, private label, fitted silhouette, racerback with mesh paneling, stretch poly blend, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Mesh Panel Blend", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1398,7 +1398,7 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Custom Shelf-Bra Tank Manufacturer",
       pdpMetaDescription:
-        "Custom shelf-bra tank manufacturer, OEM, ODM and private label, built-in shelf bra, removable pads, adjustable straps, stretch poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom shelf-bra tank manufacturer, private label, built-in shelf bra, removable pads, adjustable straps, stretch poly blend, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton-Poly Blend", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1495,7 +1495,7 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Custom Halter Tank Manufacturer",
       pdpMetaDescription:
-        "Custom halter tank manufacturer, OEM, ODM and private label, halterneck front, deep scoop back, stretch poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom halter tank manufacturer, private label, halterneck front, deep scoop back, stretch Polyester/Spandex, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton-Poly Blend", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1599,7 +1599,7 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Custom Cropped Tank Manufacturer",
       pdpMetaDescription:
-        "Custom cropped tank manufacturer, OEM, ODM and private label, relaxed fit, cropped midriff-baring hem, stretch poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom cropped tank manufacturer, private label, relaxed fit, cropped midriff-baring hem, stretch poly blend, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Cotton-Poly Blend", "Nylon-Elastane", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1700,7 +1700,7 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Women's Ribbed Tank Manufacturer",
       pdpMetaDescription:
-        "Custom ribbed tank manufacturer, OEM, ODM and private label, ribbed knit with color-blocked side panels, poly-elastane body, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom women's ribbed tank manufacturer, private label, ribbed knit with color-blocked side panels, poly-spandex body, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Cotton-Elastane Rib Knit", "Viscose-Elastane Rib Knit", "Poly-Spandex", "Nylon-Elastane"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
