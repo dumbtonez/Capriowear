@@ -191,6 +191,10 @@ export const leggings: Category = {
       a: "A tested squat-proof knit dense enough to stay opaque under stretch, confirmed on your sample before bulk.",
     },
     {
+      q: "Do you manufacture yoga leggings?",
+      a: "Yes. Our squat-proof compression fabrics and 4-way stretch knits are built for yoga, studio and fitness brands, alongside general activewear and teamwear buyers.",
+    },
+    {
       q: "Can you match a specific fabric or a reference legging?",
       a: "Yes. Send a swatch, reference or tech pack and we source or develop to match, then share swatches before bulk.",
     },
