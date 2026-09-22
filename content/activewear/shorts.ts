@@ -455,7 +455,7 @@ export const shorts: Category = {
         },
         {
           label: "Weight",
-          value: "340 GSM, per the locked reference's published spec (YoungLA). Final weight confirmed on your sample.",
+          value: "340 GSM. Final weight confirmed on your sample.",
         },
         {
           label: "Stretch and support",
@@ -565,7 +565,7 @@ export const shorts: Category = {
         },
         {
           label: "Weight",
-          value: "460 GSM, per the locked reference's published spec (YoungLA). Final weight confirmed on your sample.",
+          value: "460 GSM. Final weight confirmed on your sample.",
         },
         {
           label: "Stretch and support",
@@ -613,6 +613,100 @@ export const shorts: Category = {
       image: "",
       imageAlt: "Custom 2-in-1 shorts manufacturer",
       href: "/capriowear/activewear/shorts/2-in-1",
+      // Full PDP content for SKU 5 (owner spec, 2026-09-22), draft, same
+      // shape as SKU 1 to 4. Reachable by URL and a clickable PLP card
+      // via the sitewide draft-PDP rule (`isDraftPdpReachable()`): still
+      // noindex/nofollow, out of the sitemap, no Product/FAQPage
+      // JSON-LD. Do not flip `status` to "published". No GSM sourced
+      // (Weight stays "Pending, confirmed on your sample."). `images`
+      // are alt-only placeholders: real product photography is needed
+      // before this can go live. CTA is Request a Sample only.
+      pdpTitle: "2-in-1",
+      pdpHeading: "Custom 2-in-1 Shorts Manufacturer",
+      pdpDescription:
+        "Men's 2-in-1 shorts, a looser outer shell over a built-in fitted liner, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew construction, mid-length inseam, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "2-in-1 shorts, front view" },
+        { alt: "2-in-1 shorts, liner and shell detail" },
+        { alt: "2-in-1 shorts, side profile" },
+        { alt: "2-in-1 shorts, fabric close-up" },
+        { alt: "2-in-1 shorts, worn on model" },
+        { alt: "2-in-1 shorts, flat lay" },
+      ],
+      pdpMetaTitle: "Custom 2-in-1 Shorts Manufacturer",
+      pdpMetaDescription:
+        "Custom 2-in-1 shorts manufacturer, OEM, ODM and private label, outer shell over a built-in fitted liner, Polyester/Spandex or Nylon/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes (plus waist-inch sizing)" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the 2-in-1 short made from?",
+          a: "A Polyester/Spandex or Nylon/Spandex cut-and-sew construction for both the outer shell and the fitted liner, in the composition range typical of comparable 2-in-1 training shorts. We confirm the exact blend and weight for each layer on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How is the liner attached, can I change how fitted it is?",
+          a: "The liner is built into the shell at the waistband, not a separate garment. Liner fit (looser or more compressive) is adjustable to your tech pack, confirmed for alignment and comfort on your sample before bulk.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Athletic Shorts", slug: "athletic-regular", href: "/capriowear/activewear/shorts" },
+        { label: "Fitted Training Shorts", slug: "fitted-training", href: "/capriowear/activewear/shorts" },
+        { label: "Relaxed Shorts", slug: "relaxed-mid", href: "/capriowear/activewear/shorts" },
+        { label: "Relaxed Long Shorts", slug: "relaxed-long", href: "/capriowear/activewear/shorts" },
+        { label: "See All", href: "/capriowear/activewear/shorts" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Men's 2-in-1 short, looser outer shell over a built-in fitted liner, mid-length inseam (base type)",
+        },
+        {
+          label: "Fabric",
+          value:
+            "Two-layer construction, outer shell and liner both in cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        {
+          label: "Stretch and support",
+          value: "Fitted compression liner under a looser, non-compression outer shell. Liner and shell fit checked together, not as separate garments.",
+        },
+        { label: "Waistband", value: "Standard elastic waistband with drawcord closure, shared by both layers" },
+        {
+          label: "Construction",
+          value: "Cut-and-sew, two-layer build (outer shell plus attached fitted liner), elastic waistband with drawcord, not knit-to-shape, flatlock finishing available",
+        },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "2-in-1 shorts, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Liner and shell layers checked for consistent fit and alignment together, not separately",
+        "Drawcord and eyelets checked for secure anchoring and pull strength",
+        "Waistbands hold their recovery",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Polyester/Spandex or Nylon/Spandex, any weight, sourced or matched to your reference, shell and liner independently specced",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
@@ -623,6 +717,99 @@ export const shorts: Category = {
       image: "",
       imageAlt: "Custom relaxed long shorts manufacturer",
       href: "/capriowear/activewear/shorts/relaxed-long",
+      // Full PDP content for SKU 6 (owner spec, 2026-09-22), draft, same
+      // shape as SKU 1 to 5. Reachable by URL and a clickable PLP card
+      // via the sitewide draft-PDP rule (`isDraftPdpReachable()`): still
+      // noindex/nofollow, out of the sitemap, no Product/FAQPage
+      // JSON-LD. Do not flip `status` to "published". No GSM sourced
+      // (Weight stays "Pending, confirmed on your sample."). `images`
+      // are alt-only placeholders: real product photography is needed
+      // before this can go live. CTA is Request a Sample only.
+      pdpTitle: "Relaxed Long",
+      pdpHeading: "Custom Relaxed Long Shorts Manufacturer",
+      pdpDescription:
+        "Men's relaxed, roomier fit shorts, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 8 inch or below-knee inseam, elastic waistband with drawcord, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Relaxed long shorts, front view" },
+        { alt: "Relaxed long shorts, waistband and drawcord detail" },
+        { alt: "Relaxed long shorts, side profile" },
+        { alt: "Relaxed long shorts, fabric close-up" },
+        { alt: "Relaxed long shorts, worn on model" },
+        { alt: "Relaxed long shorts, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Relaxed Long Shorts Manufacturer",
+      pdpMetaDescription:
+        "Custom relaxed long shorts manufacturer, OEM, ODM and private label, 8 inch or below-knee inseam, roomier cut, Polyester/Spandex or Nylon/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes (plus waist-inch sizing)" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the relaxed long short made from?",
+          a: "A Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, in the composition range typical of comparable relaxed training shorts. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How is this different from your Relaxed and Baggy shorts?",
+          a: "This shares the same roomier, relaxed cut as our shorter Relaxed short, just at an 8 inch or below-knee inseam. It's a lighter jersey knit build, not the heavier cotton fleece used on our Baggy short.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Relaxed Shorts", slug: "relaxed-mid", href: "/capriowear/activewear/shorts" },
+        { label: "Baggy Shorts", slug: "baggy", href: "/capriowear/activewear/shorts" },
+        { label: "Fitted Long Shorts", slug: "fitted-long", href: "/capriowear/activewear/shorts" },
+        { label: "2-in-1 Shorts", slug: "2-in-1", href: "/capriowear/activewear/shorts" },
+        { label: "See All", href: "/capriowear/activewear/shorts" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Men's relaxed, roomier fit short, not fitted, not baggy, 8 inch or below-knee inseam (base type)",
+        },
+        {
+          label: "Fabric",
+          value:
+            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        {
+          label: "Stretch and support",
+          value: "Relaxed, roomier cut, not compression, not baggy. A standard mid-weight everyday short at the longer inseam length.",
+        },
+        { label: "Waistband", value: "Standard elastic waistband with drawcord closure" },
+        {
+          label: "Construction",
+          value: "Cut-and-sew, elastic waistband with drawcord, not knit-to-shape, flatlock finishing available",
+        },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Relaxed long shorts, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Drawcord and eyelets checked for secure anchoring and pull strength",
+        "Waistbands hold their recovery",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Polyester/Spandex or Nylon/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
