@@ -18,10 +18,12 @@ import { categoryBanner } from "@/components/ui/styles";
 export type CategoryBannerProps = {
   breadcrumbItems: BreadcrumbItem[];
   h1: string;
+  /** Optional line under h1 (owner spec, 2026-09-22, Sports Bras) -- renders nothing when unset, so every category without one is unaffected. */
+  heroSubline?: string;
   trustBullets: string[];
 };
 
-export function CategoryBanner({ breadcrumbItems, h1, trustBullets }: CategoryBannerProps) {
+export function CategoryBanner({ breadcrumbItems, h1, heroSubline, trustBullets }: CategoryBannerProps) {
   return (
     <section className={categoryBanner.section}>
       <div className={categoryBanner.breadcrumbWrap}>
@@ -30,6 +32,7 @@ export function CategoryBanner({ breadcrumbItems, h1, trustBullets }: CategoryBa
       <div className={categoryBanner.contentWrap}>
         <div className={categoryBanner.content}>
           <TextReveal as="h1" text={h1} className={categoryBanner.h1} />
+          {heroSubline ? <p className={categoryBanner.subline}>{heroSubline}</p> : null}
           <ul className={categoryBanner.trustBullets}>
             {trustBullets.map((bullet, index) => (
               // key={index}: a static, presentational list -- never

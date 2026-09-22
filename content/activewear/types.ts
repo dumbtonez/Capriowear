@@ -597,6 +597,14 @@ export type Category = {
   metaDescription: string;
   /** CategoryBanner's own checkmark row (Figma node 502:3310), e.g. ["MOQ from 50 pieces", "Samples in 10 to 14 days"]. Exactly 4 in the real design. */
   trustBullets: string[];
+  /**
+   * One-line subline under CategoryBanner's own H1 (owner spec, 2026-09-22,
+   * Sports Bras: "Custom from fabric to packaging, low MOQ to full bulk.").
+   * Optional -- CategoryBanner renders nothing here when unset, so every
+   * category built before Sports Bras (none of which has this line) renders
+   * byte-identical to before.
+   */
+  heroSubline?: string;
   /** ProductGrid's own meta-strip subline, e.g. "Every style, made to your brand spec." (Figma node 406:3137). Different copy from trustBullets -- this sits next to menuLabel above the grid, not in the banner. */
   gridSubline: string;
   /**

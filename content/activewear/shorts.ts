@@ -1026,6 +1026,98 @@ export const shorts: Category = {
       image: "",
       imageAlt: "Custom mid-rise biker shorts manufacturer",
       href: "/capriowear/activewear/shorts/mid-rise-biker",
+      // Full PDP content for SKU 9 (owner spec, 2026-09-22), draft, same
+      // shape as SKU 1 to 8. Reachable by URL and a clickable PLP card
+      // via the sitewide draft-PDP rule (`isDraftPdpReachable()`): still
+      // noindex/nofollow, out of the sitemap, no Product/FAQPage
+      // JSON-LD. Do not flip `status` to "published". No GSM sourced
+      // (Weight stays "Pending, confirmed on your sample."). `images`
+      // are alt-only placeholders: real product photography is needed
+      // before this can go live. CTA is Request a Sample only.
+      // `pdpSpecHighlights` drops the "(plus waist-inch sizing)"
+      // qualifier the men's SKUs use -- women's-only, same as SKU 8.
+      pdpTitle: "Mid-Rise Biker",
+      pdpHeading: "Custom Mid-Rise Biker Shorts Manufacturer",
+      pdpDescription:
+        "Women's mid-rise, fitted bike-short, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 5 to 7 inch inseam, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Mid-rise biker shorts, front view" },
+        { alt: "Mid-rise biker shorts, waistband detail" },
+        { alt: "Mid-rise biker shorts, side profile" },
+        { alt: "Mid-rise biker shorts, fabric close-up" },
+        { alt: "Mid-rise biker shorts, worn on model" },
+        { alt: "Mid-rise biker shorts, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Mid-Rise Biker Shorts Manufacturer",
+      pdpMetaDescription:
+        "Custom mid-rise biker shorts manufacturer, OEM, ODM and private label, fitted bike-short, 5 to 7 inch inseam, Polyester/Spandex or Nylon/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the mid-rise biker short made from?",
+          a: "A Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, in the composition range typical of comparable fitted biker shorts. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How is this different from your High-Rise Biker short?",
+          a: "This uses a mid-rise waistband at the same 5 to 7 inch inseam and fitted, compression cut. Our High-Rise Biker short uses a taller waistband at the same length and fit.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "High-Rise Biker Shorts", slug: "high-rise-biker", href: "/capriowear/activewear/shorts" },
+        { label: "High-Rise Mini Shorts", slug: "high-rise-mini", href: "/capriowear/activewear/shorts" },
+        { label: "Zip-Pocket Shorts", slug: "zip-pocket", href: "/capriowear/activewear/shorts" },
+        { label: "Mid-Rise Relaxed Shorts", slug: "mid-rise-relaxed", href: "/capriowear/activewear/shorts" },
+        { label: "See All", href: "/capriowear/activewear/shorts" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Women's mid-rise, fitted bike-short, 5 to 7 inch inseam (base type)",
+        },
+        {
+          label: "Fabric",
+          value:
+            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        {
+          label: "Stretch and support",
+          value: "Fitted, compression bike-short fit, not relaxed, not loose. A close-to-body silhouette built to hold through movement.",
+        },
+        { label: "Waistband", value: "Mid-rise elastic waistband" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Mid-rise biker shorts, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Compression fit checked for consistent recovery across the size run",
+        "Mid-rise waistband checked for hold and no roll-down under movement",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Polyester/Spandex or Nylon/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
@@ -1036,6 +1128,100 @@ export const shorts: Category = {
       image: "",
       imageAlt: "Custom high-rise mini shorts manufacturer",
       href: "/capriowear/activewear/shorts/high-rise-mini",
+      // Full PDP content for SKU 10 (owner spec, 2026-09-22), draft, same
+      // shape as SKU 1 to 9. Reachable by URL and a clickable PLP card
+      // via the sitewide draft-PDP rule (`isDraftPdpReachable()`): still
+      // noindex/nofollow, out of the sitemap, no Product/FAQPage
+      // JSON-LD. Do not flip `status` to "published". No GSM sourced
+      // (Weight stays "Pending, confirmed on your sample."). `images`
+      // are alt-only placeholders: real product photography is needed
+      // before this can go live. CTA is Request a Sample only.
+      // `pdpSpecHighlights` drops the "(plus waist-inch sizing)"
+      // qualifier the men's SKUs use -- women's-only, same as SKU 8/9.
+      pdpTitle: "High-Rise Mini",
+      pdpHeading: "Custom High-Rise Mini Shorts Manufacturer",
+      pdpDescription:
+        "Women's high-rise, fitted short, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 4 inch or under inseam, side pocket, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "High-rise mini shorts, front view" },
+        { alt: "High-rise mini shorts, side pocket detail" },
+        { alt: "High-rise mini shorts, side profile" },
+        { alt: "High-rise mini shorts, fabric close-up" },
+        { alt: "High-rise mini shorts, worn on model" },
+        { alt: "High-rise mini shorts, flat lay" },
+      ],
+      pdpMetaTitle: "Custom High-Rise Mini Shorts Manufacturer",
+      pdpMetaDescription:
+        "Custom high-rise mini shorts manufacturer, OEM, ODM and private label, fitted, 4 inch or under inseam, Polyester/Spandex or Nylon/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the high-rise mini short made from?",
+          a: "A Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, in the composition range typical of comparable fitted compression shorts. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How is this different from your High-Rise Biker short?",
+          a: "Same high-rise, fitted compression construction, at a shorter 4 inch or under inseam instead of the 5 to 7 inch length used on our Biker short.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "High-Rise Biker Shorts", slug: "high-rise-biker", href: "/capriowear/activewear/shorts" },
+        { label: "Mid-Rise Biker Shorts", slug: "mid-rise-biker", href: "/capriowear/activewear/shorts" },
+        { label: "Mid-Rise Mini Shorts", slug: "mid-rise-mini", href: "/capriowear/activewear/shorts" },
+        { label: "Zip-Pocket Shorts", slug: "zip-pocket", href: "/capriowear/activewear/shorts" },
+        { label: "See All", href: "/capriowear/activewear/shorts" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Women's high-rise, fitted short, 4 inch or under inseam (base type)",
+        },
+        {
+          label: "Fabric",
+          value:
+            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        {
+          label: "Stretch and support",
+          value: "Fitted, compression fit, not relaxed, not loose. A close-to-body silhouette at the shortest inseam length in the catalog.",
+        },
+        { label: "Pocket", value: "Side pocket, practical placement for secure everyday carry" },
+        { label: "Waistband", value: "High-rise elastic waistband, wide enough for a comfortable compression hold" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "High-rise mini shorts, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Compression fit checked for consistent recovery across the size run",
+        "High-rise waistband checked for hold and no roll-down under movement",
+        "Side pocket checked for secure hold during movement",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Polyester/Spandex or Nylon/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
