@@ -149,17 +149,26 @@ export const sportsBras: Category = {
     },
   ],
   ctaReferenceNoun: "sports bra",
-  // All 15 styles are "draft" (owner spec, explicit under Schema: "all 15
-  // cards draft") -- each shows on the grid as a non-clickable "Coming
-  // soon" tile, no generated route, excluded from the sitemap and this
-  // category's own ItemList schema, same rule every other category's
-  // draft cards already follow. No `gender` field on any card (women's-
-  // only category, nothing to filter). No PDP content authored yet for
-  // any card -- SKUs 1-3's "PDP built, mark clickable once live" note in
-  // the brief is guidance for a later task once that real PDP content
-  // exists, not something to invent now.
+  // All 15 styles stay "draft" (owner spec) -- flip to "published" only
+  // once sampled, photographed, and confirmed real, same rule every other
+  // category's draft cards already follow. No `gender` field on any card
+  // (women's-only category, nothing to filter). SKU 1 (CAP-SPB-01) and
+  // SKU 2 (CAP-SPB-02) got full PDP content 2026-09-22 (owner spec) --
+  // reachable by URL and a clickable PLP card via `isDraftPdpReachable()`,
+  // still noindex/nofollow, out of the sitemap, no Product/FAQPage
+  // JSON-LD. The other 13 cards are card-only, no PDP content.
   styleCards: [
     {
+      // Full PDP content for SKU 1 (owner spec, 2026-09-22), draft.
+      // Reachable by URL and a clickable PLP card via the sitewide
+      // draft-PDP rule (`isDraftPdpReachable()`): still noindex/nofollow,
+      // out of the sitemap, no Product/FAQPage JSON-LD. Do not flip
+      // `status` to "published" until sampled and photographed. `images`
+      // are alt-only placeholders: real product photography is needed
+      // before this can go live. Desktop CTA row is the shared,
+      // hardcoded primary+secondary pair every PDP renders (ProductCtas,
+      // home.nav.cta/secondaryCta) -- same as Leggings and every built
+      // Shorts SKU, no per-style override exists or was added here.
       status: "draft",
       slug: "high-support-full-coverage",
       cardTitle: "Custom High-Support Sports Bra",
@@ -168,8 +177,80 @@ export const sportsBras: Category = {
       imageAlt: "Custom high-support full-coverage sports bra manufacturer",
       href: "/capriowear/activewear/sports-bras/high-support-full-coverage",
       sku: "CAP-SPB-01",
+      pdpTitle: "High Support",
+      pdpHeading: "Custom High-Support Sports Bra Manufacturer",
+      pdpDescription:
+        "High-support, full-coverage sports bra, custom and private label, in a Polyester/Spandex blend, 87% / 13%, closed with a back hook-and-eye or wide pull-over racerback, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "High-support sports bra, front view" },
+        { alt: "High-support sports bra, back closure detail" },
+        { alt: "High-support sports bra, side profile" },
+        { alt: "High-support sports bra, fabric close-up" },
+        { alt: "High-support sports bra, worn on model" },
+        { alt: "High-support sports bra, flat lay" },
+      ],
+      pdpMetaTitle: "Custom High-Support Sports Bra Manufacturer",
+      pdpMetaDescription:
+        "Custom high-support, full-coverage sports bra manufacturer, OEM, ODM and private label, back hook-and-eye or wide racerback, Polyester/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "Polyester/Spandex, 87% / 13%",
+      pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "What fabric is the high-support sports bra made from?",
+          a: "A Polyester/Spandex blend, 87% / 13%, matching the composition typical of comparable high-support builds from leading brands. We confirm the exact weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How is this different from your medium-support sports bra?",
+          a: "This is a high-support, full-coverage build with a wide compression band and a back hook-and-eye or wide racerback closure. Our medium-support sports bra uses a standard band and a simpler pull-over racerback or crossback closure, for lower-impact use.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Medium-Support Sports Bra", slug: "medium-support-full-coverage", href: "/capriowear/activewear/sports-bras" },
+        { label: "Wide-Band Sports Bra", slug: "wide-band", href: "/capriowear/activewear/sports-bras" },
+        { label: "Hook-and-Eye Sports Bra", slug: "hook-and-eye", href: "/capriowear/activewear/sports-bras" },
+        { label: "Crossback Sports Bra", slug: "crossback", href: "/capriowear/activewear/sports-bras" },
+        { label: "See All", href: "/capriowear/activewear/sports-bras" },
+      ],
+      specifications: [
+        { label: "Style", value: "High support, full coverage sports bra (base type)" },
+        { label: "Fabric", value: "Polyester/Spandex, 87% / 13%. Final composition confirmed on your sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Support and coverage", value: "High support, full coverage, not compression-only, not cutout or minimal" },
+        { label: "Closure", value: "Back hook-and-eye, or wide pull-over racerback as an alternative" },
+        { label: "Band", value: "Wide, structured compression band" },
+        { label: "Padding", value: "Molded, fixed cups" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape; flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "High-support sports bra, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Band checked for recovery under repeated wear",
+        "Back hook-and-eye closure checked for hold under movement",
+        "Molded cups checked for consistent shape across the size run",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 2 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1 above.
       status: "draft",
       slug: "medium-support-full-coverage",
       cardTitle: "Custom Medium-Support Sports Bra",
@@ -178,6 +259,76 @@ export const sportsBras: Category = {
       imageAlt: "Custom medium-support full-coverage sports bra manufacturer",
       href: "/capriowear/activewear/sports-bras/medium-support-full-coverage",
       sku: "CAP-SPB-02",
+      pdpTitle: "Medium Support",
+      pdpHeading: "Custom Medium-Support Sports Bra Manufacturer",
+      pdpDescription:
+        "Medium-support, full-coverage sports bra, custom and private label, in a recycled polyester blend, pull-over racerback closure, sewn-in fixed padding, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Medium-support sports bra, front view" },
+        { alt: "Medium-support sports bra, back racerback detail" },
+        { alt: "Medium-support sports bra, side profile" },
+        { alt: "Medium-support sports bra, fabric close-up" },
+        { alt: "Medium-support sports bra, worn on model" },
+        { alt: "Medium-support sports bra, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Medium-Support Sports Bra Manufacturer",
+      pdpMetaDescription:
+        "Custom medium-support, full-coverage sports bra manufacturer, OEM, ODM and private label, racerback or crossback, recycled polyester blend, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "Recycled polyester blend",
+      pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "What fabric is the medium-support sports bra made from?",
+          a: "A recycled polyester blend. We confirm the exact composition and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How is this different from your high-support sports bra?",
+          a: "This is a medium-support, full-coverage build with a standard band and a pull-over racerback closure, for everyday and moderate-impact training. Our high-support sports bra uses a wider compression band and a back hook-and-eye closure for higher-impact use.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "High-Support Sports Bra", slug: "high-support-full-coverage", href: "/capriowear/activewear/sports-bras" },
+        { label: "Low-Support Sports Bra", slug: "low-support-full-coverage", href: "/capriowear/activewear/sports-bras" },
+        { label: "Racerback Sports Bra", slug: "racerback", href: "/capriowear/activewear/sports-bras" },
+        { label: "Medium-Support Cutout Sports Bra", slug: "medium-support-cutout", href: "/capriowear/activewear/sports-bras" },
+        { label: "See All", href: "/capriowear/activewear/sports-bras" },
+      ],
+      specifications: [
+        { label: "Style", value: "Medium support, full coverage sports bra (base type)" },
+        { label: "Fabric", value: "Recycled polyester blend, exact composition pending confirmation on sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Support and coverage", value: "Medium support, full coverage, not high-impact, not cutout" },
+        { label: "Closure", value: "Pull-over racerback" },
+        { label: "Band", value: "Standard band" },
+        { label: "Padding", value: "Sewn-in, fixed" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape; flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Medium-support sports bra, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Band checked for recovery under repeated wear",
+        "Racerback closure checked for hold under movement",
+        "Sewn-in padding checked for consistent shape across the size run",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
