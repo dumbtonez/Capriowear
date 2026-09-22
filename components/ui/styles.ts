@@ -1464,9 +1464,10 @@ export const drawer = {
   contactGroup: "flex flex-col gap-1 mb-5",
   contactLabel: "text-[1.125rem] leading-[26px] text-[#838d97]",
   contactEmail: "text-h5 font-medium text-paper underline decoration-solid underline-offset-2",
-  // Left-aligned to match the contact block above it, not centred. `mb-6`
-  // (24px) to the CTA button below -- see `ctaWrap`'s own comment.
-  socialRow: "flex items-center justify-start gap-3 mb-6",
+  // Left-aligned to match the contact block above it, not centred. `mb-12`
+  // (48px) to the CTA button below (owner, 2026-09-22) -- see `ctaWrap`'s
+  // own comment.
+  socialRow: "flex items-center justify-start gap-3 mb-12",
   // Distinct from Footer's own `footer.social*` keys: 50px/dark-bg here vs.
   // Footer's 60px/light-bg -- two different confirmed Figma treatments of
   // the same three icons, not one shared recipe forced to cover both.
