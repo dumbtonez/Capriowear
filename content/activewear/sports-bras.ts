@@ -35,10 +35,11 @@ export const sportsBras: Category = {
   metaTitle: "Custom Sports Bra Manufacturer",
   metaDescription:
     "Custom sports bra manufacturer, OEM, ODM and private label, high to low support, full coverage to cutout and cage-back, removable padding, wholesale sports bras from 50 pieces, any fabric and color, DDP worldwide.",
+  // Owner correction, 2026-09-22: "remove the subline on the hero banner ...
+  // banner should be same as leggings" -- no heroSubline set, same
+  // 2-child (h1 + trustBullets) banner every other category renders, same
+  // trust-bullet spacing as Leggings.
   trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
-  // CategoryBanner's own new optional hero subline (owner spec, 2026-09-22
-  // -- see Category.heroSubline's own comment in ./types.ts).
-  heroSubline: "Custom from fabric to packaging, low MOQ to full bulk.",
   // The listing section heading is "Sports Bras" (menuLabel, rendered
   // separately by CategoryMetaStrip) + this subline.
   gridSubline: "every style, made to your brand spec",

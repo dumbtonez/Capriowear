@@ -145,7 +145,6 @@ export default async function CategoryPage({ params }: PageProps<"/capriowear/ac
             { label: data.menuLabel, href: `/capriowear/activewear/${data.slug}` },
           ]}
           h1={data.h1}
-          heroSubline={data.heroSubline}
           trustBullets={data.trustBullets}
         />
         {/* Structured data (SEO/AEO/GEO finalization pass, 2026-08-30):

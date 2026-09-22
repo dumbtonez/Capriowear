@@ -6385,11 +6385,6 @@ export const categoryBanner = {
   // wrap onto a second line; it cannot change how any existing, already
   // one-line-fitting H1 renders.
   h1: "text-[1.875rem] leading-[38px] font-normal text-paper md:text-[3.375rem] md:leading-[64px]",
-  // Optional line under h1 (owner spec, 2026-09-22, Sports Bras) -- same
-  // 1.25rem/28px size as trustBulletText below (this section's own existing
-  // secondary-text scale), solid text-paper rather than that row's muted
-  // #abb5c0 since this is primary supporting copy, not a secondary trust list.
-  subline: "text-[1.25rem] leading-[28px] font-normal text-paper",
   // max-xl: a single column, gap-4 (16px) -- mobile Figma stacks the 4 trust
   // bullets vertically (gap-[16px]), not the desktop's wrapped row. xl
   // keeps the original wrapped-row layout untouched.
