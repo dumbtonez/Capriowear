@@ -285,6 +285,104 @@ export const shorts: Category = {
       image: "",
       imageAlt: "Custom fitted training shorts manufacturer",
       href: "/capriowear/activewear/shorts/fitted-training",
+      // Full PDP content for SKU 2 (owner spec, 2026-09-22), draft, same
+      // shape as SKU 1. Reachable by URL and a clickable PLP card via the
+      // sitewide draft-PDP rule (`isDraftPdpReachable()`): still
+      // noindex/nofollow, out of the sitemap, no Product/FAQPage JSON-LD.
+      // Do not flip `status` to "published". No GSM or composition
+      // figure of any kind. `images` are alt-only placeholders: real
+      // product photography is needed before this can go live.
+      // `pdpFabricPills`/`pdpSpecHighlights` overrides match SKU 1's own.
+      pdpTitle: "Fitted Training",
+      pdpHeading: "Custom Fitted Training Shorts Manufacturer",
+      pdpDescription:
+        "Men's fitted athletic shorts, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 5 to 7 inch inseam, a closer training fit than our Athletic short, elastic waistband with drawcord, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Fitted training shorts, front view" },
+        { alt: "Fitted training shorts, waistband and drawcord detail" },
+        { alt: "Fitted training shorts, side profile" },
+        { alt: "Fitted training shorts, fabric close-up" },
+        { alt: "Fitted training shorts, worn on model" },
+        { alt: "Fitted training shorts, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Fitted Training Shorts Manufacturer",
+      pdpMetaDescription:
+        "Custom fitted training shorts manufacturer, OEM, ODM and private label, 5 to 7 inch inseam, closer athletic fit, Polyester/Spandex or Nylon/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes (plus waist-inch sizing)" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the fitted training short made from?",
+          a: "A Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, in the composition range typical of comparable fitted training shorts. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How is this different from your Athletic short?",
+          a: "This is a closer, more fitted cut through the leg and seat, at the same 5 to 7 inch inseam as our Athletic short. It sits between that standard athletic-regular fit and a closer compression build.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Athletic Shorts", slug: "athletic-regular", href: "/capriowear/activewear/shorts" },
+        { label: "Relaxed Shorts", slug: "relaxed-mid", href: "/capriowear/activewear/shorts" },
+        { label: "Baggy Shorts", slug: "baggy", href: "/capriowear/activewear/shorts" },
+        { label: "2-in-1 Shorts", slug: "2-in-1", href: "/capriowear/activewear/shorts" },
+        { label: "See All", href: "/capriowear/activewear/shorts" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value:
+            "Men's fitted athletic short, closer cut than our Athletic-Regular style, not compression, not baggy, 5 to 7 inch inseam (base type)",
+        },
+        {
+          label: "Fabric",
+          value:
+            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
+        },
+        // Weight row wording simplified sitewide (owner correction,
+        // 2026-09-22, applied first on SKU 1): "Pending, confirmed on
+        // your sample." only, not the longer disclaimer version.
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        {
+          label: "Stretch and support",
+          value: "Closer, fitted athletic cut, not a compression fit. Sits between our Athletic short and a closer-still compression build.",
+        },
+        { label: "Waistband", value: "Standard elastic waistband with drawcord closure, side vent or split at the hem" },
+        {
+          label: "Construction",
+          value: "Cut-and-sew, elastic waistband with drawcord, side vent detail, not knit-to-shape, flatlock finishing available",
+        },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Fitted training shorts, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Drawcord and eyelets checked for secure anchoring and pull strength",
+        "Side vents checked for consistent finish across the size run",
+        "Waistbands hold their recovery",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Polyester/Spandex or Nylon/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
