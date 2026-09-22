@@ -12,14 +12,12 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import { Logo } from "@/components/Logo";
+import { ActivewearListing } from "@/components/sections/ActivewearListing";
 import { CategoryBanner } from "@/components/sections/CategoryBanner";
-import { CategoryFilters } from "@/components/sections/CategoryFilters";
-import { CategoryMetaStrip } from "@/components/sections/CategoryMetaStrip";
 import { FabricOptions } from "@/components/sections/FabricOptions";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
-import { ProductGrid } from "@/components/sections/ProductGrid";
 import { FINAL_CTA_MARKER_ID, ProductCtasMobileBar } from "@/components/sections/ProductCtas";
 import { TrustPoints } from "@/components/sections/TrustPoints";
 import { WhatWeCover } from "@/components/sections/WhatWeCover";
@@ -187,64 +185,40 @@ export default async function CategoryPage({ params }: PageProps<"/capriowear/ac
             )}
           />
         ) : null}
-        {/* container-p wrapper here, not inside CategoryMetaStrip/
-            CategoryFilters/ProductGrid themselves -- all three are reusable
-            pieces sharing this one page margin, not each carrying their
-            own. CategoryMetaStrip renders full-width for layout purposes
-            (its chip row is flush with the page's own right margin, same
-            edge as the grid's own right edge), but its own text block is
-            indented past the sidebar at xl -- Figma (node 406:3075,
-            re-checked 2026-08-29) positions this row's text starting at
-            the SAME x as the product grid (x=380, i.e. 252px sidebar +
-            48px gap past the container's own left edge), with nothing
-            above the "Categories" panel. See CategoryMetaStrip's own
-            header comment. */}
+        {/* container-p wrapper here, not inside ActivewearListing's own
+            pieces themselves -- CategoryMetaStrip/CategoryFilters/
+            ProductGrid are reusable pieces sharing this one page margin,
+            not each carrying their own. CategoryMetaStrip renders
+            full-width for layout purposes (its chip row is flush with the
+            page's own right margin, same edge as the grid's own right
+            edge), but its own text block is indented past the sidebar at
+            xl -- Figma (node 406:3075, re-checked 2026-08-29) positions
+            this row's text starting at the SAME x as the product grid
+            (x=380, i.e. 252px sidebar + 48px gap past the container's own
+            left edge), with nothing above the "Categories" panel. See
+            CategoryMetaStrip's own header comment.
+            ActivewearListing.tsx (owner spec, Shorts, 2026-09-22) is a
+            thin client wrapper around CategoryMetaStrip + the
+            CategoryFilters/ProductGrid row below it -- the All/Women/Men
+            chip row now actually filters the grid, which needs state
+            shared between those two previously-independent siblings; see
+            that file's own header comment. The flex-col/xl:flex-row row
+            layout, the gap-8/xl:gap-12 spacing, and id="plp-listing"
+            (watched by CategoryFilters.tsx's own mobile Filter FAB via
+            IntersectionObserver) all moved into that component unchanged
+            -- this is a pure state-lifting refactor, no layout change. */}
         <div className="container-p">
-          <CategoryMetaStrip
+          <ActivewearListing
+            slug={data.slug}
             categoryLabel={data.menuLabel}
             categorySubline={data.gridSubline}
             categorySublineMobile={data.gridSublineMobile}
             showGenderFilter={data.showGenderFilter}
             defaultChip={data.defaultGenderFilter}
+            cards={data.styleCards.map((card) =>
+              isDraftPdpReachable(card) ? { ...card, internalPreview: true } : card,
+            )}
           />
-          {/* flex-col below xl, flex-row at xl -- no mobile Figma frame
-              exists for this row yet (CategoryFilters' own fixed 252px width
-              plus ProductGrid's 3-column grid has no graceful shrink the way
-              CategoryBanner's wrapping text does), so this is a safe
-              structural fallback, not an invented mobile design: stacking
-              the sidebar above the grid, rather than beside it, is what
-              keeps every real value (252px sidebar, product card ratios)
-              exactly as Figma specifies instead of guessing at responsive
-              sizes nothing has confirmed yet. gap-8 (32px) below xl (stacked,
-              vertical spacing, no Figma frame to check against); xl:gap-12
-              (48px) at desktop -- Figma's own gap between the Filters and
-              Products List frames (node 561:4684), corrected from a
-              previously-unchecked 32px.
-              Bottom padding down to the section divider below is 24px on
-              mobile (owner report, 2026-08-30: "the separator under the
-              pagination should have 24px gap only"), was pb-14 (56px) at
-              every breakpoint -- xl keeps that confirmed desktop value.
-              id="plp-listing" (internal review, 2026-08-30): the mobile
-              Filter FAB (CategoryFilters.tsx) watches this element via
-              IntersectionObserver to know when it should show itself --
-              see that file's own comment for the bug this fixes (the FAB
-              was `position: fixed` with no scoping at all, so it floated
-              over every section on the page, including the Footer's own
-              social links, not just this listing area). */}
-          <div id="plp-listing" className="flex flex-col gap-8 max-xl:pb-6 xl:pb-14 xl:flex-row xl:gap-12">
-            <CategoryFilters activeSlug={data.slug} />
-            {/* key={data.slug}: ProductGrid holds its own page-number
-                client state -- keying by category forces a full remount
-                on navigation instead of reusing a stale page index
-                against a different category's (possibly shorter)
-                card list. */}
-            <ProductGrid
-              key={data.slug}
-              cards={data.styleCards.map((card) =>
-                isDraftPdpReachable(card) ? { ...card, internalPreview: true } : card,
-              )}
-            />
-          </div>
         </div>
 
         {/* Section divider (owner request, 2026-08-30): 56px gap above

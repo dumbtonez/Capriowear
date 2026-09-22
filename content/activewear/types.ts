@@ -68,6 +68,17 @@ export type StyleCard = {
   /** Root-relative, e.g. "/capriowear/activewear/leggings/high-waisted-compression". */
   href: string;
   /**
+   * Which chip in CategoryMetaStrip's own All/Women/Men row this card
+   * belongs to (owner spec, Shorts, 2026-09-22: the chip row must actually
+   * filter the grid, not just restyle itself -- see `Category.
+   * showGenderFilter`'s own comment for the prior cosmetic-only state).
+   * Optional and unset on every category built before Shorts: a card with
+   * no `gender` shows under every chip, so this is a strictly additive
+   * capability with no regression for those categories. `ActivewearListing.
+   * tsx` reads this to filter `ProductGrid`'s own `cards` prop.
+   */
+  gender?: "Women" | "Men";
+  /**
    * The PDP's own product name, e.g. "High-Waisted Compression" (Figma node
    * 634:4952, breadcrumb) -- a real design confirmed this differs from
    * `cardTitle` (the grid's own shorter label, "High Waist Leggings"), so

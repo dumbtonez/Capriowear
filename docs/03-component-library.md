@@ -1542,7 +1542,18 @@ Title/subline alignment and subline colour carry over unchanged from the pre-spl
 
 **`subline` now uses the `text-subline` token (`#17191E`)**, not `text-ink` (2026-09-01, see `docs/02-design-system.md`'s Colour section and the decision log) — the same sitewide title+subline colour rule applied to `TrustPoints`' own subline the same day.
 
-**Used by:** `app/activewear/[category]/page.tsx`, directly above the `CategoryFilters`/`ProductGrid` row.
+**Used by:** `app/activewear/[category]/page.tsx`, indirectly via `ActivewearListing` (below); `app/boxing-and-mma/[category]/page.tsx`, `app/lifting-gears/[category]/page.tsx`, `app/capriowear/teamwear/[sport]/page.tsx`, `app/capriowear/activewear/running-wear/page.tsx`, and `app/styleguide/page.tsx` still call it directly, uncontrolled.
+
+**Gained optional controlled-mode props, `activeChip`/`onChipChange`, 2026-09-22 (owner spec, Shorts: the All/Women/Men chips must actually filter the grid, not just restyle themselves)**. Previously the chip row owned its own `useState` internally with no way for a sibling to read the selection. Now: pass both props and the component is fully controlled (its own internal state is unused); pass neither and it falls back to the original internal `useState` (`defaultChip`, unchanged). Only `ActivewearListing.tsx` passes the controlled props today — the other 4 route templates and the styleguide keep calling this uncontrolled and render byte-identically to before.
+
+### ActivewearListing — Built
+`components/sections/ActivewearListing.tsx`
+
+Thin client wrapper (owner spec, Shorts, 2026-09-22) around `CategoryMetaStrip` + the `CategoryFilters`/`ProductGrid` row: owns the `activeGender` selection that those two need to share (they were independent server-mounted siblings with no shared parent state) and filters `ProductGrid`'s own `cards` prop by each card's `StyleCard.gender` (`content/activewear/types.ts`, new optional field: `"Women" | "Men" | undefined`). A card with no `gender` set shows under every chip — every category built before Shorts leaves this field unset on every card, so this is a strictly additive capability with zero behavior change for them (confirmed live on Sports Bras). `ProductGrid` is keyed on `` `${slug}-${activeGender}` ``, extending the pre-existing remount-on-slug pagination-reset pattern to also reset on a filter change.
+
+Props: `slug`, `categoryLabel`, `categorySubline`, `categorySublineMobile`, `showGenderFilter?`, `defaultChip?`, `cards: StyleCard[]` — the same set `app/capriowear/activewear/[category]/page.tsx` used to pass to `CategoryMetaStrip` and `ProductGrid` directly. Renders in the exact same DOM positions/markup those two occupied before (same `container-p`/`#plp-listing` structure) — a pure state-lifting refactor, no layout change.
+
+**Used by:** `app/capriowear/activewear/[category]/page.tsx` only. The other 4 route templates that reuse `CategoryMetaStrip`/`ProductGrid` (Boxing/MMA, Lifting Gears, Teamwear, Running Wear) were not touched — none of their content files set a per-card `gender`, so nothing there needs this wrapper yet.
 
 ### RelatedCategories — Built, not currently used on the PLP
 `components/sections/RelatedCategories.tsx` · recipe: `relatedCategories`

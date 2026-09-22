@@ -39,8 +39,22 @@ export type CategoryMetaStripProps = {
    * Which chip starts active (owner spec, 2026-09-03, Bodysuits: "default
    * Women, women's-led category") -- see `Category.defaultGenderFilter`'s
    * own comment. Defaults to "All", every category's own prior behavior.
+   * Ignored once `activeChip` (controlled mode, below) is passed.
    */
   defaultChip?: string;
+  /**
+   * Controlled mode (owner spec, Shorts, 2026-09-22): `ActivewearListing.
+   * tsx` passes `activeChip`/`onChipChange` so the chip row's selection can
+   * actually filter `ProductGrid`'s own `cards` prop, a sibling this
+   * component has no direct relationship with -- see that file's own
+   * comment. Every other call site (boxing-and-mma, lifting-gears,
+   * teamwear, running-wear, the styleguide) still renders this
+   * uncontrolled, passing neither prop, and keeps its pre-existing
+   * cosmetic-only behavior via the internal `useState` fallback below.
+   */
+  activeChip?: string;
+  /** Required alongside `activeChip` for controlled mode; unused otherwise. */
+  onChipChange?: (chip: string) => void;
 };
 
 const FILTER_CHIPS = ["All", "Women", "Men"];
@@ -51,8 +65,12 @@ export function CategoryMetaStrip({
   categorySublineMobile,
   showGenderFilter = true,
   defaultChip = "All",
+  activeChip: controlledChip,
+  onChipChange,
 }: CategoryMetaStripProps) {
-  const [activeChip, setActiveChip] = useState(defaultChip);
+  const [uncontrolledChip, setUncontrolledChip] = useState(defaultChip);
+  const activeChip = controlledChip ?? uncontrolledChip;
+  const setActiveChip = onChipChange ?? setUncontrolledChip;
 
   return (
     // id targeted by ProductGrid.tsx's own pagination scroll-to-top --
