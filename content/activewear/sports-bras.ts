@@ -153,10 +153,10 @@ export const sportsBras: Category = {
   // once sampled, photographed, and confirmed real, same rule every other
   // category's draft cards already follow. No `gender` field on any card
   // (women's-only category, nothing to filter). SKU 1 (CAP-SPB-01) through
-  // SKU 9 (CAP-SPB-09) got full PDP content 2026-09-22 (owner spec) --
+  // SKU 12 (CAP-SPB-12) got full PDP content 2026-09-22 (owner spec) --
   // reachable by URL and a clickable PLP card via `isDraftPdpReachable()`,
   // still noindex/nofollow, out of the sitemap, no Product/FAQPage
-  // JSON-LD. The other 6 cards are card-only, no PDP content.
+  // JSON-LD. The other 3 cards are card-only, no PDP content.
   styleCards: [
     {
       // Full PDP content for SKU 1 (owner spec, 2026-09-22), draft.
@@ -904,6 +904,12 @@ export const sportsBras: Category = {
       },
     },
     {
+      // Full PDP content for SKU 10 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1 to 9 above. No blend name in the Fabric row --
+      // the locked reference doesn't disclose composition, none estimated.
+      // Note (owner): shares its locked reference product with SKU 7, but
+      // is a distinct construction-feature SKU (band, not closure) --
+      // copy kept differentiated, not merged or treated as a duplicate.
       status: "draft",
       slug: "wide-band",
       cardTitle: "Custom Wide-Band Sports Bra",
@@ -911,8 +917,79 @@ export const sportsBras: Category = {
       image: "",
       imageAlt: "Custom wide-band sports bra manufacturer",
       href: "/capriowear/activewear/sports-bras/wide-band",
+      sku: "CAP-SPB-10",
+      pdpTitle: "Wide Band",
+      pdpHeading: "Custom Wide-Band Sports Bra Manufacturer",
+      pdpDescription:
+        "High-support sports bra with a wide, structured compression band, custom and private label, molded padding, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Wide-band sports bra, front view" },
+        { alt: "Wide-band sports bra, band detail" },
+        { alt: "Wide-band sports bra, back view" },
+        { alt: "Wide-band sports bra, fabric close-up" },
+        { alt: "Wide-band sports bra, worn on model" },
+        { alt: "Wide-band sports bra, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Wide-Band Sports Bra Manufacturer",
+      pdpMetaDescription:
+        "Custom wide-band sports bra manufacturer, structured compression band for high-support builds, OEM, ODM and private label, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "What fabric is the wide-band sports bra made from?",
+          a: "We confirm the exact composition and weight on your sample, matched to your reference if you have one. Standard offering runs Nylon/Spandex or Polyester/Spandex blends.",
+        },
+        {
+          q: "Why does a wide band matter for support?",
+          a: "A wider, more structured band spreads compression across more of the ribcage, which is why it's the primary stability mechanism on our highest-support builds, distinct from a standard narrow band on our medium- and low-support styles.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "High-Support Sports Bra", slug: "high-support-full-coverage", href: "/capriowear/activewear/sports-bras" },
+        { label: "Hook-and-Eye Sports Bra", slug: "hook-and-eye", href: "/capriowear/activewear/sports-bras" },
+        { label: "Cage-Back Sports Bra", slug: "cage-back", href: "/capriowear/activewear/sports-bras" },
+        { label: "See All", href: "/capriowear/activewear/sports-bras" },
+      ],
+      specifications: [
+        { label: "Style", value: "High support sports bra with wide compression band (construction-feature base type)" },
+        { label: "Fabric", value: "Composition pending confirmation on sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Support and coverage", value: "High support, full coverage" },
+        { label: "Closure", value: "Back hook-and-eye, or wide pull-over racerback as an alternative" },
+        { label: "Band", value: "Wide, structured compression band" },
+        { label: "Padding", value: "Molded, fixed cups" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape; flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Wide-band sports bra, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Wide band checked for recovery and stability under repeated wear",
+        "Molded cups checked for consistent shape across the size run",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 11 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1 to 10 above. No blend name in the Fabric row --
+      // the locked reference doesn't disclose composition, none estimated.
       status: "draft",
       slug: "cage-back",
       cardTitle: "Custom Cage-Back Sports Bra",
@@ -920,8 +997,83 @@ export const sportsBras: Category = {
       image: "",
       imageAlt: "Custom cage-back sports bra manufacturer",
       href: "/capriowear/activewear/sports-bras/cage-back",
+      sku: "CAP-SPB-11",
+      pdpTitle: "Cage-Back",
+      pdpHeading: "Custom Cage-Back Sports Bra Manufacturer",
+      pdpDescription:
+        "Low-support sports bra with a multi-strap cage or crisscross back detail, custom and private label, removable padding, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Cage-back sports bra, front view" },
+        { alt: "Cage-back sports bra, cage strap detail" },
+        { alt: "Cage-back sports bra, back view" },
+        { alt: "Cage-back sports bra, fabric close-up" },
+        { alt: "Cage-back sports bra, worn on model" },
+        { alt: "Cage-back sports bra, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Cage-Back Sports Bra Manufacturer",
+      pdpMetaDescription:
+        "Custom cage-back sports bra manufacturer, multi-strap cage or crisscross back detail, OEM, ODM and private label, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "What fabric is the cage-back sports bra made from?",
+          a: "We confirm the exact composition and weight on your sample, matched to your reference if you have one. Standard offering runs Nylon/Spandex or Polyester/Spandex blends.",
+        },
+        {
+          q: "How is cage-back different from crossback?",
+          a: "A cage-back uses multiple straps in a cage or crisscross arrangement across the back, a more fashion-forward detail. A crossback uses just two straps crossing once, usually with a single keyhole cutout. We offer both as separate construction options.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Minimal-Coverage Sports Bra", slug: "minimal-coverage", href: "/capriowear/activewear/sports-bras" },
+        { label: "Crossback Sports Bra", slug: "crossback", href: "/capriowear/activewear/sports-bras" },
+        { label: "Low-Support Cutout Sports Bra", slug: "low-support-cutout", href: "/capriowear/activewear/sports-bras" },
+        { label: "See All", href: "/capriowear/activewear/sports-bras" },
+      ],
+      specifications: [
+        { label: "Style", value: "Low support sports bra with cage-back strap detail (construction-feature base type)" },
+        { label: "Fabric", value: "Composition pending confirmation on sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Support and coverage", value: "Low support, minimal to full coverage depending on base silhouette" },
+        { label: "Closure", value: "Pull-over" },
+        { label: "Band", value: "Standard band" },
+        { label: "Padding", value: "Removable, foam insert" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape; flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Cage-back sports bra, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Band checked for recovery under repeated wear",
+        "Cage-back straps checked for hold and even tension under movement",
+        "Removable pad pocket checked for a secure, snag-free fit",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 12 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1 to 11 above. No blend name in the Fabric row --
+      // the locked reference doesn't disclose composition, none estimated.
+      // Note (owner): shares its reference family with SKU 2, but is a
+      // distinct construction-feature SKU (fixed racerback, non-padded) --
+      // copy kept differentiated, not merged or treated as a duplicate.
       status: "draft",
       slug: "racerback",
       cardTitle: "Custom Racerback Sports Bra",
@@ -929,6 +1081,74 @@ export const sportsBras: Category = {
       image: "",
       imageAlt: "Custom racerback sports bra manufacturer",
       href: "/capriowear/activewear/sports-bras/racerback",
+      sku: "CAP-SPB-12",
+      pdpTitle: "Racerback",
+      pdpHeading: "Custom Racerback Sports Bra Manufacturer",
+      pdpDescription:
+        "Medium-support sports bra with a fixed, wide racerback panel, custom and private label, non-padded construction, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Racerback sports bra, front view" },
+        { alt: "Racerback sports bra, racerback panel detail" },
+        { alt: "Racerback sports bra, back view" },
+        { alt: "Racerback sports bra, fabric close-up" },
+        { alt: "Racerback sports bra, worn on model" },
+        { alt: "Racerback sports bra, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Racerback Sports Bra Manufacturer",
+      pdpMetaDescription:
+        "Custom racerback sports bra manufacturer, fixed wide racerback panel, OEM, ODM and private label, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "What fabric is the racerback sports bra made from?",
+          a: "We confirm the exact composition and weight on your sample, matched to your reference if you have one. Standard offering runs Nylon/Spandex or Polyester/Spandex blends.",
+        },
+        {
+          q: "Can I add padding to the racerback sports bra?",
+          a: "Yes. This base build is non-padded, single-lined construction, but we can apply sewn-in fixed padding, molded fixed cups, or a removable pad pocket to the same racerback silhouette on request.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Medium-Support Sports Bra", slug: "medium-support-full-coverage", href: "/capriowear/activewear/sports-bras" },
+        { label: "Crossback Sports Bra", slug: "crossback", href: "/capriowear/activewear/sports-bras" },
+        { label: "Cage-Back Sports Bra", slug: "cage-back", href: "/capriowear/activewear/sports-bras" },
+        { label: "See All", href: "/capriowear/activewear/sports-bras" },
+      ],
+      specifications: [
+        { label: "Style", value: "Medium support sports bra with fixed racerback panel (construction-feature base type)" },
+        { label: "Fabric", value: "Composition pending confirmation on sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Support and coverage", value: "Medium support, full coverage" },
+        { label: "Closure", value: "Pull-over" },
+        { label: "Band", value: "Standard band" },
+        { label: "Padding", value: "None, single-lined construction" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape; flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Racerback sports bra, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Band checked for recovery under repeated wear",
+        "Racerback panel checked for hold under movement",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
