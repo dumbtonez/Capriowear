@@ -160,15 +160,13 @@ export const shorts: Category = {
   ctaReferenceNoun: "pair of shorts",
   // 14 styles, 7 men's (CAP-SHO-01 to 07) then 7 women's (CAP-SHO-08 to
   // 14), every one "draft" (owner spec, 2026-09-22): real name, one-line
-  // spec, and a `gender` tag for the chip-row filter, no PDP content yet.
-  // Shows on the grid as a non-clickable tile (no hover image swap either,
-  // since no `images` array is set -- see ProductCardMedia.tsx's own
-  // contract), no generated route, excluded from the sitemap and this
-  // category's own ItemList schema. SKU 1 additionally carries its real
-  // `sku` code ahead of its own PDP content hand-off in a later pass, but
-  // stays "draft" (non-clickable) in this pass -- do not flip it, and do
-  // not invent PDP-only fields (pdpTitle, pdpDescription, gallery, etc.)
-  // for it or any other card here.
+  // spec, and a `gender` tag for the chip-row filter. Shows on the grid as
+  // a non-clickable tile (no hover image swap either, since no `images`
+  // array is set -- see ProductCardMedia.tsx's own contract), no
+  // generated route, excluded from the sitemap and this category's own
+  // ItemList schema. Only SKU 1 has real PDP content (below) -- do not
+  // flip any status to "published", and do not invent PDP-only fields
+  // (pdpTitle, pdpDescription, gallery, etc.) for any other card here.
   styleCards: [
     {
       status: "draft",
@@ -180,6 +178,103 @@ export const shorts: Category = {
       image: "",
       imageAlt: "Custom athletic shorts manufacturer",
       href: "/capriowear/activewear/shorts/athletic-regular",
+      // Full PDP content for SKU 1 (owner spec, 2026-09-22), draft.
+      // Reachable by URL and a clickable PLP card via the sitewide
+      // draft-PDP rule (`isDraftPdpReachable()`, gated on `pdpHeading` +
+      // `specifications` both being set): still noindex/nofollow, out of
+      // the sitemap, no Product/FAQPage JSON-LD -- BreadcrumbList only.
+      // Do not flip `status` to "published". No GSM or composition
+      // figure of any kind (weight and fabric composition are both
+      // "pending, confirmed on your sample"). `images` are alt-only
+      // placeholders: real product photography is needed before this can
+      // go live. `pdpFabricPills`/`pdpSpecHighlights` override the
+      // category-level defaults with this style's own exact given
+      // wording (slash fabric names, waist-inch sizing note) rather than
+      // editing the shared `fabricPills`/`pdpSpecHighlights` every future
+      // SKU on this category will also fall back to.
+      pdpTitle: "Athletic/Regular",
+      pdpHeading: "Custom Athletic Shorts Manufacturer",
+      pdpDescription:
+        "Men's athletic-regular fit shorts, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 5 to 7 inch inseam, elastic waistband with drawcord, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Athletic shorts, front view" },
+        { alt: "Athletic shorts, waistband and drawcord detail" },
+        { alt: "Athletic shorts, side profile" },
+        { alt: "Athletic shorts, fabric close-up" },
+        { alt: "Athletic shorts, worn on model" },
+        { alt: "Athletic shorts, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Athletic Shorts Manufacturer",
+      pdpMetaDescription:
+        "Custom athletic-regular fit shorts manufacturer, OEM, ODM and private label, 5 to 7 inch inseam, elastic waistband with drawcord, Polyester/Spandex or Nylon/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes (plus waist-inch sizing)" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the athletic-regular short made from?",
+          a: "A Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, in the composition range typical of comparable athletic training shorts. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How is this different from your fitted training short?",
+          a: "This is a standard athletic-regular cut, not a close-to-body compression fit. It sits between our Fitted Training Shorts and our Relaxed Shorts in how close it sits to the leg.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted Training Shorts", slug: "fitted-training", href: "/capriowear/activewear/shorts" },
+        { label: "Relaxed Shorts", slug: "relaxed-mid", href: "/capriowear/activewear/shorts" },
+        { label: "Baggy Shorts", slug: "baggy", href: "/capriowear/activewear/shorts" },
+        { label: "2-in-1 Shorts", slug: "2-in-1", href: "/capriowear/activewear/shorts" },
+        { label: "See All", href: "/capriowear/activewear/shorts" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Men's athletic-regular fit short, not compression, not baggy, 5 to 7 inch inseam (base type)",
+        },
+        {
+          label: "Fabric",
+          value:
+            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample. No number, no estimate, no GSM figure of any kind." },
+        { label: "Stretch and support", value: "Athletic-regular fit, not compression, not baggy. A standard mid-weight training and running short." },
+        { label: "Waistband", value: "Standard elastic waistband with drawcord closure, side vent or split at the hem" },
+        {
+          label: "Construction",
+          value: "Cut-and-sew, elastic waistband with drawcord, side vent detail, not knit-to-shape, flatlock finishing available",
+        },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Athletic shorts, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Drawcord and eyelets checked for secure anchoring and pull strength",
+        "Side vents checked for consistent finish across the size run",
+        "Waistbands hold their recovery",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Polyester/Spandex or Nylon/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",

@@ -320,7 +320,7 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
               content's intrinsic width. */}
           <div className="flex w-full min-w-0 flex-col gap-8 xl:w-[514px] xl:flex-none">
             <ProductInfo sku={data.product.sku} heading={heading} description={description} />
-            <ProductHighlights items={pdpSpecHighlights} />
+            <ProductHighlights items={data.product.pdpSpecHighlights ?? pdpSpecHighlights} />
             {/* ProductOptions (node 634:5034/645:2905, 2026-09-01) --
                 "Fabric options" (category-level, `data.category.fabricPills`)
                 + "Customization" (shared across every PDP,
