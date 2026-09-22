@@ -241,7 +241,7 @@ export const shorts: Category = {
           value:
             "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
         },
-        { label: "Weight", value: "Pending, confirmed on your sample. No number, no estimate, no GSM figure of any kind." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Stretch and support", value: "Athletic-regular fit, not compression, not baggy. A standard mid-weight training and running short." },
         { label: "Waistband", value: "Standard elastic waistband with drawcord closure, side vent or split at the hem" },
         {
