@@ -143,8 +143,9 @@ export default async function SportPage({ params }: PageProps<"/capriowear/teamw
           <div className="h-px bg-[#e8ecf1] xl:mb-[120px]" />
         </div>
 
-        <WhatWeCover eyebrow={data.coverageEyebrow} heading={data.coverageHeading} items={data.coverageItems} />
-        <TrustPoints heading={data.qualityHeading} subline={data.qualitySubline} points={data.qualityPoints} />
+        {/* Order: Fabric options -> Customization -> Trust/proof (owner
+            spec, 2026-09-22, site-wide PLP reorder -- see the Activewear
+            category route's own comment on this same change). */}
         <FabricOptions
           eyebrow={data.fabricEyebrow!}
           heading={data.fabricHeading!}
@@ -154,6 +155,8 @@ export default async function SportPage({ params }: PageProps<"/capriowear/teamw
           structuredBlock={data.structuredBlock}
           note={data.fabricNote!}
         />
+        <WhatWeCover eyebrow={data.coverageEyebrow} heading={data.coverageHeading} items={data.coverageItems} />
+        <TrustPoints heading={data.qualityHeading} subline={data.qualitySubline} points={data.qualityPoints} />
 
         <Faq content={{ h2: data.faqHeading, items: faqItems }} />
         <JsonLd data={faqSchema(faqItems)} />

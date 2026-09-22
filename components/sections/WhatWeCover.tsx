@@ -17,6 +17,7 @@
 // as one flat list of 6 rather than 3 explicit row pairs.
 import { MediaPlaceholder } from "@/components/MediaPlaceholder";
 import { TextReveal } from "@/components/TextReveal";
+import { cx } from "@/components/ui/cx";
 import { whatWeCover } from "@/components/ui/styles";
 import type { CoverageItem } from "@/content/activewear/types";
 
@@ -24,11 +25,21 @@ export type WhatWeCoverProps = {
   eyebrow: string;
   heading: string;
   items: CoverageItem[];
+  /**
+   * True only for a template where this section genuinely renders first,
+   * with nothing above it but the page-level divider (running-wear, no
+   * FabricOptions section) -- owner spec, 2026-09-22, site-wide PLP
+   * reorder: every other template now leads with FabricOptions instead,
+   * so this section's own top padding assumes something real precedes it
+   * (`whatWeCover.section`'s own "middle role" comment). Defaults to
+   * `false`; every other call site is unaffected.
+   */
+  leading?: boolean;
 };
 
-export function WhatWeCover({ eyebrow, heading, items }: WhatWeCoverProps) {
+export function WhatWeCover({ eyebrow, heading, items, leading = false }: WhatWeCoverProps) {
   return (
-    <section className={whatWeCover.section}>
+    <section className={cx(leading ? whatWeCover.sectionLeading : whatWeCover.section)}>
       <div className={whatWeCover.headingBlock}>
         <p className={whatWeCover.eyebrow}>
           <TextReveal text={eyebrow} />

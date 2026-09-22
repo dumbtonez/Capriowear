@@ -138,12 +138,16 @@ export default function RunningWearPage() {
         </div>
 
         {/* No FabricOptions section (deliberate) -- see this file's own
-            header comment. WhatWeCover/TrustPoints order matches every
-            category PLP's own (see that file's own comment for why). */}
+            header comment. WhatWeCover leads here (no Fabric section to
+            put ahead of it), unlike every other category PLP after the
+            2026-09-22 reorder -- `leading` swaps in that role's own
+            padding (WhatWeCover.tsx's own comment, whatWeCover.
+            sectionLeading in components/ui/styles.ts). */}
         <WhatWeCover
           eyebrow={data.coverageEyebrow}
           heading={data.coverageHeading}
           items={data.coverageItems}
+          leading
         />
         <TrustPoints heading={data.qualityHeading} subline={data.qualitySubline} points={data.qualityPoints} />
 

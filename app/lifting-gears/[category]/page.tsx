@@ -176,10 +176,19 @@ export default async function LiftingGearsCategoryPage({ params }: PageProps<"/l
             element still reserving space. */}
         {data.comparisonTable ? <ComparisonTable content={data.comparisonTable} /> : null}
 
-        <WhatWeCover eyebrow={data.coverageEyebrow} heading={data.coverageHeading} items={data.coverageItems} />
-        <TrustPoints heading={data.qualityHeading} subline={data.qualitySubline} points={data.qualityPoints} />
-        {/* Optional -- a category with no fabric-options table (e.g. Wraps,
-            Straps & Sleeves, which uses `specTables` below instead) omits
+        {/* Order: Fabric options -> Customization -> Trust/proof (owner
+            spec, 2026-09-22, site-wide PLP reorder -- see the Activewear
+            category route's own comment on this same change). Safe to
+            move ahead of WhatWeCover unconditionally: no lifting-gears
+            category sets both `comparisonTable` and `fabricOptions` (the
+            two categories with `comparisonTable` -- Gloves & Grips,
+            Wraps/Straps/Sleeves -- both leave `fabricOptions` unset, so
+            this block still renders nothing for them and the flush
+            ComparisonTable->WhatWeCover gap above is unaffected; only
+            Weight Lifting Belts, which has no `comparisonTable`, actually
+            gains a real FabricOptions section here). Optional -- a
+            category with no fabric-options table (e.g. Wraps, Straps &
+            Sleeves, which uses `specTables` below instead) omits
             `fabricOptions` entirely and renders nothing here. */}
         {data.fabricOptions ? (
           <FabricOptions
@@ -193,6 +202,20 @@ export default async function LiftingGearsCategoryPage({ params }: PageProps<"/l
             note={data.fabricNote!}
           />
         ) : null}
+        {/* `leading` when `fabricOptions` is unset: the block above then
+            renders nothing, so this section is effectively first here too
+            (same as running-wear), and needs that role's own padding
+            (WhatWeCover.tsx's own comment) instead of assuming a real
+            Fabric section precedes it -- otherwise the flush Comparison
+            Table->WhatWeCover gap above breaks for Gloves & Grips and
+            Wraps/Straps/Sleeves specifically. */}
+        <WhatWeCover
+          eyebrow={data.coverageEyebrow}
+          heading={data.coverageHeading}
+          items={data.coverageItems}
+          leading={!data.fabricOptions}
+        />
+        <TrustPoints heading={data.qualityHeading} subline={data.qualitySubline} points={data.qualityPoints} />
         {/* Optional array of standalone spec tables (owner spec, 2026-09-16,
             Wraps, Straps & Sleeves) -- every other category leaves
             `specTables` unset and renders nothing extra here. */}

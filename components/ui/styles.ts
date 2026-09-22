@@ -7323,16 +7323,25 @@ export const whatWeCover = {
   // Now the MIDDLE of the 3 sections (order swapped again, owner spec
   // 2026-09-22: "Fabric options -> Customization -> Trust/proof", site-
   // wide, reverting the 2026-08-30 "this 1st" order -- FabricOptions
-  // leads now). Middle-role padding: no top padding of its own at mobile
-  // (FabricOptions' own new mobile pb-[72px] above already supplies that
-  // gap), `pb-[72px]` at mobile (hands the gap down to TrustPoints,
-  // unchanged value from the 2026-08-30 swap, just now owned by this
-  // section's own bottom instead of the top). At xl this section now
-  // owns the FIRST->MIDDLE gap itself via its own `xl:pt-[120px]` (was
-  // FabricOptions' partner TrustPoints owning that value when this
-  // section led; the number itself, 120px, carries over unchanged), with
-  // `xl:pb-0` (TrustPoints, now last, owns the gap below via its own
-  // top padding instead).
+  // leads now). Middle-role padding, own top only (own bottom stays 0 --
+  // TrustPoints, now last, owns the gap below via its own top padding):
+  // own top gap set to 154px (owner spec, 2026-09-22, "make customization
+  // 154" -- was 120px) at both `md:` (tablet, explicitly matched to
+  // desktop by the same request: "apply the desktop same changes to
+  // tablet too") and above (no separate `xl:` override needed once `md:`
+  // carries the real value, since Tailwind's breakpoints cascade
+  // upward). Mobile keeps its own `pt-[40px]` (owner, same request: "on
+  // mobile add 40px more from top of customization section" -- FabricOptions'
+  // own unchanged mobile `pb-[72px]` above still supplies the base 72px
+  // of that gap; this is the additional 40px on top of it, not a
+  // replacement, so the real mobile gap is 112px total). `pb-[72px]`
+  // unprefixed (mobile only, `md:pb-0` cancels it at tablet/desktop) is
+  // this section's own bottom at mobile, unchanged value from the
+  // 2026-08-30 swap.
+  // Not used by every template with this same 3-section pattern --
+  // running-wear has no FabricOptions section at all (deliberate, see
+  // that route's own comment) and keeps WhatWeCover genuinely first, so
+  // it passes `leading` (below) instead of using this default.
   // max-xl: mobile Figma frame (node 590:1217, 360px), read 2026-08-30 --
   // side padding of its own is still none (headingBlock/artwork/grid each
   // carry their own px-5 instead, matching Figma's own nested-inset
@@ -7344,7 +7353,24 @@ export const whatWeCover = {
   // instead. xl keeps the original desktop values (including its own
   // gap-[72px]) untouched.
   section:
-    "mx-auto flex w-full max-w-[1440px] flex-col items-center px-0 pt-0 pb-[72px] xl:gap-[72px] xl:px-[138px] xl:pt-[120px] xl:pb-0",
+    "mx-auto flex w-full max-w-[1440px] flex-col items-center px-0 pt-[40px] pb-[72px] md:pt-[154px] md:pb-0 xl:gap-[72px] xl:px-[138px]",
+  // Leading-role variant (owner spec, 2026-09-22) for a template where
+  // this section genuinely has nothing before it -- running-wear (no
+  // FabricOptions), and lifting-gears categories with no `comparisonTable`
+  // + no `fabricOptions` (WhatWeCover.tsx's own `leading` prop, passed
+  // conditionally there). Tablet and desktop are UNCHANGED from this
+  // recipe's own pre-2026-09-22 values (`xl:pt-0 xl:pb-0`, `md:pt-[72px]`
+  // explicitly reverting the mobile-only bump below back to the original
+  // shared mobile/tablet number) -- the owner's later same-day request
+  // ("on mobile add 40px more") named mobile specifically, not tablet, so
+  // only mobile changes here: `pt-[112px]` (was `72px`, +40) `pb-[72px]`
+  // (unchanged). This preserves the pre-existing flush 0px desktop gap a
+  // `comparisonTable` immediately above this section relies on
+  // (lifting-gears' own comment on that), which a same-as-desktop tablet
+  // value (`md:py-0`, tried first) would have also made flush at tablet,
+  // a real behavior change nothing in this request asked for.
+  sectionLeading:
+    "mx-auto flex w-full max-w-[1440px] flex-col items-center px-0 pt-[112px] pb-[72px] md:pt-[72px] xl:gap-[72px] xl:px-[138px] xl:pt-0 xl:pb-0",
   // max-xl:gap-4 (16px, mobile Title frame's own gap)/px-5 (20px, mobile's
   // own inset -- the section itself carries none below xl)/mb-8 (32px, the
   // gap down to the artwork below -- see the section comment above for why
@@ -7504,18 +7530,22 @@ export const trustPoints = {
   // Now the LAST of the 3 sections (order swapped again, owner spec
   // 2026-09-22: "Fabric options -> Customization -> Trust/proof",
   // site-wide, reverting the 2026-08-30 order where this component sat
-  // in the middle). Last-role padding: `pb-[80px]` at mobile (was
-  // `pb-[72px]` -- this section is now the page-end section, so its own
-  // mobile bottom matches the 80px page-end value FabricOptions used to
-  // carry when it was last, not the 72px inter-section value). At xl,
-  // `xl:pt-[80px]` (this section's own top now owns the WhatWeCover->
-  // TrustPoints gap, the same 80px value FabricOptions' own former
-  // `xl:pt-[80px]` carried when it sat in this position) and
-  // `xl:pb-[120px]` (this section's own new page-end bottom gap,
-  // matching the divider's own top `xl:mb-[120px]` for symmetry, the
-  // same value FabricOptions used to carry as page-end when it was
-  // last).
-  sidePaddingPlp: "pb-[80px] xl:px-[138px] xl:pt-[80px] xl:pb-[120px]",
+  // in the middle). Last-role padding: `pb-[80px]` at mobile (this
+  // section is the page-end section, unchanged, not part of this later
+  // request) plus `pt-[40px]` (owner, same-day follow-up: "on mobile add
+  // 40px more from top of ... other section" -- WhatWeCover's own
+  // unchanged mobile `pb-[72px]` above still supplies the base 72px of
+  // this gap; this is the additional 40px on top of it, so the real
+  // mobile gap is 112px total, matching WhatWeCover's own mobile top gap
+  // for consistency). `md:pt-[120px]` (owner, same follow-up: "make ...
+  // next section 120" and "apply the desktop same changes to tablet
+  // too" -- was `xl:pt-[80px]`, tablet now explicitly matches desktop
+  // rather than falling back to the mobile value) cascades up to `xl:`
+  // automatically, so no separate `xl:pt-*` override is needed any more.
+  // `xl:pb-[120px]` (this section's own page-end bottom gap, matching
+  // the divider's own top `xl:mb-[120px]` for symmetry) is unchanged,
+  // not part of this request.
+  sidePaddingPlp: "pb-[80px] pt-[40px] md:pt-[120px] xl:px-[138px] xl:pb-[120px]",
   // PDP desktop side padding (app/activewear/[category]/[style]/page.tsx,
   // owner, 2026-09-01) -- the site's own standard 80px content margin
   // (same value as `.container-p`'s desktop inset, app/globals.css), not a
