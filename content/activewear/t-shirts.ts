@@ -829,6 +829,9 @@ export const tShirts: Category = {
       },
     },
     {
+      // Full PDP content for SKU 7 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1/2/3/4/5/6/9. Completes the men's set (SKU 1
+      // to 8) alongside SKU 8 below.
       status: "draft",
       slug: "cropped-mens",
       cardTitle: "Custom Cropped T-Shirt",
@@ -838,8 +841,87 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/cropped-mens",
       gender: "Men",
       sku: "CAP-TEE-07",
+      pdpTitle: "Cropped",
+      pdpHeading: "Custom Cropped T-Shirt Manufacturer",
+      pdpDescription:
+        "Men's cropped-length tee, shortened body length below the standard hem, custom and private label, in combed cotton or a cotton-poly blend, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Cropped t-shirt, front view, men's" },
+        { alt: "Cropped t-shirt, hem length detail, men's" },
+        { alt: "Cropped t-shirt, back view, men's" },
+        { alt: "Cropped t-shirt, fabric close-up, men's" },
+        { alt: "Cropped t-shirt, worn on model, men's" },
+        { alt: "Cropped t-shirt, flat lay, men's" },
+      ],
+      pdpMetaTitle: "Custom Cropped T-Shirt Manufacturer",
+      pdpMetaDescription:
+        "Custom cropped t-shirt manufacturer, OEM, ODM and private label, cropped body length, combed cotton or cotton-poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "Combed cotton or cotton-poly blend",
+      pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Tri-blend", "Recycled polyester"],
+      pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "How much shorter is the cropped length compared to a standard tee?",
+          a: "Body length is shortened below the standard hem; the exact drop is confirmed on your tech pack or reference garment, since there's no single industry-standard crop length.",
+        },
+        {
+          q: "What fabric is the cropped tee made from?",
+          a: "Combed cotton or a cotton-poly blend as the default. We confirm the exact blend and weight on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Oversized", slug: "oversized-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Dropped-Shoulder", slug: "dropped-shoulder-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Relaxed", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Curved-Hem", slug: "curved-hem", href: "/capriowear/activewear/t-shirts" },
+        { label: "See All", href: "/capriowear/activewear/t-shirts" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's cropped-length tee (base type)" },
+        { label: "Fabric", value: "Combed cotton or cotton-poly blend, directional research range" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Shortened body length, standard through the chest and shoulder" },
+        { label: "Construction", value: "Cut-and-sew, side-seam or tubular body, double-needle stitched sleeves, hem and neck" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Cropped t-shirt, construction detail, men's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Body length checked for consistency at every size",
+        "Print durability tested for your fabric and method",
+        "Shrinkage tested after wash, preshrink status stated",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, puff, silicone, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric and weight",
+            body: "Any blend and GSM, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" },
+          },
+          {
+            title: "Fit and build",
+            body: "Body length, side-seam or tubular, to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit and build" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven, printed or tear-away labels, care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 8 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 7 above. Completes the men's set (SKU 1 to 8).
       status: "draft",
       slug: "curved-hem",
       cardTitle: "Custom Curved-Hem T-Shirt",
@@ -849,6 +931,83 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/curved-hem",
       gender: "Men",
       sku: "CAP-TEE-08",
+      pdpTitle: "Curved-Hem",
+      pdpHeading: "Custom Curved-Hem T-Shirt Manufacturer",
+      pdpDescription:
+        "Men's tee with a curved, dropped hem, longer at the back and sides than the front, custom and private label, in combed cotton or a cotton-poly blend, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Curved-hem t-shirt, front view" },
+        { alt: "Curved-hem t-shirt, hem detail" },
+        { alt: "Curved-hem t-shirt, back view" },
+        { alt: "Curved-hem t-shirt, fabric close-up" },
+        { alt: "Curved-hem t-shirt, worn on model" },
+        { alt: "Curved-hem t-shirt, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Curved-Hem T-Shirt Manufacturer",
+      pdpMetaDescription:
+        "Custom curved-hem t-shirt manufacturer, OEM, ODM and private label, curved dropped hem construction, combed cotton or cotton-poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "Combed cotton or cotton-poly blend",
+      pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Performance polyester", "Tri-blend"],
+      pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "What is a curved hem, and how is it different from a standard hem?",
+          a: "The hem drops longer at the back and sides than the front, instead of sitting level all the way around. It's a subtle detail that adds a more tailored, athletic finish.",
+        },
+        {
+          q: "Can the curved hem be combined with a v-neck or other neckline?",
+          a: "Yes. The curved hem is a construction detail independent of neckline, so it can be built on a crew or v-neck base to your tech pack.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Athletic", slug: "athletic-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Fitted", slug: "fitted-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Cropped", slug: "cropped-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Relaxed", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "See All", href: "/capriowear/activewear/t-shirts" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's curved, dropped-hem tee (base type)" },
+        { label: "Fabric", value: "Combed cotton or cotton-poly blend, directional research range" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "True-to-size through the body, curved hem longer at back and sides" },
+        { label: "Construction", value: "Cut-and-sew, curved hem finishing, side-seam or tubular body, double-needle stitching" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Curved-hem t-shirt, construction detail" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Hem curve checked for placement and finish consistency at every size",
+        "Print durability tested for your fabric and method",
+        "Shrinkage tested after wash, preshrink status stated",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, puff, silicone, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric and weight",
+            body: "Any blend and GSM, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" },
+          },
+          {
+            title: "Fit and build",
+            body: "Hem curve depth, body length, side-seam or tubular, to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit and build" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven, printed or tear-away labels, care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
