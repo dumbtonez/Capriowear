@@ -559,6 +559,8 @@ export const tShirts: Category = {
       },
     },
     {
+      // Full PDP content for SKU 4 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1/2/3/6/9.
       status: "draft",
       slug: "athletic-mens",
       cardTitle: "Custom Athletic T-Shirt",
@@ -568,8 +570,87 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/athletic-mens",
       gender: "Men",
       sku: "CAP-TEE-04",
+      pdpTitle: "Athletic",
+      pdpHeading: "Custom Athletic T-Shirt Manufacturer",
+      pdpDescription:
+        "Men's true-to-size athletic and training tee, custom and private label, in 100% performance polyester, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Athletic t-shirt, front view, men's" },
+        { alt: "Athletic t-shirt, back view, men's" },
+        { alt: "Athletic t-shirt, side profile, men's" },
+        { alt: "Athletic t-shirt, fabric close-up, men's" },
+        { alt: "Athletic t-shirt, worn on model, men's" },
+        { alt: "Athletic t-shirt, flat lay, men's" },
+      ],
+      pdpMetaTitle: "Custom Athletic T-Shirt Manufacturer",
+      pdpMetaDescription:
+        "Custom athletic t-shirt manufacturer, OEM, ODM and private label, true-to-size training and running cut, moisture-wicking performance polyester, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "100% performance polyester",
+      pdpFabricPills: ["Performance polyester", "Recycled polyester", "Poly-spandex blend", "Cotton-poly blend"],
+      pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "What fabric is the athletic tee made from?",
+          a: "100% performance polyester as the default, chosen for moisture-wicking and quick-dry performance. This is also the fabric that takes true sublimation printing. We confirm the exact weight on your sample.",
+        },
+        {
+          q: "Is this the same as your Raglan or Curved-Hem tees?",
+          a: "No. This is the base athletic-cut construction with a standard set-in sleeve. The Raglan tee uses a diagonal raglan seam and the Curved-Hem tee adds a curved, dropped hem; either construction detail can be applied to this athletic base fit on request.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted", slug: "fitted-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Raglan", slug: "raglan", href: "/capriowear/activewear/t-shirts" },
+        { label: "Relaxed", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Curved-Hem", slug: "curved-hem", href: "/capriowear/activewear/t-shirts" },
+        { label: "See All", href: "/capriowear/activewear/t-shirts" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's athletic, true-to-size training and running tee (base type)" },
+        { label: "Fabric", value: "100% performance polyester, directional research range" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "True-to-size, athletic cut" },
+        { label: "Construction", value: "Cut-and-sew, side-seam or tubular body, double-needle stitched sleeves, hem and neck" },
+        { label: "Branding", value: "Sublimation, screen, DTF, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Athletic t-shirt, construction detail, men's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Moisture-wicking performance tested for your exact fabric",
+        "Print durability tested for your exact fabric and method",
+        "Collar and hem hold their shape after repeated washing",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation on polyester, screen, DTF", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, silicone, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric and weight",
+            body: "Any blend and GSM, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" },
+          },
+          {
+            title: "Fit and build",
+            body: "Body width, length, side-seam or tubular, to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit and build" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven, printed or tear-away labels, care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 5 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 4 above.
       status: "draft",
       slug: "raglan",
       cardTitle: "Custom Raglan T-Shirt",
@@ -579,6 +660,83 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/raglan",
       gender: "Men",
       sku: "CAP-TEE-05",
+      pdpTitle: "Raglan",
+      pdpHeading: "Custom Raglan T-Shirt Manufacturer",
+      pdpDescription:
+        "Men's raglan-sleeve tee, one-piece sleeve extending to the collar with a diagonal seam, custom and private label, in performance polyester or a poly-spandex blend, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Raglan t-shirt, front view" },
+        { alt: "Raglan t-shirt, sleeve seam detail" },
+        { alt: "Raglan t-shirt, back view" },
+        { alt: "Raglan t-shirt, fabric close-up" },
+        { alt: "Raglan t-shirt, worn on model" },
+        { alt: "Raglan t-shirt, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Raglan T-Shirt Manufacturer",
+      pdpMetaDescription:
+        "Custom raglan t-shirt manufacturer, OEM, ODM and private label, diagonal raglan sleeve construction, performance polyester or poly-spandex blend, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "Performance polyester or poly-spandex blend",
+      pdpFabricPills: ["Performance polyester", "Poly-spandex blend", "Combed cotton", "Cotton-poly blend"],
+      pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "What is a raglan sleeve, and why choose it?",
+          a: "The sleeve is cut in one piece that extends to the collar with a diagonal seam, instead of a standard set-in sleeve. It gives a slightly more relaxed range of motion at the shoulder and a distinct vintage-athletic look.",
+        },
+        {
+          q: "What fabric is the raglan tee made from?",
+          a: "Performance polyester or a poly-spandex blend as the default for the athletic construction, or a cotton-blend option is available. We confirm the exact blend and weight on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted", slug: "fitted-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Athletic", slug: "athletic-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Dropped-Shoulder", slug: "dropped-shoulder-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Relaxed", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "See All", href: "/capriowear/activewear/t-shirts" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's raglan-sleeve tee (base type)" },
+        { label: "Fabric", value: "Performance polyester or poly-spandex blend, directional research range" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "True-to-size, raglan-sleeve construction" },
+        { label: "Construction", value: "Cut-and-sew, one-piece raglan sleeve to collar, diagonal seam, double-needle stitching" },
+        { label: "Branding", value: "Sublimation, screen, DTF, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Raglan t-shirt, construction detail" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Raglan seam checked for placement and finish consistency at every size",
+        "Print durability tested for your fabric and method",
+        "Shrinkage tested after wash, preshrink status stated",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation on polyester, screen, DTF", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, silicone, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric and weight",
+            body: "Any blend and GSM, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" },
+          },
+          {
+            title: "Fit and build",
+            body: "Raglan seam placement, body length, side-seam or tubular, to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit and build" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven, printed or tear-away labels, care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
