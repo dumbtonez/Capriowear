@@ -1157,7 +1157,7 @@ export const tShirts: Category = {
         },
         {
           q: "How does this compare to your Dropped-Shoulder tee?",
-          a: "Related but distinct. This SKU is fully boxy with a deeper shoulder drop. Our Dropped-Shoulder tee is specified at a more moderate drop on a relaxed, not fully boxy, body.",
+          a: "Closely related, both are oversized with a dropped shoulder. This SKU is named for the fit, a fully boxy body, while our Dropped-Shoulder tee is named for the construction detail, the seam placement. Confirm your exact body width and shoulder drop on your tech pack if you're ordering both, so we build them consistently distinct.",
         },
       ],
       relatedStyleTags: [
@@ -1244,7 +1244,7 @@ export const tShirts: Category = {
       ],
       pdpMetaTitle: "Women's Relaxed T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom relaxed t-shirt manufacturer, OEM, ODM and private label, softer roomier everyday fit, cotton-poly or CVC blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom women's relaxed t-shirt manufacturer, OEM, ODM and private label, softer roomier everyday fit for women, cotton-poly or CVC blend, from 50 pieces, any fabric and color, DDP worldwide.",
       material: "50/50 or CVC cotton-poly blend",
       pdpFabricPills: ["50/50 cotton-poly", "CVC cotton-poly", "Combed cotton", "Tri-blend"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],

@@ -3772,3 +3772,19 @@ Owner call: track it, not a blocker. Logged as a KNOWN ISSUE against `ProductGal
 Unrelated, noted while checking: `capriosports.com` is still the old WordPress site (Yoast, `xmlrpc.php`), so `/capriowear` 404s there. This app currently lives only at `capriowear.vercel.app`; the `SITE_URL` default in `content/site.ts` points at the production domain it is *intended* to be mounted on, which is correct for canonical/OG/sitemap output but means those URLs do not resolve yet.
 
 **Verified:** `npm run build` (Turbopack, no flags) compiles and prerenders all 154 pages. `npx tsc --noEmit` and `npx eslint app/ content/` clean. Playwright 68/68. Draft gating re-confirmed on all four new PDPs against the Turbopack build: 200, one `<h1>`, noindex/nofollow, BreadcrumbList present, no Product and no FAQPage JSON-LD. Still unpushed per the owner's hold.
+
+## Racerback pair gendered, SKU 10 FAQ 2 and SKU 11 meta corrected, 2026-09-23
+
+Three owner follow-ups closing out the SKU 10 to 13 work, then pushed.
+
+**Racerback treated as a cross-gender pair after all** (owner call, overruling the collision-only rule applied the day before): Tank Tops SKU 6 to "Men's Racerback Singlet Manufacturer" and SKU 12 to "Women's Racerback Tank Manufacturer", `pdpHeading` and `pdpMetaTitle` both. The two headings never collided byte-for-byte (different product nouns, Singlet vs Tank), which is why the earlier pass left them alone; the owner's reasoning is that a buyer reads them as one style split by gender, so the gendered form is right regardless of string equality. Sports Bras' own `racerback` style ("Custom Racerback Sports Bra Manufacturer") is a different category with no cross-gender sibling and was left un-gendered.
+
+**SKU 10's FAQ 2 answer replaced** with the owner's corrected source text, resolving the contradiction flagged in the previous entry: the old answer described the Dropped-Shoulder tee as "a more moderate drop on a relaxed, not fully boxy, body", which contradicted SKU 13's own spec (SKU 13 is oversized). The new answer separates the two by *what they are named for* -- SKU 10 for the fit (a fully boxy body), SKU 13 for the construction detail (seam placement) -- rather than by body shape, so both pages now agree.
+
+**One deliberate deviation from the supplied text:** the owner's version opened "Closely related — both are oversized...", with an em dash. Replaced with a comma, per the standing no-em/en-dashes-in-copy rule, which explicitly applies even when the owner supplies one. Nothing else in the sentence changed. Whole file re-checked for em/en dashes: none.
+
+**SKU 11's `pdpMetaDescription` de-duplicated** from men's SKU 3's, which it had been byte-identical to. Now "Custom women's relaxed t-shirt manufacturer, OEM, ODM and private label, softer roomier everyday fit for women, cotton-poly or CVC blend, from 50 pieces, any fabric and color, DDP worldwide." (190 chars). Men's SKU 3 deliberately left unchanged at its original 172-char string; only the second occurrence was replaced.
+
+**Verification, widened from PDPs to the whole site this time:** all 147 rendered pages scanned, every one has exactly one `<h1>`, and there are **zero duplicate `<h1>`s and zero duplicate `<title>`s sitewide** (not just within T-Shirts/Tank Tops). `npm run build` (Turbopack, no flags) green. `npx tsc --noEmit` and `npx eslint app/ content/` clean. Playwright 68/68. Draft gating re-confirmed on all four women's PDPs. SKU 10's FAQ 2 and SKU 11's meta description confirmed against the rendered HTML, and men's SKU 3's meta confirmed unchanged.
+
+Pushed to origin/main: the hold is lifted, and this is the first push since `6d3bf2e`.

@@ -660,7 +660,7 @@ export const tankTops: Category = {
       // before this can go live. CTA is Request a Sample only.
       pdpTitle: "Racerback Singlet",
       sku: "CAP-TNK-06",
-      pdpHeading: "Custom Racerback Singlet Manufacturer",
+      pdpHeading: "Men's Racerback Singlet Manufacturer",
       pdpDescription:
         "Men's fitted running and training singlet with a full racerback construction, custom and private label, in stretch compression knit, made to your brand in Sialkot, Pakistan.",
       images: [
@@ -671,7 +671,7 @@ export const tankTops: Category = {
         { alt: "Racerback singlet, worn on model" },
         { alt: "Racerback singlet, flat lay" },
       ],
-      pdpMetaTitle: "Custom Racerback Singlet Manufacturer",
+      pdpMetaTitle: "Men's Racerback Singlet Manufacturer",
       pdpMetaDescription:
         "Custom racerback singlet manufacturer, OEM, ODM and private label, fitted running and training singlet, full racerback construction, stretch compression knit, from 50 pieces, any fabric and color, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Recycled Polyester", "Cotton-Lyocell-Elastane"],
@@ -1283,7 +1283,7 @@ export const tankTops: Category = {
       // is Request a Sample only.
       pdpTitle: "Racerback",
       sku: "CAP-TNK-12",
-      pdpHeading: "Custom Racerback Tank Manufacturer",
+      pdpHeading: "Women's Racerback Tank Manufacturer",
       pdpDescription:
         "Women's fitted tank with a true racerback and mesh paneling, custom and private label, in stretch poly blend, made to your brand in Sialkot, Pakistan.",
       images: [
@@ -1294,7 +1294,7 @@ export const tankTops: Category = {
         { alt: "Racerback tank, worn on model" },
         { alt: "Racerback tank, flat lay" },
       ],
-      pdpMetaTitle: "Custom Racerback Tank Manufacturer",
+      pdpMetaTitle: "Women's Racerback Tank Manufacturer",
       pdpMetaDescription:
         "Custom racerback tank manufacturer, OEM, ODM and private label, fitted silhouette, true racerback with mesh paneling, stretch poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Mesh Panel Blend", "Recycled Polyester"],
