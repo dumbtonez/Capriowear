@@ -153,10 +153,10 @@ export const sportsBras: Category = {
   // once sampled, photographed, and confirmed real, same rule every other
   // category's draft cards already follow. No `gender` field on any card
   // (women's-only category, nothing to filter). SKU 1 (CAP-SPB-01) through
-  // SKU 4 (CAP-SPB-04) got full PDP content 2026-09-22 (owner spec) --
+  // SKU 6 (CAP-SPB-06) got full PDP content 2026-09-22 (owner spec) --
   // reachable by URL and a clickable PLP card via `isDraftPdpReachable()`,
   // still noindex/nofollow, out of the sitemap, no Product/FAQPage
-  // JSON-LD. The other 11 cards are card-only, no PDP content.
+  // JSON-LD. The other 9 cards are card-only, no PDP content.
   styleCards: [
     {
       // Full PDP content for SKU 1 (owner spec, 2026-09-22), draft.
@@ -493,6 +493,9 @@ export const sportsBras: Category = {
       },
     },
     {
+      // Full PDP content for SKU 5 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1 to 4 above. No blend name in the Fabric row --
+      // the locked reference doesn't disclose composition, none estimated.
       status: "draft",
       slug: "minimal-coverage",
       cardTitle: "Custom Minimal-Coverage Sports Bra",
@@ -500,8 +503,80 @@ export const sportsBras: Category = {
       image: "",
       imageAlt: "Custom minimal-coverage sports bra manufacturer",
       href: "/capriowear/activewear/sports-bras/minimal-coverage",
+      sku: "CAP-SPB-05",
+      pdpTitle: "Minimal Coverage",
+      pdpHeading: "Custom Minimal-Coverage Sports Bra Manufacturer",
+      pdpDescription:
+        "Low-support, minimal-coverage sports bra, bralette-style, custom and private label, single-strap silhouette, removable padding, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Minimal-coverage sports bra, front view" },
+        { alt: "Minimal-coverage sports bra, strap detail" },
+        { alt: "Minimal-coverage sports bra, back view" },
+        { alt: "Minimal-coverage sports bra, fabric close-up" },
+        { alt: "Minimal-coverage sports bra, worn on model" },
+        { alt: "Minimal-coverage sports bra, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Minimal-Coverage Sports Bra Manufacturer",
+      pdpMetaDescription:
+        "Custom minimal-coverage sports bra manufacturer, bralette-style, low-impact and layering wear, OEM, ODM and private label, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "What fabric is the minimal-coverage sports bra made from?",
+          a: "We confirm the exact composition and weight on your sample, matched to your reference if you have one. Standard offering runs Nylon/Spandex or Polyester/Spandex blends.",
+        },
+        {
+          q: "Is this style meant for high-impact training?",
+          a: "No. This is a low-support, minimal-coverage build meant for low-impact use or layering. For higher-impact training, our medium- and high-support sports bras use a wider band and more structured closure.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Low-Support Sports Bra", slug: "low-support-full-coverage", href: "/capriowear/activewear/sports-bras" },
+        { label: "Low-Support Cutout Sports Bra", slug: "low-support-cutout", href: "/capriowear/activewear/sports-bras" },
+        { label: "Removable-Pad Sports Bra", slug: "removable-padding", href: "/capriowear/activewear/sports-bras" },
+        { label: "See All", href: "/capriowear/activewear/sports-bras" },
+      ],
+      specifications: [
+        { label: "Style", value: "Low support, minimal coverage sports bra (base type)" },
+        { label: "Fabric", value: "Composition pending confirmation on sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Support and coverage", value: "Low support, minimal bralette-style coverage, for low-impact use or layering" },
+        { label: "Closure", value: "Pull-over" },
+        { label: "Band", value: "Narrow band" },
+        { label: "Padding", value: "Removable, foam insert" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape; flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Minimal-coverage sports bra, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Band checked for recovery under repeated wear",
+        "Removable pad pocket checked for a secure, snag-free fit",
+        "Straps checked for hold under movement",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
+      // Full PDP content for SKU 6 (owner spec, 2026-09-22), draft, same
+      // shape/rules as SKU 1 to 5 above. No blend name in the Fabric row --
+      // the locked reference doesn't disclose composition, none estimated.
       status: "draft",
       slug: "low-support-cutout",
       cardTitle: "Custom Low-Support Cutout Sports Bra",
@@ -509,6 +584,75 @@ export const sportsBras: Category = {
       image: "",
       imageAlt: "Custom low-support cutout sports bra manufacturer",
       href: "/capriowear/activewear/sports-bras/low-support-cutout",
+      sku: "CAP-SPB-06",
+      pdpTitle: "Low Support Cutout",
+      pdpHeading: "Custom Low-Support Cutout Sports Bra Manufacturer",
+      pdpDescription:
+        "Low-support sports bra with a V-neck cutout detail, custom and private label, adjustable straps, removable padding, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Low-support cutout sports bra, front view" },
+        { alt: "Low-support cutout sports bra, V-neck cutout detail" },
+        { alt: "Low-support cutout sports bra, back view" },
+        { alt: "Low-support cutout sports bra, fabric close-up" },
+        { alt: "Low-support cutout sports bra, worn on model" },
+        { alt: "Low-support cutout sports bra, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Low-Support Cutout Sports Bra Manufacturer",
+      pdpMetaDescription:
+        "Custom low-support sports bra manufacturer with a V-neck cutout detail, OEM, ODM and private label, adjustable straps, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "What fabric is the low-support cutout sports bra made from?",
+          a: "We confirm the exact composition and weight on your sample, matched to your reference if you have one. Standard offering runs Nylon/Spandex or Polyester/Spandex blends.",
+        },
+        {
+          q: "How is this different from your minimal-coverage sports bra?",
+          a: "This is a low-support build with a defined V-neck cutout and standard band, offering more coverage than our bralette-style minimal-coverage sports bra, which uses a narrower band and single-strap silhouette.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Low-Support Sports Bra", slug: "low-support-full-coverage", href: "/capriowear/activewear/sports-bras" },
+        { label: "Minimal-Coverage Sports Bra", slug: "minimal-coverage", href: "/capriowear/activewear/sports-bras" },
+        { label: "Medium-Support Cutout Sports Bra", slug: "medium-support-cutout", href: "/capriowear/activewear/sports-bras" },
+        { label: "See All", href: "/capriowear/activewear/sports-bras" },
+      ],
+      specifications: [
+        { label: "Style", value: "Low support, cutout coverage sports bra (base type)" },
+        { label: "Fabric", value: "Composition pending confirmation on sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Support and coverage", value: "Low support, cutout coverage, between full coverage and minimal" },
+        { label: "Closure", value: "Pull-over" },
+        { label: "Band", value: "Standard band" },
+        { label: "Padding", value: "Removable, foam insert" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape; flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Low-support cutout sports bra, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Band checked for recovery under repeated wear",
+        "Cutout edges checked for a clean, snag-free finish",
+        "Adjustable straps checked for hold under movement",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Nylon/Spandex or Polyester/Spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",

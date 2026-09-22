@@ -294,6 +294,7 @@ export const shorts: Category = {
       // product photography is needed before this can go live.
       // `pdpFabricPills`/`pdpSpecHighlights` overrides match SKU 1's own.
       pdpTitle: "Fitted Training",
+      sku: "CAP-SHO-02",
       pdpHeading: "Custom Fitted Training Shorts Manufacturer",
       pdpDescription:
         "Men's fitted athletic shorts, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 5 to 7 inch inseam, a closer training fit than our Athletic short, elastic waistband with drawcord, made to your brand in Sialkot, Pakistan.",
@@ -405,6 +406,7 @@ export const shorts: Category = {
       // this can go live. CTA is Request a Sample only (no secondary
       // Download Catalog button), same as SKU 1/2.
       pdpTitle: "Relaxed",
+      sku: "CAP-SHO-03",
       pdpHeading: "Custom Relaxed Shorts Manufacturer",
       pdpDescription:
         "Men's relaxed, roomier fit shorts, custom and private label, in a cotton fleece cut-and-sew construction, 5 to 7 inch inseam, elastic waistband with drawcord, made to your brand in Sialkot, Pakistan.",
@@ -515,6 +517,7 @@ export const shorts: Category = {
       // Request a Sample only (no secondary Download Catalog button),
       // same as SKU 1/2/3.
       pdpTitle: "Baggy",
+      sku: "CAP-SHO-04",
       pdpHeading: "Custom Baggy Shorts Manufacturer",
       pdpDescription:
         "Men's baggy, below-knee wide-leg shorts, custom and private label, in a heavyweight cotton fleece cut-and-sew construction, made to your brand in Sialkot, Pakistan.",
@@ -622,6 +625,7 @@ export const shorts: Category = {
       // are alt-only placeholders: real product photography is needed
       // before this can go live. CTA is Request a Sample only.
       pdpTitle: "2-in-1",
+      sku: "CAP-SHO-05",
       pdpHeading: "Custom 2-in-1 Shorts Manufacturer",
       pdpDescription:
         "Men's 2-in-1 shorts, a looser outer shell over a built-in fitted liner, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew construction, mid-length inseam, made to your brand in Sialkot, Pakistan.",
@@ -726,6 +730,7 @@ export const shorts: Category = {
       // are alt-only placeholders: real product photography is needed
       // before this can go live. CTA is Request a Sample only.
       pdpTitle: "Relaxed Long",
+      sku: "CAP-SHO-06",
       pdpHeading: "Custom Relaxed Long Shorts Manufacturer",
       pdpDescription:
         "Men's relaxed, roomier fit shorts, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 8 inch or below-knee inseam, elastic waistband with drawcord, made to your brand in Sialkot, Pakistan.",
@@ -830,6 +835,7 @@ export const shorts: Category = {
       // product photography is needed before this can go live. CTA is
       // Request a Sample only.
       pdpTitle: "Fitted Long",
+      sku: "CAP-SHO-07",
       pdpHeading: "Custom Fitted Long Shorts Manufacturer",
       pdpDescription:
         "Men's fitted, close-to-body compression shorts, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 8 inch or below-knee inseam, drop-in pocket, made to your brand in Sialkot, Pakistan.",
@@ -935,6 +941,7 @@ export const shorts: Category = {
       // qualifier the men's SKUs use -- that addition is men's-only per
       // the PLP customization strip, not a general sizing note.
       pdpTitle: "High-Rise Biker",
+      sku: "CAP-SHO-08",
       pdpHeading: "Custom High-Rise Biker Shorts Manufacturer",
       pdpDescription:
         "Women's high-rise, fitted bike-short, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 5 to 7 inch inseam, made to your brand in Sialkot, Pakistan.",
@@ -1037,6 +1044,7 @@ export const shorts: Category = {
       // `pdpSpecHighlights` drops the "(plus waist-inch sizing)"
       // qualifier the men's SKUs use -- women's-only, same as SKU 8.
       pdpTitle: "Mid-Rise Biker",
+      sku: "CAP-SHO-09",
       pdpHeading: "Custom Mid-Rise Biker Shorts Manufacturer",
       pdpDescription:
         "Women's mid-rise, fitted bike-short, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 5 to 7 inch inseam, made to your brand in Sialkot, Pakistan.",
@@ -1139,6 +1147,7 @@ export const shorts: Category = {
       // `pdpSpecHighlights` drops the "(plus waist-inch sizing)"
       // qualifier the men's SKUs use -- women's-only, same as SKU 8/9.
       pdpTitle: "High-Rise Mini",
+      sku: "CAP-SHO-10",
       pdpHeading: "Custom High-Rise Mini Shorts Manufacturer",
       pdpDescription:
         "Women's high-rise, fitted short, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 4 inch or under inseam, side pocket, made to your brand in Sialkot, Pakistan.",
@@ -1247,6 +1256,7 @@ export const shorts: Category = {
       // sizing)" qualifier the men's SKUs use -- women's-only, same as
       // SKU 8 to 10.
       pdpTitle: "Zip-Pocket",
+      sku: "CAP-SHO-11",
       pdpHeading: "Custom Zip-Pocket Shorts Manufacturer",
       pdpDescription:
         "Women's mid-rise, fitted short with a discreet zip pocket, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, short inseam, made to your brand in Sialkot, Pakistan. The zip pocket detail can also be layered onto any other silhouette in the catalog on request.",
@@ -1359,6 +1369,7 @@ export const shorts: Category = {
       // waist-inch sizing)" qualifier the men's SKUs use -- women's-only,
       // same as SKU 8 to 11.
       pdpTitle: "Mid-Rise Relaxed",
+      sku: "CAP-SHO-12",
       pdpHeading: "Custom Mid-Rise Relaxed Shorts Manufacturer",
       pdpDescription:
         "Women's mid-rise, relaxed and loose fit short, custom and private label, in a Polyester/Spandex, Nylon/Spandex, or cotton fleece cut-and-sew woven or lightweight fleece, made to your brand in Sialkot, Pakistan.",
@@ -1465,6 +1476,7 @@ export const shorts: Category = {
       // waist-inch sizing)" qualifier the men's SKUs use -- women's-only,
       // same as SKU 8 to 12.
       pdpTitle: "Mid-Rise Mini",
+      sku: "CAP-SHO-13",
       pdpHeading: "Custom Mid-Rise Mini Shorts Manufacturer",
       pdpDescription:
         "Women's mid-rise, fitted short, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 4 inch or under inseam, no-front-seam construction, made to your brand in Sialkot, Pakistan.",
@@ -1518,7 +1530,7 @@ export const shorts: Category = {
           label: "Stretch and support",
           value: "Fitted, compression fit, not relaxed, not loose. A close-to-body silhouette at the shortest inseam length in the catalog.",
         },
-        { label: "Seam", value: "No-front-seam construction, following the locked reference" },
+        { label: "Seam", value: "No-front-seam construction." },
         { label: "Waistband", value: "Mid-rise elastic waistband" },
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
@@ -1570,6 +1582,7 @@ export const shorts: Category = {
       // waist-inch sizing)" qualifier the men's SKUs use -- women's-only,
       // same as SKU 8 to 13.
       pdpTitle: "Mid-Rise Sweat",
+      sku: "CAP-SHO-14",
       pdpHeading: "Custom Mid-Rise Sweat Shorts Manufacturer",
       pdpDescription:
         "Women's mid-rise, relaxed fleece sweatshort, custom and private label, in a cotton fleece or cotton/poly blend brushed knit, short inseam, made to your brand in Sialkot, Pakistan.",

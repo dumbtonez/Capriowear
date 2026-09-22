@@ -170,6 +170,7 @@ export const weightLiftingBelts: Category = {
       imageAlt: "Custom leather lever weight lifting belt",
       href: "/lifting-gears/weight-lifting-belts/lever-belt",
       pdpTitle: "Lever Belt",
+      sku: "CAP-BLT-01",
       // Full 9-slot gallery, same convention as Capriowear's own PDPs
       // (e.g. content/activewear/leggings.ts) -- `ProductGallery` is the
       // same shared component either brand's PDP uses, so the thumbnail
