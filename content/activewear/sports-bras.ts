@@ -68,7 +68,7 @@ export const sportsBras: Category = {
   ],
   fabricNote: [
     {
-      text: "No GSM or composition figure is stated here. Fabric weight is set by Capriowear's own engineering and confirmed on your sample, not estimated or copied from competitor data; where a locked reference states a composition percentage, it's on that SKU's own specification table, not here. Swatches before every bulk run, and we can source or match a ",
+      text: "No GSM or composition figure is stated here. Fabric weight is confirmed on your sample; where a locked reference states a composition percentage, it's on that SKU's own specification table, not here. Swatches before every bulk run, and we can source or match a ",
     },
     { text: "specific fabric", bold: true },
     { text: " from your reference." },
@@ -84,7 +84,7 @@ export const sportsBras: Category = {
     "Every run inspected to AQL 2.5",
     "Third-party inspection welcome",
   ],
-  coverageEyebrow: "CUSTOM FROM FABRIC TO PACKAGING",
+  coverageEyebrow: "CUSTOMIZATION",
   coverageHeading: "From custom fabric to packaging design",
   coverageItems: [
     { title: "Fabric", body: "Nylon/Spandex, Polyamide/Spandex, Polyester/Spandex, and recycled polyester blends" },

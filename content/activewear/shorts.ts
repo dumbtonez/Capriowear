@@ -79,7 +79,7 @@ export const shorts: Category = {
   // style's real PDP content exists.
   fabricNote: [
     {
-      text: "Fabric weight is set by Capriowear's own engineering and confirmed on your sample, not estimated or copied from competitor data. Swatches before every bulk run, and we can source or match a specific fabric from your reference.",
+      text: "Fabric weight is confirmed on your sample. Swatches before every bulk run, and we can source or match a specific fabric from your reference.",
     },
   ],
   fabricPills: ["Polyester spandex", "Nylon spandex", "Recycled polyester", "Cotton fleece"],
