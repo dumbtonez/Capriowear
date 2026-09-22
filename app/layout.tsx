@@ -9,11 +9,34 @@ import { ALLOW_INDEXING, DEFAULT_DESCRIPTION, PARENT_SITE_NAME, SITE_URL } from 
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import "./globals.css";
 
-// Figtree is the only typeface on the site. Weights 400, 500, 600, 700.
+// Figtree is the only typeface on the site. The design system uses 400,
+// 500, 600 and 700 (docs/02-design-system.md) -- all four are covered by
+// the variable font's own 300..900 `wght` axis, which is what we load.
+//
+// `weight` must NOT be an array here. Figtree is a variable font, and
+// next/font/google's own contract (node_modules/next/dist/docs/01-app/
+// 03-api-reference/02-components/font.md, the `weight` section) says an
+// array of weights "applies to a font that is not a variable google
+// font" and is only *required* when the font is not variable. This was
+// `weight: ["400", "500", "600", "700"]` until 2026-09-22, which asked
+// Google for 4 static instances of a variable font: the stylesheet comes
+// back with 8 @font-face blocks pointing at only 2 distinct .woff2 files
+// (the same variable file repeated per weight), and Turbopack's own
+// font-file replacer cannot resolve that duplication -- it fails the
+// whole build with "Can't resolve '@vercel/turbopack-next/internal/font/
+// google/font'" / "next/font/google queries have exactly one entry",
+// reported against app/layout.tsx with no mention of the real cause.
+//
+// A range string ("300..900") is not valid for next/font/google either:
+// it validates `weight` against its own font-data.json, whose Figtree
+// entry lists the discrete weights plus the literal "variable". Use
+// "variable" (or omit `weight`); both self-host 2 .woff2 subsets and
+// emit `font-weight: 300 900`, so 500/600/700 render as real
+// interpolated weights rather than synthetic ones.
 const figtree = Figtree({
   variable: "--font-figtree",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: "variable",
   display: "swap",
 });
 
