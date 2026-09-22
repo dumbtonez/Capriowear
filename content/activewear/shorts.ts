@@ -393,6 +393,106 @@ export const shorts: Category = {
       image: "",
       imageAlt: "Custom relaxed shorts manufacturer",
       href: "/capriowear/activewear/shorts/relaxed-mid",
+      // Full PDP content for SKU 3 (owner spec, 2026-09-22), draft, same
+      // shape as SKU 1/2. Reachable by URL and a clickable PLP card via
+      // the sitewide draft-PDP rule (`isDraftPdpReachable()`): still
+      // noindex/nofollow, out of the sitemap, no Product/FAQPage JSON-LD.
+      // Do not flip `status` to "published". First Shorts SKU with a real
+      // GSM figure (340, attributed to the locked YoungLA reference, not
+      // invented) -- unlike SKU 1/2's "pending" Polyester/Spandex or
+      // Nylon/Spandex builds, this style is cotton fleece. `images` are
+      // alt-only placeholders: real product photography is needed before
+      // this can go live. CTA is Request a Sample only (no secondary
+      // Download Catalog button), same as SKU 1/2.
+      pdpTitle: "Relaxed",
+      pdpHeading: "Custom Relaxed Shorts Manufacturer",
+      pdpDescription:
+        "Men's relaxed, roomier fit shorts, custom and private label, in a cotton fleece cut-and-sew construction, 5 to 7 inch inseam, elastic waistband with drawcord, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Relaxed shorts, front view" },
+        { alt: "Relaxed shorts, waistband and drawcord detail" },
+        { alt: "Relaxed shorts, side profile" },
+        { alt: "Relaxed shorts, fabric close-up" },
+        { alt: "Relaxed shorts, worn on model" },
+        { alt: "Relaxed shorts, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Relaxed Shorts Manufacturer",
+      pdpMetaDescription:
+        "Custom relaxed fit shorts manufacturer, OEM, ODM and private label, 5 to 7 inch inseam, roomier cut, cotton fleece, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes (plus waist-inch sizing)" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the relaxed short made from?",
+          a: "A cotton fleece, cotton or cotton/poly blend, in a soft-hand, brushed-finish construction. Our locked sampling reference runs 340 GSM, and we confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How is this different from your Athletic and Fitted Training shorts?",
+          a: "This is a roomier, relaxed cut, not a close-to-body athletic or fitted fit. It's built in a soft cotton fleece rather than a performance jersey knit.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Athletic Shorts", slug: "athletic-regular", href: "/capriowear/activewear/shorts" },
+        { label: "Fitted Training Shorts", slug: "fitted-training", href: "/capriowear/activewear/shorts" },
+        { label: "Baggy Shorts", slug: "baggy", href: "/capriowear/activewear/shorts" },
+        { label: "Relaxed Long Shorts", slug: "relaxed-long", href: "/capriowear/activewear/shorts" },
+        { label: "See All", href: "/capriowear/activewear/shorts" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Men's relaxed, roomier fit short, not fitted, not baggy, 5 to 7 inch inseam (base type)",
+        },
+        {
+          label: "Fabric",
+          value:
+            "Cotton fleece, cotton or cotton/poly blend, cut-and-sew construction, directional research range, pending confirmed spec on sample.",
+        },
+        {
+          label: "Weight",
+          value: "340 GSM, per the locked reference's published spec (YoungLA). Final weight confirmed on your sample.",
+        },
+        {
+          label: "Stretch and support",
+          value: "Relaxed, roomier cut, not compression, not baggy. A soft-hand, brushed-finish everyday short.",
+        },
+        { label: "Waistband", value: "Standard elastic waistband with drawcord closure" },
+        {
+          label: "Construction",
+          value: "Cut-and-sew, elastic waistband with drawcord, not knit-to-shape, flatlock finishing available",
+        },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Relaxed shorts, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Drawcord and eyelets checked for secure anchoring and pull strength",
+        "Waistbands hold their recovery",
+        "Fleece brushed finish checked for consistency across the size run",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Cotton fleece or a Polyester/Spandex or Nylon/Spandex blend, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
@@ -403,6 +503,106 @@ export const shorts: Category = {
       image: "",
       imageAlt: "Custom baggy shorts manufacturer",
       href: "/capriowear/activewear/shorts/baggy",
+      // Full PDP content for SKU 4 (owner spec, 2026-09-22), draft, same
+      // shape as SKU 1/2/3. Reachable by URL and a clickable PLP card via
+      // the sitewide draft-PDP rule (`isDraftPdpReachable()`): still
+      // noindex/nofollow, out of the sitemap, no Product/FAQPage JSON-LD.
+      // Do not flip `status` to "published". Real GSM figure (460,
+      // attributed to the locked YoungLA reference, not invented), same
+      // cotton fleece family as SKU 3, heavier weight for the baggy
+      // streetwear silhouette. `images` are alt-only placeholders: real
+      // product photography is needed before this can go live. CTA is
+      // Request a Sample only (no secondary Download Catalog button),
+      // same as SKU 1/2/3.
+      pdpTitle: "Baggy",
+      pdpHeading: "Custom Baggy Shorts Manufacturer",
+      pdpDescription:
+        "Men's baggy, below-knee wide-leg shorts, custom and private label, in a heavyweight cotton fleece cut-and-sew construction, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Baggy shorts, front view" },
+        { alt: "Baggy shorts, waistband and drawcord detail" },
+        { alt: "Baggy shorts, side profile" },
+        { alt: "Baggy shorts, fabric close-up" },
+        { alt: "Baggy shorts, worn on model" },
+        { alt: "Baggy shorts, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Baggy Shorts Manufacturer",
+      pdpMetaDescription:
+        "Custom baggy shorts manufacturer, OEM, ODM and private label, below-knee wide-leg streetwear silhouette, heavyweight cotton fleece, from 50 pieces, any fabric and color, DDP worldwide.",
+      pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes (plus waist-inch sizing)" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      faqs: [
+        {
+          q: "What fabric is the baggy short made from?",
+          a: "A heavyweight cotton fleece, cotton or cotton/poly blend. Our locked sampling reference runs 460 GSM, and we confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "How wide is the leg opening, and can it be adjusted?",
+          a: "The below-knee, wide-leg cut is fully adjustable to your tech pack, we confirm the exact leg width and length on your sample before bulk.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Relaxed Shorts", slug: "relaxed-mid", href: "/capriowear/activewear/shorts" },
+        { label: "Relaxed Long Shorts", slug: "relaxed-long", href: "/capriowear/activewear/shorts" },
+        { label: "Fitted Long Shorts", slug: "fitted-long", href: "/capriowear/activewear/shorts" },
+        { label: "2-in-1 Shorts", slug: "2-in-1", href: "/capriowear/activewear/shorts" },
+        { label: "See All", href: "/capriowear/activewear/shorts" },
+      ],
+      specifications: [
+        {
+          label: "Style",
+          value: "Men's baggy, oversized fit short, below-knee, wide-leg streetwear silhouette (base type)",
+        },
+        {
+          label: "Fabric",
+          value:
+            "Cotton fleece, cotton or cotton/poly blend, cut-and-sew construction, directional research range, pending confirmed spec on sample.",
+        },
+        {
+          label: "Weight",
+          value: "460 GSM, per the locked reference's published spec (YoungLA). Final weight confirmed on your sample.",
+        },
+        {
+          label: "Stretch and support",
+          value: "Baggy, oversized fit, not compression, not fitted. A heavyweight streetwear short, not intended for close-fit training use.",
+        },
+        { label: "Waistband", value: "Standard elastic waistband with drawcord closure" },
+        {
+          label: "Construction",
+          value: "Cut-and-sew, elastic waistband with drawcord, wide-leg pattern, not knit-to-shape, flatlock finishing available",
+        },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Baggy shorts, construction detail" },
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Drawcord and eyelets checked for secure anchoring and pull strength",
+        "Waistbands hold their recovery",
+        "Fleece weight and brushed finish checked for consistency across the size run",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Cotton fleece or a Polyester/Spandex or Nylon/Spandex blend, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
