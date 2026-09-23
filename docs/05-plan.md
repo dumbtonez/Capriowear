@@ -4149,3 +4149,11 @@ Built from the owner's brief (revised version, "Women's" naming per the always-g
 **SKU 7 chip change (brief's checklist item 8):** SKU 7's live chip row had no link to SKU 13; its "Men's Technical Performance Crewneck" chip (the least related to French terry) was replaced by "Women's French Terry Crewneck", same direct-mirror swap as SKU 5/6, keeping 4 chips + See All.
 
 All 16 Sweatshirts SKUs now have draft PDPs; every PLP card is a link (16/16 in server HTML). Verified (local render): all 4 pages 200, noindex/nofollow, BreadcrumbList only, both header CTAs, FAQ entity first and exact, linked get-started answer, Weight "Pending, confirmed on your sample.", `<dl>` specs, no H2 periods, no dashes, no elastane or brand names, 7 ↔ 13 links both ways. tsc clean, eslint 0 errors, build clean, Playwright 45/45.
+
+## T-Shirts Raglan (CAP-TEE-05) and Curved-Hem (CAP-TEE-08) gendered; all 16 T-Shirts SKUs now gendered, 2026-09-23
+
+Both carry `gender: "Men"` (confirmed in the data layer; the owner's content docs had said no gender field). Under the always-gender rule they now read "Men's Raglan / Men's Curved-Hem T-Shirt": card title, H1, title tag, breadcrumb (`pdpTitle`, visible + JSON-LD), card `imageAlt`, the 6 gallery alts plus the specifications alt (", men's" suffix), and the meta description opening.
+
+Raglan's meta fell to 149 chars after "Custom" became "Men's". Per the owner's choice, it now ends "...from 50 pieces, DDP to 20+ countries." (the site's standard DDP wording) with "Polyester/Spandex" lowercased: 156 chars. Curved-Hem's is 153.
+
+T-Shirts is closed out under the rule: 16/16 SKUs carry "Men's"/"Women's".
