@@ -5,10 +5,11 @@
 // capriowear-longsleeve-plp-content.md brief, same Tank Tops PLP pattern
 // (title/meta/hero/fabric/customization/trust/FAQ), minus the gender split:
 //
-// No gender toggle (owner spec, 2026-09-23): unlike T-Shirts and Tank Tops,
-// this category has had no brand-convergence research pass, so there is
-// no men's/women's SKU split yet. `showGenderFilter: false` and no card
-// carries a `gender` field. Add both only once that research exists.
+// Gender toggle (owner spec, 2026-09-23, after the brand-convergence pass):
+// All / Women / Men, "All" by default, same ActivewearListing filter as
+// T-Shirts. Every card carries `gender`: 6 men's (Crew, Fitted
+// Performance, Henley, Quarter-Zip, Fitted Raglan, Mock Neck) and 4
+// women's (CAP-LSL-11 to 14).
 //
 // No `weightTiers` table any more (the 2026-09-02 build had one): the brief
 // states no GSM or composition beyond what the fabric table itself lists,
@@ -47,39 +48,41 @@ export const longSleeveTops: Category = {
   trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
-  showGenderFilter: false,
+  showGenderFilter: true,
   fabricEyebrow: "FABRIC OPTIONS",
   fabricHeading: "The fabrics behind the\nbig brands",
+  // Rebuilt 2026-09-23 (owner) to the current 10-style range; rows tied
+  // to retired styles (Hooded, Waffle Thermal) removed.
   fabricOptions: [
     {
       fabric: "Cotton or cotton-blend jersey",
-      bestFor: "Crew long-sleeve tee, henley",
-      performance: "Soft hand, breathable",
+      bestFor: "Crew long-sleeve tee, henley, both genders",
+      performance: "Soft hand, breathable, the direct long-sleeve extension of our tee fabric platform",
     },
     {
-      fabric: "Waffle/thermal knit, cotton-spandex (96% cotton / 4% spandex)",
-      bestFor: "Fitted athletic thermal long-sleeve with thumbholes",
-      performance: "6 oz, ~203 GSM, honeycomb texture, stretch recovery",
+      fabric: "Heavier thermal cotton (190 GSM reference)",
+      bestFor: "Streetwear and workwear henleys",
+      performance: "100% cotton, sourced weight, pending confirmed on your sample for other builds",
     },
     {
-      fabric: "Waffle/thermal knit, heavier 100% cotton",
-      bestFor: "Streetwear/workwear henleys, cold-weather wear",
-      performance: "Heavyweight, GSM pending, confirmed on sample",
+      fabric: "Stretch tri-blend or waffle-knit",
+      bestFor: "Fitted raglan long-sleeve",
+      performance: "46% cotton / 46% lyocell / 8% elastane, 165 GSM on the tri-blend route, or a waffle-knit alternate",
     },
     {
-      fabric: "Brushed-back jersey",
-      bestFor: "Warmth without full waffle construction",
-      performance: "Pending, confirmed on sample",
-    },
-    {
-      fabric: "Performance poly-spandex (90% polyester / 10% spandex)",
-      bestFor: "Fitted athletic long-sleeves, quarter-zip pullovers",
+      fabric: "Performance poly-spandex",
+      bestFor: "Fitted performance long-sleeves, quarter-zip pullovers, both genders",
       performance: "Four-way stretch, moisture-wicking, lightweight",
     },
     {
-      fabric: "Modal or similar smooth-handfeel blends",
-      bestFor: "Hooded henley hybrid programs",
-      performance: "Pending, confirmed on sample",
+      fabric: "Performance poly (recycled)",
+      bestFor: "Fitted cropped long-sleeve, women's",
+      performance: "At least 75% recycled polyester on our reference, jacquard elastic hem finishing",
+    },
+    {
+      fabric: "Lightweight stretch cotton knit",
+      bestFor: "Midi-length long-sleeve, women's",
+      performance: "Pending, confirmed on your sample",
     },
   ],
   fabricNote: [
@@ -92,11 +95,11 @@ export const longSleeveTops: Category = {
   // Short PDP-facing pill labels for the same 6 fabrics above, same order.
   fabricPills: [
     "Cotton jersey",
-    "Waffle knit, cotton-spandex",
-    "Heavyweight cotton waffle",
-    "Brushed-back jersey",
-    "Poly-spandex",
-    "Modal blend",
+    "Heavier thermal cotton",
+    "Stretch tri-blend or waffle-knit",
+    "Performance poly-spandex",
+    "Recycled performance poly",
+    "Lightweight stretch cotton knit",
   ],
   // The brief's "TESTED BEFORE BULK" eyebrow isn't rendered: TrustPoints has
   // no eyebrow by design (see its own header comment), same as Tank Tops.
@@ -105,25 +108,26 @@ export const longSleeveTops: Category = {
   qualityPoints: [
     "Sleeve length graded proportionally across the full size run",
     "Cuff and thumbhole placement checked across sizes",
-    "Waffle/thermal shape retention and stretch recovery tested after wash",
+    "Thermal cotton and waffle-knit shape retention and stretch recovery tested after wash",
     "Henley plackets checked for secure buttons and flat lie, no gapping",
     "Every run inspected to AQL 2.5",
     "Third-party inspection welcome",
   ],
   coverageEyebrow: "CUSTOMIZATION",
   coverageHeading: "From custom fabric to packaging design",
-  // Owner-locked 6-item copy (2026-09-23), verbatim apart from the leading
-  // capital each body takes on every category. The brief's "Explore full
+  // Owner-locked 6-item copy (2026-09-23, rebuilt for the current range),
+  // verbatim apart from the leading capital each body takes on every
+  // category. The brief's "Explore full
   // customization" link isn't rendered: WhatWeCover has no link slot.
   coverageItems: [
-    { title: "Fabric", body: "Cotton, cotton-blend, waffle/thermal, performance poly, poly-spandex" },
+    { title: "Fabric", body: "Cotton, cotton-blend, thermal cotton, stretch tri-blend, performance poly, poly-spandex" },
     {
       title: "Fit and neckline",
       body: "Fitted athletic, relaxed, or oversized; crew, henley placket with button count, mock neck, or quarter-zip",
     },
     {
       title: "Sleeve, cuff, and construction",
-      body: "Set-in, raglan, or drop-shoulder sleeve; ribbed, hemmed, raw-edge, or thumbhole cuff; hood (hooded henley hybrid) and articulated elbow/back darts as upgrades",
+      body: "Set-in, raglan, or drop-shoulder sleeve; ribbed, hemmed, thumbhole, or elastic-band cuff",
     },
     {
       title: "Branding",
@@ -142,7 +146,7 @@ export const longSleeveTops: Category = {
     },
     {
       q: "Which fabrics do you use for long-sleeve tops?",
-      a: "Cotton and cotton-blend jersey, waffle/thermal knit, performance poly-spandex, and modal blends, confirmed on your sample.",
+      a: "Cotton and cotton-blend jersey, heavier thermal cotton, stretch tri-blend, performance poly-spandex, recycled performance poly, and lightweight stretch cotton knit, confirmed on your sample.",
     },
     {
       q: "What is the difference between a performance long-sleeve and a compression long-sleeve?",
@@ -166,7 +170,7 @@ export const longSleeveTops: Category = {
     },
     {
       q: "What can I customize?",
-      a: "Fabric, fit, neckline, cuff type, sleeve construction, hood, articulated darts, color, print/embroidery placement (incl. sleeve and cuff), logos, labels, hangtags, packaging.",
+      a: "Fabric, fit, neckline, cuff type, sleeve construction, articulated darts, color, print/embroidery placement (incl. sleeve and cuff), logos, labels, hangtags, packaging.",
     },
     {
       q: "Do you offer OEM, ODM, and private label long-sleeve tops?",
@@ -209,6 +213,7 @@ export const longSleeveTops: Category = {
     {
       status: "draft",
       slug: "crew",
+      gender: "Men",
       sku: "CAP-LSL-01",
       cardTitle: "Custom Crew Long-Sleeve Tee",
       cardSubline: "Standard crew neckline, cotton or cotton-blend jersey",
@@ -326,6 +331,7 @@ export const longSleeveTops: Category = {
     {
       status: "draft",
       slug: "fitted-performance",
+      gender: "Men",
       sku: "CAP-LSL-02",
       cardTitle: "Men's Fitted Performance Long-Sleeve",
       cardSubline: "Moisture-wicking poly-spandex, athletic cut, thumbholes standard",
@@ -430,6 +436,7 @@ export const longSleeveTops: Category = {
     {
       status: "draft",
       slug: "henley",
+      gender: "Men",
       sku: "CAP-LSL-03",
       cardTitle: "Custom Henley Long-Sleeve",
       cardSubline: "Collarless neckline, 2 to 5 button placket",
@@ -533,6 +540,7 @@ export const longSleeveTops: Category = {
     {
       status: "draft",
       slug: "quarter-zip",
+      gender: "Men",
       sku: "CAP-LSL-04",
       cardTitle: "Custom Quarter-Zip Long-Sleeve",
       cardSubline: "Partial front zip, standing mock collar",
@@ -622,6 +630,7 @@ export const longSleeveTops: Category = {
     {
       status: "draft",
       slug: "raglan",
+      gender: "Men",
       sku: "CAP-LSL-07",
       cardTitle: "Custom Fitted Raglan Long-Sleeve",
       cardSubline: "Fitted raglan sleeve, stretch blend fabric, improved shoulder flexibility",
@@ -724,6 +733,7 @@ export const longSleeveTops: Category = {
     {
       status: "draft",
       slug: "mock-neck",
+      gender: "Men",
       sku: "CAP-LSL-10",
       cardTitle: "Custom Mock Neck Long-Sleeve",
       cardSubline: "Standing mock collar, no front zip",
@@ -816,6 +826,7 @@ export const longSleeveTops: Category = {
     {
       status: "draft",
       slug: "fitted-performance-womens",
+      gender: "Women",
       sku: "CAP-LSL-11",
       cardTitle: "Women's Fitted Performance Long-Sleeve",
       cardSubline: "Thumbholes and mesh underarm panels, moisture-wicking poly-spandex",
@@ -913,6 +924,7 @@ export const longSleeveTops: Category = {
     {
       status: "draft",
       slug: "fitted-cropped",
+      gender: "Women",
       sku: "CAP-LSL-12",
       cardTitle: "Women's Fitted Cropped Long-Sleeve",
       cardSubline: "Jacquard elastic hem band, performance poly",
@@ -999,6 +1011,7 @@ export const longSleeveTops: Category = {
     {
       status: "draft",
       slug: "crew-womens",
+      gender: "Women",
       sku: "CAP-LSL-13",
       cardTitle: "Women's Oversized Crew Long-Sleeve",
       cardSubline: "Oversized crew neckline, 100% cotton",
@@ -1097,6 +1110,7 @@ export const longSleeveTops: Category = {
     {
       status: "draft",
       slug: "midi-length",
+      gender: "Women",
       sku: "CAP-LSL-14",
       cardTitle: "Women's Midi-Length Long-Sleeve",
       cardSubline: "Between full-length and cropped, lightweight stretch cotton knit",

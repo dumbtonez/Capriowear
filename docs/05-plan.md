@@ -4068,3 +4068,14 @@ Owner override of the strict rule applied earlier today: the whole Long-Sleeve T
 - **CAP-LSL-02:** meta description now starts "Men's fitted performance long-sleeve manufacturer..." (was "Custom ..."), catching up with its gendered H1/title/breadcrumb/card/alts.
 
 **Verified:** all 4 pages return 200 with the new title, H1, breadcrumb, alts and meta. The PLP shows the 4 women's cards as "Women's ...". tsc and eslint clean.
+
+## Long-Sleeve Tops PLP: gender toggle on, fabric table and customization strip rebuilt for the current range, 2026-09-23
+
+Owner fix after a live-page check, `content/activewear/long-sleeve-tops.ts`:
+
+- **Gender toggle:** `showGenderFilter: true` (All by default, the same ActivewearListing filter as T-Shirts). Every card now carries `gender`: Men = Crew, Fitted Performance, Henley, Quarter-Zip, Fitted Raglan, Mock Neck (6); Women = CAP-LSL-11 to 14 (4).
+- **Fabric table:** replaced with the owner's 6 rows (cotton jersey, heavier thermal cotton 190 GSM, stretch tri-blend or waffle-knit, performance poly-spandex, recycled performance poly, lightweight stretch cotton knit). Category `fabricPills` realigned to the same 6; every LST PDP sets its own pills, so no page changes from that. The note under the table was kept unchanged as instructed. The brief quoted a different note ("...set by Capriowear's own engineering... not... copied from competitor data...") that was never live here, so the live note was kept.
+- **Customization strip:** replaced with the owner's 6 items (no raw-edge cuff, no hood).
+- **Leftover sweep (owner calls):** PLP FAQ "Which fabrics...?" now lists the current six fabrics (was waffle/thermal knit and modal blends). "What can I customize?" drops "hood" and keeps articulated darts (still a Fitted Performance upgrade). The trust point is now "Thermal cotton and waffle-knit shape retention and stretch recovery tested after wash".
+
+**Verified, click-tested at 1440 and 390:** All is pressed on load. Men shows exactly the 6 men's cards, Women exactly the 4 women's, and All returns the full set (paginated 9 or 8 on page 1, all 10 in the server HTML). `aria-pressed` flips correctly on every click. Rendered page has none of hooded/hood/Waffle Thermal/raw-edge/modal/96%. Zero overflow at the 15 target viewports. tsc and eslint clean.
