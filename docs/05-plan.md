@@ -4157,3 +4157,12 @@ Both carry `gender: "Men"` (confirmed in the data layer; the owner's content doc
 Raglan's meta fell to 149 chars after "Custom" became "Men's". Per the owner's choice, it now ends "...from 50 pieces, DDP to 20+ countries." (the site's standard DDP wording) with "Polyester/Spandex" lowercased: 156 chars. Curved-Hem's is 153.
 
 T-Shirts is closed out under the rule: 16/16 SKUs carry "Men's"/"Women's".
+
+## Shorts fix pass: all 14 SKUs gendered, meta descriptions replaced, CTA noun "short", 2026-09-23
+
+Owner's 8-item Shorts pass, `content/activewear/shorts.ts` only.
+
+- **1. Gendering (always-gender rule):** all 14 SKUs, CAP-SHO-01 to 07 "Men's ..." and 08 to 14 "Women's ...": card title, H1, title tag, breadcrumb (`pdpTitle` gets the gender prefix on its existing short label, e.g. "Men's Athletic/Regular", visible + JSON-LD), card `imageAlt`, the 6 gallery alts plus the specifications alt (", men's"/", women's" suffix). All 56 related-style chips carry their target SKU's gender prefix.
+- **2. Meta descriptions:** the owner's 14 PDP strings and the PLP string, verbatim, all 150 to 158 chars (lengths verified).
+- **6. Final CTA body:** `ctaReferenceNoun` "pair of shorts" became "short": "Share your tech pack, sketch or a reference short. We'll come back within 24 hours with next steps."
+- **Already correct on the live site before this pass, no change needed:** (3) two-button header CTA, Request a Sample + Download Catalog, from the shared PDP template; (4) all 14 draft cards clickable via `isDraftPdpReachable()`, PDPs noindex with BreadcrumbList only; (5) PLP and PDP "How do I get started?" already the locked wording with the contact-form link; (6) final CTA heading, both buttons and all 8 compliance items; (7) no "Explore full customization" link; (8) no "TESTED BEFORE BULK" eyebrow.

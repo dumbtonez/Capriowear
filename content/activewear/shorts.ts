@@ -45,7 +45,7 @@ export const shorts: Category = {
   h1: "Custom Shorts Manufacturer",
   metaTitle: "Custom Shorts Manufacturer",
   metaDescription:
-    "Custom shorts manufacturer, OEM, ODM and private label, athletic to relaxed to baggy, 2-in-1 lined and zip-pocket builds, from 50 pieces, any fabric and color, DDP worldwide.",
+    "Custom shorts manufacturer, OEM, ODM and private label, athletic to relaxed to baggy, biker and mini styles, from 50 pieces, any fabric, DDP to 20+ countries.",
   trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
@@ -155,7 +155,7 @@ export const shorts: Category = {
     },
     faqGetStarted,
   ],
-  ctaReferenceNoun: "pair of shorts",
+  ctaReferenceNoun: "short",
   // 14 styles, 7 men's (CAP-SHO-01 to 07) then 7 women's (CAP-SHO-08 to
   // 14), every one "draft" (owner spec, 2026-09-22): real name, one-line
   // spec, and a `gender` tag for the chip-row filter. Shows on the grid as
@@ -170,11 +170,11 @@ export const shorts: Category = {
       status: "draft",
       slug: "athletic-regular",
       sku: "CAP-SHO-01",
-      cardTitle: "Custom Athletic Shorts",
+      cardTitle: "Men's Athletic Shorts",
       cardSubline: "Standard athletic fit, 5 to 7 inch inseam, drawcord waistband",
       gender: "Men",
       image: "",
-      imageAlt: "Custom athletic shorts manufacturer",
+      imageAlt: "Men's athletic shorts manufacturer",
       href: "/capriowear/activewear/shorts/athletic-regular",
       // Full PDP content for SKU 1 (owner spec, 2026-09-22), draft.
       // Reachable by URL and a clickable PLP card via the sitewide
@@ -190,21 +190,21 @@ export const shorts: Category = {
       // wording (slash fabric names, waist-inch sizing note) rather than
       // editing the shared `fabricPills`/`pdpSpecHighlights` every future
       // SKU on this category will also fall back to.
-      pdpTitle: "Athletic/Regular",
-      pdpHeading: "Custom Athletic Shorts Manufacturer",
+      pdpTitle: "Men's Athletic/Regular",
+      pdpHeading: "Men's Athletic Shorts Manufacturer",
       pdpDescription:
         "Men's athletic-regular fit shorts, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 5 to 7 inch inseam, elastic waistband with drawcord, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Athletic shorts, front view" },
-        { alt: "Athletic shorts, waistband and drawcord detail" },
-        { alt: "Athletic shorts, side profile" },
-        { alt: "Athletic shorts, fabric close-up" },
-        { alt: "Athletic shorts, worn on model" },
-        { alt: "Athletic shorts, flat lay" },
+        { alt: "Athletic shorts, front view, men's" },
+        { alt: "Athletic shorts, waistband and drawcord detail, men's" },
+        { alt: "Athletic shorts, side profile, men's" },
+        { alt: "Athletic shorts, fabric close-up, men's" },
+        { alt: "Athletic shorts, worn on model, men's" },
+        { alt: "Athletic shorts, flat lay, men's" },
       ],
-      pdpMetaTitle: "Custom Athletic Shorts Manufacturer",
+      pdpMetaTitle: "Men's Athletic Shorts Manufacturer",
       pdpMetaDescription:
-        "Custom athletic-regular fit shorts manufacturer, OEM, ODM and private label, 5 to 7 inch inseam, elastic waistband with drawcord, Polyester/Spandex or Nylon/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Men's athletic shorts manufacturer, private label, 5 to 7 inch inseam, elastic waistband, Polyester/Spandex, low MOQ from 50 pieces, DDP to 20+ countries.",
       pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -223,10 +223,10 @@ export const shorts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted Training Shorts", slug: "fitted-training", href: "/capriowear/activewear/shorts" },
-        { label: "Relaxed Shorts", slug: "relaxed-mid", href: "/capriowear/activewear/shorts" },
-        { label: "Baggy Shorts", slug: "baggy", href: "/capriowear/activewear/shorts" },
-        { label: "2-in-1 Shorts", slug: "2-in-1", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Fitted Training Shorts", slug: "fitted-training", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Relaxed Shorts", slug: "relaxed-mid", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Baggy Shorts", slug: "baggy", href: "/capriowear/activewear/shorts" },
+        { label: "Men's 2-in-1 Shorts", slug: "2-in-1", href: "/capriowear/activewear/shorts" },
         { label: "See All", href: "/capriowear/activewear/shorts" },
       ],
       specifications: [
@@ -248,7 +248,7 @@ export const shorts: Category = {
         },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Athletic shorts, construction detail" },
+      specificationsImage: { alt: "Athletic shorts, construction detail, men's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Drawcord and eyelets checked for secure anchoring and pull strength",
@@ -277,11 +277,11 @@ export const shorts: Category = {
     {
       status: "draft",
       slug: "fitted-training",
-      cardTitle: "Custom Fitted Training Shorts",
+      cardTitle: "Men's Fitted Training Shorts",
       cardSubline: "Closer training fit, 5 to 7 inch inseam",
       gender: "Men",
       image: "",
-      imageAlt: "Custom fitted training shorts manufacturer",
+      imageAlt: "Men's fitted training shorts manufacturer",
       href: "/capriowear/activewear/shorts/fitted-training",
       // Full PDP content for SKU 2 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1. Reachable by URL and a clickable PLP card via the
@@ -291,22 +291,22 @@ export const shorts: Category = {
       // figure of any kind. `images` are alt-only placeholders: real
       // product photography is needed before this can go live.
       // `pdpFabricPills`/`pdpSpecHighlights` overrides match SKU 1's own.
-      pdpTitle: "Fitted Training",
+      pdpTitle: "Men's Fitted Training",
       sku: "CAP-SHO-02",
-      pdpHeading: "Custom Fitted Training Shorts Manufacturer",
+      pdpHeading: "Men's Fitted Training Shorts Manufacturer",
       pdpDescription:
         "Men's fitted athletic shorts, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 5 to 7 inch inseam, a closer training fit than our Athletic short, elastic waistband with drawcord, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Fitted training shorts, front view" },
-        { alt: "Fitted training shorts, waistband and drawcord detail" },
-        { alt: "Fitted training shorts, side profile" },
-        { alt: "Fitted training shorts, fabric close-up" },
-        { alt: "Fitted training shorts, worn on model" },
-        { alt: "Fitted training shorts, flat lay" },
+        { alt: "Fitted training shorts, front view, men's" },
+        { alt: "Fitted training shorts, waistband and drawcord detail, men's" },
+        { alt: "Fitted training shorts, side profile, men's" },
+        { alt: "Fitted training shorts, fabric close-up, men's" },
+        { alt: "Fitted training shorts, worn on model, men's" },
+        { alt: "Fitted training shorts, flat lay, men's" },
       ],
-      pdpMetaTitle: "Custom Fitted Training Shorts Manufacturer",
+      pdpMetaTitle: "Men's Fitted Training Shorts Manufacturer",
       pdpMetaDescription:
-        "Custom fitted training shorts manufacturer, OEM, ODM and private label, 5 to 7 inch inseam, closer athletic fit, Polyester/Spandex or Nylon/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Men's fitted training shorts manufacturer, private label, 5 to 7 inch inseam, athletic fit, Polyester/Spandex or Nylon/Spandex, low MOQ, DDP to 20+ countries.",
       pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -325,10 +325,10 @@ export const shorts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Athletic Shorts", slug: "athletic-regular", href: "/capriowear/activewear/shorts" },
-        { label: "Relaxed Shorts", slug: "relaxed-mid", href: "/capriowear/activewear/shorts" },
-        { label: "Baggy Shorts", slug: "baggy", href: "/capriowear/activewear/shorts" },
-        { label: "2-in-1 Shorts", slug: "2-in-1", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Athletic Shorts", slug: "athletic-regular", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Relaxed Shorts", slug: "relaxed-mid", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Baggy Shorts", slug: "baggy", href: "/capriowear/activewear/shorts" },
+        { label: "Men's 2-in-1 Shorts", slug: "2-in-1", href: "/capriowear/activewear/shorts" },
         { label: "See All", href: "/capriowear/activewear/shorts" },
       ],
       specifications: [
@@ -357,7 +357,7 @@ export const shorts: Category = {
         },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Fitted training shorts, construction detail" },
+      specificationsImage: { alt: "Fitted training shorts, construction detail, men's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Drawcord and eyelets checked for secure anchoring and pull strength",
@@ -386,11 +386,11 @@ export const shorts: Category = {
     {
       status: "draft",
       slug: "relaxed-mid",
-      cardTitle: "Custom Relaxed Shorts",
+      cardTitle: "Men's Relaxed Shorts",
       cardSubline: "Roomier relaxed cut, 5 to 7 inch inseam",
       gender: "Men",
       image: "",
-      imageAlt: "Custom relaxed shorts manufacturer",
+      imageAlt: "Men's relaxed shorts manufacturer",
       href: "/capriowear/activewear/shorts/relaxed-mid",
       // Full PDP content for SKU 3 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1/2. Reachable by URL and a clickable PLP card via
@@ -403,22 +403,22 @@ export const shorts: Category = {
       // alt-only placeholders: real product photography is needed before
       // this can go live. CTA is Request a Sample only (no secondary
       // Download Catalog button), same as SKU 1/2.
-      pdpTitle: "Relaxed",
+      pdpTitle: "Men's Relaxed",
       sku: "CAP-SHO-03",
-      pdpHeading: "Custom Relaxed Shorts Manufacturer",
+      pdpHeading: "Men's Relaxed Shorts Manufacturer",
       pdpDescription:
         "Men's relaxed, roomier fit shorts, custom and private label, in a cotton fleece cut-and-sew construction, 5 to 7 inch inseam, elastic waistband with drawcord, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Relaxed shorts, front view" },
-        { alt: "Relaxed shorts, waistband and drawcord detail" },
-        { alt: "Relaxed shorts, side profile" },
-        { alt: "Relaxed shorts, fabric close-up" },
-        { alt: "Relaxed shorts, worn on model" },
-        { alt: "Relaxed shorts, flat lay" },
+        { alt: "Relaxed shorts, front view, men's" },
+        { alt: "Relaxed shorts, waistband and drawcord detail, men's" },
+        { alt: "Relaxed shorts, side profile, men's" },
+        { alt: "Relaxed shorts, fabric close-up, men's" },
+        { alt: "Relaxed shorts, worn on model, men's" },
+        { alt: "Relaxed shorts, flat lay, men's" },
       ],
-      pdpMetaTitle: "Custom Relaxed Shorts Manufacturer",
+      pdpMetaTitle: "Men's Relaxed Shorts Manufacturer",
       pdpMetaDescription:
-        "Custom relaxed fit shorts manufacturer, OEM, ODM and private label, 5 to 7 inch inseam, roomier cut, cotton fleece, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Men's relaxed fit shorts manufacturer, private label, 5 to 7 inch inseam, roomier cut, soft cotton fleece, low MOQ from 50 pieces, DDP to 20+ countries.",
       pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -437,10 +437,10 @@ export const shorts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Athletic Shorts", slug: "athletic-regular", href: "/capriowear/activewear/shorts" },
-        { label: "Fitted Training Shorts", slug: "fitted-training", href: "/capriowear/activewear/shorts" },
-        { label: "Baggy Shorts", slug: "baggy", href: "/capriowear/activewear/shorts" },
-        { label: "Relaxed Long Shorts", slug: "relaxed-long", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Athletic Shorts", slug: "athletic-regular", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Fitted Training Shorts", slug: "fitted-training", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Baggy Shorts", slug: "baggy", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Relaxed Long Shorts", slug: "relaxed-long", href: "/capriowear/activewear/shorts" },
         { label: "See All", href: "/capriowear/activewear/shorts" },
       ],
       specifications: [
@@ -468,7 +468,7 @@ export const shorts: Category = {
         },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Relaxed shorts, construction detail" },
+      specificationsImage: { alt: "Relaxed shorts, construction detail, men's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Drawcord and eyelets checked for secure anchoring and pull strength",
@@ -497,11 +497,11 @@ export const shorts: Category = {
     {
       status: "draft",
       slug: "baggy",
-      cardTitle: "Custom Baggy Shorts",
+      cardTitle: "Men's Baggy Shorts",
       cardSubline: "Below-knee, wide-leg streetwear silhouette",
       gender: "Men",
       image: "",
-      imageAlt: "Custom baggy shorts manufacturer",
+      imageAlt: "Men's baggy shorts manufacturer",
       href: "/capriowear/activewear/shorts/baggy",
       // Full PDP content for SKU 4 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1/2/3. Reachable by URL and a clickable PLP card via
@@ -514,22 +514,22 @@ export const shorts: Category = {
       // product photography is needed before this can go live. CTA is
       // Request a Sample only (no secondary Download Catalog button),
       // same as SKU 1/2/3.
-      pdpTitle: "Baggy",
+      pdpTitle: "Men's Baggy",
       sku: "CAP-SHO-04",
-      pdpHeading: "Custom Baggy Shorts Manufacturer",
+      pdpHeading: "Men's Baggy Shorts Manufacturer",
       pdpDescription:
         "Men's baggy, below-knee wide-leg shorts, custom and private label, in a heavyweight cotton fleece cut-and-sew construction, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Baggy shorts, front view" },
-        { alt: "Baggy shorts, waistband and drawcord detail" },
-        { alt: "Baggy shorts, side profile" },
-        { alt: "Baggy shorts, fabric close-up" },
-        { alt: "Baggy shorts, worn on model" },
-        { alt: "Baggy shorts, flat lay" },
+        { alt: "Baggy shorts, front view, men's" },
+        { alt: "Baggy shorts, waistband and drawcord detail, men's" },
+        { alt: "Baggy shorts, side profile, men's" },
+        { alt: "Baggy shorts, fabric close-up, men's" },
+        { alt: "Baggy shorts, worn on model, men's" },
+        { alt: "Baggy shorts, flat lay, men's" },
       ],
-      pdpMetaTitle: "Custom Baggy Shorts Manufacturer",
+      pdpMetaTitle: "Men's Baggy Shorts Manufacturer",
       pdpMetaDescription:
-        "Custom baggy shorts manufacturer, OEM, ODM and private label, below-knee wide-leg streetwear silhouette, heavyweight cotton fleece, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Men's baggy shorts manufacturer, private label, below-knee wide-leg streetwear cut, heavyweight cotton fleece, low MOQ from 50 pieces, DDP to 20+ countries.",
       pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -548,10 +548,10 @@ export const shorts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Relaxed Shorts", slug: "relaxed-mid", href: "/capriowear/activewear/shorts" },
-        { label: "Relaxed Long Shorts", slug: "relaxed-long", href: "/capriowear/activewear/shorts" },
-        { label: "Fitted Long Shorts", slug: "fitted-long", href: "/capriowear/activewear/shorts" },
-        { label: "2-in-1 Shorts", slug: "2-in-1", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Relaxed Shorts", slug: "relaxed-mid", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Relaxed Long Shorts", slug: "relaxed-long", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Fitted Long Shorts", slug: "fitted-long", href: "/capriowear/activewear/shorts" },
+        { label: "Men's 2-in-1 Shorts", slug: "2-in-1", href: "/capriowear/activewear/shorts" },
         { label: "See All", href: "/capriowear/activewear/shorts" },
       ],
       specifications: [
@@ -579,7 +579,7 @@ export const shorts: Category = {
         },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Baggy shorts, construction detail" },
+      specificationsImage: { alt: "Baggy shorts, construction detail, men's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Drawcord and eyelets checked for secure anchoring and pull strength",
@@ -608,11 +608,11 @@ export const shorts: Category = {
     {
       status: "draft",
       slug: "2-in-1",
-      cardTitle: "Custom 2-in-1 Shorts",
+      cardTitle: "Men's 2-in-1 Shorts",
       cardSubline: "Outer shell over a built-in fitted liner, mid-length inseam",
       gender: "Men",
       image: "",
-      imageAlt: "Custom 2-in-1 shorts manufacturer",
+      imageAlt: "Men's 2-in-1 shorts manufacturer",
       href: "/capriowear/activewear/shorts/2-in-1",
       // Full PDP content for SKU 5 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 4. Reachable by URL and a clickable PLP card
@@ -622,22 +622,22 @@ export const shorts: Category = {
       // (Weight stays "Pending, confirmed on your sample."). `images`
       // are alt-only placeholders: real product photography is needed
       // before this can go live. CTA is Request a Sample only.
-      pdpTitle: "2-in-1",
+      pdpTitle: "Men's 2-in-1",
       sku: "CAP-SHO-05",
-      pdpHeading: "Custom 2-in-1 Shorts Manufacturer",
+      pdpHeading: "Men's 2-in-1 Shorts Manufacturer",
       pdpDescription:
         "Men's 2-in-1 shorts, a looser outer shell over a built-in fitted liner, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew construction, mid-length inseam, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "2-in-1 shorts, front view" },
-        { alt: "2-in-1 shorts, liner and shell detail" },
-        { alt: "2-in-1 shorts, side profile" },
-        { alt: "2-in-1 shorts, fabric close-up" },
-        { alt: "2-in-1 shorts, worn on model" },
-        { alt: "2-in-1 shorts, flat lay" },
+        { alt: "2-in-1 shorts, front view, men's" },
+        { alt: "2-in-1 shorts, liner and shell detail, men's" },
+        { alt: "2-in-1 shorts, side profile, men's" },
+        { alt: "2-in-1 shorts, fabric close-up, men's" },
+        { alt: "2-in-1 shorts, worn on model, men's" },
+        { alt: "2-in-1 shorts, flat lay, men's" },
       ],
-      pdpMetaTitle: "Custom 2-in-1 Shorts Manufacturer",
+      pdpMetaTitle: "Men's 2-in-1 Shorts Manufacturer",
       pdpMetaDescription:
-        "Custom 2-in-1 shorts manufacturer, OEM, ODM and private label, outer shell over a built-in fitted liner, Polyester/Spandex or Nylon/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Men's 2-in-1 shorts manufacturer, private label, outer shell over a built-in fitted liner, Polyester/Spandex or Nylon/Spandex, low MOQ, DDP to 20+ countries.",
       pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -656,10 +656,10 @@ export const shorts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Athletic Shorts", slug: "athletic-regular", href: "/capriowear/activewear/shorts" },
-        { label: "Fitted Training Shorts", slug: "fitted-training", href: "/capriowear/activewear/shorts" },
-        { label: "Relaxed Shorts", slug: "relaxed-mid", href: "/capriowear/activewear/shorts" },
-        { label: "Relaxed Long Shorts", slug: "relaxed-long", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Athletic Shorts", slug: "athletic-regular", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Fitted Training Shorts", slug: "fitted-training", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Relaxed Shorts", slug: "relaxed-mid", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Relaxed Long Shorts", slug: "relaxed-long", href: "/capriowear/activewear/shorts" },
         { label: "See All", href: "/capriowear/activewear/shorts" },
       ],
       specifications: [
@@ -684,7 +684,7 @@ export const shorts: Category = {
         },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "2-in-1 shorts, construction detail" },
+      specificationsImage: { alt: "2-in-1 shorts, construction detail, men's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Liner and shell layers checked for consistent fit and alignment together, not separately",
@@ -713,11 +713,11 @@ export const shorts: Category = {
     {
       status: "draft",
       slug: "relaxed-long",
-      cardTitle: "Custom Relaxed Long Shorts",
+      cardTitle: "Men's Relaxed Long Shorts",
       cardSubline: "Roomier relaxed cut, 8 inch or below-knee",
       gender: "Men",
       image: "",
-      imageAlt: "Custom relaxed long shorts manufacturer",
+      imageAlt: "Men's relaxed long shorts manufacturer",
       href: "/capriowear/activewear/shorts/relaxed-long",
       // Full PDP content for SKU 6 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 5. Reachable by URL and a clickable PLP card
@@ -727,22 +727,22 @@ export const shorts: Category = {
       // (Weight stays "Pending, confirmed on your sample."). `images`
       // are alt-only placeholders: real product photography is needed
       // before this can go live. CTA is Request a Sample only.
-      pdpTitle: "Relaxed Long",
+      pdpTitle: "Men's Relaxed Long",
       sku: "CAP-SHO-06",
-      pdpHeading: "Custom Relaxed Long Shorts Manufacturer",
+      pdpHeading: "Men's Relaxed Long Shorts Manufacturer",
       pdpDescription:
         "Men's relaxed, roomier fit shorts, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 8 inch or below-knee inseam, elastic waistband with drawcord, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Relaxed long shorts, front view" },
-        { alt: "Relaxed long shorts, waistband and drawcord detail" },
-        { alt: "Relaxed long shorts, side profile" },
-        { alt: "Relaxed long shorts, fabric close-up" },
-        { alt: "Relaxed long shorts, worn on model" },
-        { alt: "Relaxed long shorts, flat lay" },
+        { alt: "Relaxed long shorts, front view, men's" },
+        { alt: "Relaxed long shorts, waistband and drawcord detail, men's" },
+        { alt: "Relaxed long shorts, side profile, men's" },
+        { alt: "Relaxed long shorts, fabric close-up, men's" },
+        { alt: "Relaxed long shorts, worn on model, men's" },
+        { alt: "Relaxed long shorts, flat lay, men's" },
       ],
-      pdpMetaTitle: "Custom Relaxed Long Shorts Manufacturer",
+      pdpMetaTitle: "Men's Relaxed Long Shorts Manufacturer",
       pdpMetaDescription:
-        "Custom relaxed long shorts manufacturer, OEM, ODM and private label, 8 inch or below-knee inseam, roomier cut, Polyester/Spandex or Nylon/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Men's relaxed long shorts manufacturer, private label, 8 inch or below-knee inseam, Polyester/Spandex or Nylon/Spandex, low MOQ, DDP to 20+ countries.",
       pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -761,10 +761,10 @@ export const shorts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Relaxed Shorts", slug: "relaxed-mid", href: "/capriowear/activewear/shorts" },
-        { label: "Baggy Shorts", slug: "baggy", href: "/capriowear/activewear/shorts" },
-        { label: "Fitted Long Shorts", slug: "fitted-long", href: "/capriowear/activewear/shorts" },
-        { label: "2-in-1 Shorts", slug: "2-in-1", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Relaxed Shorts", slug: "relaxed-mid", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Baggy Shorts", slug: "baggy", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Fitted Long Shorts", slug: "fitted-long", href: "/capriowear/activewear/shorts" },
+        { label: "Men's 2-in-1 Shorts", slug: "2-in-1", href: "/capriowear/activewear/shorts" },
         { label: "See All", href: "/capriowear/activewear/shorts" },
       ],
       specifications: [
@@ -789,7 +789,7 @@ export const shorts: Category = {
         },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Relaxed long shorts, construction detail" },
+      specificationsImage: { alt: "Relaxed long shorts, construction detail, men's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Drawcord and eyelets checked for secure anchoring and pull strength",
@@ -817,11 +817,11 @@ export const shorts: Category = {
     {
       status: "draft",
       slug: "fitted-long",
-      cardTitle: "Custom Fitted Long Shorts",
+      cardTitle: "Men's Fitted Long Shorts",
       cardSubline: "Fitted baselayer cut, 8 inch or below-knee",
       gender: "Men",
       image: "",
-      imageAlt: "Custom fitted long shorts manufacturer",
+      imageAlt: "Men's fitted long shorts manufacturer",
       href: "/capriowear/activewear/shorts/fitted-long",
       // Full PDP content for SKU 7 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 6, last SKU of the men's line. Reachable by
@@ -832,22 +832,22 @@ export const shorts: Category = {
       // on your sample."). `images` are alt-only placeholders: real
       // product photography is needed before this can go live. CTA is
       // Request a Sample only.
-      pdpTitle: "Fitted Long",
+      pdpTitle: "Men's Fitted Long",
       sku: "CAP-SHO-07",
-      pdpHeading: "Custom Fitted Long Shorts Manufacturer",
+      pdpHeading: "Men's Fitted Long Shorts Manufacturer",
       pdpDescription:
         "Men's fitted, close-to-body compression shorts, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 8 inch or below-knee inseam, drop-in pocket, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Fitted long shorts, front view" },
-        { alt: "Fitted long shorts, drop-in pocket detail" },
-        { alt: "Fitted long shorts, side profile" },
-        { alt: "Fitted long shorts, fabric close-up" },
-        { alt: "Fitted long shorts, worn on model" },
-        { alt: "Fitted long shorts, flat lay" },
+        { alt: "Fitted long shorts, front view, men's" },
+        { alt: "Fitted long shorts, drop-in pocket detail, men's" },
+        { alt: "Fitted long shorts, side profile, men's" },
+        { alt: "Fitted long shorts, fabric close-up, men's" },
+        { alt: "Fitted long shorts, worn on model, men's" },
+        { alt: "Fitted long shorts, flat lay, men's" },
       ],
-      pdpMetaTitle: "Custom Fitted Long Shorts Manufacturer",
+      pdpMetaTitle: "Men's Fitted Long Shorts Manufacturer",
       pdpMetaDescription:
-        "Custom fitted long shorts manufacturer, OEM, ODM and private label, 8 inch or below-knee compression baselayer, drop-in pocket, Polyester/Spandex or Nylon/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Men's fitted long shorts manufacturer, private label, 8 inch or below-knee compression fit, drop-in pocket, Polyester/Spandex, low MOQ, DDP to 20+ countries.",
       pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -866,10 +866,10 @@ export const shorts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Relaxed Long Shorts", slug: "relaxed-long", href: "/capriowear/activewear/shorts" },
-        { label: "Baggy Shorts", slug: "baggy", href: "/capriowear/activewear/shorts" },
-        { label: "Fitted Training Shorts", slug: "fitted-training", href: "/capriowear/activewear/shorts" },
-        { label: "2-in-1 Shorts", slug: "2-in-1", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Relaxed Long Shorts", slug: "relaxed-long", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Baggy Shorts", slug: "baggy", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Fitted Training Shorts", slug: "fitted-training", href: "/capriowear/activewear/shorts" },
+        { label: "Men's 2-in-1 Shorts", slug: "2-in-1", href: "/capriowear/activewear/shorts" },
         { label: "See All", href: "/capriowear/activewear/shorts" },
       ],
       specifications: [
@@ -892,7 +892,7 @@ export const shorts: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Fitted long shorts, construction detail" },
+      specificationsImage: { alt: "Fitted long shorts, construction detail, men's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Compression fit checked for consistent recovery across the size run",
@@ -921,11 +921,11 @@ export const shorts: Category = {
     {
       status: "draft",
       slug: "high-rise-biker",
-      cardTitle: "Custom High-Rise Biker Shorts",
+      cardTitle: "Women's High-Rise Biker Shorts",
       cardSubline: "High-rise, fitted bike-short, 5 to 7 inch inseam",
       gender: "Women",
       image: "",
-      imageAlt: "Custom high-rise biker shorts manufacturer",
+      imageAlt: "Women's high-rise biker shorts manufacturer",
       href: "/capriowear/activewear/shorts/high-rise-biker",
       // Full PDP content for SKU 8 (owner spec, 2026-09-22), draft, first
       // SKU of the women's line. Reachable by URL and a clickable PLP
@@ -938,22 +938,22 @@ export const shorts: Category = {
       // `pdpSpecHighlights` drops the "(plus waist-inch sizing)"
       // qualifier the men's SKUs use -- that addition is men's-only per
       // the PLP customization strip, not a general sizing note.
-      pdpTitle: "High-Rise Biker",
+      pdpTitle: "Women's High-Rise Biker",
       sku: "CAP-SHO-08",
-      pdpHeading: "Custom High-Rise Biker Shorts Manufacturer",
+      pdpHeading: "Women's High-Rise Biker Shorts Manufacturer",
       pdpDescription:
         "Women's high-rise, fitted bike-short, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 5 to 7 inch inseam, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "High-rise biker shorts, front view" },
-        { alt: "High-rise biker shorts, waistband detail" },
-        { alt: "High-rise biker shorts, side profile" },
-        { alt: "High-rise biker shorts, fabric close-up" },
-        { alt: "High-rise biker shorts, worn on model" },
-        { alt: "High-rise biker shorts, flat lay" },
+        { alt: "High-rise biker shorts, front view, women's" },
+        { alt: "High-rise biker shorts, waistband detail, women's" },
+        { alt: "High-rise biker shorts, side profile, women's" },
+        { alt: "High-rise biker shorts, fabric close-up, women's" },
+        { alt: "High-rise biker shorts, worn on model, women's" },
+        { alt: "High-rise biker shorts, flat lay, women's" },
       ],
-      pdpMetaTitle: "Custom High-Rise Biker Shorts Manufacturer",
+      pdpMetaTitle: "Women's High-Rise Biker Shorts Manufacturer",
       pdpMetaDescription:
-        "Custom high-rise biker shorts manufacturer, OEM, ODM and private label, fitted bike-short, 5 to 7 inch inseam, Polyester/Spandex or Nylon/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Women's high-rise biker shorts manufacturer, private label, bike-short, 5 to 7 inch inseam, Polyester/Spandex or Nylon/Spandex, low MOQ, DDP to 20+ countries.",
       pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -972,10 +972,10 @@ export const shorts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Mid-Rise Biker Shorts", slug: "mid-rise-biker", href: "/capriowear/activewear/shorts" },
-        { label: "High-Rise Mini Shorts", slug: "high-rise-mini", href: "/capriowear/activewear/shorts" },
-        { label: "Zip-Pocket Shorts", slug: "zip-pocket", href: "/capriowear/activewear/shorts" },
-        { label: "Mid-Rise Relaxed Shorts", slug: "mid-rise-relaxed", href: "/capriowear/activewear/shorts" },
+        { label: "Women's Mid-Rise Biker Shorts", slug: "mid-rise-biker", href: "/capriowear/activewear/shorts" },
+        { label: "Women's High-Rise Mini Shorts", slug: "high-rise-mini", href: "/capriowear/activewear/shorts" },
+        { label: "Women's Zip-Pocket Shorts", slug: "zip-pocket", href: "/capriowear/activewear/shorts" },
+        { label: "Women's Mid-Rise Relaxed Shorts", slug: "mid-rise-relaxed", href: "/capriowear/activewear/shorts" },
         { label: "See All", href: "/capriowear/activewear/shorts" },
       ],
       specifications: [
@@ -997,7 +997,7 @@ export const shorts: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "High-rise biker shorts, construction detail" },
+      specificationsImage: { alt: "High-rise biker shorts, construction detail, women's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Compression fit checked for consistent recovery across the size run",
@@ -1025,11 +1025,11 @@ export const shorts: Category = {
     {
       status: "draft",
       slug: "mid-rise-biker",
-      cardTitle: "Custom Mid-Rise Biker Shorts",
+      cardTitle: "Women's Mid-Rise Biker Shorts",
       cardSubline: "Mid-rise, fitted bike-short, 5 to 7 inch inseam",
       gender: "Women",
       image: "",
-      imageAlt: "Custom mid-rise biker shorts manufacturer",
+      imageAlt: "Women's mid-rise biker shorts manufacturer",
       href: "/capriowear/activewear/shorts/mid-rise-biker",
       // Full PDP content for SKU 9 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 8. Reachable by URL and a clickable PLP card
@@ -1041,22 +1041,22 @@ export const shorts: Category = {
       // before this can go live. CTA is Request a Sample only.
       // `pdpSpecHighlights` drops the "(plus waist-inch sizing)"
       // qualifier the men's SKUs use -- women's-only, same as SKU 8.
-      pdpTitle: "Mid-Rise Biker",
+      pdpTitle: "Women's Mid-Rise Biker",
       sku: "CAP-SHO-09",
-      pdpHeading: "Custom Mid-Rise Biker Shorts Manufacturer",
+      pdpHeading: "Women's Mid-Rise Biker Shorts Manufacturer",
       pdpDescription:
         "Women's mid-rise, fitted bike-short, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 5 to 7 inch inseam, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Mid-rise biker shorts, front view" },
-        { alt: "Mid-rise biker shorts, waistband detail" },
-        { alt: "Mid-rise biker shorts, side profile" },
-        { alt: "Mid-rise biker shorts, fabric close-up" },
-        { alt: "Mid-rise biker shorts, worn on model" },
-        { alt: "Mid-rise biker shorts, flat lay" },
+        { alt: "Mid-rise biker shorts, front view, women's" },
+        { alt: "Mid-rise biker shorts, waistband detail, women's" },
+        { alt: "Mid-rise biker shorts, side profile, women's" },
+        { alt: "Mid-rise biker shorts, fabric close-up, women's" },
+        { alt: "Mid-rise biker shorts, worn on model, women's" },
+        { alt: "Mid-rise biker shorts, flat lay, women's" },
       ],
-      pdpMetaTitle: "Custom Mid-Rise Biker Shorts Manufacturer",
+      pdpMetaTitle: "Women's Mid-Rise Biker Shorts Manufacturer",
       pdpMetaDescription:
-        "Custom mid-rise biker shorts manufacturer, OEM, ODM and private label, fitted bike-short, 5 to 7 inch inseam, Polyester/Spandex or Nylon/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Women's mid-rise biker shorts manufacturer, private label, bike-short, 5 to 7 inch inseam, Polyester/Spandex or Nylon/Spandex, low MOQ, DDP to 20+ countries.",
       pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1075,10 +1075,10 @@ export const shorts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "High-Rise Biker Shorts", slug: "high-rise-biker", href: "/capriowear/activewear/shorts" },
-        { label: "High-Rise Mini Shorts", slug: "high-rise-mini", href: "/capriowear/activewear/shorts" },
-        { label: "Zip-Pocket Shorts", slug: "zip-pocket", href: "/capriowear/activewear/shorts" },
-        { label: "Mid-Rise Relaxed Shorts", slug: "mid-rise-relaxed", href: "/capriowear/activewear/shorts" },
+        { label: "Women's High-Rise Biker Shorts", slug: "high-rise-biker", href: "/capriowear/activewear/shorts" },
+        { label: "Women's High-Rise Mini Shorts", slug: "high-rise-mini", href: "/capriowear/activewear/shorts" },
+        { label: "Women's Zip-Pocket Shorts", slug: "zip-pocket", href: "/capriowear/activewear/shorts" },
+        { label: "Women's Mid-Rise Relaxed Shorts", slug: "mid-rise-relaxed", href: "/capriowear/activewear/shorts" },
         { label: "See All", href: "/capriowear/activewear/shorts" },
       ],
       specifications: [
@@ -1100,7 +1100,7 @@ export const shorts: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Mid-rise biker shorts, construction detail" },
+      specificationsImage: { alt: "Mid-rise biker shorts, construction detail, women's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Compression fit checked for consistent recovery across the size run",
@@ -1128,11 +1128,11 @@ export const shorts: Category = {
     {
       status: "draft",
       slug: "high-rise-mini",
-      cardTitle: "Custom High-Rise Mini Shorts",
+      cardTitle: "Women's High-Rise Mini Shorts",
       cardSubline: "High-rise, fitted, 4 inch or under",
       gender: "Women",
       image: "",
-      imageAlt: "Custom high-rise mini shorts manufacturer",
+      imageAlt: "Women's high-rise mini shorts manufacturer",
       href: "/capriowear/activewear/shorts/high-rise-mini",
       // Full PDP content for SKU 10 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 9. Reachable by URL and a clickable PLP card
@@ -1144,22 +1144,22 @@ export const shorts: Category = {
       // before this can go live. CTA is Request a Sample only.
       // `pdpSpecHighlights` drops the "(plus waist-inch sizing)"
       // qualifier the men's SKUs use -- women's-only, same as SKU 8/9.
-      pdpTitle: "High-Rise Mini",
+      pdpTitle: "Women's High-Rise Mini",
       sku: "CAP-SHO-10",
-      pdpHeading: "Custom High-Rise Mini Shorts Manufacturer",
+      pdpHeading: "Women's High-Rise Mini Shorts Manufacturer",
       pdpDescription:
         "Women's high-rise, fitted short, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 4 inch or under inseam, side pocket, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "High-rise mini shorts, front view" },
-        { alt: "High-rise mini shorts, side pocket detail" },
-        { alt: "High-rise mini shorts, side profile" },
-        { alt: "High-rise mini shorts, fabric close-up" },
-        { alt: "High-rise mini shorts, worn on model" },
-        { alt: "High-rise mini shorts, flat lay" },
+        { alt: "High-rise mini shorts, front view, women's" },
+        { alt: "High-rise mini shorts, side pocket detail, women's" },
+        { alt: "High-rise mini shorts, side profile, women's" },
+        { alt: "High-rise mini shorts, fabric close-up, women's" },
+        { alt: "High-rise mini shorts, worn on model, women's" },
+        { alt: "High-rise mini shorts, flat lay, women's" },
       ],
-      pdpMetaTitle: "Custom High-Rise Mini Shorts Manufacturer",
+      pdpMetaTitle: "Women's High-Rise Mini Shorts Manufacturer",
       pdpMetaDescription:
-        "Custom high-rise mini shorts manufacturer, OEM, ODM and private label, fitted, 4 inch or under inseam, Polyester/Spandex or Nylon/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Women's high-rise mini shorts manufacturer, private label, fitted, 4 inch or under inseam, Polyester/Spandex or Nylon/Spandex, low MOQ, DDP to 20+ countries.",
       pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1178,10 +1178,10 @@ export const shorts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "High-Rise Biker Shorts", slug: "high-rise-biker", href: "/capriowear/activewear/shorts" },
-        { label: "Mid-Rise Biker Shorts", slug: "mid-rise-biker", href: "/capriowear/activewear/shorts" },
-        { label: "Mid-Rise Mini Shorts", slug: "mid-rise-mini", href: "/capriowear/activewear/shorts" },
-        { label: "Zip-Pocket Shorts", slug: "zip-pocket", href: "/capriowear/activewear/shorts" },
+        { label: "Women's High-Rise Biker Shorts", slug: "high-rise-biker", href: "/capriowear/activewear/shorts" },
+        { label: "Women's Mid-Rise Biker Shorts", slug: "mid-rise-biker", href: "/capriowear/activewear/shorts" },
+        { label: "Women's Mid-Rise Mini Shorts", slug: "mid-rise-mini", href: "/capriowear/activewear/shorts" },
+        { label: "Women's Zip-Pocket Shorts", slug: "zip-pocket", href: "/capriowear/activewear/shorts" },
         { label: "See All", href: "/capriowear/activewear/shorts" },
       ],
       specifications: [
@@ -1204,7 +1204,7 @@ export const shorts: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "High-rise mini shorts, construction detail" },
+      specificationsImage: { alt: "High-rise mini shorts, construction detail, women's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Compression fit checked for consistent recovery across the size run",
@@ -1233,11 +1233,11 @@ export const shorts: Category = {
     {
       status: "draft",
       slug: "zip-pocket",
-      cardTitle: "Custom Zip-Pocket Shorts",
+      cardTitle: "Women's Zip-Pocket Shorts",
       cardSubline: "Discreet zip pocket, layered onto any silhouette",
       gender: "Women",
       image: "",
-      imageAlt: "Custom zip-pocket shorts manufacturer",
+      imageAlt: "Women's zip-pocket shorts manufacturer",
       href: "/capriowear/activewear/shorts/zip-pocket",
       // Full PDP content for SKU 11 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 10. A construction-feature SKU, not a pure
@@ -1253,22 +1253,22 @@ export const shorts: Category = {
       // Sample only. `pdpSpecHighlights` drops the "(plus waist-inch
       // sizing)" qualifier the men's SKUs use -- women's-only, same as
       // SKU 8 to 10.
-      pdpTitle: "Zip-Pocket",
+      pdpTitle: "Women's Zip-Pocket",
       sku: "CAP-SHO-11",
-      pdpHeading: "Custom Zip-Pocket Shorts Manufacturer",
+      pdpHeading: "Women's Zip-Pocket Shorts Manufacturer",
       pdpDescription:
         "Women's mid-rise, fitted short with a discreet zip pocket, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, short inseam, made to your brand in Sialkot, Pakistan. The zip pocket detail can also be layered onto any other silhouette in the catalog on request.",
       images: [
-        { alt: "Zip-pocket shorts, front view" },
-        { alt: "Zip-pocket shorts, zip pocket detail" },
-        { alt: "Zip-pocket shorts, side profile" },
-        { alt: "Zip-pocket shorts, fabric close-up" },
-        { alt: "Zip-pocket shorts, worn on model" },
-        { alt: "Zip-pocket shorts, flat lay" },
+        { alt: "Zip-pocket shorts, front view, women's" },
+        { alt: "Zip-pocket shorts, zip pocket detail, women's" },
+        { alt: "Zip-pocket shorts, side profile, women's" },
+        { alt: "Zip-pocket shorts, fabric close-up, women's" },
+        { alt: "Zip-pocket shorts, worn on model, women's" },
+        { alt: "Zip-pocket shorts, flat lay, women's" },
       ],
-      pdpMetaTitle: "Custom Zip-Pocket Shorts Manufacturer",
+      pdpMetaTitle: "Women's Zip-Pocket Shorts Manufacturer",
       pdpMetaDescription:
-        "Custom zip-pocket shorts manufacturer, OEM, ODM and private label, fitted, discreet zip pocket, mid-rise, short inseam, Polyester/Spandex or Nylon/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Women's zip-pocket shorts manufacturer, private label, fitted, discreet zip pocket, mid-rise, short inseam, Polyester/Spandex, low MOQ, DDP to 20+ countries.",
       pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1287,10 +1287,10 @@ export const shorts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "High-Rise Biker Shorts", slug: "high-rise-biker", href: "/capriowear/activewear/shorts" },
-        { label: "Mid-Rise Biker Shorts", slug: "mid-rise-biker", href: "/capriowear/activewear/shorts" },
-        { label: "High-Rise Mini Shorts", slug: "high-rise-mini", href: "/capriowear/activewear/shorts" },
-        { label: "Mid-Rise Mini Shorts", slug: "mid-rise-mini", href: "/capriowear/activewear/shorts" },
+        { label: "Women's High-Rise Biker Shorts", slug: "high-rise-biker", href: "/capriowear/activewear/shorts" },
+        { label: "Women's Mid-Rise Biker Shorts", slug: "mid-rise-biker", href: "/capriowear/activewear/shorts" },
+        { label: "Women's High-Rise Mini Shorts", slug: "high-rise-mini", href: "/capriowear/activewear/shorts" },
+        { label: "Women's Mid-Rise Mini Shorts", slug: "mid-rise-mini", href: "/capriowear/activewear/shorts" },
         { label: "See All", href: "/capriowear/activewear/shorts" },
       ],
       specifications: [
@@ -1317,7 +1317,7 @@ export const shorts: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Zip-pocket shorts, construction detail" },
+      specificationsImage: { alt: "Zip-pocket shorts, construction detail, women's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Compression fit checked for consistent recovery across the size run",
@@ -1346,11 +1346,11 @@ export const shorts: Category = {
     {
       status: "draft",
       slug: "mid-rise-relaxed",
-      cardTitle: "Custom Mid-Rise Relaxed Shorts",
+      cardTitle: "Women's Mid-Rise Relaxed Shorts",
       cardSubline: "Roomy, relaxed mid-rise cut",
       gender: "Women",
       image: "",
-      imageAlt: "Custom mid-rise relaxed shorts manufacturer",
+      imageAlt: "Women's mid-rise relaxed shorts manufacturer",
       href: "/capriowear/activewear/shorts/mid-rise-relaxed",
       // Full PDP content for SKU 12 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 11. No inseam number invented anywhere on this
@@ -1366,22 +1366,22 @@ export const shorts: Category = {
       // is Request a Sample only. `pdpSpecHighlights` drops the "(plus
       // waist-inch sizing)" qualifier the men's SKUs use -- women's-only,
       // same as SKU 8 to 11.
-      pdpTitle: "Mid-Rise Relaxed",
+      pdpTitle: "Women's Mid-Rise Relaxed",
       sku: "CAP-SHO-12",
-      pdpHeading: "Custom Mid-Rise Relaxed Shorts Manufacturer",
+      pdpHeading: "Women's Mid-Rise Relaxed Shorts Manufacturer",
       pdpDescription:
         "Women's mid-rise, relaxed and loose fit short, custom and private label, in a Polyester/Spandex, Nylon/Spandex, or cotton fleece cut-and-sew woven or lightweight fleece, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Mid-rise relaxed shorts, front view" },
-        { alt: "Mid-rise relaxed shorts, waistband detail" },
-        { alt: "Mid-rise relaxed shorts, side profile" },
-        { alt: "Mid-rise relaxed shorts, fabric close-up" },
-        { alt: "Mid-rise relaxed shorts, worn on model" },
-        { alt: "Mid-rise relaxed shorts, flat lay" },
+        { alt: "Mid-rise relaxed shorts, front view, women's" },
+        { alt: "Mid-rise relaxed shorts, waistband detail, women's" },
+        { alt: "Mid-rise relaxed shorts, side profile, women's" },
+        { alt: "Mid-rise relaxed shorts, fabric close-up, women's" },
+        { alt: "Mid-rise relaxed shorts, worn on model, women's" },
+        { alt: "Mid-rise relaxed shorts, flat lay, women's" },
       ],
-      pdpMetaTitle: "Custom Mid-Rise Relaxed Shorts Manufacturer",
+      pdpMetaTitle: "Women's Mid-Rise Relaxed Shorts Manufacturer",
       pdpMetaDescription:
-        "Custom mid-rise relaxed shorts manufacturer, OEM, ODM and private label, roomy loose fit, mid-rise waistband, Polyester/Spandex, Nylon/Spandex or cotton fleece, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Women's mid-rise relaxed shorts manufacturer, private label, loose fit, mid-rise waistband, Polyester/Spandex or cotton fleece, low MOQ, DDP to 20+ countries.",
       pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1400,10 +1400,10 @@ export const shorts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "High-Rise Biker Shorts", slug: "high-rise-biker", href: "/capriowear/activewear/shorts" },
-        { label: "Mid-Rise Biker Shorts", slug: "mid-rise-biker", href: "/capriowear/activewear/shorts" },
-        { label: "Mid-Rise Mini Shorts", slug: "mid-rise-mini", href: "/capriowear/activewear/shorts" },
-        { label: "Mid-Rise Sweat Shorts", slug: "relaxed-short", href: "/capriowear/activewear/shorts" },
+        { label: "Women's High-Rise Biker Shorts", slug: "high-rise-biker", href: "/capriowear/activewear/shorts" },
+        { label: "Women's Mid-Rise Biker Shorts", slug: "mid-rise-biker", href: "/capriowear/activewear/shorts" },
+        { label: "Women's Mid-Rise Mini Shorts", slug: "mid-rise-mini", href: "/capriowear/activewear/shorts" },
+        { label: "Women's Mid-Rise Sweat Shorts", slug: "relaxed-short", href: "/capriowear/activewear/shorts" },
         { label: "See All", href: "/capriowear/activewear/shorts" },
       ],
       specifications: [
@@ -1426,7 +1426,7 @@ export const shorts: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Mid-rise relaxed shorts, construction detail" },
+      specificationsImage: { alt: "Mid-rise relaxed shorts, construction detail, women's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Relaxed fit checked for consistent drape across the size run",
@@ -1454,11 +1454,11 @@ export const shorts: Category = {
     {
       status: "draft",
       slug: "mid-rise-mini",
-      cardTitle: "Custom Mid-Rise Mini Shorts",
+      cardTitle: "Women's Mid-Rise Mini Shorts",
       cardSubline: "Short, fitted mid-rise cut, 4 inch or under",
       gender: "Women",
       image: "",
-      imageAlt: "Custom mid-rise mini shorts manufacturer",
+      imageAlt: "Women's mid-rise mini shorts manufacturer",
       href: "/capriowear/activewear/shorts/mid-rise-mini",
       // Full PDP content for SKU 13 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 12. Card title and slug already used "Mini,"
@@ -1473,22 +1473,22 @@ export const shorts: Category = {
       // Request a Sample only. `pdpSpecHighlights` drops the "(plus
       // waist-inch sizing)" qualifier the men's SKUs use -- women's-only,
       // same as SKU 8 to 12.
-      pdpTitle: "Mid-Rise Mini",
+      pdpTitle: "Women's Mid-Rise Mini",
       sku: "CAP-SHO-13",
-      pdpHeading: "Custom Mid-Rise Mini Shorts Manufacturer",
+      pdpHeading: "Women's Mid-Rise Mini Shorts Manufacturer",
       pdpDescription:
         "Women's mid-rise, fitted short, custom and private label, in a Polyester/Spandex or Nylon/Spandex cut-and-sew jersey knit or lightweight woven, 4 inch or under inseam, no-front-seam construction, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Mid-rise mini shorts, front view" },
-        { alt: "Mid-rise mini shorts, no-front-seam detail" },
-        { alt: "Mid-rise mini shorts, side profile" },
-        { alt: "Mid-rise mini shorts, fabric close-up" },
-        { alt: "Mid-rise mini shorts, worn on model" },
-        { alt: "Mid-rise mini shorts, flat lay" },
+        { alt: "Mid-rise mini shorts, front view, women's" },
+        { alt: "Mid-rise mini shorts, no-front-seam detail, women's" },
+        { alt: "Mid-rise mini shorts, side profile, women's" },
+        { alt: "Mid-rise mini shorts, fabric close-up, women's" },
+        { alt: "Mid-rise mini shorts, worn on model, women's" },
+        { alt: "Mid-rise mini shorts, flat lay, women's" },
       ],
-      pdpMetaTitle: "Custom Mid-Rise Mini Shorts Manufacturer",
+      pdpMetaTitle: "Women's Mid-Rise Mini Shorts Manufacturer",
       pdpMetaDescription:
-        "Custom mid-rise mini shorts manufacturer, OEM, ODM and private label, fitted, 4 inch or under inseam, no front seam, Polyester/Spandex or Nylon/Spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Women's mid-rise mini shorts manufacturer, private label, fitted, 4 inch or under inseam, no front seam, Polyester/Spandex, low MOQ, DDP to 20+ countries.",
       pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton fleece"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1507,10 +1507,10 @@ export const shorts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "High-Rise Biker Shorts", slug: "high-rise-biker", href: "/capriowear/activewear/shorts" },
-        { label: "Mid-Rise Biker Shorts", slug: "mid-rise-biker", href: "/capriowear/activewear/shorts" },
-        { label: "High-Rise Mini Shorts", slug: "high-rise-mini", href: "/capriowear/activewear/shorts" },
-        { label: "Mid-Rise Sweat Shorts", slug: "relaxed-short", href: "/capriowear/activewear/shorts" },
+        { label: "Women's High-Rise Biker Shorts", slug: "high-rise-biker", href: "/capriowear/activewear/shorts" },
+        { label: "Women's Mid-Rise Biker Shorts", slug: "mid-rise-biker", href: "/capriowear/activewear/shorts" },
+        { label: "Women's High-Rise Mini Shorts", slug: "high-rise-mini", href: "/capriowear/activewear/shorts" },
+        { label: "Women's Mid-Rise Sweat Shorts", slug: "relaxed-short", href: "/capriowear/activewear/shorts" },
         { label: "See All", href: "/capriowear/activewear/shorts" },
       ],
       specifications: [
@@ -1533,7 +1533,7 @@ export const shorts: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Mid-rise mini shorts, construction detail" },
+      specificationsImage: { alt: "Mid-rise mini shorts, construction detail, women's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Compression fit checked for consistent recovery across the size run",
@@ -1562,11 +1562,11 @@ export const shorts: Category = {
     {
       status: "draft",
       slug: "relaxed-short",
-      cardTitle: "Custom Mid-Rise Sweat Shorts",
+      cardTitle: "Women's Mid-Rise Sweat Shorts",
       cardSubline: "Relaxed sweatshort, short inseam",
       gender: "Women",
       image: "",
-      imageAlt: "Custom mid-rise sweat shorts manufacturer",
+      imageAlt: "Women's mid-rise sweat shorts manufacturer",
       href: "/capriowear/activewear/shorts/relaxed-short",
       // Full PDP content for SKU 14 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 13, the last of the 14-SKU Shorts catalog.
@@ -1579,22 +1579,22 @@ export const shorts: Category = {
       // is Request a Sample only. `pdpSpecHighlights` drops the "(plus
       // waist-inch sizing)" qualifier the men's SKUs use -- women's-only,
       // same as SKU 8 to 13.
-      pdpTitle: "Mid-Rise Sweat",
+      pdpTitle: "Women's Mid-Rise Sweat",
       sku: "CAP-SHO-14",
-      pdpHeading: "Custom Mid-Rise Sweat Shorts Manufacturer",
+      pdpHeading: "Women's Mid-Rise Sweat Shorts Manufacturer",
       pdpDescription:
         "Women's mid-rise, relaxed fleece sweatshort, custom and private label, in a cotton fleece or cotton/poly blend brushed knit, short inseam, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Mid-rise sweat shorts, front view" },
-        { alt: "Mid-rise sweat shorts, waistband and drawcord detail" },
-        { alt: "Mid-rise sweat shorts, side profile" },
-        { alt: "Mid-rise sweat shorts, fabric close-up" },
-        { alt: "Mid-rise sweat shorts, worn on model" },
-        { alt: "Mid-rise sweat shorts, flat lay" },
+        { alt: "Mid-rise sweat shorts, front view, women's" },
+        { alt: "Mid-rise sweat shorts, waistband and drawcord detail, women's" },
+        { alt: "Mid-rise sweat shorts, side profile, women's" },
+        { alt: "Mid-rise sweat shorts, fabric close-up, women's" },
+        { alt: "Mid-rise sweat shorts, worn on model, women's" },
+        { alt: "Mid-rise sweat shorts, flat lay, women's" },
       ],
-      pdpMetaTitle: "Custom Mid-Rise Sweat Shorts Manufacturer",
+      pdpMetaTitle: "Women's Mid-Rise Sweat Shorts Manufacturer",
       pdpMetaDescription:
-        "Custom mid-rise sweat shorts manufacturer, OEM, ODM and private label, relaxed fleece short, short inseam, cotton fleece or cotton/poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Women's mid-rise sweat shorts manufacturer, private label, relaxed fleece short, short inseam, cotton fleece or cotton/poly, low MOQ, DDP to 20+ countries.",
       pdpFabricPills: ["Cotton fleece", "Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1613,10 +1613,10 @@ export const shorts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Mid-Rise Relaxed Shorts", slug: "mid-rise-relaxed", href: "/capriowear/activewear/shorts" },
-        { label: "Mid-Rise Mini Shorts", slug: "mid-rise-mini", href: "/capriowear/activewear/shorts" },
-        { label: "High-Rise Mini Shorts", slug: "high-rise-mini", href: "/capriowear/activewear/shorts" },
-        { label: "Relaxed Long Shorts", slug: "relaxed-long", href: "/capriowear/activewear/shorts" },
+        { label: "Women's Mid-Rise Relaxed Shorts", slug: "mid-rise-relaxed", href: "/capriowear/activewear/shorts" },
+        { label: "Women's Mid-Rise Mini Shorts", slug: "mid-rise-mini", href: "/capriowear/activewear/shorts" },
+        { label: "Women's High-Rise Mini Shorts", slug: "high-rise-mini", href: "/capriowear/activewear/shorts" },
+        { label: "Men's Relaxed Long Shorts", slug: "relaxed-long", href: "/capriowear/activewear/shorts" },
         { label: "See All", href: "/capriowear/activewear/shorts" },
       ],
       specifications: [
@@ -1637,7 +1637,7 @@ export const shorts: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Mid-rise sweat shorts, construction detail" },
+      specificationsImage: { alt: "Mid-rise sweat shorts, construction detail, women's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Fleece checked for consistent hand feel and brushed finish across the run",
