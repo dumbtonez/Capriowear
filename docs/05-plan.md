@@ -4218,3 +4218,14 @@ Follow-up to the standing-rules fix batch.
 1. **Long-Sleeve Tops Raglan meta:** 161 to 154 chars by dropping "fabric" from "stretch tri-blend fabric". No single-character trim read naturally.
 2. **Tank Tops product alts gendered (8 SKUs):** men's Fitted, Relaxed, Racerback Singlet, Ribbed and women's Fitted, Relaxed, Racerback, Ribbed. The 6 gallery alts plus the specifications alt on each now end ", men's"/", women's", the same form as the other 8 gendered Tank Tops SKUs. Their card `imageAlt` also changed from "Custom ... manufacturer, men's" (Racerback Singlet had no gender at all) to "Men's/Women's ... tank manufacturer", again matching the other 8. Generic customization-step images are unchanged.
 3. **Tank Tops meta prefix (same 8):** "Custom men's/women's ..." now starts "Men's/Women's ...". Five dropped under 150 once "Custom " was removed (Men's Fitted, Men's Ribbed, Women's Fitted, Women's Relaxed, Women's Ribbed) and gained "any color," to land at 153 to 159. All 8 are 150 to 160.
+
+## Hoodies PLP rebuilt: 16 gendered draft SKUs, 2026-09-24
+
+Owner brief replaced the 6-card test version of `content/activewear/hoodies.ts` entirely. Content-only change: same shared `[category]` template, components and section order as Sweatshirts and Tank Tops.
+
+- **Cards:** CAP-HOO-01 to 08 men's, 09 to 16 women's, in SKU order, each with `gender`, `sku`, spec line and alt "[Card name], men's/women's". All card-only drafts, so none is a link; each becomes one automatically via `isDraftPdpReachable()` once its `pdpHeading` and `specifications` land. The old test slugs (pullover, oversized, full-zip, cropped, quarter-zip, stringless) stay 404, no redirects.
+- **Copy:** new meta description (161 chars, owner-confirmed as written), 7-row fabric table (adds technical performance knit and Polyester/Modal stretch), 4 weight tiers, 6-item customization strip, 6 trust points, 16 FAQs (entity answer now names the men's and women's style sets, adds "Are you a heavyweight hoodie manufacturer?"), related links Sweatshirts, Joggers, Long-Sleeve Tops, T-Shirts, Jackets.
+- **Kept to convention:** the trust lead has no trailing period, same as every other PLP's `qualitySubline`.
+- **Schema:** BreadcrumbList and FAQPage from the same data; CollectionPage/ItemList stays omitted until a style is published.
+
+**Verified (local build):** title, meta, H1 and key facts exact; 16 card names in the HTML, 0 hoodie PDP links; FAQPage has 16 entries; no "40+", "TESTED BEFORE BULK", "Tech Fleece", "elastane" or dashes. The only "WhatsApp" strings on the page are the sitewide chat button's aria-labels. tsc, eslint and build clean, Playwright 45/45.
