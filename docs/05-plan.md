@@ -3927,3 +3927,11 @@ The old per-file comments ("only live pages", "swap in sibling sports as they pu
 Brand-convergence research (Nike Jordan Flight Heavyweight, Nike Sportswear Long-Sleeve, Gymshark Crest, Under Armour Heavyweight Wash Oversized, YoungLA 8001/8016) found this style's market pattern is relaxed to oversized, not a standard crew. Three content changes on `/long-sleeve-tops/crew`, with no URL, slug, H1 or title change: the description now opens "Relaxed-to-oversized crew-neck long-sleeve tee", the Fit spec row reads "Relaxed to oversized", and the neckline FAQ answer reads "Built as a relaxed-to-oversized crew as standard, but fit, neckline, cuff, and sleeve construction...".
 
 The Fit row drops the brief's clause "confirmed as the dominant fit pattern across the brand panel" (owner call): it is internal research language in buyer-facing copy, same rule as the T-Shirts "directional research range" removal. The description and FAQ changes first shipped inside the other session's `f317db1`, together with that clause; this commit corrects the Fit row. SKU 2 to 4 unchanged.
+
+## Long-Sleeve Tops entity FAQ answer updated to the research-confirmed range, 2026-09-23
+
+The "What does Capriowear manufacture?" answer on the PLP and all 4 PDPs named the original 8-style list, which brand-convergence research has since superseded (Hooded and Waffle Thermal are not in the confirmed shortlist, Oversized folded into Crew, Raglan is now a distinct unbuilt construction). New answer, the owner's text word for word: "...across men's and women's lines, including crew, fitted performance, henley, and quarter-zip styles, with additional men's and women's styles available on request." followed by `companyIdentity`.
+
+The template in `categoryEntityFaq()` cannot produce this sentence (it always adds "with low minimums and full customization"), so the category now sets `entityQuestion`/`entityAnswer`, the existing word-for-word override (first used on Gear/Weight Lifting Belts). `companyIdentity` is interpolated, not retyped. `entityExampleStyles` is removed. One field feeds all 5 pages, so they can't drift apart.
+
+**Verified:** the answer renders byte-identical on all 5 pages, and no page still carries the old list. The PLP's FAQPage JSON-LD first answer matches. The PDPs carry no FAQPage (draft). tsc and eslint clean.

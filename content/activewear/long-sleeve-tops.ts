@@ -20,21 +20,25 @@
 // drafts are non-clickable with no route; drafts with PDP content (SKU 1-4)
 // render noindexed via isDraftPdpReachable() -- see styleCards below. Flip a style to
 // "published" only once its PDP is sampled, photographed and built.
+import { companyIdentity } from "../site";
 import type { Category } from "./types";
 
 export const longSleeveTops: Category = {
   slug: "long-sleeve-tops",
   group: "Activewear",
   menuLabel: "Long-Sleeve Tops",
-  // Entity FAQ fields -- with these, categoryEntityFaq() (./pdpShared.ts)
-  // renders the brief's own entity answer word for word: "a custom long
-  // sleeve shirt manufacturer", "private label long-sleeve tops", then the
-  // 8 styles, then companyIdentity. No entityFabrics (the brief's answer
-  // has no fabrics clause).
+  // Entity FAQ: verbatim override (owner, 2026-09-23), shown identically on
+  // the PLP and every PDP via categoryEntityFaq() (./pdpShared.ts). The
+  // brand-convergence research superseded the original 8-style list, and the
+  // new wording ("across men's and women's lines", no "with low minimums and
+  // full customization") is a sentence the template can't build, so
+  // entityQuestion/entityAnswer replace it. companyIdentity is still
+  // imported, never retyped. manufacturerNoun/productNounPlural are kept for
+  // shape parity, the template no longer reads them for this category.
   manufacturerNoun: "Long Sleeve Shirt",
   productNounPlural: "long-sleeve tops",
-  entityExampleStyles:
-    "crew, fitted performance, henley, quarter-zip, hooded, oversized, raglan, and waffle thermal styles",
+  entityQuestion: "What does Capriowear manufacture?",
+  entityAnswer: `Capriowear is a custom long sleeve shirt manufacturer for activewear brands and teamwear suppliers worldwide. We produce private label long-sleeve tops from fabric to packaging, across men's and women's lines, including crew, fitted performance, henley, and quarter-zip styles, with additional men's and women's styles available on request. ${companyIdentity}`,
   h1: "Custom Long Sleeve Shirt Manufacturer",
   metaTitle: "Custom Long Sleeve Shirt Manufacturer",
   metaDescription:
