@@ -4105,3 +4105,9 @@ The 8 Tank Tops cards whose H1 is gendered still read "Custom ..." on the live P
 **Prevention:** a "fixed" claim should be verified against the pushed commit or the live page, not the local working tree. Two sessions share this checkout, so an edit that isn't committed isn't shipped.
 
 **Verified:** 16/16 Tank Tops cards equal their H1 minus " Manufacturer" in the committed file. The rendered PLP shows all 8 new titles and none of the old ones, and the Men/Women filters each show the expected 8. tsc clean.
+
+## Sweatshirts SKU 1, 2, 3 draft PDPs, 2026-09-23
+
+Built from the owner's brief in `content/activewear/sweatshirts.ts` on the existing cards: CAP-SWT-01 Men's Oversized Brushed Fleece Crewneck (`oversized-brushed-fleece-mens`) and CAP-SWT-03 Women's Oversized Brushed Fleece Crewneck (`oversized-brushed-fleece-womens`), the category's anchor collision pair, gendered in H1, title, breadcrumb and all gallery alts, and cross-linked through their related-style chips; CAP-SWT-02 Custom Oversized French Terry Crewneck (`oversized-french-terry`, un-gendered, drawcord hem). Same shape as SKU 4 to 9; all three meta descriptions used as given (150/152/151 chars). SKU 3's chips to the unbuilt SKU 11 and 12 fall back to the PLP. Sweatshirts now has 9 draft PDPs (SKU 1 to 9); SKU 10 to 16 are card-only.
+
+Verified (local render): 200, brief's title/H1/breadcrumb/meta, canonical `/capriowear/...` everywhere, noindex/nofollow, BreadcrumbList only, FAQ order entity → 2 style → 5 shared with exact entity answer and the linked get-started answer, Weight "Pending, confirmed on your sample.", no dashes or branded fabric names, SKU 1/3 alts 25/25 gendered, all three PLP cards clickable. tsc clean, eslint 0 errors, build clean, Playwright 45/45.
