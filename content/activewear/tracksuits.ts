@@ -4,7 +4,7 @@
 // before it (owner spec, 2026-09-03): no edits to app/activewear/
 // [category]/[style]/page.tsx, app/sitemap.ts, or lib/schema.ts, only this
 // file plus one line in ./categories.ts. Third category under the
-// "OUTWEAR & SUITS" mega-menu group (content/home.ts), after Jackets and
+// "OUTERWEAR & SUITS" mega-menu group (content/home.ts), after Jackets and
 // Track Jackets & Zip-Ups.
 //
 // No `weightTiers` block (owner spec, 2026-09-03) -- a tracksuit is a

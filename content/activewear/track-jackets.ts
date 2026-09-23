@@ -4,7 +4,7 @@
 // before it (owner spec, 2026-09-03): no edits to app/activewear/
 // [category]/[style]/page.tsx, app/sitemap.ts, or lib/schema.ts, only this
 // file plus one line in ./categories.ts. Second category under the
-// "OUTWEAR & SUITS" mega-menu group (content/home.ts), after Jackets.
+// "OUTERWEAR & SUITS" mega-menu group (content/home.ts), after Jackets.
 //
 // No `weightTiers` block (owner spec, 2026-09-03) -- track jackets are a
 // knit, not weight- or weather-driven the way Jackets' own water

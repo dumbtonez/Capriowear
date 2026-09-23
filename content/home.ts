@@ -94,7 +94,7 @@ export const activewearMegaMenu = [
     ],
   },
   {
-    label: "OUTWEAR & SUITS",
+    label: "OUTERWEAR & SUITS",
     items: [
       { label: "Jackets", href: "/capriowear/activewear/jackets" },
       { label: "Track Jackets & Zip-Ups", href: "/capriowear/activewear/track-jackets" },

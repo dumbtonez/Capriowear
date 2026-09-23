@@ -16,7 +16,7 @@
 // registry drives both the shared [category] PLP template's
 // CollectionPage/ItemList schema and the [category]/[style] PDP route
 // generator, neither of which this page should ever produce). Fifth
-// category-shaped page under the "OUTWEAR & SUITS" mega-menu group
+// category-shaped page under the "OUTERWEAR & SUITS" mega-menu group
 // (content/home.ts), after Jackets, Track Jackets & Zip-Ups, Tracksuits
 // and Sweatsuits -- the group's own mega-menu href already points to
 // /activewear/running-wear (no fix needed, confirmed before writing this

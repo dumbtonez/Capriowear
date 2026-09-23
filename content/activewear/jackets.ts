@@ -4,7 +4,7 @@
 // before it (owner spec, 2026-09-03): no edits to app/activewear/
 // [category]/[style]/page.tsx, app/sitemap.ts, or lib/schema.ts, only this
 // file plus one line in ./categories.ts. First category under the
-// "OUTWEAR & SUITS" mega-menu group (content/home.ts).
+// "OUTERWEAR & SUITS" mega-menu group (content/home.ts).
 //
 // Water performance, not GSM weight tiers -- reuses the same `weightTiers`
 // table (`WeightTier`'s own generic `{tier, gsm, bestFor}` shape, first

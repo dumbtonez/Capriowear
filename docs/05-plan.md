@@ -4229,3 +4229,7 @@ Owner brief replaced the 6-card test version of `content/activewear/hoodies.ts` 
 - **Schema:** BreadcrumbList and FAQPage from the same data; CollectionPage/ItemList stays omitted until a style is published.
 
 **Verified (local build):** title, meta, H1 and key facts exact; 16 card names in the HTML, 0 hoodie PDP links; FAQPage has 16 entries; no "40+", "TESTED BEFORE BULK", "Tech Fleece", "elastane" or dashes. The only "WhatsApp" strings on the page are the sitewide chat button's aria-labels. tsc, eslint and build clean, Playwright 45/45.
+
+## "Outwear & Suits" typo fixed to "Outerwear & Suits", 2026-09-24
+
+One-label fix at the single source, the `activewearMegaMenu` group label in `content/home.ts` ("OUTWEAR & SUITS" to "OUTERWEAR & SUITS"). It flows to the mega menu, mobile drawer, every PLP's left-panel category nav (title-cased to "Outerwear & Suits") and the nav-generated ItemList JSON-LD. Matching code comments in the Jackets, Track Jackets, Tracksuits and Running Wear content files updated too. No other group labels, category names or links changed.
