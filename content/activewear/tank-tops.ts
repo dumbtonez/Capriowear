@@ -184,28 +184,28 @@ export const tankTops: Category = {
       // attribution note).
       status: "draft",
       slug: "oversized-cutoff",
-      cardTitle: "Custom Oversized Cut-Off Tank",
+      cardTitle: "Men's Oversized Cut-Off Tank",
       cardSubline: "Boxy, dropped-shoulder, wide raw-cut armhole",
       gender: "Men",
       image: "",
-      imageAlt: "Custom oversized cut-off tank manufacturer",
+      imageAlt: "Men's oversized cut-off tank manufacturer",
       href: "/capriowear/activewear/tank-tops/oversized-cutoff",
       sku: "CAP-TNK-01",
-      pdpTitle: "Oversized Cut-Off",
-      pdpHeading: "Custom Oversized Cut-Off Tank Manufacturer",
+      pdpTitle: "Men's Oversized Cut-Off",
+      pdpHeading: "Men's Oversized Cut-Off Tank Manufacturer",
       pdpDescription:
         "Men's oversized, boxy tank with a dropped shoulder and wide raw-cut armhole, custom and private label, in cotton or cotton-blend jersey, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Oversized cut-off tank, front view" },
-        { alt: "Oversized cut-off tank, armhole detail" },
-        { alt: "Oversized cut-off tank, back view" },
-        { alt: "Oversized cut-off tank, fabric close-up" },
-        { alt: "Oversized cut-off tank, worn on model" },
-        { alt: "Oversized cut-off tank, flat lay" },
+        { alt: "Oversized cut-off tank, front view, men's" },
+        { alt: "Oversized cut-off tank, armhole detail, men's" },
+        { alt: "Oversized cut-off tank, back view, men's" },
+        { alt: "Oversized cut-off tank, fabric close-up, men's" },
+        { alt: "Oversized cut-off tank, worn on model, men's" },
+        { alt: "Oversized cut-off tank, flat lay, men's" },
       ],
-      pdpMetaTitle: "Custom Oversized Cut-Off Tank Manufacturer",
+      pdpMetaTitle: "Men's Oversized Cut-Off Tank Manufacturer",
       pdpMetaDescription:
-        "Custom oversized cut-off tank manufacturer, private label, boxy dropped-shoulder fit, wide raw-cut armhole, cotton-blend jersey, from 50 pieces, DDP worldwide.",
+        "Men's oversized cut-off tank manufacturer, private label, boxy dropped-shoulder fit, wide raw-cut armhole, cotton-blend jersey, from 50 pieces, DDP worldwide.",
       material: "Cotton or cotton-blend jersey, 260 GSM",
       pdpFabricPills: ["Cotton", "Cotton-Poly Blend", "Recycled Polyester", "Ribbed Cotton Knit"],
       pdpSpecHighlights: [
@@ -241,7 +241,7 @@ export const tankTops: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Oversized cut-off tank, construction detail" },
+      specificationsImage: { alt: "Oversized cut-off tank, construction detail, men's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Armhole width and dropped-shoulder placement checked for consistency across the size run",
@@ -442,11 +442,11 @@ export const tankTops: Category = {
     {
       status: "draft",
       slug: "athletic",
-      cardTitle: "Custom Athletic Tank",
+      cardTitle: "Men's Athletic Tank",
       cardSubline: "True-to-size training and running cut",
       gender: "Men",
       image: "",
-      imageAlt: "Custom athletic tank manufacturer",
+      imageAlt: "Men's athletic tank manufacturer",
       href: "/capriowear/activewear/tank-tops/athletic",
       // Full PDP content for SKU 4 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 3. Reachable by URL and a clickable PLP card
@@ -456,22 +456,22 @@ export const tankTops: Category = {
       // (Weight stays "Pending, confirmed on your sample."). `images`
       // are alt-only placeholders: real product photography is needed
       // before this can go live. CTA is Request a Sample only.
-      pdpTitle: "Athletic",
+      pdpTitle: "Men's Athletic",
       sku: "CAP-TNK-04",
-      pdpHeading: "Custom Athletic Tank Manufacturer",
+      pdpHeading: "Men's Athletic Tank Manufacturer",
       pdpDescription:
         "Men's true-to-size, performance training tank with a deep scoop neckline, custom and private label, in recycled polyester or moisture-wicking knit, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Athletic tank, front view" },
-        { alt: "Athletic tank, neckline detail" },
-        { alt: "Athletic tank, side profile" },
-        { alt: "Athletic tank, fabric close-up" },
-        { alt: "Athletic tank, worn on model" },
-        { alt: "Athletic tank, flat lay" },
+        { alt: "Athletic tank, front view, men's" },
+        { alt: "Athletic tank, neckline detail, men's" },
+        { alt: "Athletic tank, side profile, men's" },
+        { alt: "Athletic tank, fabric close-up, men's" },
+        { alt: "Athletic tank, worn on model, men's" },
+        { alt: "Athletic tank, flat lay, men's" },
       ],
-      pdpMetaTitle: "Custom Athletic Tank Manufacturer",
+      pdpMetaTitle: "Men's Athletic Tank Manufacturer",
       pdpMetaDescription:
-        "Custom athletic tank manufacturer, private label, true-to-size training and running cut, deep scoop neckline, recycled polyester, from 50 pieces, DDP worldwide.",
+        "Men's athletic tank manufacturer, private label, true-to-size training and running cut, deep scoop neckline, recycled polyester, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Recycled Polyester", "Poly-Spandex", "Cotton-Poly Blend", "Nylon-Elastane"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
@@ -511,7 +511,7 @@ export const tankTops: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Athletic tank, construction detail" },
+      specificationsImage: { alt: "Athletic tank, construction detail, men's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "True-to-size fit checked for consistency across the size run",
@@ -539,11 +539,11 @@ export const tankTops: Category = {
     {
       status: "draft",
       slug: "stringer",
-      cardTitle: "Custom Stringer Tank",
+      cardTitle: "Men's Stringer Tank",
       cardSubline: "Narrow straps, deep-cut racerback armhole",
       gender: "Men",
       image: "",
-      imageAlt: "Custom stringer tank manufacturer",
+      imageAlt: "Men's stringer tank manufacturer",
       href: "/capriowear/activewear/tank-tops/stringer",
       // Full PDP content for SKU 5 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 4. Reachable by URL and a clickable PLP card
@@ -554,22 +554,22 @@ export const tankTops: Category = {
       // builds," not a brand name, per the brief). `images` are alt-only
       // placeholders: real product photography is needed before this can
       // go live. CTA is Request a Sample only.
-      pdpTitle: "Stringer",
+      pdpTitle: "Men's Stringer",
       sku: "CAP-TNK-05",
-      pdpHeading: "Custom Stringer Tank Manufacturer",
+      pdpHeading: "Men's Stringer Tank Manufacturer",
       pdpDescription:
         "Men's stringer tank with narrow straps and a deep-cut racerback armhole, custom and private label, in cotton/lyocell/elastane jersey, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Stringer tank, front view" },
-        { alt: "Stringer tank, armhole and strap detail" },
-        { alt: "Stringer tank, side profile" },
-        { alt: "Stringer tank, fabric close-up" },
-        { alt: "Stringer tank, worn on model" },
-        { alt: "Stringer tank, flat lay" },
+        { alt: "Stringer tank, front view, men's" },
+        { alt: "Stringer tank, armhole and strap detail, men's" },
+        { alt: "Stringer tank, side profile, men's" },
+        { alt: "Stringer tank, fabric close-up, men's" },
+        { alt: "Stringer tank, worn on model, men's" },
+        { alt: "Stringer tank, flat lay, men's" },
       ],
-      pdpMetaTitle: "Custom Stringer Tank Manufacturer",
+      pdpMetaTitle: "Men's Stringer Tank Manufacturer",
       pdpMetaDescription:
-        "Custom stringer tank manufacturer, private label, narrow straps, deep-cut racerback armhole, cotton/lyocell/spandex jersey, from 50 pieces, DDP worldwide.",
+        "Men's stringer tank manufacturer, private label, narrow straps, deep-cut racerback armhole, cotton/lyocell/spandex jersey, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Cotton/Lyocell/Elastane", "Cotton", "Poly-Spandex", "Nylon-Elastane"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
@@ -614,7 +614,7 @@ export const tankTops: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Stringer tank, construction detail" },
+      specificationsImage: { alt: "Stringer tank, construction detail, men's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Armhole depth and strap width checked for consistency at every size",
@@ -739,11 +739,11 @@ export const tankTops: Category = {
     {
       status: "draft",
       slug: "muscle-cut",
-      cardTitle: "Custom Muscle-Cut Tank",
+      cardTitle: "Men's Muscle-Cut Tank",
       cardSubline: "Wide dropped armhole, deeper than standard",
       gender: "Men",
       image: "",
-      imageAlt: "Custom muscle-cut tank manufacturer",
+      imageAlt: "Men's muscle-cut tank manufacturer",
       href: "/capriowear/activewear/tank-tops/muscle-cut",
       // Full PDP content for SKU 7 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 6. A construction-feature SKU, not a pure
@@ -756,22 +756,22 @@ export const tankTops: Category = {
       // your sample."). `images` are alt-only placeholders: real product
       // photography is needed before this can go live. CTA is Request a
       // Sample only.
-      pdpTitle: "Muscle-Cut",
+      pdpTitle: "Men's Muscle-Cut",
       sku: "CAP-TNK-07",
-      pdpHeading: "Custom Muscle-Cut Tank Manufacturer",
+      pdpHeading: "Men's Muscle-Cut Tank Manufacturer",
       pdpDescription:
         "Men's relaxed tank with a wide dropped armhole, ribbed collar, and raw-edge hem, custom and private label, in cotton-poly blend, made to your brand in Sialkot, Pakistan. The dropped-armhole detail sits between a standard tank armhole and a true stringer cut, and can also be layered onto other silhouettes on request.",
       images: [
-        { alt: "Muscle-cut tank, front view" },
-        { alt: "Muscle-cut tank, armhole and collar detail" },
-        { alt: "Muscle-cut tank, side profile" },
-        { alt: "Muscle-cut tank, fabric close-up" },
-        { alt: "Muscle-cut tank, worn on model" },
-        { alt: "Muscle-cut tank, flat lay" },
+        { alt: "Muscle-cut tank, front view, men's" },
+        { alt: "Muscle-cut tank, armhole and collar detail, men's" },
+        { alt: "Muscle-cut tank, side profile, men's" },
+        { alt: "Muscle-cut tank, fabric close-up, men's" },
+        { alt: "Muscle-cut tank, worn on model, men's" },
+        { alt: "Muscle-cut tank, flat lay, men's" },
       ],
-      pdpMetaTitle: "Custom Muscle-Cut Tank Manufacturer",
+      pdpMetaTitle: "Men's Muscle-Cut Tank Manufacturer",
       pdpMetaDescription:
-        "Custom muscle-cut tank manufacturer, private label, wide dropped armhole, ribbed collar, raw-edge hem, cotton-poly blend, from 50 pieces, DDP worldwide.",
+        "Men's muscle-cut tank manufacturer, private label, wide dropped armhole, ribbed collar, raw-edge hem, cotton-poly blend, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Cotton-Poly Blend", "Cotton", "Poly-Spandex", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
@@ -818,7 +818,7 @@ export const tankTops: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Muscle-cut tank, construction detail" },
+      specificationsImage: { alt: "Muscle-cut tank, construction detail, men's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Armhole depth checked for consistency across the size run",
@@ -1159,11 +1159,11 @@ export const tankTops: Category = {
     {
       status: "draft",
       slug: "cropped-fitted",
-      cardTitle: "Custom Cropped Fitted Tank",
+      cardTitle: "Women's Cropped Fitted Tank",
       cardSubline: "Fitted, midriff-baring cropped length",
       gender: "Women",
       image: "",
-      imageAlt: "Custom cropped fitted tank manufacturer",
+      imageAlt: "Women's cropped fitted tank manufacturer",
       href: "/capriowear/activewear/tank-tops/cropped-fitted",
       // Full PDP content for SKU 11 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 10. Card name "Cropped Fitted Tank" is
@@ -1177,22 +1177,22 @@ export const tankTops: Category = {
       // (Weight stays "Pending, confirmed on your sample."). `images`
       // are alt-only placeholders: real product photography is needed
       // before this can go live. CTA is Request a Sample only.
-      pdpTitle: "Cropped Fitted",
+      pdpTitle: "Women's Cropped Fitted",
       sku: "CAP-TNK-11",
-      pdpHeading: "Custom Cropped Fitted Tank Manufacturer",
+      pdpHeading: "Women's Cropped Fitted Tank Manufacturer",
       pdpDescription:
         "Women's fitted tank with a cropped, midriff-baring hem, custom and private label, in stretch poly blend, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Cropped fitted tank, front view" },
-        { alt: "Cropped fitted tank, hem detail" },
-        { alt: "Cropped fitted tank, side profile" },
-        { alt: "Cropped fitted tank, fabric close-up" },
-        { alt: "Cropped fitted tank, worn on model" },
-        { alt: "Cropped fitted tank, flat lay" },
+        { alt: "Cropped fitted tank, front view, women's" },
+        { alt: "Cropped fitted tank, hem detail, women's" },
+        { alt: "Cropped fitted tank, side profile, women's" },
+        { alt: "Cropped fitted tank, fabric close-up, women's" },
+        { alt: "Cropped fitted tank, worn on model, women's" },
+        { alt: "Cropped fitted tank, flat lay, women's" },
       ],
-      pdpMetaTitle: "Custom Cropped Fitted Tank Manufacturer",
+      pdpMetaTitle: "Women's Cropped Fitted Tank Manufacturer",
       pdpMetaDescription:
-        "Custom cropped fitted tank manufacturer, private label, close-fitting, midriff-baring cropped hem, stretch poly blend, from 50 pieces, DDP worldwide.",
+        "Women's cropped fitted tank manufacturer, private label, close-fitting, midriff-baring cropped hem, stretch poly blend, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton-Poly Blend", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1233,7 +1233,7 @@ export const tankTops: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Cropped fitted tank, construction detail" },
+      specificationsImage: { alt: "Cropped fitted tank, construction detail, women's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Fitted silhouette checked for consistent recovery across the size run",
@@ -1363,11 +1363,11 @@ export const tankTops: Category = {
     {
       status: "draft",
       slug: "shelf-bra",
-      cardTitle: "Custom Shelf-Bra Tank",
+      cardTitle: "Women's Shelf-Bra Tank",
       cardSubline: "Built-in shelf bra, adjustable straps",
       gender: "Women",
       image: "",
-      imageAlt: "Custom shelf-bra tank manufacturer",
+      imageAlt: "Women's shelf-bra tank manufacturer",
       href: "/capriowear/activewear/tank-tops/shelf-bra",
       // Full PDP content for SKU 13 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 12. A Tank Tops category SKU (an integrated
@@ -1381,22 +1381,22 @@ export const tankTops: Category = {
       // on your sample."). `images` are alt-only placeholders: real
       // product photography is needed before this can go live. CTA is
       // Request a Sample only.
-      pdpTitle: "Shelf-Bra",
+      pdpTitle: "Women's Shelf-Bra",
       sku: "CAP-TNK-13",
-      pdpHeading: "Custom Shelf-Bra Tank Manufacturer",
+      pdpHeading: "Women's Shelf-Bra Tank Manufacturer",
       pdpDescription:
         "Women's tank with a built-in shelf bra, removable pads, and adjustable straps, custom and private label, in stretch poly blend, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Shelf-bra tank, front view" },
-        { alt: "Shelf-bra tank, built-in shelf bra detail" },
-        { alt: "Shelf-bra tank, side profile" },
-        { alt: "Shelf-bra tank, fabric close-up" },
-        { alt: "Shelf-bra tank, worn on model" },
-        { alt: "Shelf-bra tank, flat lay" },
+        { alt: "Shelf-bra tank, front view, women's" },
+        { alt: "Shelf-bra tank, built-in shelf bra detail, women's" },
+        { alt: "Shelf-bra tank, side profile, women's" },
+        { alt: "Shelf-bra tank, fabric close-up, women's" },
+        { alt: "Shelf-bra tank, worn on model, women's" },
+        { alt: "Shelf-bra tank, flat lay, women's" },
       ],
-      pdpMetaTitle: "Custom Shelf-Bra Tank Manufacturer",
+      pdpMetaTitle: "Women's Shelf-Bra Tank Manufacturer",
       pdpMetaDescription:
-        "Custom shelf-bra tank manufacturer, private label, built-in shelf bra, removable pads, adjustable straps, stretch poly blend, from 50 pieces, DDP worldwide.",
+        "Women's shelf-bra tank manufacturer, private label, built-in shelf bra, removable pads, adjustable straps, stretch poly blend, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton-Poly Blend", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1436,7 +1436,7 @@ export const tankTops: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Shelf-bra tank, construction detail" },
+      specificationsImage: { alt: "Shelf-bra tank, construction detail, women's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Shelf bra and strap adjustment tested for support and hold",
@@ -1464,11 +1464,11 @@ export const tankTops: Category = {
     {
       status: "draft",
       slug: "halter",
-      cardTitle: "Custom Halter Tank",
+      cardTitle: "Women's Halter Tank",
       cardSubline: "Halter-neck strap, ties or clips behind the neck",
       gender: "Women",
       image: "",
-      imageAlt: "Custom halter tank manufacturer",
+      imageAlt: "Women's halter tank manufacturer",
       href: "/capriowear/activewear/tank-tops/halter",
       // Full PDP content for SKU 14 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 13. Reachable by URL and a clickable PLP card
@@ -1478,22 +1478,22 @@ export const tankTops: Category = {
       // (Weight stays "Pending, confirmed on your sample."). `images`
       // are alt-only placeholders: real product photography is needed
       // before this can go live. CTA is Request a Sample only.
-      pdpTitle: "Halter",
+      pdpTitle: "Women's Halter",
       sku: "CAP-TNK-14",
-      pdpHeading: "Custom Halter Tank Manufacturer",
+      pdpHeading: "Women's Halter Tank Manufacturer",
       pdpDescription:
         "Women's halter-neck tank with a deep scoop back, custom and private label, in stretch poly blend, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Halter tank, front view" },
-        { alt: "Halter tank, neckline and back detail" },
-        { alt: "Halter tank, side profile" },
-        { alt: "Halter tank, fabric close-up" },
-        { alt: "Halter tank, worn on model" },
-        { alt: "Halter tank, flat lay" },
+        { alt: "Halter tank, front view, women's" },
+        { alt: "Halter tank, neckline and back detail, women's" },
+        { alt: "Halter tank, side profile, women's" },
+        { alt: "Halter tank, fabric close-up, women's" },
+        { alt: "Halter tank, worn on model, women's" },
+        { alt: "Halter tank, flat lay, women's" },
       ],
-      pdpMetaTitle: "Custom Halter Tank Manufacturer",
+      pdpMetaTitle: "Women's Halter Tank Manufacturer",
       pdpMetaDescription:
-        "Custom halter tank manufacturer, private label, halterneck front, deep scoop back, stretch Polyester/Spandex, from 50 pieces, DDP worldwide.",
+        "Women's halter tank manufacturer, private label, halterneck front, deep scoop back, stretch Polyester/Spandex, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton-Poly Blend", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1534,7 +1534,7 @@ export const tankTops: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Halter tank, construction detail" },
+      specificationsImage: { alt: "Halter tank, construction detail, women's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Halter tie and neckline hardware tested for hold",
@@ -1562,11 +1562,11 @@ export const tankTops: Category = {
     {
       status: "draft",
       slug: "cropped-length",
-      cardTitle: "Custom Cropped Tank",
+      cardTitle: "Women's Cropped Tank",
       cardSubline: "Cropped hem length, cross-silhouette construction feature",
       gender: "Women",
       image: "",
-      imageAlt: "Custom cropped tank manufacturer, cross-silhouette",
+      imageAlt: "Women's cropped tank manufacturer, cross-silhouette",
       href: "/capriowear/activewear/tank-tops/cropped-length",
       // Full PDP content for SKU 15 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 14. Card name "Cropped Tank" is deliberately
@@ -1582,22 +1582,22 @@ export const tankTops: Category = {
       // on your sample."). `images` are alt-only placeholders: real
       // product photography is needed before this can go live. CTA is
       // Request a Sample only.
-      pdpTitle: "Cropped",
+      pdpTitle: "Women's Cropped",
       sku: "CAP-TNK-15",
-      pdpHeading: "Custom Cropped Tank Manufacturer",
+      pdpHeading: "Women's Cropped Tank Manufacturer",
       pdpDescription:
         "Women's relaxed tank with a cropped, midriff-baring hem, custom and private label, in stretch poly blend, made to your brand in Sialkot, Pakistan. The cropped hem length can also be layered onto other silhouettes on request.",
       images: [
-        { alt: "Cropped tank, front view" },
-        { alt: "Cropped tank, hem detail" },
-        { alt: "Cropped tank, side profile" },
-        { alt: "Cropped tank, fabric close-up" },
-        { alt: "Cropped tank, worn on model" },
-        { alt: "Cropped tank, flat lay" },
+        { alt: "Cropped tank, front view, women's" },
+        { alt: "Cropped tank, hem detail, women's" },
+        { alt: "Cropped tank, side profile, women's" },
+        { alt: "Cropped tank, fabric close-up, women's" },
+        { alt: "Cropped tank, worn on model, women's" },
+        { alt: "Cropped tank, flat lay, women's" },
       ],
-      pdpMetaTitle: "Custom Cropped Tank Manufacturer",
+      pdpMetaTitle: "Women's Cropped Tank Manufacturer",
       pdpMetaDescription:
-        "Custom cropped tank manufacturer, private label, relaxed fit, cropped midriff-baring hem, stretch poly blend, from 50 pieces, DDP worldwide.",
+        "Women's cropped tank manufacturer, private label, relaxed fit, cropped midriff-baring hem, stretch poly blend, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Cotton-Poly Blend", "Nylon-Elastane", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1637,7 +1637,7 @@ export const tankTops: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Cropped tank, construction detail" },
+      specificationsImage: { alt: "Cropped tank, construction detail, women's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Hem length checked for consistency across the size run",

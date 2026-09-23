@@ -4170,3 +4170,9 @@ Owner's 8-item Shorts pass, `content/activewear/shorts.ts` only.
 ## "You may also be interested in" chips match the PDP Related styles chips, 2026-09-23
 
 Owner: "treat them visual same as related styles on pdp across all pages". `RelatedCategories` (every Activewear, Teamwear and Gear PLP) now renders its chips with the same markup as `ProductRelatedStyles` (`next/link` + `ChevronRight`) and the same `productRelatedStyles.list`/`chip`/`chipIcon` recipe, replacing the outlined `Button` (secondary) pills; `relatedCategories.list` removed. Heading, 48px heading-to-chips gap and section spacing unchanged. Verified: identical className and zero computed-style differences at rest and on hover between T-Shirts PLP chips and a T-Shirts PDP's Related styles chips; no overflow at 390/768/1440 on the T-Shirts, Soccer and Wraps, Straps & Sleeves PLPs. tsc clean, eslint 0 errors, build clean, Playwright 45/45.
+
+## Tank Tops: the 8 remaining "Custom" SKUs gendered; all 16 Tank Tops SKUs gendered, 2026-09-23
+
+Always-gender rule applied to the 8 gendered Tank Tops SKUs still named "Custom ...": men's CAP-TNK-01 Oversized Cut-Off, 04 Athletic, 05 Stringer, 07 Muscle-Cut; women's 11 Cropped Fitted, 13 Shelf-Bra, 14 Halter, 15 Cropped. Changed: card title, H1, title tag, breadcrumb (`pdpTitle` prefixed, visible + JSON-LD), meta description opening ("Custom" to "Men's/Women's"), card `imageAlt`, and the 6 gallery alts plus the specifications alt (", men's"/", women's" suffix, as on Ringer/V-Neck).
+
+**Not changed, flagged:** (1) related-style chips keep Tank Tops' existing short, ungendered labels ("Athletic Tank"), the same style the 8 already-gendered SKUs' chips use; the brief didn't ask for chips. (2) Halter and Cropped meta descriptions are 141 chars (140 before this change, already under the 150 to 160 target).
