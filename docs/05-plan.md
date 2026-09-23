@@ -4190,3 +4190,12 @@ Crew (CAP-LSL-01), Henley (03), Quarter-Zip (04), Fitted Raglan (07) and Mock Ne
 ## Related-style chips gendered to the target's card name, 2026-09-23
 
 Owner: every related-style chip pointing at a SKU with a `gender` field reads that SKU's full card title (its H1 minus " Manufacturer"), not a short form, so a chip row never mixes "Men's Fitted Performance" with "Henley Long-Sleeve". Applied by slug lookup (chip `slug` to target `cardTitle`), so every label is exactly the target's own name: Tank Tops 64 chips, T-Shirts 64, Sweatshirts 64 (were short gendered forms without "Sweatshirt"), Long-Sleeve Tops 14 of 30 (16 already matched). Shorts already matched on all 56, unchanged. Leggings and Sports Bras untouched (single-gender, no `gender` field). Link targets, counts and layout unchanged; "See All" untouched.
+
+## Standing-rules audit fix batch: Tank Tops breadcrumbs, Elastane to Spandex, 28 meta lengths, Long-Sleeve Tops entity answer, 2026-09-23
+
+Four fixes from the read-only standing-rules audit of 7 categories.
+
+1. **Tank Tops breadcrumbs gendered (8):** `pdpTitle` on men's Fitted, Relaxed, Racerback Singlet, Ribbed and women's Fitted, Relaxed, Racerback, Ribbed now carries "Men's"/"Women's", so the visible breadcrumb and JSON-LD BreadcrumbList match the H1.
+2. **Elastane to Spandex:** Tank Tops and Long-Sleeve Tops no longer say "elastane" anywhere. On Tank Tops every compound fabric name also moved to the slash convention with each material capitalized ("Nylon-Elastane" to "Nylon/Spandex", "Cotton-Elastane Rib Knit" to "Cotton/Spandex Rib Knit", "Poly-Spandex" to "Poly/Spandex", "Cotton-Poly Blend" to "Cotton/Poly Blend", "Cotton/lyocell/elastane" to "Cotton/Lyocell/Spandex"). The two PLP fabric pills that joined two options with " / " now use " or " ("Poly/Spandex or Nylon/Spandex") so the slash only ever separates materials. Long-Sleeve Tops: word swap only.
+3. **Meta descriptions into 150 to 160 characters (28):** Sports Bras PLP and 13 PDPs (all but Crossback and Racerback), Long-Sleeve Tops PLP, Men's Fitted Performance, Henley and Quarter-Zip, Tank Tops PLP, Leggings PLP and 8 PDPs. Long ones mostly lost "any fabric and color" or a restated phrase; short ones gained "from 50 pieces" (the category trust bullet) and in a few cases "any color". No new claims.
+4. **Long-Sleeve Tops entity answer:** replaced with the owner's roster-accurate version naming all 6 men's and 4 women's styles.

@@ -39,7 +39,7 @@ export const tankTops: Category = {
   // other field on this page (owner explicit: title/H1/slug/every other
   // section unchanged, description only).
   metaDescription:
-    "Custom tank top manufacturing for activewear and teamwear brands. Request samples, MOQs, and turnaround from a tank top manufacturer built for bulk orders, OEM, ODM, and private label, any fabric and color, DDP worldwide.",
+    "Custom tank top manufacturer for activewear and teamwear brands, OEM, ODM and private label, samples in 10 to 14 days, from 50 pieces, any color, DDP worldwide.",
   trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
@@ -53,17 +53,17 @@ export const tankTops: Category = {
       performance: "Soft hand, breathable, brushed or garment-washed finish available",
     },
     {
-      fabric: "Cotton-poly blend",
+      fabric: "Cotton/Poly blend",
       bestFor: "Everyday relaxed and casual training tanks",
       performance: "Durable, soft hand, easy-care",
     },
     {
-      fabric: "Cotton-spandex or moisture-wicking polyester blend",
+      fabric: "Cotton/Spandex or moisture-wicking polyester blend",
       bestFor: "Racerback and athletic performance tanks",
       performance: "Quick-dry, moisture-wicking, 4-way stretch",
     },
     {
-      fabric: "Polyester-spandex, cotton/lyocell/elastane, or nylon-elastane blends",
+      fabric: "Polyester/Spandex, Cotton/Lyocell/Spandex, or Nylon/Spandex blends",
       bestFor: "Fitted, stringer, and compression tanks",
       performance: "Soft hand, 4-way stretch, strong recovery",
     },
@@ -85,9 +85,9 @@ export const tankTops: Category = {
   ],
   fabricPills: [
     "Cotton",
-    "Cotton-poly blend",
-    "Cotton-spandex / moisture-wicking polyester",
-    "Poly-spandex / nylon-elastane",
+    "Cotton/Poly blend",
+    "Cotton/Spandex or moisture-wicking polyester",
+    "Poly/Spandex or Nylon/Spandex",
     "Ribbed knit",
   ],
   qualityHeading: "Fit that holds, seams that don't chafe",
@@ -103,7 +103,7 @@ export const tankTops: Category = {
   coverageEyebrow: "CUSTOMIZATION",
   coverageHeading: "From custom fabric to packaging design",
   coverageItems: [
-    { title: "Fabric", body: "Cotton, cotton-poly, poly-spandex, nylon-elastane, and ribbed knit blends" },
+    { title: "Fabric", body: "Cotton, Cotton/Poly, Poly/Spandex, Nylon/Spandex, and ribbed knit blends" },
     { title: "Color and print", body: "Custom colors with Pantone matching, sublimation, screen, DTF" },
     {
       title: "Style and fit",
@@ -121,7 +121,7 @@ export const tankTops: Category = {
     },
     {
       q: "Which fabrics do you use for tank tops?",
-      a: "Cotton, cotton-poly, poly-spandex, nylon-elastane, and ribbed knit blends, confirmed on your sample.",
+      a: "Cotton, Cotton/Poly, Poly/Spandex, Nylon/Spandex, and ribbed knit blends, confirmed on your sample.",
     },
     {
       q: "What is the difference between a muscle tank, a stringer, and a standard racerback?",
@@ -207,7 +207,7 @@ export const tankTops: Category = {
       pdpMetaDescription:
         "Men's oversized cut-off tank manufacturer, private label, boxy dropped-shoulder fit, wide raw-cut armhole, cotton-blend jersey, from 50 pieces, DDP worldwide.",
       material: "Cotton or cotton-blend jersey, 260 GSM",
-      pdpFabricPills: ["Cotton", "Cotton-Poly Blend", "Recycled Polyester", "Ribbed Cotton Knit"],
+      pdpFabricPills: ["Cotton", "Cotton/Poly Blend", "Recycled Polyester", "Ribbed Cotton Knit"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
@@ -279,10 +279,10 @@ export const tankTops: Category = {
       imageAlt: "Custom fitted tank manufacturer, men's",
       href: "/capriowear/activewear/tank-tops/fitted-mens",
       sku: "CAP-TNK-02",
-      pdpTitle: "Fitted",
+      pdpTitle: "Men's Fitted",
       pdpHeading: "Men's Fitted Tank Manufacturer",
       pdpDescription:
-        "Men's close-fitting, compression tank with a standard neckline and armhole, custom and private label, in poly-spandex, nylon-elastane, or fitted cotton, made to your brand in Sialkot, Pakistan.",
+        "Men's close-fitting, compression tank with a standard neckline and armhole, custom and private label, in Poly/Spandex, Nylon/Spandex, or fitted cotton, made to your brand in Sialkot, Pakistan.",
       images: [
         { alt: "Fitted tank, front view" },
         { alt: "Fitted tank, armhole detail" },
@@ -294,7 +294,7 @@ export const tankTops: Category = {
       pdpMetaTitle: "Men's Fitted Tank Manufacturer",
       pdpMetaDescription:
         "Custom men's fitted tank manufacturer, private label, close-fitting compression build, Polyester/Spandex or Nylon/Spandex, from 50 pieces, DDP worldwide.",
-      pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton", "Recycled Polyester"],
+      pdpFabricPills: ["Poly/Spandex", "Nylon/Spandex", "Cotton", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
@@ -304,7 +304,7 @@ export const tankTops: Category = {
       faqs: [
         {
           q: "What fabric is the fitted tank made from?",
-          a: "Poly-spandex, nylon-elastane, or fitted cotton, in the composition range typical of comparable compression tanks. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+          a: "Poly/Spandex, Nylon/Spandex, or fitted cotton, in the composition range typical of comparable compression tanks. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
         },
         {
           q: "How is this different from your Athletic Tank?",
@@ -320,7 +320,7 @@ export const tankTops: Category = {
       ],
       specifications: [
         { label: "Style", value: "Men's close-fitting, compression tank, standard neckline and armhole (base type)" },
-        { label: "Fabric", value: "Poly-spandex, nylon-elastane, or fitted cotton, confirmed on your sample." },
+        { label: "Fabric", value: "Poly/Spandex, Nylon/Spandex, or fitted cotton, confirmed on your sample." },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Fitted, compression fit, not oversized, not relaxed. A close-to-body silhouette through the torso." },
         { label: "Armhole", value: "Standard armhole, finished edge" },
@@ -344,7 +344,7 @@ export const tankTops: Category = {
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
           {
             title: "Fabric",
-            body: "Poly-spandex, nylon-elastane, or fitted cotton, any weight, sourced or matched to your reference",
+            body: "Poly/Spandex, Nylon/Spandex, or fitted cotton, any weight, sourced or matched to your reference",
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
           },
           { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
@@ -366,7 +366,7 @@ export const tankTops: Category = {
       imageAlt: "Custom relaxed tank manufacturer, men's",
       href: "/capriowear/activewear/tank-tops/relaxed-mens",
       sku: "CAP-TNK-03",
-      pdpTitle: "Relaxed",
+      pdpTitle: "Men's Relaxed",
       pdpHeading: "Men's Relaxed Tank Manufacturer",
       pdpDescription:
         "Men's relaxed, softer-fit tank with a standard finished armhole and neckline, custom and private label, in recycled polyester or cotton jersey, made to your brand in Sialkot, Pakistan.",
@@ -381,7 +381,7 @@ export const tankTops: Category = {
       pdpMetaTitle: "Men's Relaxed Tank Manufacturer",
       pdpMetaDescription:
         "Custom men's relaxed tank manufacturer, private label, softer roomier fit, finished armhole, recycled polyester or cotton jersey, from 50 pieces, DDP worldwide.",
-      pdpFabricPills: ["Recycled Polyester", "Cotton", "Cotton-Poly Blend", "Poly-Spandex"],
+      pdpFabricPills: ["Recycled Polyester", "Cotton", "Cotton/Poly Blend", "Poly/Spandex"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
@@ -472,7 +472,7 @@ export const tankTops: Category = {
       pdpMetaTitle: "Men's Athletic Tank Manufacturer",
       pdpMetaDescription:
         "Men's athletic tank manufacturer, private label, true-to-size training and running cut, deep scoop neckline, recycled polyester, from 50 pieces, DDP worldwide.",
-      pdpFabricPills: ["Recycled Polyester", "Poly-Spandex", "Cotton-Poly Blend", "Nylon-Elastane"],
+      pdpFabricPills: ["Recycled Polyester", "Poly/Spandex", "Cotton/Poly Blend", "Nylon/Spandex"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
@@ -558,7 +558,7 @@ export const tankTops: Category = {
       sku: "CAP-TNK-05",
       pdpHeading: "Men's Stringer Tank Manufacturer",
       pdpDescription:
-        "Men's stringer tank with narrow straps and a deep-cut racerback armhole, custom and private label, in cotton/lyocell/elastane jersey, made to your brand in Sialkot, Pakistan.",
+        "Men's stringer tank with narrow straps and a deep-cut racerback armhole, custom and private label, in Cotton/Lyocell/Spandex jersey, made to your brand in Sialkot, Pakistan.",
       images: [
         { alt: "Stringer tank, front view, men's" },
         { alt: "Stringer tank, armhole and strap detail, men's" },
@@ -570,7 +570,7 @@ export const tankTops: Category = {
       pdpMetaTitle: "Men's Stringer Tank Manufacturer",
       pdpMetaDescription:
         "Men's stringer tank manufacturer, private label, narrow straps, deep-cut racerback armhole, cotton/lyocell/spandex jersey, from 50 pieces, DDP worldwide.",
-      pdpFabricPills: ["Cotton/Lyocell/Elastane", "Cotton", "Poly-Spandex", "Nylon-Elastane"],
+      pdpFabricPills: ["Cotton/Lyocell/Spandex", "Cotton", "Poly/Spandex", "Nylon/Spandex"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
@@ -580,7 +580,7 @@ export const tankTops: Category = {
       faqs: [
         {
           q: "What fabric is the stringer tank made from?",
-          a: "Cotton/lyocell/elastane jersey, in the composition range typical of comparable stringer tanks. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+          a: "Cotton/Lyocell/Spandex jersey, in the composition range typical of comparable stringer tanks. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
         },
         {
           q: "What is the difference between a stringer and your Racerback Singlet?",
@@ -601,7 +601,7 @@ export const tankTops: Category = {
         },
         {
           label: "Fabric",
-          value: "Cotton/lyocell/elastane jersey, confirmed on your sample.",
+          value: "Cotton/Lyocell/Spandex jersey, confirmed on your sample.",
         },
         { label: "Weight", value: "165 GSM. Final weight confirmed on your sample." },
         { label: "Fit", value: "Fitted. Deep-scooped stringer armholes, racerback (Y-back) construction." },
@@ -631,7 +631,7 @@ export const tankTops: Category = {
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
           {
             title: "Fabric",
-            body: "Cotton/lyocell/elastane jersey, any weight, sourced or matched to your reference",
+            body: "Cotton/Lyocell/Spandex jersey, any weight, sourced or matched to your reference",
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
           },
           { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
@@ -656,7 +656,7 @@ export const tankTops: Category = {
       // (Weight stays "Pending, confirmed on your sample."). `images`
       // are alt-only placeholders: real product photography is needed
       // before this can go live. CTA is Request a Sample only.
-      pdpTitle: "Racerback Singlet",
+      pdpTitle: "Men's Racerback Singlet",
       sku: "CAP-TNK-06",
       pdpHeading: "Men's Racerback Singlet Manufacturer",
       pdpDescription:
@@ -672,7 +672,7 @@ export const tankTops: Category = {
       pdpMetaTitle: "Men's Racerback Singlet Manufacturer",
       pdpMetaDescription:
         "Custom men's racerback singlet manufacturer, private label, fitted running and training cut, full racerback, compression knit, from 50 pieces, DDP worldwide.",
-      pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Recycled Polyester", "Cotton-Lyocell-Elastane"],
+      pdpFabricPills: ["Poly/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton/Lyocell/Spandex"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
@@ -760,7 +760,7 @@ export const tankTops: Category = {
       sku: "CAP-TNK-07",
       pdpHeading: "Men's Muscle-Cut Tank Manufacturer",
       pdpDescription:
-        "Men's relaxed tank with a wide dropped armhole, ribbed collar, and raw-edge hem, custom and private label, in cotton-poly blend, made to your brand in Sialkot, Pakistan. The dropped-armhole detail sits between a standard tank armhole and a true stringer cut, and can also be layered onto other silhouettes on request.",
+        "Men's relaxed tank with a wide dropped armhole, ribbed collar, and raw-edge hem, custom and private label, in Cotton/Poly blend, made to your brand in Sialkot, Pakistan. The dropped-armhole detail sits between a standard tank armhole and a true stringer cut, and can also be layered onto other silhouettes on request.",
       images: [
         { alt: "Muscle-cut tank, front view, men's" },
         { alt: "Muscle-cut tank, armhole and collar detail, men's" },
@@ -771,8 +771,8 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Men's Muscle-Cut Tank Manufacturer",
       pdpMetaDescription:
-        "Men's muscle-cut tank manufacturer, private label, wide dropped armhole, ribbed collar, raw-edge hem, cotton-poly blend, from 50 pieces, DDP worldwide.",
-      pdpFabricPills: ["Cotton-Poly Blend", "Cotton", "Poly-Spandex", "Recycled Polyester"],
+        "Men's muscle-cut tank manufacturer, private label, wide dropped armhole, ribbed collar, raw-edge hem, Cotton/Poly blend, from 50 pieces, DDP worldwide.",
+      pdpFabricPills: ["Cotton/Poly Blend", "Cotton", "Poly/Spandex", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
@@ -782,7 +782,7 @@ export const tankTops: Category = {
       faqs: [
         {
           q: "What fabric is the muscle-cut tank made from?",
-          a: "Cotton-poly blend, in the composition range typical of comparable dropped-armhole tanks. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+          a: "Cotton/Poly blend, in the composition range typical of comparable dropped-armhole tanks. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
         },
         {
           q: "Can I get this dropped-armhole cut on a different style, not this exact tank?",
@@ -803,7 +803,7 @@ export const tankTops: Category = {
         },
         {
           label: "Fabric",
-          value: "Cotton-poly blend, confirmed on your sample.",
+          value: "Cotton/Poly blend, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         {
@@ -835,7 +835,7 @@ export const tankTops: Category = {
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
           {
             title: "Fabric",
-            body: "Cotton-poly blend, any weight, sourced or matched to your reference",
+            body: "Cotton/Poly blend, any weight, sourced or matched to your reference",
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
           },
           { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
@@ -861,7 +861,7 @@ export const tankTops: Category = {
       // noindex/nofollow, out of the sitemap, no Product/FAQPage
       // JSON-LD. Do not flip `status` to "published". No GSM sourced
       // (Weight stays "Pending, confirmed on your sample."). Fabric row
-      // states the real composition (95% Cotton / 5% Elastane) plainly,
+      // states the real composition (95% Cotton / 5% Spandex) plainly,
       // with no "per the confirmed reference" attribution -- the brief's
       // own draft copy included that phrase, but it reads as the same
       // internal-sourcing leak already found and fixed once on Shorts
@@ -872,11 +872,11 @@ export const tankTops: Category = {
       // sample.", no attribution). `images` are alt-only placeholders:
       // real product photography is needed before this can go live. CTA
       // is Request a Sample only.
-      pdpTitle: "Ribbed",
+      pdpTitle: "Men's Ribbed",
       sku: "CAP-TNK-08",
       pdpHeading: "Men's Ribbed Tank Manufacturer",
       pdpDescription:
-        "Men's fitted tank in a full-body ribbed knit, custom and private label, in cotton-elastane rib knit, lay-flat chafe-free side seams, made to your brand in Sialkot, Pakistan.",
+        "Men's fitted tank in a full-body ribbed knit, custom and private label, in Cotton/Spandex rib knit, lay-flat chafe-free side seams, made to your brand in Sialkot, Pakistan.",
       images: [
         { alt: "Ribbed tank, front view" },
         { alt: "Ribbed tank, rib knit detail" },
@@ -887,8 +887,8 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Men's Ribbed Tank Manufacturer",
       pdpMetaDescription:
-        "Custom men's ribbed tank manufacturer, private label, full-body rib knit, fitted through the torso, cotton-spandex rib, from 50 pieces, DDP worldwide.",
-      pdpFabricPills: ["Cotton-Elastane Rib Knit", "Viscose-Elastane Rib Knit", "Cotton", "Poly-Spandex"],
+        "Custom men's ribbed tank manufacturer, private label, full-body rib knit, fitted through the torso, Cotton/Spandex rib, from 50 pieces, DDP worldwide.",
+      pdpFabricPills: ["Cotton/Spandex Rib Knit", "Viscose/Spandex Rib Knit", "Cotton", "Poly/Spandex"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
@@ -919,7 +919,7 @@ export const tankTops: Category = {
         },
         {
           label: "Fabric",
-          value: "Cotton-elastane rib knit, 95% Cotton / 5% Elastane. Final blend and weight confirmed on your sample.",
+          value: "Cotton/Spandex rib knit, 95% Cotton / 5% Spandex. Final blend and weight confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Fitted through the torso, standard neckline and armhole." },
@@ -944,7 +944,7 @@ export const tankTops: Category = {
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
           {
             title: "Fabric",
-            body: "Cotton-elastane rib knit, any weight, sourced or matched to your reference",
+            body: "Cotton/Spandex rib knit, any weight, sourced or matched to your reference",
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
           },
           { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },
@@ -973,7 +973,7 @@ export const tankTops: Category = {
       // your sample."). `images` are alt-only placeholders: real product
       // photography is needed before this can go live. CTA is Request a
       // Sample only.
-      pdpTitle: "Fitted",
+      pdpTitle: "Women's Fitted",
       sku: "CAP-TNK-09",
       pdpHeading: "Women's Fitted Tank Manufacturer",
       pdpDescription:
@@ -989,7 +989,7 @@ export const tankTops: Category = {
       pdpMetaTitle: "Women's Fitted Tank Manufacturer",
       pdpMetaDescription:
         "Custom women's fitted tank manufacturer, private label, close-fitting, high scoop neckline, stretch Polyester/Spandex, from 50 pieces, DDP worldwide.",
-      pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton-Poly Blend", "Recycled Polyester"],
+      pdpFabricPills: ["Poly/Spandex", "Nylon/Spandex", "Cotton/Poly Blend", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
@@ -1075,7 +1075,7 @@ export const tankTops: Category = {
       // your sample."). `images` are alt-only placeholders: real product
       // photography is needed before this can go live. CTA is Request a
       // Sample only.
-      pdpTitle: "Relaxed",
+      pdpTitle: "Women's Relaxed",
       sku: "CAP-TNK-10",
       pdpHeading: "Women's Relaxed Tank Manufacturer",
       pdpDescription:
@@ -1091,7 +1091,7 @@ export const tankTops: Category = {
       pdpMetaTitle: "Women's Relaxed Tank Manufacturer",
       pdpMetaDescription:
         "Custom women's relaxed tank manufacturer, private label, roomier non-compression fit, finished neckline, stretch poly blend, from 50 pieces, DDP worldwide.",
-      pdpFabricPills: ["Poly-Spandex", "Cotton-Poly Blend", "Nylon-Elastane", "Recycled Polyester"],
+      pdpFabricPills: ["Poly/Spandex", "Cotton/Poly Blend", "Nylon/Spandex", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
@@ -1193,7 +1193,7 @@ export const tankTops: Category = {
       pdpMetaTitle: "Women's Cropped Fitted Tank Manufacturer",
       pdpMetaDescription:
         "Women's cropped fitted tank manufacturer, private label, close-fitting, midriff-baring cropped hem, stretch poly blend, from 50 pieces, DDP worldwide.",
-      pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton-Poly Blend", "Recycled Polyester"],
+      pdpFabricPills: ["Poly/Spandex", "Nylon/Spandex", "Cotton/Poly Blend", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
@@ -1279,7 +1279,7 @@ export const tankTops: Category = {
       // confirmed on your sample."). `images` are alt-only placeholders:
       // real product photography is needed before this can go live. CTA
       // is Request a Sample only.
-      pdpTitle: "Racerback",
+      pdpTitle: "Women's Racerback",
       sku: "CAP-TNK-12",
       pdpHeading: "Women's Racerback Tank Manufacturer",
       pdpDescription:
@@ -1295,7 +1295,7 @@ export const tankTops: Category = {
       pdpMetaTitle: "Women's Racerback Tank Manufacturer",
       pdpMetaDescription:
         "Custom women's racerback tank manufacturer, private label, fitted silhouette, racerback with mesh paneling, stretch poly blend, from 50 pieces, DDP worldwide.",
-      pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Mesh Panel Blend", "Recycled Polyester"],
+      pdpFabricPills: ["Poly/Spandex", "Nylon/Spandex", "Mesh Panel Blend", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
@@ -1397,7 +1397,7 @@ export const tankTops: Category = {
       pdpMetaTitle: "Women's Shelf-Bra Tank Manufacturer",
       pdpMetaDescription:
         "Women's shelf-bra tank manufacturer, private label, built-in shelf bra, removable pads, adjustable straps, stretch poly blend, from 50 pieces, DDP worldwide.",
-      pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton-Poly Blend", "Recycled Polyester"],
+      pdpFabricPills: ["Poly/Spandex", "Nylon/Spandex", "Cotton/Poly Blend", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
@@ -1494,7 +1494,7 @@ export const tankTops: Category = {
       pdpMetaTitle: "Women's Halter Tank Manufacturer",
       pdpMetaDescription:
         "Women's halter tank manufacturer, private label, halterneck front, deep scoop back, stretch Polyester/Spandex, from 50 pieces, DDP worldwide.",
-      pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton-Poly Blend", "Recycled Polyester"],
+      pdpFabricPills: ["Poly/Spandex", "Nylon/Spandex", "Cotton/Poly Blend", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
@@ -1598,7 +1598,7 @@ export const tankTops: Category = {
       pdpMetaTitle: "Women's Cropped Tank Manufacturer",
       pdpMetaDescription:
         "Women's cropped tank manufacturer, private label, relaxed fit, cropped midriff-baring hem, stretch poly blend, from 50 pieces, DDP worldwide.",
-      pdpFabricPills: ["Poly-Spandex", "Cotton-Poly Blend", "Nylon-Elastane", "Recycled Polyester"],
+      pdpFabricPills: ["Poly/Spandex", "Cotton/Poly Blend", "Nylon/Spandex", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
@@ -1683,11 +1683,11 @@ export const tankTops: Category = {
       // (Weight stays "Pending, confirmed on your sample."). `images`
       // are alt-only placeholders: real product photography is needed
       // before this can go live. CTA is Request a Sample only.
-      pdpTitle: "Ribbed",
+      pdpTitle: "Women's Ribbed",
       sku: "CAP-TNK-16",
       pdpHeading: "Women's Ribbed Tank Manufacturer",
       pdpDescription:
-        "Women's fitted tank with ribbed-knit color-blocked side panels, custom and private label, in poly-elastane blend, made to your brand in Sialkot, Pakistan.",
+        "Women's fitted tank with ribbed-knit color-blocked side panels, custom and private label, in Poly/Spandex blend, made to your brand in Sialkot, Pakistan.",
       images: [
         { alt: "Ribbed tank, front view" },
         { alt: "Ribbed tank, side panel detail" },
@@ -1698,8 +1698,8 @@ export const tankTops: Category = {
       ],
       pdpMetaTitle: "Women's Ribbed Tank Manufacturer",
       pdpMetaDescription:
-        "Custom women's ribbed tank manufacturer, private label, ribbed knit with color-blocked side panels, poly-spandex body, from 50 pieces, DDP worldwide.",
-      pdpFabricPills: ["Cotton-Elastane Rib Knit", "Viscose-Elastane Rib Knit", "Poly-Spandex", "Nylon-Elastane"],
+        "Custom women's ribbed tank manufacturer, private label, ribbed knit with color-blocked side panels, Poly/Spandex body, from 50 pieces, DDP worldwide.",
+      pdpFabricPills: ["Cotton/Spandex Rib Knit", "Viscose/Spandex Rib Knit", "Poly/Spandex", "Nylon/Spandex"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
@@ -1709,7 +1709,7 @@ export const tankTops: Category = {
       faqs: [
         {
           q: "What fabric is the ribbed tank made from?",
-          a: "A poly-elastane body with ribbed-knit color-blocked side panels, in the composition range typical of comparable ribbed tanks. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+          a: "A Poly/Spandex body with ribbed-knit color-blocked side panels, in the composition range typical of comparable ribbed tanks. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
         },
         {
           q: "Can the ribbed panel be a solid color instead of color-blocked?",
@@ -1731,7 +1731,7 @@ export const tankTops: Category = {
         {
           label: "Fabric",
           value:
-            "Poly-elastane body with cotton-elastane or viscose-elastane rib knit side panels, confirmed on your sample.",
+            "Poly/Spandex body with Cotton/Spandex or Viscose/Spandex rib knit side panels, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Fitted, close-to-body." },
@@ -1757,7 +1757,7 @@ export const tankTops: Category = {
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
           {
             title: "Fabric",
-            body: "Poly-elastane body with ribbed-knit panels, any weight, sourced or matched to your reference",
+            body: "Poly/Spandex body with ribbed-knit panels, any weight, sourced or matched to your reference",
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
           },
           { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" } },

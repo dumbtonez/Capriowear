@@ -29,22 +29,22 @@ export const longSleeveTops: Category = {
   slug: "long-sleeve-tops",
   group: "Activewear",
   menuLabel: "Long-Sleeve Tops",
-  // Entity FAQ: verbatim override (owner, 2026-09-23), shown identically on
-  // the PLP and every PDP via categoryEntityFaq() (./pdpShared.ts). The
-  // brand-convergence research superseded the original 8-style list, and the
-  // new wording ("across men's and women's lines", no "with low minimums and
-  // full customization") is a sentence the template can't build, so
-  // entityQuestion/entityAnswer replace it. companyIdentity is still
-  // imported, never retyped. manufacturerNoun/productNounPlural are kept for
+  // Entity FAQ: verbatim override (owner, 2026-09-23, replaced the same day
+  // with the roster-accurate version naming all 6 men's and 4 women's
+  // styles), shown identically on the PLP and every PDP via
+  // categoryEntityFaq() (./pdpShared.ts). The split men's/women's style lists
+  // are a sentence the template can't build, so entityQuestion/entityAnswer
+  // replace it. companyIdentity is still imported, never retyped.
+  // manufacturerNoun/productNounPlural are kept for
   // shape parity, the template no longer reads them for this category.
   manufacturerNoun: "Long Sleeve Shirt",
   productNounPlural: "long-sleeve tops",
   entityQuestion: "What does Capriowear manufacture?",
-  entityAnswer: `Capriowear is a custom long sleeve shirt manufacturer for activewear brands and teamwear suppliers worldwide. We produce private label long-sleeve tops from fabric to packaging, across men's and women's lines, including crew, fitted performance, henley, and quarter-zip styles, with additional men's and women's styles available on request. ${companyIdentity}`,
+  entityAnswer: `Capriowear is a custom long sleeve shirt manufacturer for activewear brands and teamwear suppliers worldwide. We produce private label long-sleeve tops from fabric to packaging, including crew, fitted performance, henley, quarter-zip, raglan, and mock neck styles for men, and fitted performance, fitted cropped, oversized crew, and midi-length styles for women, with low minimums and full customization. ${companyIdentity}`,
   h1: "Custom Long Sleeve Shirt Manufacturer",
   metaTitle: "Custom Long Sleeve Shirt Manufacturer",
   metaDescription:
-    "Custom long sleeve shirt manufacturing for activewear and teamwear brands. Request samples, MOQs, and turnaround from a long sleeve apparel manufacturer built for bulk orders, OEM, ODM, and private label, any fabric and color, DDP worldwide.",
+    "Custom long sleeve shirt manufacturer for activewear and teamwear brands, OEM, ODM and private label, samples in 10 to 14 days, from 50 pieces, DDP worldwide.",
   trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
@@ -67,7 +67,7 @@ export const longSleeveTops: Category = {
     {
       fabric: "Stretch tri-blend or waffle-knit",
       bestFor: "Fitted raglan long-sleeve",
-      performance: "46% cotton / 46% lyocell / 8% elastane, 165 GSM on the tri-blend route, or a waffle-knit alternate",
+      performance: "46% cotton / 46% lyocell / 8% spandex, 165 GSM on the tri-blend route, or a waffle-knit alternate",
     },
     {
       fabric: "Performance poly-spandex",
@@ -356,7 +356,7 @@ export const longSleeveTops: Category = {
       ],
       pdpMetaTitle: "Men's Fitted Performance Long-Sleeve Manufacturer",
       pdpMetaDescription:
-        "Men's fitted performance long-sleeve manufacturer, OEM, ODM and private label, moisture-wicking poly-spandex, thumbholes standard, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Men's fitted performance long-sleeve manufacturer, OEM, ODM and private label, moisture-wicking poly-spandex, thumbholes standard, 50 pieces, DDP worldwide.",
       material: "Performance poly-spandex (90% polyester / 10% spandex) or 100% performance polyester",
       pdpFabricPills: ["Performance Poly-Spandex (90/10)", "100% Performance Polyester"],
       faqs: [
@@ -462,7 +462,7 @@ export const longSleeveTops: Category = {
       ],
       pdpMetaTitle: "Men's Henley Long-Sleeve Manufacturer",
       pdpMetaDescription:
-        "Men's henley long-sleeve manufacturer, OEM, ODM and private label, 2 to 5 button placket, cotton or heavier thermal cotton, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Men's henley long-sleeve manufacturer, OEM, ODM and private label, 2 to 5 button placket, cotton or heavier thermal cotton, from 50 pieces, DDP worldwide.",
       material: "Cotton or cotton-blend jersey, or heavier 100% cotton thermal weight",
       pdpFabricPills: ["Cotton Jersey", "Cotton-Poly Blend", "Heavier Thermal Cotton (190 GSM Reference)"],
       faqs: [
@@ -562,7 +562,7 @@ export const longSleeveTops: Category = {
       ],
       pdpMetaTitle: "Men's Quarter-Zip Long-Sleeve Manufacturer",
       pdpMetaDescription:
-        "Men's quarter-zip long-sleeve manufacturer, OEM, ODM and private label, mock-neck construction, performance poly-spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Men's quarter-zip long-sleeve manufacturer, OEM, ODM and private label, mock-neck construction, performance poly-spandex, from 50 pieces, DDP worldwide.",
       material: "Performance poly-spandex or 100% performance polyester",
       pdpFabricPills: ["Performance Poly-Spandex (90/10)", "100% Performance Polyester"],
       faqs: [
@@ -653,8 +653,8 @@ export const longSleeveTops: Category = {
       pdpMetaTitle: "Men's Fitted Raglan Long-Sleeve Manufacturer",
       pdpMetaDescription:
         "Men's fitted raglan long-sleeve manufacturer, OEM, ODM and private label, stretch tri-blend fabric, improved shoulder flexibility, from 50 pieces, DDP worldwide.",
-      material: "Stretch tri-blend (cotton, lyocell, elastane) or waffle-knit blend",
-      pdpFabricPills: ["Stretch Tri-Blend (Cotton/Lyocell/Elastane)", "Waffle-Knit Blend"],
+      material: "Stretch tri-blend (cotton, lyocell, spandex) or waffle-knit blend",
+      pdpFabricPills: ["Stretch Tri-Blend (Cotton/Lyocell/Spandex)", "Waffle-Knit Blend"],
       faqs: [
         {
           q: "What is raglan sleeve construction, and why does it matter?",
@@ -662,7 +662,7 @@ export const longSleeveTops: Category = {
         },
         {
           q: "What fabric is this style made from?",
-          a: "A stretch tri-blend (cotton, lyocell, and elastane) as our reference composition, or a waffle-knit blend as an alternate route. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+          a: "A stretch tri-blend (cotton, lyocell, and spandex) as our reference composition, or a waffle-knit blend as an alternate route. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
         },
       ],
       relatedStyleTags: [
@@ -677,7 +677,7 @@ export const longSleeveTops: Category = {
         { label: "Style", value: "Fitted raglan-sleeve long-sleeve, diagonal underarm-to-collar seam (base type)" },
         {
           label: "Fabric",
-          value: "Stretch tri-blend, 46% cotton / 46% lyocell / 8% elastane, or waffle-knit blend as an alternate route. Final composition confirmed on your sample.",
+          value: "Stretch tri-blend, 46% cotton / 46% lyocell / 8% spandex, or waffle-knit blend as an alternate route. Final composition confirmed on your sample.",
         },
         { label: "Weight", value: "165 GSM. Final weight confirmed on your sample." },
         { label: "Fit", value: "Fitted, athletic cut" },
