@@ -4135,3 +4135,9 @@ Verified (local render): all 3 new pages 200 with the brief's title/H1/breadcrum
 ## Sweatshirts meta descriptions gendered per the gendered-SKU rule, 2026-09-23
 
 Follow-up to the rule entry above: the meta descriptions of CAP-SWT-02, 08, 09, 10 (men's) and 04 (women's) now open "Men's/Women's ... crewneck sweatshirt manufacturer" instead of "Custom ...". Nothing else changed; lengths 151 to 158 chars. No gendered Sweatshirts SKU has a "Custom" meta description left. tsc clean.
+
+## T-Shirts Ringer (CAP-TEE-15) and V-Neck (CAP-TEE-16) gendered under the always-gender rule, 2026-09-23
+
+Both carry `gender: "Women"` with no men's counterpart. Under the 2026-09-23 always-gender rule they now read "Women's Ringer / Women's V-Neck ...": card title, H1, title tag, breadcrumb (`pdpTitle`, visible + JSON-LD), card `imageAlt`, the 6 gallery alts plus the specifications alt (", women's" suffix, same as the other gendered T-Shirts SKUs), and the meta description opening (now 153 and 156 chars). Code comments that said these stay "Custom" updated.
+
+**Flagged, not changed (outside this prompt's scope):** the brief says Raglan (CAP-TEE-05) and Curved-Hem (CAP-TEE-08) have no gender field. Both actually carry `gender: "Men"`, so the same rule would make them "Men's Raglan T-Shirt" / "Men's Curved-Hem T-Shirt".

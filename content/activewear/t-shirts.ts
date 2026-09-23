@@ -1612,8 +1612,9 @@ export const tShirts: Category = {
       // Full PDP content for SKU 15 (owner spec, 2026-09-23), draft, same
       // shape/rules as SKU 14 above. No men's counterpart -- the men's
       // ringer was a 1-of-4-brand near-miss and was never built as a SKU,
-      // so there is no cross-gender collision and the H1/title stay in
-      // the un-gendered "Custom ..." form, per the same convention.
+      // so there is no cross-gender collision -- but under the 2026-09-23
+      // always-gender rule (any SKU with a `gender` field is gendered), the
+      // name is "Women's Ringer ..." everywhere anyway.
       //
       // Internal research provenance, comment-only, never visible copy:
       // evidence tier 3 of 4 brands (Nike, Gymshark and YoungLA
@@ -1622,28 +1623,28 @@ export const tShirts: Category = {
       // GSM, confirmed on the sample.
       status: "draft",
       slug: "ringer",
-      cardTitle: "Custom Ringer T-Shirt",
+      cardTitle: "Women's Ringer T-Shirt",
       cardSubline: "Contrast-color neckline and sleeve trim",
       image: "",
-      imageAlt: "Custom ringer t-shirt manufacturer",
+      imageAlt: "Women's ringer t-shirt manufacturer",
       href: "/capriowear/activewear/t-shirts/ringer",
       gender: "Women",
       sku: "CAP-TEE-15",
-      pdpTitle: "Ringer",
-      pdpHeading: "Custom Ringer T-Shirt Manufacturer",
+      pdpTitle: "Women's Ringer",
+      pdpHeading: "Women's Ringer T-Shirt Manufacturer",
       pdpDescription:
         "Ringer tee with a contrast-color neckline and sleeve trim, custom and private label, in combed cotton or a cotton-poly blend, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Ringer t-shirt, front view" },
-        { alt: "Ringer t-shirt, contrast neckline trim detail" },
-        { alt: "Ringer t-shirt, contrast sleeve trim detail" },
-        { alt: "Ringer t-shirt, back view" },
-        { alt: "Ringer t-shirt, worn on model" },
-        { alt: "Ringer t-shirt, flat lay" },
+        { alt: "Ringer t-shirt, front view, women's" },
+        { alt: "Ringer t-shirt, contrast neckline trim detail, women's" },
+        { alt: "Ringer t-shirt, contrast sleeve trim detail, women's" },
+        { alt: "Ringer t-shirt, back view, women's" },
+        { alt: "Ringer t-shirt, worn on model, women's" },
+        { alt: "Ringer t-shirt, flat lay, women's" },
       ],
-      pdpMetaTitle: "Custom Ringer T-Shirt Manufacturer",
+      pdpMetaTitle: "Women's Ringer T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom ringer t-shirt manufacturer, private label, contrast-trim ringer construction, combed cotton or cotton-poly blend, from 50 pieces, DDP worldwide.",
+        "Women's ringer t-shirt manufacturer, private label, contrast-trim ringer construction, combed cotton or cotton-poly blend, from 50 pieces, DDP worldwide.",
       material: "Combed cotton or cotton-poly blend",
       pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Tri-blend", "Recycled polyester"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -1672,7 +1673,7 @@ export const tShirts: Category = {
         { label: "Construction", value: "Cut-and-sew, contrast-bound neckline and sleeve trim, side-seam or tubular body, double-needle stitching" },
         { label: "Branding", value: "Screen, DTG, DTF, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Ringer t-shirt, contrast trim construction detail" },
+      specificationsImage: { alt: "Ringer t-shirt, contrast trim construction detail, women's" },
       pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
       pdpQualityPoints: [
         "GSM held consistent, batch to batch",
@@ -1710,8 +1711,8 @@ export const tShirts: Category = {
     {
       // Full PDP content for SKU 16 (owner spec, 2026-09-23), draft, same
       // shape/rules as SKU 14/15 above. No men's counterpart (the men's
-      // v-neck was a 1-of-4-brand near-miss, never built), so the
-      // un-gendered "Custom ..." H1/title form applies. Completes the
+      // v-neck was a 1-of-4-brand near-miss, never built); named "Women's
+      // V-Neck ..." under the 2026-09-23 always-gender rule. Completes the
       // full 16-SKU T-Shirts catalog: 8 men's, 8 women's, all built.
       //
       // Internal research provenance, comment-only, never visible copy:
@@ -1721,28 +1722,28 @@ export const tShirts: Category = {
       // 100 to 155 GSM, confirmed on the sample.
       status: "draft",
       slug: "v-neck",
-      cardTitle: "Custom V-Neck T-Shirt",
+      cardTitle: "Women's V-Neck T-Shirt",
       cardSubline: "V-neckline construction",
       image: "",
-      imageAlt: "Custom v-neck t-shirt manufacturer",
+      imageAlt: "Women's v-neck t-shirt manufacturer",
       href: "/capriowear/activewear/t-shirts/v-neck",
       gender: "Women",
       sku: "CAP-TEE-16",
-      pdpTitle: "V-Neck",
-      pdpHeading: "Custom V-Neck T-Shirt Manufacturer",
+      pdpTitle: "Women's V-Neck",
+      pdpHeading: "Women's V-Neck T-Shirt Manufacturer",
       pdpDescription:
         "V-neck tee in 100% performance polyester, custom and private label, moisture-wicking and quick-dry, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "V-neck t-shirt, front view" },
-        { alt: "V-neck t-shirt, neckline depth detail" },
-        { alt: "V-neck t-shirt, back view" },
-        { alt: "V-neck t-shirt, fabric close-up" },
-        { alt: "V-neck t-shirt, worn on model" },
-        { alt: "V-neck t-shirt, flat lay" },
+        { alt: "V-neck t-shirt, front view, women's" },
+        { alt: "V-neck t-shirt, neckline depth detail, women's" },
+        { alt: "V-neck t-shirt, back view, women's" },
+        { alt: "V-neck t-shirt, fabric close-up, women's" },
+        { alt: "V-neck t-shirt, worn on model, women's" },
+        { alt: "V-neck t-shirt, flat lay, women's" },
       ],
-      pdpMetaTitle: "Custom V-Neck T-Shirt Manufacturer",
+      pdpMetaTitle: "Women's V-Neck T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom v-neck t-shirt manufacturer, OEM and private label, v-neck construction, performance polyester, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Women's v-neck t-shirt manufacturer, OEM and private label, v-neck construction, performance polyester, from 50 pieces, any fabric and color, DDP worldwide.",
       material: "100% performance polyester",
       pdpFabricPills: ["Performance polyester", "Recycled polyester", "Poly-spandex blend", "Cotton-poly blend"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -1771,7 +1772,7 @@ export const tShirts: Category = {
         { label: "Construction", value: "Cut-and-sew, V-neck binding, side-seam or tubular body, double-needle stitched sleeves and hem" },
         { label: "Branding", value: "Sublimation, screen, DTF, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "V-neck t-shirt, neckline construction detail" },
+      specificationsImage: { alt: "V-neck t-shirt, neckline construction detail, women's" },
       pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
       pdpQualityPoints: [
         "GSM held consistent, batch to batch",
