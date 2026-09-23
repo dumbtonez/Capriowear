@@ -483,6 +483,8 @@ The PDP's pill-tag groups (Figma node `634:5034` desktop / `645:2905` mobile, "C
 
 **Content, two different scopes**: "Fabric options" is category-level (`Category.fabricPills`, new field, `content/activewear/leggings.ts`) — a short PDP-facing pill label per fabric, distinct from `fabricOptions[].fabric`'s own full descriptive string on the PLP (e.g. "Nylon or polyamide + elastane (70 to 85% / 15 to 30%)" → "Nylon spandex"), not derived from it at render time since the two don't share a mechanical transformation. "Customization" is shared across every PDP regardless of category (`pdpCustomizationPills`, `content/activewear/pdpShared.ts`) — generic manufacturing-capability tags, same "one shared place" rule as `pdpFaqOperational`/`pdpSpecHighlights`.
 
+**Over-long pills wrap inside the pill, never past the page** (owner call, 2026-09-23): `pill` is `max-w-full shrink-0`, and `pillText` no longer sets `whitespace-nowrap`. A pill still takes its one-line width whenever that fits the row. Only a label wider than the whole row wraps onto a second line inside its own pill; the first one is Long-Sleeve Tops Henley's "Waffle/Thermal Knit (Heavier 100% Cotton)", at 412px and narrower. Every pill that fit before is unchanged.
+
 **Layout**: third child in the same text column as `ProductInfo`/`ProductHighlights` (that column's own shared `gap-8` supplies the 32px gap above this section too — Figma measures the same 32px here as well).
 
 **Used by:** `app/activewear/[category]/[style]/page.tsx`.

@@ -14,10 +14,11 @@
 // states no GSM or composition beyond what the fabric table itself lists,
 // so the old tier ranges were dropped rather than kept as unsourced claims.
 //
-// The PLP itself goes live; every style is "draft" (owner spec): each card
-// shows on the grid, non-clickable, no PDP route generated, excluded from
-// app/sitemap.ts and this category's own CollectionPage/ItemList schema
-// (omitted entirely while zero styles are published). Flip a style to
+// The PLP itself goes live; every style is "draft" (owner spec), excluded
+// from app/sitemap.ts and this category's own CollectionPage/ItemList
+// schema (omitted entirely while zero styles are published). Card-only
+// drafts are non-clickable with no route; drafts with PDP content (SKU 1-4)
+// render noindexed via isDraftPdpReachable() -- see styleCards below. Flip a style to
 // "published" only once its PDP is sampled, photographed and built.
 import type { Category } from "./types";
 
@@ -187,50 +188,397 @@ export const longSleeveTops: Category = {
   // 8 styles, all draft (owner spec). Card title carries "Custom"; pdpHeading
   // is the card title + " Manufacturer" (card-title rule). Slugs are
   // not-yet-final while draft -- they become permanent URLs only on publish.
+  // SKU 1-4 carry full PDP content (2026-09-23 build brief), so they render
+  // as reachable drafts (noindex, no Product/FAQPage schema, not in the
+  // sitemap) and their PLP cards link; SKU 5-8 are still card-only. Their
+  // related-style chips name only SKU 1-4 slugs, so nothing links to an
+  // unbuilt page.
   styleCards: [
     {
       status: "draft",
       slug: "crew",
       sku: "CAP-LSL-01",
       cardTitle: "Custom Crew Long-Sleeve Tee",
-      pdpHeading: "Custom Crew Long-Sleeve Tee Manufacturer",
       cardSubline: "Standard crew neckline, cotton or cotton-blend jersey",
       image: "",
       imageAlt: "Custom crew long-sleeve tee, standard crew neckline, cotton or cotton-blend jersey",
       href: "/capriowear/activewear/long-sleeve-tops/crew",
+      pdpTitle: "Crew",
+      pdpHeading: "Custom Crew Long-Sleeve Tee Manufacturer",
+      pdpDescription:
+        "Standard crew-neck long-sleeve tee, custom and private label, in cotton or cotton-blend jersey, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Custom crew long-sleeve tee, front view" },
+        { alt: "Custom crew long-sleeve tee, back view" },
+        { alt: "Custom crew long-sleeve tee, side profile" },
+        { alt: "Custom crew long-sleeve tee, ribbed cuff close-up" },
+        { alt: "Custom crew long-sleeve tee, worn on model" },
+        { alt: "Custom crew long-sleeve tee, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Crew Long-Sleeve Tee Manufacturer",
+      pdpMetaDescription:
+        "Custom crew long-sleeve tee manufacturer, OEM, ODM and private label, cotton and cotton-blend jersey, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "Cotton or cotton-blend jersey",
+      pdpFabricPills: ["Cotton Jersey", "Cotton-Poly Blend", "Brushed-Back Jersey"],
+      faqs: [
+        {
+          q: "What fabric is the crew long-sleeve tee made from?",
+          a: "Cotton or cotton-blend jersey, the direct long-sleeve extension of our standard tee fabric platform. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "Is this a standard crew neckline, or can it be customized?",
+          a: "Standard crew neckline as built, but neckline, cuff, and sleeve construction can all be customized to your reference garment, confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Henley Long-Sleeve", slug: "henley", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Quarter-Zip Long-Sleeve", slug: "quarter-zip", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
+      ],
+      specifications: [
+        { label: "Style", value: "Crew long-sleeve tee, standard crew neckline (base type)" },
+        {
+          label: "Fabric",
+          value: "Cotton or cotton-blend jersey, the direct long-sleeve extension of our tee fabric platform. Pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Standard, true to size" },
+        { label: "Cuff", value: "Ribbed knit, standard finish" },
+        { label: "Sleeve construction", value: "Set-in sleeve, standard" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        {
+          label: "Branding",
+          value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging, including sleeve and cuff placement",
+        },
+      ],
+      specificationsImage: { alt: "Custom crew long-sleeve tee, construction detail" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Sleeve length graded proportionally across the full size run",
+        "Cuff consistency checked across sizes",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          {
+            title: "Branding",
+            body: "Silicone, heat transfer, embroidery, sleeve and cuff placement available",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" },
+          },
+          {
+            title: "Fabric",
+            body: "Cotton or cotton-blend jersey, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, size and care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
       slug: "fitted-performance",
       sku: "CAP-LSL-02",
       cardTitle: "Custom Fitted Performance Long-Sleeve",
-      pdpHeading: "Custom Fitted Performance Long-Sleeve Manufacturer",
       cardSubline: "Moisture-wicking poly-spandex, athletic cut, thumbholes standard",
       image: "",
       imageAlt: "Custom fitted performance long-sleeve, moisture-wicking poly-spandex, athletic cut with thumbholes",
       href: "/capriowear/activewear/long-sleeve-tops/fitted-performance",
+      pdpTitle: "Fitted Performance",
+      pdpHeading: "Custom Fitted Performance Long-Sleeve Manufacturer",
+      pdpDescription:
+        "Fitted, moisture-wicking long-sleeve in performance poly-spandex, with standard thumbholes, custom and private label, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Custom fitted performance long-sleeve, front view" },
+        { alt: "Custom fitted performance long-sleeve, back view" },
+        { alt: "Custom fitted performance long-sleeve, side profile" },
+        { alt: "Custom fitted performance long-sleeve, thumbhole cuff close-up" },
+        { alt: "Custom fitted performance long-sleeve, worn on model" },
+        { alt: "Custom fitted performance long-sleeve, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Fitted Performance Long-Sleeve Manufacturer",
+      pdpMetaDescription:
+        "Custom fitted performance long-sleeve manufacturer, OEM, ODM and private label, moisture-wicking poly-spandex, thumbholes standard, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "Performance poly-spandex (90% polyester / 10% spandex) or 100% performance polyester",
+      pdpFabricPills: ["Performance Poly-Spandex (90/10)", "100% Performance Polyester"],
+      faqs: [
+        {
+          q: "Do thumbholes come standard on this style?",
+          a: "Yes. Thumbholes are a standard feature on our fitted performance long-sleeve, not a special order, confirmed on your sample.",
+        },
+        {
+          q: "What is the difference between this and a compression long-sleeve?",
+          a: "Fit intent, specifically. This is a more relaxed athletic fit built for moisture-wicking and mobility, even with spandex content. A true compression long-sleeve sits tight against the skin for muscle support and blood flow, and belongs to our Compression and Base Layers line.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Henley Long-Sleeve", slug: "henley", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Quarter-Zip Long-Sleeve", slug: "quarter-zip", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
+      ],
+      specifications: [
+        { label: "Style", value: "Fitted athletic/performance long-sleeve, thumbholes standard (base type)" },
+        {
+          label: "Fabric",
+          value: "Performance poly-spandex, 90% polyester/10% spandex confirmed reference composition, or 100% performance polyester for a non-stretch option. Pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Fitted, athletic cut" },
+        { label: "Cuff", value: "Thumbholes standard, hemmed cuff" },
+        { label: "Sleeve construction", value: "Set-in standard, raglan available for improved shoulder flexibility" },
+        {
+          label: "Construction upgrades",
+          value: "Articulated elbow and back darts, dual filament yarn construction, both available as premium-tier upgrades",
+        },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        {
+          label: "Branding",
+          value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging, including sleeve and cuff placement",
+        },
+      ],
+      specificationsImage: { alt: "Custom fitted performance long-sleeve, construction detail" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Thumbhole placement checked for comfort and consistency across sizes",
+        "Moisture-wicking performance and stretch recovery tested before bulk",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          {
+            title: "Branding",
+            body: "Silicone, heat transfer, embroidery, sleeve and cuff placement available",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" },
+          },
+          {
+            title: "Fabric",
+            body: "Performance poly-spandex or 100% performance polyester, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          {
+            title: "Construction upgrades",
+            body: "Articulated elbow and back darts, dual filament yarn construction, on request",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Construction upgrades" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, size and care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
       slug: "henley",
       sku: "CAP-LSL-03",
       cardTitle: "Custom Henley Long-Sleeve",
-      pdpHeading: "Custom Henley Long-Sleeve Manufacturer",
       cardSubline: "Collarless neckline, 2 to 5 button placket",
       image: "",
       imageAlt: "Custom henley long-sleeve, collarless neckline with a 2 to 5 button placket",
       href: "/capriowear/activewear/long-sleeve-tops/henley",
+      // Kept distinct from SKU 8, Waffle Thermal (owner note, 2026-09-23):
+      // this style covers henley construction across its two fabric routes
+      // (jersey or heavier waffle knit); SKU 8 will cover waffle/thermal knit
+      // as its own feature across several necklines. Different slugs, no
+      // collision, not to be merged.
+      pdpTitle: "Henley",
+      pdpHeading: "Custom Henley Long-Sleeve Manufacturer",
+      pdpDescription:
+        "Collarless henley long-sleeve with a 2 to 5 button placket, custom and private label, in cotton jersey or waffle knit, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Custom henley long-sleeve, front view" },
+        { alt: "Custom henley long-sleeve, back view" },
+        { alt: "Custom henley long-sleeve, side profile" },
+        { alt: "Custom henley long-sleeve, button placket close-up" },
+        { alt: "Custom henley long-sleeve, worn on model" },
+        { alt: "Custom henley long-sleeve, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Henley Long-Sleeve Manufacturer",
+      pdpMetaDescription:
+        "Custom henley long-sleeve manufacturer, OEM, ODM and private label, 2 to 5 button placket, cotton or waffle knit, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "Cotton or cotton-blend jersey, or heavier 100% cotton waffle knit",
+      pdpFabricPills: ["Cotton Jersey", "Cotton-Poly Blend", "Waffle/Thermal Knit (Heavier 100% Cotton)"],
+      faqs: [
+        {
+          q: "How many buttons does the henley placket have?",
+          a: "Anywhere from 2 to 5, depending on your positioning. We build to your spec.",
+        },
+        {
+          q: "Can this be built in a heavier waffle-knit fabric instead of jersey?",
+          a: "Yes. Both a lighter cotton jersey build and a heavier 100% cotton waffle-knit build are available, confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Quarter-Zip Long-Sleeve", slug: "quarter-zip", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
+      ],
+      specifications: [
+        { label: "Style", value: "Henley long-sleeve, collarless neckline with button placket (base type)" },
+        {
+          label: "Fabric",
+          value: "Cotton or cotton-blend jersey for a lighter build, or heavier 100% cotton waffle knit for a streetwear/workwear positioning. Pending confirmed spec on sample.",
+        },
+        {
+          label: "Weight",
+          value: "Pending, confirmed on your sample. Heavier waffle-knit henleys are described as heavyweight, with no confirmed GSM ceiling.",
+        },
+        { label: "Fit", value: "Standard, true to size" },
+        { label: "Placket", value: "2 to 5 buttons, count varies by positioning, built to your spec" },
+        {
+          label: "Cuff",
+          value: "Ribbed cuff standard; raw or unfinished edge available as a streetwear/heritage option on heavier waffle builds",
+        },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        {
+          label: "Branding",
+          value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging. Chest-center or back placement recommended over near-collar graphics.",
+        },
+      ],
+      specificationsImage: { alt: "Custom henley long-sleeve, placket construction detail" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Buttons securely attached, placket checked to lie flat without gapping or puckering",
+        "Waffle-knit builds checked for shape retention and stretch recovery after wash",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          {
+            title: "Print and artwork",
+            body: "Sublimation, screen, DTF, DTG, chest or back placement recommended near the placket",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" },
+          },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Cotton jersey or waffle knit, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Placket", body: "2 to 5 button count, built to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Placket" } },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, size and care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
       slug: "quarter-zip",
       sku: "CAP-LSL-04",
       cardTitle: "Custom Quarter-Zip Long-Sleeve",
-      pdpHeading: "Custom Quarter-Zip Long-Sleeve Manufacturer",
       cardSubline: "Partial front zip, standing mock collar",
       image: "",
       imageAlt: "Custom quarter-zip long-sleeve, partial front zip with a standing mock collar",
       href: "/capriowear/activewear/long-sleeve-tops/quarter-zip",
+      pdpTitle: "Quarter-Zip",
+      pdpHeading: "Custom Quarter-Zip Long-Sleeve Manufacturer",
+      pdpDescription:
+        "Partial front-zip long-sleeve with a standing mock collar, custom and private label, in performance poly-spandex, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Custom quarter-zip long-sleeve, front view" },
+        { alt: "Custom quarter-zip long-sleeve, back view" },
+        { alt: "Custom quarter-zip long-sleeve, side profile" },
+        { alt: "Custom quarter-zip long-sleeve, mock collar and zip garage close-up" },
+        { alt: "Custom quarter-zip long-sleeve, worn on model" },
+        { alt: "Custom quarter-zip long-sleeve, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Quarter-Zip Long-Sleeve Manufacturer",
+      pdpMetaDescription:
+        "Custom quarter-zip long-sleeve manufacturer, OEM, ODM and private label, mock-neck construction, performance poly-spandex, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "Performance poly-spandex or 100% performance polyester",
+      pdpFabricPills: ["Performance Poly-Spandex (90/10)", "100% Performance Polyester"],
+      faqs: [
+        {
+          q: 'What does the "garage" at the zipper mean?',
+          a: "It's a small fabric flap at the top of the zip that covers the pull, so it doesn't rest against your skin at the chin. Confirmed on your sample.",
+        },
+        {
+          q: "Is this style used for golf or training programs?",
+          a: "Yes. Quarter-zip/mock-neck long-sleeves are a common choice for golf and training-crossover programs, often paired with UPF 50+ sun protection.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Henley Long-Sleeve", slug: "henley", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
+      ],
+      specifications: [
+        { label: "Style", value: "Quarter-zip / mock-neck long-sleeve, partial front zip (base type)" },
+        {
+          label: "Fabric",
+          value: "Performance poly-spandex, shares its fabric family with our fitted performance long-sleeve, or 100% performance polyester for a non-stretch option. Pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Fitted through the body, standing mock collar" },
+        { label: "Zip", value: 'Partial front zip with a "garage" detail at the chin for comfort against the skin' },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom quarter-zip long-sleeve, zip construction detail" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Zip pull and garage detail tested for smooth operation and comfort at the chin",
+        "Moisture-wicking performance and stretch recovery tested before bulk",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Performance poly-spandex or 100% performance polyester, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          {
+            title: "Zip",
+            body: "Pull and garage detail in your color or hardware finish",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Zip" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, size and care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
