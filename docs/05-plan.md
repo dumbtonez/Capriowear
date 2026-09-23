@@ -4069,6 +4069,14 @@ Owner override of the strict rule applied earlier today: the whole Long-Sleeve T
 
 **Verified:** all 4 pages return 200 with the new title, H1, breadcrumb, alts and meta. The PLP shows the 4 women's cards as "Women's ...". tsc and eslint clean.
 
+## Draft card clickability locked sitewide; Sweatshirts SKU 8 renamed, 2026-09-23
+
+**Decision (owner, confirmed with Mohsin): draft PDP cards are clickable from the PLP grid, in every category.** A draft with PDP content keeps its card link (`isDraftPdpReachable()`) while the page stays noindex/nofollow, out of the sitemap, with Product/FAQPage JSON-LD withheld and BreadcrumbList present. This is the locked standing rule; the brief non-clickable request for Sweatshirts SKU 4/5/6 was withdrawn and those cards stay as built.
+
+**SKU 8 renamed** (owner-approved, audit finding: "Tech Fleece" is a Nike product name): card "Custom Premium Tech Fleece Loose-Fit Crewneck Sweatshirt" is now "Custom Premium Technical Fleece Loose-Fit Crewneck Sweatshirt", slug `premium-tech-fleece` is now `premium-technical-fleece` (href and image alt updated to match). No redirect: the card had no PDP and the old URL never resolved. Title tag, H1, meta and breadcrumb arrive with the SKU 7 to 9 build.
+
+**Source of truth for content diffs:** the build prompts pasted into the working session, which carry each SKU's full content; the claude.ai Project docs are not accessible from the repo.
+
 ## Long-Sleeve Tops PLP: gender toggle on, fabric table and customization strip rebuilt for the current range, 2026-09-23
 
 Owner fix after a live-page check, `content/activewear/long-sleeve-tops.ts`:
