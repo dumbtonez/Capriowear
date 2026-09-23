@@ -3949,3 +3949,16 @@ Grid goes from 8 cards to 5 (4 linked drafts, 1 card-only). That's intentional a
 **Not changed (out of scope, flagged):** the fabric table's "Hooded henley hybrid programs" and the customization strip's "hood (hooded henley hybrid)" still mention a hood.
 
 **Verified:** 5 cards render in order, and only SKU 1 to 4 link. `/hooded`, `/oversized`, `/waffle-thermal` and `/raglan` return 404, and SKU 1 to 4 return 200. No overflow at 360/390/768/1024/1440/1920. tsc and eslint clean.
+
+## Long-Sleeve Tops SKU 7 (Fitted Raglan) and SKU 10 (Mock Neck) PDPs built (draft); Compression Long-Sleeve retired, 2026-09-23
+
+Built from the owner's build brief on the master PDP template, in `content/activewear/long-sleeve-tops.ts`. Both pages are draft: `noindex, nofollow`, not in the sitemap, BreadcrumbList only. They are reachable through `isDraftPdpReachable()`, so their PLP cards link.
+
+- **Fitted Raglan (CAP-LSL-07, `/raglan`):** the existing card was upgraded to full PDP content. The card was renamed "Custom Fitted Raglan Long-Sleeve" to match its H1 under the card-title rule (owner call). Slug and spec line unchanged.
+- **Mock Neck (CAP-LSL-10, `/mock-neck`):** new card after Raglan, "Custom Mock Neck Long-Sleeve" / "Standing mock collar, no front zip". The brief gave no card copy, so this wording was owner-approved.
+- **Spec wording (owner call):** Raglan's Weight and Fabric rows dropped the brief's internal sourcing language ("sourced to the locked reference product", "(sourced to reference)", "alternate documented route") and keep a sample caveat: "165 GSM, confirmed on your sample"; "Stretch tri-blend, 46% cotton / 46% lyocell / 8% elastane, or a waffle-knit blend, confirmed on your sample".
+- **Compression Long-Sleeve removed from the category entirely (owner follow-up):** no card and no PDP. `/compression-thumbholes` 404s, and CAP-LSL-09 is retired and never to be reused. Chip rows per the follow-up: Raglan shows Fitted Performance, Mock Neck, Crew, See All. Mock Neck shows Quarter-Zip, Fitted Performance, Fitted Raglan, See All. All chips resolve to built pages.
+- **Grid:** 6 cards: Crew, Fitted Performance, Henley, Quarter-Zip, Fitted Raglan, Mock Neck. All link.
+- **Lengths:** rendered titles 58/54 chars. Meta descriptions (verbatim) 162/154.
+
+**Verified:** tsc, eslint, `npm run build` clean (the build output includes `raglan` and `mock-neck`). Both PDPs: 200, correct title, meta, one H1, SKU, 4-level breadcrumb, `noindex, nofollow`, entity question first, no "Compression Long-Sleeve" in rendered text. Zero horizontal overflow at the 15 target viewports. Dev-server note: `/raglan` served a stale cached 404 from before it existed; a cache-busted request and the production build both confirm the route.

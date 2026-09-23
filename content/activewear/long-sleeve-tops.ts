@@ -189,14 +189,16 @@ export const longSleeveTops: Category = {
     },
   ],
   ctaReferenceNoun: "long-sleeve top",
-  // 5 styles, all draft (owner spec). Card title carries "Custom"; pdpHeading
+  // 6 styles, all draft (owner spec). Card title carries "Custom"; pdpHeading
   // is the card title + " Manufacturer" (card-title rule). Slugs are
   // not-yet-final while draft -- they become permanent URLs only on publish.
   // SKU 1-4 carry full PDP content (2026-09-23 build brief), so they render
   // as reachable drafts (noindex, no Product/FAQPage schema, not in the
-  // sitemap) and their PLP cards link; SKU 7 (Raglan) is still card-only.
-  // Their related-style chips name only SKU 1-4 slugs, so nothing links to
-  // an unbuilt page.
+  // sitemap) and their PLP cards link, as do SKU 7 (Fitted Raglan) and
+  // SKU 10 (Mock Neck), built 2026-09-23. Related-style chips name only
+  // built slugs, so nothing links to an unbuilt page. SKU 9 (Compression
+  // Long-Sleeve) was removed from this category entirely (owner, 2026-09-23):
+  // no card, no PDP, and CAP-LSL-09 is retired, never to be reused.
   //
   // SKU 5 (Hooded), 6 (Oversized) and 8 (Waffle Thermal) were removed
   // (owner, 2026-09-23, brand-convergence research): Hooded and Waffle
@@ -595,12 +597,192 @@ export const longSleeveTops: Category = {
       status: "draft",
       slug: "raglan",
       sku: "CAP-LSL-07",
-      cardTitle: "Custom Raglan Long-Sleeve",
-      pdpHeading: "Custom Raglan Long-Sleeve Manufacturer",
+      cardTitle: "Custom Fitted Raglan Long-Sleeve",
       cardSubline: "Fitted raglan sleeve, stretch blend fabric, improved shoulder flexibility",
       image: "",
       imageAlt: "Custom raglan long-sleeve, fitted raglan sleeve in a stretch blend fabric for shoulder flexibility",
       href: "/capriowear/activewear/long-sleeve-tops/raglan",
+      pdpTitle: "Fitted Raglan",
+      pdpHeading: "Custom Fitted Raglan Long-Sleeve Manufacturer",
+      pdpDescription:
+        "Fitted long-sleeve with raglan sleeve construction for improved shoulder flexibility, custom and private label, in a stretch tri-blend or waffle-knit fabric, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Custom fitted raglan long-sleeve, front view" },
+        { alt: "Custom fitted raglan long-sleeve, back view" },
+        { alt: "Custom fitted raglan long-sleeve, side profile" },
+        { alt: "Custom fitted raglan long-sleeve, raglan shoulder seam close-up" },
+        { alt: "Custom fitted raglan long-sleeve, worn on model" },
+        { alt: "Custom fitted raglan long-sleeve, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Fitted Raglan Long-Sleeve Manufacturer",
+      pdpMetaDescription:
+        "Custom fitted raglan long-sleeve manufacturer, OEM, ODM and private label, stretch tri-blend fabric, improved shoulder flexibility, from 50 pieces, DDP worldwide.",
+      material: "Stretch tri-blend (cotton, lyocell, elastane) or waffle-knit blend",
+      pdpFabricPills: ["Stretch Tri-Blend (Cotton/Lyocell/Elastane)", "Waffle-Knit Blend"],
+      faqs: [
+        {
+          q: "What is raglan sleeve construction, and why does it matter?",
+          a: "The sleeve is cut as one piece with the shoulder, joined by a diagonal seam running from the underarm to the collar instead of a standard set-in seam. This gives more shoulder flexibility and range of motion, which is why it's common in performance-focused long-sleeves.",
+        },
+        {
+          q: "What fabric is this style made from?",
+          a: "A stretch tri-blend (cotton, lyocell, and elastane) as our reference composition, or a waffle-knit blend as an alternate route. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Mock Neck Long-Sleeve", slug: "mock-neck", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
+      ],
+      // Weight/Fabric rows trimmed of the brief's internal sourcing wording
+      // ("sourced to the locked reference product"), sample caveat kept
+      // (owner call, 2026-09-23).
+      specifications: [
+        { label: "Style", value: "Fitted raglan-sleeve long-sleeve, diagonal underarm-to-collar seam (base type)" },
+        {
+          label: "Fabric",
+          value: "Stretch tri-blend, 46% cotton / 46% lyocell / 8% elastane, or a waffle-knit blend, confirmed on your sample",
+        },
+        { label: "Weight", value: "165 GSM, confirmed on your sample" },
+        { label: "Fit", value: "Fitted, athletic cut" },
+        {
+          label: "Sleeve construction",
+          value: "Raglan, one-piece with the shoulder, diagonal seam from underarm to collar for improved flexibility",
+        },
+        { label: "Cuff", value: "Hemmed, ribbed cuff available on request" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        {
+          label: "Branding",
+          value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging, including sleeve and cuff placement",
+        },
+      ],
+      specificationsImage: { alt: "Custom fitted raglan long-sleeve, raglan seam construction detail" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested, raglan seam checked for range-of-motion flexibility",
+        "Sleeve length graded proportionally across the full size run",
+        "Stretch recovery tested before bulk",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          {
+            title: "Branding",
+            body: "Silicone, heat transfer, embroidery, sleeve and cuff placement available",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" },
+          },
+          {
+            title: "Fabric",
+            body: "Stretch tri-blend or waffle-knit, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          {
+            title: "Sleeve construction",
+            body: "Raglan as standard, set-in available on request",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Sleeve construction" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, size and care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
+    },
+    {
+      status: "draft",
+      slug: "mock-neck",
+      sku: "CAP-LSL-10",
+      cardTitle: "Custom Mock Neck Long-Sleeve",
+      cardSubline: "Standing mock collar, no front zip",
+      image: "",
+      imageAlt: "Custom mock neck long-sleeve, standing mock collar with no front zip",
+      href: "/capriowear/activewear/long-sleeve-tops/mock-neck",
+      pdpTitle: "Mock Neck",
+      pdpHeading: "Custom Mock Neck Long-Sleeve Manufacturer",
+      pdpDescription:
+        "Long-sleeve with a standing mock collar and no front zip, custom and private label, in cotton or performance poly-spandex, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Custom mock neck long-sleeve, front view" },
+        { alt: "Custom mock neck long-sleeve, back view" },
+        { alt: "Custom mock neck long-sleeve, side profile" },
+        { alt: "Custom mock neck long-sleeve, standing collar close-up" },
+        { alt: "Custom mock neck long-sleeve, worn on model" },
+        { alt: "Custom mock neck long-sleeve, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Mock Neck Long-Sleeve Manufacturer",
+      pdpMetaDescription:
+        "Custom mock neck long-sleeve manufacturer, OEM, ODM and private label, standing collar, cotton or performance poly-spandex, from 50 pieces, DDP worldwide.",
+      material: "Cotton or cotton-blend, or performance poly-spandex",
+      pdpFabricPills: ["Cotton or Cotton-Blend", "Performance Poly-Spandex (90/10)"],
+      faqs: [
+        {
+          q: "What's the difference between this and the Quarter-Zip Long-Sleeve?",
+          a: 'Both share a standing mock collar, but this style has no front zip, a clean pull-on construction. The Quarter-Zip adds a partial front zip with a "garage" detail at the chin.',
+        },
+        {
+          q: "Is this style used for golf or training programs?",
+          a: "Yes. Mock neck long-sleeves show up consistently in golf and training-crossover product lines, in both cotton and performance poly-spandex builds.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Quarter-Zip Long-Sleeve", slug: "quarter-zip", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Fitted Raglan Long-Sleeve", slug: "raglan", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
+      ],
+      specifications: [
+        { label: "Style", value: "Mock neck long-sleeve, standing collar, no front zip (base type)" },
+        {
+          label: "Fabric",
+          value: "Cotton or cotton-blend for a golf/training-leaning build, or performance poly-spandex for a compression-adjacent build. Pending confirmed spec on sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Fitted through the body, standing mock collar" },
+        {
+          label: "Neckline",
+          value: "Mock neck, no zip (distinct from our Quarter-Zip Long-Sleeve, which shares the mock collar but adds a partial front zip)",
+        },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom mock neck long-sleeve, collar construction detail" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Mock collar height and stretch recovery checked for consistency across sizes",
+        "Moisture-wicking performance tested before bulk on the poly-spandex route",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Cotton or cotton-blend, or performance poly-spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Collar", body: "Mock neck height and finish built to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Collar" } },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, size and care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
     },
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, same L1 group first
