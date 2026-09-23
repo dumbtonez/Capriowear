@@ -276,7 +276,7 @@ export const tankTops: Category = {
       cardSubline: "Close-fitting, standard neckline and armhole",
       gender: "Men",
       image: "",
-      imageAlt: "Custom fitted tank manufacturer, men's",
+      imageAlt: "Men's fitted tank manufacturer",
       href: "/capriowear/activewear/tank-tops/fitted-mens",
       sku: "CAP-TNK-02",
       pdpTitle: "Men's Fitted",
@@ -284,16 +284,16 @@ export const tankTops: Category = {
       pdpDescription:
         "Men's close-fitting, compression tank with a standard neckline and armhole, custom and private label, in Poly/Spandex, Nylon/Spandex, or fitted cotton, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Fitted tank, front view" },
-        { alt: "Fitted tank, armhole detail" },
-        { alt: "Fitted tank, back view" },
-        { alt: "Fitted tank, fabric close-up" },
-        { alt: "Fitted tank, worn on model" },
-        { alt: "Fitted tank, flat lay" },
+        { alt: "Fitted tank, front view, men's" },
+        { alt: "Fitted tank, armhole detail, men's" },
+        { alt: "Fitted tank, back view, men's" },
+        { alt: "Fitted tank, fabric close-up, men's" },
+        { alt: "Fitted tank, worn on model, men's" },
+        { alt: "Fitted tank, flat lay, men's" },
       ],
       pdpMetaTitle: "Men's Fitted Tank Manufacturer",
       pdpMetaDescription:
-        "Custom men's fitted tank manufacturer, private label, close-fitting compression build, Polyester/Spandex or Nylon/Spandex, from 50 pieces, DDP worldwide.",
+        "Men's fitted tank manufacturer, private label, close-fitting compression build, Polyester/Spandex or Nylon/Spandex, any color, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly/Spandex", "Nylon/Spandex", "Cotton", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -327,7 +327,7 @@ export const tankTops: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Fitted tank, construction detail" },
+      specificationsImage: { alt: "Fitted tank, construction detail, men's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Compression fit checked for consistent recovery across the size run",
@@ -363,7 +363,7 @@ export const tankTops: Category = {
       cardSubline: "Softer, roomier fit, finished armhole",
       gender: "Men",
       image: "",
-      imageAlt: "Custom relaxed tank manufacturer, men's",
+      imageAlt: "Men's relaxed tank manufacturer",
       href: "/capriowear/activewear/tank-tops/relaxed-mens",
       sku: "CAP-TNK-03",
       pdpTitle: "Men's Relaxed",
@@ -371,16 +371,16 @@ export const tankTops: Category = {
       pdpDescription:
         "Men's relaxed, softer-fit tank with a standard finished armhole and neckline, custom and private label, in recycled polyester or cotton jersey, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Relaxed tank, front view" },
-        { alt: "Relaxed tank, armhole detail" },
-        { alt: "Relaxed tank, back view" },
-        { alt: "Relaxed tank, fabric close-up" },
-        { alt: "Relaxed tank, worn on model" },
-        { alt: "Relaxed tank, flat lay" },
+        { alt: "Relaxed tank, front view, men's" },
+        { alt: "Relaxed tank, armhole detail, men's" },
+        { alt: "Relaxed tank, back view, men's" },
+        { alt: "Relaxed tank, fabric close-up, men's" },
+        { alt: "Relaxed tank, worn on model, men's" },
+        { alt: "Relaxed tank, flat lay, men's" },
       ],
       pdpMetaTitle: "Men's Relaxed Tank Manufacturer",
       pdpMetaDescription:
-        "Custom men's relaxed tank manufacturer, private label, softer roomier fit, finished armhole, recycled polyester or cotton jersey, from 50 pieces, DDP worldwide.",
+        "Men's relaxed tank manufacturer, private label, softer roomier fit, finished armhole, recycled polyester or cotton jersey, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Recycled Polyester", "Cotton", "Cotton/Poly Blend", "Poly/Spandex"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -414,7 +414,7 @@ export const tankTops: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Relaxed tank, construction detail" },
+      specificationsImage: { alt: "Relaxed tank, construction detail, men's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Relaxed fit checked for consistent drape across the size run",
@@ -646,7 +646,7 @@ export const tankTops: Category = {
       cardSubline: "Fitted singlet, full racerback construction",
       gender: "Men",
       image: "",
-      imageAlt: "Custom racerback singlet manufacturer",
+      imageAlt: "Men's racerback singlet manufacturer",
       href: "/capriowear/activewear/tank-tops/racerback-singlet",
       // Full PDP content for SKU 6 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 5. Reachable by URL and a clickable PLP card
@@ -662,16 +662,16 @@ export const tankTops: Category = {
       pdpDescription:
         "Men's fitted running and training singlet with a full racerback construction, custom and private label, in stretch compression knit, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Racerback singlet, front view" },
-        { alt: "Racerback singlet, back construction detail" },
-        { alt: "Racerback singlet, side profile" },
-        { alt: "Racerback singlet, fabric close-up" },
-        { alt: "Racerback singlet, worn on model" },
-        { alt: "Racerback singlet, flat lay" },
+        { alt: "Racerback singlet, front view, men's" },
+        { alt: "Racerback singlet, back construction detail, men's" },
+        { alt: "Racerback singlet, side profile, men's" },
+        { alt: "Racerback singlet, fabric close-up, men's" },
+        { alt: "Racerback singlet, worn on model, men's" },
+        { alt: "Racerback singlet, flat lay, men's" },
       ],
       pdpMetaTitle: "Men's Racerback Singlet Manufacturer",
       pdpMetaDescription:
-        "Custom men's racerback singlet manufacturer, private label, fitted running and training cut, full racerback, compression knit, from 50 pieces, DDP worldwide.",
+        "Men's racerback singlet manufacturer, private label, fitted running and training cut, full racerback, compression knit, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly/Spandex", "Nylon/Spandex", "Recycled Polyester", "Cotton/Lyocell/Spandex"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -711,7 +711,7 @@ export const tankTops: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Racerback singlet, construction detail" },
+      specificationsImage: { alt: "Racerback singlet, construction detail, men's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Racerback construction checked for hold and fit stability",
@@ -850,7 +850,7 @@ export const tankTops: Category = {
       cardSubline: "Ribbed-knit body fabric, fitted through the torso",
       gender: "Men",
       image: "",
-      imageAlt: "Custom ribbed tank manufacturer, men's",
+      imageAlt: "Men's ribbed tank manufacturer",
       href: "/capriowear/activewear/tank-tops/ribbed-mens",
       // Full PDP content for SKU 8 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 7. Card name "Ribbed Tank" is shared with
@@ -878,16 +878,16 @@ export const tankTops: Category = {
       pdpDescription:
         "Men's fitted tank in a full-body ribbed knit, custom and private label, in Cotton/Spandex rib knit, lay-flat chafe-free side seams, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Ribbed tank, front view" },
-        { alt: "Ribbed tank, rib knit detail" },
-        { alt: "Ribbed tank, side profile" },
-        { alt: "Ribbed tank, fabric close-up" },
-        { alt: "Ribbed tank, worn on model" },
-        { alt: "Ribbed tank, flat lay" },
+        { alt: "Ribbed tank, front view, men's" },
+        { alt: "Ribbed tank, rib knit detail, men's" },
+        { alt: "Ribbed tank, side profile, men's" },
+        { alt: "Ribbed tank, fabric close-up, men's" },
+        { alt: "Ribbed tank, worn on model, men's" },
+        { alt: "Ribbed tank, flat lay, men's" },
       ],
       pdpMetaTitle: "Men's Ribbed Tank Manufacturer",
       pdpMetaDescription:
-        "Custom men's ribbed tank manufacturer, private label, full-body rib knit, fitted through the torso, Cotton/Spandex rib, from 50 pieces, DDP worldwide.",
+        "Men's ribbed tank manufacturer, private label, full-body rib knit, fitted through the torso, Cotton/Spandex rib, any color, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Cotton/Spandex Rib Knit", "Viscose/Spandex Rib Knit", "Cotton", "Poly/Spandex"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -927,7 +927,7 @@ export const tankTops: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Ribbed tank, construction detail" },
+      specificationsImage: { alt: "Ribbed tank, construction detail, men's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Rib-knit stretch recovery, shrinkage, and twisting tested before bulk",
@@ -959,7 +959,7 @@ export const tankTops: Category = {
       cardSubline: "Close-fitting, standard neckline and back",
       gender: "Women",
       image: "",
-      imageAlt: "Custom fitted tank manufacturer, women's",
+      imageAlt: "Women's fitted tank manufacturer",
       href: "/capriowear/activewear/tank-tops/fitted-womens",
       // Full PDP content for SKU 9 (owner spec, 2026-09-22), draft, the
       // first women's Tank Tops SKU. Card name "Fitted Tank" is shared
@@ -979,16 +979,16 @@ export const tankTops: Category = {
       pdpDescription:
         "Women's close-fitting tank with a high scoop neckline and standard back, custom and private label, in stretch poly blend, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Fitted tank, front view" },
-        { alt: "Fitted tank, neckline detail" },
-        { alt: "Fitted tank, side profile" },
-        { alt: "Fitted tank, fabric close-up" },
-        { alt: "Fitted tank, worn on model" },
-        { alt: "Fitted tank, flat lay" },
+        { alt: "Fitted tank, front view, women's" },
+        { alt: "Fitted tank, neckline detail, women's" },
+        { alt: "Fitted tank, side profile, women's" },
+        { alt: "Fitted tank, fabric close-up, women's" },
+        { alt: "Fitted tank, worn on model, women's" },
+        { alt: "Fitted tank, flat lay, women's" },
       ],
       pdpMetaTitle: "Women's Fitted Tank Manufacturer",
       pdpMetaDescription:
-        "Custom women's fitted tank manufacturer, private label, close-fitting, high scoop neckline, stretch Polyester/Spandex, from 50 pieces, DDP worldwide.",
+        "Women's fitted tank manufacturer, private label, close-fitting, high scoop neckline, stretch Polyester/Spandex, any color, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly/Spandex", "Nylon/Spandex", "Cotton/Poly Blend", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1029,7 +1029,7 @@ export const tankTops: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Fitted tank, construction detail" },
+      specificationsImage: { alt: "Fitted tank, construction detail, women's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Fitted silhouette checked for consistent recovery across the size run",
@@ -1061,7 +1061,7 @@ export const tankTops: Category = {
       cardSubline: "Roomier, non-compression, finished armhole",
       gender: "Women",
       image: "",
-      imageAlt: "Custom relaxed tank manufacturer, women's",
+      imageAlt: "Women's relaxed tank manufacturer",
       href: "/capriowear/activewear/tank-tops/relaxed-womens",
       // Full PDP content for SKU 10 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 9. Card name "Relaxed Tank" is shared with
@@ -1081,16 +1081,16 @@ export const tankTops: Category = {
       pdpDescription:
         "Women's relaxed, non-compression tank with a standard finished neckline and armhole, custom and private label, in stretch poly blend, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Relaxed tank, front view" },
-        { alt: "Relaxed tank, neckline and armhole detail" },
-        { alt: "Relaxed tank, side profile" },
-        { alt: "Relaxed tank, fabric close-up" },
-        { alt: "Relaxed tank, worn on model" },
-        { alt: "Relaxed tank, flat lay" },
+        { alt: "Relaxed tank, front view, women's" },
+        { alt: "Relaxed tank, neckline and armhole detail, women's" },
+        { alt: "Relaxed tank, side profile, women's" },
+        { alt: "Relaxed tank, fabric close-up, women's" },
+        { alt: "Relaxed tank, worn on model, women's" },
+        { alt: "Relaxed tank, flat lay, women's" },
       ],
       pdpMetaTitle: "Women's Relaxed Tank Manufacturer",
       pdpMetaDescription:
-        "Custom women's relaxed tank manufacturer, private label, roomier non-compression fit, finished neckline, stretch poly blend, from 50 pieces, DDP worldwide.",
+        "Women's relaxed tank manufacturer, private label, roomier non-compression fit, finished neckline, stretch poly blend, any color, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly/Spandex", "Cotton/Poly Blend", "Nylon/Spandex", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1131,7 +1131,7 @@ export const tankTops: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Relaxed tank, construction detail" },
+      specificationsImage: { alt: "Relaxed tank, construction detail, women's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Relaxed fit checked for consistent drape across the size run",
@@ -1265,7 +1265,7 @@ export const tankTops: Category = {
       cardSubline: "Fitted, true racerback construction",
       gender: "Women",
       image: "",
-      imageAlt: "Custom racerback tank manufacturer, women's",
+      imageAlt: "Women's racerback tank manufacturer",
       href: "/capriowear/activewear/tank-tops/racerback-womens",
       // Full PDP content for SKU 12 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 11. Card name "Racerback Tank" is a distinct
@@ -1285,16 +1285,16 @@ export const tankTops: Category = {
       pdpDescription:
         "Women's fitted tank with a true racerback and mesh paneling, custom and private label, in stretch poly blend, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Racerback tank, front view" },
-        { alt: "Racerback tank, back and mesh panel detail" },
-        { alt: "Racerback tank, side profile" },
-        { alt: "Racerback tank, fabric close-up" },
-        { alt: "Racerback tank, worn on model" },
-        { alt: "Racerback tank, flat lay" },
+        { alt: "Racerback tank, front view, women's" },
+        { alt: "Racerback tank, back and mesh panel detail, women's" },
+        { alt: "Racerback tank, side profile, women's" },
+        { alt: "Racerback tank, fabric close-up, women's" },
+        { alt: "Racerback tank, worn on model, women's" },
+        { alt: "Racerback tank, flat lay, women's" },
       ],
       pdpMetaTitle: "Women's Racerback Tank Manufacturer",
       pdpMetaDescription:
-        "Custom women's racerback tank manufacturer, private label, fitted silhouette, racerback with mesh paneling, stretch poly blend, from 50 pieces, DDP worldwide.",
+        "Women's racerback tank manufacturer, private label, fitted silhouette, racerback with mesh paneling, stretch poly blend, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly/Spandex", "Nylon/Spandex", "Mesh Panel Blend", "Recycled Polyester"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1335,7 +1335,7 @@ export const tankTops: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Racerback tank, construction detail" },
+      specificationsImage: { alt: "Racerback tank, construction detail, women's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Racerback construction checked for hold and fit stability",
@@ -1669,7 +1669,7 @@ export const tankTops: Category = {
       cardSubline: "Ribbed-knit body fabric, contrast side panels",
       gender: "Women",
       image: "",
-      imageAlt: "Custom ribbed tank manufacturer, women's",
+      imageAlt: "Women's ribbed tank manufacturer",
       href: "/capriowear/activewear/tank-tops/ribbed-womens",
       // Full PDP content for SKU 16 (owner spec, 2026-09-22), draft, the
       // final SKU of the 16-SKU Tank Tops catalog. Card name "Ribbed
@@ -1689,16 +1689,16 @@ export const tankTops: Category = {
       pdpDescription:
         "Women's fitted tank with ribbed-knit color-blocked side panels, custom and private label, in Poly/Spandex blend, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Ribbed tank, front view" },
-        { alt: "Ribbed tank, side panel detail" },
-        { alt: "Ribbed tank, side profile" },
-        { alt: "Ribbed tank, fabric close-up" },
-        { alt: "Ribbed tank, worn on model" },
-        { alt: "Ribbed tank, flat lay" },
+        { alt: "Ribbed tank, front view, women's" },
+        { alt: "Ribbed tank, side panel detail, women's" },
+        { alt: "Ribbed tank, side profile, women's" },
+        { alt: "Ribbed tank, fabric close-up, women's" },
+        { alt: "Ribbed tank, worn on model, women's" },
+        { alt: "Ribbed tank, flat lay, women's" },
       ],
       pdpMetaTitle: "Women's Ribbed Tank Manufacturer",
       pdpMetaDescription:
-        "Custom women's ribbed tank manufacturer, private label, ribbed knit with color-blocked side panels, Poly/Spandex body, from 50 pieces, DDP worldwide.",
+        "Women's ribbed tank manufacturer, private label, ribbed knit with color-blocked side panels, Poly/Spandex body, any color, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Cotton/Spandex Rib Knit", "Viscose/Spandex Rib Knit", "Poly/Spandex", "Nylon/Spandex"],
       pdpSpecHighlights: [
         { icon: "package", text: "MOQ from 50 pieces" },
@@ -1740,7 +1740,7 @@ export const tankTops: Category = {
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Ribbed tank, construction detail" },
+      specificationsImage: { alt: "Ribbed tank, construction detail, women's" },
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Rib-knit panel stretch recovery, shrinkage, and color-block alignment tested before bulk",

@@ -652,7 +652,7 @@ export const longSleeveTops: Category = {
       ],
       pdpMetaTitle: "Men's Fitted Raglan Long-Sleeve Manufacturer",
       pdpMetaDescription:
-        "Men's fitted raglan long-sleeve manufacturer, OEM, ODM and private label, stretch tri-blend fabric, improved shoulder flexibility, from 50 pieces, DDP worldwide.",
+        "Men's fitted raglan long-sleeve manufacturer, OEM, ODM and private label, stretch tri-blend, improved shoulder flexibility, from 50 pieces, DDP worldwide.",
       material: "Stretch tri-blend (cotton, lyocell, spandex) or waffle-knit blend",
       pdpFabricPills: ["Stretch Tri-Blend (Cotton/Lyocell/Spandex)", "Waffle-Knit Blend"],
       faqs: [

@@ -4210,3 +4210,11 @@ Owner: both retired as standalone categories (neither is a real bundled product;
 - **Related links (kept at 5 each):** Jumpsuits Yoga Sets to Sports Bras; Bodysuits Yoga Sets to Shorts; Shorts Yoga Sets to Tank Tops; Leggings Yoga Sets to Bodysuits; Track Jackets Sweatsuits to Hoodies; Joggers Sweatsuits to Tracksuits; Tracksuits Sweatsuits to Hoodies; Jackets Sweatsuits to Sweatshirts. Sports Bras no longer linked to Yoga Sets (already fixed earlier).
 - **Group renamed:** mega-menu label "SETS & ONE PIECES" to "ONE-PIECES" (left panel shows "One-Pieces": `CategoryFilters`' `toTitleCase` now capitalises each hyphenated part); hub eyebrow to "ONE-PIECES", H2 "Matched sets and one-piece builds" to "One-piece builds".
 - **Tracksuits copy:** fabric note's "for the fleece hoodie-and-sweatpant set see our Sweatsuits range" sentence dropped; the tracksuit-vs-sweatsuit FAQ now ends "We make fleece sets as coordinated hoodie and sweatpant separates."
+
+## Tank Tops alts and meta prefixes, LST Raglan meta trim, 2026-09-24
+
+Follow-up to the standing-rules fix batch.
+
+1. **Long-Sleeve Tops Raglan meta:** 161 to 154 chars by dropping "fabric" from "stretch tri-blend fabric". No single-character trim read naturally.
+2. **Tank Tops product alts gendered (8 SKUs):** men's Fitted, Relaxed, Racerback Singlet, Ribbed and women's Fitted, Relaxed, Racerback, Ribbed. The 6 gallery alts plus the specifications alt on each now end ", men's"/", women's", the same form as the other 8 gendered Tank Tops SKUs. Their card `imageAlt` also changed from "Custom ... manufacturer, men's" (Racerback Singlet had no gender at all) to "Men's/Women's ... tank manufacturer", again matching the other 8. Generic customization-step images are unchanged.
+3. **Tank Tops meta prefix (same 8):** "Custom men's/women's ..." now starts "Men's/Women's ...". Five dropped under 150 once "Custom " was removed (Men's Fitted, Men's Ribbed, Women's Fitted, Women's Relaxed, Women's Ribbed) and gained "any color," to land at 153 to 159. All 8 are 150 to 160.
