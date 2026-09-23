@@ -209,7 +209,7 @@ export const tankTops: Category = {
       material: "Cotton or cotton-blend jersey, 260 GSM",
       pdpFabricPills: ["Cotton", "Cotton-Poly Blend", "Recycled Polyester", "Ribbed Cotton Knit"],
       pdpSpecHighlights: [
-        { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
+        { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
         { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
         { icon: "ship", text: "DDP to 20+ countries" },
@@ -296,7 +296,7 @@ export const tankTops: Category = {
         "Custom men's fitted tank manufacturer, private label, close-fitting compression build, Polyester/Spandex or Nylon/Spandex, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Cotton", "Recycled Polyester"],
       pdpSpecHighlights: [
-        { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
+        { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
         { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
         { icon: "ship", text: "DDP to 20+ countries" },
@@ -383,7 +383,7 @@ export const tankTops: Category = {
         "Custom men's relaxed tank manufacturer, private label, softer roomier fit, finished armhole, recycled polyester or cotton jersey, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Recycled Polyester", "Cotton", "Cotton-Poly Blend", "Poly-Spandex"],
       pdpSpecHighlights: [
-        { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
+        { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
         { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
         { icon: "ship", text: "DDP to 20+ countries" },
@@ -474,7 +474,7 @@ export const tankTops: Category = {
         "Men's athletic tank manufacturer, private label, true-to-size training and running cut, deep scoop neckline, recycled polyester, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Recycled Polyester", "Poly-Spandex", "Cotton-Poly Blend", "Nylon-Elastane"],
       pdpSpecHighlights: [
-        { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
+        { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
         { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
         { icon: "ship", text: "DDP to 20+ countries" },
@@ -572,7 +572,7 @@ export const tankTops: Category = {
         "Men's stringer tank manufacturer, private label, narrow straps, deep-cut racerback armhole, cotton/lyocell/spandex jersey, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Cotton/Lyocell/Elastane", "Cotton", "Poly-Spandex", "Nylon-Elastane"],
       pdpSpecHighlights: [
-        { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
+        { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
         { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
         { icon: "ship", text: "DDP to 20+ countries" },
@@ -674,7 +674,7 @@ export const tankTops: Category = {
         "Custom men's racerback singlet manufacturer, private label, fitted running and training cut, full racerback, compression knit, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Poly-Spandex", "Nylon-Elastane", "Recycled Polyester", "Cotton-Lyocell-Elastane"],
       pdpSpecHighlights: [
-        { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
+        { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
         { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
         { icon: "ship", text: "DDP to 20+ countries" },
@@ -774,7 +774,7 @@ export const tankTops: Category = {
         "Men's muscle-cut tank manufacturer, private label, wide dropped armhole, ribbed collar, raw-edge hem, cotton-poly blend, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Cotton-Poly Blend", "Cotton", "Poly-Spandex", "Recycled Polyester"],
       pdpSpecHighlights: [
-        { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
+        { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
         { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
         { icon: "ship", text: "DDP to 20+ countries" },
@@ -890,7 +890,7 @@ export const tankTops: Category = {
         "Custom men's ribbed tank manufacturer, private label, full-body rib knit, fitted through the torso, cotton-spandex rib, from 50 pieces, DDP worldwide.",
       pdpFabricPills: ["Cotton-Elastane Rib Knit", "Viscose-Elastane Rib Knit", "Cotton", "Poly-Spandex"],
       pdpSpecHighlights: [
-        { icon: "package", text: "MOQ from 50 pieces (plus waist-inch sizing)" },
+        { icon: "package", text: "MOQ from 50 pieces" },
         { icon: "calendarDays", text: "Samples in 10 to 14 days" },
         { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
         { icon: "ship", text: "DDP to 20+ countries" },
@@ -964,8 +964,8 @@ export const tankTops: Category = {
       // Full PDP content for SKU 9 (owner spec, 2026-09-22), draft, the
       // first women's Tank Tops SKU. Card name "Fitted Tank" is shared
       // with men's SKU 2 by design -- slug `fitted-womens` stays distinct
-      // from `fitted-mens`, no collision. No "(plus waist-inch sizing)"
-      // qualifier on this women's SKU's key facts (men's-only). Reachable
+      // from `fitted-mens`, no collision. Key facts read plain "MOQ from 50
+      // pieces", same as men's (tops never take waist-inch sizing). Reachable
       // by URL and a clickable PLP card via the sitewide draft-PDP rule
       // (`isDraftPdpReachable()`): still noindex/nofollow, out of the
       // sitemap, no Product/FAQPage JSON-LD. Do not flip `status` to
@@ -1066,8 +1066,8 @@ export const tankTops: Category = {
       // Full PDP content for SKU 10 (owner spec, 2026-09-22), draft, same
       // shape as SKU 1 to 9. Card name "Relaxed Tank" is shared with
       // men's SKU 3 by design -- slug `relaxed-womens` stays distinct
-      // from `relaxed-mens`, no collision. No "(plus waist-inch sizing)"
-      // qualifier on this women's SKU's key facts (men's-only). Reachable
+      // from `relaxed-mens`, no collision. Key facts read plain "MOQ from 50
+      // pieces", same as men's (tops never take waist-inch sizing). Reachable
       // by URL and a clickable PLP card via the sitewide draft-PDP rule
       // (`isDraftPdpReachable()`): still noindex/nofollow, out of the
       // sitemap, no Product/FAQPage JSON-LD. Do not flip `status` to
@@ -1675,8 +1675,8 @@ export const tankTops: Category = {
       // final SKU of the 16-SKU Tank Tops catalog. Card name "Ribbed
       // Tank" is shared with men's SKU 8 by design -- slug
       // `ribbed-womens` stays distinct from `ribbed-mens`, no collision.
-      // No "(plus waist-inch sizing)" qualifier on this women's SKU's
-      // key facts (men's-only). Reachable by URL and a clickable PLP
+      // Key facts read plain "MOQ from 50 pieces", same as men's (tops
+      // never take waist-inch sizing). Reachable by URL and a clickable PLP
       // card via the sitewide draft-PDP rule (`isDraftPdpReachable()`):
       // still noindex/nofollow, out of the sitemap, no Product/FAQPage
       // JSON-LD. Do not flip `status` to "published". No GSM sourced

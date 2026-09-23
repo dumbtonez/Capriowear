@@ -4176,3 +4176,7 @@ Owner: "treat them visual same as related styles on pdp across all pages". `Rela
 Always-gender rule applied to the 8 gendered Tank Tops SKUs still named "Custom ...": men's CAP-TNK-01 Oversized Cut-Off, 04 Athletic, 05 Stringer, 07 Muscle-Cut; women's 11 Cropped Fitted, 13 Shelf-Bra, 14 Halter, 15 Cropped. Changed: card title, H1, title tag, breadcrumb (`pdpTitle` prefixed, visible + JSON-LD), meta description opening ("Custom" to "Men's/Women's"), card `imageAlt`, and the 6 gallery alts plus the specifications alt (", men's"/", women's" suffix, as on Ringer/V-Neck).
 
 **Not changed, flagged:** (1) related-style chips keep Tank Tops' existing short, ungendered labels ("Athletic Tank"), the same style the 8 already-gendered SKUs' chips use; the brief didn't ask for chips. (2) Halter and Cropped meta descriptions are 141 chars (140 before this change, already under the 150 to 160 target).
+
+## Tank Tops men's key facts: "(plus waist-inch sizing)" removed, 2026-09-23
+
+All 8 men's Tank Tops PDPs (CAP-TNK-01 to 08) had the MOQ key fact "MOQ from 50 pieces (plus waist-inch sizing)", a Shorts-only qualifier copied in by mistake: tops are sized XS to 5XL with no waist-inch sizing. Now plain "MOQ from 50 pieces", matching the 8 women's SKUs. Other key facts untouched. The three women's-SKU code comments that called the qualifier "men's-only" were updated so it doesn't get reintroduced.
