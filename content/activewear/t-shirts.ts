@@ -285,7 +285,7 @@ export const tShirts: Category = {
       // stay byte-identical automatically, same mechanism as before.
       status: "draft",
       slug: "fitted-mens",
-      cardTitle: "Custom Fitted T-Shirt",
+      cardTitle: "Men's Fitted T-Shirt",
       cardSubline: "Close-fitting compression cut, standard crew",
       image: "",
       imageAlt: "Custom fitted t-shirt manufacturer, men's",
@@ -375,7 +375,7 @@ export const tShirts: Category = {
       // shape/rules as SKU 1 above.
       status: "draft",
       slug: "oversized-mens",
-      cardTitle: "Custom Oversized T-Shirt",
+      cardTitle: "Men's Oversized T-Shirt",
       cardSubline: "Boxy, dropped-shoulder streetwear fit",
       image: "",
       imageAlt: "Custom oversized t-shirt manufacturer, men's",
@@ -472,7 +472,7 @@ export const tShirts: Category = {
       // claim). `pdpCustomizationPills` overridden to the brief's own
       // 4-pill set (narrower than the shared 6-pill default).
       slug: "relaxed-mens",
-      cardTitle: "Custom Relaxed T-Shirt",
+      cardTitle: "Men's Relaxed T-Shirt",
       cardSubline: "Softer, roomier everyday cut",
       image: "",
       imageAlt: "Custom relaxed t-shirt manufacturer, men's",
@@ -562,7 +562,7 @@ export const tShirts: Category = {
       // shape/rules as SKU 1/2/3/6/9.
       status: "draft",
       slug: "athletic-mens",
-      cardTitle: "Custom Athletic T-Shirt",
+      cardTitle: "Men's Athletic T-Shirt",
       cardSubline: "True-to-size training and running cut",
       image: "",
       imageAlt: "Custom athletic t-shirt manufacturer, men's",
@@ -742,7 +742,7 @@ export const tShirts: Category = {
       // Full PDP content for SKU 6 (owner spec, 2026-09-22), draft, same
       // shape/rules as SKU 3.
       slug: "dropped-shoulder-mens",
-      cardTitle: "Custom Dropped-Shoulder T-Shirt",
+      cardTitle: "Men's Dropped-Shoulder T-Shirt",
       cardSubline: "Dropped shoulder seam, streetwear staple",
       image: "",
       imageAlt: "Custom dropped-shoulder t-shirt manufacturer, men's",
@@ -833,7 +833,7 @@ export const tShirts: Category = {
       // to 8) alongside SKU 8 below.
       status: "draft",
       slug: "cropped-mens",
-      cardTitle: "Custom Cropped T-Shirt",
+      cardTitle: "Men's Cropped T-Shirt",
       cardSubline: "Cropped body length",
       image: "",
       imageAlt: "Custom cropped t-shirt manufacturer, men's",
@@ -1015,7 +1015,7 @@ export const tShirts: Category = {
       // from men's `fitted-mens` (already live) -- no collision, same
       // gender-scoped-slug pattern already established on Tank Tops.
       slug: "fitted-womens",
-      cardTitle: "Custom Fitted T-Shirt",
+      cardTitle: "Women's Fitted T-Shirt",
       cardSubline: "Close-fitting, standard crew neckline",
       image: "",
       imageAlt: "Custom fitted t-shirt manufacturer, women's",
@@ -1124,7 +1124,7 @@ export const tShirts: Category = {
       // countries" default applies, same call as SKU 3.
       status: "draft",
       slug: "oversized-womens",
-      cardTitle: "Custom Oversized T-Shirt",
+      cardTitle: "Women's Oversized T-Shirt",
       cardSubline: "Boxy, dropped-shoulder oversized fit",
       image: "",
       imageAlt: "Custom oversized t-shirt manufacturer, women's",
@@ -1222,7 +1222,7 @@ export const tShirts: Category = {
       // midweight, 150 to 190 GSM, confirmed on the sample.
       status: "draft",
       slug: "relaxed-womens",
-      cardTitle: "Custom Relaxed T-Shirt",
+      cardTitle: "Women's Relaxed T-Shirt",
       cardSubline: "Roomier, non-fitted everyday cut",
       image: "",
       imageAlt: "Custom relaxed t-shirt manufacturer, women's",
@@ -1324,7 +1324,7 @@ export const tShirts: Category = {
       // siblings instead, same rule every other chip row follows.
       status: "draft",
       slug: "athletic-womens",
-      cardTitle: "Custom Athletic T-Shirt",
+      cardTitle: "Women's Athletic T-Shirt",
       cardSubline: "True-to-size training cut",
       image: "",
       imageAlt: "Custom athletic t-shirt manufacturer, women's",
@@ -1422,7 +1422,7 @@ export const tShirts: Category = {
       // 260 GSM, confirmed on the sample.
       status: "draft",
       slug: "dropped-shoulder-womens",
-      cardTitle: "Custom Dropped-Shoulder T-Shirt",
+      cardTitle: "Women's Dropped-Shoulder T-Shirt",
       cardSubline: "Dropped shoulder, oversized construction",
       image: "",
       imageAlt: "Custom dropped-shoulder t-shirt manufacturer, women's",
@@ -1523,7 +1523,7 @@ export const tShirts: Category = {
       // fitted comparison for this style.
       status: "draft",
       slug: "cropped-womens",
-      cardTitle: "Custom Cropped T-Shirt",
+      cardTitle: "Women's Cropped T-Shirt",
       cardSubline: "Cropped, baby-tee length",
       image: "",
       imageAlt: "Custom cropped t-shirt manufacturer, women's",
