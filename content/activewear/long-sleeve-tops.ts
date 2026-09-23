@@ -266,8 +266,8 @@ export const longSleeveTops: Category = {
       ],
       relatedStyleTags: [
         { label: "Men's Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
-        { label: "Henley Long-Sleeve", slug: "henley", href: "/capriowear/activewear/long-sleeve-tops" },
-        { label: "Quarter-Zip Long-Sleeve", slug: "quarter-zip", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Henley Long-Sleeve", slug: "henley", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Quarter-Zip Long-Sleeve", slug: "quarter-zip", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
       ],
       specifications: [
@@ -370,9 +370,9 @@ export const longSleeveTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
-        { label: "Henley Long-Sleeve", slug: "henley", href: "/capriowear/activewear/long-sleeve-tops" },
-        { label: "Quarter-Zip Long-Sleeve", slug: "quarter-zip", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Henley Long-Sleeve", slug: "henley", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Quarter-Zip Long-Sleeve", slug: "quarter-zip", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
       ],
       specifications: [
@@ -476,9 +476,9 @@ export const longSleeveTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "Men's Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
-        { label: "Quarter-Zip Long-Sleeve", slug: "quarter-zip", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Quarter-Zip Long-Sleeve", slug: "quarter-zip", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
       ],
       specifications: [
@@ -576,9 +576,9 @@ export const longSleeveTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "Men's Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
-        { label: "Henley Long-Sleeve", slug: "henley", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Henley Long-Sleeve", slug: "henley", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
       ],
       specifications: [
@@ -667,8 +667,8 @@ export const longSleeveTops: Category = {
       ],
       relatedStyleTags: [
         { label: "Men's Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
-        { label: "Mock Neck Long-Sleeve", slug: "mock-neck", href: "/capriowear/activewear/long-sleeve-tops" },
-        { label: "Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Mock Neck Long-Sleeve", slug: "mock-neck", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
       ],
       // Weight/Fabric rows: owner's final wording (2026-09-23), no internal
@@ -773,9 +773,9 @@ export const longSleeveTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Quarter-Zip Long-Sleeve", slug: "quarter-zip", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Quarter-Zip Long-Sleeve", slug: "quarter-zip", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "Men's Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
-        { label: "Fitted Raglan Long-Sleeve", slug: "raglan", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Fitted Raglan Long-Sleeve", slug: "raglan", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
       ],
       specifications: [
@@ -1048,7 +1048,7 @@ export const longSleeveTops: Category = {
       relatedStyleTags: [
         { label: "Women's Fitted Performance Long-Sleeve", slug: "fitted-performance-womens", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "Women's Midi-Length Long-Sleeve", slug: "midi-length", href: "/capriowear/activewear/long-sleeve-tops" },
-        { label: "Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
       ],
       specifications: [

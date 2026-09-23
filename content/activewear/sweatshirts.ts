@@ -228,10 +228,10 @@ export const sweatshirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Women's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Oversized French Terry Crewneck", slug: "oversized-french-terry", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Regular-Fit Brushed Fleece Crewneck", slug: "regular-fit-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Technical Performance Crewneck", slug: "technical-performance-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Oversized French Terry Crewneck Sweatshirt", slug: "oversized-french-terry", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Regular-Fit Brushed Fleece Crewneck Sweatshirt", slug: "regular-fit-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Technical Performance Crewneck Sweatshirt", slug: "technical-performance-mens", href: "/capriowear/activewear/sweatshirts" },
         { label: "See All", href: "/capriowear/activewear/sweatshirts" },
       ],
       specifications: [
@@ -307,10 +307,10 @@ export const sweatshirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Men's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's French Terry Crewneck", slug: "french-terry-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Technical Performance Crewneck", slug: "technical-performance-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's French Terry Crewneck Sweatshirt", slug: "french-terry-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Technical Performance Crewneck Sweatshirt", slug: "technical-performance-mens", href: "/capriowear/activewear/sweatshirts" },
         { label: "See All", href: "/capriowear/activewear/sweatshirts" },
       ],
       specifications: [
@@ -386,10 +386,10 @@ export const sweatshirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Men's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Oversized French Terry Crewneck", slug: "oversized-french-terry", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Technical Performance Crewneck", slug: "technical-performance-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Regular-Fit Brushed Fleece Crewneck", slug: "regular-fit-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Oversized French Terry Crewneck Sweatshirt", slug: "oversized-french-terry", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Technical Performance Crewneck Sweatshirt", slug: "technical-performance-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Regular-Fit Brushed Fleece Crewneck Sweatshirt", slug: "regular-fit-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
         { label: "See All", href: "/capriowear/activewear/sweatshirts" },
       ],
       specifications: [
@@ -465,10 +465,10 @@ export const sweatshirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Men's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Regular-Fit Brushed Fleece Crewneck", slug: "regular-fit-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Oversized French Terry Crewneck", slug: "oversized-french-terry", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Technical Performance Crewneck", slug: "technical-performance-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Regular-Fit Brushed Fleece Crewneck Sweatshirt", slug: "regular-fit-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Oversized French Terry Crewneck Sweatshirt", slug: "oversized-french-terry", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Technical Performance Crewneck Sweatshirt", slug: "technical-performance-womens", href: "/capriowear/activewear/sweatshirts" },
         { label: "See All", href: "/capriowear/activewear/sweatshirts" },
       ],
       specifications: [
@@ -544,10 +544,10 @@ export const sweatshirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Men's Oversized French Terry Crewneck", slug: "oversized-french-terry", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Regular-Fit Brushed Fleece Crewneck", slug: "regular-fit-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's French Terry Crewneck", slug: "french-terry-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Oversized French Terry Crewneck Sweatshirt", slug: "oversized-french-terry", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Regular-Fit Brushed Fleece Crewneck Sweatshirt", slug: "regular-fit-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's French Terry Crewneck Sweatshirt", slug: "french-terry-womens", href: "/capriowear/activewear/sweatshirts" },
         { label: "See All", href: "/capriowear/activewear/sweatshirts" },
       ],
       specifications: [
@@ -623,10 +623,10 @@ export const sweatshirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Men's French Terry Crewneck", slug: "french-terry-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Reverse French Terry Crewneck", slug: "reverse-french-terry", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Technical Performance Crewneck", slug: "technical-performance-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's French Terry Crewneck Sweatshirt", slug: "french-terry-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Reverse French Terry Crewneck Sweatshirt", slug: "reverse-french-terry", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Technical Performance Crewneck Sweatshirt", slug: "technical-performance-mens", href: "/capriowear/activewear/sweatshirts" },
         { label: "See All", href: "/capriowear/activewear/sweatshirts" },
       ],
       specifications: [
@@ -702,10 +702,10 @@ export const sweatshirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Men's French Terry Crewneck", slug: "french-terry-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Premium Technical Fleece Loose-Fit Crewneck", slug: "premium-technical-fleece", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Oversized French Terry Crewneck", slug: "oversized-french-terry", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's French Terry Crewneck Sweatshirt", slug: "french-terry-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Premium Technical Fleece Loose-Fit Crewneck Sweatshirt", slug: "premium-technical-fleece", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Oversized French Terry Crewneck Sweatshirt", slug: "oversized-french-terry", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
         { label: "See All", href: "/capriowear/activewear/sweatshirts" },
       ],
       specifications: [
@@ -781,10 +781,10 @@ export const sweatshirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Men's French Terry Crewneck", slug: "french-terry-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Reverse French Terry Crewneck", slug: "reverse-french-terry", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Premium Technical Fleece Loose-Fit Crewneck", slug: "premium-technical-fleece", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's French Terry Crewneck Sweatshirt", slug: "french-terry-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Reverse French Terry Crewneck Sweatshirt", slug: "reverse-french-terry", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Premium Technical Fleece Loose-Fit Crewneck Sweatshirt", slug: "premium-technical-fleece", href: "/capriowear/activewear/sweatshirts" },
         { label: "See All", href: "/capriowear/activewear/sweatshirts" },
       ],
       specifications: [
@@ -860,10 +860,10 @@ export const sweatshirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Men's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Oversized Cropped Fleece Crewneck", slug: "oversized-cropped", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Regular-Fit Brushed Fleece Crewneck", slug: "regular-fit-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Technical Performance Crewneck", slug: "technical-performance-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Oversized Cropped Fleece Crewneck Sweatshirt", slug: "oversized-cropped", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Regular-Fit Brushed Fleece Crewneck Sweatshirt", slug: "regular-fit-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Technical Performance Crewneck Sweatshirt", slug: "technical-performance-womens", href: "/capriowear/activewear/sweatshirts" },
         { label: "See All", href: "/capriowear/activewear/sweatshirts" },
       ],
       specifications: [
@@ -939,10 +939,10 @@ export const sweatshirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Women's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Regular-Fit Brushed Fleece Crewneck", slug: "regular-fit-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Technical Performance Crewneck", slug: "technical-performance-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Men's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Regular-Fit Brushed Fleece Crewneck Sweatshirt", slug: "regular-fit-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Technical Performance Crewneck Sweatshirt", slug: "technical-performance-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
         { label: "See All", href: "/capriowear/activewear/sweatshirts" },
       ],
       specifications: [
@@ -1018,10 +1018,10 @@ export const sweatshirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Men's Regular-Fit Brushed Fleece Crewneck", slug: "regular-fit-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Technical Performance Crewneck", slug: "technical-performance-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Oversized Cropped Fleece Crewneck", slug: "oversized-cropped", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Regular-Fit Brushed Fleece Crewneck Sweatshirt", slug: "regular-fit-brushed-fleece-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Technical Performance Crewneck Sweatshirt", slug: "technical-performance-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Oversized Cropped Fleece Crewneck Sweatshirt", slug: "oversized-cropped", href: "/capriowear/activewear/sweatshirts" },
         { label: "See All", href: "/capriowear/activewear/sweatshirts" },
       ],
       specifications: [
@@ -1097,10 +1097,10 @@ export const sweatshirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Men's Technical Performance Crewneck", slug: "technical-performance-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Regular-Fit Brushed Fleece Crewneck", slug: "regular-fit-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's French Terry Crewneck", slug: "french-terry-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's Technical Performance Crewneck Sweatshirt", slug: "technical-performance-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Regular-Fit Brushed Fleece Crewneck Sweatshirt", slug: "regular-fit-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's French Terry Crewneck Sweatshirt", slug: "french-terry-womens", href: "/capriowear/activewear/sweatshirts" },
         { label: "See All", href: "/capriowear/activewear/sweatshirts" },
       ],
       specifications: [
@@ -1176,10 +1176,10 @@ export const sweatshirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Men's French Terry Crewneck", slug: "french-terry-mens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Technical Performance Crewneck", slug: "technical-performance-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Regular-Fit Brushed Fleece Crewneck", slug: "regular-fit-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Men's French Terry Crewneck Sweatshirt", slug: "french-terry-mens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Technical Performance Crewneck Sweatshirt", slug: "technical-performance-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Regular-Fit Brushed Fleece Crewneck Sweatshirt", slug: "regular-fit-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
         { label: "See All", href: "/capriowear/activewear/sweatshirts" },
       ],
       specifications: [
@@ -1255,10 +1255,10 @@ export const sweatshirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Women's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Regular-Fit Brushed Fleece Crewneck", slug: "regular-fit-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Technical Performance Crewneck", slug: "technical-performance-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's French Terry Crewneck", slug: "french-terry-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Regular-Fit Brushed Fleece Crewneck Sweatshirt", slug: "regular-fit-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Technical Performance Crewneck Sweatshirt", slug: "technical-performance-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's French Terry Crewneck Sweatshirt", slug: "french-terry-womens", href: "/capriowear/activewear/sweatshirts" },
         { label: "See All", href: "/capriowear/activewear/sweatshirts" },
       ],
       specifications: [
@@ -1334,10 +1334,10 @@ export const sweatshirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Women's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Cropped Mod-Fit Crewneck", slug: "cropped-mod-fit", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Technical Performance Crewneck", slug: "technical-performance-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Oversized Heavyweight Terry Crewneck", slug: "oversized-heavyweight-terry", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Cropped Mod-Fit Crewneck Sweatshirt", slug: "cropped-mod-fit", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Technical Performance Crewneck Sweatshirt", slug: "technical-performance-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Oversized Heavyweight Terry Crewneck Sweatshirt", slug: "oversized-heavyweight-terry", href: "/capriowear/activewear/sweatshirts" },
         { label: "See All", href: "/capriowear/activewear/sweatshirts" },
       ],
       specifications: [
@@ -1413,10 +1413,10 @@ export const sweatshirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Women's French Terry Crewneck", slug: "french-terry-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Stretch-Blend Oversized Crewneck", slug: "stretch-blend-oversized", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Oversized Brushed Fleece Crewneck", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
-        { label: "Women's Cropped Mod-Fit Crewneck", slug: "cropped-mod-fit", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's French Terry Crewneck Sweatshirt", slug: "french-terry-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Stretch-Blend Oversized Crewneck Sweatshirt", slug: "stretch-blend-oversized", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Oversized Brushed Fleece Crewneck Sweatshirt", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/sweatshirts" },
+        { label: "Women's Cropped Mod-Fit Crewneck Sweatshirt", slug: "cropped-mod-fit", href: "/capriowear/activewear/sweatshirts" },
         { label: "See All", href: "/capriowear/activewear/sweatshirts" },
       ],
       specifications: [

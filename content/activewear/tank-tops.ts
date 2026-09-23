@@ -225,10 +225,10 @@ export const tankTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted Tank", slug: "fitted-mens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Relaxed Tank", slug: "relaxed-mens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Muscle-Cut Tank", slug: "muscle-cut", href: "/capriowear/activewear/tank-tops" },
-        { label: "Stringer Tank", slug: "stringer", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Fitted Tank", slug: "fitted-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Relaxed Tank", slug: "relaxed-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Muscle-Cut Tank", slug: "muscle-cut", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Stringer Tank", slug: "stringer", href: "/capriowear/activewear/tank-tops" },
         { label: "See All", href: "/capriowear/activewear/tank-tops" },
       ],
       specifications: [
@@ -312,10 +312,10 @@ export const tankTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Oversized Cut-Off Tank", slug: "oversized-cutoff", href: "/capriowear/activewear/tank-tops" },
-        { label: "Athletic Tank", slug: "athletic", href: "/capriowear/activewear/tank-tops" },
-        { label: "Muscle-Cut Tank", slug: "muscle-cut", href: "/capriowear/activewear/tank-tops" },
-        { label: "Ribbed Tank", slug: "ribbed-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Oversized Cut-Off Tank", slug: "oversized-cutoff", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Athletic Tank", slug: "athletic", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Muscle-Cut Tank", slug: "muscle-cut", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Ribbed Tank", slug: "ribbed-mens", href: "/capriowear/activewear/tank-tops" },
         { label: "See All", href: "/capriowear/activewear/tank-tops" },
       ],
       specifications: [
@@ -399,10 +399,10 @@ export const tankTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Oversized Cut-Off Tank", slug: "oversized-cutoff", href: "/capriowear/activewear/tank-tops" },
-        { label: "Fitted Tank", slug: "fitted-mens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Athletic Tank", slug: "athletic", href: "/capriowear/activewear/tank-tops" },
-        { label: "Ribbed Tank", slug: "ribbed-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Oversized Cut-Off Tank", slug: "oversized-cutoff", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Fitted Tank", slug: "fitted-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Athletic Tank", slug: "athletic", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Ribbed Tank", slug: "ribbed-mens", href: "/capriowear/activewear/tank-tops" },
         { label: "See All", href: "/capriowear/activewear/tank-tops" },
       ],
       specifications: [
@@ -490,10 +490,10 @@ export const tankTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted Tank", slug: "fitted-mens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Relaxed Tank", slug: "relaxed-mens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Racerback Singlet", slug: "racerback-singlet", href: "/capriowear/activewear/tank-tops" },
-        { label: "Ribbed Tank", slug: "ribbed-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Fitted Tank", slug: "fitted-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Relaxed Tank", slug: "relaxed-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Racerback Singlet", slug: "racerback-singlet", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Ribbed Tank", slug: "ribbed-mens", href: "/capriowear/activewear/tank-tops" },
         { label: "See All", href: "/capriowear/activewear/tank-tops" },
       ],
       specifications: [
@@ -588,10 +588,10 @@ export const tankTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Racerback Singlet", slug: "racerback-singlet", href: "/capriowear/activewear/tank-tops" },
-        { label: "Muscle-Cut Tank", slug: "muscle-cut", href: "/capriowear/activewear/tank-tops" },
-        { label: "Fitted Tank", slug: "fitted-mens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Oversized Cut-Off Tank", slug: "oversized-cutoff", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Racerback Singlet", slug: "racerback-singlet", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Muscle-Cut Tank", slug: "muscle-cut", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Fitted Tank", slug: "fitted-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Oversized Cut-Off Tank", slug: "oversized-cutoff", href: "/capriowear/activewear/tank-tops" },
         { label: "See All", href: "/capriowear/activewear/tank-tops" },
       ],
       specifications: [
@@ -690,10 +690,10 @@ export const tankTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Stringer Tank", slug: "stringer", href: "/capriowear/activewear/tank-tops" },
-        { label: "Muscle-Cut Tank", slug: "muscle-cut", href: "/capriowear/activewear/tank-tops" },
-        { label: "Fitted Tank", slug: "fitted-mens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Athletic Tank", slug: "athletic", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Stringer Tank", slug: "stringer", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Muscle-Cut Tank", slug: "muscle-cut", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Fitted Tank", slug: "fitted-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Athletic Tank", slug: "athletic", href: "/capriowear/activewear/tank-tops" },
         { label: "See All", href: "/capriowear/activewear/tank-tops" },
       ],
       specifications: [
@@ -790,10 +790,10 @@ export const tankTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Stringer Tank", slug: "stringer", href: "/capriowear/activewear/tank-tops" },
-        { label: "Racerback Singlet", slug: "racerback-singlet", href: "/capriowear/activewear/tank-tops" },
-        { label: "Oversized Cut-Off Tank", slug: "oversized-cutoff", href: "/capriowear/activewear/tank-tops" },
-        { label: "Ribbed Tank", slug: "ribbed-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Stringer Tank", slug: "stringer", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Racerback Singlet", slug: "racerback-singlet", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Oversized Cut-Off Tank", slug: "oversized-cutoff", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Ribbed Tank", slug: "ribbed-mens", href: "/capriowear/activewear/tank-tops" },
         { label: "See All", href: "/capriowear/activewear/tank-tops" },
       ],
       specifications: [
@@ -906,10 +906,10 @@ export const tankTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted Tank", slug: "fitted-mens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Oversized Cut-Off Tank", slug: "oversized-cutoff", href: "/capriowear/activewear/tank-tops" },
-        { label: "Muscle-Cut Tank", slug: "muscle-cut", href: "/capriowear/activewear/tank-tops" },
-        { label: "Athletic Tank", slug: "athletic", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Fitted Tank", slug: "fitted-mens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Oversized Cut-Off Tank", slug: "oversized-cutoff", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Muscle-Cut Tank", slug: "muscle-cut", href: "/capriowear/activewear/tank-tops" },
+        { label: "Men's Athletic Tank", slug: "athletic", href: "/capriowear/activewear/tank-tops" },
         { label: "See All", href: "/capriowear/activewear/tank-tops" },
       ],
       specifications: [
@@ -1007,10 +1007,10 @@ export const tankTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Relaxed Tank", slug: "relaxed-womens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
-        { label: "Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Ribbed Tank", slug: "ribbed-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Relaxed Tank", slug: "relaxed-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Ribbed Tank", slug: "ribbed-womens", href: "/capriowear/activewear/tank-tops" },
         { label: "See All", href: "/capriowear/activewear/tank-tops" },
       ],
       specifications: [
@@ -1109,10 +1109,10 @@ export const tankTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
-        { label: "Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Ribbed Tank", slug: "ribbed-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Ribbed Tank", slug: "ribbed-womens", href: "/capriowear/activewear/tank-tops" },
         { label: "See All", href: "/capriowear/activewear/tank-tops" },
       ],
       specifications: [
@@ -1211,10 +1211,10 @@ export const tankTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Relaxed Tank", slug: "relaxed-womens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Ribbed Tank", slug: "ribbed-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Relaxed Tank", slug: "relaxed-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Ribbed Tank", slug: "ribbed-womens", href: "/capriowear/activewear/tank-tops" },
         { label: "See All", href: "/capriowear/activewear/tank-tops" },
       ],
       specifications: [
@@ -1313,10 +1313,10 @@ export const tankTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Relaxed Tank", slug: "relaxed-womens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
-        { label: "Ribbed Tank", slug: "ribbed-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Relaxed Tank", slug: "relaxed-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Ribbed Tank", slug: "ribbed-womens", href: "/capriowear/activewear/tank-tops" },
         { label: "See All", href: "/capriowear/activewear/tank-tops" },
       ],
       specifications: [
@@ -1415,10 +1415,10 @@ export const tankTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Halter Tank", slug: "halter", href: "/capriowear/activewear/tank-tops" },
-        { label: "Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Halter Tank", slug: "halter", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
         { label: "See All", href: "/capriowear/activewear/tank-tops" },
       ],
       specifications: [
@@ -1512,10 +1512,10 @@ export const tankTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
-        { label: "Shelf-Bra Tank", slug: "shelf-bra", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Shelf-Bra Tank", slug: "shelf-bra", href: "/capriowear/activewear/tank-tops" },
         { label: "See All", href: "/capriowear/activewear/tank-tops" },
       ],
       specifications: [
@@ -1616,10 +1616,10 @@ export const tankTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
-        { label: "Relaxed Tank", slug: "relaxed-womens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Relaxed Tank", slug: "relaxed-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
         { label: "See All", href: "/capriowear/activewear/tank-tops" },
       ],
       specifications: [
@@ -1717,10 +1717,10 @@ export const tankTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Relaxed Tank", slug: "relaxed-womens", href: "/capriowear/activewear/tank-tops" },
-        { label: "Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
-        { label: "Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Fitted Tank", slug: "fitted-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Relaxed Tank", slug: "relaxed-womens", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Cropped Fitted Tank", slug: "cropped-fitted", href: "/capriowear/activewear/tank-tops" },
+        { label: "Women's Racerback Tank", slug: "racerback-womens", href: "/capriowear/activewear/tank-tops" },
         { label: "See All", href: "/capriowear/activewear/tank-tops" },
       ],
       specifications: [

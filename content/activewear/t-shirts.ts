@@ -321,10 +321,10 @@ export const tShirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Oversized", slug: "oversized-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Relaxed", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Athletic", slug: "athletic-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Raglan", slug: "raglan", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Oversized T-Shirt", slug: "oversized-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Relaxed T-Shirt", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Athletic T-Shirt", slug: "athletic-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Raglan T-Shirt", slug: "raglan", href: "/capriowear/activewear/t-shirts" },
         { label: "See All", href: "/capriowear/activewear/t-shirts" },
       ],
       specifications: [
@@ -411,10 +411,10 @@ export const tShirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted", slug: "fitted-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Relaxed", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Dropped-Shoulder", slug: "dropped-shoulder-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Cropped", slug: "cropped-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Fitted T-Shirt", slug: "fitted-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Relaxed T-Shirt", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Dropped-Shoulder T-Shirt", slug: "dropped-shoulder-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Cropped T-Shirt", slug: "cropped-mens", href: "/capriowear/activewear/t-shirts" },
         { label: "See All", href: "/capriowear/activewear/t-shirts" },
       ],
       specifications: [
@@ -508,10 +508,10 @@ export const tShirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted", slug: "fitted-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Oversized", slug: "oversized-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Athletic", slug: "athletic-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Dropped-Shoulder", slug: "dropped-shoulder-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Fitted T-Shirt", slug: "fitted-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Oversized T-Shirt", slug: "oversized-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Athletic T-Shirt", slug: "athletic-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Dropped-Shoulder T-Shirt", slug: "dropped-shoulder-mens", href: "/capriowear/activewear/t-shirts" },
         { label: "See All", href: "/capriowear/activewear/t-shirts" },
       ],
       specifications: [
@@ -598,10 +598,10 @@ export const tShirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted", slug: "fitted-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Raglan", slug: "raglan", href: "/capriowear/activewear/t-shirts" },
-        { label: "Relaxed", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Curved-Hem", slug: "curved-hem", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Fitted T-Shirt", slug: "fitted-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Raglan T-Shirt", slug: "raglan", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Relaxed T-Shirt", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Curved-Hem T-Shirt", slug: "curved-hem", href: "/capriowear/activewear/t-shirts" },
         { label: "See All", href: "/capriowear/activewear/t-shirts" },
       ],
       specifications: [
@@ -688,10 +688,10 @@ export const tShirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted", slug: "fitted-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Athletic", slug: "athletic-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Dropped-Shoulder", slug: "dropped-shoulder-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Relaxed", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Fitted T-Shirt", slug: "fitted-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Athletic T-Shirt", slug: "athletic-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Dropped-Shoulder T-Shirt", slug: "dropped-shoulder-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Relaxed T-Shirt", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
         { label: "See All", href: "/capriowear/activewear/t-shirts" },
       ],
       specifications: [
@@ -778,10 +778,10 @@ export const tShirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Oversized", slug: "oversized-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Relaxed", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Raglan", slug: "raglan", href: "/capriowear/activewear/t-shirts" },
-        { label: "Cropped", slug: "cropped-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Oversized T-Shirt", slug: "oversized-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Relaxed T-Shirt", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Raglan T-Shirt", slug: "raglan", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Cropped T-Shirt", slug: "cropped-mens", href: "/capriowear/activewear/t-shirts" },
         { label: "See All", href: "/capriowear/activewear/t-shirts" },
       ],
       specifications: [
@@ -869,10 +869,10 @@ export const tShirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Oversized", slug: "oversized-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Dropped-Shoulder", slug: "dropped-shoulder-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Relaxed", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Curved-Hem", slug: "curved-hem", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Oversized T-Shirt", slug: "oversized-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Dropped-Shoulder T-Shirt", slug: "dropped-shoulder-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Relaxed T-Shirt", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Curved-Hem T-Shirt", slug: "curved-hem", href: "/capriowear/activewear/t-shirts" },
         { label: "See All", href: "/capriowear/activewear/t-shirts" },
       ],
       specifications: [
@@ -959,10 +959,10 @@ export const tShirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Athletic", slug: "athletic-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Fitted", slug: "fitted-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Cropped", slug: "cropped-mens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Relaxed", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Athletic T-Shirt", slug: "athletic-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Fitted T-Shirt", slug: "fitted-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Cropped T-Shirt", slug: "cropped-mens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Men's Relaxed T-Shirt", slug: "relaxed-mens", href: "/capriowear/activewear/t-shirts" },
         { label: "See All", href: "/capriowear/activewear/t-shirts" },
       ],
       specifications: [
@@ -1051,10 +1051,10 @@ export const tShirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Oversized", slug: "oversized-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Relaxed", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Athletic", slug: "athletic-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Cropped", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Oversized T-Shirt", slug: "oversized-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Relaxed T-Shirt", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Athletic T-Shirt", slug: "athletic-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Cropped T-Shirt", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
         { label: "See All", href: "/capriowear/activewear/t-shirts" },
       ],
       specifications: [
@@ -1160,10 +1160,10 @@ export const tShirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Relaxed", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Dropped-Shoulder", slug: "dropped-shoulder-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Cropped", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Fitted T-Shirt", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Relaxed T-Shirt", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Dropped-Shoulder T-Shirt", slug: "dropped-shoulder-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Cropped T-Shirt", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
         { label: "See All", href: "/capriowear/activewear/t-shirts" },
       ],
       specifications: [
@@ -1258,10 +1258,10 @@ export const tShirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Oversized", slug: "oversized-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Athletic", slug: "athletic-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Dropped-Shoulder", slug: "dropped-shoulder-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Fitted T-Shirt", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Oversized T-Shirt", slug: "oversized-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Athletic T-Shirt", slug: "athletic-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Dropped-Shoulder T-Shirt", slug: "dropped-shoulder-womens", href: "/capriowear/activewear/t-shirts" },
         { label: "See All", href: "/capriowear/activewear/t-shirts" },
       ],
       specifications: [
@@ -1360,10 +1360,10 @@ export const tShirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Relaxed", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Dropped-Shoulder", slug: "dropped-shoulder-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Cropped", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Fitted T-Shirt", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Relaxed T-Shirt", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Dropped-Shoulder T-Shirt", slug: "dropped-shoulder-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Cropped T-Shirt", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
         { label: "See All", href: "/capriowear/activewear/t-shirts" },
       ],
       specifications: [
@@ -1458,10 +1458,10 @@ export const tShirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Oversized", slug: "oversized-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Relaxed", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Fitted", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Cropped", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Oversized T-Shirt", slug: "oversized-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Relaxed T-Shirt", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Fitted T-Shirt", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Cropped T-Shirt", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
         { label: "See All", href: "/capriowear/activewear/t-shirts" },
       ],
       specifications: [
@@ -1559,10 +1559,10 @@ export const tShirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Oversized", slug: "oversized-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Dropped-Shoulder", slug: "dropped-shoulder-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Relaxed", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Fitted T-Shirt", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Oversized T-Shirt", slug: "oversized-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Dropped-Shoulder T-Shirt", slug: "dropped-shoulder-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Relaxed T-Shirt", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
         { label: "See All", href: "/capriowear/activewear/t-shirts" },
       ],
       specifications: [
@@ -1659,10 +1659,10 @@ export const tShirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Cropped", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Relaxed", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "V-Neck", slug: "v-neck", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Fitted T-Shirt", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Cropped T-Shirt", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Relaxed T-Shirt", slug: "relaxed-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's V-Neck T-Shirt", slug: "v-neck", href: "/capriowear/activewear/t-shirts" },
         { label: "See All", href: "/capriowear/activewear/t-shirts" },
       ],
       specifications: [
@@ -1758,10 +1758,10 @@ export const tShirts: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Athletic", slug: "athletic-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Fitted", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
-        { label: "Ringer", slug: "ringer", href: "/capriowear/activewear/t-shirts" },
-        { label: "Cropped", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Athletic T-Shirt", slug: "athletic-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Fitted T-Shirt", slug: "fitted-womens", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Ringer T-Shirt", slug: "ringer", href: "/capriowear/activewear/t-shirts" },
+        { label: "Women's Cropped T-Shirt", slug: "cropped-womens", href: "/capriowear/activewear/t-shirts" },
         { label: "See All", href: "/capriowear/activewear/t-shirts" },
       ],
       specifications: [
