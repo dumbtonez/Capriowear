@@ -81,10 +81,8 @@ export const tracksuits: Category = {
   ],
   fabricNote: [
     {
-      text: "The jacket and pant share the same fabric, weight and finish so the set truly matches. Tracksuits are the tricot/woven warm-up set; for the fleece hoodie-and-sweatpant set see our ",
+      text: "The jacket and pant share the same fabric, weight and finish so the set truly matches. Swatches before every bulk run, and we can source or match a specific fabric or a ",
     },
-    { text: "Sweatsuits", bold: true },
-    { text: " range. Swatches before every bulk run, and we can source or match a specific fabric or a " },
     { text: "Pantone color", bold: true },
     { text: " from your reference." },
   ],
@@ -132,7 +130,7 @@ export const tracksuits: Category = {
     },
     {
       q: "What is the difference between a tracksuit and a sweatsuit?",
-      a: "A tracksuit is a tricot or woven warm-up set, lightweight, breathable and athletic. A sweatsuit is a fleece set, a hoodie or crewneck with a sweatpant, relaxed and built for warmth, see our Sweatsuits range. We make both.",
+      a: "A tracksuit is a tricot or woven warm-up set, lightweight, breathable and athletic. A sweatsuit is a fleece set, a hoodie or crewneck with a sweatpant, relaxed and built for warmth. We make fleece sets as coordinated hoodie and sweatpant separates.",
     },
     {
       q: "Are the jacket and pant dyed together for an exact color match?",
@@ -260,7 +258,7 @@ export const tracksuits: Category = {
   // (Outerwear & Suits, per activewearMegaMenu), then the closest pairings from other groups.
   relatedLinks: [
     { label: "Track Jackets & Zip-Ups", href: "/capriowear/activewear/track-jackets" },
-    { label: "Sweatsuits", href: "/capriowear/activewear/sweatsuits" },
+    { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
     { label: "Jackets", href: "/capriowear/activewear/jackets" },
     { label: "Running Wear", href: "/capriowear/activewear/running-wear" },
     { label: "Joggers", href: "/capriowear/activewear/joggers" },

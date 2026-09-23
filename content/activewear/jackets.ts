@@ -284,7 +284,7 @@ export const jackets: Category = {
   relatedLinks: [
     { label: "Track Jackets & Zip-Ups", href: "/capriowear/activewear/track-jackets" },
     { label: "Tracksuits", href: "/capriowear/activewear/tracksuits" },
-    { label: "Sweatsuits", href: "/capriowear/activewear/sweatsuits" },
+    { label: "Sweatshirts", href: "/capriowear/activewear/sweatshirts" },
     { label: "Running Wear", href: "/capriowear/activewear/running-wear" },
     { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
   ],

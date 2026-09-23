@@ -15,13 +15,11 @@ import { longSleeveTops } from "./long-sleeve-tops";
 import { shorts } from "./shorts";
 import { sportsBras } from "./sports-bras";
 import { sweatshirts } from "./sweatshirts";
-import { sweatsuits } from "./sweatsuits";
 import { tankTops } from "./tank-tops";
 import { tShirts } from "./t-shirts";
 import { trackJackets } from "./track-jackets";
 import { tracksuits } from "./tracksuits";
 import type { Category } from "./types";
-import { yogaSets } from "./yoga-sets";
 
 export const categories: Record<string, Category> = {
   leggings,
@@ -35,10 +33,8 @@ export const categories: Record<string, Category> = {
   "long-sleeve-tops": longSleeveTops,
   joggers,
   "compression-base-layers": compressionBaseLayers,
-  "yoga-sets": yogaSets,
   "track-jackets": trackJackets,
   tracksuits,
-  sweatsuits,
   bodysuits,
   jumpsuits,
 };

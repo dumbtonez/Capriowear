@@ -82,16 +82,22 @@ const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1
 // actually play before the portal unmounts.
 const CLOSE_TRANSITION_MS = 300;
 
-// activewearMegaMenu's group labels are stored upper-case ("TOPS", "SETS &
-// ONE PIECES") for the mega menu's own small-caps display -- this sidebar's
-// Figma design shows the same groups in plain title case ("Tops", "Sets &
-// One Pieces") instead, so each word is re-cased here rather than adding a
-// second, differently-cased copy of the same label to the shared data.
+// activewearMegaMenu's group labels are stored upper-case ("TOPS",
+// "ONE-PIECES") for the mega menu's own small-caps display -- this sidebar's
+// Figma design shows the same groups in plain title case ("Tops",
+// "One-Pieces") instead, so each word is re-cased here rather than adding a
+// second, differently-cased copy of the same label to the shared data. Each
+// hyphenated part is capitalised too, so "ONE-PIECES" reads "One-Pieces".
 function toTitleCase(label: string) {
   return label
     .toLowerCase()
     .split(" ")
-    .map((word) => (word === "&" ? word : word.charAt(0).toUpperCase() + word.slice(1)))
+    .map((word) =>
+      word
+        .split("-")
+        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+        .join("-"),
+    )
     .join(" ");
 }
 

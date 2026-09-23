@@ -48,10 +48,9 @@ export const categoryGroups: CategoryGroup[] = [
     ],
   },
   {
-    eyebrow: "SETS AND ONE-PIECES",
-    h2: "Matched sets and one-piece builds",
+    eyebrow: "ONE-PIECES",
+    h2: "One-piece builds",
     categories: [
-      { label: "Yoga Sets", descriptor: "Cut and dyed together for a true match", href: "/capriowear/activewear/yoga-sets" },
       { label: "Bodysuits", descriptor: "Fitted one-piece, hip-length closure", href: "/capriowear/activewear/bodysuits" },
       { label: "Jumpsuits", descriptor: "Full-length and cropped unitards", href: "/capriowear/activewear/jumpsuits" },
     ],
@@ -67,11 +66,6 @@ export const categoryGroups: CategoryGroup[] = [
         href: "/capriowear/activewear/track-jackets",
       },
       { label: "Tracksuits", descriptor: "Matched tricot warm-up sets", href: "/capriowear/activewear/tracksuits" },
-      {
-        label: "Sweatsuits",
-        descriptor: "Matched fleece hoodie and sweatpant sets",
-        href: "/capriowear/activewear/sweatsuits",
-      },
       {
         label: "Running Wear",
         descriptor: "A curated running edit across categories",

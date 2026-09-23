@@ -372,7 +372,7 @@ export const bodysuits: Category = {
   // (Sets & One Pieces, per activewearMegaMenu), then the closest pairings from other groups.
   relatedLinks: [
     { label: "Jumpsuits", href: "/capriowear/activewear/jumpsuits" },
-    { label: "Yoga Sets", href: "/capriowear/activewear/yoga-sets" },
+    { label: "Shorts", href: "/capriowear/activewear/shorts" },
     { label: "Leggings", href: "/capriowear/activewear/leggings" },
     { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
     { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },

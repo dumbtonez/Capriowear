@@ -1640,7 +1640,7 @@ export const leggings: Category = {
     { label: "Shorts", href: "/capriowear/activewear/shorts" },
     { label: "Joggers", href: "/capriowear/activewear/joggers" },
     { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
-    { label: "Yoga Sets", href: "/capriowear/activewear/yoga-sets" },
+    { label: "Bodysuits", href: "/capriowear/activewear/bodysuits" },
     { label: "Jumpsuits", href: "/capriowear/activewear/jumpsuits" },
   ],
 };

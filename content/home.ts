@@ -87,9 +87,8 @@ export const activewearMegaMenu = [
     ],
   },
   {
-    label: "SETS & ONE PIECES",
+    label: "ONE-PIECES",
     items: [
-      { label: "Yoga Sets", href: "/capriowear/activewear/yoga-sets" },
       { label: "Bodysuits", href: "/capriowear/activewear/bodysuits" },
       { label: "Jumpsuits", href: "/capriowear/activewear/jumpsuits" },
     ],
@@ -100,7 +99,6 @@ export const activewearMegaMenu = [
       { label: "Jackets", href: "/capriowear/activewear/jackets" },
       { label: "Track Jackets & Zip-Ups", href: "/capriowear/activewear/track-jackets" },
       { label: "Tracksuits", href: "/capriowear/activewear/tracksuits" },
-      { label: "Sweatsuits", href: "/capriowear/activewear/sweatsuits" },
       { label: "Running Wear", href: "/capriowear/activewear/running-wear" },
     ],
   },

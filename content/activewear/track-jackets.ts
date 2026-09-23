@@ -219,7 +219,7 @@ export const trackJackets: Category = {
   relatedLinks: [
     { label: "Jackets", href: "/capriowear/activewear/jackets" },
     { label: "Tracksuits", href: "/capriowear/activewear/tracksuits" },
-    { label: "Sweatsuits", href: "/capriowear/activewear/sweatsuits" },
+    { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
     { label: "Running Wear", href: "/capriowear/activewear/running-wear" },
     { label: "Joggers", href: "/capriowear/activewear/joggers" },
   ],
