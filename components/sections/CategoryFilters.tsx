@@ -67,7 +67,7 @@ export type CategoryFiltersProps = {
   activeSlug: string;
   /** The group's own mega-menu data (owner spec, 2026-09-05, Teamwear/Cricket) -- defaults to `activewearMegaMenu`, this panel's own original and only data source, so every existing Activewear call site needs no change at all. */
   menuGroups?: MegaMenuGroup[];
-  /** URL prefix used to build `activeHref` below (e.g. "/activewear", "/teamwear") -- defaults to "/activewear". */
+  /** URL prefix used to build `activeHref` below (e.g. "/capriowear/activewear", "/capriowear/teamwear") -- defaults to "/capriowear/activewear". Must match the menu data's own hrefs, which moved to the canonical /capriowear/... paths on 2026-09-23. */
   basePath?: string;
   /** `<nav>`'s own accessible name -- defaults to "Activewear categories". */
   ariaLabel?: string;
@@ -347,7 +347,7 @@ function FilterFabAndDrawer({ menuGroups, activeHref }: { menuGroups: MegaMenuGr
 export function CategoryFilters({
   activeSlug,
   menuGroups = activewearMegaMenu,
-  basePath = "/activewear",
+  basePath = "/capriowear/activewear",
   ariaLabel = "Activewear categories",
 }: CategoryFiltersProps) {
   const activeHref = `${basePath}/${activeSlug}`;

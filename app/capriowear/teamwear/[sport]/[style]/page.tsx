@@ -111,7 +111,7 @@ export default async function TeamwearStylePage({ params }: PageProps<"/capriowe
 
   const breadcrumbItems = [
     { label: "Home", href: "/capriowear" },
-    { label: "Teamwear", href: "/teamwear" },
+    { label: "Teamwear", href: "/capriowear/teamwear" },
     { label: data.category.menuLabel, href: `/capriowear/teamwear/${data.category.slug}` },
     { label: productTitle, href: data.product.href },
   ];

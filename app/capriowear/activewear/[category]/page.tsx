@@ -19,6 +19,7 @@ import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
 import { FINAL_CTA_MARKER_ID, ProductCtasMobileBar } from "@/components/sections/ProductCtas";
+import { RelatedCategories } from "@/components/sections/RelatedCategories";
 import { TrustPoints } from "@/components/sections/TrustPoints";
 import { WhatWeCover } from "@/components/sections/WhatWeCover";
 import { header } from "@/components/ui/styles";
@@ -284,6 +285,10 @@ export default async function CategoryPage({ params }: PageProps<"/capriowear/ac
           items={data.coverageItems}
         />
         <TrustPoints heading={data.qualityHeading} subline={data.qualitySubline} points={data.qualityPoints} />
+        {/* Cross-category internal links (owner, 2026-09-23: "render
+            relatedLinks on the PLP"), last in the white run before the dark
+            FAQ -- see RelatedCategories.tsx and its recipe for spacing. */}
+        <RelatedCategories links={data.relatedLinks} />
 
         {/* FAQ (Figma node 579:5660 layout, node 579:5753 full Q&A copy,
             2026-08-30) -- owner request: "Use the same component used on

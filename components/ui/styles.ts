@@ -7782,8 +7782,19 @@ export const trustPoints = {
 // No Figma frame for this row -- plain, minimal, built entirely from
 // existing tokens/Button rather than an invented visual design (SEO/AEO
 // rule 6: internal links in real body copy, not just the nav).
+// Sits directly after TrustPoints, the last white section before the dark
+// FAQ (2026-09-23). No top padding: TrustPoints' own page-end bottom
+// padding (80px / xl 120px) is the gap above. This row now carries that
+// same page-end bottom padding into the dark FAQ, and the same side
+// inset as TrustPoints' content (px-5, xl 138px inside the 1440 frame),
+// so both rows share one left edge at every width.
 export const relatedCategories = {
-  section: "container-p flex flex-col items-start gap-6 py-16",
+  section: "mx-auto flex w-full max-w-[1440px] flex-col items-start gap-6 px-5 pb-[80px] xl:px-[138px] xl:pb-[120px]",
+  // Added only when the section above carries no desktop bottom padding of
+  // its own -- today, Lifting Gear's SpecTables (it reuses FabricOptions'
+  // section recipe, which is flush at xl). Restores the same 120px desktop
+  // gap every other placement gets from TrustPoints.
+  afterFlushSection: "xl:pt-[120px]",
   heading: "text-h3",
   list: "flex flex-wrap gap-4",
 };
@@ -8521,8 +8532,15 @@ export const productOptions = {
   // (categoryMetaStrip.chip's own rounded-[4px] border pill) -- a
   // genuinely different Figma component, solid `#f2f2f7` fill with no
   // border rather than an outlined chip, not a value to reconcile with it.
-  pill: "flex shrink-0 items-center justify-center rounded-[6px] bg-[#f2f2f7] px-6 py-2",
-  pillText: "whitespace-nowrap text-[1.0625rem] font-medium text-[#3c3c43]",
+  // max-w-full + wrapping pillText (owner call, 2026-09-23, Long-Sleeve Tops
+  // Henley): a pill still sizes to its one-line width whenever that fits the
+  // row (shrink-0, so flex-wrap moves it to a new row instead of squeezing
+  // it), and only a label wider than the whole row ("Waffle/Thermal Knit
+  // (Heavier 100% Cotton)" at 360 to 393px) wraps inside its own pill
+  // rather than overflowing the page. Every pill that fit before renders
+  // exactly as it did.
+  pill: "flex max-w-full shrink-0 items-center justify-center rounded-[6px] bg-[#f2f2f7] px-6 py-2",
+  pillText: "text-center text-[1.0625rem] font-medium text-[#3c3c43]",
 };
 
 /* --- ProductCtas (PDP) ---------------------------------------------------- */

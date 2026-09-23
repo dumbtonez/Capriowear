@@ -23,6 +23,7 @@ import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
 import { ProductGrid } from "@/components/sections/ProductGrid";
 import { FINAL_CTA_MARKER_ID, ProductCtasMobileBar } from "@/components/sections/ProductCtas";
+import { RelatedCategories } from "@/components/sections/RelatedCategories";
 import { TrustPoints } from "@/components/sections/TrustPoints";
 import { WhatWeCover } from "@/components/sections/WhatWeCover";
 import { header } from "@/components/ui/styles";
@@ -90,7 +91,7 @@ export default async function SportPage({ params }: PageProps<"/capriowear/teamw
         <CategoryBanner
           breadcrumbItems={[
             { label: "Home", href: "/capriowear" },
-            { label: "Teamwear", href: "/teamwear" },
+            { label: "Teamwear", href: "/capriowear/teamwear" },
             { label: data.menuLabel, href: `/capriowear/teamwear/${data.slug}` },
           ]}
           h1={data.h1}
@@ -99,8 +100,8 @@ export default async function SportPage({ params }: PageProps<"/capriowear/teamw
         <JsonLd
           data={breadcrumbSchema([
             { name: "Home", url: `${SITE_URL}/capriowear` },
-            { name: "Teamwear", url: `${SITE_URL}/teamwear` },
-            { name: data.menuLabel, url: `${SITE_URL}/teamwear/${data.slug}` },
+            { name: "Teamwear", url: `${SITE_URL}/capriowear/teamwear` },
+            { name: data.menuLabel, url: `${SITE_URL}/capriowear/teamwear/${data.slug}` },
           ])}
         />
         {/* CollectionPage/ItemList omitted entirely while zero styles are
@@ -115,7 +116,7 @@ export default async function SportPage({ params }: PageProps<"/capriowear/teamw
           <JsonLd
             data={collectionPageSchema(
               data.menuLabel,
-              `${SITE_URL}/teamwear/${data.slug}`,
+              `${SITE_URL}/capriowear/teamwear/${data.slug}`,
               `${data.menuLabel} from ${ORGANIZATION.description}`,
               publishedStyleCards.map((card) => ({
                 name: card.cardTitle,
@@ -134,7 +135,7 @@ export default async function SportPage({ params }: PageProps<"/capriowear/teamw
             defaultChip={data.defaultGenderFilter}
           />
           <div id="plp-listing" className="flex flex-col gap-8 max-xl:pb-6 xl:pb-14 xl:flex-row xl:gap-12">
-            <CategoryFilters activeSlug={data.slug} menuGroups={teamwearMegaMenu} basePath="/teamwear" ariaLabel="Teamwear categories" />
+            <CategoryFilters activeSlug={data.slug} menuGroups={teamwearMegaMenu} basePath="/capriowear/teamwear" ariaLabel="Teamwear categories" />
             <ProductGrid key={data.slug} cards={data.styleCards} />
           </div>
         </div>
@@ -158,6 +159,10 @@ export default async function SportPage({ params }: PageProps<"/capriowear/teamw
         <WhatWeCover eyebrow={data.coverageEyebrow} heading={data.coverageHeading} items={data.coverageItems} />
         <TrustPoints heading={data.qualityHeading} subline={data.qualitySubline} points={data.qualityPoints} />
 
+        {/* Cross-category internal links (owner, 2026-09-23), last before
+            the dark FAQ -- see RelatedCategories.tsx. Renders nothing for
+            an empty `relatedLinks`. */}
+        <RelatedCategories links={data.relatedLinks} />
         <Faq content={{ h2: data.faqHeading, items: faqItems }} />
         <JsonLd data={faqSchema(faqItems)} />
 

@@ -1536,6 +1536,8 @@ The sheet reuses `MobileNav.tsx`'s own proven overlay mechanic rather than a new
 
 **Deliberately left `xl:`-gated, not extended to `md:` (owner, 2026-09-04, PLP/PDP tablet-width pass)** — this sidebar is a fixed `252px` column beside `ProductGrid`'s own 3-column grid; the FAB+bottom-sheet mobile pattern above (no in-flow sidebar at all — no Figma tablet frame exists for one either) is what actually shows below `xl` today, including at 768–1279px tablet width. Forcing the fixed sidebar into a 768px container alongside a 3-column grid would overflow (the grid's own card width can't support that combined layout at that width); fitting both needs a dedicated tablet-specific sidebar/grid redesign, not a same-day judgment call. `ProductGrid`'s own typography (`productCard.title`/`subline`) was already moved to `md:` in this same pass — only the column-count/sidebar structure stays deferred.
 
+**`basePath` default is now `/capriowear/activewear` (2026-09-23).** `activeHref` is `${basePath}/${activeSlug}` and must match the menu data's own hrefs exactly. When the header mega menu moved to canonical `/capriowear/...` hrefs (T-Shirts audit follow-up), the old `/activewear` default stopped matching, so no sidebar item showed as active on any Activewear or Teamwear PLP. Fixed by moving the default, and the Teamwear PLP now passes `basePath="/capriowear/teamwear"`. Gear PLPs pass their own `/lifting-gears` / `/boxing-and-mma` and were unaffected.
+
 ### CategoryMetaStrip — Built
 `components/sections/CategoryMetaStrip.tsx` · recipe: `categoryMetaStrip`
 
@@ -1584,7 +1586,7 @@ Props: `slug`, `categoryLabel`, `categorySubline`, `categorySublineMobile`, `sho
 
 **Used by:** `app/capriowear/activewear/[category]/page.tsx` only. The other 4 route templates that reuse `CategoryMetaStrip`/`ProductGrid` (Boxing/MMA, Lifting Gears, Teamwear, Running Wear) were not touched — none of their content files set a per-card `gender`, so nothing there needs this wrapper yet.
 
-### RelatedCategories — Built, not currently used on the PLP
+### RelatedCategories — Built
 `components/sections/RelatedCategories.tsx` · recipe: `relatedCategories`
 
 Internal-linking row (SEO/AEO rule 6, `docs/06-seo.md`: link related pages from real body copy, not just the nav) — built 2026-08-30 as part of the Leggings PLP's SEO/AEO/GEO finalization pass. No Figma frame exists for this row, so it's deliberately plain: an `<h2>` ("Explore more Activewear categories") plus a `<ul>` of `Button` (secondary variant) links, built entirely from existing tokens/components rather than an invented visual design.
@@ -1593,7 +1595,9 @@ Internal-linking row (SEO/AEO rule 6, `docs/06-seo.md`: link related pages from 
 
 Props: `links: RelatedLink[]` (`{label, href}`, `content/activewear/types.ts`). `content/activewear/leggings.ts`'s own `relatedLinks` holds the real 4 sibling categories (Sports Bras, Shorts, Joggers, Compression & Base Layers), matching `content/home.ts`'s own `activewearMegaMenu` labels/hrefs exactly.
 
-**Used by:** `app/styleguide/page.tsx` only, for now.
+**Back on the live PLPs, 2026-09-23** (owner: "render relatedLinks on the PLP", reversing the 2026-08-30 removal). Rendered by the Activewear (`app/capriowear/activewear/[category]/page.tsx`, directly after `TrustPoints`), Teamwear (`app/capriowear/teamwear/[sport]/page.tsx`) and Gear (`app/lifting-gears/[category]/page.tsx`, `app/boxing-and-mma/[category]/page.tsx`) PLP templates, last in the white run before the dark `Faq`. Heading is now a `heading` prop defaulting to "You may also be interested in" (owner wording; generic because some lists cross groups, e.g. Soccer → Compression & Base Layers). Returns `null` for an empty `links` array (Boxing Gloves has `relatedLinks: []`). Spacing: no top padding (TrustPoints' page-end bottom padding is the gap above), same page-end bottom padding into the dark FAQ (80px / `xl:` 120px), same side inset as TrustPoints (`px-5`, `xl:px-[138px]` inside the 1440 frame). `afterFlushSection` adds `xl:pt-[120px]` where the section above is flush at desktop (Lifting Gear's `SpecTables`, which reuses `fabricOptions.section`). Live on 30 of 31 PLPs; all 139 rendered links resolve 200.
+
+**Used by:** the four PLP templates above, plus `app/styleguide/page.tsx`.
 
 ### ProductGrid / ProductCard / Pagination — Built
 `components/sections/ProductGrid.tsx` · `components/ProductCard.tsx` · `components/Pagination.tsx` · recipes: `productGrid`, `productCard`, `pagination`

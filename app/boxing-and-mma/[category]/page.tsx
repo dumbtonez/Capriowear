@@ -17,6 +17,7 @@ import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
 import { ProductGrid } from "@/components/sections/ProductGrid";
 import { FINAL_CTA_MARKER_ID, ProductCtasMobileBar } from "@/components/sections/ProductCtas";
+import { RelatedCategories } from "@/components/sections/RelatedCategories";
 import { TrustPoints } from "@/components/sections/TrustPoints";
 import { WhatWeCover } from "@/components/sections/WhatWeCover";
 import { footer, header } from "@/components/ui/styles";
@@ -157,6 +158,10 @@ export default async function BoxingMmaCategoryPage({ params }: PageProps<"/boxi
         <WhatWeCover eyebrow={data.coverageEyebrow} heading={data.coverageHeading} items={data.coverageItems} />
         <TrustPoints heading={data.qualityHeading} subline={data.qualitySubline} points={data.qualityPoints} />
 
+        {/* Cross-category internal links (owner, 2026-09-23), last before
+            the dark FAQ -- see RelatedCategories.tsx. Renders nothing for
+            an empty `relatedLinks`. */}
+        <RelatedCategories links={data.relatedLinks} />
         <Faq content={{ h2: data.faqHeading, items: faqItems }} />
         <JsonLd data={faqSchema(faqItems)} />
 

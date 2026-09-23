@@ -457,7 +457,7 @@ export const home = {
           { bold: "from sample to bulk" },
           ".",
         ],
-        href: "/activewear",
+        href: "/capriowear/activewear",
         tiles: [
           // Placeholder/QA photo (owner, 2026-09-07) -- the same one real
           // photo used on the Leggings PLP card/PDP gallery
@@ -466,7 +466,7 @@ export const home = {
           // same fact.
           {
             label: "Leggings",
-            href: "/activewear/leggings",
+            href: "/capriowear/activewear/leggings",
             image: {
               src: "/product-images/leggings-high-waisted-compression.png",
               alt: "Custom high-waisted compression leggings",
@@ -481,12 +481,12 @@ export const home = {
           // above, stays as the one reference photo; every other tile
           // reverts to its placeholder box until real per-category
           // photography lands).
-          { label: "Sports Bras", href: "/activewear/sports-bras" },
-          { label: "Shorts", href: "/activewear/shorts" },
-          { label: "Hoodies", href: "/activewear/hoodies" },
-          { label: "Joggers", href: "/activewear/joggers" },
-          { label: "Tracksuits", href: "/activewear/tracksuits" },
-          { label: "Base Layers", href: "/activewear/compression-base-layers" },
+          { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
+          { label: "Shorts", href: "/capriowear/activewear/shorts" },
+          { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
+          { label: "Joggers", href: "/capriowear/activewear/joggers" },
+          { label: "Tracksuits", href: "/capriowear/activewear/tracksuits" },
+          { label: "Base Layers", href: "/capriowear/activewear/compression-base-layers" },
         ] satisfies WhatWeMakeTile[],
       },
       {
@@ -499,7 +499,7 @@ export const home = {
           { bold: "low MOQ to bulk" },
           ".",
         ],
-        href: "/teamwear",
+        href: "/capriowear/teamwear",
         // Owner, 2026-09-11: "add 6 products to teamwear too" -- Rugby and
         // Baseball added (real, built `/teamwear/rugby`/`/teamwear/baseball`
         // routes, same set the mega menu already links to) so this group
@@ -514,12 +514,12 @@ export const home = {
         // reference" -- Teamwear keeps none, only Activewear's Leggings
         // tile does).
         tiles: [
-          { label: "Soccer Uniforms", href: "/teamwear/soccer" },
-          { label: "Basketball Uniforms", href: "/teamwear/basketball" },
-          { label: "Football Uniforms", href: "/teamwear/football" },
-          { label: "Fighting Wear", href: "/teamwear/fight-wear" },
-          { label: "Rugby Uniforms", href: "/teamwear/rugby" },
-          { label: "Baseball Uniforms", href: "/teamwear/baseball" },
+          { label: "Soccer Uniforms", href: "/capriowear/teamwear/soccer" },
+          { label: "Basketball Uniforms", href: "/capriowear/teamwear/basketball" },
+          { label: "Football Uniforms", href: "/capriowear/teamwear/football" },
+          { label: "Fighting Wear", href: "/capriowear/teamwear/fight-wear" },
+          { label: "Rugby Uniforms", href: "/capriowear/teamwear/rugby" },
+          { label: "Baseball Uniforms", href: "/capriowear/teamwear/baseball" },
         ] satisfies WhatWeMakeTile[],
       },
     ],
@@ -942,8 +942,8 @@ export const home = {
       // -- same label/href pair already used by the header nav
       // (home.nav.links above), not a new route.
       columnOne: [
-        { label: "Activewear", href: "/activewear" },
-        { label: "Teamwear & Uniforms", href: "/teamwear" },
+        { label: "Activewear", href: "/capriowear/activewear" },
+        { label: "Teamwear & Uniforms", href: "/capriowear/teamwear" },
         { label: "Services", href: "/capriowear/services" },
         { label: "Our Factory", href: "/capriowear/our-factory" },
       ],
