@@ -4180,3 +4180,9 @@ Always-gender rule applied to the 8 gendered Tank Tops SKUs still named "Custom 
 ## Tank Tops men's key facts: "(plus waist-inch sizing)" removed, 2026-09-23
 
 All 8 men's Tank Tops PDPs (CAP-TNK-01 to 08) had the MOQ key fact "MOQ from 50 pieces (plus waist-inch sizing)", a Shorts-only qualifier copied in by mistake: tops are sized XS to 5XL with no waist-inch sizing. Now plain "MOQ from 50 pieces", matching the 8 women's SKUs. Other key facts untouched. The three women's-SKU code comments that called the qualifier "men's-only" were updated so it doesn't get reintroduced.
+
+## Long-Sleeve Tops: always-gender naming on 5 men's SKUs, 2026-09-23
+
+Crew (CAP-LSL-01), Henley (03), Quarter-Zip (04), Fitted Raglan (07) and Mock Neck (10) carry `gender: "Men"` in source (checked directly) but were still named "Custom ...". Renamed "Custom" to "Men's" in the card title, H1, title tag, breadcrumb (`pdpTitle`, visible + JSON-LD), meta description opening, card `imageAlt`, the 6 gallery alts and the specifications alt, matching the already-gendered LSL-02 and LSL-11 to 14. Slugs unchanged. Section comment updated from "Card title carries 'Custom'" to the always-gender rule.
+
+**Not changed, flagged:** (1) related-style chips keep their short ungendered labels ("Henley Long-Sleeve", "Crew Long-Sleeve Tee"); the brief didn't list chips. (2) Henley (176 chars) and Quarter-Zip (174) meta descriptions were already over the 150 to 160 target before this change (1 char shorter now).
