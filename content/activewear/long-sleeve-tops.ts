@@ -243,7 +243,7 @@ export const longSleeveTops: Category = {
           value: "Cotton or cotton-blend jersey, the direct long-sleeve extension of our tee fabric platform. Pending confirmed spec on sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
-        { label: "Fit", value: "Relaxed to oversized, confirmed as the dominant fit pattern across the brand panel" },
+        { label: "Fit", value: "Relaxed to oversized" },
         { label: "Cuff", value: "Ribbed knit, standard finish" },
         { label: "Sleeve construction", value: "Set-in sleeve, standard" },
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
