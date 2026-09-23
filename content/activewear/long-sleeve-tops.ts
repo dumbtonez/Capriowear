@@ -187,7 +187,7 @@ export const longSleeveTops: Category = {
     faqGetStarted,
   ],
   ctaReferenceNoun: "long-sleeve top",
-  // 6 styles, all draft (owner spec). Card title carries "Custom"; pdpHeading
+  // 10 styles, all draft (owner spec). Card title carries "Custom"; pdpHeading
   // is the card title + " Manufacturer" (card-title rule). Slugs are
   // not-yet-final while draft -- they become permanent URLs only on publish.
   // SKU 1-4 carry full PDP content (2026-09-23 build brief), so they render
@@ -259,7 +259,7 @@ export const longSleeveTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "Henley Long-Sleeve", slug: "henley", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "Quarter-Zip Long-Sleeve", slug: "quarter-zip", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
@@ -327,24 +327,27 @@ export const longSleeveTops: Category = {
       status: "draft",
       slug: "fitted-performance",
       sku: "CAP-LSL-02",
-      cardTitle: "Custom Fitted Performance Long-Sleeve",
+      cardTitle: "Men's Fitted Performance Long-Sleeve",
       cardSubline: "Moisture-wicking poly-spandex, athletic cut, thumbholes standard",
       image: "",
-      imageAlt: "Custom fitted performance long-sleeve, moisture-wicking poly-spandex, athletic cut with thumbholes",
+      imageAlt: "Men's fitted performance long-sleeve, moisture-wicking poly-spandex, athletic cut with thumbholes",
       href: "/capriowear/activewear/long-sleeve-tops/fitted-performance",
-      pdpTitle: "Fitted Performance",
-      pdpHeading: "Custom Fitted Performance Long-Sleeve Manufacturer",
+      // Gendered (owner, 2026-09-23): Women's Fitted Performance (CAP-LSL-11)
+      // makes this a cross-gender pair, so both sides carry "Men's"/"Women's"
+      // per the 2026-09-22 convention. URL unchanged.
+      pdpTitle: "Men's Fitted Performance",
+      pdpHeading: "Men's Fitted Performance Long-Sleeve Manufacturer",
       pdpDescription:
         "Fitted, moisture-wicking long-sleeve in performance poly-spandex, with standard thumbholes, custom and private label, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Custom fitted performance long-sleeve, front view" },
-        { alt: "Custom fitted performance long-sleeve, back view" },
-        { alt: "Custom fitted performance long-sleeve, side profile" },
-        { alt: "Custom fitted performance long-sleeve, thumbhole cuff close-up" },
-        { alt: "Custom fitted performance long-sleeve, worn on model" },
-        { alt: "Custom fitted performance long-sleeve, flat lay" },
+        { alt: "Men's fitted performance long-sleeve, front view" },
+        { alt: "Men's fitted performance long-sleeve, back view" },
+        { alt: "Men's fitted performance long-sleeve, side profile" },
+        { alt: "Men's fitted performance long-sleeve, thumbhole cuff close-up" },
+        { alt: "Men's fitted performance long-sleeve, worn on model" },
+        { alt: "Men's fitted performance long-sleeve, flat lay" },
       ],
-      pdpMetaTitle: "Custom Fitted Performance Long-Sleeve Manufacturer",
+      pdpMetaTitle: "Men's Fitted Performance Long-Sleeve Manufacturer",
       pdpMetaDescription:
         "Custom fitted performance long-sleeve manufacturer, OEM, ODM and private label, moisture-wicking poly-spandex, thumbholes standard, from 50 pieces, any fabric and color, DDP worldwide.",
       material: "Performance poly-spandex (90% polyester / 10% spandex) or 100% performance polyester",
@@ -385,7 +388,7 @@ export const longSleeveTops: Category = {
           value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging, including sleeve and cuff placement",
         },
       ],
-      specificationsImage: { alt: "Custom fitted performance long-sleeve, construction detail" },
+      specificationsImage: { alt: "Men's fitted performance long-sleeve, construction detail" },
       pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
@@ -466,7 +469,7 @@ export const longSleeveTops: Category = {
       ],
       relatedStyleTags: [
         { label: "Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
-        { label: "Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "Quarter-Zip Long-Sleeve", slug: "quarter-zip", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
       ],
@@ -565,7 +568,7 @@ export const longSleeveTops: Category = {
       ],
       relatedStyleTags: [
         { label: "Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
-        { label: "Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "Henley Long-Sleeve", slug: "henley", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
       ],
@@ -653,7 +656,7 @@ export const longSleeveTops: Category = {
         },
       ],
       relatedStyleTags: [
-        { label: "Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "Mock Neck Long-Sleeve", slug: "mock-neck", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
@@ -760,7 +763,7 @@ export const longSleeveTops: Category = {
       ],
       relatedStyleTags: [
         { label: "Quarter-Zip Long-Sleeve", slug: "quarter-zip", href: "/capriowear/activewear/long-sleeve-tops" },
-        { label: "Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "Fitted Raglan Long-Sleeve", slug: "raglan", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
       ],
@@ -801,6 +804,373 @@ export const longSleeveTops: Category = {
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
           },
           { title: "Collar", body: "Mock neck height and finish built to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Collar" } },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, size and care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
+    },
+    {
+      status: "draft",
+      slug: "fitted-performance-womens",
+      sku: "CAP-LSL-11",
+      cardTitle: "Women's Fitted Performance Long-Sleeve",
+      cardSubline: "Thumbholes and mesh underarm panels, moisture-wicking poly-spandex",
+      image: "",
+      imageAlt: "Women's fitted performance long-sleeve with thumbholes and mesh underarm panels, moisture-wicking poly-spandex",
+      href: "/capriowear/activewear/long-sleeve-tops/fitted-performance-womens",
+      pdpTitle: "Women's Fitted Performance",
+      pdpHeading: "Women's Fitted Performance Long-Sleeve Manufacturer",
+      pdpDescription:
+        "Fitted performance long-sleeve with thumbholes and mesh underarm panels, custom and private label, in moisture-wicking poly-spandex, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Women's fitted performance long-sleeve, front view" },
+        { alt: "Women's fitted performance long-sleeve, back view" },
+        { alt: "Women's fitted performance long-sleeve, side profile" },
+        { alt: "Women's fitted performance long-sleeve, thumbhole cuff close-up" },
+        { alt: "Women's fitted performance long-sleeve, worn on model" },
+        { alt: "Women's fitted performance long-sleeve, flat lay" },
+      ],
+      pdpMetaTitle: "Women's Fitted Performance Long-Sleeve Manufacturer",
+      pdpMetaDescription:
+        "Women's fitted performance long-sleeve manufacturer, OEM, ODM and private label, moisture-wicking poly-spandex, thumbholes standard, 50 pieces, DDP worldwide.",
+      material: "Performance poly-spandex with poly-spandex mesh panels",
+      pdpFabricPills: ["Performance Poly-Spandex", "Poly-Spandex Mesh Panels"],
+      faqs: [
+        {
+          q: "Are thumbholes standard on this style?",
+          a: "Yes. Thumbholes are built in as standard on our women's fitted performance long-sleeve, not a special order, confirmed on your sample.",
+        },
+        {
+          // "a performance fabric platform", not the brief's "the same
+          // performance poly-spandex fabric platform": Fitted Cropped's fabric
+          // has no spandex (owner call, 2026-09-23).
+          q: "How does this differ from your Fitted Cropped Long-Sleeve?",
+          a: "Both share a performance fabric platform, but this style runs full length with mesh underarm panels, while the Fitted Cropped style is a shorter, cropped-length cut with an elastic hem band.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted Cropped Long-Sleeve", slug: "fitted-cropped", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Oversized Crew Long-Sleeve", slug: "crew-womens", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Men's Fitted Performance Long-Sleeve", slug: "fitted-performance", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
+      ],
+      specifications: [
+        { label: "Style", value: "Fitted performance crew long-sleeve, thumbholes and mesh underarm panels (base type)" },
+        { label: "Fabric", value: "Performance poly-spandex, moisture-wicking, four-way stretch. Pending confirmed spec on sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Fitted, athletic cut" },
+        { label: "Cuff", value: "Thumbhole cuff standard" },
+        { label: "Sleeve construction", value: "Set-in sleeve with mesh underarm panels for breathability" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        {
+          label: "Branding",
+          value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging, including sleeve and cuff placement",
+        },
+      ],
+      specificationsImage: { alt: "Women's fitted performance long-sleeve, mesh underarm panel detail" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Stretch recovery tested before bulk",
+        "Thumbhole cuffs checked for consistent placement across sizes",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          {
+            title: "Branding",
+            body: "Silicone, heat transfer, embroidery, sleeve and cuff placement available",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" },
+          },
+          {
+            title: "Fabric",
+            body: "Performance poly-spandex, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          {
+            title: "Mesh panels",
+            body: "Placement and density built to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Mesh panels" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, size and care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
+    },
+    {
+      status: "draft",
+      slug: "fitted-cropped",
+      sku: "CAP-LSL-12",
+      cardTitle: "Custom Fitted Cropped Long-Sleeve",
+      cardSubline: "Jacquard elastic hem band, performance poly",
+      image: "",
+      imageAlt: "Custom fitted cropped long-sleeve with a jacquard elastic hem band, performance poly",
+      href: "/capriowear/activewear/long-sleeve-tops/fitted-cropped",
+      pdpTitle: "Fitted Cropped",
+      pdpHeading: "Custom Fitted Cropped Long-Sleeve Manufacturer",
+      pdpDescription:
+        "Fitted cropped long-sleeve with a jacquard elastic hem band, custom and private label, in performance poly, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Custom fitted cropped long-sleeve, front view" },
+        { alt: "Custom fitted cropped long-sleeve, back view" },
+        { alt: "Custom fitted cropped long-sleeve, side profile" },
+        { alt: "Custom fitted cropped long-sleeve, jacquard elastic hem band close-up" },
+        { alt: "Custom fitted cropped long-sleeve, worn on model" },
+        { alt: "Custom fitted cropped long-sleeve, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Fitted Cropped Long-Sleeve Manufacturer",
+      pdpMetaDescription:
+        "Women's fitted cropped long-sleeve manufacturer, OEM, ODM and private label, jacquard elastic hem band, performance poly, from 50 pieces, DDP worldwide.",
+      material: "Performance poly, at least 75% recycled polyester",
+      pdpFabricPills: ["Performance Poly (≥75% Recycled)"],
+      faqs: [
+        {
+          q: "What makes the hem band different from a standard hem?",
+          a: "A jacquard elastic band built into the crop line, not just a folded or raw-edge hem. It holds its shape and sits flat against the body, confirmed on your sample.",
+        },
+        {
+          q: "How does this differ from your Women's Fitted Performance Long-Sleeve?",
+          a: "Both share a fitted, body-hugging cut in performance poly, but this style is cropped in length with an elastic hem band, while the Fitted Performance style runs full length with thumbholes and mesh underarm panels.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Women's Fitted Performance Long-Sleeve", slug: "fitted-performance-womens", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Oversized Crew Long-Sleeve", slug: "crew-womens", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Midi-Length Long-Sleeve", slug: "midi-length", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
+      ],
+      specifications: [
+        { label: "Style", value: "Fitted cropped long-sleeve, body-hugging fit (base type)" },
+        {
+          label: "Fabric",
+          value: "Performance poly, at least 75% recycled polyester on our reference. Final composition confirmed on your sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Body-hugging, cropped length" },
+        { label: "Hem", value: "Jacquard elastic hem band at the crop line" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom fitted cropped long-sleeve, hem band construction detail" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Elastic hem band stretch recovery tested before bulk",
+        "Crop length graded proportionally across the full size run",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Performance poly, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          { title: "Hem", body: "Elastic band width and finish built to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Hem" } },
+          { title: "Crop length", body: "Built to your reference length", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Crop length" } },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, size and care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-2.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
+    },
+    {
+      status: "draft",
+      slug: "crew-womens",
+      sku: "CAP-LSL-13",
+      cardTitle: "Custom Oversized Crew Long-Sleeve",
+      cardSubline: "Oversized crew neckline, 100% cotton",
+      image: "",
+      imageAlt: "Custom oversized crew long-sleeve, standard crew neckline, 100% cotton",
+      href: "/capriowear/activewear/long-sleeve-tops/crew-womens",
+      pdpTitle: "Oversized Crew",
+      pdpHeading: "Custom Oversized Crew Long-Sleeve Manufacturer",
+      pdpDescription: "Oversized crew-neck long-sleeve, custom and private label, in 100% cotton, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Custom oversized crew long-sleeve, front view" },
+        { alt: "Custom oversized crew long-sleeve, back view" },
+        { alt: "Custom oversized crew long-sleeve, side profile" },
+        { alt: "Custom oversized crew long-sleeve, ribbed cuff close-up" },
+        { alt: "Custom oversized crew long-sleeve, worn on model" },
+        { alt: "Custom oversized crew long-sleeve, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Oversized Crew Long-Sleeve Manufacturer",
+      pdpMetaDescription:
+        "Women's oversized crew long-sleeve manufacturer, OEM, ODM and private label, 100% cotton, relaxed fit, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "100% cotton or cotton-poly blend",
+      pdpFabricPills: ["100% Cotton", "Cotton-Poly Blend"],
+      faqs: [
+        {
+          q: "What fabric is this style made from?",
+          a: "100% cotton on our reference, or a cotton-poly blend if you prefer a lighter hand. We confirm the exact blend and weight on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "Is this a standard oversized fit, or can it be customized?",
+          a: "Built as an oversized crew as standard, but fit, neckline, cuff, and sleeve construction can all be customized to your reference garment, confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Women's Fitted Performance Long-Sleeve", slug: "fitted-performance-womens", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Midi-Length Long-Sleeve", slug: "midi-length", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
+      ],
+      specifications: [
+        { label: "Style", value: "Oversized crew long-sleeve, standard crew neckline (base type)" },
+        {
+          label: "Fabric",
+          value: "100% cotton on our reference, or cotton-poly blend. Final composition confirmed on your sample.",
+        },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        // "Oversized" only: the brief's research clause dropped, same as the
+        // men's Crew Fit row (owner call, 2026-09-23).
+        { label: "Fit", value: "Oversized" },
+        { label: "Cuff", value: "Ribbed knit, standard finish" },
+        { label: "Sleeve construction", value: "Set-in sleeve, standard, dropped shoulder available on request" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        {
+          label: "Branding",
+          value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging, including sleeve and cuff placement",
+        },
+      ],
+      specificationsImage: { alt: "Custom oversized crew long-sleeve, construction detail" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Sleeve length graded proportionally across the full size run",
+        "Cuff consistency checked across sizes",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          {
+            title: "Branding",
+            body: "Silicone, heat transfer, embroidery, sleeve and cuff placement available",
+            image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" },
+          },
+          {
+            title: "Fabric",
+            body: "100% cotton or cotton-poly blend, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          {
+            title: "Fit",
+            body: "Oversized as our base build, relaxed or true-to-size available on request",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit" },
+          },
+          {
+            title: "Trims and finish",
+            body: "Woven labels, size and care labels, hangtags",
+            image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" },
+          },
+          { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+        ],
+      },
+    },
+    {
+      status: "draft",
+      slug: "midi-length",
+      sku: "CAP-LSL-14",
+      cardTitle: "Custom Midi-Length Long-Sleeve",
+      cardSubline: "Between full-length and cropped, lightweight stretch cotton knit",
+      image: "",
+      imageAlt: "Custom midi-length long-sleeve, between full-length and cropped, lightweight stretch cotton knit",
+      href: "/capriowear/activewear/long-sleeve-tops/midi-length",
+      pdpTitle: "Midi-Length",
+      pdpHeading: "Custom Midi-Length Long-Sleeve Manufacturer",
+      pdpDescription:
+        "Midi-length long-sleeve between a full-length top and a cropped style, custom and private label, in a lightweight stretch cotton knit, made to your brand in Sialkot, Pakistan.",
+      images: [
+        { alt: "Custom midi-length long-sleeve, front view" },
+        { alt: "Custom midi-length long-sleeve, back view" },
+        { alt: "Custom midi-length long-sleeve, side profile" },
+        { alt: "Custom midi-length long-sleeve, hem length close-up" },
+        { alt: "Custom midi-length long-sleeve, worn on model" },
+        { alt: "Custom midi-length long-sleeve, flat lay" },
+      ],
+      pdpMetaTitle: "Custom Midi-Length Long-Sleeve Manufacturer",
+      pdpMetaDescription:
+        "Women's midi-length long-sleeve manufacturer, OEM, ODM and private label, lightweight stretch cotton knit, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "Lightweight stretch cotton knit",
+      pdpFabricPills: ["Lightweight Stretch Cotton Knit"],
+      faqs: [
+        {
+          q: 'What does "midi-length" mean on this style?',
+          a: "It sits between a full-length long-sleeve and a fully cropped top, a length option distinct from both. We confirm the exact length on your sample, matched to your reference if you have one.",
+        },
+        {
+          q: "Is this a body-hugging fit or a relaxed fit?",
+          a: "Our reference construction is body fit, but a relaxed midi silhouette is also available. Tell us your preference and we confirm the fit on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Fitted Cropped Long-Sleeve", slug: "fitted-cropped", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Oversized Crew Long-Sleeve", slug: "crew-womens", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "Women's Fitted Performance Long-Sleeve", slug: "fitted-performance-womens", href: "/capriowear/activewear/long-sleeve-tops" },
+        { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
+      ],
+      specifications: [
+        { label: "Style", value: "Midi-length long-sleeve, sits between full-length and cropped (base type)" },
+        { label: "Fabric", value: "Lightweight stretch cotton knit. Pending confirmed spec on sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Body fit on our reference; a relaxed midi fit is also available, confirmed on your sample" },
+        { label: "Length", value: "Midi, between a full-length long-sleeve and a fully cropped style" },
+        { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom midi-length long-sleeve, construction detail" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Seams reinforced and stress-tested",
+        "Midi length graded proportionally across the full size run",
+        "Stretch recovery tested before bulk",
+        "Every run inspected to AQL 2.5",
+        "Third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          {
+            title: "Fabric",
+            body: "Lightweight stretch cotton knit, any weight, sourced or matched to your reference",
+            image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          {
+            title: "Fit and length",
+            body: "Body fit or relaxed, exact midi length built to your spec",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Fit and length" },
+          },
           {
             title: "Trims and finish",
             body: "Woven labels, size and care labels, hangtags",
