@@ -235,7 +235,7 @@ export const tankTops: Category = {
       ],
       specifications: [
         { label: "Style", value: "Men's oversized, boxy tank, dropped shoulder, wide raw-cut armhole (base type)" },
-        { label: "Fabric", value: "Cotton or cotton-blend jersey, directional research range, pending confirmed spec on sample." },
+        { label: "Fabric", value: "Cotton or cotton-blend jersey, confirmed on your sample." },
         { label: "Weight", value: "260 GSM, per the confirmed range on comparable cotton cut-off builds. Final weight confirmed on your sample." },
         { label: "Fit", value: "Oversized, boxy, dropped-shoulder seam. Not fitted, not compression." },
         { label: "Armhole", value: "Wide raw-cut or cut-off armhole, unfinished edge option available" },
@@ -322,7 +322,7 @@ export const tankTops: Category = {
       ],
       specifications: [
         { label: "Style", value: "Men's close-fitting, compression tank, standard neckline and armhole (base type)" },
-        { label: "Fabric", value: "Poly-spandex, nylon-elastane, or fitted cotton, directional research range, pending confirmed spec on sample." },
+        { label: "Fabric", value: "Poly-spandex, nylon-elastane, or fitted cotton, confirmed on your sample." },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Fitted, compression fit, not oversized, not relaxed. A close-to-body silhouette through the torso." },
         { label: "Armhole", value: "Standard armhole, finished edge" },
@@ -409,7 +409,7 @@ export const tankTops: Category = {
       ],
       specifications: [
         { label: "Style", value: "Men's relaxed, softer fit tank, standard finished armhole and neckline (base type)" },
-        { label: "Fabric", value: "Recycled polyester or cotton jersey, directional research range, pending confirmed spec on sample." },
+        { label: "Fabric", value: "Recycled polyester or cotton jersey, confirmed on your sample." },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Relaxed, softer through the body. Not oversized-boxy, not fitted-compression." },
         { label: "Armhole", value: "Standard, finished edge, not raw-cut" },
@@ -505,7 +505,7 @@ export const tankTops: Category = {
         },
         {
           label: "Fabric",
-          value: "Recycled polyester or moisture-wicking knit, directional research range, pending confirmed spec on sample.",
+          value: "Recycled polyester or moisture-wicking knit, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Athletic, true-to-size. Not fitted-compression, not oversized-boxy." },
@@ -603,7 +603,7 @@ export const tankTops: Category = {
         },
         {
           label: "Fabric",
-          value: "Cotton/lyocell/elastane jersey, directional research range, pending confirmed spec on sample.",
+          value: "Cotton/lyocell/elastane jersey, confirmed on your sample.",
         },
         { label: "Weight", value: "165 GSM. Final weight confirmed on your sample." },
         { label: "Fit", value: "Fitted. Deep-scooped stringer armholes, racerback (Y-back) construction." },
@@ -705,7 +705,7 @@ export const tankTops: Category = {
         },
         {
           label: "Fabric",
-          value: "Stretch compression knit, directional research range, pending confirmed spec on sample.",
+          value: "Stretch compression knit, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Fitted, close-to-body. Full racerback, not a stringer's narrow strap." },
@@ -805,7 +805,7 @@ export const tankTops: Category = {
         },
         {
           label: "Fabric",
-          value: "Cotton-poly blend, directional research range, pending confirmed spec on sample.",
+          value: "Cotton-poly blend, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         {
@@ -1022,7 +1022,7 @@ export const tankTops: Category = {
         },
         {
           label: "Fabric",
-          value: "Stretch poly blend, directional research range, pending confirmed spec on sample.",
+          value: "Stretch poly blend, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Fitted, close-to-body. Not racerback, not shelf-bra." },
@@ -1124,7 +1124,7 @@ export const tankTops: Category = {
         },
         {
           label: "Fabric",
-          value: "Stretch poly blend, directional research range, pending confirmed spec on sample.",
+          value: "Stretch poly blend, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Relaxed, roomier, non-compression. Not fitted, not cropped." },
@@ -1226,7 +1226,7 @@ export const tankTops: Category = {
         },
         {
           label: "Fabric",
-          value: "Stretch poly blend, directional research range, pending confirmed spec on sample.",
+          value: "Stretch poly blend, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Fitted, close-to-body. Cropped hem length." },
@@ -1328,7 +1328,7 @@ export const tankTops: Category = {
         },
         {
           label: "Fabric",
-          value: "Stretch poly blend with mesh back paneling, directional research range, pending confirmed spec on sample.",
+          value: "Stretch poly blend with mesh back paneling, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Fitted, close-to-body." },
@@ -1430,7 +1430,7 @@ export const tankTops: Category = {
         },
         {
           label: "Fabric",
-          value: "Stretch poly blend, directional research range, pending confirmed spec on sample.",
+          value: "Stretch poly blend, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Fitted body, scoop neckline." },
@@ -1527,7 +1527,7 @@ export const tankTops: Category = {
         },
         {
           label: "Fabric",
-          value: "Stretch poly blend, directional research range, pending confirmed spec on sample.",
+          value: "Stretch poly blend, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Fitted through the body." },
@@ -1631,7 +1631,7 @@ export const tankTops: Category = {
         },
         {
           label: "Fabric",
-          value: "Stretch poly blend, directional research range, pending confirmed spec on sample.",
+          value: "Stretch poly blend, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Relaxed. Cropped hem length." },
@@ -1733,7 +1733,7 @@ export const tankTops: Category = {
         {
           label: "Fabric",
           value:
-            "Poly-elastane body with cotton-elastane or viscose-elastane rib knit side panels, directional research range, pending confirmed spec on sample.",
+            "Poly-elastane body with cotton-elastane or viscose-elastane rib knit side panels, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Fitted, close-to-body." },

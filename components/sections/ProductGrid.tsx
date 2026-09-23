@@ -60,7 +60,8 @@ export function ProductGrid({ cards }: ProductGridProps) {
   // range the same render a breakpoint crossing shrinks `totalPages` below
   // the current page, instead of one render later.
   if (page > totalPages) setPage(totalPages);
-  const pageCards = cards.slice((page - 1) * pageSize, page * pageSize);
+  const pageStart = (page - 1) * pageSize;
+  const pageEnd = page * pageSize;
 
   // Owner report, 2026-09-03: clicking a page number left the scroll
   // position where it was (mid-page, wherever Pagination itself sits),
@@ -101,10 +102,23 @@ export function ProductGrid({ cards }: ProductGridProps) {
 
   return (
     <div className={productGrid.root}>
+      {/* Every card is rendered, not just the current page (T-Shirts audit,
+          2026-09-23): pagination used to slice `cards` in client state, so
+          the server HTML carried only page 1 and every page-2+ card link
+          was invisible to crawlers (T-Shirts' whole women's set, for one).
+          Off-page cards now sit inside a native `hidden` wrapper instead:
+          still in the HTML, `display: none` so they take no grid cell, and
+          no style class needed. Pagination itself is unchanged. */}
       <div className={productGrid.grid}>
-        {pageCards.map((card) => (
-          <ProductCard key={card.slug} {...card} />
-        ))}
+        {cards.map((card, index) =>
+          index >= pageStart && index < pageEnd ? (
+            <ProductCard key={card.slug} {...card} />
+          ) : (
+            <div key={card.slug} hidden>
+              <ProductCard {...card} />
+            </div>
+          ),
+        )}
       </div>
 
       {totalPages > 1 && <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />}

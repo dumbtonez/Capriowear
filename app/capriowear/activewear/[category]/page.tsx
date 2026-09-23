@@ -141,7 +141,7 @@ export default async function CategoryPage({ params }: PageProps<"/capriowear/ac
         <CategoryBanner
           breadcrumbItems={[
             { label: "Home", href: "/capriowear" },
-            { label: "Activewear", href: "/activewear" },
+            { label: "Activewear", href: "/capriowear/activewear" },
             { label: data.menuLabel, href: `/capriowear/activewear/${data.slug}` },
           ]}
           h1={data.h1}
@@ -156,8 +156,8 @@ export default async function CategoryPage({ params }: PageProps<"/capriowear/ac
         <JsonLd
           data={breadcrumbSchema([
             { name: "Home", url: `${SITE_URL}/capriowear` },
-            { name: "Activewear", url: `${SITE_URL}/activewear` },
-            { name: data.menuLabel, url: `${SITE_URL}/activewear/${data.slug}` },
+            { name: "Activewear", url: `${SITE_URL}/capriowear/activewear` },
+            { name: data.menuLabel, url: `${SITE_URL}/capriowear/activewear/${data.slug}` },
           ])}
         />
         {/* Omitted entirely when zero styles are published (SEO audit,
@@ -166,7 +166,7 @@ export default async function CategoryPage({ params }: PageProps<"/capriowear/ac
           <JsonLd
             data={collectionPageSchema(
               data.menuLabel,
-              `${SITE_URL}/activewear/${data.slug}`,
+              `${SITE_URL}/capriowear/activewear/${data.slug}`,
               `${data.menuLabel} from ${ORGANIZATION.description}`,
               // Published styles only (owner spec, 2026-09-02, Leggings PLP
               // pilot: "ItemList should include only PUBLISHED styles; do not

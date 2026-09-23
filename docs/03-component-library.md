@@ -1573,6 +1573,8 @@ Title/subline alignment and subline colour carry over unchanged from the pre-spl
 
 **Gained optional controlled-mode props, `activeChip`/`onChipChange`, 2026-09-22 (owner spec, Shorts: the All/Women/Men chips must actually filter the grid, not just restyle themselves)**. Previously the chip row owned its own `useState` internally with no way for a sibling to read the selection. Now: pass both props and the component is fully controlled (its own internal state is unused); pass neither and it falls back to the original internal `useState` (`defaultChip`, unchanged). Only `ActivewearListing.tsx` passes the controlled props today — the other 4 route templates and the styleguide keep calling this uncontrolled and render byte-identically to before.
 
+**Gender chips expose their state (T-Shirts audit, 2026-09-23):** each chip carries `aria-pressed` (true on the active one) and the row is a `role="group"` labelled "Filter by gender". Previously the active chip was signalled only by its accent border.
+
 ### ActivewearListing — Built
 `components/sections/ActivewearListing.tsx`
 
@@ -1656,6 +1658,8 @@ Gender filter chips ("All"/"Women"/"Men") are real, clickable `<button>`s with a
 **Card title is now `<h3>`, not `<p>`** (SEO/AEO/GEO finalization pass, 2026-08-30): a product tile title is a sub-item under the grid's own `<h2>` (`CategoryMetaStrip`'s title, see below), the same "`h2` section → `h3` sub-item" pattern already used for `WhatWeMake`'s category tiles and Trust Signals' entries elsewhere on the site — this page's own heading outline was missing that level entirely before. `className` unchanged, so nothing visual moved.
 
 New `imageAlt` field on `StyleCard` (`content/activewear/types.ts`) — keyword-aware descriptive alt text per card (e.g. "Custom high-waisted compression leggings"), separate from `cardTitle` (the short on-card label) since an alt needs to stand alone with no card context around it. Wired into `MediaPlaceholder`'s `image.alt`; has no visible effect yet since every card's `image` is still an empty string (no `<img>` renders at all until real photography lands), but the data is ready the moment it does.
+
+**Every card is server-rendered, pagination is visual only (T-Shirts audit, 2026-09-23).** `ProductGrid` used to `slice` `cards` to the current page in client state, so the server HTML carried only page 1 and every page-2+ card link was invisible to crawlers (T-Shirts' whole women's set, for one). It now renders all cards; off-page ones sit in a native `<div hidden>` wrapper (`display: none`, no grid cell, no style class). Page size (9 desktop / 8 mobile), `Pagination` and scroll-to-title behaviour are unchanged. Affects every PLP using it (Activewear, Running Wear, Teamwear, Gear). Verified in raw server HTML: T-Shirts 16/16, Leggings 13/13, Shorts 14/14, Tank Tops 16/16, Sports Bras 15/15.
 
 ### FabricOptions — Built (responsive: desktop table, mobile accordion)
 `components/sections/FabricOptions.tsx` · recipe: `fabricOptions`

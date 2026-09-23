@@ -104,11 +104,15 @@ export function CategoryMetaStrip({
           their own comments in components/ui/styles.ts. Conditionally
           rendered: not every category has a gender split. */}
       {showGenderFilter && (
-        <div className={categoryMetaStrip.chipRow}>
+        // role="group" + aria-label names the chip row for screen readers;
+        // aria-pressed exposes which filter is active (T-Shirts audit,
+        // 2026-09-23), which the accent border alone only showed visually.
+        <div className={categoryMetaStrip.chipRow} role="group" aria-label="Filter by gender">
           {FILTER_CHIPS.map((chip) => (
             <button
               key={chip}
               type="button"
+              aria-pressed={chip === activeChip}
               onClick={() => setActiveChip(chip)}
               className={chip === activeChip ? categoryMetaStrip.chipActive : categoryMetaStrip.chip}
             >

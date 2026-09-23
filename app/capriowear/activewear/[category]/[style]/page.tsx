@@ -156,7 +156,7 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
 
   const breadcrumbItems = [
     { label: "Home", href: "/capriowear" },
-    { label: "Activewear", href: "/activewear" },
+    { label: "Activewear", href: "/capriowear/activewear" },
     { label: data.category.menuLabel, href: `/capriowear/activewear/${data.category.slug}` },
     { label: productTitle, href: data.product.href },
   ];

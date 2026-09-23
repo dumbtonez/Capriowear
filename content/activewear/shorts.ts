@@ -239,7 +239,7 @@ export const shorts: Category = {
         {
           label: "Fabric",
           value:
-            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
+            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Stretch and support", value: "Athletic-regular fit, not compression, not baggy. A standard mid-weight training and running short." },
@@ -342,7 +342,7 @@ export const shorts: Category = {
         {
           label: "Fabric",
           value:
-            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
+            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, confirmed on your sample.",
         },
         // Weight row wording simplified sitewide (owner correction,
         // 2026-09-22, applied first on SKU 1): "Pending, confirmed on
@@ -453,7 +453,7 @@ export const shorts: Category = {
         {
           label: "Fabric",
           value:
-            "Cotton fleece, cotton or cotton/poly blend, cut-and-sew construction, directional research range, pending confirmed spec on sample.",
+            "Cotton fleece, cotton or cotton/poly blend, cut-and-sew construction, confirmed on your sample.",
         },
         {
           label: "Weight",
@@ -564,7 +564,7 @@ export const shorts: Category = {
         {
           label: "Fabric",
           value:
-            "Cotton fleece, cotton or cotton/poly blend, cut-and-sew construction, directional research range, pending confirmed spec on sample.",
+            "Cotton fleece, cotton or cotton/poly blend, cut-and-sew construction, confirmed on your sample.",
         },
         {
           label: "Weight",
@@ -672,7 +672,7 @@ export const shorts: Category = {
         {
           label: "Fabric",
           value:
-            "Two-layer construction, outer shell and liner both in cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
+            "Two-layer construction, outer shell and liner both in cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         {
@@ -777,7 +777,7 @@ export const shorts: Category = {
         {
           label: "Fabric",
           value:
-            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
+            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         {
@@ -882,7 +882,7 @@ export const shorts: Category = {
         {
           label: "Fabric",
           value:
-            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
+            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         {
@@ -988,7 +988,7 @@ export const shorts: Category = {
         {
           label: "Fabric",
           value:
-            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
+            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         {
@@ -1091,7 +1091,7 @@ export const shorts: Category = {
         {
           label: "Fabric",
           value:
-            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
+            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         {
@@ -1194,7 +1194,7 @@ export const shorts: Category = {
         {
           label: "Fabric",
           value:
-            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
+            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         {
@@ -1303,7 +1303,7 @@ export const shorts: Category = {
         {
           label: "Fabric",
           value:
-            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
+            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         {
@@ -1416,7 +1416,7 @@ export const shorts: Category = {
         {
           label: "Fabric",
           value:
-            "Cut-and-sew woven or lightweight fleece, Polyester/Spandex, Nylon/Spandex, or cotton fleece, directional research range, pending confirmed spec on sample.",
+            "Cut-and-sew woven or lightweight fleece, Polyester/Spandex, Nylon/Spandex, or cotton fleece, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         {
@@ -1523,7 +1523,7 @@ export const shorts: Category = {
         {
           label: "Fabric",
           value:
-            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, directional research range, pending confirmed spec on sample.",
+            "Cut-and-sew jersey knit or lightweight woven, Polyester/Spandex or Nylon/Spandex, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         {
@@ -1628,7 +1628,7 @@ export const shorts: Category = {
         },
         {
           label: "Fabric",
-          value: "Cotton fleece or cotton/poly blend, brushed finish, directional research range, pending confirmed spec on sample.",
+          value: "Cotton fleece or cotton/poly blend, brushed finish, confirmed on your sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         {

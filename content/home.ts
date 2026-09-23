@@ -69,43 +69,43 @@ export const activewearMegaMenu = [
   {
     label: "TOPS",
     items: [
-      { label: "Sports Bras", href: "/activewear/sports-bras" },
-      { label: "Tank Tops", href: "/activewear/tank-tops" },
-      { label: "T-Shirts", href: "/activewear/t-shirts" },
-      { label: "Long-Sleeve Tops", href: "/activewear/long-sleeve-tops" },
-      { label: "Hoodies", href: "/activewear/hoodies" },
-      { label: "Sweatshirts", href: "/activewear/sweatshirts" },
+      { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
+      { label: "Tank Tops", href: "/capriowear/activewear/tank-tops" },
+      { label: "T-Shirts", href: "/capriowear/activewear/t-shirts" },
+      { label: "Long-Sleeve Tops", href: "/capriowear/activewear/long-sleeve-tops" },
+      { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
+      { label: "Sweatshirts", href: "/capriowear/activewear/sweatshirts" },
     ],
   },
   {
     label: "BOTTOMS",
     items: [
-      { label: "Leggings", href: "/activewear/leggings" },
-      { label: "Shorts", href: "/activewear/shorts" },
-      { label: "Joggers", href: "/activewear/joggers" },
+      { label: "Leggings", href: "/capriowear/activewear/leggings" },
+      { label: "Shorts", href: "/capriowear/activewear/shorts" },
+      { label: "Joggers", href: "/capriowear/activewear/joggers" },
     ],
   },
   {
     label: "SETS & ONE PIECES",
     items: [
-      { label: "Yoga Sets", href: "/activewear/yoga-sets" },
-      { label: "Bodysuits", href: "/activewear/bodysuits" },
-      { label: "Jumpsuits", href: "/activewear/jumpsuits" },
+      { label: "Yoga Sets", href: "/capriowear/activewear/yoga-sets" },
+      { label: "Bodysuits", href: "/capriowear/activewear/bodysuits" },
+      { label: "Jumpsuits", href: "/capriowear/activewear/jumpsuits" },
     ],
   },
   {
     label: "OUTWEAR & SUITS",
     items: [
-      { label: "Jackets", href: "/activewear/jackets" },
-      { label: "Track Jackets & Zip-Ups", href: "/activewear/track-jackets" },
-      { label: "Tracksuits", href: "/activewear/tracksuits" },
-      { label: "Sweatsuits", href: "/activewear/sweatsuits" },
-      { label: "Running Wear", href: "/activewear/running-wear" },
+      { label: "Jackets", href: "/capriowear/activewear/jackets" },
+      { label: "Track Jackets & Zip-Ups", href: "/capriowear/activewear/track-jackets" },
+      { label: "Tracksuits", href: "/capriowear/activewear/tracksuits" },
+      { label: "Sweatsuits", href: "/capriowear/activewear/sweatsuits" },
+      { label: "Running Wear", href: "/capriowear/activewear/running-wear" },
     ],
   },
   {
     label: "BASE LAYERS",
-    items: [{ label: "Base Layers & Compression", href: "/activewear/compression-base-layers" }],
+    items: [{ label: "Base Layers & Compression", href: "/capriowear/activewear/compression-base-layers" }],
   },
 ];
 
@@ -132,21 +132,21 @@ export const teamwearMegaMenu = [
   {
     label: "UNIFORMS",
     items: [
-      { label: "Cricket Uniforms", href: "/teamwear/cricket" },
-      { label: "Basketball Uniforms", href: "/teamwear/basketball" },
-      { label: "Rugby Uniforms", href: "/teamwear/rugby" },
-      { label: "Baseball Uniforms", href: "/teamwear/baseball" },
-      { label: "Volleyball Uniforms", href: "/teamwear/volleyball" },
-      { label: "Soccer Uniforms", href: "/teamwear/soccer" },
-      { label: "Football Uniforms", href: "/teamwear/football" },
-      { label: "Ice Hockey Jerseys", href: "/teamwear/ice-hockey" },
+      { label: "Cricket Uniforms", href: "/capriowear/teamwear/cricket" },
+      { label: "Basketball Uniforms", href: "/capriowear/teamwear/basketball" },
+      { label: "Rugby Uniforms", href: "/capriowear/teamwear/rugby" },
+      { label: "Baseball Uniforms", href: "/capriowear/teamwear/baseball" },
+      { label: "Volleyball Uniforms", href: "/capriowear/teamwear/volleyball" },
+      { label: "Soccer Uniforms", href: "/capriowear/teamwear/soccer" },
+      { label: "Football Uniforms", href: "/capriowear/teamwear/football" },
+      { label: "Ice Hockey Jerseys", href: "/capriowear/teamwear/ice-hockey" },
     ],
   },
   {
     label: "OTHERS",
     items: [
-      { label: "Cycling Kits", href: "/teamwear/cycling" },
-      { label: "Rash Guards & Fight Wear", href: "/teamwear/fight-wear" },
+      { label: "Cycling Kits", href: "/capriowear/teamwear/cycling" },
+      { label: "Rash Guards & Fight Wear", href: "/capriowear/teamwear/fight-wear" },
     ],
   },
 ];
@@ -213,8 +213,8 @@ export const home = {
     // "Our Factory" -> "Factory Tour" (owner call, 2026-08-28), href
     // unchanged -- still /our-factory.
     links: [
-      { label: "Activewear", href: "/activewear", megaMenu: activewearMegaMenu },
-      { label: "Teamwear & Uniforms", href: "/teamwear", megaMenu: teamwearMegaMenu },
+      { label: "Activewear", href: "/capriowear/activewear", megaMenu: activewearMegaMenu },
+      { label: "Teamwear & Uniforms", href: "/capriowear/teamwear", megaMenu: teamwearMegaMenu },
       { label: "Services", href: "/capriowear/services" },
       { label: "Factory Tour", href: "/capriowear/our-factory" },
     ],
@@ -232,13 +232,13 @@ export const home = {
     mobileLinks: [
       {
         label: "Activewear",
-        href: "/activewear",
+        href: "/capriowear/activewear",
         chevron: true,
         megaMenu: activewearMegaMenu,
       },
       {
         label: "Teamwear & Uniforms",
-        href: "/teamwear",
+        href: "/capriowear/teamwear",
         chevron: true,
         megaMenu: teamwearMegaMenu,
       },

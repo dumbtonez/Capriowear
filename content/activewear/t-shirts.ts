@@ -55,10 +55,11 @@ export const tShirts: Category = {
   // titles each needed a call on the 3-segment "| Private Label and OEM"
   // form).
   metaTitle: "Custom T-Shirt Manufacturer",
-  // Owner's exact given copy, 158 chars -- within Google's own ~155-160
+  // Owner copy, 154 chars (lengthened from 116, T-Shirts audit follow-up,
+  // 2026-09-23) -- inside the 150 to 160 target, under Google's ~160
   // char truncation point.
   metaDescription:
-    "Custom t-shirt manufacturer, cotton to heavyweight performance tees, 100 to 280+ GSM, low minimum order. Capriowear.",
+    "Custom t-shirt manufacturer, cotton to heavyweight performance tees, 100 to 280+ GSM, low minimum order from 50 pieces, OEM and private label. Capriowear.",
   // CategoryBanner's own checkmark row -- same 4 facts, same wording, as
   // every prior category's own.
   trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
@@ -293,7 +294,7 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/fitted-mens",
       gender: "Men",
       sku: "CAP-TEE-01",
-      pdpTitle: "Fitted",
+      pdpTitle: "Men's Fitted",
       pdpHeading: "Men's Fitted T-Shirt Manufacturer",
       pdpDescription:
         "Men's close-fitting, compression-leaning tee with a standard crew neckline, custom and private label, in performance polyester, a poly-spandex blend, or combed cotton, made to your brand in Sialkot, Pakistan.",
@@ -330,7 +331,7 @@ export const tShirts: Category = {
       ],
       specifications: [
         { label: "Style", value: "Men's fitted, compression-leaning tee, standard crew neckline (base type)" },
-        { label: "Fabric", value: "Performance polyester, poly-spandex blend, or combed cotton, directional research range" },
+        { label: "Fabric", value: "Performance polyester, poly-spandex blend, or combed cotton" },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Close-fitting through the body, standard crew neckline" },
         { label: "Construction", value: "Cut-and-sew, side-seam or tubular body, double-needle stitched sleeves, hem and neck" },
@@ -383,7 +384,7 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/oversized-mens",
       gender: "Men",
       sku: "CAP-TEE-02",
-      pdpTitle: "Oversized",
+      pdpTitle: "Men's Oversized",
       pdpHeading: "Men's Oversized T-Shirt Manufacturer",
       pdpDescription:
         "Men's boxy, dropped-shoulder oversized tee, custom and private label, in combed cotton or a heavyweight cotton-poly blend, made to your brand in Sialkot, Pakistan.",
@@ -420,7 +421,7 @@ export const tShirts: Category = {
       ],
       specifications: [
         { label: "Style", value: "Men's boxy, oversized tee, dropped-shoulder construction (base type)" },
-        { label: "Fabric", value: "Combed cotton or heavyweight cotton-poly blend, directional research range" },
+        { label: "Fabric", value: "Combed cotton or heavyweight cotton-poly blend" },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Oversized, boxy through the body" },
         { label: "Construction", value: "Cut-and-sew, dropped-shoulder seam, side-seam or tubular body, double-needle stitching" },
@@ -480,21 +481,21 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/relaxed-mens",
       gender: "Men",
       sku: "CAP-TEE-03",
-      pdpTitle: "Relaxed",
+      pdpTitle: "Men's Relaxed",
       pdpHeading: "Men's Relaxed T-Shirt Manufacturer",
       pdpDescription:
         "Men's softer, roomier everyday tee, custom and private label, in a 50/50 cotton-poly or CVC blend, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Relaxed t-shirt, front view" },
-        { alt: "Relaxed t-shirt, back view" },
-        { alt: "Relaxed t-shirt, side profile" },
-        { alt: "Relaxed t-shirt, fabric close-up" },
-        { alt: "Relaxed t-shirt, worn on model" },
-        { alt: "Relaxed t-shirt, flat lay" },
+        { alt: "Relaxed t-shirt, front view, men's" },
+        { alt: "Relaxed t-shirt, back view, men's" },
+        { alt: "Relaxed t-shirt, side profile, men's" },
+        { alt: "Relaxed t-shirt, fabric close-up, men's" },
+        { alt: "Relaxed t-shirt, worn on model, men's" },
+        { alt: "Relaxed t-shirt, flat lay, men's" },
       ],
       pdpMetaTitle: "Men's Relaxed T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom men's relaxed t-shirt manufacturer, private label, softer roomier everyday fit, cotton-poly or CVC blend, from 50 pieces, DDP worldwide.",
+        "Custom men's relaxed t-shirt manufacturer, OEM and private label, roomier everyday cut, 50/50 or CVC cotton-poly, low shrink, from 50 pieces, DDP worldwide.",
       material: "50/50 or CVC cotton-poly blend",
       pdpFabricPills: ["50/50 cotton-poly", "CVC cotton-poly", "Combed cotton", "Tri-blend"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -517,13 +518,13 @@ export const tShirts: Category = {
       ],
       specifications: [
         { label: "Style", value: "Men's relaxed, everyday tee (base type)" },
-        { label: "Fabric", value: "50/50 or CVC cotton-poly blend, directional research range" },
+        { label: "Fabric", value: "50/50 or CVC cotton-poly blend" },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Relaxed, roomier through the body than the Fitted SKU, not as boxy as the Oversized SKU" },
         { label: "Construction", value: "Cut-and-sew, side-seam or tubular body, double-needle stitched sleeves, hem and neck" },
         { label: "Branding", value: "Screen, DTG, DTF, embroidery, labels and packaging" },
       ],
-      specificationsImage: { alt: "Relaxed t-shirt, construction detail" },
+      specificationsImage: { alt: "Relaxed t-shirt, construction detail, men's" },
       pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
       pdpQualityPoints: [
         "GSM held consistent, batch to batch",
@@ -570,7 +571,7 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/athletic-mens",
       gender: "Men",
       sku: "CAP-TEE-04",
-      pdpTitle: "Athletic",
+      pdpTitle: "Men's Athletic",
       pdpHeading: "Men's Athletic T-Shirt Manufacturer",
       pdpDescription:
         "Men's true-to-size athletic and training tee, custom and private label, in 100% performance polyester, made to your brand in Sialkot, Pakistan.",
@@ -607,7 +608,7 @@ export const tShirts: Category = {
       ],
       specifications: [
         { label: "Style", value: "Men's athletic, true-to-size training and running tee (base type)" },
-        { label: "Fabric", value: "100% performance polyester, directional research range" },
+        { label: "Fabric", value: "100% performance polyester" },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "True-to-size, athletic cut" },
         { label: "Construction", value: "Cut-and-sew, side-seam or tubular body, double-needle stitched sleeves, hem and neck" },
@@ -697,7 +698,7 @@ export const tShirts: Category = {
       ],
       specifications: [
         { label: "Style", value: "Men's raglan-sleeve tee (base type)" },
-        { label: "Fabric", value: "Performance polyester or poly-spandex blend, directional research range" },
+        { label: "Fabric", value: "Performance polyester or poly-spandex blend" },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "True-to-size, raglan-sleeve construction" },
         { label: "Construction", value: "Cut-and-sew, one-piece raglan sleeve to collar, diagonal seam, double-needle stitching" },
@@ -750,17 +751,17 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/dropped-shoulder-mens",
       gender: "Men",
       sku: "CAP-TEE-06",
-      pdpTitle: "Dropped-Shoulder",
+      pdpTitle: "Men's Dropped-Shoulder",
       pdpHeading: "Men's Dropped-Shoulder T-Shirt Manufacturer",
       pdpDescription:
         "Men's dropped-shoulder tee, seam sits below the natural shoulder line, custom and private label, in combed cotton or a cotton-poly blend, made to your brand in Sialkot, Pakistan.",
       images: [
-        { alt: "Dropped-shoulder t-shirt, front view" },
-        { alt: "Dropped-shoulder t-shirt, shoulder seam detail" },
-        { alt: "Dropped-shoulder t-shirt, back view" },
-        { alt: "Dropped-shoulder t-shirt, fabric close-up" },
-        { alt: "Dropped-shoulder t-shirt, worn on model" },
-        { alt: "Dropped-shoulder t-shirt, flat lay" },
+        { alt: "Dropped-shoulder t-shirt, front view, men's" },
+        { alt: "Dropped-shoulder t-shirt, shoulder seam detail, men's" },
+        { alt: "Dropped-shoulder t-shirt, back view, men's" },
+        { alt: "Dropped-shoulder t-shirt, fabric close-up, men's" },
+        { alt: "Dropped-shoulder t-shirt, worn on model, men's" },
+        { alt: "Dropped-shoulder t-shirt, flat lay, men's" },
       ],
       pdpMetaTitle: "Men's Dropped-Shoulder T-Shirt Manufacturer",
       pdpMetaDescription:
@@ -787,13 +788,13 @@ export const tShirts: Category = {
       ],
       specifications: [
         { label: "Style", value: "Men's dropped-shoulder tee (base type)" },
-        { label: "Fabric", value: "Combed cotton or cotton-poly blend, directional research range" },
+        { label: "Fabric", value: "Combed cotton or cotton-poly blend" },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Relaxed through the body, moderate shoulder drop" },
         { label: "Construction", value: "Cut-and-sew, dropped-shoulder seam, side-seam or tubular body, double-needle stitching" },
         { label: "Branding", value: "Screen, DTG, DTF, embroidery, puff, labels and packaging" },
       ],
-      specificationsImage: { alt: "Dropped-shoulder t-shirt, construction detail" },
+      specificationsImage: { alt: "Dropped-shoulder t-shirt, construction detail, men's" },
       pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
       pdpQualityPoints: [
         "GSM held consistent, batch to batch",
@@ -841,7 +842,7 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/cropped-mens",
       gender: "Men",
       sku: "CAP-TEE-07",
-      pdpTitle: "Cropped",
+      pdpTitle: "Men's Cropped",
       pdpHeading: "Men's Cropped T-Shirt Manufacturer",
       pdpDescription:
         "Men's cropped-length tee, shortened body length below the standard hem, custom and private label, in combed cotton or a cotton-poly blend, made to your brand in Sialkot, Pakistan.",
@@ -855,7 +856,7 @@ export const tShirts: Category = {
       ],
       pdpMetaTitle: "Men's Cropped T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom men's cropped t-shirt manufacturer, private label, cropped body length, combed cotton or cotton-poly blend, from 50 pieces, DDP worldwide.",
+        "Custom men's cropped t-shirt manufacturer, OEM and private label, cropped body length, combed cotton or cotton-poly blend, from 50 pieces, DDP worldwide.",
       material: "Combed cotton or cotton-poly blend",
       pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Tri-blend", "Recycled polyester"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -878,7 +879,7 @@ export const tShirts: Category = {
       ],
       specifications: [
         { label: "Style", value: "Men's cropped-length tee (base type)" },
-        { label: "Fabric", value: "Combed cotton or cotton-poly blend, directional research range" },
+        { label: "Fabric", value: "Combed cotton or cotton-poly blend" },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Shortened body length, standard through the chest and shoulder" },
         { label: "Construction", value: "Cut-and-sew, side-seam or tubular body, double-needle stitched sleeves, hem and neck" },
@@ -968,7 +969,7 @@ export const tShirts: Category = {
       ],
       specifications: [
         { label: "Style", value: "Men's curved, dropped-hem tee (base type)" },
-        { label: "Fabric", value: "Combed cotton or cotton-poly blend, directional research range" },
+        { label: "Fabric", value: "Combed cotton or cotton-poly blend" },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "True-to-size through the body, curved hem longer at back and sides" },
         { label: "Construction", value: "Cut-and-sew, curved hem finishing, side-seam or tubular body, double-needle stitching" },
@@ -1023,7 +1024,7 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/fitted-womens",
       gender: "Women",
       sku: "CAP-TEE-09",
-      pdpTitle: "Fitted",
+      pdpTitle: "Women's Fitted",
       pdpHeading: "Women's Fitted T-Shirt Manufacturer",
       pdpDescription:
         "Women's close-fitting standard tee with a standard crew neckline, custom and private label, in combed cotton or a cotton-poly blend, made to your brand in Sialkot, Pakistan.",
@@ -1031,7 +1032,7 @@ export const tShirts: Category = {
         { alt: "Fitted t-shirt, front view, women's" },
         { alt: "Fitted t-shirt, back view, women's" },
         { alt: "Fitted t-shirt, side profile, women's" },
-        { alt: "Fitted t-shirt, fabric close-up" },
+        { alt: "Fitted t-shirt, fabric close-up, women's" },
         { alt: "Fitted t-shirt, worn on model, women's" },
         { alt: "Fitted t-shirt, flat lay, women's" },
       ],
@@ -1060,7 +1061,7 @@ export const tShirts: Category = {
       ],
       specifications: [
         { label: "Style", value: "Women's fitted tee, standard crew neckline (base type)" },
-        { label: "Fabric", value: "Combed cotton or cotton-poly blend, directional research range" },
+        { label: "Fabric", value: "Combed cotton or cotton-poly blend" },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Close-fitting through the body, tapered cut" },
         { label: "Construction", value: "Cut-and-sew, side-seam or tubular body, double-needle stitched sleeves, hem and neck" },
@@ -1118,9 +1119,9 @@ export const tShirts: Category = {
       // `pdpHeading`/`pdpMetaTitle` use the gender-scoped "Women's ..."
       // form the owner's own brief specifies for SKU 10 to 13, rather
       // than the un-gendered "Custom ..." form every prior SKU uses --
-      // this also removes the duplicate-H1 collision with SKU 2. SKU 9
-      // and all of Tank Tops still use the old form (flagged, not
-      // changed here: out of this task's scope).
+      // this also removes the duplicate-H1 collision with SKU 2. The
+      // 2026-09-22 sweep later applied the same form to every colliding
+      // pair (SKU 1/9, 2/10, 3/11, 4/12, 6/13, 7/14).
       // `pdpSpecHighlights` left unset so the shared "DDP to 20+
       // countries" default applies, same call as SKU 3.
       status: "draft",
@@ -1132,7 +1133,7 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/oversized-womens",
       gender: "Women",
       sku: "CAP-TEE-10",
-      pdpTitle: "Oversized",
+      pdpTitle: "Women's Oversized",
       pdpHeading: "Women's Oversized T-Shirt Manufacturer",
       pdpDescription:
         "Women's boxy, dropped-shoulder oversized tee, custom and private label, in combed cotton or a heavyweight cotton-poly blend, made to your brand in Sialkot, Pakistan.",
@@ -1146,7 +1147,7 @@ export const tShirts: Category = {
       ],
       pdpMetaTitle: "Women's Oversized T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom oversized t-shirt manufacturer, OEM, ODM and private label, boxy dropped-shoulder oversized fit, heavyweight cotton or cotton-poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom women's oversized t-shirt manufacturer, OEM, ODM and private label, boxy dropped-shoulder fit, heavyweight cotton or cotton-poly, DDP worldwide.",
       material: "Combed cotton or heavyweight cotton-poly blend",
       pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Tri-blend", "Recycled polyester"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -1169,7 +1170,7 @@ export const tShirts: Category = {
       ],
       specifications: [
         { label: "Style", value: "Women's boxy, oversized tee, dropped-shoulder construction (base type)" },
-        { label: "Fabric", value: "Combed cotton or heavyweight cotton-poly blend, directional research range" },
+        { label: "Fabric", value: "Combed cotton or heavyweight cotton-poly blend" },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Oversized, boxy through the body" },
         { label: "Construction", value: "Cut-and-sew, dropped-shoulder seam, side-seam or tubular body, double-needle stitching" },
@@ -1230,7 +1231,7 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/relaxed-womens",
       gender: "Women",
       sku: "CAP-TEE-11",
-      pdpTitle: "Relaxed",
+      pdpTitle: "Women's Relaxed",
       pdpHeading: "Women's Relaxed T-Shirt Manufacturer",
       pdpDescription:
         "Women's softer, roomier everyday tee, custom and private label, in a 50/50 cotton-poly or CVC blend, made to your brand in Sialkot, Pakistan.",
@@ -1244,7 +1245,7 @@ export const tShirts: Category = {
       ],
       pdpMetaTitle: "Women's Relaxed T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom women's relaxed t-shirt manufacturer, OEM, ODM and private label, softer roomier everyday fit for women, cotton-poly or CVC blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom women's relaxed t-shirt manufacturer, OEM, ODM and private label, softer roomier everyday fit, cotton-poly or CVC blend, from 50 pieces, DDP worldwide.",
       material: "50/50 or CVC cotton-poly blend",
       pdpFabricPills: ["50/50 cotton-poly", "CVC cotton-poly", "Combed cotton", "Tri-blend"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -1267,7 +1268,7 @@ export const tShirts: Category = {
       ],
       specifications: [
         { label: "Style", value: "Women's relaxed, everyday tee (base type)" },
-        { label: "Fabric", value: "50/50 or CVC cotton-poly blend, directional research range" },
+        { label: "Fabric", value: "50/50 or CVC cotton-poly blend" },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Relaxed, roomier through the body than the Fitted SKU, not as boxy as the Oversized SKU" },
         { label: "Construction", value: "Cut-and-sew, side-seam or tubular body, double-needle stitched sleeves, hem and neck" },
@@ -1332,7 +1333,7 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/athletic-womens",
       gender: "Women",
       sku: "CAP-TEE-12",
-      pdpTitle: "Athletic",
+      pdpTitle: "Women's Athletic",
       pdpHeading: "Women's Athletic T-Shirt Manufacturer",
       pdpDescription:
         "Women's true-to-size athletic and training tee, custom and private label, in 100% performance polyester, made to your brand in Sialkot, Pakistan.",
@@ -1346,7 +1347,7 @@ export const tShirts: Category = {
       ],
       pdpMetaTitle: "Women's Athletic T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom athletic t-shirt manufacturer, OEM, ODM and private label, true-to-size training cut, moisture-wicking performance polyester, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom women's athletic t-shirt manufacturer, private label, true-to-size training cut, moisture-wicking performance polyester, from 50 pieces, DDP worldwide.",
       material: "100% performance polyester",
       pdpFabricPills: ["Performance polyester", "Recycled polyester", "Poly-spandex blend", "Cotton-poly blend"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -1357,7 +1358,7 @@ export const tShirts: Category = {
         },
         {
           q: "How does this compare to your Fitted tee?",
-          a: "Both are true-to-size, but the Athletic tee is built in performance polyester for training and running, while the Fitted tee leans closer-fitting and offers a cotton option.",
+          a: "The Athletic tee is a true-to-size training cut in performance polyester, built for training and running. The Fitted tee runs closer through the body and also comes in a cotton option.",
         },
       ],
       relatedStyleTags: [
@@ -1369,7 +1370,7 @@ export const tShirts: Category = {
       ],
       specifications: [
         { label: "Style", value: "Women's athletic, true-to-size training tee (base type)" },
-        { label: "Fabric", value: "100% performance polyester, directional research range" },
+        { label: "Fabric", value: "100% performance polyester" },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "True-to-size, athletic cut" },
         { label: "Construction", value: "Cut-and-sew, side-seam or tubular body, double-needle stitched sleeves, hem and neck" },
@@ -1430,7 +1431,7 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/dropped-shoulder-womens",
       gender: "Women",
       sku: "CAP-TEE-13",
-      pdpTitle: "Dropped-Shoulder",
+      pdpTitle: "Women's Dropped-Shoulder",
       pdpHeading: "Women's Dropped-Shoulder T-Shirt Manufacturer",
       pdpDescription:
         "Women's dropped-shoulder tee, seam sits below the natural shoulder line on an oversized body, custom and private label, in combed cotton or a cotton-poly blend, made to your brand in Sialkot, Pakistan.",
@@ -1444,7 +1445,7 @@ export const tShirts: Category = {
       ],
       pdpMetaTitle: "Women's Dropped-Shoulder T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom dropped-shoulder t-shirt manufacturer, OEM, ODM and private label, dropped shoulder, oversized construction, combed cotton or cotton-poly blend, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom women's dropped-shoulder t-shirt manufacturer, private label, oversized dropped-shoulder build, cotton or cotton-poly, from 50 pieces, DDP worldwide.",
       material: "Combed cotton or cotton-poly blend",
       pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Tri-blend", "Recycled polyester"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -1467,7 +1468,7 @@ export const tShirts: Category = {
       ],
       specifications: [
         { label: "Style", value: "Women's dropped-shoulder tee, oversized construction (base type)" },
-        { label: "Fabric", value: "Combed cotton or cotton-poly blend, directional research range" },
+        { label: "Fabric", value: "Combed cotton or cotton-poly blend" },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Oversized through the body, dropped-shoulder seam" },
         { label: "Construction", value: "Cut-and-sew, dropped-shoulder seam, side-seam or tubular body, double-needle stitching" },
@@ -1531,7 +1532,7 @@ export const tShirts: Category = {
       href: "/capriowear/activewear/t-shirts/cropped-womens",
       gender: "Women",
       sku: "CAP-TEE-14",
-      pdpTitle: "Cropped",
+      pdpTitle: "Women's Cropped",
       pdpHeading: "Women's Cropped T-Shirt Manufacturer",
       pdpDescription:
         "Women's cropped-length tee, shortened body length at a baby-tee hem, custom and private label, in combed cotton or a cotton-poly blend, made to your brand in Sialkot, Pakistan.",
@@ -1545,7 +1546,7 @@ export const tShirts: Category = {
       ],
       pdpMetaTitle: "Women's Cropped T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom cropped t-shirt manufacturer, private label, cropped length construction, combed cotton or cotton-poly blend, from 50 pieces, DDP worldwide.",
+        "Custom women's cropped t-shirt manufacturer, OEM and private label, cropped length construction, combed cotton or cotton-poly, from 50 pieces, DDP worldwide.",
       material: "Combed cotton or cotton-poly blend",
       pdpFabricPills: ["Combed cotton", "Cotton-poly blend", "Tri-blend", "Performance polyester"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -1568,7 +1569,7 @@ export const tShirts: Category = {
       ],
       specifications: [
         { label: "Style", value: "Women's cropped-length tee, baby-tee hem (base type)" },
-        { label: "Fabric", value: "Combed cotton or cotton-poly blend, directional research range" },
+        { label: "Fabric", value: "Combed cotton or cotton-poly blend" },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Shortened body length, standard through the chest and shoulder" },
         { label: "Construction", value: "Cut-and-sew, side-seam or tubular body, double-needle stitched sleeves, hem and neck" },
@@ -1667,7 +1668,7 @@ export const tShirts: Category = {
       ],
       specifications: [
         { label: "Style", value: "Ringer tee, contrast neckline and sleeve trim (base type)" },
-        { label: "Fabric", value: "Combed cotton or cotton-poly blend, directional research range" },
+        { label: "Fabric", value: "Combed cotton or cotton-poly blend" },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Standard through the body, trim at neckline and sleeve opening" },
         { label: "Construction", value: "Cut-and-sew, contrast-bound neckline and sleeve trim, side-seam or tubular body, double-needle stitching" },
@@ -1743,7 +1744,7 @@ export const tShirts: Category = {
       ],
       pdpMetaTitle: "Custom V-Neck T-Shirt Manufacturer",
       pdpMetaDescription:
-        "Custom v-neck t-shirt manufacturer, private label, v-neck construction, performance polyester, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom v-neck t-shirt manufacturer, OEM and private label, v-neck construction, performance polyester, from 50 pieces, any fabric and color, DDP worldwide.",
       material: "100% performance polyester",
       pdpFabricPills: ["Performance polyester", "Recycled polyester", "Poly-spandex blend", "Cotton-poly blend"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
@@ -1766,7 +1767,7 @@ export const tShirts: Category = {
       ],
       specifications: [
         { label: "Style", value: "V-neck tee, V-neckline construction (base type)" },
-        { label: "Fabric", value: "100% performance polyester, directional research range" },
+        { label: "Fabric", value: "100% performance polyester" },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Standard through the body, V-neckline depth to your spec" },
         { label: "Construction", value: "Cut-and-sew, V-neck binding, side-seam or tubular body, double-needle stitched sleeves and hem" },

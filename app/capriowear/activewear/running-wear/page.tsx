@@ -101,7 +101,7 @@ export default function RunningWearPage() {
         <CategoryBanner
           breadcrumbItems={[
             { label: "Home", href: "/capriowear" },
-            { label: "Activewear", href: "/activewear" },
+            { label: "Activewear", href: "/capriowear/activewear" },
             { label: data.menuLabel, href: `/capriowear/activewear/${data.slug}` },
           ]}
           h1={data.h1}
@@ -110,8 +110,8 @@ export default function RunningWearPage() {
         <JsonLd
           data={breadcrumbSchema([
             { name: "Home", url: `${SITE_URL}/capriowear` },
-            { name: "Activewear", url: `${SITE_URL}/activewear` },
-            { name: data.menuLabel, url: `${SITE_URL}/activewear/${data.slug}` },
+            { name: "Activewear", url: `${SITE_URL}/capriowear/activewear` },
+            { name: data.menuLabel, url: `${SITE_URL}/capriowear/activewear/${data.slug}` },
           ])}
         />
         {/* No collectionPageSchema()/JsonLd here (deliberate) -- this page
