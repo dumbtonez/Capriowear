@@ -281,16 +281,13 @@ export const jackets: Category = {
       href: "/capriowear/activewear/jackets/vest",
     },
   ],
-  // Sibling Outwear & Suits-group categories from content/home.ts's own
-  // activewearMegaMenu -- Track Jackets & Zip-Ups, Tracksuits, Sweatsuits
-  // and Running Wear don't have their own content files yet, so linking
-  // to real, built categories instead (same "only real hrefs, no invented
-  // placeholder pages" rule every prior category's own relatedLinks
-  // already follows).
+  // "You may also be interested in" (owner rule, 2026-09-23): max 5, same L1 group first
+  // (Outerwear & Suits, per activewearMegaMenu), then the closest pairings from other groups.
   relatedLinks: [
+    { label: "Track Jackets & Zip-Ups", href: "/capriowear/activewear/track-jackets" },
+    { label: "Tracksuits", href: "/capriowear/activewear/tracksuits" },
+    { label: "Sweatsuits", href: "/capriowear/activewear/sweatsuits" },
+    { label: "Running Wear", href: "/capriowear/activewear/running-wear" },
     { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
-    { label: "Sweatshirts", href: "/capriowear/activewear/sweatshirts" },
-    { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
-    { label: "Joggers", href: "/capriowear/activewear/joggers" },
   ],
 };

@@ -1599,6 +1599,8 @@ Props: `links: RelatedLink[]` (`{label, href}`, `content/activewear/types.ts`). 
 
 **Back on the live PLPs, 2026-09-23** (owner: "render relatedLinks on the PLP", reversing the 2026-08-30 removal). Rendered by the Activewear (`app/capriowear/activewear/[category]/page.tsx`, directly after `TrustPoints`), Teamwear (`app/capriowear/teamwear/[sport]/page.tsx`) and Gear (`app/lifting-gears/[category]/page.tsx`, `app/boxing-and-mma/[category]/page.tsx`) PLP templates, last in the white run before the dark `Faq`. Heading is now a `heading` prop defaulting to "You may also be interested in" (owner wording; generic because some lists cross groups, e.g. Soccer → Compression & Base Layers). Returns `null` for an empty `links` array (Boxing Gloves has `relatedLinks: []`). Spacing: no top padding (TrustPoints' page-end bottom padding is the gap above), same page-end bottom padding into the dark FAQ (80px / `xl:` 120px), same side inset as TrustPoints (`px-5`, `xl:px-[138px]` inside the 1440 frame). `afterFlushSection` adds `xl:pt-[120px]` where the section above is flush at desktop (Lifting Gear's `SpecTables`, which reuses `fabricOptions.section`). Live on 30 of 31 PLPs; all 139 rendered links resolve 200.
 
+**Heading-to-chips gap is 48px (`gap-12`) at every width** (owner, 2026-09-23: "add more space of 24px", on top of the original 24px).
+
 **Used by:** the four PLP templates above, plus `app/styleguide/page.tsx`.
 
 ### ProductGrid / ProductCard / Pagination — Built

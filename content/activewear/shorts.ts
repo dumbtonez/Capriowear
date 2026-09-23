@@ -1665,9 +1665,13 @@ export const shorts: Category = {
       },
     },
   ],
+  // "You may also be interested in" (owner rule, 2026-09-23): max 5, same L1 group first
+  // (Bottoms, per activewearMegaMenu), then the closest pairings from other groups.
   relatedLinks: [
     { label: "Leggings", href: "/capriowear/activewear/leggings" },
-    { label: "Joggers & Track Pants", href: "/capriowear/activewear/joggers" },
+    { label: "Joggers", href: "/capriowear/activewear/joggers" },
+    { label: "T-Shirts", href: "/capriowear/activewear/t-shirts" },
+    { label: "Yoga Sets", href: "/capriowear/activewear/yoga-sets" },
     { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
   ],
 };

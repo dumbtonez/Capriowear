@@ -378,14 +378,13 @@ export const cricket: Category = {
     // entry. A cut-and-sew fleece or interlock vest version may come back
     // later as a new style entry under a different name, per the owner.
   ],
-  // Cricket is the first Teamwear page at launch -- no sibling sport PLPs
-  // exist yet, so linking only to LIVE Activewear pages (owner spec: "do
-  // NOT link to Soccer, Rugby, Volleyball, Polo Shirts or Training Tees,
-  // they do not exist yet and would 404"). Swap these for sibling sport
-  // PLPs as more Teamwear categories publish.
+  // "You may also be interested in" (owner rule, 2026-09-23): max 5, Teamwear sports only,
+  // closest sports first.
   relatedLinks: [
-    { label: "Tracksuits", href: "/capriowear/activewear/tracksuits" },
-    { label: "Track Jackets & Zip-Ups", href: "/capriowear/activewear/track-jackets" },
-    { label: "T-Shirts", href: "/capriowear/activewear/t-shirts" },
+    { label: "Baseball", href: "/capriowear/teamwear/baseball" },
+    { label: "Soccer", href: "/capriowear/teamwear/soccer" },
+    { label: "Rugby", href: "/capriowear/teamwear/rugby" },
+    { label: "Football", href: "/capriowear/teamwear/football" },
+    { label: "Basketball", href: "/capriowear/teamwear/basketball" },
   ],
 };

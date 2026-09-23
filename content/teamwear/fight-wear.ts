@@ -364,19 +364,13 @@ export const fightWear: Category = {
       href: "/capriowear/teamwear/fight-wear/compression-top",
     },
   ],
-  // Only live pages (owner spec: "Never link an unbuilt PLP or unpublished
-  // PDP") -- every already-built sibling Teamwear PLP and one real
-  // Activewear PLP.
+  // "You may also be interested in" (owner rule, 2026-09-23): max 5, Teamwear sports only,
+  // closest sports first.
   relatedLinks: [
-    { label: "Cricket", href: "/capriowear/teamwear/cricket" },
-    { label: "Basketball", href: "/capriowear/teamwear/basketball" },
     { label: "Rugby", href: "/capriowear/teamwear/rugby" },
-    { label: "Baseball", href: "/capriowear/teamwear/baseball" },
-    { label: "Volleyball", href: "/capriowear/teamwear/volleyball" },
-    { label: "Soccer", href: "/capriowear/teamwear/soccer" },
+    { label: "Cycling", href: "/capriowear/teamwear/cycling" },
     { label: "Football", href: "/capriowear/teamwear/football" },
     { label: "Ice Hockey", href: "/capriowear/teamwear/ice-hockey" },
-    { label: "Cycling", href: "/capriowear/teamwear/cycling" },
-    { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
+    { label: "Volleyball", href: "/capriowear/teamwear/volleyball" },
   ],
 };

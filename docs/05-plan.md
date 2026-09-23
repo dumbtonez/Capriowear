@@ -3906,3 +3906,18 @@ Crew (CAP-LSL-01), Fitted Performance (02), Henley (03), Quarter-Zip (04), built
 - **Henley vs. SKU 8 (Waffle Thermal):** kept distinct per the brief's note (henley construction across two fabric routes vs. waffle knit across necklines), recorded in a comment on the Henley card.
 
 **Verified:** tsc, eslint, `npm run build` clean. All 4 PDPs return 200 with the correct title, meta, canonical, one H1, SKU, 4-level BreadcrumbList, `noindex, nofollow`, the entity question first, and Request a Sample + Download Catalog. `/hooded` 404s. Zero horizontal overflow on all 4 at the 15 target viewports. The only wrapped pill across the checked PDPs (these 4, T-Shirts fitted-mens, Tank Tops oversized-cutoff) is the Henley one, at 412px and below.
+
+## Related-category lists rebuilt to owner rules, 2026-09-23
+
+Owner rules for the "You may also be interested in" block (`relatedLinks`): max 5 on every page; Teamwear links only to Teamwear sports; Activewear draws first from the page's own L1 group in `activewearMegaMenu`, filling the rest with the closest pairings from other groups. Gear (Lifting Gear, Boxing & MMA) parked, unchanged.
+
+- **Tops** (6): each page lists its 5 siblings.
+- **Bottoms** (3): 2 siblings + 3 pairings (Leggings → Sports Bras, Yoga Sets, Compression; Shorts → T-Shirts, Tank Tops, Compression; Joggers → Hoodies, Sweatshirts, Tracksuits).
+- **Sets & One Pieces** (3): 2 siblings + Leggings, Sports Bras, and Tank Tops (Bodysuits: Compression).
+- **Outerwear & Suits** (5 incl. Running Wear): 4 siblings + 1 (Jackets/Sweatsuits: Hoodies; Track Jackets/Tracksuits: Joggers). Running Wear is a curated page with no `relatedLinks` of its own, so no block renders there.
+- **Base Layers** (1): Leggings, Shorts, Sports Bras, Tank Tops, Long-Sleeve Tops.
+- **Teamwear**: 5 closest sports each; no Activewear links remain.
+
+The old per-file comments ("only live pages", "swap in sibling sports as they publish") were replaced with one line stating the new rule. Verified on all 27 PLPs: rendered links match the data, 1 to 5 each, no self-links, Teamwear links only to Teamwear, all 28 targets 200. Every Activewear/Teamwear page now receives at least 2 inbound links (Sweatsuits, Jumpsuits and Fight Wear previously received none). Also fixes the stale "Joggers & Track Pants" label on Shorts.
+
+**Rebalanced the same day (owner: "make all pages 5 relevant links").** Every page already showed 5; the gap was inbound: Bodysuits, Jumpsuits, Cycling and Fight Wear were linked from only 2 pages each. Only the cross-group slots changed (Tops lists stay pure siblings), and every swap is a real product pairing: Jumpsuits includes unitards and a biker-length romper, so Leggings, Shorts and Compression now pair with it; Yoga Sets includes bra-and-short and bike-short sets, so it pairs with Shorts; Joggers → Track Jackets and Sweatsuits; Sweatsuits → Sweatshirts; Soccer → Cricket and Cycling; Ice Hockey → Fight Wear. Result: every Activewear and Teamwear page shows exactly 5 and receives at least 3 (Sports Bras, the most linked, drops from 10 to 9). Re-verified on all 27 PLPs: rendered matches data, all 28 targets 200.

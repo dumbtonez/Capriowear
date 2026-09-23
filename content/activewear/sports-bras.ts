@@ -1399,10 +1399,13 @@ export const sportsBras: Category = {
       },
     },
   ],
+  // "You may also be interested in" (owner rule, 2026-09-23): max 5, same L1 group first
+  // (Tops, per activewearMegaMenu), then the closest pairings from other groups.
   relatedLinks: [
-    { label: "Leggings", href: "/capriowear/activewear/leggings" },
     { label: "Tank Tops", href: "/capriowear/activewear/tank-tops" },
     { label: "T-Shirts", href: "/capriowear/activewear/t-shirts" },
-    { label: "Yoga Sets", href: "/capriowear/activewear/yoga-sets" },
+    { label: "Long-Sleeve Tops", href: "/capriowear/activewear/long-sleeve-tops" },
+    { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
+    { label: "Sweatshirts", href: "/capriowear/activewear/sweatshirts" },
   ],
 };

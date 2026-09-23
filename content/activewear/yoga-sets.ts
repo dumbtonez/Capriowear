@@ -231,15 +231,13 @@ export const yogaSets: Category = {
       href: "/capriowear/activewear/yoga-sets/bike-short-set",
     },
   ],
-  // Bodysuits and Jumpsuits, this category's own mega-menu siblings under
-  // "SETS & ONE PIECES" (content/home.ts), don't have their own content
-  // files yet -- linking to real, built categories instead (Leggings,
-  // Sports Bras), same "only real hrefs, no invented placeholder pages"
-  // rule every prior category's own relatedLinks already follows.
+  // "You may also be interested in" (owner rule, 2026-09-23): max 5, same L1 group first
+  // (Sets & One Pieces, per activewearMegaMenu), then the closest pairings from other groups.
   relatedLinks: [
+    { label: "Bodysuits", href: "/capriowear/activewear/bodysuits" },
+    { label: "Jumpsuits", href: "/capriowear/activewear/jumpsuits" },
     { label: "Leggings", href: "/capriowear/activewear/leggings" },
     { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
-    { label: "Tank Tops", href: "/capriowear/activewear/tank-tops" },
     { label: "Shorts", href: "/capriowear/activewear/shorts" },
   ],
 };

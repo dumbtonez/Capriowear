@@ -7789,7 +7789,9 @@ export const trustPoints = {
 // inset as TrustPoints' content (px-5, xl 138px inside the 1440 frame),
 // so both rows share one left edge at every width.
 export const relatedCategories = {
-  section: "mx-auto flex w-full max-w-[1440px] flex-col items-start gap-6 px-5 pb-[80px] xl:px-[138px] xl:pb-[120px]",
+  // Heading-to-chips gap 48px at every width (owner, 2026-09-23: "add more
+  // space of 24px", on top of the original 24px `gap-6`).
+  section: "mx-auto flex w-full max-w-[1440px] flex-col items-start gap-12 px-5 pb-[80px] xl:px-[138px] xl:pb-[120px]",
   // Added only when the section above carries no desktop bottom padding of
   // its own -- today, Lifting Gear's SpecTables (it reuses FabricOptions'
   // section recipe, which is flush at xl). Restores the same 120px desktop

@@ -206,7 +206,7 @@ export const longSleeveTops: Category = {
       pdpTitle: "Crew",
       pdpHeading: "Custom Crew Long-Sleeve Tee Manufacturer",
       pdpDescription:
-        "Standard crew-neck long-sleeve tee, custom and private label, in cotton or cotton-blend jersey, made to your brand in Sialkot, Pakistan.",
+        "Relaxed-to-oversized crew-neck long-sleeve tee, custom and private label, in cotton or cotton-blend jersey, made to your brand in Sialkot, Pakistan.",
       images: [
         { alt: "Custom crew long-sleeve tee, front view" },
         { alt: "Custom crew long-sleeve tee, back view" },
@@ -227,7 +227,7 @@ export const longSleeveTops: Category = {
         },
         {
           q: "Is this a standard crew neckline, or can it be customized?",
-          a: "Standard crew neckline as built, but neckline, cuff, and sleeve construction can all be customized to your reference garment, confirmed on your sample.",
+          a: "Built as a relaxed-to-oversized crew as standard, but fit, neckline, cuff, and sleeve construction can all be customized to your reference garment, confirmed on your sample.",
         },
       ],
       relatedStyleTags: [
@@ -243,7 +243,7 @@ export const longSleeveTops: Category = {
           value: "Cotton or cotton-blend jersey, the direct long-sleeve extension of our tee fabric platform. Pending confirmed spec on sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
-        { label: "Fit", value: "Standard, true to size" },
+        { label: "Fit", value: "Relaxed to oversized, confirmed as the dominant fit pattern across the brand panel" },
         { label: "Cuff", value: "Ribbed knit, standard finish" },
         { label: "Sleeve construction", value: "Set-in sleeve, standard" },
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
@@ -625,9 +625,13 @@ export const longSleeveTops: Category = {
       href: "/capriowear/activewear/long-sleeve-tops/waffle-thermal",
     },
   ],
+  // "You may also be interested in" (owner rule, 2026-09-23): max 5, same L1 group first
+  // (Tops, per activewearMegaMenu), then the closest pairings from other groups.
   relatedLinks: [
     { label: "T-Shirts", href: "/capriowear/activewear/t-shirts" },
     { label: "Tank Tops", href: "/capriowear/activewear/tank-tops" },
     { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
+    { label: "Sweatshirts", href: "/capriowear/activewear/sweatshirts" },
+    { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
   ],
 };

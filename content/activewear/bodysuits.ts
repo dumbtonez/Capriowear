@@ -370,11 +370,13 @@ export const bodysuits: Category = {
       href: "/capriowear/activewear/bodysuits/ribbed",
     },
   ],
-  // Owner's exact given related set, 2026-09-03.
+  // "You may also be interested in" (owner rule, 2026-09-23): max 5, same L1 group first
+  // (Sets & One Pieces, per activewearMegaMenu), then the closest pairings from other groups.
   relatedLinks: [
+    { label: "Jumpsuits", href: "/capriowear/activewear/jumpsuits" },
+    { label: "Yoga Sets", href: "/capriowear/activewear/yoga-sets" },
     { label: "Leggings", href: "/capriowear/activewear/leggings" },
     { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
     { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
-    { label: "Yoga Sets", href: "/capriowear/activewear/yoga-sets" },
   ],
 };

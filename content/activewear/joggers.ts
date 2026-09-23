@@ -392,15 +392,13 @@ export const joggers: Category = {
       href: "/capriowear/activewear/joggers/sweatpant",
     },
   ],
-  // Sibling Bottoms-group categories from content/home.ts's own
-  // activewearMegaMenu, same "real hrefs and labels, no PLACEHOLDER
-  // prefix" pattern every prior category's own relatedLinks already
-  // establishes -- these become live the moment each one gets its own
-  // content file.
+  // "You may also be interested in" (owner rule, 2026-09-23): max 5, same L1 group first
+  // (Bottoms, per activewearMegaMenu), then the closest pairings from other groups.
   relatedLinks: [
     { label: "Leggings", href: "/capriowear/activewear/leggings" },
     { label: "Shorts", href: "/capriowear/activewear/shorts" },
-    { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
-    { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
+    { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
+    { label: "Track Jackets & Zip-Ups", href: "/capriowear/activewear/track-jackets" },
+    { label: "Sweatsuits", href: "/capriowear/activewear/sweatsuits" },
   ],
 };

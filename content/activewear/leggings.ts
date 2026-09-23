@@ -1636,13 +1636,13 @@ export const leggings: Category = {
       },
     },
   ],
-  // Real hrefs and labels, matching content/home.ts's own activewearMegaMenu
-  // exactly (owner request, 2026-08-30) -- no PLACEHOLDER prefix, since
-  // this is now a real, rendered internal-linking row (RelatedCategories).
+  // "You may also be interested in" (owner rule, 2026-09-23): max 5, same L1 group first
+  // (Bottoms, per activewearMegaMenu), then the closest pairings from other groups.
   relatedLinks: [
-    { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
     { label: "Shorts", href: "/capriowear/activewear/shorts" },
     { label: "Joggers", href: "/capriowear/activewear/joggers" },
-    { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
+    { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
+    { label: "Yoga Sets", href: "/capriowear/activewear/yoga-sets" },
+    { label: "Jumpsuits", href: "/capriowear/activewear/jumpsuits" },
   ],
 };

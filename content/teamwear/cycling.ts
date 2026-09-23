@@ -353,18 +353,13 @@ export const cycling: Category = {
       href: "/capriowear/teamwear/cycling/thermal-jacket",
     },
   ],
-  // Only live pages (owner spec: "Never link an unbuilt PLP or unpublished
-  // PDP") -- the live sibling Teamwear PLPs and real Activewear PLPs.
+  // "You may also be interested in" (owner rule, 2026-09-23): max 5, Teamwear sports only,
+  // closest sports first.
   relatedLinks: [
-    { label: "Cricket", href: "/capriowear/teamwear/cricket" },
-    { label: "Basketball", href: "/capriowear/teamwear/basketball" },
-    { label: "Rugby", href: "/capriowear/teamwear/rugby" },
-    { label: "Baseball", href: "/capriowear/teamwear/baseball" },
     { label: "Volleyball", href: "/capriowear/teamwear/volleyball" },
     { label: "Soccer", href: "/capriowear/teamwear/soccer" },
-    { label: "Football", href: "/capriowear/teamwear/football" },
-    { label: "Ice Hockey", href: "/capriowear/teamwear/ice-hockey" },
-    { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
-    { label: "Jackets", href: "/capriowear/activewear/jackets" },
+    { label: "Rash Guards & Fight Wear", href: "/capriowear/teamwear/fight-wear" },
+    { label: "Basketball", href: "/capriowear/teamwear/basketball" },
+    { label: "Rugby", href: "/capriowear/teamwear/rugby" },
   ],
 };

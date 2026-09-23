@@ -363,16 +363,13 @@ export const volleyball: Category = {
       href: "/capriowear/teamwear/volleyball/warm-up-pants",
     },
   ],
-  // Only live pages (owner spec: "Never link an unbuilt PLP or unpublished
-  // PDP") -- no `/teamwear` index route exists yet, so the Cricket,
-  // Basketball, Rugby and Baseball PLPs and real Activewear PLPs are linked
-  // instead. Add more sibling sport PLPs here as they publish.
+  // "You may also be interested in" (owner rule, 2026-09-23): max 5, Teamwear sports only,
+  // closest sports first.
   relatedLinks: [
-    { label: "Cricket", href: "/capriowear/teamwear/cricket" },
     { label: "Basketball", href: "/capriowear/teamwear/basketball" },
-    { label: "Rugby", href: "/capriowear/teamwear/rugby" },
+    { label: "Soccer", href: "/capriowear/teamwear/soccer" },
+    { label: "Cycling", href: "/capriowear/teamwear/cycling" },
     { label: "Baseball", href: "/capriowear/teamwear/baseball" },
-    { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
-    { label: "Track Jackets & Zip-Ups", href: "/capriowear/activewear/track-jackets" },
+    { label: "Rugby", href: "/capriowear/teamwear/rugby" },
   ],
 };

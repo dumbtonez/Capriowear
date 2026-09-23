@@ -1768,9 +1768,13 @@ export const tankTops: Category = {
       },
     },
   ],
+  // "You may also be interested in" (owner rule, 2026-09-23): max 5, same L1 group first
+  // (Tops, per activewearMegaMenu), then the closest pairings from other groups.
   relatedLinks: [
     { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
     { label: "T-Shirts", href: "/capriowear/activewear/t-shirts" },
     { label: "Long-Sleeve Tops", href: "/capriowear/activewear/long-sleeve-tops" },
+    { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
+    { label: "Sweatshirts", href: "/capriowear/activewear/sweatshirts" },
   ],
 };
