@@ -4026,6 +4026,16 @@ Corrected research supports cotton only for CAP-LSL-10, so the performance poly-
 
 **Verified:** the rendered page has no "poly-spandex", "performance poly", "compression-adjacent" or "Dri-FIT". All new strings are present. tsc and eslint clean.
 
+## Sweatshirts SKU 4, 5, 6 draft PDPs, 2026-09-23
+
+Built from the owner's brief in `content/activewear/sweatshirts.ts`, on the existing `oversized-cropped` (CAP-SWT-04), `regular-fit-brushed-fleece-mens` (CAP-SWT-05) and `technical-performance-mens` (CAP-SWT-06) cards: H1/title, breadcrumb label (`pdpTitle`), description, gallery alts (SKU 5 and 6 carry ", men's"), fabric and customization pills, 9-row spec table (Weight "Pending, confirmed on your sample."), 6-step customize carousel, quality points, 2 style FAQs each (then the shared operational block, ending in the shared get-started answer), related-style chips. SKU 6 describes the finish generically ("moisture-wicking", "double-knit performance fabric"). Draft: noindex/nofollow, out of the sitemap, BreadcrumbList only.
+
+These are the category's first PDPs: the brief assumed SKU 1 to 3 were already built, but all Sweatshirts cards were still card-only. Chips pointing at unbuilt SKUs (1, 2, 3, 11, 12) fall back to the Sweatshirts PLP via `resolveRelatedStyleTags()` and switch to the real page once each is built. Chips between SKU 4, 5 and 6 already resolve to each other.
+
+Deviations: (1) header keeps "Request a Sample" + "Download Catalog", per the owner's standing sitewide correction (see the Download Catalog entry above), not the brief's single CTA; (2) the three PLP cards are clickable, per the sitewide `isDraftPdpReachable()` rule (owner-confirmed 2026-09-23), not non-clickable as the brief says; (3) the customize heading keeps the shared "Your brand, applied in-house, no outsourcing" form without the brief's trailing period, and the quality heading inherits the category's "A flat collar, the weight you approve" (same text, no period).
+
+Verified on all 3: 200, canonical `/capriowear/activewear/sweatshirts/[slug]` in breadcrumb (visible + JSON-LD) and canonical tag, meta 150/154/159 chars as served, FAQ order entity → 2 style → 5 shared, entity answer exact, get-started answer identical across all 3 with its link to `/capriowear/request-a-sample`, no en/em dashes, no Dri-FIT/Nike, no legacy hrefs, SKU 5 has no un-gendered name mentions and all 25 alts carry "men's". tsc clean, eslint 0 errors, build clean, Playwright 45/45.
+
 ## Long-Sleeve Tops women's line: 4 draft PDPs (CAP-LSL-11 to 14), men's Fitted Performance gendered, 2026-09-23
 
 Built from the owner's brief on the master PDP template, `content/activewear/long-sleeve-tops.ts`. All four are drafts: `noindex, nofollow`, not in the sitemap, BreadcrumbList only. Product and FAQPage are withheld per the draft rule; the brief's "Product (no price, no Offer)" line conflicts with its own draft line, so the site-wide draft rule was followed. Their PLP cards link, and the grid is now 10 cards.
@@ -4047,3 +4057,5 @@ Audit of all 16 T-Shirts cards against the house rule "card title = PDP H1 minus
 - **Related-style pills:** unchanged. They use short style labels ("Fitted", "Cropped"), not card titles, so none carried the drifted text.
 
 **Verified:** 16/16 cards now equal their H1 minus " Manufacturer". The rendered T-Shirts PLP shows all 12 gendered titles, and no "Custom Fitted T-Shirt" remains. tsc and eslint clean.
+
+**Card clickability: back to the sitewide rule (owner, same day).** A brief revert made the SKU 4, 5, 6 PLP cards non-clickable via an explicit `internalPreview: false` opt-out; the owner then asked for them to be clickable like every other PLP, so the opt-out and its template/type support were removed entirely. The three cards follow `isDraftPdpReachable()` like every built draft card sitewide.
