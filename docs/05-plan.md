@@ -4119,3 +4119,15 @@ Built from the owner's brief in `content/activewear/sweatshirts.ts` on the exist
 **SKU 5 and 6 chip change (brief's checklist items 8 and 9):** the brief requires 5 ↔ 11 and 6 ↔ 12 to cross-link both ways, but the live SKU 5/6 chip rows didn't include their women's mirrors. On each, the "Custom Oversized Cropped Fleece Crewneck" chip was replaced by the direct mirror ("Women's Regular-Fit Brushed Fleece Crewneck" on SKU 5, "Women's Technical Performance Crewneck" on SKU 6), keeping 4 chips + See All. Oversized Cropped keeps inbound chips from SKU 3 and 11. SKU 12's chip to the unbuilt SKU 13 falls back to the PLP. Sweatshirts now has 12 draft PDPs (SKU 1 to 12); SKU 13 to 16 are card-only.
 
 Verified (local render): all 3 new pages 200 with the brief's title/H1/breadcrumb/meta, canonical `/capriowear/...`, noindex/nofollow, BreadcrumbList only, FAQ order and exact entity answer, linked get-started answer, Weight rows as specified, no dashes or brand/IP names, SKU 11/12 alts 25/25 gendered, all 3 PLP cards clickable, 5 ↔ 11 and 6 ↔ 12 links present both ways. tsc clean, eslint 0 errors, build clean, Playwright 45/45.
+
+## Rule: any gendered SKU always carries "Men's"/"Women's"; Sweatshirts brought into line, 2026-09-23
+
+**New sitewide naming rule (owner, recorded in the Caprio project's standards-and-findings.md):** any SKU with a `gender` field carries "Men's"/"Women's" in its card title and H1, even when no cross-gender name collision exists. This supersedes the 2026-09-22 rule's "Custom where no collision" clause for gendered SKUs. Ungendered SKUs keep "Custom ...".
+
+**Sweatshirts, 8 SKUs** (`content/activewear/sweatshirts.ts`):
+- **Live, 4:** CAP-SWT-02 Men's Oversized French Terry, 04 Women's Oversized Cropped Fleece, 08 Men's Premium Technical Fleece Loose-Fit, 09 Men's Reverse French Terry (each "... Crewneck Sweatshirt"). Changed: card title, H1 (`pdpHeading`), title tag (`pdpMetaTitle`), breadcrumb (`pdpTitle`, visible + JSON-LD), card `imageAlt` ("Men's/Women's ..."), and the 6 gallery alts plus the specifications alt (", men's"/", women's" suffix, same pattern as the already-gendered siblings). Related-style chips pointing at them relabelled to match.
+- **Pre-applied, 4:** CAP-SWT-10 Vintage-Wash Terry (men's; built in the same working tree by the other session's SKU 10 to 12 pass) gets the same full treatment. The card-only CAP-SWT-14 Cropped Mod-Fit, 15 Stretch-Blend Oversized and 16 Oversized Heavyweight Terry (women's) get "Women's" card titles and card alts now, so their PDPs ship gendered from the start.
+
+**Commit note:** these edits landed inside `6c5594b` (the other session's SKU 10 to 12 commit, which staged the whole shared file moments after the edit). No separate code commit; this entry is the record.
+
+**Not changed, flagged:** meta descriptions for CAP-SWT-02, 04, 08, 09, 10 still open "Custom ... manufacturer". They were not in the requested field list.
