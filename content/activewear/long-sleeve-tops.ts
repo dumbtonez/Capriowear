@@ -232,6 +232,18 @@ export const longSleeveTops: Category = {
         "Custom crew long-sleeve tee manufacturer, OEM, ODM and private label, cotton and cotton-blend jersey, from 50 pieces, any fabric and color, DDP worldwide.",
       material: "Cotton or cotton-blend jersey",
       pdpFabricPills: ["Cotton Jersey", "Cotton-Poly Blend", "Brushed-Back Jersey"],
+      // Shared six (pdpCustomizationPills, ./pdpShared.ts) plus this style's
+      // ribbed-collar option (owner, 2026-09-23). Retyped here because the
+      // override replaces the shared list rather than extending it.
+      pdpCustomizationPills: [
+        "Custom fabric",
+        "Custom color & design",
+        "Your fit",
+        "Your branding",
+        "Custom labels",
+        "Custom packaging",
+        "Ribbed-collar finish option",
+      ],
       faqs: [
         {
           q: "What fabric is the crew long-sleeve tee made from?",
@@ -240,6 +252,10 @@ export const longSleeveTops: Category = {
         {
           q: "Is this a standard crew neckline, or can it be customized?",
           a: "Built as a relaxed-to-oversized crew as standard, but fit, neckline, cuff, and sleeve construction can all be customized to your reference garment, confirmed on your sample.",
+        },
+        {
+          q: "Can I get this with a ribbed collar instead of a standard crew neckline?",
+          a: "Yes. A ribbed-collar finish is available as an option on the same body and fabric, confirmed on your sample.",
         },
       ],
       relatedStyleTags: [
@@ -256,6 +272,10 @@ export const longSleeveTops: Category = {
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Relaxed to oversized" },
+        {
+          label: "Collar",
+          value: "Standard crew neckline, or a ribbed-collar finish available as an option on the same body and fabric",
+        },
         { label: "Cuff", value: "Ribbed knit, standard finish" },
         { label: "Sleeve construction", value: "Set-in sleeve, standard" },
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
@@ -288,6 +308,11 @@ export const longSleeveTops: Category = {
             title: "Fabric",
             body: "Cotton or cotton-blend jersey, any weight, sourced or matched to your reference",
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
+          },
+          {
+            title: "Collar",
+            body: "Standard crew as our base build, or a ribbed-collar finish available on request",
+            image: { src: "/factory-test/inside-factory-4.jpg", alt: "Collar" },
           },
           {
             title: "Trims and finish",
@@ -409,13 +434,13 @@ export const longSleeveTops: Category = {
       imageAlt: "Custom henley long-sleeve, collarless neckline with a 2 to 5 button placket",
       href: "/capriowear/activewear/long-sleeve-tops/henley",
       // Covers henley construction across its two fabric routes (jersey or
-      // heavier waffle knit). The separate Waffle Thermal style (SKU 8) this
+      // heavier 100% cotton thermal weight, 190 GSM reference, 2026-09-23). The separate Waffle Thermal style (SKU 8) this
       // was kept distinct from was removed, 2026-09-23 -- see styleCards'
       // own comment.
       pdpTitle: "Henley",
       pdpHeading: "Custom Henley Long-Sleeve Manufacturer",
       pdpDescription:
-        "Collarless henley long-sleeve with a 2 to 5 button placket, custom and private label, in cotton jersey or waffle knit, made to your brand in Sialkot, Pakistan.",
+        "Collarless henley long-sleeve with a 2 to 5 button placket, custom and private label, in cotton jersey or heavier thermal cotton, made to your brand in Sialkot, Pakistan.",
       images: [
         { alt: "Custom henley long-sleeve, front view" },
         { alt: "Custom henley long-sleeve, back view" },
@@ -426,17 +451,17 @@ export const longSleeveTops: Category = {
       ],
       pdpMetaTitle: "Custom Henley Long-Sleeve Manufacturer",
       pdpMetaDescription:
-        "Custom henley long-sleeve manufacturer, OEM, ODM and private label, 2 to 5 button placket, cotton or waffle knit, from 50 pieces, any fabric and color, DDP worldwide.",
-      material: "Cotton or cotton-blend jersey, or heavier 100% cotton waffle knit",
-      pdpFabricPills: ["Cotton Jersey", "Cotton-Poly Blend", "Waffle/Thermal Knit (Heavier 100% Cotton)"],
+        "Custom henley long-sleeve manufacturer, OEM, ODM and private label, 2 to 5 button placket, cotton or heavier thermal cotton, from 50 pieces, any fabric and color, DDP worldwide.",
+      material: "Cotton or cotton-blend jersey, or heavier 100% cotton thermal weight",
+      pdpFabricPills: ["Cotton Jersey", "Cotton-Poly Blend", "Heavier Thermal Cotton (190 GSM Reference)"],
       faqs: [
         {
           q: "How many buttons does the henley placket have?",
           a: "Anywhere from 2 to 5, depending on your positioning. We build to your spec.",
         },
         {
-          q: "Can this be built in a heavier waffle-knit fabric instead of jersey?",
-          a: "Yes. Both a lighter cotton jersey build and a heavier 100% cotton waffle-knit build are available, confirmed on your sample.",
+          q: "What's the difference between the two fabric routes?",
+          a: "A lighter cotton or cotton-blend jersey for an everyday build, or a heavier 100% cotton thermal weight (190 GSM on our reference) for a streetwear or workwear-positioned henley. Both are available, confirmed on your sample.",
         },
       ],
       relatedStyleTags: [
@@ -449,17 +474,17 @@ export const longSleeveTops: Category = {
         { label: "Style", value: "Henley long-sleeve, collarless neckline with button placket (base type)" },
         {
           label: "Fabric",
-          value: "Cotton or cotton-blend jersey for a lighter build, or heavier 100% cotton waffle knit for a streetwear/workwear positioning. Pending confirmed spec on sample.",
+          value: "Cotton or cotton-blend jersey for a lighter build, or 100% cotton thermal weight for a streetwear/workwear positioning",
         },
         {
           label: "Weight",
-          value: "Pending, confirmed on your sample. Heavier waffle-knit henleys are described as heavyweight, with no confirmed GSM ceiling.",
+          value: "190 GSM on the thermal reference; lighter jersey route pending confirmed spec on sample.",
         },
         { label: "Fit", value: "Standard, true to size" },
         { label: "Placket", value: "2 to 5 buttons, count varies by positioning, built to your spec" },
         {
           label: "Cuff",
-          value: "Ribbed cuff standard; raw or unfinished edge available as a streetwear/heritage option on heavier waffle builds",
+          value: "Ribbed cuff standard; raw or unfinished edge available as a streetwear/heritage option on heavier thermal builds",
         },
         { label: "Construction", value: "Cut-and-sew, not knit-to-shape, flatlock finishing available" },
         {
@@ -472,7 +497,7 @@ export const longSleeveTops: Category = {
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Buttons securely attached, placket checked to lie flat without gapping or puckering",
-        "Waffle-knit builds checked for shape retention and stretch recovery after wash",
+        "Heavier cotton builds checked for shape retention after wash",
         "Every run inspected to AQL 2.5",
         "Third-party inspection welcome",
       ],
@@ -489,7 +514,7 @@ export const longSleeveTops: Category = {
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
           {
             title: "Fabric",
-            body: "Cotton jersey or waffle knit, any weight, sourced or matched to your reference",
+            body: "Cotton jersey or heavier thermal cotton, any weight, sourced or matched to your reference",
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
           },
           { title: "Placket", body: "2 to 5 button count, built to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Placket" } },
@@ -633,16 +658,15 @@ export const longSleeveTops: Category = {
         { label: "Crew Long-Sleeve Tee", slug: "crew", href: "/capriowear/activewear/long-sleeve-tops" },
         { label: "See All", href: "/capriowear/activewear/long-sleeve-tops" },
       ],
-      // Weight/Fabric rows trimmed of the brief's internal sourcing wording
-      // ("sourced to the locked reference product"), sample caveat kept
-      // (owner call, 2026-09-23).
+      // Weight/Fabric rows: owner's final wording (2026-09-23), no internal
+      // sourcing language, sample caveat as its own sentence.
       specifications: [
         { label: "Style", value: "Fitted raglan-sleeve long-sleeve, diagonal underarm-to-collar seam (base type)" },
         {
           label: "Fabric",
-          value: "Stretch tri-blend, 46% cotton / 46% lyocell / 8% elastane, or a waffle-knit blend, confirmed on your sample",
+          value: "Stretch tri-blend, 46% cotton / 46% lyocell / 8% elastane, or waffle-knit blend as an alternate route. Final composition confirmed on your sample.",
         },
-        { label: "Weight", value: "165 GSM, confirmed on your sample" },
+        { label: "Weight", value: "165 GSM. Final weight confirmed on your sample." },
         { label: "Fit", value: "Fitted, athletic cut" },
         {
           label: "Sleeve construction",
@@ -706,7 +730,7 @@ export const longSleeveTops: Category = {
       pdpTitle: "Mock Neck",
       pdpHeading: "Custom Mock Neck Long-Sleeve Manufacturer",
       pdpDescription:
-        "Long-sleeve with a standing mock collar and no front zip, custom and private label, in cotton or performance poly-spandex, made to your brand in Sialkot, Pakistan.",
+        "Long-sleeve with a standing mock collar and no front zip, custom and private label, in moisture-wicking cotton construction, made to your brand in Sialkot, Pakistan.",
       images: [
         { alt: "Custom mock neck long-sleeve, front view" },
         { alt: "Custom mock neck long-sleeve, back view" },
@@ -717,9 +741,13 @@ export const longSleeveTops: Category = {
       ],
       pdpMetaTitle: "Custom Mock Neck Long-Sleeve Manufacturer",
       pdpMetaDescription:
-        "Custom mock neck long-sleeve manufacturer, OEM, ODM and private label, standing collar, cotton or performance poly-spandex, from 50 pieces, DDP worldwide.",
-      material: "Cotton or cotton-blend, or performance poly-spandex",
-      pdpFabricPills: ["Cotton or Cotton-Blend", "Performance Poly-Spandex (90/10)"],
+        "Custom mock neck long-sleeve manufacturer, OEM, ODM and private label, standing collar, moisture-wicking cotton construction, from 50 pieces, DDP worldwide.",
+      material: "Cotton or cotton-blend",
+      // Cotton only (owner, 2026-09-23: corrected research supports no
+      // poly-spandex route for this SKU). "Dri-FIT" in the brief swapped for
+      // "moisture-wicking cotton" in the description/meta (Nike trademark,
+      // and a polyester technology), owner call.
+      pdpFabricPills: ["Cotton or Cotton-Blend"],
       faqs: [
         {
           q: "What's the difference between this and the Quarter-Zip Long-Sleeve?",
@@ -727,7 +755,7 @@ export const longSleeveTops: Category = {
         },
         {
           q: "Is this style used for golf or training programs?",
-          a: "Yes. Mock neck long-sleeves show up consistently in golf and training-crossover product lines, in both cotton and performance poly-spandex builds.",
+          a: "Yes. Mock neck long-sleeves show up consistently in golf and training-crossover product lines, built here in cotton or cotton-blend.",
         },
       ],
       relatedStyleTags: [
@@ -740,7 +768,7 @@ export const longSleeveTops: Category = {
         { label: "Style", value: "Mock neck long-sleeve, standing collar, no front zip (base type)" },
         {
           label: "Fabric",
-          value: "Cotton or cotton-blend for a golf/training-leaning build, or performance poly-spandex for a compression-adjacent build. Pending confirmed spec on sample.",
+          value: "Cotton or cotton-blend, golf/training-crossover positioning. Pending confirmed spec on sample.",
         },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Fitted through the body, standing mock collar" },
@@ -756,7 +784,7 @@ export const longSleeveTops: Category = {
       pdpQualityPoints: [
         "Seams reinforced and stress-tested",
         "Mock collar height and stretch recovery checked for consistency across sizes",
-        "Moisture-wicking performance tested before bulk on the poly-spandex route",
+        "Shrinkage and shape retention checked after wash",
         "Every run inspected to AQL 2.5",
         "Third-party inspection welcome",
       ],
@@ -769,7 +797,7 @@ export const longSleeveTops: Category = {
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
           {
             title: "Fabric",
-            body: "Cotton or cotton-blend, or performance poly-spandex, any weight, sourced or matched to your reference",
+            body: "Cotton or cotton-blend, any weight, sourced or matched to your reference",
             image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric" },
           },
           { title: "Collar", body: "Mock neck height and finish built to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Collar" } },

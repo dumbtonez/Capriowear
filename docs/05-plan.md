@@ -3983,3 +3983,45 @@ Verified: server HTML carries all 16 card titles, 0 card links (all draft); titl
 
 
 **Teamwear hub too (owner go-ahead, same day).** `content/teamwear/hub.ts` asked a third variant, "How do we get started with a custom teamwear order?" ("Start by requesting a sample or downloading the catalog…"); replaced with the shared `faqGetStarted` entry. Re-verified on 139 pages including the hub: byte-identical text, one link each to `/capriowear/request-a-sample` (200). Playwright 45/45.
+
+## Long-Sleeve Tops Henley PDP: heavier fabric route confirmed as 190 GSM thermal cotton, 2026-09-23
+
+Owner-confirmed fabric spec. `content/activewear/long-sleeve-tops.ts`, Henley entry only.
+
+- **Fabric chips:** "Heavier Thermal Cotton (190 GSM Reference)" replaces "Waffle/Thermal Knit (Heavier 100% Cotton)" (owner call). Cotton Jersey and Cotton-Poly Blend kept.
+- **Specs:** the Fabric row reads "...or 100% cotton thermal weight for a streetwear/workwear positioning". The Weight row reads "190 GSM on the thermal reference; lighter jersey route pending confirmed spec on sample."
+- **FAQ:** "What's the difference between the two fabric routes?" replaces the waffle-knit question (owner call). The placket-buttons question is kept.
+- **Follow-through (owner copy, same day):** the page's other "waffle" mentions now say thermal, in the owner's exact wording: the description ("in cotton jersey or heavier thermal cotton"), the meta description ("cotton or heavier thermal cotton", 177 chars), the How We Customize Fabric step ("Cotton jersey or heavier thermal cotton, any weight..."), and the quality point ("Heavier cotton builds checked for shape retention after wash"). `material` and the Cuff row ("heavier thermal builds") were aligned the same way.
+- **Not changed:** the PLP's category fabric table row "Waffle/thermal knit, heavier 100% cotton / Streetwear/workwear henleys" is category-level. Worth aligning to the 190 GSM thermal reference in a later PLP pass.
+
+**Verified:** rendered Henley page has no "waffle" anywhere, the three new pills, both new spec rows, and FAQ order entity > placket > fabric routes > operational. Zero overflow at the 15 target viewports. tsc and eslint clean.
+
+## Long-Sleeve Tops Crew PDP: ribbed-collar finish option added, 2026-09-23
+
+An alternate collar option only; the base product is unchanged. Crew entry in `content/activewear/long-sleeve-tops.ts`:
+
+- **Customization pills:** Crew now sets its own `pdpCustomizationPills`: the shared six, retyped because the override replaces the list rather than extending it, plus "Ribbed-collar finish option".
+- **Specs:** new "Collar" row between Fit and Cuff: "Standard crew neckline, or a ribbed-collar finish available as an option on the same body and fabric".
+- **How We Customize:** new "Collar" step after Fabric: "Standard crew as our base build, or a ribbed-collar finish available on request". The brief gave no position, so it sits after Fabric, same as Henley's Placket and Mock Neck's Collar steps.
+- **FAQ:** third style question added: "Can I get this with a ribbed collar instead of a standard crew neckline?"
+
+**Verified:** the rendered Crew page has 7 customization pills (the new one last), spec order Style > Fabric > Weight > Fit > Collar > Cuff > Sleeve construction > Construction > Branding, the new step, and FAQ order entity > fabric > neckline > ribbed collar > operational. Zero overflow at the 15 target viewports. tsc and eslint clean.
+
+
+**Teamwear hub too (owner go-ahead, same day).** `content/teamwear/hub.ts` asked a third variant, "How do we get started with a custom teamwear order?" ("Start by requesting a sample or downloading the catalog…"); replaced with the shared `faqGetStarted` entry. Re-verified on 139 pages including the hub: byte-identical text, one link each to `/capriowear/request-a-sample` (200). Playwright 45/45.
+
+## Long-Sleeve Tops Fitted Raglan PDP: final spec-row wording, 2026-09-23
+
+Owner's final wording for two Specifications rows, replacing the earlier trimmed versions: Fabric "Stretch tri-blend, 46% cotton / 46% lyocell / 8% elastane, or waffle-knit blend as an alternate route. Final composition confirmed on your sample." and Weight "165 GSM. Final weight confirmed on your sample." Nothing else on the page changed. Both strings verified on the rendered page. tsc clean.
+
+## Long-Sleeve Tops Mock Neck PDP narrowed to cotton only, 2026-09-23
+
+Corrected research supports cotton only for CAP-LSL-10, so the performance poly-spandex route is removed from the page:
+
+- **Fabric pills:** "Cotton or Cotton-Blend" only.
+- **Specs, Fabric row:** "Cotton or cotton-blend, golf/training-crossover positioning. Pending confirmed spec on sample."
+- **Description and meta (owner call):** the brief's "cotton Dri-FIT(-style) construction" became "moisture-wicking cotton construction". Dri-FIT is a Nike trademark and a polyester technology, so it is kept out of the copy. Meta is 156 chars.
+- **Sweep (point 5):** the How We Customize Fabric step is now "Cotton or cotton-blend, any weight..."; the golf/training FAQ answer ends "built here in cotton or cotton-blend"; `material` is "Cotton or cotton-blend". The quality bullet "Moisture-wicking performance tested before bulk on the poly-spandex route" is replaced by "Shrinkage and shape retention checked after wash", keeping 5 points (owner call).
+- **Left as is:** the "Fitted Performance Long-Sleeve" related-style chip (a style name, not a fabric claim) and "Mock collar height and stretch recovery checked" (collar rib).
+
+**Verified:** the rendered page has no "poly-spandex", "performance poly", "compression-adjacent" or "Dri-FIT". All new strings are present. tsc and eslint clean.
