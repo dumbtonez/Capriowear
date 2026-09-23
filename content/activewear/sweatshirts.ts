@@ -292,7 +292,7 @@ export const sweatshirts: Category = {
       ],
       pdpMetaTitle: "Men's Oversized French Terry Crewneck Sweatshirt Manufacturer",
       pdpMetaDescription:
-        "Custom oversized French terry crewneck sweatshirt manufacturer, private label, heavyweight terry, drawcord hem, low MOQ, DDP to 20+ countries worldwide.",
+        "Men's oversized French terry crewneck sweatshirt manufacturer, private label, heavyweight terry, drawcord hem, low MOQ, DDP to 20+ countries worldwide.",
       material: "Heavyweight French terry",
       pdpFabricPills: ["French Terry", "Brushed Fleece", "Cotton-Poly Blend", "Tri-Blend Fleece"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
@@ -608,7 +608,7 @@ export const sweatshirts: Category = {
       ],
       pdpMetaTitle: "Men's Premium Technical Fleece Loose-Fit Crewneck Sweatshirt Manufacturer",
       pdpMetaDescription:
-        "Custom premium technical fleece loose-fit crewneck sweatshirt manufacturer, private label, vent detailing, low MOQ from 50 pieces, DDP to 20+ countries.",
+        "Men's premium technical fleece loose-fit crewneck sweatshirt manufacturer, private label, vent detailing, low MOQ from 50 pieces, DDP to 20+ countries.",
       material: "Premium technical fleece",
       pdpFabricPills: ["Premium Technical Fleece", "Brushed Fleece", "French Terry", "Tri-Blend Fleece"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
@@ -687,7 +687,7 @@ export const sweatshirts: Category = {
       ],
       pdpMetaTitle: "Men's Reverse French Terry Crewneck Sweatshirt Manufacturer",
       pdpMetaDescription:
-        "Custom reverse French terry crewneck sweatshirt manufacturer, private label, soft fleece feel without added heat, low MOQ from 50 pieces, DDP to 20+ countries.",
+        "Men's reverse French terry crewneck sweatshirt manufacturer, private label, soft fleece feel without added heat, low MOQ from 50 pieces, DDP to 20+ countries.",
       material: "Reverse French terry",
       pdpFabricPills: ["Reverse French Terry", "French Terry", "Brushed Fleece", "Cotton-Poly Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
@@ -766,7 +766,7 @@ export const sweatshirts: Category = {
       ],
       pdpMetaTitle: "Men's Vintage-Wash Terry Crewneck Sweatshirt Manufacturer",
       pdpMetaDescription:
-        "Custom vintage-wash terry crewneck sweatshirt manufacturer, private label, heavyweight cotton terry, cracked wash finish, low MOQ, DDP to 20+ countries.",
+        "Men's vintage-wash terry crewneck sweatshirt manufacturer, private label, heavyweight cotton terry, cracked wash finish, low MOQ, DDP to 20+ countries.",
       material: "100% cotton terry, 420 GSM",
       pdpFabricPills: ["Cotton Terry", "French Terry", "Brushed Fleece", "Cotton-Poly Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
@@ -924,7 +924,7 @@ export const sweatshirts: Category = {
       ],
       pdpMetaTitle: "Women's Oversized Cropped Fleece Crewneck Sweatshirt Manufacturer",
       pdpMetaDescription:
-        "Custom oversized cropped fleece crewneck sweatshirt manufacturer, private label, cropped body length, midweight fleece, low MOQ, DDP to 20+ countries.",
+        "Women's oversized cropped fleece crewneck sweatshirt manufacturer, private label, cropped body length, midweight fleece, low MOQ, DDP to 20+ countries.",
       material: "Midweight cotton-poly blend fleece",
       pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton-Poly Blend", "Tri-Blend Fleece"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],

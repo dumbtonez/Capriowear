@@ -4131,3 +4131,7 @@ Verified (local render): all 3 new pages 200 with the brief's title/H1/breadcrum
 **Commit note:** these edits landed inside `6c5594b` (the other session's SKU 10 to 12 commit, which staged the whole shared file moments after the edit). No separate code commit; this entry is the record.
 
 **Not changed, flagged:** meta descriptions for CAP-SWT-02, 04, 08, 09, 10 still open "Custom ... manufacturer". They were not in the requested field list.
+
+## Sweatshirts meta descriptions gendered per the gendered-SKU rule, 2026-09-23
+
+Follow-up to the rule entry above: the meta descriptions of CAP-SWT-02, 08, 09, 10 (men's) and 04 (women's) now open "Men's/Women's ... crewneck sweatshirt manufacturer" instead of "Custom ...". Nothing else changed; lengths 151 to 158 chars. No gendered Sweatshirts SKU has a "Custom" meta description left. tsc clean.
