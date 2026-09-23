@@ -3848,3 +3848,19 @@ Audited rather than assumed. They split three ways, and the split matters:
 **No live SEO harm today**, which is why this was not urgent: `ALLOW_INDEXING` defaults to false (`content/site.ts`), so the whole site is `noindex, nofollow` and out of the sitemap while it stages on Vercel. **But that flag is designed to be flipped by one env var at launch with no code change** -- if it flips while these three still carry the placeholder string, three real category pages go to Google with "Placeholder meta description -- real copy is a later phase." Worth fixing before launch, not after.
 
 **No content changed here.** The brief scoped this item to listing them, with a change only if one proved to be a built category -- three did, but the fixes are Gear copy decisions (a real meta description each, the third trust bullet, and boxing-gloves' H1), outside this task and plausibly mid-build elsewhere. Recommended, flagged, awaiting a go-ahead.
+
+## Long-Sleeve Tops PLP rebuilt from the final content brief, 2026-09-23
+
+Pure content drop, `content/activewear/long-sleeve-tops.ts` only (no route, schema, sitemap or component changes). Source: owner's `capriowear-longsleeve-plp-content.md` brief.
+
+- **Title/H1:** "Custom Long Sleeve Shirt Manufacturer" (rendered title "Custom Long Sleeve Shirt Manufacturer | Capriowear", 50 chars). Meta description verbatim from the brief, 239 chars; the first ~155 hold the category, "manufacturer" and the service model, within the ~270 AEO ceiling in docs/06-seo.md.
+- **No gender toggle** (`showGenderFilter: false`, no card `gender`): this category has had no brand-convergence research pass, so no men's/women's split exists yet. Add both once it does.
+- **8 draft cards**, CAP-LSL-01 to 08, each with `sku` and `pdpHeading` (card title + " Manufacturer"). Two slugs renamed while still draft: `performance` → `fitted-performance`, `waffle` → `waffle-thermal`. No PDP was ever published, so no redirect is needed. Cards stay non-clickable: no `specifications`, so `isDraftPdpReachable()` is false.
+- **Fabric table** replaced with the brief's 6 rows. The old `weightTiers` table and tri-blend row were dropped because the brief states no GSM or composition beyond its own table. Pills re-cut to the 6 fabrics.
+- **Customization:** owner-locked 6-item copy (follow-up, same day), verbatim with a leading capital per body. The brief's "Explore full customization →" link is not rendered because WhatWeCover has no link slot, and no PLP renders one.
+- **Trust block:** new H2 and 6 points. The brief's "TESTED BEFORE BULK" eyebrow is not rendered because TrustPoints has no eyebrow by design, same as Tank Tops.
+- **FAQ:** 13 category questions verbatim. The entity answer is produced word for word by `categoryEntityFaq()` via `manufacturerNoun: "Long Sleeve Shirt"`, `productNounPlural`, `entityExampleStyles`.
+- **Related:** T-Shirts, Tank Tops, Hoodies (Sweatshirts removed).
+- **Schema:** BreadcrumbList + FAQPage live. CollectionPage/ItemList stays omitted while zero styles are published (sitewide rule, 2026-09-07).
+
+**Verified:** tsc, eslint (only the known unrelated `scripts/` warning), `npm run build` clean. Scoped Playwright check found zero horizontal overflow at all 15 target viewports (Tank Tops baseline also 0). Rendered DOM: one H1, no gender chips, no card links, canonical `https://www.capriosports.com/capriowear/activewear/long-sleeve-tops`.
