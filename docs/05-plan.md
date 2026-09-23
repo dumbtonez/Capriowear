@@ -3935,3 +3935,17 @@ The "What does Capriowear manufacture?" answer on the PLP and all 4 PDPs named t
 The template in `categoryEntityFaq()` cannot produce this sentence (it always adds "with low minimums and full customization"), so the category now sets `entityQuestion`/`entityAnswer`, the existing word-for-word override (first used on Gear/Weight Lifting Belts). `companyIdentity` is interpolated, not retyped. `entityExampleStyles` is removed. One field feeds all 5 pages, so they can't drift apart.
 
 **Verified:** the answer renders byte-identical on all 5 pages, and no page still carries the old list. The PLP's FAQPage JSON-LD first answer matches. The PDPs carry no FAQPage (draft). tsc and eslint clean.
+
+## Long-Sleeve Tops PLP grid: 3 superseded draft cards removed, Raglan corrected, 2026-09-23
+
+Per the brand-convergence research (`capriowear-longsleeve-brand-convergence.md`), each card handled on its own facts, `content/activewear/long-sleeve-tops.ts` only:
+
+- **Removed CAP-LSL-05 Hooded** and **CAP-LSL-08 Waffle Thermal**: neither is in the confirmed 16-SKU shortlist, and neither is scoped to be built.
+- **Removed CAP-LSL-06 Oversized**: folded into the live Crew PDP's relaxed-to-oversized fit. A separate card would duplicate it.
+- **Kept CAP-LSL-07 Raglan** (draft, card-only). Subline now reads "Fitted raglan sleeve, stretch blend fabric, improved shoulder flexibility" (confirmed name "Fitted Raglan-Sleeve, Stretch Blend", 2 of 4 brands). Its `imageAlt` was updated to match, since it described the old "diagonal" wording.
+
+Grid goes from 8 cards to 5 (4 linked drafts, 1 card-only). That's intentional and temporary, with no placeholder backfill. Compression Thumbholes, Mock Neck and the women's line arrive with the gender-toggle rebuild. SKU codes are not renumbered. None of the removed cards had a route, so no redirect is needed. The Henley card's old "keep distinct from SKU 8" comment was reworded to match.
+
+**Not changed (out of scope, flagged):** the fabric table's "Hooded henley hybrid programs" and the customization strip's "hood (hooded henley hybrid)" still mention a hood.
+
+**Verified:** 5 cards render in order, and only SKU 1 to 4 link. `/hooded`, `/oversized`, `/waffle-thermal` and `/raglan` return 404, and SKU 1 to 4 return 200. No overflow at 360/390/768/1024/1440/1920. tsc and eslint clean.

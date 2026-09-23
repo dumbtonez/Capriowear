@@ -189,14 +189,22 @@ export const longSleeveTops: Category = {
     },
   ],
   ctaReferenceNoun: "long-sleeve top",
-  // 8 styles, all draft (owner spec). Card title carries "Custom"; pdpHeading
+  // 5 styles, all draft (owner spec). Card title carries "Custom"; pdpHeading
   // is the card title + " Manufacturer" (card-title rule). Slugs are
   // not-yet-final while draft -- they become permanent URLs only on publish.
   // SKU 1-4 carry full PDP content (2026-09-23 build brief), so they render
   // as reachable drafts (noindex, no Product/FAQPage schema, not in the
-  // sitemap) and their PLP cards link; SKU 5-8 are still card-only. Their
-  // related-style chips name only SKU 1-4 slugs, so nothing links to an
-  // unbuilt page.
+  // sitemap) and their PLP cards link; SKU 7 (Raglan) is still card-only.
+  // Their related-style chips name only SKU 1-4 slugs, so nothing links to
+  // an unbuilt page.
+  //
+  // SKU 5 (Hooded), 6 (Oversized) and 8 (Waffle Thermal) were removed
+  // (owner, 2026-09-23, brand-convergence research): Hooded and Waffle
+  // Thermal are not in the confirmed shortlist, and Oversized is folded into
+  // Crew's relaxed-to-oversized fit. The grid stays at 5 on purpose -- don't
+  // backfill placeholder cards. The remaining confirmed men's styles
+  // (Compression Thumbholes, Mock Neck) and the women's line are added with
+  // the gender-toggle rebuild. SKU codes are not renumbered.
   styleCards: [
     {
       status: "draft",
@@ -400,11 +408,10 @@ export const longSleeveTops: Category = {
       image: "",
       imageAlt: "Custom henley long-sleeve, collarless neckline with a 2 to 5 button placket",
       href: "/capriowear/activewear/long-sleeve-tops/henley",
-      // Kept distinct from SKU 8, Waffle Thermal (owner note, 2026-09-23):
-      // this style covers henley construction across its two fabric routes
-      // (jersey or heavier waffle knit); SKU 8 will cover waffle/thermal knit
-      // as its own feature across several necklines. Different slugs, no
-      // collision, not to be merged.
+      // Covers henley construction across its two fabric routes (jersey or
+      // heavier waffle knit). The separate Waffle Thermal style (SKU 8) this
+      // was kept distinct from was removed, 2026-09-23 -- see styleCards'
+      // own comment.
       pdpTitle: "Henley",
       pdpHeading: "Custom Henley Long-Sleeve Manufacturer",
       pdpDescription:
@@ -586,47 +593,14 @@ export const longSleeveTops: Category = {
     },
     {
       status: "draft",
-      slug: "hooded",
-      sku: "CAP-LSL-05",
-      cardTitle: "Custom Hooded Long-Sleeve Tee",
-      pdpHeading: "Custom Hooded Long-Sleeve Tee Manufacturer",
-      cardSubline: "Henley or crew long-sleeve with an attached hood",
-      image: "",
-      imageAlt: "Custom hooded long-sleeve tee, henley or crew long-sleeve with an attached hood",
-      href: "/capriowear/activewear/long-sleeve-tops/hooded",
-    },
-    {
-      status: "draft",
-      slug: "oversized",
-      sku: "CAP-LSL-06",
-      cardTitle: "Custom Oversized Long-Sleeve",
-      pdpHeading: "Custom Oversized Long-Sleeve Manufacturer",
-      cardSubline: "Loose, boxy streetwear fit",
-      image: "",
-      imageAlt: "Custom oversized long-sleeve, loose boxy streetwear fit",
-      href: "/capriowear/activewear/long-sleeve-tops/oversized",
-    },
-    {
-      status: "draft",
       slug: "raglan",
       sku: "CAP-LSL-07",
       cardTitle: "Custom Raglan Long-Sleeve",
       pdpHeading: "Custom Raglan Long-Sleeve Manufacturer",
-      cardSubline: "Diagonal raglan sleeve, improved shoulder flexibility",
+      cardSubline: "Fitted raglan sleeve, stretch blend fabric, improved shoulder flexibility",
       image: "",
-      imageAlt: "Custom raglan long-sleeve, diagonal raglan sleeve for shoulder flexibility",
+      imageAlt: "Custom raglan long-sleeve, fitted raglan sleeve in a stretch blend fabric for shoulder flexibility",
       href: "/capriowear/activewear/long-sleeve-tops/raglan",
-    },
-    {
-      status: "draft",
-      slug: "waffle-thermal",
-      sku: "CAP-LSL-08",
-      cardTitle: "Custom Waffle Thermal Long-Sleeve",
-      pdpHeading: "Custom Waffle Thermal Long-Sleeve Manufacturer",
-      cardSubline: "Honeycomb-textured knit, fitted or heavyweight",
-      image: "",
-      imageAlt: "Custom waffle thermal long-sleeve, honeycomb-textured knit, fitted or heavyweight",
-      href: "/capriowear/activewear/long-sleeve-tops/waffle-thermal",
     },
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, same L1 group first
