@@ -14,9 +14,18 @@
 // since some lists cross groups (e.g. Soccer links to Compression & Base
 // Layers). Renders nothing for an empty list (some Gear categories have
 // `relatedLinks: []`), so no orphan heading ever shows.
-import { Button } from "@/components/Button";
+//
+// Chips look exactly like the PDP's "Related styles" chips (owner,
+// 2026-09-23: "treat them visual same as related styles on pdp across all
+// pages"): same markup (Link + ChevronRight) and the same
+// `productRelatedStyles` list/chip/chipIcon recipe, reused rather than
+// copied, so the two can never drift apart. Replaces the earlier
+// outlined `Button` pills.
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
+
 import { cx } from "@/components/ui/cx";
-import { relatedCategories } from "@/components/ui/styles";
+import { productRelatedStyles, relatedCategories } from "@/components/ui/styles";
 import type { RelatedLink } from "@/content/activewear/types";
 
 export type RelatedCategoriesProps = {
@@ -40,12 +49,13 @@ export function RelatedCategories({
       <h2 id="related-categories-heading" className={relatedCategories.heading}>
         {heading}
       </h2>
-      <ul className={relatedCategories.list}>
+      <ul className={productRelatedStyles.list}>
         {links.map((link) => (
           <li key={link.href}>
-            <Button href={link.href} variant="secondary">
+            <Link href={link.href} className={productRelatedStyles.chip}>
               {link.label}
-            </Button>
+              <ChevronRight className={productRelatedStyles.chipIcon} aria-hidden="true" />
+            </Link>
           </li>
         ))}
       </ul>

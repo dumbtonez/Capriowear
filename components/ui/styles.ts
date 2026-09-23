@@ -7803,7 +7803,8 @@ export const relatedCategories = {
   // gap every other placement gets from TrustPoints.
   afterFlushSection: "xl:pt-[120px]",
   heading: "text-h3",
-  list: "flex flex-wrap gap-4",
+  // No `list` key: the chip row reuses `productRelatedStyles.list`/`chip`/
+  // `chipIcon` (see RelatedCategories.tsx), same as the PDP's Related styles.
 };
 
 // categoryLinkGrid (added 2026-09-11, Activewear hub's category-group
