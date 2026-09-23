@@ -4095,3 +4095,13 @@ Built from the owner's brief in `content/activewear/sweatshirts.ts` on the exist
 One deviation: SKU 8's meta description is the owner-confirmed 152-char version (the brief's 162-char text minus the trailing "worldwide"), per the owner's same-day confirmation.
 
 Verified (local render): all 3 return 200 with the brief's title, H1, breadcrumb (visible + JSON-LD, canonical `/capriowear/...`) and meta (153/152/159 chars); FAQ order entity → 2 style → 5 shared, entity answer exact, get-started identical with its link; no en/em dashes, no Dri-FIT/Nike/Tech Fleece (including the PLP); SKU 7's only un-gendered "French Terry Crewneck" mentions refer to SKU 2 (Oversized French Terry). tsc clean, eslint 0 errors, build clean, Playwright 45/45.
+
+## Tank Tops card titles aligned to gendered H1s (shipped), 2026-09-23
+
+The 8 Tank Tops cards whose H1 is gendered still read "Custom ..." on the live PLP: CAP-TNK-02 Fitted, 03 Relaxed, 06 Racerback Singlet, 08 Ribbed (men's) and 09 Fitted, 10 Relaxed, 12 Racerback, 16 Ribbed (women's). They now read "Men's/Women's [Style]", equal to H1 minus " Manufacturer". The other 8 (Oversized Cut-Off, Athletic, Stringer, Muscle-Cut, Cropped Fitted, Shelf-Bra, Halter, Cropped Tank) keep "Custom ..." on both card and H1.
+
+**Root cause: an uncommitted fix, not a regression or a logic miss.** The earlier cross-category card-title audit (another session) made exactly these 8 edits in the shared working tree and logged them as fixed, but never committed them. The live site kept the pre-audit titles. Running the same comparison against HEAD (what was live) found 8 mismatches; against the working tree it found 0. The audit's check was right; its fix never shipped.
+
+**Prevention:** a "fixed" claim should be verified against the pushed commit or the live page, not the local working tree. Two sessions share this checkout, so an edit that isn't committed isn't shipped.
+
+**Verified:** 16/16 Tank Tops cards equal their H1 minus " Manufacturer" in the committed file. The rendered PLP shows all 8 new titles and none of the old ones, and the Men/Women filters each show the expected 8. tsc clean.

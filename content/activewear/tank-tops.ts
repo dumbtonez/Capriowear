@@ -272,7 +272,7 @@ export const tankTops: Category = {
       // from women's `fitted-womens` (already live) -- no collision.
       status: "draft",
       slug: "fitted-mens",
-      cardTitle: "Custom Fitted Tank",
+      cardTitle: "Men's Fitted Tank",
       cardSubline: "Close-fitting, standard neckline and armhole",
       gender: "Men",
       image: "",
@@ -359,7 +359,7 @@ export const tankTops: Category = {
       // collision.
       status: "draft",
       slug: "relaxed-mens",
-      cardTitle: "Custom Relaxed Tank",
+      cardTitle: "Men's Relaxed Tank",
       cardSubline: "Softer, roomier fit, finished armhole",
       gender: "Men",
       image: "",
@@ -642,7 +642,7 @@ export const tankTops: Category = {
     {
       status: "draft",
       slug: "racerback-singlet",
-      cardTitle: "Custom Racerback Singlet",
+      cardTitle: "Men's Racerback Singlet",
       cardSubline: "Fitted singlet, full racerback construction",
       gender: "Men",
       image: "",
@@ -846,7 +846,7 @@ export const tankTops: Category = {
     {
       status: "draft",
       slug: "ribbed-mens",
-      cardTitle: "Custom Ribbed Tank",
+      cardTitle: "Men's Ribbed Tank",
       cardSubline: "Ribbed-knit body fabric, fitted through the torso",
       gender: "Men",
       image: "",
@@ -955,7 +955,7 @@ export const tankTops: Category = {
     {
       status: "draft",
       slug: "fitted-womens",
-      cardTitle: "Custom Fitted Tank",
+      cardTitle: "Women's Fitted Tank",
       cardSubline: "Close-fitting, standard neckline and back",
       gender: "Women",
       image: "",
@@ -1057,7 +1057,7 @@ export const tankTops: Category = {
     {
       status: "draft",
       slug: "relaxed-womens",
-      cardTitle: "Custom Relaxed Tank",
+      cardTitle: "Women's Relaxed Tank",
       cardSubline: "Roomier, non-compression, finished armhole",
       gender: "Women",
       image: "",
@@ -1261,7 +1261,7 @@ export const tankTops: Category = {
     {
       status: "draft",
       slug: "racerback-womens",
-      cardTitle: "Custom Racerback Tank",
+      cardTitle: "Women's Racerback Tank",
       cardSubline: "Fitted, true racerback construction",
       gender: "Women",
       image: "",
@@ -1665,7 +1665,7 @@ export const tankTops: Category = {
     {
       status: "draft",
       slug: "ribbed-womens",
-      cardTitle: "Custom Ribbed Tank",
+      cardTitle: "Women's Ribbed Tank",
       cardSubline: "Ribbed-knit body fabric, contrast side panels",
       gender: "Women",
       image: "",
