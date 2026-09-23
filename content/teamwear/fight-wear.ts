@@ -53,6 +53,7 @@
 // squad number (owner spec, fight-wear-specific: this discipline is named
 // by gym and athlete, not roster numbers).
 import type { Category } from "../activewear/types";
+import { faqGetStarted } from "../getStarted";
 
 export const fightWear: Category = {
   slug: "fight-wear",
@@ -205,9 +206,10 @@ export const fightWear: Category = {
       a: "A sublimated poly-spandex knit for rash guards and compression tops, a sublimated compression knit for spats, and a woven poly-spandex shell for fight shorts. All take full-color sublimation; weights are confirmed on your sample.",
     },
     {
-      q: "How long do samples and bulk take, and how do I start?",
-      a: "A digital mockup in a few business days, a physical sample in 10 to 14 days; bulk depends on quantity and customization, confirmed on your quote. To start, send your tech pack, sketch or a reference rash guard by email or WhatsApp and we reply within 24 hours.",
+      q: "How long do samples and bulk take?",
+      a: "A digital mockup in a few business days, a physical sample in 10 to 14 days; bulk depends on quantity and customization, confirmed on your quote.",
     },
+    faqGetStarted,
   ],
   ctaReferenceNoun: "rash guard",
   // All 5 styles ship "draft" (owner spec): zero published at launch, so no

@@ -30,6 +30,7 @@
 // Flip a style to "published" only once its real PDP content exists, same
 // rule every prior category's own styleCards already follow.
 import type { Category } from "./types";
+import { faqGetStarted } from "./pdpShared";
 
 export const jackets: Category = {
   slug: "jackets",
@@ -204,10 +205,7 @@ export const jackets: Category = {
       q: "Will my designs stay protected?",
       a: "Yes. We sign an NDA before any tech pack.",
     },
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch or a reference jacket by email or WhatsApp. We come back within 24 hours with next steps.",
-    },
+    faqGetStarted,
   ],
   // Standing CTA subline, same as every category (owner spec, 2026-09-02) --
   // see this file's own header comment for why this differs from the

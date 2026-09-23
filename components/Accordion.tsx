@@ -18,13 +18,34 @@
 import { Minus, Plus } from "lucide-react";
 import { useId, useState } from "react";
 
+import Link from "next/link";
+
 import { cx } from "./ui/cx";
 import { accordion } from "./ui/styles";
 
 export type AccordionItem = {
   question: string;
   answer: string;
+  /** Optional inline link: the first occurrence of `text` in `answer` renders as a link to `href`. */
+  answerLink?: { text: string; href: string };
 };
+
+// Splits `answer` around the first occurrence of `link.text` and wraps that
+// span in a real link; an answer without a link (or whose text doesn't
+// contain it) renders unchanged, as plain text.
+function AnswerText({ answer, link }: { answer: string; link?: AccordionItem["answerLink"] }) {
+  const at = link ? answer.indexOf(link.text) : -1;
+  if (!link || at === -1) return answer;
+  return (
+    <>
+      {answer.slice(0, at)}
+      <Link href={link.href} className={accordion.answerLink}>
+        {link.text}
+      </Link>
+      {answer.slice(at + link.text.length)}
+    </>
+  );
+}
 
 export type AccordionProps = {
   items: AccordionItem[];
@@ -78,10 +99,16 @@ export function Accordion({ items, defaultOpen = null, className }: AccordionPro
               role="region"
               aria-labelledby={triggerId}
               aria-hidden={!isOpen}
+              // `inert` as well as aria-hidden: a collapsed panel is only
+              // zero-height, so without it an inline answer link would still
+              // take keyboard focus while invisible.
+              inert={!isOpen}
               className={cx(accordion.panel, isOpen ? accordion.panelOpen : accordion.panelClosed)}
             >
               <div className={accordion.panelInner}>
-                <p className={accordion.answer}>{item.answer}</p>
+                <p className={accordion.answer}>
+                  <AnswerText answer={item.answer} link={item.answerLink} />
+                </p>
               </div>
             </div>
           </div>

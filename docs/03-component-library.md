@@ -259,6 +259,8 @@ Real buttons inside headings, so Tab, Enter and Space all work with no custom ke
 - **Border**: every item gets a bottom border, including the last (Figma shows a trailing rule); none above the first (dropped the earlier `first:border-t`). Genuine one-off colour per breakpoint, no matching token: `#29292e` mobile, `#3c3c43` desktop, via mutually exclusive `max-xl:`/`xl:` classes.
 - **Icon**: a real plus glyph closed, a real minus glyph open (`lucide-react`'s `Plus`/`Minus`, swapped by `isOpen`) — not a plus rotated 45° into an X, which is what the pre-real-design guess used.
 
+**Inline answer links (2026-09-23).** `AccordionItem.answerLink?: { text, href }` (fed from `FaqEntry.link` via `Faq`): the first occurrence of `text` in the answer renders as a `next/link` (`accordion.answerLink`: white, underlined, on the dark FAQ ground). The answer string itself stays plain, so `faqSchema()` JSON-LD is unchanged. Closed panels now also carry `inert` alongside `aria-hidden`, so a link inside a collapsed (zero-height) answer never takes keyboard focus. First and only use: the shared `faqGetStarted` answer (`content/getStarted.ts`), whose "through our contact form" links to `REQUEST_A_SAMPLE_HREF` (`/capriowear/request-a-sample`), the same constant the header's "Request a Sample" CTA (`home.nav.cta.href`) now reads.
+
 ### Logo — Built
 `components/Logo.tsx` · sized via `header.brandLogo`/`header.brandLogoDesktop` (Capriowear) or `header.brandLogoCapriosports`/`header.brandLogoDesktopCapriosports` (Capriosports) where it's used
 

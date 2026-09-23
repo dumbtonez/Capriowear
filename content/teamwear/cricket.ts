@@ -28,6 +28,7 @@
 // never "seamless" -- confirmed throughout, same standing sitewide rules
 // every category follows.
 import type { Category } from "../activewear/types";
+import { faqGetStarted } from "../getStarted";
 
 export const cricket: Category = {
   slug: "cricket",
@@ -189,10 +190,7 @@ export const cricket: Category = {
       q: "How long do samples and bulk take?",
       a: "A digital mockup in a few business days, a physical sample in 10 to 14 days. Bulk lead time depends on quantity and customization, confirmed on your quote.",
     },
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch or a reference kit by email or WhatsApp. We come back within 24 hours with next steps.",
-    },
+    faqGetStarted,
   ],
   ctaReferenceNoun: "kit",
   styleCards: [

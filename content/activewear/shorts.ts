@@ -20,6 +20,7 @@
 // (owner spec, 2026-09-22) via each card's own `gender` field -- see
 // StyleCard.gender's own comment in ./types.ts and ActivewearListing.tsx.
 import type { Category } from "./types";
+import { faqGetStarted } from "./pdpShared";
 
 export const shorts: Category = {
   slug: "shorts",
@@ -152,10 +153,7 @@ export const shorts: Category = {
       q: "Will my designs stay protected?",
       a: "Yes. We sign an NDA before any tech pack.",
     },
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch, or a reference short through our contact form. We come back within 24 hours with next steps, including a quote and sample timeline.",
-    },
+    faqGetStarted,
   ],
   ctaReferenceNoun: "pair of shorts",
   // 14 styles, 7 men's (CAP-SHO-01 to 07) then 7 women's (CAP-SHO-08 to

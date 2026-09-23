@@ -6,6 +6,7 @@
 // under every sport is still DRAFT, so this content never links to one.
 // American spelling, no en/em dashes, no prices, per house copy rules.
 import type { CategoryGroup } from "../hubTypes";
+import { faqGetStarted } from "../getStarted";
 import { SITE_URL } from "../site";
 
 export type { CategoryGroup, CategoryLink } from "../hubTypes";
@@ -176,10 +177,7 @@ export const teamwearHub = {
         q: "How is our team's design kept confidential?",
         a: "An NDA is signed before any tech pack, sketch, or reference design is shared with the factory, keeping new designs confidential ahead of a season launch.",
       },
-      {
-        q: "How do we get started with a custom teamwear order?",
-        a: "Start by requesting a sample or downloading the catalog. From there, a tech pack and NDA are exchanged before a sample run begins, typically arriving in 10 to 14 days.",
-      },
+      faqGetStarted,
     ],
   },
 

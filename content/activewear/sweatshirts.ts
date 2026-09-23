@@ -1,66 +1,46 @@
 // content/activewear/sweatshirts.ts
-// Seventh real category built on the Category shape (content/activewear/
-// types.ts) -- a pure content/data drop, same pattern as every prior
-// category (owner spec, 2026-09-02): no edits to app/activewear/
-// [category]/page.tsx, app/activewear/[category]/[style]/page.tsx,
-// app/sitemap.ts, or lib/schema.ts, only this file plus one line in
-// ./categories.ts.
+// Crewneck Sweatshirts PLP, rebuilt from the owner's final content brief
+// (2026-09-23): 16 draft SKUs (CAP-SWT-01 to 16, numbered to match the
+// source research doc, not renumbered), 8 men's and 8 women's, crewneck
+// only (the earlier half-zip, quarter-zip and mock-neck cards and FAQ are
+// gone). Same locked PLP template and data shape as every other category.
 //
-// Second real use of `weightTiers` (see Hoodies' own header comment for
-// the first) -- Sweatshirts has the same shape of data (a clean,
-// named-tier breakdown), just 3 tiers here, not 4 (this brief's own given
-// content has no ultra-heavyweight tier for crewnecks the way Hoodies
-// does).
+// Gendering: four style names exist on both sides (Oversized Brushed Fleece,
+// Regular-Fit Brushed Fleece, Technical Performance, French Terry). Those
+// cards carry the gendered "Men's ..." / "Women's ..." title with no
+// "Custom" prefix, and their slugs take a "-mens" / "-womens" suffix (the
+// brief gave identical slugs for each pair, which would collide on one
+// URL; same suffix pattern as T-Shirts and Tank Tops). Every other style
+// keeps the un-gendered "Custom ..." title and its given slug.
 //
-// ctaSubline is the standing sitewide line, Leggings' own original
-// wording, NOT the per-category line this brief's own copy gave
-// ("Share your tech pack, sketch or a reference sweatshirt, we'll
-// develop it with you.") -- owner correction, same day: "I told you to
-// use the same cta subline that you used in leggings, it should be every
-// page next you build," applied retroactively to every prior category's
-// own file at the same time this one was built (see the decision log
-// entry, 2026-09-02).
-//
-// The PLP itself goes live; every style is "draft" for now (owner spec):
-// each card shows on the grid, non-clickable, no PDP route generated
-// (app/activewear/[category]/[style]/page.tsx's own generateStaticParams
-// filters to "published" only, plus dynamicParams = false), excluded from
-// app/sitemap.ts and this category's own CollectionPage/ItemList schema.
-// Flip a style to "published" only once its real PDP content exists, same
-// rule every prior category's own styleCards already follow.
+// Every style is "draft" with no PDP content, so each card is a
+// non-clickable tile, with no route, no sitemap entry and no ItemList
+// entry until its own PDP is built and published.
 import type { Category } from "./types";
+import { faqGetStarted } from "./pdpShared";
 
 export const sweatshirts: Category = {
   slug: "sweatshirts",
   group: "Activewear",
   menuLabel: "Sweatshirts",
-  // Entity FAQ overrides (owner spec, 2026-09-02) -- "Sweatshirt"
-  // (singular) reads correctly in "a custom Sweatshirt manufacturer",
-  // "sweatshirts" (plural) in "private label sweatshirts" -- see
-  // categoryEntityFaq()'s own comment in ./pdpShared.ts.
+  // Entity FAQ parts (categoryEntityFaq(), ./pdpShared.ts). No
+  // `entityFabrics`: the brief's entity answer names styles only, so the
+  // fabric clause drops out and the sentence reads exactly as given.
   manufacturerNoun: "Sweatshirt",
-  productNounPlural: "sweatshirts",
-  entityExampleStyles: "crewneck, half-zip, oversized, and cropped styles",
-  entityFabrics: "French terry and brushed fleece",
-  h1: "Custom Crewneck Sweatshirt Manufacturer",
-  // metaTitle leads with "Crewneck Sweatshirt" (SEO/AEO refresh, owner
-  // spec: "own crewneck sweatshirt manufacturer as its own head term") --
-  // H1 stays the broader "Sweatshirt" (not in this pass's H1-change list),
-  // same deliberate H1/title split as Long-Sleeve Tops' own metaTitle.
-  metaTitle: "Custom Crewneck Sweatshirt Manufacturer",
+  productNounPlural: "crewneck sweatshirts",
+  entityExampleStyles:
+    "oversized, regular-fit, technical performance, and French terry styles for men, and oversized, cropped, regular-fit, and technical performance styles for women",
+  h1: "Custom Sweatshirt Manufacturer",
+  metaTitle: "Custom Sweatshirt Manufacturer",
+  // 156 chars, owner-measured and confirmed as rendered.
   metaDescription:
-    "Custom crewneck sweatshirt manufacturer, half-zip and quarter-zip, ribbed collar, French terry or brushed fleece, low MOQ. Capriowear.",
-  // CategoryBanner's own checkmark row -- same 4 facts, same wording, as
-  // every prior category's own.
+    "Custom sweatshirt manufacturer, private label crewnecks in French terry or brushed fleece, low MOQ from 50 pieces, full customization, DDP to 20+ countries.",
   trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
-  // Real Women/Men split, same as every prior category -- explicit,
-  // though also the default (see this field's own comment in ./types.ts).
   showGenderFilter: true,
   fabricEyebrow: "FABRIC OPTIONS",
-  // Same "\n" + whitespace-pre-line line-break technique every prior
-  // category's own fabricHeading already uses -- identical H2 wording.
+  // Same sitewide H2 wording and "\n" line break as every category.
   fabricHeading: "The fabrics behind the\nbig brands",
   fabricOptions: [
     {
@@ -94,10 +74,6 @@ export const sweatshirts: Category = {
       performance: "Comparable to standard cotton-poly, eco-positioning",
     },
   ],
-  // Weight tiers as their own real, liftable table (FabricOptions.tsx's
-  // own `weightTiers` prop) -- only 3 tiers here, not 4: this category's
-  // own given content has no ultra-heavyweight crewneck tier the way
-  // Hoodies does.
   weightTiers: [
     {
       tier: "Lightweight",
@@ -116,15 +92,12 @@ export const sweatshirts: Category = {
     },
   ],
   fabricNote: [
-    { text: "Crewnecks run about a step lighter than hoodies (no hood or pocket), so the same feel lands at a lower GSM. Ribbed collar, cuffs and waistband carry " },
-    { text: "spandex", bold: true },
-    { text: " for recovery and a flat, non-curling collar. Garment-dye available. Swatches before every bulk run, and we can source or match a " },
+    { text: "Crewnecks run about a step lighter than hoodies (no hood or pocket to add fabric and construction), so the same feel lands at a lower GSM. The ribbed collar, cuffs, and waistband carry " },
+    { text: "Spandex", bold: true },
+    { text: " for recovery and a flat, non-curling collar. Garment-dye is available. Swatches before every bulk run, and we can source or match a " },
     { text: "specific fabric or GSM", bold: true },
     { text: " from your reference." },
   ],
-  // Short PDP-facing pill labels for the same 6 fabrics above, in the same
-  // order -- same "shortened, not derived" pattern every prior category's
-  // own fabricPills already establishes.
   fabricPills: [
     "French terry",
     "Brushed fleece",
@@ -134,10 +107,10 @@ export const sweatshirts: Category = {
     "Recycled blend",
   ],
   qualityHeading: "A flat collar, the weight you approve",
-  qualitySubline: "We confirm the collar, GSM and shrinkage on your sample before a single bulk piece is cut",
+  qualitySubline: "We confirm the collar, GSM, and shrinkage on your sample before a single bulk piece is cut",
   qualityPoints: [
     "Ribbed collar lies flat and holds its recovery, no curling",
-    "Spandex-reinforced collar, cuffs and hem, confirmed content",
+    "Spandex-reinforced collar, cuffs, and hem, confirmed content",
     "GSM held consistent, batch to batch, not just on the sample",
     "Shrinkage tested after wash, targeted under 5%, brushed fleece checked for pilling",
     "Every run inspected to AQL 2.5, third-party inspection welcome",
@@ -145,26 +118,19 @@ export const sweatshirts: Category = {
   coverageEyebrow: "CUSTOMIZATION",
   coverageHeading: "From custom fabric to packaging design",
   coverageItems: [
-    { title: "Fabric", body: "French terry or brushed fleece, cotton, cotton-poly and recycled blends" },
-    { title: "Weight and fit", body: "250 to 475+ GSM, regular, oversized, cropped or longline" },
+    { title: "Fabric", body: "French terry, brushed fleece, cotton-poly, tri-blend, and recycled fiber blends" },
+    { title: "Weight and fit", body: "250 to 475+ GSM, regular, oversized, or cropped" },
     {
-      title: "Neckline and zip",
-      body: "Crew, mock or cowl neckline; no zip, quarter-zip, half-zip or zip-up",
-    },
-    {
-      title: "Construction",
-      body: "Set-in, raglan or drop-shoulder sleeve, optional V-stitch sweat-guard, ribbed collar, cuffs and hem, side-seam or tubular body",
+      title: "Collar and construction",
+      body: "Crew collar with optional V-stitch sweat-guard, set-in, raglan, or drop-shoulder sleeve",
     },
     { title: "Color and print", body: "Custom colors with Pantone matching, screen, DTG, DTF, embroidery, puff, patches" },
-    { title: "Labels and packaging", body: "Woven, printed or tear-away labels, hangtags, retail-ready packaging" },
+    { title: "Labels", body: "Woven, printed, or tear-away labels, hangtags" },
+    { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec" },
   ],
-  // Same heading every prior category's own faqHeading already uses --
-  // confirmed intentional reuse, since every question below it is
-  // genuinely sweatshirt-specific. The entity question itself is NOT
-  // stored here -- app/activewear/[category]/page.tsx builds it per
-  // category via categoryEntityFaq() and prepends it at render time (see
-  // that function's own comment in ./pdpShared.ts), so it can never drift
-  // out of sync with what any style page under this category generates.
+  // Same sitewide FAQ heading. The entity question (FAQ 1) is built by
+  // categoryEntityFaq() from the entity fields above and prepended at
+  // render time; the last entry is the shared, locked get-started Q&A.
   faqHeading: "Top questions from B2B buyers",
   faqs: [
     {
@@ -173,23 +139,19 @@ export const sweatshirts: Category = {
     },
     {
       q: "What is the difference between a crewneck sweatshirt and a hoodie?",
-      a: "A crewneck is the same fleece body and sleeve as a hoodie, without the hood, drawcord and kangaroo pocket, keeping the round ribbed collar. It uses less fabric and simpler construction, so it is often the more cost-efficient first SKU. Many brands start with a midweight crewneck in core colors, then add hoodies in the best sellers. It is one of the most common requests we get as a sweatshirt manufacturer.",
+      a: "A crewneck is the same fleece body and sleeve as a hoodie, without the hood, drawcord, and kangaroo pocket, keeping the round ribbed collar. It uses less fabric and simpler construction, so it is often the more cost-efficient first SKU. Many brands start with a midweight crewneck in core colors, then add hoodies in the best sellers.",
     },
     {
-      q: "What is the standard GSM for a crewneck sweatshirt?",
+      q: "What fabric weights (GSM) do you offer?",
       a: "Lightweight 250 to 300 GSM, midweight 300 to 350 GSM (the standard band), and heavyweight 400 to 475+ GSM. Crewnecks run about a step lighter than hoodies at the same feel.",
     },
     {
       q: "How do you keep the collar from curling?",
-      a: "The ribbed crew collar is fully exposed, so we build spandex into the collar rib and test its recovery, so it lies flat and does not curl after washing.",
-    },
-    {
-      q: "Do you make half-zip and quarter-zip sweatshirts?",
-      a: "Yes. Half-zip and quarter-zip crewnecks with a standing collar, a fast-growing style for collegiate and corporate programs.",
+      a: "The ribbed crew collar is fully exposed, so we build Spandex into the collar rib and test its recovery, so it lies flat and does not curl after washing. A V-stitch sweat-guard is available as an optional heritage detail.",
     },
     {
       q: "Can you match a specific GSM or a reference sweatshirt?",
-      a: "Yes. Send a reference or tech pack and we match the fabric, GSM and hand-feel, then confirm on your sample.",
+      a: "Yes. Send a reference or tech pack and we match the fabric, GSM, and hand-feel, then confirm on your sample.",
     },
     {
       q: "What print and branding methods can you do?",
@@ -197,19 +159,19 @@ export const sweatshirts: Category = {
     },
     {
       q: "Will my sweatshirts shrink or pill?",
-      a: "We test shrinkage after wash, targeting under 5%, and check brushed fleece for pilling, before bulk.",
+      a: "We test shrinkage after wash, targeting under 5 percent, and check brushed fleece for pilling, before bulk.",
     },
     {
       q: "What can I customize?",
-      a: "Everything from fabric to packaging: fabric, weight, fit, neckline, zip, sleeve construction, collar and cuffs, color and finish (including garment-dye), print and embroidery, your logos, labels, hangtags and packaging.",
+      a: "Everything from fabric to packaging: fabric, weight, fit, collar construction, sleeve construction, cuffs, color and finish (including garment-dye), print and embroidery, your logos, labels, hangtags, and packaging.",
     },
     {
-      q: "Do you offer OEM, ODM and private label sweatshirts?",
+      q: "Do you offer OEM, ODM, and private label sweatshirts?",
       a: "Yes, all three, made under your brand.",
     },
     {
       q: "How are sweatshirts sized?",
-      a: "Alpha XS to 5XL. Unisex, men's and women's fits use the same size range with a different cut, unisex is boxier, women's is tapered.",
+      a: "Alpha XS to 5XL. Unisex, men's, and women's fits use the same size range with a different cut, unisex is boxier, women's is tapered.",
     },
     {
       q: "How long do samples and bulk take?",
@@ -217,108 +179,191 @@ export const sweatshirts: Category = {
     },
     {
       q: "Do you ship to my country?",
-      a: "Yes, 20+ countries. DDP to the US, UK, EU, Canada and Australia, with GSP+ 0% EU duty.",
+      a: "Yes, DDP to 20+ countries, including the US, UK, EU, Canada, and Australia, with GSP+ 0% EU duty.",
     },
     {
       q: "Will my designs stay protected?",
       a: "Yes. We sign an NDA before any tech pack.",
     },
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch or a reference sweatshirt by email or WhatsApp. We come back within 24 hours with next steps.",
-    },
+    faqGetStarted,
   ],
-  // FinalCta's own h2/cta and the compliance bar's own items already match
-  // content/home.ts's own shared finalCta/complianceTicker verbatim --
-  // app/activewear/[category]/page.tsx reuses those directly, same as
-  // every prior category. ctaReferenceNoun swaps this category's own noun
-  // into the shared subline template (buildCtaSubline(), ./pdpShared.ts) --
-  // owner spec, 2026-09-04.
   ctaReferenceNoun: "sweatshirt",
-  // Every style is "draft" (owner spec) -- a real name and one-line spec,
-  // no PDP content yet: shows on the grid as a non-clickable tile (no
-  // hover image swap either, since no `images` array is set -- see
-  // ProductCardMedia.tsx's own contract, which only ever activates hover
-  // once a real `images[1]` exists), no generated route, excluded from
-  // the sitemap and this category's own ItemList schema. `imageAlt` is a
-  // real, descriptive per-style alt (style name + key spec), not a bare
-  // "image" placeholder -- ready for the moment real photography drops
-  // into `image` with no separate alt-text pass, same convention every
-  // prior category's own cards already follow. Flip to "published" once
-  // a style's real PDP content (description, FAQs, specifications,
-  // gallery) exists, same as every prior category's own pilot styles.
   styleCards: [
     {
       status: "draft",
-      slug: "crewneck",
-      cardTitle: "Custom Classic Crewneck Sweatshirt",
-      cardSubline: "Round rib collar, no hood",
+      slug: "oversized-brushed-fleece-mens",
+      cardTitle: "Men's Oversized Brushed Fleece Crewneck Sweatshirt",
+      cardSubline: "Roomy relaxed fit, midweight brushed fleece",
       image: "",
-      imageAlt: "Custom classic crewneck sweatshirt, round rib collar, no hood",
-      href: "/capriowear/activewear/sweatshirts/crewneck",
+      imageAlt: "Men's oversized brushed fleece crewneck sweatshirt, roomy relaxed fit, midweight brushed fleece",
+      href: "/capriowear/activewear/sweatshirts/oversized-brushed-fleece-mens",
+      gender: "Men",
+      sku: "CAP-SWT-01",
     },
     {
       status: "draft",
-      slug: "half-zip",
-      cardTitle: "Custom Half-Zip Sweatshirt",
-      cardSubline: "Standing collar, partial zip",
+      slug: "oversized-french-terry",
+      cardTitle: "Custom Oversized French Terry Crewneck Sweatshirt",
+      cardSubline: "Extra-roomy fit, heavyweight French terry, drawcord hem",
       image: "",
-      imageAlt: "Custom half-zip sweatshirt, standing collar, partial zip",
-      href: "/capriowear/activewear/sweatshirts/half-zip",
+      imageAlt: "Custom oversized French terry crewneck sweatshirt, extra-roomy fit, heavyweight French terry, drawcord hem",
+      href: "/capriowear/activewear/sweatshirts/oversized-french-terry",
+      gender: "Men",
+      sku: "CAP-SWT-02",
     },
     {
       status: "draft",
-      slug: "quarter-zip",
-      cardTitle: "Custom Quarter-Zip Sweatshirt",
-      cardSubline: "Short zip, raised collar",
+      slug: "regular-fit-brushed-fleece-mens",
+      cardTitle: "Men's Regular-Fit Brushed Fleece Crewneck Sweatshirt",
+      cardSubline: "Standard fit, cotton-blend fleece, brushed inside",
       image: "",
-      imageAlt: "Custom quarter-zip sweatshirt, short zip, raised collar",
-      href: "/capriowear/activewear/sweatshirts/quarter-zip",
+      imageAlt: "Men's regular-fit brushed fleece crewneck sweatshirt, standard fit, cotton-blend fleece, brushed inside",
+      href: "/capriowear/activewear/sweatshirts/regular-fit-brushed-fleece-mens",
+      gender: "Men",
+      sku: "CAP-SWT-05",
     },
     {
       status: "draft",
-      slug: "oversized",
-      cardTitle: "Custom Oversized Boxy Sweatshirt",
-      cardSubline: "Heavyweight, structured fit",
+      slug: "technical-performance-mens",
+      cardTitle: "Men's Technical Performance Crewneck Sweatshirt",
+      cardSubline: "Double-knit fabric, sweat-wicking performance finish",
       image: "",
-      imageAlt: "Custom oversized boxy sweatshirt, heavyweight, structured fit",
-      href: "/capriowear/activewear/sweatshirts/oversized",
+      imageAlt: "Men's technical performance crewneck sweatshirt, double-knit fabric, sweat-wicking performance finish",
+      href: "/capriowear/activewear/sweatshirts/technical-performance-mens",
+      gender: "Men",
+      sku: "CAP-SWT-06",
     },
     {
       status: "draft",
-      slug: "cropped",
-      cardTitle: "Custom Cropped Sweatshirt",
-      cardSubline: "Shortened body length",
+      slug: "french-terry-mens",
+      cardTitle: "Men's French Terry Crewneck Sweatshirt",
+      cardSubline: "Smooth outside, warm brushed inside, stretch recovery",
       image: "",
-      imageAlt: "Custom cropped sweatshirt, shortened body length",
-      href: "/capriowear/activewear/sweatshirts/cropped",
+      imageAlt: "Men's French terry crewneck sweatshirt, smooth outside, warm brushed inside, stretch recovery",
+      href: "/capriowear/activewear/sweatshirts/french-terry-mens",
+      gender: "Men",
+      sku: "CAP-SWT-07",
     },
     {
       status: "draft",
-      slug: "raglan",
-      cardTitle: "Custom Raglan Sweatshirt",
-      cardSubline: "Raglan sleeve, athletic build",
+      slug: "premium-tech-fleece",
+      cardTitle: "Custom Premium Tech Fleece Loose-Fit Crewneck Sweatshirt",
+      cardSubline: "Loose fit, premium technical fleece, vent detailing",
       image: "",
-      imageAlt: "Custom raglan sweatshirt, raglan sleeve, athletic build",
-      href: "/capriowear/activewear/sweatshirts/raglan",
+      imageAlt: "Custom premium tech fleece loose-fit crewneck sweatshirt, loose fit, premium technical fleece, vent detailing",
+      href: "/capriowear/activewear/sweatshirts/premium-tech-fleece",
+      gender: "Men",
+      sku: "CAP-SWT-08",
     },
     {
       status: "draft",
-      slug: "longline",
-      cardTitle: "Custom Longline Sweatshirt",
-      cardSubline: "Extended hem length",
+      slug: "reverse-french-terry",
+      cardTitle: "Custom Reverse French Terry Crewneck Sweatshirt",
+      cardSubline: "Soft fleece feel without brushed-fleece heat",
       image: "",
-      imageAlt: "Custom longline sweatshirt, extended hem length",
-      href: "/capriowear/activewear/sweatshirts/longline",
+      imageAlt: "Custom reverse French terry crewneck sweatshirt, soft fleece feel without brushed-fleece heat",
+      href: "/capriowear/activewear/sweatshirts/reverse-french-terry",
+      gender: "Men",
+      sku: "CAP-SWT-09",
     },
     {
       status: "draft",
-      slug: "mock-neck",
-      cardTitle: "Custom Mock-Neck Sweatshirt",
-      cardSubline: "Short standing collar",
+      slug: "vintage-terry",
+      cardTitle: "Custom Vintage-Wash Terry Crewneck Sweatshirt",
+      cardSubline: "Heavyweight cotton terry, cracked vintage-wash finish",
       image: "",
-      imageAlt: "Custom mock-neck sweatshirt, short standing collar",
-      href: "/capriowear/activewear/sweatshirts/mock-neck",
+      imageAlt: "Custom vintage-wash terry crewneck sweatshirt, heavyweight cotton terry, cracked vintage-wash finish",
+      href: "/capriowear/activewear/sweatshirts/vintage-terry",
+      gender: "Men",
+      sku: "CAP-SWT-10",
+    },
+    {
+      status: "draft",
+      slug: "oversized-brushed-fleece-womens",
+      cardTitle: "Women's Oversized Brushed Fleece Crewneck Sweatshirt",
+      cardSubline: "Roomy relaxed fit, midweight brushed fleece",
+      image: "",
+      imageAlt: "Women's oversized brushed fleece crewneck sweatshirt, roomy relaxed fit, midweight brushed fleece",
+      href: "/capriowear/activewear/sweatshirts/oversized-brushed-fleece-womens",
+      gender: "Women",
+      sku: "CAP-SWT-03",
+    },
+    {
+      status: "draft",
+      slug: "oversized-cropped",
+      cardTitle: "Custom Oversized Cropped Fleece Crewneck Sweatshirt",
+      cardSubline: "Oversized fit, shortened cropped body length",
+      image: "",
+      imageAlt: "Custom oversized cropped fleece crewneck sweatshirt, oversized fit, shortened cropped body length",
+      href: "/capriowear/activewear/sweatshirts/oversized-cropped",
+      gender: "Women",
+      sku: "CAP-SWT-04",
+    },
+    {
+      status: "draft",
+      slug: "regular-fit-brushed-fleece-womens",
+      cardTitle: "Women's Regular-Fit Brushed Fleece Crewneck Sweatshirt",
+      cardSubline: "Standard fit, medium-weight fleece",
+      image: "",
+      imageAlt: "Women's regular-fit brushed fleece crewneck sweatshirt, standard fit, medium-weight fleece",
+      href: "/capriowear/activewear/sweatshirts/regular-fit-brushed-fleece-womens",
+      gender: "Women",
+      sku: "CAP-SWT-11",
+    },
+    {
+      status: "draft",
+      slug: "technical-performance-womens",
+      cardTitle: "Women's Technical Performance Crewneck Sweatshirt",
+      cardSubline: "Sport-finish fabric, sweat-wicking performance crew",
+      image: "",
+      imageAlt: "Women's technical performance crewneck sweatshirt, sport-finish fabric, sweat-wicking performance crew",
+      href: "/capriowear/activewear/sweatshirts/technical-performance-womens",
+      gender: "Women",
+      sku: "CAP-SWT-12",
+    },
+    {
+      status: "draft",
+      slug: "french-terry-womens",
+      cardTitle: "Women's French Terry Crewneck Sweatshirt",
+      cardSubline: "Lightweight French terry, quick-dry finish",
+      image: "",
+      imageAlt: "Women's French terry crewneck sweatshirt, lightweight French terry, quick-dry finish",
+      href: "/capriowear/activewear/sweatshirts/french-terry-womens",
+      gender: "Women",
+      sku: "CAP-SWT-13",
+    },
+    {
+      status: "draft",
+      slug: "cropped-mod-fit",
+      cardTitle: "Custom Cropped Mod-Fit Crewneck Sweatshirt",
+      cardSubline: "Mod-crop, loose-fit proportion, heavyweight fleece",
+      image: "",
+      imageAlt: "Custom cropped mod-fit crewneck sweatshirt, mod-crop, loose-fit proportion, heavyweight fleece",
+      href: "/capriowear/activewear/sweatshirts/cropped-mod-fit",
+      gender: "Women",
+      sku: "CAP-SWT-14",
+    },
+    {
+      status: "draft",
+      slug: "stretch-blend-oversized",
+      cardTitle: "Custom Stretch-Blend Oversized Crewneck Sweatshirt",
+      cardSubline: "Oversized fit, lightweight stretch fleece with spandex",
+      image: "",
+      imageAlt: "Custom stretch-blend oversized crewneck sweatshirt, oversized fit, lightweight stretch fleece with spandex",
+      href: "/capriowear/activewear/sweatshirts/stretch-blend-oversized",
+      gender: "Women",
+      sku: "CAP-SWT-15",
+    },
+    {
+      status: "draft",
+      slug: "oversized-heavyweight-terry",
+      cardTitle: "Custom Oversized Heavyweight Terry Crewneck Sweatshirt",
+      cardSubline: "Oversized drop-shoulder fit, heavyweight cotton-blend terry",
+      image: "",
+      imageAlt: "Custom oversized heavyweight terry crewneck sweatshirt, oversized drop-shoulder fit, heavyweight cotton-blend terry",
+      href: "/capriowear/activewear/sweatshirts/oversized-heavyweight-terry",
+      gender: "Women",
+      sku: "CAP-SWT-16",
     },
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, same L1 group first

@@ -16,7 +16,9 @@ import { faq } from "@/components/ui/styles";
 // component is reused verbatim by other pages with their own content
 // (e.g. `content/services.ts`'s `services.faq`, an `as const` object, so
 // its own `items` is a readonly tuple unlike `home.faq`'s mutable array).
-export type FaqProps = { content: { h2: string; items: readonly { q: string; a: string }[] } };
+export type FaqProps = {
+  content: { h2: string; items: readonly { q: string; a: string; link?: { text: string; href: string } }[] };
+};
 
 // Owner, 2026-09-04: "FAQ title, keep the word B2B in 2nd line all pages" --
 // this exact heading, "Top questions from B2B buyers," is repeated as a
@@ -64,7 +66,7 @@ function renderHeadingWithB2BBreak(heading: string) {
 }
 
 export function Faq({ content }: FaqProps) {
-  const items = content.items.map((item) => ({ question: item.q, answer: item.a }));
+  const items = content.items.map((item) => ({ question: item.q, answer: item.a, answerLink: item.link }));
   const heading = renderHeadingWithB2BBreak(content.h2);
 
   return (

@@ -22,6 +22,7 @@
 // Straps & Sleeves, this category's spec info lives in `comparisonTable`
 // and `specTables`.
 import type { Category } from "../../activewear/types";
+import { faqGetStarted } from "../../getStarted";
 
 export const weightLiftingGlovesAndGrips: Category = {
   slug: "weight-lifting-gloves-and-grips",
@@ -162,10 +163,7 @@ export const weightLiftingGlovesAndGrips: Category = {
       q: "Will my design and spec sheet stay protected?",
       a: "Yes. NDA before any tech pack or spec sheet is shared.",
     },
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch, or a reference piece by email or WhatsApp. We reply within 24 hours with next steps.",
-    },
+    faqGetStarted,
   ],
   // Shared PDP FAQ block for every Gloves & Grips PDP (rendered after the
   // entity answer and the style's own `faqs`) -- same mechanism as
@@ -179,10 +177,7 @@ export const weightLiftingGlovesAndGrips: Category = {
       q: "Will my design and spec sheet stay protected?",
       a: "Yes. NDA before any tech pack or spec sheet is shared.",
     },
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch, or a reference piece by email or WhatsApp. We reply within 24 hours with next steps.",
-    },
+    faqGetStarted,
   ],
   ctaReferenceNoun: "piece",
   styleCards: [

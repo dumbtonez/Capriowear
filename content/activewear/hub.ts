@@ -17,6 +17,7 @@
 // descriptor field this hub's cards need.
 import type { CategoryGroup } from "../hubTypes";
 import { SITE_URL } from "../site";
+import { faqGetStarted } from "../getStarted";
 
 export type { CategoryGroup, CategoryLink } from "../hubTypes";
 
@@ -183,10 +184,7 @@ export const activewearHub = {
         q: "Will my designs stay confidential?",
         a: "Yes. We sign an NDA before any tech pack is shared.",
       },
-      {
-        q: "How do I get started?",
-        a: "Pick the category closest to what you need, or send your tech pack, sketch or reference directly, and we will reply within 24 hours with next steps.",
-      },
+      faqGetStarted,
     ],
   },
 

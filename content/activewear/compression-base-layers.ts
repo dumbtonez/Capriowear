@@ -41,6 +41,7 @@
 // Flip a style to "published" only once its real PDP content exists, same
 // rule every prior category's own styleCards already follow.
 import type { Category } from "./types";
+import { faqGetStarted } from "./pdpShared";
 
 export const compressionBaseLayers: Category = {
   slug: "compression-base-layers",
@@ -257,10 +258,7 @@ export const compressionBaseLayers: Category = {
       q: "Will my designs stay protected?",
       a: "Yes. We sign an NDA before any tech pack.",
     },
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch, target mmHg or a reference garment by email or WhatsApp. We come back within 24 hours with next steps.",
-    },
+    faqGetStarted,
   ],
   // FinalCta's own h2/cta and the compliance bar's own items already match
   // content/home.ts's own shared finalCta/complianceTicker verbatim --

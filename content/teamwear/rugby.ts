@@ -37,6 +37,7 @@
 // never "seamless" -- confirmed throughout, same standing sitewide rules
 // every category follows.
 import type { Category } from "../activewear/types";
+import { faqGetStarted } from "../getStarted";
 
 export const rugby: Category = {
   slug: "rugby",
@@ -182,9 +183,10 @@ export const rugby: Category = {
       a: "Yes. Send Pantone, CMYK, RGB or hex values and we match production dye to them, and both colorways are planned into one order so they match.",
     },
     {
-      q: "How long do samples and bulk take, and how do I start?",
-      a: "A digital mockup in a few business days, a physical sample in 10 to 14 days; bulk depends on quantity and customization, confirmed on your quote. To start, send your tech pack, sketch or a reference kit by email or WhatsApp and we reply within 24 hours.",
+      q: "How long do samples and bulk take?",
+      a: "A digital mockup in a few business days, a physical sample in 10 to 14 days; bulk depends on quantity and customization, confirmed on your quote.",
     },
+    faqGetStarted,
   ],
   ctaReferenceNoun: "kit",
   // All 6 styles ship "draft" (owner spec): zero published at launch, so no

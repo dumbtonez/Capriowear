@@ -38,6 +38,7 @@
 // Leggings' own ctaSubline verbatim, regardless of what a given brief
 // supplies here.
 import type { CuratedCollection } from "./types";
+import { faqGetStarted } from "./pdpShared";
 
 export const runningWear: CuratedCollection = {
   slug: "running-wear",
@@ -126,10 +127,7 @@ export const runningWear: CuratedCollection = {
       q: "Will my designs stay protected?",
       a: "Yes. We sign an NDA before any tech pack.",
     },
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch or a reference by email or WhatsApp. We come back within 24 hours with next steps.",
-    },
+    faqGetStarted,
   ],
   // Standing CTA subline, same as every category (owner spec, 2026-09-02) --
   // see this file's own header comment for why this differs from the

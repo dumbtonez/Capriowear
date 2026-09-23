@@ -472,7 +472,16 @@ export type FaqEntry = {
   q: string;
   /** Answer-first and self-contained -- quotable as a single Q&A with no need to read the rest of the page. */
   a: string;
+  /**
+   * Optional inline link inside the answer (2026-09-23, first used by the
+   * shared "How do I get started?" answer): the first occurrence of `text`
+   * in `a` renders as a link to `href`. `a` itself stays plain text, so
+   * FAQPage JSON-LD (lib/schema.ts faqSchema) is unaffected.
+   */
+  link?: FaqLink;
 };
+
+export type FaqLink = { text: string; href: string };
 
 export type RelatedLink = {
   label: string;

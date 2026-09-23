@@ -31,6 +31,7 @@
 // every category follows. GSM figures worded as "roughly"/"confirmed on your
 // sample" reference points, never hardened claims.
 import type { Category } from "../activewear/types";
+import { faqGetStarted } from "../getStarted";
 
 export const soccer: Category = {
   slug: "soccer",
@@ -166,9 +167,10 @@ export const soccer: Category = {
       a: "They vary by competition. FIFA and the leagues set their own number sizes, name heights, reserved sleeve badge zones and color limits. Tell us your competition and we lay out the numbering, names and badges to its current rules, confirmed on your proof.",
     },
     {
-      q: "How long do samples and bulk take, and how do I start?",
-      a: "A digital mockup in a few business days, a physical sample in 10 to 14 days; bulk depends on quantity and customization, confirmed on your quote. To start, send your tech pack, sketch or a reference kit by email or WhatsApp and we reply within 24 hours.",
+      q: "How long do samples and bulk take?",
+      a: "A digital mockup in a few business days, a physical sample in 10 to 14 days; bulk depends on quantity and customization, confirmed on your quote.",
     },
+    faqGetStarted,
   ],
   ctaReferenceNoun: "kit",
   // All 7 styles ship "draft" (owner spec): zero published at launch, so no

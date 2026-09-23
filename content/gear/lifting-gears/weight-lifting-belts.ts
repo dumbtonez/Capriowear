@@ -9,6 +9,7 @@
 // "draft"` (no PDP content exists yet) -- non-clickable cards, no
 // generated route.
 import type { Category } from "../../activewear/types";
+import { faqGetStarted } from "../../getStarted";
 
 export const weightLiftingBelts: Category = {
   slug: "weight-lifting-belts",
@@ -111,10 +112,7 @@ export const weightLiftingBelts: Category = {
       q: "Will my design and spec sheet stay protected?",
       a: "Yes. NDA before any tech pack or spec sheet is shared.",
     },
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch, or a reference belt by email or WhatsApp. We reply within 24 hours with next steps.",
-    },
+    faqGetStarted,
   ],
   faqHeading: "Top questions from B2B buyers",
   faqs: [
@@ -142,10 +140,7 @@ export const weightLiftingBelts: Category = {
       q: "Will my belt design and spec sheet stay protected?",
       a: "Yes. We sign an NDA before any tech pack or spec sheet is shared, and every belt is produced entirely under your brand.",
     },
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch, or a reference belt by email or WhatsApp. We reply within 24 hours with next steps.",
-    },
+    faqGetStarted,
   ],
   ctaReferenceNoun: "belt",
   styleCards: [
@@ -527,10 +522,7 @@ export const weightLiftingBelts: Category = {
           q: "Will my design and spec sheet stay protected?",
           a: "Yes. NDA before any tech pack or spec sheet is shared.",
         },
-        {
-          q: "How do I get started?",
-          a: "Send your tech pack, sketch, or a reference belt by email or WhatsApp. We reply within 24 hours with next steps.",
-        },
+        faqGetStarted,
       ],
       pdpCustomizationPills: ["Color", "Logo patch or print", "Private label", "Custom labels"],
       // Per-style override -- this style is nylon webbing only, never
@@ -763,10 +755,7 @@ export const weightLiftingBelts: Category = {
           q: "Will my design and spec sheet stay protected?",
           a: "Yes. NDA before any tech pack or spec sheet is shared.",
         },
-        {
-          q: "How do I get started?",
-          a: "Send your tech pack, sketch, or a reference belt by email or WhatsApp. We reply within 24 hours with next steps.",
-        },
+        faqGetStarted,
       ],
       faqs: [
         {
@@ -925,10 +914,7 @@ export const weightLiftingBelts: Category = {
           q: "Will my design and spec sheet stay protected?",
           a: "Yes. NDA before any tech pack or spec sheet is shared.",
         },
-        {
-          q: "How do I get started?",
-          a: "Send your tech pack, sketch, or a reference belt by email or WhatsApp. We reply within 24 hours with next steps.",
-        },
+        faqGetStarted,
       ],
       faqs: [
         {
@@ -1078,10 +1064,7 @@ export const weightLiftingBelts: Category = {
           q: "Will my design and spec sheet stay protected?",
           a: "Yes. NDA before any tech pack or spec sheet is shared.",
         },
-        {
-          q: "How do I get started?",
-          a: "Send your tech pack, sketch, or a reference belt by email or WhatsApp. We reply within 24 hours with next steps.",
-        },
+        faqGetStarted,
       ],
       faqs: [
         {

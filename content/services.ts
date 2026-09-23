@@ -17,6 +17,7 @@
 // markup embedded in a plain string" shape FabricOptions' own closing note
 // already uses, not a second bespoke type for an identical shape.
 import type { NoteSegment } from "@/content/activewear/types";
+import { faqGetStarted } from "@/content/getStarted";
 
 // Declared outside the `as const` object below so it can carry its own
 // `NoteSegment[]` annotation -- `as const` on the object as a whole would
@@ -279,10 +280,7 @@ export const services = {
         q: "Do you ship to my country?",
         a: "Yes, 20+ countries. DDP to the US, UK, EU, Canada and Australia, with GSP+ 0% EU duty.",
       },
-      {
-        q: "How do I get started?",
-        a: "Send your tech pack, sketch or a reference by email or WhatsApp. We come back within 24 hours with next steps.",
-      },
+      faqGetStarted,
     ],
   },
 

@@ -667,6 +667,11 @@ export const accordion = {
   // stays mounted either way (never `display:none`), so this doesn't
   // reintroduce the find-on-page problem `hidden` was chosen to avoid --
   // `aria-hidden` on the panel is what keeps screen readers out while closed.
+  // Inline link inside an answer (2026-09-23, "contact form" in the shared
+  // get-started answer): white on the dark FAQ ground so it reads as a link
+  // against the muted answer text, underlined, same hover fade as other
+  // inline text links.
+  answerLink: "text-paper underline underline-offset-4 transition-opacity hover:opacity-70",
   panel: "grid transition-[grid-template-rows] duration-300 ease-in-out",
   panelOpen: "grid-rows-[1fr]",
   panelClosed: "grid-rows-[0fr]",

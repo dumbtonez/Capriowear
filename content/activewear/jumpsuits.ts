@@ -35,6 +35,7 @@
 // brief's own explicit rule -- audited out at write time, same standing
 // sitewide rule every category follows.
 import type { Category } from "./types";
+import { faqGetStarted } from "./pdpShared";
 
 export const jumpsuits: Category = {
   slug: "jumpsuits",
@@ -174,10 +175,7 @@ export const jumpsuits: Category = {
       q: "Will my designs stay protected?",
       a: "Yes. We sign an NDA before any tech pack.",
     },
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch or a reference jumpsuit by email or WhatsApp. We come back within 24 hours with next steps.",
-    },
+    faqGetStarted,
   ],
   // Standing CTA subline, same as every category (owner spec, 2026-09-02) --
   // see this file's own header comment for why this differs from the

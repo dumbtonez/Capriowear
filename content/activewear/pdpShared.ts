@@ -13,6 +13,7 @@
 // render and faqSchema() wherever it's used, so the two can never drift
 // apart.
 import { CAPRIOSPORTS_ORGANIZATION } from "../capriosports/organization";
+import { faqGetStarted } from "../getStarted";
 import { companyIdentity } from "../site";
 import type { Category, FaqEntry, PdpSpecHighlight, RelatedStyleTag } from "./types";
 
@@ -263,6 +264,11 @@ export const pdpSpecificationsCopy = {
   subline: "This is a standard build, but fully customizable to your brief",
 };
 
+// The shared "How do I get started?" Q&A now lives in content/getStarted.ts
+// (importable from content/home.ts without a cycle); re-exported here so
+// category files keep importing it from "./pdpShared".
+export { faqGetStarted };
+
 export const pdpFaqOperational: FaqEntry[] = [
   {
     q: "What is the minimum order quantity, and can I mix sizes?",
@@ -280,10 +286,7 @@ export const pdpFaqOperational: FaqEntry[] = [
     q: "Will you sign an NDA before I share my designs?",
     a: "Yes. We sign NDAs on request before you send tech packs, patterns, or reference samples, and your designs are never shared with or produced for other brands.",
   },
-  {
-    q: "How do I get started?",
-    a: "Send your tech pack, sketch, or a reference garment through our contact form. We come back within 24 hours with next steps, including a quote and sample timeline.",
-  },
+  faqGetStarted,
 ];
 
 /**

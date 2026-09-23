@@ -2,6 +2,7 @@
 // Single source of truth for all Capriowear homepage copy.
 // Edit copy here only. Verify every string against the Figma design file; where the
 // wireframe was hard to read it is marked with // VERIFY. No en dashes or em dashes.
+import { faqGetStarted, REQUEST_A_SAMPLE_HREF } from "./getStarted";
 import { companyIdentity } from "./site";
 
 // What We Make's own tile shape (owner, 2026-09-07: "add a dummy product
@@ -255,7 +256,7 @@ export const home = {
     // "Get in touch" block at the foot of the mobile drawer -- same email
     // Footer already uses (content/home.ts's own footer.contact.email).
     contact: { label: "Get in touch", email: "hello@capriosports.com" },
-    cta: { label: "Request a Sample", href: "/capriowear/request-a-sample" },
+    cta: { label: "Request a Sample", href: REQUEST_A_SAMPLE_HREF },
     secondaryCta: { label: "Download Catalog", href: "/capriowear/download-catalog" },
   },
 
@@ -840,10 +841,7 @@ export const home = {
         q: "Will my designs stay protected?",
         a: "Yes. We sign an NDA before you share any tech pack, and your designs, patterns and samples stay your intellectual property. We never resell or reuse your styles.",
       },
-      {
-        q: "How do I get started?",
-        a: "Send your tech pack, sketch or idea by email or WhatsApp. We'll come back within 24 hours with next steps.",
-      },
+      faqGetStarted,
     ],
   },
 

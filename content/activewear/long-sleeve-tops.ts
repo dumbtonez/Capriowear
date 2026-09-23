@@ -22,6 +22,7 @@
 // "published" only once its PDP is sampled, photographed and built.
 import { companyIdentity } from "../site";
 import type { Category } from "./types";
+import { faqGetStarted } from "./pdpShared";
 
 export const longSleeveTops: Category = {
   slug: "long-sleeve-tops",
@@ -183,10 +184,7 @@ export const longSleeveTops: Category = {
       q: "Will my designs stay protected?",
       a: "Yes, NDA before any tech pack.",
     },
-    {
-      q: "How do I get started?",
-      a: "Tech pack, sketch, or reference top via contact form, response within 24 hours.",
-    },
+    faqGetStarted,
   ],
   ctaReferenceNoun: "long-sleeve top",
   // 6 styles, all draft (owner spec). Card title carries "Custom"; pdpHeading

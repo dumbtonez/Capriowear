@@ -32,6 +32,7 @@
 // every category follows. GSM figures (roughly 215 to 240) are reference
 // points tied to sample confirmation, not hardened claims.
 import type { Category } from "../activewear/types";
+import { faqGetStarted } from "../getStarted";
 
 export const iceHockey: Category = {
   slug: "ice-hockey",
@@ -171,9 +172,10 @@ export const iceHockey: Category = {
       a: "They vary by league. Number size, the name bar and captain patches differ across the NHL, USA Hockey, IIHF and junior leagues. Tell us your league and we build the numbering and patches to its current rules, confirmed on your proof.",
     },
     {
-      q: "How long do samples and bulk take, and how do I start?",
-      a: "A digital mockup in a few business days, a physical sample in 10 to 14 days; bulk depends on quantity and customization, confirmed on your quote. To start, send your tech pack, sketch or a reference kit by email or WhatsApp and we reply within 24 hours.",
+      q: "How long do samples and bulk take?",
+      a: "A digital mockup in a few business days, a physical sample in 10 to 14 days; bulk depends on quantity and customization, confirmed on your quote.",
     },
+    faqGetStarted,
   ],
   ctaReferenceNoun: "kit",
   // All 5 styles ship "draft" (owner spec): zero published at launch, so no

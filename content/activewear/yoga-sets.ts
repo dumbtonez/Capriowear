@@ -22,6 +22,7 @@
 // Sweatshirts/Long-Sleeve Tops/Joggers do -- `weightTiers` simply omitted,
 // same as Leggings/Sports Bras/Shorts/Tank Tops.
 import type { Category } from "./types";
+import { faqGetStarted } from "./pdpShared";
 
 export const yogaSets: Category = {
   slug: "yoga-sets",
@@ -148,10 +149,7 @@ export const yogaSets: Category = {
       q: "Will my designs stay protected?",
       a: "Yes. We sign an NDA before any tech pack.",
     },
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch or a reference set by email or WhatsApp. We come back within 24 hours with next steps.",
-    },
+    faqGetStarted,
   ],
   // Standing CTA subline, same as every category (owner spec, 2026-09-02).
   ctaReferenceNoun: "yoga set",

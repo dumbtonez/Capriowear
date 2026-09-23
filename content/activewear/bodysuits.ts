@@ -43,6 +43,7 @@
 // brief's own explicit rule -- "colour"/"–"/"—" audited out at write time,
 // same standing sitewide rule every category follows.
 import type { Category } from "./types";
+import { faqGetStarted } from "./pdpShared";
 
 export const bodysuits: Category = {
   slug: "bodysuits",
@@ -181,10 +182,7 @@ export const bodysuits: Category = {
       q: "Will my designs stay protected?",
       a: "Yes. We sign an NDA before any tech pack.",
     },
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch or a reference bodysuit by email or WhatsApp. We come back within 24 hours with next steps.",
-    },
+    faqGetStarted,
   ],
   // Standing CTA subline, same as every category (owner spec, 2026-09-02) --
   // see this file's own header comment for why this differs from the

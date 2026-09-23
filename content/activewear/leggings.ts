@@ -20,6 +20,7 @@
 // [style]/page.tsx -- no new routes, no new schema code, no new metadata
 // code for either case.
 import type { Category } from "./types";
+import { faqGetStarted } from "./pdpShared";
 
 export const leggings: Category = {
   slug: "leggings",
@@ -222,10 +223,7 @@ export const leggings: Category = {
     // answer given -- reused verbatim from the homepage's own closing FAQ
     // CTA line (content/home.ts's faq items) rather than invent new copy
     // for the one genuine gap in an otherwise fully real Q&A set.
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch or idea by email or WhatsApp. We'll come back within 24 hours with next steps.",
-    },
+    faqGetStarted,
   ],
   // Figma-confirmed real copy (node 579:5710, 2026-08-30), same treatment
   // as h1/trustBullets/fabricOptions/qualityPoints/coverageItems -- not a

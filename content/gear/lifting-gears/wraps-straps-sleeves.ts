@@ -17,6 +17,7 @@
 // standalone Spec/Options tables, rendered after the trust block) -- see
 // both fields' own comments in content/activewear/types.ts.
 import type { Category } from "../../activewear/types";
+import { faqGetStarted } from "../../getStarted";
 
 export const wrapsStrapsSleeves: Category = {
   slug: "wraps-straps-sleeves",
@@ -154,10 +155,7 @@ export const wrapsStrapsSleeves: Category = {
       q: "Will my design and spec sheet stay protected?",
       a: "Yes. NDA before any tech pack or spec sheet is shared.",
     },
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch, or a reference piece by email or WhatsApp. We reply within 24 hours with next steps.",
-    },
+    faqGetStarted,
   ],
   faqHeading: "Top questions from B2B buyers",
   faqs: [
@@ -189,10 +187,7 @@ export const wrapsStrapsSleeves: Category = {
       q: "Will my design and spec sheet stay protected?",
       a: "Yes. NDA before any tech pack or spec sheet is shared.",
     },
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch, or a reference piece by email or WhatsApp. We reply within 24 hours with next steps.",
-    },
+    faqGetStarted,
   ],
   ctaReferenceNoun: "piece",
   styleCards: [
@@ -740,10 +735,7 @@ export const wrapsStrapsSleeves: Category = {
           q: "Will my design and spec sheet stay protected?",
           a: "Yes. NDA before any tech pack or spec sheet is shared.",
         },
-        {
-          q: "How do I get started?",
-          a: "Send your tech pack, sketch, or a reference piece by email or WhatsApp. We reply within 24 hours with next steps.",
-        },
+        faqGetStarted,
       ],
       faqs: [
         {
@@ -899,10 +891,7 @@ export const wrapsStrapsSleeves: Category = {
           q: "Will my design and spec sheet stay protected?",
           a: "Yes. NDA before any tech pack or spec sheet is shared.",
         },
-        {
-          q: "How do I get started?",
-          a: "Send your tech pack, sketch, or a reference piece by email or WhatsApp. We reply within 24 hours with next steps.",
-        },
+        faqGetStarted,
       ],
       faqs: [
         {
@@ -1063,10 +1052,7 @@ export const wrapsStrapsSleeves: Category = {
           q: "Will my design and spec sheet stay protected?",
           a: "Yes. NDA before any tech pack or spec sheet is shared.",
         },
-        {
-          q: "How do I get started?",
-          a: "Send your tech pack, sketch, or a reference piece by email or WhatsApp. We reply within 24 hours with next steps.",
-        },
+        faqGetStarted,
       ],
       faqs: [
         {
@@ -1224,10 +1210,7 @@ export const wrapsStrapsSleeves: Category = {
           q: "Will my design and spec sheet stay protected?",
           a: "Yes. NDA before any tech pack or spec sheet is shared.",
         },
-        {
-          q: "How do I get started?",
-          a: "Send your tech pack, sketch, or a reference piece by email or WhatsApp. We reply within 24 hours with next steps.",
-        },
+        faqGetStarted,
       ],
       faqs: [
         {
@@ -1391,10 +1374,7 @@ export const wrapsStrapsSleeves: Category = {
           q: "Will my design and spec sheet stay protected?",
           a: "Yes. NDA before any tech pack or spec sheet is shared.",
         },
-        {
-          q: "How do I get started?",
-          a: "Send your tech pack, sketch, or a reference piece by email or WhatsApp. We reply within 24 hours with next steps.",
-        },
+        faqGetStarted,
       ],
       faqs: [
         {
@@ -1559,10 +1539,7 @@ export const wrapsStrapsSleeves: Category = {
           q: "Will my design and spec sheet stay protected?",
           a: "Yes. NDA before any tech pack or spec sheet is shared.",
         },
-        {
-          q: "How do I get started?",
-          a: "Send your tech pack, sketch, or a reference piece by email or WhatsApp. We reply within 24 hours with next steps.",
-        },
+        faqGetStarted,
       ],
       faqs: [
         {
@@ -1733,10 +1710,7 @@ export const wrapsStrapsSleeves: Category = {
           q: "Will my design and spec sheet stay protected?",
           a: "Yes. NDA before any tech pack or spec sheet is shared.",
         },
-        {
-          q: "How do I get started?",
-          a: "Send your tech pack, sketch, or a reference piece by email or WhatsApp. We reply within 24 hours with next steps.",
-        },
+        faqGetStarted,
       ],
       faqs: [
         {

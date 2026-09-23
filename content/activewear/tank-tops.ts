@@ -17,6 +17,7 @@
 // gender-disambiguated slugs (fitted-mens/fitted-womens,
 // ribbed-mens/ribbed-womens) -- never collapsed to one shared slug.
 import type { Category } from "./types";
+import { faqGetStarted } from "./pdpShared";
 
 export const tankTops: Category = {
   slug: "tank-tops",
@@ -162,10 +163,7 @@ export const tankTops: Category = {
       q: "Will my designs stay protected?",
       a: "Yes. We sign an NDA before any tech pack.",
     },
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch, or a reference tank through our contact form. We come back within 24 hours with next steps, including a quote and sample timeline.",
-    },
+    faqGetStarted,
   ],
   ctaReferenceNoun: "tank top",
   // 16 styles, 8 men's (CAP-TNK-01 to 08) then 8 women's (CAP-TNK-09 to

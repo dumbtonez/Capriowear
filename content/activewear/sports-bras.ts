@@ -12,6 +12,7 @@
 // keyword -- see `entityQuestion`/`entityAnswer` and `h1`/`metaTitle`
 // below.
 import type { Category } from "./types";
+import { faqGetStarted } from "./pdpShared";
 
 export const sportsBras: Category = {
   slug: "sports-bras",
@@ -143,10 +144,7 @@ export const sportsBras: Category = {
       q: "Will my designs stay protected?",
       a: "Yes. We sign an NDA before any tech pack.",
     },
-    {
-      q: "How do I get started?",
-      a: "Send your tech pack, sketch, or a reference sports bra through our contact form. We come back within 24 hours with next steps, including a quote and sample timeline.",
-    },
+    faqGetStarted,
   ],
   ctaReferenceNoun: "sports bra",
   // All 15 styles stay "draft" (owner spec) -- flip to "published" only
