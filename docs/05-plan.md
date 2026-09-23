@@ -4059,3 +4059,12 @@ Audit of all 16 T-Shirts cards against the house rule "card title = PDP H1 minus
 **Verified:** 16/16 cards now equal their H1 minus " Manufacturer". The rendered T-Shirts PLP shows all 12 gendered titles, and no "Custom Fitted T-Shirt" remains. tsc and eslint clean.
 
 **Card clickability: back to the sitewide rule (owner, same day).** A brief revert made the SKU 4, 5, 6 PLP cards non-clickable via an explicit `internalPreview: false` opt-out; the owner then asked for them to be clickable like every other PLP, so the opt-out and its template/type support were removed entirely. The three cards follow `isDraftPdpReachable()` like every built draft card sitewide.
+
+## Long-Sleeve Tops women-only styles switched to "Women's", men's Fitted Performance meta gendered, 2026-09-23
+
+Owner override of the strict rule applied earlier today: the whole Long-Sleeve Tops women's line now leads with "Women's", matching CAP-LSL-11, even where no men's counterpart exists.
+
+- **CAP-LSL-12 / 13 / 14:** "Custom Fitted Cropped / Oversized Crew / Midi-Length Long-Sleeve" became "Women's ..." in the H1, `pdpMetaTitle` (title tag), breadcrumb (`pdpTitle`), card title, card `imageAlt` and all 7 image alts per style (6 gallery images plus the specifications image). Meta descriptions already said "Women's", unchanged. The 7 related-style chips pointing at these three styles were relabelled "Women's ... Long-Sleeve" to match.
+- **CAP-LSL-02:** meta description now starts "Men's fitted performance long-sleeve manufacturer..." (was "Custom ..."), catching up with its gendered H1/title/breadcrumb/card/alts.
+
+**Verified:** all 4 pages return 200 with the new title, H1, breadcrumb, alts and meta. The PLP shows the 4 women's cards as "Women's ...". tsc and eslint clean.
