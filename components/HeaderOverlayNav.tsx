@@ -42,8 +42,8 @@ export type HeaderOverlayNavProps = {
 };
 
 const SOCIAL_ICON = [
-  { match: "instagram.com", Icon: InstagramIcon, size: "socialIconSm" as const },
-  { match: "linkedin.com", Icon: LinkedinIcon, size: "socialIconLg" as const },
+  { match: "instagram.com", Icon: InstagramIcon, size: "socialIconSm" as const, label: "Capriowear on Instagram" },
+  { match: "linkedin.com", Icon: LinkedinIcon, size: "socialIconLg" as const, label: "Capriowear on LinkedIn" },
 ];
 
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -205,7 +205,7 @@ export function HeaderOverlayNav({ brand, logo, links, cta, secondaryCta, social
                     {social.map((url) => {
                       const entry = SOCIAL_ICON.find((s) => url.includes(s.match));
                       if (!entry) return null;
-                      const { Icon, size } = entry;
+                      const { Icon, size, label } = entry;
                       return (
                         <a
                           key={url}
@@ -213,12 +213,14 @@ export function HeaderOverlayNav({ brand, logo, links, cta, secondaryCta, social
                           target="_blank"
                           rel="noopener noreferrer"
                           className={footer.socialButton}
+                          aria-label={label}
                         >
                           <Icon className={footer[size]} />
                         </a>
                       );
                     })}
-                    <span className={footer.socialButton} aria-label="Facebook (coming soon)">
+                    {/* Not a link (no Facebook page yet): decorative, no label. */}
+                    <span className={footer.socialButton} aria-hidden="true">
                       <FacebookIcon className={footer.socialIconFb} />
                     </span>
                   </div>

@@ -116,8 +116,8 @@ export type FooterProps = {
 };
 
 const SOCIAL_ICON = [
-  { match: "instagram.com", Icon: InstagramIcon, size: "socialIconSm" as const },
-  { match: "linkedin.com", Icon: LinkedinIcon, size: "socialIconLg" as const },
+  { match: "instagram.com", Icon: InstagramIcon, size: "socialIconSm" as const, label: "Capriowear on Instagram" },
+  { match: "linkedin.com", Icon: LinkedinIcon, size: "socialIconLg" as const, label: "Capriowear on LinkedIn" },
 ];
 
 function SocialLinks({ social }: { social: readonly string[] }) {
@@ -126,15 +126,16 @@ function SocialLinks({ social }: { social: readonly string[] }) {
       {social.map((url) => {
         const entry = SOCIAL_ICON.find((s) => url.includes(s.match));
         if (!entry) return null;
-        const { Icon, size } = entry;
+        const { Icon, size, label } = entry;
         return (
-          <a key={url} href={url} target="_blank" rel="noopener noreferrer" className={footer.socialButton}>
+          <a key={url} href={url} target="_blank" rel="noopener noreferrer" className={footer.socialButton} aria-label={label}>
             <Icon className={footer[size]} />
           </a>
         );
       })}
-      {/* No real Facebook page yet -- see the header comment above. */}
-      <span className={footer.socialButton} aria-label="Facebook (coming soon)">
+      {/* No real Facebook page yet -- see the header comment above. Not a
+          link, so purely decorative: hidden from assistive tech, no label. */}
+      <span className={footer.socialButton} aria-hidden="true">
         <FacebookIcon className={footer.socialIconFb} />
       </span>
     </>

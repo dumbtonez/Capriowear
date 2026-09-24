@@ -127,6 +127,18 @@ export function TextReveal({ text, segments, boldClassName, as: Tag = "span", cl
   const { ref, active } = useRevealOnView<HTMLElement>();
   let globalIndex = 0;
 
+  // Accessible name for the split, aria-hidden words (Hoodies audit
+  // follow-up, 2026-09-24). A heading (h1 to h6) has a real role, so
+  // `aria-label` on it is valid ARIA and stays: a second, visually-hidden
+  // copy there would double the H1/H2's own DOM text for crawlers. Any
+  // other element (span, p) has no role, so `aria-label` is prohibited
+  // (Lighthouse "aria-prohibited-attr"): it gets one `sr-only` copy of the
+  // full text instead, same raw `sr-only` utility Marquee already uses.
+  const isHeading = typeof Tag === "string" && /^h[1-6]$/.test(Tag);
+  const accessibleText = segments ? segments.map((s) => s.text).join("") : (text ?? "").replace(/\n/g, " ");
+  const labelProps = isHeading ? { "aria-label": accessibleText } : {};
+  const srCopy = isHeading ? null : <span className="sr-only">{accessibleText}</span>;
+
   // Segmented mode: word boundaries are re-derived from the flattened
   // segment text (not kept per-segment) -- see the `segments` prop's own
   // comment. No line-break support here (nothing segmented needs it yet);
@@ -146,7 +158,6 @@ export function TextReveal({ text, segments, boldClassName, as: Tag = "span", cl
   // keeping this instance's total duration in the same ~1.25s ballpark as
   // every short heading elsewhere, regardless of how many words it has.
   if (segments) {
-    const fullText = segments.map((s) => s.text).join("");
     const words = segments.flatMap((segment) =>
       segment.text
         .split(" ")
@@ -156,7 +167,8 @@ export function TextReveal({ text, segments, boldClassName, as: Tag = "span", cl
     const MAX_STAGGER_INDEX = 10;
 
     return (
-      <Tag ref={ref} className={cx(className, active && "reveal-active")} aria-label={fullText}>
+      <Tag ref={ref} className={cx(className, active && "reveal-active")} {...labelProps}>
+        {srCopy}
         {words.map(({ word, bold }, wi) => {
           const i = Math.min(globalIndex++, MAX_STAGGER_INDEX);
           return (
@@ -193,8 +205,9 @@ export function TextReveal({ text, segments, boldClassName, as: Tag = "span", cl
     <Tag
       ref={ref}
       className={cx(className, active && "reveal-active")}
-      aria-label={text}
+      {...labelProps}
     >
+      {srCopy}
       {lines.map((line, li) => (
         <Fragment key={li}>
           {li > 0 && <br />}

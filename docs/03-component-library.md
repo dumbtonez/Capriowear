@@ -176,6 +176,8 @@ Pauses on hover **and** on keyboard focus, so a keyboard user can read a moving 
 ### TextReveal — Built
 `components/TextReveal.tsx` (client component) · recipe: `textReveal` · animation in `app/globals.css`
 
+**Accessible name (2026-09-24, Hoodies audit follow-up):** the animated words are `aria-hidden`. On a heading (`as="h1"` to `"h6"`) the full text stays as the heading's own `aria-label` (valid ARIA; a second copy would double the heading's DOM text for crawlers). On any other element (`span`, `p`), where `aria-label` is prohibited, it renders one `sr-only` copy of the full text instead.
+
 Word-by-word entrance reveal: each word sits in its own `overflow-hidden` mask and slides up into place, staggered per word, when the element scrolls into view. Owner reference, 2026-08-27: `afternow.co/services/`.
 
 | Prop | Meaning |
@@ -743,6 +745,8 @@ Social icons reuse `LinkedinIcon`/`InstagramIcon`/`FacebookIcon`, extracted this
 
 ### Footer — Built
 `components/sections/Footer.tsx` · recipe: `footer`
+
+**Social links (2026-09-24):** Instagram and LinkedIn icon links carry `aria-label="Capriowear on Instagram"` / `"Capriowear on LinkedIn"` (same in `MobileNav` and `HeaderOverlayNav`). The unlinked Facebook placeholder is `aria-hidden`, with no label.
 
 Site footer, homepage section 15. Figma: desktop node `461:2683`, mobile node `499:3275` (moved from the original `461:2715` at some point during the desktop content-arrangement pass below -- the old ID stopped resolving; re-confirmed 2026-08-27, same real values: 40px top / 20px side inset) -- genuinely different layouts per breakpoint (desktop: multi-row grid, nav/description then contact/address; mobile: one flat stacked column, gap-24, 3 dividers instead of desktop's 1), not one responsive reflow.
 

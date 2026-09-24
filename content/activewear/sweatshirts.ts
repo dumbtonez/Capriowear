@@ -54,7 +54,7 @@ export const sweatshirts: Category = {
       performance: "Napped soft interior, warmer at the same weight, a fuller hand for dimensional embroidery",
     },
     {
-      fabric: "Cotton-poly blend (commonly 80/20)",
+      fabric: "Cotton/poly blend (commonly 80/20)",
       bestFor: "Retail, promo, collegiate and corporate programs",
       performance: "Balances cost, shrink control and embroidery stability",
     },
@@ -71,7 +71,7 @@ export const sweatshirts: Category = {
     {
       fabric: "Recycled fiber blend",
       bestFor: "Sustainable lines",
-      performance: "Comparable to standard cotton-poly, eco-positioning",
+      performance: "Comparable to standard cotton/poly, eco-positioning",
     },
   ],
   weightTiers: [
@@ -101,7 +101,7 @@ export const sweatshirts: Category = {
   fabricPills: [
     "French terry",
     "Brushed fleece",
-    "Cotton-poly blend",
+    "Cotton/poly blend",
     "Compacted cotton",
     "Tri-blend fleece",
     "Recycled blend",
@@ -118,7 +118,7 @@ export const sweatshirts: Category = {
   coverageEyebrow: "CUSTOMIZATION",
   coverageHeading: "From custom fabric to packaging design",
   coverageItems: [
-    { title: "Fabric", body: "French terry, brushed fleece, cotton-poly, tri-blend, and recycled fiber blends" },
+    { title: "Fabric", body: "French terry, brushed fleece, cotton/poly, tri-blend, and recycled fiber blends" },
     { title: "Weight and fit", body: "250 to 475+ GSM, regular, oversized, or cropped" },
     {
       title: "Collar and construction",
@@ -161,7 +161,7 @@ export const sweatshirts: Category = {
     },
     {
       q: "Will my sweatshirts shrink or pill?",
-      a: "We test shrinkage after wash, targeting under 5 percent, and check brushed fleece for pilling, before bulk.",
+      a: "We test shrinkage after wash, targeting under 5%, and check brushed fleece for pilling, before bulk.",
     },
     {
       q: "What can I customize?",
@@ -217,7 +217,7 @@ export const sweatshirts: Category = {
       pdpMetaDescription:
         "Men's oversized brushed fleece crewneck sweatshirt manufacturer, private label, roomy relaxed fit, flat spandex collar, low MOQ, DDP to 20+ countries.",
       material: "Brushed fleece",
-      pdpFabricPills: ["Brushed Fleece", "Cotton-Poly Blend", "Tri-Blend Fleece", "Recycled Fiber Blend"],
+      pdpFabricPills: ["Brushed Fleece", "Cotton/Poly Blend", "Tri-Blend Fleece", "Recycled Fiber Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -226,7 +226,7 @@ export const sweatshirts: Category = {
         },
         {
           q: "Can I choose a different fabric weight for this style?",
-          a: "Yes. This build ships in brushed fleece as the base, and we can move it to French terry, cotton-poly, or a heavier tri-blend, confirmed on your sample.",
+          a: "Yes. This build ships in brushed fleece as the base, and we can move it to French terry, cotton/poly, or a heavier tri-blend, confirmed on your sample.",
         },
       ],
       relatedStyleTags: [
@@ -296,7 +296,7 @@ export const sweatshirts: Category = {
       pdpMetaDescription:
         "Men's oversized French terry crewneck sweatshirt manufacturer, private label, heavyweight terry, drawcord hem, low MOQ, DDP to 20+ countries worldwide.",
       material: "Heavyweight French terry",
-      pdpFabricPills: ["French Terry", "Brushed Fleece", "Cotton-Poly Blend", "Tri-Blend Fleece"],
+      pdpFabricPills: ["French Terry", "Brushed Fleece", "Cotton/Poly Blend", "Tri-Blend Fleece"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -375,7 +375,7 @@ export const sweatshirts: Category = {
       pdpMetaDescription:
         "Men's regular-fit brushed fleece crewneck sweatshirt manufacturer, private label, cotton-blend fleece, flat spandex collar, low MOQ, DDP to 20+ countries.",
       material: "Cotton-blend brushed fleece",
-      pdpFabricPills: ["Brushed Fleece", "Cotton-Poly Blend", "French Terry", "Tri-Blend Fleece"],
+      pdpFabricPills: ["Brushed Fleece", "Cotton/Poly Blend", "French Terry", "Tri-Blend Fleece"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -454,7 +454,7 @@ export const sweatshirts: Category = {
       pdpMetaDescription:
         "Men's technical performance crewneck sweatshirt manufacturer, private label, moisture-wicking double-knit fabric, low MOQ from 50 pieces, DDP to 20+ countries.",
       material: "Double-knit performance fabric with a moisture-wicking finish",
-      pdpFabricPills: ["Performance Double-Knit", "French Terry", "Brushed Fleece", "Cotton-Poly Blend"],
+      pdpFabricPills: ["Performance Double-Knit", "French Terry", "Brushed Fleece", "Cotton/Poly Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -533,7 +533,7 @@ export const sweatshirts: Category = {
       pdpMetaDescription:
         "Men's French terry crewneck sweatshirt manufacturer, private label, smooth outer face, brushed interior, stretch recovery, low MOQ, DDP to 20+ countries.",
       material: "French terry",
-      pdpFabricPills: ["French Terry", "Brushed Fleece", "Cotton-Poly Blend", "Tri-Blend Fleece"],
+      pdpFabricPills: ["French Terry", "Brushed Fleece", "Cotton/Poly Blend", "Tri-Blend Fleece"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -691,7 +691,7 @@ export const sweatshirts: Category = {
       pdpMetaDescription:
         "Men's reverse French terry crewneck sweatshirt manufacturer, private label, soft fleece feel without added heat, low MOQ from 50 pieces, DDP to 20+ countries.",
       material: "Reverse French terry",
-      pdpFabricPills: ["Reverse French Terry", "French Terry", "Brushed Fleece", "Cotton-Poly Blend"],
+      pdpFabricPills: ["Reverse French Terry", "French Terry", "Brushed Fleece", "Cotton/Poly Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -770,7 +770,7 @@ export const sweatshirts: Category = {
       pdpMetaDescription:
         "Men's vintage-wash terry crewneck sweatshirt manufacturer, private label, heavyweight cotton terry, cracked wash finish, low MOQ, DDP to 20+ countries.",
       material: "100% cotton terry, 420 GSM",
-      pdpFabricPills: ["Cotton Terry", "French Terry", "Brushed Fleece", "Cotton-Poly Blend"],
+      pdpFabricPills: ["Cotton Terry", "French Terry", "Brushed Fleece", "Cotton/Poly Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -849,7 +849,7 @@ export const sweatshirts: Category = {
       pdpMetaDescription:
         "Women's oversized brushed fleece crewneck sweatshirt manufacturer, private label, roomy relaxed fit, flat ribbed collar, low MOQ, DDP to 20+ countries.",
       material: "Brushed fleece",
-      pdpFabricPills: ["Brushed Fleece", "Cotton-Poly Blend", "Tri-Blend Fleece", "Recycled Fiber Blend"],
+      pdpFabricPills: ["Brushed Fleece", "Cotton/Poly Blend", "Tri-Blend Fleece", "Recycled Fiber Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -858,7 +858,7 @@ export const sweatshirts: Category = {
         },
         {
           q: "Can I choose a different fabric weight for this style?",
-          a: "Yes. This build ships in brushed fleece as the base, and we can move it to French terry, cotton-poly, or a heavier tri-blend, confirmed on your sample.",
+          a: "Yes. This build ships in brushed fleece as the base, and we can move it to French terry, cotton/poly, or a heavier tri-blend, confirmed on your sample.",
         },
       ],
       relatedStyleTags: [
@@ -927,8 +927,8 @@ export const sweatshirts: Category = {
       pdpMetaTitle: "Women's Oversized Cropped Fleece Crewneck Sweatshirt Manufacturer",
       pdpMetaDescription:
         "Women's oversized cropped fleece crewneck sweatshirt manufacturer, private label, cropped body length, midweight fleece, low MOQ, DDP to 20+ countries.",
-      material: "Midweight cotton-poly blend fleece",
-      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton-Poly Blend", "Tri-Blend Fleece"],
+      material: "Midweight cotton/poly blend fleece",
+      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton/Poly Blend", "Tri-Blend Fleece"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -949,7 +949,7 @@ export const sweatshirts: Category = {
       ],
       specifications: [
         { label: "Style", value: "Women's oversized crewneck sweatshirt, cropped body length, no hood, no zip (base type)" },
-        { label: "Fabric", value: "Midweight fleece (cotton-poly blend)" },
+        { label: "Fabric", value: "Midweight fleece (cotton/poly blend)" },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Oversized through the body and sleeve, cropped body length" },
         { label: "Collar", value: "Round ribbed crew, spandex-reinforced to lie flat, optional V-stitch sweat-guard" },
@@ -1007,7 +1007,7 @@ export const sweatshirts: Category = {
       pdpMetaDescription:
         "Women's regular-fit brushed fleece crewneck sweatshirt manufacturer, private label, medium-weight fleece, flat ribbed collar, low MOQ, DDP to 20+ countries.",
       material: "Medium-weight brushed fleece",
-      pdpFabricPills: ["Brushed Fleece", "Cotton-Poly Blend", "French Terry", "Tri-Blend Fleece"],
+      pdpFabricPills: ["Brushed Fleece", "Cotton/Poly Blend", "French Terry", "Tri-Blend Fleece"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -1016,7 +1016,7 @@ export const sweatshirts: Category = {
         },
         {
           q: "Can I choose a different fabric weight for this style?",
-          a: "Yes. This build ships in medium-weight brushed fleece as the base, and we can move it to French terry, cotton-poly, or a heavier tri-blend, confirmed on your sample.",
+          a: "Yes. This build ships in medium-weight brushed fleece as the base, and we can move it to French terry, cotton/poly, or a heavier tri-blend, confirmed on your sample.",
         },
       ],
       relatedStyleTags: [
@@ -1086,7 +1086,7 @@ export const sweatshirts: Category = {
       pdpMetaDescription:
         "Women's technical performance crewneck sweatshirt manufacturer, private label, moisture-wicking double-knit performance fabric, low MOQ, DDP to 20+ countries.",
       material: "Moisture-wicking performance double-knit",
-      pdpFabricPills: ["Performance Double-Knit", "Brushed Fleece", "French Terry", "Cotton-Poly Blend"],
+      pdpFabricPills: ["Performance Double-Knit", "Brushed Fleece", "French Terry", "Cotton/Poly Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -1165,7 +1165,7 @@ export const sweatshirts: Category = {
       pdpMetaDescription:
         "Women's French terry crewneck sweatshirt manufacturer, private label, lightweight performance terry, quick-dry finish, low MOQ, DDP to 20+ countries worldwide.",
       material: "Lightweight French terry (performance polyester)",
-      pdpFabricPills: ["French Terry", "Brushed Fleece", "Performance Double-Knit", "Cotton-Poly Blend"],
+      pdpFabricPills: ["French Terry", "Brushed Fleece", "Performance Double-Knit", "Cotton/Poly Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -1244,7 +1244,7 @@ export const sweatshirts: Category = {
       pdpMetaDescription:
         "Women's cropped mod-fit crewneck sweatshirt manufacturer, private label, loose fit, heavyweight fleece, low MOQ from 50 pieces, DDP to 20+ countries worldwide.",
       material: "Heavyweight brushed fleece",
-      pdpFabricPills: ["Brushed Fleece", "Cotton-Poly Blend", "Tri-Blend Fleece", "French Terry"],
+      pdpFabricPills: ["Brushed Fleece", "Cotton/Poly Blend", "Tri-Blend Fleece", "French Terry"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -1323,7 +1323,7 @@ export const sweatshirts: Category = {
       pdpMetaDescription:
         "Women's stretch-blend oversized crewneck sweatshirt manufacturer, private label, lightweight stretch fleece with Spandex, low MOQ, DDP to 20+ countries.",
       material: "Lightweight stretch-blend fleece with Spandex",
-      pdpFabricPills: ["Stretch-Blend Fleece", "Brushed Fleece", "Cotton-Poly Blend", "Tri-Blend Fleece"],
+      pdpFabricPills: ["Stretch-Blend Fleece", "Brushed Fleece", "Cotton/Poly Blend", "Tri-Blend Fleece"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {

@@ -29,6 +29,7 @@ import { footer, header } from "@/components/ui/styles";
 import { buildCtaSubline, categoryEntityFaq } from "@/content/activewear/pdpShared";
 import { capriosportsHome } from "@/content/capriosports/home";
 import { home, liftingGearsMegaMenu } from "@/content/home";
+import { CAPRIOSPORTS_ORGANIZATION } from "@/content/capriosports/organization";
 import { GEAR_DEFAULT_OG_IMAGE, ORGANIZATION, SITE_URL, siteNameForGroup } from "@/content/site";
 import { liftingGearsCategories } from "@/content/gear/lifting-gears/categories";
 import { breadcrumbSchema, collectionPageSchema, faqSchema } from "@/lib/schema";
@@ -118,7 +119,9 @@ export default async function LiftingGearsCategoryPage({ params }: PageProps<"/l
             data={collectionPageSchema(
               data.menuLabel,
               `${SITE_URL}/lifting-gears/${data.slug}`,
-              `${data.menuLabel} from ${ORGANIZATION.description}`,
+              // Gear is Capriosports' own line, not Capriowear: the locked schema
+              // one-liner, never Capriowear's intro (Hoodies audit follow-up, 2026-09-24).
+              `${data.menuLabel} by Capriosports. ${CAPRIOSPORTS_ORGANIZATION.identityLine.gear}`,
               publishedStyleCards.map((card) => ({
                 name: card.cardTitle,
                 url: `${SITE_URL}${card.href}`,

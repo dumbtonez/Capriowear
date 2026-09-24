@@ -120,23 +120,24 @@ function focusQuietly(el: HTMLElement | null, quiet: boolean) {
 // Figma order. Facebook has no `match`: it always renders, unlinked, unless
 // a real URL shows up in `social` -- same standing rule Footer follows.
 const SOCIAL_ICONS = [
-  { match: "linkedin.com", Icon: LinkedinIcon, size: drawer.socialIconLg },
-  { match: "instagram.com", Icon: InstagramIcon, size: drawer.socialIconSm },
+  { match: "linkedin.com", Icon: LinkedinIcon, size: drawer.socialIconLg, label: "Capriowear on LinkedIn" },
+  { match: "instagram.com", Icon: InstagramIcon, size: drawer.socialIconSm, label: "Capriowear on Instagram" },
 ];
 
 function SocialLinks({ social }: { social: readonly string[] }) {
   return (
     <>
-      {SOCIAL_ICONS.map(({ match, Icon, size }) => {
+      {SOCIAL_ICONS.map(({ match, Icon, size, label }) => {
         const url = social.find((href) => href.includes(match));
         if (!url) return null;
         return (
-          <a key={match} href={url} target="_blank" rel="noopener noreferrer" className={drawer.socialButton}>
+          <a key={match} href={url} target="_blank" rel="noopener noreferrer" className={drawer.socialButton} aria-label={label}>
             <Icon className={size} />
           </a>
         );
       })}
-      <span className={drawer.socialButton} aria-label="Facebook (coming soon)">
+      {/* Not a link (no Facebook page yet): decorative, no label. */}
+      <span className={drawer.socialButton} aria-hidden="true">
         <FacebookIcon className={drawer.socialIconFb} />
       </span>
     </>
