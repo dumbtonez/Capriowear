@@ -4322,3 +4322,13 @@ Owner spec: refinement of the existing PLP, same sections and components. `conte
 - **Test PDPs removed:** full-length-unitard and cropped-unitard now 404, no redirects; their codes are reused. With no published PDPs, CollectionPage/ItemList drops out (accepted sitewide behavior).
 - **Fabric table** 5 rows (ribbed knit removed), new note; fabric pills follow the table. **Customization** 6 items, trust bullet 2 reworded, **FAQ** 17 Q&As.
 - Related, Final CTA, breadcrumb and canonical unchanged.
+
+## Bodysuits PDPs batch 2: SKUs 4, 5, 6 built as drafts, 2026-09-24
+
+Owner brief: draft PDPs for CAP-BOD-04 `open-back-short-leg`, CAP-BOD-05 `long-sleeve` (new content under the reused slug) and CAP-BOD-06 `corset-detail-short-leg`, in `content/activewear/bodysuits.ts`. Content only, same template and field set as batch 1; the category-level "How we customize" block is reused, not duplicated.
+
+- **Weight row:** "Pending, confirmed on your sample." on all 3, no GSM.
+- **Pills:** batch 1's pills to SKUs 4 to 6 now resolve to the new PDPs through the existing slug fallback, with no edit to batch 1 data. Pills to SKUs 7 to 9 still fall back to the PLP.
+- **Draft handling:** unchanged. noindex/nofollow, out of the sitemap, BreadcrumbList only. PLP cards 1 to 6 are links; 7 to 9 are not.
+
+**Verified (local build):** script check of all 3 pages passes (title, meta 153/151/160, robots, canonical, OG/Twitter, H1, breadcrumb, spec rows, chips, customize steps, quality block, FAQ order and text, pill targets, CTA, compliance, banned strings). tsc, eslint, build clean.

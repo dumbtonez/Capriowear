@@ -13,8 +13,8 @@
 // the sitewide `isDraftPdpReachable()` rule, same as Hoodies. Grid order
 // is SKU-number order, 1 to 9.
 //
-// PDP batch 1 (owner spec, 2026-09-24): SKUs 1 to 3 carry full draft PDP
-// content, so their cards link and their pages render noindexed, with no
+// PDP batches 1 and 2 (owner spec, 2026-09-24): SKUs 1 to 6 carry full
+// draft PDP content, so their cards link and their pages render noindexed, with no
 // sitemap entry and no Product/FAQPage JSON-LD. Key facts, customization
 // chips, spec subtitle and the operational FAQs are the shared PDP
 // defaults (./pdpShared.ts); "How we customize" is set once below for the
@@ -411,6 +411,66 @@ export const bodysuits: Category = {
       imageAlt: "Custom Open-Back Short-Leg Bodysuit",
       href: "/capriowear/activewear/bodysuits/open-back-short-leg",
       sku: "CAP-BOD-04",
+      pdpHeading: "Custom Open-Back Short-Leg Bodysuit Manufacturer",
+      pdpDescription:
+        "Open-back short-leg bodysuit with a mock neck, quarter-zip front, cap sleeves and a back cutout, custom and private label, in a high-stretch Polyester/Spandex knit, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Open-Back Short-Leg Bodysuit Manufacturer",
+      pdpMetaDescription:
+        "Custom open-back short-leg bodysuit manufacturer, private label, mock neck, quarter-zip front, back cutout, bike-short leg, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Open-Back Short-Leg Bodysuit" },
+        { alt: "Custom Open-Back Short-Leg Bodysuit" },
+        { alt: "Custom Open-Back Short-Leg Bodysuit" },
+        { alt: "Custom Open-Back Short-Leg Bodysuit" },
+        { alt: "Custom Open-Back Short-Leg Bodysuit" },
+        { alt: "Custom Open-Back Short-Leg Bodysuit" },
+      ],
+      material: "Polyester/Spandex high-stretch knit, commonly around 68% / 32%",
+      pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "What does the front zip do on the open-back short-leg bodysuit?",
+          a: "The open-back short-leg bodysuit has a quarter-zip front at a mock neck, which makes the style easier to step into and adds ventilation at the neck. Zip type, length and puller are specified to your brief.",
+        },
+        {
+          q: "Can you change the back cutout on the open-back short-leg bodysuit?",
+          a: "Yes. The back cutout on the open-back short-leg bodysuit is cut to your pattern in any shape or size, with the edges bound or turned and checked for stretch recovery on your sample.",
+        },
+        {
+          q: "What fabric do you use for the open-back short-leg bodysuit?",
+          a: "A high-stretch Polyester/Spandex knit, commonly around 68% Polyester and 32% Spandex, which holds the cutout edges and mock neck close to the body. The exact blend and weight of the open-back short-leg bodysuit are confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Sleeveless Short-Leg Bodysuit", slug: "sleeveless-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Long-Sleeve Short-Leg Bodysuit", slug: "long-sleeve-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Corset-Detail Short-Leg Bodysuit", slug: "corset-detail-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Crossback Short-Leg Bodysuit", slug: "crossback-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "See All", href: "/capriowear/activewear/bodysuits" },
+      ],
+      specifications: [
+        { label: "Style", value: "Open-back short-leg bodysuit" },
+        { label: "Fabric", value: "Polyester/Spandex high-stretch knit, commonly around 68% / 32%, confirmed on your sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Silhouette", value: "Built-in bike-short leg, inseam to your spec" },
+        { label: "Sleeve", value: "Cap sleeve" },
+        { label: "Neckline", value: "Mock neck with quarter-zip front" },
+        { label: "Back", value: "Open-back cutout, shape and size to your pattern" },
+        { label: "Closure", value: "Quarter-zip front, zip type and puller to your spec" },
+        { label: "Construction", value: "Cut-and-sew, bound or turned cutout edges, flatlock or coverstitch seams" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, heat transfer, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Open-Back Short-Leg Bodysuit" },
+      pdpQualityHeading: "Cutouts and zips that hold their shape",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Cutout edges checked for stretch recovery, no rolling or gaping",
+        "Front zip tested open and closed under stretch, lies flat at the neck",
+        "Seat opacity confirmed under squat-depth stretch",
+        "Torso length graded and checked across every size",
+        "Leg hem checked for roll and ride-up under movement",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
@@ -421,6 +481,66 @@ export const bodysuits: Category = {
       imageAlt: "Custom Long-Sleeve Bodysuit",
       href: "/capriowear/activewear/bodysuits/long-sleeve",
       sku: "CAP-BOD-05",
+      pdpHeading: "Custom Long-Sleeve Bodysuit Manufacturer",
+      pdpDescription:
+        "Hip-ending long-sleeve bodysuit with a scoop neck and a snap-button gusset, custom and private label, in a smooth Polyester/Spandex knit, built as a base layer or standalone piece, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Long-Sleeve Bodysuit Manufacturer",
+      pdpMetaDescription:
+        "Custom long-sleeve bodysuit manufacturer, private label, hip-ending cut, scoop neck, snap gusset, thong-cut or full back, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Long-Sleeve Bodysuit" },
+        { alt: "Custom Long-Sleeve Bodysuit" },
+        { alt: "Custom Long-Sleeve Bodysuit" },
+        { alt: "Custom Long-Sleeve Bodysuit" },
+        { alt: "Custom Long-Sleeve Bodysuit" },
+        { alt: "Custom Long-Sleeve Bodysuit" },
+      ],
+      material: "Polyester/Spandex 4-way stretch knit, commonly around 89% / 11%",
+      pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "How is the long-sleeve bodysuit different from the long-sleeve short-leg bodysuit?",
+          a: "The long-sleeve bodysuit ends at the hip with a snap-button gusset, so it layers under shorts, joggers or leggings. The long-sleeve short-leg bodysuit has a built-in bike-short leg and is built to be worn on its own.",
+        },
+        {
+          q: "Can the long-sleeve bodysuit be built with a full back instead of a thong cut?",
+          a: "Yes. The long-sleeve bodysuit is built with a thong-cut or full back to your spec, and the leg opening can be cut standard or high, confirmed on your sample.",
+        },
+        {
+          q: "What fabric do you build the long-sleeve bodysuit in?",
+          a: "A smooth Polyester/Spandex 4-way stretch knit, commonly around 89% Polyester and 11% Spandex, which layers cleanly under other garments. The exact blend and weight of the long-sleeve bodysuit are confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Tank Bodysuit", slug: "tank", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Long-Sleeve Short-Leg Bodysuit", slug: "long-sleeve-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Ribbed Bodysuit", slug: "ribbed", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Sleeveless Short-Leg Bodysuit", slug: "sleeveless-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "See All", href: "/capriowear/activewear/bodysuits" },
+      ],
+      specifications: [
+        { label: "Style", value: "Hip-ending long-sleeve bodysuit" },
+        { label: "Fabric", value: "Polyester/Spandex 4-way stretch knit, commonly around 89% / 11%, confirmed on your sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Silhouette", value: "Hip-ending, standard or high-cut leg opening" },
+        { label: "Sleeve", value: "Long sleeve, thumbholes on request" },
+        { label: "Neckline", value: "Scoop neck, crew or mock on request" },
+        { label: "Back", value: "Thong-cut or full back, to your spec" },
+        { label: "Closure", value: "Snap-button gusset as standard, sewn gusset on request" },
+        { label: "Construction", value: "Cut-and-sew, 4-way stretch, flatlock or coverstitch seams" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, heat transfer, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Long-Sleeve Bodysuit" },
+      pdpQualityHeading: "A closure that holds, a fit that stays put",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Snap gusset cycled open and closed before bulk",
+        "Gusset seam tested under stretch, the highest-stress point on a one-piece",
+        "Sleeve and underarm seams stress-tested through full range of motion",
+        "Torso length graded and checked across every size",
+        "Opacity confirmed under real stretch and movement",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
@@ -431,6 +551,65 @@ export const bodysuits: Category = {
       imageAlt: "Custom Corset-Detail Short-Leg Bodysuit",
       href: "/capriowear/activewear/bodysuits/corset-detail-short-leg",
       sku: "CAP-BOD-06",
+      pdpHeading: "Custom Corset-Detail Short-Leg Bodysuit Manufacturer",
+      pdpDescription:
+        "Short-leg bodysuit with corset-style boning channels at the waist, thin straps and a scoop neck, custom and private label, in a matte, sculpting Nylon/Spandex knit, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Corset-Detail Short-Leg Bodysuit Manufacturer",
+      pdpMetaDescription:
+        "Custom corset-detail short-leg bodysuit manufacturer, private label, boned waist, matte Nylon/Spandex, bike-short leg, scoop neck, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Corset-Detail Short-Leg Bodysuit" },
+        { alt: "Custom Corset-Detail Short-Leg Bodysuit" },
+        { alt: "Custom Corset-Detail Short-Leg Bodysuit" },
+        { alt: "Custom Corset-Detail Short-Leg Bodysuit" },
+        { alt: "Custom Corset-Detail Short-Leg Bodysuit" },
+        { alt: "Custom Corset-Detail Short-Leg Bodysuit" },
+      ],
+      material: "Matte Nylon/Spandex sculpting knit, commonly around 72 to 76% / 24 to 28%",
+      pdpFabricPills: ["Nylon/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "How is the corset detail built on the corset-detail short-leg bodysuit?",
+          a: "The corset-detail short-leg bodysuit has flexible boning sewn into covered channels at the waist, which shapes the waistline while the knit keeps its stretch. Boning count, length and placement are set to your spec and confirmed on your sample.",
+        },
+        {
+          q: "Will the boning in the corset-detail short-leg bodysuit hold up in training?",
+          a: "Yes. The boning channels on the corset-detail short-leg bodysuit are closed and covered at both ends, and we test flex, recovery and poke-through through bending and squatting on your sample before bulk.",
+        },
+        {
+          q: "What fabric do you build the corset-detail short-leg bodysuit in?",
+          a: "A matte, sculpting Nylon/Spandex knit, commonly around 72 to 76% Nylon with the balance Spandex, which gives the corset-detail short-leg bodysuit a smooth finish and firm hold. The exact blend and weight are confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Sleeveless Short-Leg Bodysuit", slug: "sleeveless-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Long-Sleeve Short-Leg Bodysuit", slug: "long-sleeve-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Open-Back Short-Leg Bodysuit", slug: "open-back-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Crossback Short-Leg Bodysuit", slug: "crossback-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "See All", href: "/capriowear/activewear/bodysuits" },
+      ],
+      specifications: [
+        { label: "Style", value: "Corset-detail short-leg bodysuit" },
+        { label: "Fabric", value: "Matte Nylon/Spandex sculpting knit, commonly around 72 to 76% / 24 to 28%, confirmed on your sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Silhouette", value: "Built-in bike-short leg, around 3 inch inseam or to your spec" },
+        { label: "Waist", value: "Sewn boning channels at the waist, flexible boning, count and placement to your spec" },
+        { label: "Neckline and straps", value: "Scoop neck, thin straps" },
+        { label: "Entry", value: "Step-in, pull-on, no crotch closure" },
+        { label: "Construction", value: "Cut-and-sew, gusseted seat, covered boning channels, flatlock or coverstitch seams" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, heat transfer, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Corset-Detail Short-Leg Bodysuit" },
+      pdpQualityHeading: "Structure that stays in place",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Boning channels checked for secure, covered ends with no poke-through",
+        "Boning tested for flex and recovery through bending and squatting",
+        "Seat opacity confirmed under squat-depth stretch",
+        "Leg hem checked for roll and ride-up under movement",
+        "Torso length graded and checked across every size",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
