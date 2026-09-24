@@ -4394,3 +4394,13 @@ Owner brief, final batch: draft PDPs for CAP-BOD-07 `crossback-short-leg`, CAP-B
 - **Draft handling:** unchanged. noindex/nofollow, out of the sitemap, BreadcrumbList only. All 9 PLP cards are links.
 
 **Verified (local build):** script check of all 3 pages passes (title, meta 155/154/156, robots, canonical, OG/Twitter, H1, breadcrumb, spec rows, chips, customize steps, quality block, FAQ order and text with 9/9/10 entries, pill targets across all 9 PDPs, Running Wear link, CTA, compliance, banned strings, GSM only in SKU 9's four briefed places). tsc, eslint, build clean.
+
+## Tracksuits PLP rebuilt and 2 draft PDPs built, 2026-09-24 (commit 0df5b95)
+
+Owner spec, `content/activewear/tracksuits.ts` only. Dual-gender category on the shared Hoodies template.
+
+- **PLP:** title and H1 unchanged; new 153-char meta. Entity FAQ is the verbatim `entityQuestion`/`entityAnswer` pair. The 7 test cards (Classic Tricot, Retro Striped, Slim Tapered, Oversized, Funnel-Neck, Warm-Up, Satin) are replaced by 2: CAP-TSU-01 Men's Full-Zip Knit Tracksuit (`full-zip-knit`, gender Men) and CAP-TSU-02 Women's Full-Zip Woven Tracksuit (`full-zip-woven`, gender Women). Fabric table 5 rows plus a new note, 6 customization items, 17 FAQs (the dashed tricot answer and the youth-sizing claim are gone). Trust block, Related, Final CTA and the All/Women/Men toggle kept.
+- **PDPs:** both carry full draft content, so both cards link. Always-gender naming in card, H1, title, breadcrumb and pills; gallery alts add ", men's"/", women's", card alt is the card title. No slug suffix, since the names differ. Per-style fabric chips and "Custom color & print" customization chips; "How we customize" set once for the category with 6 tracksuit-specific tiles; per-style quality blocks; each PDP's one gendered pill links to the other PDP.
+- **Draft handling:** noindex/nofollow, out of the sitemap, BreadcrumbList only, no Product/FAQPage JSON-LD, no CollectionPage on the PLP while nothing is published.
+
+**Verified (deployed, cache-busted):** PLP title, meta, H1, 2 cards in order, both linking and returning 200; toggle checked in the browser (Men 1 card, Women 1 card, All 2, `aria-pressed` updating each time); fabric table, note, customization items and 17 FAQs exact, with the FAQPage JSON-LD matching the visible text. Both PDPs: 200, robots, sitemap, JSON-LD types, title, meta, H1, description, breadcrumb, image labels, style code, chips, spec order, customize tiles, quality block, 9 FAQs in order, CTA, compliance and pill targets all exact. No banned strings or dashes. Build checked in a clean worktree (HEAD plus this file only) before the push.
