@@ -1,47 +1,20 @@
 // content/activewear/bodysuits.ts
-// Sixteenth real category built on the Category shape (content/activewear/
-// types.ts) -- a pure content/data drop, same pattern as every category
-// before it (owner spec, 2026-09-03): no edits to app/activewear/
-// [category]/[style]/page.tsx, app/sitemap.ts, or lib/schema.ts. Two real
-// authorized component changes, both small and backward-compatible, not
-// workarounds:
-// 1. `Category.defaultGenderFilter` (new, optional) -- CategoryMetaStrip's
-//    own All/Women/Men chip row now starts on whichever chip a category
-//    names ("Women" here, owner spec: "default Women, women's-led
-//    category"), defaulting to "All" (every prior category's own actual
-//    behavior, unchanged) when omitted. Purely the chip row's own initial
-//    visual state -- these chips don't filter `styleCards` today (no
-//    per-style gender field exists), so this has no effect on which cards
-//    render, only which chip looks active on load.
-// 2. This category also confirms the second real Leggings-pilot-style PDP
-//    build (two published styles, Tank + Long-Sleeve, per owner spec:
-//    "publish tank + long-sleeve first") -- no template change needed for
-//    that, StyleCard already supports any number of "published" entries.
+// Rewritten to the owner's final, locked 9-SKU catalog and copy (owner
+// spec, 2026-09-24) -- replaces the 2026-09-03 test version entirely,
+// including its two test PDPs (tank, long-sleeve), which are removed so
+// both routes 404 until SKU 1 and SKU 5 ship real PDPs under those same
+// slugs. Women's-only category, same as Leggings and Sports Bras: no
+// gender toggle, no `gender` field on any card.
 //
-// First category under the "SETS & ONE PIECES" mega-menu group
-// (content/home.ts) with real content -- Yoga Sets was first into that
-// group overall; this is the second. That group's own mega-menu href for
-// Bodysuits already points to /activewear/bodysuits (confirmed before
-// writing this file, same check every category since the Track Jackets &
-// Zip-Ups mega-menu mismatch, 2026-09-03).
+// Every card is a card-only "draft" (name, spec line, no PDP content), so
+// each renders non-clickable, gets no route, and stays out of the sitemap
+// and CollectionPage/ItemList. A card becomes a link automatically the
+// moment its PDP content (`pdpHeading` + `specifications`) is added, via
+// the sitewide `isDraftPdpReachable()` rule, same as Hoodies. Grid order
+// is SKU-number order, 1 to 9.
 //
-// No `weightTiers` block (owner spec, 2026-09-03: "does NOT use the
-// reusable weight-tiers / mmHg / water-performance block, bodysuits are
-// not weight-tier driven") -- field simply omitted, same as Leggings/
-// Sports Bras/Shorts/Tank Tops/Yoga Sets/Track Jackets & Zip-Ups.
-//
-// ctaSubline is the standing sitewide line, Leggings' own original
-// wording, NOT the per-category line this brief's own copy gave ("Share
-// your tech pack, sketch or a reference bodysuit. We'll come back within
-// 24 hours with next steps.") -- standing rule, owner spec, 2026-09-02
-// (see every category since Sweatshirts' own header comment and the
-// decision log entries of that date): every category file uses Leggings'
-// own ctaSubline verbatim, regardless of what a category's own brief
-// supplies here.
-//
-// American spelling and no en/em dashes confirmed throughout, per this
-// brief's own explicit rule -- "colour"/"–"/"—" audited out at write time,
-// same standing sitewide rule every category follows.
+// No `weightTiers` block (owner spec): bodysuits are not weight-tier
+// driven.
 import type { Category } from "./types";
 import { faqGetStarted } from "./pdpShared";
 
@@ -49,63 +22,66 @@ export const bodysuits: Category = {
   slug: "bodysuits",
   group: "Activewear",
   menuLabel: "Bodysuits",
-  // Entity FAQ overrides (owner's exact given values, 2026-09-03).
-  manufacturerNoun: "Bodysuit",
-  productNounPlural: "bodysuits",
-  entityExampleStyles: "tank, long-sleeve, and racerback bodysuits",
-  entityFabrics: "nylon spandex and poly spandex knits",
-  // H1/title lead with "Athletic Bodysuit" (SEO/AEO refresh, owner spec:
-  // "the bare term draws shapewear/dancewear intent; the athletic
-  // qualifier must be in the H1 and title, not just body copy").
+  // Verbatim override pair (owner spec, 2026-09-24), same as Sports Bras:
+  // bypasses categoryEntityFaq()'s templated sentence entirely.
+  entityQuestion: "What does Capriowear manufacture?",
+  entityAnswer:
+    "Capriowear is a custom bodysuit manufacturer for activewear brands and teamwear suppliers worldwide. We produce private label athletic bodysuits from fabric to packaging, including hip-ending tank, long-sleeve, and ribbed styles and short-leg bodysuits in sleeveless, long-sleeve, open-back, corset-detail, crossback, and double-layer running builds, in Nylon/Spandex and Polyester/Spandex knits, with low minimums and full customization. Capriowear is the activewear and teamwear division of Caprio Sports, a cut-and-sew manufacturer in Sialkot, Pakistan.",
+  // "Athletic" qualifier stays in the H1 and title (the bare term draws
+  // shapewear intent). No "| Capriowear" suffix: the root layout's title
+  // template adds it.
   h1: "Custom Athletic Bodysuit Manufacturer",
   metaTitle: "Custom Athletic Bodysuit Manufacturer",
   metaDescription:
-    "Custom athletic bodysuit manufacturer, tank, long-sleeve and racerback styles, snap gusset, built-in shelf bra, low MOQ. Capriowear.",
+    "Custom athletic bodysuit manufacturer: private label tank, long-sleeve and short-leg bodysuits in Nylon/Spandex knits, MOQ from 50 pieces, DDP to 20+ countries.",
   trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
-  showGenderFilter: true,
-  // Women's-led category (owner spec, 2026-09-03) -- see this file's own
-  // header comment and Category.defaultGenderFilter's own comment.
-  defaultGenderFilter: "Women",
+  // Women's-only category: the All/Women/Men chip row does not render.
+  showGenderFilter: false,
   fabricEyebrow: "FABRIC OPTIONS",
   fabricHeading: "The fabrics behind the\nbig brands",
   fabricOptions: [
     {
-      fabric: "Nylon spandex knit",
-      bestFor: "Soft, matte second-skin bodysuits",
-      performance: "Four-way stretch, strong recovery, smooth opaque hand",
+      fabric: "Nylon/Spandex (75 to 78% / 22 to 25%)",
+      bestFor: "Smooth second-skin and sculpting bodysuits",
+      performance: "Soft hand, 4-way stretch, strong recovery",
     },
     {
-      fabric: "Poly spandex knit",
-      bestFor: "Moisture-wicking and print-ready bodysuits",
-      performance: "Quick-dry, colorfast, holds sublimation and bright color",
+      fabric: "Polyester/Spandex (68 to 89% / 11 to 32%)",
+      bestFor: "Training, short-leg, and print-ready bodysuits",
+      performance: "Moisture-wicking, quick-dry, holds sublimation",
     },
     {
-      fabric: "Ribbed knit",
-      bestFor: "Textured body or contrast panels",
-      performance: "Structured stretch, cotton-adjacent look, holds shape",
+      fabric: "Recycled Polyester/Spandex",
+      bestFor: "Sustainable lines",
+      performance: "Eco-positioning, moisture management",
+    },
+    {
+      fabric: "Ribbed knit (Modal/Spandex)",
+      bestFor: "Textured, rib-knit bodysuits",
+      performance: "Structured stretch, soft rib texture",
     },
     {
       fabric: "Power mesh",
       bestFor: "Support and ventilation panels",
-      performance: "Adds structure without underwire, breathable",
+      performance: "Adds structure and airflow in targeted zones",
     },
   ],
   fabricNote: [
     {
-      text: "Body panels run nylon or poly spandex, commonly 70 to 85% face fiber with 15 to 30% spandex for four-way stretch and recovery, in a matte or shine finish. Ribbed knit and power mesh are used for full bodies or contrast and support panels. Seamless and circular-knit bodysuits exist in the market but sit outside our cut-and-sew scope. Swatches before every bulk run, and we can source or match a specific knit, finish or reference garment, confirmed on your sample.",
+      text: "Fabric weight and composition are confirmed on your sample, and matte or shine finish is chosen at swatch stage. Swatches before every bulk run, and we can source or match a specific fabric or reference garment.",
     },
   ],
-  fabricPills: ["Nylon spandex", "Poly spandex", "Ribbed knit", "Power mesh"],
+  fabricPills: ["Nylon/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex", "Ribbed knit", "Power mesh"],
   qualityHeading: "A closure that holds, a fit that stays put",
-  qualitySubline: "We test the closure, the gusset and the fit on your sample before a single bulk piece is cut",
+  qualitySubline: "We test the closure, the gusset, and the fit on your sample before a single bulk piece is cut.",
   qualityPoints: [
-    "Snap or hook closure cycled open and closed, built to hold past 500 uses",
+    "Snap, hook, and zip closures cycled open and closed before bulk",
     "Gusset seam tested under stretch, the highest-stress point on a one-piece",
     "Torso length graded and checked across every size, not just the sample",
     "Opacity confirmed under real stretch and movement, not only at rest",
-    "Shelf bra pads sit true and support holds through wear and wash",
+    "Shelf bra pads sit true, and support holds through wear and wash",
     "Every run inspected to AQL 2.5, third-party inspection welcome",
   ],
   coverageEyebrow: "CUSTOMIZATION",
@@ -113,18 +89,23 @@ export const bodysuits: Category = {
   coverageItems: [
     {
       title: "Fabric",
-      body: "Nylon or poly spandex knits, ribbed knit, power mesh support panels, matte or shine finish",
+      body: "Nylon/Spandex, Polyester/Spandex, recycled blends, ribbed knit, and power mesh support panels",
     },
-    { title: "Fit and neckline", body: "Fitted second-skin cut, scoop, square, V, mock or crew neckline" },
-    { title: "Back and leg", body: "Full-back, low-back or strappy-back, standard or higher-cut leg opening" },
-    { title: "Closure", body: "Snap-button gusset, sewn gusset, or hook-and-snap" },
     {
-      title: "Support",
-      body: "Built-in shelf bra with removable pads and adjustable straps, or no support",
+      title: "Silhouette and fit",
+      body: "Hip-ending or short-leg, sleeveless, cap, or long sleeve, scoop, square, V, or mock neck, full or thong-cut back",
     },
-    { title: "Sleeve", body: "Sleeveless, short, or long sleeve, thumbholes optional" },
+    {
+      title: "Closure and support",
+      body: "Snap-button gusset, sewn gusset, hook-and-snap, or front zip, built-in shelf bra with removable pads or no support",
+    },
+    { title: "Color and print", body: "Custom colors with Pantone matching, sublimation, screen, heat transfer, embroidery" },
+    { title: "Labels", body: "Woven, printed, or tear-away labels, hangtags" },
+    { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec" },
   ],
   faqHeading: "Top questions from B2B buyers",
+  // Entity question is NOT stored here -- see entityQuestion/entityAnswer
+  // above; the route prepends it at render time. The remaining 15 below.
   faqs: [
     {
       q: "What is your MOQ for custom bodysuits?",
@@ -132,43 +113,43 @@ export const bodysuits: Category = {
     },
     {
       q: "What is the difference between a bodysuit and a jumpsuit?",
-      a: "A bodysuit is a fitted one-piece that ends at the hip with a crotch closure. A jumpsuit or unitard continues into full or cropped leg coverage. We make both.",
+      a: "A bodysuit ends at the hip, or at a short bike-short-length leg a few inches down the thigh. A jumpsuit or unitard continues into full or cropped leg coverage. Capriowear makes both.",
     },
     {
-      q: "What closure options do you offer?",
-      a: "A snap-button gusset is our standard, so the piece is worn and removed without fully undressing. We also build a fully sewn gusset for simpler styles, or a hook-and-snap combination.",
+      q: "What is a short-leg bodysuit?",
+      a: "A short-leg bodysuit is a one-piece with a built-in bike-short leg of a few inches instead of a hip-ending brief cut. It removes the gap and waistband ride-up between a separate top and shorts, and it gives a training line a one-piece that works as a standalone piece, not only as a base layer.",
     },
     {
-      q: "Do your bodysuits come with a built-in bra?",
-      a: "They can. A built-in shelf bra with removable pads and adjustable straps is a common option, from medium to high support, or the body can be left plain to wear with a separate bra.",
+      q: "What closure options do you offer on bodysuits?",
+      a: "Closure is set per style: a snap-button gusset for easy on and off, a fully sewn gusset for simpler builds, a hook-and-snap combination, or a front zip. Every closure is cycled open and closed on your sample before bulk.",
+    },
+    {
+      q: "Can you build a shelf bra into a bodysuit?",
+      a: "Yes. A shelf bra with removable pads and adjustable straps can be built in, from medium to high support, or the bodysuit can be left plain to wear with a separate sports bra.",
     },
     {
       q: "Which fabrics do you use for bodysuits?",
-      a: "Nylon or poly spandex knits for the body, with ribbed knit or power mesh for texture and support panels, in a matte or shine finish.",
+      a: "Nylon/Spandex and Polyester/Spandex knits for the body, recycled Polyester/Spandex for sustainable lines, ribbed knit for textured styles, and power mesh for support and ventilation panels, all confirmed on your sample.",
     },
     {
-      q: "Will the fabric show through when stretched?",
-      a: "We confirm opacity under real stretch and movement on your sample before bulk, and can move to a higher weight or a lined panel where a color or fabric needs it.",
-    },
-    {
-      q: "What back and leg options are there?",
-      a: "Full-back, low-back or strappy-back, with a standard or higher-cut leg opening, to your spec.",
-    },
-    {
-      q: "Can you match a specific fabric or a reference garment?",
-      a: "Yes. Send a swatch, reference or tech pack and we source or develop to match, then confirm on your sample.",
-    },
-    {
-      q: "What can I customize?",
-      a: "Fabric and finish, neckline, back, leg cut, sleeve, gusset closure, built-in bra, color and print, your logos, labels, hangtags and packaging.",
-    },
-    {
-      q: "Do you offer OEM, ODM and private label bodysuits?",
-      a: "Yes, all three, made under your brand.",
+      q: "How do you check opacity on a bodysuit?",
+      a: "We check bodysuit opacity on your sample under real stretch and movement, not only at rest, and move to a heavier knit or a lined panel where a color needs it.",
     },
     {
       q: "How are bodysuits sized?",
-      a: "Alpha XS to 5XL, women's-led, with men's and unisex cuts by fit block. Torso length is graded and checked across the full size range.",
+      a: "Alpha XS to 5XL. Torso length is graded and checked across every size, because on a one-piece garment a torso that runs short or long changes the fit of the whole bodysuit.",
+    },
+    {
+      q: "Can you match a specific fabric or a reference bodysuit?",
+      a: "Yes. Send a swatch, reference garment, or tech pack and we source or develop to match, then share swatches and confirm on your sample before bulk.",
+    },
+    {
+      q: "What can I customize?",
+      a: "Everything from fabric to packaging: fabric and finish, silhouette, leg length, sleeve, neckline, back coverage, closure, shelf bra, color, print, your logos, labels, hangtags, and packaging, with Pantone color matching.",
+    },
+    {
+      q: "Do you offer OEM, ODM, and private label bodysuits?",
+      a: "Yes, all three. As a private label bodysuit manufacturer, we make every style under your brand, with your labels and packaging.",
     },
     {
       q: "How long do samples and bulk take?",
@@ -176,7 +157,7 @@ export const bodysuits: Category = {
     },
     {
       q: "Do you ship to my country?",
-      a: "Yes, 20+ countries. DDP to the US, UK, EU, Canada and Australia, with GSP+ 0% EU duty.",
+      a: "Yes, DDP to 20+ countries, including the US, UK, EU, Canada, and Australia, with GSP+ 0% EU duty.",
     },
     {
       q: "Will my designs stay protected?",
@@ -184,197 +165,109 @@ export const bodysuits: Category = {
     },
     faqGetStarted,
   ],
-  // Standing CTA subline, same as every category (owner spec, 2026-09-02) --
-  // see this file's own header comment for why this differs from the
-  // brief's own given per-category line.
   ctaReferenceNoun: "bodysuit",
-  // Tank and Long-Sleeve published first (owner spec, 2026-09-03), same
-  // Leggings-pilot pattern (one or more real PDPs, the rest "draft" -- a
-  // real name and one-line spec, no PDP content yet, no generated route,
-  // excluded from sitemap/ItemList). cardTitle form is "Custom [Style]",
-  // matching the owner's own given titles exactly.
+  // 9 card-only drafts, SKU-number order (see header comment). Alt text is
+  // the card name exactly.
   styleCards: [
     {
-      status: "published",
+      status: "draft",
       slug: "tank",
       cardTitle: "Custom Tank Bodysuit",
-      cardSubline: "Sleeveless, full-back, built-in shelf bra",
+      cardSubline: "Hip-ending, wide tank straps, scoop neck",
       image: "",
-      imageAlt: "Custom tank bodysuit, sleeveless, full-back, built-in shelf bra",
+      imageAlt: "Custom Tank Bodysuit",
       href: "/capriowear/activewear/bodysuits/tank",
-      pdpTitle: "Tank",
       sku: "CAP-BOD-01",
-      pdpHeading: "Custom Tank Bodysuit Manufacturer",
-      pdpDescription:
-        "Sleeveless full-back bodysuit with a snap gusset and built-in shelf bra, custom and private label, in nylon or poly spandex, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Tank bodysuit, front view" },
-        { alt: "Tank bodysuit, back view" },
-        { alt: "Tank bodysuit, side profile" },
-        { alt: "Tank bodysuit, gusset closure detail" },
-        { alt: "Tank bodysuit, shelf bra interior detail" },
-        { alt: "Tank bodysuit, fabric close-up" },
-      ],
-      pdpMetaTitle: "Custom Athletic Tank Bodysuit Manufacturer",
-      pdpMetaDescription:
-        "Custom athletic tank bodysuit manufacturer, nylon or poly spandex, snap gusset, built-in shelf bra, low MOQ. DDP worldwide.",
-      material: "Nylon or poly spandex knit, 70 to 85% face fiber, 15 to 30% spandex",
-      faqs: [
-        {
-          q: "Does the tank bodysuit come with a built-in bra?",
-          a: "Yes, a built-in shelf bra with removable pads and adjustable straps is standard on this style, and can be built from medium to high support or left out.",
-        },
-        {
-          q: "How does the closure work?",
-          a: "A snap-button gusset lets the piece be worn and taken off without fully undressing, cycled and tested to hold past 500 uses.",
-        },
-        {
-          q: "Will it show through when stretched?",
-          a: "We confirm opacity under real stretch and movement on your sample, and can move to a higher weight or lined panel where a color needs it.",
-        },
-      ],
-      relatedStyleTags: [
-        { label: "Long-Sleeve", href: "/capriowear/activewear/bodysuits/long-sleeve" },
-        { label: "Short-Sleeve", href: "/capriowear/activewear/bodysuits" },
-        { label: "Racerback", href: "/capriowear/activewear/bodysuits" },
-        { label: "Square-Neck", href: "/capriowear/activewear/bodysuits" },
-        { label: "Open-Back", href: "/capriowear/activewear/bodysuits" },
-        { label: "See All", href: "/capriowear/activewear/bodysuits" },
-      ],
-      specifications: [
-        { label: "Composition", value: "One-piece bodysuit, ends at hip with crotch closure (base type)" },
-        { label: "Fabric", value: "Nylon or poly spandex knit, commonly 70 to 85% face fiber, 15 to 30% spandex" },
-        { label: "Finish", value: "Matte or shine" },
-        { label: "Closure", value: "Snap-button gusset (standard), sewn or hook-and-snap on request" },
-        { label: "Support", value: "Built-in shelf bra, removable pads, adjustable straps, or none" },
-        { label: "Back and leg", value: "Full-back (base), low or strappy-back, standard or high-cut leg" },
-        { label: "Neckline", value: "Scoop (base), square, V, mock or crew" },
-        { label: "Branding", value: "Sublimation, screen, heat transfer, embroidery, custom labels and packaging" },
-      ],
-      specificationsImage: { alt: "Tank bodysuit, construction detail" },
     },
     {
-      status: "published",
+      status: "draft",
+      slug: "sleeveless-short-leg",
+      cardTitle: "Custom Sleeveless Short-Leg Bodysuit",
+      cardSubline: "Built-in bike-short leg, thin straps, scoop neck",
+      image: "",
+      imageAlt: "Custom Sleeveless Short-Leg Bodysuit",
+      href: "/capriowear/activewear/bodysuits/sleeveless-short-leg",
+      sku: "CAP-BOD-02",
+    },
+    {
+      status: "draft",
+      slug: "long-sleeve-short-leg",
+      cardTitle: "Custom Long-Sleeve Short-Leg Bodysuit",
+      cardSubline: "Built-in bike-short leg, long sleeve, deep-V open back",
+      image: "",
+      imageAlt: "Custom Long-Sleeve Short-Leg Bodysuit",
+      href: "/capriowear/activewear/bodysuits/long-sleeve-short-leg",
+      sku: "CAP-BOD-03",
+    },
+    {
+      status: "draft",
+      slug: "open-back-short-leg",
+      cardTitle: "Custom Open-Back Short-Leg Bodysuit",
+      cardSubline: "Mock neck, quarter-zip front, cap sleeve, back cutout",
+      image: "",
+      imageAlt: "Custom Open-Back Short-Leg Bodysuit",
+      href: "/capriowear/activewear/bodysuits/open-back-short-leg",
+      sku: "CAP-BOD-04",
+    },
+    {
+      status: "draft",
       slug: "long-sleeve",
       cardTitle: "Custom Long-Sleeve Bodysuit",
-      cardSubline: "Full sleeve, thumbholes optional",
+      cardSubline: "Hip-ending, long sleeve, scoop neck",
       image: "",
-      imageAlt: "Custom long-sleeve bodysuit, full sleeve, thumbholes optional",
+      imageAlt: "Custom Long-Sleeve Bodysuit",
       href: "/capriowear/activewear/bodysuits/long-sleeve",
-      pdpTitle: "Long-Sleeve",
-      sku: "CAP-BOD-02",
-      pdpHeading: "Custom Long-Sleeve Bodysuit Manufacturer",
-      pdpDescription:
-        "Full-sleeve bodysuit with a snap gusset and optional thumbholes, custom and private label, in nylon or poly spandex, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Long-sleeve bodysuit, front view" },
-        { alt: "Long-sleeve bodysuit, back view" },
-        { alt: "Long-sleeve bodysuit, side profile" },
-        { alt: "Long-sleeve bodysuit, thumbhole detail" },
-        { alt: "Long-sleeve bodysuit, gusset closure detail" },
-        { alt: "Long-sleeve bodysuit, fabric close-up" },
-      ],
-      pdpMetaTitle: "Custom Long-Sleeve Bodysuit Manufacturer",
-      pdpMetaDescription:
-        "Custom athletic long-sleeve bodysuit manufacturer, nylon or poly spandex, snap gusset, optional thumbholes, low MOQ. DDP worldwide.",
-      material: "Nylon or poly spandex knit, 70 to 85% face fiber, 15 to 30% spandex",
-      faqs: [
-        {
-          q: "Does the long-sleeve bodysuit come with thumbholes?",
-          a: "Thumbholes are optional on this style, built into the cuff on request, along with a standard or ribbed cuff finish.",
-        },
-        {
-          q: "Does it come with a built-in bra?",
-          a: "Yes, a built-in shelf bra with removable pads and adjustable straps is available on this style, from medium to high support, or it can be left out.",
-        },
-        {
-          q: "How does the closure work?",
-          a: "A snap-button gusset lets the piece be worn and taken off without fully undressing, cycled and tested to hold past 500 uses.",
-        },
-      ],
-      relatedStyleTags: [
-        { label: "Tank", href: "/capriowear/activewear/bodysuits/tank" },
-        { label: "Short-Sleeve", href: "/capriowear/activewear/bodysuits" },
-        { label: "Mock-Neck", href: "/capriowear/activewear/bodysuits" },
-        { label: "Ribbed", href: "/capriowear/activewear/bodysuits" },
-        { label: "Open-Back", href: "/capriowear/activewear/bodysuits" },
-        { label: "See All", href: "/capriowear/activewear/bodysuits" },
-      ],
-      specifications: [
-        { label: "Composition", value: "One-piece bodysuit, ends at hip with crotch closure (base type)" },
-        { label: "Fabric", value: "Nylon or poly spandex knit, commonly 70 to 85% face fiber, 15 to 30% spandex" },
-        { label: "Finish", value: "Matte or shine" },
-        { label: "Closure", value: "Snap-button gusset (standard), sewn or hook-and-snap on request" },
-        { label: "Support", value: "Built-in shelf bra, removable pads, adjustable straps, or none" },
-        { label: "Back and leg", value: "Full-back (base), low or strappy-back, standard or high-cut leg" },
-        { label: "Neckline", value: "Scoop (base), square, V, mock or crew" },
-        { label: "Sleeve", value: "Full long sleeve, thumbholes optional, standard or ribbed cuff" },
-        { label: "Branding", value: "Sublimation, screen, heat transfer, embroidery, custom labels and packaging" },
-      ],
-      specificationsImage: { alt: "Long-sleeve bodysuit, construction detail" },
+      sku: "CAP-BOD-05",
     },
     {
       status: "draft",
-      slug: "short-sleeve",
-      cardTitle: "Custom Short-Sleeve Bodysuit",
-      cardSubline: "Cap sleeve, snap gusset",
+      slug: "corset-detail-short-leg",
+      cardTitle: "Custom Corset-Detail Short-Leg Bodysuit",
+      cardSubline: "Boned corset waist, built-in bike-short leg",
       image: "",
-      imageAlt: "Custom short-sleeve bodysuit, cap sleeve, snap gusset",
-      href: "/capriowear/activewear/bodysuits/short-sleeve",
+      imageAlt: "Custom Corset-Detail Short-Leg Bodysuit",
+      href: "/capriowear/activewear/bodysuits/corset-detail-short-leg",
+      sku: "CAP-BOD-06",
     },
     {
       status: "draft",
-      slug: "racerback",
-      cardTitle: "Custom Racerback Bodysuit",
-      cardSubline: "Narrow racerback straps, shelf bra",
+      slug: "crossback-short-leg",
+      cardTitle: "Custom Crossback Short-Leg Bodysuit",
+      cardSubline: "Crossover straps, built-in shelf bra, removable cups",
       image: "",
-      imageAlt: "Custom racerback bodysuit, narrow racerback straps, shelf bra",
-      href: "/capriowear/activewear/bodysuits/racerback",
-    },
-    {
-      status: "draft",
-      slug: "square-neck",
-      cardTitle: "Custom Square-Neck Bodysuit",
-      cardSubline: "Square neckline, snap gusset",
-      image: "",
-      imageAlt: "Custom square-neck bodysuit, square neckline, snap gusset",
-      href: "/capriowear/activewear/bodysuits/square-neck",
-    },
-    {
-      status: "draft",
-      slug: "mock-neck",
-      cardTitle: "Custom Mock-Neck Bodysuit",
-      cardSubline: "Mock neck, long or short sleeve",
-      image: "",
-      imageAlt: "Custom mock-neck bodysuit, mock neck, long or short sleeve",
-      href: "/capriowear/activewear/bodysuits/mock-neck",
-    },
-    {
-      status: "draft",
-      slug: "open-back",
-      cardTitle: "Custom Open-Back Bodysuit",
-      cardSubline: "Low or strappy back detailing",
-      image: "",
-      imageAlt: "Custom open-back bodysuit, low or strappy back detailing",
-      href: "/capriowear/activewear/bodysuits/open-back",
+      imageAlt: "Custom Crossback Short-Leg Bodysuit",
+      href: "/capriowear/activewear/bodysuits/crossback-short-leg",
+      sku: "CAP-BOD-07",
     },
     {
       status: "draft",
       slug: "ribbed",
       cardTitle: "Custom Ribbed Bodysuit",
-      cardSubline: "Ribbed knit, textured body",
+      cardSubline: "Ribbed knit, square neck, snap closure",
       image: "",
-      imageAlt: "Custom ribbed bodysuit, ribbed knit, textured body",
+      imageAlt: "Custom Ribbed Bodysuit",
       href: "/capriowear/activewear/bodysuits/ribbed",
+      sku: "CAP-BOD-08",
+    },
+    {
+      status: "draft",
+      slug: "double-layer-short-leg",
+      cardTitle: "Custom Double-Layer Short-Leg Bodysuit",
+      cardSubline: "Running build, loose outer short over fitted inner short",
+      image: "",
+      imageAlt: "Custom Double-Layer Short-Leg Bodysuit",
+      href: "/capriowear/activewear/bodysuits/double-layer-short-leg",
+      sku: "CAP-BOD-09",
     },
   ],
-  // "You may also be interested in" (owner rule, 2026-09-23): max 5, same L1 group first
-  // (Sets & One Pieces, per activewearMegaMenu), then the closest pairings from other groups.
+  // "You may also be interested in" (owner spec, 2026-09-24): exact list
+  // and order, 6 links, all real built pages.
   relatedLinks: [
     { label: "Jumpsuits", href: "/capriowear/activewear/jumpsuits" },
-    { label: "Shorts", href: "/capriowear/activewear/shorts" },
     { label: "Leggings", href: "/capriowear/activewear/leggings" },
     { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
+    { label: "Shorts", href: "/capriowear/activewear/shorts" },
+    { label: "Running Wear", href: "/capriowear/activewear/running-wear" },
     { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
   ],
 };

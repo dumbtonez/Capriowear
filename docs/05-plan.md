@@ -4278,3 +4278,15 @@ Owner brief: the last four draft PDPs in `content/activewear/hoodies.ts`, same t
 - **Draft handling:** unchanged. noindex/nofollow, out of the sitemap, no Product or FAQPage JSON-LD, BreadcrumbList present.
 
 **Verified (local build):** script check of all 4 pages passes, and a sweep of all 16 PDPs finds no related pill falling back to the PLP. tsc, eslint, build clean. Playwright 44/45 with one homepage page-load timeout that passed on rerun.
+
+## Bodysuits PLP rebuilt from locked content, 2026-09-24
+
+Owner brief: replace the 2026-09-03 test version of `/capriowear/activewear/bodysuits` entirely. Content only (`content/activewear/bodysuits.ts`), same shared PLP components as Hoodies, Leggings and Sports Bras.
+
+- **Catalog:** 9 card-only drafts, CAP-BOD-01 to 09, in SKU order. Card alt text = card name. No `gender` field; `showGenderFilter: false` (women's-only, like Leggings and Sports Bras), so the All/Women/Men toggle is gone.
+- **Old test PDPs removed:** the `tank` and `long-sleeve` PDP data and the 6 other test cards are removed. Both routes now 404 with no redirects. SKU 1 and SKU 5 reuse those slugs when their PDPs ship.
+- **Card links:** every card is a non-link today. Each one becomes a link automatically once its PDP content (`pdpHeading` + `specifications`) exists, through `isDraftPdpReachable()`.
+- **Copy:** title, meta (160 chars), H1, key facts, fabric table (5 rows) and new note, 6 customization items, trust block, 6 Related links, 16 FAQs (entity via `entityQuestion`/`entityAnswer`, get-started from the shared constant) all set exactly as briefed. No weight tiers.
+- **Schema:** BreadcrumbList and FAQPage (16 entries, identical to visible text). No published PDPs, so the shared route omits CollectionPage/ItemList entirely (sitewide rule since the 2026-09-07 SEO audit), rather than emitting an empty list. No Product, Offer or price.
+
+**Verified (local production build):** every briefed string is present in the server HTML. All 9 cards are server-rendered with no links. The two old PDP routes return 404. There is one H1, and the canonical, OG and Twitter strings are exact. No banned strings in visible text. tsc, eslint and build are clean. Playwright passes 45/45 (the homepage 1920 timeout passed on rerun).
