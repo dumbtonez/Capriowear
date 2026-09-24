@@ -4233,3 +4233,15 @@ Owner brief replaced the 6-card test version of `content/activewear/hoodies.ts` 
 ## "Outwear & Suits" typo fixed to "Outerwear & Suits", 2026-09-24
 
 One-label fix at the single source, the `activewearMegaMenu` group label in `content/home.ts` ("OUTWEAR & SUITS" to "OUTERWEAR & SUITS"). It flows to the mega menu, mobile drawer, every PLP's left-panel category nav (title-cased to "Outerwear & Suits") and the nav-generated ItemList JSON-LD. Matching code comments in the Jackets, Track Jackets, Tracksuits and Running Wear content files updated too. No other group labels, category names or links changed.
+
+## Hoodies PDPs: SKUs 1, 9, 2, 10 built as drafts, 2026-09-24
+
+Owner brief: four draft PDPs added to `content/activewear/hoodies.ts` on the shared `[category]/[style]` template, same field set as the Sweatshirts PDPs. Content only, no template or component changes.
+
+- **Pages:** `oversized-brushed-fleece-mens` (CAP-HOO-01), `oversized-brushed-fleece-womens` (09), `full-zip-fleece-mens` (02), `full-zip-fleece-womens` (10). Each has its own H1, description, meta, 4 fabric pills, spec rows, 6 customization steps, quality points and 3 style FAQs; the entity FAQ and the 5 operational FAQs (MOQ to get started) come from the shared builders unchanged.
+- **Draft handling:** `status: "draft"` keeps noindex/nofollow, out of the sitemap, and no Product or FAQPage JSON-LD; BreadcrumbList renders. `isDraftPdpReachable()` generates the 4 routes and turns exactly those 4 PLP cards into links; the other 12 stay non-links.
+- **Breadcrumb:** no `pdpTitle` set, so the last crumb (visible and JSON-LD) falls back to `cardTitle`, which equals the H1 minus " Manufacturer".
+- **Alt text:** all 6 gallery placeholders and the specifications image use "[Card name], men's/women's". The customization carousel keeps its shared step-title alts on the factory photos.
+- **Related pills:** gendered card names with `slug`; targets inside this batch resolve to their PDPs, unbuilt targets fall back to the PLP and switch automatically when built.
+
+**Verified (local build):** a script check of all 4 pages (robots, title, meta, H1, breadcrumb, alts, JSON-LD types, FAQ order, pill targets, final CTA, compliance bar, banned strings) passes except "WhatsApp", which is only the sitewide chat button's aria-label. tsc, eslint and build clean. Playwright 45/45 (one earlier run had a single failure that did not reproduce).

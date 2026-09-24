@@ -35,7 +35,7 @@ export const sportsBras: Category = {
   // it (see every other category's own metaTitle comment for why).
   metaTitle: "Custom Sports Bra Manufacturer",
   metaDescription:
-    "Custom sports bra manufacturer, OEM, ODM, private label, high to low support, full coverage, cutout, cage-back, removable pads, from 50 pieces, DDP worldwide.",
+    "Custom sports bra manufacturer, private label, high to low support, full coverage to cutout, cage-back, removable padding, from 50 pieces, DDP to 20+ countries.",
   // Owner correction, 2026-09-22: "remove the subline on the hero banner ...
   // banner should be same as leggings" -- no heroSubline set, same
   // 2-child (h1 + trustBullets) banner every other category renders, same
@@ -188,7 +188,7 @@ export const sportsBras: Category = {
       ],
       pdpMetaTitle: "Custom High-Support Sports Bra Manufacturer",
       pdpMetaDescription:
-        "Custom high-support full-coverage sports bra manufacturer, OEM, ODM, private label, hook-and-eye or racerback, Polyester/Spandex, from 50 pieces, DDP worldwide.",
+        "Custom high-support sports bra manufacturer, private label, back hook-and-eye or wide racerback, Polyester/Spandex, from 50 pieces, DDP to 20+ countries.",
       material: "Polyester/Spandex, 87% / 13%",
       pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
       faqs: [
@@ -270,7 +270,7 @@ export const sportsBras: Category = {
       ],
       pdpMetaTitle: "Custom Medium-Support Sports Bra Manufacturer",
       pdpMetaDescription:
-        "Custom medium-support full-coverage sports bra manufacturer, OEM, ODM, private label, racerback or crossback, recycled polyester, from 50 pieces, DDP worldwide.",
+        "Custom medium-support sports bra manufacturer, private label, racerback or crossback closure, recycled polyester blend, from 50 pieces, DDP to 20+ countries.",
       material: "Recycled polyester blend",
       pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
       faqs: [
@@ -352,7 +352,7 @@ export const sportsBras: Category = {
       ],
       pdpMetaTitle: "Custom Low-Support Sports Bra Manufacturer",
       pdpMetaDescription:
-        "Custom low-support full-coverage sports bra manufacturer, OEM, ODM, private label, everyday, low-impact wear, Polyester/Spandex, from 50 pieces, DDP worldwide.",
+        "Custom low-support sports bra manufacturer, private label, everyday and low-impact wear, non-padded, Polyester/Spandex, from 50 pieces, DDP to 20+ countries.",
       material: "Polyester/Spandex, 80% / 20%",
       pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
       faqs: [
@@ -433,7 +433,7 @@ export const sportsBras: Category = {
       ],
       pdpMetaTitle: "Custom Medium-Support Cutout Sports Bra Manufacturer",
       pdpMetaDescription:
-        "Custom medium-support sports bra manufacturer, front or back cutout detail, OEM, ODM and private label, removable padding, from 50 pieces, DDP worldwide.",
+        "Custom medium-support sports bra manufacturer, private label, front or back cutout detail, removable padding, from 50 pieces, any color, DDP to 20+ countries.",
       pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
       faqs: [
         {
@@ -515,7 +515,7 @@ export const sportsBras: Category = {
       ],
       pdpMetaTitle: "Custom Minimal-Coverage Sports Bra Manufacturer",
       pdpMetaDescription:
-        "Custom minimal-coverage sports bra manufacturer, bralette-style, low-impact and layering wear, OEM, ODM and private label, from 50 pieces, DDP worldwide.",
+        "Custom minimal-coverage sports bra manufacturer, bralette-style, private label, low-impact and layering wear, from 50 pieces, any color, DDP to 20+ countries.",
       pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
       faqs: [
         {
@@ -596,7 +596,7 @@ export const sportsBras: Category = {
       ],
       pdpMetaTitle: "Custom Low-Support Cutout Sports Bra Manufacturer",
       pdpMetaDescription:
-        "Custom low-support sports bra manufacturer with a V-neck cutout detail, OEM, ODM and private label, adjustable straps, from 50 pieces, any color, DDP worldwide.",
+        "Custom low-support sports bra manufacturer, private label, V-neck cutout detail, adjustable straps, from 50 pieces, any fabric and color, DDP to 20+ countries.",
       pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
       faqs: [
         {
@@ -677,7 +677,7 @@ export const sportsBras: Category = {
       ],
       pdpMetaTitle: "Custom Hook-and-Eye Sports Bra Manufacturer",
       pdpMetaDescription:
-        "Custom hook-and-eye sports bra manufacturer, back closure for high-support builds, OEM, ODM and private label, from 50 pieces, any color, DDP worldwide.",
+        "Custom hook-and-eye sports bra manufacturer, private label, back closure for high-support builds, from 50 pieces, any fabric and color, DDP to 20+ countries.",
       pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
       faqs: [
         {
@@ -761,7 +761,7 @@ export const sportsBras: Category = {
       ],
       pdpMetaTitle: "Custom Removable-Pad Sports Bra Manufacturer",
       pdpMetaDescription:
-        "Custom removable-pad sports bra manufacturer, internal pad pocket with adjustable foam insert, OEM, ODM and private label, from 50 pieces, DDP worldwide.",
+        "Custom removable-pad sports bra manufacturer, private label, internal pad pocket, adjustable foam insert, from 50 pieces, any color, DDP to 20+ countries.",
       pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
       faqs: [
         {
@@ -845,7 +845,7 @@ export const sportsBras: Category = {
       ],
       pdpMetaTitle: "Custom Crossback Sports Bra Manufacturer",
       pdpMetaDescription:
-        "Custom crossback sports bra manufacturer, crossed straps with keyhole cutout, OEM, ODM and private label, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom crossback sports bra manufacturer, private label, crossed straps with keyhole cutout, from 50 pieces, any fabric and color, DDP to 20+ countries.",
       pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
       faqs: [
         {
@@ -929,7 +929,7 @@ export const sportsBras: Category = {
       ],
       pdpMetaTitle: "Custom Wide-Band Sports Bra Manufacturer",
       pdpMetaDescription:
-        "Custom wide-band sports bra manufacturer, structured compression band for high-support builds, OEM, ODM and private label, from 50 pieces, DDP worldwide.",
+        "Custom wide-band sports bra manufacturer, private label, structured compression band for high-support builds, from 50 pieces, any color, DDP to 20+ countries.",
       pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
       faqs: [
         {
@@ -1009,7 +1009,7 @@ export const sportsBras: Category = {
       ],
       pdpMetaTitle: "Custom Cage-Back Sports Bra Manufacturer",
       pdpMetaDescription:
-        "Custom cage-back sports bra manufacturer, multi-strap cage or crisscross back detail, OEM, ODM and private label, from 50 pieces, any color, DDP worldwide.",
+        "Custom cage-back sports bra manufacturer, private label, multi-strap cage or crisscross back detail, from 50 pieces, any fabric and color, DDP to 20+ countries.",
       pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
       faqs: [
         {
@@ -1093,7 +1093,7 @@ export const sportsBras: Category = {
       ],
       pdpMetaTitle: "Custom Racerback Sports Bra Manufacturer",
       pdpMetaDescription:
-        "Custom racerback sports bra manufacturer, fixed wide racerback panel, OEM, ODM and private label, from 50 pieces, any fabric and color, DDP worldwide.",
+        "Custom racerback sports bra manufacturer, private label, fixed wide racerback panel, non-padded, from 50 pieces, any fabric and color, DDP to 20+ countries.",
       pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
       faqs: [
         {
@@ -1179,7 +1179,7 @@ export const sportsBras: Category = {
       ],
       pdpMetaTitle: "Custom Deep Plunge Convertible Sports Bra Manufacturer",
       pdpMetaDescription:
-        "Custom deep plunge convertible sports bra manufacturer, OEM, ODM, private label, medium support, convertible straps, removable pads, 50 pieces, DDP worldwide.",
+        "Custom plunge convertible sports bra manufacturer, private label, deep plunge front, convertible straps, from 50 pieces, any color, DDP to 20+ countries.",
       pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
       faqs: [
         {
@@ -1258,7 +1258,7 @@ export const sportsBras: Category = {
       ],
       pdpMetaTitle: "Custom High-Support Cutout Sports Bra Manufacturer",
       pdpMetaDescription:
-        "Custom high-support cutout sports bra manufacturer, OEM, ODM and private label, front cutout, racerback, encapsulated support, from 50 pieces, DDP worldwide.",
+        "Custom high-support cutout sports bra manufacturer, private label, front cutout detail, racerback, from 50 pieces, any fabric and color, DDP to 20+ countries.",
       pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
       faqs: [
         {
@@ -1341,7 +1341,7 @@ export const sportsBras: Category = {
       ],
       pdpMetaTitle: "Custom Twist-Front Sports Bra Manufacturer",
       pdpMetaDescription:
-        "Custom twist-front sports bra manufacturer, OEM, ODM and private label, medium support, twist bust detail, adjustable straps, from 50 pieces, DDP worldwide.",
+        "Custom twist-front sports bra manufacturer, private label, twist or knot detail at the front bust, from 50 pieces, any fabric and color, DDP to 20+ countries.",
       pdpFabricPills: ["Nylon/Spandex", "Polyamide/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
       faqs: [
         {
