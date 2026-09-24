@@ -4423,3 +4423,16 @@ Owner: "on mobile: plp, you may also be interested in title and chip, reduce the
 
 ## Bodysuits audit fixes, 2026-09-24 (commit b3fb99e)
 Owner-approved fixes from the Bodysuits audit, `bodysuits.ts` plus the one hub card string: hub descriptor now "Fitted one-piece, hip-ending or short-leg"; PLP Nylon/Spandex range 72 to 78% / 22 to 28%, new 157-char meta, step-in pull-on added to the closure coverage item, trust bullets and closure FAQ, shelf bra and short-leg FAQ definitions, card 7/8 sublines; SKU 1/8 closure answers, SKU 4 Entry row, SKU 5 comparison answer, SKU 6 boning FAQ reworded B2B, SKU 7/9 "removable pads" (was cups), SKU 8 meta; comments now say single-gender and drop "card-only drafts". Verified live, FAQPage JSON-LD matching the visible FAQ.
+
+## Hoodies audit follow-up: B5 and AA contrast, 2026-09-24 (commit 413fba4)
+
+The two items held back in c83228e until `components/ui/styles.ts` was free.
+
+- **B5, Customize H2:** the mobile "How we customize" heading no longer splits "in-house" across two lines as "in-" / "house". All 139 copies of `mobileHeading` (16 content files) now read "Your brand, applied in-house, no outsourcing" with no forced break in the string. The line break is CSS: `productCustomizeSteps.mobileHeadingWidth` is `max-w-[9.5em]` (was `whitespace-pre-line`), since `text-balance` alone still broke at the hard hyphen. Mobile and tablet wrap as "Your brand," / "applied in-house," / "no outsourcing"; desktop unchanged. The owner's 2026-09-01 "keep the in- in the first line" mobile request is superseded; the three-line wrap is accepted.
+- **AA contrast:** pagination Previous/Next (`pagination.edgeCell`, was `#838d97`) and uppercase fabric labels (`fabricOptions.accordionLabel`, was `#727272`) are now `#666666`: 5.50:1 on `#fafafa`, 5.39:1 on the `#fff6f3` hover, 5.15:1 on the `#f2f2f7` open row, 5.74:1 on white (old: 3.23, 3.17, 4.31, 4.81). Neither gray is a token. `#838d97` is kept as the dark-section muted colour (about 5.8:1 on `#121317`); page numbers already used `text-text`. Brand orange `#ff791b` unchanged.
+
+**Verified live 2026-09-24 (capriowear.vercel.app, mobile width):** Hoodies PLP and a Hoodies PDP, 0 split-word matches in text and HTML; `#666666` rendering on Previous/Next and the labels. Repo: no forced break left in any content string.
+
+## SEO doc aligned with the one-domain cutover plan, 2026-09-24 (commit 12fdf34)
+
+`docs/06-seo.md` no longer says the app is mounted at `/capriowear` with WordPress staying. It now records the 2026-09-14 decision: the app owns all of `www.capriosports.com` (parent homepage and gear at the root, Capriowear under `/capriowear`, no `basePath`), and www is the canonical host with the bare domain 301ing to www (WordPress does the reverse today). Until the Phase 5 cutover the domain stays on WordPress, `/capriowear` URLs there 404 (diagnosed 2026-09-24: WordPress on Hostinger behind Cloudflare, domain not attached to any Vercel project), and verification runs on `capriowear.vercel.app`. Cutover order: attach both hosts in Vercel, repoint Cloudflare DNS, set `NEXT_PUBLIC_SITE_URL=https://www.capriosports.com` explicitly, put the Search Console redirect map live, then turn on `NEXT_PUBLIC_ALLOW_INDEXING`.
