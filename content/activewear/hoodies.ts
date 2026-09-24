@@ -7,7 +7,7 @@
 // Sweatshirts and Tank Tops.
 //
 // Every style is "draft". Card-only drafts are non-clickable tiles with
-// no route. Drafts with PDP content (SKUs 1 to 4, 9 to 12) render noindexed
+// no route. Drafts with PDP content (SKUs 1 to 7, 9 to 13) render noindexed
 // and their cards link. Neither kind gets a sitemap or ItemList entry. A
 // card becomes a link on its own once its PDP content lands here
 // (isDraftPdpReachable(), ./pdpShared.ts).
@@ -203,7 +203,7 @@ export const hoodies: Category = {
     faqGetStarted,
   ],
   ctaReferenceNoun: "hoodie",
-  // SKU order 1 to 16, never reordered. SKUs 1 to 4 and 9 to 12 carry draft
+  // SKU order 1 to 16, never reordered. SKUs 1 to 7 and 9 to 13 carry draft
   // PDP content (reachable, noindexed, no Product/FAQPage schema, card is a
   // link); the rest are card-only drafts until their PDP content lands.
   styleCards: [
@@ -556,6 +556,80 @@ export const hoodies: Category = {
       image: "",
       imageAlt: "Men's Quarter-Zip Fleece Hoodie, men's",
       href: "/capriowear/activewear/hoodies/quarter-zip-mens",
+      pdpHeading: "Men's Quarter-Zip Fleece Hoodie Manufacturer",
+      pdpDescription:
+        "Men's relaxed-fit quarter-zip hoodie in heavyweight cotton fleece, custom and private label, with an adjustable hood, a front pouch pocket, and Spandex-reinforced ribbing, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Men's Quarter-Zip Fleece Hoodie Manufacturer",
+      pdpMetaDescription:
+        "Men's quarter-zip fleece hoodie manufacturer, private label, 460 GSM cotton fleece, adjustable hood, pouch pocket, low MOQ from 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Men's Quarter-Zip Fleece Hoodie, men's" },
+        { alt: "Men's Quarter-Zip Fleece Hoodie, men's" },
+        { alt: "Men's Quarter-Zip Fleece Hoodie, men's" },
+        { alt: "Men's Quarter-Zip Fleece Hoodie, men's" },
+        { alt: "Men's Quarter-Zip Fleece Hoodie, men's" },
+        { alt: "Men's Quarter-Zip Fleece Hoodie, men's" },
+      ],
+      material: "100% cotton fleece",
+      pdpFabricPills: ["Cotton Fleece", "Brushed Fleece", "French Terry", "Cotton-Poly Blend"],
+      pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "What fabric weight is the men's quarter-zip hoodie?",
+          a: "The standard build is a 460 GSM cotton fleece, heavy enough to hold its shape and take dimensional embroidery. We can move it lighter or heavier across the full weight range, and the final weight is confirmed on your sample.",
+        },
+        {
+          q: "How does a quarter-zip hoodie differ from a full-zip hoodie?",
+          a: "A quarter-zip hoodie is a pullover with a short zip at the neck, usually with a front pouch pocket, so the chest stays uninterrupted for branding. A full-zip hoodie opens the full length of the front and wears like a light jacket, with hand pockets. We make both.",
+        },
+        {
+          q: "What zip options do you offer on this hoodie?",
+          a: "Metal or molded zips in a range of weights, with custom pullers and color-matched tape, set to lie flat and run smoothly after washing. Zip hardware is a main quality signal on a zip hoodie, so we confirm it on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Women's Quarter-Zip Fleece Hoodie", slug: "quarter-zip-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "Men's Full-Zip Fleece Hoodie", slug: "full-zip-fleece-mens", href: "/capriowear/activewear/hoodies" },
+        { label: "Men's Premium Technical Fleece Full-Zip Hoodie", slug: "premium-technical-fleece", href: "/capriowear/activewear/hoodies" },
+        { label: "Men's Heavyweight Loose-Fit Hoodie", slug: "heavyweight-loose-fit", href: "/capriowear/activewear/hoodies" },
+        { label: "See All", href: "/capriowear/activewear/hoodies" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's quarter-zip pullover hoodie with front pouch pocket" },
+        { label: "Fabric", value: "100% cotton fleece" },
+        { label: "Weight", value: "460 GSM. Final weight confirmed on your sample." },
+        { label: "Fit", value: "Relaxed fit through the body and sleeve" },
+        { label: "Zip", value: "Quarter-length neck zip, metal or molded teeth, custom puller" },
+        { label: "Hood", value: "Adjustable hood, flat drawcord with eyelets and aglets" },
+        { label: "Pocket", value: "Front pouch pocket, bar-tacked corners" },
+        { label: "Cuffs and hem", value: "Ribbed knit with 5 to 8% Spandex for recovery" },
+        { label: "Sleeve", value: "Set-in or drop-shoulder, to your spec" },
+        { label: "Construction", value: "Cut-and-sew, side-seam body" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, puff, patches, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Men's Quarter-Zip Fleece Hoodie, men's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Zip runs smoothly and lies flat after wash, no rippling along the placket",
+        "GSM held consistent, batch to batch",
+        "Shrinkage tested after wash, targeted under 5%, brushed fleece checked for pilling",
+        "Cuff and hem ribbing hold their recovery, no bagging",
+        "Pocket corners bar-tacked and stress-tested",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          { title: "Fabric and weight", body: "Brushed fleece or French terry, any GSM, sourced or matched to your reference", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" } },
+          { title: "Build", body: "Zip type, length and puller, hood, pocket, drawcord hardware, cuffs to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Build" } },
+          { title: "Finish", body: "Standard or garment-dye", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Finish" } },
+          { title: "Trims and packaging", body: "Woven or tear-away labels, hangtags, retail-ready packaging", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
@@ -567,6 +641,80 @@ export const hoodies: Category = {
       image: "",
       imageAlt: "Men's Premium Technical Fleece Full-Zip Hoodie, men's",
       href: "/capriowear/activewear/hoodies/premium-technical-fleece",
+      pdpHeading: "Men's Premium Technical Fleece Full-Zip Hoodie Manufacturer",
+      pdpDescription:
+        "Men's full-zip hoodie in premium technical fleece, smooth on both faces, custom and private label, with articulated seaming and hand pockets, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Men's Premium Technical Fleece Full-Zip Hoodie Manufacturer",
+      pdpMetaDescription:
+        "Men's premium technical fleece full-zip hoodie manufacturer, private label, smooth-faced fleece, articulated seams, low MOQ from 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Men's Premium Technical Fleece Full-Zip Hoodie, men's" },
+        { alt: "Men's Premium Technical Fleece Full-Zip Hoodie, men's" },
+        { alt: "Men's Premium Technical Fleece Full-Zip Hoodie, men's" },
+        { alt: "Men's Premium Technical Fleece Full-Zip Hoodie, men's" },
+        { alt: "Men's Premium Technical Fleece Full-Zip Hoodie, men's" },
+        { alt: "Men's Premium Technical Fleece Full-Zip Hoodie, men's" },
+      ],
+      material: "Double-faced technical fleece",
+      pdpFabricPills: ["Technical Fleece", "Brushed Fleece", "Recycled Polyester Blend", "Cotton-Poly Blend"],
+      pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "What is technical fleece?",
+          a: "It is a double-faced knit that is smooth on both the outside and the inside, denser and more structured than brushed fleece, so it holds a clean, tailored shape while staying warm. We confirm the exact fabric and weight on your sample.",
+        },
+        {
+          q: "How does technical fleece differ from brushed fleece?",
+          a: "Brushed fleece has a soft, napped interior and a relaxed, classic hand. Technical fleece is smooth on both faces, holds a sharper silhouette, and suits paneled, articulated patterns. We make both.",
+        },
+        {
+          q: "Can I add contrast panels or color-blocking?",
+          a: "Yes. The articulated seam lines can carry contrast panels or color-blocking to your spec, confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Men's Full-Zip Fleece Hoodie", slug: "full-zip-fleece-mens", href: "/capriowear/activewear/hoodies" },
+        { label: "Men's Quarter-Zip Fleece Hoodie", slug: "quarter-zip-mens", href: "/capriowear/activewear/hoodies" },
+        { label: "Men's Technical Performance Pullover Hoodie", slug: "technical-performance-mens", href: "/capriowear/activewear/hoodies" },
+        { label: "Men's Heavyweight Loose-Fit Hoodie", slug: "heavyweight-loose-fit", href: "/capriowear/activewear/hoodies" },
+        { label: "See All", href: "/capriowear/activewear/hoodies" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's full-zip hoodie in premium technical fleece" },
+        { label: "Fabric", value: "Double-faced technical fleece, smooth outside and inside" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Roomy fit through the body, articulated for movement" },
+        { label: "Zip", value: "Full-length center-front zip, metal or molded teeth, custom puller" },
+        { label: "Hood", value: "Structured hood, with or without drawcord, to your spec" },
+        { label: "Pocket", value: "Hand pockets, open or zip-closed" },
+        { label: "Cuffs and hem", value: "Self-fabric or ribbed, to your spec" },
+        { label: "Sleeve", value: "Articulated sleeve seams" },
+        { label: "Construction", value: "Cut-and-sew, paneled body with articulated seams" },
+        { label: "Branding", value: "Screen, DTF, heat transfer, silicone, embroidery, patches, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Men's Premium Technical Fleece Full-Zip Hoodie, men's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Zip runs smoothly and lies flat after wash, no rippling along the placket",
+        "Fabric weight held consistent, batch to batch",
+        "Shrinkage tested after wash, targeted under 5%",
+        "Fabric surface checked for pilling after wash",
+        "Articulated seams stress-tested at the shoulders and elbows",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTF, heat transfer", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, silicone, patches", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          { title: "Fabric and weight", body: "Technical fleece or brushed fleece, any weight, sourced or matched to your reference", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" } },
+          { title: "Build", body: "Zip type and puller, panel and seam lines, hood, pockets to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Build" } },
+          { title: "Finish", body: "Solid or color-blocked panels", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Finish" } },
+          { title: "Trims and packaging", body: "Woven or heat-transfer labels, hangtags, retail-ready packaging", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
@@ -578,6 +726,80 @@ export const hoodies: Category = {
       image: "",
       imageAlt: "Men's Lightweight Stretch Performance Hoodie, men's",
       href: "/capriowear/activewear/hoodies/lightweight-stretch-performance",
+      pdpHeading: "Men's Lightweight Stretch Performance Hoodie Manufacturer",
+      pdpDescription:
+        "Men's lightweight performance hoodie in a 4-way stretch, fast-drying knit, custom and private label, built for running, training, and layering, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Men's Lightweight Stretch Performance Hoodie Manufacturer",
+      pdpMetaDescription:
+        "Men's lightweight stretch performance hoodie manufacturer, private label, 4-way stretch, fast-drying knit, low MOQ from 50 pieces, DDP to 20+ countries.",
+      images: [
+        { alt: "Men's Lightweight Stretch Performance Hoodie, men's" },
+        { alt: "Men's Lightweight Stretch Performance Hoodie, men's" },
+        { alt: "Men's Lightweight Stretch Performance Hoodie, men's" },
+        { alt: "Men's Lightweight Stretch Performance Hoodie, men's" },
+        { alt: "Men's Lightweight Stretch Performance Hoodie, men's" },
+        { alt: "Men's Lightweight Stretch Performance Hoodie, men's" },
+      ],
+      material: "Lightweight Polyester/Spandex knit",
+      pdpFabricPills: ["Lightweight Polyester/Spandex Knit", "Recycled Polyester Blend", "Stretch Performance Fleece", "Brushed Fleece"],
+      pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "How does the Men's Lightweight Stretch Performance Hoodie differ from the Men's Technical Performance Pullover Hoodie?",
+          a: "The Men's Lightweight Stretch Performance Hoodie uses a lighter knit with more stretch, built for running and high-output training. The Men's Technical Performance Pullover Hoodie uses a performance knit with underarm ventilation panels, built for training and layering. Both are sweat-wicking and fast-drying.",
+        },
+        {
+          q: "What fabric is the men's lightweight stretch performance hoodie made from?",
+          a: "A lightweight Polyester/Spandex knit with 4-way stretch that breathes, wicks sweat, and dries fast. We confirm the exact fabric and weight on your sample.",
+        },
+        {
+          q: "Which branding methods work on performance fabric?",
+          a: "Heat transfer, silicone, DTF, screen print, embroidery, and sublimation all work on polyester performance knits. We match the method to the fabric so the print flexes with the garment and holds its finish after washing.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Men's Technical Performance Pullover Hoodie", slug: "technical-performance-mens", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Technical Performance Pullover Hoodie", slug: "technical-performance-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "Men's Full-Zip Fleece Hoodie", slug: "full-zip-fleece-mens", href: "/capriowear/activewear/hoodies" },
+        { label: "Men's Regular-Fit Brushed Fleece Pullover Hoodie", slug: "regular-fit-brushed-fleece-mens", href: "/capriowear/activewear/hoodies" },
+        { label: "See All", href: "/capriowear/activewear/hoodies" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's lightweight stretch performance pullover hoodie" },
+        { label: "Fabric", value: "Lightweight Polyester/Spandex knit, 4-way stretch" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Athletic fit, close to the body without compression" },
+        { label: "Performance", value: "Breathable, sweat-wicking, fast-drying" },
+        { label: "Hood", value: "Single-layer, with or without drawcord, to your spec" },
+        { label: "Pocket", value: "Kangaroo, zip, or none, to your spec" },
+        { label: "Cuffs and hem", value: "Self-fabric or ribbed, to your spec" },
+        { label: "Construction", value: "Cut-and-sew, flatlock or overlock seams to your spec" },
+        { label: "Branding", value: "Sublimation, heat transfer, silicone, screen, DTF, embroidery, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Men's Lightweight Stretch Performance Hoodie, men's" },
+      pdpQualityHeading: "Stretch that holds, wash after wash",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Fabric stretch and recovery tested before bulk",
+        "Sweat-wicking finish checked after wash",
+        "Seams stress-tested at the shoulders and underarms",
+        "Fabric weight held consistent, batch to batch",
+        "Shrinkage tested after wash, targeted under 5%",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, heat transfer", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, embroidery, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          { title: "Fabric and weight", body: "Stretch performance knit, any weight, sourced or matched to your reference", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" } },
+          { title: "Build", body: "Hood, pocket, cuffs and hem to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Build" } },
+          { title: "Finish", body: "Sweat-wicking and quick-dry fabric finishes", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Finish" } },
+          { title: "Trims and packaging", body: "Woven or heat-transfer labels, hangtags, retail-ready packaging", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
@@ -938,6 +1160,80 @@ export const hoodies: Category = {
       image: "",
       imageAlt: "Women's Quarter-Zip Fleece Hoodie, women's",
       href: "/capriowear/activewear/hoodies/quarter-zip-womens",
+      pdpHeading: "Women's Quarter-Zip Fleece Hoodie Manufacturer",
+      pdpDescription:
+        "Women's regular-fit quarter-zip hoodie in low-shed brushed fleece, custom and private label, with a half-length neck zip and Spandex-reinforced ribbing, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Women's Quarter-Zip Fleece Hoodie Manufacturer",
+      pdpMetaDescription:
+        "Women's quarter-zip fleece hoodie manufacturer, private label, half-length neck zip, low-shed brushed fleece, low MOQ from 50 pieces, DDP to 20+ countries.",
+      images: [
+        { alt: "Women's Quarter-Zip Fleece Hoodie, women's" },
+        { alt: "Women's Quarter-Zip Fleece Hoodie, women's" },
+        { alt: "Women's Quarter-Zip Fleece Hoodie, women's" },
+        { alt: "Women's Quarter-Zip Fleece Hoodie, women's" },
+        { alt: "Women's Quarter-Zip Fleece Hoodie, women's" },
+        { alt: "Women's Quarter-Zip Fleece Hoodie, women's" },
+      ],
+      material: "Low-shed brushed fleece",
+      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton-Poly Blend", "Recycled Fiber Blend"],
+      pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "What is the difference between a quarter-zip and a half-zip hoodie?",
+          a: "Both are pullover hoodies with a partial front zip at the neck. The only difference is zip length, and we set it to your spec, from a short quarter-length zip to a longer half-length zip.",
+        },
+        {
+          q: "How does the Women's Quarter-Zip Fleece Hoodie differ from the Men's Quarter-Zip Fleece Hoodie?",
+          a: "The Women's Quarter-Zip Fleece Hoodie is a regular fit on a women's pattern block, with a half-length neck zip in low-shed brushed fleece. The Men's Quarter-Zip Fleece Hoodie is a relaxed fit in 460 GSM cotton fleece, with an adjustable hood and a front pouch pocket. Both are fully customizable.",
+        },
+        {
+          q: "What does low-shed brushed fleece mean?",
+          a: "It is a brushed fleece finished to release fewer loose fibers, so it sheds and pills less over time than standard brushed fleece. We check shedding and pilling on your sample before bulk.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Men's Quarter-Zip Fleece Hoodie", slug: "quarter-zip-mens", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Full-Zip Fleece Hoodie", slug: "full-zip-fleece-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Regular-Fit Brushed Fleece Pullover Hoodie", slug: "regular-fit-brushed-fleece-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Technical Performance Pullover Hoodie", slug: "technical-performance-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "See All", href: "/capriowear/activewear/hoodies" },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's quarter-zip pullover hoodie" },
+        { label: "Fabric", value: "Low-shed brushed fleece" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Regular fit, clean through the body, cut on a women's pattern block" },
+        { label: "Zip", value: "Half-length neck zip, metal or molded teeth, custom puller" },
+        { label: "Hood", value: "Single or double-layer, flat drawcord with eyelets and aglets" },
+        { label: "Pocket", value: "Front pouch or kangaroo pocket, bar-tacked corners" },
+        { label: "Cuffs and hem", value: "Ribbed knit with 5 to 8% Spandex for recovery" },
+        { label: "Sleeve", value: "Set-in sleeve" },
+        { label: "Construction", value: "Cut-and-sew, side-seam body" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, puff, patches, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Women's Quarter-Zip Fleece Hoodie, women's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Zip runs smoothly and lies flat after wash, no rippling along the placket",
+        "GSM held consistent, batch to batch",
+        "Shrinkage tested after wash, targeted under 5%",
+        "Brushed fleece checked for shedding and pilling",
+        "Cuff and hem ribbing hold their recovery, no bagging",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          { title: "Fabric and weight", body: "Brushed fleece or French terry, any GSM, sourced or matched to your reference", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" } },
+          { title: "Build", body: "Zip type, length and puller, hood, pocket, drawcord hardware, cuffs to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Build" } },
+          { title: "Finish", body: "Standard or garment-dye", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Finish" } },
+          { title: "Trims and packaging", body: "Woven or tear-away labels, hangtags, retail-ready packaging", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and packaging" } },
+        ],
+      },
     },
     {
       status: "draft",

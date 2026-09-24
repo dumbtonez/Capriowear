@@ -4256,3 +4256,14 @@ Owner brief: four more draft PDPs in `content/activewear/hoodies.ts`, same templ
 - **Pills:** data-driven, so batch 1's SKU 1 pill "Men's Regular-Fit Brushed Fleece Pullover Hoodie" now resolves to its PDP with no edit. Unbuilt targets (Lightweight Stretch Performance, Soft-Stretch Lounge, Quarter-Zip) still fall back to the PLP.
 
 **Verified (local build):** script check of all 4 pages passes (robots, title, meta, H1, breadcrumb, gallery alts, JSON-LD types, every spec row, tile, quality point, FAQ order and answers, pill targets, CTA, compliance, banned strings). tsc, eslint, build clean. Playwright 44/45 with one homepage page-load timeout that passed on rerun.
+
+## Hoodies PDPs batch 3: SKUs 5, 13, 6, 7 built as drafts, 2026-09-24
+
+Owner brief: four more draft PDPs in `content/activewear/hoodies.ts`, same template and field set as batches 1 and 2. Content only.
+
+- **Pages:** `quarter-zip-mens` (CAP-HOO-05), `quarter-zip-womens` (13), `premium-technical-fleece` (06), `lightweight-stretch-performance` (07).
+- **Per-SKU specifics:** SKU 5 is the only Hoodies PDP with a real weight ("460 GSM. Final weight confirmed on your sample."). SKU 13's Zip row is "Half-length neck zip" by design, explained in its first style FAQ. SKU 6 has its own tiles and rows (articulated sleeve seams, paneled body, solid or color-blocked finish). SKU 7 is a performance build: "Stretch that holds, wash after wash", no Ventilation row.
+- **Draft handling:** unchanged. PLP cards for SKUs 1 to 7 and 9 to 13 are links; 8, 14, 15, 16 are not.
+- **Pills:** data-driven. SKU 2's Premium Technical Fleece and Quarter-Zip pills, SKU 4's Lightweight Stretch Performance pill and SKU 12's Quarter-Zip pill now resolve to their PDPs with no edit; SKU 12's Soft-Stretch Lounge pill still falls back to the PLP.
+
+**Verified (local build):** script check of all 4 pages plus the cross-page pills passes. tsc, eslint, build clean. Playwright 44/45 with one homepage page-load timeout that passed on rerun.
