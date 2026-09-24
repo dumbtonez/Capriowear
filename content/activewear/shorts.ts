@@ -1668,7 +1668,6 @@ export const shorts: Category = {
   relatedLinks: [
     { label: "Leggings", href: "/capriowear/activewear/leggings" },
     { label: "Joggers", href: "/capriowear/activewear/joggers" },
-    { label: "T-Shirts", href: "/capriowear/activewear/t-shirts" },
     { label: "Tank Tops", href: "/capriowear/activewear/tank-tops" },
     { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
     { label: "Bodysuits", href: "/capriowear/activewear/bodysuits" },

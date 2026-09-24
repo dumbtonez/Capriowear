@@ -4307,3 +4307,7 @@ Owner brief: draft PDPs for CAP-BOD-01 `tank` (new content under the reused slug
 ## Bodysuits added to Related on Sports Bras and Shorts, 2026-09-24
 
 Owner request: link Bodysuits from three more PLPs' "You may also be interested in" module, appended last, existing items untouched. Sports Bras and Shorts now list 6 (the component has no fixed cap; this goes past the 2026-09-23 "5 each" balance by owner request, as Bodysuits' own list already does). Running Wear was skipped: it has no Related module (its curated page renders banner, card grid, customization, trust block, FAQ, CTA only), and the brief said not to build one.
+
+## Related links back to the 5-link maximum, 2026-09-24
+
+Owner follow-up: keep the 2026-09-23 rule of at most 5 "You may also be interested in" links. Bodysuits drops Compression & Base Layers, Sports Bras drops Sweatshirts, Shorts drops T-Shirts. All three now show exactly 5, each still including the Bodysuits cross-links added earlier today.

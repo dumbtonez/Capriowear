@@ -464,13 +464,12 @@ export const bodysuits: Category = {
     },
   ],
   // "You may also be interested in" (owner spec, 2026-09-24): exact list
-  // and order, 6 links, all real built pages.
+  // and order, 5 links (sitewide max, 2026-09-23), all real built pages.
   relatedLinks: [
     { label: "Jumpsuits", href: "/capriowear/activewear/jumpsuits" },
     { label: "Leggings", href: "/capriowear/activewear/leggings" },
     { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
     { label: "Shorts", href: "/capriowear/activewear/shorts" },
     { label: "Running Wear", href: "/capriowear/activewear/running-wear" },
-    { label: "Compression & Base Layers", href: "/capriowear/activewear/compression-base-layers" },
   ],
 };
