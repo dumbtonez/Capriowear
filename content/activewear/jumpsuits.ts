@@ -19,7 +19,10 @@
 // chips, spec subtitle and the operational FAQs are the shared PDP
 // defaults (./pdpShared.ts); "How we customize" is set once below for the
 // whole category. Related-style pills carry a `slug`, so a pill for an
-// unbuilt SKU falls back to the PLP and switches to its PDP by itself. Second and final category under
+// unbuilt SKU falls back to the PLP and switches to its PDP by itself.
+//
+// PDP batch 2 (owner spec, 2026-09-24): SKUs 4 to 6 added the same way, so
+// all 6 cards link and every related-style pill resolves to a real PDP. Second and final category under
 // the "ONE-PIECES" mega-menu group (content/home.ts), after Bodysuits.
 //
 // No `weightTiers` block (owner spec): jumpsuits are not weight-tier driven.
@@ -191,7 +194,7 @@ export const jumpsuits: Category = {
       { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
     ],
   },
-  // 6 drafts (SKUs 1 to 3 with PDP content), SKU-number order (see header comment). Alt text is
+  // 6 drafts, all with PDP content, SKU-number order (see header comment). Alt text is
   // the card name exactly.
   styleCards: [
     {
@@ -416,6 +419,68 @@ export const jumpsuits: Category = {
       imageAlt: "Custom Corset-Detail Square-Neck Jumpsuit",
       href: "/capriowear/activewear/jumpsuits/corset-square-neck",
       sku: "CAP-JMP-04",
+      pdpHeading: "Custom Corset-Detail Square-Neck Jumpsuit Manufacturer",
+      pdpDescription:
+        "Fitted sleeveless jumpsuit with a square neckline and a corset-style boned waist, custom and private label, in a matte Nylon/Spandex sculpting knit with a straight, full-length leg, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Corset-Detail Square-Neck Jumpsuit Manufacturer",
+      pdpMetaDescription:
+        "Custom corset-detail square-neck jumpsuit manufacturer, private label, boned waist, matte Nylon/Spandex sculpting knit, MOQ from 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Corset-Detail Square-Neck Jumpsuit" },
+        { alt: "Custom Corset-Detail Square-Neck Jumpsuit" },
+        { alt: "Custom Corset-Detail Square-Neck Jumpsuit" },
+        { alt: "Custom Corset-Detail Square-Neck Jumpsuit" },
+        { alt: "Custom Corset-Detail Square-Neck Jumpsuit" },
+        { alt: "Custom Corset-Detail Square-Neck Jumpsuit" },
+      ],
+      material: "Matte Nylon/Spandex sculpting knit, blend confirmed on your sample.",
+      pdpFabricPills: ["Matte Nylon/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "What does the corset detail do on the corset-detail square-neck jumpsuit?",
+          a: "The corset-detail square-neck jumpsuit has flexible boning in stitched channels at the waist, which gives the waist a sculpted, structured line while the rest of the jumpsuit keeps full 4-way stretch. Boning placement and count are set to your spec and confirmed on your sample.",
+        },
+        {
+          q: "Does the boning stay in place through washing on a corset-detail jumpsuit?",
+          a: "Yes. On the corset-detail square-neck jumpsuit, each bone sits in its own stitched channel with finished ends, so it stays flat and does not work through the fabric. We check the boning after wash on your sample before bulk.",
+        },
+        {
+          q: "What fabric do you build the corset-detail square-neck jumpsuit in?",
+          a: "A matte Nylon/Spandex sculpting knit with a smooth, low-shine finish and firm compression, or Polyester/Spandex for a training build. The exact blend and weight of the corset-detail square-neck jumpsuit are confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Scoop-Neck Straight-Leg Jumpsuit", slug: "scoop-neck-straight-leg", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Molded-Cup V-Panel Jumpsuit", slug: "molded-cup-v-panel", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Deep V-Neck Jumpsuit", slug: "deep-v-neck", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Wide-Leg Drop-Crotch Jumpsuit", slug: "wide-leg-drop-crotch", href: "/capriowear/activewear/jumpsuits" },
+        { label: "See All", href: "/capriowear/activewear/jumpsuits" },
+      ],
+      specifications: [
+        { label: "Style", value: "Sleeveless fitted jumpsuit, square neck, corset-detail waist" },
+        { label: "Fabric", value: "Matte Nylon/Spandex sculpting knit, blend confirmed on your sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Fitted and sculpting through the torso and leg" },
+        { label: "Waist", value: "Flexible boning in stitched channels at the waist, corset seaming to your spec" },
+        { label: "Leg", value: "Straight, full length" },
+        { label: "Neckline and straps", value: "Square neck, wide straps" },
+        { label: "Entry", value: "Step-in, pull-on (base), back or side zip on request" },
+        { label: "Gusset", value: "Sewn gusset (base), snap-button gusset on request" },
+        { label: "Support", value: "Plain, or built-in shelf bra with removable pads" },
+        { label: "Construction", value: "Cut-and-sew, boning channels stitched into the waist panels, flatlock or coverstitch seams" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, heat transfer, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Corset-Detail Square-Neck Jumpsuit" },
+      pdpQualityHeading: "Structure at the waist, stretch everywhere else",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Boning channels hold their shape and stay flat through wear and wash",
+        "Boning ends finished so nothing presses through the fabric",
+        "Square neckline holds its line without gaping",
+        "Torso length graded across every size, so the corset waist sits at the natural waist",
+        "Opacity confirmed under squat-depth stretch across the full leg",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
@@ -426,6 +491,68 @@ export const jumpsuits: Category = {
       imageAlt: "Custom Wide-Leg Drop-Crotch Jumpsuit",
       href: "/capriowear/activewear/jumpsuits/wide-leg-drop-crotch",
       sku: "CAP-JMP-05",
+      pdpHeading: "Custom Wide-Leg Drop-Crotch Jumpsuit Manufacturer",
+      pdpDescription:
+        "Relaxed sleeveless jumpsuit with a scoop neck, a dropped crotch and a wide, full-length leg, custom and private label, in a soft Modal/Nylon/Spandex jersey that drapes rather than compresses, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Wide-Leg Drop-Crotch Jumpsuit Manufacturer",
+      pdpMetaDescription:
+        "Custom wide-leg drop-crotch jumpsuit manufacturer, private label, relaxed fit, soft Modal/Nylon/Spandex jersey, scoop neck, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Wide-Leg Drop-Crotch Jumpsuit" },
+        { alt: "Custom Wide-Leg Drop-Crotch Jumpsuit" },
+        { alt: "Custom Wide-Leg Drop-Crotch Jumpsuit" },
+        { alt: "Custom Wide-Leg Drop-Crotch Jumpsuit" },
+        { alt: "Custom Wide-Leg Drop-Crotch Jumpsuit" },
+        { alt: "Custom Wide-Leg Drop-Crotch Jumpsuit" },
+      ],
+      material: "Modal/Nylon/Spandex single jersey, commonly around 71% / 18% / 11%, confirmed on your sample.",
+      pdpFabricPills: ["Modal/Nylon/Spandex Jersey", "Polyester/Spandex Jersey", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "How does the wide-leg drop-crotch jumpsuit differ from a fitted jumpsuit?",
+          a: "The wide-leg drop-crotch jumpsuit is cut relaxed, with a lowered crotch and a wide leg that drape away from the body, while a fitted jumpsuit compresses from shoulder to ankle. The relaxed style suits studio, travel, and rest-day wear rather than high-compression training.",
+        },
+        {
+          q: "How low is the crotch on the wide-leg drop-crotch jumpsuit?",
+          a: "The wide-leg drop-crotch jumpsuit sits the crotch lower than a fitted style for a loose, easy drape. Crotch depth and leg width are set to your spec and graded across the size run, confirmed on your sample.",
+        },
+        {
+          q: "What fabric do you build the wide-leg drop-crotch jumpsuit in?",
+          a: "A soft Modal/Nylon/Spandex single jersey, commonly around 71% Modal, 18% Nylon and 11% Spandex, which drapes and breathes rather than compresses. The exact blend and weight of the wide-leg drop-crotch jumpsuit are confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Flared-Leg Jumpsuit", slug: "flared-leg", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Scoop-Neck Straight-Leg Jumpsuit", slug: "scoop-neck-straight-leg", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Corset-Detail Square-Neck Jumpsuit", slug: "corset-square-neck", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Molded-Cup V-Panel Jumpsuit", slug: "molded-cup-v-panel", href: "/capriowear/activewear/jumpsuits" },
+        { label: "See All", href: "/capriowear/activewear/jumpsuits" },
+      ],
+      specifications: [
+        { label: "Style", value: "Relaxed sleeveless jumpsuit, scoop neck, wide leg" },
+        { label: "Fabric", value: "Modal/Nylon/Spandex single jersey, commonly around 71% / 18% / 11%, confirmed on your sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Relaxed, drapes away from the body" },
+        { label: "Crotch", value: "Dropped crotch for a loose, easy drape" },
+        { label: "Leg", value: "Wide, full length" },
+        { label: "Neckline and straps", value: "Scoop neck, wide straps" },
+        { label: "Entry", value: "Step-in, pull-on (base), back or side zip on request" },
+        { label: "Gusset", value: "Sewn gusset (base), snap-button gusset on request" },
+        { label: "Support", value: "Plain, or built-in shelf bra with removable pads" },
+        { label: "Construction", value: "Cut-and-sew, overlock or coverstitch seams" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, heat transfer, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Wide-Leg Drop-Crotch Jumpsuit" },
+      pdpQualityHeading: "A relaxed drape that keeps its shape",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Leg width and drape held consistent at every size",
+        "Crotch depth graded across the size run",
+        "Jersey checked for pilling and shrinkage after wash, shrinkage targeted under 5%",
+        "Straps and neckline hold their shape without stretching out",
+        "Seams stress-tested at the crotch and underarm",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
@@ -436,6 +563,68 @@ export const jumpsuits: Category = {
       imageAlt: "Custom Molded-Cup V-Panel Jumpsuit",
       href: "/capriowear/activewear/jumpsuits/molded-cup-v-panel",
       sku: "CAP-JMP-06",
+      pdpHeading: "Custom Molded-Cup V-Panel Jumpsuit Manufacturer",
+      pdpDescription:
+        "Fitted sleeveless jumpsuit with built-in molded cups and a double-layer V-panel front, custom and private label, in a 4-way stretch Nylon/Spandex knit with a straight, full-length leg, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Molded-Cup V-Panel Jumpsuit Manufacturer",
+      pdpMetaDescription:
+        "Custom molded-cup V-panel jumpsuit manufacturer, private label, built-in molded cups, double-layer V-panel, Nylon/Spandex knit, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Molded-Cup V-Panel Jumpsuit" },
+        { alt: "Custom Molded-Cup V-Panel Jumpsuit" },
+        { alt: "Custom Molded-Cup V-Panel Jumpsuit" },
+        { alt: "Custom Molded-Cup V-Panel Jumpsuit" },
+        { alt: "Custom Molded-Cup V-Panel Jumpsuit" },
+        { alt: "Custom Molded-Cup V-Panel Jumpsuit" },
+      ],
+      material: "Nylon/Spandex 4-way stretch knit, blend confirmed on your sample.",
+      pdpFabricPills: ["Nylon/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "Does the molded-cup V-panel jumpsuit need a separate bra?",
+          a: "No. The molded-cup V-panel jumpsuit has molded cups with foam inserts built between the fabric layers, so it gives support on its own. Cup shape, size, and support level are set to your spec and confirmed on your sample.",
+        },
+        {
+          q: "What does the double-layer V-panel do on the molded-cup V-panel jumpsuit?",
+          a: "The double-layer V-panel on the front of the molded-cup V-panel jumpsuit adds shaping and extra coverage through the torso and frames the built-in cups. The panel shape and depth are set to your spec.",
+        },
+        {
+          q: "How do you size molded cups across a full size run?",
+          a: "On the molded-cup V-panel jumpsuit, cup size and placement are graded with torso length across the full size run, not just scaled from the sample, so the support sits in the right place at every size. We confirm the cup fit on your sample before bulk.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Deep V-Neck Jumpsuit", slug: "deep-v-neck", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Scoop-Neck Straight-Leg Jumpsuit", slug: "scoop-neck-straight-leg", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Corset-Detail Square-Neck Jumpsuit", slug: "corset-square-neck", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Wide-Leg Drop-Crotch Jumpsuit", slug: "wide-leg-drop-crotch", href: "/capriowear/activewear/jumpsuits" },
+        { label: "See All", href: "/capriowear/activewear/jumpsuits" },
+      ],
+      specifications: [
+        { label: "Style", value: "Sleeveless fitted jumpsuit, scoop neck, molded-cup support" },
+        { label: "Fabric", value: "Nylon/Spandex 4-way stretch knit, blend confirmed on your sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Fitted, second-skin through the torso and leg" },
+        { label: "Support", value: "Built-in molded cups with foam inserts, no separate bra needed" },
+        { label: "Front panel", value: "Double-layer V-panel for shaping and coverage" },
+        { label: "Leg", value: "Straight, full length" },
+        { label: "Neckline and straps", value: "Scoop neck, tank straps" },
+        { label: "Entry", value: "Step-in, pull-on (base), back or side zip on request" },
+        { label: "Gusset", value: "Sewn gusset (base), snap-button gusset on request" },
+        { label: "Construction", value: "Cut-and-sew, cups set between fabric layers, flatlock or coverstitch seams" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, heat transfer, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Molded-Cup V-Panel Jumpsuit" },
+      pdpQualityHeading: "Built-in support that holds its shape",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Molded cups hold their shape through wear and wash, with no folding or shifting",
+        "Cup placement graded across every size, so support sits right at each torso length",
+        "Double-layer front panel lies flat with no bubbling",
+        "Opacity confirmed under squat-depth stretch across the full leg",
+        "Ease of entry checked across the size run",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, same L1 group first
