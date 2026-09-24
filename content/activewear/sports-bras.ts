@@ -231,7 +231,7 @@ export const sportsBras: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -313,7 +313,7 @@ export const sportsBras: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -393,7 +393,7 @@ export const sportsBras: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -475,7 +475,7 @@ export const sportsBras: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -556,7 +556,7 @@ export const sportsBras: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -637,7 +637,7 @@ export const sportsBras: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -718,7 +718,7 @@ export const sportsBras: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -802,7 +802,7 @@ export const sportsBras: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -886,7 +886,7 @@ export const sportsBras: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -969,7 +969,7 @@ export const sportsBras: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -1050,7 +1050,7 @@ export const sportsBras: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -1133,7 +1133,7 @@ export const sportsBras: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -1219,7 +1219,7 @@ export const sportsBras: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -1299,7 +1299,7 @@ export const sportsBras: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -1382,7 +1382,7 @@ export const sportsBras: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },

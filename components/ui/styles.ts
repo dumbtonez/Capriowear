@@ -6924,8 +6924,10 @@ export const pagination = {
   // it can never overflow itself, so the row's own `gap-2` between cells
   // is guaranteed, at any font/rendering. `whitespace-nowrap` keeps the
   // icon and "Previous"/"Next" on one line at any width.
+  // Text #666666, was #838d97 (Hoodies audit, 2026-09-24: WCAG AA). 5.50:1
+  // on the #fafafa cell, 5.39:1 on the #FFF6F3 hover; #838d97 was 3.23:1.
   edgeCell:
-    "flex max-xl:h-[40px] xl:h-[48px] items-center gap-1.5 max-xl:w-fit whitespace-nowrap rounded-none bg-[#fafafa] px-5 text-[0.875rem] text-[#838d97] enabled:hover:bg-[#FFF6F3] disabled:cursor-not-allowed disabled:opacity-60",
+    "flex max-xl:h-[40px] xl:h-[48px] items-center gap-1.5 max-xl:w-fit whitespace-nowrap rounded-none bg-[#fafafa] px-5 text-[0.875rem] text-[#666666] enabled:hover:bg-[#FFF6F3] disabled:cursor-not-allowed disabled:opacity-60",
   edgeIcon: "size-2 shrink-0 text-current",
 };
 
@@ -7288,7 +7290,9 @@ export const fabricOptions = {
   accordionField: "flex flex-col gap-1",
   // No explicit leading override -- Figma specifies leading-[normal] here
   // (not a tight leading-none), same as the eyebrow above.
-  accordionLabel: "text-sm font-semibold uppercase text-[#727272]",
+  // #666666, was #727272 (Hoodies audit, 2026-09-24: WCAG AA). 5.15:1 on the
+  // open row's #f2f2f7, 5.74:1 on white; #727272 was 4.31:1 on #f2f2f7.
+  accordionLabel: "text-sm font-semibold uppercase text-[#666666]",
   accordionValue: "text-[1.125rem] font-normal leading-6 text-text",
   accordionCollapsedTitle: "overflow-hidden text-ellipsis whitespace-nowrap",
   accordionChevron: "size-3 shrink-0 text-current transition-transform duration-300 ease-in-out",
@@ -8852,11 +8856,14 @@ export const productCustomizeSteps = {
   // break instead of collapsing it to a space, same technique already
   // used for FabricOptions' own heading.
   desktopHeadingWidth: "max-w-[812px] whitespace-pre-line",
-  // Same break, mobile (owner, 2026-09-01: "make it for mobile too") --
-  // no width constraint needed here (mobile's own column is already
-  // narrow enough that the explicit "\n" is the only thing controlling
-  // where the break falls).
-  mobileHeadingWidth: "whitespace-pre-line",
+  // Mobile break is CSS-only (Hoodies audit B5, 2026-09-24): the content
+  // string has no "\n" any more (the old newline after "in-" split the
+  // word across lines). A hard hyphen is always a break opportunity, and
+  // "in-house, no outsourcing" is wider than the mobile column, so
+  // `text-balance` alone still broke after "in-". 9.5em sits between
+  // "Your brand, applied" (8.7em) and "Your brand, applied in-" (10.1em),
+  // forcing the break after "applied" so "in-house" stays whole.
+  mobileHeadingWidth: "max-w-[9.5em]",
   // Mobile-only eyebrow override (owner correction, 2026-09-02: "eyebrow
   // size is 16px and auto height" -- was inheriting Eyebrow's own default
   // Overline size, 20px/1.2 line-height). `leading-normal` renders as the

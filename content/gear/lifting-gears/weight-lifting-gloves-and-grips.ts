@@ -237,7 +237,7 @@ export const weightLiftingGlovesAndGrips: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           {
             title: "Palm material",
@@ -371,7 +371,7 @@ export const weightLiftingGlovesAndGrips: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           {
             title: "Palm material",
@@ -505,7 +505,7 @@ export const weightLiftingGlovesAndGrips: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           {
             title: "Fit",

@@ -229,12 +229,10 @@ export const pdpCustomizationSteps = {
   // FabricOptions' own 2-line heading. Desktop only -- rendered via
   // `productCustomizeSteps.desktopHeadingWidth`'s own `whitespace-pre-line`.
   heading: "Your brand, applied\nin-house, no outsourcing",
-  // Mobile's own break point, deliberately different from desktop's above
-  // (owner, 2026-09-01: "keep the in- in the first line" -- i.e. don't
-  // orphan "in-" onto the second line the way desktop's break does).
-  // Rendered via `productCustomizeSteps.mobileHeadingWidth`'s own
-  // `whitespace-pre-line`.
-  mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+  // No hard break in the string (Hoodies audit B5, 2026-09-24: the old
+  // newline after "in-" split the word across lines). The line break is done in
+  // CSS by `productCustomizeSteps.mobileHeadingWidth`'s `text-balance`.
+  mobileHeading: "Your brand, applied in-house, no outsourcing",
   // Fabric moved first (owner, 2026-09-10: "make fabric as first card") --
   // was 3rd.
   // `image` on all 5, 2026-09-12: temporary test photography (Inside the
