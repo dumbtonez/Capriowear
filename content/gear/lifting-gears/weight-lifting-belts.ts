@@ -226,7 +226,6 @@ export const weightLiftingBelts: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           {
             title: "Material & thickness",
@@ -378,7 +377,6 @@ export const weightLiftingBelts: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           {
             title: "Thickness and prong count",
@@ -551,7 +549,6 @@ export const weightLiftingBelts: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           {
             title: "Buckle",
@@ -682,7 +679,6 @@ export const weightLiftingBelts: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           {
             title: "Pad material",
@@ -833,7 +829,6 @@ export const weightLiftingBelts: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           {
             title: "Closure",
@@ -990,7 +985,6 @@ export const weightLiftingBelts: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           {
             title: "Cut",

@@ -277,7 +277,6 @@ export const hoodies: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -362,7 +361,6 @@ export const hoodies: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -446,7 +444,6 @@ export const hoodies: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -532,7 +529,6 @@ export const hoodies: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, heat transfer", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, embroidery, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -617,7 +613,6 @@ export const hoodies: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -702,7 +697,6 @@ export const hoodies: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Screen, DTF, heat transfer", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Embroidery, silicone, patches", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -787,7 +781,6 @@ export const hoodies: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, heat transfer", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, embroidery, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -871,7 +864,6 @@ export const hoodies: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -955,7 +947,6 @@ export const hoodies: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -1040,7 +1031,6 @@ export const hoodies: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -1124,7 +1114,6 @@ export const hoodies: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -1209,7 +1198,6 @@ export const hoodies: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Sublimation, screen, DTF, heat transfer", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Silicone, embroidery, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -1294,7 +1282,6 @@ export const hoodies: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -1379,7 +1366,6 @@ export const hoodies: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -1464,7 +1450,6 @@ export const hoodies: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Screen, DTF, heat transfer", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Embroidery, heat transfer, patches", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
@@ -1548,7 +1533,6 @@ export const hoodies: Category = {
       pdpCustomizationSteps: {
         eyebrow: "HOW WE CUSTOMIZE",
         heading: "Your brand, applied\nin-house, no outsourcing",
-        mobileHeading: "Your brand, applied in-house, no outsourcing",
         steps: [
           { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },

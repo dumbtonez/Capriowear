@@ -463,7 +463,6 @@ export type PdpSpecHighlight = {
 export type PdpCustomizeStepsContent = {
   eyebrow: string;
   heading: string;
-  mobileHeading: string;
   steps: { title: string; body: string; image: { src: string; alt: string } }[];
 };
 

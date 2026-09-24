@@ -28,7 +28,10 @@ export type FaqProps = {
 // editing all of them. Handled once here instead, in the one shared
 // component every page renders: a real <br/> inserted right before "B2B"
 // (not CSS text-wrap, which can't target a specific word), so "B2B buyers"
-// always starts its own line regardless of viewport width. Falls through
+// always starts its own line regardless of viewport width. A real space
+// sits before each <br/> (Bodysuits audit follow-up, 2026-09-24) so the
+// heading's text reads "from B2B", not "fromB2B"; a trailing space before a
+// line break collapses, so the visual break is unchanged. Falls through
 // to the plain string unchanged if a future heading doesn't contain "B2B"
 // at all.
 //
@@ -36,7 +39,7 @@ export type FaqProps = {
 // 2 lines, as we have in design system") -- a heading with no "B2B" in it
 // still needs the same real-2-line treatment, so a literal "\n" in the
 // content string (same forced-break convention `FinalCta.tsx`'s own
-// `DesktopSubline` already uses) is checked first and takes priority; the
+// `Subline` already uses) is checked first and takes priority; the
 // B2B-specific rule below stays as the fallback for every existing page's
 // heading, unchanged.
 function renderHeadingWithB2BBreak(heading: string) {
@@ -46,7 +49,12 @@ function renderHeadingWithB2BBreak(heading: string) {
       <>
         {lines.map((line, index) => (
           <Fragment key={index}>
-            {index > 0 && <br />}
+            {index > 0 && (
+              <>
+                {" "}
+                <br />
+              </>
+            )}
             {line}
           </Fragment>
         ))}
@@ -58,7 +66,7 @@ function renderHeadingWithB2BBreak(heading: string) {
   if (index === -1) return heading;
   return (
     <>
-      {heading.slice(0, index).trimEnd()}
+      {heading.slice(0, index).trimEnd()}{" "}
       <br />
       {heading.slice(index)}
     </>

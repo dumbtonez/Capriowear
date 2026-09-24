@@ -199,6 +199,9 @@ export function TextReveal({ text, segments, boldClassName, as: Tag = "span", cl
   // order across the break ("The fabrics behind the brands" / "big").
   // Splitting on "\n" first and rendering a real `<br />` between lines
   // keeps every word's own mask a plain single word, no embedded newline.
+  // A plain space precedes each <br /> so the visible words' text reads
+  // "the big", not "thebig" (2026-09-24); it collapses at the line end, so
+  // the break itself is unchanged.
   const lines = (text ?? "").split("\n");
 
   return (
@@ -210,7 +213,12 @@ export function TextReveal({ text, segments, boldClassName, as: Tag = "span", cl
       {srCopy}
       {lines.map((line, li) => (
         <Fragment key={li}>
-          {li > 0 && <br />}
+          {li > 0 && (
+            <>
+              {" "}
+              <br />
+            </>
+          )}
           {line.split(" ").map((word, wi) => {
             const i = globalIndex++;
             return (

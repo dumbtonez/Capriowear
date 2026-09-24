@@ -230,12 +230,6 @@ export const pdpCustomizationSteps = {
   // `productCustomizeSteps.headingWidth`'s `xl:whitespace-pre-line`; below
   // xl the break collapses to a space and wraps inside `max-w-[9.5em]`.
   heading: "Your brand, applied\nin-house, no outsourcing",
-  // No hard break in the string (Hoodies audit B5, 2026-09-24: the old
-  // newline after "in-" split the word across lines). No longer rendered
-  // since ProductCustomizeSteps became one tree (Bodysuits audit #13,
-  // 2026-09-24): every width now renders `heading` above, which reads the
-  // same below xl because its "\n" collapses to a space.
-  mobileHeading: "Your brand, applied in-house, no outsourcing",
   // Fabric moved first (owner, 2026-09-10: "make fabric as first card") --
   // was 3rd.
   // `image` on all 5, 2026-09-12: temporary test photography (Inside the

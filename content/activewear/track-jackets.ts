@@ -170,7 +170,6 @@ export const trackJackets: Category = {
   pdpCustomizationSteps: {
     eyebrow: "HOW WE CUSTOMIZE",
     heading: "Your brand, applied\nin-house, no outsourcing",
-    mobileHeading: "Your brand, applied in-house, no outsourcing",
     steps: [
       { title: "Print and artwork", body: "Sublimation, screen, DTF, heat transfer", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Print and artwork" } },
       { title: "Branding", body: "Embroidery, patches, reflective trims", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Branding" } },
