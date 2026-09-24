@@ -1405,5 +1405,6 @@ export const sportsBras: Category = {
     { label: "Long-Sleeve Tops", href: "/capriowear/activewear/long-sleeve-tops" },
     { label: "Hoodies", href: "/capriowear/activewear/hoodies" },
     { label: "Sweatshirts", href: "/capriowear/activewear/sweatshirts" },
+    { label: "Bodysuits", href: "/capriowear/activewear/bodysuits" },
   ],
 };
