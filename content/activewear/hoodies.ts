@@ -6,11 +6,9 @@
 // stay 404 with no redirects. Same locked PLP template and data shape as
 // Sweatshirts and Tank Tops.
 //
-// Every style is "draft". Card-only drafts are non-clickable tiles with
-// no route. Drafts with PDP content (SKUs 1 to 7, 9 to 13) render noindexed
-// and their cards link. Neither kind gets a sitemap or ItemList entry. A
-// card becomes a link on its own once its PDP content lands here
-// (isDraftPdpReachable(), ./pdpShared.ts).
+// Every style is "draft" and all 16 carry PDP content, so every card is a
+// link (isDraftPdpReachable(), ./pdpShared.ts) and every PDP renders
+// noindexed, with no sitemap or ItemList entry until it is published.
 import type { Category } from "./types";
 import { faqGetStarted } from "./pdpShared";
 
@@ -203,9 +201,8 @@ export const hoodies: Category = {
     faqGetStarted,
   ],
   ctaReferenceNoun: "hoodie",
-  // SKU order 1 to 16, never reordered. SKUs 1 to 7 and 9 to 13 carry draft
-  // PDP content (reachable, noindexed, no Product/FAQPage schema, card is a
-  // link); the rest are card-only drafts until their PDP content lands.
+  // SKU order 1 to 16, never reordered. All 16 carry draft PDP content
+  // (reachable, noindexed, no Product/FAQPage schema, card is a link).
   styleCards: [
     {
       status: "draft",
@@ -811,6 +808,79 @@ export const hoodies: Category = {
       image: "",
       imageAlt: "Men's Heavyweight Loose-Fit Hoodie, men's",
       href: "/capriowear/activewear/hoodies/heavyweight-loose-fit",
+      pdpHeading: "Men's Heavyweight Loose-Fit Hoodie Manufacturer",
+      pdpDescription:
+        "Men's loose-fit hoodie in 570 GSM heavyweight cotton, custom and private label, with an adjustable hood, a kangaroo pocket, and Spandex-reinforced ribbing, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Men's Heavyweight Loose-Fit Hoodie Manufacturer",
+      pdpMetaDescription:
+        "Men's heavyweight loose-fit hoodie manufacturer, private label, 570 GSM 100% cotton, kangaroo pocket, adjustable hood, MOQ from 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Men's Heavyweight Loose-Fit Hoodie, men's" },
+        { alt: "Men's Heavyweight Loose-Fit Hoodie, men's" },
+        { alt: "Men's Heavyweight Loose-Fit Hoodie, men's" },
+        { alt: "Men's Heavyweight Loose-Fit Hoodie, men's" },
+        { alt: "Men's Heavyweight Loose-Fit Hoodie, men's" },
+        { alt: "Men's Heavyweight Loose-Fit Hoodie, men's" },
+      ],
+      material: "100% cotton heavyweight fleece",
+      pdpFabricPills: ["Heavyweight Cotton Fleece", "French Terry", "Brushed Fleece", "Cotton-Poly Blend"],
+      pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "Are you a heavyweight hoodie manufacturer?",
+          a: "Yes. We cut heavyweight hoodies from 400 GSM up to 650+ GSM, and this style's standard build is 570 GSM 100% cotton. Heavyweight fleece holds a structured, loose silhouette and takes dimensional embroidery and puff print best. The final weight is confirmed on your sample.",
+        },
+        {
+          q: "Why choose a 570 GSM hoodie over a midweight hoodie?",
+          a: "A 570 GSM fleece has a denser, more structured hand that holds its shape wash after wash and reads as premium, suited to streetwear and luxury basics. Midweight fleece, around 300 to 400 GSM, is lighter and better for layering and everyday wear. We make both.",
+        },
+        {
+          q: "How does the Men's Heavyweight Loose-Fit Hoodie differ from the Men's Oversized Brushed Fleece Pullover Hoodie?",
+          a: "The Men's Heavyweight Loose-Fit Hoodie is built in 570 GSM 100% cotton with an adjustable hood. The Men's Oversized Brushed Fleece Pullover Hoodie is a brushed fleece build with a roomy oversized cut. Both have a kangaroo pocket and ribbed cuffs and hem.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Women's Heavyweight Oversized Hoodie", slug: "heavyweight-oversized", href: "/capriowear/activewear/hoodies" },
+        { label: "Men's Oversized Brushed Fleece Pullover Hoodie", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/hoodies" },
+        { label: "Men's Quarter-Zip Fleece Hoodie", slug: "quarter-zip-mens", href: "/capriowear/activewear/hoodies" },
+        { label: "Men's Premium Technical Fleece Full-Zip Hoodie", slug: "premium-technical-fleece", href: "/capriowear/activewear/hoodies" },
+        { label: "See All", href: "/capriowear/activewear/hoodies" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's heavyweight loose-fit pullover hoodie with kangaroo pocket" },
+        { label: "Fabric", value: "100% cotton heavyweight fleece" },
+        { label: "Weight", value: "570 GSM. Final weight confirmed on your sample." },
+        { label: "Fit", value: "Loose fit, extra room through the body and sleeve" },
+        { label: "Hood", value: "Adjustable hood, single or double-layer, flat drawcord with eyelets and aglets" },
+        { label: "Pocket", value: "Kangaroo pocket, bar-tacked corners" },
+        { label: "Cuffs and hem", value: "Ribbed knit with 5 to 8% Spandex for recovery" },
+        { label: "Sleeve", value: "Drop-shoulder or set-in, to your spec" },
+        { label: "Construction", value: "Cut-and-sew, side-seam body" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, puff, patches, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Men's Heavyweight Loose-Fit Hoodie, men's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Shrinkage tested after wash, targeted under 5%, brushed fleece checked for pilling",
+        "Cuff and hem ribbing hold their recovery, no bagging",
+        "Kangaroo pocket corners bar-tacked and stress-tested",
+        "Hood holds its shape after the drawcord is pulled and washed",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          { title: "Fabric and weight", body: "Heavyweight cotton fleece or French terry, 400 to 650+ GSM, sourced or matched to your reference", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" } },
+          { title: "Build", body: "Hood, pocket, drawcord hardware, sleeve construction, cuffs to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Build" } },
+          { title: "Finish", body: "Standard or garment-dye", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Finish" } },
+          { title: "Trims and packaging", body: "Woven or tear-away labels, hangtags, retail-ready packaging", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
@@ -1245,6 +1315,80 @@ export const hoodies: Category = {
       image: "",
       imageAlt: "Women's Oversized Cropped Pullover Hoodie, women's",
       href: "/capriowear/activewear/hoodies/oversized-cropped",
+      pdpHeading: "Women's Oversized Cropped Pullover Hoodie Manufacturer",
+      pdpDescription:
+        "Women's oversized pullover hoodie with a cropped body length, custom and private label, in midweight fleece with Spandex-reinforced ribbing, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Women's Oversized Cropped Pullover Hoodie Manufacturer",
+      pdpMetaDescription:
+        "Women's oversized cropped pullover hoodie manufacturer, private label, midweight fleece, cropped body length, low MOQ from 50 pieces, DDP to 20+ countries.",
+      images: [
+        { alt: "Women's Oversized Cropped Pullover Hoodie, women's" },
+        { alt: "Women's Oversized Cropped Pullover Hoodie, women's" },
+        { alt: "Women's Oversized Cropped Pullover Hoodie, women's" },
+        { alt: "Women's Oversized Cropped Pullover Hoodie, women's" },
+        { alt: "Women's Oversized Cropped Pullover Hoodie, women's" },
+        { alt: "Women's Oversized Cropped Pullover Hoodie, women's" },
+      ],
+      material: "Midweight fleece",
+      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton-Poly Blend", "Recycled Fiber Blend"],
+      pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "How cropped is the women's oversized cropped hoodie?",
+          a: "The standard build finishes at or just above the waist, and we set the exact body length to your spec, confirmed on your sample.",
+        },
+        {
+          q: "How does the Women's Oversized Cropped Pullover Hoodie differ from the Women's Oversized Brushed Fleece Pullover Hoodie?",
+          a: "Both share the same oversized cut through the body and sleeve. The Women's Oversized Cropped Pullover Hoodie has a shortened body that finishes at or above the waist, and the Women's Oversized Brushed Fleece Pullover Hoodie runs to a standard hip length. Both are fully customizable.",
+        },
+        {
+          q: "Can the cropped hoodie keep a kangaroo pocket?",
+          a: "Yes. A kangaroo pocket scales to the shorter body, or it can be left off for a clean front, to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Women's Oversized Brushed Fleece Pullover Hoodie", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Heavyweight Oversized Hoodie", slug: "heavyweight-oversized", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Soft-Stretch Lounge Hoodie", slug: "soft-stretch-lounge", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Full-Zip Fleece Hoodie", slug: "full-zip-fleece-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "See All", href: "/capriowear/activewear/hoodies" },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's oversized cropped pullover hoodie" },
+        { label: "Fabric", value: "Midweight fleece, brushed or French terry" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Oversized through the body and sleeve, cut on a women's pattern block" },
+        { label: "Length", value: "Cropped body length, finishing at or above the waist, to your spec" },
+        { label: "Hood", value: "Single or double-layer, flat drawcord with eyelets and aglets" },
+        { label: "Pocket", value: "Kangaroo or no pocket, to your spec" },
+        { label: "Cuffs and hem", value: "Ribbed knit with 5 to 8% Spandex for recovery, banded hem" },
+        { label: "Sleeve", value: "Drop-shoulder or set-in, to your spec" },
+        { label: "Construction", value: "Cut-and-sew, side-seam body" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, puff, patches, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Women's Oversized Cropped Pullover Hoodie, women's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Shrinkage tested after wash, targeted under 5%, brushed fleece checked for pilling",
+        "Cropped body length held consistent at every size",
+        "Hem band holds its recovery, no flaring",
+        "Hood holds its shape after the drawcord is pulled and washed",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          { title: "Fabric and weight", body: "Brushed fleece or French terry, any GSM, sourced or matched to your reference", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" } },
+          { title: "Build", body: "Body length, hood, pocket, drawcord hardware, cuffs and hem to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Build" } },
+          { title: "Finish", body: "Standard or garment-dye", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Finish" } },
+          { title: "Trims and packaging", body: "Woven or tear-away labels, hangtags, retail-ready packaging", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
@@ -1256,6 +1400,80 @@ export const hoodies: Category = {
       image: "",
       imageAlt: "Women's Soft-Stretch Lounge Hoodie, women's",
       href: "/capriowear/activewear/hoodies/soft-stretch-lounge",
+      pdpHeading: "Women's Soft-Stretch Lounge Hoodie Manufacturer",
+      pdpDescription:
+        "Women's relaxed-fit lounge hoodie in a soft Polyester/Modal stretch fabric, custom and private label, built for rest-day and everyday wear, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Women's Soft-Stretch Lounge Hoodie Manufacturer",
+      pdpMetaDescription:
+        "Women's soft-stretch lounge hoodie manufacturer, private label, Polyester/Modal stretch fabric, relaxed fit, low MOQ from 50 pieces, DDP to 20+ countries.",
+      images: [
+        { alt: "Women's Soft-Stretch Lounge Hoodie, women's" },
+        { alt: "Women's Soft-Stretch Lounge Hoodie, women's" },
+        { alt: "Women's Soft-Stretch Lounge Hoodie, women's" },
+        { alt: "Women's Soft-Stretch Lounge Hoodie, women's" },
+        { alt: "Women's Soft-Stretch Lounge Hoodie, women's" },
+        { alt: "Women's Soft-Stretch Lounge Hoodie, women's" },
+      ],
+      material: "Polyester/Modal stretch knit",
+      pdpFabricPills: ["Polyester/Modal Stretch Knit", "Brushed Fleece", "French Terry", "Recycled Polyester Blend"],
+      pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "What fabric is the women's soft-stretch lounge hoodie made from?",
+          a: "A Polyester/Modal stretch knit with a soft, cushioned hand, lighter and smoother than cotton fleece. We confirm the exact blend and weight on your sample.",
+        },
+        {
+          q: "How does a soft-stretch lounge hoodie differ from a brushed fleece hoodie?",
+          a: "A soft-stretch lounge hoodie uses a smooth Polyester/Modal knit that stretches and drapes, built for rest-day and everyday comfort. A brushed fleece hoodie uses a cotton-rich fleece with a napped interior, built for warmth. We make both.",
+        },
+        {
+          q: "Which branding methods work on Polyester/Modal fabric?",
+          a: "Screen print, DTF, heat transfer, and embroidery all work on Polyester/Modal knits. We match the method to the fabric so the branding flexes with the garment and holds its finish after washing.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Women's Oversized Brushed Fleece Pullover Hoodie", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Technical Performance Pullover Hoodie", slug: "technical-performance-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Oversized Cropped Pullover Hoodie", slug: "oversized-cropped", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Regular-Fit Brushed Fleece Pullover Hoodie", slug: "regular-fit-brushed-fleece-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "See All", href: "/capriowear/activewear/hoodies" },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's soft-stretch lounge pullover hoodie" },
+        { label: "Fabric", value: "Polyester/Modal stretch knit with a soft, cushioned hand" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Relaxed fit, true to size, cut on a women's pattern block" },
+        { label: "Hood", value: "Single or double-layer, flat drawcord with eyelets and aglets" },
+        { label: "Pocket", value: "Kangaroo or no pocket, to your spec" },
+        { label: "Cuffs and hem", value: "Self-fabric or ribbed, to your spec" },
+        { label: "Sleeve", value: "Set-in or drop-shoulder, to your spec" },
+        { label: "Construction", value: "Cut-and-sew, overlock or coverstitch seams to your spec" },
+        { label: "Branding", value: "Screen, DTF, heat transfer, embroidery, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Women's Soft-Stretch Lounge Hoodie, women's" },
+      pdpQualityHeading: "Stretch that holds, wash after wash",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Fabric stretch and recovery tested before bulk",
+        "Fabric surface checked for pilling after wash",
+        "Shrinkage tested after wash, targeted under 5%",
+        "Fabric weight held consistent, batch to batch",
+        "Seams stress-tested at the shoulders and underarms",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTF, heat transfer", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, heat transfer, patches", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          { title: "Fabric and weight", body: "Polyester/Modal or other soft-stretch knits, any weight, sourced or matched to your reference", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" } },
+          { title: "Build", body: "Hood, pocket, cuffs and hem to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Build" } },
+          { title: "Finish", body: "Standard dye, soft-hand finish", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Finish" } },
+          { title: "Trims and packaging", body: "Woven or heat-transfer labels, hangtags, retail-ready packaging", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
@@ -1267,6 +1485,79 @@ export const hoodies: Category = {
       image: "",
       imageAlt: "Women's Heavyweight Oversized Hoodie, women's",
       href: "/capriowear/activewear/hoodies/heavyweight-oversized",
+      pdpHeading: "Women's Heavyweight Oversized Hoodie Manufacturer",
+      pdpDescription:
+        "Women's oversized hoodie in heavyweight fleece, custom and private label, cut roomy on a women's pattern block with a kangaroo pocket and Spandex-reinforced ribbing, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Women's Heavyweight Oversized Hoodie Manufacturer",
+      pdpMetaDescription:
+        "Women's heavyweight oversized hoodie manufacturer, private label, heavyweight fleece, roomy fit, kangaroo pocket, low MOQ from 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Women's Heavyweight Oversized Hoodie, women's" },
+        { alt: "Women's Heavyweight Oversized Hoodie, women's" },
+        { alt: "Women's Heavyweight Oversized Hoodie, women's" },
+        { alt: "Women's Heavyweight Oversized Hoodie, women's" },
+        { alt: "Women's Heavyweight Oversized Hoodie, women's" },
+        { alt: "Women's Heavyweight Oversized Hoodie, women's" },
+      ],
+      material: "Heavyweight fleece",
+      pdpFabricPills: ["Heavyweight Fleece", "Brushed Fleece", "French Terry", "Cotton-Poly Blend"],
+      pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "How does the Women's Heavyweight Oversized Hoodie differ from the Women's Oversized Brushed Fleece Pullover Hoodie?",
+          a: "Both share an oversized women's cut and a kangaroo pocket. The Women's Heavyweight Oversized Hoodie is built in a heavier fleece for a denser, more structured hand, and the Women's Oversized Brushed Fleece Pullover Hoodie uses a standard brushed fleece. We confirm the exact weight of each on your sample.",
+        },
+        {
+          q: "What weight counts as a heavyweight hoodie?",
+          a: "Heavyweight hoodies run from 400 to 500 GSM, and ultra-heavyweight from 500 to 650+ GSM. We build this style in the heavyweight range and confirm the final weight on your sample.",
+        },
+        {
+          q: "Which branding methods work best on brushed fleece?",
+          a: "Embroidery and puff print give the fullest finish on brushed fleece, and screen print, DTG, DTF, and patches are also available. We advise the best method for your artwork and fabric weight.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Men's Heavyweight Loose-Fit Hoodie", slug: "heavyweight-loose-fit", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Oversized Brushed Fleece Pullover Hoodie", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Oversized Cropped Pullover Hoodie", slug: "oversized-cropped", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Full-Zip Fleece Hoodie", slug: "full-zip-fleece-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "See All", href: "/capriowear/activewear/hoodies" },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's heavyweight oversized pullover hoodie with kangaroo pocket" },
+        { label: "Fabric", value: "Heavyweight fleece, soft inside with a smooth face" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Oversized, roomy through the body and sleeve, cut on a women's pattern block" },
+        { label: "Hood", value: "Single or double-layer, flat drawcord with eyelets and aglets" },
+        { label: "Pocket", value: "Kangaroo pocket, bar-tacked corners" },
+        { label: "Cuffs and hem", value: "Ribbed knit with 5 to 8% Spandex for recovery" },
+        { label: "Sleeve", value: "Drop-shoulder or set-in, to your spec" },
+        { label: "Construction", value: "Cut-and-sew, side-seam body" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, puff, patches, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Women's Heavyweight Oversized Hoodie, women's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Shrinkage tested after wash, targeted under 5%, brushed fleece checked for pilling",
+        "Cuff and hem ribbing hold their recovery, no bagging",
+        "Kangaroo pocket corners bar-tacked and stress-tested",
+        "Hood holds its shape after the drawcord is pulled and washed",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          { title: "Fabric and weight", body: "Heavyweight cotton fleece or French terry, 400 to 650+ GSM, sourced or matched to your reference", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" } },
+          { title: "Build", body: "Hood, pocket, drawcord hardware, sleeve construction, cuffs to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Build" } },
+          { title: "Finish", body: "Standard or garment-dye", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Finish" } },
+          { title: "Trims and packaging", body: "Woven or tear-away labels, hangtags, retail-ready packaging", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and packaging" } },
+        ],
+      },
     },
   ],
   // "You may also be interested in": owner-specified set for this rebuild.
