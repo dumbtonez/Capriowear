@@ -6,13 +6,24 @@ How this site wins on traditional search and on AI answer engines (AEO): structu
 
 ## The one fact that shapes every URL here
 
-Production is `www.capriosports.com`. This Next app is not the whole site — it's mounted at `/capriowear` (the landing page splits into "capriogear," the existing WordPress site, and "capriowear," this app). So every canonical/OG/sitemap URL must read `https://www.capriosports.com/capriowear...`, even though this app's own internal routing still starts at `/`.
+Production is `www.capriosports.com`, one domain, and this Next app owns all of it (decided 2026-09-14; Caprio project docs `caprio-gear-rebuild-plan.md` and `caprio-brand-web-channel-strategy.md`). The parent Caprio Sports homepage and the gear pages live at the root (`/`, `/lifting-gears`, `/boxing-and-mma`, etc.), and Capriowear lives under a real `/capriowear` route tree (`app/capriowear/`). There is no `basePath` and no mount: every canonical/OG/sitemap URL is `${SITE_URL}` plus the page's own real route path, e.g. `https://www.capriosports.com/capriowear/activewear/track-jackets`.
+
+**Canonical host is `www.capriosports.com`.** The bare `capriosports.com` must 301 to www. (Today WordPress does the reverse, www to bare; that flips at cutover.)
+
+**Until cutover, the domain is still WordPress.** `www.capriosports.com` currently serves the old WordPress site (Hostinger, behind Cloudflare), and no Vercel project has the domain attached, so any `/capriowear` URL on it 404s. That is expected, not a bug. Live verification runs on `https://capriowear.vercel.app` until then.
+
+**Cutover (Phase 5).** WordPress is retired only once the 301 redirect map (built from the Google Search Console export) is ready. At cutover, in this order:
+1. Attach `www.capriosports.com` and `capriosports.com` to the `capriowear` Vercel project (bare domain redirecting to www).
+2. Repoint the Cloudflare DNS records to Vercel.
+3. Set `NEXT_PUBLIC_SITE_URL=https://www.capriosports.com` explicitly in Vercel's production environment (don't rely on the code fallback).
+4. Put the redirect map live.
+5. Only then switch indexing on (`NEXT_PUBLIC_ALLOW_INDEXING=true`, see below).
 
 That real public URL lives in exactly one place: `content/site.ts`'s `SITE_URL`. Never hand-type it, never assume Next's automatic relative-URL resolution (via `metadataBase`) gets it right for a per-page canonical — set `alternates.canonical` as an explicit absolute string built from `SITE_URL` on every page (see `app/page.tsx`). `SITE_URL` reads from `NEXT_PUBLIC_SITE_URL` when set, falling back to the exact literal above when it isn't (every environment today) — so a preview/staging deploy can point canonicals at its own URL without a code change, while every environment that never sets the var keeps behaving exactly as before.
 
 ## Indexing switch — currently OFF (do not flip without checking with the owner)
 
-The site is staging on Vercel ahead of the real launch on `capriosports.com/capriowear` and must not be indexed by Google until then. One env var controls the whole site: `NEXT_PUBLIC_ALLOW_INDEXING`, read into `content/site.ts`'s `ALLOW_INDEXING` constant (defaults to `false`/off whenever unset). While off: `app/layout.tsx` renders a sitewide `<meta name="robots" content="noindex, nofollow">` (via the Metadata API's own `robots` field, no per-page override reintroduces indexing), and `app/robots.ts` disallows every path for every agent, with no sitemap reference. Set `NEXT_PUBLIC_ALLOW_INDEXING=true` in Vercel's production environment variables at real launch to flip both at once — no code change needed.
+The site is staging on `capriowear.vercel.app` ahead of the Phase 5 cutover to `www.capriosports.com` (see above) and must not be indexed by Google until then. One env var controls the whole site: `NEXT_PUBLIC_ALLOW_INDEXING`, read into `content/site.ts`'s `ALLOW_INDEXING` constant (defaults to `false`/off whenever unset). While off: `app/layout.tsx` renders a sitewide `<meta name="robots" content="noindex, nofollow">` (via the Metadata API's own `robots` field, no per-page override reintroduces indexing), and `app/robots.ts` disallows every path for every agent, with no sitemap reference. Set `NEXT_PUBLIC_ALLOW_INDEXING=true` in Vercel's production environment variables to flip both at once, no code change needed, and only after the cutover's redirect map is live.
 
 ## 1 · Structured data (JSON-LD)
 
