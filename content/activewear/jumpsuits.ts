@@ -11,7 +11,15 @@
 // and CollectionPage/ItemList. A card becomes a link automatically the
 // moment its PDP content (`pdpHeading` + `specifications`) is added, via
 // the sitewide `isDraftPdpReachable()` rule, same as Hoodies and Bodysuits.
-// Grid order is SKU-number order, 1 to 6. Second and final category under
+// Grid order is SKU-number order, 1 to 6.
+//
+// PDP batch 1 (owner spec, 2026-09-24): SKUs 1 to 3 carry full draft PDP
+// content, so their cards link and their pages render noindexed, with no
+// sitemap entry and no Product/FAQPage JSON-LD. Key facts, customization
+// chips, spec subtitle and the operational FAQs are the shared PDP
+// defaults (./pdpShared.ts); "How we customize" is set once below for the
+// whole category. Related-style pills carry a `slug`, so a pill for an
+// unbuilt SKU falls back to the PLP and switches to its PDP by itself. Second and final category under
 // the "ONE-PIECES" mega-menu group (content/home.ts), after Bodysuits.
 //
 // No `weightTiers` block (owner spec): jumpsuits are not weight-tier driven.
@@ -167,7 +175,23 @@ export const jumpsuits: Category = {
     faqGetStarted,
   ],
   ctaReferenceNoun: "jumpsuit",
-  // 6 card-only drafts, SKU-number order (see header comment). Alt text is
+  // "How we customize" for every Jumpsuits PDP (owner spec, 2026-09-24):
+  // 6 steps incl. Build, overriding the shared 5-step default. Same
+  // temporary factory photography as the shared default.
+  pdpCustomizationSteps: {
+    eyebrow: "HOW WE CUSTOMIZE",
+    heading: "Your brand, applied\nin-house, no outsourcing",
+    mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+    steps: [
+      { title: "Fabric and material", body: "Any blend and weight, sourced or matched to your reference", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and material" } },
+      { title: "Print and artwork", body: "Sublimation, screen, DTF, DTG", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+      { title: "Branding", body: "Silicone, heat transfer, embroidery", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+      { title: "Build", body: "Leg shape, neckline, back, entry, gusset, and support to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Build" } },
+      { title: "Trims and finish", body: "Woven labels, size and care labels, hangtags", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Trims and finish" } },
+      { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
+    ],
+  },
+  // 6 drafts (SKUs 1 to 3 with PDP content), SKU-number order (see header comment). Alt text is
   // the card name exactly.
   styleCards: [
     {
@@ -179,6 +203,67 @@ export const jumpsuits: Category = {
       imageAlt: "Custom Scoop-Neck Straight-Leg Jumpsuit",
       href: "/capriowear/activewear/jumpsuits/scoop-neck-straight-leg",
       sku: "CAP-JMP-01",
+      pdpHeading: "Custom Scoop-Neck Straight-Leg Jumpsuit Manufacturer",
+      pdpDescription:
+        "Fitted sleeveless jumpsuit with a scoop neck and a straight, full-length leg, custom and private label, in a soft 4-way stretch Nylon/Spandex knit, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Scoop-Neck Straight-Leg Jumpsuit Manufacturer",
+      pdpMetaDescription:
+        "Custom scoop-neck straight-leg jumpsuit manufacturer, private label, fitted sleeveless unitard, soft Nylon/Spandex knit, MOQ from 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Scoop-Neck Straight-Leg Jumpsuit" },
+        { alt: "Custom Scoop-Neck Straight-Leg Jumpsuit" },
+        { alt: "Custom Scoop-Neck Straight-Leg Jumpsuit" },
+        { alt: "Custom Scoop-Neck Straight-Leg Jumpsuit" },
+        { alt: "Custom Scoop-Neck Straight-Leg Jumpsuit" },
+        { alt: "Custom Scoop-Neck Straight-Leg Jumpsuit" },
+      ],
+      material: "Nylon/Spandex 4-way stretch knit, blend confirmed on your sample.",
+      pdpFabricPills: ["Nylon/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "What leg length does the scoop-neck straight-leg jumpsuit come in?",
+          a: "The scoop-neck straight-leg jumpsuit is built full length as standard, or at 7/8 length ending just above the ankle, to your spec. The inseam is graded across the size run and confirmed on your sample.",
+        },
+        {
+          q: "How does the scoop-neck straight-leg jumpsuit go on?",
+          a: "The scoop-neck straight-leg jumpsuit is a step-in, pull-on build as standard. The 4-way stretch body lets it go on over the shoulders with no zip, keeping full stretch everywhere. A back or side zip can be added on request.",
+        },
+        {
+          q: "What fabric do you build the scoop-neck straight-leg jumpsuit in?",
+          a: "A soft 4-way stretch Nylon/Spandex knit with a smooth, second-skin hand, or Polyester/Spandex for a quick-drying training build. The exact blend and weight of the scoop-neck straight-leg jumpsuit are confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Flared-Leg Jumpsuit", slug: "flared-leg", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Deep V-Neck Jumpsuit", slug: "deep-v-neck", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Molded-Cup V-Panel Jumpsuit", slug: "molded-cup-v-panel", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Corset-Detail Square-Neck Jumpsuit", slug: "corset-square-neck", href: "/capriowear/activewear/jumpsuits" },
+        { label: "See All", href: "/capriowear/activewear/jumpsuits" },
+      ],
+      specifications: [
+        { label: "Style", value: "Sleeveless fitted jumpsuit, scoop neck, straight leg" },
+        { label: "Fabric", value: "Nylon/Spandex 4-way stretch knit, blend confirmed on your sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Fitted, second-skin through the torso and leg" },
+        { label: "Leg", value: "Straight, full length or 7/8, to your spec" },
+        { label: "Neckline and straps", value: "Scoop neck, wide tank straps" },
+        { label: "Entry", value: "Step-in, pull-on (base), back or side zip on request" },
+        { label: "Gusset", value: "Sewn gusset (base), snap-button gusset on request" },
+        { label: "Support", value: "Plain, or built-in shelf bra with removable pads" },
+        { label: "Construction", value: "Cut-and-sew, waist seam or one-piece torso panel, flatlock or coverstitch seams" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, heat transfer, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Scoop-Neck Straight-Leg Jumpsuit" },
+      pdpQualityHeading: "One piece, fitted from shoulder to ankle",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Torso and leg length graded and checked across every size",
+        "Opacity confirmed under squat-depth stretch across the full leg",
+        "Gusset seam stress-tested under stretch",
+        "Straps and neckline hold their shape without rolling",
+        "Ease of entry checked across the size run",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
@@ -189,6 +274,67 @@ export const jumpsuits: Category = {
       imageAlt: "Custom Flared-Leg Jumpsuit",
       href: "/capriowear/activewear/jumpsuits/flared-leg",
       sku: "CAP-JMP-02",
+      pdpHeading: "Custom Flared-Leg Jumpsuit Manufacturer",
+      pdpDescription:
+        "Fitted sleeveless jumpsuit with a halter deep-V neck and a leg that flares to the hem, custom and private label, in a 215 GSM Polyester/Spandex knit with flatlock seams, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Flared-Leg Jumpsuit Manufacturer",
+      pdpMetaDescription:
+        "Custom flared-leg jumpsuit manufacturer, private label, halter deep-V neck, 215 GSM Polyester/Spandex knit, flatlock seams, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Flared-Leg Jumpsuit" },
+        { alt: "Custom Flared-Leg Jumpsuit" },
+        { alt: "Custom Flared-Leg Jumpsuit" },
+        { alt: "Custom Flared-Leg Jumpsuit" },
+        { alt: "Custom Flared-Leg Jumpsuit" },
+        { alt: "Custom Flared-Leg Jumpsuit" },
+      ],
+      material: "Polyester/Spandex 4-way stretch knit, commonly around 78% / 22%, confirmed on your sample.",
+      pdpFabricPills: ["Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "Where does the leg start to flare on the flared-leg jumpsuit?",
+          a: "The flared-leg jumpsuit stays fitted through the hip and thigh and flares below the knee to a wider hem. The flare point and hem width are set to your spec and graded across the size run, confirmed on your sample.",
+        },
+        {
+          q: "What fabric weight is the flared-leg jumpsuit built in?",
+          a: "The flared-leg jumpsuit's standard build is a 215 GSM Polyester/Spandex 4-way stretch knit, commonly around 78% Polyester and 22% Spandex, heavy enough for opacity and light enough for a flare that moves. The final blend and weight are confirmed on your sample.",
+        },
+        {
+          q: "Why use flatlock seams on the flared-leg jumpsuit?",
+          a: "Flatlock seams lie flat against the skin, so the flared-leg jumpsuit stays smooth under movement, with no raised seam to rub at the inner leg or shoulder. We check the seam finish on your sample before bulk.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Scoop-Neck Straight-Leg Jumpsuit", slug: "scoop-neck-straight-leg", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Wide-Leg Drop-Crotch Jumpsuit", slug: "wide-leg-drop-crotch", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Deep V-Neck Jumpsuit", slug: "deep-v-neck", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Corset-Detail Square-Neck Jumpsuit", slug: "corset-square-neck", href: "/capriowear/activewear/jumpsuits" },
+        { label: "See All", href: "/capriowear/activewear/jumpsuits" },
+      ],
+      specifications: [
+        { label: "Style", value: "Sleeveless fitted jumpsuit, halter deep-V neck, flared leg" },
+        { label: "Fabric", value: "Polyester/Spandex 4-way stretch knit, commonly around 78% / 22%, confirmed on your sample." },
+        { label: "Weight", value: "215 GSM. Final weight confirmed on your sample." },
+        { label: "Fit", value: "Fitted through the torso, hip and thigh" },
+        { label: "Leg", value: "Flares below the knee to a wider hem, full length, flare point to your spec" },
+        { label: "Neckline and straps", value: "Halter neck, deep V front" },
+        { label: "Entry", value: "Step-in, pull-on (base), back or side zip on request" },
+        { label: "Gusset", value: "Sewn gusset (base), snap-button gusset on request" },
+        { label: "Support", value: "Plain, or built-in shelf bra with removable pads" },
+        { label: "Construction", value: "Cut-and-sew, flatlock seams" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, heat transfer, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Flared-Leg Jumpsuit" },
+      pdpQualityHeading: "Fitted up top, a flare that holds its line",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Flare width and hem length held consistent at every size",
+        "Hem checked so the flare hangs even, without twisting",
+        "Opacity confirmed under squat-depth stretch across the full leg",
+        "Halter strap tested for hold under stretch",
+        "Flatlock seams checked for a flat, chafe-free finish",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
@@ -199,6 +345,67 @@ export const jumpsuits: Category = {
       imageAlt: "Custom Deep V-Neck Jumpsuit",
       href: "/capriowear/activewear/jumpsuits/deep-v-neck",
       sku: "CAP-JMP-03",
+      pdpHeading: "Custom Deep V-Neck Jumpsuit Manufacturer",
+      pdpDescription:
+        "Fitted sleeveless jumpsuit with a deep V neckline, a low-cut back and removable padding, custom and private label, in a lightly brushed Polyester/Spandex knit with a full-length legging leg, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Deep V-Neck Jumpsuit Manufacturer",
+      pdpMetaDescription:
+        "Custom deep V-neck jumpsuit manufacturer, private label, low back, removable padding, brushed Polyester/Spandex knit, MOQ from 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Deep V-Neck Jumpsuit" },
+        { alt: "Custom Deep V-Neck Jumpsuit" },
+        { alt: "Custom Deep V-Neck Jumpsuit" },
+        { alt: "Custom Deep V-Neck Jumpsuit" },
+        { alt: "Custom Deep V-Neck Jumpsuit" },
+        { alt: "Custom Deep V-Neck Jumpsuit" },
+      ],
+      material: "Lightly brushed Polyester/Spandex 4-way stretch knit, commonly around 68% / 32%, confirmed on your sample.",
+      pdpFabricPills: ["Brushed Polyester/Spandex", "Nylon/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "Can the padding be removed from the deep V-neck jumpsuit?",
+          a: "Yes. The deep V-neck jumpsuit has removable pads that sit in internal pockets, so they can come out for washing or for wearing without them. Pad shape and thickness are set to your spec and confirmed on your sample.",
+        },
+        {
+          q: "How do you keep a deep V neckline secure on a jumpsuit?",
+          a: "On the deep V-neck jumpsuit, adjustable straps and a graded torso length hold the neckline in place, and the low back balances the fit. We check coverage and hold under movement on your sample, and the V depth is set to your spec.",
+        },
+        {
+          q: "What fabric do you build the deep V-neck jumpsuit in?",
+          a: "A lightly brushed Polyester/Spandex 4-way stretch knit, commonly around 68% Polyester and 32% Spandex, for a soft hand and firm compression. The exact blend and weight of the deep V-neck jumpsuit are confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Molded-Cup V-Panel Jumpsuit", slug: "molded-cup-v-panel", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Scoop-Neck Straight-Leg Jumpsuit", slug: "scoop-neck-straight-leg", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Flared-Leg Jumpsuit", slug: "flared-leg", href: "/capriowear/activewear/jumpsuits" },
+        { label: "Custom Corset-Detail Square-Neck Jumpsuit", slug: "corset-square-neck", href: "/capriowear/activewear/jumpsuits" },
+        { label: "See All", href: "/capriowear/activewear/jumpsuits" },
+      ],
+      specifications: [
+        { label: "Style", value: "Sleeveless fitted jumpsuit, deep V neck, low back" },
+        { label: "Fabric", value: "Lightly brushed Polyester/Spandex 4-way stretch knit, commonly around 68% / 32%, confirmed on your sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Fitted, compressive through the torso and leg" },
+        { label: "Leg", value: "Straight legging leg, full length" },
+        { label: "Neckline and straps", value: "Deep V front, low-cut back, adjustable straps" },
+        { label: "Support", value: "Removable pads in internal pockets" },
+        { label: "Entry", value: "Step-in, pull-on (base), back or side zip on request" },
+        { label: "Gusset", value: "Sewn gusset (base), snap-button gusset on request" },
+        { label: "Construction", value: "Cut-and-sew, flatlock or coverstitch seams" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, heat transfer, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Deep V-Neck Jumpsuit" },
+      pdpQualityHeading: "Support that stays in place, rep after rep",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Pad pockets hold the pads in place through wear and wash",
+        "Deep V and low back checked for coverage and hold under movement",
+        "Adjustable straps tested for slip and recovery",
+        "Torso length graded across every size, so the neckline sits right",
+        "Opacity confirmed under squat-depth stretch across the full leg",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
