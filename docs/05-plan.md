@@ -4463,3 +4463,9 @@ Owner spec, `content/activewear/jackets.ts` only. CAP-JKT-04 `hooded-running-win
 
 ## Product card titles: 2-line clamp on mobile, 2026-09-24
 Owner: "clamp product card titles to 2 lines on mobile only". `productCard.title` and `productCard.titleLg` gained `max-md:line-clamp-2`; tablet wraps freely, desktop keeps `xl:truncate`, font sizes, subline, gaps and images unchanged. Supersedes the 2026-09-02 "never truncate on mobile" call for real mobile only. Shared recipe, so every PLP grid picks it up (`ProductCard` via `ProductGrid` is the only product-card title renderer). Local check at 375px: Hoodies 5 and Jackets 2 titles that needed 3 lines now show 2 with an ellipsis, Bodysuits max 2; 768px no clamp, 1440px one-line truncate as before. Component registry updated.
+
+## Jackets draft PDPs batch 3, 2026-09-24 (commit e4ea9fd)
+
+Owner spec, `content/activewear/jackets.ts` only. CAP-JKT-07 `chevron-quilted-puffer`, CAP-JKT-08 `polar-fleece-full-zip` and CAP-JKT-09 `quilted-hybrid` get full draft PDP content, so PLP cards 1 to 9 now link; 10 to 12 stay card-only (non-links, routes 404). Each new PDP's two pills point within batch 3; SKU 1 to 6 pills unchanged. SKU 9's spec has Body and Sleeves rows instead of a Fabric row, so its `material` (Product-schema only, withheld while draft) is built from those two rows. Operational FAQs are the current shared ones. No other PLP content changed.
+
+**Verified (deployed on capriowear.vercel.app, cache-busted):** all 3 PDPs 200, noindex/nofollow, BreadcrumbList plus sitewide Organization/WebSite only, and title, meta, H1, description, breadcrumb, image labels, style code, chips, spec order, customize tiles, quality block, 9 FAQs in order, CTA, compliance and pill targets exact. PLP: cards 1 to 9 link to 200 pages, 10 to 12 unlinked, all PLP sections re-checked unchanged. No banned strings, dashes, "waterproof" or "down" on the new PDPs. Build checked in a clean worktree before the push.
