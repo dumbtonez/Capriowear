@@ -8,8 +8,10 @@
 // PDP batch 1 (owner spec, 2026-09-24): SKUs 1 to 3 carry full draft PDP
 // content, so their cards link (the sitewide `isDraftPdpReachable()` rule)
 // and their pages render noindexed, with no sitemap entry and no
-// Product/FAQPage JSON-LD. SKUs 4 to 12 are card-only drafts: non-clickable,
-// no route, until their PDP content lands in a later batch. "How we
+// Product/FAQPage JSON-LD. The remaining SKUs are card-only drafts: non-clickable,
+// no route, until their PDP content lands in a later batch. Batch 2
+// (owner spec, 2026-09-24) adds SKUs 4 to 6 the same way; 7 to 12 remain
+// card-only. "How we
 // customize" is set once for the category (6 jacket tiles); key facts,
 // spec subtitle and the operational FAQs are the shared PDP defaults
 // (./pdpShared.ts).
@@ -217,8 +219,8 @@ export const jackets: Category = {
       { title: "Trims and packaging", body: "Woven or printed labels, hangtags, retail-ready packaging", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and packaging" } },
     ],
   },
-  // 12 drafts, SKU-number order (CAP-JKT-01 to 12). SKUs 1 to 3 carry PDP
-  // content; 4 to 12 are card-only. Card and image alt text is the card
+  // 12 drafts, SKU-number order (CAP-JKT-01 to 12). SKUs 1 to 6 carry PDP
+  // content; 7 to 12 are card-only. Card and image alt text is the card
   // name exactly.
   styleCards: [
     {
@@ -438,6 +440,65 @@ export const jackets: Category = {
       imageAlt: "Custom Hooded Running Windbreaker",
       href: `${PLP}/hooded-running-windbreaker`,
       sku: "CAP-JKT-04",
+      pdpHeading: "Custom Hooded Running Windbreaker Manufacturer",
+      pdpDescription:
+        "Hooded running windbreaker with color-block panels, a diagonal contrast stripe and a mesh-lined hood, custom and private label, in a 130 GSM polyester microfiber, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Hooded Running Windbreaker Manufacturer",
+      pdpMetaDescription:
+        "Custom hooded running windbreaker manufacturer, private label, 130 GSM polyester microfiber, mesh-lined hood, color-block panels, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Hooded Running Windbreaker" },
+        { alt: "Custom Hooded Running Windbreaker" },
+        { alt: "Custom Hooded Running Windbreaker" },
+        { alt: "Custom Hooded Running Windbreaker" },
+        { alt: "Custom Hooded Running Windbreaker" },
+        { alt: "Custom Hooded Running Windbreaker" },
+      ],
+      material: "100% polyester microfiber woven",
+      pdpFabricPills: ["Polyester Microfiber", "Recycled Polyester", "Polyester/Spandex Stretch Woven"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What is the hooded running windbreaker made from?",
+          a: "The hooded running windbreaker is built in a 130 GSM polyester microfiber woven, light and smooth with a wind-resistant face. The final weight is confirmed on your sample, and recycled polyester is an option.",
+        },
+        {
+          q: "Why does the hooded running windbreaker have a mesh-lined hood?",
+          a: "The mesh lining adds airflow inside the hood and gives the hooded running windbreaker a clean inside finish. It can be removed or swapped for a self-fabric lining to your spec.",
+        },
+        {
+          q: "Can the color-block panels be matched to our brand colors?",
+          a: "Yes. The body panels and diagonal stripe of the hooded running windbreaker are cut in your brand or team colors with Pantone matching, and aligned across every size.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Quilted Bench Jacket", slug: "quilted-bench-jacket", href: PLP },
+        { label: "Custom Quilted Puffer Jacket", slug: "quilted-puffer", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Hooded running windbreaker with color-block panels" },
+        { label: "Fabric", value: "100% polyester microfiber woven" },
+        { label: "Weight", value: "130 GSM. Final weight confirmed on your sample." },
+        { label: "Fit", value: "Unisex athletic fit, graded XS to 5XL" },
+        { label: "Zip and hood", value: "Front zip, attached hood with mesh lining" },
+        { label: "Panels", value: "Color-block body with a diagonal contrast stripe, to your colors" },
+        { label: "Finish", value: "Wind-resistant shell, DWR water-repellent finish on request" },
+        { label: "Cuffs and hem", value: "Self-fabric, elastic or ribbed, to your spec" },
+        { label: "Construction", value: "Cut-and-sew, clean-finished seams" },
+        { label: "Branding", value: "Embroidery, screen, heat transfer, patches, reflective trims, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Hooded Running Windbreaker" },
+      pdpQualityHeading: "Light shell, clean panel lines",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Color-block seams and contrast stripe aligned at every size",
+        "Fabric weight held consistent, batch to batch",
+        "Zip cycled and function-tested before bulk",
+        "Mesh hood lining checked for a clean, secure finish",
+        "Colorfastness checked after wash, no bleed between panels",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
@@ -448,6 +509,66 @@ export const jackets: Category = {
       imageAlt: "Custom Quilted Bench Jacket",
       href: `${PLP}/quilted-bench-jacket`,
       sku: "CAP-JKT-05",
+      pdpHeading: "Custom Quilted Bench Jacket Manufacturer",
+      pdpDescription:
+        "Short quilted bench jacket with a hood and ribbed cuffs, custom and private label, in a matte quilted polyester shell with synthetic fill, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Quilted Bench Jacket Manufacturer",
+      pdpMetaDescription:
+        "Custom quilted bench jacket manufacturer, private label, matte quilted polyester shell, synthetic fill, hood and ribbed cuffs, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Quilted Bench Jacket" },
+        { alt: "Custom Quilted Bench Jacket" },
+        { alt: "Custom Quilted Bench Jacket" },
+        { alt: "Custom Quilted Bench Jacket" },
+        { alt: "Custom Quilted Bench Jacket" },
+        { alt: "Custom Quilted Bench Jacket" },
+      ],
+      material: "Polyester shell, matte finish",
+      pdpFabricPills: ["Matte Polyester Shell", "Glossy Polyester Shell", "Recycled Polyester"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What is a quilted bench jacket used for?",
+          a: "Teams and clubs use it on the sideline and bench between play. The quilted bench jacket is a short, hooded, insulated layer that goes on over kit, with ribbed cuffs to hold in warmth.",
+        },
+        {
+          q: "What insulation does the quilted bench jacket use?",
+          a: "The quilted bench jacket uses synthetic fill held in place by stitch-through quilting. The fill weight is set to your spec and confirmed on your sample.",
+        },
+        {
+          q: "Can you add team crests and names to the quilted bench jacket?",
+          a: "Yes. Crests, names and sponsor logos can be embroidered or heat-transferred on the chest, sleeve and back of the quilted bench jacket, placed to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Hooded Running Windbreaker", slug: "hooded-running-windbreaker", href: PLP },
+        { label: "Custom Quilted Puffer Jacket", slug: "quilted-puffer", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Short hooded quilted bench jacket" },
+        { label: "Fabric", value: "Polyester shell, matte finish" },
+        { label: "Insulation", value: "Synthetic fill, gram weight confirmed on your sample" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Unisex regular fit with room to layer over kit, graded XS to 5XL" },
+        { label: "Zip and hood", value: "Front zip, attached hood" },
+        { label: "Quilting", value: "Stitch-through quilting" },
+        { label: "Cuffs and hem", value: "Ribbed cuffs, hem to your spec" },
+        { label: "Finish", value: "DWR water-repellent finish on request" },
+        { label: "Construction", value: "Cut-and-sew, clean-finished seams" },
+        { label: "Branding", value: "Embroidery, screen, heat transfer, patches, reflective trims, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Quilted Bench Jacket" },
+      pdpQualityHeading: "Quilted flat, fill that stays put",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Quilting lines checked so fill stays put after wash",
+        "Stitch-through seams checked for fill leakage",
+        "Zip cycled and function-tested before bulk",
+        "Ribbed cuffs checked for recovery after wash",
+        "Colorfastness checked after wash",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
@@ -458,6 +579,66 @@ export const jackets: Category = {
       imageAlt: "Custom Quilted Puffer Jacket",
       href: `${PLP}/quilted-puffer`,
       sku: "CAP-JKT-06",
+      pdpHeading: "Custom Quilted Puffer Jacket Manufacturer",
+      pdpDescription:
+        "Hooded quilted puffer jacket with a glossy shell and ribbed cuffs, custom and private label, in a quilted polyester shell with synthetic fill, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Quilted Puffer Jacket Manufacturer",
+      pdpMetaDescription:
+        "Custom quilted puffer jacket manufacturer, private label, glossy quilted polyester shell, synthetic fill, hood, ribbed cuffs, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Quilted Puffer Jacket" },
+        { alt: "Custom Quilted Puffer Jacket" },
+        { alt: "Custom Quilted Puffer Jacket" },
+        { alt: "Custom Quilted Puffer Jacket" },
+        { alt: "Custom Quilted Puffer Jacket" },
+        { alt: "Custom Quilted Puffer Jacket" },
+      ],
+      material: "Polyester shell, glossy finish",
+      pdpFabricPills: ["Glossy Polyester Shell", "Matte Polyester Shell", "Recycled Polyester"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What is the difference between the quilted puffer jacket and the chevron-stripe quilted puffer jacket?",
+          a: "The quilted puffer jacket is a clean hooded puffer with a glossy shell. The chevron-stripe quilted puffer jacket has a matte shell and a chevron stripe on the sleeve. Both share the same quilted, synthetic-fill build.",
+        },
+        {
+          q: "What insulation does the quilted puffer jacket use?",
+          a: "The quilted puffer jacket uses synthetic fill held in place by stitch-through quilting. The fill weight is set to your spec and confirmed on your sample.",
+        },
+        {
+          q: "Can the quilted puffer jacket be made in a matte finish?",
+          a: "Yes. The quilted puffer jacket can move from a glossy to a matte polyester shell, in any Pantone matched color, with the same quilting and fill.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Hooded Running Windbreaker", slug: "hooded-running-windbreaker", href: PLP },
+        { label: "Custom Quilted Bench Jacket", slug: "quilted-bench-jacket", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Hooded quilted puffer jacket" },
+        { label: "Fabric", value: "Polyester shell, glossy finish" },
+        { label: "Insulation", value: "Synthetic fill, gram weight confirmed on your sample" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Unisex regular fit, graded XS to 5XL" },
+        { label: "Zip and hood", value: "Front zip, attached hood" },
+        { label: "Quilting", value: "Stitch-through quilting" },
+        { label: "Cuffs and hem", value: "Ribbed cuffs, hem to your spec" },
+        { label: "Finish", value: "DWR water-repellent finish on request" },
+        { label: "Construction", value: "Cut-and-sew, clean-finished seams" },
+        { label: "Branding", value: "Embroidery, screen, heat transfer, patches, reflective trims, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Quilted Puffer Jacket" },
+      pdpQualityHeading: "Glossy shell, fill that stays put",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Shell finish checked for an even gloss across panels",
+        "Quilting lines checked so fill stays put after wash",
+        "Stitch-through seams checked for fill leakage",
+        "Zip cycled and function-tested before bulk",
+        "Colorfastness checked after wash",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
