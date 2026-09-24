@@ -226,12 +226,15 @@ export const pdpCustomizationSteps = {
   // outsourcing" on its own second line) -- natural wrap at this
   // heading's own 812px max-width doesn't reliably land there on its own,
   // same "\n" + `whitespace-pre-line` technique already used for
-  // FabricOptions' own 2-line heading. Desktop only -- rendered via
-  // `productCustomizeSteps.desktopHeadingWidth`'s own `whitespace-pre-line`.
+  // FabricOptions' own 2-line heading. From xl only -- rendered via
+  // `productCustomizeSteps.headingWidth`'s `xl:whitespace-pre-line`; below
+  // xl the break collapses to a space and wraps inside `max-w-[9.5em]`.
   heading: "Your brand, applied\nin-house, no outsourcing",
   // No hard break in the string (Hoodies audit B5, 2026-09-24: the old
-  // newline after "in-" split the word across lines). The line break is done in
-  // CSS by `productCustomizeSteps.mobileHeadingWidth`'s `text-balance`.
+  // newline after "in-" split the word across lines). No longer rendered
+  // since ProductCustomizeSteps became one tree (Bodysuits audit #13,
+  // 2026-09-24): every width now renders `heading` above, which reads the
+  // same below xl because its "\n" collapses to a space.
   mobileHeading: "Your brand, applied in-house, no outsourcing",
   // Fabric moved first (owner, 2026-09-10: "make fabric as first card") --
   // was 3rd.
@@ -270,7 +273,7 @@ export { faqGetStarted };
 export const pdpFaqOperational: FaqEntry[] = [
   {
     q: "What is the minimum order quantity, and can I mix sizes?",
-    a: "MOQ starts at 50 pieces per style. You can grade that across a full size run rather than ordering 50 of one size, and we can quote lower or higher runs depending on the style and fabric.",
+    a: "MOQ starts at 50 pieces per style. You can grade that across a full size run rather than ordering 50 of one size, and runs scale to full bulk.",
   },
   {
     q: "How long do samples take?",

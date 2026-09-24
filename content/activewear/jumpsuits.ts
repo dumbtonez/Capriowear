@@ -120,8 +120,8 @@ export const jumpsuits: Category = {
       a: "From 50 pieces per style, and you can mix sizes freely within a colorway. Scales to full bulk.",
     },
     {
-      q: "What is the difference between a bodysuit and a jumpsuit?",
-      a: "A bodysuit ends at the hip, or at a short bike-short-length leg a few inches down the thigh. A jumpsuit or unitard continues into full or cropped leg coverage. Capriowear makes both.",
+      q: "How is a jumpsuit different from a bodysuit?",
+      a: "A jumpsuit or unitard continues past the hip into full or cropped leg coverage. A bodysuit ends at the hip, or at a short bike-short-length leg a few inches down the thigh. Capriowear makes both.",
     },
     {
       q: "What entry methods do you offer on jumpsuits, and which is best?",

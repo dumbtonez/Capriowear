@@ -70,18 +70,11 @@ export function Faq({ content }: FaqProps) {
   const heading = renderHeadingWithB2BBreak(content.h2);
 
   return (
-    <>
-      <section className={faq.desktopOuter}>
-        <div className={faq.desktopInner}>
-          <h2 className={faq.desktopHeading}>{heading}</h2>
-          <Accordion items={items} className={faq.desktopAccordion} />
-        </div>
-      </section>
-
-      <section className={faq.mobileSection}>
-        <h2 className={faq.mobileHeading}>{heading}</h2>
-        <Accordion items={items} className={faq.mobileAccordion} />
-      </section>
-    </>
+    <section className={faq.section}>
+      <div className={faq.inner}>
+        <h2 className={faq.heading}>{heading}</h2>
+        <Accordion items={items} className={faq.accordion} />
+      </div>
+    </section>
   );
 }

@@ -2,15 +2,14 @@
 // Homepage section 10, the page's closing section. Figma: desktop node
 // 409:5309 ("Desktop CTA"), mobile node 409:5342 ("Mobile CTA").
 //
-// Genuinely different layouts per breakpoint, not one responsive shape:
-//   - Desktop: CTA block (heading, subline, button) then the compliance
-//     ticker below it, as one continuous bg-ink band, reusing Marquee --
-//     the same component already built for Hero's "Fully Custom Offerings"
-//     strip, whose own header comment anticipated this exact section.
+// One CTA block (heading, subline, buttons) at every width, laid out by
+// responsive classes (Bodysuits audit #13, 2026-09-24: it used to render a
+// desktop copy and a mobile copy, duplicating the H2). Only the ticker
+// differs by breakpoint, because the two are genuinely different widgets:
+//   - Tablet up: the CTA block, then the compliance ticker below it as a
+//     Marquee band, one continuous bg-ink section.
 //   - Mobile: the ticker comes FIRST, as its own labelled vertical list
-//     (not a marquee -- a plain stack, same "mobile ticker is a list, not
-//     a scroller" pattern already established on Hero), then the CTA block
-//     below it.
+//     (not a marquee, same pattern as Hero), then the CTA block.
 //
 // Mobile interaction: as the user scrolls, the list item nearest the
 // viewport's vertical centre brightens to white, fading smoothly as it
@@ -26,15 +25,14 @@
 // it like desktop's marquee. Omitting `ticker` drops that whole block on
 // both breakpoints -- just the heading/subline/button remain. On desktop
 // specifically, the ticker's own Marquee also supplied this section's only
-// bottom padding (`desktopSection` itself has none) -- without it the CTA
-// button sat flush against whatever follows with zero gap, a real bug
-// found live once the second, ticker-less CTA shipped. `desktopSectionNoTicker`
-// adds that padding back only when there's no ticker to supply it. Same
-// shape of bug on mobile: `mobileCtaBlock`'s own 72px top padding assumes a
-// ticker block precedes it in the same black box; without one it stacks on
-// top of the previous section's standard bottom gap instead, reading as an
-// oversized space above the heading (also found live, 2026-08-27) --
-// `mobileCtaBlockNoTicker` resets it to the standard pt-0.
+// bottom padding (`band` itself has none) -- without it the CTA button sat
+// flush against whatever follows with zero gap, a real bug found live once
+// the second, ticker-less CTA shipped. `bandNoTicker` adds that padding
+// back only when there's no ticker to supply it. Same shape of bug on
+// mobile: `ctaBlock`'s own 72px top padding assumes a ticker list precedes
+// it in the same black box; without one it stacks on top of the previous
+// section's standard bottom gap instead (also found live, 2026-08-27) --
+// `ctaBlockNoTicker` resets it.
 //
 // `secondaryCta` (added 2026-09-07, Services page's own closing CTA) is a
 // second, outline `Button` rendered alongside the primary one -- optional,
@@ -66,7 +64,7 @@ export type FinalCtaProps = {
    *  omits it and keeps rendering just the one primary button, unchanged. */
   secondaryCta?: { label: string; href: string };
   /** The section directly above this one already supplies the standard
-   *  mobile 72px gap (e.g. Faq's own `mobileSection` pb-[72px] on the
+   *  mobile 72px gap (e.g. Faq's own mobile `max-md:py-[72px]` on the
    *  Activewear PLP) -- drops this ticker block's own pt-[72px] so the two
    *  don't stack into 144px. See `mobileTickerBlockTight`'s own comment in
    *  components/ui/styles.ts. */
@@ -76,7 +74,7 @@ export type FinalCtaProps = {
    *  mobile, remove 'standard on every order' under the faq cta, only keep
    *  the cta") -- desktop keeps its own Marquee unaffected, since only the
    *  mobile block was flagged. Mobile then falls back to
-   *  `mobileCtaBlockNoTicker`'s own spacing, the same as a real `!ticker`
+   *  `ctaBlockNoTicker`'s own spacing, the same as a real `!ticker`
    *  usage, since there's no ticker block above it any more on this
    *  breakpoint either. */
   hideTickerMobile?: boolean;
@@ -88,19 +86,24 @@ export type FinalCtaProps = {
   crossLinks?: { label: string; href: string }[];
 };
 
-// A literal "\n" in `content.subline` forces a line break on desktop only
-// (owner, 2026-09-09, `home.finalCta.subline`: "make with next steps in
-// 2nd line") -- desktop renders it as a real `<br/>`; mobile (no request
-// to change its own natural wrap) strips it back to a plain space. Every
-// other caller's subline has no "\n" at all, so both paths are a no-op for
-// them.
-function DesktopSubline({ text }: { text: string }) {
+// A literal "\n" in `content.subline` forces a line break from tablet up
+// only (owner, 2026-09-09, `home.finalCta.subline`: "make with next steps
+// in 2nd line"). One node for both layouts: each break is a space (so
+// mobile's natural wrap reads "steps. We'll" as before) followed by a
+// `<br>` hidden below `md`. A trailing space before a line break collapses,
+// so tablet up is unchanged. A subline with no "\n" renders as plain text.
+function Subline({ text }: { text: string }) {
   const lines = text.split("\n");
   return (
-    <p className={finalCta.desktopSubline}>
+    <p className={finalCta.subline}>
       {lines.map((line, index) => (
         <Fragment key={index}>
-          {index > 0 && <br />}
+          {index > 0 && (
+            <>
+              {" "}
+              <br className="max-md:hidden" />
+            </>
+          )}
           {line}
         </Fragment>
       ))}
@@ -131,49 +134,10 @@ export function FinalCta({
   crossLinks,
 }: FinalCtaProps) {
   const showMobileTicker = ticker && !hideTickerMobile;
-  const mobileSubline = content.subline.replace(/\n/g, " ");
   return (
-    <section>
-      {/* Desktop: CTA block, then the ticker, one continuous band */}
-      <div className={finalCta.desktopOuter}>
-        <div className={cx(finalCta.desktopSection, !ticker && finalCta.desktopSectionNoTicker)}>
-          <div className={finalCta.desktopCtaBlock}>
-            <div className={finalCta.desktopHeadingWrap}>
-              <TextReveal as="h2" text={content.h2} className={finalCta.desktopHeading} />
-              <DesktopSubline text={content.subline} />
-            </div>
-            {secondaryCta ? (
-              <div className={finalCta.desktopButtonRow}>
-                <Button href={content.cta.href} className={finalCta.desktopButton}>
-                  {content.cta.label}
-                </Button>
-                <Button variant="secondary" href={secondaryCta.href} className={finalCta.desktopButton} gradientBorder>
-                  {secondaryCta.label}
-                </Button>
-              </div>
-            ) : (
-              <Button href={content.cta.href} className={finalCta.desktopButton}>
-                {content.cta.label}
-              </Button>
-            )}
-            {crossLinks ? <CrossLinks links={crossLinks} /> : null}
-          </div>
-          {ticker ? (
-            <Marquee
-              items={ticker.items}
-              separator="sparkle"
-              itemSize="lg"
-              tone="dark"
-              divider={false}
-              className={cx("mt-[110px]", finalCta.desktopTickerTablet)}
-            />
-          ) : null}
-        </div>
-      </div>
-
-      {/* Mobile: ticker list first, CTA block below -- a different order
-          than desktop, not the same layout reflowed */}
-      <div className={finalCta.mobileOuter}>
+    <section className={finalCta.section}>
+      <div className={cx(finalCta.band, !ticker && finalCta.bandNoTicker)}>
+        {/* Mobile only: ticker list first, CTA block below. */}
         {showMobileTicker ? (
           <div className={cx(finalCta.mobileTickerBlock, compactMobileTop && finalCta.mobileTickerBlockTight)}>
             <span className={finalCta.mobileTickerLabel}>{ticker.title}</span>
@@ -184,27 +148,41 @@ export function FinalCta({
             />
           </div>
         ) : null}
-        <div className={cx(finalCta.mobileCtaBlock, !showMobileTicker && finalCta.mobileCtaBlockNoTicker)}>
-          <div className={finalCta.mobileHeadingWrap}>
-            <TextReveal as="h2" text={content.h2} className={finalCta.mobileHeading} />
-            <p className={finalCta.mobileSubline}>{mobileSubline}</p>
+
+        {/* The CTA block: one tree, both layouts. */}
+        <div className={cx(finalCta.ctaBlock, !showMobileTicker && finalCta.ctaBlockNoTicker)}>
+          <div className={finalCta.headingWrap}>
+            <TextReveal as="h2" text={content.h2} className={finalCta.heading} />
+            <Subline text={content.subline} />
           </div>
           {secondaryCta ? (
-            <div className={finalCta.mobileButtonRow}>
-              <Button href={content.cta.href} className={finalCta.mobileButton}>
+            <div className={finalCta.buttonRow}>
+              <Button href={content.cta.href} className={finalCta.button}>
                 {content.cta.label}
               </Button>
-              <Button variant="secondary" href={secondaryCta.href} className={finalCta.mobileButton}>
+              <Button variant="secondary" href={secondaryCta.href} className={finalCta.button} gradientBorder>
                 {secondaryCta.label}
               </Button>
             </div>
           ) : (
-            <Button href={content.cta.href} className={finalCta.mobileButton}>
+            <Button href={content.cta.href} className={finalCta.button}>
               {content.cta.label}
             </Button>
           )}
           {crossLinks ? <CrossLinks links={crossLinks} /> : null}
         </div>
+
+        {/* Tablet up only: the Marquee band below the CTA. */}
+        {ticker ? (
+          <Marquee
+            items={ticker.items}
+            separator="sparkle"
+            itemSize="lg"
+            tone="dark"
+            divider={false}
+            className={finalCta.tickerBand}
+          />
+        ) : null}
       </div>
     </section>
   );

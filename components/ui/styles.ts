@@ -681,54 +681,29 @@ export const accordion = {
 /* --- FAQ (homepage section 13) -------------------------------------------- */
 
 export const faq = {
-  // Figma node 438:2150. bg-ink lives on its own unconstrained outer wrapper,
-  // container-p only on the inner flex row -- the same split already used by
-  // every other full-bleed dark section (Hero, Stats, Inside the Factory),
-  // corrected here 2026-08-26 after shipping with container-p and bg-ink on
-  // the same element, which caps the fill at container-p's own 1440px
-  // max-width instead of true edge-to-edge at 1920px+.
-  // Threshold moved xl: -> md: (owner, 2026-09-04: apply the same
-  // tablet-width treatment used on the homepage to PLP/PDP -- Faq is
-  // shared by all three, so this fixes the homepage's own Faq section too,
-  // which hadn't been touched in the earlier homepage-only pass).
-  desktopOuter: "hidden bg-ink text-paper md:block",
-  // `md:gap-10` (40px, `xl:gap-[124px]` restores the original confirmed
-  // desktop value) frees up room for the accordion at tablet width.
-  desktopInner: "container-p flex items-start gap-10 pt-[120px] pb-[120px] xl:gap-[124px]",
-  // Owner, 2026-09-06, after two rounds of "still in 3 lines": a fixed px
-  // cap per breakpoint (320px at md:, 474px at xl:, 500px at 1920+) can't
-  // keep this 2-line forced break (see Faq.tsx's renderHeadingWithB2BBreak)
-  // correct across the whole range, because text-h1's font-size is a
-  // continuous fluid clamp, not a stepped one -- e.g. at 1279px (top of
-  // `md:`, just before `xl:` kicks in) the font is already ~50px, needing
-  // ~440px to stay at 2 lines, not the 320-360px that worked lower in the
-  // `md:` range. A single `em`-based max-width fixes every viewport at
-  // once instead of chasing more breakpoints: live-measured, the minimum
-  // width needed for "Top questions from" to hold one line is a near-
-  // constant ~8.73-8.75x the heading's own font-size at every width
-  // checked (342px/39.07px at 768, 440px/50.42px at 1279, 472px/54px at
-  // 1440, 564px/64.67px at 1920) -- expected, since it's the same string
-  // and width scales with font-size. `em` units are relative to the
-  // element's own font-size, so `8.85em` (a small buffer above the
-  // measured ratio) tracks text-h1's clamp automatically at any width,
-  // replacing all three previous fixed-px breakpoint values.
-  desktopHeading: "max-w-[8.85em] shrink-0 text-h1",
-  desktopAccordion: "flex-1",
-  // Figma node 438:2192: this frame's own top/bottom padding really is
-  // 72/72 (unlike the general pt-0/pb-72 pattern elsewhere on the page).
-  // items-start/left-aligned heading (owner, 2026-09-04: mobile FAQ title
-  // doesn't match Figma -- the frame is left-aligned, not centred). This
-  // was the one outlier: every other mobile section heading on the site
-  // (SectionHeading's own `max-md:` styles, e.g. line ~148) is already
-  // left-aligned by default; Faq had its own one-off `items-center` +
-  // `text-center` instead of following that shared convention. No
-  // `container-p` here -- `mobileAccordion` spans the section edge to edge
-  // on purpose (each `accordion.item`'s own `max-xl:px-5` gives every
-  // question row its 20px inset), so `container-p` on the section would
-  // double that up. The heading gets that same 20px directly instead.
-  mobileSection: "flex flex-col items-start gap-8 bg-ink pt-[72px] pb-[72px] text-paper md:hidden",
-  mobileHeading: "px-5 text-[1.875rem] font-[460] leading-[34px]",
-  mobileAccordion: "w-full",
+  // ONE tree at every width (Bodysuits audit #13, 2026-09-24): the FAQ used
+  // to render twice, a `hidden md:block` desktop copy and a `md:hidden`
+  // mobile copy, duplicating its H2 and every H3 in the server HTML. The
+  // two layouts now come from `max-md:`/`md:` variants on the same nodes.
+  // Mobile-only and tablet-up classes never target the same property, so
+  // neither can clobber the other in the cascade.
+  //
+  // Full-bleed bg-ink on the outer section; the inner row carries the page
+  // cap. Mobile (Figma 438:2192): stacked, left-aligned, 72/72 padding and
+  // NO side padding on the row -- each `accordion.item`'s own `max-xl:px-5`
+  // insets the questions and the heading takes the same 20px directly.
+  // Tablet up (Figma 438:2150): heading beside the accordion, 120/120,
+  // container-p's own 32px (md) / 80px (xl) side padding written out as
+  // utilities, since container-p itself has no responsive variant.
+  section: "bg-ink text-paper",
+  inner:
+    "mx-auto flex w-full max-w-[1440px] items-start max-md:flex-col max-md:gap-8 max-md:py-[72px] md:gap-10 md:px-8 md:py-[120px] xl:gap-[124px] xl:px-20",
+  // Tablet up: `8.85em` tracks text-h1's fluid clamp so "Top questions
+  // from" always holds one line and "B2B buyers" the second (live-measured
+  // ratio ~8.75x font-size at every width, 2026-09-06).
+  heading:
+    "max-md:px-5 max-md:text-[1.875rem] max-md:font-[460] max-md:leading-[34px] md:max-w-[8.85em] md:shrink-0 md:text-h1",
+  accordion: "max-md:w-full md:flex-1",
 };
 
 /* --- Header -------------------------------------------------------------- */
@@ -4638,7 +4613,7 @@ export const insideFactory = {
   // removed above) -- now that this track only ever moves via a precise
   // click-driven jump, there's no reason left for it to differ from every
   // other full-bleed gallery on the site (`exhibitions.desktopRow`/
-  // `howItWorks.desktopRow`/`productCustomizeSteps.desktopRow`), which all
+  // `howItWorks.desktopRow`/`productCustomizeSteps.track`), which all
   // already use this exact flat 80px, matching `container-p`'s own real
   // `xl:` inset (app/globals.css).
   // `md:` tier removed, 2026-09-09 -- this whole gallery only renders at
@@ -4923,195 +4898,67 @@ export const insideFactory = {
 // itself, and it's the last section on the page, so there's no full-bleed
 // vs. container-p split to worry about beyond the standard one).
 export const finalCta = {
-  // 60px top / 24px bottom -- this frame's own confirmed padding, trusted
-  // directly (not the usual 120/120 py-section rhythm): came straight from
-  // get_design_context's real values, not an inferred/cropped screenshot
-  // reading, so there's no reason to default to the established rhythm
-  // instead the way What We Make/Certified & Compliant/Inside the Factory's
-  // *top* edges did.
-  // xl: -> md: (owner, 2026-09-04, homepage tablet-width review: "Use the
-  // same cta as desktop") -- same split already applied to Hero's ticker,
-  // Certified & Compliant, and Inside the Factory/Exhibitions: the CTA
-  // block + Marquee ticker (one continuous band) reads fine at real
-  // tablet width, so the mobile ticker-list-then-CTA layout is real-
-  // mobile-only now.
-  desktopOuter: "hidden bg-ink text-paper md:block",
-  // container-p lives here, on the CTA block only -- Marquee supplies its
-  // OWN container-p internally (see marquee.innerStacked), so it renders as
-  // a sibling of this wrapper, never nested inside it, or the side padding
-  // doubles (the exact bug already found and fixed on the offerings
-  // ticker). Marquee also carries its own pt-10/pb-8 vertical padding; the
-  // 110px margin-top on the Marquee instance below makes up the rest of
-  // Figma's confirmed 150px gap (150 - Marquee's own 40px top pad), and its
-  // own 32px bottom padding is accepted as this section's bottom breathing
-  // room in place of Figma's 24px -- a deliberate reuse decision, not a
-  // missed value.
-  // md:pt-[28px] (owner, 2026-09-04: "reduce 32px space from the top of
-  // the title let's build") -- 32px off the confirmed 60px desktop value,
-  // only at `md:` (768-1279px); `xl:pt-[60px]` restores the original
-  // explicitly, same reasoning as `desktopTickerTablet` above (`md:` stays
-  // active at `xl:` too unless overridden there). Applies to both of this
-  // component's homepage usages (this token is shared, not per-instance),
-  // consistent with every other shared `finalCta` token.
-  desktopSection: "md:pt-[28px] xl:pt-[60px]",
-  // Only applied when this instance has no ticker (FinalCta.tsx) -- the
-  // ticker's own Marquee normally supplies this section's entire bottom
-  // padding (its `pb-8`, accepted as this section's own breathing room, see
-  // the comment above), so a ticker-less usage needs its own, or the CTA
-  // button sits flush against whatever follows with zero gap (a real bug,
-  // found live on the second, closing-CTA usage, 2026-08-27). 60px mirrors
-  // the section's own pt-[60px] for a symmetric top/bottom rhythm.
-  // pb-[84px] (was 60px, owner call 2026-08-30: "add 24px more at the
-  // bottom of the black background") -- this section is the last on the
-  // page, so its own bottom padding is the very last thing before the
-  // page ends.
-  desktopSectionNoTicker: "pb-[84px]",
-  // Services page's own no-ticker usage (owner, 2026-09-08: "let's build
-  // cta title should have 72px from top gap" -- was the shared
-  // `desktopSection`'s own `xl:pt-[60px]"). `xl:!pt-[72px]` overrides just
-  // that value for this one instance, same reasoning
-  // `mobileCtaBlockNoTickerServices` documents for its own mobile
-  // counterpart -- the homepage's own no-ticker usage keeps the shared 60px.
-  desktopSectionNoTickerServices: "pb-[84px] xl:!pt-[72px]",
-  desktopCtaBlock: "container-p flex flex-col items-center gap-12",
-  // Fixed min-width (owner call, 2026-08-27) so the button reads the same
-  // size regardless of label length -- "Request a Sample" (this section's
-  // original label) measures ~237px; "Let's Talk" (the second, closing CTA's
-  // own label) would otherwise render notably narrower and read as
-  // inconsistent between the two CTA bands on the same page.
-  desktopButton: "min-w-[240px] justify-center",
-  // Opt-in row for a second, outline button (`secondaryCta`, added
-  // 2026-09-07 for the Services page's own closing CTA: primary "Request a
-  // Sample" plus secondary "Download Catalog") -- same `gap-4` row already
-  // used by `servicesHero.buttons`' desktop pairing, not a new value.
-  desktopButtonRow: "flex items-center gap-4",
-  // Stacked full-width, same `gap-4` as the desktop row above -- matches
-  // `servicesHero.buttons`' own mobile stack.
-  mobileButtonRow: "flex w-full flex-col gap-4",
-  // Tablet-only trim (owner, 2026-09-04: "reduce the space from top and
-  // bottom of compliance section. reduce 32px from both sides") --
-  // `Marquee`'s own shared `basePaddingDefault` (`pt-10 pb-8`, every
-  // Marquee instance sitewide) supplies the ticker band's top/bottom
-  // space; this override applies only to THIS instance (passed as
-  // `className` on FinalCta.tsx's own `<Marquee>`, not a recipe-wide
-  // change) and only at `md:` (768-1279px, where this whole desktop block
-  // first became visible -- see this file's own `desktopOuter` comment),
-  // cutting exactly 32px off the top: `pt-10` (40px) -> `md:pt-2` (8px).
-  // `xl:pt-10` restores the original desktop value explicitly -- `md:` is
-  // a min-width breakpoint and stays active at `xl:` too unless overridden
-  // there, the exact bug already caught once on Inside the Factory's own
-  // tablet image ratio.
-  //
-  // Bottom was cut the same way (`md:pb-0`) but corrected the same day
-  // (owner: "cta bottom AQL inspection ticker does not have right space
-  // from the bottom. use same as desktop") -- reverted entirely; bottom
-  // padding now stays the shared `pb-8` (32px) at every width, matching
-  // desktop, no `md:` override at all for it.
-  desktopTickerTablet: "md:pt-2 xl:pt-10",
-  desktopHeadingWrap: "flex flex-col items-center gap-4 text-center",
-  desktopHeading: "text-h1",
-  // 20px/32px-line-height (owner correction, 2026-09-01: "On desktop, CTA
-  // subline font size should be 20px and line height 32, its a global
-  // component, should be applied to all the pages") -- supersedes a
-  // 2026-08-30 pass that set this to 18px/leading-6 (24px); this
-  // component is shared verbatim by the homepage and every PLP/PDP's
-  // closing CTA, so the change applies everywhere with this one edit.
-  // Mobile's own subline is untouched (owner scoped this to desktop only).
-  desktopSubline: "max-w-[623px] text-[1.25rem] font-normal leading-8 text-[#838D97]",
+  // ONE CTA block at every width (Bodysuits audit #13, 2026-09-24): this
+  // section used to render a `hidden md:block` desktop copy and a
+  // `md:hidden` mobile copy, duplicating its H2 in the server HTML. The
+  // heading, subline and buttons are now one tree, with the two layouts
+  // from `max-md:`/`md:` variants (mobile-only and tablet-up classes never
+  // target the same property, so neither clobbers the other). Only the two
+  // ticker widgets stay breakpoint-specific, because they are genuinely
+  // different components: the mobile ScrollSpotlightList sits ABOVE the
+  // CTA, the tablet-up Marquee band BELOW it. Neither contains a heading.
+  section: "bg-ink text-paper",
+  // Tablet-up top padding: 28px at md (owner, 2026-09-04: "reduce 32px
+  // space from the top of the title"), the confirmed 60px at xl. Mobile
+  // spacing lives on the ticker and CTA blocks below instead.
+  band: "flex flex-col md:pt-[28px] xl:pt-[60px]",
+  // Ticker-less usage, tablet up: the Marquee normally supplies the
+  // section's bottom padding, so without it the band needs its own 84px
+  // (owner, 2026-08-30: "add 24px more at the bottom").
+  bandNoTicker: "md:pb-[84px]",
 
-  // Inside the Factory (also dark) precedes it directly, so still no
-  // margin here (that would show as a page-background seam between two
-  // black boxes) -- but the owner asked for real breathing room between
-  // the two sections' content specifically at this boundary (2026-08-25),
-  // overriding Figma's own raw pt-0 read. 72px padding-top keeps both
-  // sections' boxes flush black while giving the content itself the
-  // standard mobile section-to-section rhythm.
-  mobileOuter: "bg-ink text-paper md:hidden",
-  // No bottom padding here -- the gap down to the CTA block below is
-  // entirely `mobileCtaBlock`'s own 72px top padding (owner call,
-  // 2026-08-25: a combined 172px, Figma's raw 100px plus the CTA block's
-  // 72px, read as too much once both were on screen together; one side
-  // owning the whole confirmed 72px reads correctly and matches this
-  // project's own established pattern for a gap between two stacked
-  // blocks, one pt-0 + one pb/pt carrying the full value).
-  mobileTickerBlock: "container-p flex flex-col items-center gap-8 pt-[72px] pb-0",
-  // Opt-in for the OTHER ticker'd usage of this component (the Activewear
-  // PLP, app/activewear/[category]/page.tsx, 2026-08-30 -- owner: "Standard
-  // on every order" should have a 72px gap from the section above it).
-  // There, this ticker block follows Faq directly, and Faq's own
-  // mobileSection already supplies a standard pb-[72px] -- stacking this
-  // block's own pt-[72px] on top doubled the real gap to 144px. The
-  // homepage's ticker'd usage (after Exhibitions, whose own mobileSection is
-  // only pb-12/48px) still needs the full pt-[72px] above, so this is a
-  // second, opt-in class -- same "one side owns the gap" reasoning as
-  // `mobileCtaBlockNoTicker` above, not a change to the shared default.
+  // Mobile ticker list, above the CTA block. No bottom padding: the CTA
+  // block's own 72px top owns that gap (owner, 2026-08-25).
+  mobileTickerBlock: "container-p flex flex-col items-center gap-8 pt-[72px] pb-0 md:hidden",
+  // Opt-in (`compactMobileTop`) when the section above already supplies a
+  // 72px bottom (e.g. Faq on the PLP), so the two don't stack into 144px.
+  // `!` because same-specificity utilities are settled by Tailwind's own
+  // stylesheet order, not class-string order.
   mobileTickerBlockTight: "!pt-0",
   mobileTickerLabel: "text-[1rem] font-normal leading-[1.2] text-center",
   mobileTickerList: "flex flex-col items-center gap-6",
-  // Rest colour #838D97 (owner call, 2026-08-25, replacing the initial
-  // #ABB5C0 guess) -- same muted grey already used for Stats' caption and
-  // this section's own subline, not the sitewide eyebrow hex (this is body
-  // copy, not an eyebrow, so it isn't driven by that token). Colour is
-  // overwritten per-item by the scroll listener in FinalCta.tsx (white when
-  // centred), this is just the base.
+  // Rest color #838D97; FinalCta's scroll listener turns the centered item
+  // white.
   mobileTickerItem: "text-[1.5rem] font-normal leading-[1.2] text-[#838D97] transition-none",
-  // 72px top (owner call, 2026-08-25, real breathing room from the ticker
-  // block above -- both still the same black box, no seam), 60px bottom.
-  mobileCtaBlock: "container-p flex flex-col items-center gap-8 pt-[72px] pb-[60px]",
-  // Ticker-less usage only (the second, closing CTA -- FinalCta.tsx): the
-  // 72px above exists to separate this block from a ticker block sharing
-  // the SAME black box; with no ticker, this block is the section's only
-  // content, so that top padding stacks on top of the previous section's
-  // own standard pb-[72px] instead, reading as an oversized gap (real bug,
-  // found live 2026-08-27). `!pt-0` (not a bare `pt-0`) puts this section
-  // back on the sitewide mobile section-to-section rhythm -- confirmed live
-  // that a bare `pt-0` was NOT enough: same-specificity plain-utility
-  // pairs are settled by Tailwind's own generated-stylesheet order, not by
-  // position in the class string, and `pt-[72px]` happened to win. Same
-  // class of bug already documented for `hidden xl:inline-flex` on Button
-  // and the `min-[1920px]:` heading override -- `!important` is the fix
-  // every time, not reordering the class list.
-  // !pb-[84px] added (was the shared 60px from mobileCtaBlock, owner call
-  // 2026-08-30: "add 24px more at the bottom of the black background") --
-  // same reasoning as desktopSectionNoTicker's own bump; scoped to this
-  // no-ticker override so the FIRST FinalCta usage (with a ticker, after
-  // Exhibitions) keeps its own unrelated 60px.
-  mobileCtaBlockNoTicker: "!pt-0 !pb-[84px]",
-  // Services page's own no-ticker usage, directly under `HowItWorks`
-  // (owner, 2026-09-08: "let's build cta title should have 72px from top
-  // gap") -- that section's own mobile `pb-12` (48px) is its real,
-  // standing value (shared with the homepage's own light-tone usage, not
-  // itself a bug), so `!pt-0` here landed only 48px total, not the
-  // standard 72px. `!pt-6` (24px) makes up the missing 24px on this one
-  // instance -- scoped separately from `mobileCtaBlockNoTicker` above so
-  // the homepage's own no-ticker usage (`app/page.tsx`'s `home.closingCta`,
-  // which follows Faq's own different bottom padding) is unaffected.
-  mobileCtaBlockNoTickerServices: "!pt-6 !pb-[84px]",
-  mobileHeadingWrap: "flex flex-col items-center gap-3 text-center",
-  mobileHeading: "text-[2.25rem] font-medium leading-[2.5rem]",
-  // 18px (owner correction 2026-08-30: "cta subline font size should be
-  // 18px as other places") -- back to the same size/leading-6 pairing this
-  // subline used before the 2026-08-28 bump to 24px, and the same pairing
-  // this size already uses everywhere else on the site.
-  mobileSubline: "text-[1.125rem] font-normal leading-6 text-[#838D97]",
-  // Owner, 2026-09-08: "on large mobile viewport [button] does not scale
-  // edge to edge, on 360 it is fine but on large view it's not scaling" --
-  // the fixed `w-[320px]` matched a 360px viewport (container-p's own side
-  // padding leaves ~320px of content) but stayed pinned to that width on
-  // any wider mobile viewport instead of growing with the container. `w-full`
-  // lets it fill `mobileCtaBlock`/`mobileButtonRow`'s own container-p
-  // width at every mobile size, same pattern already used elsewhere on the
-  // site (e.g. `servicesHero.ctaPrimary`'s own `w-full`).
-  mobileButton: "w-full justify-center",
-  // crossLinks (added 2026-09-11, Teamwear hub's closing CTA: "cross-links
-  // to /activewear, /our-factory, /services") -- a small row of plain text
-  // links under the primary/secondary buttons, both breakpoints share the
-  // same classes since the row is short enough not to need a mobile-only
-  // stack. `crossLinksList` a flex-wrap row so 3 short labels never force
-  // horizontal overflow at narrow widths.
+
+  // Mobile: 72px top (breathing room from the ticker list, same black
+  // box), 60px bottom, 32px gaps. Tablet up: 48px gaps, vertical rhythm
+  // from `band` and the Marquee.
+  ctaBlock: "container-p flex flex-col items-center gap-8 max-md:pt-[72px] max-md:pb-[60px] md:gap-12",
+  // Mobile, no ticker list above: the block is the section's only content,
+  // so no top padding (the previous section's own 72px bottom owns the
+  // gap) and 84px bottom as the page's last dark band (owner, 2026-08-30).
+  ctaBlockNoTicker: "max-md:!pt-0 max-md:!pb-[84px]",
+  headingWrap: "flex flex-col items-center gap-3 text-center md:gap-4",
+  heading: "max-md:text-[2.25rem] max-md:font-medium max-md:leading-[2.5rem] md:text-h1",
+  // Tablet up: 20px/32px (owner, 2026-09-01), capped at 623px, with the
+  // content's own "\n" breaks honored (FinalCta's Subline). Mobile:
+  // 18px/24px, breaks collapsed to spaces.
+  subline:
+    "font-normal text-[#838D97] max-md:text-[1.125rem] max-md:leading-6 md:max-w-[623px] md:text-[1.25rem] md:leading-8",
+  // Mobile: stacked full-width. Tablet up: one row, each button at least
+  // 240px (owner, 2026-08-27) so labels of different length match.
+  buttonRow: "flex gap-4 max-md:w-full max-md:flex-col md:items-center",
+  button: "justify-center max-md:w-full md:min-w-[240px]",
+  // Tablet-up Marquee band below the CTA: hidden on mobile (the ticker
+  // list above replaces it). 110px top margin + Marquee's own 40px top pad
+  // = Figma's 150px gap at xl; at md the pad trims to 8px (owner,
+  // 2026-09-04: "reduce 32px").
+  tickerBand: "hidden md:block mt-[110px] md:pt-2 xl:pt-10",
   crossLinksList: "flex flex-wrap items-center justify-center gap-x-6 gap-y-2",
   crossLinksItem: "text-body text-[#838D97] underline decoration-solid underline-offset-2 hover:text-paper",
 };
+
 
 /* --- OurServices (homepage section 11) -------------------------------- */
 // Figma: desktop node 415:5449, mobile node 415:5484. A light section --
@@ -8814,175 +8661,48 @@ export const whatsappFloating = {
 // which was deliberately widened to 469px to match Exhibitions -- a
 // homepage-specific choice with no equivalent sibling section on the PDP).
 export const productCustomizeSteps = {
-  // pt-[120px]: no sibling section context confirmed yet for this brand
-  // new PDP section (Figma's own frame only specifies its own pt-[120px]).
-  // Unprefixed, so it already applies at both tablet and desktop (this
-  // div only ever renders from `md:` up) -- owner, 2026-09-07: "follow
-  // 120px from top of each section" for this section, Specifications, and
-  // TrustPoints specifically, already satisfied here, no change needed.
-  // pb-[200px] used to be unprefixed too (owner, 2026-09-02: "make it
-  // 200px from the top" -- this section's own bottom padding doubled as
-  // TrustPoints' entire top gap on the PDP at every width, see
-  // trustPoints' own comment) -- was pb-[120px] (originally set to mirror
-  // pt as a plain symmetric default before TrustPoints' real gap was ever
-  // specified). Split 2026-09-07 (owner: "...0px from the bottom of the
-  // section" for this section too): `pb-0` is now the tablet value,
-  // `xl:pb-[200px]` restores the original desktop-only value explicitly --
-  // TrustPoints now owns its own top gap at tablet instead (see that
-  // recipe's own comment), so this section no longer needs to supply it.
-  // xl: -> md: (owner, 2026-09-04: apply the homepage's tablet-width
-  // treatment to PDP -- this carousel is the same shape as Inside the
-  // Factory/Exhibitions/How It Works, already fixed there; see
-  // `desktopRow`/`desktopCard`/`cardMediaRatio` below for the matching
-  // padding/width changes). -- Reverted back to `xl:`, 2026-09-16 (owner:
-  // tablet should swipe with dots, not use the chevron -- same "How It
-  // Works reverted 2026-09-09" correction this recipe never got at the
-  // time; see `mobileSection`'s own comment below). Tablet now gets the
-  // same real `CardCarousel` swipe+dots mobile already uses, same fixed
-  // `cardCarousel.track`/`gap-4` card spacing at both widths -- so this
-  // now matches Capriowear's own PDPs too, since they render through this
-  // exact same shared recipe/component, not a separate copy.
-  desktopOuter: "hidden xl:flex xl:flex-col xl:items-center xl:gap-[72px] pt-[120px] pb-0 xl:pb-[200px]",
-  desktopHeadingWrap: "container-p",
-  // Reverted to Eyebrow's own default Overline size (20px/600), 2026-09-01
-  // (owner: "make the eyebrow heading back to 20px wherever you changed")
-  // -- a same-day earlier pass had overridden this to 16px semibold; no
-  // `eyebrowSize` override is passed at either call site below anymore.
-  // 812px forces Figma's real 2-line wrap -- same confirmed value already
-  // used by How It Works/Certified & Compliant/Inside the Factory's own
-  // centred headings. whitespace-pre-line (owner, 2026-09-01: "make in-
-  // [house] the 2nd line") -- renders the content's own explicit "\n"
-  // (see pdpCustomizationSteps.heading's own comment) as a real line
-  // break instead of collapsing it to a space, same technique already
-  // used for FabricOptions' own heading.
-  desktopHeadingWidth: "max-w-[812px] whitespace-pre-line",
-  // Mobile break is CSS-only (Hoodies audit B5, 2026-09-24): the content
-  // string has no "\n" any more (the old newline after "in-" split the
-  // word across lines). A hard hyphen is always a break opportunity, and
-  // "in-house, no outsourcing" is wider than the mobile column, so
-  // `text-balance` alone still broke after "in-". 9.5em sits between
-  // "Your brand, applied" (8.7em) and "Your brand, applied in-" (10.1em),
-  // forcing the break after "applied" so "in-house" stays whole.
-  mobileHeadingWidth: "max-w-[9.5em]",
-  // Mobile-only eyebrow override (owner correction, 2026-09-02: "eyebrow
-  // size is 16px and auto height" -- was inheriting Eyebrow's own default
-  // Overline size, 20px/1.2 line-height). `leading-normal` renders as the
-  // browser's own font-metric-based "auto" line height rather than a fixed
-  // multiple, matching "auto height" literally. `font-semibold` (owner
-  // correction, same day: "font weight is semi bold") -- swapping to
-  // `text-base` dropped `text-overline`'s own bundled 600 weight along with
-  // its size/line-height, so it's restated explicitly here. Desktop's own
-  // eyebrow (`desktopHeadingWrap`'s `SectionHeading` call) keeps the
-  // default Overline size/weight, unaffected -- not part of this request.
-  mobileEyebrowSize: "text-base leading-normal font-semibold",
-  // Caps the carousel at the same 1440px/centred box `container-p` uses
-  // (owner, 2026-09-02: "How We Customize should match [the rest] only on
-  // the PDPs, not homepage" -- TrustPoints/Specifications/FAQ on this page
-  // all sit inside `container-p`, so their content starts 80px in from
-  // whatever margin centres that 1440px box). Without this cap, the
-  // scroller wrap below is a genuine full-bleed sibling of the heading's
-  // own `container-p` -- its own `px-[80px]` is measured from the TRUE
-  // viewport edge, not from container-p's centred boundary, so on any
-  // viewport wider than 1440px the two visibly diverge (confirmed live via
-  // an owner screenshot: cards start well left of the heading/TrustPoints
-  // text on a wide screen).
+  // ONE tree at every width (Bodysuits audit #13, 2026-09-24): heading and
+  // cards render once; below xl they form the swipe row with pill dots
+  // (formerly a separate CardCarousel copy), from xl the chevron scroller
+  // (formerly a separate desktop copy). Mobile-only (`max-xl:`) and xl
+  // classes never target the same property.
   //
-  // At the time this was written, the homepage's own `howItWorks` (and
-  // `exhibitions`/`insideFactory`) used the same uncapped shape
-  // deliberately, "for its own wide-gallery feel" -- that was superseded
-  // 2026-09-08 (owner: the drift read as a real bug, not a wide-gallery
-  // effect, once shown live on Our Factory's own gallery/process sections)
-  // -- every `desktopScrollerWrap` sitewide now gets this same 1440px cap.
-  // See `docs/02-design-system.md`'s own "full-bleed scroller" note for
-  // the general rule this recipe follows.
-  desktopScrollerCap: "mx-auto w-full max-w-[1440px]",
-  desktopScrollerWrap: "relative w-full cursor-none overflow-hidden",
-  // scroll-pl/pr match the visual px-[80px] inset -- same reasoning as
-  // `howItWorks.desktopRow`'s own comment (without them, scroll-snap's own
-  // snap-point maths collapses the intended 80px gap before the first
-  // card to 0).
-  // md:px-8 (32px, container-p's own md: inset) / xl:px-[80px] (the
-  // original, container-p's xl: inset) -- same tablet-width fix as
-  // How It Works' own desktopRow.
-  // `overflow-x-hidden`, not `-auto` (owner, 2026-09-08: "user can only
-  // scroll by clicking" -- see `useDesktopChevronScroller`'s own header
-  // comment in DesktopChevronScroller.tsx for the full reasoning).
-  // `snap-x`/`snap-mandatory`/`scroll-pl`/`scroll-pr` dropped in the same
-  // pass (owner, 2026-09-08: "still requires 2 times scroll to go up or
-  // down, further make it smooth") -- didn't fully fix it either. See
-  // `useDesktopChevronScroller`'s own trailing comment in
-  // DesktopChevronScroller.tsx for the real fix, `overflow-clip` plus an
-  // inner transform-driven `desktopReel`.
-  // `px-8` (tablet's own inset) is now unreachable dead weight -- this row
-  // only ever mounts at `xl:` any more (see `desktopOuter`'s own comment
-  // above), so only the true-desktop `px-[80px]` inset is left.
-  desktopRow: "overflow-clip w-full px-[80px]",
-  // gap-6 (24px) -- briefly moved to 40px along with every other desktop
-  // chevron gallery (owner, 2026-09-12: "make it 40px across the site"),
-  // but unlike `howItWorks`/`trustSignals`/Exhibitions this one never got
-  // the same-day revert back to 24px -- found live on the Lever Belt PDP
-  // (owner, 2026-09-16: "double check [homepage uses 24px] and apply the
-  // same on Caprio and Capriowear PDPs" -- this recipe is the shared PDP
-  // "How We Customize" carousel both brands render through, so one fix
-  // covers every PDP). `CARD_GAP` in ProductCustomizeSteps.tsx must match.
-  desktopReel:
-    "flex w-max gap-6 transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-  // 469px -- owner correction, 2026-09-01: "you did not use the same
-  // component how [it] works from the homepage. Use homepage component
-  // size, overall." Was a section-specific 335px (Figma's own literal
-  // value, deliberately NOT matched to How It Works) -- now matches
-  // `howItWorks.desktopCard` exactly, same reasoning How It Works itself
-  // used to widen off its own literal Figma value (reads as the same size
-  // as its sibling carousel sections).
-  desktopCard: "w-[469px] shrink-0",
-  // 469:320 true desktop only, matching `howItWorks.cardMediaRatio`
-  // exactly (see `desktopCard`'s own comment for why). Mobile AND tablet
-  // now share the plain 7:5 CardCarousel default -- `md:` reverted to
-  // `xl:` alongside `desktopOuter`/`mobileSection` above, 2026-09-16, same
-  // final shape `howItWorks.cardMediaRatio` itself settled on (its own
-  // 2026-09-14 "same for mobile and tablet" correction).
+  // Vertical rhythm: 72/72 on mobile, 120 top / 0 bottom at tablet
+  // (TrustPoints owns its own top gap there, owner 2026-09-07), 120 top /
+  // 200 bottom at xl (owner, 2026-09-02: this bottom padding doubles as
+  // TrustPoints' top gap on desktop). Tablet swipes with dots like mobile,
+  // not the chevron (owner, 2026-09-16).
+  section:
+    "flex flex-col items-center gap-8 pt-[72px] pb-[72px] md:pt-[120px] md:pb-0 xl:gap-[72px] xl:pb-[200px]",
+  headingWrap: "container-p",
+  // Below xl: the content's "\n" collapses to a space and the heading wraps
+  // naturally inside 9.5em. From xl: the "\n" is a real break (owner,
+  // 2026-09-01: "in-house, no outsourcing" on its own line), capped at
+  // 812px.
+  headingWidth: "max-xl:max-w-[9.5em] xl:max-w-[812px] xl:whitespace-pre-line",
+  // Below xl: the mobile Figma eyebrow (16px semibold). From xl: the
+  // standard Overline token.
+  eyebrowSize: "max-xl:text-base max-xl:leading-normal max-xl:font-semibold xl:text-overline",
+  // Below xl the row sits inside container-p's own inset (20px, 32px at
+  // md), written out as utilities because container-p has no responsive
+  // variant; from xl it runs full width inside the 1440 cap and the track
+  // carries the 80px inset instead.
+  scrollerCap: "mx-auto flex w-full max-w-[1440px] flex-col items-center gap-8 px-5 md:px-8 xl:block xl:px-0",
+  scrollerWrap: "relative w-full overflow-hidden xl:cursor-none",
+  // Below xl: a native horizontal scroller with snap and a hidden
+  // scrollbar (cardCarousel.track's values). From xl: clipped, the reel
+  // moved by the chevron hook's translateX.
+  track:
+    "no-scrollbar flex w-full max-xl:snap-x max-xl:snap-mandatory max-xl:overflow-x-auto max-xl:px-[20px] xl:overflow-clip xl:px-[80px]",
+  // 16px card gap below xl, 24px at xl (CARD_GAP in the component).
+  reel:
+    "flex w-max gap-4 xl:gap-6 xl:transition-transform xl:duration-[550ms] xl:ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+  card: "w-[280px] shrink-0 max-xl:snap-start xl:w-[469px]",
   cardMediaRatio: "aspect-[7/5] xl:aspect-[469/320]",
-  // No title/body overrides here anymore (owner: "use homepage component
-  // size") -- both breakpoints now render through CapabilityCard's own
-  // plain defaults (`capabilityCard.title`/`capabilityCard.text`), exactly
-  // like How It Works. The title/body gap itself (`capabilityCard.body`)
-  // is a shared, sitewide value -- see its own comment for the 12px
-  // correction.
-  // 32px gap from the heading down to the carousel, same as How It Works'
-  // own mobile section. pb-[72px] (owner, 2026-09-01: gap down to
-  // TrustPoints below should be 72px, was pb-12/48px) -- TrustPoints
-  // itself has no top padding of its own on mobile, so this bottom
-  // padding is the entire gap between the two sections. pt-[72px] (owner
-  // correction, 2026-09-02: "How We Customize from the top space is 72px
-  // mobile" -- was pt-12/48px) -- ProductSpecifications above has no
-  // bottom padding of its own on mobile, so this top padding is the entire
-  // gap from its last row's own divider up to this section's heading,
-  // confirmed via getBoundingClientRect() (was 48px before this fix).
-  // xl:hidden -> md:hidden (2026-09-04, same review). -- `md:hidden` ->
-  // `xl:hidden` (owner, 2026-09-16: swap the tablet chevron for swipe+dots,
-  // same correction How It Works already got 2026-09-09) -- this carousel
-  // now covers real mobile and tablet alike, the desktop chevron row above
-  // moved back to `xl:` to match. Card spacing between cards is
-  // `cardCarousel.track`'s own fixed `gap-4`, identical at every width
-  // this renders at (real mobile and tablet alike) and identical on every
-  // PDP that uses this shared recipe/component, Gear and Capriowear both.
-  // `md:pt-[120px]` added 2026-09-16 (owner: tablet top gap should match
-  // Specifications above it and TrustPoints below it) -- this section had
-  // never actually received the 2026-09-07 "120px from the top of each
-  // section, for Specifications, HOW WE CUSTOMIZE, and TrustPoints
-  // specifically" rule (`productSpecifications.section`'s own `md:pt-
-  // [120px]` and `trustPoints.sidePaddingPdp`'s own `md:pt-[120px]` both
-  // already have it -- see each one's own comment); real mobile keeps its
-  // own unrelated 72px. `md:pb-0` added same day (owner: remove the 72px
-  // gap under the segmented counter on tablet) -- TrustPoints' own `md:pt-
-  // [120px]` (`sidePaddingPdp`) already owns the entire tablet gap down to
-  // it, same "this section's bottom stays 0 at tablet, the next section
-  // supplies the whole gap" pattern `productSpecifications.section` itself
-  // already uses; real mobile's own `pb-[72px]` is unaffected (TrustPoints
-  // has no `pt` of its own at real mobile, so this bottom padding is still
-  // that gap's only source there).
-  mobileSection: "container-p flex flex-col items-center gap-8 pt-[72px] pb-[72px] md:pb-0 md:pt-[120px] xl:hidden",
+  chevronOnly: "max-xl:hidden",
+  dotsOnly: "xl:hidden",
 };
+
 
 /* --- ProductRelatedStyles (PDP) ------------------------------------------ */
 
