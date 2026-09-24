@@ -1,25 +1,22 @@
 // content/activewear/bodysuits.ts
 // Rewritten to the owner's final, locked 9-SKU catalog and copy (owner
 // spec, 2026-09-24) -- replaces the 2026-09-03 test version entirely,
-// including its two test PDPs (tank, long-sleeve), which are removed so
-// both routes 404 until SKU 1 and SKU 5 ship real PDPs under those same
-// slugs. Women's-only category, same as Leggings and Sports Bras: no
+// including its two test PDPs (tank, long-sleeve); SKU 1 and SKU 5 now
+// reuse those slugs with new content. Women's-only category, same as Leggings and Sports Bras: no
 // gender toggle, no `gender` field on any card.
 //
-// Every card is a card-only "draft" (name, spec line, no PDP content), so
-// each renders non-clickable, gets no route, and stays out of the sitemap
-// and CollectionPage/ItemList. A card becomes a link automatically the
-// moment its PDP content (`pdpHeading` + `specifications`) is added, via
-// the sitewide `isDraftPdpReachable()` rule, same as Hoodies. Grid order
+// Every card is "draft": out of the sitemap and CollectionPage/ItemList. A
+// card links once its PDP content (`pdpHeading` + `specifications`) exists,
+// via the sitewide `isDraftPdpReachable()` rule, same as Hoodies. Grid order
 // is SKU-number order, 1 to 9.
 //
-// PDP batches 1 and 2 (owner spec, 2026-09-24): SKUs 1 to 6 carry full
-// draft PDP content, so their cards link and their pages render noindexed, with no
-// sitemap entry and no Product/FAQPage JSON-LD. Key facts, customization
-// chips, spec subtitle and the operational FAQs are the shared PDP
-// defaults (./pdpShared.ts); "How we customize" is set once below for the
-// whole category. Related-style pills carry a `slug`, so a pill for an
-// unbuilt SKU falls back to the PLP and switches to its PDP by itself.
+// PDP batches 1 to 3 (owner spec, 2026-09-24): all 9 SKUs carry full
+// draft PDP content, so every card links and every page renders noindexed,
+// with no sitemap entry and no Product/FAQPage JSON-LD. Key facts,
+// customization chips, spec subtitle and the operational FAQs are the
+// shared PDP defaults (./pdpShared.ts); "How we customize" is set once
+// below for the whole category. Related-style pills carry a `slug`, so
+// each resolves to its sibling's PDP through resolveRelatedStyleTags().
 //
 // No `weightTiers` block (owner spec): bodysuits are not weight-tier
 // driven.
@@ -620,6 +617,66 @@ export const bodysuits: Category = {
       imageAlt: "Custom Crossback Short-Leg Bodysuit",
       href: "/capriowear/activewear/bodysuits/crossback-short-leg",
       sku: "CAP-BOD-07",
+      pdpHeading: "Custom Crossback Short-Leg Bodysuit Manufacturer",
+      pdpDescription:
+        "Crossback short-leg bodysuit with thin straps crossing to an open back and a 2-layer shelf bra with removable cups, custom and private label, in a soft Nylon/Spandex knit, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Crossback Short-Leg Bodysuit Manufacturer",
+      pdpMetaDescription:
+        "Custom crossback short-leg bodysuit manufacturer, private label, 2-layer shelf bra, removable cups, open back, Nylon/Spandex, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Crossback Short-Leg Bodysuit" },
+        { alt: "Custom Crossback Short-Leg Bodysuit" },
+        { alt: "Custom Crossback Short-Leg Bodysuit" },
+        { alt: "Custom Crossback Short-Leg Bodysuit" },
+        { alt: "Custom Crossback Short-Leg Bodysuit" },
+        { alt: "Custom Crossback Short-Leg Bodysuit" },
+      ],
+      material: "Nylon/Spandex 4-way stretch knit, commonly around 78% / 22%",
+      pdpFabricPills: ["Nylon/Spandex", "Polyester/Spandex", "Recycled Polyester/Spandex"],
+      faqs: [
+        {
+          q: "How is the shelf bra built into the crossback short-leg bodysuit?",
+          a: "The crossback short-leg bodysuit has a 2-layer shelf bra sewn into the front body, with an elastic underband and pockets for removable cups. Band tension, cup shape and support level are set to your spec and checked across the size run on your sample.",
+        },
+        {
+          q: "Can the strap layout on the crossback short-leg bodysuit be changed?",
+          a: "Yes. The crossback short-leg bodysuit ships with thin straps crossing once at the upper back, and strap width, crossover point and back depth can all be adjusted to your pattern, confirmed on your sample.",
+        },
+        {
+          q: "What fabric do you build the crossback short-leg bodysuit in?",
+          a: "A soft Nylon/Spandex 4-way stretch knit, commonly around 78% Nylon and 22% Spandex, which holds the shelf bra and open back close to the body. The exact blend and weight of the crossback short-leg bodysuit are confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Sleeveless Short-Leg Bodysuit", slug: "sleeveless-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Double-Layer Short-Leg Bodysuit", slug: "double-layer-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Open-Back Short-Leg Bodysuit", slug: "open-back-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Corset-Detail Short-Leg Bodysuit", slug: "corset-detail-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "See All", href: "/capriowear/activewear/bodysuits" },
+      ],
+      specifications: [
+        { label: "Style", value: "Crossback short-leg bodysuit with built-in shelf bra" },
+        { label: "Fabric", value: "Nylon/Spandex 4-way stretch knit, commonly around 78% / 22%, confirmed on your sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Silhouette", value: "Built-in bike-short leg, around 6 inch inseam or to your spec" },
+        { label: "Straps and back", value: "Thin straps crossing once at the upper back, deep open scoop back" },
+        { label: "Support", value: "Built-in 2-layer shelf bra with removable cups" },
+        { label: "Neckline", value: "Scoop neck" },
+        { label: "Entry", value: "Step-in, pull-on, no crotch closure" },
+        { label: "Construction", value: "Cut-and-sew, gusseted seat, bound strap and back edges, flatlock or coverstitch seams" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, heat transfer, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Crossback Short-Leg Bodysuit" },
+      pdpQualityHeading: "Support that holds, straps that stay put",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Shelf bra band checked for recovery and hold under movement",
+        "Cup pockets checked for a secure, snag-free fit and correct pad placement across the size run",
+        "Strap crossover point and anchors stress-tested",
+        "Open-back edges hold their recovery, no rolling",
+        "Seat opacity confirmed under squat-depth stretch",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
@@ -630,6 +687,65 @@ export const bodysuits: Category = {
       imageAlt: "Custom Ribbed Bodysuit",
       href: "/capriowear/activewear/bodysuits/ribbed",
       sku: "CAP-BOD-08",
+      pdpHeading: "Custom Ribbed Bodysuit Manufacturer",
+      pdpDescription:
+        "Hip-ending ribbed bodysuit in a double-layer rib knit with a square neckline, wide straps and a snap-button gusset, custom and private label, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Ribbed Bodysuit Manufacturer",
+      pdpMetaDescription:
+        "Custom ribbed bodysuit manufacturer, private label, double-layer rib knit, square neck, snap gusset, thong-cut or full back, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Ribbed Bodysuit" },
+        { alt: "Custom Ribbed Bodysuit" },
+        { alt: "Custom Ribbed Bodysuit" },
+        { alt: "Custom Ribbed Bodysuit" },
+        { alt: "Custom Ribbed Bodysuit" },
+        { alt: "Custom Ribbed Bodysuit" },
+      ],
+      material: "Double-layer rib knit, Modal/Spandex commonly around 89% / 11%, or Polyester/Spandex rib",
+      pdpFabricPills: ["Modal/Spandex Rib", "Polyester/Spandex Rib", "Nylon/Spandex"],
+      faqs: [
+        {
+          q: "What rib fabric do you use for the ribbed bodysuit?",
+          a: "The ribbed bodysuit is built in a double-layer rib knit, commonly Modal/Spandex at around 89% Modal and 11% Spandex for a soft hand, or a Polyester/Spandex rib for a quicker-drying, more colorfast build. Rib width, blend and weight are confirmed on your sample.",
+        },
+        {
+          q: "Why build the ribbed bodysuit double-layer?",
+          a: "A double layer gives the ribbed bodysuit full opacity and a smoother fit without a separate lining, while the rib keeps its stretch. We confirm opacity under stretch on your sample in your chosen colors.",
+        },
+        {
+          q: "What closure do you use on the ribbed bodysuit?",
+          a: "A snap-button gusset as standard, so the ribbed bodysuit goes on and off without fully undressing, or a fully sewn gusset for a simpler build. The closure is cycled open and closed on your sample before bulk.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Tank Bodysuit", slug: "tank", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Long-Sleeve Bodysuit", slug: "long-sleeve", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Sleeveless Short-Leg Bodysuit", slug: "sleeveless-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Crossback Short-Leg Bodysuit", slug: "crossback-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "See All", href: "/capriowear/activewear/bodysuits" },
+      ],
+      specifications: [
+        { label: "Style", value: "Hip-ending ribbed bodysuit" },
+        { label: "Fabric", value: "Double-layer rib knit, Modal/Spandex commonly around 89% / 11%, or Polyester/Spandex rib, confirmed on your sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Silhouette", value: "Hip-ending, standard or high-cut leg opening" },
+        { label: "Neckline and straps", value: "Square neck, wide straps" },
+        { label: "Back", value: "Thong-cut or full back, to your spec" },
+        { label: "Closure", value: "Snap-button gusset as standard, sewn gusset on request" },
+        { label: "Construction", value: "Cut-and-sew, double-layer rib body, flatlock or coverstitch seams" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, heat transfer, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Ribbed Bodysuit" },
+      pdpQualityHeading: "A rib that holds its shape, a closure that holds",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Rib knit checked for recovery, no bagging at the seat or neckline",
+        "Double-layer body checked for opacity under stretch",
+        "Snap gusset cycled open and closed before bulk",
+        "Gusset seam tested under stretch, the highest-stress point on a one-piece",
+        "Torso length graded and checked across every size",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
@@ -640,6 +756,71 @@ export const bodysuits: Category = {
       imageAlt: "Custom Double-Layer Short-Leg Bodysuit",
       href: "/capriowear/activewear/bodysuits/double-layer-short-leg",
       sku: "CAP-BOD-09",
+      pdpHeading: "Custom Double-Layer Short-Leg Bodysuit Manufacturer",
+      pdpDescription:
+        "Running bodysuit with a loose outer short over a fitted inner short, a hidden zip pocket in the waistband and a shelf bra with removable cups, custom and private label, in a lightweight Polyester/Spandex knit, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Double-Layer Short-Leg Bodysuit Manufacturer",
+      pdpMetaDescription:
+        "Custom double-layer short-leg bodysuit manufacturer, private label running build, 123 GSM, zip pocket, shelf bra, outer short, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Double-Layer Short-Leg Bodysuit" },
+        { alt: "Custom Double-Layer Short-Leg Bodysuit" },
+        { alt: "Custom Double-Layer Short-Leg Bodysuit" },
+        { alt: "Custom Double-Layer Short-Leg Bodysuit" },
+        { alt: "Custom Double-Layer Short-Leg Bodysuit" },
+        { alt: "Custom Double-Layer Short-Leg Bodysuit" },
+      ],
+      material: "Lightweight Polyester/Spandex 4-way stretch knit, commonly around 87% / 13%",
+      pdpFabricPills: ["Polyester/Spandex", "Recycled Polyester/Spandex", "Nylon/Spandex"],
+      faqs: [
+        {
+          q: "How is the double-layer short-leg bodysuit built?",
+          a: "The double-layer short-leg bodysuit joins a fitted inner short, around a 3 inch inseam, and a loose outer short, around a 2 inch inseam, to one body at the waist seam. Both inseams, the outer short's cut and the split at the hem are set to your spec and confirmed on your sample.",
+        },
+        {
+          q: "What pockets can you put on the double-layer short-leg bodysuit?",
+          a: "The double-layer short-leg bodysuit carries a hidden zipped pocket in the waistband and a pocket in the inner short as standard. Pocket size, placement and zip type can be changed to your brief, and every loaded pocket is checked on your sample.",
+        },
+        {
+          q: "What fabric weight is the double-layer short-leg bodysuit built in?",
+          a: "The double-layer short-leg bodysuit is built in a lightweight Polyester/Spandex knit at 123 GSM, commonly around 87% Polyester and 13% Spandex, for a running build that dries quickly. The final weight is confirmed on your sample.",
+        },
+        {
+          q: "Can the double-layer short-leg bodysuit sit in a running line?",
+          a: "Yes. The double-layer short-leg bodysuit is built for running programs, with reflective print available for low-light visibility, and it sits alongside the shorts, tops and layers in our Running Wear range.",
+          link: { text: "Running Wear range", href: "/capriowear/activewear/running-wear" },
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Sleeveless Short-Leg Bodysuit", slug: "sleeveless-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Crossback Short-Leg Bodysuit", slug: "crossback-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Long-Sleeve Short-Leg Bodysuit", slug: "long-sleeve-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "Custom Corset-Detail Short-Leg Bodysuit", slug: "corset-detail-short-leg", href: "/capriowear/activewear/bodysuits" },
+        { label: "See All", href: "/capriowear/activewear/bodysuits" },
+      ],
+      specifications: [
+        { label: "Style", value: "Double-layer short-leg running bodysuit" },
+        { label: "Fabric", value: "Lightweight Polyester/Spandex 4-way stretch knit, commonly around 87% / 13%, confirmed on your sample." },
+        { label: "Weight", value: "123 GSM. Final weight confirmed on your sample." },
+        { label: "Silhouette", value: "Fitted inner short around 3 inch inseam, loose outer short around 2 inch inseam, to your spec" },
+        { label: "Straps and back", value: "Thin adjustable straps crossing into a back panel with a keyhole cutout" },
+        { label: "Support", value: "Built-in shelf bra with removable cups" },
+        { label: "Pockets", value: "Hidden zipped pocket in the waistband, pocket in the inner short" },
+        { label: "Entry", value: "Step-in, pull-on, no crotch closure" },
+        { label: "Construction", value: "Cut-and-sew, inner and outer short joined at the waist seam, flatlock or coverstitch seams" },
+        { label: "Branding", value: "Sublimation, screen, DTF, silicone, heat transfer, reflective print, embroidery, labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Double-Layer Short-Leg Bodysuit" },
+      pdpQualityHeading: "Built for the miles, checked before bulk",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Inner and outer short checked for leg-hem roll and ride-up at running stride",
+        "Zipped waistband pocket tested open and closed with a loaded pocket",
+        "Strap adjusters and crossover anchors stress-tested",
+        "Shelf bra cup pockets checked for a secure, snag-free fit across the size run",
+        "GSM held consistent, batch to batch",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
   ],
   // "You may also be interested in" (owner spec, 2026-09-24): exact list

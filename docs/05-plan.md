@@ -4383,3 +4383,14 @@ Read-only audit of the Hoodies PLP and 16 PDPs first (1 blocker, 2 high, 9 mediu
 - **Social links:** "Capriowear on Instagram" / "Capriowear on LinkedIn" in Footer, MobileNav and HeaderOverlayNav; the unlinked Facebook placeholder is `aria-hidden`.
 - **Lighthouse mobile Accessibility, Hoodies PLP:** 87 to 96; only color-contrast remains.
 - **Decisions:** brand orange `#ff791b` stays. B6 dropped ("Back to all [Category]" is `sr-only`, not a visible tap target). **Pending until `components/ui/styles.ts` is free:** B5 (mobile customize H2 "in- house": CSS line break plus "in-\nhouse" to "in-house" in 13 content files) and two non-orange contrast fixes to at least 4.5:1 (pagination button `#838d97` on `#fafafa`, uppercase `#727272` labels on `#f2f2f7`).
+
+## Bodysuits PDPs batch 3: SKUs 7, 8, 9 built as drafts, 2026-09-24
+
+Owner brief, final batch: draft PDPs for CAP-BOD-07 `crossback-short-leg`, CAP-BOD-08 `ribbed` and CAP-BOD-09 `double-layer-short-leg`, in `content/activewear/bodysuits.ts`. Content only, same template and field set as batches 1 and 2; the category-level "How we customize" block is reused.
+
+- **Weight row:** "Pending, confirmed on your sample." on SKUs 7 and 8 (no GSM anywhere on either page). SKU 9 reads "123 GSM. Final weight confirmed on your sample.", and 123 GSM also appears in its meta description and fabric-weight FAQ answer, as briefed.
+- **In-copy link:** SKU 9's "Can the double-layer short-leg bodysuit sit in a running line?" answer links "Running Wear range" to `/capriowear/activewear/running-wear` through `FaqEntry.link`, the same mechanism as the contact-form link. Running Wear's own page is untouched.
+- **Pills:** all 9 Bodysuits PDPs exist, so every style pill on every page resolves to its sibling's PDP through the existing slug fallback (batch 1 and 2 data unedited). Only "See All" resolves to the PLP.
+- **Draft handling:** unchanged. noindex/nofollow, out of the sitemap, BreadcrumbList only. All 9 PLP cards are links.
+
+**Verified (local build):** script check of all 3 pages passes (title, meta 155/154/156, robots, canonical, OG/Twitter, H1, breadcrumb, spec rows, chips, customize steps, quality block, FAQ order and text with 9/9/10 entries, pill targets across all 9 PDPs, Running Wear link, CTA, compliance, banned strings, GSM only in SKU 9's four briefed places). tsc, eslint, build clean.
