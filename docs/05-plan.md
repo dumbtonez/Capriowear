@@ -4420,3 +4420,6 @@ Owner spec, `content/activewear/track-jackets.ts` only. Unisex category on the s
 
 ## PLP "You may also be interested in": mobile gap 24px, 2026-09-24
 Owner: "on mobile: plp, you may also be interested in title and chip, reduce the gap to 24px across all plps". `relatedCategories.section` changed `gap-12` to `gap-6 md:gap-12`: heading-to-chips is 24px below `md`, still 48px at tablet and desktop. One shared recipe, so every PLP template (Activewear, Teamwear, Lifting Gear, Boxing and MMA) picks it up. Verified on the Leggings PLP: 24px at 375, 48px at 768. Component registry updated.
+
+## Bodysuits audit fixes, 2026-09-24 (commit b3fb99e)
+Owner-approved fixes from the Bodysuits audit, `bodysuits.ts` plus the one hub card string: hub descriptor now "Fitted one-piece, hip-ending or short-leg"; PLP Nylon/Spandex range 72 to 78% / 22 to 28%, new 157-char meta, step-in pull-on added to the closure coverage item, trust bullets and closure FAQ, shelf bra and short-leg FAQ definitions, card 7/8 sublines; SKU 1/8 closure answers, SKU 4 Entry row, SKU 5 comparison answer, SKU 6 boning FAQ reworded B2B, SKU 7/9 "removable pads" (was cups), SKU 8 meta; comments now say single-gender and drop "card-only drafts". Verified live, FAQPage JSON-LD matching the visible FAQ.
