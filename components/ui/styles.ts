@@ -6703,13 +6703,19 @@ export const productCard = {
   // subline"), a deliberate override of the Figma-literal 14px/12px this
   // recipe otherwise runs on -- explicit owner value, not re-derived from
   // any node.
-  title: "xl:truncate max-md:text-[0.9375rem] md:text-[1.125rem] font-medium text-[#21272a]",
+  // Mobile clamps to 2 lines with an ellipsis (owner, 2026-09-24: "clamp
+  // product card titles to 2 lines on mobile only"), reversing the
+  // 2026-09-02 "do not truncate" call above for real mobile only: long
+  // titles were wrapping to 3 lines. CSS only, the full title stays in the
+  // H3. Tablet (md to below xl) still wraps freely; desktop keeps
+  // `xl:truncate`.
+  title: "xl:truncate max-md:line-clamp-2 max-md:text-[0.9375rem] md:text-[1.125rem] font-medium text-[#21272a]",
   // titleLg (added 2026-09-11, Teamwear hub's sport cards, owner feedback:
   // "make tht product titles 22px") -- same shape as `title` above, just
   // 22px (`1.375rem`) instead of 18px at `md:` and up. Passed via
   // `ProductCard`'s own `titleClassName` override, never the shared
   // `title` default every real PLP grid still uses.
-  titleLg: "xl:truncate max-md:text-[0.9375rem] md:text-[1.375rem] font-medium text-[#21272a]",
+  titleLg: "xl:truncate max-md:line-clamp-2 max-md:text-[0.9375rem] md:text-[1.375rem] font-medium text-[#21272a]",
   subline: "truncate max-md:text-[0.8125rem] md:text-[1rem] text-[#727272]",
   // 220px fixed image height at real mobile (node 590:1173: 156x220
   // tiles) -- passed as an extra className on MediaPlaceholder alongside
