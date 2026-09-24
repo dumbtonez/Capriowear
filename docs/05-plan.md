@@ -4245,3 +4245,14 @@ Owner brief: four draft PDPs added to `content/activewear/hoodies.ts` on the sha
 - **Related pills:** gendered card names with `slug`; targets inside this batch resolve to their PDPs, unbuilt targets fall back to the PLP and switch automatically when built.
 
 **Verified (local build):** a script check of all 4 pages (robots, title, meta, H1, breadcrumb, alts, JSON-LD types, FAQ order, pill targets, final CTA, compliance bar, banned strings) passes except "WhatsApp", which is only the sitewide chat button's aria-label. tsc, eslint and build clean. Playwright 45/45 (one earlier run had a single failure that did not reproduce).
+
+## Hoodies PDPs batch 2: SKUs 3, 11, 4, 12 built as drafts, 2026-09-24
+
+Owner brief: four more draft PDPs in `content/activewear/hoodies.ts`, same template and field set as batch 1 (SKUs 1, 9, 2, 10). Content only.
+
+- **Pages:** `regular-fit-brushed-fleece-mens` (CAP-HOO-03), `regular-fit-brushed-fleece-womens` (11), `technical-performance-mens` (04), `technical-performance-womens` (12).
+- **Performance builds (4, 12):** own spec rows (Performance on both, Ventilation on SKU 4 only), `pdpQualityHeading` "Stretch that holds, wash after wash", and their own customization tiles (SKU 12: no ventilation panels, heat-retaining finish). No fleece rows carried over.
+- **Draft handling:** unchanged rules. noindex/nofollow, out of the sitemap, no Product or FAQPage JSON-LD, BreadcrumbList present. PLP cards for SKUs 1 to 4 and 9 to 12 are now links; the other 8 are not.
+- **Pills:** data-driven, so batch 1's SKU 1 pill "Men's Regular-Fit Brushed Fleece Pullover Hoodie" now resolves to its PDP with no edit. Unbuilt targets (Lightweight Stretch Performance, Soft-Stretch Lounge, Quarter-Zip) still fall back to the PLP.
+
+**Verified (local build):** script check of all 4 pages passes (robots, title, meta, H1, breadcrumb, gallery alts, JSON-LD types, every spec row, tile, quality point, FAQ order and answers, pill targets, CTA, compliance, banned strings). tsc, eslint, build clean. Playwright 44/45 with one homepage page-load timeout that passed on rerun.

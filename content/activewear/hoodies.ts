@@ -7,7 +7,7 @@
 // Sweatshirts and Tank Tops.
 //
 // Every style is "draft". Card-only drafts are non-clickable tiles with
-// no route. Drafts with PDP content (SKUs 1, 2, 9, 10) render noindexed
+// no route. Drafts with PDP content (SKUs 1 to 4, 9 to 12) render noindexed
 // and their cards link. Neither kind gets a sitemap or ItemList entry. A
 // card becomes a link on its own once its PDP content lands here
 // (isDraftPdpReachable(), ./pdpShared.ts).
@@ -203,7 +203,7 @@ export const hoodies: Category = {
     faqGetStarted,
   ],
   ctaReferenceNoun: "hoodie",
-  // SKU order 1 to 16, never reordered. SKUs 1, 2, 9 and 10 carry draft
+  // SKU order 1 to 16, never reordered. SKUs 1 to 4 and 9 to 12 carry draft
   // PDP content (reachable, noindexed, no Product/FAQPage schema, card is a
   // link); the rest are card-only drafts until their PDP content lands.
   styleCards: [
@@ -386,6 +386,79 @@ export const hoodies: Category = {
       image: "",
       imageAlt: "Men's Regular-Fit Brushed Fleece Pullover Hoodie, men's",
       href: "/capriowear/activewear/hoodies/regular-fit-brushed-fleece-mens",
+      pdpHeading: "Men's Regular-Fit Brushed Fleece Pullover Hoodie Manufacturer",
+      pdpDescription:
+        "Men's regular-fit pullover hoodie in cotton-blend brushed fleece, custom and private label, with a kangaroo pocket and Spandex-reinforced ribbing, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Men's Regular-Fit Brushed Fleece Pullover Hoodie Manufacturer",
+      pdpMetaDescription:
+        "Men's regular-fit brushed fleece pullover hoodie manufacturer, private label, cotton-blend fleece, kangaroo pocket, low MOQ from 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Men's Regular-Fit Brushed Fleece Pullover Hoodie, men's" },
+        { alt: "Men's Regular-Fit Brushed Fleece Pullover Hoodie, men's" },
+        { alt: "Men's Regular-Fit Brushed Fleece Pullover Hoodie, men's" },
+        { alt: "Men's Regular-Fit Brushed Fleece Pullover Hoodie, men's" },
+        { alt: "Men's Regular-Fit Brushed Fleece Pullover Hoodie, men's" },
+        { alt: "Men's Regular-Fit Brushed Fleece Pullover Hoodie, men's" },
+      ],
+      material: "Cotton-blend brushed fleece",
+      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton-Poly Blend", "Recycled Fiber Blend"],
+      pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "How does the men's regular-fit hoodie differ from the men's oversized hoodie?",
+          a: "The Men's Regular-Fit Brushed Fleece Pullover Hoodie has standard ease through the body and sleeve and a set-in sleeve, for a cleaner silhouette. The Men's Oversized Brushed Fleece Pullover Hoodie is cut roomier through the body and sleeve. Both use the same brushed fleece, kangaroo pocket, and ribbing options.",
+        },
+        {
+          q: "Is a regular-fit hoodie a good choice for team and uniform programs?",
+          a: "Yes. A regular fit grades evenly across XS to 5XL and holds a consistent silhouette at every size, which suits team, staff, and uniform orders as well as retail. We confirm the grading on your sample.",
+        },
+        {
+          q: "Which branding methods work best on brushed fleece?",
+          a: "Embroidery and puff print give the fullest finish on brushed fleece, and screen print, DTG, DTF, and patches are also available. We advise the best method for your artwork and fabric weight.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Women's Regular-Fit Brushed Fleece Pullover Hoodie", slug: "regular-fit-brushed-fleece-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "Men's Oversized Brushed Fleece Pullover Hoodie", slug: "oversized-brushed-fleece-mens", href: "/capriowear/activewear/hoodies" },
+        { label: "Men's Full-Zip Fleece Hoodie", slug: "full-zip-fleece-mens", href: "/capriowear/activewear/hoodies" },
+        { label: "Men's Technical Performance Pullover Hoodie", slug: "technical-performance-mens", href: "/capriowear/activewear/hoodies" },
+        { label: "See All", href: "/capriowear/activewear/hoodies" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's regular-fit pullover hoodie with kangaroo pocket" },
+        { label: "Fabric", value: "Cotton-blend fleece, brushed inside" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Regular fit, standard ease through the body and sleeve" },
+        { label: "Hood", value: "Single or double-layer, flat drawcord with eyelets and aglets" },
+        { label: "Pocket", value: "Kangaroo pocket, bar-tacked corners" },
+        { label: "Cuffs and hem", value: "Ribbed knit with 5 to 8% Spandex for recovery" },
+        { label: "Sleeve", value: "Set-in sleeve" },
+        { label: "Construction", value: "Cut-and-sew, side-seam or tubular body to your spec" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, puff, patches, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Men's Regular-Fit Brushed Fleece Pullover Hoodie, men's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Shrinkage tested after wash, targeted under 5%, brushed fleece checked for pilling",
+        "Cuff and hem ribbing hold their recovery, no bagging",
+        "Kangaroo pocket corners bar-tacked and stress-tested",
+        "Hood holds its shape after the drawcord is pulled and washed",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          { title: "Fabric and weight", body: "Brushed fleece or French terry, any GSM, sourced or matched to your reference", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" } },
+          { title: "Build", body: "Hood, pocket, drawcord hardware, sleeve construction, cuffs to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Build" } },
+          { title: "Finish", body: "Standard or garment-dye", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Finish" } },
+          { title: "Trims and packaging", body: "Woven or tear-away labels, hangtags, retail-ready packaging", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
@@ -397,6 +470,81 @@ export const hoodies: Category = {
       image: "",
       imageAlt: "Men's Technical Performance Pullover Hoodie, men's",
       href: "/capriowear/activewear/hoodies/technical-performance-mens",
+      pdpHeading: "Men's Technical Performance Pullover Hoodie Manufacturer",
+      pdpDescription:
+        "Men's technical performance pullover hoodie in a sweat-wicking Polyester/Spandex knit, custom and private label, with underarm ventilation panels for training and layering, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Men's Technical Performance Pullover Hoodie Manufacturer",
+      pdpMetaDescription:
+        "Men's technical performance pullover hoodie manufacturer, private label, sweat-wicking stretch knit, underarm panels, MOQ from 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Men's Technical Performance Pullover Hoodie, men's" },
+        { alt: "Men's Technical Performance Pullover Hoodie, men's" },
+        { alt: "Men's Technical Performance Pullover Hoodie, men's" },
+        { alt: "Men's Technical Performance Pullover Hoodie, men's" },
+        { alt: "Men's Technical Performance Pullover Hoodie, men's" },
+        { alt: "Men's Technical Performance Pullover Hoodie, men's" },
+      ],
+      material: "Polyester/Spandex performance knit",
+      pdpFabricPills: ["Polyester/Spandex Knit", "Recycled Polyester Blend", "Stretch Performance Fleece", "Brushed Fleece"],
+      pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "What fabric is the men's technical performance hoodie made from?",
+          a: "A sweat-wicking Polyester/Spandex performance knit with 4-way stretch that dries fast, with a recycled polyester option. We confirm the exact fabric and weight on your sample.",
+        },
+        {
+          q: "How does a technical performance hoodie differ from a brushed fleece hoodie?",
+          a: "A technical performance hoodie uses a lighter, stretch polyester knit that wicks sweat and dries fast, built for training and layering. A brushed fleece hoodie uses a cotton-rich fleece with a soft brushed interior, built for warmth and everyday wear. We make both.",
+        },
+        {
+          q: "Which branding methods work on performance fabric?",
+          a: "Heat transfer, silicone, DTF, screen print, embroidery, and sublimation all work on polyester performance knits. We match the method to the fabric so the print flexes with the garment and holds its finish after washing.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Women's Technical Performance Pullover Hoodie", slug: "technical-performance-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "Men's Lightweight Stretch Performance Hoodie", slug: "lightweight-stretch-performance", href: "/capriowear/activewear/hoodies" },
+        { label: "Men's Regular-Fit Brushed Fleece Pullover Hoodie", slug: "regular-fit-brushed-fleece-mens", href: "/capriowear/activewear/hoodies" },
+        { label: "Men's Full-Zip Fleece Hoodie", slug: "full-zip-fleece-mens", href: "/capriowear/activewear/hoodies" },
+        { label: "See All", href: "/capriowear/activewear/hoodies" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's technical performance pullover hoodie" },
+        { label: "Fabric", value: "Polyester/Spandex performance knit, recycled polyester option" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Classic fit, room to move for training and layering" },
+        { label: "Performance", value: "Sweat-wicking, 4-way stretch, fast-drying" },
+        { label: "Ventilation", value: "Underarm panels" },
+        { label: "Hood", value: "Single-layer, with or without drawcord, to your spec" },
+        { label: "Pocket", value: "Kangaroo, zip, or none, to your spec" },
+        { label: "Cuffs and hem", value: "Ribbed or self-fabric, to your spec" },
+        { label: "Construction", value: "Cut-and-sew, flatlock or overlock seams to your spec" },
+        { label: "Branding", value: "Sublimation, heat transfer, silicone, screen, DTF, embroidery, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Men's Technical Performance Pullover Hoodie, men's" },
+      pdpQualityHeading: "Stretch that holds, wash after wash",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Fabric stretch and recovery tested before bulk",
+        "Sweat-wicking finish checked after wash",
+        "Seams stress-tested at the shoulders and underarm panels",
+        "Fabric weight held consistent, batch to batch",
+        "Shrinkage tested after wash, targeted under 5%",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, heat transfer", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, embroidery, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          { title: "Fabric and weight", body: "Stretch performance knit or performance fleece, any weight, sourced or matched to your reference", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" } },
+          { title: "Build", body: "Hood, pocket, ventilation panels, cuffs and hem to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Build" } },
+          { title: "Finish", body: "Sweat-wicking and quick-dry fabric finishes", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Finish" } },
+          { title: "Trims and packaging", body: "Woven or heat-transfer labels, hangtags, retail-ready packaging", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
@@ -621,6 +769,79 @@ export const hoodies: Category = {
       image: "",
       imageAlt: "Women's Regular-Fit Brushed Fleece Pullover Hoodie, women's",
       href: "/capriowear/activewear/hoodies/regular-fit-brushed-fleece-womens",
+      pdpHeading: "Women's Regular-Fit Brushed Fleece Pullover Hoodie Manufacturer",
+      pdpDescription:
+        "Women's regular-fit pullover hoodie in cotton-blend brushed fleece, custom and private label, tapered through the waist with a kangaroo pocket and Spandex-reinforced ribbing, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Women's Regular-Fit Brushed Fleece Pullover Hoodie Manufacturer",
+      pdpMetaDescription:
+        "Women's regular-fit brushed fleece pullover hoodie manufacturer, private label, tapered women's cut, kangaroo pocket, low MOQ from 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Women's Regular-Fit Brushed Fleece Pullover Hoodie, women's" },
+        { alt: "Women's Regular-Fit Brushed Fleece Pullover Hoodie, women's" },
+        { alt: "Women's Regular-Fit Brushed Fleece Pullover Hoodie, women's" },
+        { alt: "Women's Regular-Fit Brushed Fleece Pullover Hoodie, women's" },
+        { alt: "Women's Regular-Fit Brushed Fleece Pullover Hoodie, women's" },
+        { alt: "Women's Regular-Fit Brushed Fleece Pullover Hoodie, women's" },
+      ],
+      material: "Cotton-blend brushed fleece",
+      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton-Poly Blend", "Recycled Fiber Blend"],
+      pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "How does the Women's Regular-Fit Brushed Fleece Pullover Hoodie differ from the men's version?",
+          a: "It uses the same fabric and construction, but it is cut on a separate women's pattern block, tapered through the waist with its own shoulder and chest proportions, not a scaled-down men's pattern. Both run XS to 5XL.",
+        },
+        {
+          q: "How does the women's regular-fit hoodie differ from the women's oversized hoodie?",
+          a: "The Women's Regular-Fit Brushed Fleece Pullover Hoodie is tapered through the waist with standard ease. The Women's Oversized Brushed Fleece Pullover Hoodie is cut roomy through the body and sleeve. Both use the same brushed fleece, kangaroo pocket, and ribbing options.",
+        },
+        {
+          q: "Which branding methods work best on brushed fleece?",
+          a: "Embroidery and puff print give the fullest finish on brushed fleece, and screen print, DTG, DTF, and patches are also available. We advise the best method for your artwork and fabric weight.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Men's Regular-Fit Brushed Fleece Pullover Hoodie", slug: "regular-fit-brushed-fleece-mens", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Oversized Brushed Fleece Pullover Hoodie", slug: "oversized-brushed-fleece-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Full-Zip Fleece Hoodie", slug: "full-zip-fleece-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Technical Performance Pullover Hoodie", slug: "technical-performance-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "See All", href: "/capriowear/activewear/hoodies" },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's regular-fit pullover hoodie with kangaroo pocket" },
+        { label: "Fabric", value: "Cotton-blend fleece, brushed inside" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Regular fit, tapered through the waist, cut on a women's pattern block" },
+        { label: "Hood", value: "Single or double-layer, flat drawcord with eyelets and aglets" },
+        { label: "Pocket", value: "Kangaroo pocket, bar-tacked corners" },
+        { label: "Cuffs and hem", value: "Ribbed knit with 5 to 8% Spandex for recovery" },
+        { label: "Sleeve", value: "Set-in sleeve" },
+        { label: "Construction", value: "Cut-and-sew, side-seam or tubular body to your spec" },
+        { label: "Branding", value: "Screen, DTG, DTF, embroidery, puff, patches, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Women's Regular-Fit Brushed Fleece Pullover Hoodie, women's" },
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "GSM held consistent, batch to batch",
+        "Shrinkage tested after wash, targeted under 5%, brushed fleece checked for pilling",
+        "Cuff and hem ribbing hold their recovery, no bagging",
+        "Kangaroo pocket corners bar-tacked and stress-tested",
+        "Hood holds its shape after the drawcord is pulled and washed",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          { title: "Fabric and weight", body: "Brushed fleece or French terry, any GSM, sourced or matched to your reference", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" } },
+          { title: "Build", body: "Hood, pocket, drawcord hardware, sleeve construction, cuffs to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Build" } },
+          { title: "Finish", body: "Standard or garment-dye", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Finish" } },
+          { title: "Trims and packaging", body: "Woven or tear-away labels, hangtags, retail-ready packaging", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
@@ -632,6 +853,80 @@ export const hoodies: Category = {
       image: "",
       imageAlt: "Women's Technical Performance Pullover Hoodie, women's",
       href: "/capriowear/activewear/hoodies/technical-performance-womens",
+      pdpHeading: "Women's Technical Performance Pullover Hoodie Manufacturer",
+      pdpDescription:
+        "Women's technical performance pullover hoodie in a stretch performance knit with a heat-retaining interior finish, custom and private label, cut close to the body for cold-weather training, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Women's Technical Performance Pullover Hoodie Manufacturer",
+      pdpMetaDescription:
+        "Women's technical performance pullover hoodie manufacturer, private label, heat-retaining interior, stretch knit, MOQ from 50 pieces, DDP to 20+ countries.",
+      images: [
+        { alt: "Women's Technical Performance Pullover Hoodie, women's" },
+        { alt: "Women's Technical Performance Pullover Hoodie, women's" },
+        { alt: "Women's Technical Performance Pullover Hoodie, women's" },
+        { alt: "Women's Technical Performance Pullover Hoodie, women's" },
+        { alt: "Women's Technical Performance Pullover Hoodie, women's" },
+        { alt: "Women's Technical Performance Pullover Hoodie, women's" },
+      ],
+      material: "Stretch performance knit",
+      pdpFabricPills: ["Stretch Performance Knit", "Recycled Polyester Blend", "Stretch Performance Fleece", "Brushed Fleece"],
+      pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "How does the Women's Technical Performance Pullover Hoodie differ from the Men's Technical Performance Pullover Hoodie?",
+          a: "The Women's Technical Performance Pullover Hoodie is a cold-weather build with a heat-retaining interior finish, cut close to the body on a women's pattern block. The Men's Technical Performance Pullover Hoodie is a lighter, sweat-wicking training build with underarm panels. Both use stretch performance fabrics, and either construction can be made on the other gender's pattern block.",
+        },
+        {
+          q: "How does the heat-retaining interior work?",
+          a: "The fabric carries a textured interior finish designed to hold body heat, so the hoodie stays warm without the bulk of heavy fleece. We confirm the exact fabric and finish on your sample.",
+        },
+        {
+          q: "Which branding methods work on performance fabric?",
+          a: "Heat transfer, silicone, DTF, screen print, embroidery, and sublimation all work on polyester performance knits. We match the method to the fabric so the print flexes with the garment and holds its finish after washing.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Men's Technical Performance Pullover Hoodie", slug: "technical-performance-mens", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Regular-Fit Brushed Fleece Pullover Hoodie", slug: "regular-fit-brushed-fleece-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Soft-Stretch Lounge Hoodie", slug: "soft-stretch-lounge", href: "/capriowear/activewear/hoodies" },
+        { label: "Women's Quarter-Zip Fleece Hoodie", slug: "quarter-zip-womens", href: "/capriowear/activewear/hoodies" },
+        { label: "See All", href: "/capriowear/activewear/hoodies" },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's technical performance pullover hoodie" },
+        { label: "Fabric", value: "Stretch performance knit with a heat-retaining interior finish" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Streamlined, close to the body without compression, cut on a women's pattern block" },
+        { label: "Performance", value: "Holds body heat without added bulk, stretch for movement" },
+        { label: "Hood", value: "Single-layer, with or without drawcord, to your spec" },
+        { label: "Pocket", value: "Kangaroo, zip, or none, to your spec" },
+        { label: "Cuffs and hem", value: "Ribbed or self-fabric, to your spec" },
+        { label: "Construction", value: "Cut-and-sew, flatlock or overlock seams to your spec" },
+        { label: "Branding", value: "Sublimation, heat transfer, silicone, screen, DTF, embroidery, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Women's Technical Performance Pullover Hoodie, women's" },
+      pdpQualityHeading: "Stretch that holds, wash after wash",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Fabric stretch and recovery tested before bulk",
+        "Interior finish checked for wear after wash",
+        "Seams stress-tested at the shoulders and underarms",
+        "Fabric weight held consistent, batch to batch",
+        "Shrinkage tested after wash, targeted under 5%",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+      pdpCustomizationSteps: {
+        eyebrow: "HOW WE CUSTOMIZE",
+        heading: "Your brand, applied\nin-house, no outsourcing",
+        mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+        steps: [
+          { title: "Print and artwork", body: "Sublimation, screen, DTF, heat transfer", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
+          { title: "Branding", body: "Silicone, embroidery, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
+          { title: "Fabric and weight", body: "Stretch performance knit or performance fleece, any weight, sourced or matched to your reference", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" } },
+          { title: "Build", body: "Hood, pocket, cuffs and hem to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Build" } },
+          { title: "Finish", body: "Heat-retaining interior finish", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Finish" } },
+          { title: "Trims and packaging", body: "Woven or heat-transfer labels, hangtags, retail-ready packaging", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and packaging" } },
+        ],
+      },
     },
     {
       status: "draft",
