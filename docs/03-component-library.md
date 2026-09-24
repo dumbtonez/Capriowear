@@ -1608,7 +1608,7 @@ Props: `links: RelatedLink[]` (`{label, href}`, `content/activewear/types.ts`). 
 
 **Chips match the PDP's Related styles (owner, 2026-09-23).** The row now renders the same markup as `ProductRelatedStyles` (a `next/link` with a `ChevronRight`) using the same `productRelatedStyles.list`/`chip`/`chipIcon` recipe, reused rather than copied: white pill, `#f2f4f8` border, soft drop shadow, 16px `#3c3c43` text, darker text and a chevron nudge on hover. Replaces the earlier outlined `Button` (secondary) pills; `relatedCategories.list` was removed. Verified: identical className and zero computed-style differences (rest and hover) between the T-Shirts PLP chips and a T-Shirts PDP's Related styles chips.
 
-**Heading-to-chips gap is 48px (`gap-12`) at every width** (owner, 2026-09-23: "add more space of 24px", on top of the original 24px).
+**Heading-to-chips gap is 24px (`gap-6`) on real mobile, 48px (`md:gap-12`) from tablet up** (owner, 2026-09-23: "add more space of 24px", on top of the original 24px; mobile brought back to 24px 2026-09-24, owner: "on mobile ... reduce the gap to 24px across all plps").
 
 **Used by:** the four PLP templates above, plus `app/styleguide/page.tsx`.
 
