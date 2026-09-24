@@ -4290,3 +4290,16 @@ Owner brief: replace the 2026-09-03 test version of `/capriowear/activewear/body
 - **Schema:** BreadcrumbList and FAQPage (16 entries, identical to visible text). No published PDPs, so the shared route omits CollectionPage/ItemList entirely (sitewide rule since the 2026-09-07 SEO audit), rather than emitting an empty list. No Product, Offer or price.
 
 **Verified (local production build):** every briefed string is present in the server HTML. All 9 cards are server-rendered with no links. The two old PDP routes return 404. There is one H1, and the canonical, OG and Twitter strings are exact. No banned strings in visible text. tsc, eslint and build are clean. Playwright passes 45/45 (the homepage 1920 timeout passed on rerun).
+
+## Bodysuits PDPs batch 1: SKUs 1, 2, 3 built as drafts, 2026-09-24
+
+Owner brief: draft PDPs for CAP-BOD-01 `tank` (new content under the reused slug), CAP-BOD-02 `sleeveless-short-leg` and CAP-BOD-03 `long-sleeve-short-leg`, in `content/activewear/bodysuits.ts`. Content only, shared PDP template.
+
+- **Shared defaults used as-is:** key facts, customization chips, spec subtitle and the 5 operational FAQs already match the brief word for word (`pdpShared.ts`).
+- **How we customize:** the brief's 6-step version (adds "Build", and "sourced or matched to your reference") is set once as the category's `pdpCustomizationSteps`, so all Bodysuits PDPs share it without touching the sitewide default.
+- **Weight row:** "Pending, confirmed on your sample." on all 3, no GSM.
+- **Pills:** every style pill carries its `slug` with the PLP as fallback, so pills for SKUs 4 to 9 resolve to the PLP now and switch to their PDPs automatically.
+- **Draft handling:** unchanged. noindex/nofollow, out of the sitemap, BreadcrumbList only (no Product or FAQPage JSON-LD). PLP cards 1 to 3 are links; 4 to 9 are not.
+- **Alt text:** gallery and spec-image alts are set to the style name, but the gallery is still placeholder-only (no photography), so no `<img>` renders yet.
+
+**Verified (local build):** script check of all 3 pages passes (title, meta 153/156/159, robots, canonical, OG/Twitter, H1, breadcrumb, every spec row, chips, customize steps, quality block, FAQ order and text, pill targets, CTA, compliance, banned strings). tsc, eslint, build clean.
