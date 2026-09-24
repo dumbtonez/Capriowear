@@ -68,7 +68,7 @@ export const hoodies: Category = {
     {
       fabric: "Recycled fiber blend",
       bestFor: "Sustainable lines",
-      performance: "Comparable to standard cotton-poly, eco-positioning",
+      performance: "Comparable to standard cotton/poly, eco-positioning",
     },
   ],
   weightTiers: [
@@ -124,7 +124,7 @@ export const hoodies: Category = {
   coverageEyebrow: "CUSTOMIZATION",
   coverageHeading: "From custom fabric to packaging design",
   coverageItems: [
-    { title: "Fabric", body: "French terry, brushed fleece, cotton-poly, technical performance knit, and recycled blends" },
+    { title: "Fabric", body: "French terry, brushed fleece, cotton/poly, technical performance knit, and recycled blends" },
     { title: "Weight and fit", body: "240 to 650+ GSM, regular, oversized, loose, or cropped" },
     {
       title: "Hood, pocket, and hardware",
@@ -172,7 +172,7 @@ export const hoodies: Category = {
     },
     {
       q: "Will my hoodies shrink or pill?",
-      a: "We test shrinkage after wash, targeting under 5 percent, and check brushed fleece for pilling, before bulk. Cuff and hem ribbing carry Spandex to hold their recovery.",
+      a: "We test shrinkage after wash, targeting under 5%, and check brushed fleece for pilling, before bulk. Cuff and hem ribbing carry Spandex to hold their recovery.",
     },
     {
       q: "What can I customize?",
@@ -184,7 +184,7 @@ export const hoodies: Category = {
     },
     {
       q: "How are hoodies sized?",
-      a: "Alpha XS to 5XL. Men's and women's hoodies use the same size range with a different cut, men's straighter through the body, women's tapered.",
+      a: "Alpha XS to 5XL. Men's and women's hoodies use the same size range but are cut on separate men's and women's pattern blocks, each with its own shoulder, chest, and body proportions, in regular, oversized, loose, boxy, or cropped fits.",
     },
     {
       q: "How long do samples and bulk take?",
@@ -229,7 +229,7 @@ export const hoodies: Category = {
         { alt: "Men's Oversized Brushed Fleece Pullover Hoodie, men's" },
       ],
       material: "Brushed fleece",
-      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton-Poly Blend", "Recycled Fiber Blend"],
+      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton/Poly Blend", "Recycled Fiber Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -398,7 +398,7 @@ export const hoodies: Category = {
         { alt: "Men's Regular-Fit Brushed Fleece Pullover Hoodie, men's" },
       ],
       material: "Cotton-blend brushed fleece",
-      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton-Poly Blend", "Recycled Fiber Blend"],
+      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton/Poly Blend", "Recycled Fiber Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -568,7 +568,7 @@ export const hoodies: Category = {
         { alt: "Men's Quarter-Zip Fleece Hoodie, men's" },
       ],
       material: "100% cotton fleece",
-      pdpFabricPills: ["Cotton Fleece", "Brushed Fleece", "French Terry", "Cotton-Poly Blend"],
+      pdpFabricPills: ["Cotton Fleece", "Brushed Fleece", "French Terry", "Cotton/Poly Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -609,7 +609,7 @@ export const hoodies: Category = {
       pdpQualityPoints: [
         "Zip runs smoothly and lies flat after wash, no rippling along the placket",
         "GSM held consistent, batch to batch",
-        "Shrinkage tested after wash, targeted under 5%, brushed fleece checked for pilling",
+        "Shrinkage tested after wash, targeted under 5%, fleece checked for pilling",
         "Cuff and hem ribbing hold their recovery, no bagging",
         "Pocket corners bar-tacked and stress-tested",
         "Every run inspected to AQL 2.5, third-party inspection welcome",
@@ -621,7 +621,7 @@ export const hoodies: Category = {
         steps: [
           { title: "Print and artwork", body: "Screen, DTG, DTF, puff", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Print and artwork" } },
           { title: "Branding", body: "Embroidery, patches, heat transfer", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Branding" } },
-          { title: "Fabric and weight", body: "Brushed fleece or French terry, any GSM, sourced or matched to your reference", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" } },
+          { title: "Fabric and weight", body: "Cotton fleece, brushed fleece or French terry, any GSM, sourced or matched to your reference", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Fabric and weight" } },
           { title: "Build", body: "Zip type, length and puller, hood, pocket, drawcord hardware, cuffs to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Build" } },
           { title: "Finish", body: "Standard or garment-dye", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Finish" } },
           { title: "Trims and packaging", body: "Woven or tear-away labels, hangtags, retail-ready packaging", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and packaging" } },
@@ -653,12 +653,12 @@ export const hoodies: Category = {
         { alt: "Men's Premium Technical Fleece Full-Zip Hoodie, men's" },
       ],
       material: "Double-faced technical fleece",
-      pdpFabricPills: ["Technical Fleece", "Brushed Fleece", "Recycled Polyester Blend", "Cotton-Poly Blend"],
+      pdpFabricPills: ["Technical Fleece", "Brushed Fleece", "Recycled Polyester Blend", "Cotton/Poly Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
           q: "What is technical fleece?",
-          a: "It is a double-faced knit that is smooth on both the outside and the inside, denser and more structured than brushed fleece, so it holds a clean, tailored shape while staying warm. We confirm the exact fabric and weight on your sample.",
+          a: "Technical fleece is a double-faced knit that is smooth on both the outside and the inside, denser and more structured than brushed fleece, so it holds a clean, tailored shape while staying warm. We confirm the exact fabric and weight on your sample.",
         },
         {
           q: "How does technical fleece differ from brushed fleece?",
@@ -823,12 +823,12 @@ export const hoodies: Category = {
         { alt: "Men's Heavyweight Loose-Fit Hoodie, men's" },
       ],
       material: "100% cotton heavyweight fleece",
-      pdpFabricPills: ["Heavyweight Cotton Fleece", "French Terry", "Brushed Fleece", "Cotton-Poly Blend"],
+      pdpFabricPills: ["Heavyweight Cotton Fleece", "French Terry", "Brushed Fleece", "Cotton/Poly Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
-          q: "Are you a heavyweight hoodie manufacturer?",
-          a: "Yes. We cut heavyweight hoodies from 400 GSM up to 650+ GSM, and this style's standard build is 570 GSM 100% cotton. Heavyweight fleece holds a structured, loose silhouette and takes dimensional embroidery and puff print best. The final weight is confirmed on your sample.",
+          q: "Is the Men's Heavyweight Loose-Fit Hoodie a heavyweight build?",
+          a: "Yes. The Men's Heavyweight Loose-Fit Hoodie's standard build is 570 GSM 100% cotton, inside our 400 to 650+ GSM heavyweight range. Heavyweight fleece holds a structured, loose silhouette and takes dimensional embroidery and puff print best. The final weight is confirmed on your sample.",
         },
         {
           q: "Why choose a 570 GSM hoodie over a midweight hoodie?",
@@ -862,7 +862,7 @@ export const hoodies: Category = {
       pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
       pdpQualityPoints: [
         "GSM held consistent, batch to batch",
-        "Shrinkage tested after wash, targeted under 5%, brushed fleece checked for pilling",
+        "Shrinkage tested after wash, targeted under 5%, fleece checked for pilling",
         "Cuff and hem ribbing hold their recovery, no bagging",
         "Kangaroo pocket corners bar-tacked and stress-tested",
         "Hood holds its shape after the drawcord is pulled and washed",
@@ -897,7 +897,7 @@ export const hoodies: Category = {
         "Women's oversized, roomy-fit pullover hoodie in brushed fleece, custom and private label, cut on a women's pattern block with a kangaroo pocket and Spandex-reinforced ribbing, made to your brand in Sialkot, Pakistan.",
       pdpMetaTitle: "Women's Oversized Brushed Fleece Pullover Hoodie Manufacturer",
       pdpMetaDescription:
-        "Women's oversized brushed fleece pullover hoodie manufacturer, private label, roomy women's cut, kangaroo pocket, low MOQ from 50 pieces, DDP to 20+ countries.",
+        "Women's oversized brushed fleece pullover hoodie manufacturer, private label, own women's pattern block, body length to your spec, MOQ 50, DDP to 20+ countries.",
       images: [
         { alt: "Women's Oversized Brushed Fleece Pullover Hoodie, women's" },
         { alt: "Women's Oversized Brushed Fleece Pullover Hoodie, women's" },
@@ -907,12 +907,12 @@ export const hoodies: Category = {
         { alt: "Women's Oversized Brushed Fleece Pullover Hoodie, women's" },
       ],
       material: "Brushed fleece",
-      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton-Poly Blend", "Recycled Fiber Blend"],
+      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton/Poly Blend", "Recycled Fiber Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
           q: "How does the Women's Oversized Brushed Fleece Pullover Hoodie differ from the men's version?",
-          a: "It uses the same fabric options and construction quality, but it is cut on a separate women's pattern block with its own shoulder, chest, and body proportions, not a scaled-down men's pattern. Both run XS to 5XL.",
+          a: "The Women's Oversized Brushed Fleece Pullover Hoodie uses the same fabric options and construction quality as the men's version, but it is cut on a separate women's pattern block with its own shoulder, chest, and body proportions, not a scaled-down men's pattern. Both run XS to 5XL.",
         },
         {
           q: "Can the women's oversized hoodie be made in a cropped length?",
@@ -981,7 +981,7 @@ export const hoodies: Category = {
         "Women's boxy full-zip hoodie in soft brushed fleece, custom and private label, with hand pockets, your choice of zip hardware, and Spandex-reinforced ribbing, made to your brand in Sialkot, Pakistan.",
       pdpMetaTitle: "Women's Full-Zip Fleece Hoodie Manufacturer",
       pdpMetaDescription:
-        "Women's full-zip fleece hoodie manufacturer, private label, boxy relaxed fit, soft brushed fleece, metal or molded zips, low MOQ, DDP to 20+ countries.",
+        "Women's full-zip fleece hoodie manufacturer, private label, boxy relaxed fit, soft brushed fleece or French terry, zip and hood to spec, DDP to 20+ countries.",
       images: [
         { alt: "Women's Full-Zip Fleece Hoodie, women's" },
         { alt: "Women's Full-Zip Fleece Hoodie, women's" },
@@ -991,7 +991,7 @@ export const hoodies: Category = {
         { alt: "Women's Full-Zip Fleece Hoodie, women's" },
       ],
       material: "Brushed fleece",
-      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton-Poly Blend", "Recycled Fiber Blend"],
+      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton/Poly Blend", "Recycled Fiber Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -1066,7 +1066,7 @@ export const hoodies: Category = {
         "Women's regular-fit pullover hoodie in cotton-blend brushed fleece, custom and private label, tapered through the waist with a kangaroo pocket and Spandex-reinforced ribbing, made to your brand in Sialkot, Pakistan.",
       pdpMetaTitle: "Women's Regular-Fit Brushed Fleece Pullover Hoodie Manufacturer",
       pdpMetaDescription:
-        "Women's regular-fit brushed fleece pullover hoodie manufacturer, private label, tapered women's cut, kangaroo pocket, low MOQ from 50, DDP to 20+ countries.",
+        "Women's regular-fit brushed fleece pullover hoodie manufacturer, private label, tapered through the waist on a women's block, MOQ 50, DDP to 20+ countries.",
       images: [
         { alt: "Women's Regular-Fit Brushed Fleece Pullover Hoodie, women's" },
         { alt: "Women's Regular-Fit Brushed Fleece Pullover Hoodie, women's" },
@@ -1076,12 +1076,12 @@ export const hoodies: Category = {
         { alt: "Women's Regular-Fit Brushed Fleece Pullover Hoodie, women's" },
       ],
       material: "Cotton-blend brushed fleece",
-      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton-Poly Blend", "Recycled Fiber Blend"],
+      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton/Poly Blend", "Recycled Fiber Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
           q: "How does the Women's Regular-Fit Brushed Fleece Pullover Hoodie differ from the men's version?",
-          a: "It uses the same fabric and construction, but it is cut on a separate women's pattern block, tapered through the waist with its own shoulder and chest proportions, not a scaled-down men's pattern. Both run XS to 5XL.",
+          a: "The Women's Regular-Fit Brushed Fleece Pullover Hoodie uses the same fabric and construction as the men's version, but it is cut on a separate women's pattern block, tapered through the waist with its own shoulder and chest proportions, not a scaled-down men's pattern. Both run XS to 5XL.",
         },
         {
           q: "How does the women's regular-fit hoodie differ from the women's oversized hoodie?",
@@ -1150,7 +1150,7 @@ export const hoodies: Category = {
         "Women's technical performance pullover hoodie in a stretch performance knit with a heat-retaining interior finish, custom and private label, cut close to the body for cold-weather training, made to your brand in Sialkot, Pakistan.",
       pdpMetaTitle: "Women's Technical Performance Pullover Hoodie Manufacturer",
       pdpMetaDescription:
-        "Women's technical performance pullover hoodie manufacturer, private label, heat-retaining interior, stretch knit, MOQ from 50 pieces, DDP to 20+ countries.",
+        "Women's technical performance pullover hoodie manufacturer, private label, heat-retaining interior finish, women's pattern block, MOQ 50, DDP to 20+ countries.",
       images: [
         { alt: "Women's Technical Performance Pullover Hoodie, women's" },
         { alt: "Women's Technical Performance Pullover Hoodie, women's" },
@@ -1245,12 +1245,12 @@ export const hoodies: Category = {
         { alt: "Women's Quarter-Zip Fleece Hoodie, women's" },
       ],
       material: "Low-shed brushed fleece",
-      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton-Poly Blend", "Recycled Fiber Blend"],
+      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton/Poly Blend", "Recycled Fiber Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
           q: "What is the difference between a quarter-zip and a half-zip hoodie?",
-          a: "Both are pullover hoodies with a partial front zip at the neck. The only difference is zip length, and we set it to your spec, from a short quarter-length zip to a longer half-length zip.",
+          a: "Quarter-zip and half-zip hoodies are both pullover hoodies with a partial front zip at the neck. The only difference is zip length, and we set it to your spec, from a short quarter-length zip to a longer half-length zip.",
         },
         {
           q: "How does the Women's Quarter-Zip Fleece Hoodie differ from the Men's Quarter-Zip Fleece Hoodie?",
@@ -1258,7 +1258,7 @@ export const hoodies: Category = {
         },
         {
           q: "What does low-shed brushed fleece mean?",
-          a: "It is a brushed fleece finished to release fewer loose fibers, so it sheds and pills less over time than standard brushed fleece. We check shedding and pilling on your sample before bulk.",
+          a: "Low-shed brushed fleece is a brushed fleece finished to release fewer loose fibers, so it sheds and pills less over time than standard brushed fleece. We check shedding and pilling on your sample before bulk.",
         },
       ],
       relatedStyleTags: [
@@ -1330,7 +1330,7 @@ export const hoodies: Category = {
         { alt: "Women's Oversized Cropped Pullover Hoodie, women's" },
       ],
       material: "Midweight fleece",
-      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton-Poly Blend", "Recycled Fiber Blend"],
+      pdpFabricPills: ["Brushed Fleece", "French Terry", "Cotton/Poly Blend", "Recycled Fiber Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
@@ -1339,7 +1339,7 @@ export const hoodies: Category = {
         },
         {
           q: "How does the Women's Oversized Cropped Pullover Hoodie differ from the Women's Oversized Brushed Fleece Pullover Hoodie?",
-          a: "Both share the same oversized cut through the body and sleeve. The Women's Oversized Cropped Pullover Hoodie has a shortened body that finishes at or above the waist, and the Women's Oversized Brushed Fleece Pullover Hoodie runs to a standard hip length. Both are fully customizable.",
+          a: "The Women's Oversized Cropped Pullover Hoodie and the Women's Oversized Brushed Fleece Pullover Hoodie share the same oversized cut through the body and sleeve. The cropped style has a shortened body that finishes at or above the waist, and the brushed fleece style runs to a standard hip length. Both are fully customizable.",
         },
         {
           q: "Can the cropped hoodie keep a kangaroo pocket?",
@@ -1500,12 +1500,12 @@ export const hoodies: Category = {
         { alt: "Women's Heavyweight Oversized Hoodie, women's" },
       ],
       material: "Heavyweight fleece",
-      pdpFabricPills: ["Heavyweight Fleece", "Brushed Fleece", "French Terry", "Cotton-Poly Blend"],
+      pdpFabricPills: ["Heavyweight Fleece", "Brushed Fleece", "French Terry", "Cotton/Poly Blend"],
       pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
         {
           q: "How does the Women's Heavyweight Oversized Hoodie differ from the Women's Oversized Brushed Fleece Pullover Hoodie?",
-          a: "Both share an oversized women's cut and a kangaroo pocket. The Women's Heavyweight Oversized Hoodie is built in a heavier fleece for a denser, more structured hand, and the Women's Oversized Brushed Fleece Pullover Hoodie uses a standard brushed fleece. We confirm the exact weight of each on your sample.",
+          a: "The Women's Heavyweight Oversized Hoodie and the Women's Oversized Brushed Fleece Pullover Hoodie share an oversized women's cut and a kangaroo pocket. The Women's Heavyweight Oversized Hoodie is built in a heavier fleece for a denser, more structured hand, and the Women's Oversized Brushed Fleece Pullover Hoodie uses a standard brushed fleece. We confirm the exact weight of each on your sample.",
         },
         {
           q: "What weight counts as a heavyweight hoodie?",

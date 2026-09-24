@@ -4,10 +4,15 @@
 // already renders as visible copy) -- never hand-typed a second time here.
 // See docs/06-seo.md. Render the result via components/JsonLd.tsx.
 import { CAPRIOSPORTS_CERTIFICATIONS, CAPRIOSPORTS_MEMBERSHIPS, CAPRIOSPORTS_ORGANIZATION } from "@/content/capriosports/organization";
-import { ORGANIZATION, SITE_URL } from "@/content/site";
+import { ORGANIZATION, SITE_URL, companyIntroShort } from "@/content/site";
 
 export type ProductSchemaInput = {
+  /** The style name (the card title), never the PDP's "... Manufacturer" H1. */
   name: string;
+  /** Absolute canonical PDP URL. */
+  url: string;
+  /** The category label, e.g. "Hoodies". */
+  category: string;
   description: string;
   /** Absolute URL. Omitted from the schema entirely when there's no real photo yet -- same "no placeholder image" rule as `CollectionPageItem.image`. */
   image?: string;
@@ -67,6 +72,9 @@ export function organizationSchema() {
       "@type": "Organization",
       name: division.key === "gear" ? "Caprio" : division.displayName,
       url: division.url,
+      // Capriowear's own "who we are" text, so the schema states it is the
+      // activewear and teamwear division (Hoodies audit, 2026-09-24).
+      ...(division.key === "wear" ? { description: companyIntroShort } : {}),
     })),
     // The confirmed, sitewide certification list
     // (content/capriosports/organization.ts's CAPRIOSPORTS_CERTIFICATIONS --
@@ -322,7 +330,7 @@ export function collectionOfPagesSchema(name: string, url: string, description: 
 // re-flagging: Capriowear has no fixed public per-unit price to publish
 // (quote-based, made-to-order), so omitting `offers` is the only schema.org
 // -valid option here, not an incomplete implementation.
-export function productSchema({ name, description, image, material, sku, group }: ProductSchemaInput) {
+export function productSchema({ name, url, category, description, image, material, sku, group }: ProductSchemaInput) {
   // Gear (group: "Gear" -- Lifting Gears, Boxing & MMA) has its own brand
   // identity, "Caprio," separate from its sibling division Capriowear
   // (group: "Activewear"/"Teamwear"), matching the "Caprio" name already
@@ -336,9 +344,13 @@ export function productSchema({ name, description, image, material, sku, group }
     "@context": "https://schema.org",
     "@type": "Product",
     name,
+    url,
+    category,
     description,
     brand: { "@type": "Brand", name: brandName },
-    manufacturer: { "@type": "Organization", name: ORGANIZATION.legalName },
+    // "Capriosports" in schema (naming rule; "Caprio Sports" stays in
+    // visible copy). The sitewide Organization node has no @id to reference.
+    manufacturer: { "@type": "Organization", name: CAPRIOSPORTS_ORGANIZATION.legalName },
     ...(image ? { image } : {}),
     ...(material ? { material } : {}),
     ...(sku ? { sku } : {}),

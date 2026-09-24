@@ -163,7 +163,9 @@ export default async function LiftingGearsStylePage({
         {data.product.status === "published" ? (
           <JsonLd
             data={productSchema({
-              name: heading,
+              name: data.product.cardTitle,
+              url: `${SITE_URL}${data.product.href}`,
+              category: data.category.menuLabel,
               description,
               image: productImage,
               material: data.product.material,
@@ -185,7 +187,7 @@ export default async function LiftingGearsStylePage({
             />
             <ProductCtas primaryCta={home.nav.cta} secondaryCta={home.nav.secondaryCta} />
             {data.product.relatedStyleTags ? (
-              <ProductRelatedStyles tags={data.product.relatedStyleTags} className="hidden xl:flex" />
+              <ProductRelatedStyles tags={data.product.relatedStyleTags} categoryLabel={data.category.menuLabel} className="hidden xl:flex" />
             ) : null}
           </div>
         </div>
@@ -212,7 +214,7 @@ export default async function LiftingGearsStylePage({
 
         {data.product.relatedStyleTags ? (
           <div className="container-p block xl:hidden">
-            <ProductRelatedStyles tags={data.product.relatedStyleTags} topRule="none" />
+            <ProductRelatedStyles tags={data.product.relatedStyleTags} categoryLabel={data.category.menuLabel} topRule="none" />
           </div>
         ) : null}
 

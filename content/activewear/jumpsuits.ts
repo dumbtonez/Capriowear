@@ -1,39 +1,20 @@
 // content/activewear/jumpsuits.ts
-// Seventeenth real category built on the Category shape (content/activewear/
-// types.ts) -- a pure content/data drop, same pattern as every category
-// before it (owner spec, 2026-09-03): no edits to app/activewear/
-// [category]/[style]/page.tsx, app/sitemap.ts, or lib/schema.ts, only this
-// file plus one line in ./categories.ts. Second and final category under
-// the "SETS & ONE PIECES" mega-menu group (content/home.ts), after
-// Bodysuits -- that group's own mega-menu href for Jumpsuits already
-// points to /activewear/jumpsuits (confirmed before writing this file,
-// same check every category since the Track Jackets & Zip-Ups mega-menu
-// mismatch, 2026-09-03).
+// Rewritten to the owner's final, locked 6-SKU catalog and copy (owner
+// spec, 2026-09-24), replacing the 2026-09-03 test version, including its
+// two test PDPs (full-length-unitard, cropped-unitard), removed so both
+// routes 404. Their style codes CAP-JMP-01/02 are reused below.
+// Women's-only category, same as Leggings, Sports Bras and Bodysuits: no
+// gender toggle, no `gender` field on any card.
 //
-// No `weightTiers` block (owner spec, 2026-09-03: "does NOT use the
-// reusable weight-tiers / mmHg / water block") -- field simply omitted,
-// same as Bodysuits/Leggings/Sports Bras/Shorts/Tank Tops/Yoga Sets/Track
-// Jackets & Zip-Ups.
+// Every card is a card-only "draft" (name, spec line, no PDP content), so
+// each renders non-clickable, gets no route, and stays out of the sitemap
+// and CollectionPage/ItemList. A card becomes a link automatically the
+// moment its PDP content (`pdpHeading` + `specifications`) is added, via
+// the sitewide `isDraftPdpReachable()` rule, same as Hoodies and Bodysuits.
+// Grid order is SKU-number order, 1 to 6. Second and final category under
+// the "ONE-PIECES" mega-menu group (content/home.ts), after Bodysuits.
 //
-// Two published styles at launch (owner spec: "publish full-length +
-// cropped unitard first"), same Leggings-pilot/Bodysuits pattern -- no
-// template change needed, StyleCard already supports any number of
-// "published" entries. `defaultGenderFilter: "Women"` reuses the same
-// field Bodysuits' own file introduced (Category.defaultGenderFilter,
-// content/activewear/types.ts) -- no further component change needed.
-//
-// ctaSubline is the standing sitewide line, Leggings' own original
-// wording, NOT the per-category line this brief's own copy gave ("Share
-// your tech pack, sketch or a reference jumpsuit. We'll come back within
-// 24 hours with next steps.") -- standing rule, owner spec, 2026-09-02
-// (see every category since Sweatshirts' own header comment and the
-// decision log entries of that date): every category file uses Leggings'
-// own ctaSubline verbatim, regardless of what a category's own brief
-// supplies here.
-//
-// American spelling and no en/em dashes confirmed throughout, per this
-// brief's own explicit rule -- audited out at write time, same standing
-// sitewide rule every category follows.
+// No `weightTiers` block (owner spec): jumpsuits are not weight-tier driven.
 import type { Category } from "./types";
 import { faqGetStarted } from "./pdpShared";
 
@@ -41,32 +22,40 @@ export const jumpsuits: Category = {
   slug: "jumpsuits",
   group: "Activewear",
   menuLabel: "Jumpsuits",
-  // Entity FAQ overrides (owner's exact given values, 2026-09-03).
-  manufacturerNoun: "Jumpsuit",
-  productNounPlural: "jumpsuits",
-  entityExampleStyles: "full-length and cropped unitards, and biker-length rompers",
-  entityFabrics: "nylon spandex and scuba knits",
-  // H1/title lead with "Unitard" (SEO/AEO refresh, owner spec: "'jumpsuit'
-  // alone ranks fashion/womenswear") -- "jumpsuit" kept as a secondary term
-  // in the meta only, not in the H1/title.
-  h1: "Custom Athletic Unitard Manufacturer",
-  metaTitle: "Custom Athletic Unitard Manufacturer",
+  // Verbatim override pair (owner spec, 2026-09-24), same as Bodysuits:
+  // bypasses categoryEntityFaq()'s templated sentence entirely.
+  entityQuestion: "What does Capriowear manufacture?",
+  entityAnswer:
+    "Capriowear is a custom jumpsuit manufacturer for activewear brands and teamwear suppliers worldwide. We produce private label athletic jumpsuits and unitards from fabric to packaging, including fitted full-length styles with straight or flared legs, deep V, corset-detail and molded-cup builds, and a relaxed wide-leg style, in Nylon/Spandex, Polyester/Spandex and scuba knits, with low minimums and full customization. Capriowear is the activewear and teamwear division of Caprio Sports, a cut-and-sew manufacturer in Sialkot, Pakistan.",
+  // "Athletic" qualifier stays in the H1 and title (the bare term draws
+  // fashion intent). No "| Capriowear" suffix: the root layout's title
+  // template adds it.
+  h1: "Custom Athletic Jumpsuit Manufacturer",
+  metaTitle: "Custom Athletic Jumpsuit Manufacturer",
   metaDescription:
-    "Custom athletic unitard manufacturer, private label jumpsuits, rompers and biketards, back zip or step-in, low MOQ. Capriowear.",
+    "Custom athletic jumpsuit manufacturer: private label unitards and flared or wide-leg jumpsuits in stretch and scuba knits, MOQ 50 pieces, DDP to 20+ countries.",
   trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
-  showGenderFilter: true,
-  // Women's-led category (owner spec, 2026-09-03) -- see
-  // Category.defaultGenderFilter's own comment.
-  defaultGenderFilter: "Women",
+  // Women's-only category: the All/Women/Men chip row does not render.
+  showGenderFilter: false,
   fabricEyebrow: "FABRIC OPTIONS",
   fabricHeading: "The fabrics behind the\nbig brands",
   fabricOptions: [
     {
-      fabric: "Nylon or poly spandex knit",
-      bestFor: "Soft, second-skin unitards and rompers",
-      performance: "Four-way stretch, strong recovery, smooth opaque hand",
+      fabric: "Nylon/Spandex",
+      bestFor: "Smooth second-skin and sculpting jumpsuits",
+      performance: "Soft hand, 4-way stretch, strong recovery",
+    },
+    {
+      fabric: "Polyester/Spandex (68 to 78% / 22 to 32%)",
+      bestFor: "Training and print-ready jumpsuits",
+      performance: "Moisture-wicking, quick-dry, holds sublimation",
+    },
+    {
+      fabric: "Modal-blend jersey (Modal/Nylon/Spandex)",
+      bestFor: "Relaxed, wide-leg jumpsuits",
+      performance: "Soft drape, light stretch, easy movement",
     },
     {
       fabric: "Scuba knit",
@@ -78,23 +67,18 @@ export const jumpsuits: Category = {
       bestFor: "A firmer, more stable alternative",
       performance: "Denser double-knit, holds a defined line across a long panel",
     },
-    {
-      fabric: "Ribbed knit",
-      bestFor: "Textured body or contrast panels",
-      performance: "Structured stretch, holds shape",
-    },
   ],
   fabricNote: [
     {
-      text: "Body panels run nylon or poly spandex for a soft fitted one-piece, commonly 70 to 85% face fiber with 15 to 30% spandex. Scuba knit (a smooth structured double-knit, commonly 90 to 95% polyester with 5 to 10% spandex, 180 to 380 GSM) gives a more sculptural silhouette and is a distinct fabric from true neoprene, lighter and more breathable. Seamless and circular-knit jumpsuits exist in the market but sit outside our cut-and-sew scope. Swatches before every bulk run, and we can source or match a specific knit, structure or reference garment, confirmed on your sample.",
+      text: "Scuba knit, a smooth structured double-knit commonly 90 to 95% Polyester with 5 to 10% Spandex at 180 to 380 GSM, gives a more sculptural silhouette and is a different fabric from true neoprene, lighter and more breathable. Fabric weight and composition are confirmed on your sample, and matte or shine finish is chosen at swatch stage. Seamless and circular-knit jumpsuits sit outside our cut-and-sew scope. Swatches before every bulk run, and we can source or match a specific fabric or reference garment.",
     },
   ],
-  fabricPills: ["Nylon spandex", "Scuba knit", "Interlock", "Ribbed knit"],
+  fabricPills: ["Nylon/Spandex", "Polyester/Spandex", "Modal-blend jersey", "Scuba knit", "Interlock"],
   qualityHeading: "Built as one piece, tested to move",
   qualitySubline: "We test the entry, the gusset and the length on your sample before a single bulk piece is cut",
   qualityPoints: [
     "Torso and leg length graded and checked across every size, not just the sample",
-    "Entry method chosen for the use case, and a back zip checked so it does not restrict squatting, reaching or lunging",
+    "Entry method chosen for the use case, and any zip checked so it does not restrict squatting, reaching or lunging",
     "Gusset seam tested under stretch, so no single seam bears the full load",
     "Opacity confirmed under real stretch across the full leg, not only at rest",
     "Fit and recovery hold after repeated wear and wash",
@@ -105,63 +89,68 @@ export const jumpsuits: Category = {
   coverageItems: [
     {
       title: "Fabric",
-      body: "Nylon or poly spandex knits, scuba or interlock for structure, ribbed knit, matte or shine finish",
+      body: "Nylon/Spandex, Polyester/Spandex, Modal-blend jersey, scuba or interlock for structure, matte or shine finish",
     },
-    { title: "Leg length and shape", body: "Full-length, cropped or biker-length, flared, tapered or boot-cut" },
-    { title: "Fit and neckline", body: "Fitted or relaxed, scoop, high, halter, plunge or square neckline" },
-    { title: "Entry", body: "Back zip, side zip, or step-in pull-on, chosen for your use case" },
-    { title: "Closure", body: "Snap-button gusset for access, or sewn gusset" },
-    { title: "Back and sleeve", body: "Closed, open or cross-back, sleeveless, short or long sleeve" },
+    { title: "Leg length and shape", body: "Full-length or cropped, straight, flared, or wide with a drop crotch" },
+    { title: "Fit and neckline", body: "Fitted or relaxed, scoop, square, halter, V or plunge neckline" },
+    { title: "Entry", body: "Step-in pull-on, back zip, or side zip, chosen for your use case" },
+    {
+      title: "Closure and support",
+      body: "Snap-button or sewn gusset, built-in shelf bra, molded cups, or removable pads",
+    },
+    { title: "Back and sleeve", body: "Closed, open, or cross-back, sleeveless, short, or long sleeve" },
   ],
   faqHeading: "Top questions from B2B buyers",
+  // Entity question is NOT stored here -- see entityQuestion/entityAnswer
+  // above; the route prepends it at render time. The remaining 16 below.
   faqs: [
     {
       q: "What is your MOQ for custom jumpsuits?",
       a: "From 50 pieces per style, and you can mix sizes freely within a colorway. Scales to full bulk.",
     },
     {
-      q: "What is the difference between a unitard and a bodysuit?",
-      a: "A jumpsuit or unitard continues from the torso into full, cropped or biker-length leg coverage. A bodysuit ends at the hip with a crotch closure. We make both.",
+      q: "What is the difference between a bodysuit and a jumpsuit?",
+      a: "A bodysuit ends at the hip, or at a short bike-short-length leg a few inches down the thigh. A jumpsuit or unitard continues into full or cropped leg coverage. Capriowear makes both.",
     },
     {
-      q: "What entry methods do you offer, and which is best?",
-      a: "Back zip, side zip, or a step-in pull-on. A back zip is easy to get into but the zip line does not stretch, so for high-movement athletic use a step-in preserves full stretch everywhere. We help you choose by use case.",
+      q: "What entry methods do you offer on jumpsuits, and which is best?",
+      a: "Step-in pull-on, back zip, or side zip. A step-in keeps full stretch everywhere, which suits high-movement training. A back zip is easier to get into, but the zip line does not stretch, so we check it on your sample for squatting, reaching and lunging. We help you choose by use case.",
     },
     {
-      q: "Is there a snap gusset for bathroom access?",
-      a: "Yes, a snap-button gusset can be built for access regardless of the entry method, or the gusset can be fully sewn on simpler styles.",
+      q: "Can you add a snap gusset to a jumpsuit?",
+      a: "Yes. A snap-button gusset can be built in for access, independent of the entry method, or the gusset can be fully sewn. Either way the gusset spreads movement strain so the center-back and inner-leg seams do not carry the full load.",
     },
     {
       q: "Which fabrics do you use for jumpsuits?",
-      a: "Nylon or poly spandex for a soft fitted one-piece, or scuba and interlock knits for a more structured, sculpted silhouette, in a matte or shine finish.",
+      a: "Nylon/Spandex and Polyester/Spandex knits for fitted jumpsuits, a Modal-blend jersey for relaxed styles, and scuba or interlock knits for a more structured, sculpted silhouette, in a matte or shine finish confirmed on your sample.",
     },
     {
-      q: "What leg lengths and shapes can you make?",
-      a: "Full-length, cropped, or biker-length, with flared, tapered or boot-cut legs, to your spec.",
+      q: "What leg lengths and shapes can you make on a jumpsuit?",
+      a: "Full-length or cropped legs, cut straight, flared, or wide with a drop crotch, to your spec. One-pieces with a short bike-short leg are built as bodysuits.",
     },
     {
-      q: "Will the fabric show through when stretched?",
-      a: "We confirm opacity under real stretch across the full leg on your sample before bulk, and can move to a higher weight or a lined panel where a color or fabric needs it.",
+      q: "How do you check opacity on a jumpsuit?",
+      a: "We check jumpsuit opacity on your sample under real stretch across the full leg, not only at rest, and move to a heavier knit or a lined panel where a color needs it, lighter colors especially.",
     },
     {
-      q: "How do you get the fit right on a one-piece?",
-      a: "We grade and test torso length and leg length together across the full size range, and can build a waist-seam construction where that grades more reliably than a seamless-torso panel.",
+      q: "How do you get the fit right on a one-piece jumpsuit?",
+      a: "We grade and test torso length and leg length together across the full size range, not just the sample size. A waist-seam construction grades more reliably than a torso panel cut in one piece from shoulder to leg, so we recommend it where fit across a wide size run matters most.",
     },
     {
-      q: "Can you match a specific fabric or a reference garment?",
-      a: "Yes. Send a swatch, reference or tech pack and we source or develop to match, then confirm on your sample.",
+      q: "Can you match a specific fabric or a reference jumpsuit?",
+      a: "Yes. Send a swatch, reference garment, or tech pack and we source or develop to match, then share swatches and confirm on your sample before bulk.",
     },
     {
       q: "What can I customize?",
-      a: "Fabric and structure, leg length and shape, fit, neckline, back, sleeve, entry method, gusset closure, color and print, your logos, labels, hangtags and packaging.",
+      a: "Everything from fabric to packaging: fabric and finish, leg length and shape, fit, neckline, back, sleeve, entry method, gusset closure, built-in support, color, print, your logos, labels, hangtags, and packaging, with Pantone color matching.",
     },
     {
-      q: "Do you offer OEM, ODM and private label jumpsuits?",
-      a: "Yes, all three, made under your brand.",
+      q: "Do you offer OEM, ODM, and private label jumpsuits?",
+      a: "Yes, all three. As a private label jumpsuit manufacturer, we make every style under your brand, with your labels and packaging.",
     },
     {
       q: "How are jumpsuits sized?",
-      a: "Alpha XS to 5XL, women's-led, with men's and unisex cuts by fit block. Torso and leg length are graded and checked across the full size range.",
+      a: "Alpha XS to 5XL. Torso length and leg length are graded and checked together across every size, because a one-piece jumpsuit has no waistband to absorb a difference in either.",
     },
     {
       q: "How long do samples and bulk take?",
@@ -169,7 +158,7 @@ export const jumpsuits: Category = {
     },
     {
       q: "Do you ship to my country?",
-      a: "Yes, 20+ countries. DDP to the US, UK, EU, Canada and Australia, with GSP+ 0% EU duty.",
+      a: "Yes, DDP to 20+ countries, including the US, UK, EU, Canada, and Australia, with GSP+ 0% EU duty.",
     },
     {
       q: "Will my designs stay protected?",
@@ -177,194 +166,73 @@ export const jumpsuits: Category = {
     },
     faqGetStarted,
   ],
-  // Standing CTA subline, same as every category (owner spec, 2026-09-02) --
-  // see this file's own header comment for why this differs from the
-  // brief's own given per-category line.
   ctaReferenceNoun: "jumpsuit",
-  // Full-Length Unitard and Cropped Unitard published first (owner spec,
-  // 2026-09-03), same Leggings-pilot/Bodysuits pattern (one or more real
-  // PDPs, the rest "draft" -- a real name and one-line spec, no PDP
-  // content yet, no generated route, excluded from sitemap/ItemList).
-  // cardTitle form is "Custom [Style]", matching the owner's own given
-  // titles exactly.
+  // 6 card-only drafts, SKU-number order (see header comment). Alt text is
+  // the card name exactly.
   styleCards: [
     {
-      status: "published",
-      slug: "full-length-unitard",
-      cardTitle: "Custom Full-Length Unitard",
-      cardSubline: "Full-length one-piece, fitted",
+      status: "draft",
+      slug: "scoop-neck-straight-leg",
+      cardTitle: "Custom Scoop-Neck Straight-Leg Jumpsuit",
+      cardSubline: "Scoop neck, fitted straight leg, full length",
       image: "",
-      imageAlt: "Custom full-length unitard, full-length one-piece, fitted",
-      href: "/capriowear/activewear/jumpsuits/full-length-unitard",
-      pdpTitle: "Full-Length Unitard",
+      imageAlt: "Custom Scoop-Neck Straight-Leg Jumpsuit",
+      href: "/capriowear/activewear/jumpsuits/scoop-neck-straight-leg",
       sku: "CAP-JMP-01",
-      pdpHeading: "Custom Full-Length Unitard Manufacturer",
-      pdpDescription:
-        "Fitted full-length one-piece from torso through the ankle, custom and private label, in nylon spandex or structured scuba knit, with a snap gusset and your choice of entry, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Full-length unitard, front view" },
-        { alt: "Full-length unitard, back view" },
-        { alt: "Full-length unitard, side profile" },
-        { alt: "Full-length unitard, entry zip detail" },
-        { alt: "Full-length unitard, gusset closure detail" },
-        { alt: "Full-length unitard, fabric close-up" },
-      ],
-      pdpMetaTitle: "Custom Full-Length Unitard Manufacturer",
-      pdpMetaDescription:
-        "Custom full-length unitard manufacturer, nylon spandex or scuba knit, back zip or step-in, snap gusset, low MOQ, full customization. DDP worldwide.",
-      material: "Nylon or poly spandex knit, or scuba knit, 90 to 95% polyester, 5 to 10% spandex",
-      faqs: [
-        {
-          q: "Should I choose a back zip or a step-in?",
-          a: "A back zip is easy to get into, but the zip line does not stretch, so for high-movement training a step-in pull-on keeps full stretch everywhere. We help you pick by use case, and can also place the zip at the side.",
-        },
-        {
-          q: "Is there a snap gusset?",
-          a: "Yes, a snap-button gusset gives bathroom access regardless of the entry method, or it can be fully sewn.",
-        },
-        {
-          q: "Will it show through when stretched?",
-          a: "We confirm opacity under real stretch across the full leg on your sample, and can move to a higher weight, a scuba knit or a lined panel where a color needs it.",
-        },
-      ],
-      relatedStyleTags: [
-        { label: "Cropped Unitard", href: "/capriowear/activewear/jumpsuits/cropped-unitard" },
-        { label: "Biketard", href: "/capriowear/activewear/jumpsuits" },
-        { label: "Flared", href: "/capriowear/activewear/jumpsuits" },
-        { label: "Sleeveless", href: "/capriowear/activewear/jumpsuits" },
-        { label: "Open-Back", href: "/capriowear/activewear/jumpsuits" },
-        { label: "See All", href: "/capriowear/activewear/jumpsuits" },
-      ],
-      specifications: [
-        { label: "Composition", value: "One-piece unitard, torso through full-length leg (base type)" },
-        { label: "Fabric", value: "Nylon or poly spandex knit, or scuba knit, 90 to 95% polyester, 5 to 10% spandex" },
-        { label: "Finish", value: "Matte or shine" },
-        { label: "Entry", value: "Back zip (base), side zip or step-in pull-on on request" },
-        { label: "Gusset", value: "Snap-button gusset for access (standard), or sewn" },
-        { label: "Waist", value: "Waist-seam or seamless-torso panel, waist-seam grades more reliably" },
-        { label: "Neckline and back", value: "Scoop (base), high, halter, plunge or square, closed or open/cross-back" },
-        { label: "Leg", value: "Full-length (base), cropped or biker-length, tapered, flared or boot-cut" },
-        { label: "Branding", value: "Sublimation, screen, heat transfer, embroidery, custom labels and packaging" },
-      ],
-      specificationsImage: { alt: "Full-length unitard, construction detail" },
-    },
-    {
-      status: "published",
-      slug: "cropped-unitard",
-      cardTitle: "Custom Cropped Unitard",
-      cardSubline: "Capri to mid-calf leg",
-      image: "",
-      imageAlt: "Custom cropped unitard, capri to mid-calf leg",
-      href: "/capriowear/activewear/jumpsuits/cropped-unitard",
-      pdpTitle: "Cropped Unitard",
-      sku: "CAP-JMP-02",
-      pdpHeading: "Custom Cropped Unitard Manufacturer",
-      pdpDescription:
-        "Fitted one-piece cropped between capri and mid-calf length, custom and private label, in nylon spandex or structured scuba knit, with a snap gusset and your choice of entry, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Cropped unitard, front view" },
-        { alt: "Cropped unitard, back view" },
-        { alt: "Cropped unitard, side profile" },
-        { alt: "Cropped unitard, hem detail" },
-        { alt: "Cropped unitard, gusset closure detail" },
-        { alt: "Cropped unitard, fabric close-up" },
-      ],
-      pdpMetaTitle: "Custom Cropped Unitard Manufacturer",
-      pdpMetaDescription:
-        "Custom cropped unitard manufacturer, nylon spandex or scuba knit, back zip or step-in, snap gusset, low MOQ, full customization. DDP worldwide.",
-      material: "Nylon or poly spandex knit, or scuba knit, 90 to 95% polyester, 5 to 10% spandex",
-      faqs: [
-        {
-          q: "What leg length does the cropped unitard come in?",
-          a: "Capri to mid-calf length as the base build, with the exact crop point set to your spec sheet or a reference garment.",
-        },
-        {
-          q: "Should I choose a back zip or a step-in?",
-          a: "A back zip is easy to get into, but the zip line does not stretch, so for high-movement training a step-in pull-on keeps full stretch everywhere. We help you pick by use case.",
-        },
-        {
-          q: "Is there a snap gusset?",
-          a: "Yes, a snap-button gusset gives bathroom access regardless of the entry method, or it can be fully sewn.",
-        },
-      ],
-      relatedStyleTags: [
-        { label: "Full-Length Unitard", href: "/capriowear/activewear/jumpsuits/full-length-unitard" },
-        { label: "Biketard", href: "/capriowear/activewear/jumpsuits" },
-        { label: "Flared", href: "/capriowear/activewear/jumpsuits" },
-        { label: "Long-Sleeve", href: "/capriowear/activewear/jumpsuits" },
-        { label: "Relaxed", href: "/capriowear/activewear/jumpsuits" },
-        { label: "See All", href: "/capriowear/activewear/jumpsuits" },
-      ],
-      specifications: [
-        { label: "Composition", value: "One-piece unitard, torso through cropped leg (base type)" },
-        { label: "Fabric", value: "Nylon or poly spandex knit, or scuba knit, 90 to 95% polyester, 5 to 10% spandex" },
-        { label: "Finish", value: "Matte or shine" },
-        { label: "Entry", value: "Back zip (base), side zip or step-in pull-on on request" },
-        { label: "Gusset", value: "Snap-button gusset for access (standard), or sewn" },
-        { label: "Waist", value: "Waist-seam or seamless-torso panel, waist-seam grades more reliably" },
-        { label: "Neckline and back", value: "Scoop (base), high, halter, plunge or square, closed or open/cross-back" },
-        { label: "Leg", value: "Cropped, capri to mid-calf (base), tapered, flared or boot-cut" },
-        { label: "Branding", value: "Sublimation, screen, heat transfer, embroidery, custom labels and packaging" },
-      ],
-      specificationsImage: { alt: "Cropped unitard, construction detail" },
     },
     {
       status: "draft",
-      slug: "biketard",
-      cardTitle: "Custom Biker-Length Romper",
-      cardSubline: "Biker-short leg, one-piece",
-      image: "",
-      imageAlt: "Custom biker-length romper, biker-short leg, one-piece",
-      href: "/capriowear/activewear/jumpsuits/biketard",
-    },
-    {
-      status: "draft",
-      slug: "flared",
+      slug: "flared-leg",
       cardTitle: "Custom Flared-Leg Jumpsuit",
-      cardSubline: "Leg flares from the knee",
+      cardSubline: "Halter deep V, leg flares to the hem",
       image: "",
-      imageAlt: "Custom flared-leg jumpsuit, leg flares from the knee",
-      href: "/capriowear/activewear/jumpsuits/flared",
+      imageAlt: "Custom Flared-Leg Jumpsuit",
+      href: "/capriowear/activewear/jumpsuits/flared-leg",
+      sku: "CAP-JMP-02",
     },
     {
       status: "draft",
-      slug: "sleeveless",
-      cardTitle: "Custom Sleeveless Jumpsuit",
-      cardSubline: "Tank top half, full or cropped leg",
+      slug: "deep-v-neck",
+      cardTitle: "Custom Deep V-Neck Jumpsuit",
+      cardSubline: "Deep V, low back, removable padding",
       image: "",
-      imageAlt: "Custom sleeveless jumpsuit, tank top half, full or cropped leg",
-      href: "/capriowear/activewear/jumpsuits/sleeveless",
+      imageAlt: "Custom Deep V-Neck Jumpsuit",
+      href: "/capriowear/activewear/jumpsuits/deep-v-neck",
+      sku: "CAP-JMP-03",
     },
     {
       status: "draft",
-      slug: "long-sleeve",
-      cardTitle: "Custom Long-Sleeve Jumpsuit",
-      cardSubline: "Full sleeve, layering-ready",
+      slug: "corset-square-neck",
+      cardTitle: "Custom Corset-Detail Square-Neck Jumpsuit",
+      cardSubline: "Square neck, boned corset waist",
       image: "",
-      imageAlt: "Custom long-sleeve jumpsuit, full sleeve, layering-ready",
-      href: "/capriowear/activewear/jumpsuits/long-sleeve",
+      imageAlt: "Custom Corset-Detail Square-Neck Jumpsuit",
+      href: "/capriowear/activewear/jumpsuits/corset-square-neck",
+      sku: "CAP-JMP-04",
     },
     {
       status: "draft",
-      slug: "open-back",
-      cardTitle: "Custom Open-Back Jumpsuit",
-      cardSubline: "Cutout or cross-back detailing",
+      slug: "wide-leg-drop-crotch",
+      cardTitle: "Custom Wide-Leg Drop-Crotch Jumpsuit",
+      cardSubline: "Relaxed drape, wide leg, drop crotch",
       image: "",
-      imageAlt: "Custom open-back jumpsuit, cutout or cross-back detailing",
-      href: "/capriowear/activewear/jumpsuits/open-back",
+      imageAlt: "Custom Wide-Leg Drop-Crotch Jumpsuit",
+      href: "/capriowear/activewear/jumpsuits/wide-leg-drop-crotch",
+      sku: "CAP-JMP-05",
     },
     {
       status: "draft",
-      slug: "relaxed",
-      cardTitle: "Custom Relaxed-Fit Jumpsuit",
-      cardSubline: "Looser athleisure cut",
+      slug: "molded-cup-v-panel",
+      cardTitle: "Custom Molded-Cup V-Panel Jumpsuit",
+      cardSubline: "Molded cups, double-layer V-panel front",
       image: "",
-      imageAlt: "Custom relaxed-fit jumpsuit, looser athleisure cut",
-      href: "/capriowear/activewear/jumpsuits/relaxed",
+      imageAlt: "Custom Molded-Cup V-Panel Jumpsuit",
+      href: "/capriowear/activewear/jumpsuits/molded-cup-v-panel",
+      sku: "CAP-JMP-06",
     },
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, same L1 group first
-  // (Sets & One Pieces, per activewearMegaMenu), then the closest pairings from other groups.
+  // (One-Pieces, per activewearMegaMenu), then the closest pairings from other groups.
   relatedLinks: [
     { label: "Bodysuits", href: "/capriowear/activewear/bodysuits" },
     { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },

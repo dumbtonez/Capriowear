@@ -251,7 +251,9 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
         {isPublished(data.product) ? (
           <JsonLd
             data={productSchema({
-              name: heading,
+              name: data.product.cardTitle,
+              url: `${SITE_URL}${data.product.href}`,
+              category: data.category.menuLabel,
               description,
               image: productImage,
               material: data.product.material,
@@ -386,7 +388,7 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
                 `xl` again -- the column split itself (`md:flex-row`, etc.)
                 is untouched. */}
             {relatedStyleTags ? (
-              <ProductRelatedStyles tags={relatedStyleTags} className="hidden xl:flex" />
+              <ProductRelatedStyles tags={relatedStyleTags} categoryLabel={data.category.menuLabel} className="hidden xl:flex" />
             ) : null}
           </div>
         </div>
@@ -460,7 +462,7 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
             own comment above for the full reasoning. */}
         {relatedStyleTags ? (
           <div className="container-p block xl:hidden">
-            <ProductRelatedStyles tags={relatedStyleTags} topRule="none" />
+            <ProductRelatedStyles tags={relatedStyleTags} categoryLabel={data.category.menuLabel} topRule="none" />
           </div>
         ) : null}
 

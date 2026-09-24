@@ -105,7 +105,7 @@ export function TrustPoints({ heading, subline, sublineBold, points, sidePadding
           WhatWeCover's own artwork. `heading` doubles as the alt text --
           there's no separate copy field for it. */}
       <div className={trustPoints.artworkWrap}>
-        <MediaPlaceholder label={heading} ratio="16:11" radius="none" showLabel={false} className={trustPoints.artwork} />
+        <MediaPlaceholder label={heading} ratio="16:11" radius="none" showLabel={false} decorative className={trustPoints.artwork} />
       </div>
 
       <ul className={trustPoints.list}>

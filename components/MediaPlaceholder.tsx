@@ -99,6 +99,13 @@ export type MediaPlaceholderProps = {
    * loads at all" bug this fixes.
    */
   eager?: boolean;
+  /**
+   * Purely decorative artwork (e.g. a section's placeholder art, labelled
+   * only with that section's own heading): hidden from assistive tech with
+   * no role or label, instead of repeating the heading as an "image"
+   * (Hoodies audit, 2026-09-24). Product image placeholders never set this.
+   */
+  decorative?: boolean;
 };
 
 export function MediaPlaceholder({
@@ -114,13 +121,14 @@ export function MediaPlaceholder({
   className,
   style,
   eager = false,
+  decorative = false,
 }: MediaPlaceholderProps) {
   return (
     <div className={cx(media.shell, media.ratio[ratio], media.radius[radius], className)} style={style}>
       {image ? (
         <Image
           src={image.src}
-          alt={image.alt ?? label}
+          alt={decorative ? "" : (image.alt ?? label)}
           fill
           sizes={imageSizes}
           className={media.imageFill}
@@ -128,8 +136,9 @@ export function MediaPlaceholder({
         />
       ) : (
         <div
-          role={showLabel ? undefined : "img"}
-          aria-label={showLabel ? undefined : label}
+          role={showLabel || decorative ? undefined : "img"}
+          aria-label={showLabel || decorative ? undefined : label}
+          aria-hidden={decorative ? true : undefined}
           className={cx(
             media.placeholder,
             overlay ? media.placeholderWithOverlay : media.placeholderCentred,

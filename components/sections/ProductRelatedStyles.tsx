@@ -41,6 +41,12 @@ export type ProductRelatedStylesProps = {
    * inter-section gap.
    */
   topRule?: "default" | "none";
+  /**
+   * The category label (e.g. "Hoodies"). Gives the generic "See All" chip an
+   * accessible name with context, "See all hoodies" (Hoodies audit,
+   * 2026-09-24). The visible text is unchanged.
+   */
+  categoryLabel?: string;
 };
 
 export function ProductRelatedStyles({
@@ -48,6 +54,7 @@ export function ProductRelatedStyles({
   tags,
   className,
   topRule = "default",
+  categoryLabel,
 }: ProductRelatedStylesProps) {
   return (
     <div
@@ -61,7 +68,11 @@ export function ProductRelatedStyles({
       <ul className={productRelatedStyles.list}>
         {tags.map((tag) => (
           <li key={tag.label}>
-            <Link href={tag.href} className={productRelatedStyles.chip}>
+            <Link
+              href={tag.href}
+              className={productRelatedStyles.chip}
+              aria-label={tag.label === "See All" && categoryLabel ? `See all ${categoryLabel.toLowerCase()}` : undefined}
+            >
               {tag.label}
               <ChevronRight className={productRelatedStyles.chipIcon} aria-hidden="true" />
             </Link>

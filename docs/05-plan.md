@@ -4311,3 +4311,14 @@ Owner request: link Bodysuits from three more PLPs' "You may also be interested 
 ## Related links back to the 5-link maximum, 2026-09-24
 
 Owner follow-up: keep the 2026-09-23 rule of at most 5 "You may also be interested in" links. Bodysuits drops Compression & Base Layers, Sports Bras drops Sweatshirts, Shorts drops T-Shirts. All three now show exactly 5, each still including the Bodysuits cross-links added earlier today.
+
+## Jumpsuits PLP rebuilt from locked content, 2026-09-24
+
+Owner spec: refinement of the existing PLP, same sections and components. `content/activewear/jumpsuits.ts` only.
+
+- **H1/title:** "Custom Athletic Jumpsuit Manufacturer" (was "Unitard"), new 159-char meta. Entity FAQ now the verbatim `entityQuestion`/`entityAnswer` pair, same as Bodysuits.
+- **Women's only:** `showGenderFilter: false`, `defaultGenderFilter` removed, no card `gender` field.
+- **Cards:** 8 test cards replaced by 6 card-only drafts, CAP-JMP-01 to 06, alt = card title. None has PDP content, so all render as non-links and link automatically once `pdpHeading` + `specifications` land (`isDraftPdpReachable()`).
+- **Test PDPs removed:** full-length-unitard and cropped-unitard now 404, no redirects; their codes are reused. With no published PDPs, CollectionPage/ItemList drops out (accepted sitewide behavior).
+- **Fabric table** 5 rows (ribbed knit removed), new note; fabric pills follow the table. **Customization** 6 items, trust bullet 2 reworded, **FAQ** 17 Q&As.
+- Related, Final CTA, breadcrumb and canonical unchanged.

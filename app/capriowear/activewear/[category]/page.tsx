@@ -168,7 +168,7 @@ export default async function CategoryPage({ params }: PageProps<"/capriowear/ac
             data={collectionPageSchema(
               data.menuLabel,
               `${SITE_URL}/capriowear/activewear/${data.slug}`,
-              `${data.menuLabel} from ${ORGANIZATION.description}`,
+              `${data.menuLabel} by Capriowear. ${ORGANIZATION.description}`,
               // Published styles only (owner spec, 2026-09-02, Leggings PLP
               // pilot: "ItemList should include only PUBLISHED styles; do not
               // list draft PDPs as if they exist") -- `ProductGrid` below

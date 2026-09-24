@@ -117,7 +117,7 @@ export default async function SportPage({ params }: PageProps<"/capriowear/teamw
             data={collectionPageSchema(
               data.menuLabel,
               `${SITE_URL}/capriowear/teamwear/${data.slug}`,
-              `${data.menuLabel} from ${ORGANIZATION.description}`,
+              `${data.menuLabel} by Capriowear. ${ORGANIZATION.description}`,
               publishedStyleCards.map((card) => ({
                 name: card.cardTitle,
                 url: `${SITE_URL}${card.href}`,

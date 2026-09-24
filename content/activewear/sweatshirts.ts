@@ -140,6 +140,8 @@ export const sweatshirts: Category = {
     {
       q: "What is the difference between a crewneck sweatshirt and a hoodie?",
       a: "A crewneck is the same fleece body and sleeve as a hoodie, without the hood, drawcord, and kangaroo pocket, keeping the round ribbed collar. It uses less fabric and simpler construction, so it is often the more cost-efficient first SKU. Many brands start with a midweight crewneck in core colors, then add hoodies in the best sellers.",
+      // In-copy link to Hoodies (SEO rule 6); wraps the first "hoodie".
+      link: { text: "hoodie", href: "/capriowear/activewear/hoodies" },
     },
     {
       q: "What fabric weights (GSM) do you offer?",
