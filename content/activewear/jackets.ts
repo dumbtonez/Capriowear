@@ -10,8 +10,8 @@
 // and their pages render noindexed, with no sitemap entry and no
 // Product/FAQPage JSON-LD. The remaining SKUs are card-only drafts: non-clickable,
 // no route, until their PDP content lands in a later batch. Batch 2
-// (owner spec, 2026-09-24) adds SKUs 4 to 6 the same way; 7 to 12 remain
-// card-only. "How we
+// (owner spec, 2026-09-24) adds SKUs 4 to 6 the same way, and batch 3
+// adds 7 to 9; 10 to 12 remain card-only. "How we
 // customize" is set once for the category (6 jacket tiles); key facts,
 // spec subtitle and the operational FAQs are the shared PDP defaults
 // (./pdpShared.ts).
@@ -219,8 +219,8 @@ export const jackets: Category = {
       { title: "Trims and packaging", body: "Woven or printed labels, hangtags, retail-ready packaging", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and packaging" } },
     ],
   },
-  // 12 drafts, SKU-number order (CAP-JKT-01 to 12). SKUs 1 to 6 carry PDP
-  // content; 7 to 12 are card-only. Card and image alt text is the card
+  // 12 drafts, SKU-number order (CAP-JKT-01 to 12). SKUs 1 to 9 carry PDP
+  // content; 10 to 12 are card-only. Card and image alt text is the card
   // name exactly.
   styleCards: [
     {
@@ -649,6 +649,67 @@ export const jackets: Category = {
       imageAlt: "Custom Chevron-Stripe Quilted Puffer Jacket",
       href: `${PLP}/chevron-quilted-puffer`,
       sku: "CAP-JKT-07",
+      pdpHeading: "Custom Chevron-Stripe Quilted Puffer Jacket Manufacturer",
+      pdpDescription:
+        "Hooded quilted puffer jacket with a chevron sleeve stripe and a matte shell, custom and private label, in a quilted polyester shell with synthetic fill, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Chevron-Stripe Quilted Puffer Jacket Manufacturer",
+      pdpMetaDescription:
+        "Custom chevron-stripe quilted puffer jacket manufacturer, private label, matte quilted polyester shell, chevron sleeve stripe, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Chevron-Stripe Quilted Puffer Jacket" },
+        { alt: "Custom Chevron-Stripe Quilted Puffer Jacket" },
+        { alt: "Custom Chevron-Stripe Quilted Puffer Jacket" },
+        { alt: "Custom Chevron-Stripe Quilted Puffer Jacket" },
+        { alt: "Custom Chevron-Stripe Quilted Puffer Jacket" },
+        { alt: "Custom Chevron-Stripe Quilted Puffer Jacket" },
+      ],
+      material: "Polyester shell, matte finish",
+      pdpFabricPills: ["Matte Polyester Shell", "Glossy Polyester Shell", "Recycled Polyester"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What is the difference between the chevron-stripe quilted puffer jacket and the quilted puffer jacket?",
+          a: "The chevron-stripe quilted puffer jacket has a matte shell and a chevron stripe on the sleeve. The quilted puffer jacket is a clean hooded puffer with a glossy shell. Both share the same quilted, synthetic-fill build.",
+        },
+        {
+          q: "Can the chevron stripe be matched to our team colors?",
+          a: "Yes. The chevron stripe on the chevron-stripe quilted puffer jacket is cut in your team or brand colors with Pantone matching, and its width and placement are set to your spec.",
+        },
+        {
+          q: "What insulation does the chevron-stripe quilted puffer jacket use?",
+          a: "The chevron-stripe quilted puffer jacket uses synthetic fill held in place by stitch-through quilting. The fill weight is set to your spec and confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Polar Fleece Full-Zip Jacket", slug: "polar-fleece-full-zip", href: PLP },
+        { label: "Custom Quilted Hybrid Jacket", slug: "quilted-hybrid", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Hooded quilted puffer jacket with a chevron sleeve stripe" },
+        { label: "Fabric", value: "Polyester shell, matte finish" },
+        { label: "Insulation", value: "Synthetic fill, gram weight confirmed on your sample" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Unisex regular fit, graded XS to 5XL" },
+        { label: "Zip and hood", value: "Front zip, attached hood" },
+        { label: "Quilting", value: "Stitch-through quilting" },
+        { label: "Sleeve stripe", value: "Chevron stripe on the sleeve, color and placement to your spec" },
+        { label: "Cuffs and hem", value: "Self-fabric, elastic or ribbed, to your spec" },
+        { label: "Finish", value: "DWR water-repellent finish on request" },
+        { label: "Construction", value: "Cut-and-sew, clean-finished seams" },
+        { label: "Branding", value: "Embroidery, screen, heat transfer, patches, reflective trims, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Chevron-Stripe Quilted Puffer Jacket" },
+      pdpQualityHeading: "Stripes that line up, fill that stays put",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Chevron stripe aligned and consistent at every size",
+        "Quilting lines checked so fill stays put after wash",
+        "Stitch-through seams checked for fill leakage",
+        "Zip cycled and function-tested before bulk",
+        "Colorfastness checked after wash, no bleed into the stripe",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
@@ -659,6 +720,65 @@ export const jackets: Category = {
       imageAlt: "Custom Polar Fleece Full-Zip Jacket",
       href: `${PLP}/polar-fleece-full-zip`,
       sku: "CAP-JKT-08",
+      pdpHeading: "Custom Polar Fleece Full-Zip Jacket Manufacturer",
+      pdpDescription:
+        "Full-zip polar fleece jacket with a contrast woven yoke panel, custom and private label, in a brushed polyester polar fleece, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Polar Fleece Full-Zip Jacket Manufacturer",
+      pdpMetaDescription:
+        "Custom polar fleece full-zip jacket manufacturer, private label, polyester polar fleece, contrast woven yoke panel, full zip, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Polar Fleece Full-Zip Jacket" },
+        { alt: "Custom Polar Fleece Full-Zip Jacket" },
+        { alt: "Custom Polar Fleece Full-Zip Jacket" },
+        { alt: "Custom Polar Fleece Full-Zip Jacket" },
+        { alt: "Custom Polar Fleece Full-Zip Jacket" },
+        { alt: "Custom Polar Fleece Full-Zip Jacket" },
+      ],
+      material: "100% polyester polar fleece",
+      pdpFabricPills: ["Polyester Polar Fleece", "Sherpa Fleece", "Recycled Polyester Fleece"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What is the polar fleece full-zip jacket made from?",
+          a: "The polar fleece full-zip jacket is built in 100% polyester polar fleece, brushed for warmth and quick to dry. The weight is set to your spec and confirmed on your sample, and recycled polyester fleece is an option.",
+        },
+        {
+          q: "Why does the polar fleece full-zip jacket have a woven yoke?",
+          a: "The contrast woven yoke adds a harder-wearing panel across the shoulders of the polar fleece full-zip jacket and gives a clean surface for color-blocking or a logo.",
+        },
+        {
+          q: "Can the polar fleece full-zip jacket be made with a hood?",
+          a: "Yes. The polar fleece full-zip jacket can take an attached hood, or move to a half zip, to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Chevron-Stripe Quilted Puffer Jacket", slug: "chevron-quilted-puffer", href: PLP },
+        { label: "Custom Quilted Hybrid Jacket", slug: "quilted-hybrid", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Full-zip polar fleece jacket, no hood" },
+        { label: "Fabric", value: "100% polyester polar fleece" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Unisex regular fit, graded XS to 5XL" },
+        { label: "Zip and collar", value: "Full-length zip, collar to your spec" },
+        { label: "Yoke", value: "Contrast woven yoke panel across the shoulders" },
+        { label: "Pockets", value: "Zip or open hand pockets, to your spec" },
+        { label: "Cuffs and hem", value: "Self-fabric, elastic or ribbed, to your spec" },
+        { label: "Construction", value: "Cut-and-sew, clean-finished seams" },
+        { label: "Branding", value: "Embroidery, screen, heat transfer, patches, reflective trims, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Polar Fleece Full-Zip Jacket" },
+      pdpQualityHeading: "Soft fleece, clean panel lines",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Fleece face checked for pilling after wash",
+        "Fabric weight held consistent, batch to batch",
+        "Woven yoke seams checked at the shoulder",
+        "Zip cycled and function-tested before bulk",
+        "Shrinkage tested after wash, targeted under 5%",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
@@ -669,6 +789,66 @@ export const jackets: Category = {
       imageAlt: "Custom Quilted Hybrid Jacket",
       href: `${PLP}/quilted-hybrid`,
       sku: "CAP-JKT-09",
+      pdpHeading: "Custom Quilted Hybrid Jacket Manufacturer",
+      pdpDescription:
+        "Hybrid jacket with a quilted front, softshell sleeves and a stand collar, custom and private label, in a quilted polyester body with synthetic fill, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Quilted Hybrid Jacket Manufacturer",
+      pdpMetaDescription:
+        "Custom quilted hybrid jacket manufacturer, private label, quilted front with synthetic fill, softshell sleeves, stand collar, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Quilted Hybrid Jacket" },
+        { alt: "Custom Quilted Hybrid Jacket" },
+        { alt: "Custom Quilted Hybrid Jacket" },
+        { alt: "Custom Quilted Hybrid Jacket" },
+        { alt: "Custom Quilted Hybrid Jacket" },
+        { alt: "Custom Quilted Hybrid Jacket" },
+      ],
+      material: "Quilted polyester front panels with synthetic fill, softshell sleeves",
+      pdpFabricPills: ["Quilted Polyester Shell", "Polyester/Spandex Softshell", "Recycled Polyester"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What is a quilted hybrid jacket?",
+          a: "A quilted hybrid jacket pairs an insulated, quilted front with softshell sleeves. The quilted hybrid jacket keeps the core warm while the sleeves stay light and flexible for training and sideline wear.",
+        },
+        {
+          q: "What is the quilted hybrid jacket made from?",
+          a: "The quilted hybrid jacket has quilted polyester front panels with synthetic fill and softshell sleeves. The fill weight and the softshell are confirmed on your sample.",
+        },
+        {
+          q: "Can the body and sleeves of the quilted hybrid jacket be different colors?",
+          a: "Yes. The quilted front and softshell sleeves of the quilted hybrid jacket can be cut in different colors, Pantone matched to your brand or team colors.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Chevron-Stripe Quilted Puffer Jacket", slug: "chevron-quilted-puffer", href: PLP },
+        { label: "Custom Polar Fleece Full-Zip Jacket", slug: "polar-fleece-full-zip", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Hybrid jacket with a quilted front and softshell sleeves" },
+        { label: "Body", value: "Quilted polyester front panels with synthetic fill" },
+        { label: "Sleeves", value: "Softshell sleeves for freedom of movement" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Unisex regular fit, graded XS to 5XL" },
+        { label: "Zip and collar", value: "Front zip, stand collar" },
+        { label: "Quilting", value: "Stitch-through quilting" },
+        { label: "Cuffs and hem", value: "Self-fabric, elastic or ribbed, to your spec" },
+        { label: "Finish", value: "DWR water-repellent finish on request" },
+        { label: "Construction", value: "Cut-and-sew, clean-finished seams" },
+        { label: "Branding", value: "Embroidery, screen, heat transfer, patches, reflective trims, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Quilted Hybrid Jacket" },
+      pdpQualityHeading: "Warm core, free arms",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Quilting lines checked so fill stays put after wash",
+        "Seams between quilted and softshell panels checked at stress points",
+        "Zip cycled and function-tested before bulk",
+        "Softshell sleeves checked for stretch and recovery",
+        "Colorfastness checked after wash, no bleed between panels",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
