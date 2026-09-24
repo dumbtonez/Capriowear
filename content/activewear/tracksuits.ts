@@ -1,38 +1,23 @@
 // content/activewear/tracksuits.ts
-// Fourteenth real category built on the Category shape (content/activewear/
-// types.ts) -- a pure content/data drop, same pattern as every category
-// before it (owner spec, 2026-09-03): no edits to app/activewear/
-// [category]/[style]/page.tsx, app/sitemap.ts, or lib/schema.ts, only this
-// file plus one line in ./categories.ts. Third category under the
-// "OUTERWEAR & SUITS" mega-menu group (content/home.ts), after Jackets and
-// Track Jackets & Zip-Ups.
+// Rebuilt to the owner's locked 2-SKU catalog and copy (owner spec,
+// 2026-09-24), replacing the 7 test cards. Dual-gender category: one men's
+// SKU (knit) and one women's SKU (woven), so the All/Women/Men toggle stays
+// and each card carries a `gender` field. Always-gender naming: every style
+// name carries "Men's"/"Women's", and the two names differ, so the slugs
+// need no -mens/-womens suffix.
 //
-// No `weightTiers` block (owner spec, 2026-09-03) -- a tracksuit is a
-// matched two-piece set, not weight- or weather-driven the way Jackets'
-// own water performance table or T-Shirts'/Hoodies' own GSM tiers are;
-// the field is simply omitted, same as Leggings/Sports Bras/Shorts/Tank
-// Tops/Yoga Sets/Track Jackets & Zip-Ups.
-// Explicit category boundary, carried into the fabric note and one FAQ
-// answer below: a tracksuit is the tricot/woven warm-up set (lightweight,
-// breathable); the fleece hoodie-and-sweatpant set is Sweatsuits, a
-// separate category, not this one.
+// Both SKUs carry full draft PDP content, so their cards link (the
+// sitewide `isDraftPdpReachable()` rule) and their pages render noindexed,
+// with no sitemap entry and no Product/FAQPage JSON-LD. "How we customize"
+// is set once for the category (6 tracksuit-specific tiles), and each style
+// carries "Custom color & print" customization chips. Key facts, spec
+// subtitle and the
+// operational FAQs are the shared PDP defaults (./pdpShared.ts).
 //
-// ctaSubline is the standing sitewide line, Leggings' own original
-// wording, NOT the per-category line this brief's own copy gave ("Share
-// your tech pack, sketch or a reference tracksuit, we'll develop it with
-// you.") -- standing rule, owner spec, 2026-09-02 (see every category
-// since Sweatshirts' own header comment and the decision log entries of
-// that date): every category file uses Leggings' own ctaSubline verbatim,
-// regardless of what a category's own brief supplies here. Confirmed with
-// the owner (2026-09-03): every PLP already matches this rule, no drift.
-//
-// The PLP itself goes live; every style is "draft" for now (owner spec):
-// each card shows on the grid, non-clickable, no PDP route generated
-// (app/activewear/[category]/[style]/page.tsx's own generateStaticParams
-// filters to "published" only, plus dynamicParams = false), excluded from
-// app/sitemap.ts and this category's own CollectionPage/ItemList schema.
-// Flip a style to "published" only once its real PDP content exists, same
-// rule every prior category's own styleCards already follow.
+// Explicit category boundary, carried into one FAQ answer: a tracksuit is
+// the tricot/woven warm-up set; the fleece hoodie-and-sweatpant set is not
+// this category. Third category under the "OUTERWEAR & SUITS" mega-menu
+// group (content/home.ts). No `weightTiers` block (owner spec).
 import type { Category } from "./types";
 import { faqGetStarted } from "./pdpShared";
 
@@ -40,17 +25,15 @@ export const tracksuits: Category = {
   slug: "tracksuits",
   group: "Activewear",
   menuLabel: "Tracksuits",
-  // Entity FAQ overrides (owner's exact given values, 2026-09-03).
-  manufacturerNoun: "Tracksuit",
-  productNounPlural: "tracksuits",
-  entityExampleStyles: "classic tricot, retro striped, funnel-neck, and warm-up set styles",
-  entityFabrics: "brushed polyester tricot and woven poly",
+  // Verbatim override pair (owner spec, 2026-09-24): bypasses
+  // categoryEntityFaq()'s templated sentence entirely.
+  entityQuestion: "What does Capriowear manufacture?",
+  entityAnswer:
+    "Capriowear is a custom tracksuit manufacturer for activewear brands and teamwear suppliers worldwide. We produce private label tracksuits from fabric to packaging, including matched full-zip jacket and tapered pant sets for men in polyester knit and for women in woven polyester, with low minimums and full customization. Capriowear is the activewear and teamwear division of Caprio Sports, a cut-and-sew manufacturer in Sialkot, Pakistan.",
   h1: "Custom Tracksuit Manufacturer",
   metaTitle: "Custom Tracksuit Manufacturer",
-  // Owner's exact given copy, 156 chars -- within Google's own ~155-160
-  // char truncation point.
   metaDescription:
-    "Custom tracksuit manufacturer, matching tricot warm-up suit, retro striped, jacket and pant dyed together, low MOQ. Capriowear.",
+    "Custom tracksuit manufacturer: private label men's knit and women's woven tracksuits, matched jacket and pant, team colors, MOQ 50, DDP to 20+ countries.",
   trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
@@ -59,34 +42,37 @@ export const tracksuits: Category = {
   fabricHeading: "The fabrics behind the\nbig brands",
   fabricOptions: [
     {
-      fabric: "Brushed polyester tricot",
-      bestFor: "The classic tracksuit, warm-ups and athleisure",
-      performance: "Breathable, moisture-wicking, quick-dry, soft brushed interior",
+      fabric: "Polyester knit (tricot or interlock)",
+      bestFor: "Men's and team training tracksuits",
+      performance: "Soft, breathable, holds color-blocking and sublimation",
     },
     {
-      fabric: "Polyester-spandex",
-      bestFor: "Competitive and performance tracksuits",
-      performance: "Added stretch and recovery for demanding movement",
+      fabric: "Woven polyester",
+      bestFor: "Lightweight warm-up tracksuits",
+      performance: "Smooth, lightweight shell that holds a crisp line",
     },
     {
-      fabric: "Satin-finish nylon",
-      bestFor: "Varsity-style tracksuit jackets",
-      performance: "Smooth, shinier surface, a heritage aesthetic",
+      fabric: "Recycled polyester",
+      bestFor: "Sustainable team and brand programs",
+      performance: "Recycled content in knit or woven builds",
     },
     {
-      fabric: "Quilted, mesh or taffeta lining",
+      fabric: "Polyester/Spandex knit",
+      bestFor: "Tracksuits that need extra stretch",
+      performance: "Added stretch and recovery for high-movement training",
+    },
+    {
+      fabric: "Mesh lining",
       bestFor: "Jacket lining",
-      performance: "Light warmth and comfort without moving to a fleece set",
+      performance: "Adds airflow and a clean inside finish",
     },
   ],
   fabricNote: [
     {
-      text: "The jacket and pant share the same fabric, weight and finish so the set truly matches. Swatches before every bulk run, and we can source or match a specific fabric or a ",
+      text: "The jacket and pant are cut from the same fabric, weight and finish so the set matches. Tracksuit shells are commonly 100% polyester, knit or woven, with stretch added only where a program needs it. Fabric weight is confirmed on your sample. Swatches before every bulk run, and we can source or match a specific fabric or a Pantone color from your reference.",
     },
-    { text: "Pantone color", bold: true },
-    { text: " from your reference." },
   ],
-  fabricPills: ["Brushed tricot", "Polyester-spandex", "Satin-finish nylon", "Quilted/mesh/taffeta lining"],
+  fabricPills: ["Polyester knit", "Woven polyester", "Recycled polyester", "Polyester/Spandex", "Mesh lining"],
   qualityHeading: "Matched top to bottom, across the roster",
   qualitySubline: "We cut and dye the jacket and pant together and confirm the match on your sample before a single bulk piece is cut",
   qualityPoints: [
@@ -100,29 +86,16 @@ export const tracksuits: Category = {
   coverageEyebrow: "CUSTOMIZATION",
   coverageHeading: "From custom fabric to packaging design",
   coverageItems: [
-    {
-      title: "Fabric",
-      body: "Brushed polyester tricot, poly-spandex, or satin-finish nylon, with quilted, mesh or taffeta lining",
-    },
-    {
-      title: "Matching",
-      body: "Cut and dyed together, Pantone color match, coordinated stripes, piping and color-blocks",
-    },
-    {
-      title: "Jacket",
-      body: "Cadet or funnel collar, full-zip, quarter-zip or snap-button, raglan sleeves, zip pockets",
-    },
-    {
-      title: "Pant",
-      body: "Tapered leg, elastic waistband and drawcord, cuff, open hem or ankle zip, zip pockets",
-    },
-    {
-      title: "Branding",
-      body: "Sublimation, embroidery, tackle twill names and numbers, matched placement across both pieces",
-    },
+    { title: "Fabric", body: "Polyester knit or woven, recycled polyester, Polyester/Spandex for stretch, mesh lining" },
+    { title: "Matching", body: "Cut and dyed together, Pantone color match, coordinated stripes, piping and color-blocks" },
+    { title: "Jacket", body: "Stand or funnel collar, full-zip or quarter-zip, set-in or raglan sleeves, zip pockets" },
+    { title: "Pant", body: "Tapered leg, elastic waistband and drawcord, cuffed, open or ankle-zip hem, zip pockets" },
+    { title: "Branding", body: "Sublimation, embroidery, heat transfer, tackle twill names and numbers, matched placement across both pieces" },
     { title: "Labels and packaging", body: "Woven or tear-away labels, hangtags, set or separates packaging" },
   ],
   faqHeading: "Top questions from B2B buyers",
+  // Entity question is NOT stored here -- see entityQuestion/entityAnswer
+  // above; the route prepends it at render time. The remaining 16 below.
   faqs: [
     {
       q: "What is your MOQ for custom tracksuits?",
@@ -137,12 +110,12 @@ export const tracksuits: Category = {
       a: "We cut and dye the jacket and pant together from the same production lot, and Pantone-match to your brand or team color, so the set is one true color, not two close shades.",
     },
     {
-      q: "Can pieces be sized separately?",
-      a: "Yes. Within a set, a jacket size and a pant size are chosen independently, since bodies do not scale the same top and bottom. The fabric, color and detailing stay consistent.",
+      q: "Can the jacket and pant be sized separately in one order?",
+      a: "Yes. Jacket and pant sizes are chosen independently within a set, since bodies don't scale the same top and bottom, and the fabric, color and detailing stay consistent across both.",
     },
     {
-      q: "What is tricot fabric, and why is it used for tracksuits?",
-      a: "Brushed polyester tricot for the classic tracksuit, poly-spandex for a competitive stretch set, and satin-finish nylon for a varsity-style jacket, with quilted or mesh lining options — the core fabric choices we work with as a tracksuit manufacturer.",
+      q: "What fabric are tracksuits made from?",
+      a: "Most tracksuits are made from 100% polyester, either a knit such as tricot or interlock for a soft, breathable feel, or a woven polyester for a smooth, lightweight shell. We build men's tracksuits in knit and women's in woven as standard, add Polyester/Spandex where a program needs stretch, and confirm the fabric on your sample.",
     },
     {
       q: "Can you color-match retro stripes and piping exactly?",
@@ -157,16 +130,20 @@ export const tracksuits: Category = {
       a: "Yes. We share a digital mockup or rendering for your approval before we cut a single piece.",
     },
     {
-      q: "What can I customize?",
-      a: "Everything from fabric to packaging: fabric, color and Pantone match, stripes and piping, collar, jacket closure, pant taper and hem, lining, names and numbers, branding across both pieces, labels, hangtags and packaging.",
+      q: "Can I order the jacket or pant on its own?",
+      a: "Yes. A tracksuit is made as a matched set, and the same jacket and pant can also be ordered as separates through our Track Jackets & Zip-Ups and Joggers ranges.",
     },
     {
-      q: "Do you offer OEM, ODM and private label tracksuits?",
-      a: "Yes, all three, made under your brand.",
+      q: "What can I customize?",
+      a: "Everything from fabric to packaging: fabric and weight, color and Pantone match, stripes, piping and color-blocking, collar, jacket closure, pant taper and hem, lining, names and numbers, branding across both pieces, labels, hangtags and packaging.",
+    },
+    {
+      q: "Do you offer OEM, ODM, and private label tracksuits?",
+      a: "Yes, all three. As a private label tracksuit manufacturer, we make every style under your brand, with your labels and packaging.",
     },
     {
       q: "How are tracksuits sized?",
-      a: "Alpha XS to 5XL, with mix-and-match jacket and pant sizing, and youth, men's and women's sizing for team roster orders.",
+      a: "Alpha XS to 5XL, with separate men's and women's pattern blocks and mix-and-match jacket and pant sizing for team roster orders.",
     },
     {
       q: "How long do samples and bulk take?",
@@ -174,7 +151,7 @@ export const tracksuits: Category = {
     },
     {
       q: "Do you ship to my country?",
-      a: "Yes, 20+ countries. DDP to the US, UK, EU, Canada and Australia, with GSP+ 0% EU duty.",
+      a: "Yes, DDP to 20+ countries, including the US, UK, EU, Canada, and Australia, with GSP+ 0% EU duty.",
     },
     {
       q: "Will my designs stay protected?",
@@ -182,76 +159,163 @@ export const tracksuits: Category = {
     },
     faqGetStarted,
   ],
-  // Standing CTA subline, same as every category (owner spec, 2026-09-02) --
-  // see this file's own header comment for why this differs from the
-  // brief's own given per-category line.
   ctaReferenceNoun: "tracksuit",
-  // Every style is "draft" (owner spec) -- a real name and one-line spec,
-  // no PDP content yet. cardTitle form is "Custom [Style] Tracksuit",
-  // matching the owner's own given titles exactly.
+  // "How we customize" for every Tracksuits PDP (owner spec, 2026-09-24):
+  // 6 tracksuit-specific tiles, overriding the shared 5-step default. Same
+  // temporary factory photography as the shared default.
+  pdpCustomizationSteps: {
+    eyebrow: "HOW WE CUSTOMIZE",
+    heading: "Your brand, applied\nin-house, no outsourcing",
+    mobileHeading: "Your brand, applied in-\nhouse, no outsourcing",
+    steps: [
+      { title: "Print and artwork", body: "Sublimation, screen, DTF, heat transfer", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Print and artwork" } },
+      { title: "Branding", body: "Embroidery, tackle twill, names and numbers", image: { src: "/factory-test/inside-factory-2.jpg", alt: "Branding" } },
+      { title: "Fabric and weight", body: "Polyester knit or woven, any weight, sourced or matched to your reference", image: { src: "/factory-test/inside-factory-3.jpg", alt: "Fabric and weight" } },
+      { title: "Build", body: "Collar, zip, pockets, pant taper and hem to your spec", image: { src: "/factory-test/inside-factory-4.jpg", alt: "Build" } },
+      { title: "Matching", body: "Jacket and pant cut and dyed together, Pantone matched", image: { src: "/factory-test/inside-factory-5.jpg", alt: "Matching" } },
+      { title: "Trims and packaging", body: "Woven or tear-away labels, hangtags, set or separates packaging", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and packaging" } },
+    ],
+  },
+  // 2 SKUs, SKU-number order: CAP-TSU-01 men's, CAP-TSU-02 women's. Card
+  // alt is the card title; PDP gallery alts add ", men's"/", women's".
   styleCards: [
     {
       status: "draft",
-      slug: "classic",
-      cardTitle: "Custom Classic Tricot Tracksuit",
-      cardSubline: "Brushed tricot jacket and pant, full zip",
+      slug: "full-zip-knit",
+      gender: "Men",
+      cardTitle: "Men's Full-Zip Knit Tracksuit",
+      cardSubline: "Stand collar, color-blocked jacket, tapered pant",
       image: "",
-      imageAlt: "Custom classic tricot tracksuit, brushed tricot jacket and pant, full zip",
-      href: "/capriowear/activewear/tracksuits/classic",
+      imageAlt: "Men's Full-Zip Knit Tracksuit",
+      href: "/capriowear/activewear/tracksuits/full-zip-knit",
+      sku: "CAP-TSU-01",
+      pdpHeading: "Men's Full-Zip Knit Tracksuit Manufacturer",
+      pdpDescription:
+        "Men's full-zip knit tracksuit, custom and private label, a stand-collar track jacket and matching tapered pant cut and dyed together in 100% polyester knit, with coordinated color-blocking, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Men's Full-Zip Knit Tracksuit Manufacturer",
+      pdpMetaDescription:
+        "Men's full-zip knit tracksuit manufacturer, private label, stand-collar jacket and tapered pant, matched color-blocking, MOQ from 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Men's Full-Zip Knit Tracksuit, men's" },
+        { alt: "Men's Full-Zip Knit Tracksuit, men's" },
+        { alt: "Men's Full-Zip Knit Tracksuit, men's" },
+        { alt: "Men's Full-Zip Knit Tracksuit, men's" },
+        { alt: "Men's Full-Zip Knit Tracksuit, men's" },
+        { alt: "Men's Full-Zip Knit Tracksuit, men's" },
+      ],
+      material: "100% polyester knit, the same fabric across jacket and pant",
+      pdpFabricPills: ["Polyester Knit", "Interlock", "Recycled Polyester", "Polyester/Spandex"],
+      pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "What fabric is the men's full-zip knit tracksuit made from?",
+          a: "The men's full-zip knit tracksuit is built in a 100% polyester knit, soft and breathable, with the same fabric across the jacket and pant so the set matches. Tricot, interlock, or recycled polyester are options, and the fabric and weight are confirmed on your sample.",
+        },
+        {
+          q: "Can the men's full-zip knit tracksuit be made in team colors?",
+          a: "Yes. The color-blocked jacket and matching pant panels of the men's full-zip knit tracksuit are cut and dyed to your team or brand colors with Pantone matching, and names and numbers can be added by tackle twill or sublimation.",
+        },
+        {
+          q: "What pant finishes are available on the men's full-zip knit tracksuit?",
+          a: "The standard pant on the men's full-zip knit tracksuit has a tapered leg, an elastic waistband with an internal drawcord, and a color-blocked ankle panel. Ankle zips, cuffed hems, and zip pockets are available to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Women's Full-Zip Woven Tracksuit", slug: "full-zip-woven", href: "/capriowear/activewear/tracksuits" },
+        { label: "See All", href: "/capriowear/activewear/tracksuits" },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's full-zip tracksuit, matched jacket and pant" },
+        { label: "Fabric", value: "100% polyester knit, the same fabric across jacket and pant" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Athletic, streamlined through the body and leg" },
+        { label: "Jacket", value: "Stand collar, full zip, zip hand pockets, color-blocked panels" },
+        { label: "Pant", value: "Tapered leg, elastic waistband with internal drawcord, color-blocked ankle panel" },
+        { label: "Hem", value: "Cuffed, open or ankle-zip, to your spec" },
+        { label: "Matching", value: "Cut and dyed together from one lot, Pantone color matched" },
+        { label: "Construction", value: "Cut-and-sew, coverstitch or flatlock seams" },
+        { label: "Branding", value: "Sublimation, embroidery, heat transfer, tackle twill names and numbers, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Men's Full-Zip Knit Tracksuit, men's" },
+      pdpQualityHeading: "Matched top to bottom, wash after wash",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Jacket and pant cut and dyed from the same lot, no mismatched shades",
+        "Color-block panels aligned between jacket and pant",
+        "Zips cycled and function-tested before bulk",
+        "Waistband and drawcord hold their recovery",
+        "Colorfastness checked after wash, no bleed between color-blocks",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
-      slug: "retro-striped",
-      cardTitle: "Custom Retro Striped Tracksuit",
-      cardSubline: "Contrast stripes and piping",
+      slug: "full-zip-woven",
+      gender: "Women",
+      cardTitle: "Women's Full-Zip Woven Tracksuit",
+      cardSubline: "Stand collar, side stripe, tapered pant",
       image: "",
-      imageAlt: "Custom retro striped tracksuit, contrast stripes and piping",
-      href: "/capriowear/activewear/tracksuits/retro-striped",
-    },
-    {
-      status: "draft",
-      slug: "slim",
-      cardTitle: "Custom Slim Tapered Tracksuit",
-      cardSubline: "Closer-cut jacket and pant",
-      image: "",
-      imageAlt: "Custom slim tapered tracksuit, closer-cut jacket and pant",
-      href: "/capriowear/activewear/tracksuits/slim",
-    },
-    {
-      status: "draft",
-      slug: "oversized",
-      cardTitle: "Custom Oversized Tracksuit",
-      cardSubline: "Streetwear fit",
-      image: "",
-      imageAlt: "Custom oversized tracksuit, streetwear fit",
-      href: "/capriowear/activewear/tracksuits/oversized",
-    },
-    {
-      status: "draft",
-      slug: "funnel-neck",
-      cardTitle: "Custom Funnel-Neck Tracksuit",
-      cardSubline: "Funnel-collar jacket, tapered pant",
-      image: "",
-      imageAlt: "Custom funnel-neck tracksuit, funnel-collar jacket, tapered pant",
-      href: "/capriowear/activewear/tracksuits/funnel-neck",
-    },
-    {
-      status: "draft",
-      slug: "warm-up",
-      cardTitle: "Custom Warm-Up Tracksuit",
-      cardSubline: "Flexible pieces, team roster",
-      image: "",
-      imageAlt: "Custom warm-up tracksuit, flexible pieces, team roster",
-      href: "/capriowear/activewear/tracksuits/warm-up",
-    },
-    {
-      status: "draft",
-      slug: "satin",
-      cardTitle: "Custom Satin Tracksuit",
-      cardSubline: "Satin nylon, varsity-style jacket",
-      image: "",
-      imageAlt: "Custom satin tracksuit, satin nylon, varsity-style jacket",
-      href: "/capriowear/activewear/tracksuits/satin",
+      imageAlt: "Women's Full-Zip Woven Tracksuit",
+      href: "/capriowear/activewear/tracksuits/full-zip-woven",
+      sku: "CAP-TSU-02",
+      pdpHeading: "Women's Full-Zip Woven Tracksuit Manufacturer",
+      pdpDescription:
+        "Women's full-zip woven tracksuit, custom and private label, a stand-collar track jacket and matching tapered pant cut on a women's pattern block in 100% woven polyester, with a contrast side stripe, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Women's Full-Zip Woven Tracksuit Manufacturer",
+      pdpMetaDescription:
+        "Women's full-zip woven tracksuit manufacturer, private label, stand-collar jacket, tapered pant, contrast side stripe, MOQ from 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Women's Full-Zip Woven Tracksuit, women's" },
+        { alt: "Women's Full-Zip Woven Tracksuit, women's" },
+        { alt: "Women's Full-Zip Woven Tracksuit, women's" },
+        { alt: "Women's Full-Zip Woven Tracksuit, women's" },
+        { alt: "Women's Full-Zip Woven Tracksuit, women's" },
+        { alt: "Women's Full-Zip Woven Tracksuit, women's" },
+      ],
+      material: "100% woven polyester, the same fabric across jacket and pant",
+      pdpFabricPills: ["Woven Polyester", "Recycled Polyester", "Polyester Knit", "Polyester/Spandex"],
+      pdpCustomizationPills: ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"],
+      faqs: [
+        {
+          q: "Why is the women's full-zip woven tracksuit built in woven polyester?",
+          a: "The women's full-zip woven tracksuit uses a 100% woven polyester for a smooth, lightweight shell that holds a crisp line, while the men's version uses a softer knit. A knit or Polyester/Spandex build is available on request, confirmed on your sample.",
+        },
+        {
+          q: "How does the Women's Full-Zip Woven Tracksuit differ from the Men's Full-Zip Knit Tracksuit?",
+          a: "The Women's Full-Zip Woven Tracksuit is cut on a separate women's pattern block in woven polyester with a contrast side stripe. The Men's Full-Zip Knit Tracksuit is built in polyester knit with color-blocked panels. Both pair a stand-collar full-zip jacket with a matching tapered pant.",
+        },
+        {
+          q: "Can the side stripe on the women's full-zip woven tracksuit match our brand colors?",
+          a: "Yes. On the women's full-zip woven tracksuit, the contrast side stripe runs from jacket to pant and is Pantone matched to your brand or team colors, aligned across both pieces on your sample before bulk.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Men's Full-Zip Knit Tracksuit", slug: "full-zip-knit", href: "/capriowear/activewear/tracksuits" },
+        { label: "See All", href: "/capriowear/activewear/tracksuits" },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's full-zip tracksuit, matched jacket and pant" },
+        { label: "Fabric", value: "100% woven polyester, the same fabric across jacket and pant" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Cut on a women's pattern block, streamlined through the body and leg" },
+        { label: "Jacket", value: "Stand collar, full zip, contrast side stripe" },
+        { label: "Pant", value: "Tapered leg, elastic waistband with drawcord, matching side stripe" },
+        { label: "Hem", value: "Cuffed, open or ankle-zip, to your spec" },
+        { label: "Matching", value: "Cut and dyed together from one lot, Pantone color matched" },
+        { label: "Construction", value: "Cut-and-sew, coverstitch or flatlock seams" },
+        { label: "Branding", value: "Sublimation, embroidery, heat transfer, tackle twill names and numbers, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Women's Full-Zip Woven Tracksuit, women's" },
+      pdpQualityHeading: "Matched top to bottom, stripe to stripe",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Jacket and pant cut and dyed from the same lot, no mismatched shades",
+        "Side stripes aligned from jacket to pant",
+        "Woven seams checked for puckering and slippage",
+        "Zips cycled and function-tested before bulk",
+        "Colorfastness checked after wash, no bleed into the stripe",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, same L1 group first
