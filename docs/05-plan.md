@@ -4058,6 +4058,19 @@ Audit of all 16 T-Shirts cards against the house rule "card title = PDP H1 minus
 
 **Verified:** 16/16 cards now equal their H1 minus " Manufacturer". The rendered T-Shirts PLP shows all 12 gendered titles, and no "Custom Fitted T-Shirt" remains. tsc and eslint clean.
 
+## Card title = H1 audit across Tank Tops, T-Shirts, Long-Sleeve Tops, Sweatshirts, Shorts, 2026-09-23
+
+Checked every SKU with a PDP H1 in the five gendered categories against the rule "card title = PDP H1 minus ' Manufacturer'".
+
+- **Tank Tops (fixed, 8):** men's CAP-TNK-02 Fitted, 03 Relaxed, 06 Racerback Singlet, 08 Ribbed and women's CAP-TNK-09 Fitted, 10 Relaxed, 12 Racerback, 16 Ribbed changed from "Custom [Style]" to "Men's/Women's [Style]". The other 8 (ungendered "Custom ..." H1s) already matched.
+- **T-Shirts:** already fixed in the previous entry, 16/16 match.
+- **Long-Sleeve Tops:** 10/10 already matched (LSL-02 "Men's", LSL-11 "Women's", the rest "Custom").
+- **Sweatshirts:** the 3 SKUs with a PDP (CAP-SWT-04, 05, 06) already matched. The other 13 are card-only, with no H1 to compare.
+- **Shorts:** 14/14 match. No gendered H1s in this category.
+- **Related-style pills:** unchanged. As on T-Shirts, they use short style labels ("Fitted Tank", "Ribbed Tank"), not card titles.
+
+**Verified:** a script comparison shows 0 mismatches across all five files. tsc and eslint clean.
+
 **Card clickability: back to the sitewide rule (owner, same day).** A brief revert made the SKU 4, 5, 6 PLP cards non-clickable via an explicit `internalPreview: false` opt-out; the owner then asked for them to be clickable like every other PLP, so the opt-out and its template/type support were removed entirely. The three cards follow `isDraftPdpReachable()` like every built draft card sitewide.
 
 ## Long-Sleeve Tops women-only styles switched to "Women's", men's Fitted Performance meta gendered, 2026-09-23
@@ -4234,6 +4247,18 @@ Owner brief replaced the 6-card test version of `content/activewear/hoodies.ts` 
 
 One-label fix at the single source, the `activewearMegaMenu` group label in `content/home.ts` ("OUTWEAR & SUITS" to "OUTERWEAR & SUITS"). It flows to the mega menu, mobile drawer, every PLP's left-panel category nav (title-cased to "Outerwear & Suits") and the nav-generated ItemList JSON-LD. Matching code comments in the Jackets, Track Jackets, Tracksuits and Running Wear content files updated too. No other group labels, category names or links changed.
 
+## Sports Bras standing-rule pass: meta descriptions, 2026-09-24
+
+Sports Bras was missed in the Tank Tops / Long-Sleeve Tops standing-rule pass. Three fixes were requested; only one needed a change.
+
+- **Meta descriptions (changed, 16):** the PLP and all 15 PDPs move from "OEM, ODM, private label ... DDP worldwide" to the current "private label ... DDP to 20+ countries" pattern, owner-supplied text, 152 to 160 chars.
+- **PDP CTA pair (already live, no change):** every PDP renders the shared Request a Sample + Download Catalog pair (`ProductCtas`, `home.nav.cta`/`secondaryCta`). No per-style override exists.
+- **"How do I get started?" (already live, no change):** the PLP and every PDP render the shared `faqGetStarted` (`content/getStarted.ts`), already trimmed. The PLP says "reference garment", not "reference sports bra", because the sitewide rule keeps this answer identical on every page.
+
+Trust bullet and the OEM/ODM FAQ keep "OEM, ODM" on purpose. Only the meta descriptions were in scope.
+
+**Verified:** 16 of 16 meta descriptions match their own slug. tsc, eslint and build clean.
+
 ## Hoodies PDPs: SKUs 1, 9, 2, 10 built as drafts, 2026-09-24
 
 Owner brief: four draft PDPs added to `content/activewear/hoodies.ts` on the shared `[category]/[style]` template, same field set as the Sweatshirts PDPs. Content only, no template or component changes.
@@ -4332,3 +4357,29 @@ Owner brief: draft PDPs for CAP-BOD-04 `open-back-short-leg`, CAP-BOD-05 `long-s
 - **Draft handling:** unchanged. noindex/nofollow, out of the sitemap, BreadcrumbList only. PLP cards 1 to 6 are links; 7 to 9 are not.
 
 **Verified (local build):** script check of all 3 pages passes (title, meta 153/151/160, robots, canonical, OG/Twitter, H1, breadcrumb, spec rows, chips, customize steps, quality block, FAQ order and text, pill targets, CTA, compliance, banned strings). tsc, eslint, build clean.
+
+## Commit note: Jumpsuits PLP shipped inside 898fa6f, 2026-09-24
+
+The Jumpsuits PLP rebuild logged above ("Jumpsuits PLP rebuilt from locked content") was committed and deployed inside `898fa6f` (Hoodies audit fixes), not in a commit of its own. Another session had staged `content/activewear/jumpsuits.ts` and its plan entry between that task's staging and commit, and the commit took the whole index. It built clean in a fresh worktree and deployed without error. The owner kept it. **Prevention:** commit by explicit path (`git commit -- <files>`) and confirm with `git show --stat HEAD` before pushing; every commit since does this.
+
+## Jumpsuits PDPs: SKUs 1, 2, 3 built as drafts (another session), 2026-09-24
+
+Record only, from commit `be297dc` (no plan entry of its own): draft PDP content added in `content/activewear/jumpsuits.ts` for CAP-JMP-01 Scoop-Neck Straight-Leg (`scoop-neck-straight-leg`), CAP-JMP-02 Flared-Leg (`flared-leg`) and CAP-JMP-03 Deep V-Neck (`deep-v-neck`), H1s "Custom [Style] Jumpsuit Manufacturer". Verification details belong to that session.
+
+## Hoodies audit fixes, 2026-09-24 (commit 898fa6f)
+
+Read-only audit of the Hoodies PLP and 16 PDPs first (1 blocker, 2 high, 9 medium, 12 low), then the owner-approved fixes.
+
+- **Hoodies content:** "Cotton-Poly Blend" to "Cotton/Poly Blend" on 11 PDPs and "cotton-poly" to "cotton/poly" on the PLP; SKU 8's duplicate "Are you a heavyweight hoodie manufacturer?" became "Is the Men's Heavyweight Loose-Fit Hoodie a heavyweight build?"; PLP sizing answer now describes separate pattern blocks instead of "women's tapered"; "5 percent" to "5%"; 7 pronoun-led answers rewritten answer-first (SKUs 6, 9, 11, 13 x2, 14, 16); 4 women's metas (SKUs 9 to 12) made distinct from the men's; SKU 5/8 "fleece checked for pilling" and SKU 5's cotton fleece tile. Sweatshirts' crewneck-vs-hoodie FAQ links "hoodie" to the Hoodies PLP (no Hoodies FAQ mentions sweatshirts, so no reverse link).
+- **Shared:** activewear and teamwear `[style]` routes re-export the default OG image (PDPs had no `og:image`/`twitter:image`); Product schema `name` is the style name, plus `url` and `category`, `manufacturer` "Capriosports"; Capriowear `subOrganization` gets `companyIntroShort`; Capriowear PLP CollectionPage description "[Category] by Capriowear."; "See All" chips labelled "See all [category]"; `MediaPlaceholder` `decorative` prop hides the WhatWeCover/TrustPoints heading-labelled artwork. The header's "Services Services" was an audit false positive (the ghost label is already `aria-hidden`).
+- **Checked, no change:** the doubled FAQ, final CTA, customize and related-styles blocks render exactly one copy at 375, 900 and 1440px; the other is `display:none`.
+- **Lighthouse (mobile, deployed):** PLP 87/87/100/66, SKU 1 84/89/100/69 (Perf/A11y/BP/SEO; SEO capped by the pre-launch noindex). LCP 3.7 to 3.9 s, CLS 0.
+
+## Hoodies audit follow-ups, 2026-09-24 (commit c83228e)
+
+- **Sweatshirts:** 24 "Cotton-Poly"/"cotton-poly" to "Cotton/Poly"/"cotton/poly", "5 percent" to "5%". Live PLP and 16 PDPs: 0 hits.
+- **Gear PLPs:** CollectionPage description "[Category] by Capriosports." plus `identityLine.gear` (Gear no longer borrows Capriowear's intro).
+- **TextReveal:** non-heading wrappers (`span`, `p`) drop the prohibited `aria-label` and render one `sr-only` copy; headings keep `aria-label` with no hidden copy (owner decision: a copy would double the H1/H2 DOM text).
+- **Social links:** "Capriowear on Instagram" / "Capriowear on LinkedIn" in Footer, MobileNav and HeaderOverlayNav; the unlinked Facebook placeholder is `aria-hidden`.
+- **Lighthouse mobile Accessibility, Hoodies PLP:** 87 to 96; only color-contrast remains.
+- **Decisions:** brand orange `#ff791b` stays. B6 dropped ("Back to all [Category]" is `sr-only`, not a visible tap target). **Pending until `components/ui/styles.ts` is free:** B5 (mobile customize H2 "in- house": CSS line break plus "in-\nhouse" to "in-house" in 13 content files) and two non-orange contrast fixes to at least 4.5:1 (pagination button `#838d97` on `#fafafa`, uppercase `#727272` labels on `#f2f2f7`).
