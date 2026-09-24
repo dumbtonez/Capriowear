@@ -51,7 +51,7 @@ export const categoryGroups: CategoryGroup[] = [
     eyebrow: "ONE-PIECES",
     h2: "One-piece builds",
     categories: [
-      { label: "Bodysuits", descriptor: "Fitted one-piece, hip-length closure", href: "/capriowear/activewear/bodysuits" },
+      { label: "Bodysuits", descriptor: "Fitted one-piece, hip-ending or short-leg", href: "/capriowear/activewear/bodysuits" },
       { label: "Jumpsuits", descriptor: "Full-length and cropped unitards", href: "/capriowear/activewear/jumpsuits" },
     ],
   },

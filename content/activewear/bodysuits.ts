@@ -2,8 +2,8 @@
 // Rewritten to the owner's final, locked 9-SKU catalog and copy (owner
 // spec, 2026-09-24) -- replaces the 2026-09-03 test version entirely,
 // including its two test PDPs (tank, long-sleeve); SKU 1 and SKU 5 now
-// reuse those slugs with new content. Women's-only category, same as Leggings and Sports Bras: no
-// gender toggle, no `gender` field on any card.
+// reuse those slugs with new content. Single-gender (no gender field, no toggle),
+// same as Leggings and Sports Bras.
 //
 // Every card is "draft": out of the sitemap and CollectionPage/ItemList. A
 // card links once its PDP content (`pdpHeading` + `specifications`) exists,
@@ -38,17 +38,17 @@ export const bodysuits: Category = {
   h1: "Custom Athletic Bodysuit Manufacturer",
   metaTitle: "Custom Athletic Bodysuit Manufacturer",
   metaDescription:
-    "Custom athletic bodysuit manufacturer: private label tank, long-sleeve and short-leg bodysuits in Nylon/Spandex knits, MOQ from 50 pieces, DDP to 20+ countries.",
+    "Custom athletic bodysuit manufacturer: private label hip-ending and short-leg bodysuits in Nylon/Spandex and Polyester/Spandex, MOQ 50, DDP to 20+ countries.",
   trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
-  // Women's-only category: the All/Women/Men chip row does not render.
+  // Single-gender (no gender field, no toggle): the All/Women/Men chip row does not render.
   showGenderFilter: false,
   fabricEyebrow: "FABRIC OPTIONS",
   fabricHeading: "The fabrics behind the\nbig brands",
   fabricOptions: [
     {
-      fabric: "Nylon/Spandex (75 to 78% / 22 to 25%)",
+      fabric: "Nylon/Spandex (72 to 78% / 22 to 28%)",
       bestFor: "Smooth second-skin and sculpting bodysuits",
       performance: "Soft hand, 4-way stretch, strong recovery",
     },
@@ -82,11 +82,11 @@ export const bodysuits: Category = {
   qualityHeading: "A closure that holds, a fit that stays put",
   qualitySubline: "We test the closure, the gusset, and the fit on your sample before a single bulk piece is cut.",
   qualityPoints: [
-    "Snap, hook, and zip closures cycled open and closed before bulk",
+    "Snap, hook, and zip closures cycled before bulk, pull-on styles checked for ease of entry",
     "Gusset seam tested under stretch, the highest-stress point on a one-piece",
     "Torso length graded and checked across every size, not just the sample",
     "Opacity confirmed under real stretch and movement, not only at rest",
-    "Shelf bra pads sit true, and support holds through wear and wash",
+    "Shelf bra pad placement and support checked on the sample and after wash testing",
     "Every run inspected to AQL 2.5, third-party inspection welcome",
   ],
   coverageEyebrow: "CUSTOMIZATION",
@@ -102,7 +102,7 @@ export const bodysuits: Category = {
     },
     {
       title: "Closure and support",
-      body: "Snap-button gusset, sewn gusset, hook-and-snap, or front zip, built-in shelf bra with removable pads or no support",
+      body: "Snap-button gusset, sewn gusset, hook-and-snap, front zip, or step-in pull-on with no crotch closure, built-in shelf bra with removable pads or no support",
     },
     { title: "Color and print", body: "Custom colors with Pantone matching, sublimation, screen, heat transfer, embroidery" },
     { title: "Labels", body: "Woven, printed, or tear-away labels, hangtags" },
@@ -122,15 +122,15 @@ export const bodysuits: Category = {
     },
     {
       q: "What is a short-leg bodysuit?",
-      a: "A short-leg bodysuit is a one-piece with a built-in bike-short leg of a few inches instead of a hip-ending brief cut. It removes the gap and waistband ride-up between a separate top and shorts, and it gives a training line a one-piece that works as a standalone piece, not only as a base layer.",
+      a: "A short-leg bodysuit is a one-piece with a built-in bike-short leg of a few inches instead of a hip-ending brief cut, and it is built as a step-in, pull-on garment with no crotch closure. It removes the gap and waistband ride-up between a separate top and shorts, and a double-layer version adds a loose outer short over a fitted inner short for running lines.",
     },
     {
       q: "What closure options do you offer on bodysuits?",
-      a: "Closure is set per style: a snap-button gusset for easy on and off, a fully sewn gusset for simpler builds, a hook-and-snap combination, or a front zip. Every closure is cycled open and closed on your sample before bulk.",
+      a: "Closure is set per style: a snap-button gusset, a snap-fastened panel at the crotch, on hip-ending styles; a fully sewn gusset for simpler builds; a hook-and-snap combination; a front zip; or a step-in, pull-on build with no crotch closure on short-leg styles. Every closure is cycled open and closed on your sample before bulk, and pull-on styles are checked for ease of entry across the size run.",
     },
     {
       q: "Can you build a shelf bra into a bodysuit?",
-      a: "Yes. A shelf bra with removable pads and adjustable straps can be built in, from medium to high support, or the bodysuit can be left plain to wear with a separate sports bra.",
+      a: "Yes. A shelf bra, an elastic underband with a lining layer sewn into the front body, can be built in with removable pads and adjustable straps, from medium to high support, or the bodysuit can be left plain to wear with a separate sports bra.",
     },
     {
       q: "Which fabrics do you use for bodysuits?",
@@ -187,7 +187,7 @@ export const bodysuits: Category = {
       { title: "Packaging", body: "Polybags, boxes, retail-ready to your spec", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Packaging" } },
     ],
   },
-  // 9 card-only drafts, SKU-number order (see header comment). Alt text is
+  // 9 drafts, all with full PDP content, SKU-number order (see header comment). Alt text is
   // the card name exactly.
   styleCards: [
     {
@@ -222,7 +222,7 @@ export const bodysuits: Category = {
         },
         {
           q: "What closure do you use on the tank bodysuit?",
-          a: "A snap-button gusset as standard, so the tank bodysuit goes on and off without fully undressing, or a fully sewn gusset for a simpler build. The closure is cycled open and closed on your sample before bulk.",
+          a: "A snap-button gusset as standard, which opens at the crotch, or a fully sewn gusset for a simpler build. The closure is cycled open and closed on your sample before bulk.",
         },
         {
           q: "Can the tank bodysuit be built with a shelf bra?",
@@ -454,6 +454,7 @@ export const bodysuits: Category = {
         { label: "Neckline", value: "Mock neck with quarter-zip front" },
         { label: "Back", value: "Open-back cutout, shape and size to your pattern" },
         { label: "Closure", value: "Quarter-zip front, zip type and puller to your spec" },
+        { label: "Entry", value: "Quarter-zip front, step-in, no crotch closure" },
         { label: "Construction", value: "Cut-and-sew, bound or turned cutout edges, flatlock or coverstitch seams" },
         { label: "Branding", value: "Sublimation, screen, DTF, silicone, heat transfer, embroidery, labels and packaging" },
       ],
@@ -497,7 +498,7 @@ export const bodysuits: Category = {
       faqs: [
         {
           q: "How is the long-sleeve bodysuit different from the long-sleeve short-leg bodysuit?",
-          a: "The long-sleeve bodysuit ends at the hip with a snap-button gusset, so it layers under shorts, joggers or leggings. The long-sleeve short-leg bodysuit has a built-in bike-short leg and is built to be worn on its own.",
+          a: "The long-sleeve bodysuit ends at the hip with a snap-button gusset, so it can be specified as a base layer under shorts, joggers or leggings or as a standalone piece. The long-sleeve short-leg bodysuit has a built-in bike-short leg and a deep-V open back, so it needs no separate bottom.",
         },
         {
           q: "Can the long-sleeve bodysuit be built with a full back instead of a thong cut?",
@@ -570,8 +571,8 @@ export const bodysuits: Category = {
           a: "The corset-detail short-leg bodysuit has flexible boning sewn into covered channels at the waist, which shapes the waistline while the knit keeps its stretch. Boning count, length and placement are set to your spec and confirmed on your sample.",
         },
         {
-          q: "Will the boning in the corset-detail short-leg bodysuit hold up in training?",
-          a: "Yes. The boning channels on the corset-detail short-leg bodysuit are closed and covered at both ends, and we test flex, recovery and poke-through through bending and squatting on your sample before bulk.",
+          q: "How do you test the boning on the corset-detail short-leg bodysuit?",
+          a: "We test the boning on the corset-detail short-leg bodysuit for flex, recovery and poke-through through bending and squatting on your sample before bulk, with every boning channel closed and covered at both ends.",
         },
         {
           q: "What fabric do you build the corset-detail short-leg bodysuit in?",
@@ -612,17 +613,17 @@ export const bodysuits: Category = {
       status: "draft",
       slug: "crossback-short-leg",
       cardTitle: "Custom Crossback Short-Leg Bodysuit",
-      cardSubline: "Crossover straps, built-in shelf bra, removable cups",
+      cardSubline: "Crossover straps, built-in shelf bra, removable pads",
       image: "",
       imageAlt: "Custom Crossback Short-Leg Bodysuit",
       href: "/capriowear/activewear/bodysuits/crossback-short-leg",
       sku: "CAP-BOD-07",
       pdpHeading: "Custom Crossback Short-Leg Bodysuit Manufacturer",
       pdpDescription:
-        "Crossback short-leg bodysuit with thin straps crossing to an open back and a 2-layer shelf bra with removable cups, custom and private label, in a soft Nylon/Spandex knit, made to your brand in Sialkot, Pakistan.",
+        "Crossback short-leg bodysuit with thin straps crossing to an open back and a 2-layer shelf bra with removable pads, custom and private label, in a soft Nylon/Spandex knit, made to your brand in Sialkot, Pakistan.",
       pdpMetaTitle: "Custom Crossback Short-Leg Bodysuit Manufacturer",
       pdpMetaDescription:
-        "Custom crossback short-leg bodysuit manufacturer, private label, 2-layer shelf bra, removable cups, open back, Nylon/Spandex, MOQ 50, DDP to 20+ countries.",
+        "Custom crossback short-leg bodysuit manufacturer, private label, 2-layer shelf bra, removable pads, open back, Nylon/Spandex, MOQ 50, DDP to 20+ countries.",
       images: [
         { alt: "Custom Crossback Short-Leg Bodysuit" },
         { alt: "Custom Crossback Short-Leg Bodysuit" },
@@ -636,7 +637,7 @@ export const bodysuits: Category = {
       faqs: [
         {
           q: "How is the shelf bra built into the crossback short-leg bodysuit?",
-          a: "The crossback short-leg bodysuit has a 2-layer shelf bra sewn into the front body, with an elastic underband and pockets for removable cups. Band tension, cup shape and support level are set to your spec and checked across the size run on your sample.",
+          a: "The crossback short-leg bodysuit has a 2-layer shelf bra sewn into the front body, with an elastic underband and pockets for removable pads. Band tension, cup shape and support level are set to your spec and checked across the size run on your sample.",
         },
         {
           q: "Can the strap layout on the crossback short-leg bodysuit be changed?",
@@ -660,7 +661,7 @@ export const bodysuits: Category = {
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Silhouette", value: "Built-in bike-short leg, around 6 inch inseam or to your spec" },
         { label: "Straps and back", value: "Thin straps crossing once at the upper back, deep open scoop back" },
-        { label: "Support", value: "Built-in 2-layer shelf bra with removable cups" },
+        { label: "Support", value: "Built-in 2-layer shelf bra with removable pads" },
         { label: "Neckline", value: "Scoop neck" },
         { label: "Entry", value: "Step-in, pull-on, no crotch closure" },
         { label: "Construction", value: "Cut-and-sew, gusseted seat, bound strap and back edges, flatlock or coverstitch seams" },
@@ -682,7 +683,7 @@ export const bodysuits: Category = {
       status: "draft",
       slug: "ribbed",
       cardTitle: "Custom Ribbed Bodysuit",
-      cardSubline: "Ribbed knit, square neck, snap closure",
+      cardSubline: "Ribbed knit, square neck, snap gusset",
       image: "",
       imageAlt: "Custom Ribbed Bodysuit",
       href: "/capriowear/activewear/bodysuits/ribbed",
@@ -692,7 +693,7 @@ export const bodysuits: Category = {
         "Hip-ending ribbed bodysuit in a double-layer rib knit with a square neckline, wide straps and a snap-button gusset, custom and private label, made to your brand in Sialkot, Pakistan.",
       pdpMetaTitle: "Custom Ribbed Bodysuit Manufacturer",
       pdpMetaDescription:
-        "Custom ribbed bodysuit manufacturer, private label, double-layer rib knit, square neck, snap gusset, thong-cut or full back, MOQ 50, DDP to 20+ countries.",
+        "Custom ribbed bodysuit manufacturer, private label, double-layer Modal/Spandex rib, square neck, wide straps, snap gusset, MOQ from 50, DDP to 20+ countries.",
       images: [
         { alt: "Custom Ribbed Bodysuit" },
         { alt: "Custom Ribbed Bodysuit" },
@@ -714,7 +715,7 @@ export const bodysuits: Category = {
         },
         {
           q: "What closure do you use on the ribbed bodysuit?",
-          a: "A snap-button gusset as standard, so the ribbed bodysuit goes on and off without fully undressing, or a fully sewn gusset for a simpler build. The closure is cycled open and closed on your sample before bulk.",
+          a: "A snap-button gusset as standard, which opens at the crotch, or a fully sewn gusset for a simpler build. The closure is cycled open and closed on your sample before bulk.",
         },
       ],
       relatedStyleTags: [
@@ -758,7 +759,7 @@ export const bodysuits: Category = {
       sku: "CAP-BOD-09",
       pdpHeading: "Custom Double-Layer Short-Leg Bodysuit Manufacturer",
       pdpDescription:
-        "Running bodysuit with a loose outer short over a fitted inner short, a hidden zip pocket in the waistband and a shelf bra with removable cups, custom and private label, in a lightweight Polyester/Spandex knit, made to your brand in Sialkot, Pakistan.",
+        "Running bodysuit with a loose outer short over a fitted inner short, a hidden zip pocket in the waistband and a shelf bra with removable pads, custom and private label, in a lightweight Polyester/Spandex knit, made to your brand in Sialkot, Pakistan.",
       pdpMetaTitle: "Custom Double-Layer Short-Leg Bodysuit Manufacturer",
       pdpMetaDescription:
         "Custom double-layer short-leg bodysuit manufacturer, private label running build, 123 GSM, zip pocket, shelf bra, outer short, MOQ 50, DDP to 20+ countries.",
@@ -804,7 +805,7 @@ export const bodysuits: Category = {
         { label: "Weight", value: "123 GSM. Final weight confirmed on your sample." },
         { label: "Silhouette", value: "Fitted inner short around 3 inch inseam, loose outer short around 2 inch inseam, to your spec" },
         { label: "Straps and back", value: "Thin adjustable straps crossing into a back panel with a keyhole cutout" },
-        { label: "Support", value: "Built-in shelf bra with removable cups" },
+        { label: "Support", value: "Built-in shelf bra with removable pads" },
         { label: "Pockets", value: "Hidden zipped pocket in the waistband, pocket in the inner short" },
         { label: "Entry", value: "Step-in, pull-on, no crotch closure" },
         { label: "Construction", value: "Cut-and-sew, inner and outer short joined at the waist seam, flatlock or coverstitch seams" },
@@ -817,7 +818,7 @@ export const bodysuits: Category = {
         "Inner and outer short checked for leg-hem roll and ride-up at running stride",
         "Zipped waistband pocket tested open and closed with a loaded pocket",
         "Strap adjusters and crossover anchors stress-tested",
-        "Shelf bra cup pockets checked for a secure, snag-free fit across the size run",
+        "Shelf bra pad pockets checked for a secure, snag-free fit across the size run",
         "GSM held consistent, batch to batch",
         "Every run inspected to AQL 2.5, third-party inspection welcome",
       ],
