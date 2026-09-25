@@ -338,8 +338,10 @@ export function collectionOfPagesSchema(name: string, url: string, description: 
  * and all ("Nylon/Spandex 4-way stretch knit, commonly around 78% / 22%,
  * confirmed on your sample."). Schema carries only the material itself, so
  * this drops sample-confirmation clauses, "commonly/roughly around" blend
- * ranges, bare ratio clauses and parentheticals, GSM weights, percentages
- * ("100% polyester" -> "Polyester") and the trailing period. The visible
+ * ranges, bare ratio clauses and parentheticals, GSM weights, approximate
+ * percentages ("at least 75%") and the trailing period. A definitive
+ * single-fiber "100%" ("100% polyester", "100% cotton") is kept, since it
+ * is the composition itself, not an estimate (owner, 2026-09-25). The visible
  * spec row is never touched. Verified clean against every existing value;
  * any value it can't reduce cleanly gets an explicit `schemaMaterial`.
  */
@@ -352,7 +354,8 @@ export function plainMaterial(value: string): string {
     .replace(/,\s*\d+\s*GSM\b/gi, "")
     .replace(/,\s*\d+%?\s*\/\s*\d+%?(\s*\/\s*\d+%?)*/g, "")
     .replace(/\s*\([^)]*\d[^)]*\)/g, "")
-    .replace(/\b(at least\s+)?\d+%\s*/gi, "")
+    .replace(/\bat least\s+\d+%\s*/gi, "")
+    .replace(/\b(?!100%)\d+%\s*/g, "")
     .replace(/\s{2,}/g, " ")
     .replace(/\s+,/g, ",")
     .trim();
