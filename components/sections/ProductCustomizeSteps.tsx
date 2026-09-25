@@ -128,7 +128,13 @@ export function ProductCustomizeSteps({ content, align = "center" }: ProductCust
           onMouseLeave={isDesktop ? handleMouseLeave : undefined}
           onClick={isDesktop ? handleClick : undefined}
         >
-          <div ref={trackRef} className={productCustomizeSteps.track}>
+          <div
+            ref={trackRef}
+            className={productCustomizeSteps.track}
+            tabIndex={0}
+            role="region"
+            aria-label="Customization steps"
+          >
             <div ref={reelRef} className={productCustomizeSteps.reel}>
               {content.steps.map((step, index) => (
                 <div

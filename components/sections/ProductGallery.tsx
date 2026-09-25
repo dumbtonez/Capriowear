@@ -319,7 +319,13 @@ export function ProductGallery({ images, productTitle }: ProductGalleryProps) {
         </div>
 
         <div className={productGallery.mainWrap}>
-          <div ref={desktopTrackRef} className={productGallery.mainTrack}>
+          <div
+            ref={desktopTrackRef}
+            className={productGallery.mainTrack}
+            tabIndex={0}
+            role="region"
+            aria-label={`${productTitle} images`}
+          >
             {images.map((image, index) => (
               <div key={index} className={productGallery.mainSlide} aria-hidden={index !== activeIndex}>
                 <MediaPlaceholder
@@ -366,7 +372,13 @@ export function ProductGallery({ images, productTitle }: ProductGalleryProps) {
       {/* Mobile */}
       <div className={productGallery.mobileRoot}>
         <div className={productGallery.mobileImageWrap}>
-          <div ref={mobileTrackRef} className={productGallery.mobileTrack}>
+          <div
+            ref={mobileTrackRef}
+            className={productGallery.mobileTrack}
+            tabIndex={0}
+            role="region"
+            aria-label={`${productTitle} images`}
+          >
             {images.map((image, index) => (
               <div key={index} className={productGallery.mobileSlide} aria-hidden={index !== activeIndex}>
                 <MediaPlaceholder

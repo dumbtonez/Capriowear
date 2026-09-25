@@ -21,10 +21,16 @@
 // scroll-driven components (e.g. ScrollSpotlightList) in spirit, though this
 // only needs a single boolean flip, not a continuous per-frame read.
 //
-// Accessibility: the rendered tag carries the full sentence as aria-label;
-// each per-word span is aria-hidden, so nothing is read twice or split
-// word-by-word by a screen reader -- the same pattern the reference itself
-// uses.
+// Accessibility: the text exists once in the DOM (Jackets audit #10,
+// 2026-09-25). On a heading (h2 to h6) the tag carries the full sentence as
+// aria-label and each per-word span is aria-hidden, so nothing is read twice
+// or split word-by-word by a screen reader. On any other tag the words stay
+// readable and there is no second, visually-hidden copy, so a heading that
+// wraps this as a span gets its name from the words themselves.
+//
+// An h1 is always above the fold (every H1 on the site sits in a hero), so
+// it renders as static text with no reveal: it paints on first render
+// instead of waiting for the word animation (Jackets audit #4, LCP).
 "use client";
 
 import type { ElementType, RefObject } from "react";
@@ -127,17 +133,39 @@ export function TextReveal({ text, segments, boldClassName, as: Tag = "span", cl
   const { ref, active } = useRevealOnView<HTMLElement>();
   let globalIndex = 0;
 
-  // Accessible name for the split, aria-hidden words (Hoodies audit
-  // follow-up, 2026-09-24). A heading (h1 to h6) has a real role, so
-  // `aria-label` on it is valid ARIA and stays: a second, visually-hidden
-  // copy there would double the H1/H2's own DOM text for crawlers. Any
-  // other element (span, p) has no role, so `aria-label` is prohibited
-  // (Lighthouse "aria-prohibited-attr"): it gets one `sr-only` copy of the
-  // full text instead, same raw `sr-only` utility Marquee already uses.
+  // Accessible name (Hoodies audit follow-up, 2026-09-24; revised Jackets
+  // audit #10, 2026-09-25). A heading (h1 to h6) has a real role, so
+  // `aria-label` on it is valid ARIA and its per-word spans stay
+  // aria-hidden. Any other element (span, p) has no role, so `aria-label`
+  // is prohibited (Lighthouse "aria-prohibited-attr"); its words are left
+  // readable instead of adding a second, sr-only copy, so the text is in
+  // the DOM exactly once either way.
   const isHeading = typeof Tag === "string" && /^h[1-6]$/.test(Tag);
   const accessibleText = segments ? segments.map((s) => s.text).join("") : (text ?? "").replace(/\n/g, " ");
   const labelProps = isHeading ? { "aria-label": accessibleText } : {};
-  const srCopy = isHeading ? null : <span className="sr-only">{accessibleText}</span>;
+  // Words are hidden from assistive tech only where the heading's own
+  // aria-label already names it; elsewhere they are the accessible text.
+  const wordAriaHidden = isHeading ? true : undefined;
+
+  // Above-the-fold H1: static text, no reveal, so it paints on first render.
+  if (Tag === "h1") {
+    const staticLines = segments ? [accessibleText] : (text ?? "").split("\n");
+    return (
+      <Tag className={className}>
+        {staticLines.map((line, li) => (
+          <Fragment key={li}>
+            {li > 0 && (
+              <>
+                {" "}
+                <br />
+              </>
+            )}
+            {line}
+          </Fragment>
+        ))}
+      </Tag>
+    );
+  }
 
   // Segmented mode: word boundaries are re-derived from the flattened
   // segment text (not kept per-segment) -- see the `segments` prop's own
@@ -168,13 +196,12 @@ export function TextReveal({ text, segments, boldClassName, as: Tag = "span", cl
 
     return (
       <Tag ref={ref} className={cx(className, active && "reveal-active")} {...labelProps}>
-        {srCopy}
         {words.map(({ word, bold }, wi) => {
           const i = Math.min(globalIndex++, MAX_STAGGER_INDEX);
           return (
             <Fragment key={wi}>
               {wi > 0 && " "}
-              <span className={textReveal.mask} aria-hidden="true">
+              <span className={textReveal.mask} aria-hidden={wordAriaHidden}>
                 <span
                   className={cx(textReveal.word, bold && boldClassName)}
                   style={{ ["--reveal-index" as string]: i }}
@@ -210,7 +237,6 @@ export function TextReveal({ text, segments, boldClassName, as: Tag = "span", cl
       className={cx(className, active && "reveal-active")}
       {...labelProps}
     >
-      {srCopy}
       {lines.map((line, li) => (
         <Fragment key={li}>
           {li > 0 && (
@@ -226,7 +252,7 @@ export function TextReveal({ text, segments, boldClassName, as: Tag = "span", cl
                 {wi > 0 && " "}
                 {/* Plain space text nodes between masks, not inside them --
                     avoids sizing a non-breaking space inside an animated box. */}
-                <span className={textReveal.mask} aria-hidden="true">
+                <span className={textReveal.mask} aria-hidden={wordAriaHidden}>
                   <span className={textReveal.word} style={{ ["--reveal-index" as string]: i }}>
                     {word}
                   </span>
