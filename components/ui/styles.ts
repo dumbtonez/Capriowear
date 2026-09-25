@@ -1065,8 +1065,16 @@ export const header = {
   // the menu ends") was removed the same day, so `megaGroups` is now the
   // last thing in the panel and this padding is the real gap to its edge.
   megaPanelInner: "container-p flex flex-col pt-12 pb-10",
-  // 56px between columns (Figma's own confirmed gap).
-  megaGroups: "flex gap-14",
+  // Equal visible gap between every column (owner, 2026-09-25: "the gap
+  // between these does not look equal", "one pieces look too close to
+  // outerwear"). Columns are now sized to their own content (see
+  // `megaGroup`), so this gap is the real space between one column's
+  // longest line and the next column, identical everywhere. 64px from xl
+  // (the menu's first width: Activewear's 5 columns, ~800px of text, fit
+  // the 1120px content area at 1280), 96px from 1440 (the 1280px content
+  // area, where the row ends ~96px inside the edge). Was 56px on fixed 206px-minimum columns, which left 56 to
+  // 180px of visible gap and pushed the last column past the content edge.
+  megaGroups: "flex gap-16 min-[1440px]:gap-24",
   // Per-column fade + slight rise, staggered (owner reference, 2026-08-27:
   // reference/Mega Menu.mov shows the text itself transitioning in, not
   // just the panel). Each column gets its own `transitionDelay` (set inline
@@ -1077,17 +1085,13 @@ export const header = {
   megaGroupReveal: "transition-[opacity,translate] duration-500 ease-out",
   megaGroupRevealOpen: "translate-y-0 opacity-100",
   megaGroupRevealClosed: "translate-y-2 opacity-0",
-  // `min-w-[206px]`, not a fixed `w-[206px]` (owner report, 2026-08-27):
-  // Teamwear & Uniforms' own real content -- not in the frame that first
-  // confirmed 206px for Activewear -- includes "Rash Guards & Fight Wear",
-  // which measures ~232px and was wrapping to 2 lines at a fixed 206.
-  // `min-w` keeps 206px as the floor (Activewear's own 5 columns still fit
-  // the panel's real width at that size) while letting a column with a
-  // genuinely longer item grow to fit it on one line -- a fixed wider value
-  // for every column would have overflowed Activewear's 5-column row
-  // instead (5 × 240px + 4 × 56px gap = 1424px, wider than the 1280px
-  // content area at 1440 viewport).
-  megaGroup: "flex min-w-[206px] shrink-0 flex-col gap-4",
+  // Content-width column (2026-09-25): no fixed or minimum width, so each
+  // column is exactly as wide as its longest line (items never wrap, see
+  // `megaItem`'s `whitespace-nowrap`) and `megaGroups`' gap is the whole
+  // visible space between columns. The earlier `min-w-[206px]` floor made
+  // short columns (Bottoms, One-Pieces) carry dead space while long ones
+  // (Outerwear & Suits) sat 56px from their neighbor, so gaps looked uneven.
+  megaGroup: "flex shrink-0 flex-col gap-4",
   // #838d97, not the generic `text-muted` token (#6b6b74) -- that token is
   // tuned for light sections; this panel is dark, and the project's own
   // established dark-surface muted colour (already used verbatim by
