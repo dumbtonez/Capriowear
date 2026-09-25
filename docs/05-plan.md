@@ -4561,3 +4561,7 @@ Owner fix prompt from the Jackets and Track Jackets audit, two commits.
 ## Teamwear PLPs: no gender toggle, "Private Label", 2026-09-25
 
 The Teamwear sport PLP template now always passes `showGenderFilter={false}` to `CategoryMetaStrip`, so no sport can render the All/Women/Men toggle (standing rule: Teamwear has no gender split). The now-dead `showGenderFilter: true` lines were removed from the 9 other sport files (Cricket's explicit `false` left as is). No Teamwear card has a `gender` field and the grid never filtered on one, so every card still renders. Key facts on the same 9 sports: "OEM, ODM & Private label" -> "OEM, ODM & Private Label". Nothing else changed; `draftPdpsReachable` stays Cricket-only and the legacy draft PDPs stay 404.
+
+## Cricket draft PDPs batch 2 (CAP-CRK-04 to 06) + fabric naming, 2026-09-25
+
+`content/teamwear/cricket.ts`. Colored Cricket Trousers, Cricket Whites Trousers and Cricket Training Tee now carry full draft PDP content (noindexed, BreadcrumbList only, out of the sitemap), so PLP cards 1 to 6 link and 7 (Fleece Pullover) and 8 (Cap) stay non-links. The batch 1 trousers and training-tee pills switched to the new PDPs on their own via `resolveRelatedStyleTags` (they already carried `slug`). Blend naming: every "poly-spandex" on Cricket is now "Polyester/Spandex" (PLP fabric table row 4, customization Fabric item, FAQ 5 and its JSON-LD, the category `fabricPills`, PDP 01/03 chip and Fabric spec row, PDP 02 chip); a case-insensitive grep of the Cricket content is 0.

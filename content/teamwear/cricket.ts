@@ -14,10 +14,10 @@
 // mmHg weight tier table. See StructuredBlock's own comment
 // (content/activewear/types.ts).
 //
-// 8 styles, all "draft" (owner spec, 2026-09-25). 01 to 03 carry PDP
+// 8 styles, all "draft" (owner spec, 2026-09-25). 01 to 06 carry PDP
 // content and render as noindexed draft PDPs (BreadcrumbList only, out of
 // the sitemap and the CollectionPage/ItemList), with their cards linking;
-// 04 to 08 are card-only non-links. See the styleCards comment below.
+// 07 and 08 are card-only non-links. See the styleCards comment below.
 //
 // No cricket GSM number is ever stated (owner spec) -- every fabric-weight
 // reference here is deliberately worded as "tuned to your format/climate
@@ -40,12 +40,12 @@ const AQL_POINT = "Every run inspected to AQL 2.5, third-party inspection welcom
 const SPEC_FIT = "Team cut or fitted, graded XS to 5XL, men's, women's and unisex blocks";
 const SPEC_BRANDING = "Club crest, sponsor logos, manufacturer mark, woven and care labels, packaging";
 const MATCH_JERSEY_SPEC_FABRIC =
-  "Polyester interlock or pique body, micro-mesh or ultra-light mesh ventilation, poly-spandex collar and cuffs";
+  "Polyester interlock or pique body, micro-mesh or ultra-light mesh ventilation, Polyester/Spandex collar and cuffs";
 const MATCH_JERSEY_SPEC_WEIGHT =
   "Pending, confirmed on your sample. Lighter mesh for hot-weather kit, heavier interlock for structure.";
 const MATCH_JERSEY_SPEC_COLOR = "Full sublimation color range, Pantone matched, home and away colorways";
 const MATCH_JERSEY_SPEC_CONSTRUCTION = "Flatlock and overlock seams, mesh inserts at the side and underarm optional";
-const MATCH_JERSEY_FABRIC_PILLS = ["Polyester interlock", "Micro-mesh", "Ultra-light mesh", "Poly-spandex panels"];
+const MATCH_JERSEY_FABRIC_PILLS = ["Polyester interlock", "Micro-mesh", "Ultra-light mesh", "Polyester/Spandex panels"];
 const MATCH_JERSEY_CUSTOMIZATION_PILLS = ["Sublimated names & numbers", "Pantone color match", "Home & away kits", "Custom labels"];
 
 type Step = [title: string, body: string];
@@ -62,6 +62,22 @@ const MATCH_JERSEY_STEPS_TAIL: Step[] = [
   TRIMS_STEP,
   PACKAGING_STEP,
 ];
+
+const PENDING_WEIGHT = "Pending, confirmed on your sample.";
+const TROUSER_FABRIC_PILLS = ["Polyester interlock", "Polyester/Spandex knit", "Double-knit", "Micro-mesh"];
+const TROUSER_WAIST = "Elastic waistband with an internal drawcord, finished flat";
+const TROUSER_LEG_AND_HEM =
+  "Straight leg, full length. The hem is finished to your length, or left open on request so it can be taken up or let down as a player grows.";
+const TROUSER_VENTILATION = "Mesh panels at the inside leg and the internal back yoke";
+const TROUSER_FIT = "Team cut, graded XS to 5XL, men's, women's and unisex blocks";
+const TROUSER_CONSTRUCTION = "Flatlock and overlock seams, side pockets optional";
+const TROUSER_FABRIC_STEP: Step = [
+  "Fabric",
+  "Polyester interlock, Polyester/Spandex stretch knit or double-knit, sourced or matched to your reference",
+];
+const TROUSER_WAIST_STEP: Step = ["Waist and fit", "Elastic drawcord waist, team cut, graded across the full size run"];
+const TROUSER_HEM_STEP: Step = ["Hem and length", "Finished to your inseam, or left open for alteration"];
+const INSEAM_POINT = "Inseam and hem length graded and checked across the full size run";
 
 // Per-style "How we customize" carousel. Images are the shared factory
 // test shots (same stand-ins every PDP carousel uses), cycled in order.
@@ -131,7 +147,7 @@ export const cricket: Category = {
       performance: "Lightest hand, highest airflow",
     },
     {
-      fabric: "Poly-spandex",
+      fabric: "Polyester/Spandex",
       bestFor: "Collars and fitted trims",
       performance: "Stretch, holds a flat collar",
     },
@@ -146,7 +162,7 @@ export const cricket: Category = {
     { text: "confirmed on your sample", bold: true },
     { text: ". Recycled polyester available. Swatches before every bulk run." },
   ],
-  fabricPills: ["Polyester interlock", "Pique", "Micro-mesh", "Ultra-light mesh", "Poly-spandex panels", "Recycled polyester"],
+  fabricPills: ["Polyester interlock", "Pique", "Micro-mesh", "Ultra-light mesh", "Polyester/Spandex panels", "Recycled polyester"],
   // Decoration structured block (owner spec, 2026-09-05) -- see
   // StructuredBlock's own comment. Replaces the weightTiers table this
   // reusable block otherwise renders for a GSM/mmHg-driven category.
@@ -201,7 +217,7 @@ export const cricket: Category = {
   coverageItems: [
     {
       title: "Fabric",
-      body: "Polyester interlock, pique and micro-mesh, poly-spandex collars, brushed fleece for off-field layers",
+      body: "Polyester interlock, pique and micro-mesh, Polyester/Spandex collars, brushed fleece for off-field layers",
     },
     {
       title: "Print",
@@ -239,7 +255,7 @@ export const cricket: Category = {
     },
     {
       q: "Which fabrics do you use, and how is weight decided?",
-      a: "Polyester interlock and pique for the body, micro-mesh for ventilation, ultra-light mesh for hot-weather kit, poly-spandex for collars and brushed fleece for off-field layers, with a recycled option. Weight is tuned to your format and climate and confirmed on the sample.",
+      a: "Polyester interlock and pique for the body, micro-mesh for ventilation, ultra-light mesh for hot-weather kit, Polyester/Spandex for collars and brushed fleece for off-field layers, with a recycled option. Weight is tuned to your format and climate and confirmed on the sample.",
     },
     {
       q: "Can a club or academy order whites and colored kit in one order?",
@@ -258,9 +274,10 @@ export const cricket: Category = {
   draftPdpsReachable: true,
   // 8 drafts, SKU order (CAP-CRK-01 to 08), owner spec 2026-09-25. Card
   // title = H1 minus " Manufacturer" = title-tag name = breadcrumb = alt =
-  // every pill label that targets it. 01 to 03 carry PDP content (batch 1,
-  // reachable noindexed drafts via `draftPdpsReachable`); 04 to 08 are
-  // card-only non-links until their own batch. Nothing publishes until the
+  // every pill label that targets it. 01 to 03 (batch 1) and 04 to 06
+  // (batch 2) carry PDP content (reachable noindexed drafts via
+  // `draftPdpsReachable`); 07 and 08 are card-only non-links until their
+  // own batch. Nothing publishes until the
   // roster is confirmed, the style sampled and real photos exist
   // (getPublishReadiness()). Fleece Pullover and Cap re-added by the owner
   // (2026-09-25), superseding the 2026-09-05 headwear removal.
@@ -353,7 +370,7 @@ export const cricket: Category = {
       pdpMetaDescription:
         "Custom cricket whites shirt manufacturer: polyester interlock or pique, polo collar, contrast trim and embroidered crest, MOQ 50 pieces, DDP to 20+ countries.",
       material: "Polyester interlock or pique, micro-mesh ventilation inserts optional",
-      pdpFabricPills: ["Polyester interlock", "Pique", "Micro-mesh", "Poly-spandex collar"],
+      pdpFabricPills: ["Polyester interlock", "Pique", "Micro-mesh", "Polyester/Spandex collar"],
       pdpCustomizationPills: ["Contrast trim", "Embroidered crest", "Short or long sleeve", "Custom labels"],
       faqs: [
         {
@@ -489,9 +506,244 @@ export const cricket: Category = {
         AQL_POINT,
       ],
     },
-    cardOnly("CAP-CRK-04", "colored-trousers", "Custom Colored Cricket Trousers", "Sublimated or solid, elastic drawcord waist"),
-    cardOnly("CAP-CRK-05", "whites-trousers", "Custom Cricket Whites Trousers", "Traditional whites, elastic drawcord waist"),
-    cardOnly("CAP-CRK-06", "training-tee", "Custom Cricket Training Tee", "Lightweight sublimated practice shirt"),
+    {
+      status: "draft",
+      slug: "colored-trousers",
+      cardTitle: "Custom Colored Cricket Trousers",
+      cardSubline: "Sublimated or solid, elastic drawcord waist",
+      image: "",
+      imageAlt: "Custom Colored Cricket Trousers",
+      href: `${PLP}/colored-trousers`,
+      sku: "CAP-CRK-04",
+      pdpHeading: "Custom Colored Cricket Trousers Manufacturer",
+      pdpMetaTitle: "Custom Colored Cricket Trousers Manufacturer",
+      pdpDescription:
+        "Colored cricket match trousers, custom and private label, sublimated or solid in your team colors, with an elastic drawcord waist, a straight leg and mesh ventilation, in a stretch polyester knit, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Colored Cricket Trousers"),
+      pdpMetaDescription:
+        "Custom cricket trousers manufacturer: sublimated or solid colored match trousers, elastic drawcord waist, mesh ventilation, MOQ 50, DDP to 20+ countries.",
+      material: "Polyester interlock, Polyester/Spandex stretch knit or double-knit",
+      pdpFabricPills: TROUSER_FABRIC_PILLS,
+      pdpCustomizationPills: ["Sublimated or solid color", "Matched to your jersey", "Hem to length", "Custom labels"],
+      faqs: [
+        {
+          q: "Can the colored cricket trousers be matched to our match jersey?",
+          a: "Yes. The colored cricket trousers are sublimated from the same print files or dyed to the same Pantone values as your match jersey, and both are confirmed together on your sample before bulk.",
+        },
+        {
+          q: "How is the hem finished on the colored cricket trousers?",
+          a: "The colored cricket trousers are hemmed to the inseam you specify, or the hem is left open on request so it can be taken up or let down as a player grows. Inseam is graded across the size run and confirmed on your sample.",
+        },
+        {
+          q: "Where is the ventilation on the colored cricket trousers?",
+          a: "The colored cricket trousers carry mesh panels at the inside leg and the internal back yoke, where heat builds during long fielding sessions. Panel size and placement are set to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Short-Sleeve Cricket Match Jersey", slug: "colored-match-jersey-short-sleeve", href: PLP },
+        { label: "Custom Long-Sleeve Cricket Match Jersey", slug: "colored-match-jersey-long-sleeve", href: PLP },
+        { label: "Custom Cricket Whites Trousers", slug: "whites-trousers", href: PLP },
+        { label: "Custom Cricket Training Tee", slug: "training-tee", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Colored cricket match trousers, straight leg (base type)" },
+        {
+          label: "Fabric",
+          value:
+            "Polyester interlock or a Polyester/Spandex stretch knit, double-knit for more structure. Spandex in the knit gives stretch through fielding movement.",
+        },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Waist", value: TROUSER_WAIST },
+        { label: "Leg and hem", value: TROUSER_LEG_AND_HEM },
+        { label: "Ventilation", value: TROUSER_VENTILATION },
+        {
+          label: "Color and decoration",
+          value:
+            "Sublimated or solid in your team colors, Pantone matched to the colored match jersey, with sublimated or embroidered crest and sponsor marks",
+        },
+        { label: "Fit", value: TROUSER_FIT },
+        { label: "Construction", value: TROUSER_CONSTRUCTION },
+        { label: "Branding", value: SPEC_BRANDING },
+      ],
+      specificationsImage: { alt: "Custom Colored Cricket Trousers" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Color and print", "Sublimated designs or solid team colors, Pantone matched to your match jersey"],
+        TROUSER_FABRIC_STEP,
+        TROUSER_WAIST_STEP,
+        TROUSER_HEM_STEP,
+        ["Branding", "Sublimated or embroidered crest, sponsor marks, manufacturer mark"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: PROOF_AND_SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Trouser color matched to your match jersey and approved on the sample before we cut",
+        INSEAM_POINT,
+        "Crotch and inside-leg seams checked under stretch on your sample",
+        "The full roster produced in one run, same fabric roll and print batch, so every pair matches",
+        AQL_POINT,
+      ],
+    },
+    {
+      status: "draft",
+      slug: "whites-trousers",
+      cardTitle: "Custom Cricket Whites Trousers",
+      cardSubline: "Traditional whites, elastic drawcord waist",
+      image: "",
+      imageAlt: "Custom Cricket Whites Trousers",
+      href: `${PLP}/whites-trousers`,
+      sku: "CAP-CRK-05",
+      pdpHeading: "Custom Cricket Whites Trousers Manufacturer",
+      pdpMetaTitle: "Custom Cricket Whites Trousers Manufacturer",
+      pdpDescription:
+        "Traditional cricket whites trousers, custom and private label, in a white or near-white polyester knit with an elastic drawcord waist, a straight leg and mesh ventilation, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Cricket Whites Trousers"),
+      pdpMetaDescription:
+        "Custom cricket whites trousers manufacturer: white polyester knit, elastic drawcord waist, mesh ventilation, hem to length, MOQ 50, DDP to 20+ countries.",
+      material: "White or near-white polyester interlock, Polyester/Spandex stretch knit or double-knit",
+      pdpFabricPills: TROUSER_FABRIC_PILLS,
+      pdpCustomizationPills: ["White or near-white", "Matched to your whites shirt", "Hem to length", "Custom labels"],
+      faqs: [
+        {
+          q: "Do the cricket whites trousers match the cricket whites shirt?",
+          a: "Yes. The cricket whites trousers are cut from a white or near-white knit matched to your whites shirt, and both are produced together so the shade matches across the kit.",
+        },
+        {
+          q: "How do you check opacity on the cricket whites trousers?",
+          a: "We check opacity on the cricket whites trousers under stretch on your sample, not only at rest, and move to a heavier or denser white knit where it needs more coverage.",
+        },
+        {
+          q: "How is the hem finished on the cricket whites trousers?",
+          a: "The cricket whites trousers are hemmed to the inseam you specify, or the hem is left open on request so it can be taken up or let down as a player grows. Inseam is graded across the size run and confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Cricket Whites Shirt", slug: "whites-shirt", href: PLP },
+        { label: "Custom Colored Cricket Trousers", slug: "colored-trousers", href: PLP },
+        { label: "Custom Cricket Training Tee", slug: "training-tee", href: PLP },
+        { label: "Custom Cricket Fleece Pullover", slug: "fleece-pullover", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Traditional cricket whites trousers, straight leg (base type)" },
+        {
+          label: "Fabric",
+          value:
+            "White or near-white polyester interlock or Polyester/Spandex stretch knit, double-knit for more structure. Spandex in the knit gives stretch through fielding movement.",
+        },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Waist", value: TROUSER_WAIST },
+        { label: "Leg and hem", value: TROUSER_LEG_AND_HEM },
+        { label: "Ventilation", value: TROUSER_VENTILATION },
+        {
+          label: "Color and decoration",
+          value: "White or near-white body matched to your whites shirt, with an embroidered crest or sponsor marks optional",
+        },
+        { label: "Fit", value: TROUSER_FIT },
+        { label: "Construction", value: TROUSER_CONSTRUCTION },
+        { label: "Branding", value: SPEC_BRANDING },
+      ],
+      specificationsImage: { alt: "Custom Cricket Whites Trousers" },
+      pdpCustomizationSteps: customizeSteps([
+        ["White shade", "White or near-white, matched to your whites shirt"],
+        TROUSER_FABRIC_STEP,
+        TROUSER_WAIST_STEP,
+        TROUSER_HEM_STEP,
+        ["Branding", "Embroidered crest, sponsor marks, manufacturer mark"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: "We confirm it all on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "White shade matched to your whites shirt and approved on the sample before we cut",
+        "Opacity checked under stretch on your sample",
+        INSEAM_POINT,
+        "The full roster produced in one run, same fabric roll, so every pair matches",
+        AQL_POINT,
+      ],
+    },
+    {
+      status: "draft",
+      slug: "training-tee",
+      cardTitle: "Custom Cricket Training Tee",
+      cardSubline: "Lightweight sublimated practice shirt",
+      image: "",
+      imageAlt: "Custom Cricket Training Tee",
+      href: `${PLP}/training-tee`,
+      sku: "CAP-CRK-06",
+      pdpHeading: "Custom Cricket Training Tee Manufacturer",
+      pdpMetaTitle: "Custom Cricket Training Tee Manufacturer",
+      pdpDescription:
+        "Lightweight cricket training tee, custom and private label, full-dye sublimated in your club colors with crest and squad details in the print, in a breathable micro-mesh or bird's-eye polyester, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Cricket Training Tee"),
+      pdpMetaDescription:
+        "Custom cricket training tee manufacturer: lightweight sublimated practice shirts in micro-mesh polyester, club colors and crests, MOQ 50, DDP to 20+ countries.",
+      material: "Micro-mesh or bird's-eye polyester, ultra-light mesh or polyester interlock",
+      pdpFabricPills: ["Micro-mesh", "Bird's-eye", "Ultra-light mesh", "Polyester interlock"],
+      pdpCustomizationPills: ["Sublimated club colors", "Squad numbers or initials", "Pantone color match", "Custom labels"],
+      faqs: [
+        {
+          q: "How is the cricket training tee different from the cricket match jersey?",
+          a: "The cricket training tee is a lighter, simpler practice build: a crew neck, a lightweight mesh body and no match-day collar or trim. It is sublimated in the same colors as your match kit, so training and match wear read as one program.",
+        },
+        {
+          q: "Can squad numbers or initials go on the cricket training tee?",
+          a: "Yes. Numbers, initials or player names are built into the same print file as the design and dyed into the fabric, so they add no cost or weight and will not peel.",
+        },
+        {
+          q: "What fabric is the cricket training tee built in?",
+          a: "The cricket training tee is built in micro-mesh or bird's-eye polyester for airflow, ultra-light mesh for hot-weather sessions, or polyester interlock for a smoother print face. Weight is confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Short-Sleeve Cricket Match Jersey", slug: "colored-match-jersey-short-sleeve", href: PLP },
+        { label: "Custom Colored Cricket Trousers", slug: "colored-trousers", href: PLP },
+        { label: "Custom Cricket Fleece Pullover", slug: "fleece-pullover", href: PLP },
+        { label: "Custom Cricket Cap", slug: "cap", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Cricket training tee, crew neck, short sleeve (base type)" },
+        {
+          label: "Fabric",
+          value:
+            "Micro-mesh or bird's-eye polyester, ultra-light mesh for hot-weather sessions, polyester interlock for a smoother print face",
+        },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Neck", value: "Crew neck with a flat, non-curling rib or self-fabric finish" },
+        { label: "Sleeve", value: "Short sleeve, set-in" },
+        {
+          label: "Decoration",
+          value: "Full-dye sublimation, with club crest, sponsor marks and squad numbers or initials in the print",
+        },
+        { label: "Color", value: "Full sublimation color range, Pantone matched to your match kit" },
+        { label: "Fit", value: SPEC_FIT },
+        { label: "Construction", value: "Flatlock and overlock seams" },
+        { label: "Branding", value: SPEC_BRANDING },
+      ],
+      specificationsImage: { alt: "Custom Cricket Training Tee" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Print and artwork", "Full-dye sublimation, unlimited colors and gradients in one file at one cost"],
+        ["Squad details", "Numbers, initials or player names built into the print file"],
+        ["Branding", "Sublimated or embroidered crest, sponsor marks, manufacturer mark"],
+        ["Fabric", "Micro-mesh, bird's-eye or polyester interlock, sourced or matched to your reference"],
+        ["Color", "Pantone, CMYK, RGB or hex matched to your match kit, confirmed on your digital proof"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: PROOF_AND_SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Digital proof and Pantone match approved before we cut",
+        "Numbers and initials dyed into the fiber, so they will not crack or peel",
+        "Color matched to your match kit, so training and match wear read as one program",
+        "The full roster produced in one run, same fabric roll and print batch, so every tee matches",
+        AQL_POINT,
+      ],
+    },
     cardOnly("CAP-CRK-07", "fleece-pullover", "Custom Cricket Fleece Pullover", "Brushed fleece, off-field and warm-up layer"),
     cardOnly("CAP-CRK-08", "cap", "Custom Cricket Cap", "Paneled cap, embroidered crest"),
   ],
