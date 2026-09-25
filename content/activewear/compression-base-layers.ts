@@ -10,13 +10,13 @@
 // which this category no longer sets. The one medical mention left is FAQ
 // 6, which says plainly that we do not make medical compression.
 //
-// PDP batch 1: SKUs 1 to 3 (CAP-CBL-01 to 03) carry full draft PDP
-// content, so their cards link (the sitewide `isDraftPdpReachable()` rule)
-// and their pages render noindexed, with no sitemap entry and no
-// Product/FAQPage JSON-LD. SKUs 4 to 6 stay card-only until batch 2.
+// PDP batches 1 and 2 (owner spec, 2026-09-25): all 6 SKUs (CAP-CBL-01
+// to 06) carry full draft PDP content, so every card links (the sitewide
+// `isDraftPdpReachable()` rule) and each page renders noindexed, with no
+// sitemap entry and no Product/FAQPage JSON-LD.
 // Key facts, spec subtitle and the operational FAQs are the shared PDP
 // defaults (./pdpShared.ts); "How we customize" is set once below.
-import type { Category, StyleCard } from "./types";
+import type { Category } from "./types";
 import { faqGetStarted } from "./pdpShared";
 
 const CUSTOMIZATION_PILLS = ["Custom fabric", "Custom color & print", "Your fit", "Your branding", "Custom labels", "Custom packaging"];
@@ -31,11 +31,6 @@ const QUALITY_SUBLINE = "We confirm it all on your sample before a single bulk p
 // Alt-only gallery (no photography yet): 6 frames, alt = the card name.
 function gallery(alt: string) {
   return Array.from({ length: 6 }, () => ({ alt }));
-}
-
-// Card-only draft (batch 2 adds the PDP content, then the card links).
-function cardOnly(sku: string, slug: string, cardTitle: string, cardSubline: string): StyleCard {
-  return { status: "draft", slug, cardTitle, cardSubline, image: "", imageAlt: cardTitle, href: `${PLP}/${slug}`, sku };
 }
 
 export const compressionBaseLayers: Category = {
@@ -211,8 +206,7 @@ export const compressionBaseLayers: Category = {
     ],
   },
   // 6 drafts, SKU order (CAP-CBL-01 to 06). Card and image alt text is the
-  // card name exactly. 1 to 3 carry PDP content (batch 1); 4 to 6 are
-  // card-only until batch 2.
+  // card name exactly. 1 to 3 from batch 1, 4 to 6 from batch 2.
   styleCards: [
     {
       status: "draft",
@@ -398,9 +392,193 @@ export const compressionBaseLayers: Category = {
         "Every run inspected to AQL 2.5, third-party inspection welcome",
       ],
     },
-    cardOnly("CAP-CBL-04", "compression-tights", "Custom Compression Tights", "Full-length, second-skin base-layer fit"),
-    cardOnly("CAP-CBL-05", "compression-shorts", "Custom Compression Shorts", "Mid-thigh length, second-skin fit"),
-    cardOnly("CAP-CBL-06", "thermal-compression-top", "Custom Brushed Thermal Compression Top", "Brushed interior, long sleeve, cold-weather"),
+    {
+      status: "draft",
+      slug: "compression-tights",
+      cardTitle: "Custom Compression Tights",
+      cardSubline: "Full-length, second-skin base-layer fit",
+      image: "",
+      imageAlt: "Custom Compression Tights",
+      href: `${PLP}/compression-tights`,
+      sku: "CAP-CBL-04",
+      pdpHeading: "Custom Compression Tights Manufacturer",
+      pdpDescription:
+        "Full-length compression tights with a second-skin fit, a gusset and flatlock seams, custom and private label, in a Nylon/Spandex or Polyester/Spandex knit, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Compression Tights Manufacturer",
+      pdpMetaDescription:
+        "Custom compression tights manufacturer, private label, Nylon/Spandex or Polyester/Spandex knit, gusset, flatlock seams, MOQ 50, DDP to 20+ countries.",
+      images: gallery("Custom Compression Tights"),
+      material: "Nylon/Spandex or Polyester/Spandex compression knit",
+      pdpFabricPills: ["Nylon/Spandex", "Polyester/Spandex", "Brushed Polyester/Spandex"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What are the compression tights made from?",
+          a: "The compression tights are built in a Nylon/Spandex or Polyester/Spandex compression knit. The exact blend and weight are confirmed on your sample, and a brushed Polyester/Spandex is available for cold weather.",
+        },
+        {
+          q: "How are the compression tights different from your leggings?",
+          a: "The compression tights are cut close in a higher-Spandex knit as a base layer for training and cold-weather sport, often worn under shorts. Our Leggings range covers women's training and lifestyle leggings with higher rises and waistband styles.",
+        },
+        {
+          q: "Can the compression tights be made in a 3/4 length?",
+          a: "Yes. The compression tights are full-length as standard, and a 3/4 length can be cut to your spec in the same fabric and build.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Compression Shorts", slug: "compression-shorts", href: PLP },
+        { label: "Custom Brushed Thermal Compression Top", slug: "thermal-compression-top", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Full-length compression tights" },
+        { label: "Fabric", value: SPEC_FABRIC },
+        { label: "Weight", value: SPEC_WEIGHT },
+        { label: "Fit", value: SPEC_FIT },
+        { label: "Waistband", value: "Elastic waistband, drawcord optional" },
+        { label: "Gusset", value: "Crotch gusset for freedom of movement" },
+        { label: "Length", value: "Full-length, 3/4 length to your spec" },
+        { label: "Seams", value: "Flatlock, low-profile and chafe-free" },
+        { label: "Construction", value: "Cut-and-sew, paneled to your spec" },
+        { label: "Branding", value: SPEC_BRANDING },
+      ],
+      specificationsImage: { alt: "Custom Compression Tights" },
+      pdpQualityHeading: "Full length, full range of motion",
+      pdpQualitySubline: QUALITY_SUBLINE,
+      pdpQualityPoints: [
+        "Opacity checked at full stretch, in a deep squat",
+        "Stretch and recovery checked after repeated wear and wash, no bagging at the knee or seat",
+        "Waistband checked for hold without rolling",
+        "Gusset and inseam seams checked through movement",
+        "Fit tested at multiple sizes across the run",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+    },
+    {
+      status: "draft",
+      slug: "compression-shorts",
+      cardTitle: "Custom Compression Shorts",
+      cardSubline: "Mid-thigh length, second-skin fit",
+      image: "",
+      imageAlt: "Custom Compression Shorts",
+      href: `${PLP}/compression-shorts`,
+      sku: "CAP-CBL-05",
+      pdpHeading: "Custom Compression Shorts Manufacturer",
+      pdpDescription:
+        "Mid-thigh compression shorts with a second-skin fit, a gusset and flatlock seams, custom and private label, in a Nylon/Spandex or Polyester/Spandex knit, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Compression Shorts Manufacturer",
+      pdpMetaDescription:
+        "Custom compression shorts manufacturer, private label, mid-thigh Nylon/Spandex or Polyester/Spandex knit, gusset, flatlock seams, MOQ 50, DDP to 20+ countries.",
+      images: gallery("Custom Compression Shorts"),
+      material: "Nylon/Spandex or Polyester/Spandex compression knit",
+      pdpFabricPills: FABRIC_PILLS,
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What are the compression shorts made from?",
+          a: "The compression shorts are built in a Nylon/Spandex or Polyester/Spandex compression knit. The exact blend and weight are confirmed on your sample, and recycled Polyester/Spandex is an option.",
+        },
+        {
+          q: "Can the compression shorts be worn under team shorts?",
+          a: "Yes. The compression shorts sit flat with low-profile flatlock seams, so they layer under match or training shorts as a base layer.",
+        },
+        {
+          q: "Can you change the inseam on the compression shorts?",
+          a: "Yes. The compression shorts are mid-thigh as standard, and the inseam can be cut shorter or longer to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Compression Tights", slug: "compression-tights", href: PLP },
+        { label: "Custom Brushed Thermal Compression Top", slug: "thermal-compression-top", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Compression shorts" },
+        { label: "Fabric", value: SPEC_FABRIC },
+        { label: "Weight", value: SPEC_WEIGHT },
+        { label: "Fit", value: SPEC_FIT },
+        { label: "Inseam", value: "Mid-thigh as standard, shorter or longer to your spec" },
+        { label: "Waistband", value: "Elastic waistband, logo waistband optional" },
+        { label: "Gusset", value: "Crotch gusset for freedom of movement" },
+        { label: "Leg hems", value: "Clean-finished or silicone gripper, to your spec" },
+        { label: "Seams", value: "Flatlock, low-profile and chafe-free" },
+        { label: "Construction", value: "Cut-and-sew, paneled to your spec" },
+        { label: "Branding", value: SPEC_BRANDING },
+      ],
+      specificationsImage: { alt: "Custom Compression Shorts" },
+      pdpQualityHeading: "Stays put, moves with you",
+      pdpQualitySubline: QUALITY_SUBLINE,
+      pdpQualityPoints: [
+        "Leg hems checked so they stay in place without riding up",
+        "Waistband checked for hold without rolling",
+        "Opacity checked at full stretch",
+        "Stretch and recovery checked after repeated wear and wash",
+        "Gusset seams checked through movement",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+    },
+    {
+      status: "draft",
+      slug: "thermal-compression-top",
+      cardTitle: "Custom Brushed Thermal Compression Top",
+      cardSubline: "Brushed interior, long sleeve, cold-weather",
+      image: "",
+      imageAlt: "Custom Brushed Thermal Compression Top",
+      href: `${PLP}/thermal-compression-top`,
+      sku: "CAP-CBL-06",
+      pdpHeading: "Custom Brushed Thermal Compression Top Manufacturer",
+      pdpDescription:
+        "Long-sleeve compression top with a brushed interior for cold weather, a second-skin fit and flatlock seams, custom and private label, in a brushed Polyester/Spandex knit, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Brushed Thermal Compression Top Manufacturer",
+      pdpMetaDescription:
+        "Custom brushed thermal compression top manufacturer, private label, brushed Polyester/Spandex knit, crew or mock neck, MOQ 50, DDP to 20+ countries.",
+      images: gallery("Custom Brushed Thermal Compression Top"),
+      material: "Brushed Polyester/Spandex knit",
+      pdpFabricPills: ["Brushed Polyester/Spandex", "Grid-Back Polyester/Spandex Fleece", "Recycled Polyester/Spandex"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What is the brushed thermal compression top made from?",
+          a: "The brushed thermal compression top is built in a brushed Polyester/Spandex knit, with a soft brushed face inside for warmth. The exact blend and weight are confirmed on your sample, and a grid-back fleece is available.",
+        },
+        {
+          q: "How is the brushed thermal compression top different from the long-sleeve compression top?",
+          a: "The brushed thermal compression top has a brushed interior for warmth in cold weather. The long-sleeve compression top is a lighter knit for training in any season. Both share the same second-skin fit.",
+        },
+        {
+          q: "Can the brushed thermal compression top have a mock neck or thumbholes?",
+          a: "Yes. The brushed thermal compression top is made with a crew neck and plain cuffs as standard, and a mock neck or thumbhole cuffs can be added to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Compression Tights", slug: "compression-tights", href: PLP },
+        { label: "Custom Compression Shorts", slug: "compression-shorts", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Long-sleeve thermal compression top" },
+        { label: "Fabric", value: "Brushed Polyester/Spandex knit, grid-back fleece on request, blend confirmed on your sample." },
+        { label: "Weight", value: SPEC_WEIGHT },
+        { label: "Fit", value: SPEC_FIT },
+        { label: "Interior", value: "Brushed face next to the skin for warmth" },
+        { label: "Neckline", value: "Crew neck, mock neck to your spec" },
+        { label: "Cuffs", value: "Plain cuffs, thumbholes to your spec" },
+        { label: "Seams", value: "Flatlock, low-profile and chafe-free" },
+        { label: "Construction", value: "Cut-and-sew, paneled to your spec" },
+        { label: "Branding", value: SPEC_BRANDING },
+      ],
+      specificationsImage: { alt: "Custom Brushed Thermal Compression Top" },
+      pdpQualityHeading: "Warm inside, second-skin outside",
+      pdpQualitySubline: QUALITY_SUBLINE,
+      pdpQualityPoints: [
+        "Brushed face checked for pilling and shedding after wash",
+        "Stretch and recovery checked after repeated wear and wash",
+        "Spandex content confirmed against your approved fabric",
+        "Fit tested at multiple sizes across the run",
+        "Flatlock seams checked through movement",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
+    },
   ],
   // "You may also be interested in" (owner spec, 2026-09-25): 5 links, this order.
   relatedLinks: [

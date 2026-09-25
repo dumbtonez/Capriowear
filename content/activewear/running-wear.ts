@@ -3,8 +3,8 @@
 // product category: see `CuratedCollection`'s own comment in ./types.ts
 // for why this is a genuinely different shape, not a `Category` variant.
 // This page owns no products; every card below cross-links to an
-// EXISTING page in another category (a real PDP for 15 of the 16, the
-// Compression & Base Layers PLP for the last), so nothing here 404s and
+// EXISTING page in another category (a real PDP for all 16; card 16
+// re-pointed to Compression Tights' own PDP, 2026-09-25), so nothing here 404s and
 // nothing generates a new PDP route under /activewear/running-wear.
 // Rebuilt from the refreshed content, owner spec, 2026-09-25: 16 cards,
 // each with a real `gender` ("Men"/"Women"; unisex cards leave it unset so
@@ -210,6 +210,6 @@ export const runningWear: CuratedCollection = {
     card("hooded-running-windbreaker", "Custom Hooded Running Windbreaker", undefined, "/capriowear/activewear/jackets/hooded-running-windbreaker", "Hooded, lightweight, mesh-lined hood"),
     card("stretch-woven-performance-jacket", "Custom Stretch-Woven Performance Jacket", undefined, "/capriowear/activewear/jackets/stretch-woven-performance", "Full-zip stretch woven, reflective trims"),
     card("striped-quarter-zip-track-top", "Custom Striped Quarter-Zip Track Top", undefined, "/capriowear/activewear/track-jackets/striped-quarter-zip", "Quarter-zip, contrast sleeve stripes"),
-    card("compression-tights", "Custom Compression Tights", undefined, "/capriowear/activewear/compression-base-layers", "Second-skin base-layer fit"),
+    card("compression-tights", "Custom Compression Tights", undefined, "/capriowear/activewear/compression-base-layers/compression-tights", "Second-skin base-layer fit"),
   ],
 };
