@@ -4475,3 +4475,9 @@ Owner spec, `content/activewear/jackets.ts` only. CAP-JKT-07 `chevron-quilted-pu
 Owner spec, `content/activewear/jackets.ts` only. CAP-JKT-10 `lightweight-performance`, CAP-JKT-11 `sherpa-fleece-full-zip` and CAP-JKT-12 `hooded-half-zip` get full draft PDP content, so all 12 Jackets cards now link. Each new PDP's two pills point within batch 4; SKU 1 to 9 pills unchanged. Operational FAQs are the current shared ones. No other PLP content changed. All 12 Jackets PDPs are drafts: noindex/nofollow, out of the sitemap, BreadcrumbList only.
 
 **Verified (deployed on capriowear.vercel.app, cache-busted):** all 3 PDPs 200, noindex/nofollow, BreadcrumbList plus sitewide Organization/WebSite only, and title, meta, H1, description, breadcrumb, image labels, style code, chips, spec order, customize tiles, quality block, 9 FAQs in order, CTA, compliance and pill targets exact. PLP: all 12 cards link to 200 pages, all PLP sections re-checked unchanged. No banned strings, dashes or "waterproof" on the new PDPs; the only "down" is the direction word in SKU 12's owner-supplied FAQ ("opens all the way down"), not insulation. Build checked in a clean worktree before the push.
+
+## Track Jackets PLP: FAQ in-text links, 2026-09-25 (commit c78f387)
+
+Owner spec, `content/activewear/track-jackets.ts` only. FAQ 3 links "Jackets range" to `/capriowear/activewear/jackets`; FAQ 9 links "Tracksuits range" to `/capriowear/activewear/tracksuits`, via each entry's `link` field (one link per answer). Answer text unchanged; the fabric note stays plain text.
+
+**Verified (deployed, cache-busted):** both anchors render in place, both targets 200, visible answer text unchanged, and the FAQPage JSON-LD byte-identical to the pre-change snapshot.
