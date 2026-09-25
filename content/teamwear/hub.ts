@@ -43,12 +43,12 @@ const sportCards: CategoryLink[] = [
   { label: "Ice Hockey", descriptor: "Cut roomy for pads, reinforced elbows", href: "/capriowear/teamwear/ice-hockey" },
   {
     label: "Cycling",
-    descriptor: "Aero jerseys, bib shorts with a fitted chamois",
+    descriptor: "Race-cut jerseys, bib shorts with a fitted chamois",
     href: "/capriowear/teamwear/cycling",
   },
   {
     label: "Rash Guards & Fight Wear",
-    descriptor: "IBJJF-legal rash guards and fight shorts",
+    descriptor: "Competition rash guards and fight shorts",
     href: "/capriowear/teamwear/fight-wear",
   },
 ];
