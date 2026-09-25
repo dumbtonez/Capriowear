@@ -11,8 +11,9 @@
 // fabric note, customization Fabric item, trust bullet 2, 8 FAQs) and draft
 // PDPs for CAP-BKB-01 to 03. The two legacy drafts at game-jersey and
 // reversible-practice-jersey are replaced in full by SKUs 01 and 02 (same
-// slugs). Cards 04 to 08 are card-only drafts: non-links, no route, until
-// their PDP content lands and they switch to links automatically.
+// slugs). Batch 2 (owner spec, 2026-09-25) adds PDP content for CAP-BKB-04
+// to 06 the same way. Cards 07 and 08 are card-only drafts: non-links, no
+// route, until their PDP content lands and they switch to links automatically.
 //
 // Every style is "draft": noindexed, out of the sitemap and the
 // CollectionPage/ItemList, BreadcrumbList only. `draftPdpsReachable` (same
@@ -37,6 +38,7 @@ const PLP = "/capriowear/teamwear/basketball";
 
 const QUALITY_HEADING = "The color you approve, on every kit";
 const PROOF_AND_SAMPLE_SUBLINE = "We confirm it all on your digital proof and sample before the full roster is produced.";
+const SAMPLE_SUBLINE = "We confirm it all on your sample before the full roster is produced.";
 const NAMES_NUMBERS_POINT = "Names and numbers dyed into the fiber, so they will not crack or peel";
 const AQL_POINT = "Every run inspected to AQL 2.5, third-party inspection welcome";
 
@@ -464,6 +466,68 @@ export const basketball: Category = {
       imageAlt: "Custom Sleeved Basketball Jersey",
       href: `${PLP}/sleeved-jersey`,
       sku: "CAP-BKB-04",
+      pdpHeading: "Custom Sleeved Basketball Jersey Manufacturer",
+      pdpMetaTitle: "Custom Sleeved Basketball Jersey Manufacturer",
+      pdpDescription:
+        "Sleeved basketball jersey, custom and private label, with set-in sleeves and a crew neck, full-dye sublimated with names, numbers and sponsor logos built into the print, in a lightweight polyester micro-mesh, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Sleeved Basketball Jersey"),
+      pdpMetaDescription:
+        "Custom sleeved basketball jersey manufacturer: sublimated mesh jerseys with set-in sleeves, names and numbers in the print, MOQ 50, DDP to 20+ countries.",
+      material: "Lightweight polyester micro-mesh or microfiber body, Polyester/Spandex trims",
+      pdpFabricPills: ["Micro-mesh", "Microfiber", "Polyester interlock", "Polyester/Spandex trim"],
+      pdpCustomizationPills: ["Sublimated names & numbers", "Sleeve graphics", "Pantone color match", "Custom labels"],
+      faqs: [
+        {
+          q: "How is the sleeved basketball jersey different from the basketball game jersey?",
+          a: "The sleeved basketball jersey adds set-in sleeves with a self-fabric cuff to the same sublimated mesh build as the sleeveless basketball game jersey, so both share print files, colors and roster and can be ordered in one kit.",
+        },
+        {
+          q: "Can sleeve graphics be printed on the sleeved basketball jersey?",
+          a: "Yes. The sleeves of the sleeved basketball jersey are sublimated in the same print file as the body, so stripes, numbers and sponsor marks run onto the sleeves at no added cost, with alignment checked on your sample.",
+        },
+        {
+          q: "Can we choose the sleeve length on the sleeved basketball jersey?",
+          a: "Yes. The sleeve length of the sleeved basketball jersey is set to your spec, finished with a self-fabric cuff, and confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Basketball Game Jersey", slug: "game-jersey", href: PLP },
+        { label: "Custom Basketball Shorts", slug: "shorts", href: PLP },
+        { label: "Custom Basketball Shooting Shirt", slug: "shooting-shirt", href: PLP },
+        { label: "Custom Reversible Basketball Practice Jersey", slug: "reversible-practice-jersey", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Sleeved basketball jersey (base type)" },
+        { label: "Fabric", value: "Lightweight polyester micro-mesh or microfiber body, Polyester/Spandex trims" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Neckline", value: "Crew neck, finished with a flat binding" },
+        { label: "Sleeve", value: "Set-in sleeves in a length to your spec, with a self-fabric cuff" },
+        { label: "Hem", value: "Straight hem, or a drop-tail with a longer back panel, to your spec" },
+        { label: "Decoration and color", value: "Full-dye sublimation across the body and sleeves, including fades and gradients, Pantone matched, with names, numbers and sponsor logos in the print. Tackle twill or sublimation twill optional." },
+        { label: "Fit", value: "Team cut or fitted, graded XS to 5XL, men's, women's and youth blocks" },
+        { label: "Construction", value: "Flatlock or overlock seams, mesh underarm panels optional" },
+        { label: "Branding", value: "Team crest, sponsor logos, jock tag at the hem, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Sleeved Basketball Jersey" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Print and artwork", "Full-dye sublimation across the body and sleeves, unlimited colors, fades and gradients in one file at one cost"],
+        ["Names and numbers", "Built into the print file per player, or tackle twill and sublimation twill for a raised look"],
+        ["Branding", "Embroidered or sublimated crests, sponsor logos, jock tag"],
+        ["Fabric", "Any polyester knit and weight, sourced or matched to your reference"],
+        ["Color", "Pantone, CMYK, RGB or hex matched, confirmed on your digital proof"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: PROOF_AND_SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Digital proof and Pantone match approved before we cut",
+        "Sleeve and body print aligned across seams and checked on your sample",
+        NAMES_NUMBERS_POINT,
+        "The full roster produced in one run, same fabric roll and print batch, so every kit matches",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -474,6 +538,68 @@ export const basketball: Category = {
       imageAlt: "Custom Basketball Shooting Shirt",
       href: `${PLP}/shooting-shirt`,
       sku: "CAP-BKB-05",
+      pdpHeading: "Custom Basketball Shooting Shirt Manufacturer",
+      pdpMetaTitle: "Custom Basketball Shooting Shirt Manufacturer",
+      pdpDescription:
+        "Basketball shooting shirt, custom and private label, a pre-game warm-up top in brushed polyester fleece or a performance knit, with your team colors, crest and player details, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Basketball Shooting Shirt"),
+      pdpMetaDescription:
+        "Custom basketball shooting shirt manufacturer: warm-up tops in brushed fleece or performance knit, crew, hood or quarter-zip, MOQ 50, DDP to 20+ countries.",
+      material: "Brushed-back polyester fleece or a lighter performance knit",
+      pdpFabricPills: ["Brushed polyester fleece", "Performance knit", "Recycled polyester fleece", "Rib-knit trims"],
+      pdpCustomizationPills: ["Crew, hood or quarter-zip", "Sublimated or embroidered", "Team colors", "Custom labels"],
+      faqs: [
+        {
+          q: "How is the basketball shooting shirt different from the basketball game jersey?",
+          a: "The basketball shooting shirt is a sleeved warm-up top worn over the game jersey for pre-game shooting and bench wear, built in brushed fleece or a performance knit. The basketball game jersey is a lightweight sleeveless mesh match top.",
+        },
+        {
+          q: "Can the basketball shooting shirt carry player names and numbers?",
+          a: "Yes. Player names, numbers and sponsor marks are sublimated on a performance-knit basketball shooting shirt, or printed or embroidered on fleece, placed to your spec.",
+        },
+        {
+          q: "Which necklines are available on the basketball shooting shirt?",
+          a: "The basketball shooting shirt is built with a crew neck, a hood or a quarter-zip with a stand collar, chosen per program and confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Basketball Warm-Up Jacket", slug: "warm-up-jacket", href: PLP },
+        { label: "Custom Basketball Warm-Up Pants", slug: "warm-up-pants", href: PLP },
+        { label: "Custom Basketball Game Jersey", slug: "game-jersey", href: PLP },
+        { label: "Custom Sleeved Basketball Jersey", slug: "sleeved-jersey", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Basketball shooting shirt, pre-game warm-up top (base type)" },
+        { label: "Fabric", value: "Brushed-back polyester fleece or a lighter performance knit, recycled polyester available" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Neck", value: "Crew neck, hood or quarter-zip with a stand collar" },
+        { label: "Sleeve", value: "Long or short sleeve, set-in or raglan" },
+        { label: "Cuffs and hem", value: "Rib-knit or self-fabric, finished flat" },
+        { label: "Decoration and color", value: "Sublimated designs on the performance knit, or solid team colors with printed or embroidered marks on fleece, Pantone matched to your kit" },
+        { label: "Fit", value: "Team cut, graded XS to 5XL, men's, women's and youth blocks" },
+        { label: "Construction", value: "Flatlock and overlock seams" },
+        { label: "Branding", value: "Team crest, player names or numbers, sponsor logos, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Basketball Shooting Shirt" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Neck and build", "Crew neck, hood or quarter-zip, set-in or raglan sleeve"],
+        ["Fabric", "Brushed polyester fleece or performance knit, sourced or matched to your reference"],
+        ["Color and print", "Sublimated designs or solid team colors, Pantone matched to your kit"],
+        ["Decoration", "Printed or embroidered crest, player names, numbers and sponsor marks"],
+        ["Fit", "Team cut, graded across the full size run"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Color Pantone matched to your kit and approved on the sample before we cut",
+        "Crest and player details checked for placement and a clean finish",
+        "Neck, cuffs and hem checked for a flat, even finish across the size run",
+        "The full roster produced in one run, same fabric lot, so every shirt matches",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -484,6 +610,68 @@ export const basketball: Category = {
       imageAlt: "Custom Basketball Scrimmage Vest",
       href: `${PLP}/scrimmage-vest`,
       sku: "CAP-BKB-06",
+      pdpHeading: "Custom Basketball Scrimmage Vest Manufacturer",
+      pdpMetaTitle: "Custom Basketball Scrimmage Vest Manufacturer",
+      pdpDescription:
+        "Basketball scrimmage vest, custom and private label, a lightweight polyester mesh training pinnie cut to pull on over practice wear, in team colors, numbered or plain, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Basketball Scrimmage Vest"),
+      pdpMetaDescription:
+        "Custom basketball scrimmage vest manufacturer: lightweight mesh training pinnies in team colors, numbered or plain, MOQ 50 pieces, DDP to 20+ countries.",
+      material: "Lightweight polyester open mesh or micro-mesh",
+      pdpFabricPills: ["Open mesh", "Micro-mesh", "Polyester knit", "Recycled polyester"],
+      pdpCustomizationPills: ["Numbered or plain", "Contrast colors", "Pull-on fit", "Custom labels"],
+      faqs: [
+        {
+          q: "How is the basketball scrimmage vest different from the reversible practice jersey?",
+          a: "The basketball scrimmage vest is a single-layer mesh pinnie pulled on over practice wear to split squads, while the reversible basketball practice jersey is a two-layer jersey with a full colorway on each side. Many programs order both.",
+        },
+        {
+          q: "Can the basketball scrimmage vest be numbered?",
+          a: "Yes. The basketball scrimmage vest can carry sublimated or printed numbers and team marks, or stay plain, placed to your spec.",
+        },
+        {
+          q: "What colors can the basketball scrimmage vest come in?",
+          a: "The basketball scrimmage vest is cut in any Pantone matched color, usually in contrasting sets so two practice squads read clearly apart.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Reversible Basketball Practice Jersey", slug: "reversible-practice-jersey", href: PLP },
+        { label: "Custom Basketball Game Jersey", slug: "game-jersey", href: PLP },
+        { label: "Custom Basketball Shorts", slug: "shorts", href: PLP },
+        { label: "Custom Basketball Shooting Shirt", slug: "shooting-shirt", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Basketball scrimmage vest, sleeveless training pinnie (base type)" },
+        { label: "Fabric", value: "Lightweight polyester open mesh or micro-mesh" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Cut", value: "Loose pull-on cut that fits over a practice jersey" },
+        { label: "Neck and armholes", value: "Bound neck and armholes, finished flat" },
+        { label: "Hem", value: "Straight hem, finished flat" },
+        { label: "Decoration", value: "Sublimated or printed numbers and team marks, or plain" },
+        { label: "Color", value: "Contrasting colors for practice squads, Pantone matched" },
+        { label: "Fit", value: "Graded XS to 5XL, youth sizes available" },
+        { label: "Branding", value: "Team crest or program mark, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Basketball Scrimmage Vest" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Color", "Contrasting squad colors, Pantone matched"],
+        ["Numbers and marks", "Sublimated or printed numbers and team marks, or plain"],
+        ["Fabric", "Open mesh or micro-mesh, sourced or matched to your reference"],
+        ["Cut and fit", "Loose pull-on cut, graded across the full size run"],
+        ["Branding", "Team crest or program mark"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Vest colors Pantone matched and approved before we cut",
+        "Numbers checked for placement and legibility across sizes",
+        "Bound edges checked for a flat, secure finish after wash",
+        "The full order produced in one run, same fabric roll, so every vest matches",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
