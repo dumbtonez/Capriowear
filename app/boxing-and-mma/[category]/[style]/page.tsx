@@ -25,6 +25,7 @@ import { TrustPoints } from "@/components/sections/TrustPoints";
 import {
   buildCtaSubline,
   categoryEntityFaq,
+  isPublished,
   pdpCustomizationPills,
   pdpCustomizationSteps,
   pdpFaqOperational,
@@ -75,6 +76,9 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical },
+    // A "published" style that fails getPublishReadiness() renders like a
+    // draft: noindexed, schema-less, out of the sitemap (Jumpsuits audit #13).
+    ...(!isPublished(data.product) ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       title: fullTitle,
       description,
@@ -120,6 +124,19 @@ export default async function BoxingMmaStylePage({
 
   return (
     <>
+      {/* ProductCategoryLinks: crawlable "Back to all [Category]" link plus
+          published sibling-PDP links, visually hidden (owner, 2026-09-08).
+          First in the DOM, before Header, so it works as a skip link
+          (Jumpsuits audit #24, 2026-09-25): the first Tab reveals "Back to
+          all [Category]" pinned under the header, the next Tab hides it
+          again. See productCategoryLinks' recipe comment. */}
+      <ProductCategoryLinks
+        categoryLabel={data.category.menuLabel}
+        categoryHref={`/boxing-and-mma/${data.category.slug}`}
+        siblings={data.category.styleCards
+          .filter((card) => isPublished(card) && card.slug !== data.product.slug)
+          .map((card) => ({ label: card.cardTitle, href: card.href }))}
+      />
       {/* Real sitewide Header, Capriosports' own nav content -- see
           app/lifting-gears/page.tsx's own comment for the full reasoning. */}
       <Header
@@ -144,17 +161,20 @@ export default async function BoxingMmaStylePage({
             })),
           )}
         />
-        <JsonLd
-          data={productSchema({
-            name: data.product.cardTitle,
-            url: `${SITE_URL}${data.product.href}`,
-            category: data.category.menuLabel,
-            description,
-            image: productImage,
-            material: data.product.material,
-            group: data.category.group,
-          })}
-        />
+        {isPublished(data.product) ? (
+          <JsonLd
+            data={productSchema({
+              name: data.product.cardTitle,
+              url: `${SITE_URL}${data.product.href}`,
+              category: data.category.menuLabel,
+              description,
+              image: productImage,
+              material: data.product.material,
+              schemaMaterial: data.product.schemaMaterial,
+              group: data.category.group,
+            })}
+          />
+        ) : null}
 
         <div className={productTopRow.root}>
           {data.product.images ? <ProductGallery images={data.product.images} productTitle={productTitle} /> : null}
@@ -201,15 +221,7 @@ export default async function BoxingMmaStylePage({
         ) : null}
 
         <Faq content={{ h2: "Top questions from B2B buyers", items: faqItems }} />
-        <JsonLd data={faqSchema(faqItems)} />
-
-        <ProductCategoryLinks
-          categoryLabel={data.category.menuLabel}
-          categoryHref={`/boxing-and-mma/${data.category.slug}`}
-          siblings={data.category.styleCards
-            .filter((card) => card.status === "published" && card.slug !== data.product.slug)
-            .map((card) => ({ label: card.cardTitle, href: card.href }))}
-        />
+        {isPublished(data.product) ? <JsonLd data={faqSchema(faqItems)} /> : null}
 
         <div id={FINAL_CTA_MARKER_ID} aria-hidden="true" />
         <FinalCta

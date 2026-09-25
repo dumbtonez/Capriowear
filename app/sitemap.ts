@@ -8,13 +8,23 @@
 import type { MetadataRoute } from "next";
 
 import { categories } from "@/content/activewear/categories";
-import { isPublished } from "@/content/activewear/pdpShared";
+import { assertPublishedStylesReady, isPublished } from "@/content/activewear/pdpShared";
 import { boxingMmaCategories } from "@/content/gear/boxing-and-mma/categories";
 import { liftingGearsCategories } from "@/content/gear/lifting-gears/categories";
 import { ALLOW_INDEXING, SITE_URL } from "@/content/site";
 import { sports } from "@/content/teamwear/sports";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  // Build-time publish-readiness check (Jumpsuits audit #13): fails
+  // `next build` if any "published" style in any division is missing a
+  // required field. Runs before the ALLOW_INDEXING early return below, so
+  // it applies while indexing is still switched off too. No-op at runtime.
+  assertPublishedStylesReady([
+    Object.values(categories),
+    Object.values(sports),
+    Object.values(liftingGearsCategories),
+    Object.values(boxingMmaCategories),
+  ]);
   // Same sitewide switch as app/robots.ts and the root layout's robots meta
   // (content/site.ts's ALLOW_INDEXING): while off, serve an empty urlset. A
   // populated sitemap is a discoverability signal even when robots.txt

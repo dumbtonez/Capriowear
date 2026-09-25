@@ -567,6 +567,8 @@ Also gained a `topRule?: "default" | "none"` prop for the same reason: the deskt
 **Used by:** `app/activewear/[category]/[style]/page.tsx`.
 
 ### ProductCategoryLinks — Built, no longer live
+
+**Current state (2026-09-25, Jumpsuits audit #24):** rendered again on every PDP template (activewear, teamwear, lifting gears, boxing & MMA), as the first element in the page, before `Header`, so it acts as a skip link. Visually hidden until focused: the heading is `sr-only`, and each link is `sr-only focus:not-sr-only` and pinned under the fixed header (`focus:fixed focus:top-[84px] focus:left-4`) with a paper background and the sitewide `:focus-visible` accent ring. The first Tab from the top of a PDP shows "Back to all [Category]"; the next Tab hides it. Mouse users never see it. Sibling links list only styles that pass `isPublished()`. The older notes below describe earlier states.
 `components/sections/ProductCategoryLinks.tsx` · recipe: `productCategoryLinks` · removed from both PDP templates 2026-09-07 (owner request: "remove the back to leggings link and the white space, on all PDPs") — no page renders this component any more; left in the library, not deleted, same policy as `IntroLoader`'s own removal.
 
 SEO audit finding (2026-09-02, rule 6): despite this file and `docs/05-plan.md` previously describing a PDP "sibling styles + Back to all [Category]" crawl-loop block as already built, it didn't exist anywhere in `app/activewear/[category]/[style]/page.tsx` — the PDP breadcrumb's own upward link is also `hidden md:block` (owner spec, 2026-08-31), so mobile visitors/crawlers had no visible link back to the parent category at all. Built for real this time.

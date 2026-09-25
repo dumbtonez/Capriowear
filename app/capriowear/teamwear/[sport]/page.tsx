@@ -27,7 +27,7 @@ import { RelatedCategories } from "@/components/sections/RelatedCategories";
 import { TrustPoints } from "@/components/sections/TrustPoints";
 import { WhatWeCover } from "@/components/sections/WhatWeCover";
 import { header } from "@/components/ui/styles";
-import { buildCtaSubline, categoryEntityFaq } from "@/content/activewear/pdpShared";
+import { buildCtaSubline, categoryEntityFaq, isPublished } from "@/content/activewear/pdpShared";
 import { home, teamwearMegaMenu } from "@/content/home";
 import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 import { sports } from "@/content/teamwear/sports";
@@ -71,7 +71,7 @@ export default async function SportPage({ params }: PageProps<"/capriowear/teamw
   if (!data) notFound();
 
   const faqItems = [categoryEntityFaq(data), ...data.faqs];
-  const publishedStyleCards = data.styleCards.filter((card) => card.status === "published");
+  const publishedStyleCards = data.styleCards.filter(isPublished);
 
   return (
     <>

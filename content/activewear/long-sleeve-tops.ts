@@ -941,6 +941,7 @@ export const longSleeveTops: Category = {
       pdpMetaDescription:
         "Women's fitted cropped long-sleeve manufacturer, OEM, ODM and private label, jacquard elastic hem band, performance poly, from 50 pieces, DDP worldwide.",
       material: "Performance poly, at least 75% recycled polyester",
+      schemaMaterial: "Recycled-content performance polyester",
       pdpFabricPills: ["Performance Poly (≥75% Recycled)"],
       faqs: [
         {

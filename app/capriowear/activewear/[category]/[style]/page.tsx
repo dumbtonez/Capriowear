@@ -60,12 +60,14 @@ import { breadcrumbSchema, faqSchema, productSchema } from "@/lib/schema";
 // A style is reachable (route generated, page renders) if it's published,
 // OR it's a draft with real PDP content (`isDraftPdpReachable()`, the one
 // sitewide rule shared with the category PLP, which also makes that card a
-// real link). Card-only drafts stay unreachable and 404. Everything gated by
-// `status` (sitemap, schema, indexing) still reads `status` alone, never
-// this helper, so a reachable draft stays noindexed/schema-less/out of the
-// sitemap exactly like any other draft.
+// real link). Card-only drafts stay unreachable and 404. Indexing, schema
+// and the sitemap read `isPublished()`, never this helper, so a reachable
+// draft stays noindexed/schema-less/out of the sitemap. Reachability reads
+// `status` directly, not `isPublished()`: a "published" style that fails
+// `getPublishReadiness()` still renders, but noindexed and schema-less,
+// exactly like a draft (Jumpsuits audit #13).
 function isReachable(card: { status: "published" | "draft"; pdpHeading?: string; specifications?: unknown[] }) {
-  return isPublished(card) || isDraftPdpReachable(card);
+  return card.status === "published" || isDraftPdpReachable(card);
 }
 
 export function generateStaticParams() {
@@ -185,6 +187,19 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
 
   return (
     <>
+      {/* ProductCategoryLinks: crawlable "Back to all [Category]" link plus
+          published sibling-PDP links, visually hidden (owner, 2026-09-08).
+          First in the DOM, before Header, so it works as a skip link
+          (Jumpsuits audit #24, 2026-09-25): the first Tab reveals "Back to
+          all [Category]" pinned under the header, the next Tab hides it
+          again. See productCategoryLinks' recipe comment. */}
+      <ProductCategoryLinks
+        categoryLabel={data.category.menuLabel}
+        categoryHref={`/capriowear/activewear/${data.category.slug}`}
+        siblings={data.category.styleCards
+          .filter((card) => isPublished(card) && card.slug !== data.product.slug)
+          .map((card) => ({ label: card.cardTitle, href: card.href }))}
+      />
       <Header
         brand={home.nav.brand}
         logo={<Logo stacked className={header.brandLogo} />}
@@ -257,6 +272,7 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
               description,
               image: productImage,
               material: data.product.material,
+              schemaMaterial: data.product.schemaMaterial,
               sku: data.product.sku,
               group: data.category.group,
             })}
@@ -479,23 +495,6 @@ export default async function StylePage({ params }: PageProps<"/capriowear/activ
         {/* Withheld for a draft-with-content style, same reasoning
             as the Product schema above (owner spec, 2026-09-18). */}
         {isPublished(data.product) ? <JsonLd data={faqSchema(faqItems)} /> : null}
-
-        {/* ProductCategoryLinks (SEO audit, 2026-09-02, rule 6) -- built
-            alongside this page but never actually rendered here until now
-            (found while auditing this file for orphaned components):
-            `productCategoryLinks.root` is itself `hidden` at every
-            breakpoint by deliberate owner choice (2026-09-08: "keep it only
-            on the backend for crawling"), so this has zero visible effect,
-            only a crawlable "Back to all [Category]" link plus sibling-PDP
-            links in the DOM. Siblings are this style's own published
-            category-mates, itself excluded. */}
-        <ProductCategoryLinks
-          categoryLabel={data.category.menuLabel}
-          categoryHref={`/capriowear/activewear/${data.category.slug}`}
-          siblings={data.category.styleCards
-            .filter((card) => isPublished(card) && card.slug !== data.product.slug)
-            .map((card) => ({ label: card.cardTitle, href: card.href }))}
-        />
 
         {/* Closing CTA (owner spec, 2026-09-01: "put the same cta from
             PLP") -- the exact same FinalCta component/heading/button/ticker

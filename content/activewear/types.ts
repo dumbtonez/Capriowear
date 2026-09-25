@@ -146,6 +146,13 @@ export type StyleCard = {
    */
   material?: string;
   /**
+   * Explicit plain material for Product schema, only for a `material` that
+   * `lib/schema.ts`'s `plainMaterial()` can't reduce cleanly (e.g. "50/50
+   * or CVC cotton-poly blend"). Same idea as the Sanity `style` schema's
+   * own `schemaMaterial` field. Never rendered visibly.
+   */
+  schemaMaterial?: string;
+  /**
    * This style's own 2 to 3 FAQ questions (owner spec, 2026-09-01) --
    * merged with the shared entity/operational questions
    * (`content/activewear/pdpShared.ts`) on the PDP itself, entity question

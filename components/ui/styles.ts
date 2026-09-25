@@ -8917,11 +8917,23 @@ export const productCategoryLinks = {
   // (`container-p flex-col gap-4 border-t border-line py-8`) only ever
   // mattered for a visible rendering this block was never given, so
   // they're dropped, not carried along unused.
-  root: "sr-only",
-  backLink: "text-base font-medium text-text underline decoration-solid underline-offset-2 hover:opacity-70",
-  siblingsHeading: "text-sm font-medium text-muted",
-  siblingsList: "flex flex-wrap gap-x-4 gap-y-2",
-  siblingLink: "text-base text-text underline decoration-solid underline-offset-2 hover:opacity-70",
+  //
+  // Skip-link pattern (Jumpsuits audit #24, 2026-09-25): the whole block
+  // used to be one `sr-only` wrapper, so its links still took keyboard
+  // focus but stayed invisible. Now only the non-focusable parts are
+  // `sr-only`; each link is `sr-only focus:not-sr-only`, so it appears
+  // (pinned under the fixed 68px header, above the page, with the sitewide
+  // `:focus-visible` accent ring from app/globals.css) only while it has
+  // focus and hides again on blur. A mouse can never focus an invisible
+  // link, so mouse users never see it. `fixed` rather than in-flow so
+  // revealing it never shifts the layout or scrolls the page.
+  root: "",
+  backLink:
+    "sr-only focus:not-sr-only focus:fixed focus:top-[84px] focus:left-4 focus:z-50 focus:rounded-[4px] focus:border focus:border-line focus:bg-paper focus:px-4 focus:py-3 text-base font-medium text-text underline decoration-solid underline-offset-2",
+  siblingsHeading: "sr-only",
+  siblingsList: "",
+  siblingLink:
+    "sr-only focus:not-sr-only focus:fixed focus:top-[84px] focus:left-4 focus:z-50 focus:rounded-[4px] focus:border focus:border-line focus:bg-paper focus:px-4 focus:py-3 text-base text-text underline decoration-solid underline-offset-2",
 };
 
 /* --- RequestSampleForm (/request-a-sample) --------------------------------- */
@@ -8972,8 +8984,12 @@ export const requestSampleForm = {
   // own dash length/gap scales with border width, so the heavier 2px
   // border alone reads as more spaciously dashed than the old 1px line,
   // without needing a hand-built background-image dash pattern.
+  // `[&:has(+input:focus-visible)]` (Jumpsuits audit #24): the real file
+  // input right after this label is `sr-only` (`fileInputHidden`), so it
+  // takes keyboard focus invisibly -- this draws the accent focus ring on
+  // the visible dropzone instead. Same rule on `filePreview` below.
   fileDropzone:
-    "flex h-32 w-full max-w-[500px] cursor-pointer flex-col items-center justify-center gap-2 rounded-[4px] border-2 border-dashed border-[rgba(255,255,255,0.3)] bg-transparent px-4 text-center text-sm text-[#838D97] transition-colors hover:border-accent",
+    "[&:has(+input:focus-visible)]:outline-2 [&:has(+input:focus-visible)]:outline-offset-2 [&:has(+input:focus-visible)]:outline-accent flex h-32 w-full max-w-[500px] cursor-pointer flex-col items-center justify-center gap-2 rounded-[4px] border-2 border-dashed border-[rgba(255,255,255,0.3)] bg-transparent px-4 text-center text-sm text-[#838D97] transition-colors hover:border-accent",
   fileDropzoneIcon: "size-5 text-[#838D97]",
   fileInputHidden: "sr-only",
   // Attached-file preview (owner, 2026-09-10: "once something is attached,
@@ -8994,7 +9010,7 @@ export const requestSampleForm = {
   // with a real border for definition and an accent-tinted icon badge
   // instead of a bare icon, closer to a standard "attached file" chip.
   filePreview:
-    "flex w-full max-w-[500px] items-center justify-between gap-3 rounded-[4px] border border-line bg-paper-2 px-4 py-3",
+    "[&:has(+input:focus-visible)]:outline-2 [&:has(+input:focus-visible)]:outline-offset-2 [&:has(+input:focus-visible)]:outline-accent flex w-full max-w-[500px] items-center justify-between gap-3 rounded-[4px] border border-line bg-paper-2 px-4 py-3",
   filePreviewInfo: "flex min-w-0 items-center gap-3",
   // Accent-tinted badge (10% accent fill, full accent icon) rather than a
   // bare grey paperclip -- reads as "successfully attached," not just a

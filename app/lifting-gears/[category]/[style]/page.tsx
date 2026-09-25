@@ -26,6 +26,7 @@ import { TrustPoints } from "@/components/sections/TrustPoints";
 import {
   buildCtaSubline,
   categoryEntityFaq,
+  isPublished,
   pdpCustomizationPills,
   pdpCustomizationSteps,
   pdpFaqOperational,
@@ -90,7 +91,7 @@ export async function generateMetadata({
     // (app/lifting-gears/[category]/page.tsx), since omitting `robots`
     // would otherwise just inherit the root layout's sitewide default,
     // which flips to indexable at real launch.
-    ...(data.product.status !== "published" ? { robots: { index: false, follow: false } } : {}),
+    ...(!isPublished(data.product) ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       title: fullTitle,
       description,
@@ -136,6 +137,19 @@ export default async function LiftingGearsStylePage({
 
   return (
     <>
+      {/* ProductCategoryLinks: crawlable "Back to all [Category]" link plus
+          published sibling-PDP links, visually hidden (owner, 2026-09-08).
+          First in the DOM, before Header, so it works as a skip link
+          (Jumpsuits audit #24, 2026-09-25): the first Tab reveals "Back to
+          all [Category]" pinned under the header, the next Tab hides it
+          again. See productCategoryLinks' recipe comment. */}
+      <ProductCategoryLinks
+        categoryLabel={data.category.menuLabel}
+        categoryHref={`/lifting-gears/${data.category.slug}`}
+        siblings={data.category.styleCards
+          .filter((card) => isPublished(card) && card.slug !== data.product.slug)
+          .map((card) => ({ label: card.cardTitle, href: card.href }))}
+      />
       {/* Real sitewide Header, Capriosports' own nav content -- see
           app/lifting-gears/page.tsx's own comment for the full reasoning. */}
       <Header
@@ -160,7 +174,7 @@ export default async function LiftingGearsStylePage({
             })),
           )}
         />
-        {data.product.status === "published" ? (
+        {isPublished(data.product) ? (
           <JsonLd
             data={productSchema({
               name: data.product.cardTitle,
@@ -169,6 +183,7 @@ export default async function LiftingGearsStylePage({
               description,
               image: productImage,
               material: data.product.material,
+              schemaMaterial: data.product.schemaMaterial,
               group: data.category.group,
             })}
           />
@@ -219,15 +234,7 @@ export default async function LiftingGearsStylePage({
         ) : null}
 
         <Faq content={{ h2: "Top questions from B2B buyers", items: faqItems }} />
-        {data.product.status === "published" ? <JsonLd data={faqSchema(faqItems)} /> : null}
-
-        <ProductCategoryLinks
-          categoryLabel={data.category.menuLabel}
-          categoryHref={`/lifting-gears/${data.category.slug}`}
-          siblings={data.category.styleCards
-            .filter((card) => card.status === "published" && card.slug !== data.product.slug)
-            .map((card) => ({ label: card.cardTitle, href: card.href }))}
-        />
+        {isPublished(data.product) ? <JsonLd data={faqSchema(faqItems)} /> : null}
 
         <div id={FINAL_CTA_MARKER_ID} aria-hidden="true" />
         <FinalCta

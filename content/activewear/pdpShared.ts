@@ -15,7 +15,7 @@
 import { CAPRIOSPORTS_ORGANIZATION } from "../capriosports/organization";
 import { faqGetStarted } from "../getStarted";
 import { companyIdentity } from "../site";
-import type { Category, FaqEntry, PdpSpecHighlight, RelatedStyleTag } from "./types";
+import type { Category, FaqEntry, PdpSpecHighlight, RelatedStyleTag, StyleCard } from "./types";
 
 // Shared by categoryEntityFaq() and buildCaprioEntityAnswer() below -- the
 // same noun/example-styles/fabrics/audience derivation either brand's
@@ -285,13 +285,106 @@ export const pdpFaqOperational: FaqEntry[] = [
 ];
 
 /**
+ * Image paths that are stand-ins, not product photography: the
+ * placehold.co tiles, the factory test shots and the reference-image
+ * placeholder. A gallery made only of these (or of alt-only entries) does
+ * not count as a real product image for `getPublishReadiness()`.
+ */
+const PLACEHOLDER_IMAGE_PATTERNS = [/placehold\.co/i, /\/factory-test\//i, /\/Product%20images\//i];
+
+export function isRealImageSrc(src: string | undefined): boolean {
+  return Boolean(src?.trim()) && !PLACEHOLDER_IMAGE_PATTERNS.some((pattern) => pattern.test(src!));
+}
+
+/** The fields `getPublishReadiness()` reads -- a subset of `StyleCard`, so a Sanity-mapped style can be checked the same way. */
+export type PublishReadinessInput = Pick<
+  StyleCard,
+  | "slug"
+  | "cardTitle"
+  | "pdpTitle"
+  | "sku"
+  | "pdpHeading"
+  | "pdpMetaTitle"
+  | "pdpMetaDescription"
+  | "pdpDescription"
+  | "specifications"
+  | "faqs"
+  | "images"
+>;
+
+/**
+ * Everything a published PDP needs before it may behave as published
+ * (Jumpsuits audit #13, 2026-09-25). `missing` names each absent field, in
+ * a fixed order, for the server warning and the build check.
+ */
+export function getPublishReadiness(card: PublishReadinessInput): { ready: boolean; missing: string[] } {
+  const checks: [string, boolean][] = [
+    ["sku", Boolean(card.sku?.trim())],
+    ["pdpHeading", Boolean(card.pdpHeading?.trim())],
+    // The PDP derives `Custom ${pdpTitle ?? cardTitle} Manufacturer` when pdpMetaTitle is unset.
+    ["pdpMetaTitle", Boolean((card.pdpMetaTitle ?? card.pdpTitle ?? card.cardTitle)?.trim())],
+    ["pdpMetaDescription", Boolean(card.pdpMetaDescription?.trim())],
+    ["pdpDescription", Boolean(card.pdpDescription?.trim())],
+    ["specifications", Boolean(card.specifications?.length)],
+    ["faqs", Boolean(card.faqs?.length)],
+    ["images (real src)", Boolean(card.images?.some((image) => isRealImageSrc(image.src)))],
+  ];
+  const missing = checks.filter(([, ok]) => !ok).map(([field]) => field);
+  return { ready: missing.length === 0, missing };
+}
+
+const warnedNotReady = new Set<string>();
+
+/**
  * The single "is this style live?" check. Every place that gates on
  * publication (robots/noindex, Product and FAQPage JSON-LD, sitemap, the PLP
- * ItemList, sibling links, route reachability) calls this instead of
- * repeating `status === "published"`, so the gate cannot drift.
+ * ItemList, sibling links) calls this instead of repeating
+ * `status === "published"`, so the gate cannot drift. True only when the
+ * status is "published" AND `getPublishReadiness()` passes: a published
+ * style with a missing field renders exactly like a draft and logs one
+ * server warning naming the SKU and the missing fields. Route reachability
+ * reads `status` directly (see the PDP routes), so such a page still
+ * renders, noindexed, rather than 404ing.
  */
-export function isPublished(card: { status: "published" | "draft" }): boolean {
-  return card.status === "published";
+export function isPublished(card: { status: "published" | "draft" } & Partial<PublishReadinessInput>): boolean {
+  if (card.status !== "published") return false;
+  const { ready, missing } = getPublishReadiness(card as PublishReadinessInput);
+  if (!ready) {
+    const key = card.sku ?? card.slug ?? card.cardTitle ?? "unknown";
+    if (!warnedNotReady.has(key)) {
+      warnedNotReady.add(key);
+      console.warn(
+        `[publish-readiness] ${key} (${card.slug}) has status "published" but is missing: ${missing.join(", ")}. Rendering as a draft.`,
+      );
+    }
+  }
+  return ready;
+}
+
+/**
+ * Build-time backstop for `content/*.ts` (Jumpsuits audit #13): during
+ * `next build`, any published style that isn't ready fails the build with
+ * one message listing every offender. Outside a production build it does
+ * nothing, so at runtime (and later with Sanity data) `isPublished()`'s
+ * draft fallback is the guard instead. Called from `app/sitemap.ts`, the
+ * one file that already walks every category registry in every division.
+ */
+export function assertPublishedStylesReady(registries: { slug: string; styleCards: StyleCard[] }[][]): void {
+  if (process.env.NEXT_PHASE !== "phase-production-build") return;
+  const failures = registries.flatMap((registry) =>
+    registry.flatMap((category) =>
+      category.styleCards
+        .filter((card) => card.status === "published")
+        .map((card) => ({ card, category: category.slug, ...getPublishReadiness(card) }))
+        .filter((result) => !result.ready)
+        .map(({ card, category, missing }) => `  ${category}/${card.slug} (${card.sku ?? "no sku"}): ${missing.join(", ")}`),
+    ),
+  );
+  if (failures.length > 0) {
+    throw new Error(
+      `Publish readiness check failed: ${failures.length} style(s) have status "published" but are missing required fields:\n${failures.join("\n")}`,
+    );
+  }
 }
 
 /**

@@ -16,8 +16,10 @@ export type ProductSchemaInput = {
   description: string;
   /** Absolute URL. Omitted from the schema entirely when there's no real photo yet -- same "no placeholder image" rule as `CollectionPageItem.image`. */
   image?: string;
-  /** Short spec line, e.g. "Nylon or polyamide + elastane, 4-way stretch" -- StyleCard.material. */
+  /** StyleCard.material, which may carry sample/blend qualifiers -- reduced by `plainMaterial()` before it reaches the schema. */
   material?: string;
+  /** StyleCard.schemaMaterial: an explicit plain value for a `material` that `plainMaterial()` can't reduce cleanly. Wins over `material` when set. */
+  schemaMaterial?: string;
   /** The style's own code, e.g. "CAP-LEG-01" -- StyleCard.sku. Omitted from the schema when a style has none. */
   sku?: string;
   /**
@@ -330,7 +332,35 @@ export function collectionOfPagesSchema(name: string, url: string, description: 
 // re-flagging: Capriowear has no fixed public per-unit price to publish
 // (quote-based, made-to-order), so omitting `offers` is the only schema.org
 // -valid option here, not an incomplete implementation.
-export function productSchema({ name, url, category, description, image, material, sku, group }: ProductSchemaInput) {
+/**
+ * The plain material for Product schema (Jumpsuits audit #23, 2026-09-25):
+ * `StyleCard.material` often mirrors the visible Fabric spec row, qualifiers
+ * and all ("Nylon/Spandex 4-way stretch knit, commonly around 78% / 22%,
+ * confirmed on your sample."). Schema carries only the material itself, so
+ * this drops sample-confirmation clauses, "commonly/roughly around" blend
+ * ranges, bare ratio clauses and parentheticals, GSM weights, percentages
+ * ("100% polyester" -> "Polyester") and the trailing period. The visible
+ * spec row is never touched. Verified clean against every existing value;
+ * any value it can't reduce cleanly gets an explicit `schemaMaterial`.
+ */
+export function plainMaterial(value: string): string {
+  const plain = value
+    .trim()
+    .replace(/\.$/, "")
+    .replace(/,\s*(blend\s+)?confirmed on your sample/gi, "")
+    .replace(/\s*,?\s*(commonly|roughly)\s+(around\s+)?[^,]*/gi, "")
+    .replace(/,\s*\d+\s*GSM\b/gi, "")
+    .replace(/,\s*\d+%?\s*\/\s*\d+%?(\s*\/\s*\d+%?)*/g, "")
+    .replace(/\s*\([^)]*\d[^)]*\)/g, "")
+    .replace(/\b(at least\s+)?\d+%\s*/gi, "")
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s+,/g, ",")
+    .trim();
+  return plain.charAt(0).toUpperCase() + plain.slice(1);
+}
+
+export function productSchema({ name, url, category, description, image, material, schemaMaterial, sku, group }: ProductSchemaInput) {
+  const materialValue = schemaMaterial ?? (material ? plainMaterial(material) : undefined);
   // Gear (group: "Gear" -- Lifting Gears, Boxing & MMA) has its own brand
   // identity, "Caprio," separate from its sibling division Capriowear
   // (group: "Activewear"/"Teamwear"), matching the "Caprio" name already
@@ -352,7 +382,7 @@ export function productSchema({ name, url, category, description, image, materia
     // visible copy). The sitewide Organization node has no @id to reference.
     manufacturer: { "@type": "Organization", name: CAPRIOSPORTS_ORGANIZATION.legalName },
     ...(image ? { image } : {}),
-    ...(material ? { material } : {}),
+    ...(materialValue ? { material: materialValue } : {}),
     ...(sku ? { sku } : {}),
   };
 }

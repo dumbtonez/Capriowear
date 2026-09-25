@@ -493,6 +493,7 @@ export const tShirts: Category = {
       pdpMetaDescription:
         "Custom men's relaxed t-shirt manufacturer, OEM and private label, roomier everyday cut, 50/50 or CVC cotton-poly, low shrink, from 50 pieces, DDP worldwide.",
       material: "50/50 or CVC cotton-poly blend",
+      schemaMaterial: "Cotton-poly blend",
       pdpFabricPills: ["50/50 cotton-poly", "CVC cotton-poly", "Combed cotton", "Tri-blend"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [
@@ -1235,6 +1236,7 @@ export const tShirts: Category = {
       pdpMetaDescription:
         "Custom women's relaxed t-shirt manufacturer, OEM, ODM and private label, softer roomier everyday fit, cotton-poly or CVC blend, from 50 pieces, DDP worldwide.",
       material: "50/50 or CVC cotton-poly blend",
+      schemaMaterial: "Cotton-poly blend",
       pdpFabricPills: ["50/50 cotton-poly", "CVC cotton-poly", "Combed cotton", "Tri-blend"],
       pdpCustomizationPills: ["Your weight", "Your branding", "Custom labels", "Custom packaging"],
       faqs: [

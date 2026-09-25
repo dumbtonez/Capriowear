@@ -26,7 +26,7 @@ import { RelatedCategories } from "@/components/sections/RelatedCategories";
 import { TrustPoints } from "@/components/sections/TrustPoints";
 import { WhatWeCover } from "@/components/sections/WhatWeCover";
 import { footer, header } from "@/components/ui/styles";
-import { buildCtaSubline, categoryEntityFaq } from "@/content/activewear/pdpShared";
+import { buildCtaSubline, categoryEntityFaq, isPublished } from "@/content/activewear/pdpShared";
 import { capriosportsHome } from "@/content/capriosports/home";
 import { home, liftingGearsMegaMenu } from "@/content/home";
 import { CAPRIOSPORTS_ORGANIZATION } from "@/content/capriosports/organization";
@@ -79,7 +79,7 @@ export default async function LiftingGearsCategoryPage({ params }: PageProps<"/l
   if (!data) notFound();
 
   const faqItems = [categoryEntityFaq(data), ...data.faqs];
-  const publishedStyleCards = data.styleCards.filter((card) => card.status === "published");
+  const publishedStyleCards = data.styleCards.filter(isPublished);
 
   return (
     <>
