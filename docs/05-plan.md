@@ -4507,3 +4507,9 @@ From the Jumpsuits audit (#13, #23, #24). No visible copy changes.
 **Verified locally:** tsc, eslint (0 errors, 1 pre-existing warning), `npm run build` clean with zero readiness warnings; Playwright `screenshots.spec.ts` 45/45; Tab test at 1440 and 375: first Tab focuses and shows "Back to all Jumpsuits" at (16, 84) with a 2px accent outline, no scroll, no overflow; second Tab moves to the logo and the link collapses back to 1×1.
 
 **Follow-up (same day, owner):** `plainMaterial()` now keeps a definitive single-fiber "100%" ("100% polyester", "100% cotton"). It still strips approximate figures ("commonly around 78% / 22%", "at least 75%"), ratio parentheticals and confirmation clauses. 19 of the 112 schema outputs change, all of them restoring a "100%"; no output contains an approximate percentage, a ratio, a confirmation clause or a trailing period.
+
+## Running Wear: Fabric options section, 2026-09-25 (commit 60a2b8e)
+
+Owner spec. `CuratedCollection` gained the optional `fabricEyebrow`/`fabricHeading`/`fabricOptions`/`fabricNote` fields (same shape as `Category`'s); Running Wear sets them (6 rows, note with Leggings' bold pattern) and its page renders the shared `FabricOptions` between the card grid and Customization, so the order now matches every category PLP (Fabric, Customization, Trust). `WhatWeCover`'s `leading` prop is now only set when there is no fabric table.
+
+**Verified (deployed, cache-busted, capriowear.vercel.app):** section sits between the cards and Customization; eyebrow, H2, all 6 rows and the note exact; the only new H2 is "The fabrics behind the big brands"; 16 cards in order, toggle still All 16 / Women 11 / Men 9 with `aria-pressed`; 15 FAQs and schema types (BreadcrumbList, FAQPage + sitewide) unchanged; no em/en dashes, no "waterproof". Grid to fabric-heading spacing at 1440px matches Leggings (1915px vs 1914px).
