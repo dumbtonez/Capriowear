@@ -44,7 +44,7 @@ export default defineType({
       type: "string",
       group: "identity",
       options: {
-        list: ["Tops", "Bottoms", "Sets & One-Pieces", "Outerwear & Suits", "Base Layers", "Sport"],
+        list: ["Tops", "Bottoms", "Outerwear & Suits", "One-Pieces", "Base Layers", "Sport"],
       },
       validation: (Rule) => Rule.required(),
     }),

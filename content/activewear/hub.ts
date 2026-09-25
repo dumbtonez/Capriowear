@@ -83,7 +83,7 @@ const hubGroups: CategoryGroup[] = [
     categories: [
       {
         label: "Compression & Base Layers",
-        descriptor: "Documented mmHg, zonal panelling",
+        descriptor: "Documented mmHg, zonal paneling",
         href: "/capriowear/activewear/compression-base-layers",
       },
     ],
