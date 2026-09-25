@@ -11,9 +11,9 @@
 // fabric note, customization Fabric item, trust bullet 2, 8 FAQs) and draft
 // PDPs for CAP-BKB-01 to 03. The two legacy drafts at game-jersey and
 // reversible-practice-jersey are replaced in full by SKUs 01 and 02 (same
-// slugs). Batch 2 (owner spec, 2026-09-25) adds PDP content for CAP-BKB-04
-// to 06 the same way. Cards 07 and 08 are card-only drafts: non-links, no
-// route, until their PDP content lands and they switch to links automatically.
+// slugs). Batches 2 and 3 (owner spec, 2026-09-25) add PDP content for
+// CAP-BKB-04 to 08 the same way, so all 8 cards link and every style pill
+// resolves to a real PDP.
 //
 // Every style is "draft": noindexed, out of the sitemap and the
 // CollectionPage/ItemList, BreadcrumbList only. `draftPdpsReachable` (same
@@ -682,6 +682,68 @@ export const basketball: Category = {
       imageAlt: "Custom Basketball Warm-Up Jacket",
       href: `${PLP}/warm-up-jacket`,
       sku: "CAP-BKB-07",
+      pdpHeading: "Custom Basketball Warm-Up Jacket Manufacturer",
+      pdpMetaTitle: "Custom Basketball Warm-Up Jacket Manufacturer",
+      pdpDescription:
+        "Basketball warm-up jacket, custom and private label, a full-zip warm-up in polyester tricot or brushed fleece, with a stand collar or hood, team colors and an embroidered or printed crest, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Basketball Warm-Up Jacket"),
+      pdpMetaDescription:
+        "Custom basketball warm-up jacket manufacturer: full-zip tricot or fleece warm-ups in team colors, crest and player details, MOQ 50, DDP to 20+ countries.",
+      material: "Polyester tricot or brushed-back polyester fleece",
+      pdpFabricPills: ["Polyester tricot", "Brushed polyester fleece", "Polyester interlock", "Recycled polyester"],
+      pdpCustomizationPills: ["Stand collar or hood", "Team colors & stripes", "Embroidered crest", "Custom labels"],
+      faqs: [
+        {
+          q: "Can the basketball warm-up jacket be ordered with matching warm-up pants?",
+          a: "Yes. The basketball warm-up jacket is cut from the same fabric and Pantone values as the basketball warm-up pants, so the two can be ordered together as a matched warm-up set.",
+        },
+        {
+          q: "Which fabrics is the basketball warm-up jacket made in?",
+          a: "The basketball warm-up jacket is made in polyester tricot for a smooth, classic warm-up face, or in brushed polyester fleece for more warmth, with recycled polyester available. Weight is confirmed on your sample.",
+        },
+        {
+          q: "Can the basketball warm-up jacket carry player names and numbers?",
+          a: "Yes. Player names, numbers and sponsor marks can be embroidered or printed on the basketball warm-up jacket, placed on the chest, sleeve or back to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Basketball Warm-Up Pants", slug: "warm-up-pants", href: PLP },
+        { label: "Custom Basketball Shooting Shirt", slug: "shooting-shirt", href: PLP },
+        { label: "Custom Basketball Game Jersey", slug: "game-jersey", href: PLP },
+        { label: "Custom Basketball Shorts", slug: "shorts", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Basketball warm-up jacket, full zip (base type)" },
+        { label: "Fabric", value: "Polyester tricot or brushed-back polyester fleece, recycled polyester available" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Zip and collar", value: "Full-length front zip with a stand collar or a hood, and a zip garage at the chin" },
+        { label: "Sleeve", value: "Set-in or raglan sleeve with rib or self-fabric cuffs" },
+        { label: "Pockets", value: "Zip or open side pockets, to your spec" },
+        { label: "Color and decoration", value: "Solid team colors with contrast panels, sleeve stripes or piping, Pantone matched to your kit, with an embroidered or printed crest and player details" },
+        { label: "Fit", value: "Team cut, graded XS to 5XL, men's, women's and youth blocks" },
+        { label: "Construction", value: "Flatlock and overlock seams, rib-knit or self-fabric hem" },
+        { label: "Branding", value: "Team crest, player names or numbers, sponsor logos, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Basketball Warm-Up Jacket" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Collar and build", "Stand collar or hood, set-in or raglan sleeve, zip or open pockets"],
+        ["Fabric", "Polyester tricot or brushed fleece, sourced or matched to your reference"],
+        ["Color", "Solid team colors, contrast panels, sleeve stripes and piping, Pantone matched to your kit"],
+        ["Decoration", "Embroidered or printed crest, player names, numbers and sponsor marks"],
+        ["Fit", "Team cut, graded across the full size run"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Jacket color Pantone matched to your kit and approved on the sample before we cut",
+        "Zips cycled and function-tested before bulk",
+        "Stripes and contrast panels aligned across seams at every size",
+        "The full roster produced in one run, same fabric lot, so every jacket matches",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -692,6 +754,68 @@ export const basketball: Category = {
       imageAlt: "Custom Basketball Warm-Up Pants",
       href: `${PLP}/warm-up-pants`,
       sku: "CAP-BKB-08",
+      pdpHeading: "Custom Basketball Warm-Up Pants Manufacturer",
+      pdpMetaTitle: "Custom Basketball Warm-Up Pants Manufacturer",
+      pdpDescription:
+        "Basketball warm-up pants, custom and private label, in polyester tricot or brushed fleece with an elastic drawcord waist and a straight or tapered leg, matched to your warm-up jacket, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Basketball Warm-Up Pants"),
+      pdpMetaDescription:
+        "Custom basketball warm-up pants manufacturer: tricot or fleece warm-up pants, straight or tapered leg, ankle zips optional, MOQ 50, DDP to 20+ countries.",
+      material: "Polyester tricot or brushed-back polyester fleece",
+      pdpFabricPills: ["Polyester tricot", "Brushed polyester fleece", "Polyester interlock", "Recycled polyester"],
+      pdpCustomizationPills: ["Straight or tapered", "Ankle zips optional", "Matched to your jacket", "Custom labels"],
+      faqs: [
+        {
+          q: "Can the basketball warm-up pants match our warm-up jacket?",
+          a: "Yes. The basketball warm-up pants are cut from the same fabric and Pantone values as your basketball warm-up jacket, and both are confirmed together on your sample before bulk.",
+        },
+        {
+          q: "What leg and hem options are there on the basketball warm-up pants?",
+          a: "The basketball warm-up pants come in a straight or tapered leg, finished with an open hem, a rib cuff or ankle zips so they come off over shoes, chosen per program and confirmed on your sample.",
+        },
+        {
+          q: "Which fabrics are the basketball warm-up pants made in?",
+          a: "The basketball warm-up pants are made in polyester tricot or brushed polyester fleece, with recycled polyester available. Weight is confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Basketball Warm-Up Jacket", slug: "warm-up-jacket", href: PLP },
+        { label: "Custom Basketball Shooting Shirt", slug: "shooting-shirt", href: PLP },
+        { label: "Custom Basketball Shorts", slug: "shorts", href: PLP },
+        { label: "Custom Basketball Game Jersey", slug: "game-jersey", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Basketball warm-up pants (base type)" },
+        { label: "Fabric", value: "Polyester tricot or brushed-back polyester fleece, recycled polyester available" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Waist", value: "Elastic waistband with an internal drawcord, finished flat" },
+        { label: "Leg", value: "Straight or tapered leg, full length" },
+        { label: "Hem", value: "Open hem, rib cuff, or ankle zips so the pants come off over shoes, to your spec" },
+        { label: "Pockets", value: "Zip or open side pockets, to your spec" },
+        { label: "Color and decoration", value: "Solid team colors with side stripes or contrast panels, Pantone matched to your warm-up jacket, with an embroidered or printed mark" },
+        { label: "Fit", value: "Team cut, graded XS to 5XL, men's, women's and youth blocks" },
+        { label: "Branding", value: "Team crest or mark, sponsor logos, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Basketball Warm-Up Pants" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Leg and hem", "Straight or tapered leg, open hem, rib cuff or ankle zips"],
+        ["Fabric", "Polyester tricot or brushed fleece, sourced or matched to your reference"],
+        ["Color", "Solid team colors, side stripes and contrast panels, Pantone matched to your warm-up jacket"],
+        ["Decoration", "Embroidered or printed crest and sponsor marks"],
+        ["Waist and fit", "Elastic drawcord waist, team cut, graded across the full size run"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Pants color matched to your warm-up jacket and approved on the sample before we cut",
+        "Inseam and hem graded and checked across the full size run",
+        "Ankle and pocket zips function-tested before bulk",
+        "The full roster produced in one run, same fabric lot, so every pair matches",
+        AQL_POINT,
+      ],
     },
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, Teamwear sports only,
