@@ -8,10 +8,9 @@
 // PDP batch 1 (owner spec, 2026-09-24): SKUs 1 to 3 carry full draft PDP
 // content, so their cards link (the sitewide `isDraftPdpReachable()` rule)
 // and their pages render noindexed, with no sitemap entry and no
-// Product/FAQPage JSON-LD. The remaining SKUs are card-only drafts: non-clickable,
-// no route, until their PDP content lands in a later batch. Batch 2
-// (owner spec, 2026-09-24) adds SKUs 4 to 6 the same way, and batch 3
-// adds 7 to 9; 10 to 12 remain card-only. "How we
+// Product/FAQPage JSON-LD. Batches 2 to 4 (owner spec, 2026-09-24 to
+// 2026-09-25) add SKUs 4 to 6, 7 to 9 and 10 to 12 the same way, so all
+// 12 cards now link. "How we
 // customize" is set once for the category (6 jacket tiles); key facts,
 // spec subtitle and the operational FAQs are the shared PDP defaults
 // (./pdpShared.ts).
@@ -219,8 +218,8 @@ export const jackets: Category = {
       { title: "Trims and packaging", body: "Woven or printed labels, hangtags, retail-ready packaging", image: { src: "/factory-test/inside-factory-1.jpg", alt: "Trims and packaging" } },
     ],
   },
-  // 12 drafts, SKU-number order (CAP-JKT-01 to 12). SKUs 1 to 9 carry PDP
-  // content; 10 to 12 are card-only. Card and image alt text is the card
+  // 12 drafts, SKU-number order (CAP-JKT-01 to 12). All 12 carry PDP
+  // content. Card and image alt text is the card
   // name exactly.
   styleCards: [
     {
@@ -859,6 +858,66 @@ export const jackets: Category = {
       imageAlt: "Custom Lightweight Performance Jacket",
       href: `${PLP}/lightweight-performance`,
       sku: "CAP-JKT-10",
+      pdpHeading: "Custom Lightweight Performance Jacket Manufacturer",
+      pdpDescription:
+        "Lightweight performance jacket with a notched collar, an angled chest zip pocket and contrast trim, custom and private label, in a light polyester woven, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Lightweight Performance Jacket Manufacturer",
+      pdpMetaDescription:
+        "Custom lightweight performance jacket manufacturer, private label, light polyester woven, notched collar, angled chest zip pocket, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Lightweight Performance Jacket" },
+        { alt: "Custom Lightweight Performance Jacket" },
+        { alt: "Custom Lightweight Performance Jacket" },
+        { alt: "Custom Lightweight Performance Jacket" },
+        { alt: "Custom Lightweight Performance Jacket" },
+        { alt: "Custom Lightweight Performance Jacket" },
+      ],
+      material: "Lightweight polyester woven, blend confirmed on your sample.",
+      pdpFabricPills: ["Polyester Woven", "Polyester/Spandex Stretch Woven", "Recycled Polyester"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What is the lightweight performance jacket made from?",
+          a: "The lightweight performance jacket is built in a light polyester woven with a wind-resistant face. The exact blend and weight are confirmed on your sample, and a stretch woven or recycled polyester is available.",
+        },
+        {
+          q: "Why does the lightweight performance jacket have a notched collar?",
+          a: "The notched collar gives the lightweight performance jacket a sharper, more tailored look than a standard stand collar, which suits travel, coaching staff and off-field team wear.",
+        },
+        {
+          q: "Can the trim colors on the lightweight performance jacket be changed?",
+          a: "Yes. The zip and edge trims on the lightweight performance jacket can be cut in any Pantone matched color to contrast with or match your main shell.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Sherpa Fleece Full-Zip Jacket", slug: "sherpa-fleece-full-zip", href: PLP },
+        { label: "Custom Hooded Half-Zip Jacket", slug: "hooded-half-zip", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Lightweight performance jacket with a notched collar" },
+        { label: "Fabric", value: "Lightweight polyester woven, blend confirmed on your sample." },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Unisex regular fit, graded XS to 5XL" },
+        { label: "Zip and collar", value: "Front zip, notched collar" },
+        { label: "Pockets", value: "Angled chest zip pocket" },
+        { label: "Trim", value: "Contrast zip and edge trim, to your colors" },
+        { label: "Finish", value: "Wind-resistant shell, DWR water-repellent finish on request" },
+        { label: "Cuffs and hem", value: "Self-fabric, elastic or ribbed, to your spec" },
+        { label: "Construction", value: "Cut-and-sew, clean-finished seams" },
+        { label: "Branding", value: "Embroidery, screen, heat transfer, patches, reflective trims, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Lightweight Performance Jacket" },
+      pdpQualityHeading: "Light build, sharp details",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Collar shape and angled pocket checked at every size",
+        "Fabric weight held consistent, batch to batch",
+        "Zips cycled and function-tested before bulk",
+        "Contrast trims checked for colorfastness after wash",
+        "Shrinkage tested after wash, targeted under 5%",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
@@ -869,6 +928,64 @@ export const jackets: Category = {
       imageAlt: "Custom Sherpa Fleece Full-Zip Jacket",
       href: `${PLP}/sherpa-fleece-full-zip`,
       sku: "CAP-JKT-11",
+      pdpHeading: "Custom Sherpa Fleece Full-Zip Jacket Manufacturer",
+      pdpDescription:
+        "Full-zip sherpa fleece jacket with a stand collar and drawcord toggle, custom and private label, in a high-pile polyester sherpa fleece, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Sherpa Fleece Full-Zip Jacket Manufacturer",
+      pdpMetaDescription:
+        "Custom sherpa fleece full-zip jacket manufacturer, private label, polyester sherpa fleece, stand collar with drawcord toggle, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Sherpa Fleece Full-Zip Jacket" },
+        { alt: "Custom Sherpa Fleece Full-Zip Jacket" },
+        { alt: "Custom Sherpa Fleece Full-Zip Jacket" },
+        { alt: "Custom Sherpa Fleece Full-Zip Jacket" },
+        { alt: "Custom Sherpa Fleece Full-Zip Jacket" },
+        { alt: "Custom Sherpa Fleece Full-Zip Jacket" },
+      ],
+      material: "100% polyester sherpa fleece",
+      pdpFabricPills: ["Polyester Sherpa Fleece", "Polyester Polar Fleece", "Recycled Polyester Fleece"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What is the difference between sherpa fleece and polar fleece?",
+          a: "Sherpa fleece has a deep, high-pile face that looks like shearling, while polar fleece is brushed flat on both sides. The sherpa fleece full-zip jacket reads warmer and more textured, and the polar fleece full-zip jacket is lighter and smoother.",
+        },
+        {
+          q: "What is the sherpa fleece full-zip jacket made from?",
+          a: "The sherpa fleece full-zip jacket is built in 100% polyester sherpa fleece. The weight is set to your spec and confirmed on your sample, and recycled polyester fleece is an option.",
+        },
+        {
+          q: "Can you put a logo on the sherpa fleece full-zip jacket?",
+          a: "Yes. Embroidery and woven patches sit well on the high pile of the sherpa fleece full-zip jacket, and a smooth contrast panel can be added at the chest for a cleaner logo placement.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Lightweight Performance Jacket", slug: "lightweight-performance", href: PLP },
+        { label: "Custom Hooded Half-Zip Jacket", slug: "hooded-half-zip", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Full-zip sherpa fleece jacket, no hood" },
+        { label: "Fabric", value: "100% polyester sherpa fleece" },
+        { label: "Weight", value: "Pending, confirmed on your sample." },
+        { label: "Fit", value: "Unisex regular fit, graded XS to 5XL" },
+        { label: "Zip and collar", value: "Full-length zip, stand collar with drawcord toggle" },
+        { label: "Pockets", value: "Zip or open hand pockets, to your spec" },
+        { label: "Cuffs and hem", value: "Self-fabric, elastic or ribbed, to your spec" },
+        { label: "Construction", value: "Cut-and-sew, clean-finished seams" },
+        { label: "Branding", value: "Embroidery, screen, heat transfer, patches, reflective trims, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Sherpa Fleece Full-Zip Jacket" },
+      pdpQualityHeading: "High-pile warmth, clean finish",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Pile checked for shedding and matting after wash",
+        "Fabric weight held consistent, batch to batch",
+        "Collar drawcord and toggle checked for a secure fixing",
+        "Zip cycled and function-tested before bulk",
+        "Shrinkage tested after wash, targeted under 5%",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
     {
       status: "draft",
@@ -879,6 +996,64 @@ export const jackets: Category = {
       imageAlt: "Custom Hooded Half-Zip Jacket",
       href: `${PLP}/hooded-half-zip`,
       sku: "CAP-JKT-12",
+      pdpHeading: "Custom Hooded Half-Zip Jacket Manufacturer",
+      pdpDescription:
+        "Hooded half-zip pullover jacket with a mesh-lined hood and taped zip pockets, custom and private label, in a 240 GSM polyester, made to your brand in Sialkot, Pakistan.",
+      pdpMetaTitle: "Custom Hooded Half-Zip Jacket Manufacturer",
+      pdpMetaDescription:
+        "Custom hooded half-zip jacket manufacturer, private label, 240 GSM polyester, mesh-lined hood, taped zip pockets, pullover build, MOQ 50, DDP to 20+ countries.",
+      images: [
+        { alt: "Custom Hooded Half-Zip Jacket" },
+        { alt: "Custom Hooded Half-Zip Jacket" },
+        { alt: "Custom Hooded Half-Zip Jacket" },
+        { alt: "Custom Hooded Half-Zip Jacket" },
+        { alt: "Custom Hooded Half-Zip Jacket" },
+        { alt: "Custom Hooded Half-Zip Jacket" },
+      ],
+      material: "100% polyester",
+      pdpFabricPills: ["Polyester", "Recycled Polyester", "Polyester/Spandex"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What is the difference between a half-zip jacket and a full-zip jacket?",
+          a: "A half-zip jacket pulls on over the head with a zip to mid-chest, a lighter, simpler layer for training and travel. The hooded half-zip jacket adds a hood and zip pockets. A full-zip jacket opens all the way down. We make both.",
+        },
+        {
+          q: "What is the hooded half-zip jacket made from?",
+          a: "The hooded half-zip jacket is built in 240 GSM polyester with a mesh-lined hood. The final weight is confirmed on your sample, and recycled polyester is an option.",
+        },
+        {
+          q: "Why are the zip pockets on the hooded half-zip jacket taped?",
+          a: "The taped edges give the zip pockets on the hooded half-zip jacket a clean, durable finish and stop the pocket openings from fraying. They are a finishing detail, set to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Lightweight Performance Jacket", slug: "lightweight-performance", href: PLP },
+        { label: "Custom Sherpa Fleece Full-Zip Jacket", slug: "sherpa-fleece-full-zip", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Hooded half-zip pullover jacket" },
+        { label: "Fabric", value: "100% polyester" },
+        { label: "Weight", value: "240 GSM. Final weight confirmed on your sample." },
+        { label: "Fit", value: "Unisex regular fit, graded XS to 5XL" },
+        { label: "Zip and hood", value: "Half-length zip, attached hood with mesh lining" },
+        { label: "Pockets", value: "Zip pockets with taped edges" },
+        { label: "Cuffs and hem", value: "Self-fabric, elastic or ribbed, to your spec" },
+        { label: "Construction", value: "Cut-and-sew, clean-finished seams" },
+        { label: "Branding", value: "Embroidery, screen, heat transfer, patches, reflective trims, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Custom Hooded Half-Zip Jacket" },
+      pdpQualityHeading: "Pull-on build, pockets that hold",
+      pdpQualitySubline: "We confirm it all on your sample before a single bulk piece is cut.",
+      pdpQualityPoints: [
+        "Taped pocket edges checked for a clean, secure finish after wash",
+        "GSM held consistent, batch to batch",
+        "Zips cycled and function-tested before bulk",
+        "Mesh hood lining checked for a clean, secure finish",
+        "Colorfastness checked after wash",
+        "Every run inspected to AQL 2.5, third-party inspection welcome",
+      ],
     },
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, same L1 group first
