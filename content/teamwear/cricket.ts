@@ -14,10 +14,10 @@
 // mmHg weight tier table. See StructuredBlock's own comment
 // (content/activewear/types.ts).
 //
-// 8 styles, all "draft" (owner spec, 2026-09-25). 01 to 06 carry PDP
+// 8 styles, all "draft" (owner spec, 2026-09-25). All 8 carry PDP
 // content and render as noindexed draft PDPs (BreadcrumbList only, out of
-// the sitemap and the CollectionPage/ItemList), with their cards linking;
-// 07 and 08 are card-only non-links. See the styleCards comment below.
+// the sitemap and the CollectionPage/ItemList), with their cards linking.
+// See the styleCards comment below.
 //
 // No cricket GSM number is ever stated (owner spec) -- every fabric-weight
 // reference here is deliberately worded as "tuned to your format/climate
@@ -26,12 +26,13 @@
 // American spelling, no en/em dashes, "spandex" never "elastane"/"Lycra",
 // never "seamless" -- confirmed throughout, same standing sitewide rules
 // every category follows.
-import type { Category, StyleCard } from "../activewear/types";
+import type { Category } from "../activewear/types";
 import { faqGetStarted } from "../getStarted";
 
 const PLP = "/capriowear/teamwear/cricket";
 
 const QUALITY_HEADING = "The color you approve, on every kit";
+const SAMPLE_SUBLINE = "We confirm it all on your sample before the full roster is produced.";
 const PROOF_AND_SAMPLE_SUBLINE = "We confirm it all on your digital proof and sample before the full roster is produced.";
 const NAMES_NUMBERS_POINT = "Names and numbers dyed into the fiber, so they will not crack or peel";
 const ROSTER_POINT = "The full roster produced in one run, same fabric roll and print batch, so every kit matches";
@@ -69,7 +70,7 @@ const TROUSER_WAIST = "Elastic waistband with an internal drawcord, finished fla
 const TROUSER_LEG_AND_HEM =
   "Straight leg, full length. The hem is finished to your length, or left open on request so it can be taken up or let down as a player grows.";
 const TROUSER_VENTILATION = "Mesh panels at the inside leg and the internal back yoke";
-const TROUSER_FIT = "Team cut, graded XS to 5XL, men's, women's and unisex blocks";
+const TEAM_CUT_FIT = "Team cut, graded XS to 5XL, men's, women's and unisex blocks";
 const TROUSER_CONSTRUCTION = "Flatlock and overlock seams, side pockets optional";
 const TROUSER_FABRIC_STEP: Step = [
   "Fabric",
@@ -96,11 +97,6 @@ function customizeSteps(steps: Step[]) {
 // Alt-only gallery (no photography yet): 6 frames, alt = the card name.
 function gallery(alt: string) {
   return Array.from({ length: 6 }, () => ({ alt }));
-}
-
-// Card-only draft (a later batch adds the PDP content, then the card links).
-function cardOnly(sku: string, slug: string, cardTitle: string, cardSubline: string): StyleCard {
-  return { status: "draft", slug, cardTitle, cardSubline, image: "", imageAlt: cardTitle, href: `${PLP}/${slug}`, sku };
 }
 
 export const cricket: Category = {
@@ -274,10 +270,8 @@ export const cricket: Category = {
   draftPdpsReachable: true,
   // 8 drafts, SKU order (CAP-CRK-01 to 08), owner spec 2026-09-25. Card
   // title = H1 minus " Manufacturer" = title-tag name = breadcrumb = alt =
-  // every pill label that targets it. 01 to 03 (batch 1) and 04 to 06
-  // (batch 2) carry PDP content (reachable noindexed drafts via
-  // `draftPdpsReachable`); 07 and 08 are card-only non-links until their
-  // own batch. Nothing publishes until the
+  // every pill label that targets it. All 8 carry PDP content (batches 1
+  // to 3), rendered as reachable noindexed drafts via `draftPdpsReachable`. Nothing publishes until the
   // roster is confirmed, the style sampled and real photos exist
   // (getPublishReadiness()). Fleece Pullover and Cap re-added by the owner
   // (2026-09-25), superseding the 2026-09-05 headwear removal.
@@ -422,7 +416,7 @@ export const cricket: Category = {
         PACKAGING_STEP,
       ]),
       pdpQualityHeading: QUALITY_HEADING,
-      pdpQualitySubline: "We confirm it all on your sample before the full roster is produced.",
+      pdpQualitySubline: SAMPLE_SUBLINE,
       pdpQualityPoints: [
         "Contrast trim and crest color Pantone matched and approved before we cut",
         "Crest and trim finished clean and flat, with no puckering",
@@ -562,7 +556,7 @@ export const cricket: Category = {
           value:
             "Sublimated or solid in your team colors, Pantone matched to the colored match jersey, with sublimated or embroidered crest and sponsor marks",
         },
-        { label: "Fit", value: TROUSER_FIT },
+        { label: "Fit", value: TEAM_CUT_FIT },
         { label: "Construction", value: TROUSER_CONSTRUCTION },
         { label: "Branding", value: SPEC_BRANDING },
       ],
@@ -641,7 +635,7 @@ export const cricket: Category = {
           label: "Color and decoration",
           value: "White or near-white body matched to your whites shirt, with an embroidered crest or sponsor marks optional",
         },
-        { label: "Fit", value: TROUSER_FIT },
+        { label: "Fit", value: TEAM_CUT_FIT },
         { label: "Construction", value: TROUSER_CONSTRUCTION },
         { label: "Branding", value: SPEC_BRANDING },
       ],
@@ -656,7 +650,7 @@ export const cricket: Category = {
         PACKAGING_STEP,
       ]),
       pdpQualityHeading: QUALITY_HEADING,
-      pdpQualitySubline: "We confirm it all on your sample before the full roster is produced.",
+      pdpQualitySubline: SAMPLE_SUBLINE,
       pdpQualityPoints: [
         "White shade matched to your whites shirt and approved on the sample before we cut",
         "Opacity checked under stretch on your sample",
@@ -744,8 +738,164 @@ export const cricket: Category = {
         AQL_POINT,
       ],
     },
-    cardOnly("CAP-CRK-07", "fleece-pullover", "Custom Cricket Fleece Pullover", "Brushed fleece, off-field and warm-up layer"),
-    cardOnly("CAP-CRK-08", "cap", "Custom Cricket Cap", "Paneled cap, embroidered crest"),
+    {
+      status: "draft",
+      slug: "fleece-pullover",
+      cardTitle: "Custom Cricket Fleece Pullover",
+      cardSubline: "Brushed fleece, off-field and warm-up layer",
+      image: "",
+      imageAlt: "Custom Cricket Fleece Pullover",
+      href: `${PLP}/fleece-pullover`,
+      sku: "CAP-CRK-07",
+      pdpHeading: "Custom Cricket Fleece Pullover Manufacturer",
+      pdpMetaTitle: "Custom Cricket Fleece Pullover Manufacturer",
+      pdpDescription:
+        "Cricket fleece pullover, custom and private label, an off-field and warm-up layer in brushed polyester fleece with a crew or quarter-zip neck and an embroidered club crest, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Cricket Fleece Pullover"),
+      pdpMetaDescription:
+        "Custom cricket fleece pullover manufacturer: brushed polyester fleece off-field layers, crew or quarter-zip, embroidered crest, MOQ 50, DDP to 20+ countries.",
+      material: "Brushed-back polyester fleece or recycled polyester fleece, rib-knit trims",
+      pdpFabricPills: ["Brushed polyester fleece", "Rib-knit trims", "Recycled polyester fleece", "Polyester/Spandex rib"],
+      pdpCustomizationPills: ["Crew or quarter-zip", "Embroidered crest", "Team colors", "Custom labels"],
+      faqs: [
+        {
+          q: "Why make the cricket fleece pullover instead of a knitted cricket sweater?",
+          a: "The cricket fleece pullover is cut and sewn on the same line as the rest of the kit, so it is colored, branded and delivered with the match and training wear in one order. Capriowear does not make knitted sweaters; the fleece pullover is our off-field layer.",
+        },
+        {
+          q: "Does the cricket fleece pullover come with a crew or quarter-zip neck?",
+          a: "Both. The cricket fleece pullover is built with a crew neck or a quarter-zip with a stand collar and covered zip, chosen per club and confirmed on your sample.",
+        },
+        {
+          q: "How is the club crest applied to the cricket fleece pullover?",
+          a: "The club crest is embroidered onto the cricket fleece pullover in thread matched to your Pantone colors, with sponsor marks embroidered or printed. Placement and size are confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Cricket Whites Shirt", slug: "whites-shirt", href: PLP },
+        { label: "Custom Cricket Training Tee", slug: "training-tee", href: PLP },
+        { label: "Custom Cricket Cap", slug: "cap", href: PLP },
+        { label: "Custom Short-Sleeve Cricket Match Jersey", slug: "colored-match-jersey-short-sleeve", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Cricket fleece pullover, off-field and warm-up layer (base type)" },
+        {
+          label: "Fabric",
+          value: "Brushed-back polyester fleece, recycled polyester fleece available, with rib-knit cuffs and hem",
+        },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Neck", value: "Crew neck, or a quarter-zip with a stand collar and a covered zip" },
+        { label: "Sleeve", value: "Long sleeve, set-in or raglan, with rib cuffs" },
+        { label: "Hem", value: "Rib-knit waistband, finished flat" },
+        { label: "Color", value: "Solid team colors, Pantone matched to your kit, with contrast trim optional" },
+        { label: "Decoration", value: "Embroidered club crest and sponsor marks, with printed marks optional" },
+        { label: "Fit", value: TEAM_CUT_FIT },
+        { label: "Branding", value: SPEC_BRANDING },
+      ],
+      specificationsImage: { alt: "Custom Cricket Fleece Pullover" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Neck and build", "Crew neck or quarter-zip, set-in or raglan sleeve"],
+        ["Color", "Solid team colors and contrast trim, Pantone matched to your kit"],
+        ["Decoration", "Embroidered crest and sponsor marks, printed marks on request"],
+        ["Fabric", "Brushed polyester fleece or recycled polyester fleece, sourced or matched to your reference"],
+        ["Fit", "Team cut, graded across the full size run"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Fleece color Pantone matched to your kit and approved on the sample before we cut",
+        "Crest embroidery finished clean and flat, with no puckering on the fleece face",
+        "Zip, cuffs and hem checked for a flat, even finish across the size run",
+        "The full roster produced in one run, same fabric lot, so every pullover matches",
+        AQL_POINT,
+      ],
+    },
+    {
+      status: "draft",
+      slug: "cap",
+      cardTitle: "Custom Cricket Cap",
+      cardSubline: "Paneled cap, embroidered crest",
+      image: "",
+      imageAlt: "Custom Cricket Cap",
+      href: `${PLP}/cap`,
+      sku: "CAP-CRK-08",
+      pdpHeading: "Custom Cricket Cap Manufacturer",
+      pdpMetaTitle: "Custom Cricket Cap Manufacturer",
+      pdpDescription:
+        "Cricket cap, custom and private label, cut and sewn from fabric panels in your team colors with an embroidered club crest, a peak and an adjustable or fitted closure, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Cricket Cap"),
+      pdpMetaDescription:
+        "Custom cricket cap manufacturer: paneled cut-and-sew caps with an embroidered crest, team colors, adjustable or fitted closure, MOQ 50, DDP to 20+ countries.",
+      material: "Polyester twill or performance polyester, cotton twill on request, mesh panels optional",
+      // No clothing size range on a cap: the third key fact is its closure
+      // sizing instead of the shared "XS to 5XL sizes" (owner spec).
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "Adjustable or fitted sizes" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      pdpFabricPills: ["Polyester twill", "Performance polyester", "Cotton twill", "Mesh panels"],
+      pdpCustomizationPills: ["Embroidered crest", "Team colors", "Adjustable or fitted", "Custom labels"],
+      faqs: [
+        {
+          q: "How is the cricket cap constructed?",
+          a: "The cricket cap is cut and sewn from fabric panels into a structured or unstructured crown, with sewn eyelets, an inner sweatband and a pre-curved or flat peak. The build is confirmed on your sample before bulk.",
+        },
+        {
+          q: "What closure options are there on the cricket cap?",
+          a: "The cricket cap is built with an adjustable strap, a snapback or fitted sizes, chosen to suit your squad and confirmed on your sample.",
+        },
+        {
+          q: "Can the cricket cap match our kit colors?",
+          a: "Yes. The cricket cap panels are cut from fabric dyed to your Pantone colors, and the crest is embroidered in thread matched to the same colors, so the cap matches the rest of the kit.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Cricket Fleece Pullover", slug: "fleece-pullover", href: PLP },
+        { label: "Custom Short-Sleeve Cricket Match Jersey", slug: "colored-match-jersey-short-sleeve", href: PLP },
+        { label: "Custom Cricket Whites Shirt", slug: "whites-shirt", href: PLP },
+        { label: "Custom Cricket Training Tee", slug: "training-tee", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Cricket cap, paneled crown with a peak (base type)" },
+        {
+          label: "Fabric",
+          value: "Polyester twill or performance polyester, with cotton twill on request and mesh panels optional",
+        },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Crown", value: "Cut-and-sew fabric panels, structured or unstructured, with sewn eyelets" },
+        { label: "Peak", value: "Pre-curved or flat peak, to your spec" },
+        { label: "Closure", value: "Adjustable strap, snapback or fitted sizes" },
+        { label: "Sweatband", value: "Inner sweatband, finished flat" },
+        { label: "Decoration", value: "Embroidered club crest on the front panel, with side or back marks optional" },
+        { label: "Color", value: "Solid team colors, Pantone matched to your kit, with a contrast peak or trim optional" },
+        { label: "Branding", value: "Club crest, sponsor marks, manufacturer mark, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Cricket Cap" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Crown and peak", "Structured or unstructured crown, pre-curved or flat peak"],
+        ["Closure", "Adjustable strap, snapback or fitted sizes"],
+        ["Color", "Solid team colors, contrast peak or trim, Pantone matched to your kit"],
+        ["Decoration", "Embroidered front crest, side and back marks"],
+        ["Fabric", "Polyester twill, performance polyester or cotton twill, with mesh panels optional"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Cap color Pantone matched to your kit and approved on the sample before we cut",
+        "Crest embroidery checked for clean, even stitching on the front panel",
+        "Panel seams, eyelets and peak shape checked for consistency across the run",
+        "Closure and fit checked across every size you order",
+        AQL_POINT,
+      ],
+    },
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, Teamwear sports only,
   // closest sports first.

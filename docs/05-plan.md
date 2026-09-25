@@ -4565,3 +4565,9 @@ The Teamwear sport PLP template now always passes `showGenderFilter={false}` to 
 ## Cricket draft PDPs batch 2 (CAP-CRK-04 to 06) + fabric naming, 2026-09-25
 
 `content/teamwear/cricket.ts`. Colored Cricket Trousers, Cricket Whites Trousers and Cricket Training Tee now carry full draft PDP content (noindexed, BreadcrumbList only, out of the sitemap), so PLP cards 1 to 6 link and 7 (Fleece Pullover) and 8 (Cap) stay non-links. The batch 1 trousers and training-tee pills switched to the new PDPs on their own via `resolveRelatedStyleTags` (they already carried `slug`). Blend naming: every "poly-spandex" on Cricket is now "Polyester/Spandex" (PLP fabric table row 4, customization Fabric item, FAQ 5 and its JSON-LD, the category `fabricPills`, PDP 01/03 chip and Fabric spec row, PDP 02 chip); a case-insensitive grep of the Cricket content is 0.
+
+## Cricket draft PDPs batch 3 (CAP-CRK-07, 08), last Cricket batch, 2026-09-25
+
+`content/teamwear/cricket.ts`. Fleece Pullover and Cap now carry full draft PDP content (noindexed, BreadcrumbList only, out of the sitemap), so all 8 Cricket cards link. The existing Fleece Pullover and Cap pills on PDPs 02, 05 and 06 switched to the new pages on their own via `resolveRelatedStyleTags`. The Cap sets its own `pdpSpecHighlights` (third fact "Adjustable or fitted sizes" instead of "XS to 5XL sizes"). The now-unused `cardOnly()` helper was removed. Publishing any Cricket style still needs the roster confirmed, the style sampled and real photos (`getPublishReadiness()`).
+
+**Noticed, not changed:** the teamwear (and Activewear) PLP passes whole `StyleCard` objects to the client `ProductGrid`, so every style's PDP content (FAQs, specs, steps) is serialized into the PLP's HTML payload (Cricket PLP about 318 KB). Not visible and not in JSON-LD, but it is page weight; worth trimming the grid's props to the card fields in a separate task.
