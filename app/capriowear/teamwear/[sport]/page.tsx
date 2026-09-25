@@ -131,8 +131,10 @@ export default async function SportPage({ params }: PageProps<"/capriowear/teamw
             categoryLabel={data.menuLabel}
             categorySubline={data.gridSubline}
             categorySublineMobile={data.gridSublineMobile}
-            showGenderFilter={data.showGenderFilter}
-            defaultChip={data.defaultGenderFilter}
+            // Teamwear has no gender split (standing rule, owner 2026-09-25):
+            // the All/Women/Men toggle never renders on a sport PLP, whatever
+            // a sport's content file sets, so a new sport can't bring it back.
+            showGenderFilter={false}
           />
           <div id="plp-listing" className="flex flex-col gap-8 max-xl:pb-6 xl:pb-14 xl:flex-row xl:gap-12">
             <CategoryFilters activeSlug={data.slug} menuGroups={teamwearMegaMenu} basePath="/capriowear/teamwear" ariaLabel="Teamwear categories" />

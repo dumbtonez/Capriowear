@@ -57,10 +57,9 @@ export const volleyball: Category = {
   metaTitle: "Custom Volleyball Uniform Manufacturer",
   metaDescription:
     "Custom volleyball uniform manufacturer. Indoor and beach jerseys, libero jerseys, women's fitted shorts, sublimated, low MOQ. Capriowear.",
-  trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private label", "DDP to 20+ countries"],
+  trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
-  showGenderFilter: true,
   fabricEyebrow: "FABRIC OPTIONS",
   fabricHeading: "The fabrics behind the\nbig brands",
   fabricOptions: [

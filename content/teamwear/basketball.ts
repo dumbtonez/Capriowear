@@ -46,10 +46,9 @@ export const basketball: Category = {
   metaTitle: "Custom Basketball Uniform Manufacturer",
   metaDescription:
     "Custom basketball uniform manufacturer, private label. Sublimated game and reversible practice jerseys, shorts and warm-ups, low MOQ. Capriowear.",
-  trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private label", "DDP to 20+ countries"],
+  trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
-  showGenderFilter: true,
   fabricEyebrow: "FABRIC OPTIONS",
   fabricHeading: "The fabrics behind the\nbig brands",
   // Trimmed to 4 rows (owner spec, 2026-09-06, "leaner for mobile and a

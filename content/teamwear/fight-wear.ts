@@ -85,10 +85,9 @@ export const fightWear: Category = {
   metaTitle: "Custom BJJ Rash Guard Manufacturer",
   metaDescription:
     "Custom BJJ and MMA rash guard manufacturer, private label. IBJJF-legal rash guards, fight shorts and grappling spats, sublimated, low MOQ. Capriowear.",
-  trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private label", "DDP to 20+ countries"],
+  trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
-  showGenderFilter: true,
   fabricEyebrow: "FABRIC OPTIONS",
   fabricHeading: "The fabrics behind the\nbig brands",
   fabricOptions: [
