@@ -26,7 +26,7 @@ import { RelatedCategories } from "@/components/sections/RelatedCategories";
 import { TrustPoints } from "@/components/sections/TrustPoints";
 import { WhatWeCover } from "@/components/sections/WhatWeCover";
 import { footer, header } from "@/components/ui/styles";
-import { buildCtaSubline, categoryEntityFaq, isPublished } from "@/content/activewear/pdpShared";
+import { buildCtaSubline, categoryEntityFaq, isPublished, toGridCard } from "@/content/activewear/pdpShared";
 import { capriosportsHome } from "@/content/capriosports/home";
 import { home, liftingGearsMegaMenu } from "@/content/home";
 import { CAPRIOSPORTS_ORGANIZATION } from "@/content/capriosports/organization";
@@ -145,7 +145,7 @@ export default async function LiftingGearsCategoryPage({ params }: PageProps<"/l
               basePath="/lifting-gears"
               ariaLabel="Lifting Gears categories"
             />
-            <ProductGrid key={data.slug} cards={data.styleCards} />
+            <ProductGrid key={data.slug} cards={data.styleCards.map((card) => toGridCard(card))} />
           </div>
         </div>
 

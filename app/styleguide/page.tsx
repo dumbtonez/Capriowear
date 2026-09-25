@@ -34,6 +34,7 @@ import { StatBlock } from "@/components/StatBlock";
 import { TextReveal } from "@/components/TextReveal";
 import { header as headerStyles } from "@/components/ui/styles";
 import { leggings } from "@/content/activewear/leggings";
+import { toGridCard } from "@/content/activewear/pdpShared";
 import { home } from "@/content/home";
 import { ORGANIZATION } from "@/content/site";
 
@@ -938,7 +939,7 @@ export default function StyleguidePage() {
           title="ProductGrid — PLP tiles and pagination"
           intro="Figma node 406:3137, 2026-08-28. Real pagination over the category's own real styleCards (9 today, 3 per page) -- not Figma's own placeholder '1 2 3 ... 39'."
         >
-          <ProductGrid cards={leggings.styleCards} />
+          <ProductGrid cards={leggings.styleCards.map((card) => toGridCard(card))} />
         </SgSection>
 
         {/* ------------------------------------------------------------------ */}

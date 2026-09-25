@@ -27,10 +27,11 @@ import { useEffect, useState } from "react";
 import { Pagination } from "@/components/Pagination";
 import { ProductCard } from "@/components/ProductCard";
 import { productGrid } from "@/components/ui/styles";
-import type { StyleCard } from "@/content/activewear/types";
+import type { GridCard } from "@/content/activewear/types";
 
 export type ProductGridProps = {
-  cards: StyleCard[];
+  /** Slim cards from `toGridCard()`, never whole `StyleCard`s (page-data weight). */
+  cards: GridCard[];
 };
 
 const MOBILE_PAGE_SIZE = 8;

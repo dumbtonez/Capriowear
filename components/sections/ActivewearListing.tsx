@@ -15,7 +15,7 @@ import { useState } from "react";
 import { CategoryFilters } from "@/components/sections/CategoryFilters";
 import { CategoryMetaStrip } from "@/components/sections/CategoryMetaStrip";
 import { ProductGrid } from "@/components/sections/ProductGrid";
-import type { StyleCard } from "@/content/activewear/types";
+import type { GridCard } from "@/content/activewear/types";
 
 export type ActivewearListingProps = {
   slug: string;
@@ -24,7 +24,7 @@ export type ActivewearListingProps = {
   categorySublineMobile: string;
   showGenderFilter?: boolean;
   defaultChip?: string;
-  cards: StyleCard[];
+  cards: GridCard[];
 };
 
 export function ActivewearListing({

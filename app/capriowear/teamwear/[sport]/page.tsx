@@ -27,7 +27,7 @@ import { RelatedCategories } from "@/components/sections/RelatedCategories";
 import { TrustPoints } from "@/components/sections/TrustPoints";
 import { WhatWeCover } from "@/components/sections/WhatWeCover";
 import { header } from "@/components/ui/styles";
-import { buildCtaSubline, categoryEntityFaq, isDraftPdpReachable, isPublished } from "@/content/activewear/pdpShared";
+import { buildCtaSubline, categoryEntityFaq, isPublished, toGridCard } from "@/content/activewear/pdpShared";
 import { home, teamwearMegaMenu } from "@/content/home";
 import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 import { sports } from "@/content/teamwear/sports";
@@ -144,9 +144,7 @@ export default async function SportPage({ params }: PageProps<"/capriowear/teamw
                 the Activewear PLP; a card-only draft stays a non-link. */}
             <ProductGrid
               key={data.slug}
-              cards={data.styleCards.map((card) =>
-                data.draftPdpsReachable && isDraftPdpReachable(card) ? { ...card, internalPreview: true } : card,
-              )}
+              cards={data.styleCards.map((card) => toGridCard(card, { previewDraft: data.draftPdpsReachable }))}
             />
           </div>
         </div>

@@ -36,9 +36,9 @@ import Link from "next/link";
 import { ProductCardMedia } from "@/components/ProductCardMedia";
 import { cx } from "@/components/ui/cx";
 import { card, productCard } from "@/components/ui/styles";
-import type { StyleCard } from "@/content/activewear/types";
+import type { GridCard } from "@/content/activewear/types";
 
-export type ProductCardProps = StyleCard & {
+export type ProductCardProps = GridCard & {
   /**
    * Full replacement (not appended) for the title's own class string --
    * same "replace the whole string, don't layer a second font-size class

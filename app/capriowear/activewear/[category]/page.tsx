@@ -24,7 +24,7 @@ import { TrustPoints } from "@/components/sections/TrustPoints";
 import { WhatWeCover } from "@/components/sections/WhatWeCover";
 import { header } from "@/components/ui/styles";
 import { categories } from "@/content/activewear/categories";
-import { buildCtaSubline, categoryEntityFaq, isDraftPdpReachable, isPublished } from "@/content/activewear/pdpShared";
+import { buildCtaSubline, categoryEntityFaq, isPublished, toGridCard } from "@/content/activewear/pdpShared";
 import { home } from "@/content/home";
 import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 import { breadcrumbSchema, collectionPageSchema, faqSchema } from "@/lib/schema";
@@ -216,9 +216,7 @@ export default async function CategoryPage({ params }: PageProps<"/capriowear/ac
             categorySublineMobile={data.gridSublineMobile}
             showGenderFilter={data.showGenderFilter}
             defaultChip={data.defaultGenderFilter}
-            cards={data.styleCards.map((card) =>
-              isDraftPdpReachable(card) ? { ...card, internalPreview: true } : card,
-            )}
+            cards={data.styleCards.map((card) => toGridCard(card, { previewDraft: true }))}
           />
         </div>
 

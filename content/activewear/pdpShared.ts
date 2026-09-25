@@ -15,7 +15,7 @@
 import { CAPRIOSPORTS_ORGANIZATION } from "../capriosports/organization";
 import { faqGetStarted } from "../getStarted";
 import { companyIdentity } from "../site";
-import type { Category, FaqEntry, PdpSpecHighlight, RelatedStyleTag, StyleCard } from "./types";
+import type { Category, FaqEntry, GridCard, PdpSpecHighlight, RelatedStyleTag, StyleCard } from "./types";
 
 // Shared by categoryEntityFaq() and buildCaprioEntityAnswer() below -- the
 // same noun/example-styles/fabrics/audience derivation either brand's
@@ -402,6 +402,29 @@ export function isDraftPdpReachable(card: {
   specifications?: unknown[];
 }): boolean {
   return card.status === "draft" && Boolean(card.pdpHeading) && Boolean(card.specifications?.length);
+}
+
+/**
+ * Maps a style to the slim `GridCard` the client product grid receives, so
+ * a PLP never serializes PDP-only content into its page data (see
+ * `GridCard`'s comment in ./types.ts). `previewDraft` marks a draft with PDP
+ * content as linkable (`internalPreview`), the existing card-link rule for
+ * reachable drafts; the caller decides whether that rule applies.
+ */
+export function toGridCard(card: StyleCard, options: { previewDraft?: boolean } = {}): GridCard {
+  const linkDraft = card.internalPreview === true || (options.previewDraft === true && isDraftPdpReachable(card));
+  return {
+    status: card.status,
+    slug: card.slug,
+    cardTitle: card.cardTitle,
+    cardSubline: card.cardSubline,
+    image: card.image,
+    imageAlt: card.imageAlt,
+    href: card.href,
+    ...(linkDraft ? { internalPreview: true as const } : {}),
+    ...(card.gender ? { gender: card.gender } : {}),
+    ...(card.images ? { images: card.images.slice(0, 2) } : {}),
+  };
 }
 
 /**

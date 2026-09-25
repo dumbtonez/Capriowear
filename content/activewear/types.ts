@@ -11,6 +11,23 @@
 // placeholder content now anyway, so later sections are additive, not a
 // second pass through every category file to backfill a shape change.
 
+/**
+ * The slim card model the client-side product grid receives (PLP
+ * performance fix, 2026-09-25). `ProductGrid`/`ProductCard`/
+ * `ActivewearListing` are client components, so whatever they are handed
+ * is serialized into the page's RSC payload. Passing whole `StyleCard`s
+ * shipped every style's full PDP content (FAQs, specs, customize tiles,
+ * quality bullets) inside every PLP. Build it with `toGridCard()`
+ * (./pdpShared.ts) on the server; add a field here only if the card or the
+ * grid actually renders or filters on it.
+ */
+export type GridCard = Pick<StyleCard, "status" | "slug" | "cardTitle" | "cardSubline" | "image" | "imageAlt" | "href"> & {
+  internalPreview?: true;
+  gender?: StyleCard["gender"];
+  /** First two gallery frames only: the card's primary and hover image. */
+  images?: StyleCard["images"];
+};
+
 export type StyleCard = {
   /**
    * "published": has a real PDP, gets a generated route

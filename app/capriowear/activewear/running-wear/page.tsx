@@ -37,7 +37,7 @@ import { FINAL_CTA_MARKER_ID, ProductCtasMobileBar } from "@/components/sections
 import { TrustPoints } from "@/components/sections/TrustPoints";
 import { WhatWeCover } from "@/components/sections/WhatWeCover";
 import { header } from "@/components/ui/styles";
-import { buildCtaSubline, categoryEntityFaq } from "@/content/activewear/pdpShared";
+import { buildCtaSubline, categoryEntityFaq, toGridCard } from "@/content/activewear/pdpShared";
 import { runningWear as data } from "@/content/activewear/running-wear";
 import { home } from "@/content/home";
 import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
@@ -126,7 +126,7 @@ export default function RunningWearPage() {
             categorySubline={data.gridSubline}
             categorySublineMobile={data.gridSublineMobile}
             showGenderFilter={data.showGenderFilter}
-            cards={data.cards}
+            cards={data.cards.map((card) => toGridCard(card))}
           />
         </div>
 
