@@ -14,16 +14,18 @@
 // category is ever added, removed, or regrouped in the mega menu, this
 // array's own grouping must be updated to match, same "keep the group
 // structure in sync with the mega menu, don't let the two drift apart"
-// instruction the source doc itself gives. Not derived programmatically
-// from `activewearMegaMenu`, since that array has no per-category
-// descriptor field this hub's cards need.
+// instruction the source doc itself gives. The group ORDER is derived from
+// `activewearMegaMenu` (see `categoryGroups` below); the groups themselves
+// stay hand-written here, since that array has no per-category descriptor
+// field this hub's cards need.
 import type { CategoryGroup } from "../hubTypes";
+import { activewearMegaMenu } from "../home";
 import { SITE_URL } from "../site";
 import { faqGetStarted } from "../getStarted";
 
 export type { CategoryGroup, CategoryLink } from "../hubTypes";
 
-export const categoryGroups: CategoryGroup[] = [
+const hubGroups: CategoryGroup[] = [
   {
     eyebrow: "TOPS",
     h2: "Everyday tops, built for performance",
@@ -50,14 +52,6 @@ export const categoryGroups: CategoryGroup[] = [
     ],
   },
   {
-    eyebrow: "ONE-PIECES",
-    h2: "One-piece builds",
-    categories: [
-      { label: "Bodysuits", descriptor: "Fitted one-piece, hip-ending or short-leg", href: "/capriowear/activewear/bodysuits" },
-      { label: "Jumpsuits", descriptor: "One-piece, full or cropped leg, fitted or relaxed", href: "/capriowear/activewear/jumpsuits" },
-    ],
-  },
-  {
     eyebrow: "OUTERWEAR AND SUITS",
     h2: "Jackets, tracksuits and warm-up wear",
     categories: [
@@ -76,6 +70,14 @@ export const categoryGroups: CategoryGroup[] = [
     ],
   },
   {
+    eyebrow: "ONE-PIECES",
+    h2: "One-piece builds",
+    categories: [
+      { label: "Bodysuits", descriptor: "Fitted one-piece, hip-ending or short-leg", href: "/capriowear/activewear/bodysuits" },
+      { label: "Jumpsuits", descriptor: "One-piece, full or cropped leg, fitted or relaxed", href: "/capriowear/activewear/jumpsuits" },
+    ],
+  },
+  {
     eyebrow: "BASE LAYERS",
     h2: "Compression and cold-weather layers",
     categories: [
@@ -87,6 +89,17 @@ export const categoryGroups: CategoryGroup[] = [
     ],
   },
 ];
+
+// Group ORDER comes from the mega menu (`activewearMegaMenu`, content/home.ts),
+// the one source of truth that also drives the desktop menu, the mobile
+// drawer, every PLP's Filters panel and the nav ItemList JSON-LD. Each hub
+// group is matched to its menu group by its first category's href, so
+// reordering the menu reorders the hub too (2026-09-25: Outerwear & Suits
+// moved ahead of One-Pieces). The array above keeps the same order for
+// readability; this sort is what makes it authoritative.
+const menuPosition = (group: CategoryGroup) =>
+  activewearMegaMenu.findIndex((menuGroup) => menuGroup.items.some((item) => item.href === group.categories[0]?.href));
+export const categoryGroups: CategoryGroup[] = [...hubGroups].sort((a, b) => menuPosition(a) - menuPosition(b));
 
 // Every category card the hub renders, counted rather than typed, so the
 // "N categories" copy below stays correct (was a hardcoded "18" after two
@@ -163,7 +176,7 @@ export const activewearHub = {
     items: [
       {
         q: "What activewear categories does Capriowear manufacture?",
-        a: `${CATEGORY_COUNT} categories across tops, bottoms, one-pieces, outerwear and suits, and base layers, from leggings and sports bras to jackets, tracksuits and compression wear, all made in-house in Sialkot, Pakistan.`,
+        a: `${CATEGORY_COUNT} categories across tops, bottoms, outerwear and suits, one-pieces, and base layers, from leggings and sports bras to jackets, tracksuits and compression wear, all made in-house in Sialkot, Pakistan.`,
       },
       {
         q: "Can I order across multiple categories in one order?",

@@ -87,19 +87,19 @@ export const activewearMegaMenu = [
     ],
   },
   {
-    label: "ONE-PIECES",
-    items: [
-      { label: "Bodysuits", href: "/capriowear/activewear/bodysuits" },
-      { label: "Jumpsuits", href: "/capriowear/activewear/jumpsuits" },
-    ],
-  },
-  {
     label: "OUTERWEAR & SUITS",
     items: [
       { label: "Jackets", href: "/capriowear/activewear/jackets" },
       { label: "Track Jackets & Zip-Ups", href: "/capriowear/activewear/track-jackets" },
       { label: "Tracksuits", href: "/capriowear/activewear/tracksuits" },
       { label: "Running Wear", href: "/capriowear/activewear/running-wear" },
+    ],
+  },
+  {
+    label: "ONE-PIECES",
+    items: [
+      { label: "Bodysuits", href: "/capriowear/activewear/bodysuits" },
+      { label: "Jumpsuits", href: "/capriowear/activewear/jumpsuits" },
     ],
   },
   {

@@ -1,7 +1,7 @@
 // components/sections/CategoryLinkGrid.tsx
 // Grouped category/sport-grid section, shared by both hub pages -- one
-// instance per mega-menu group (Activewear's 5: Tops, Bottoms, Sets &
-// One-Pieces, Outerwear & Suits, Base Layers; Teamwear's 2: Uniforms,
+// instance per mega-menu group (Activewear's 5: Tops, Bottoms, Outerwear &
+// Suits, One-Pieces, Base Layers; Teamwear's 2: Uniforms,
 // Others -- owner: "teamwear should have 2 categories uniforms and others
 // as we used in mega menu"). Renders that group's own eyebrow + H2
 // (SectionHeading, TextReveal -- same sitewide pattern every other section
