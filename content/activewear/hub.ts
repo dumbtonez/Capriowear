@@ -1,8 +1,10 @@
 // content/activewear/hub.ts
 // Copy for the Activewear Landing Hub (/activewear), Mohsin's own spec doc,
-// 2026-09-11: a light browse/directory page one level above the 18 real
-// Activewear category PLPs (17 in content/activewear/categories.ts, plus
-// the standalone running-wear page) -- not another PLP itself. Unlike the
+// 2026-09-11: a light browse/directory page one level above the real
+// Activewear category PLPs (every entry in `categoryGroups` below, which
+// includes the standalone running-wear page) -- not another PLP itself.
+// The "N categories" copy is derived from that array (CATEGORY_COUNT), so
+// it can't drift when a category is added or removed. Unlike the
 // Teamwear hub, every PDP under these categories is real/published, but
 // this page still owns no products of its own. American spelling, no
 // en/em dashes, no prices, period-clean headings, per house copy rules.
@@ -52,7 +54,7 @@ export const categoryGroups: CategoryGroup[] = [
     h2: "One-piece builds",
     categories: [
       { label: "Bodysuits", descriptor: "Fitted one-piece, hip-ending or short-leg", href: "/capriowear/activewear/bodysuits" },
-      { label: "Jumpsuits", descriptor: "Full-length and cropped unitards", href: "/capriowear/activewear/jumpsuits" },
+      { label: "Jumpsuits", descriptor: "One-piece, full or cropped leg, fitted or relaxed", href: "/capriowear/activewear/jumpsuits" },
     ],
   },
   {
@@ -86,6 +88,11 @@ export const categoryGroups: CategoryGroup[] = [
   },
 ];
 
+// Every category card the hub renders, counted rather than typed, so the
+// "N categories" copy below stays correct (was a hardcoded "18" after two
+// categories were retired; the hub links 16, 2026-09-25).
+const CATEGORY_COUNT = categoryGroups.reduce((count, group) => count + group.categories.length, 0);
+
 export const activewearHub = {
   // Renders as "%s | Capriowear" via the root layout's title template
   // (same convention as content/services.ts and content/teamwear/hub.ts)
@@ -94,7 +101,7 @@ export const activewearHub = {
   // suffix, not stored with the suffix baked in.
   metaTitle: "Custom Activewear Manufacturer",
   metaDescription:
-    "Custom activewear manufacturer in Sialkot, Pakistan. Private label and OEM from fabric to packaging across 18 categories, low MOQ, samples in 10 to 14 days.",
+    `Custom activewear manufacturer in Sialkot, Pakistan. Private label and OEM from fabric to packaging across ${CATEGORY_COUNT} categories, low MOQ, samples in 10 to 14 days.`,
 
   // Hero is `CategoryBanner` alone (breadcrumb, H1, fact strip) -- lesson
   // carried over from the Teamwear hub build (owner feedback there:
@@ -106,7 +113,7 @@ export const activewearHub = {
       { label: "Activewear", href: "/capriowear/activewear" },
     ],
     h1: "Custom Activewear Manufacturer",
-    trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "18 categories", "DDP to 20+ countries"],
+    trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", `${CATEGORY_COUNT} categories`, "DDP to 20+ countries"],
   },
 
   overview: {
@@ -118,7 +125,7 @@ export const activewearHub = {
     // `content/home.ts`'s own `trustStrip[].body` already uses.
     lead: [
       "Capriowear manufactures custom and private label activewear across ",
-      { bold: "18 categories" },
+      { bold: `${CATEGORY_COUNT} categories` },
       ", from leggings and sports bras to jackets and matched sets, made to your spec from sample to bulk in ",
       { bold: "our own cut-and-sew facility in Sialkot, Pakistan" },
       ".",
@@ -142,7 +149,7 @@ export const activewearHub = {
   trust: {
     eyebrow: "AUDITED, NOT JUST PROMISED",
     heading: "Certified and inspected, category after category",
-    subline: "Every certification below applies across all 18 categories.",
+    subline: `Every certification below applies across all ${CATEGORY_COUNT} categories.`,
     points: [
       "ISO 9001, ISO 45001, ISO 14001, BSCI, IMAC and SGS certified",
       "Every run inspected to AQL 2.5, in-line and pre-shipment",
@@ -156,7 +163,7 @@ export const activewearHub = {
     items: [
       {
         q: "What activewear categories does Capriowear manufacture?",
-        a: "18 categories across tops, bottoms, sets and one-pieces, outerwear and suits, and base layers, from leggings and sports bras to jackets, tracksuits and compression wear, all made in-house in Sialkot, Pakistan.",
+        a: `${CATEGORY_COUNT} categories across tops, bottoms, sets and one-pieces, outerwear and suits, and base layers, from leggings and sports bras to jackets, tracksuits and compression wear, all made in-house in Sialkot, Pakistan.`,
       },
       {
         q: "Can I order across multiple categories in one order?",

@@ -56,7 +56,7 @@ export const leggings: Category = {
   // truncation point even though it fit this project's own ~270-char AEO
   // allowance. Owner's exact given copy.
   metaDescription:
-    "Custom leggings manufacturer, OEM, ODM and private label, high-rise compression, squat-proof, flare and capri styles, from 50 pieces, DDP worldwide. Capriowear.",
+    "Custom leggings manufacturer, OEM, ODM and private label, high-rise compression, flare and capri styles, from 50 pieces, DDP to 20+ countries. Capriowear.",
   // Figma-confirmed real copy (node 502:3310, revised 2026-08-28), same
   // treatment as h1 -- not a placeholder. Replaces the earlier single
   // quickAnswer subline, dropped from this design entirely.

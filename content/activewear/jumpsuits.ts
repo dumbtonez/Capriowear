@@ -3,15 +3,13 @@
 // spec, 2026-09-24), replacing the 2026-09-03 test version, including its
 // two test PDPs (full-length-unitard, cropped-unitard), removed so both
 // routes 404. Their style codes CAP-JMP-01/02 are reused below.
-// Women's-only category, same as Leggings, Sports Bras and Bodysuits: no
-// gender toggle, no `gender` field on any card.
+// Single-gender (no gender field, no toggle), same as Leggings, Sports Bras
+// and Bodysuits.
 //
-// Every card is a card-only "draft" (name, spec line, no PDP content), so
-// each renders non-clickable, gets no route, and stays out of the sitemap
-// and CollectionPage/ItemList. A card becomes a link automatically the
-// moment its PDP content (`pdpHeading` + `specifications`) is added, via
-// the sitewide `isDraftPdpReachable()` rule, same as Hoodies and Bodysuits.
-// Grid order is SKU-number order, 1 to 6.
+// Every card is "draft": out of the sitemap and CollectionPage/ItemList. A
+// card links once its PDP content (`pdpHeading` + `specifications`) exists,
+// via the sitewide `isDraftPdpReachable()` rule, same as Hoodies and
+// Bodysuits. Grid order is SKU-number order, 1 to 6.
 //
 // PDP batch 1 (owner spec, 2026-09-24): SKUs 1 to 3 carry full draft PDP
 // content, so their cards link and their pages render noindexed, with no
@@ -22,8 +20,9 @@
 // unbuilt SKU falls back to the PLP and switches to its PDP by itself.
 //
 // PDP batch 2 (owner spec, 2026-09-24): SKUs 4 to 6 added the same way, so
-// all 6 cards link and every related-style pill resolves to a real PDP. Second and final category under
-// the "ONE-PIECES" mega-menu group (content/home.ts), after Bodysuits.
+// all 6 cards link and every related-style pill resolves to a real PDP.
+// Second and final category under the "ONE-PIECES" mega-menu group
+// (content/home.ts), after Bodysuits.
 //
 // No `weightTiers` block (owner spec): jumpsuits are not weight-tier driven.
 import type { Category } from "./types";
@@ -37,18 +36,18 @@ export const jumpsuits: Category = {
   // bypasses categoryEntityFaq()'s templated sentence entirely.
   entityQuestion: "What does Capriowear manufacture?",
   entityAnswer:
-    "Capriowear is a custom jumpsuit manufacturer for activewear brands and teamwear suppliers worldwide. We produce private label athletic jumpsuits and unitards from fabric to packaging, including fitted full-length styles with straight or flared legs, deep V, corset-detail and molded-cup builds, and a relaxed wide-leg style, in Nylon/Spandex, Polyester/Spandex and scuba knits, with low minimums and full customization. Capriowear is the activewear and teamwear division of Caprio Sports, a cut-and-sew manufacturer in Sialkot, Pakistan.",
+    "Capriowear is a custom jumpsuit manufacturer for activewear brands and teamwear suppliers worldwide. We produce private label athletic jumpsuits and unitards from fabric to packaging, including fitted full-length styles with straight or flared legs, deep V, corset-detail and molded-cup builds, and a relaxed wide-leg style, in Nylon/Spandex, Polyester/Spandex, Modal-blend jersey and structured scuba knits, with low minimums and full customization. Capriowear is the activewear and teamwear division of Caprio Sports, a cut-and-sew manufacturer in Sialkot, Pakistan.",
   // "Athletic" qualifier stays in the H1 and title (the bare term draws
   // fashion intent). No "| Capriowear" suffix: the root layout's title
   // template adds it.
   h1: "Custom Athletic Jumpsuit Manufacturer",
   metaTitle: "Custom Athletic Jumpsuit Manufacturer",
   metaDescription:
-    "Custom athletic jumpsuit manufacturer: private label unitards and flared or wide-leg jumpsuits in stretch and scuba knits, MOQ 50 pieces, DDP to 20+ countries.",
+    "Custom athletic jumpsuit manufacturer: private label unitards and flared or wide-leg jumpsuits in stretch and Modal knits, MOQ 50 pieces, DDP to 20+ countries.",
   trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
-  // Women's-only category: the All/Women/Men chip row does not render.
+  // Single-gender (no gender field, no toggle): the All/Women/Men chip row does not render.
   showGenderFilter: false,
   fabricEyebrow: "FABRIC OPTIONS",
   fabricHeading: "The fabrics behind the\nbig brands",
@@ -92,7 +91,7 @@ export const jumpsuits: Category = {
     "Entry method chosen for the use case, and any zip checked so it does not restrict squatting, reaching or lunging",
     "Gusset seam tested under stretch, so no single seam bears the full load",
     "Opacity confirmed under real stretch across the full leg, not only at rest",
-    "Fit and recovery hold after repeated wear and wash",
+    "Fit and recovery checked after wash testing, before bulk",
     "Every run inspected to AQL 2.5, third-party inspection welcome",
   ],
   coverageEyebrow: "CUSTOMIZATION",
@@ -100,7 +99,7 @@ export const jumpsuits: Category = {
   coverageItems: [
     {
       title: "Fabric",
-      body: "Nylon/Spandex, Polyester/Spandex, Modal-blend jersey, scuba or interlock for structure, matte or shine finish",
+      body: "Nylon/Spandex, Polyester/Spandex (recycled on request), Modal-blend jersey, scuba or interlock for structure, matte or shine finish",
     },
     { title: "Leg length and shape", body: "Full-length or cropped, straight, flared, or wide with a drop crotch" },
     { title: "Fit and neckline", body: "Fitted or relaxed, scoop, square, halter, V or plunge neckline" },
@@ -132,12 +131,16 @@ export const jumpsuits: Category = {
       a: "Yes. A snap-button gusset can be built in for access, independent of the entry method, or the gusset can be fully sewn. Either way the gusset spreads movement strain so the center-back and inner-leg seams do not carry the full load.",
     },
     {
+      q: "What built-in support can you add to a jumpsuit?",
+      a: "Four options, chosen per style: a shelf bra, which is an elastic-banded inner layer sewn into the bodice; removable pads held in internal pockets; molded foam cups set between fabric layers; or corset boning stitched into channels at the waist for shape. The support build is confirmed on your sample.",
+    },
+    {
       q: "Which fabrics do you use for jumpsuits?",
-      a: "Nylon/Spandex and Polyester/Spandex knits for fitted jumpsuits, a Modal-blend jersey for relaxed styles, and scuba or interlock knits for a more structured, sculpted silhouette, in a matte or shine finish confirmed on your sample.",
+      a: "Nylon/Spandex and Polyester/Spandex knits for fitted jumpsuits, a Modal-blend jersey for relaxed styles, and scuba or interlock knits for a more structured, sculpted silhouette, in a matte or shine finish confirmed on your sample. Recycled Polyester/Spandex is available on request.",
     },
     {
       q: "What leg lengths and shapes can you make on a jumpsuit?",
-      a: "Full-length or cropped legs, cut straight, flared, or wide with a drop crotch, to your spec. One-pieces with a short bike-short leg are built as bodysuits.",
+      a: "Full-length or cropped legs, cut straight, flared, or wide with a drop crotch, to your spec. On a flared leg, the flare point is where the leg starts to widen, usually below the knee. A drop crotch lowers the crotch seam for a relaxed drape. One-pieces with a short bike-short leg are built as bodysuits.",
     },
     {
       q: "How do you check opacity on a jumpsuit?",
@@ -152,7 +155,7 @@ export const jumpsuits: Category = {
       a: "Yes. Send a swatch, reference garment, or tech pack and we source or develop to match, then share swatches and confirm on your sample before bulk.",
     },
     {
-      q: "What can I customize?",
+      q: "What can I customize on a jumpsuit?",
       a: "Everything from fabric to packaging: fabric and finish, leg length and shape, fit, neckline, back, sleeve, entry method, gusset closure, built-in support, color, print, your logos, labels, hangtags, and packaging, with Pantone color matching.",
     },
     {
@@ -200,17 +203,17 @@ export const jumpsuits: Category = {
       status: "draft",
       slug: "scoop-neck-straight-leg",
       cardTitle: "Custom Scoop-Neck Straight-Leg Jumpsuit",
-      cardSubline: "Scoop neck, fitted straight leg, full length",
+      cardSubline: "Scoop neck, fitted straight leg, full length or 7/8",
       image: "",
       imageAlt: "Custom Scoop-Neck Straight-Leg Jumpsuit",
       href: "/capriowear/activewear/jumpsuits/scoop-neck-straight-leg",
       sku: "CAP-JMP-01",
       pdpHeading: "Custom Scoop-Neck Straight-Leg Jumpsuit Manufacturer",
       pdpDescription:
-        "Fitted sleeveless jumpsuit with a scoop neck and a straight, full-length leg, custom and private label, in a soft 4-way stretch Nylon/Spandex knit, made to your brand in Sialkot, Pakistan.",
+        "Fitted sleeveless jumpsuit with a scoop neck and a straight, full-length or 7/8 leg, custom and private label, in a soft 4-way stretch Nylon/Spandex knit, made to your brand in Sialkot, Pakistan.",
       pdpMetaTitle: "Custom Scoop-Neck Straight-Leg Jumpsuit Manufacturer",
       pdpMetaDescription:
-        "Custom scoop-neck straight-leg jumpsuit manufacturer, private label, fitted sleeveless unitard, soft Nylon/Spandex knit, MOQ from 50, DDP to 20+ countries.",
+        "Custom scoop-neck straight-leg jumpsuit manufacturer, private label, fitted sleeveless jumpsuit, soft Nylon/Spandex knit, MOQ from 50, DDP to 20+ countries.",
       images: [
         { alt: "Custom Scoop-Neck Straight-Leg Jumpsuit" },
         { alt: "Custom Scoop-Neck Straight-Leg Jumpsuit" },
@@ -271,14 +274,14 @@ export const jumpsuits: Category = {
       status: "draft",
       slug: "flared-leg",
       cardTitle: "Custom Flared-Leg Jumpsuit",
-      cardSubline: "Halter deep V, leg flares to the hem",
+      cardSubline: "Halter deep V, leg flares from below the knee",
       image: "",
       imageAlt: "Custom Flared-Leg Jumpsuit",
       href: "/capriowear/activewear/jumpsuits/flared-leg",
       sku: "CAP-JMP-02",
       pdpHeading: "Custom Flared-Leg Jumpsuit Manufacturer",
       pdpDescription:
-        "Fitted sleeveless jumpsuit with a halter deep-V neck and a leg that flares to the hem, custom and private label, in a 215 GSM Polyester/Spandex knit with flatlock seams, made to your brand in Sialkot, Pakistan.",
+        "Fitted sleeveless jumpsuit with a halter deep-V neck and a leg that flares from below the knee to a wider hem, custom and private label, in a 215 GSM Polyester/Spandex knit with flatlock seams, made to your brand in Sialkot, Pakistan.",
       pdpMetaTitle: "Custom Flared-Leg Jumpsuit Manufacturer",
       pdpMetaDescription:
         "Custom flared-leg jumpsuit manufacturer, private label, halter deep-V neck, 215 GSM Polyester/Spandex knit, flatlock seams, MOQ 50, DDP to 20+ countries.",
@@ -303,7 +306,7 @@ export const jumpsuits: Category = {
         },
         {
           q: "Why use flatlock seams on the flared-leg jumpsuit?",
-          a: "Flatlock seams lie flat against the skin, so the flared-leg jumpsuit stays smooth under movement, with no raised seam to rub at the inner leg or shoulder. We check the seam finish on your sample before bulk.",
+          a: "Flatlock seams lie flat against the skin, so the flared-leg jumpsuit's inner-leg and shoulder seams stay flat and smooth under stretch, with no raised ridge. We check the seam finish on your sample before bulk.",
         },
       ],
       relatedStyleTags: [
@@ -342,17 +345,17 @@ export const jumpsuits: Category = {
       status: "draft",
       slug: "deep-v-neck",
       cardTitle: "Custom Deep V-Neck Jumpsuit",
-      cardSubline: "Deep V, low back, removable padding",
+      cardSubline: "Deep V, low back, removable pads",
       image: "",
       imageAlt: "Custom Deep V-Neck Jumpsuit",
       href: "/capriowear/activewear/jumpsuits/deep-v-neck",
       sku: "CAP-JMP-03",
       pdpHeading: "Custom Deep V-Neck Jumpsuit Manufacturer",
       pdpDescription:
-        "Fitted sleeveless jumpsuit with a deep V neckline, a low-cut back and removable padding, custom and private label, in a lightly brushed Polyester/Spandex knit with a full-length legging leg, made to your brand in Sialkot, Pakistan.",
+        "Fitted sleeveless jumpsuit with a deep V neckline, a low-cut back and removable pads, custom and private label, in a lightly brushed Polyester/Spandex knit with a full-length legging leg, made to your brand in Sialkot, Pakistan.",
       pdpMetaTitle: "Custom Deep V-Neck Jumpsuit Manufacturer",
       pdpMetaDescription:
-        "Custom deep V-neck jumpsuit manufacturer, private label, low back, removable padding, brushed Polyester/Spandex knit, MOQ from 50, DDP to 20+ countries.",
+        "Custom deep V-neck jumpsuit manufacturer, private label, low back, removable pads, brushed Polyester/Spandex knit, MOQ from 50, DDP to 20+ countries.",
       images: [
         { alt: "Custom Deep V-Neck Jumpsuit" },
         { alt: "Custom Deep V-Neck Jumpsuit" },
@@ -366,7 +369,7 @@ export const jumpsuits: Category = {
       faqs: [
         {
           q: "Can the padding be removed from the deep V-neck jumpsuit?",
-          a: "Yes. The deep V-neck jumpsuit has removable pads that sit in internal pockets, so they can come out for washing or for wearing without them. Pad shape and thickness are set to your spec and confirmed on your sample.",
+          a: "Yes. The deep V-neck jumpsuit has removable pads that sit in internal pockets, so they can be removed for washing, or the style can be specified without pads. Pad shape and thickness are set to your spec and confirmed on your sample.",
         },
         {
           q: "How do you keep a deep V neckline secure on a jumpsuit?",
@@ -440,8 +443,8 @@ export const jumpsuits: Category = {
           a: "The corset-detail square-neck jumpsuit has flexible boning in stitched channels at the waist, which gives the waist a sculpted, structured line while the rest of the jumpsuit keeps full 4-way stretch. Boning placement and count are set to your spec and confirmed on your sample.",
         },
         {
-          q: "Does the boning stay in place through washing on a corset-detail jumpsuit?",
-          a: "Yes. On the corset-detail square-neck jumpsuit, each bone sits in its own stitched channel with finished ends, so it stays flat and does not work through the fabric. We check the boning after wash on your sample before bulk.",
+          q: "How do you test the boning on the corset-detail square-neck jumpsuit?",
+          a: "We wash-test the corset-detail square-neck jumpsuit's boning on your sample before bulk. Each bone sits in its own stitched channel at the waist with finished ends, so it stays flat and does not work through the fabric.",
         },
         {
           q: "What fabric do you build the corset-detail square-neck jumpsuit in?",
@@ -509,7 +512,7 @@ export const jumpsuits: Category = {
       faqs: [
         {
           q: "How does the wide-leg drop-crotch jumpsuit differ from a fitted jumpsuit?",
-          a: "The wide-leg drop-crotch jumpsuit is cut relaxed, with a lowered crotch and a wide leg that drape away from the body, while a fitted jumpsuit compresses from shoulder to ankle. The relaxed style suits studio, travel, and rest-day wear rather than high-compression training.",
+          a: "The wide-leg drop-crotch jumpsuit is cut relaxed, with a lowered crotch and a wide leg that drape away from the body, while a fitted jumpsuit compresses from shoulder to ankle. The relaxed build suits a brand's studio or lounge line rather than a high-compression training range.",
         },
         {
           q: "How low is the crotch on the wide-leg drop-crotch jumpsuit?",
@@ -547,7 +550,7 @@ export const jumpsuits: Category = {
       pdpQualityPoints: [
         "Leg width and drape held consistent at every size",
         "Crotch depth graded across the size run",
-        "Jersey checked for pilling and shrinkage after wash, shrinkage targeted under 5%",
+        "Jersey checked for pilling and shrinkage after wash",
         "Straps and neckline hold their shape without stretching out",
         "Seams stress-tested at the crotch and underarm",
         "Every run inspected to AQL 2.5, third-party inspection welcome",
@@ -600,7 +603,7 @@ export const jumpsuits: Category = {
         { label: "See All", href: "/capriowear/activewear/jumpsuits" },
       ],
       specifications: [
-        { label: "Style", value: "Sleeveless fitted jumpsuit, scoop neck, molded-cup support" },
+        { label: "Style", value: "Sleeveless fitted jumpsuit, scoop neck over a double-layer V-shaped front panel, molded-cup support" },
         { label: "Fabric", value: "Nylon/Spandex 4-way stretch knit, blend confirmed on your sample." },
         { label: "Weight", value: "Pending, confirmed on your sample." },
         { label: "Fit", value: "Fitted, second-skin through the torso and leg" },

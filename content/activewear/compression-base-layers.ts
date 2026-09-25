@@ -346,7 +346,7 @@ export const compressionBaseLayers: Category = {
   relatedLinks: [
     { label: "Leggings", href: "/capriowear/activewear/leggings" },
     { label: "Shorts", href: "/capriowear/activewear/shorts" },
-    { label: "Long-Sleeve Tops", href: "/capriowear/activewear/long-sleeve-tops" },
+    { label: "Jumpsuits", href: "/capriowear/activewear/jumpsuits" },
     { label: "Sports Bras", href: "/capriowear/activewear/sports-bras" },
     { label: "Bodysuits", href: "/capriowear/activewear/bodysuits" },
   ],

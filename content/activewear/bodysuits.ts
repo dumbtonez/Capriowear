@@ -149,7 +149,7 @@ export const bodysuits: Category = {
       a: "Yes. Send a swatch, reference garment, or tech pack and we source or develop to match, then share swatches and confirm on your sample before bulk.",
     },
     {
-      q: "What can I customize?",
+      q: "What can I customize on a bodysuit?",
       a: "Everything from fabric to packaging: fabric and finish, silhouette, leg length, sleeve, neckline, back coverage, closure, shelf bra, color, print, your logos, labels, hangtags, and packaging, with Pantone color matching.",
     },
     {
