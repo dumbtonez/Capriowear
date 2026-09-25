@@ -105,7 +105,7 @@ export const runningWear: CuratedCollection = {
   ],
   // Same bold runs as every category's own fabricNote (Leggings' pattern).
   fabricNote: [
-    { text: "Running fabric weight " },
+    { text: "Running fabric weight is " },
     { text: "confirmed on your sample", bold: true },
     { text: ". Swatches before every bulk run, and we can source or match a " },
     { text: "specific fabric", bold: true },
