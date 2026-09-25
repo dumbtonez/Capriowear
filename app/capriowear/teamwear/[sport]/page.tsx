@@ -27,7 +27,7 @@ import { RelatedCategories } from "@/components/sections/RelatedCategories";
 import { TrustPoints } from "@/components/sections/TrustPoints";
 import { WhatWeCover } from "@/components/sections/WhatWeCover";
 import { header } from "@/components/ui/styles";
-import { buildCtaSubline, categoryEntityFaq, isPublished } from "@/content/activewear/pdpShared";
+import { buildCtaSubline, categoryEntityFaq, isDraftPdpReachable, isPublished } from "@/content/activewear/pdpShared";
 import { home, teamwearMegaMenu } from "@/content/home";
 import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 import { sports } from "@/content/teamwear/sports";
@@ -136,7 +136,16 @@ export default async function SportPage({ params }: PageProps<"/capriowear/teamw
           />
           <div id="plp-listing" className="flex flex-col gap-8 max-xl:pb-6 xl:pb-14 xl:flex-row xl:gap-12">
             <CategoryFilters activeSlug={data.slug} menuGroups={teamwearMegaMenu} basePath="/capriowear/teamwear" ariaLabel="Teamwear categories" />
-            <ProductGrid key={data.slug} cards={data.styleCards} />
+            {/* For a sport opted into the draft-PDP rule (TEMPORARY
+                `draftPdpsReachable`, see content/activewear/types.ts), a
+                draft with PDP content links to its noindexed page, same as
+                the Activewear PLP; a card-only draft stays a non-link. */}
+            <ProductGrid
+              key={data.slug}
+              cards={data.styleCards.map((card) =>
+                data.draftPdpsReachable && isDraftPdpReachable(card) ? { ...card, internalPreview: true } : card,
+              )}
+            />
           </div>
         </div>
 

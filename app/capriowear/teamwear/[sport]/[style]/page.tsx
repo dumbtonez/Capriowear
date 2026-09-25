@@ -33,29 +33,43 @@ import { header, productTopRow } from "@/components/ui/styles";
 import {
   buildCtaSubline,
   categoryEntityFaq,
+  isDraftPdpReachable,
   isPublished,
   pdpCustomizationPills,
   pdpCustomizationSteps,
   pdpFaqOperational,
   pdpSpecHighlights,
   pdpSpecificationsCopy,
+  resolveRelatedStyleTags,
 } from "@/content/activewear/pdpShared";
 import { home } from "@/content/home";
 import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 import { sports } from "@/content/teamwear/sports";
 import { breadcrumbSchema, faqSchema, productSchema } from "@/lib/schema";
 
-// Published styles only -- same rule as the Activewear PDP's own
-// generateStaticParams.
+// Published styles, plus drafts with PDP content for a sport that has
+// opted into the Activewear draft-PDP rule (`Category.draftPdpsReachable`,
+// TEMPORARY -- see its comment in content/activewear/types.ts; once every
+// sport is rebuilt, drop the flag and make this the default). A reachable
+// draft renders noindexed, out of the sitemap, with BreadcrumbList only
+// (Product/FAQPage withheld, gated on isPublished() below). A card-only
+// draft, or any draft on a sport without the flag, still 404s.
+function isReachable(
+  sport: { draftPdpsReachable?: boolean },
+  card: { status: "published" | "draft"; pdpHeading?: string; specifications?: unknown[] },
+) {
+  return card.status === "published" || (sport.draftPdpsReachable === true && isDraftPdpReachable(card));
+}
+
 export function generateStaticParams() {
   return Object.values(sports).flatMap((sport) =>
     sport.styleCards
-      .filter((card) => card.status === "published")
+      .filter((card) => isReachable(sport, card))
       .map((card) => ({ sport: sport.slug, style: card.slug })),
   );
 }
 
-// Same reasoning as the Activewear PDP -- a draft style's URL 404s
+// Same reasoning as the Activewear PDP -- an unreachable style's URL 404s
 // immediately rather than falling through to a thin on-demand render.
 export const dynamicParams = false;
 
@@ -72,7 +86,7 @@ export async function generateMetadata({
 }: PageProps<"/capriowear/teamwear/[sport]/[style]">): Promise<Metadata> {
   const { sport, style } = await params;
   const data = getData(sport, style);
-  if (!data || data.product.status !== "published") return {};
+  if (!data || !isReachable(data.category, data.product)) return {};
 
   const shortTitle = data.product.pdpTitle ?? data.product.cardTitle;
   const title = data.product.pdpMetaTitle ?? `Custom ${shortTitle} Manufacturer`;
@@ -107,7 +121,7 @@ export async function generateMetadata({
 export default async function TeamwearStylePage({ params }: PageProps<"/capriowear/teamwear/[sport]/[style]">) {
   const { sport, style } = await params;
   const data = getData(sport, style);
-  if (!data || data.product.status !== "published") notFound();
+  if (!data || !isReachable(data.category, data.product)) notFound();
 
   const productTitle = data.product.pdpTitle ?? data.product.cardTitle;
   const heading = data.product.pdpHeading ?? productTitle;
@@ -119,6 +133,13 @@ export default async function TeamwearStylePage({ params }: PageProps<"/capriowe
     { label: data.category.menuLabel, href: `/capriowear/teamwear/${data.category.slug}` },
     { label: productTitle, href: data.product.href },
   ];
+
+  // Chip resolution only for an opted-in sport; otherwise the tags render
+  // exactly as authored (the old Teamwear behavior).
+  const relatedStyleTags =
+    data.product.relatedStyleTags && data.category.draftPdpsReachable
+      ? resolveRelatedStyleTags(data.product.relatedStyleTags, data.category.styleCards)
+      : data.product.relatedStyleTags;
 
   const faqItems = [categoryEntityFaq(data.category), ...(data.product.faqs ?? []), ...pdpFaqOperational];
 
@@ -178,6 +199,7 @@ export default async function TeamwearStylePage({ params }: PageProps<"/capriowe
               image: productImage,
               material: data.product.material,
               schemaMaterial: data.product.schemaMaterial,
+              sku: data.product.sku,
               group: data.category.group,
             })}
           />
@@ -187,16 +209,16 @@ export default async function TeamwearStylePage({ params }: PageProps<"/capriowe
           {data.product.images ? <ProductGallery images={data.product.images} productTitle={productTitle} /> : null}
           <div className={productTopRow.infoColumn}>
             <ProductInfo sku={data.product.sku} heading={heading} description={description} />
-            <ProductHighlights items={pdpSpecHighlights} />
+            <ProductHighlights items={data.product.pdpSpecHighlights ?? pdpSpecHighlights} />
             <ProductOptions
               groups={[
-                { heading: "Fabric options", items: data.category.fabricPills! },
-                { heading: "Customization", items: pdpCustomizationPills },
+                { heading: "Fabric options", items: data.product.pdpFabricPills ?? data.category.fabricPills ?? [] },
+                { heading: "Customization", items: data.product.pdpCustomizationPills ?? pdpCustomizationPills },
               ]}
             />
             <ProductCtas primaryCta={home.nav.cta} secondaryCta={home.nav.secondaryCta} />
-            {data.product.relatedStyleTags ? (
-              <ProductRelatedStyles tags={data.product.relatedStyleTags} categoryLabel={data.category.menuLabel} className="hidden xl:flex" />
+            {relatedStyleTags ? (
+              <ProductRelatedStyles tags={relatedStyleTags} categoryLabel={data.category.menuLabel} className="hidden xl:flex" />
             ) : null}
           </div>
         </div>
@@ -210,18 +232,20 @@ export default async function TeamwearStylePage({ params }: PageProps<"/capriowe
           />
         ) : null}
 
-        <ProductCustomizeSteps content={pdpCustomizationSteps} />
+        <ProductCustomizeSteps
+          content={data.product.pdpCustomizationSteps ?? data.category.pdpCustomizationSteps ?? pdpCustomizationSteps}
+        />
 
         <TrustPoints
-          heading={data.category.qualityHeading}
-          subline={data.category.qualitySubline}
-          points={data.category.qualityPoints}
+          heading={data.product.pdpQualityHeading ?? data.category.qualityHeading}
+          subline={data.product.pdpQualitySubline ?? data.category.qualitySubline}
+          points={data.product.pdpQualityPoints ?? data.category.qualityPoints}
           sidePadding="pdp"
         />
 
-        {data.product.relatedStyleTags ? (
+        {relatedStyleTags ? (
           <div className="container-p block xl:hidden">
-            <ProductRelatedStyles tags={data.product.relatedStyleTags} categoryLabel={data.category.menuLabel} topRule="none" />
+            <ProductRelatedStyles tags={relatedStyleTags} categoryLabel={data.category.menuLabel} topRule="none" />
           </div>
         ) : null}
 

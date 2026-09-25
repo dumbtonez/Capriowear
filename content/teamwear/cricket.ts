@@ -14,11 +14,10 @@
 // mmHg weight tier table. See StructuredBlock's own comment
 // (content/activewear/types.ts).
 //
-// Two published PDPs (Colored Match Jersey Short Sleeve, Whites Shirt), the
-// remaining 8 styles "draft" -- same Leggings-pilot pattern every category
-// since has followed: a draft card shows on the grid, non-clickable, no PDP
-// route generated, excluded from the sitemap and this category's own
-// CollectionPage/ItemList schema.
+// 8 styles, all "draft" (owner spec, 2026-09-25). 01 to 03 carry PDP
+// content and render as noindexed draft PDPs (BreadcrumbList only, out of
+// the sitemap and the CollectionPage/ItemList), with their cards linking;
+// 04 to 08 are card-only non-links. See the styleCards comment below.
 //
 // No cricket GSM number is ever stated (owner spec) -- every fabric-weight
 // reference here is deliberately worded as "tuned to your format/climate
@@ -27,8 +26,66 @@
 // American spelling, no en/em dashes, "spandex" never "elastane"/"Lycra",
 // never "seamless" -- confirmed throughout, same standing sitewide rules
 // every category follows.
-import type { Category } from "../activewear/types";
+import type { Category, StyleCard } from "../activewear/types";
 import { faqGetStarted } from "../getStarted";
+
+const PLP = "/capriowear/teamwear/cricket";
+
+const QUALITY_HEADING = "The color you approve, on every kit";
+const PROOF_AND_SAMPLE_SUBLINE = "We confirm it all on your digital proof and sample before the full roster is produced.";
+const NAMES_NUMBERS_POINT = "Names and numbers dyed into the fiber, so they will not crack or peel";
+const ROSTER_POINT = "The full roster produced in one run, same fabric roll and print batch, so every kit matches";
+const AQL_POINT = "Every run inspected to AQL 2.5, third-party inspection welcome";
+
+const SPEC_FIT = "Team cut or fitted, graded XS to 5XL, men's, women's and unisex blocks";
+const SPEC_BRANDING = "Club crest, sponsor logos, manufacturer mark, woven and care labels, packaging";
+const MATCH_JERSEY_SPEC_FABRIC =
+  "Polyester interlock or pique body, micro-mesh or ultra-light mesh ventilation, poly-spandex collar and cuffs";
+const MATCH_JERSEY_SPEC_WEIGHT =
+  "Pending, confirmed on your sample. Lighter mesh for hot-weather kit, heavier interlock for structure.";
+const MATCH_JERSEY_SPEC_COLOR = "Full sublimation color range, Pantone matched, home and away colorways";
+const MATCH_JERSEY_SPEC_CONSTRUCTION = "Flatlock and overlock seams, mesh inserts at the side and underarm optional";
+const MATCH_JERSEY_FABRIC_PILLS = ["Polyester interlock", "Micro-mesh", "Ultra-light mesh", "Poly-spandex panels"];
+const MATCH_JERSEY_CUSTOMIZATION_PILLS = ["Sublimated names & numbers", "Pantone color match", "Home & away kits", "Custom labels"];
+
+type Step = [title: string, body: string];
+const NAMES_AND_NUMBERS_STEP: Step = [
+  "Names and numbers",
+  "Built into the print file per player, or tackle twill and sublimation twill for a raised look",
+];
+const TRIMS_STEP: Step = ["Trims and finish", "Woven labels, size and care labels, hangtags"];
+const PACKAGING_STEP: Step = ["Packaging", "Polybags, boxes, retail-ready to your spec"];
+const MATCH_JERSEY_STEPS_TAIL: Step[] = [
+  ["Branding", "Embroidered or sublimated crests, sponsor logos, manufacturer mark"],
+  ["Fabric", "Any polyester knit and weight, sourced or matched to your reference"],
+  ["Color", "Pantone, CMYK, RGB or hex matched, confirmed on your digital proof"],
+  TRIMS_STEP,
+  PACKAGING_STEP,
+];
+
+// Per-style "How we customize" carousel. Images are the shared factory
+// test shots (same stand-ins every PDP carousel uses), cycled in order.
+function customizeSteps(steps: Step[]) {
+  return {
+    eyebrow: "HOW WE CUSTOMIZE",
+    heading: "Your brand, applied\nin-house, no outsourcing",
+    steps: steps.map(([title, body], i) => ({
+      title,
+      body,
+      image: { src: `/factory-test/inside-factory-${(i % 5) + 1}.jpg`, alt: title },
+    })),
+  };
+}
+
+// Alt-only gallery (no photography yet): 6 frames, alt = the card name.
+function gallery(alt: string) {
+  return Array.from({ length: 6 }, () => ({ alt }));
+}
+
+// Card-only draft (a later batch adds the PDP content, then the card links).
+function cardOnly(sku: string, slug: string, cardTitle: string, cardSubline: string): StyleCard {
+  return { status: "draft", slug, cardTitle, cardSubline, image: "", imageAlt: cardTitle, href: `${PLP}/${slug}`, sku };
+}
 
 export const cricket: Category = {
   slug: "cricket",
@@ -41,16 +98,17 @@ export const cricket: Category = {
   // sourced item, not something this entity sentence should claim as
   // manufactured. "Training tees" added (owner spec, 2026-09-06, PLP
   // content trim) to match the trimmed entity-FAQ answer's own given copy.
-  entityExampleStyles: "colored match jerseys, traditional whites, trousers, and training tees",
-  entityFabrics: "polyester interlock, pique, and micro-mesh knits",
+  entityExampleStyles: "colored match jerseys, traditional whites, trousers, training tees, fleece pullovers and caps",
+  entityFabrics: "polyester interlock, pique, micro-mesh and fleece",
   h1: "Custom Cricket Uniform Manufacturer",
   metaTitle: "Custom Cricket Uniform Manufacturer",
   metaDescription:
-    "Custom cricket uniform and kit manufacturer, Pakistan. Sublimated colored match kit and traditional whites, low MOQ, for clubs and academies.",
-  trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private label", "DDP to 20+ countries"],
+    "Custom cricket uniform manufacturer: private label sublimated match kit, traditional whites, trousers and training wear, MOQ 50 pieces, DDP to 20+ countries.",
+  trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
-  showGenderFilter: true,
+  // Teamwear has no gender split (owner spec, 2026-09-25).
+  showGenderFilter: false,
   fabricEyebrow: "FABRIC OPTIONS",
   fabricHeading: "The fabrics behind the\nbig brands",
   // Trimmed to 4 rows (owner spec, 2026-09-06, "leaner for mobile and a
@@ -82,7 +140,9 @@ export const cricket: Category = {
   // important phrase, semibold, not the whole note) -- was one plain
   // segment.
   fabricNote: [
-    { text: "Polyester-based for full-color sublimation. Weight tuned to your format and climate and " },
+    {
+      text: "Polyester-based for full-color sublimation, with whites built in white or near-white polyester. Brushed polyester fleece for the fleece pullover. Weight tuned to your format and climate and ",
+    },
     { text: "confirmed on your sample", bold: true },
     { text: ". Recycled polyester available. Swatches before every bulk run." },
   ],
@@ -113,7 +173,7 @@ export const cricket: Category = {
       },
       {
         method: "Embroidery",
-        bestFor: "Crests, badges, sponsor marks",
+        bestFor: "Crests, badges, sponsor marks, caps",
         notes: "Raised, premium texture",
       },
     ],
@@ -131,7 +191,7 @@ export const cricket: Category = {
   // Trimmed to 4 bullets (owner spec, 2026-09-06) -- was 5.
   qualityPoints: [
     "Digital proof and Pantone match approved before we cut",
-    "Names and numbers sublimated into the fiber, they will not crack, peel or fade",
+    "Names and numbers sublimated into the fiber, so they will not crack or peel",
     "The full roster produced in one run, same fabric roll and print batch, so every kit matches",
     "Every run inspected to AQL 2.5, third-party inspection welcome",
   ],
@@ -141,7 +201,7 @@ export const cricket: Category = {
   coverageItems: [
     {
       title: "Fabric",
-      body: "Polyester interlock, pique and micro-mesh, poly-spandex collars",
+      body: "Polyester interlock, pique and micro-mesh, poly-spandex collars, brushed fleece for off-field layers",
     },
     {
       title: "Print",
@@ -149,7 +209,7 @@ export const cricket: Category = {
     },
     {
       title: "Decoration",
-      body: "Tackle twill, sublimation twill patches, embroidered crests",
+      body: "Tackle twill, sublimation twill patches, embroidered crests on shirts and caps",
     },
     {
       title: "Finishing",
@@ -161,6 +221,9 @@ export const cricket: Category = {
   // a buyer skim") -- was 15. Plus the auto-built entity question
   // (categoryEntityFaq(), from entityExampleStyles above), 8 total, matching
   // the owner's own numbered list exactly.
+  // 7 questions plus the auto-built entity question first (categoryEntityFaq(),
+  // from entityExampleStyles/entityFabrics above), 8 total (owner spec,
+  // 2026-09-25). The whites-shirt collar question moved to that PDP.
   faqs: [
     {
       q: "What is your MOQ for custom cricket kit?",
@@ -168,7 +231,7 @@ export const cricket: Category = {
     },
     {
       q: "What is the difference between cricket whites and colored match kit?",
-      a: "Both, on the same sublimation-capable polyester platform. Whites use white or near-white bodies with contrast trim; colored kit uses the full sublimation color range for T20 and ODI-format designs.",
+      a: "Whites are the traditional kit for multi-day and club cricket: a white or near-white body with contrast trim in team colors. Colored match kit is fully sublimated in team colors for T20 and one-day formats. Capriowear makes both on the same polyester platform.",
     },
     {
       q: "How are names and numbers applied?",
@@ -176,15 +239,11 @@ export const cricket: Category = {
     },
     {
       q: "Which fabrics do you use, and how is weight decided?",
-      a: "Polyester interlock and pique for the body, micro-mesh for ventilation, ultra-light mesh for hot-weather kit, poly-spandex for collars, with a recycled option. Weight is tuned to your format and climate and confirmed on the sample.",
+      a: "Polyester interlock and pique for the body, micro-mesh for ventilation, ultra-light mesh for hot-weather kit, poly-spandex for collars and brushed fleece for off-field layers, with a recycled option. Weight is tuned to your format and climate and confirmed on the sample.",
     },
     {
-      q: "Can a club or academy order both whites and colored kit together?",
-      a: "Yes. Send Pantone, CMYK, RGB or hex values and we match production dye to them, and whites and colored kit are planned into one order so a club or academy gets both in the same run.",
-    },
-    {
-      q: "Does the whites shirt have a polo collar and button placket?",
-      a: "Yes. The whites shirt is built with a traditional polo collar and button placket, plus contrast trim and an embroidered crest, the classic cricket whites build.",
+      q: "Can a club or academy order whites and colored kit in one order?",
+      a: "Yes. Whites, colored match kit and training wear are planned into one order, with Pantone, CMYK, RGB or hex values matched in production dye and trim, so every piece matches across the program.",
     },
     {
       q: "How long do samples and bulk take?",
@@ -193,188 +252,248 @@ export const cricket: Category = {
     faqGetStarted,
   ],
   ctaReferenceNoun: "kit",
+  // TEMPORARY (owner, 2026-09-25): opts Cricket into the draft-PDP rule so
+  // the batch-1 drafts get noindexed pages and their cards link. See the
+  // field's own comment in content/activewear/types.ts.
+  draftPdpsReachable: true,
+  // 8 drafts, SKU order (CAP-CRK-01 to 08), owner spec 2026-09-25. Card
+  // title = H1 minus " Manufacturer" = title-tag name = breadcrumb = alt =
+  // every pill label that targets it. 01 to 03 carry PDP content (batch 1,
+  // reachable noindexed drafts via `draftPdpsReachable`); 04 to 08 are
+  // card-only non-links until their own batch. Nothing publishes until the
+  // roster is confirmed, the style sampled and real photos exist
+  // (getPublishReadiness()). Fleece Pullover and Cap re-added by the owner
+  // (2026-09-25), superseding the 2026-09-05 headwear removal.
   styleCards: [
     {
-      // Draft (owner spec, 2026-09-05): "none of the cricket products are
-      // team-confirmed yet, so nothing publishes until we confirm each
-      // one" -- the full worked PDP content below stays exactly as built
-      // (do not delete), only this flag flips back to "published" once the
-      // team confirms this style and it's sampled.
       status: "draft",
       slug: "colored-match-jersey-short-sleeve",
-      cardTitle: "Custom Colored Match Jersey, Short Sleeve",
+      cardTitle: "Custom Short-Sleeve Cricket Match Jersey",
       cardSubline: "Full-dye sublimated, names and numbers in the print",
       image: "",
-      imageAlt: "Custom colored cricket match jersey, short sleeve, full-dye sublimated",
-      href: "/capriowear/teamwear/cricket/colored-match-jersey-short-sleeve",
-      pdpTitle: "Colored Match Jersey",
+      imageAlt: "Custom Short-Sleeve Cricket Match Jersey",
+      href: `${PLP}/colored-match-jersey-short-sleeve`,
       sku: "CAP-CRK-01",
-      pdpHeading: "Custom Cricket Match Jersey Manufacturer",
+      pdpHeading: "Custom Short-Sleeve Cricket Match Jersey Manufacturer",
+      pdpMetaTitle: "Custom Short-Sleeve Cricket Match Jersey Manufacturer",
       pdpDescription:
         "Colored cricket match jersey, custom and private label, full-dye sublimated with names, numbers and sponsor logos built into the print, in a polyester interlock or micro-mesh knit, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Colored cricket match jersey, front view" },
-        { alt: "Colored cricket match jersey, back view with name and number" },
-        { alt: "Colored cricket match jersey, side profile" },
-        { alt: "Colored cricket match jersey, collar detail" },
-        { alt: "Colored cricket match jersey, sponsor logo placement" },
-        { alt: "Colored cricket match jersey, fabric close-up" },
-      ],
-      pdpMetaTitle: "Custom Cricket Jersey Manufacturer",
+      images: gallery("Custom Short-Sleeve Cricket Match Jersey"),
       pdpMetaDescription:
-        "Custom colored cricket jersey manufacturer, full-dye sublimated, names and numbers in the print, Pantone color match, low MOQ. DDP worldwide.",
+        "Custom cricket match jersey manufacturer: sublimated short-sleeve jerseys, names and numbers in the print, Pantone matched, MOQ 50, DDP to 20+ countries.",
       material: "Polyester interlock or pique, micro-mesh or ultra-light mesh ventilation",
+      pdpFabricPills: MATCH_JERSEY_FABRIC_PILLS,
+      pdpCustomizationPills: MATCH_JERSEY_CUSTOMIZATION_PILLS,
       faqs: [
         {
-          q: "How are the names and numbers applied to a sublimated jersey?",
-          a: "They are composited into the same print file as the rest of the design and dyed into the fabric in one pass, so there is no added cost or weight and nothing to peel. Tackle twill or sublimation twill is available where you want a raised, sewn look.",
+          q: "How are names and numbers applied to the short-sleeve cricket match jersey?",
+          a: "They are composited into the same print file as the design and dyed into the fabric in one pass, so there is no added cost or weight and nothing to peel. Tackle twill or sublimation twill is available for a raised, sewn look.",
         },
         {
-          q: "Can you produce a home and an away kit together?",
+          q: "Can you produce home and away short-sleeve cricket match jerseys together?",
           a: "Yes. Both colorways are planned into one order and share the same print files, sizing and roster, so they match as a set.",
         },
         {
-          q: "Can you match our exact team and sponsor colors?",
-          a: "Yes. Send Pantone, CMYK, RGB or hex values with your artwork and we match production dye to them, confirmed on your digital proof and sample before bulk.",
+          q: "Can you match our exact team and sponsor colors on the cricket match jersey?",
+          a: "Yes. Send Pantone, CMYK, RGB or hex values and we match production dye to them, confirmed on your proof and sample before bulk.",
         },
       ],
       relatedStyleTags: [
-        { label: "Colored Match Jersey Long Sleeve", href: "/capriowear/teamwear/cricket" },
-        { label: "Colored Trousers", href: "/capriowear/teamwear/cricket" },
-        { label: "Whites Shirt", href: "/capriowear/teamwear/cricket/whites-shirt" },
-        { label: "Training Tee", href: "/capriowear/teamwear/cricket" },
-        { label: "See All", href: "/capriowear/teamwear/cricket" },
+        { label: "Custom Long-Sleeve Cricket Match Jersey", slug: "colored-match-jersey-long-sleeve", href: PLP },
+        { label: "Custom Colored Cricket Trousers", slug: "colored-trousers", href: PLP },
+        { label: "Custom Cricket Whites Shirt", slug: "whites-shirt", href: PLP },
+        { label: "Custom Cricket Training Tee", slug: "training-tee", href: PLP },
+        { label: "See All", href: PLP },
       ],
       specifications: [
         { label: "Style", value: "Colored cricket match jersey, short sleeve (base type)" },
-        {
-          label: "Fabric",
-          value: "Polyester interlock or pique body, micro-mesh or ultra-light mesh ventilation, poly-spandex collar and cuffs",
-        },
-        {
-          label: "Weight",
-          value:
-            "Tuned to your format and climate, confirmed on your sample; lighter mesh for hot-weather match kit, heavier interlock for structure",
-        },
-        { label: "Collar", value: "Crew or polo, your choice; flat, non-curling finish" },
-        { label: "Sleeve", value: "Short sleeve; long sleeve available in the same construction" },
+        { label: "Fabric", value: MATCH_JERSEY_SPEC_FABRIC },
+        { label: "Weight", value: MATCH_JERSEY_SPEC_WEIGHT },
+        { label: "Collar", value: "Crew or polo, your choice, with a flat, non-curling finish" },
+        { label: "Sleeve", value: "Short sleeve. The long-sleeve build is its own style (CAP-CRK-03)." },
         {
           label: "Decoration",
-          value: "Full-dye sublimation, names, numbers and sponsor logos in the print; tackle twill or sublimation twill optional",
+          value: "Full-dye sublimation, with names, numbers and sponsor logos in the print. Tackle twill or sublimation twill optional.",
         },
-        { label: "Color", value: "Full sublimation color range, Pantone matched, home and away colorways" },
-        { label: "Fit", value: "Team cut or fitted, graded XS to 5XL, men's, women's and unisex blocks" },
-        { label: "Construction", value: "Flatlock and overlock seams, side and underarm mesh panels optional" },
-        { label: "Branding", value: "Club crest, sponsor logos, manufacturer mark, woven and care labels, packaging" },
+        { label: "Color", value: MATCH_JERSEY_SPEC_COLOR },
+        { label: "Fit", value: SPEC_FIT },
+        { label: "Construction", value: MATCH_JERSEY_SPEC_CONSTRUCTION },
+        { label: "Branding", value: SPEC_BRANDING },
       ],
-      specificationsImage: { alt: "Colored cricket match jersey, construction detail" },
+      specificationsImage: { alt: "Custom Short-Sleeve Cricket Match Jersey" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Print and artwork", "Full-dye sublimation, unlimited colors and gradients in one file at one cost"],
+        NAMES_AND_NUMBERS_STEP,
+        ...MATCH_JERSEY_STEPS_TAIL,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: PROOF_AND_SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Digital proof and Pantone match approved before we cut",
+        NAMES_NUMBERS_POINT,
+        ROSTER_POINT,
+        "Sizing held consistent across the run, with custom measurements for hard-to-fit players",
+        AQL_POINT,
+      ],
     },
     {
-      // Draft (owner spec, 2026-09-05) -- see the identical comment on the
-      // Colored Match Jersey card above.
       status: "draft",
       slug: "whites-shirt",
       cardTitle: "Custom Cricket Whites Shirt",
       cardSubline: "Polo collar, contrast trim, short or long sleeve",
       image: "",
-      imageAlt: "Custom cricket whites shirt, polo collar, contrast trim",
-      href: "/capriowear/teamwear/cricket/whites-shirt",
-      pdpTitle: "Whites Shirt",
+      imageAlt: "Custom Cricket Whites Shirt",
+      href: `${PLP}/whites-shirt`,
       sku: "CAP-CRK-02",
       pdpHeading: "Custom Cricket Whites Shirt Manufacturer",
+      pdpMetaTitle: "Custom Cricket Whites Shirt Manufacturer",
       pdpDescription:
-        "Traditional cricket whites shirt, custom and private label, polo collar with a buttoned placket and contrast trim, in a breathable polyester interlock or pique knit, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Cricket whites shirt, front view" },
-        { alt: "Cricket whites shirt, back view" },
-        { alt: "Cricket whites shirt, collar and placket detail" },
-        { alt: "Cricket whites shirt, contrast trim detail" },
-        { alt: "Cricket whites shirt, embroidered crest detail" },
-        { alt: "Cricket whites shirt, fabric close-up" },
-      ],
-      pdpMetaTitle: "Custom Cricket Whites Manufacturer",
+        "Traditional cricket whites shirt, custom and private label, with a polo collar, buttoned placket and contrast trim, in a breathable polyester interlock or pique knit, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Cricket Whites Shirt"),
       pdpMetaDescription:
-        "Custom cricket whites manufacturer, private label. Match and club whites in polyester interlock, polo collar, contrast trim, embroidered crest, low MOQ.",
-      material: "Polyester interlock or pique, micro-mesh ventilation panels optional",
+        "Custom cricket whites shirt manufacturer: polyester interlock or pique, polo collar, contrast trim and embroidered crest, MOQ 50 pieces, DDP to 20+ countries.",
+      material: "Polyester interlock or pique, micro-mesh ventilation inserts optional",
+      pdpFabricPills: ["Polyester interlock", "Pique", "Micro-mesh", "Poly-spandex collar"],
+      pdpCustomizationPills: ["Contrast trim", "Embroidered crest", "Short or long sleeve", "Custom labels"],
       faqs: [
         {
-          q: "What collar options are there on cricket whites?",
-          a: "A polo collar with a two or three button placket is the traditional standard, and we also build a crew-neck version. The collar is finished flat so it will not curl.",
+          q: "What collar options are there on the cricket whites shirt?",
+          a: "A polo collar with a two or three button placket is the traditional standard, and we also build a crew neck. On long sleeve, a one-piece collar with a back stand adds sun cover at the neck. Every collar is finished flat so it does not curl.",
         },
         {
-          q: "Can we add contrast trim and a club crest to whites?",
-          a: "Yes. Contrast collar, placket and tipping in your team color, with an embroidered or sublimated crest and sponsor marks, all matched to your reference.",
+          q: "Can we add contrast trim and a club crest to the cricket whites shirt?",
+          a: "Yes. We add a contrast collar, placket and tipping in your team color, with an embroidered or sublimated crest and sponsor marks.",
         },
         {
-          q: "Do you make matching whites trousers?",
-          a: "Yes, as part of the same kit, produced together so the whites match across pieces.",
+          q: "Do you make matching whites trousers for the cricket whites shirt?",
+          a: "Yes. They are made as part of the same kit and produced together, so the whites match across pieces.",
         },
       ],
       relatedStyleTags: [
-        { label: "Whites Trousers", href: "/capriowear/teamwear/cricket" },
-        { label: "Colored Match Jersey", href: "/capriowear/teamwear/cricket/colored-match-jersey-short-sleeve" },
-        { label: "Training Tee", href: "/capriowear/teamwear/cricket" },
-        { label: "See All", href: "/capriowear/teamwear/cricket" },
+        { label: "Custom Cricket Whites Trousers", slug: "whites-trousers", href: PLP },
+        { label: "Custom Short-Sleeve Cricket Match Jersey", slug: "colored-match-jersey-short-sleeve", href: PLP },
+        { label: "Custom Cricket Training Tee", slug: "training-tee", href: PLP },
+        { label: "Custom Cricket Fleece Pullover", slug: "fleece-pullover", href: PLP },
+        { label: "See All", href: PLP },
       ],
       specifications: [
         { label: "Style", value: "Traditional cricket whites shirt (base type)" },
-        { label: "Fabric", value: "Polyester interlock or pique body, micro-mesh ventilation panels optional" },
-        { label: "Weight", value: "Tuned to climate, confirmed on your sample; breathable for match-day heat" },
-        { label: "Collar", value: "Polo collar with a two or three button placket; crew-neck alternative" },
+        { label: "Fabric", value: "Polyester interlock or pique body, micro-mesh ventilation inserts optional" },
+        { label: "Weight", value: "Pending, confirmed on your sample. Built breathable for match-day heat." },
+        {
+          label: "Collar",
+          value:
+            "Polo collar with a two or three button placket. Crew-neck alternative. On long sleeve, a one-piece collar with a back stand for extra sun cover.",
+        },
         { label: "Sleeve", value: "Short sleeve or long sleeve, same construction" },
-        { label: "Color", value: "White or near-white body, contrast collar, placket and trim in your team color, Pantone matched" },
-        { label: "Decoration", value: "Embroidered or sublimated crest and sponsor marks; contrast tipping and piping" },
-        { label: "Fit", value: "Team cut or fitted, graded XS to 5XL, men's, women's and unisex blocks" },
+        {
+          label: "Color",
+          value: "White or near-white body, with contrast collar, placket and trim in your team color, Pantone matched",
+        },
+        { label: "Decoration", value: "Embroidered or sublimated crest and sponsor marks, contrast tipping and piping" },
+        { label: "Fit", value: SPEC_FIT },
         { label: "Construction", value: "Flatlock and overlock seams, side vents optional, flat non-curling collar" },
-        { label: "Branding", value: "Club crest, sponsor logos, manufacturer mark, woven and care labels, packaging" },
+        { label: "Branding", value: SPEC_BRANDING },
       ],
-      specificationsImage: { alt: "Cricket whites shirt, construction detail" },
+      specificationsImage: { alt: "Custom Cricket Whites Shirt" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Collar and trim", "Contrast collar, placket and tipping in your team color, Pantone matched"],
+        ["Decoration", "Embroidered crest and sponsor marks, or sublimated marks on a white body"],
+        ["Fabric", "Breathable polyester interlock or pique, any weight, sourced or matched to your reference"],
+        ["Fit and construction", "Polo, crew or one-piece stand collar, short or long sleeve, side vents"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: "We confirm it all on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Contrast trim and crest color Pantone matched and approved before we cut",
+        "Crest and trim finished clean and flat, with no puckering",
+        "The full roster produced in one run, same fabric roll, so every shirt matches",
+        "Sizing held consistent across the run, with custom measurements for hard-to-fit players",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
       slug: "colored-match-jersey-long-sleeve",
-      cardTitle: "Custom Colored Match Jersey, Long Sleeve",
-      cardSubline: "Long-sleeve sublimated match shirt",
+      cardTitle: "Custom Long-Sleeve Cricket Match Jersey",
+      cardSubline: "Full-dye sublimated, long sleeve for sun cover",
       image: "",
-      imageAlt: "Custom colored cricket match jersey, long sleeve, sublimated",
-      href: "/capriowear/teamwear/cricket/colored-match-jersey-long-sleeve",
+      imageAlt: "Custom Long-Sleeve Cricket Match Jersey",
+      href: `${PLP}/colored-match-jersey-long-sleeve`,
+      sku: "CAP-CRK-03",
+      pdpHeading: "Custom Long-Sleeve Cricket Match Jersey Manufacturer",
+      pdpMetaTitle: "Custom Long-Sleeve Cricket Match Jersey Manufacturer",
+      pdpDescription:
+        "Long-sleeve colored cricket match jersey, custom and private label, full-dye sublimated with names, numbers and sponsor logos built into the print, in a polyester interlock or micro-mesh knit, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Long-Sleeve Cricket Match Jersey"),
+      pdpMetaDescription:
+        "Custom cricket match jersey manufacturer: sublimated long-sleeve jerseys for sun cover, names and numbers in the print, MOQ 50 pieces, DDP to 20+ countries.",
+      material: "Polyester interlock or pique, micro-mesh or ultra-light mesh ventilation",
+      pdpFabricPills: MATCH_JERSEY_FABRIC_PILLS,
+      pdpCustomizationPills: MATCH_JERSEY_CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "Why add the long-sleeve cricket match jersey to a kit?",
+          a: "The long-sleeve cricket match jersey gives players sun cover through long sessions and cooler conditions, in the same sublimated construction, print file and colors as the short-sleeve cricket match jersey, so a club can offer both in one kit.",
+        },
+        {
+          q: "Can the long-sleeve and short-sleeve cricket match jerseys be produced in one run?",
+          a: "Yes. The long-sleeve and short-sleeve cricket match jerseys share the same print files, fabric and roster, so they are produced together and match in color across the set.",
+        },
+        {
+          q: "Can sleeve graphics be printed on the long-sleeve cricket match jersey?",
+          a: "Yes. The sleeves are sublimated in the same print file as the body, so sponsor marks, stripes and team graphics run onto the sleeves at no added cost, with alignment checked on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Short-Sleeve Cricket Match Jersey", slug: "colored-match-jersey-short-sleeve", href: PLP },
+        { label: "Custom Colored Cricket Trousers", slug: "colored-trousers", href: PLP },
+        { label: "Custom Cricket Whites Shirt", slug: "whites-shirt", href: PLP },
+        { label: "Custom Cricket Training Tee", slug: "training-tee", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Colored cricket match jersey, long sleeve (base type)" },
+        { label: "Fabric", value: MATCH_JERSEY_SPEC_FABRIC },
+        { label: "Weight", value: MATCH_JERSEY_SPEC_WEIGHT },
+        { label: "Collar", value: "Crew or polo, your choice, with a flat, non-curling finish" },
+        {
+          label: "Sleeve",
+          value: "Long sleeve for sun cover, with a cuff finish to your spec. The short-sleeve build is its own style (CAP-CRK-01).",
+        },
+        {
+          label: "Decoration",
+          value:
+            "Full-dye sublimation, with names, numbers and sponsor logos in the print, including sleeve graphics. Tackle twill or sublimation twill optional.",
+        },
+        { label: "Color", value: MATCH_JERSEY_SPEC_COLOR },
+        { label: "Fit", value: SPEC_FIT },
+        { label: "Construction", value: MATCH_JERSEY_SPEC_CONSTRUCTION },
+        { label: "Branding", value: SPEC_BRANDING },
+      ],
+      specificationsImage: { alt: "Custom Long-Sleeve Cricket Match Jersey" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Print and artwork", "Full-dye sublimation across the body and sleeves, unlimited colors and gradients in one file at one cost"],
+        NAMES_AND_NUMBERS_STEP,
+        ...MATCH_JERSEY_STEPS_TAIL,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: PROOF_AND_SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Digital proof and Pantone match approved before we cut",
+        NAMES_NUMBERS_POINT,
+        "Sleeve and body print aligned across seams and checked on your sample",
+        ROSTER_POINT,
+        AQL_POINT,
+      ],
     },
-    {
-      status: "draft",
-      slug: "colored-trousers",
-      cardTitle: "Custom Colored Cricket Trousers",
-      cardSubline: "Sublimated or solid, elastic drawcord waist",
-      image: "",
-      imageAlt: "Custom colored cricket trousers, sublimated or solid",
-      href: "/capriowear/teamwear/cricket/colored-trousers",
-    },
-    {
-      status: "draft",
-      slug: "whites-trousers",
-      cardTitle: "Custom Cricket Whites Trousers",
-      cardSubline: "Traditional whites, elastic drawcord waist",
-      image: "",
-      imageAlt: "Custom cricket whites trousers, elastic drawcord waist",
-      href: "/capriowear/teamwear/cricket/whites-trousers",
-    },
-    {
-      status: "draft",
-      slug: "training-tee",
-      cardTitle: "Custom Cricket Training Tee",
-      cardSubline: "Lightweight practice shirt",
-      image: "",
-      imageAlt: "Custom cricket training tee, lightweight practice shirt",
-      href: "/capriowear/teamwear/cricket/training-tee",
-    },
-    // Removed (owner spec, 2026-09-05, "cut-and-sew scope filter", a new
-    // standing rule for the whole Teamwear group): Cricket Cap, Wide-Brim
-    // Sun Hat (headwear -- a different, typically-sourced manufacturing
-    // process, not cut-and-sew), Sleeveless Cricket Sweater, Long-Sleeve
-    // Cricket Sweater (a true cable-knit sweater/slipover is a knitted
-    // garment, also typically sourced, not cut-and-sew). Pulled entirely,
-    // not left as draft cards -- no slug, no route, no sitemap/ItemList
-    // entry. A cut-and-sew fleece or interlock vest version may come back
-    // later as a new style entry under a different name, per the owner.
+    cardOnly("CAP-CRK-04", "colored-trousers", "Custom Colored Cricket Trousers", "Sublimated or solid, elastic drawcord waist"),
+    cardOnly("CAP-CRK-05", "whites-trousers", "Custom Cricket Whites Trousers", "Traditional whites, elastic drawcord waist"),
+    cardOnly("CAP-CRK-06", "training-tee", "Custom Cricket Training Tee", "Lightweight sublimated practice shirt"),
+    cardOnly("CAP-CRK-07", "fleece-pullover", "Custom Cricket Fleece Pullover", "Brushed fleece, off-field and warm-up layer"),
+    cardOnly("CAP-CRK-08", "cap", "Custom Cricket Cap", "Paneled cap, embroidered crest"),
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, Teamwear sports only,
   // closest sports first.
