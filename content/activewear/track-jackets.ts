@@ -73,7 +73,7 @@ export const trackJackets: Category = {
   ],
   fabricNote: [
     {
-      text: "Track jackets are knit, built for stretch and comfort in training, warm-ups and travel, while woven wind and rain shells sit in our Jackets range. Fabric weight is confirmed on your sample. Swatches before every bulk run, and we can source or match a specific fabric or a Pantone color from your reference.",
+      text: "Track jackets are smooth-face knits, built for stretch and comfort in training, warm-ups and travel, while woven shells, quilted and fleece jackets sit in our Jackets range. Fabric weight is confirmed on your sample. Swatches before every bulk run, and we can source or match a specific fabric or a Pantone color from your reference.",
     },
   ],
   fabricPills: ["Polyester interlock", "Performance stretch knit", "Brushed tricot", "Recycled polyester", "Mesh lining"],
@@ -107,16 +107,16 @@ export const trackJackets: Category = {
     },
     {
       q: "What is the difference between a track jacket and a windbreaker?",
-      a: "A track jacket is knit, built for stretch and comfort in training, warm-ups and travel. A windbreaker is a woven shell built to block wind and light rain. We make both, track jackets here and windbreakers in our Jackets range.",
+      a: "A track jacket is a smooth-face knit, such as interlock or tricot, built for stretch and comfort in training, warm-ups and travel. A windbreaker is a woven shell built to block wind, with a water-repellent finish on request. We make both, track jackets here and windbreakers in our Jackets range.",
       link: { text: "Jackets range", href: "/capriowear/activewear/jackets" },
     },
     {
       q: "What is the difference between a quarter-zip track top and a full-zip track jacket?",
-      a: "A quarter-zip track top pulls on over the head with a short zip at the neck, a lighter layer for training. A full-zip track jacket opens all the way down and layers over other kit as a warm-up. We make both, to your spec.",
+      a: "A quarter-zip track top pulls on over the head with a short zip at the neck, a lighter layer for training. A full-zip track jacket opens full length and layers over other kit as a warm-up. We make both, to your spec.",
     },
     {
       q: "What fabrics do you use for track jackets?",
-      a: "Polyester interlock for a smooth, stable face that holds color-blocking and print, performance Polyester/Spandex knits for quarter-zip training tops, brushed tricot for a classic warm-up feel, and recycled polyester for sustainable lines, all confirmed on your sample.",
+      a: "Our track jackets are made in polyester interlock for a smooth, stable face that holds color-blocking and print, performance Polyester/Spandex knits for quarter-zip training tops, brushed tricot for a classic warm-up feel, and recycled polyester for sustainable lines, all confirmed on your sample.",
     },
     {
       q: "Can you add a zipper garage, thumbholes or reflective trims?",
@@ -127,7 +127,7 @@ export const trackJackets: Category = {
       a: "Yes. Sleeve stripes, color-block panels and chevron yokes are cut and aligned to your artwork, Pantone matched, and checked for alignment at every size.",
     },
     {
-      q: "Can you add team names, numbers and logos?",
+      q: "Can you add team names, numbers and logos to track jackets?",
       a: "Yes. Names, numbers and logos by sublimation, screen print, heat transfer or embroidery, placed to your spec across chest, sleeve and back.",
     },
     {
@@ -140,7 +140,7 @@ export const trackJackets: Category = {
       a: "Yes. Send a swatch, reference garment, or tech pack and we source or develop to match, then share swatches and confirm on your sample before bulk.",
     },
     {
-      q: "What can I customize?",
+      q: "What can I customize on a track jacket?",
       a: "Everything from fabric to packaging: fabric and weight, zip length, collar and hood, sleeves and cuffs, stripes and color-blocking, color with Pantone matching, your logos, labels, hangtags, and packaging.",
     },
     {
@@ -149,7 +149,7 @@ export const trackJackets: Category = {
     },
     {
       q: "How are track jackets sized?",
-      a: "Alpha XS to 5XL on a unisex block, with separate men's and women's cuts to your spec and mix-and-match sizing within a colorway for team orders.",
+      a: "Our track jackets are sized Alpha XS to 5XL on a unisex block, with separate men's and women's cuts to your spec and mix-and-match sizing within a colorway for team orders.",
     },
     {
       q: "How long do samples and bulk take?",

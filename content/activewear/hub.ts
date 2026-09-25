@@ -55,13 +55,13 @@ const hubGroups: CategoryGroup[] = [
     eyebrow: "OUTERWEAR AND SUITS",
     h2: "Jackets, tracksuits and warm-up wear",
     categories: [
-      { label: "Jackets", descriptor: "Woven shells, water-repellent to waterproof", href: "/capriowear/activewear/jackets" },
+      { label: "Jackets", descriptor: "Softshell, windbreaker, quilted and fleece jackets", href: "/capriowear/activewear/jackets" },
       {
         label: "Track Jackets & Zip-Ups",
-        descriptor: "Brushed tricot, full and quarter zip",
+        descriptor: "Knit quarter-zip tops and full-zip track jackets",
         href: "/capriowear/activewear/track-jackets",
       },
-      { label: "Tracksuits", descriptor: "Matched tricot warm-up sets", href: "/capriowear/activewear/tracksuits" },
+      { label: "Tracksuits", descriptor: "Men's knit and women's woven full-zip tracksuits", href: "/capriowear/activewear/tracksuits" },
       {
         label: "Running Wear",
         descriptor: "A curated running edit across categories",

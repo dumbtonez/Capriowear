@@ -36,7 +36,7 @@ export const jackets: Category = {
   // categoryEntityFaq()'s templated sentence entirely.
   entityQuestion: "What does Capriowear manufacture?",
   entityAnswer:
-    "Capriowear is a custom jacket manufacturer for activewear brands and teamwear suppliers worldwide. We produce private label jackets from fabric to packaging, including softshell, windbreaker, quilted puffer, hybrid, bench and fleece jackets in woven, quilted and fleece builds, with low minimums and full customization. Capriowear is the activewear and teamwear division of Caprio Sports, a cut-and-sew manufacturer in Sialkot, Pakistan.",
+    "Capriowear is a custom jacket manufacturer for activewear brands and teamwear suppliers worldwide. We produce private label jackets from fabric to packaging, including softshell, windbreaker, performance, quilted puffer, hybrid, bench and fleece jackets in woven, quilted and fleece builds, with low minimums and full customization. Capriowear is the activewear and teamwear division of Caprio Sports, a cut-and-sew manufacturer in Sialkot, Pakistan.",
   h1: "Custom Jacket Manufacturer",
   // SERP-verified primary "jacket manufacturer" (owner spec, 2026-09-24).
   metaTitle: "Custom Jacket Manufacturer",
@@ -53,7 +53,7 @@ export const jackets: Category = {
     {
       fabric: "Softshell (Polyester/Spandex or polyester)",
       bestFor: "Hooded softshell and hybrid sleeves",
-      performance: "Wind-resistant stretch woven, lightweight 125 GSM up to structured 320 GSM",
+      performance: "Wind-resistant woven, often with stretch, lightweight 125 GSM up to structured 320 GSM",
     },
     {
       fabric: "Performance stretch woven (Polyester/Spandex)",
@@ -87,7 +87,7 @@ export const jackets: Category = {
     {
       tier: "Wind-resistant",
       gsm: "A tightly woven shell or softshell face",
-      bestFor: "Blocks wind by weave density, standard on every jacket shell",
+      bestFor: "Blocks wind by weave density, standard on every woven shell",
     },
     {
       tier: "Water-repellent",
@@ -103,7 +103,7 @@ export const jackets: Category = {
   weightTiersHeaders: { tier: "Level", value: "How it's built", bestFor: "Use" },
   fabricNote: [
     {
-      text: "Jackets here are woven shells, quilted and fleece builds, while knit track jackets and zip-ups sit in our Track Jackets & Zip-Ups range. Fabric weight is confirmed on your sample. Swatches before every bulk run, and we can source or match a specific fabric or a Pantone color from your reference.",
+      text: "Jackets here are woven shells, quilted and fleece builds, while smooth-face knit track jackets and zip-ups sit in our Track Jackets & Zip-Ups range. Fabric weight is confirmed on your sample. Swatches before every bulk run, and we can source or match a specific fabric or a Pantone color from your reference.",
     },
   ],
   fabricPills: ["Softshell", "Stretch woven", "Polyester microfiber", "Quilted shell", "Polar and sherpa fleece", "Mesh lining"],
@@ -121,7 +121,7 @@ export const jackets: Category = {
   coverageHeading: "From custom fabric to packaging design",
   coverageItems: [
     { title: "Shell and fabric", body: "Softshell, stretch woven, microfiber, quilted shells, polar or sherpa fleece, by weight" },
-    { title: "Water and wind", body: "Wind-resistant shells as standard, DWR water-repellent finish on request" },
+    { title: "Water and wind", body: "Wind-resistant woven shells as standard, DWR water-repellent finish on request" },
     {
       title: "Insulation and quilting",
       body: "Synthetic fill by gram weight, stitch-through quilting, full quilted body or vest-front hybrid",
@@ -146,30 +146,30 @@ export const jackets: Category = {
     },
     {
       q: "What is the difference between a softshell and a windbreaker?",
-      a: "A softshell is a stretch woven with more body, built for training and sideline wear in cool weather. A windbreaker is a light, thin woven shell built to cut wind on the move. We make both, to your spec.",
+      a: "A softshell is a woven with more body, often with stretch, built for training and sideline wear in cool weather. A windbreaker is a light, thin woven shell built to cut wind on the move. We make both, to your spec.",
     },
     {
       q: "What is the difference between water-resistant and waterproof?",
-      a: "Our standard jacket shells are wind-resistant, and a DWR finish can be added so light rain beads off. A jacket is only called waterproof when it is built with a coated or laminated shell and taped seams and tested to a stated hydrostatic head rating, confirmed on your sample.",
+      a: "Our woven jacket shells are wind-resistant, and a DWR finish can be added so light rain beads off. A jacket is only called waterproof when it is built with a coated or laminated shell and taped seams and tested to a stated hydrostatic head rating, confirmed on your sample.",
     },
     {
       q: "What is the difference between a jacket and a track jacket?",
-      a: "A jacket here is a woven shell, quilted or fleece build for weather and warmth. A track jacket is knit, built for stretch and comfort in training and warm-ups, and sits in our Track Jackets & Zip-Ups range. We make both.",
+      a: "A jacket here is a woven shell, a quilted build or a fleece, made for weather and warmth. A track jacket is a smooth-face knit, such as interlock or tricot, built for stretch and comfort in training and warm-ups, and sits in our Track Jackets & Zip-Ups range. We make both.",
     },
     {
       q: "What fabrics do you use for jackets?",
-      a: "Polyester/Spandex softshell and stretch wovens, lightweight polyester microfiber, quilted polyester shells with synthetic fill, and polar and sherpa fleece, each confirmed on your sample.",
+      a: "Our jackets are made in polyester and Polyester/Spandex softshells, stretch and plain polyester wovens, lightweight polyester microfiber, quilted polyester shells with synthetic fill, and polar and sherpa fleece, each confirmed on your sample.",
     },
     {
       q: "What insulation do your quilted jackets use?",
-      a: "Synthetic fill, specified by gram weight and held in place by stitch-through quilting, in a fully quilted body or a vest-front hybrid with softshell sleeves. The fill weight is confirmed on your sample.",
+      a: "Our quilted jackets use synthetic fill, specified by gram weight and held in place by stitch-through quilting, in a fully quilted body or a vest-front hybrid with softshell sleeves. The fill weight is confirmed on your sample.",
     },
     {
       q: "What hardware and construction can you add?",
-      a: "Full or half zips, a zipper garage at the collar, fixed or drawcord hoods, mesh hood linings, ribbed, elastic or self-fabric cuffs, hem drawcords, and zip or open pockets, all to your spec.",
+      a: "We can add full or half zips, a zipper garage at the collar, fixed or drawcord hoods, mesh hood linings, ribbed, elastic or self-fabric cuffs, hem drawcords, and zip or open pockets, all to your spec.",
     },
     {
-      q: "Can you add team names, numbers and logos?",
+      q: "Can you add team names, numbers and logos to jackets?",
       a: "Yes. Names, numbers and logos by embroidery, screen print, heat transfer or patches, placed to your spec across chest, sleeve and back, with reflective trims on request.",
     },
     {
@@ -177,7 +177,7 @@ export const jackets: Category = {
       a: "Yes. Send a swatch, reference garment, or tech pack and we source or develop to match, then share swatches and confirm on your sample before bulk.",
     },
     {
-      q: "What can I customize?",
+      q: "What can I customize on a jacket?",
       a: "Everything from fabric to packaging: shell fabric and weight, water-repellent finish, insulation, zip, hood, collar, cuffs and pockets, color-blocking and stripes with Pantone matching, your logos, labels, hangtags, and packaging.",
     },
     {
@@ -186,7 +186,7 @@ export const jackets: Category = {
     },
     {
       q: "How are jackets sized?",
-      a: "Alpha XS to 5XL on a unisex block, with separate men's and women's cuts to your spec and mix-and-match sizing within a colorway for team orders.",
+      a: "Our jackets are sized Alpha XS to 5XL on a unisex block, with separate men's and women's cuts to your spec and mix-and-match sizing within a colorway for team orders.",
     },
     {
       q: "How long do samples and bulk take?",
@@ -398,7 +398,7 @@ export const jackets: Category = {
         },
         {
           q: "Which programs is the stretch-woven performance jacket suited to?",
-          a: "Cycling, running and outdoor training lines. The stretch-woven performance jacket is a fitted full-zip layer with a chest zip pocket, and its stretch woven moves through the shoulders and arms.",
+          a: "The stretch-woven performance jacket suits cycling, running and outdoor training lines. It is a fitted full-zip layer with a chest zip pocket, in a stretch woven that moves through the shoulders and arms.",
         },
       ],
       relatedStyleTags: [
@@ -510,10 +510,10 @@ export const jackets: Category = {
       sku: "CAP-JKT-05",
       pdpHeading: "Custom Quilted Bench Jacket Manufacturer",
       pdpDescription:
-        "Short quilted bench jacket with a hood and ribbed cuffs, custom and private label, in a matte quilted polyester shell with synthetic fill, made to your brand in Sialkot, Pakistan.",
+        "Short sideline bench jacket for teams and clubs, with a hood, ribbed cuffs and synthetic fill, custom and private label, in a matte quilted polyester shell, made to your brand in Sialkot, Pakistan.",
       pdpMetaTitle: "Custom Quilted Bench Jacket Manufacturer",
       pdpMetaDescription:
-        "Custom quilted bench jacket manufacturer, private label, matte quilted polyester shell, synthetic fill, hood and ribbed cuffs, MOQ 50, DDP to 20+ countries.",
+        "Custom quilted bench jacket manufacturer: short sideline coat for teams and clubs, matte quilted shell, synthetic fill, hood, MOQ 50, DDP to 20+ countries.",
       images: [
         { alt: "Custom Quilted Bench Jacket" },
         { alt: "Custom Quilted Bench Jacket" },
@@ -528,7 +528,7 @@ export const jackets: Category = {
       faqs: [
         {
           q: "What is a quilted bench jacket used for?",
-          a: "Teams and clubs use it on the sideline and bench between play. The quilted bench jacket is a short, hooded, insulated layer that goes on over kit, with ribbed cuffs to hold in warmth.",
+          a: "The quilted bench jacket is worn by teams and clubs on the sideline and bench between play. It is a short, hooded layer with synthetic fill, stitch-through quilting and ribbed cuffs, built to go on over kit.",
         },
         {
           q: "What insulation does the quilted bench jacket use?",
@@ -580,10 +580,10 @@ export const jackets: Category = {
       sku: "CAP-JKT-06",
       pdpHeading: "Custom Quilted Puffer Jacket Manufacturer",
       pdpDescription:
-        "Hooded quilted puffer jacket with a glossy shell and ribbed cuffs, custom and private label, in a quilted polyester shell with synthetic fill, made to your brand in Sialkot, Pakistan.",
+        "Glossy hooded puffer jacket for outerwear and streetwear lines, with stitch-through quilting and ribbed cuffs, custom and private label, in a quilted polyester shell with synthetic fill, made to your brand in Sialkot, Pakistan.",
       pdpMetaTitle: "Custom Quilted Puffer Jacket Manufacturer",
       pdpMetaDescription:
-        "Custom quilted puffer jacket manufacturer, private label, glossy quilted polyester shell, synthetic fill, hood, ribbed cuffs, MOQ 50, DDP to 20+ countries.",
+        "Custom quilted puffer jacket manufacturer: glossy hooded puffer for outerwear and streetwear lines, synthetic fill, ribbed cuffs, MOQ 50, DDP to 20+ countries.",
       images: [
         { alt: "Custom Quilted Puffer Jacket" },
         { alt: "Custom Quilted Puffer Jacket" },
@@ -650,7 +650,7 @@ export const jackets: Category = {
       sku: "CAP-JKT-07",
       pdpHeading: "Custom Chevron-Stripe Quilted Puffer Jacket Manufacturer",
       pdpDescription:
-        "Hooded quilted puffer jacket with a chevron sleeve stripe and a matte shell, custom and private label, in a quilted polyester shell with synthetic fill, made to your brand in Sialkot, Pakistan.",
+        "Team-style puffer with a chevron stripe across the sleeve, a hood and a matte shell, custom and private label, in a quilted polyester shell with synthetic fill, made to your brand in Sialkot, Pakistan.",
       pdpMetaTitle: "Custom Chevron-Stripe Quilted Puffer Jacket Manufacturer",
       pdpMetaDescription:
         "Custom chevron-stripe quilted puffer jacket manufacturer, private label, matte quilted polyester shell, chevron sleeve stripe, MOQ 50, DDP to 20+ countries.",
@@ -790,7 +790,7 @@ export const jackets: Category = {
       sku: "CAP-JKT-09",
       pdpHeading: "Custom Quilted Hybrid Jacket Manufacturer",
       pdpDescription:
-        "Hybrid jacket with a quilted front, softshell sleeves and a stand collar, custom and private label, in a quilted polyester body with synthetic fill, made to your brand in Sialkot, Pakistan.",
+        "Hybrid jacket with a quilted front, softshell sleeves and a stand collar, custom and private label, in a quilted polyester front with synthetic fill, made to your brand in Sialkot, Pakistan.",
       pdpMetaTitle: "Custom Quilted Hybrid Jacket Manufacturer",
       pdpMetaDescription:
         "Custom quilted hybrid jacket manufacturer, private label, quilted front with synthetic fill, softshell sleeves, stand collar, MOQ 50, DDP to 20+ countries.",
@@ -808,7 +808,7 @@ export const jackets: Category = {
       faqs: [
         {
           q: "What is a quilted hybrid jacket?",
-          a: "A quilted hybrid jacket pairs an insulated, quilted front with softshell sleeves. The quilted hybrid jacket keeps the core warm while the sleeves stay light and flexible for training and sideline wear.",
+          a: "A quilted hybrid jacket pairs an insulated, quilted front with softshell sleeves. The quilted hybrid jacket puts synthetic fill across the core and keeps the sleeves in a lighter, flexible softshell for training and sideline wear.",
         },
         {
           q: "What is the quilted hybrid jacket made from?",
@@ -882,7 +882,7 @@ export const jackets: Category = {
         },
         {
           q: "Why does the lightweight performance jacket have a notched collar?",
-          a: "The notched collar gives the lightweight performance jacket a sharper, more tailored look than a standard stand collar, which suits travel, coaching staff and off-field team wear.",
+          a: "The notched collar gives the lightweight performance jacket a lapel-style collar in place of a standard stand collar, a build used for travel, coaching staff and off-field team wear.",
         },
         {
           q: "Can the trim colors on the lightweight performance jacket be changed?",
@@ -948,7 +948,7 @@ export const jackets: Category = {
       faqs: [
         {
           q: "What is the difference between sherpa fleece and polar fleece?",
-          a: "Sherpa fleece has a deep, high-pile face that looks like shearling, while polar fleece is brushed flat on both sides. The sherpa fleece full-zip jacket reads warmer and more textured, and the polar fleece full-zip jacket is lighter and smoother.",
+          a: "Sherpa fleece has a deep, high-pile face made to look like shearling, while polar fleece is brushed flat on both sides. The sherpa fleece full-zip jacket uses the high-pile face for more bulk and texture, and the polar fleece full-zip jacket is lighter and smoother.",
         },
         {
           q: "What is the sherpa fleece full-zip jacket made from?",
