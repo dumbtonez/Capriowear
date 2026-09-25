@@ -1016,7 +1016,7 @@ export const jackets: Category = {
       faqs: [
         {
           q: "What is the difference between a half-zip jacket and a full-zip jacket?",
-          a: "A half-zip jacket pulls on over the head with a zip to mid-chest, a lighter, simpler layer for training and travel. The hooded half-zip jacket adds a hood and zip pockets. A full-zip jacket opens all the way down. We make both.",
+          a: "A half-zip jacket pulls on over the head with a zip to mid-chest, a lighter, simpler layer for training and travel. The hooded half-zip jacket adds a hood and zip pockets. A full-zip jacket opens full length. We make both.",
         },
         {
           q: "What is the hooded half-zip jacket made from?",
