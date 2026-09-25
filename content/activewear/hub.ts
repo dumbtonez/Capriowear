@@ -163,7 +163,7 @@ export const activewearHub = {
     items: [
       {
         q: "What activewear categories does Capriowear manufacture?",
-        a: `${CATEGORY_COUNT} categories across tops, bottoms, sets and one-pieces, outerwear and suits, and base layers, from leggings and sports bras to jackets, tracksuits and compression wear, all made in-house in Sialkot, Pakistan.`,
+        a: `${CATEGORY_COUNT} categories across tops, bottoms, one-pieces, outerwear and suits, and base layers, from leggings and sports bras to jackets, tracksuits and compression wear, all made in-house in Sialkot, Pakistan.`,
       },
       {
         q: "Can I order across multiple categories in one order?",
