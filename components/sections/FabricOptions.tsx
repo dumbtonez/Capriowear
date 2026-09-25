@@ -208,9 +208,12 @@ export function FabricOptions({
         <Eyebrow tone="light">
           <TextReveal text={eyebrow} />
         </Eyebrow>
-        <h2 className={fabricOptions.heading}>
-          <TextReveal as="span" text={heading} />
-        </h2>
+        {/* TextReveal renders the <h2> itself (2026-09-25): wrapped in a
+            plain <h2> as a span, it added an sr-only copy of the heading
+            beside the animated words, doubling the H2's DOM text. As the
+            heading element it takes an aria-label instead, same as
+            FinalCta/OurFactoryIntro. */}
+        <TextReveal as="h2" text={heading} className={fabricOptions.heading} />
       </div>
 
       {/* Real <table> markup, not styled divs (SEO/AEO/GEO finalization
