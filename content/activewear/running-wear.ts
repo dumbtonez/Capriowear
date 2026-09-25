@@ -23,11 +23,8 @@
 // file, after the Track Jackets & Zip-Ups mega-menu mismatch found
 // 2026-09-03).
 //
-// No fabric options table, no weight tiers -- this brief's own section
-// list omits FabricOptions entirely (unlike every real category so far):
-// this page has no fabric of its own, only an edit across other
-// categories' fabrics, so app/activewear/running-wear/page.tsx never
-// renders that section for it.
+// Fabric options table added 2026-09-25 (owner spec), no weight tiers:
+// it renders ahead of Customization, same order as every category PLP.
 //
 // ctaSubline is the standing sitewide line, Leggings' own original
 // wording, NOT the per-page line this brief's own copy gave ("Share your
@@ -70,6 +67,52 @@ export const runningWear: CuratedCollection = {
   gridSubline: "The running edit, built to your brand spec",
   gridSublineMobile: "The running edit, built to your brand spec",
   showGenderFilter: true,
+  // Fabric options (owner spec, 2026-09-25), rendered ahead of
+  // Customization, same order as every category PLP.
+  fabricEyebrow: "FABRIC OPTIONS",
+  fabricHeading: "The fabrics behind the big brands",
+  fabricOptions: [
+    {
+      fabric: "Moisture-wicking polyester knit",
+      bestFor: "Running tees, singlets and tanks",
+      performance: "Light and quick-drying, moves sweat off the skin",
+    },
+    {
+      fabric: "Performance stretch knit (Polyester/Spandex)",
+      bestFor: "Long-sleeves, lined shorts and biker shorts",
+      performance: "Stretch and recovery for movement, quick-drying",
+    },
+    {
+      fabric: "Compression knit (Nylon/Spandex)",
+      bestFor: "Leggings, compression tights and sports bras",
+      performance: "Firm compression and recovery, opacity checked on your sample",
+    },
+    {
+      fabric: "Lightweight woven shell (polyester microfiber)",
+      bestFor: "Running jackets and short shells",
+      performance: "Light, wind-resistant woven face, DWR finish on request",
+    },
+    {
+      fabric: "Mesh",
+      bestFor: "Vent panels, liners and hood linings",
+      performance: "Adds airflow at the underarm, back and hood",
+    },
+    {
+      fabric: "Recycled polyester",
+      bestFor: "Sustainable running lines",
+      performance: "Recycled content in knit and woven builds",
+    },
+  ],
+  // Same bold runs as every category's own fabricNote (Leggings' pattern).
+  fabricNote: [
+    { text: "Running fabric weight " },
+    { text: "confirmed on your sample", bold: true },
+    { text: ". Swatches before every bulk run, and we can source or match a " },
+    { text: "specific fabric", bold: true },
+    { text: " or a " },
+    { text: "Pantone color", bold: true },
+    { text: " from your reference." },
+  ],
   coverageEyebrow: "CUSTOMIZATION",
   coverageHeading: "From custom fabric to packaging design",
   coverageItems: [

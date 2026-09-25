@@ -7,9 +7,6 @@
 // comment in content/activewear/types.ts for the full reasoning.
 //
 // Differences from the shared [category] PLP template, all deliberate:
-// - No FabricOptions section (this brief's own content has no fabric
-//   table -- the page has no fabric of its own, only an edit across other
-//   categories' fabrics).
 // - No CollectionPage/ItemList/Product schema (nothing of its own to
 //   list; BreadcrumbList + FAQPage only, same as every category PLP's
 //   own, but no collectionPageSchema() call).
@@ -32,6 +29,7 @@ import { Header } from "@/components/Header";
 import { Logo } from "@/components/Logo";
 import { ActivewearListing } from "@/components/sections/ActivewearListing";
 import { CategoryBanner } from "@/components/sections/CategoryBanner";
+import { FabricOptions } from "@/components/sections/FabricOptions";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
@@ -136,17 +134,22 @@ export default function RunningWearPage() {
           <div className="h-px bg-[#e8ecf1] xl:mb-[120px]" />
         </div>
 
-        {/* No FabricOptions section (deliberate) -- see this file's own
-            header comment. WhatWeCover leads here (no Fabric section to
-            put ahead of it), unlike every other category PLP after the
-            2026-09-22 reorder -- `leading` swaps in that role's own
-            padding (WhatWeCover.tsx's own comment, whatWeCover.
-            sectionLeading in components/ui/styles.ts). */}
+        {/* FabricOptions -> WhatWeCover -> TrustPoints, the same order
+            and padding roles as every category PLP (owner spec,
+            2026-09-25: Running Wear gained its own fabric table). */}
+        {data.fabricOptions && (
+          <FabricOptions
+            eyebrow={data.fabricEyebrow!}
+            heading={data.fabricHeading!}
+            options={data.fabricOptions}
+            note={data.fabricNote!}
+          />
+        )}
         <WhatWeCover
           eyebrow={data.coverageEyebrow}
           heading={data.coverageHeading}
           items={data.coverageItems}
-          leading
+          leading={!data.fabricOptions}
         />
         <TrustPoints heading={data.qualityHeading} subline={data.qualitySubline} points={data.qualityPoints} />
 

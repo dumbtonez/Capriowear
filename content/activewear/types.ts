@@ -841,6 +841,11 @@ export type CuratedCollection = {
   gridSubline: string;
   gridSublineMobile: string;
   showGenderFilter?: boolean;
+  /** Same four FabricOptions fields as `Category`'s own (added for Running Wear, owner spec, 2026-09-25). Optional: omit all four and the page renders no fabric table. */
+  fabricEyebrow?: string;
+  fabricHeading?: string;
+  fabricOptions?: FabricOption[];
+  fabricNote?: NoteSegment[];
   coverageEyebrow: string;
   coverageHeading: string;
   coverageItems: CoverageItem[];
