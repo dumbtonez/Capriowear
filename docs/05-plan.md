@@ -4600,3 +4600,9 @@ Owner spec, `content/teamwear/basketball.ts` only. CAP-BKB-04 `sleeved-jersey`, 
 
 ## Fight Wear PLP: card line and meta tidy-up, 2026-09-25
 Long-sleeve rash guard card line back to "Sublimated flatlock rash guard, silicone grip hem"; its alt text is now the card name, "Custom Long-Sleeve Rash Guard". Meta: "Custom BJJ and MMA rash guard manufacturer: sublimated rash guards, fight shorts and spats built to your competition's rules, MOQ 50, DDP to 20+ countries." (155 characters). The PLP FAQ stating the IBJJF rule is unchanged, its wording still being verified.
+
+## Basketball batch 3 (final): draft PDPs CAP-BKB-07 and 08, 2026-09-25 (commit a7352bb)
+
+Owner spec, `content/teamwear/basketball.ts` only. CAP-BKB-07 `warm-up-jacket` and CAP-BKB-08 `warm-up-pants` get full draft PDP content on the batch 1 and 2 pattern (10 spec rows, 7 sentence-case tiles, `SAMPLE_SUBLINE` quality lead, 3 style FAQs plus the shared ones). All 8 Basketball cards now link, and every style pill on all 8 PDPs resolves to its PDP (no PLP fallback left; See All still goes to the PLP). PLP content unchanged.
+
+**Verified (deployed on capriowear.vercel.app, cache-busted):** both PDPs 200, noindex/nofollow, out of the sitemap, BreadcrumbList plus sitewide Organization/WebSite only; title, meta (153/153), H1, breadcrumb, image label, style code, description, key facts, chips, 10 spec rows, 7 tiles, quality, 9 FAQs, Final CTA and compliance exact. PLP: all 8 cards link to 200 pages; FAQs, FAQPage JSON-LD and other blocks unchanged. All 32 style pills across the 8 PDPs link to their PDPs. No banned strings or dashes. Built in a clean worktree before push.
