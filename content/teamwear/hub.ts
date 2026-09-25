@@ -5,8 +5,9 @@
 // sport card below links to a live, already-indexed PLP only -- every PDP
 // under every sport is still DRAFT, so this content never links to one.
 // American spelling, no en/em dashes, no prices, per house copy rules.
-import type { CategoryGroup } from "../hubTypes";
+import type { CategoryGroup, CategoryLink } from "../hubTypes";
 import { faqGetStarted } from "../getStarted";
+import { teamwearMegaMenu } from "../home";
 import { SITE_URL } from "../site";
 
 export type { CategoryGroup, CategoryLink } from "../hubTypes";
@@ -14,50 +15,62 @@ export type { CategoryGroup, CategoryLink } from "../hubTypes";
 /** Same `string | { bold: string }` segment shape `content/home.ts`'s own `trustStrip[].body` uses for an inline bold span. */
 export type BodySegment = string | { bold: string };
 
-// Grouped into UNIFORMS/OTHERS, matching `teamwearMegaMenu`'s own grouping
-// exactly (owner, 2026-09-11: "teamwear should have 2 categories uniforms
-// and others as we used in mega menu") -- same order within each group as
-// the mega menu too. Reuses the shared `CategoryGroup` shape
-// (content/hubTypes.ts), the same one `content/activewear/hub.ts`'s own
-// `categoryGroups` uses, so both hubs render through the identical
-// `CategoryLinkGrid` component. hrefs match the real slugs already live in
-// content/teamwear/sports.ts and `teamwearMegaMenu`.
-export const sportGroups: CategoryGroup[] = [
+// Grouping and order come from `teamwearMegaMenu` (content/home.ts), the one
+// source that also drives the desktop mega menu, the mobile drawer and
+// every sport PLP's Filters panel (owner, 2026-09-11: "teamwear should have
+// 2 categories uniforms and others as we used in mega menu"). This file
+// only adds what the menu lacks: each card's hub label and descriptor
+// (`sportCards`, looked up by href) and each group's H2 (`groupHeadings`,
+// keyed by the menu's group label, which is also the hub eyebrow). Moving a
+// sport between groups is a one-line menu change (2026-09-25: Ice Hockey
+// moved from Uniforms to the top of Others). A menu sport with no card, or
+// a group with no heading, throws at build time instead of silently
+// dropping off the hub. Reuses the shared `CategoryGroup` shape
+// (content/hubTypes.ts), same as `content/activewear/hub.ts`, so both hubs
+// render through the identical `CategoryLinkGrid` component.
+const sportCards: CategoryLink[] = [
+  { label: "Cricket", descriptor: "Traditional whites and full-color match kits", href: "/capriowear/teamwear/cricket" },
   {
-    eyebrow: "UNIFORMS",
-    h2: "Match and training uniforms, sport by sport",
-    categories: [
-      { label: "Cricket", descriptor: "Traditional whites and full-color match kits", href: "/capriowear/teamwear/cricket" },
-      {
-        label: "Basketball",
-        descriptor: "Sublimated jerseys, reversible practice kits",
-        href: "/capriowear/teamwear/basketball",
-      },
-      { label: "Rugby", descriptor: "Built for contact, grab-resistant construction", href: "/capriowear/teamwear/rugby" },
-      { label: "Baseball", descriptor: "Button-front jerseys, double-knit pants", href: "/capriowear/teamwear/baseball" },
-      { label: "Volleyball", descriptor: "Indoor jerseys, libero contrast kits", href: "/capriowear/teamwear/volleyball" },
-      { label: "Soccer", descriptor: "Match jerseys, goalkeeper kits, home and away", href: "/capriowear/teamwear/soccer" },
-      { label: "Football", descriptor: "Pro-cut jerseys built to fit over pads", href: "/capriowear/teamwear/football" },
-      { label: "Ice Hockey", descriptor: "Cut roomy for pads, reinforced elbows", href: "/capriowear/teamwear/ice-hockey" },
-    ],
+    label: "Basketball",
+    descriptor: "Sublimated jerseys, reversible practice kits",
+    href: "/capriowear/teamwear/basketball",
+  },
+  { label: "Rugby", descriptor: "Built for contact, grab-resistant construction", href: "/capriowear/teamwear/rugby" },
+  { label: "Baseball", descriptor: "Button-front jerseys, double-knit pants", href: "/capriowear/teamwear/baseball" },
+  { label: "Volleyball", descriptor: "Indoor jerseys, libero contrast kits", href: "/capriowear/teamwear/volleyball" },
+  { label: "Soccer", descriptor: "Match jerseys, goalkeeper kits, home and away", href: "/capriowear/teamwear/soccer" },
+  { label: "Football", descriptor: "Pro-cut jerseys built to fit over pads", href: "/capriowear/teamwear/football" },
+  { label: "Ice Hockey", descriptor: "Cut roomy for pads, reinforced elbows", href: "/capriowear/teamwear/ice-hockey" },
+  {
+    label: "Cycling",
+    descriptor: "Aero jerseys, bib shorts with a fitted chamois",
+    href: "/capriowear/teamwear/cycling",
   },
   {
-    eyebrow: "OTHERS",
-    h2: "Cycling kits and fight sport apparel",
-    categories: [
-      {
-        label: "Cycling",
-        descriptor: "Aero jerseys, bib shorts with a fitted chamois",
-        href: "/capriowear/teamwear/cycling",
-      },
-      {
-        label: "Rash Guards & Fight Wear",
-        descriptor: "IBJJF-legal rash guards and fight shorts",
-        href: "/capriowear/teamwear/fight-wear",
-      },
-    ],
+    label: "Rash Guards & Fight Wear",
+    descriptor: "IBJJF-legal rash guards and fight shorts",
+    href: "/capriowear/teamwear/fight-wear",
   },
 ];
+
+const groupHeadings: Record<string, string> = {
+  UNIFORMS: "Match and training uniforms, sport by sport",
+  OTHERS: "Ice hockey, cycling and fight sport apparel",
+};
+
+export const sportGroups: CategoryGroup[] = teamwearMegaMenu.map((group) => {
+  const h2 = groupHeadings[group.label];
+  if (!h2) throw new Error(`Teamwear hub: no H2 for menu group "${group.label}"`);
+  return {
+    eyebrow: group.label,
+    h2,
+    categories: group.items.map((item) => {
+      const card = sportCards.find((c) => c.href === item.href);
+      if (!card) throw new Error(`Teamwear hub: no card for menu item ${item.href}`);
+      return card;
+    }),
+  };
+});
 
 export const teamwearHub = {
   // Renders as "%s | Capriowear" via the root layout's title template

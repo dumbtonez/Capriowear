@@ -138,12 +138,12 @@ export const teamwearMegaMenu = [
       { label: "Volleyball Uniforms", href: "/capriowear/teamwear/volleyball" },
       { label: "Soccer Uniforms", href: "/capriowear/teamwear/soccer" },
       { label: "Football Uniforms", href: "/capriowear/teamwear/football" },
-      { label: "Ice Hockey Jerseys", href: "/capriowear/teamwear/ice-hockey" },
     ],
   },
   {
     label: "OTHERS",
     items: [
+      { label: "Ice Hockey Jerseys", href: "/capriowear/teamwear/ice-hockey" },
       { label: "Cycling Kits", href: "/capriowear/teamwear/cycling" },
       { label: "Rash Guards & Fight Wear", href: "/capriowear/teamwear/fight-wear" },
     ],
