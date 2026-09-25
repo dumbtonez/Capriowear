@@ -108,6 +108,7 @@ export const trackJackets: Category = {
     {
       q: "What is the difference between a track jacket and a windbreaker?",
       a: "A track jacket is knit, built for stretch and comfort in training, warm-ups and travel. A windbreaker is a woven shell built to block wind and light rain. We make both, track jackets here and windbreakers in our Jackets range.",
+      link: { text: "Jackets range", href: "/capriowear/activewear/jackets" },
     },
     {
       q: "What is the difference between a quarter-zip track top and a full-zip track jacket?",
@@ -132,6 +133,7 @@ export const trackJackets: Category = {
     {
       q: "Can I order a matching pant?",
       a: "Yes. A track jacket can be paired with a matching pant as a set through our Tracksuits range, or ordered on its own here.",
+      link: { text: "Tracksuits range", href: "/capriowear/activewear/tracksuits" },
     },
     {
       q: "Can you match a specific fabric or a reference track jacket?",
