@@ -1599,7 +1599,7 @@ Thin client wrapper (owner spec, Shorts, 2026-09-22) around `CategoryMetaStrip` 
 
 Props: `slug`, `categoryLabel`, `categorySubline`, `categorySublineMobile`, `showGenderFilter?`, `defaultChip?`, `cards: StyleCard[]` — the same set `app/capriowear/activewear/[category]/page.tsx` used to pass to `CategoryMetaStrip` and `ProductGrid` directly. Renders in the exact same DOM positions/markup those two occupied before (same `container-p`/`#plp-listing` structure) — a pure state-lifting refactor, no layout change.
 
-**Used by:** `app/capriowear/activewear/[category]/page.tsx` only. The other 4 route templates that reuse `CategoryMetaStrip`/`ProductGrid` (Boxing/MMA, Lifting Gears, Teamwear, Running Wear) were not touched — none of their content files set a per-card `gender`, so nothing there needs this wrapper yet.
+**Used by:** `app/capriowear/activewear/[category]/page.tsx` and, since 2026-09-25, `app/capriowear/activewear/running-wear/page.tsx` (its 16 cards now carry a real `gender`; unisex cards leave it unset). The other 3 route templates that reuse `CategoryMetaStrip`/`ProductGrid` (Boxing/MMA, Lifting Gears, Teamwear) were not touched: none of their content files set a per-card `gender`, so nothing there needs this wrapper yet.
 
 ### RelatedCategories — Built
 `components/sections/RelatedCategories.tsx` · recipe: `relatedCategories`

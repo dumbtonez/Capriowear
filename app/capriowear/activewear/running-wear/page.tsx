@@ -14,7 +14,7 @@
 //   list; BreadcrumbList + FAQPage only, same as every category PLP's
 //   own, but no collectionPageSchema() call).
 // - `runningWear.cards` are real, "published" cross-links straight to
-//   OTHER categories' own PLPs (`ProductGrid`/`ProductCard` render them
+//   pages in OTHER categories (`ProductGrid`/`ProductCard` render them
 //   with zero code changes, see CuratedCollection's own comment), not
 //   same-category child routes -- this file has no `generateStaticParams`
 //   at all, since there is no `[style]` segment under this route for it
@@ -30,13 +30,11 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import { Logo } from "@/components/Logo";
+import { ActivewearListing } from "@/components/sections/ActivewearListing";
 import { CategoryBanner } from "@/components/sections/CategoryBanner";
-import { CategoryFilters } from "@/components/sections/CategoryFilters";
-import { CategoryMetaStrip } from "@/components/sections/CategoryMetaStrip";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
-import { ProductGrid } from "@/components/sections/ProductGrid";
 import { FINAL_CTA_MARKER_ID, ProductCtasMobileBar } from "@/components/sections/ProductCtas";
 import { TrustPoints } from "@/components/sections/TrustPoints";
 import { WhatWeCover } from "@/components/sections/WhatWeCover";
@@ -121,16 +119,17 @@ export default function RunningWearPage() {
             CollectionPage/ItemList schema on their own page. */}
 
         <div className="container-p">
-          <CategoryMetaStrip
+          {/* ActivewearListing (not CategoryMetaStrip + ProductGrid mounted
+              directly) so the All/Women/Men chips actually filter the
+              cards by their `gender` (owner spec, 2026-09-25). */}
+          <ActivewearListing
+            slug={data.slug}
             categoryLabel={data.menuLabel}
             categorySubline={data.gridSubline}
             categorySublineMobile={data.gridSublineMobile}
             showGenderFilter={data.showGenderFilter}
+            cards={data.cards}
           />
-          <div id="plp-listing" className="flex flex-col gap-8 max-xl:pb-6 xl:pb-14 xl:flex-row xl:gap-12">
-            <CategoryFilters activeSlug={data.slug} />
-            <ProductGrid key={data.slug} cards={data.cards} />
-          </div>
         </div>
 
         <div className="mx-auto w-full max-w-[1440px]">

@@ -3,13 +3,13 @@
 // product category: see `CuratedCollection`'s own comment in ./types.ts
 // for why this is a genuinely different shape, not a `Category` variant.
 // This page owns no products; every card below cross-links to an
-// EXISTING, already-published category PLP (Shorts, Long-Sleeve Tops,
-// T-Shirts, Compression & Base Layers, Jackets), so nothing here 404s and
-// nothing generates a new PDP route under /activewear/running-wear. Once
-// a running-specific style publishes on its own real category (e.g. a
-// running short under Shorts), that one card can be re-pointed from the
-// category PLP to that style's own real PDP -- a content-only change,
-// same as flipping any `StyleCard.status`.
+// EXISTING page in another category (a real PDP for 15 of the 16, the
+// Compression & Base Layers PLP for the last), so nothing here 404s and
+// nothing generates a new PDP route under /activewear/running-wear.
+// Rebuilt from the refreshed content, owner spec, 2026-09-25: 16 cards,
+// each with a real `gender` ("Men"/"Women"; unisex cards leave it unset so
+// they show under every chip), so the All/Women/Men row actually filters
+// via ActivewearListing.
 //
 // Rendered by its own static route, app/activewear/running-wear/page.tsx
 // -- deliberately NOT added to content/activewear/categories.ts (that
@@ -37,23 +37,35 @@
 // entries of that date): every Activewear page under FinalCta uses
 // Leggings' own ctaSubline verbatim, regardless of what a given brief
 // supplies here.
-import type { CuratedCollection } from "./types";
+import type { CuratedCollection, StyleCard } from "./types";
 import { faqGetStarted } from "./pdpShared";
+
+// Every card is "published": a real crawlable link to a live page in
+// another category (see this file's own header comment). Alt text is the
+// card title (owner spec, 2026-09-25).
+function card(
+  slug: string,
+  cardTitle: string,
+  gender: StyleCard["gender"],
+  href: string,
+  cardSubline: string,
+): StyleCard {
+  return { status: "published", slug, cardTitle, cardSubline, image: "", imageAlt: cardTitle, href, gender };
+}
 
 export const runningWear: CuratedCollection = {
   slug: "running-wear",
   menuLabel: "Running Wear",
-  // Entity FAQ overrides (owner's exact given values, 2026-09-03).
+  // Entity FAQ overrides (owner spec, 2026-09-25).
   manufacturerNoun: "Running Wear",
   productNounPlural: "running wear",
-  entityExampleStyles: "running shorts, tights, tops, and jackets",
-  entityFabrics: "moisture-wicking polyester and nylon spandex",
+  entityExampleStyles: "running shorts, tees, singlets, tights, sports bras, and jackets",
+  entityFabrics: "moisture-wicking polyester and Polyester/Spandex knits",
   h1: "Custom Running Wear Manufacturer",
   metaTitle: "Custom Running Wear Manufacturer",
-  // Owner's exact given copy, 159 chars -- within Google's own ~155-160
-  // char truncation point.
+  // Owner's exact given copy, 150 chars.
   metaDescription:
-    "Custom running apparel manufacturer, lightweight running jackets, split running shorts, reflective trims, low MOQ. Capriowear.",
+    "Custom running wear manufacturer: private label running shorts, tees, singlets, tights, sports bras and running jackets, MOQ 50, DDP to 20+ countries.",
   trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "The running edit, built to your brand spec",
   gridSublineMobile: "The running edit, built to your brand spec",
@@ -61,8 +73,8 @@ export const runningWear: CuratedCollection = {
   coverageEyebrow: "CUSTOMIZATION",
   coverageHeading: "From custom fabric to packaging design",
   coverageItems: [
-    { title: "Fabric", body: "Moisture-wicking polyester, nylon spandex, and lightweight woven shells" },
-    { title: "Fit and build", body: "Fitted or relaxed, split hems, liners, thumbholes, packable shells" },
+    { title: "Fabric", body: "Moisture-wicking polyester, Polyester/Spandex and Nylon/Spandex knits, lightweight woven shells" },
+    { title: "Fit and build", body: "Fitted or relaxed, liners, zip pockets, thumbholes, mesh panels" },
     { title: "Performance", body: "Moisture-wicking, quick-dry, reflective trims and prints for low light" },
     { title: "Branding", body: "Sublimation, screen, heat transfer, reflective, embroidery" },
     { title: "Color and print", body: "Custom colors with Pantone matching, paneling and color-blocking" },
@@ -72,48 +84,55 @@ export const runningWear: CuratedCollection = {
   qualitySubline: "We confirm the wicking, seams and finish on your sample before a single bulk piece is cut",
   qualityPoints: [
     "Moisture-wicking and quick-dry confirmed on the fabric",
-    "Flatlock seams tested, no chafe over distance",
-    "Reflective trims and prints checked for placement and durability",
+    "Flatlock seams checked at stress points for a flat, low-friction finish",
+    "Reflective trims and prints checked for placement and adhesion after wash",
     "Fit and recovery hold after repeated wear and wash",
+    "Colorfastness checked after wash, no bleed between panels",
     "Every run inspected to AQL 2.5, third-party inspection welcome",
   ],
   faqHeading: "Top questions from B2B buyers",
+  // Entity question ("What does Capriowear manufacture?") is prepended by
+  // the page via categoryEntityFaq(), built from the entity fields above.
   faqs: [
     {
       q: "What running wear can you make?",
-      a: "Running split and 2-in-1 lined shorts, compression tights and tops, moisture-wicking performance tees and long-sleeves, and lightweight windbreakers and vests, all custom to your brand.",
+      a: "Athletic, 2-in-1, biker and zip-pocket shorts, athletic tees, singlets and racerback tanks, fitted performance long-sleeves, compression leggings and tights, high-support sports bras, and lightweight running jackets and quarter-zips, all custom to your brand.",
     },
     {
       q: "What is your MOQ for custom running wear?",
       a: "From 50 pieces per style, and you can mix sizes freely within a colorway. Scales to full bulk.",
     },
     {
+      q: "Which fabrics do you use for running wear?",
+      a: "Moisture-wicking polyester and Polyester/Spandex knits for tees, singlets, bras, tights and lined shorts, Nylon/Spandex for compression pieces, and lightweight woven shells for running jackets, all confirmed on your sample.",
+    },
+    {
       q: "What makes a jacket suitable for running?",
-      a: "A lightweight woven shell that packs down small, moisture-wicking polyester and poly-spandex for tops, tights and lined shorts, and compression knits for base layers.",
+      a: "A lightweight woven shell with a wind-resistant face, a mesh-lined hood or vents for airflow, and reflective details for low light. A DWR finish can be added so light rain beads off.",
     },
     {
-      q: "Can you add reflective detailing for low-light visibility?",
-      a: "Yes. Reflective trims, piping and prints are added for visibility, placed to your spec.",
+      q: "Can you add reflective details for low light?",
+      a: "Yes. Reflective trims, piping and prints are added for visibility, placed to your spec and checked for adhesion after wash.",
     },
     {
-      q: "Is the fabric lightweight and moisture-wicking, chafe-free?",
-      a: "Yes. Moisture-wicking fabrics with flatlock seams, tested for chafe over distance, are standard on our running styles.",
+      q: "Can you build running styles to reduce chafing?",
+      a: "Yes. Moisture-wicking fabrics and flatlock seams are standard on our running styles, and seam placement is checked on your sample before bulk.",
     },
     {
       q: "Can you match a specific fabric or a reference garment?",
-      a: "Yes. Send a swatch, reference or tech pack and we source or develop to match, then confirm on your sample.",
+      a: "Yes. Send a swatch, reference garment, or tech pack and we source or develop to match, then confirm on your sample before bulk.",
     },
     {
       q: "What can I customize?",
-      a: "Everything from fabric to packaging: fabric, fit, liner, reflective details, color, print and embroidery, your logos, labels, hangtags and packaging.",
+      a: "Everything from fabric to packaging: fabric and weight, fit, liners and pockets, reflective details, color with Pantone matching, print and embroidery, your logos, labels, hangtags, and packaging.",
     },
     {
-      q: "Do you offer OEM, ODM and private label running wear?",
-      a: "Yes, all three, made under your brand.",
+      q: "Do you offer OEM, ODM, and private label running wear?",
+      a: "Yes, all three. As a private label running wear manufacturer, we make every style under your brand, with your labels and packaging.",
     },
     {
       q: "How is running wear sized?",
-      a: "Alpha XS to 5XL, and men's bottoms can also be graded by waist inch. Women's, men's and unisex by cut.",
+      a: "Alpha XS to 5XL, with men's, women's and unisex cuts, and men's shorts can also be graded by waist inch.",
     },
     {
       q: "How long do samples and bulk take?",
@@ -121,7 +140,7 @@ export const runningWear: CuratedCollection = {
     },
     {
       q: "Do you ship to my country?",
-      a: "Yes, 20+ countries. DDP to the US, UK, EU, Canada and Australia, with GSP+ 0% EU duty.",
+      a: "Yes, DDP to 20+ countries, including the US, UK, EU, Canada, and Australia, with GSP+ 0% EU duty.",
     },
     {
       q: "Will my designs stay protected?",
@@ -129,91 +148,25 @@ export const runningWear: CuratedCollection = {
     },
     faqGetStarted,
   ],
-  // Standing CTA subline, same as every category (owner spec, 2026-09-02) --
-  // see this file's own header comment for why this differs from the
-  // brief's own given per-page line.
-  // No noun (owner spec, 2026-09-04) -- buildCtaSubline() (./pdpShared.ts)
-  // drops the "a reference [X]" clause's bracket entirely when this is
-  // omitted, rendering "a reference." verbatim, the owner's own exact
-  // given form for this one page.
-  // Every card is "published" and clickable -- these are real cross-links
-  // to existing, already-live category PLPs, not draft styles waiting on
-  // content (see this file's own header comment and CuratedCollection's
-  // own comment in ./types.ts for why `status: "published"` is correct
-  // here, not a contradiction of the usual "draft until real PDP content
-  // exists" rule).
+  // No ctaReferenceNoun (owner spec, 2026-09-04) -- buildCtaSubline()
+  // (./pdpShared.ts) drops the "[X]" clause entirely when this is unset.
   cards: [
-    {
-      status: "published",
-      slug: "running-split-shorts",
-      cardTitle: "Running Split Shorts",
-      cardSubline: "Lightweight woven shell, side splits",
-      image: "",
-      imageAlt: "Custom running split shorts, lightweight woven shell, side splits",
-      href: "/capriowear/activewear/shorts",
-    },
-    {
-      status: "published",
-      slug: "2-in-1-lined-shorts",
-      cardTitle: "2-in-1 Lined Shorts",
-      cardSubline: "Outer short with built-in liner",
-      image: "",
-      imageAlt: "Custom 2-in-1 lined running shorts, outer short with built-in liner",
-      href: "/capriowear/activewear/shorts",
-    },
-    {
-      status: "published",
-      slug: "performance-long-sleeve",
-      cardTitle: "Performance Long-Sleeve",
-      cardSubline: "Moisture-wicking, thumbholes",
-      image: "",
-      imageAlt: "Custom performance long-sleeve running top, moisture-wicking, thumbholes",
-      href: "/capriowear/activewear/long-sleeve-tops",
-    },
-    {
-      status: "published",
-      slug: "performance-tee",
-      cardTitle: "Performance Tee",
-      cardSubline: "Moisture-wicking poly, athletic cut",
-      image: "",
-      imageAlt: "Custom performance running tee, moisture-wicking poly, athletic cut",
-      href: "/capriowear/activewear/t-shirts",
-    },
-    {
-      status: "published",
-      slug: "compression-tights",
-      cardTitle: "Compression Tights",
-      cardSubline: "Documented mmHg, base-layer fit",
-      image: "",
-      imageAlt: "Custom running compression tights, documented mmHg, base-layer fit",
-      href: "/capriowear/activewear/compression-base-layers",
-    },
-    {
-      status: "published",
-      slug: "compression-top",
-      cardTitle: "Compression Top",
-      cardSubline: "Second-skin, moisture-wicking",
-      image: "",
-      imageAlt: "Custom running compression top, second-skin, moisture-wicking",
-      href: "/capriowear/activewear/compression-base-layers",
-    },
-    {
-      status: "published",
-      slug: "windbreaker-jacket",
-      cardTitle: "Windbreaker Jacket",
-      cardSubline: "Lightweight woven shell, DWR, packable",
-      image: "",
-      imageAlt: "Custom running windbreaker jacket, lightweight woven shell, DWR, packable",
-      href: "/capriowear/activewear/jackets",
-    },
-    {
-      status: "published",
-      slug: "running-vest-gilet",
-      cardTitle: "Running Vest / Gilet",
-      cardSubline: "Sleeveless shell for layering",
-      image: "",
-      imageAlt: "Custom running vest or gilet, sleeveless shell for layering",
-      href: "/capriowear/activewear/jackets",
-    },
+    card("mens-athletic-shorts", "Men's Athletic Shorts", "Men", "/capriowear/activewear/shorts/athletic-regular", "Standard athletic fit, 5 to 7 inch inseam, drawcord waistband"),
+    card("mens-2-in-1-shorts", "Men's 2-in-1 Shorts", "Men", "/capriowear/activewear/shorts/2-in-1", "Outer shell over a built-in fitted liner, mid-length inseam"),
+    card("mens-athletic-t-shirt", "Men's Athletic T-Shirt", "Men", "/capriowear/activewear/t-shirts/athletic-mens", "True-to-size training and running cut"),
+    card("mens-racerback-singlet", "Men's Racerback Singlet", "Men", "/capriowear/activewear/tank-tops/racerback-singlet", "Fitted singlet, full racerback construction"),
+    card("mens-fitted-performance-long-sleeve", "Men's Fitted Performance Long-Sleeve", "Men", "/capriowear/activewear/long-sleeve-tops/fitted-performance", "Moisture-wicking Polyester/Spandex, athletic cut, thumbholes"),
+    card("womens-high-rise-biker-shorts", "Women's High-Rise Biker Shorts", "Women", "/capriowear/activewear/shorts/high-rise-biker", "High-rise, fitted bike-short, 5 to 7 inch inseam"),
+    card("womens-zip-pocket-shorts", "Women's Zip-Pocket Shorts", "Women", "/capriowear/activewear/shorts/zip-pocket", "Discreet zip pocket for a phone or keys"),
+    card("womens-athletic-t-shirt", "Women's Athletic T-Shirt", "Women", "/capriowear/activewear/t-shirts/athletic-womens", "True-to-size training cut"),
+    card("womens-racerback-tank", "Women's Racerback Tank", "Women", "/capriowear/activewear/tank-tops/racerback-womens", "Fitted, true racerback construction"),
+    card("womens-fitted-performance-long-sleeve", "Women's Fitted Performance Long-Sleeve", "Women", "/capriowear/activewear/long-sleeve-tops/fitted-performance-womens", "Thumbholes and mesh underarm panels, moisture-wicking"),
+    card("high-rise-compression-leggings", "Custom High-Rise Compression Leggings", "Women", "/capriowear/activewear/leggings/high-waisted-compression", "4-way stretch, squat-proof, high-rise"),
+    card("high-support-sports-bra", "Custom High-Support Sports Bra", "Women", "/capriowear/activewear/sports-bras/high-support-full-coverage", "High support, full coverage, wide racerback option"),
+    // Unisex: no `gender`, so these show under every chip.
+    card("hooded-running-windbreaker", "Custom Hooded Running Windbreaker", undefined, "/capriowear/activewear/jackets/hooded-running-windbreaker", "Hooded, lightweight, mesh-lined hood"),
+    card("stretch-woven-performance-jacket", "Custom Stretch-Woven Performance Jacket", undefined, "/capriowear/activewear/jackets/stretch-woven-performance", "Full-zip stretch woven, reflective trims"),
+    card("striped-quarter-zip-track-top", "Custom Striped Quarter-Zip Track Top", undefined, "/capriowear/activewear/track-jackets/striped-quarter-zip", "Quarter-zip, contrast sleeve stripes"),
+    card("compression-tights", "Custom Compression Tights", undefined, "/capriowear/activewear/compression-base-layers", "Second-skin base-layer fit"),
   ],
 };
