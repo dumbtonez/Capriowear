@@ -7,10 +7,11 @@
 // "Women's": card = H1 minus " Manufacturer" = title = breadcrumb = alt =
 // every pill that targets it.
 //
-// Batch 1 builds draft PDPs for the hero SKUs 01, 09 and 02. Drafts with PDP
-// content render noindexed (BreadcrumbList only, out of the sitemap and the
-// ItemList) and their cards link (`isDraftPdpReachable()`); the other 13
-// are card-only non-links until their batch. Pills carry a `slug`, so a
+// Batch 1 builds draft PDPs for the hero SKUs 01, 09 and 02, batch 2 for 10,
+// 03 and 11. Drafts with PDP content render noindexed (BreadcrumbList only,
+// out of the sitemap and the ItemList) and their cards link
+// (`isDraftPdpReachable()`); the rest are card-only non-links until their
+// batch. Pills carry a `slug`, so a
 // pill for a card-only SKU falls back to the PLP. "How we customize" is set
 // once for the category (6 tiles); key facts, spec subtitle and the
 // operational FAQs are the shared PDP defaults (./pdpShared.ts).
@@ -364,6 +365,59 @@ export const joggers: Category = {
       imageAlt: "Men's Cargo Jogger",
       href: `${PLP}/cargo-jogger-mens`,
       sku: "CAP-JOG-03",
+      pdpHeading: "Men's Cargo Jogger Manufacturer",
+      pdpMetaTitle: "Men's Cargo Jogger Manufacturer",
+      pdpDescription:
+        "Men's cargo jogger, custom and private label, a tapered jogger with cargo pockets on each leg and an elastic cuff, in heavyweight fleece or a Polyester/Spandex stretch woven, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Men's Cargo Jogger"),
+      pdpMetaDescription:
+        "Men's cargo jogger manufacturer: heavyweight fleece or stretch woven, cargo pockets, tapered leg, elastic cuff, private label, MOQ 50, DDP to 20+ countries.",
+      material: "Heavyweight cotton fleece or Polyester/Spandex stretch woven",
+      pdpFabricPills: ["Heavyweight cotton fleece", "Polyester/Spandex stretch woven", "Cotton/Polyester fleece"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What fabrics can the men's cargo jogger be made in?",
+          a: "The men's cargo jogger is made in heavyweight cotton fleece for a streetwear look or a Polyester/Spandex stretch woven for training, confirmed on your sample.",
+        },
+        {
+          q: "What cargo pocket options are there on the men's cargo jogger?",
+          a: "The men's cargo jogger has a cargo pocket on each leg, open or with a flap and snap, placed and sized to your spec.",
+        },
+        {
+          q: "Can the men's cargo jogger have an open hem instead of a cuff?",
+          a: "Yes. The men's cargo jogger comes with an elastic or ribbed cuff as standard, and an open or toggle hem can be cut to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Men's Cuffed Fleece Jogger", slug: "cuffed-fleece-jogger-mens", href: PLP },
+        { label: "Men's Training Jogger", slug: "training-jogger-mens", href: PLP },
+        { label: "Men's Wide-Leg Jogger", slug: "wide-leg-jogger-mens", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's cargo jogger" },
+        { label: "Fabric", value: "Heavyweight cotton fleece or Polyester/Spandex stretch woven" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Fit", value: "Tapered leg, relaxed or regular, men's block, graded XS to 5XL" },
+        { label: "Cargo pockets", value: "Cargo pocket on each leg, flap and snap or open, to your spec" },
+        { label: "Cuff", value: "Elastic or ribbed ankle cuff" },
+        { label: "Waistband", value: "Elastic waistband with a drawcord" },
+        { label: "Pockets", value: "Side pockets, back pocket optional" },
+        { label: "Construction", value: "Cut-and-sew, bar-tacked pocket corners" },
+        { label: "Branding", value: "Screen print, embroidery or heat transfer, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Men's Cargo Jogger" },
+      pdpQualityHeading: "Pockets that hold their shape",
+      pdpQualitySubline: SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Cargo pocket placement checked at every size",
+        "Pocket corners bar-tacked and load-tested",
+        "Snaps function-tested before bulk",
+        "Taper graded proportionally across the size run",
+        "Shrinkage tested after wash",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -494,6 +548,59 @@ export const joggers: Category = {
       imageAlt: "Women's Woven Track Pant",
       href: `${PLP}/woven-track-pant-womens`,
       sku: "CAP-JOG-10",
+      pdpHeading: "Women's Woven Track Pant Manufacturer",
+      pdpMetaTitle: "Women's Woven Track Pant Manufacturer",
+      pdpDescription:
+        "Women's woven track pant, custom and private label, a lightweight polyester woven pant with a relaxed leg, an adjustable toggle or open hem and an elastic drawcord waist, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Women's Woven Track Pant"),
+      pdpMetaDescription:
+        "Women's woven track pant manufacturer: lightweight polyester woven, relaxed leg, adjustable toggle or open hem, elastic waist, MOQ 50, DDP to 20+ countries.",
+      material: "Lightweight polyester woven",
+      pdpFabricPills: ["Polyester woven", "Recycled polyester"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What is the women's woven track pant made from?",
+          a: "The women's woven track pant is made in a lightweight polyester woven. The weight is confirmed on your sample, and recycled polyester is an option.",
+        },
+        {
+          q: "What hem options are there on the women's woven track pant?",
+          a: "The women's woven track pant comes with an adjustable toggle hem or an open hem, so the leg can be worn straight or gathered at the ankle.",
+        },
+        {
+          q: "Can the women's woven track pant match a track jacket?",
+          a: "Yes. The women's woven track pant can be cut from the same woven and matched in color and stripes to a track jacket from our Track Jackets range.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Women's Training Jogger", slug: "training-jogger-womens", href: PLP },
+        { label: "Women's Wide-Leg Jogger", slug: "wide-leg-jogger-womens", href: PLP },
+        { label: "Women's Cuffed Fleece Jogger", slug: "cuffed-fleece-jogger-womens", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's woven track pant" },
+        { label: "Fabric", value: "Lightweight polyester woven, recycled polyester available" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Fit", value: "Relaxed or oversized leg, women's block, graded XS to 5XL" },
+        { label: "Hem", value: "Adjustable toggle hem or open hem" },
+        { label: "Waistband", value: "Elastic waistband with an adjustable drawcord" },
+        { label: "Lining", value: "Mesh lining optional" },
+        { label: "Pockets", value: "Side pockets, zip pockets optional" },
+        { label: "Detailing", value: "Side stripes, piping or color-blocking to your spec" },
+        { label: "Branding", value: "Sublimation, screen print, embroidery or heat transfer, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Women's Woven Track Pant" },
+      pdpQualityHeading: "Light, clean and built to move",
+      pdpQualitySubline: SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Leg width and hem checked at every size",
+        "Toggles function-tested before bulk",
+        "Seams checked through movement",
+        "Color matched across panels and stripes",
+        "Shrinkage tested after wash",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -505,6 +612,59 @@ export const joggers: Category = {
       imageAlt: "Women's Cargo Jogger",
       href: `${PLP}/cargo-jogger-womens`,
       sku: "CAP-JOG-11",
+      pdpHeading: "Women's Cargo Jogger Manufacturer",
+      pdpMetaTitle: "Women's Cargo Jogger Manufacturer",
+      pdpDescription:
+        "Women's cargo jogger, custom and private label, a relaxed jogger with cargo pockets on each leg and an adjustable or cuffed ankle, in French terry or a Polyester/Spandex stretch woven, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Women's Cargo Jogger"),
+      pdpMetaDescription:
+        "Women's cargo jogger manufacturer: French terry or stretch woven, cargo pockets, relaxed fit, adjustable or cuffed ankle, MOQ 50, DDP to 20+ countries.",
+      material: "French terry or Polyester/Spandex stretch woven",
+      pdpFabricPills: ["French terry", "Polyester/Spandex stretch woven", "Cotton/Polyester fleece"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What fabrics can the women's cargo jogger be made in?",
+          a: "The women's cargo jogger is made in French terry for a relaxed lounge fit or a Polyester/Spandex stretch woven for training, confirmed on your sample.",
+        },
+        {
+          q: "Can the women's cargo jogger have an adjustable ankle?",
+          a: "Yes. The women's cargo jogger can have an adjustable toggle ankle, so it wears gathered or loose, or a fixed elastic cuff.",
+        },
+        {
+          q: "Can the women's cargo jogger be made in a high rise?",
+          a: "Yes. The women's cargo jogger is made in a mid rise as standard, and a high rise can be cut to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Women's Cuffed Fleece Jogger", slug: "cuffed-fleece-jogger-womens", href: PLP },
+        { label: "Women's Training Jogger", slug: "training-jogger-womens", href: PLP },
+        { label: "Women's Wide-Leg Jogger", slug: "wide-leg-jogger-womens", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's cargo jogger" },
+        { label: "Fabric", value: "French terry or Polyester/Spandex stretch woven" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Fit", value: "Relaxed or oversized, women's block, graded XS to 5XL" },
+        { label: "Cargo pockets", value: "Cargo pocket on each leg, flap and snap or open, to your spec" },
+        { label: "Ankle", value: "Adjustable toggle ankle or elastic cuff" },
+        { label: "Waistband", value: "Elastic waistband with a drawcord" },
+        { label: "Rise", value: "Mid or high rise, to your spec" },
+        { label: "Construction", value: "Cut-and-sew, bar-tacked pocket corners" },
+        { label: "Branding", value: "Screen print, embroidery or heat transfer, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Women's Cargo Jogger" },
+      pdpQualityHeading: "Pockets that hold their shape",
+      pdpQualitySubline: SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Cargo pocket placement checked at every size",
+        "Pocket corners bar-tacked and load-tested",
+        "Toggles and snaps function-tested before bulk",
+        "Shrinkage tested after wash",
+        "Rise and waistband checked for hold",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
