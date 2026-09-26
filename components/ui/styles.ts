@@ -7935,8 +7935,10 @@ export const categoryCard = {
   // 22px (owner request, 2026-09-11: "make the category font like
   // leggings, etc 22px") -- was `text-h5` (24px). Explicit size, not a
   // token, since no named size sits at exactly 22px.
-  label: "truncate text-[1.375rem] font-medium leading-[1.2]",
-  descriptor: "truncate text-body text-muted",
+  // Mobile (below md, owner, 2026-09-26): title 20px with the font's own
+  // normal line height, subline 16px on a 20px line. md and up unchanged.
+  label: "truncate text-[1.375rem] font-medium leading-[1.2] max-md:text-[1.25rem] max-md:leading-[normal]",
+  descriptor: "truncate text-body text-muted max-md:text-[1rem] max-md:leading-[20px]",
   icon: "size-4 shrink-0 text-muted transition-transform group-hover:translate-x-1 group-hover:text-accent",
 };
 
