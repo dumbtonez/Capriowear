@@ -6,11 +6,10 @@
 // only this file plus one line in ./sports.ts.
 //
 // PDP publish state (owner spec): every style ships "draft". Under the
-// Teamwear draft-PDP rule (isDraftPdpReachable(), pdpShared.ts), 01 to 06
-// carry PDP content (batches 1 and 2, 2026-09-26) and render as noindexed
-// draft PDPs (BreadcrumbList only, out of the sitemap and the
-// CollectionPage/ItemList) with linking cards; 07 is a card-only non-link
-// until its own batch. Publishing needs the roster confirmed, the style sampled and real
+// Teamwear draft-PDP rule (isDraftPdpReachable(), pdpShared.ts), all 7
+// styles carry PDP content (batches 1 to 3, 2026-09-26) and render as
+// noindexed draft PDPs (BreadcrumbList only, out of the sitemap and the
+// CollectionPage/ItemList) with linking cards. Publishing needs the roster confirmed, the style sampled and real
 // photos (getPublishReadiness()).
 //
 // "Aero" is never used (owner spec, 2026-09-26: an unbacked claim).
@@ -39,7 +38,7 @@
 // American spelling, no en/em dashes, "spandex" never "elastane"/"Lycra",
 // never "seamless" -- confirmed throughout, same standing sitewide rules
 // every category follows.
-import type { Category, StyleCard } from "../activewear/types";
+import type { Category } from "../activewear/types";
 import { faqGetStarted } from "../getStarted";
 
 const PLP = "/capriowear/teamwear/cycling";
@@ -80,11 +79,6 @@ function customizeSteps(steps: Step[]) {
 // Alt-only gallery (no photography yet): 6 frames, alt = the card name.
 function gallery(alt: string) {
   return Array.from({ length: 6 }, () => ({ alt }));
-}
-
-// Card-only draft (a later batch adds the PDP content, then the card links).
-function cardOnly(sku: string, slug: string, cardTitle: string, cardSubline: string): StyleCard {
-  return { status: "draft", slug, cardTitle, cardSubline, image: "", imageAlt: cardTitle, href: `${PLP}/${slug}`, sku };
 }
 
 export const cycling: Category = {
@@ -228,9 +222,8 @@ export const cycling: Category = {
   ctaReferenceNoun: "kit",
   // 7 drafts, SKU order (CAP-CYC-01 to 07), owner spec 2026-09-26. Card
   // title = H1 minus " Manufacturer" = title-tag name = breadcrumb = alt =
-  // every pill label that targets it, no commas in names. 01 to 03 (batch 1; 01
-  // and 02 reuse the slugs of the removed legacy drafts) and 04 to 06 (batch
-  // 2) carry PDP content; 07 is a card-only non-link until its own batch.
+  // every pill label that targets it, no commas in names. All 7 carry PDP content
+  // (batches 1 to 3; 01 and 02 reuse the slugs of the removed legacy drafts).
   styleCards: [
     {
       status: "draft",
@@ -725,7 +718,93 @@ export const cycling: Category = {
         AQL_POINT,
       ],
     },
-    cardOnly("CAP-CYC-07", "thermal-jacket", "Custom Cycling Thermal Jacket", "Windproof winter jacket, water-resistant shell"),
+    {
+      status: "draft",
+      slug: "thermal-jacket",
+      cardTitle: "Custom Cycling Thermal Jacket",
+      cardSubline: "Windproof winter jacket, water-resistant shell",
+      image: "",
+      imageAlt: "Custom Cycling Thermal Jacket",
+      href: `${PLP}/thermal-jacket`,
+      sku: "CAP-CYC-07",
+      pdpHeading: "Custom Cycling Thermal Jacket Manufacturer",
+      pdpMetaTitle: "Custom Cycling Thermal Jacket Manufacturer",
+      pdpDescription:
+        "Cycling thermal jacket, custom and private label, a winter riding jacket with a windproof, water-resistant front and a brushed thermal lining, cut longer at the back for the riding position, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Cycling Thermal Jacket"),
+      pdpMetaDescription:
+        "Custom cycling thermal jacket manufacturer: windproof, water-resistant shell, brushed thermal lining, drop-tail hem, rear pockets, MOQ 50, DDP to 20+ countries.",
+      material: "Windproof, water-resistant polyester shell with a brushed thermal knit lining",
+      pdpFabricPills: ["Windproof polyester shell", "Brushed thermal lining", "Stretch woven panels", "Recycled polyester"],
+      pdpCustomizationPills: ["Race or club cut", "Rear pockets", "Printed logos", "Custom labels"],
+      faqs: [
+        {
+          q: "How does the cycling thermal jacket handle wind and rain?",
+          a: "The cycling thermal jacket has a windproof front and a water-resistant shell that sheds light rain, with a brushed thermal lining for warmth. The shell fabric is confirmed on your sample.",
+        },
+        {
+          q: "What is the difference between the cycling thermal jacket and the gilet?",
+          a: "The cycling thermal jacket has sleeves and a brushed thermal lining for cold rides, while the gilet is a light sleeveless windproof layer that packs into a jersey pocket. Both can be made in the same order.",
+        },
+        {
+          q: "Can the cycling thermal jacket match our jerseys?",
+          a: "Yes. The cycling thermal jacket is Pantone matched to your jerseys and bibs, with printed team and sponsor logos, and all of them can be produced in the same order.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Cycling Gilet", slug: "gilet", href: PLP },
+        { label: "Custom Long-Sleeve Cycling Jersey", slug: "long-sleeve-jersey", href: PLP },
+        { label: "Custom Cycling Bib Tights", slug: "bib-tights", href: PLP },
+        { label: "Custom Short-Sleeve Cycling Jersey", slug: "jersey", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Cycling thermal jacket, full zip (base type)" },
+        {
+          label: "Fabric",
+          value: "Windproof, water-resistant polyester shell front with a brushed thermal knit lining or back",
+        },
+        { label: "Weight", value: PENDING_WEIGHT },
+        {
+          label: "Fit",
+          value: "Race or club cut over a jersey or base layer, graded XS to 5XL, men's and women's blocks",
+        },
+        {
+          label: "Hem",
+          value: "Drop-tail with a gripper band, so the lower back stays covered in the riding position",
+        },
+        { label: "Collar", value: "Stand collar with a zip garage" },
+        { label: "Zip", value: "Full-length front zip, two-way zip optional" },
+        { label: "Cuffs", value: "Close elasticated cuffs, gripper finish optional" },
+        { label: "Pockets", value: "Three rear pockets, zipped security pocket optional" },
+        {
+          label: "Decoration and branding",
+          value: "Printed team and sponsor logos, Pantone matched, print method confirmed on your sample",
+        },
+      ],
+      specificationsImage: { alt: "Custom Cycling Thermal Jacket" },
+      pdpCustomizationSteps: customizeSteps([
+        [
+          "Fabric",
+          "Windproof water-resistant shell and brushed thermal lining, sourced or matched to your reference",
+        ],
+        ["Fit", "Race or club cut with a drop-tail hem"],
+        ["Zip and collar", "Full-length or two-way zip, stand collar with a zip garage"],
+        ["Pockets", "Three rear pockets, zipped security pocket optional"],
+        ["Logos and color", "Printed team and sponsor logos, Pantone matched to your kit"],
+        ["Trims and finish", "Zip pullers, printed care labels, hangtags"],
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: "We confirm the shell, the lining and the fit on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Shell and lining approved on your sample",
+        "Fit checked in the riding position, with the lower back covered",
+        "Zips function-tested before bulk",
+        "Color matched to the rest of your kit",
+        AQL_POINT,
+      ],
+    },
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, Teamwear sports only,
   // closest sports first.
