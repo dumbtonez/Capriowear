@@ -4720,3 +4720,7 @@ Owner spec, `content/teamwear/fight-wear.ts`, on the Ice Hockey pattern (e2a1530
 ## Cycling batch 3 (final): draft PDP CAP-CYC-07, 2026-09-26
 
 `content/teamwear/cycling.ts`. Cycling Thermal Jacket now carries full draft PDP content (noindexed, BreadcrumbList only, out of the sitemap), so all 7 Cycling cards link and every Cycling pill resolves to a real PDP (only See All goes to the PLP); the PLP markup is otherwise byte-identical. Quality H2 "Built for the long ride". The now-unused `cardOnly()` helper and its `StyleCard` import were removed. Publishing any Cycling style still needs the roster confirmed, the style sampled and real photos (`getPublishReadiness()`).
+
+## Rash Guards & Fight Wear batch 2 (final): draft PDPs CAP-FGT-04 and 05, 2026-09-26
+
+Owner spec, `content/teamwear/fight-wear.ts`, on the batch 1 pattern (dd64a96). CAP-FGT-04 `spats` and CAP-FGT-05 `compression-top` get full draft PDP content (10 spec rows, 7 sentence-case tiles, the "Built to hold up on the mat" quality H2 with a per-style lead, 3 style FAQs plus the shared ones). All 5 Fight Wear cards now link, and the Grappling Spats and Compression Top pills on 01 to 03 resolve to the new PDPs with no edits. Batch 1 wrote the card-only styles as plain entries, so there was no card-only helper to remove. Card names, lines, slugs and codes unchanged. Built in a clean worktree before push; live verification is reported in the session.

@@ -10,7 +10,8 @@
 // FAQs) and draft PDPs for CAP-FGT-01 to 03, on the pattern Ice Hockey
 // used. Every style is "draft": 01 to 03 render as noindexed draft PDPs
 // (BreadcrumbList only, out of the sitemap and the CollectionPage/ItemList)
-// with linking cards; 04 and 05 are card-only non-links until their batch.
+// with linking cards; batch 2 (2026-09-26) adds 04 and 05 the same way, so
+// all 5 cards link and every style pill resolves to a real PDP.
 //
 // Cut-and-sew scope (owner standing rule, set on Cricket) -- closures and
 // grip bands (hook-and-loop, drawcord, elastic waistband, silicone grip
@@ -241,9 +242,8 @@ export const fightWear: Category = {
   ctaReferenceNoun: "rash guard",
   // 5 drafts, SKU order (CAP-FGT-01 to 05), owner spec 2026-09-26. Card
   // title = H1 minus " Manufacturer" = title-tag name = breadcrumb = alt =
-  // every pill label that targets it. 01 to 03 carry PDP content (batch 1);
-  // 04 and 05 are card-only non-links until their own batch. Pills carry a
-  // `slug`, so a pill for a card-only style falls back to the PLP.
+  // every pill label that targets it. All 5 carry PDP content (batches 1
+  // and 2); pills carry a `slug`, so each resolves to its PDP.
   styleCards: [
     {
       status: "draft",
@@ -443,6 +443,69 @@ export const fightWear: Category = {
       imageAlt: "Custom Grappling Spats",
       href: `${PLP}/spats`,
       sku: "CAP-FGT-04",
+      pdpHeading: "Custom Grappling Spats Manufacturer",
+      pdpMetaTitle: "Custom Grappling Spats Manufacturer",
+      pdpDescription:
+        "Grappling spats, custom and private label, full-leg compression tights in a sublimated Polyester/Spandex knit with flatlock seams and an elastic waistband with an internal drawcord, matched to your rash guards, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Grappling Spats"),
+      pdpMetaDescription:
+        "Custom grappling spats manufacturer: full-leg sublimated Polyester/Spandex compression tights for BJJ and MMA, flatlock seams, MOQ 50, DDP to 20+ countries.",
+      material: "Sublimated Polyester/Spandex compression knit",
+      pdpFabricPills: ["Polyester/Spandex compression knit", "Flatlock seams", "Internal drawcord", "Tapered panels"],
+      pdpCustomizationPills: ["Rank & division colors", "Gym & athlete name", "Men's, women's or unisex", "Custom labels"],
+      faqs: [
+        {
+          q: "Can the grappling spats be worn in competition?",
+          a: "The IBJJF no-gi rules allow women to compete in skin-tight compression pants, in black, white, black and white, or the rank color. For other divisions and federations, we build the grappling spats to your rules and confirm them on your proof.",
+        },
+        {
+          q: "How do the grappling spats match the rest of the gym set?",
+          a: "The grappling spats are sublimated in the same design and Pantone colors as your rash guards and fight shorts, so the gym set matches.",
+        },
+        {
+          q: "What seams and waistband do the grappling spats use?",
+          a: "Flatlock seams throughout, flat to the skin where the grappling spats are gripped and dragged, and an elastic waistband with an internal drawcord. Both are confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Long-Sleeve Rash Guard", slug: "long-sleeve-rash-guard", href: PLP },
+        { label: "Custom MMA Fight Shorts", slug: "fight-shorts", href: PLP },
+        { label: "Custom Compression Top", slug: "compression-top", href: PLP },
+        { label: "Custom Short-Sleeve Rash Guard", slug: "short-sleeve-rash-guard", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Grappling spats, full-leg compression tights (base type)" },
+        { label: "Fabric", value: "Sublimated Polyester/Spandex compression knit, with the Spandex share confirmed on your sample" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Fit", value: "Full-length close compression through the hip, thigh and calf, cut in tapered panels" },
+        { label: "Seams", value: "Flatlock seams throughout" },
+        { label: "Waistband", value: "Elastic waistband with an internal drawcord" },
+        { label: "Gusset", value: "Crotch gusset construction confirmed on your sample" },
+        { label: "Colors", value: "Full-dye sublimation, matched to your rash guards" },
+        { label: "Sizing", value: "Graded XS to 5XL, men's, women's and unisex blocks" },
+        { label: "Branding", value: "Gym and athlete name, sponsor logos, manufacturer mark, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Grappling Spats" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Print and artwork", "Full-dye sublimation, matched to your rash guards"],
+        ["Compliance colors", "Rank and division colors built into the print where your rules require them"],
+        ["Naming", "Gym branding and athlete-name fields"],
+        ["Fabric", "Sublimated Polyester/Spandex compression knit, sourced or matched to your reference"],
+        ["Fit", "Full-length compression, men's, women's or unisex block"],
+        ["Trims and finish", "Elastic waistband and internal drawcord, woven labels, size and care labels, hangtags"],
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline:
+        "We confirm the seams, the fit and the waistband on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Flatlock seams pull-tested for grip and mat-abrasion stress",
+        "Compression fit and gusset checked across the size run on your sample",
+        "Waistband and drawcord set to hold through grappling movement",
+        GRAPHICS_POINT,
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -453,6 +516,69 @@ export const fightWear: Category = {
       imageAlt: "Custom Compression Top",
       href: `${PLP}/compression-top`,
       sku: "CAP-FGT-05",
+      pdpHeading: "Custom Compression Top Manufacturer",
+      pdpMetaTitle: "Custom Compression Top Manufacturer",
+      pdpDescription:
+        "Compression top, custom and private label, a close-fit Polyester/Spandex base-layer top on the same knit as our rash guards, for training and under a gi, in short or long sleeve, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Compression Top"),
+      pdpMetaDescription:
+        "Custom compression top manufacturer: close-fit Polyester/Spandex base-layer tops for BJJ and MMA training, short or long sleeve, MOQ 50, DDP to 20+ countries.",
+      material: "Polyester/Spandex knit",
+      pdpFabricPills: ["Polyester/Spandex knit", "Flatlock seams", "Four-way stretch", "Silicone grip hem option"],
+      pdpCustomizationPills: ["Short or long sleeve", "Solid or sublimated", "Gym logo", "Custom labels"],
+      faqs: [
+        {
+          q: "How is the compression top different from the rash guard?",
+          a: "The compression top uses the same knit as our rash guards, built as a simpler training base layer in solid colors or fully sublimated, with no rank-color build for IBJJF competition. For competition no-gi, choose the Custom Long-Sleeve Rash Guard or the Custom Short-Sleeve Rash Guard.",
+        },
+        {
+          q: "Can the compression top be worn under a gi?",
+          a: "Yes. The compression top is cut close so it sits smoothly under a gi, and it works on its own for no-gi training and conditioning.",
+        },
+        {
+          q: "Does the compression top come in short and long sleeve?",
+          a: "Both. The compression top is built in short or long sleeve with a crew neck, in solid colors or fully sublimated, to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Long-Sleeve Rash Guard", slug: "long-sleeve-rash-guard", href: PLP },
+        { label: "Custom Short-Sleeve Rash Guard", slug: "short-sleeve-rash-guard", href: PLP },
+        { label: "Custom Grappling Spats", slug: "spats", href: PLP },
+        { label: "Custom MMA Fight Shorts", slug: "fight-shorts", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Compression top, base-layer top for training (base type)" },
+        { label: "Fabric", value: "Polyester/Spandex knit, the same knit as our rash guards, with the Spandex share confirmed on your sample" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Fit", value: "Close compression fit, for training on its own or under a gi" },
+        { label: "Sleeve and neck", value: "Short or long sleeve, crew neck" },
+        { label: "Seams", value: "Flatlock seams" },
+        { label: "Hem", value: "Straight hem, with a silicone grip band optional" },
+        { label: "Colors", value: "Solid colors or full-dye sublimation, Pantone matched" },
+        { label: "Sizing", value: "Graded XS to 5XL, men's, women's and unisex blocks" },
+        { label: "Branding", value: "Gym logo, sponsor marks and athlete name optional, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Compression Top" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Print and artwork", "Solid colors or full-dye sublimation"],
+        ["Branding", "Gym logo, sponsor marks and athlete name, all optional"],
+        ["Fit", "Close compression, short or long sleeve, men's, women's or unisex block"],
+        ["Fabric", "Polyester/Spandex knit, sourced or matched to your reference"],
+        ["Color", "Pantone, CMYK, RGB or hex matched, confirmed on your digital proof"],
+        ["Trims and finish", "Optional silicone grip hem, woven labels, size and care labels, hangtags"],
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline:
+        "We confirm the fabric, the fit and the color on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Flatlock seams pull-tested for grip and mat-abrasion stress",
+        "Stretch and recovery checked on your sample before bulk",
+        "Fit graded and checked across the full size run",
+        "Graphics dyed into the fabric, so they will not crack or peel",
+        AQL_POINT,
+      ],
     },
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, Teamwear sports only,
