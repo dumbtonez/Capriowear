@@ -19,7 +19,7 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "resend": "^6.27.0",
-    "sanity": "^6.13.2"
+    "sanity": "^6.14.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
