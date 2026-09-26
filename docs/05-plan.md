@@ -4636,3 +4636,7 @@ Owner spec, `content/teamwear/rugby.ts` only. CAP-RGB-07 `warm-up-pants` gets fu
 ## Baseball batch 2: draft PDPs CAP-BSB-04 to 06, 2026-09-26
 
 `content/teamwear/baseball.ts`. Knicker Baseball Pants, Batting-Practice Jersey and Sliding Shorts now carry full draft PDP content (noindexed, BreadcrumbList only, out of the sitemap), so cards 1 to 6 link and 7 (Warm-Up Jacket) stays a card-only non-link. The Knicker, Batting-Practice and Sliding Shorts pills on 01 to 03 switched to the new pages on their own via `resolveRelatedStyleTags`; Warm-Up Jacket pills still fall back to the PLP. The full-length (02) and knicker (04) pants now share their fabric, knee, decoration, sizing, branding, customize-tile and quality strings through local constants, so the two cannot drift.
+
+## Baseball batch 3 (final): draft PDP CAP-BSB-07 + PDP 05 quality H2, 2026-09-26
+
+`content/teamwear/baseball.ts`. Baseball Warm-Up Jacket now carries full draft PDP content (noindexed, BreadcrumbList only, out of the sitemap), so all 7 Baseball cards link; the Warm-Up Jacket pills on 05 and 06 switched to it on their own. Quality H2s are per PDP: 05 "Matched to your game kit", 07 "Built for the dugout", 01 to 04 and 06 "Built to take the slide". The now-unused `cardOnly()` helper was removed. Publishing any Baseball style still needs the roster confirmed, the style sampled and real photos (`getPublishReadiness()`).

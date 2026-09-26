@@ -8,10 +8,9 @@
 //
 // PDP publish state (owner spec): every style ships "draft". Baseball opts
 // into the Teamwear draft-PDP rule (`draftPdpsReachable`, TEMPORARY, see
-// content/activewear/types.ts): 01 to 06 carry PDP content (batches 1 and 2,
+// content/activewear/types.ts): all 7 styles carry PDP content (batches 1 to 3,
 // 2026-09-26) and render as noindexed draft PDPs (BreadcrumbList only, out
-// of the sitemap and the CollectionPage/ItemList) with linking cards; 07 is
-// a card-only non-link until its own batch. Publishing needs the
+// of the sitemap and the CollectionPage/ItemList) with linking cards. Publishing needs the
 // roster confirmed, the style sampled and real photos (getPublishReadiness()).
 //
 // Cut-and-sew scope (owner standing rule, set on Cricket) -- caps (structured
@@ -35,7 +34,7 @@
 // American spelling, no en/em dashes, "spandex" never "elastane"/"Lycra",
 // never "seamless" -- confirmed throughout, same standing sitewide rules
 // every category follows.
-import type { Category, StyleCard } from "../activewear/types";
+import type { Category } from "../activewear/types";
 import { faqGetStarted } from "../getStarted";
 
 const PLP = "/capriowear/teamwear/baseball";
@@ -90,11 +89,6 @@ function customizeSteps(steps: Step[]) {
 // Alt-only gallery (no photography yet): 6 frames, alt = the card name.
 function gallery(alt: string) {
   return Array.from({ length: 6 }, () => ({ alt }));
-}
-
-// Card-only draft (a later batch adds the PDP content, then the card links).
-function cardOnly(sku: string, slug: string, cardTitle: string, cardSubline: string): StyleCard {
-  return { status: "draft", slug, cardTitle, cardSubline, image: "", imageAlt: cardTitle, href: `${PLP}/${slug}`, sku };
 }
 
 export const baseball: Category = {
@@ -247,9 +241,8 @@ export const baseball: Category = {
   draftPdpsReachable: true,
   // 7 drafts, SKU order (CAP-BSB-01 to 07), owner spec 2026-09-26. Card
   // title = H1 minus " Manufacturer" = title-tag name = breadcrumb = alt =
-  // every pill label that targets it. 01 to 03 (batch 1; 01 and 02 replace
-  // the two legacy drafts entirely) and 04 to 06 (batch 2) carry PDP
-  // content; 07 is a card-only non-link until its own batch.
+  // every pill label that targets it. All 7 carry PDP content (batches 1 to
+  // 3; 01 and 02 replaced the two legacy drafts entirely).
   styleCards: [
     {
       status: "draft",
@@ -615,7 +608,7 @@ export const baseball: Category = {
         TRIMS_STEP,
         PACKAGING_STEP,
       ]),
-      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualityHeading: "Matched to your game kit",
       pdpQualitySubline: "We confirm the fabric, the neck, the color and the fit on your sample before the full roster is produced.",
       pdpQualityPoints: [
         "Mesh weight and hand confirmed on your sample before bulk",
@@ -700,7 +693,78 @@ export const baseball: Category = {
         AQL_POINT,
       ],
     },
-    cardOnly("CAP-BSB-07", "warm-up-jacket", "Custom Baseball Warm-Up Jacket", "Dugout zip jacket, tricot or stretch woven"),
+    {
+      status: "draft",
+      slug: "warm-up-jacket",
+      cardTitle: "Custom Baseball Warm-Up Jacket",
+      cardSubline: "Dugout zip jacket, tricot or stretch woven",
+      image: "",
+      imageAlt: "Custom Baseball Warm-Up Jacket",
+      href: `${PLP}/warm-up-jacket`,
+      sku: "CAP-BSB-07",
+      pdpHeading: "Custom Baseball Warm-Up Jacket Manufacturer",
+      pdpMetaTitle: "Custom Baseball Warm-Up Jacket Manufacturer",
+      pdpDescription:
+        "Baseball warm-up jacket, custom and private label, a dugout zip layer in brushed-back polyester tricot or a Polyester/Spandex stretch woven, full-zip or quarter-zip with an embroidered crest, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Baseball Warm-Up Jacket"),
+      pdpMetaDescription:
+        "Custom baseball warm-up jacket manufacturer: tricot or stretch woven dugout jackets, full-zip or quarter-zip, embroidered crest, MOQ 50, DDP to 20+ countries.",
+      material: "Brushed-back polyester tricot or Polyester/Spandex stretch woven",
+      pdpFabricPills: ["Polyester tricot", "Brushed back", "Polyester/Spandex stretch woven", "Recycled option"],
+      pdpCustomizationPills: ["Full-zip or quarter-zip", "Embroidered crest", "Team colors", "Custom labels"],
+      faqs: [
+        {
+          q: "Is the baseball warm-up jacket made in tricot or stretch woven?",
+          a: "Both. The baseball warm-up jacket is built in brushed-back polyester tricot, the classic track-style build, or in a Polyester/Spandex stretch woven with a smoother face and added stretch. The fabric is chosen per program and confirmed on your sample.",
+        },
+        {
+          q: "Does the baseball warm-up jacket come in full-zip or quarter-zip?",
+          a: "Both. The baseball warm-up jacket is built as a full-zip with a stand collar or as a quarter-zip pullover, with set-in or raglan sleeves, all to your spec.",
+        },
+        {
+          q: "How is the team crest applied to the baseball warm-up jacket?",
+          a: "The crest is embroidered onto the baseball warm-up jacket in thread matched to your Pantone colors, with team marks printed. Sublimated panels are available on the tricot build. Placement and size are confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Batting-Practice Jersey", slug: "batting-practice-jersey", href: PLP },
+        { label: "Custom Button-Front Baseball Jersey", slug: "button-front-jersey", href: PLP },
+        { label: "Custom Pullover Baseball Jersey", slug: "pullover-jersey", href: PLP },
+        { label: "Custom Baseball Pants", slug: "double-knit-pants", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Baseball warm-up jacket, dugout zip layer (base type)" },
+        { label: "Fabric", value: "Polyester tricot with a brushed back, or a Polyester/Spandex stretch woven" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Zip and collar", value: "Full-zip or quarter-zip, with a stand collar" },
+        { label: "Sleeve", value: "Long sleeve, set-in or raglan" },
+        { label: "Hem and pockets", value: "Drawcord hem with toggles, zip or seam side pockets" },
+        { label: "Decoration", value: "Embroidered crest and printed team marks, with sublimated panels on tricot" },
+        { label: "Color", value: "Solid team colors, contrast panels and piping, Pantone matched to your kit" },
+        { label: "Fit", value: "Team cut, graded XS to 5XL, men's, women's and youth blocks" },
+        { label: "Branding", value: JERSEY_BRANDING },
+      ],
+      specificationsImage: { alt: "Custom Baseball Warm-Up Jacket" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Fabric and build", "Polyester tricot or Polyester/Spandex stretch woven, full-zip or quarter-zip"],
+        ["Construction", "Stand collar, set-in or raglan sleeve, drawcord hem, zip or seam pockets"],
+        ["Color", "Solid team colors, contrast panels and piping, Pantone matched"],
+        ["Decoration", "Embroidered crest, printed team marks, sublimated panels on tricot"],
+        ["Fit", "Team cut, graded across the full size run"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: "Built for the dugout",
+      pdpQualitySubline: "We confirm the fabric, the zip, the color and the fit on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Jacket color Pantone matched to your kit and approved on the sample before we cut",
+        "Crest embroidery finished clean and flat, with no puckering",
+        "Zip, pockets and hem checked for a flat, even finish across the size run",
+        "The full roster produced in one run, same fabric lot, so every jacket matches",
+        AQL_POINT,
+      ],
+    },
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, Teamwear sports only,
   // closest sports first.
