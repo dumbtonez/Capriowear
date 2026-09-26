@@ -7,10 +7,10 @@
 //
 // PDP publish state (owner spec): every style ships "draft". Under the
 // Teamwear draft-PDP rule (isDraftPdpReachable(), pdpShared.ts), 01 to 03
-// carry PDP content (batch 1, 2026-09-26) and render as noindexed draft PDPs
-// (BreadcrumbList only, out of the sitemap and the CollectionPage/ItemList)
-// with linking cards; 04 and 05 are card-only non-links until their own
-// batch. Publishing needs the roster confirmed, the style sampled and real
+// carry PDP content (batch 1, 2026-09-26) and 04 and 05 follow in batch 2
+// (2026-09-26), so all 5 render as noindexed draft PDPs (BreadcrumbList
+// only, out of the sitemap and the CollectionPage/ItemList) with linking
+// cards, and every style pill resolves to a real PDP. Publishing needs the roster confirmed, the style sampled and real
 // photos (getPublishReadiness()).
 //
 // Cut-and-sew scope (owner standing rule, set on Cricket) -- socks are
@@ -32,7 +32,7 @@
 // never "seamless" -- confirmed throughout, same standing sitewide rules
 // every category follows. No GSM figures (owner spec): weights are
 // "Pending, confirmed on your sample."
-import type { Category, StyleCard } from "../activewear/types";
+import type { Category } from "../activewear/types";
 import { faqGetStarted } from "../getStarted";
 
 const PLP = "/capriowear/teamwear/ice-hockey";
@@ -68,11 +68,6 @@ function customizeSteps(steps: Step[]) {
 // Alt-only gallery (no photography yet): 6 frames, alt = the card name.
 function gallery(alt: string) {
   return Array.from({ length: 6 }, () => ({ alt }));
-}
-
-// Card-only draft (a later batch adds the PDP content, then the card links).
-function cardOnly(sku: string, slug: string, cardTitle: string, cardSubline: string): StyleCard {
-  return { status: "draft", slug, cardTitle, cardSubline, image: "", imageAlt: cardTitle, href: `${PLP}/${slug}`, sku };
 }
 
 export const iceHockey: Category = {
@@ -215,8 +210,8 @@ export const iceHockey: Category = {
   ctaReferenceNoun: "kit",
   // 5 drafts, SKU order (CAP-HKY-01 to 05), owner spec 2026-09-26. Card
   // title = H1 minus " Manufacturer" = title-tag name = breadcrumb = alt =
-  // every pill label that targets it. 01 to 03 carry PDP content (batch 1);
-  // 04 and 05 are card-only non-links until their own batch.
+  // every pill label that targets it. All 5 carry PDP content (batches 1
+  // and 2).
   styleCards: [
     {
       status: "draft",
@@ -466,8 +461,152 @@ export const iceHockey: Category = {
         AQL_POINT,
       ],
     },
-    cardOnly("CAP-HKY-04", "base-layer", "Custom Ice Hockey Base Layer", "Close-fit under-kit layer"),
-    cardOnly("CAP-HKY-05", "team-jacket", "Custom Ice Hockey Team Jacket", "Zip warm-up, tricot or stretch woven"),
+    {
+      status: "draft",
+      slug: "base-layer",
+      cardTitle: "Custom Ice Hockey Base Layer",
+      cardSubline: "Close-fit under-kit layer",
+      image: "",
+      imageAlt: "Custom Ice Hockey Base Layer",
+      href: `${PLP}/base-layer`,
+      sku: "CAP-HKY-04",
+      pdpHeading: "Custom Ice Hockey Base Layer Manufacturer",
+      pdpMetaTitle: "Custom Ice Hockey Base Layer Manufacturer",
+      pdpDescription:
+        "Ice hockey base layer, custom and private label, a close-fit Polyester/Spandex top worn under the pads, in long or short sleeve, with a brushed interior and a silicone sleeve grip as options, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Ice Hockey Base Layer"),
+      pdpMetaDescription:
+        "Custom ice hockey base layer manufacturer: close-fit Polyester/Spandex tops worn under the pads, brushed interior option, MOQ 50, DDP to 20+ countries.",
+      material: "Polyester/Spandex knit",
+      pdpFabricPills: ["Polyester/Spandex knit", "Brushed interior option", "Mesh panels", "Recycled option"],
+      pdpCustomizationPills: ["Long or short sleeve", "Silicone sleeve grip", "Team colors", "Custom labels"],
+      faqs: [
+        {
+          q: "What is the ice hockey base layer made from?",
+          a: "The ice hockey base layer is a Polyester/Spandex knit with four-way stretch for a close fit under the pads, with a brushed interior available for colder rinks. The Spandex share is set to the fit you want and confirmed on your sample.",
+        },
+        {
+          q: "Can the ice hockey base layer help keep pads in place?",
+          a: "A silicone grip print at the sleeve is available on the ice hockey base layer, to help hold elbow pads in place. Placement is confirmed on your sample.",
+        },
+        {
+          q: "Does the ice hockey base layer come in long and short sleeve?",
+          a: "Both. The ice hockey base layer is built in long or short sleeve, with a crew or mock neck, in solid team colors, to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Ice Hockey Game Jersey", slug: "game-jersey", href: PLP },
+        { label: "Custom Ice Hockey Practice Jersey", slug: "practice-jersey", href: PLP },
+        { label: "Custom Ice Hockey Goalie Jersey", slug: "goalie-jersey", href: PLP },
+        { label: "Custom Ice Hockey Team Jacket", slug: "team-jacket", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Ice hockey base layer, close-fit top worn under the pads (base type)" },
+        { label: "Fabric", value: "Polyester/Spandex knit, with a brushed interior optional" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Fit", value: "Close compression fit under shoulder and elbow pads" },
+        { label: "Sleeve", value: "Long or short sleeve, with a silicone grip print at the sleeve optional to help hold pads in place" },
+        { label: "Neck", value: "Crew or mock neck" },
+        { label: "Ventilation", value: "Mesh panels at the underarm and back optional" },
+        { label: "Color", value: "Solid team colors, Pantone matched" },
+        { label: "Sizing", value: "Graded XS to 5XL, men's, women's and youth blocks" },
+        { label: "Branding", value: "Team logo, manufacturer mark, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Ice Hockey Base Layer" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Fit", "Close compression fit, long or short sleeve"],
+        ["Neck", "Crew or mock neck"],
+        ["Grip and panels", "Silicone sleeve grip and mesh panels, both optional"],
+        ["Fabric", "Polyester/Spandex knit, brushed interior optional, sourced or matched to your reference"],
+        ["Color", "Solid team colors, Pantone matched and confirmed on your sample"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: "Close fit, under the pads",
+      pdpQualitySubline:
+        "We confirm the fabric, the fit under your pads and the color on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Stretch and recovery checked on your sample before bulk",
+        "Fit under shoulder and elbow pads confirmed on your sample",
+        "Fit graded and checked across the full size run",
+        "The full roster produced in one run, same fabric lot, so every layer matches",
+        AQL_POINT,
+      ],
+    },
+    {
+      status: "draft",
+      slug: "team-jacket",
+      cardTitle: "Custom Ice Hockey Team Jacket",
+      cardSubline: "Zip warm-up, tricot or stretch woven",
+      image: "",
+      imageAlt: "Custom Ice Hockey Team Jacket",
+      href: `${PLP}/team-jacket`,
+      sku: "CAP-HKY-05",
+      pdpHeading: "Custom Ice Hockey Team Jacket Manufacturer",
+      pdpMetaTitle: "Custom Ice Hockey Team Jacket Manufacturer",
+      pdpDescription:
+        "Ice hockey team jacket, custom and private label, a zip warm-up jacket in brushed-back polyester tricot or a Polyester/Spandex stretch woven, full-zip or quarter-zip, for the bench, warm-ups and travel, with an embroidered crest, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Ice Hockey Team Jacket"),
+      pdpMetaDescription:
+        "Custom ice hockey team jacket manufacturer: tricot or stretch woven zip jackets for the bench and travel, embroidered crest, MOQ 50, DDP to 20+ countries.",
+      material: "Polyester tricot with a brushed back, or a Polyester/Spandex stretch woven",
+      pdpFabricPills: ["Polyester tricot", "Brushed back", "Polyester/Spandex stretch woven", "Recycled option"],
+      pdpCustomizationPills: ["Full-zip or quarter-zip", "Embroidered crest", "Team colors", "Custom labels"],
+      faqs: [
+        {
+          q: "Is the ice hockey team jacket made in tricot or stretch woven?",
+          a: "Both. The ice hockey team jacket is built in brushed-back polyester tricot, the classic track-style build, or in a Polyester/Spandex stretch woven with a smoother face and added stretch. The fabric is chosen per program and confirmed on your sample.",
+        },
+        {
+          q: "Does the ice hockey team jacket come in full-zip or quarter-zip?",
+          a: "Both. The ice hockey team jacket is built as a full-zip with a stand collar or as a quarter-zip pullover, with set-in or raglan sleeves, all to your spec.",
+        },
+        {
+          q: "How is the team crest applied to the ice hockey team jacket?",
+          a: "The crest is embroidered onto the ice hockey team jacket in thread matched to your Pantone colors, with team marks printed. Sublimated panels are available on the tricot build. Placement and size are confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Ice Hockey Game Jersey", slug: "game-jersey", href: PLP },
+        { label: "Custom Ice Hockey Practice Jersey", slug: "practice-jersey", href: PLP },
+        { label: "Custom Ice Hockey Base Layer", slug: "base-layer", href: PLP },
+        { label: "Custom Ice Hockey Goalie Jersey", slug: "goalie-jersey", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Ice hockey team jacket, zip warm-up layer (base type)" },
+        { label: "Fabric", value: "Polyester tricot with a brushed back, or a Polyester/Spandex stretch woven" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Zip and collar", value: "Full-zip or quarter-zip, with a stand collar" },
+        { label: "Sleeve", value: "Long sleeve, set-in or raglan" },
+        { label: "Hem and pockets", value: "Drawcord hem with toggles, zip or seam side pockets" },
+        { label: "Decoration", value: "Embroidered crest and printed team marks, with sublimated panels on tricot" },
+        { label: "Color", value: "Solid team colors, contrast panels and piping, Pantone matched to your kit" },
+        { label: "Fit", value: "Team cut, graded XS to 5XL, men's, women's and youth blocks" },
+        { label: "Branding", value: "Team crest, sponsor logos, manufacturer mark, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Ice Hockey Team Jacket" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Fabric and build", "Polyester tricot or Polyester/Spandex stretch woven, full-zip or quarter-zip"],
+        ["Construction", "Stand collar, set-in or raglan sleeve, drawcord hem, zip or seam pockets"],
+        ["Color", "Solid team colors, contrast panels and piping, Pantone matched"],
+        ["Decoration", "Embroidered crest, printed team marks, sublimated panels on tricot"],
+        ["Fit", "Team cut, graded across the full size run"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: "Built for the rink",
+      pdpQualitySubline:
+        "We confirm the fabric, the zip, the color and the fit on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Jacket color Pantone matched to your kit and approved on the sample before we cut",
+        "Crest embroidery finished clean and flat, with no puckering",
+        "Zip, pockets and hem checked for a flat, even finish across the size run",
+        "The full roster produced in one run, same fabric lot, so every jacket matches",
+        AQL_POINT,
+      ],
+    },
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, Teamwear sports only,
   // closest sports first.
