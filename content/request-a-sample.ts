@@ -47,7 +47,14 @@ export const requestASample = {
       },
       file: {
         label: "Attach a file (optional)",
-        helpText: "Tech pack, sketch, or reference image. PDF, JPG or PNG, up to 10MB.",
+        // 4 MB, not 10 (owner, 2026-09-26; audit 2026-09, C-06): Vercel
+        // rejects any request over 4.5 MB before the API route runs.
+        helpText: "Tech pack, sketch, or reference image. PDF, JPG or PNG, up to 4 MB.",
+        // Shown under an attached file that is over the limit. The form
+        // still sends the request without the file (the lead is never
+        // lost), and the team asks for a link.
+        oversizeNotice:
+          "This file is over 4 MB, so it will not be attached. Send your request anyway and we will ask you for a link to it.",
       },
       phone: {
         label: "WhatsApp or phone number (optional)",
@@ -64,6 +71,8 @@ export const requestASample = {
     submitLabel: "Send Request",
     submittingLabel: "Sending...",
     successMessage: "Thanks. Your request is in, we will reply within 24 hours.",
+    // Added under the success message when the file was left off for size.
+    successFileNotAttached: "Your file was over 4 MB, so it was not attached. We will ask you for a link to it in our reply.",
     errorMessage:
       "Something went wrong on our end. Please try again, or reach us directly and we will pick it up from there.",
   },

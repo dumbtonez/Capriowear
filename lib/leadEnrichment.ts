@@ -56,6 +56,14 @@ function parseUserAgent(ua: string): { deviceType: string; os: string; browser: 
   return { deviceType, os, browser };
 }
 
+// Client-supplied values are capped before they reach the Sheet (audit
+// 2026-09, C-08); lib/leadsSheet.ts also caps every cell.
+const MAX_CONTEXT_LENGTH = 500;
+
+function formField(formData: FormData, key: string): string {
+  return String(formData.get(key) || "").replace(/[\r\n]/g, " ").slice(0, MAX_CONTEXT_LENGTH);
+}
+
 export function buildLeadEnrichment(request: Request, formData: FormData): LeadEnrichment {
   const headers = request.headers;
   const { deviceType, os, browser } = parseUserAgent(headers.get("user-agent") || "");
@@ -67,10 +75,10 @@ export function buildLeadEnrichment(request: Request, formData: FormData): LeadE
     deviceType,
     os,
     browser,
-    referrer: String(formData.get("referrer") || ""),
-    utmSource: String(formData.get("utm_source") || ""),
-    utmMedium: String(formData.get("utm_medium") || ""),
-    utmCampaign: String(formData.get("utm_campaign") || ""),
+    referrer: formField(formData, "referrer"),
+    utmSource: formField(formData, "utm_source"),
+    utmMedium: formField(formData, "utm_medium"),
+    utmCampaign: formField(formData, "utm_campaign"),
     timestamp: new Date().toISOString(),
   };
 }

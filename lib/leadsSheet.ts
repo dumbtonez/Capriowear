@@ -53,6 +53,11 @@ export const LEAD_COLUMNS = [
   "Timestamp",
 ] as const;
 
+// Every cell is capped (audit 2026-09, C-08): a single oversized cell
+// (an uncapped referrer or UTM string) makes the whole append fail, which
+// would silently lose the lead.
+const MAX_CELL_LENGTH = 500;
+
 function rowToValues(row: LeadRow): string[] {
   return [
     row.firstName,
@@ -70,7 +75,7 @@ function rowToValues(row: LeadRow): string[] {
     row.utmMedium,
     row.utmCampaign,
     row.timestamp,
-  ];
+  ].map((value) => String(value ?? "").slice(0, MAX_CELL_LENGTH));
 }
 
 export async function appendLead(row: LeadRow): Promise<void> {
@@ -79,10 +84,8 @@ export async function appendLead(row: LeadRow): Promise<void> {
   const spreadsheetId = process.env.GOOGLE_SHEETS_LEADS_ID;
 
   if (!clientEmail || !privateKey || !spreadsheetId) {
-    console.error("Google Sheets credentials are not set; lead was not saved to the leads Sheet.", {
-      email: row.email,
-      sourcePage: row.sourcePage,
-    });
+    // No lead details in logs (audit 2026-09, C-10).
+    console.error(`[leads-sheet] Google Sheets credentials are not set; a ${row.sourcePage} lead was not saved to the Sheet.`);
     return;
   }
 
@@ -99,12 +102,15 @@ export async function appendLead(row: LeadRow): Promise<void> {
     await sheets.spreadsheets.values.append({
       spreadsheetId,
       range: "A:A",
-      valueInputOption: "USER_ENTERED",
+      // RAW, not USER_ENTERED (audit 2026-09, C-08): a submitted value such
+      // as `=IMPORTXML(...)` or `=HYPERLINK(...)` must land as plain text,
+      // never run as a formula in the team's own Sheet.
+      valueInputOption: "RAW",
       requestBody: { values: [rowToValues(row)] },
     });
   } catch (error) {
     // Never throw -- see this file's own header comment for why a Sheet
     // failure must not fail the customer-facing request.
-    console.error("Failed to append lead to Google Sheet", error);
+    console.error("[leads-sheet] Failed to append lead:", error instanceof Error ? error.message : "unknown");
   }
 }

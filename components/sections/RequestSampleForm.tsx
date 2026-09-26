@@ -48,7 +48,11 @@ type FieldKey = "name" | "email" | "company" | "interest" | "project" | "file";
 type FieldErrors = Partial<Record<FieldKey, string>>;
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const MAX_FILE_BYTES = 10 * 1024 * 1024;
+// 4 MB (owner, 2026-09-26; audit 2026-09, C-06): Vercel rejects any request
+// body over 4.5 MB before the API route runs. A larger file never blocks the
+// submission: it is left off, the request still goes through, and the team
+// asks for a link (see handleSubmit and app/api/request-sample/route.ts).
+const MAX_FILE_BYTES = 4 * 1024 * 1024;
 
 function formatFileSize(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
@@ -82,6 +86,9 @@ export function RequestSampleForm({ content }: RequestSampleFormProps) {
   // fallback below only fires if even that finds nothing.
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error" | "invalid">("idle");
   const [serverMessage, setServerMessage] = useState<string | null>(null);
+  // True once a submission went through without its (oversized) file, so the
+  // success state can say we will ask for a link.
+  const [fileLeftOff, setFileLeftOff] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Owner, 2026-09-10: "once something is attached, there should be an
@@ -133,7 +140,6 @@ export function RequestSampleForm({ content }: RequestSampleFormProps) {
     const email = String(formData.get("email") || "").trim();
     const company = String(formData.get("company") || "").trim();
     const project = String(formData.get("project") || "").trim();
-    const file = formData.get("file");
 
     if (!name) next.name = "Full name is required.";
     if (!email) next.email = "Work email is required.";
@@ -141,10 +147,6 @@ export function RequestSampleForm({ content }: RequestSampleFormProps) {
     if (!company) next.company = "Company name is required.";
     if (!interest) next.interest = "Select one option.";
     if (!project) next.project = "Tell us a bit about your project.";
-    if (file instanceof File && file.size > 0 && file.size > MAX_FILE_BYTES) {
-      next.file = "File is larger than 10MB. Please attach a smaller file, or leave this blank and mention it in your message.";
-    }
-
     return next;
   }
 
@@ -162,9 +164,28 @@ export function RequestSampleForm({ content }: RequestSampleFormProps) {
       return;
     }
 
+    // Leave an oversized file off rather than fail the whole request: the
+    // lead still goes through, and the API route's email tells the team
+    // which file to ask for.
+    let leftOff = false;
+    function leaveFileOff(file: File) {
+      formData.delete("file");
+      formData.set("fileNotAttached", `${file.name}, ${formatFileSize(file.size)}`);
+      leftOff = true;
+    }
+    const file = formData.get("file");
+    if (file instanceof File && file.size > MAX_FILE_BYTES) leaveFileOff(file);
+
     setStatus("submitting");
     try {
-      const response = await fetch("/api/request-sample", { method: "POST", body: formData });
+      let response = await fetch("/api/request-sample", { method: "POST", body: formData });
+      // 413 comes from Vercel itself when the whole request (file plus
+      // multipart overhead) is still over its 4.5 MB cap: retry once
+      // without the file so the lead is never lost.
+      if (response.status === 413 && file instanceof File && !leftOff) {
+        leaveFileOff(file);
+        response = await fetch("/api/request-sample", { method: "POST", body: formData });
+      }
       if (response.status === 400) {
         // A 400 means the server rejected this as bad input, not a send
         // failure -- try to recover field-level messages the same way a
@@ -184,6 +205,7 @@ export function RequestSampleForm({ content }: RequestSampleFormProps) {
         return;
       }
       if (!response.ok) throw new Error("Request failed");
+      setFileLeftOff(leftOff);
       setStatus("success");
     } catch {
       setStatus("error");
@@ -205,6 +227,7 @@ export function RequestSampleForm({ content }: RequestSampleFormProps) {
               </svg>
             </div>
             <p className={requestSample.successMessage}>{content.successMessage}</p>
+            {fileLeftOff ? <p className={requestSample.helpText}>{content.successFileNotAttached}</p> : null}
           </div>
         </div>
       </section>
@@ -343,7 +366,9 @@ export function RequestSampleForm({ content }: RequestSampleFormProps) {
               }}
               className={requestSample.fileInputHidden}
             />
-            <p className={requestSample.helpText}>{content.fields.file.helpText}</p>
+            <p className={requestSample.helpText} aria-live="polite">
+              {attachedFile && attachedFile.size > MAX_FILE_BYTES ? content.fields.file.oversizeNotice : content.fields.file.helpText}
+            </p>
             {errors.file ? <p className={requestSample.errorText}>{errors.file}</p> : null}
           </div>
 
