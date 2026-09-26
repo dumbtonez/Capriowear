@@ -9,8 +9,9 @@
 // fabric table and note, customization Fabric item, trust bullet 3, 8 FAQs)
 // and draft PDPs for CAP-FBL-01 to 03, on the slugs of the two legacy
 // drafts (game-jersey, integrated-pad-pants), whose content was removed in
-// c71a68d. Cards 04 to 06 are card-only drafts: non-links, no route, until
-// their PDP content lands and they switch to links automatically.
+// c71a68d. Batch 2 (owner spec, 2026-09-26) adds PDP content for
+// CAP-FBL-04 to 06 the same way, so all 6 cards link and every style pill
+// resolves to a real PDP.
 //
 // Naming (owner spec): every style name starts "Custom American Football"
 // (in Europe "football" means soccer), one exact name per style across the
@@ -442,6 +443,69 @@ export const football: Category = {
       imageAlt: "Custom American Football Girdle",
       href: `${PLP}/girdle`,
       sku: "CAP-FBL-04",
+      pdpHeading: "Custom American Football Girdle Manufacturer",
+      pdpMetaTitle: "Custom American Football Girdle Manufacturer",
+      pdpDescription:
+        "American football girdle, custom and private label, a close-fit Polyester/Spandex compression base worn under the pants, sewn with pockets for a five-pad set, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom American Football Girdle"),
+      pdpMetaDescription:
+        "Custom American football girdle manufacturer: compression Polyester/Spandex with hip, thigh and tailbone pad pockets, MOQ 50 pieces, DDP to 20+ countries.",
+      material: "Polyester/Spandex compression knit, four-way stretch",
+      pdpFabricPills: ["Polyester/Spandex", "Four-way stretch knit", "Mesh panels"],
+      pdpCustomizationPills: ["Five-pad pockets", "Pads fitted or left out", "Waistband branding", "Custom labels"],
+      faqs: [
+        {
+          q: "Is the American football girdle sold separately from the pants?",
+          a: "Yes. The American football girdle is its own style with its own minimum, so you can order it alone or alongside the American football pants in the same run.",
+        },
+        {
+          q: "Does the American football girdle come with the pads?",
+          a: "Pads are optional. The American football girdle is sewn with pockets for a five-pad set, two hip, two thigh and one tailbone, and you can order it with the foam pads fitted to spec or without.",
+        },
+        {
+          q: "Which pants go with the American football girdle?",
+          a: "Teams wearing the American football girdle usually pair it with pants that hold the knee pads only. We can build those pants in the same order, matched in color.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom American Football Pants", slug: "integrated-pad-pants", href: PLP },
+        { label: "Custom American Football Base Layer", slug: "base-layer", href: PLP },
+        { label: "Custom American Football Game Jersey", slug: "game-jersey", href: PLP },
+        { label: "Custom American Football Practice Jersey", slug: "practice-jersey", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "American football girdle, compression base with pad pockets (base type)" },
+        { label: "Fabric", value: "Polyester/Spandex compression knit, four-way stretch, mesh panels optional" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Pad pockets", value: "Built-in pockets for a five-pad set, two hip, two thigh and one tailbone" },
+        { label: "Pads", value: "Foam pads are a sourced insert, fitted to spec or left out, your choice" },
+        { label: "Fit", value: "Close fit that holds the pads in place, flatlock seams, finishing above the knee" },
+        { label: "Waistband", value: "Wide elastic waistband, finished flat, with your logo optional" },
+        { label: "Color", value: "Solid team color, Pantone matched" },
+        { label: "Sizing", value: SIZING },
+        { label: "Branding", value: "Waistband logo, manufacturer mark, tagless printed care label, packaging" },
+      ],
+      specificationsImage: { alt: "Custom American Football Girdle" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Construction", "Pockets for a five-pad set, pads fitted to spec or left out"],
+        ["Fit", "Close fit that holds the pads in place, length to your spec"],
+        ["Waistband", "Wide elastic waistband with your logo woven or printed"],
+        ["Fabric", "Four-way stretch Polyester/Spandex, sourced or matched to your reference"],
+        ["Color", "Solid team colors, Pantone matched, confirmed on your sample"],
+        ["Trims and finish", "Tagless printed care labels, woven brand labels, hangtags"],
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: "Built to hold the pads in place",
+      pdpQualitySubline:
+        "We confirm the fit, the pad pockets and the waistband on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Pad pockets sewn to hold a five-pad set, pads fitted to spec",
+        "Fit checked on your sample so the pads stay in place",
+        "Opacity checked at full stretch",
+        "The full roster produced in one run, same fabric lot, so every girdle matches",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -452,6 +516,69 @@ export const football: Category = {
       imageAlt: "Custom American Football Base Layer",
       href: `${PLP}/base-layer`,
       sku: "CAP-FBL-05",
+      pdpHeading: "Custom American Football Base Layer Manufacturer",
+      pdpMetaTitle: "Custom American Football Base Layer Manufacturer",
+      pdpDescription:
+        "American football base layer, custom and private label, a close-fit Polyester/Spandex top worn under the shoulder pads, short sleeve, long sleeve or sleeveless, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom American Football Base Layer"),
+      pdpMetaDescription:
+        "Custom American football base layer manufacturer: close-fit Polyester/Spandex tops worn under the pads, short or long sleeve, MOQ 50, DDP to 20+ countries.",
+      material: "Polyester/Spandex four-way stretch knit",
+      pdpFabricPills: ["Polyester/Spandex", "Brushed-back knit", "Recycled Polyester/Spandex"],
+      pdpCustomizationPills: ["Sleeve options", "Crew or mock neck", "Team colors", "Custom labels"],
+      faqs: [
+        {
+          q: "What sleeve options are there on the American football base layer?",
+          a: "The American football base layer comes short sleeve, long sleeve or sleeveless, and different sleeve options can be mixed across one roster order in the same run.",
+        },
+        {
+          q: "Is there a cold-weather version of the American football base layer?",
+          a: "Yes. The American football base layer can be made in a brushed-back Polyester/Spandex knit for cold-weather games and practice, confirmed on your sample.",
+        },
+        {
+          q: "Can the American football base layer match the game jersey colors?",
+          a: "Yes. The American football base layer is Pantone matched to your game jersey, in a solid team color or a sublimated design, and approved on your sample before bulk.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom American Football Game Jersey", slug: "game-jersey", href: PLP },
+        { label: "Custom American Football Girdle", slug: "girdle", href: PLP },
+        { label: "Custom American Football Practice Jersey", slug: "practice-jersey", href: PLP },
+        { label: "Custom American Football Sideline Jacket", slug: "sideline-jacket", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "American football base layer top, close fit (base type)" },
+        { label: "Fabric", value: "Polyester/Spandex four-way stretch knit, brushed back for cold-weather programs" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Fit", value: "Close fit worn under the shoulder pads" },
+        { label: "Sleeve", value: "Short sleeve, long sleeve or sleeveless" },
+        { label: "Neckline", value: "Crew or mock neck" },
+        { label: "Seams", value: "Flatlock seams for a flat finish under the pads" },
+        { label: "Decoration and color", value: "Solid team color or full-dye sublimation, Pantone matched, with a printed logo" },
+        { label: "Sizing", value: SIZING },
+        { label: "Branding", value: "Team logo, manufacturer mark, tagless printed care label, packaging" },
+      ],
+      specificationsImage: { alt: "Custom American Football Base Layer" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Sleeve and neck", "Short sleeve, long sleeve or sleeveless, crew or mock neck"],
+        ["Fabric", "Polyester/Spandex, standard or brushed back, sourced or matched to your reference"],
+        ["Color", "Solid team colors or full-dye sublimation, Pantone matched"],
+        ["Branding", "Printed team logo and manufacturer mark"],
+        ["Fit", "Close fit under the pads, graded across the full size run"],
+        ["Trims and finish", "Tagless printed care labels, woven brand labels, hangtags"],
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: "Built to sit under the pads",
+      pdpQualitySubline:
+        "We confirm the fit, the seams and the color on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Close fit checked under the pads on your sample",
+        "Flatlock seams checked for a flat finish under the pads",
+        "Opacity checked at full stretch",
+        "The full roster produced in one run, same fabric lot, so every top matches",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -462,6 +589,69 @@ export const football: Category = {
       imageAlt: "Custom American Football Sideline Jacket",
       href: `${PLP}/sideline-jacket`,
       sku: "CAP-FBL-06",
+      pdpHeading: "Custom American Football Sideline Jacket Manufacturer",
+      pdpMetaTitle: "Custom American Football Sideline Jacket Manufacturer",
+      pdpDescription:
+        "American football sideline jacket, custom and private label, a full-zip warm-up in polyester tricot, brushed fleece or a woven polyester shell for the sideline and travel, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom American Football Sideline Jacket"),
+      pdpMetaDescription:
+        "Custom American football sideline jacket manufacturer: full-zip tricot or fleece, stand collar or hood, team colors and crest, MOQ 50, DDP to 20+ countries.",
+      material: "Polyester tricot, brushed-back polyester fleece or a woven polyester shell",
+      pdpFabricPills: ["Polyester tricot", "Brushed polyester fleece", "Woven polyester shell", "Recycled polyester"],
+      pdpCustomizationPills: ["Stand collar or hood", "Zip pockets", "Embroidered crest", "Custom labels"],
+      faqs: [
+        {
+          q: "Can the American football sideline jacket be made with a hood?",
+          a: "Yes. The American football sideline jacket comes with a stand collar or a hood, chosen per program and confirmed on your sample.",
+        },
+        {
+          q: "Which fabrics are the American football sideline jacket made in?",
+          a: "The American football sideline jacket is made in polyester tricot, brushed polyester fleece or a woven polyester shell, with recycled polyester available. Weight is confirmed on your sample.",
+        },
+        {
+          q: "Can the American football sideline jacket carry player names or numbers?",
+          a: "Yes. The American football sideline jacket can carry embroidered or printed names, numbers and crests, placed to your spec and confirmed on your proof.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom American Football Game Jersey", slug: "game-jersey", href: PLP },
+        { label: "Custom American Football Practice Jersey", slug: "practice-jersey", href: PLP },
+        { label: "Custom American Football Base Layer", slug: "base-layer", href: PLP },
+        { label: "Custom American Football Pants", slug: "integrated-pad-pants", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "American football sideline jacket, full zip (base type)" },
+        { label: "Fabric", value: "Polyester tricot, brushed-back polyester fleece or a woven polyester shell, recycled polyester available" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Closure", value: "Full-length front zip with a zip garage at the chin" },
+        { label: "Collar", value: "Stand collar or hood" },
+        { label: "Pockets", value: "Zip or open side pockets, to your spec" },
+        { label: "Cuffs and hem", value: "Rib or elastic cuffs and hem" },
+        { label: "Color and decoration", value: "Team colors with contrast panels or piping, Pantone matched, with an embroidered or printed crest" },
+        { label: "Fit", value: "Team cut, graded XS to 5XL, men's, women's and youth blocks" },
+        { label: "Branding", value: "Team crest, sponsor logos, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom American Football Sideline Jacket" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Collar and closure", "Stand collar or hood, full-length zip"],
+        ["Fabric", "Tricot, brushed fleece or a woven shell, sourced or matched to your reference"],
+        ["Color", "Team colors, contrast panels and piping, Pantone matched"],
+        ["Decoration", "Embroidered or printed crest, sponsor marks, names and numbers"],
+        ["Pockets and fit", "Zip or open pockets, team cut graded across the full size run"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: "Matched to your uniform",
+      pdpQualitySubline:
+        "We confirm the fabric, the zips, the color and the fit on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Jacket color matched to your uniform and approved on the sample before we cut",
+        "Zips function-tested before bulk",
+        "Embroidery density and placement checked on the sample",
+        "The full roster produced in one run, same fabric lot, so every jacket matches",
+        AQL_POINT,
+      ],
     },
   ],
   relatedLinks: [
