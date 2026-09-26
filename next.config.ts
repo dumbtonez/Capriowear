@@ -16,16 +16,30 @@ import type { NextConfig } from "next";
 // isolate from; revisit with nonces if/when an analytics or embed script is
 // added. `font-src`/`img-src` cover next/font's self-hosted Figtree files
 // and next/image's own optimized output plus any real `https:` photography.
+//
+// Tightened 2026-09-26 (audit 2026-09, C-17): `img-src` names its hosts
+// instead of allowing any `https:` origin (placehold.co is the only
+// external image live today, on the parent homepage; cdn.sanity.io is for
+// the incoming product photography), and `object-src`/`frame-src`/
+// `worker-src`/`manifest-src`/`media-src` are explicit. Still static with
+// `'unsafe-inline'` scripts, deliberately: a nonce would force every one of
+// the ~300 prerendered pages to render per request (Next's own CSP guide).
 const CSP = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline'",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: https:",
+  "img-src 'self' data: blob: https://cdn.sanity.io https://placehold.co",
   "font-src 'self' data:",
   "connect-src 'self'",
+  "media-src 'self' https://cdn.sanity.io",
+  "object-src 'none'",
+  "frame-src 'none'",
+  "worker-src 'self'",
+  "manifest-src 'self'",
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",
+  "upgrade-insecure-requests",
 ].join("; ");
 
 // /studio (Sanity Studio, embedded 2026-09-13) needs a looser CSP than the
@@ -42,20 +56,37 @@ const CSP = [
 // added 2026-09-13 after wiring up a real project -- both were blocked
 // outright until then, confirmed via the browser console against the real
 // Studio login screen, not guessed ahead of time.
+//
+// 2026-09-26 (audit 2026-09, C-17): additions only cover what the Studio
+// needs after login (realtime `wss:`, the bare api.sanity.io host that
+// `*.api.sanity.io` does not match, blob: image previews, avatar hosts),
+// plus `object-src 'none'`. `img-src` stays `https:` here: editors paste
+// and preview images from arbitrary sources inside the Studio.
 const STUDIO_CSP = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://core.sanity-cdn.com",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: https:",
+  "img-src 'self' data: blob: https:",
   "font-src 'self' data: https://design-system-static.sanity.io",
-  "connect-src 'self' https://*.api.sanity.io https://*.apicdn.sanity.io https://core.sanity-cdn.com",
+  "connect-src 'self' https://api.sanity.io https://*.api.sanity.io wss://*.api.sanity.io https://*.apicdn.sanity.io https://core.sanity-cdn.com",
   "worker-src 'self' blob:",
+  "frame-src 'self' https://*.sanity.io",
+  "object-src 'none'",
   "frame-ancestors 'none'",
   "base-uri 'self'",
-  "form-action 'self'",
+  "form-action 'self' https://api.sanity.io",
 ].join("; ");
 
+// Read directly from the env (not content/site.ts's ALLOW_INDEXING) so this
+// config file stays free of app imports; same variable, same default: off
+// unless explicitly "true".
+const ALLOW_INDEXING = process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true";
+const NOINDEX = { key: "X-Robots-Tag", value: "noindex, nofollow" };
+
 const nextConfig: NextConfig = {
+  // No `X-Powered-By: Next.js` fingerprint on any response (audit 2026-09,
+  // C-18: it was still present on /studio).
+  poweredByHeader: false,
   images: {
     // AVIF first, WebP fallback (owner spec, 2026-09-02, PLP card hover
     // swap: "modern formats (WebP/AVIF)") -- Next's own default is
@@ -86,28 +117,69 @@ const nextConfig: NextConfig = {
       // embed use case shows up.
       { key: "X-Frame-Options", value: "DENY" },
       { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-      // Camera/mic/geolocation are all genuinely unused sitewide --
-      // disabled outright rather than left at the browser default.
-      { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+      // Camera/mic/geolocation/payment/USB/Topics are all genuinely unused
+      // sitewide -- disabled outright rather than left at the browser
+      // default.
+      { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()" },
       // 2 years + subdomains + preload -- the long-lived, "submit to
       // the browser preload list" HSTS config, appropriate once a site
       // is committed to HTTPS-only (Vercel serves this site over HTTPS
       // by default; this header is what tells browsers to never even
       // try plain HTTP again, for every subdomain too).
       { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+      // Other sites can't embed this site's own files (audit 2026-09,
+      // C-19); the OG image entry below re-opens that for share images.
+      { key: "Cross-Origin-Resource-Policy", value: "same-site" },
     ];
 
+    // Header entries are applied in order, and a later entry that sets the
+    // same key wins -- so the specific entries below (Studio, OG images,
+    // noindex) override the common ones for their own paths.
     return [
+      // Common headers on every path, /studio included. Split from the CSP
+      // entries so a path neither CSP pattern matches (e.g. /studiox, which
+      // the old single pattern left with no headers at all) still gets
+      // them (audit 2026-09, C-16).
+      { source: "/:path*", headers: commonHeaders },
       {
-        // Every real route except /studio -- see STUDIO_CSP above for why
-        // this must not also match /studio.
-        source: "/:path((?!studio).*)*",
-        headers: [{ key: "Content-Security-Policy", value: CSP }, ...commonHeaders],
+        // Every route except /studio and /studio/* -- but /studiox or
+        // /studio-notes still match. See STUDIO_CSP above for why this
+        // must never also match /studio: two CSP headers on one response
+        // intersect rather than override.
+        source: "/:path((?!studio(?:/|$)).*)*",
+        headers: [
+          { key: "Content-Security-Policy", value: CSP },
+          { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+        ],
       },
       {
+        // Studio: its own CSP, never indexed (even after launch), and a
+        // COOP that still lets a sign-in popup talk back to the Studio.
         source: "/studio/:path*",
-        headers: [{ key: "Content-Security-Policy", value: STUDIO_CSP }, ...commonHeaders],
+        headers: [
+          { key: "Content-Security-Policy", value: STUDIO_CSP },
+          { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
+          NOINDEX,
+        ],
       },
+      // Share images must stay fetchable when a social platform or chat app
+      // embeds them from its own origin.
+      { source: "/opengraph-image", headers: [{ key: "Cross-Origin-Resource-Policy", value: "cross-origin" }] },
+      { source: "/:path*/opengraph-image", headers: [{ key: "Cross-Origin-Resource-Policy", value: "cross-origin" }] },
+      { source: "/og/:path*", headers: [{ key: "Cross-Origin-Resource-Policy", value: "cross-origin" }] },
+      // Never indexed, before or after launch: internal QA page and the form
+      // endpoints.
+      { source: "/styleguide", headers: [NOINDEX] },
+      { source: "/api/:path*", headers: [NOINDEX] },
+      // Any *.vercel.app host (the capriowear.vercel.app production alias,
+      // previews) stays out of search even after launch, so it can never
+      // compete with www as a duplicate (audit 2026-09, B-07).
+      { source: "/:path*", has: [{ type: "host", value: ".*\\.vercel\\.app" }], headers: [NOINDEX] },
+      // Pre-launch lock, header form: the meta robots tag only reaches HTML,
+      // and robots.txt's Disallow stops crawlers from ever seeing it. This
+      // covers every response (images, PDFs, OG PNGs) until
+      // NEXT_PUBLIC_ALLOW_INDEXING=true, then drops out on its own.
+      ...(ALLOW_INDEXING ? [] : [{ source: "/:path*", headers: [NOINDEX] }]),
     ];
   },
   // Capriowear's routes moved from the repo root to /capriowear (2026-09-14
