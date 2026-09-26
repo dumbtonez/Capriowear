@@ -8,7 +8,7 @@
 // every pill that targets it.
 //
 // Batch 1 builds draft PDPs for the hero SKUs 01, 09 and 02, batch 2 for 10,
-// 03 and 11. Drafts with PDP content render noindexed (BreadcrumbList only,
+// 03 and 11, batch 3 for 05, 14 and 06. Drafts with PDP content render noindexed (BreadcrumbList only,
 // out of the sitemap and the ItemList) and their cards link
 // (`isDraftPdpReachable()`); the rest are card-only non-links until their
 // batch. Pills carry a `slug`, so a
@@ -440,6 +440,59 @@ export const joggers: Category = {
       imageAlt: "Men's Sweatpant",
       href: `${PLP}/sweatpant-mens`,
       sku: "CAP-JOG-05",
+      pdpHeading: "Men's Sweatpant Manufacturer",
+      pdpMetaTitle: "Men's Sweatpant Manufacturer",
+      pdpDescription:
+        "Men's sweatpant, custom and private label, a straight-leg sweatpant in a heavier brushed fleece or French terry, with an open or elastic hem and a drawcord waist, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Men's Sweatpant"),
+      pdpMetaDescription:
+        "Men's sweatpant manufacturer: heavier brushed fleece or French terry, straight leg, open or elastic hem, drawcord waist, MOQ 50, DDP to 20+ countries.",
+      material: "Brushed Cotton/Polyester fleece, French terry or heavyweight cotton fleece",
+      pdpFabricPills: ["Brushed fleece", "French terry", "Heavyweight cotton fleece"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What is the difference between the men's sweatpant and a jogger?",
+          a: "The men's sweatpant has a straighter leg and an open or elastic hem in a heavier fleece. A jogger tapers to a ribbed ankle cuff.",
+        },
+        {
+          q: "What fabrics can the men's sweatpant be made in?",
+          a: "The men's sweatpant is made in brushed Cotton/Polyester fleece, French terry or a heavyweight cotton fleece, with weight confirmed on your sample.",
+        },
+        {
+          q: "Can the men's sweatpant be garment-dyed?",
+          a: "Yes. The men's sweatpant can be garment-dyed on cotton fleece for a softer, lived-in color, confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Men's Cuffed Fleece Jogger", slug: "cuffed-fleece-jogger-mens", href: PLP },
+        { label: "Men's Wide-Leg Jogger", slug: "wide-leg-jogger-mens", href: PLP },
+        { label: "Men's Cargo Jogger", slug: "cargo-jogger-mens", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's straight-leg sweatpant" },
+        { label: "Fabric", value: "Brushed Cotton/Polyester fleece, French terry or heavyweight cotton fleece" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Fit", value: "Straight or regular leg, men's block, graded XS to 5XL" },
+        { label: "Hem", value: "Open hem or elastic hem, to your spec" },
+        { label: "Waistband", value: "Elastic waistband with a drawcord" },
+        { label: "Pockets", value: "Side pockets, back pocket optional" },
+        { label: "Gusset", value: "Crotch gusset optional" },
+        { label: "Finish", value: "Garment-dye available for premium fleece" },
+        { label: "Branding", value: "Screen print, embroidery, DTF or heat transfer, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Men's Sweatpant" },
+      pdpQualityHeading: "Heavier fleece, a straight clean leg",
+      pdpQualitySubline: SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Leg width graded proportionally across the size run",
+        "Shrinkage tested after wash",
+        "Brushed fleece checked for pilling",
+        "Hem finish checked for a straight, even drop",
+        "Color matched to your approved sample",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -451,6 +504,59 @@ export const joggers: Category = {
       imageAlt: "Men's Training Jogger",
       href: `${PLP}/training-jogger-mens`,
       sku: "CAP-JOG-06",
+      pdpHeading: "Men's Training Jogger Manufacturer",
+      pdpMetaTitle: "Men's Training Jogger Manufacturer",
+      pdpDescription:
+        "Men's training jogger, custom and private label, a lightweight Polyester/Spandex stretch woven jogger with a tapered leg, zip pockets and an elastic or adjustable cuff, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Men's Training Jogger"),
+      pdpMetaDescription:
+        "Men's training jogger manufacturer: Polyester/Spandex stretch woven, tapered leg, zip pockets, elastic or adjustable cuff, MOQ 50, DDP to 20+ countries.",
+      material: "Lightweight Polyester/Spandex stretch woven",
+      pdpFabricPills: ["Polyester/Spandex stretch woven", "Recycled Polyester/Spandex"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What is the men's training jogger made from?",
+          a: "The men's training jogger is made in a lightweight Polyester/Spandex stretch woven. The blend and weight are confirmed on your sample, and recycled Polyester/Spandex is an option.",
+        },
+        {
+          q: "What cuff options are there on the men's training jogger?",
+          a: "The men's training jogger comes with an elastic cuff or an adjustable toggle cuff that tightens at the ankle, chosen per style.",
+        },
+        {
+          q: "How is the men's training jogger different from the woven track pant?",
+          a: "The men's training jogger is a stretch woven with a tapered leg and a cuff for training. The woven track pant is a lighter, straighter leg with an open hem.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Men's Woven Track Pant", slug: "woven-track-pant-mens", href: PLP },
+        { label: "Men's Slim Tapered Jogger", slug: "slim-tapered-jogger", href: PLP },
+        { label: "Men's Cargo Jogger", slug: "cargo-jogger-mens", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's training jogger" },
+        { label: "Fabric", value: "Lightweight Polyester/Spandex stretch woven, recycled Polyester/Spandex available" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Fit", value: "Tapered leg, men's block, graded XS to 5XL" },
+        { label: "Cuff", value: "Elastic cuff or adjustable toggle cuff" },
+        { label: "Waistband", value: "Elastic waistband with an internal drawcord" },
+        { label: "Pockets", value: "Zip side pockets, zip back pocket optional" },
+        { label: "Ventilation", value: "Perforated or mesh panels optional" },
+        { label: "Construction", value: "Cut-and-sew, gusset to your spec" },
+        { label: "Branding", value: "Heat transfer, silicone logos, reflective prints or embroidery, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Men's Training Jogger" },
+      pdpQualityHeading: "Stretch that moves with every rep",
+      pdpQualitySubline: SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Stretch and recovery checked after repeated wear and wash",
+        "Zips function-tested before bulk",
+        "Taper graded proportionally across the size run",
+        "Gusset and inseam checked through movement",
+        "Adjustable cuff checked for hold",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -698,6 +804,59 @@ export const joggers: Category = {
       imageAlt: "Women's Sweatpant",
       href: `${PLP}/sweatpant-womens`,
       sku: "CAP-JOG-14",
+      pdpHeading: "Women's Sweatpant Manufacturer",
+      pdpMetaTitle: "Women's Sweatpant Manufacturer",
+      pdpDescription:
+        "Women's sweatpant, custom and private label, a relaxed straight-leg sweatpant in French terry or brushed fleece with an open hem and drawcord waist, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Women's Sweatpant"),
+      pdpMetaDescription:
+        "Women's sweatpant manufacturer: French terry or brushed fleece, relaxed straight leg, open hem, drawcord waist, private label, MOQ 50, DDP to 20+ countries.",
+      material: "French terry or brushed Cotton/Polyester fleece",
+      pdpFabricPills: ["French terry", "Brushed fleece", "Cotton/Polyester fleece"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What is the difference between the women's sweatpant and a jogger?",
+          a: "The women's sweatpant has a relaxed straight leg and an open hem. A jogger tapers to a ribbed ankle cuff.",
+        },
+        {
+          q: "What fabric is the women's sweatpant made from?",
+          a: "The women's sweatpant is made in French terry or brushed Cotton/Polyester fleece, with weight confirmed on your sample.",
+        },
+        {
+          q: "Can the women's sweatpant be made oversized?",
+          a: "Yes. The women's sweatpant comes in a regular or oversized fit, with a mid or high rise to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Women's Cuffed Fleece Jogger", slug: "cuffed-fleece-jogger-womens", href: PLP },
+        { label: "Women's Wide-Leg Jogger", slug: "wide-leg-jogger-womens", href: PLP },
+        { label: "Women's Barrel Jogger", slug: "barrel-jogger", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's straight-leg sweatpant" },
+        { label: "Fabric", value: "French terry or brushed Cotton/Polyester fleece" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Fit", value: "Relaxed straight leg, regular or oversized, women's block, graded XS to 5XL" },
+        { label: "Hem", value: "Open hem, elastic hem optional" },
+        { label: "Waistband", value: "Elastic waistband with a drawcord" },
+        { label: "Rise", value: "Mid or high rise, to your spec" },
+        { label: "Pockets", value: "Side pockets, back pocket optional" },
+        { label: "Finish", value: "Garment-dye available for premium fleece" },
+        { label: "Branding", value: "Screen print, embroidery, DTF or heat transfer, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Women's Sweatpant" },
+      pdpQualityHeading: "Heavier fleece, a straight clean leg",
+      pdpQualitySubline: SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Leg width graded proportionally across the size run",
+        "Shrinkage tested after wash",
+        "Brushed fleece checked for pilling",
+        "Hem finish checked for a straight, even drop",
+        "Rise and waistband checked for hold",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
