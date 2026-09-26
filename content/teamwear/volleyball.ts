@@ -9,9 +9,9 @@
 // fabric table and note, customization Fabric item, trust bullet 3, 8 FAQs)
 // and draft PDPs for CAP-VOL-01 to 03. The two legacy drafts at
 // indoor-jersey and fitted-shorts are replaced in full by SKUs 01 and 02
-// (same slugs). Batch 2 (owner spec, 2026-09-26) adds PDP content for
-// CAP-VOL-04 to 06 the same way. Card 07 is a card-only draft: non-link, no
-// route, until its PDP content lands and it switches to a link automatically.
+// (same slugs). Batches 2 and 3 (owner spec, 2026-09-26) add PDP content
+// for CAP-VOL-04 to 07 the same way, so all 7 cards link and every style
+// pill resolves to a real PDP.
 //
 // Every style is "draft": noindexed, out of the sitemap and the
 // CollectionPage/ItemList, BreadcrumbList only. Under the Teamwear draft-PDP
@@ -651,6 +651,69 @@ export const volleyball: Category = {
       imageAlt: "Custom Volleyball Warm-Up Pants",
       href: `${PLP}/warm-up-pants`,
       sku: "CAP-VOL-07",
+      pdpHeading: "Custom Volleyball Warm-Up Pants Manufacturer",
+      pdpMetaTitle: "Custom Volleyball Warm-Up Pants Manufacturer",
+      pdpDescription:
+        "Volleyball warm-up pants, custom and private label, in polyester tricot or brushed fleece with an elastic drawcord waist and a straight or tapered leg, matched to your warm-up jacket, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Volleyball Warm-Up Pants"),
+      pdpMetaDescription:
+        "Custom volleyball warm-up pants manufacturer: tricot or fleece warm-up pants, straight or tapered leg, ankle zips optional, MOQ 50, DDP to 20+ countries.",
+      material: "Polyester tricot or brushed-back polyester fleece",
+      pdpFabricPills: ["Polyester tricot", "Brushed polyester fleece", "Polyester interlock", "Recycled polyester"],
+      pdpCustomizationPills: ["Straight or tapered", "Ankle zips optional", "Matched to your jacket", "Custom labels"],
+      faqs: [
+        {
+          q: "Can the volleyball warm-up pants match our warm-up jacket?",
+          a: "Yes. The volleyball warm-up pants are cut from the same fabric and Pantone values as your volleyball warm-up jacket, and both are confirmed together on your sample before bulk.",
+        },
+        {
+          q: "What leg and hem options are there on the volleyball warm-up pants?",
+          a: "The volleyball warm-up pants come in a straight or tapered leg, finished with an open hem, a rib cuff or ankle zips so they come off over court shoes, chosen per program and confirmed on your sample.",
+        },
+        {
+          q: "Which fabrics are the volleyball warm-up pants made in?",
+          a: "The volleyball warm-up pants are made in polyester tricot or brushed polyester fleece, with recycled polyester available. Weight is confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Volleyball Warm-Up Jacket", slug: "warm-up-jacket", href: PLP },
+        { label: "Custom Men's Volleyball Shorts", slug: "mens-shorts", href: PLP },
+        { label: "Custom Women's Volleyball Shorts", slug: "fitted-shorts", href: PLP },
+        { label: "Custom Volleyball Jersey", slug: "indoor-jersey", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Volleyball warm-up pants (base type)" },
+        { label: "Fabric", value: "Polyester tricot or brushed-back polyester fleece, recycled polyester available" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Waist", value: "Elastic waistband with an internal drawcord, finished flat" },
+        { label: "Leg", value: "Straight or tapered leg, full length" },
+        { label: "Hem", value: "Open hem, rib cuff, or ankle zips so the pants come off over court shoes, to your spec" },
+        { label: "Pockets", value: "Zip or open side pockets, to your spec" },
+        { label: "Color and decoration", value: "Team colors with side stripes or contrast panels, Pantone matched to your warm-up jacket, with an embroidered or printed mark" },
+        { label: "Fit", value: "Team cut, graded XS to 5XL, men's, women's and youth blocks" },
+        { label: "Branding", value: "Team crest or mark, sponsor logos, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Volleyball Warm-Up Pants" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Leg and hem", "Straight or tapered leg, open hem, rib cuff or ankle zips"],
+        ["Fabric", "Polyester tricot or brushed fleece, sourced or matched to your reference"],
+        ["Color", "Team colors, side stripes and contrast panels, Pantone matched to your warm-up jacket"],
+        ["Decoration", "Embroidered or printed crest and sponsor marks"],
+        ["Waist and fit", "Elastic drawcord waist, team cut, graded across the full size run"],
+        ["Trims and finish", "Woven labels, size and care labels, hangtags"],
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline:
+        "We confirm the fabric, the zips, the color and the fit on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Pants color matched to your warm-up jacket and approved on the sample before we cut",
+        "Inseam and hem graded and checked across the full size run",
+        "Ankle and pocket zips function-tested before bulk",
+        "The full roster produced in one run, same fabric lot, so every pair matches",
+        AQL_POINT,
+      ],
     },
   ],
   relatedLinks: [
