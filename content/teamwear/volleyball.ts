@@ -9,8 +9,9 @@
 // fabric table and note, customization Fabric item, trust bullet 3, 8 FAQs)
 // and draft PDPs for CAP-VOL-01 to 03. The two legacy drafts at
 // indoor-jersey and fitted-shorts are replaced in full by SKUs 01 and 02
-// (same slugs). Cards 04 to 07 are card-only drafts: non-links, no route,
-// until their PDP content lands and they switch to links automatically.
+// (same slugs). Batch 2 (owner spec, 2026-09-26) adds PDP content for
+// CAP-VOL-04 to 06 the same way. Card 07 is a card-only draft: non-link, no
+// route, until its PDP content lands and it switches to a link automatically.
 //
 // Every style is "draft": noindexed, out of the sitemap and the
 // CollectionPage/ItemList, BreadcrumbList only. `draftPdpsReachable` (same
@@ -437,6 +438,69 @@ export const volleyball: Category = {
       imageAlt: "Custom Men's Volleyball Shorts",
       href: `${PLP}/mens-shorts`,
       sku: "CAP-VOL-04",
+      pdpHeading: "Custom Men's Volleyball Shorts Manufacturer",
+      pdpMetaTitle: "Custom Men's Volleyball Shorts Manufacturer",
+      pdpDescription:
+        "Men's volleyball shorts, custom and private label, a looser athletic cut in a lightweight polyester knit or stretch woven with an elastic drawcord waist, sublimated in your team colors, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Men's Volleyball Shorts"),
+      pdpMetaDescription:
+        "Custom men's volleyball shorts manufacturer: looser athletic-cut sublimated shorts, stretch knit or woven, drawcord waist, MOQ 50 pieces, DDP to 20+ countries.",
+      material: "Lightweight polyester knit, or a stretch woven polyester or Polyester/Spandex",
+      pdpFabricPills: ["Polyester knit", "Stretch woven polyester", "Polyester/Spandex", "Recycled polyester"],
+      pdpCustomizationPills: ["Inseam to length", "Drawcord waist", "Team colors", "Custom labels"],
+      faqs: [
+        {
+          q: "How are the men's volleyball shorts different from the women's volleyball shorts?",
+          a: "The men's volleyball shorts are a looser athletic cut with a drawcord waist and a longer inseam, while the women's volleyball shorts are a fitted four-way stretch short. Both are made in the same team colors for one program.",
+        },
+        {
+          q: "What inseam do the men's volleyball shorts have?",
+          a: "The men's volleyball shorts are cut to the inseam you specify, graded across the size run and confirmed on your sample.",
+        },
+        {
+          q: "Can the men's volleyball shorts carry numbers?",
+          a: "Yes. Player numbers, the team logo and sponsor marks are sublimated into the men's volleyball shorts, placed to your spec and your competition's rules.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Volleyball Jersey", slug: "indoor-jersey", href: PLP },
+        { label: "Custom Women's Volleyball Shorts", slug: "fitted-shorts", href: PLP },
+        { label: "Custom Beach Volleyball Uniform", slug: "beach-uniform", href: PLP },
+        { label: "Custom Volleyball Warm-Up Pants", slug: "warm-up-pants", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's volleyball short, looser athletic cut (base type)" },
+        { label: "Fabric", value: "Lightweight polyester knit, or a stretch woven polyester or Polyester/Spandex" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Fit", value: "Looser athletic cut, graded XS to 5XL" },
+        { label: "Inseam", value: "Set to your spec and graded across the size run" },
+        { label: "Waistband", value: "Elastic waistband with an internal drawcord" },
+        { label: "Side detail", value: "Side vents or side panels, to your spec" },
+        { label: "Decoration and color", value: "Full-dye sublimation or a solid team color, Pantone matched to your jersey" },
+        { label: "Seams and label", value: "Flatlock or overlock seams, tagless printed care label" },
+        { label: "Branding", value: "Team logo, player numbers, manufacturer mark, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Men's Volleyball Shorts" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Fit and inseam", "Looser athletic cut, inseam to your spec"],
+        ["Fabric", "Polyester knit or stretch woven, sourced or matched to your reference"],
+        ["Color and print", "Full-dye sublimation or solid team colors, Pantone matched to your jersey"],
+        ["Waist", "Elastic waistband with an internal drawcord"],
+        ["Branding", "Team logo, player numbers and sponsor marks"],
+        ["Trims and finish", "Tagless printed care labels, woven brand labels, hangtags"],
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline:
+        "We confirm the fit, the waistband and the color on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Shorts color matched to your jersey and approved on the proof before we cut",
+        "Inseam graded and checked across the full size run",
+        "Waistband and drawcord checked for a flat, secure finish",
+        "The full roster produced in one run, same fabric roll and print batch, so every pair matches",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -447,6 +511,69 @@ export const volleyball: Category = {
       imageAlt: "Custom Beach Volleyball Uniform",
       href: `${PLP}/beach-uniform`,
       sku: "CAP-VOL-05",
+      pdpHeading: "Custom Beach Volleyball Uniform Manufacturer",
+      pdpMetaTitle: "Custom Beach Volleyball Uniform Manufacturer",
+      pdpDescription:
+        "Beach volleyball uniform, custom and private label, a tank or jersey top with fitted Polyester/Spandex bottoms, full-dye sublimated in your team colors and built to your competition's rules, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Beach Volleyball Uniform"),
+      pdpMetaDescription:
+        "Custom beach volleyball uniform manufacturer: tank or jersey tops with fitted Polyester/Spandex bottoms, sublimated, MOQ 50 pieces, DDP to 20+ countries.",
+      material: "Four-way stretch Polyester/Spandex, with polyester mesh for tops",
+      pdpFabricPills: ["Polyester/Spandex", "Polyester mesh", "Four-way stretch knit", "Recycled polyester"],
+      pdpCustomizationPills: ["Top and bottom options", "Numbers to your rules", "Team colors", "Custom labels"],
+      faqs: [
+        {
+          q: "Can players on one team choose different beach volleyball uniform tops or bottoms?",
+          a: "Yes. Tops and bottoms of the beach volleyball uniform can be chosen per player within your competition's rules, all in the same team colors and produced in one run.",
+        },
+        {
+          q: "What top and bottom options are there on the beach volleyball uniform?",
+          a: "The beach volleyball uniform comes with a tank, sleeveless or short-sleeve jersey top and fitted shorts or brief-style bottoms, in women's and men's blocks, confirmed on your sample.",
+        },
+        {
+          q: "Can the beach volleyball uniform match our indoor kit?",
+          a: "Yes. The beach volleyball uniform is sublimated from the same Pantone values as your indoor kit, so a club or brand can run indoor and beach programs in matching colors.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Volleyball Jersey", slug: "indoor-jersey", href: PLP },
+        { label: "Custom Women's Volleyball Shorts", slug: "fitted-shorts", href: PLP },
+        { label: "Custom Men's Volleyball Shorts", slug: "mens-shorts", href: PLP },
+        { label: "Custom Volleyball Warm-Up Jacket", slug: "warm-up-jacket", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Beach volleyball uniform, top with fitted bottoms (base type)" },
+        { label: "Fabric", value: "Four-way stretch Polyester/Spandex, with polyester mesh for tops" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Top", value: "Tank, sleeveless or short-sleeve jersey top" },
+        { label: "Bottoms", value: "Fitted shorts or brief-style bottoms, rise and length to your spec" },
+        { label: "Fit", value: "Women's and men's blocks, graded XS to 5XL" },
+        { label: "Numbering", value: "Numbers sized and placed to your competition's rules" },
+        { label: "Decoration and color", value: "Full-dye sublimation, Pantone matched" },
+        { label: "Seams and label", value: SEAMS_LABEL },
+        { label: "Branding", value: "Team or event marks, sponsor logos, manufacturer mark, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Beach Volleyball Uniform" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Tops", "Tank, sleeveless or short-sleeve jersey top"],
+        ["Bottoms", "Fitted shorts or brief-style bottoms, rise and length to your spec"],
+        ["Fabric", "Four-way stretch Polyester/Spandex or polyester mesh, sourced or matched to your reference"],
+        ["Print and artwork", "Full-dye sublimation, unlimited colors in one file at one cost"],
+        ["Numbering", "Sized and placed to your competition's rules"],
+        ["Trims and finish", "Tagless printed care labels, woven brand labels, hangtags"],
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline:
+        "We confirm the fit, the numbering and the color on your proof and sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Top and bottom colors matched and approved on the proof before we cut",
+        "Fit, rise and length confirmed on your sample",
+        "Opacity checked at full stretch",
+        "Numbering set to your competition's rules and confirmed on your proof",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -457,6 +584,69 @@ export const volleyball: Category = {
       imageAlt: "Custom Volleyball Warm-Up Jacket",
       href: `${PLP}/warm-up-jacket`,
       sku: "CAP-VOL-06",
+      pdpHeading: "Custom Volleyball Warm-Up Jacket Manufacturer",
+      pdpMetaTitle: "Custom Volleyball Warm-Up Jacket Manufacturer",
+      pdpDescription:
+        "Volleyball warm-up jacket, custom and private label, a full-zip warm-up in polyester tricot or brushed fleece, with a stand collar or hood, team colors and an embroidered or printed crest, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Volleyball Warm-Up Jacket"),
+      pdpMetaDescription:
+        "Custom volleyball warm-up jacket manufacturer: full-zip tricot or fleece warm-ups in team colors, crest and player details, MOQ 50, DDP to 20+ countries.",
+      material: "Polyester tricot or brushed-back polyester fleece",
+      pdpFabricPills: ["Polyester tricot", "Brushed polyester fleece", "Polyester interlock", "Recycled polyester"],
+      pdpCustomizationPills: ["Stand collar or hood", "Team colors & panels", "Embroidered crest", "Custom labels"],
+      faqs: [
+        {
+          q: "Can the volleyball warm-up jacket be ordered with matching warm-up pants?",
+          a: "Yes. The volleyball warm-up jacket is cut from the same fabric and Pantone values as the volleyball warm-up pants, so the two can be ordered together as a matched warm-up set.",
+        },
+        {
+          q: "Which fabrics is the volleyball warm-up jacket made in?",
+          a: "The volleyball warm-up jacket is made in polyester tricot for a smooth, classic warm-up face, or in brushed polyester fleece for more warmth, with recycled polyester available. Weight is confirmed on your sample.",
+        },
+        {
+          q: "Can player names and numbers go on the volleyball warm-up jacket?",
+          a: "Yes. Player names, numbers and sponsor marks can be embroidered or printed on the volleyball warm-up jacket, placed on the chest, sleeve or back to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Volleyball Warm-Up Pants", slug: "warm-up-pants", href: PLP },
+        { label: "Custom Volleyball Jersey", slug: "indoor-jersey", href: PLP },
+        { label: "Custom Women's Volleyball Shorts", slug: "fitted-shorts", href: PLP },
+        { label: "Custom Men's Volleyball Shorts", slug: "mens-shorts", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Volleyball warm-up jacket, full zip (base type)" },
+        { label: "Fabric", value: "Polyester tricot or brushed-back polyester fleece, recycled polyester available" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Zip and collar", value: "Full-length front zip with a stand collar or a hood, and a zip garage at the chin" },
+        { label: "Sleeve", value: "Set-in or raglan sleeve with rib or self-fabric cuffs" },
+        { label: "Pockets", value: "Zip side pockets, to your spec" },
+        { label: "Color and decoration", value: "Team colors with contrast panels or piping, Pantone matched to your kit, with an embroidered or printed crest and player details" },
+        { label: "Fit", value: "Team cut, graded XS to 5XL, men's, women's and youth blocks" },
+        { label: "Construction", value: "Flatlock and overlock seams, rib-knit or self-fabric hem" },
+        { label: "Branding", value: "Team crest, player names or numbers, sponsor logos, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Volleyball Warm-Up Jacket" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Collar and build", "Stand collar or hood, set-in or raglan sleeve, zip pockets"],
+        ["Fabric", "Polyester tricot or brushed fleece, sourced or matched to your reference"],
+        ["Color", "Team colors, contrast panels and piping, Pantone matched to your kit"],
+        ["Decoration", "Embroidered or printed crest, player names, numbers and sponsor marks"],
+        ["Fit", "Team cut, graded across the full size run"],
+        ["Trims and finish", "Woven labels, size and care labels, hangtags"],
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline:
+        "We confirm the fabric, the zips, the color and the fit on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Jacket color Pantone matched to your kit and approved on the sample before we cut",
+        "Zips cycled and function-tested before bulk",
+        "Contrast panels and piping aligned across seams at every size",
+        "The full roster produced in one run, same fabric lot, so every jacket matches",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
