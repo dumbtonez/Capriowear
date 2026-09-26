@@ -8,10 +8,10 @@
 //
 // PDP publish state (owner spec): every style ships "draft". Baseball opts
 // into the Teamwear draft-PDP rule (`draftPdpsReachable`, TEMPORARY, see
-// content/activewear/types.ts): 01 to 03 carry PDP content (batch 1,
+// content/activewear/types.ts): 01 to 06 carry PDP content (batches 1 and 2,
 // 2026-09-26) and render as noindexed draft PDPs (BreadcrumbList only, out
-// of the sitemap and the CollectionPage/ItemList) with linking cards; 04 to
-// 07 are card-only non-links until their own batch. Publishing needs the
+// of the sitemap and the CollectionPage/ItemList) with linking cards; 07 is
+// a card-only non-link until its own batch. Publishing needs the
 // roster confirmed, the style sampled and real photos (getPublishReadiness()).
 //
 // Cut-and-sew scope (owner standing rule, set on Cricket) -- caps (structured
@@ -51,11 +51,27 @@ const JERSEY_FIT = "Baseball cut or a fitted softball cut, graded XS to 5XL, men
 const JERSEY_COLOR = "Full sublimation color range, Pantone matched, home and away colorways";
 const JERSEY_BRANDING = "Team crest, sponsor logos, manufacturer mark, woven and care labels, packaging";
 
+const PANTS_FABRIC = "100% polyester double-knit with a soil-release finish";
+const PANTS_KNEE = "Optional reinforced double-layer knee for sliding and fielding";
+const PANTS_DECORATION = "Full-dye sublimation, team colors and piping, Pantone matched";
+const PANTS_SIZING = "Graded XS to 5XL, men's, women's and youth blocks, with a softball women's-specific block available";
+const PANTS_BRANDING = "Team logo, manufacturer mark, woven and care labels, packaging";
+const PANTS_CUSTOMIZATION_PILLS = ["Reinforced knee", "Belt-loop or elastic waist", "Team colors", "Custom labels"];
+const PANTS_KNEE_POINT = "Reinforced knee option, built for sliding and fielding";
+const PANTS_INSEAM_POINT = "Inseam and waist graded and checked across the full size run";
+const PAIR_ROSTER_POINT = "The full roster produced in one run, same fabric roll, so every pair matches";
+
 type Step = [title: string, body: string];
 const NAMES_AND_NUMBERS_STEP: Step = ["Names and numbers", "Built into the print file, or tackle twill for a raised pro-style look"];
 const COLOR_STEP: Step = ["Color", "Pantone, CMYK, RGB or hex matched, confirmed on your digital proof"];
 const TRIMS_STEP: Step = ["Trims and finish", "Woven labels, size and care labels, hangtags"];
 const PACKAGING_STEP: Step = ["Packaging", "Polybags, boxes, retail-ready to your spec"];
+const PANTS_WAISTBAND_STEP: Step = ["Waistband", "Pro-style tunnel belt loops and zipper fly, or a gripper elastic waistband"];
+const PANTS_PRINT_STEP: Step = ["Print and artwork", "Full-dye sublimation, team colors and piping"];
+const PANTS_FABRIC_STEP: Step = [
+  "Fabric",
+  "Firm polyester double-knit with a soil-release finish, sourced or matched to your reference",
+];
 
 // Per-style "How we customize" carousel. Images are the shared factory
 // test shots (same stand-ins every PDP carousel uses), cycled in order.
@@ -231,9 +247,9 @@ export const baseball: Category = {
   draftPdpsReachable: true,
   // 7 drafts, SKU order (CAP-BSB-01 to 07), owner spec 2026-09-26. Card
   // title = H1 minus " Manufacturer" = title-tag name = breadcrumb = alt =
-  // every pill label that targets it. 01 to 03 carry PDP content (batch 1;
-  // 01 and 02 replace the two legacy drafts entirely); 04 to 07 are
-  // card-only non-links until their own batch.
+  // every pill label that targets it. 01 to 03 (batch 1; 01 and 02 replace
+  // the two legacy drafts entirely) and 04 to 06 (batch 2) carry PDP
+  // content; 07 is a card-only non-link until its own batch.
   styleCards: [
     {
       status: "draft",
@@ -326,9 +342,9 @@ export const baseball: Category = {
       images: gallery("Custom Baseball Pants"),
       pdpMetaDescription:
         "Custom baseball pants manufacturer: full-length 100% polyester double-knit, reinforced knee option, pro-style belt loops, MOQ 50, DDP to 20+ countries.",
-      material: "100% polyester double-knit with a soil-release finish",
+      material: PANTS_FABRIC,
       pdpFabricPills: ["Polyester double-knit", "Soil-release finish", "Reinforced knee option", "Tunnel belt loops"],
-      pdpCustomizationPills: ["Reinforced knee", "Belt-loop or elastic waist", "Team colors", "Custom labels"],
+      pdpCustomizationPills: PANTS_CUSTOMIZATION_PILLS,
       faqs: [
         {
           q: "Is the reinforced knee standard on the custom baseball pants?",
@@ -352,28 +368,25 @@ export const baseball: Category = {
       ],
       specifications: [
         { label: "Style", value: "Full-length baseball pants, double-knit (base type)" },
-        { label: "Fabric", value: "100% polyester double-knit with a soil-release finish" },
+        { label: "Fabric", value: PANTS_FABRIC },
         { label: "Weight", value: PENDING_WEIGHT },
         { label: "Silhouette", value: "Full length, draping over the cleat. The knee-length cut is its own style (CAP-BSB-04)." },
-        { label: "Knee", value: "Optional reinforced double-layer knee for sliding and fielding" },
+        { label: "Knee", value: PANTS_KNEE },
         {
           label: "Waistband",
           value: "Pro-style tunnel belt loops and a zipper fly as standard, or a gripper elastic waistband on request",
         },
         { label: "Pockets", value: "Back welt pockets" },
-        { label: "Decoration and color", value: "Full-dye sublimation, team colors and piping, Pantone matched" },
-        {
-          label: "Sizing",
-          value: "Graded XS to 5XL, men's, women's and youth blocks, with a softball women's-specific block available",
-        },
-        { label: "Branding", value: "Team logo, manufacturer mark, woven and care labels, packaging" },
+        { label: "Decoration and color", value: PANTS_DECORATION },
+        { label: "Sizing", value: PANTS_SIZING },
+        { label: "Branding", value: PANTS_BRANDING },
       ],
       specificationsImage: { alt: "Custom Baseball Pants" },
       pdpCustomizationSteps: customizeSteps([
         ["Construction", "Full length, optional reinforced double-layer knee"],
-        ["Waistband", "Pro-style tunnel belt loops and zipper fly, or a gripper elastic waistband"],
-        ["Print and artwork", "Full-dye sublimation, team colors and piping"],
-        ["Fabric", "Firm polyester double-knit with a soil-release finish, sourced or matched to your reference"],
+        PANTS_WAISTBAND_STEP,
+        PANTS_PRINT_STEP,
+        PANTS_FABRIC_STEP,
         COLOR_STEP,
         TRIMS_STEP,
         PACKAGING_STEP,
@@ -382,10 +395,10 @@ export const baseball: Category = {
       pdpQualitySubline:
         "We confirm the fabric, the knee reinforcement and the waistband on your sample before the full roster is produced.",
       pdpQualityPoints: [
-        "Reinforced knee option, built for sliding and fielding",
+        PANTS_KNEE_POINT,
         "Double-knit and soil-release finish confirmed on your sample",
-        "Inseam and waist graded and checked across the full size run",
-        "The full roster produced in one run, same fabric roll, so every pair matches",
+        PANTS_INSEAM_POINT,
+        PAIR_ROSTER_POINT,
         AQL_POINT,
       ],
     },
@@ -461,9 +474,232 @@ export const baseball: Category = {
         AQL_POINT,
       ],
     },
-    cardOnly("CAP-BSB-04", "knicker-pants", "Custom Knicker Baseball Pants", "Knee-length, worn with stirrup socks"),
-    cardOnly("CAP-BSB-05", "batting-practice-jersey", "Custom Batting-Practice Jersey", "Lightweight practice top"),
-    cardOnly("CAP-BSB-06", "sliding-shorts", "Custom Sliding Shorts", "Padded slide protection under the pant"),
+    {
+      status: "draft",
+      slug: "knicker-pants",
+      cardTitle: "Custom Knicker Baseball Pants",
+      cardSubline: "Knee-length, worn with stirrup socks",
+      image: "",
+      imageAlt: "Custom Knicker Baseball Pants",
+      href: `${PLP}/knicker-pants`,
+      sku: "CAP-BSB-04",
+      pdpHeading: "Custom Knicker Baseball Pants Manufacturer",
+      pdpMetaTitle: "Custom Knicker Baseball Pants Manufacturer",
+      pdpDescription:
+        "Knicker baseball pants, custom and private label, knee-length in a firm 100% polyester double-knit with a soil-release finish and a covered elastic knee cuff, pro-style tunnel belt loops, a zipper fly and an optional reinforced knee, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Knicker Baseball Pants"),
+      pdpMetaDescription:
+        "Custom knicker baseball pants manufacturer: knee-length 100% polyester double-knit, elastic knee cuff, reinforced knee option, MOQ 50, DDP to 20+ countries.",
+      material: PANTS_FABRIC,
+      pdpFabricPills: ["Polyester double-knit", "Soil-release finish", "Elastic knee cuff", "Reinforced knee option"],
+      pdpCustomizationPills: PANTS_CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "How do the knicker baseball pants differ from the full-length custom baseball pants?",
+          a: "The knicker baseball pants use the same double-knit platform but end just below the knee with a covered elastic cuff, and are worn with stirrup or sanitary socks. The full-length cut drapes over the cleat and is its own style, the Custom Baseball Pants.",
+        },
+        {
+          q: "Is the reinforced knee available on the knicker baseball pants?",
+          a: "Yes, as an option. An added double-layer knee panel gives the knicker baseball pants extra sliding and fielding durability, confirmed on your sample.",
+        },
+        {
+          q: "Do you make the knicker baseball pants in a softball cut?",
+          a: "Yes. The softball cut uses a women's-specific block that runs trimmer through the hip and thigh, graded across the full size run.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Baseball Pants", slug: "double-knit-pants", href: PLP },
+        { label: "Custom Sliding Shorts", slug: "sliding-shorts", href: PLP },
+        { label: "Custom Button-Front Baseball Jersey", slug: "button-front-jersey", href: PLP },
+        { label: "Custom Pullover Baseball Jersey", slug: "pullover-jersey", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Knicker baseball pants, double-knit (base type)" },
+        { label: "Fabric", value: PANTS_FABRIC },
+        { label: "Weight", value: PENDING_WEIGHT },
+        {
+          label: "Silhouette",
+          value: "Knee length, ending just below the knee. The full-length cut is its own style (CAP-BSB-02).",
+        },
+        { label: "Leg opening", value: "Covered elastic cuff at the knee, worn with stirrup or sanitary socks" },
+        { label: "Knee", value: PANTS_KNEE },
+        {
+          label: "Waistband",
+          value:
+            "Pro-style tunnel belt loops and a zipper fly as standard, or a gripper elastic waistband on request, with back welt pockets",
+        },
+        { label: "Decoration and color", value: PANTS_DECORATION },
+        { label: "Sizing", value: PANTS_SIZING },
+        { label: "Branding", value: PANTS_BRANDING },
+      ],
+      specificationsImage: { alt: "Custom Knicker Baseball Pants" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Construction", "Knee length with a covered elastic cuff, optional reinforced double-layer knee"],
+        PANTS_WAISTBAND_STEP,
+        PANTS_PRINT_STEP,
+        PANTS_FABRIC_STEP,
+        COLOR_STEP,
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: "We confirm the fabric, the knee cuff and the waistband on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        PANTS_KNEE_POINT,
+        "Elastic cuff set to sit just below the knee and stay in place",
+        PANTS_INSEAM_POINT,
+        PAIR_ROSTER_POINT,
+        AQL_POINT,
+      ],
+    },
+    {
+      status: "draft",
+      slug: "batting-practice-jersey",
+      cardTitle: "Custom Batting-Practice Jersey",
+      cardSubline: "Lightweight practice top",
+      image: "",
+      imageAlt: "Custom Batting-Practice Jersey",
+      href: `${PLP}/batting-practice-jersey`,
+      sku: "CAP-BSB-05",
+      pdpHeading: "Custom Batting-Practice Jersey Manufacturer",
+      pdpMetaTitle: "Custom Batting-Practice Jersey Manufacturer",
+      pdpDescription:
+        "Batting-practice jersey, custom and private label, a lightweight practice top in polyester mesh with a two-button placket or a pullover neck, fully sublimated in your team colors, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Batting-Practice Jersey"),
+      pdpMetaDescription:
+        "Custom batting-practice jersey manufacturer: lightweight polyester mesh practice tops, two-button or pullover, fully sublimated, MOQ 50, DDP to 20+ countries.",
+      material: "Lightweight 100% polyester mesh, flatback mesh or microfiber",
+      pdpFabricPills: ["Lightweight polyester mesh", "Flatback mesh", "Microfiber", "Recycled option"],
+      pdpCustomizationPills: ["Two-button or pullover", "Names & numbers", "Team colors", "Custom labels"],
+      faqs: [
+        {
+          q: "How is the batting-practice jersey different from a game jersey?",
+          a: "The batting-practice jersey is a lighter, simpler top worn for batting practice, warm-ups and training, often in a different design from the game kit. It is built on the same polyester mesh platform, so it takes the same full-dye sublimation and Pantone colors.",
+        },
+        {
+          q: "Does the batting-practice jersey come with a two-button placket or a pullover neck?",
+          a: "Both. The batting-practice jersey is built with a two-button placket and rib-knit collar, or as a V-neck or crew pullover, chosen per team and confirmed on your sample.",
+        },
+        {
+          q: "Can the batting-practice jersey match our game kit colors?",
+          a: "Yes. The batting-practice jersey is sublimated to the same Pantone colors as your game kit, with names and numbers added or left off as your program prefers.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Pullover Baseball Jersey", slug: "pullover-jersey", href: PLP },
+        { label: "Custom Button-Front Baseball Jersey", slug: "button-front-jersey", href: PLP },
+        { label: "Custom Baseball Warm-Up Jacket", slug: "warm-up-jacket", href: PLP },
+        { label: "Custom Baseball Pants", slug: "double-knit-pants", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Batting-practice jersey, lightweight practice top (base type)" },
+        { label: "Fabric", value: "Lightweight 100% polyester mesh, flatback mesh or microfiber" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Neck", value: "Two-button placket with a rib-knit collar, or a V-neck or crew pullover" },
+        { label: "Sleeve", value: "Short sleeve, set-in or raglan" },
+        { label: "Hem", value: "Straight hem, to your spec" },
+        { label: "Decoration", value: "Full-dye sublimation across the whole jersey, names and numbers optional" },
+        { label: "Color", value: "Full sublimation color range, Pantone matched to your game kit" },
+        { label: "Fit", value: JERSEY_FIT },
+        { label: "Branding", value: JERSEY_BRANDING },
+      ],
+      specificationsImage: { alt: "Custom Batting-Practice Jersey" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Print and artwork", "Full-dye sublimation across the whole jersey, a practice design or a match to your game kit"],
+        ["Names and numbers", "Built into the print file, or left off for a shared practice set"],
+        ["Construction", "Two-button placket or pullover neck, set-in or raglan sleeve"],
+        ["Fabric", "Any lightweight polyester mesh or knit, sourced or matched to your reference"],
+        COLOR_STEP,
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: "We confirm the fabric, the neck, the color and the fit on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Mesh weight and hand confirmed on your sample before bulk",
+        NAMES_NUMBERS_POINT,
+        PROOF_POINT,
+        "The full roster produced in one run, same fabric roll and print batch, so every jersey matches",
+        AQL_POINT,
+      ],
+    },
+    {
+      status: "draft",
+      slug: "sliding-shorts",
+      cardTitle: "Custom Sliding Shorts",
+      cardSubline: "Padded slide protection under the pant",
+      image: "",
+      imageAlt: "Custom Sliding Shorts",
+      href: `${PLP}/sliding-shorts`,
+      sku: "CAP-BSB-06",
+      pdpHeading: "Custom Sliding Shorts Manufacturer",
+      pdpMetaTitle: "Custom Sliding Shorts Manufacturer",
+      pdpDescription:
+        "Sliding shorts, custom and private label, a close-fitting Polyester/Spandex short worn under the pant with quilted foam padding at the hips for slide protection, the shell cut and sewn to your brand in Sialkot, Pakistan, with the pad sourced to your spec.",
+      images: gallery("Custom Sliding Shorts"),
+      pdpMetaDescription:
+        "Custom sliding shorts manufacturer: Polyester/Spandex compression shorts with foam hip padding for baseball and softball, MOQ 50, DDP to 20+ countries.",
+      material: "Polyester/Spandex knit with quilted foam hip pads",
+      pdpFabricPills: ["Polyester/Spandex knit", "Quilted foam hip pads", "Moisture-wicking", "Elastic waistband"],
+      pdpCustomizationPills: ["Pad placement", "Team colors", "Printed logo", "Custom labels"],
+      faqs: [
+        {
+          q: "What padding do the custom sliding shorts use?",
+          a: "The custom sliding shorts use quilted foam pads at the hips, sourced to your spec and sewn into the Polyester/Spandex shell in-house. Pad placement is confirmed on your sample before bulk.",
+        },
+        {
+          q: "Are the custom sliding shorts worn under the baseball pants?",
+          a: "Yes. The custom sliding shorts are a close-fitting layer worn under the Custom Baseball Pants or the Custom Knicker Baseball Pants, protecting the hips on slides.",
+        },
+        {
+          q: "Do you make the custom sliding shorts for softball?",
+          a: "Yes. The custom sliding shorts are graded across men's, women's and youth blocks, so one order can cover baseball and softball rosters.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Baseball Pants", slug: "double-knit-pants", href: PLP },
+        { label: "Custom Knicker Baseball Pants", slug: "knicker-pants", href: PLP },
+        { label: "Custom Button-Front Baseball Jersey", slug: "button-front-jersey", href: PLP },
+        { label: "Custom Baseball Warm-Up Jacket", slug: "warm-up-jacket", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Padded sliding shorts, worn under the pant (base type)" },
+        { label: "Fabric", value: "Polyester/Spandex knit, moisture-wicking" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Padding", value: "Quilted foam pads at the hips, sourced to your spec and sewn in-house" },
+        {
+          label: "Fit",
+          value: "Close compression fit through the hip and thigh, graded XS to 5XL, men's, women's and youth blocks",
+        },
+        { label: "Inseam", value: "Set to your spec, sitting under the pant leg" },
+        { label: "Waistband", value: "Wide elastic waistband" },
+        { label: "Color", value: "Solid team colors, Pantone matched" },
+        { label: "Decoration", value: "Printed logo on the leg or waistband" },
+        { label: "Branding", value: PANTS_BRANDING },
+      ],
+      specificationsImage: { alt: "Custom Sliding Shorts" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Padding", "Foam hip pads, placement and thickness sourced to your spec"],
+        ["Fit and length", "Compression fit, inseam set to your spec"],
+        ["Color", "Solid team colors, Pantone matched"],
+        ["Decoration", "Printed logo on the leg or waistband"],
+        ["Fabric", "Polyester/Spandex knit, sourced or matched to your reference"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: "We confirm the fabric, the pad placement and the fit on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Pad placement at the hips confirmed on your sample before bulk",
+        "Pads sewn in flat and checked so they stay in place",
+        "Waistband and stretch recovery checked across the full size run",
+        "The full roster produced in one run, same fabric lot, so every pair matches",
+        AQL_POINT,
+      ],
+    },
     cardOnly("CAP-BSB-07", "warm-up-jacket", "Custom Baseball Warm-Up Jacket", "Dugout zip jacket, tricot or stretch woven"),
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, Teamwear sports only,
