@@ -6,11 +6,10 @@
 // only this file plus one line in ./sports.ts.
 //
 // PDP publish state (owner spec): every style ships "draft". Under the
-// Teamwear draft-PDP rule (isDraftPdpReachable(), pdpShared.ts), 01 to 06
-// carry PDP content (batches 1 and 2, 2026-09-26) and render as noindexed
-// draft PDPs (BreadcrumbList only, out of the sitemap and the
-// CollectionPage/ItemList) with linking cards; 07 and 08 are card-only
-// non-links until their own batch. Publishing needs the roster confirmed, the style sampled and real
+// Teamwear draft-PDP rule (isDraftPdpReachable(), pdpShared.ts), all 8
+// styles carry PDP content (batches 1 to 3, 2026-09-26) and render as
+// noindexed draft PDPs (BreadcrumbList only, out of the sitemap and the
+// CollectionPage/ItemList) with linking cards. Publishing needs the roster confirmed, the style sampled and real
 // photos (getPublishReadiness()).
 //
 // Cut-and-sew scope (owner standing rule, set on Cricket) -- socks are
@@ -32,7 +31,7 @@
 // never "seamless" -- confirmed throughout, same standing sitewide rules
 // every category follows. No GSM figures (owner spec): weights are
 // "Pending, confirmed on your sample."
-import type { Category, StyleCard } from "../activewear/types";
+import type { Category } from "../activewear/types";
 import { faqGetStarted } from "../getStarted";
 
 const PLP = "/capriowear/teamwear/soccer";
@@ -69,11 +68,6 @@ function customizeSteps(steps: Step[]) {
 // Alt-only gallery (no photography yet): 6 frames, alt = the card name.
 function gallery(alt: string) {
   return Array.from({ length: 6 }, () => ({ alt }));
-}
-
-// Card-only draft (a later batch adds the PDP content, then the card links).
-function cardOnly(sku: string, slug: string, cardTitle: string, cardSubline: string): StyleCard {
-  return { status: "draft", slug, cardTitle, cardSubline, image: "", imageAlt: cardTitle, href: `${PLP}/${slug}`, sku };
 }
 
 export const soccer: Category = {
@@ -219,9 +213,8 @@ export const soccer: Category = {
   // 8 drafts, SKU order (CAP-SOC-01 to 08), owner spec 2026-09-26. Card
   // title = H1 minus " Manufacturer" = title-tag name = breadcrumb = alt =
   // every pill label that targets it. The old Goalkeeper Kit card is split
-  // into Goalkeeper Jersey (03) and Goalkeeper Shorts (04). 01 to 03 (batch 1)
-  // and 04 to 06 (batch 2) carry PDP content; 07 and 08 are card-only
-  // non-links until their own batch.
+  // into Goalkeeper Jersey (03) and Goalkeeper Shorts (04). All 8 carry PDP content
+  // (batches 1 to 3).
   styleCards: [
     {
       status: "draft",
@@ -682,8 +675,158 @@ export const soccer: Category = {
         AQL_POINT,
       ],
     },
-    cardOnly("CAP-SOC-07", "training-bibs", "Custom Training Bibs", "Mesh scrimmage pinnies, numbered"),
-    cardOnly("CAP-SOC-08", "base-layer", "Custom Soccer Base Layer", "Close-fit under-kit layer"),
+    {
+      status: "draft",
+      slug: "training-bibs",
+      cardTitle: "Custom Training Bibs",
+      cardSubline: "Mesh scrimmage pinnies, numbered",
+      image: "",
+      imageAlt: "Custom Training Bibs",
+      href: `${PLP}/training-bibs`,
+      sku: "CAP-SOC-07",
+      pdpHeading: "Custom Training Bibs Manufacturer",
+      pdpMetaTitle: "Custom Training Bibs Manufacturer",
+      pdpDescription:
+        "Training bibs, custom and private label, lightweight polyester mesh scrimmage pinnies in single-layer or reversible two-layer builds, numbered and printed in your team colors, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Training Bibs"),
+      pdpMetaDescription:
+        "Custom training bibs manufacturer: polyester mesh soccer scrimmage pinnies, single-layer or reversible, numbered in team colors, MOQ 50, DDP to 20+ countries.",
+      material: "Lightweight polyester mesh",
+      // Bibs are not graded XS to 5XL: the third key fact is their own sizing
+      // line instead of the shared "XS to 5XL sizes" (owner spec).
+      pdpSpecHighlights: [
+        { icon: "package", text: "MOQ from 50 pieces" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "Youth and adult sizes" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
+      pdpFabricPills: ["Polyester mesh", "Reversible two-layer option", "Hemmed edges", "Recycled option"],
+      pdpCustomizationPills: ["Numbered", "Team colors", "Club crest", "Custom labels"],
+      faqs: [
+        {
+          q: "Are the training bibs available as reversible?",
+          a: "Yes. The training bibs are built single-layer, or reversible with two mesh layers in contrasting colors, so one set covers both sides in a scrimmage.",
+        },
+        {
+          q: "How are numbers applied to the training bibs?",
+          a: "Numbers are sublimated or printed onto the training bibs, front and back, in a color that stands out against the mesh. Placement and size are confirmed on your sample.",
+        },
+        {
+          q: "What sizes do the training bibs come in?",
+          a: "The training bibs come in youth and adult sizes, cut relaxed to fit over a jersey or training top.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Soccer Training Top", slug: "training-top", href: PLP },
+        { label: "Custom Soccer Match Jersey", slug: "match-jersey", href: PLP },
+        { label: "Custom Soccer Shorts", slug: "shorts", href: PLP },
+        { label: "Custom Soccer Presentation Jacket", slug: "presentation-jacket", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Training bib, mesh scrimmage pinnie (base type)" },
+        { label: "Fabric", value: "Lightweight polyester mesh" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Build", value: "Single-layer, or reversible with two layers in contrasting colors" },
+        { label: "Neck and armholes", value: "Scoop neck, open armholes with hemmed edges" },
+        { label: "Fit", value: "Relaxed cut to wear over a jersey or training top" },
+        { label: "Decoration", value: "Sublimated or printed numbers, with a crest or sponsor mark optional" },
+        { label: "Color", value: "Solid team colors, Pantone matched, with contrasting colors on reversible bibs" },
+        { label: "Sizing", value: "Youth and adult sizes" },
+        { label: "Branding", value: "Club crest, manufacturer mark, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Training Bibs" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Build", "Single-layer or reversible two-layer"],
+        ["Numbering", "Sublimated or printed numbers, front and back"],
+        ["Color", "Solid team colors, contrasting colors on reversible bibs, Pantone matched"],
+        ["Decoration", "Crest or sponsor mark optional"],
+        ["Fabric", "Polyester mesh, sourced or matched to your reference"],
+        TRIMS_STEP,
+        ["Packaging", "Polybags or boxes, packed in numbered sets to your spec"],
+      ]),
+      pdpQualityHeading: "Built for every session",
+      pdpQualitySubline: "We confirm the mesh, the colors and the numbering on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Mesh and colors confirmed on your sample before bulk",
+        "Numbers checked for placement and legibility across the set",
+        "Hemmed edges checked for a flat, even finish",
+        "Every set produced in one run, same fabric lot, so every bib matches",
+        AQL_POINT,
+      ],
+    },
+    {
+      status: "draft",
+      slug: "base-layer",
+      cardTitle: "Custom Soccer Base Layer",
+      cardSubline: "Close-fit under-kit layer",
+      image: "",
+      imageAlt: "Custom Soccer Base Layer",
+      href: `${PLP}/base-layer`,
+      sku: "CAP-SOC-08",
+      pdpHeading: "Custom Soccer Base Layer Manufacturer",
+      pdpMetaTitle: "Custom Soccer Base Layer Manufacturer",
+      pdpDescription:
+        "Soccer base layer, custom and private label, a close-fit Polyester/Spandex under-kit top in short or long sleeve, color-matched to your kit, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Soccer Base Layer"),
+      pdpMetaDescription:
+        "Custom soccer base layer manufacturer: close-fit Polyester/Spandex under-kit tops, short or long sleeve, matched to your kit, MOQ 50, DDP to 20+ countries.",
+      material: "Polyester/Spandex knit with optional mesh panels",
+      pdpFabricPills: ["Polyester/Spandex knit", "Mesh panels", "Four-way stretch", "Recycled option"],
+      pdpCustomizationPills: ["Short or long sleeve", "Kit color match", "Printed logo", "Custom labels"],
+      faqs: [
+        {
+          q: "Why should the soccer base layer match the jersey sleeve color?",
+          a: "Many competitions require an undershirt sleeve to match the main color of the jersey sleeve, so the soccer base layer is color-matched to your kit and confirmed on your proof. Tell us your competition and we match to its current rules.",
+        },
+        {
+          q: "Does the soccer base layer come in short and long sleeve?",
+          a: "Both. The soccer base layer is built in short or long sleeve, with set-in or raglan sleeves and a crew or mock neck, to your spec.",
+        },
+        {
+          q: "What is the soccer base layer made from?",
+          a: "The soccer base layer is a Polyester/Spandex knit with four-way stretch for a close fit, with mesh panels at the underarm and back optional. The Spandex share is set to the fit you want and confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Soccer Match Jersey", slug: "match-jersey", href: PLP },
+        { label: "Custom Soccer Shorts", slug: "shorts", href: PLP },
+        { label: "Custom Goalkeeper Jersey", slug: "goalkeeper-jersey", href: PLP },
+        { label: "Custom Soccer Training Top", slug: "training-top", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Soccer base layer, close-fit under-kit top (base type)" },
+        { label: "Fabric", value: "Polyester/Spandex knit, with mesh panels at the underarm and back optional" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Fit", value: "Close compression fit, worn under the match jersey" },
+        { label: "Sleeve", value: "Short or long sleeve, set-in or raglan" },
+        { label: "Neck", value: "Crew neck, or a mock neck on request" },
+        { label: "Color", value: "Solid colors matched to your kit, Pantone matched" },
+        { label: "Decoration", value: "Printed logo at the chest or back of the neck" },
+        { label: "Sizing", value: SIZING },
+        { label: "Branding", value: "Team logo, manufacturer mark, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Soccer Base Layer" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Fit", "Close compression fit, short or long sleeve, set-in or raglan"],
+        ["Neck", "Crew neck or mock neck"],
+        ["Color", "Solid colors matched to your kit, Pantone matched"],
+        ["Decoration", "Printed logo at the chest or back of the neck"],
+        ["Fabric", "Polyester/Spandex knit with optional mesh panels, sourced or matched to your reference"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: "Close fit, matched to the kit",
+      pdpQualitySubline: "We confirm the fabric, the fit and the color on your sample before the full program is produced.",
+      pdpQualityPoints: [
+        "Stretch and recovery checked on your sample before bulk",
+        "Sleeve color matched to your jersey and approved on your proof",
+        "Fit graded and checked across the full size run",
+        "The full roster produced in one run, same fabric lot, so every layer matches",
+        AQL_POINT,
+      ],
+    },
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, Teamwear sports only,
   // closest sports first.
