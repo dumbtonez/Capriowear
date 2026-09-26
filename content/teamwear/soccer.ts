@@ -6,11 +6,11 @@
 // only this file plus one line in ./sports.ts.
 //
 // PDP publish state (owner spec): every style ships "draft". Under the
-// Teamwear draft-PDP rule (isDraftPdpReachable(), pdpShared.ts), 01 to 03
-// carry PDP content (batch 1, 2026-09-26) and render as noindexed draft PDPs
-// (BreadcrumbList only, out of the sitemap and the CollectionPage/ItemList)
-// with linking cards; 04 to 08 are card-only non-links until their own
-// batch. Publishing needs the roster confirmed, the style sampled and real
+// Teamwear draft-PDP rule (isDraftPdpReachable(), pdpShared.ts), 01 to 06
+// carry PDP content (batches 1 and 2, 2026-09-26) and render as noindexed
+// draft PDPs (BreadcrumbList only, out of the sitemap and the
+// CollectionPage/ItemList) with linking cards; 07 and 08 are card-only
+// non-links until their own batch. Publishing needs the roster confirmed, the style sampled and real
 // photos (getPublishReadiness()).
 //
 // Cut-and-sew scope (owner standing rule, set on Cricket) -- socks are
@@ -41,6 +41,11 @@ const QUALITY_HEADING = "Three kits, matched across the program";
 const AQL_POINT = "Every run inspected to AQL 2.5, third-party inspection welcome";
 const PENDING_WEIGHT = "Pending, confirmed on your sample.";
 const SIZING = "Graded XS to 5XL, men's, women's and youth blocks";
+const KEEPER_HEADING = "A keeper kit that stands apart";
+const KEEPER_SUBLINE =
+  "We confirm the fabric, the pad placement, the color and the fit on your sample before the full program is produced.";
+const PADS_FLAT_POINT = "Pads sewn in flat and checked so they stay in place";
+const SAME_RUN_POINT = "Produced in the same run as the outfield kits, so sizing and roster data match";
 
 type Step = [title: string, body: string];
 const COLOR_STEP: Step = ["Color", "Pantone, CMYK, RGB or hex matched, confirmed on your digital proof"];
@@ -214,9 +219,9 @@ export const soccer: Category = {
   // 8 drafts, SKU order (CAP-SOC-01 to 08), owner spec 2026-09-26. Card
   // title = H1 minus " Manufacturer" = title-tag name = breadcrumb = alt =
   // every pill label that targets it. The old Goalkeeper Kit card is split
-  // into Goalkeeper Jersey (03) and Goalkeeper Shorts (04). 01 to 03 carry
-  // PDP content (batch 1); 04 to 08 are card-only non-links until their own
-  // batch.
+  // into Goalkeeper Jersey (03) and Goalkeeper Shorts (04). 01 to 03 (batch 1)
+  // and 04 to 06 (batch 2) carry PDP content; 07 and 08 are card-only
+  // non-links until their own batch.
   styleCards: [
     {
       status: "draft",
@@ -448,20 +453,235 @@ export const soccer: Category = {
         TRIMS_STEP,
         PACKAGING_STEP,
       ]),
-      pdpQualityHeading: "A keeper kit that stands apart",
-      pdpQualitySubline:
-        "We confirm the fabric, the pad placement, the color and the fit on your sample before the full program is produced.",
+      pdpQualityHeading: KEEPER_HEADING,
+      pdpQualitySubline: KEEPER_SUBLINE,
       pdpQualityPoints: [
         "Keeper colorway checked against both team kits and approved on your proof",
         "Pad placement at the elbows confirmed on your sample before bulk",
-        "Pads sewn in flat and checked so they stay in place",
-        "Produced in the same run as the outfield kits, so sizing and roster data match",
+        PADS_FLAT_POINT,
+        SAME_RUN_POINT,
         AQL_POINT,
       ],
     },
-    cardOnly("CAP-SOC-04", "goalkeeper-shorts", "Custom Goalkeeper Shorts", "Padded shorts, distinct color"),
-    cardOnly("CAP-SOC-05", "training-top", "Custom Soccer Training Top", "Lighter training and warm-up jersey"),
-    cardOnly("CAP-SOC-06", "presentation-jacket", "Custom Soccer Presentation Jacket", "Zip warm-up, tricot or stretch woven"),
+    {
+      status: "draft",
+      slug: "goalkeeper-shorts",
+      cardTitle: "Custom Goalkeeper Shorts",
+      cardSubline: "Padded shorts, distinct color",
+      image: "",
+      imageAlt: "Custom Goalkeeper Shorts",
+      href: `${PLP}/goalkeeper-shorts`,
+      sku: "CAP-SOC-04",
+      pdpHeading: "Custom Goalkeeper Shorts Manufacturer",
+      pdpMetaTitle: "Custom Goalkeeper Shorts Manufacturer",
+      pdpDescription:
+        "Goalkeeper shorts, custom and private label, a polyester short with foam padding at the hips and thighs, sublimated in the keeper colorway, the shorts cut and sewn to your brand in Sialkot, Pakistan, with the padding sourced to your spec.",
+      images: gallery("Custom Goalkeeper Shorts"),
+      pdpMetaDescription:
+        "Custom goalkeeper shorts manufacturer: padded soccer keeper shorts with foam hip and thigh pads, sublimated in a distinct color, MOQ 50, DDP to 20+ countries.",
+      material: "Polyester interlock or pique with mesh ventilation panels and sourced foam hip and thigh pads",
+      pdpFabricPills: ["Polyester interlock", "Polyester pique", "Foam hip and thigh pads", "Mesh ventilation"],
+      pdpCustomizationPills: ["Keeper colorway", "Pad placement", "Inseam length", "Custom labels"],
+      faqs: [
+        {
+          q: "Where is the padding on the goalkeeper shorts?",
+          a: "The goalkeeper shorts carry foam pads at the hips and thighs, sourced to your spec and sewn into the shorts in-house. Placement is confirmed on your sample before bulk.",
+        },
+        {
+          q: "Do the goalkeeper shorts match the goalkeeper jersey?",
+          a: "Yes. The goalkeeper shorts are sublimated in the same keeper colorway as the Custom Goalkeeper Jersey and produced in the same run, so the keeper kit reads as a set.",
+        },
+        {
+          q: "What length are the goalkeeper shorts?",
+          a: "The goalkeeper shorts sit above the knee, with the inseam cut to your spec and the thigh pads placed to suit that length.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Goalkeeper Jersey", slug: "goalkeeper-jersey", href: PLP },
+        { label: "Custom Soccer Shorts", slug: "shorts", href: PLP },
+        { label: "Custom Soccer Match Jersey", slug: "match-jersey", href: PLP },
+        { label: "Custom Soccer Base Layer", slug: "base-layer", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Goalkeeper shorts, padded (base type)" },
+        { label: "Fabric", value: "Polyester interlock or pique, with mesh ventilation panels" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Padding", value: "Foam pads at the hips and thighs, sourced to your spec and sewn in-house" },
+        { label: "Length", value: "Above the knee, inseam to your spec" },
+        { label: "Waistband", value: "Elastic with an internal drawcord" },
+        { label: "Decoration", value: "Full-dye sublimation, team colors and side detail" },
+        { label: "Color", value: "The keeper colorway, matched to the goalkeeper jersey, Pantone matched" },
+        { label: "Sizing", value: SIZING },
+        { label: "Branding", value: "Team logo, manufacturer mark, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Goalkeeper Shorts" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Padding", "Hip and thigh pads, placement and thickness sourced to your spec"],
+        ["Fit", "Inseam length to your spec, elastic drawcord waist"],
+        ["Print and artwork", "Full-dye sublimation in the keeper colorway"],
+        ["Fabric", "Polyester interlock or pique with mesh panels, sourced or matched to your reference"],
+        COLOR_STEP,
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: KEEPER_HEADING,
+      pdpQualitySubline: KEEPER_SUBLINE,
+      pdpQualityPoints: [
+        "Keeper colorway matched to the goalkeeper jersey and approved on your proof",
+        "Pad placement at the hips and thighs confirmed on your sample before bulk",
+        PADS_FLAT_POINT,
+        SAME_RUN_POINT,
+        AQL_POINT,
+      ],
+    },
+    {
+      status: "draft",
+      slug: "training-top",
+      cardTitle: "Custom Soccer Training Top",
+      cardSubline: "Lighter training and warm-up jersey",
+      image: "",
+      imageAlt: "Custom Soccer Training Top",
+      href: `${PLP}/training-top`,
+      sku: "CAP-SOC-05",
+      pdpHeading: "Custom Soccer Training Top Manufacturer",
+      pdpMetaTitle: "Custom Soccer Training Top Manufacturer",
+      pdpDescription:
+        "Soccer training top, custom and private label, a lighter polyester training and warm-up jersey on the match-jersey platform, sublimated in your team colors, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Soccer Training Top"),
+      pdpMetaDescription:
+        "Custom soccer training top manufacturer: lightweight polyester training and warm-up jerseys, sublimated in your team colors, MOQ 50, DDP to 20+ countries.",
+      material: "Lightweight polyester microfiber, interlock or mesh",
+      pdpFabricPills: ["Lightweight polyester", "Microfiber or mesh", "Polyester interlock", "Recycled option"],
+      pdpCustomizationPills: ["Short or long sleeve", "Contrast piping", "Team colors", "Custom labels"],
+      faqs: [
+        {
+          q: "How is the soccer training top different from the soccer match jersey?",
+          a: "The soccer training top is a lighter, simpler jersey worn for training and warm-ups, usually in a training design rather than the match kit, with no competition badge zones to lay out. It is built on the same polyester platform, so it takes the same sublimation and Pantone colors.",
+        },
+        {
+          q: "Does the soccer training top come in short and long sleeve?",
+          a: "Both. The soccer training top is built in short or long sleeve, with set-in or raglan sleeves and a crew or V-neck, to your spec.",
+        },
+        {
+          q: "Can the soccer training top carry player initials or numbers?",
+          a: "Yes. Initials or numbers can be built into the print file for each player, or left off for a shared training set, as your program prefers.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Soccer Match Jersey", slug: "match-jersey", href: PLP },
+        { label: "Custom Soccer Presentation Jacket", slug: "presentation-jacket", href: PLP },
+        { label: "Custom Training Bibs", slug: "training-bibs", href: PLP },
+        { label: "Custom Soccer Shorts", slug: "shorts", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Soccer training top, training and warm-up jersey (base type)" },
+        { label: "Fabric", value: "Lightweight polyester microfiber, interlock or mesh" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Neck", value: "Crew or V-neck, rib-knit collar" },
+        { label: "Sleeve", value: "Short or long sleeve, set-in or raglan" },
+        { label: "Detail", value: "Contrast shoulder or sleeve piping optional" },
+        { label: "Decoration", value: "Full-dye sublimation, with crest, initials or numbers optional" },
+        { label: "Color", value: "Full sublimation color range, Pantone matched to your match kit" },
+        { label: "Fit", value: "Athletic or relaxed training fit, graded XS to 5XL, men's, women's and youth blocks" },
+        { label: "Branding", value: "Club crest, sponsor and manufacturer marks, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Soccer Training Top" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Print and artwork", "Full-dye sublimation, a training design or a match to your kit"],
+        ["Construction", "Crew or V-neck, short or long sleeve, set-in or raglan"],
+        ["Detail", "Contrast piping at the shoulder or sleeve"],
+        ["Fabric", "Any lightweight polyester microfiber, interlock or mesh, sourced or matched to your reference"],
+        COLOR_STEP,
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: "Matched to your club colors",
+      pdpQualitySubline: "We confirm the fabric, the neck, the color and the fit on your sample before the full program is produced.",
+      pdpQualityPoints: [
+        "Fabric weight and hand confirmed on your sample before bulk",
+        "Club colors Pantone matched to your match kit and approved on your proof",
+        "Crest and marks dyed into the fiber, so they will not crack or peel",
+        "The full roster produced in one run, same fabric roll and print batch, so every top matches",
+        AQL_POINT,
+      ],
+    },
+    {
+      status: "draft",
+      slug: "presentation-jacket",
+      cardTitle: "Custom Soccer Presentation Jacket",
+      cardSubline: "Zip warm-up, tricot or stretch woven",
+      image: "",
+      imageAlt: "Custom Soccer Presentation Jacket",
+      href: `${PLP}/presentation-jacket`,
+      sku: "CAP-SOC-06",
+      pdpHeading: "Custom Soccer Presentation Jacket Manufacturer",
+      pdpMetaTitle: "Custom Soccer Presentation Jacket Manufacturer",
+      pdpDescription:
+        "Soccer presentation jacket, custom and private label, a full-zip warm-up jacket in brushed-back polyester tricot or a Polyester/Spandex stretch woven, for the bench, warm-ups and travel, with an embroidered crest, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Soccer Presentation Jacket"),
+      pdpMetaDescription:
+        "Custom soccer presentation jacket manufacturer: tricot or stretch woven zip jackets for the bench and travel, embroidered crest, MOQ 50, DDP to 20+ countries.",
+      material: "Brushed-back polyester tricot or Polyester/Spandex stretch woven",
+      pdpFabricPills: ["Polyester tricot", "Brushed back", "Polyester/Spandex stretch woven", "Recycled option"],
+      pdpCustomizationPills: ["Embroidered crest", "Contrast panels", "Club colors", "Custom labels"],
+      faqs: [
+        {
+          q: "Is the soccer presentation jacket made in tricot or stretch woven?",
+          a: "Both. The soccer presentation jacket is built in brushed-back polyester tricot, the classic track-style build, or in a Polyester/Spandex stretch woven with a smoother face and added stretch. The fabric is chosen per program and confirmed on your sample.",
+        },
+        {
+          q: "Can the soccer presentation jacket match the rest of the club kit?",
+          a: "Yes. The soccer presentation jacket is made in your club colors, Pantone matched to the match kit, with contrast panels or piping, and produced alongside the rest of the program.",
+        },
+        {
+          q: "How is the club crest applied to the soccer presentation jacket?",
+          a: "The crest is embroidered onto the soccer presentation jacket in thread matched to your Pantone colors, with sponsor and team marks printed. Sublimated panels are available on the tricot build. Placement and size are confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Soccer Training Top", slug: "training-top", href: PLP },
+        { label: "Custom Soccer Match Jersey", slug: "match-jersey", href: PLP },
+        { label: "Custom Soccer Base Layer", slug: "base-layer", href: PLP },
+        { label: "Custom Goalkeeper Jersey", slug: "goalkeeper-jersey", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Soccer presentation jacket, full-zip warm-up layer (base type)" },
+        {
+          label: "Fabric",
+          value: "Polyester tricot with a brushed back, or a Polyester/Spandex stretch woven, with mesh inserts optional",
+        },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Zip and collar", value: "Full-zip with a stand collar" },
+        { label: "Sleeve", value: "Long sleeve, set-in or raglan" },
+        { label: "Hem and pockets", value: "Drawcord or open hem, zip side pockets" },
+        { label: "Decoration", value: "Embroidered crest and printed marks, with sublimated panels on tricot" },
+        { label: "Color", value: "Club colors, contrast panels and piping, Pantone matched to your kit" },
+        { label: "Fit", value: "Team cut, graded XS to 5XL, men's, women's and youth blocks" },
+        { label: "Branding", value: "Club crest, sponsor and manufacturer marks, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Soccer Presentation Jacket" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Fabric and build", "Polyester tricot or Polyester/Spandex stretch woven, mesh inserts optional"],
+        ["Construction", "Full-zip with a stand collar, set-in or raglan sleeve, drawcord or open hem, zip pockets"],
+        ["Color", "Club colors, contrast panels and piping, Pantone matched"],
+        ["Decoration", "Embroidered crest, printed marks, sublimated panels on tricot"],
+        ["Fit", "Team cut, graded across the full size run"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: "Built for the bench",
+      pdpQualitySubline: "We confirm the fabric, the zip, the color and the fit on your sample before the full program is produced.",
+      pdpQualityPoints: [
+        "Jacket color Pantone matched to your kit and approved on the sample before we cut",
+        "Crest embroidery finished clean and flat, with no puckering",
+        "Zip, pockets and hem checked for a flat, even finish across the size run",
+        "The full roster produced in one run, same fabric lot, so every jacket matches",
+        AQL_POINT,
+      ],
+    },
     cardOnly("CAP-SOC-07", "training-bibs", "Custom Training Bibs", "Mesh scrimmage pinnies, numbered"),
     cardOnly("CAP-SOC-08", "base-layer", "Custom Soccer Base Layer", "Close-fit under-kit layer"),
   ],

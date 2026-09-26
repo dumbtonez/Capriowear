@@ -4671,3 +4671,7 @@ Owner spec, `content/teamwear/volleyball.ts` only. CAP-VOL-07 `warm-up-pants` ge
 
 ## Hub category cards: mobile type sizes, 2026-09-26
 Owner: on mobile, card title 20px with automatic line height, subline 16px on a 20px line. `categoryCard.label` gains `max-md:text-[1.25rem] max-md:leading-[normal]` (CSS `normal`, not Tailwind's `leading-normal`, which is a fixed 1.5), `categoryCard.descriptor` gains `max-md:text-[1rem] max-md:leading-[20px]`. md and up unchanged (22px/1.2, 18px/22px). Shared card, so it applies on the Activewear, Teamwear, Lifting Gears and Boxing & MMA hubs.
+
+## Soccer batch 2: draft PDPs CAP-SOC-04 to 06, 2026-09-26
+
+`content/teamwear/soccer.ts`. Goalkeeper Shorts, Soccer Training Top and Soccer Presentation Jacket now carry full draft PDP content (noindexed, BreadcrumbList only, out of the sitemap), so cards 1 to 6 link and 7 (Training Bibs) and 8 (Base Layer) stay card-only non-links. The Goalkeeper Shorts and Training Top pills on 01 to 03 switched to the new pages on their own via `resolveRelatedStyleTags`. Quality H2s: 04 "A keeper kit that stands apart" (shared with 03, along with its lead and two bullets, via local constants), 05 "Matched to your club colors", 06 "Built for the bench".
