@@ -6,14 +6,13 @@
 // app/teamwear/[sport]/[style]/page.tsx, only this file plus one line in
 // ./sports.ts.
 //
-// PDP publish state (owner spec): every style ships "draft". Zero published
-// styles at launch means the PLP stays live/indexed, every card renders
-// non-clickable, no PDP routes generate, nothing is in the sitemap, and
-// CollectionPage/ItemList is omitted from the PLP entirely
-// (app/teamwear/[sport]/page.tsx already conditions that block on
-// `publishedStyleCards.length > 0`, no page code change needed here). Flip a
-// style to "published" per style, heroes first, once the team confirms it
-// and it is sampled.
+// PDP publish state (owner spec): every style ships "draft". Baseball opts
+// into the Teamwear draft-PDP rule (`draftPdpsReachable`, TEMPORARY, see
+// content/activewear/types.ts): 01 to 03 carry PDP content (batch 1,
+// 2026-09-26) and render as noindexed draft PDPs (BreadcrumbList only, out
+// of the sitemap and the CollectionPage/ItemList) with linking cards; 04 to
+// 07 are card-only non-links until their own batch. Publishing needs the
+// roster confirmed, the style sampled and real photos (getPublishReadiness()).
 //
 // Cut-and-sew scope (owner standing rule, set on Cricket) -- caps (structured
 // headwear), belts (accessory) and socks/stirrups (knitted goods) are all
@@ -36,8 +35,51 @@
 // American spelling, no en/em dashes, "spandex" never "elastane"/"Lycra",
 // never "seamless" -- confirmed throughout, same standing sitewide rules
 // every category follows.
-import type { Category } from "../activewear/types";
+import type { Category, StyleCard } from "../activewear/types";
 import { faqGetStarted } from "../getStarted";
+
+const PLP = "/capriowear/teamwear/baseball";
+
+const QUALITY_HEADING = "Built to take the slide";
+const NAMES_NUMBERS_POINT = "Names and numbers dyed into the fiber, so they will not crack or peel";
+const PROOF_POINT = "Digital proof and Pantone match approved before we cut";
+const ROSTER_POINT = "The full roster produced in one run, same fabric roll and print batch, so every kit matches";
+const AQL_POINT = "Every run inspected to AQL 2.5, third-party inspection welcome";
+
+const PENDING_WEIGHT = "Pending, confirmed on your sample.";
+const JERSEY_FIT = "Baseball cut or a fitted softball cut, graded XS to 5XL, men's, women's and youth blocks";
+const JERSEY_COLOR = "Full sublimation color range, Pantone matched, home and away colorways";
+const JERSEY_BRANDING = "Team crest, sponsor logos, manufacturer mark, woven and care labels, packaging";
+
+type Step = [title: string, body: string];
+const NAMES_AND_NUMBERS_STEP: Step = ["Names and numbers", "Built into the print file, or tackle twill for a raised pro-style look"];
+const COLOR_STEP: Step = ["Color", "Pantone, CMYK, RGB or hex matched, confirmed on your digital proof"];
+const TRIMS_STEP: Step = ["Trims and finish", "Woven labels, size and care labels, hangtags"];
+const PACKAGING_STEP: Step = ["Packaging", "Polybags, boxes, retail-ready to your spec"];
+
+// Per-style "How we customize" carousel. Images are the shared factory
+// test shots (same stand-ins every PDP carousel uses), cycled in order.
+function customizeSteps(steps: Step[]) {
+  return {
+    eyebrow: "HOW WE CUSTOMIZE",
+    heading: "Your brand, applied\nin-house, no outsourcing",
+    steps: steps.map(([title, body], i) => ({
+      title,
+      body,
+      image: { src: `/factory-test/inside-factory-${(i % 5) + 1}.jpg`, alt: title },
+    })),
+  };
+}
+
+// Alt-only gallery (no photography yet): 6 frames, alt = the card name.
+function gallery(alt: string) {
+  return Array.from({ length: 6 }, () => ({ alt }));
+}
+
+// Card-only draft (a later batch adds the PDP content, then the card links).
+function cardOnly(sku: string, slug: string, cardTitle: string, cardSubline: string): StyleCard {
+  return { status: "draft", slug, cardTitle, cardSubline, image: "", imageAlt: cardTitle, href: `${PLP}/${slug}`, sku };
+}
 
 export const baseball: Category = {
   slug: "baseball",
@@ -50,7 +92,7 @@ export const baseball: Category = {
   h1: "Custom Baseball Uniform Manufacturer",
   metaTitle: "Custom Baseball Uniform Manufacturer",
   metaDescription:
-    "Custom baseball and softball uniform manufacturer. Button-front jerseys, double-knit pants with piping, softball women's fit, low MOQ. Capriowear.",
+    "Custom baseball and softball uniform manufacturer: button-front jerseys, double-knit pants and warm-ups, sublimated, MOQ 50 pieces, DDP to 20+ countries.",
   trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
@@ -68,14 +110,14 @@ export const baseball: Category = {
       performance: "Firm and structured, holds up to sliding",
     },
     {
-      fabric: "Poly-spandex knit",
-      bestFor: "Sliding shorts and base layers",
+      fabric: "Polyester/Spandex knit",
+      bestFor: "Sliding shorts",
       performance: "Close fit, moisture-wicking",
     },
     {
       fabric: "Recycled polyester",
       bestFor: "Sustainability-positioned programs",
-      performance: "Same print and performance as virgin polyester",
+      performance: "Print result confirmed on your sample",
     },
   ],
   // Segment run (owner spec: highlight one small, important phrase,
@@ -86,7 +128,7 @@ export const baseball: Category = {
     { text: "confirmed on your sample", bold: true },
     { text: ". Swatches before every bulk run." },
   ],
-  fabricPills: ["Polyester mesh", "Microfiber", "Double-knit", "Poly-spandex", "Recycled option"],
+  fabricPills: ["Polyester mesh", "Microfiber", "Double-knit", "Polyester/Spandex", "Recycled option"],
   structuredBlock: {
     type: "decoration",
     eyebrow: "DECORATION",
@@ -117,9 +159,9 @@ export const baseball: Category = {
     // important phrase, semibold, not the whole sentence -- same standing
     // rule as Cricket/Basketball's own decoration note).
     note: [
-      { text: "A button-front jersey still takes full sublimation, placket and all, so " },
+      { text: "A button-front jersey still takes full sublimation, placket included, so " },
       { text: "the classic look does not limit your design", bold: true },
-      { text: "." },
+      { text: ". Buttons are dyed to match rather than sublimated." },
     ],
   },
   qualityHeading: "Built to take the slide",
@@ -127,7 +169,7 @@ export const baseball: Category = {
     "We confirm the fabric, the knee reinforcement, the color and the fit on your sample before the full roster is produced.",
   qualityPoints: [
     "Double-knit pants and the reinforced knee option, built for sliding and fielding",
-    "Names and numbers sublimated into the fiber, they will not crack, peel or fade",
+    "Names and numbers sublimated into the fiber, so they will not crack or peel",
     "Digital proof and Pantone match approved before we cut",
     "Every run inspected to AQL 2.5, third-party inspection welcome",
   ],
@@ -136,7 +178,7 @@ export const baseball: Category = {
   coverageItems: [
     {
       title: "Fabric",
-      body: "Lightweight jersey knits, firm polyester double-knit pants, poly-spandex base layers",
+      body: "Lightweight jersey knits, firm polyester double-knit pants, Polyester/Spandex sliding shorts",
     },
     {
       title: "Print",
@@ -152,6 +194,9 @@ export const baseball: Category = {
     },
   ],
   faqHeading: "Top questions from B2B buyers",
+  // 7 questions plus the auto-built entity question first (categoryEntityFaq(),
+  // from entityExampleStyles/entityFabrics above), 8 total (owner spec,
+  // 2026-09-26).
   faqs: [
     {
       q: "What is your MOQ for custom baseball kit?",
@@ -159,23 +204,15 @@ export const baseball: Category = {
     },
     {
       q: "What is the difference between a button-front and a pullover jersey, and does the placket limit sublimation?",
-      a: "Both are available. A button-front jersey has a full-button or two-button placket for the classic pro look; a pullover is simpler and often lower cost. Either way the whole jersey, placket included, takes full-dye sublimation, so the button front does not limit your design.",
+      a: "Both are available. A button-front jersey has a full-button or two-button placket for the classic pro look, with dyed-to-match buttons; a pullover is simpler and often lower cost. Either way the whole jersey, placket included, takes full-dye sublimation, so the button front does not limit your design.",
     },
     {
-      q: "Should we order full-length or knicker pants?",
-      a: "Both, on the same double-knit platform. Full-length pants drape over the cleat; knicker pants end at the knee and are worn with stirrup or sanitary socks, so the choice also sets which socks the team needs.",
+      q: "Should we order full-length or knicker pants, and is the reinforced knee standard?",
+      a: "Both lengths are built on the same double-knit platform: full-length pants drape over the cleat, and knicker pants end at the knee and are worn with stirrup or sanitary socks. The reinforced knee is an option on either length, an added double-layer knee panel for sliding and fielding durability, confirmed on your sample.",
     },
     {
-      q: "Is the reinforced knee standard or an upgrade?",
-      a: "It is an option. An added double-layer knee panel gives sliding and fielding durability where a team wants it, confirmed on your sample.",
-    },
-    {
-      q: "What is the difference between softball and baseball fit?",
-      a: "Same polyester sublimation fabric family. The difference is the cut, softball jerseys run more fitted and are usually pullovers, and softball pants use a women's-specific block and add a mid-thigh option that pitchers favor.",
-    },
-    {
-      q: "Are caps and belts included with the uniform?",
-      a: "Caps and belts are separate accessory items we source rather than cut-and-sew, so they aren't a style on this page, but we can coordinate them to your team colors alongside the jersey and pants order.",
+      q: "Do baseball and softball use different fabric?",
+      a: "Same polyester sublimation fabric family. The difference is the cut: softball jerseys run more fitted and are usually pullovers, and softball pants use a women's-specific block.",
     },
     {
       q: "What numbering and uniform rules apply?",
@@ -183,18 +220,20 @@ export const baseball: Category = {
     },
     {
       q: "How long do samples and bulk take?",
-      a: "A digital mockup in a few business days, a physical sample in 10 to 14 days; bulk depends on quantity and customization, confirmed on your quote.",
+      a: "A digital mockup in a few business days, a physical sample in 10 to 14 days. Bulk lead time depends on quantity and customization, confirmed on your quote.",
     },
     faqGetStarted,
   ],
   ctaReferenceNoun: "kit",
-  // All 7 styles ship "draft" (owner spec): zero published at launch, so no
-  // PDP routes generate, nothing enters the sitemap, and ItemList/
-  // CollectionPage is omitted from the PLP entirely (see
-  // app/teamwear/[sport]/page.tsx's own `publishedStyleCards` gate) -- same
-  // pattern Cricket/Basketball/Rugby ship with today. Full PDP content is
-  // kept for the two hero styles (Button-Front Jersey, Baseball Pants) so
-  // either can flip to "published" on its own once confirmed and sampled.
+  // TEMPORARY (owner, 2026-09-26): opts Baseball into the draft-PDP rule so
+  // the batch-1 drafts get noindexed pages and their cards link. See the
+  // field's own comment in content/activewear/types.ts.
+  draftPdpsReachable: true,
+  // 7 drafts, SKU order (CAP-BSB-01 to 07), owner spec 2026-09-26. Card
+  // title = H1 minus " Manufacturer" = title-tag name = breadcrumb = alt =
+  // every pill label that targets it. 01 to 03 carry PDP content (batch 1;
+  // 01 and 02 replace the two legacy drafts entirely); 04 to 07 are
+  // card-only non-links until their own batch.
   styleCards: [
     {
       status: "draft",
@@ -202,118 +241,153 @@ export const baseball: Category = {
       cardTitle: "Custom Button-Front Baseball Jersey",
       cardSubline: "Full-button or two-button placket, fully sublimated",
       image: "",
-      imageAlt: "Custom button-front baseball jersey, full-button or two-button placket, fully sublimated",
-      href: "/capriowear/teamwear/baseball/button-front-jersey",
-      pdpTitle: "Button-Front Jersey",
+      imageAlt: "Custom Button-Front Baseball Jersey",
+      href: `${PLP}/button-front-jersey`,
       sku: "CAP-BSB-01",
-      pdpHeading: "Custom Baseball Jersey Manufacturer",
+      pdpHeading: "Custom Button-Front Baseball Jersey Manufacturer",
+      pdpMetaTitle: "Custom Button-Front Baseball Jersey Manufacturer",
       pdpDescription:
-        "Button-front baseball jersey, custom and private label, a full-button or two-button placket with dyed-to-match buttons, fully sublimated including the placket, in a lightweight polyester knit, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Button-front baseball jersey, front view" },
-        { alt: "Button-front baseball jersey, back view with name and number" },
-        { alt: "Button-front baseball jersey, placket and button detail" },
-        { alt: "Button-front baseball jersey, sleeve detail" },
-        { alt: "Button-front baseball jersey, sponsor logo placement" },
-        { alt: "Button-front baseball jersey, fabric close-up" },
-      ],
-      pdpMetaTitle: "Custom Baseball Jersey Manufacturer",
+        "Button-front baseball jersey, custom and private label, with a full-button or two-button placket and dyed-to-match buttons, fully sublimated including the placket, in a lightweight polyester knit, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Button-Front Baseball Jersey"),
       pdpMetaDescription:
-        "Custom button-front baseball jersey manufacturer, full-button or two-button placket, fully sublimated including the placket, low MOQ. DDP worldwide.",
-      material: "Lightweight 100% polyester, mesh or microfiber",
+        "Custom button-front baseball jersey manufacturer: full-button or two-button placket, fully sublimated, dyed-to-match buttons, MOQ 50, DDP to 20+ countries.",
+      material: "Lightweight 100% polyester, mesh, microfiber or interlock",
+      pdpFabricPills: ["Lightweight polyester", "Mesh or microfiber", "Polyester interlock", "Recycled option"],
+      pdpCustomizationPills: ["Sublimated placket", "Names & numbers", "Home & away kits", "Custom labels"],
       faqs: [
         {
-          q: "Does the button placket limit the design or sublimation?",
-          a: "No. The whole jersey, placket and buttons included, takes full-dye sublimation, so you get the classic button-front look with unlimited-color graphics.",
+          q: "Does the placket limit sublimation on the button-front baseball jersey?",
+          a: "No. The whole button-front baseball jersey, placket included, takes full-dye sublimation, and the buttons are dyed to match, so the classic button-front look carries unlimited-color graphics.",
         },
         {
-          q: "Can I choose full-button or two-button, and set-in or raglan sleeves?",
-          a: "Yes. A full-button placket runs the length of the jersey, a two-button placket sits at the collar, and either set-in or raglan sleeves are available, all to your spec.",
+          q: "Can the button-front baseball jersey be full-button or two-button, with set-in or raglan sleeves?",
+          a: "Yes. A full-button placket runs the length of the jersey, a two-button placket sits at the collar, and set-in or raglan sleeves are both available, all to your spec.",
         },
         {
-          q: "Do you make a matching pullover version and softball cut?",
-          a: "Yes. A pullover jersey and a fitted softball cut are both available on the same platform.",
+          q: "Is the button-front baseball jersey available in a softball cut?",
+          a: "Yes. A fitted softball cut is built on the same platform and graded across the full size run. A jersey with no placket is its own style, the Custom Pullover Baseball Jersey.",
         },
       ],
       relatedStyleTags: [
-        { label: "Baseball Pants", href: "/capriowear/teamwear/baseball/double-knit-pants" },
-        { label: "Pullover Jersey", href: "/capriowear/teamwear/baseball" },
-        { label: "Batting-Practice Jersey", href: "/capriowear/teamwear/baseball" },
-        { label: "See All", href: "/capriowear/teamwear/baseball" },
+        { label: "Custom Baseball Pants", slug: "double-knit-pants", href: PLP },
+        { label: "Custom Pullover Baseball Jersey", slug: "pullover-jersey", href: PLP },
+        { label: "Custom Batting-Practice Jersey", slug: "batting-practice-jersey", href: PLP },
+        { label: "Custom Knicker Baseball Pants", slug: "knicker-pants", href: PLP },
+        { label: "See All", href: PLP },
       ],
       specifications: [
         { label: "Style", value: "Button-front baseball jersey (base type)" },
-        { label: "Fabric", value: "Lightweight 100% polyester, mesh or microfiber" },
-        { label: "Weight", value: "Tuned to your program, confirmed on your sample" },
+        { label: "Fabric", value: "Lightweight 100% polyester, mesh, microfiber or interlock" },
+        { label: "Weight", value: PENDING_WEIGHT },
         { label: "Placket", value: "Full-button or two-button placket, dyed-to-match buttons" },
         { label: "Sleeve", value: "Set-in or raglan, your choice" },
+        { label: "Hem", value: "Curved shirttail hem, cut to stay tucked" },
         {
           label: "Decoration",
           value: "Full-dye sublimation across the whole jersey, placket included; tackle twill numbers optional",
         },
-        { label: "Color", value: "Full sublimation color range, Pantone matched, home and away colorways" },
-        { label: "Fit", value: "Baseball looser cut or a fitted softball cut, graded XS to 5XL, men's, women's and youth blocks" },
-        { label: "Branding", value: "Team crest, sponsor logos, manufacturer mark, woven and care labels, packaging" },
+        { label: "Color", value: JERSEY_COLOR },
+        { label: "Fit", value: JERSEY_FIT },
+        { label: "Branding", value: JERSEY_BRANDING },
       ],
-      specificationsImage: { alt: "Button-front baseball jersey, construction detail" },
+      specificationsImage: { alt: "Custom Button-Front Baseball Jersey" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Print and artwork", "Full-dye sublimation across the whole jersey, placket included, dyed-to-match buttons"],
+        NAMES_AND_NUMBERS_STEP,
+        ["Construction", "Full-button or two-button placket, set-in or raglan sleeve, curved shirttail hem"],
+        ["Fabric", "Any lightweight polyester knit, sourced or matched to your reference"],
+        COLOR_STEP,
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: "We confirm the fabric, the placket, the color and the fit on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Placket finished clean, with buttons dyed to match the design",
+        NAMES_NUMBERS_POINT,
+        PROOF_POINT,
+        ROSTER_POINT,
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
       slug: "double-knit-pants",
       cardTitle: "Custom Baseball Pants",
-      cardSubline: "Double-knit, reinforced knee option, full-length or knicker",
+      cardSubline: "Double-knit, reinforced knee option",
       image: "",
-      imageAlt: "Custom double-knit baseball pants, reinforced knee option, full-length or knicker",
-      href: "/capriowear/teamwear/baseball/double-knit-pants",
-      pdpTitle: "Baseball Pants",
+      imageAlt: "Custom Baseball Pants",
+      href: `${PLP}/double-knit-pants`,
       sku: "CAP-BSB-02",
       pdpHeading: "Custom Baseball Pants Manufacturer",
-      pdpDescription:
-        "Double-knit baseball pants, custom and private label, a firm 100% polyester double-knit with a soil-release finish, pro-style tunnel belt loops and a zipper fly, in full-length or knicker, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Baseball pants, front view" },
-        { alt: "Baseball pants, back view" },
-        { alt: "Baseball pants, reinforced knee detail" },
-        { alt: "Baseball pants, waistband and belt loop detail" },
-        { alt: "Baseball pants, fabric close-up" },
-      ],
       pdpMetaTitle: "Custom Baseball Pants Manufacturer",
+      pdpDescription:
+        "Full-length baseball pants, custom and private label, in a firm 100% polyester double-knit with a soil-release finish, pro-style tunnel belt loops, a zipper fly and an optional reinforced knee, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Baseball Pants"),
       pdpMetaDescription:
-        "Custom baseball pants manufacturer, 100% polyester double-knit with piping, reinforced knee option, full-length or knicker, low MOQ. DDP worldwide.",
+        "Custom baseball pants manufacturer: full-length 100% polyester double-knit, reinforced knee option, pro-style belt loops, MOQ 50, DDP to 20+ countries.",
       material: "100% polyester double-knit with a soil-release finish",
+      pdpFabricPills: ["Polyester double-knit", "Soil-release finish", "Reinforced knee option", "Tunnel belt loops"],
+      pdpCustomizationPills: ["Reinforced knee", "Belt-loop or elastic waist", "Team colors", "Custom labels"],
       faqs: [
         {
-          q: "Should we order full-length or knicker pants?",
-          a: "Full-length pants drape over the cleat and are the standard baseball choice; knicker pants end at the knee and are worn with stirrup or sanitary socks. The choice also sets which socks the team needs.",
+          q: "Is the reinforced knee standard on the custom baseball pants?",
+          a: "It is an option. An added double-layer knee panel gives the custom baseball pants extra sliding and fielding durability where a team wants it, confirmed on your sample.",
         },
         {
-          q: "Is the reinforced knee standard or an upgrade?",
-          a: "It is an option. An added double-layer knee panel gives extra sliding and fielding durability where you want it, confirmed on your sample.",
+          q: "What waistband do the custom baseball pants use?",
+          a: "Pro-style tunnel belt loops and a zipper fly as standard, or a gripper elastic waistband on request. The waistband is confirmed on your sample before bulk.",
         },
         {
-          q: "Do you make a softball-cut pant?",
-          a: "Yes. Softball uses a women's-specific block that runs trimmer through the hip and thigh, with full-length, knicker and mid-thigh options.",
+          q: "Do you make the custom baseball pants in a softball cut?",
+          a: "Yes. The softball cut uses a women's-specific block that runs trimmer through the hip and thigh, in full length. The knee-length cut is its own style, the Custom Knicker Baseball Pants.",
         },
       ],
       relatedStyleTags: [
-        { label: "Knicker Pants", href: "/capriowear/teamwear/baseball" },
-        { label: "Button-Front Jersey", href: "/capriowear/teamwear/baseball/button-front-jersey" },
-        { label: "Sliding Shorts", href: "/capriowear/teamwear/baseball" },
-        { label: "See All", href: "/capriowear/teamwear/baseball" },
+        { label: "Custom Knicker Baseball Pants", slug: "knicker-pants", href: PLP },
+        { label: "Custom Button-Front Baseball Jersey", slug: "button-front-jersey", href: PLP },
+        { label: "Custom Sliding Shorts", slug: "sliding-shorts", href: PLP },
+        { label: "Custom Pullover Baseball Jersey", slug: "pullover-jersey", href: PLP },
+        { label: "See All", href: PLP },
       ],
       specifications: [
-        { label: "Style", value: "Baseball pants, double-knit (base type)" },
+        { label: "Style", value: "Full-length baseball pants, double-knit (base type)" },
         { label: "Fabric", value: "100% polyester double-knit with a soil-release finish" },
-        { label: "Weight", value: "Firm double-knit, weight tuned to your program and confirmed on your sample" },
-        { label: "Silhouette", value: "Full-length over the cleat, or knicker at the knee worn with stirrup socks" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Silhouette", value: "Full length, draping over the cleat. The knee-length cut is its own style (CAP-BSB-04)." },
         { label: "Knee", value: "Optional reinforced double-layer knee for sliding and fielding" },
-        { label: "Waistband", value: "Pro-style tunnel belt loops, zipper fly, back welt pockets" },
-        { label: "Decoration", value: "Full-dye sublimation, team colors and piping; flat so nothing snags" },
-        { label: "Color", value: "Full sublimation color range, Pantone matched" },
-        { label: "Sizing", value: "Graded XS to 5XL, men's, women's and youth blocks; softball women's-specific block available" },
+        {
+          label: "Waistband",
+          value: "Pro-style tunnel belt loops and a zipper fly as standard, or a gripper elastic waistband on request",
+        },
+        { label: "Pockets", value: "Back welt pockets" },
+        { label: "Decoration and color", value: "Full-dye sublimation, team colors and piping, Pantone matched" },
+        {
+          label: "Sizing",
+          value: "Graded XS to 5XL, men's, women's and youth blocks, with a softball women's-specific block available",
+        },
         { label: "Branding", value: "Team logo, manufacturer mark, woven and care labels, packaging" },
       ],
-      specificationsImage: { alt: "Baseball pants, construction detail" },
+      specificationsImage: { alt: "Custom Baseball Pants" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Construction", "Full length, optional reinforced double-layer knee"],
+        ["Waistband", "Pro-style tunnel belt loops and zipper fly, or a gripper elastic waistband"],
+        ["Print and artwork", "Full-dye sublimation, team colors and piping"],
+        ["Fabric", "Firm polyester double-knit with a soil-release finish, sourced or matched to your reference"],
+        COLOR_STEP,
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline:
+        "We confirm the fabric, the knee reinforcement and the waistband on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Reinforced knee option, built for sliding and fielding",
+        "Double-knit and soil-release finish confirmed on your sample",
+        "Inseam and waist graded and checked across the full size run",
+        "The full roster produced in one run, same fabric roll, so every pair matches",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -321,45 +395,76 @@ export const baseball: Category = {
       cardTitle: "Custom Pullover Baseball Jersey",
       cardSubline: "Simpler placket, common softball style",
       image: "",
-      imageAlt: "Custom pullover baseball jersey, simpler placket, common softball style",
-      href: "/capriowear/teamwear/baseball/pullover-jersey",
+      imageAlt: "Custom Pullover Baseball Jersey",
+      href: `${PLP}/pullover-jersey`,
+      sku: "CAP-BSB-03",
+      pdpHeading: "Custom Pullover Baseball Jersey Manufacturer",
+      pdpMetaTitle: "Custom Pullover Baseball Jersey Manufacturer",
+      pdpDescription:
+        "Pullover baseball jersey, custom and private label, a V-neck or crew jersey with no button placket, fully sublimated, the common softball style and a simpler baseball option, in a lightweight polyester mesh, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Pullover Baseball Jersey"),
+      pdpMetaDescription:
+        "Custom pullover baseball jersey manufacturer: V-neck or crew polyester mesh jerseys for baseball and softball, fully sublimated, MOQ 50, DDP to 20+ countries.",
+      material: "Lightweight 100% polyester mesh, flatback mesh or microfiber",
+      pdpFabricPills: ["Polyester mesh", "Flatback mesh", "Microfiber", "Recycled option"],
+      pdpCustomizationPills: ["V-neck or crew", "Names & numbers", "Softball fitted cut", "Custom labels"],
+      faqs: [
+        {
+          q: "How is the pullover baseball jersey different from the button-front baseball jersey?",
+          a: "The pullover baseball jersey has no button placket and pulls on over the head, with a V-neck or crew collar. It is the simpler build, common in softball and as a lower-cost baseball option, with the same full-dye sublimation and colors as the button-front baseball jersey.",
+        },
+        {
+          q: "Is the pullover baseball jersey made in a fitted softball cut?",
+          a: "Yes. The pullover baseball jersey is built in a baseball cut or a fitted softball cut, graded across the full size run, with men's, women's and youth blocks.",
+        },
+        {
+          q: "What collar options are there on the pullover baseball jersey?",
+          a: "A V-neck or crew collar in a rib knit, in your team color or a contrast trim color, finished flat and confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Button-Front Baseball Jersey", slug: "button-front-jersey", href: PLP },
+        { label: "Custom Batting-Practice Jersey", slug: "batting-practice-jersey", href: PLP },
+        { label: "Custom Baseball Pants", slug: "double-knit-pants", href: PLP },
+        { label: "Custom Sliding Shorts", slug: "sliding-shorts", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Pullover baseball jersey, no placket (base type)" },
+        { label: "Fabric", value: "Lightweight 100% polyester mesh, flatback mesh or microfiber" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Neck", value: "V-neck or crew with a rib-knit collar" },
+        { label: "Sleeve", value: "Set-in or raglan, your choice" },
+        { label: "Hem", value: "Straight or curved hem, to your spec" },
+        { label: "Decoration", value: "Full-dye sublimation across the whole jersey; tackle twill numbers optional" },
+        { label: "Color", value: JERSEY_COLOR },
+        { label: "Fit", value: JERSEY_FIT },
+        { label: "Branding", value: JERSEY_BRANDING },
+      ],
+      specificationsImage: { alt: "Custom Pullover Baseball Jersey" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Print and artwork", "Full-dye sublimation across the whole jersey, unlimited colors at one cost"],
+        NAMES_AND_NUMBERS_STEP,
+        ["Construction", "V-neck or crew, set-in or raglan sleeve, straight or curved hem"],
+        ["Fabric", "Any lightweight polyester mesh or knit, sourced or matched to your reference"],
+        COLOR_STEP,
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: "We confirm the fabric, the collar, the color and the fit on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Rib-knit collar finished flat, with the collar color matched to the design",
+        NAMES_NUMBERS_POINT,
+        PROOF_POINT,
+        ROSTER_POINT,
+        AQL_POINT,
+      ],
     },
-    {
-      status: "draft",
-      slug: "knicker-pants",
-      cardTitle: "Custom Knicker Baseball Pants",
-      cardSubline: "Knee-length, worn with stirrup socks",
-      image: "",
-      imageAlt: "Custom knicker baseball pants, knee-length, worn with stirrup socks",
-      href: "/capriowear/teamwear/baseball/knicker-pants",
-    },
-    {
-      status: "draft",
-      slug: "batting-practice-jersey",
-      cardTitle: "Custom Batting-Practice Jersey",
-      cardSubline: "Lightweight practice top",
-      image: "",
-      imageAlt: "Custom batting-practice jersey, lightweight practice top",
-      href: "/capriowear/teamwear/baseball/batting-practice-jersey",
-    },
-    {
-      status: "draft",
-      slug: "sliding-shorts",
-      cardTitle: "Custom Sliding Shorts",
-      cardSubline: "Padded slide protection under the pant",
-      image: "",
-      imageAlt: "Custom sliding shorts, padded slide protection under the pant",
-      href: "/capriowear/teamwear/baseball/sliding-shorts",
-    },
-    {
-      status: "draft",
-      slug: "warm-up-jacket",
-      cardTitle: "Custom Baseball Warm-Up Jacket",
-      cardSubline: "Dugout zip jacket, tricot or fleece",
-      image: "",
-      imageAlt: "Custom baseball warm-up jacket, dugout zip jacket, tricot or fleece",
-      href: "/capriowear/teamwear/baseball/warm-up-jacket",
-    },
+    cardOnly("CAP-BSB-04", "knicker-pants", "Custom Knicker Baseball Pants", "Knee-length, worn with stirrup socks"),
+    cardOnly("CAP-BSB-05", "batting-practice-jersey", "Custom Batting-Practice Jersey", "Lightweight practice top"),
+    cardOnly("CAP-BSB-06", "sliding-shorts", "Custom Sliding Shorts", "Padded slide protection under the pant"),
+    cardOnly("CAP-BSB-07", "warm-up-jacket", "Custom Baseball Warm-Up Jacket", "Dugout zip jacket, tricot or stretch woven"),
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, Teamwear sports only,
   // closest sports first.
