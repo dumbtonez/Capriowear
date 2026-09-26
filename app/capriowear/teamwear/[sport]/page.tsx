@@ -37,6 +37,11 @@ export function generateStaticParams() {
   return Object.keys(sports).map((sport) => ({ sport }));
 }
 
+// Only the prebuilt slugs exist (audit 2026-09, D-16): an unknown slug is a
+// straight 404 from the build output, not an on-demand render that Vercel
+// then caches as an empty 404 page.
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: PageProps<"/capriowear/teamwear/[sport]">): Promise<Metadata> {
