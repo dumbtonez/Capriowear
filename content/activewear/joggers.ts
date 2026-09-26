@@ -8,7 +8,7 @@
 // every pill that targets it.
 //
 // Batch 1 builds draft PDPs for the hero SKUs 01, 09 and 02, batch 2 for 10,
-// 03 and 11, batch 3 for 05, 14 and 06. Drafts with PDP content render noindexed (BreadcrumbList only,
+// 03 and 11, batch 3 for 05, 14 and 06, batch 4 for 15, 07 and 12. Drafts with PDP content render noindexed (BreadcrumbList only,
 // out of the sitemap and the ItemList) and their cards link
 // (`isDraftPdpReachable()`); the rest are card-only non-links until their
 // batch. Pills carry a `slug`, so a
@@ -568,6 +568,59 @@ export const joggers: Category = {
       imageAlt: "Men's Wide-Leg Jogger",
       href: `${PLP}/wide-leg-jogger-mens`,
       sku: "CAP-JOG-07",
+      pdpHeading: "Men's Wide-Leg Jogger Manufacturer",
+      pdpMetaTitle: "Men's Wide-Leg Jogger Manufacturer",
+      pdpDescription:
+        "Men's wide-leg jogger, custom and private label, a relaxed wide-leg jogger in heavyweight cotton fleece with an open hem and drawcord waist, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Men's Wide-Leg Jogger"),
+      pdpMetaDescription:
+        "Men's wide-leg jogger manufacturer: heavyweight cotton fleece, relaxed wide leg, open hem, drawcord waist, garment-dye option, MOQ 50, DDP to 20+ countries.",
+      material: "Heavyweight cotton fleece or French terry",
+      pdpFabricPills: ["Heavyweight cotton fleece", "French terry", "Brushed fleece"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What fabric is the men's wide-leg jogger made from?",
+          a: "The men's wide-leg jogger is made in heavyweight cotton fleece or French terry for a structured, relaxed drape. Weight is confirmed on your sample.",
+        },
+        {
+          q: "Can the men's wide-leg jogger be garment-dyed?",
+          a: "Yes. The men's wide-leg jogger can be garment-dyed or washed on cotton fleece for a softer, streetwear finish, confirmed on your sample.",
+        },
+        {
+          q: "How is the men's wide-leg jogger different from the sweatpant?",
+          a: "The men's wide-leg jogger has a fuller, relaxed leg in a heavier fleece for a streetwear fit. The sweatpant has a straighter, regular leg.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Men's Sweatpant", slug: "sweatpant-mens", href: PLP },
+        { label: "Men's Cargo Jogger", slug: "cargo-jogger-mens", href: PLP },
+        { label: "Men's Cuffed Fleece Jogger", slug: "cuffed-fleece-jogger-mens", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Men's wide-leg jogger" },
+        { label: "Fabric", value: "Heavyweight cotton fleece or French terry" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Fit", value: "Relaxed wide leg with a dropped seat, men's block, graded XS to 5XL" },
+        { label: "Hem", value: "Open hem, to your spec" },
+        { label: "Waistband", value: "Elastic waistband with a drawcord" },
+        { label: "Pockets", value: "Side pockets, back pocket optional" },
+        { label: "Finish", value: "Garment-dye or washed finish available" },
+        { label: "Construction", value: "Cut-and-sew, overlock or flatlock seams" },
+        { label: "Branding", value: "Screen print, puff print, embroidery or DTF, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Men's Wide-Leg Jogger" },
+      pdpQualityHeading: "A relaxed leg with real weight",
+      pdpQualitySubline: SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Leg width graded proportionally across the size run",
+        "Heavyweight fleece checked for shrinkage after wash",
+        "Hem length checked for an even drop",
+        "Garment-dye color matched to your approved sample",
+        "Seams checked for strength at the seat",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -782,6 +835,59 @@ export const joggers: Category = {
       imageAlt: "Women's Wide-Leg Jogger",
       href: `${PLP}/wide-leg-jogger-womens`,
       sku: "CAP-JOG-12",
+      pdpHeading: "Women's Wide-Leg Jogger Manufacturer",
+      pdpMetaTitle: "Women's Wide-Leg Jogger Manufacturer",
+      pdpDescription:
+        "Women's wide-leg jogger, custom and private label, a high-rise wide-leg jogger in fleece or French terry with a snap or open hem and drawcord waist, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Women's Wide-Leg Jogger"),
+      pdpMetaDescription:
+        "Women's wide-leg jogger manufacturer: high-rise wide leg in fleece or French terry, snap or open hem, drawcord waist, MOQ 50 pieces, DDP to 20+ countries.",
+      material: "Cotton/Polyester fleece, French terry or a Polyester/Cotton/Spandex knit",
+      pdpFabricPills: ["Cotton/Polyester fleece", "French terry", "Polyester/Cotton/Spandex knit"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What fabric is the women's wide-leg jogger made from?",
+          a: "The women's wide-leg jogger is made in Cotton/Polyester fleece, French terry or a Polyester/Cotton/Spandex knit for extra stretch, with weight confirmed on your sample.",
+        },
+        {
+          q: "What hem options are there on the women's wide-leg jogger?",
+          a: "The women's wide-leg jogger comes with snap fastenings at the leg opening, so it can be worn open or gathered, or with a plain open hem.",
+        },
+        {
+          q: "Can the women's wide-leg jogger have side stripes?",
+          a: "Yes. The women's wide-leg jogger can carry side stripes or piping in your colors, placed to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Women's Barrel Jogger", slug: "barrel-jogger", href: PLP },
+        { label: "Women's Sweatpant", slug: "sweatpant-womens", href: PLP },
+        { label: "Women's Cuffed Fleece Jogger", slug: "cuffed-fleece-jogger-womens", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's wide-leg jogger" },
+        { label: "Fabric", value: "Cotton/Polyester fleece, French terry or a Polyester/Cotton/Spandex knit" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Fit", value: "High rise, wide leg, women's block, graded XS to 5XL" },
+        { label: "Hem", value: "Snap-adjustable leg opening or open hem" },
+        { label: "Waistband", value: "Elastic waistband with a drawcord" },
+        { label: "Pockets", value: "Side pockets" },
+        { label: "Detailing", value: "Side stripes or piping optional" },
+        { label: "Construction", value: "Cut-and-sew, overlock or flatlock seams" },
+        { label: "Branding", value: "Screen print, embroidery, DTF or heat transfer, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Women's Wide-Leg Jogger" },
+      pdpQualityHeading: "A wide leg that drapes evenly",
+      pdpQualitySubline: SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Leg width graded proportionally across the size run",
+        "Snaps function-tested before bulk",
+        "Hem length checked for an even drop",
+        "Rise and waistband checked for hold",
+        "Shrinkage tested after wash",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -868,6 +974,59 @@ export const joggers: Category = {
       imageAlt: "Women's Training Jogger",
       href: `${PLP}/training-jogger-womens`,
       sku: "CAP-JOG-15",
+      pdpHeading: "Women's Training Jogger Manufacturer",
+      pdpMetaTitle: "Women's Training Jogger Manufacturer",
+      pdpDescription:
+        "Women's training jogger, custom and private label, a high-rise, tapered jogger in a lightweight Polyester/Spandex stretch woven with a drawcord waist and side pockets, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Women's Training Jogger"),
+      pdpMetaDescription:
+        "Women's training jogger manufacturer: lightweight Polyester/Spandex stretch woven, high rise, tapered leg, drawcord waist, MOQ 50, DDP to 20+ countries.",
+      material: "Lightweight Polyester/Spandex stretch woven",
+      pdpFabricPills: ["Polyester/Spandex stretch woven", "Recycled Polyester/Spandex"],
+      pdpCustomizationPills: CUSTOMIZATION_PILLS,
+      faqs: [
+        {
+          q: "What is the women's training jogger made from?",
+          a: "The women's training jogger is made in a lightweight Polyester/Spandex stretch woven. The blend and weight are confirmed on your sample, and recycled Polyester/Spandex is an option.",
+        },
+        {
+          q: "Is the women's training jogger high rise?",
+          a: "Yes. The women's training jogger is cut with a high rise as standard, and a mid rise can be cut to your spec.",
+        },
+        {
+          q: "How is the women's training jogger different from the woven track pant?",
+          a: "The women's training jogger is a stretch woven with a high rise and tapered leg for training. The woven track pant is a lighter, relaxed leg with an adjustable or open hem.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Women's Woven Track Pant", slug: "woven-track-pant-womens", href: PLP },
+        { label: "Women's Cargo Jogger", slug: "cargo-jogger-womens", href: PLP },
+        { label: "Women's Cuffed Fleece Jogger", slug: "cuffed-fleece-jogger-womens", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Women's training jogger" },
+        { label: "Fabric", value: "Lightweight Polyester/Spandex stretch woven, recycled Polyester/Spandex available" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Fit", value: "High rise, tapered leg, women's block, graded XS to 5XL" },
+        { label: "Cuff", value: "Elastic cuff or open tapered hem" },
+        { label: "Waistband", value: "Elastic waistband with a drawcord" },
+        { label: "Pockets", value: "Side pockets, zip pocket optional" },
+        { label: "Seams", value: "Shaped back seams, to your spec" },
+        { label: "Construction", value: "Cut-and-sew, gusset to your spec" },
+        { label: "Branding", value: "Heat transfer, silicone logos, reflective prints or embroidery, custom labels and packaging" },
+      ],
+      specificationsImage: { alt: "Women's Training Jogger" },
+      pdpQualityHeading: "Stretch that moves with every rep",
+      pdpQualitySubline: SAMPLE_SUBLINE,
+      pdpQualityPoints: [
+        "Stretch and recovery checked after repeated wear and wash",
+        "Rise and waistband checked for hold",
+        "Taper graded proportionally across the size run",
+        "Gusset and inseam checked through movement",
+        "Zips function-tested before bulk",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
