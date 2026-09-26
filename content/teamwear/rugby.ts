@@ -9,8 +9,9 @@
 // fabric table and note, customization Fabric item, trust bullet 2, 8 FAQs)
 // and draft PDPs for CAP-RGB-01 to 03. The two legacy drafts at
 // match-jersey and reinforced-shorts are replaced in full by SKUs 01 and 02
-// (same slugs). Cards 04 to 07 are card-only drafts: non-links, no route,
-// until their PDP content lands and they switch to links automatically.
+// (same slugs). Batch 2 (owner spec, 2026-09-26) adds PDP content for
+// CAP-RGB-04 to 06 the same way. Card 07 is a card-only draft: non-link, no
+// route, until its PDP content lands and it switches to a link automatically.
 //
 // Every style is "draft": noindexed, out of the sitemap and the
 // CollectionPage/ItemList, BreadcrumbList only. `draftPdpsReachable` (same
@@ -446,6 +447,68 @@ export const rugby: Category = {
       imageAlt: "Custom Heritage Rugby Jersey",
       href: `${PLP}/heritage-jersey`,
       sku: "CAP-RGB-04",
+      pdpHeading: "Custom Heritage Rugby Jersey Manufacturer",
+      pdpMetaTitle: "Custom Heritage Rugby Jersey Manufacturer",
+      pdpDescription:
+        "Heritage rugby jersey, custom and private label, a traditional cotton or Cotton/Polyester build with a twill collar, rubber buttons and rib-knit cuffs, embroidered or printed in your club colors, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Heritage Rugby Jersey"),
+      pdpMetaDescription:
+        "Custom heritage rugby jersey manufacturer: cotton-rich jerseys with twill collar, rubber buttons and embroidered crest, MOQ 50 pieces, DDP to 20+ countries.",
+      material: "Cotton or Cotton/Polyester knit",
+      pdpFabricPills: ["Cotton jersey knit", "Cotton/Polyester knit", "Cotton twill collar", "Rib-knit cuffs"],
+      pdpCustomizationPills: ["Hoops or solid", "Embroidered crest", "Club colors", "Custom labels"],
+      faqs: [
+        {
+          q: "What is the heritage rugby jersey used for?",
+          a: "The heritage rugby jersey is a traditional club jersey for socials, tours, supporter ranges and retail, not for contact play. It gives a club or brand a classic rugby shirt alongside the performance match kit.",
+        },
+        {
+          q: "Why is the heritage rugby jersey embroidered rather than sublimated?",
+          a: "The heritage rugby jersey is made in cotton or Cotton/Polyester, which does not take full sublimation, so crests, numbers and sponsor marks are embroidered or printed instead.",
+        },
+        {
+          q: "Can the heritage rugby jersey have hoops or stripes?",
+          a: "Yes. The heritage rugby jersey is made with a solid body or with hoops and stripes in your club colors, aligned across the seams and confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Rugby Match Jersey", slug: "match-jersey", href: PLP },
+        { label: "Custom Rugby Training Jersey", slug: "training-jersey", href: PLP },
+        { label: "Custom Rugby Warm-Up Jacket", slug: "warm-up-jacket", href: PLP },
+        { label: "Custom Reinforced Rugby Shorts", slug: "reinforced-shorts", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Heritage rugby jersey (base type)" },
+        { label: "Fabric", value: "Cotton or Cotton/Polyester knit" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Collar", value: "Cotton twill collar with a rubber-button placket" },
+        { label: "Sleeve", value: "Long or short sleeve, with rib-knit cuffs" },
+        { label: "Body", value: "Solid body, or hoops and stripes in your club colors" },
+        { label: "Decoration", value: "Embroidered or printed crest, numbers and sponsor marks. Not sublimated, since cotton does not take full sublimation." },
+        { label: "Fit", value: "Regular or relaxed fit" },
+        { label: "Sizing", value: SIZING },
+        { label: "Branding", value: "Club crest, sponsor logos, manufacturer mark, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Heritage Rugby Jersey" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Collar and placket", "Twill collar in a contrast color, rubber-button placket"],
+        ["Body", "Solid, hoops or stripes in your club colors"],
+        ["Fabric", "Cotton or Cotton/Polyester knit, sourced or matched to your reference"],
+        ["Decoration", "Embroidered or printed crest, numbers and sponsor marks"],
+        ["Color", "Club colors, Pantone matched"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: "We confirm the fabric, the collar, the color and the fit on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Club colors Pantone matched and approved on the sample before we cut",
+        "Hoops and stripes aligned across seams at every size",
+        "Collar, placket and rubber buttons checked for a secure, flat finish",
+        "Embroidery checked for clean, even stitching",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -456,6 +519,68 @@ export const rugby: Category = {
       imageAlt: "Custom Rugby Base Layer",
       href: `${PLP}/base-layer`,
       sku: "CAP-RGB-05",
+      pdpHeading: "Custom Rugby Base Layer Manufacturer",
+      pdpMetaTitle: "Custom Rugby Base Layer Manufacturer",
+      pdpDescription:
+        "Rugby base layer, custom and private label, a close-fit Polyester/Spandex top worn under the match jersey, with flat seams and mesh ventilation panels, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Rugby Base Layer"),
+      pdpMetaDescription:
+        "Custom rugby base layer manufacturer: close-fit Polyester/Spandex tops worn under the jersey, flat seams, mesh panels, MOQ 50 pieces, DDP to 20+ countries.",
+      material: "Polyester/Spandex knit",
+      pdpFabricPills: ["Polyester/Spandex knit", "Polyester/Spandex mesh", "Brushed Polyester/Spandex", "Recycled Polyester/Spandex"],
+      pdpCustomizationPills: ["Short or long sleeve", "Crew or mock neck", "Team colors", "Custom labels"],
+      faqs: [
+        {
+          q: "How does the rugby base layer fit under the match jersey?",
+          a: "The rugby base layer is cut close with flat, low-profile seams, so it sits smoothly under the bodyfit match jersey without adding bulk or loose fabric.",
+        },
+        {
+          q: "Can the rugby base layer match our team colors?",
+          a: "Yes. The rugby base layer is made in solid team colors or sublimated designs, Pantone matched to your match kit and confirmed on your sample.",
+        },
+        {
+          q: "Is the rugby base layer available for cold weather?",
+          a: "Yes. The rugby base layer can be made in a brushed Polyester/Spandex knit for cold-weather training and matches, with long sleeves and a mock neck on request.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Rugby Match Jersey", slug: "match-jersey", href: PLP },
+        { label: "Custom Reinforced Rugby Shorts", slug: "reinforced-shorts", href: PLP },
+        { label: "Custom Rugby Training Jersey", slug: "training-jersey", href: PLP },
+        { label: "Custom Rugby Warm-Up Jacket", slug: "warm-up-jacket", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Rugby base layer top, close fit (base type)" },
+        { label: "Fabric", value: "Polyester/Spandex knit, brushed for cold weather on request" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Fit", value: "Close second-skin fit that sits flat under the match jersey, graded XS to 5XL" },
+        { label: "Neck", value: "Crew or mock neck" },
+        { label: "Sleeve", value: "Short or long sleeve" },
+        { label: "Seams", value: "Flat, low-profile seams to limit chafing" },
+        { label: "Ventilation", value: "Mesh panels at the back and underarm, optional" },
+        { label: "Color", value: "Solid team colors or sublimated designs, Pantone matched to your kit" },
+        { label: "Branding", value: "Team crest, sponsor logos, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Rugby Base Layer" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Fabric", "Polyester/Spandex knit, brushed or recycled, sourced or matched to your reference"],
+        ["Neck and sleeve", "Crew or mock neck, short or long sleeve"],
+        ["Ventilation", "Mesh panels at the back and underarm"],
+        ["Color and print", "Solid team colors or sublimated designs, Pantone matched"],
+        ["Branding", "Team crest and sponsor logos"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: SEAMS_SUB,
+      pdpQualityPoints: [
+        "Stretch and recovery checked after repeated wear and wash",
+        "Flat seams checked through movement for a low-friction finish",
+        "Fit tested at multiple sizes across the run",
+        "Opacity checked at full stretch",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -466,6 +591,68 @@ export const rugby: Category = {
       imageAlt: "Custom Rugby Warm-Up Jacket",
       href: `${PLP}/warm-up-jacket`,
       sku: "CAP-RGB-06",
+      pdpHeading: "Custom Rugby Warm-Up Jacket Manufacturer",
+      pdpMetaTitle: "Custom Rugby Warm-Up Jacket Manufacturer",
+      pdpDescription:
+        "Rugby warm-up jacket, custom and private label, a full-zip warm-up in polyester tricot or brushed fleece, with a stand collar or hood, club colors and an embroidered or printed crest, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Rugby Warm-Up Jacket"),
+      pdpMetaDescription:
+        "Custom rugby warm-up jacket manufacturer: full-zip tricot or fleece warm-ups in club colors, crest and sponsor marks, MOQ 50 pieces, DDP to 20+ countries.",
+      material: "Polyester tricot or brushed-back polyester fleece",
+      pdpFabricPills: ["Polyester tricot", "Brushed polyester fleece", "Polyester interlock", "Recycled polyester"],
+      pdpCustomizationPills: ["Stand collar or hood", "Club colors & panels", "Embroidered crest", "Custom labels"],
+      faqs: [
+        {
+          q: "Can the rugby warm-up jacket be ordered with matching warm-up pants?",
+          a: "Yes. The rugby warm-up jacket is cut from the same fabric and Pantone values as the rugby warm-up pants, so the two can be ordered together as a matched warm-up set.",
+        },
+        {
+          q: "Which fabrics is the rugby warm-up jacket made in?",
+          a: "The rugby warm-up jacket is made in polyester tricot for a smooth, classic warm-up face, or in brushed polyester fleece for more warmth, with recycled polyester available. Weight is confirmed on your sample.",
+        },
+        {
+          q: "Can sponsor logos go on the rugby warm-up jacket?",
+          a: "Yes. Club crests and sponsor logos are embroidered or printed on the rugby warm-up jacket, placed on the chest, sleeve or back to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Rugby Warm-Up Pants", slug: "warm-up-pants", href: PLP },
+        { label: "Custom Rugby Training Jersey", slug: "training-jersey", href: PLP },
+        { label: "Custom Rugby Match Jersey", slug: "match-jersey", href: PLP },
+        { label: "Custom Heritage Rugby Jersey", slug: "heritage-jersey", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Rugby warm-up jacket, full zip (base type)" },
+        { label: "Fabric", value: "Polyester tricot or brushed-back polyester fleece, recycled polyester available" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Zip and collar", value: "Full-length front zip with a stand collar or a hood, and a zip garage at the chin" },
+        { label: "Sleeve", value: "Set-in or raglan sleeve with rib or self-fabric cuffs" },
+        { label: "Pockets", value: "Zip side pockets, to your spec" },
+        { label: "Color and decoration", value: "Club colors with contrast panels or piping, Pantone matched to your kit, with an embroidered or printed crest and sponsor marks" },
+        { label: "Fit", value: "Team cut, graded XS to 5XL, men's, women's and youth blocks" },
+        { label: "Construction", value: "Flatlock and overlock seams, rib-knit or self-fabric hem" },
+        { label: "Branding", value: "Club crest, sponsor logos, manufacturer mark, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Rugby Warm-Up Jacket" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Collar and build", "Stand collar or hood, set-in or raglan sleeve, zip pockets"],
+        ["Fabric", "Polyester tricot or brushed fleece, sourced or matched to your reference"],
+        ["Color", "Club colors, contrast panels and piping, Pantone matched to your kit"],
+        ["Decoration", "Embroidered or printed crest and sponsor marks"],
+        ["Fit", "Team cut, graded across the full size run"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline: "We confirm the fabric, the zips, the color and the fit on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Jacket color Pantone matched to your kit and approved on the sample before we cut",
+        "Zips cycled and function-tested before bulk",
+        "Contrast panels and piping aligned across seams at every size",
+        "The full roster produced in one run, same fabric lot, so every jacket matches",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
