@@ -9,9 +9,9 @@
 // fabric table and note, customization Fabric item, trust bullet 2, 8 FAQs)
 // and draft PDPs for CAP-RGB-01 to 03. The two legacy drafts at
 // match-jersey and reinforced-shorts are replaced in full by SKUs 01 and 02
-// (same slugs). Batch 2 (owner spec, 2026-09-26) adds PDP content for
-// CAP-RGB-04 to 06 the same way. Card 07 is a card-only draft: non-link, no
-// route, until its PDP content lands and it switches to a link automatically.
+// (same slugs). Batches 2 and 3 (owner spec, 2026-09-26) add PDP content
+// for CAP-RGB-04 to 07 the same way, so all 7 cards link and every style
+// pill resolves to a real PDP.
 //
 // Every style is "draft": noindexed, out of the sitemap and the
 // CollectionPage/ItemList, BreadcrumbList only. `draftPdpsReachable` (same
@@ -663,6 +663,69 @@ export const rugby: Category = {
       imageAlt: "Custom Rugby Warm-Up Pants",
       href: `${PLP}/warm-up-pants`,
       sku: "CAP-RGB-07",
+      pdpHeading: "Custom Rugby Warm-Up Pants Manufacturer",
+      pdpMetaTitle: "Custom Rugby Warm-Up Pants Manufacturer",
+      pdpDescription:
+        "Rugby warm-up pants, custom and private label, in polyester tricot or brushed fleece with an elastic drawcord waist and a straight or tapered leg, matched to your warm-up jacket, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Rugby Warm-Up Pants"),
+      pdpMetaDescription:
+        "Custom rugby warm-up pants manufacturer: tricot or fleece warm-up pants, straight or tapered leg, ankle zips optional, MOQ 50 pieces, DDP to 20+ countries.",
+      material: "Polyester tricot or brushed-back polyester fleece",
+      pdpFabricPills: ["Polyester tricot", "Brushed polyester fleece", "Polyester interlock", "Recycled polyester"],
+      pdpCustomizationPills: ["Straight or tapered", "Ankle zips optional", "Matched to your jacket", "Custom labels"],
+      faqs: [
+        {
+          q: "Can the rugby warm-up pants match our warm-up jacket?",
+          a: "Yes. The rugby warm-up pants are cut from the same fabric and Pantone values as your rugby warm-up jacket, and both are confirmed together on your sample before bulk.",
+        },
+        {
+          q: "What leg and hem options are there on the rugby warm-up pants?",
+          a: "The rugby warm-up pants come in a straight or tapered leg, finished with an open hem, a rib cuff or ankle zips so they come off over boots, chosen per club and confirmed on your sample.",
+        },
+        {
+          q: "Which fabrics are the rugby warm-up pants made in?",
+          a: "The rugby warm-up pants are made in polyester tricot or brushed polyester fleece, with recycled polyester available. Weight is confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Rugby Warm-Up Jacket", slug: "warm-up-jacket", href: PLP },
+        { label: "Custom Rugby Training Jersey", slug: "training-jersey", href: PLP },
+        { label: "Custom Reinforced Rugby Shorts", slug: "reinforced-shorts", href: PLP },
+        { label: "Custom Rugby Match Jersey", slug: "match-jersey", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Rugby warm-up pants (base type)" },
+        { label: "Fabric", value: "Polyester tricot or brushed-back polyester fleece, recycled polyester available" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Waist", value: "Elastic waistband with an internal drawcord, finished flat" },
+        { label: "Leg", value: "Straight or tapered leg, full length" },
+        { label: "Hem", value: "Open hem, rib cuff, or ankle zips so the pants come off over boots, to your spec" },
+        { label: "Pockets", value: "Zip or open side pockets, to your spec" },
+        { label: "Color and decoration", value: "Club colors with side stripes or contrast panels, Pantone matched to your warm-up jacket, with an embroidered or printed mark" },
+        { label: "Fit", value: "Team cut, graded XS to 5XL, men's, women's and youth blocks" },
+        { label: "Branding", value: "Club crest or mark, sponsor logos, woven and care labels, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Rugby Warm-Up Pants" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Leg and hem", "Straight or tapered leg, open hem, rib cuff or ankle zips"],
+        ["Fabric", "Polyester tricot or brushed fleece, sourced or matched to your reference"],
+        ["Color", "Club colors, side stripes and contrast panels, Pantone matched to your warm-up jacket"],
+        ["Decoration", "Embroidered or printed crest and sponsor marks"],
+        ["Waist and fit", "Elastic drawcord waist, team cut, graded across the full size run"],
+        TRIMS_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline:
+        "We confirm the fabric, the zips, the color and the fit on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Pants color matched to your warm-up jacket and approved on the sample before we cut",
+        "Inseam and hem graded and checked across the full size run",
+        "Ankle and pocket zips function-tested before bulk",
+        "The full roster produced in one run, same fabric lot, so every pair matches",
+        AQL_POINT,
+      ],
     },
   ],
   relatedLinks: [
