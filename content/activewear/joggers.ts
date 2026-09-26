@@ -307,13 +307,13 @@ export const joggers: Category = {
       images: gallery("Men's Woven Track Pant"),
       pdpMetaDescription:
         "Men's woven track pant manufacturer: lightweight polyester woven, straight leg, open hem or ankle zip, elastic waist, MOQ 50 pieces, DDP to 20+ countries.",
-      material: "Lightweight polyester or nylon woven",
-      pdpFabricPills: ["Polyester woven", "Nylon woven", "Recycled polyester"],
+      material: "Lightweight polyester woven",
+      pdpFabricPills: ["Polyester woven", "Recycled polyester"],
       pdpCustomizationPills: CUSTOMIZATION_PILLS,
       faqs: [
         {
           q: "What is the men's woven track pant made from?",
-          a: "The men's woven track pant is made in a lightweight polyester or nylon woven. The fabric and weight are confirmed on your sample, and recycled polyester is an option.",
+          a: "The men's woven track pant is made in a lightweight polyester woven. The fabric and weight are confirmed on your sample, and recycled polyester is an option.",
         },
         {
           q: "Can the men's woven track pant have ankle zips?",
@@ -332,7 +332,7 @@ export const joggers: Category = {
       ],
       specifications: [
         { label: "Style", value: "Men's woven track pant" },
-        { label: "Fabric", value: "Lightweight polyester or nylon woven, blend confirmed on your sample" },
+        { label: "Fabric", value: "Lightweight polyester woven, blend confirmed on your sample" },
         { label: "Weight", value: PENDING_WEIGHT },
         { label: "Fit", value: "Straight or relaxed leg, men's block, graded XS to 5XL" },
         { label: "Hem", value: "Open hem, ankle zip optional" },

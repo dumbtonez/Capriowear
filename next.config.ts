@@ -138,6 +138,13 @@ const nextConfig: NextConfig = {
       // one rule, all landing on the category page.
       { source: "/activewear/joggers-track-pants/:path*", destination: "/capriowear/activewear/joggers", permanent: true },
       { source: "/capriowear/activewear/joggers-track-pants/:path*", destination: "/capriowear/activewear/joggers", permanent: true },
+      // Legacy Wide-Leg Woven Jogger draft PDP, removed with the Joggers
+      // rebuild (owner spec, 2026-09-26): its old style code CAP-JOG-01 now
+      // belongs to Men's Cuffed Fleece Jogger, so the URL lands on the PLP.
+      // Listed before the generic /activewear rule so the old pre-/capriowear
+      // path redirects in one hop.
+      { source: "/capriowear/activewear/joggers/wide-leg-woven-jogger", destination: "/capriowear/activewear/joggers", permanent: true },
+      { source: "/activewear/joggers/wide-leg-woven-jogger", destination: "/capriowear/activewear/joggers", permanent: true },
       { source: "/activewear/:path*", destination: "/capriowear/activewear/:path*", permanent: true },
       { source: "/teamwear/:path*", destination: "/capriowear/teamwear/:path*", permanent: true },
       { source: "/services", destination: "/capriowear/services", permanent: true },
