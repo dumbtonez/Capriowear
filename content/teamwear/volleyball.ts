@@ -1,65 +1,82 @@
 // content/teamwear/volleyball.ts
-// Fifth Teamwear category, same `Category` shape as Cricket/Basketball/
-// Rugby/Baseball (content/teamwear/{cricket,basketball,rugby,baseball}.ts)
-// and every Activewear category (content/activewear/types.ts) -- a pure
-// content/data drop: no edits to app/teamwear/[sport]/page.tsx or
-// app/teamwear/[sport]/[style]/page.tsx, only this file plus one line in
-// ./sports.ts.
+// Teamwear category, same `Category` shape as Cricket, Basketball and
+// Rugby (content/teamwear/*.ts) and every Activewear category
+// (content/activewear/types.ts) -- a pure content/data drop: no edits to
+// app/teamwear/[sport]/page.tsx or app/teamwear/[sport]/[style]/page.tsx,
+// only this file plus one line in ./sports.ts.
 //
-// PDP publish state (owner spec): every style ships "draft". Zero published
-// styles at launch means the PLP stays live/indexed, every card renders
-// non-clickable, no PDP routes generate, nothing is in the sitemap, and
-// CollectionPage/ItemList is omitted from the PLP entirely
-// (app/teamwear/[sport]/page.tsx already conditions that block on
-// `publishedStyleCards.length > 0`, no page code change needed here). Flip a
-// style to "published" per style, heroes first, once the team confirms it
-// and it is sampled.
+// Batch 1 (owner spec, 2026-09-26): PLP fixes (meta, 7 cards in SKU order,
+// fabric table and note, customization Fabric item, trust bullet 3, 8 FAQs)
+// and draft PDPs for CAP-VOL-01 to 03. The two legacy drafts at
+// indoor-jersey and fitted-shorts are replaced in full by SKUs 01 and 02
+// (same slugs). Cards 04 to 07 are card-only drafts: non-links, no route,
+// until their PDP content lands and they switch to links automatically.
 //
-// Cut-and-sew scope (owner standing rule, set on Cricket) -- socks (knitted
-// goods) and knee pads (molded foam) are typically sourced, not cut-and-sew,
-// so neither is a style card here. Every card below is a genuinely
-// cut-and-sew volleyball piece.
+// Every style is "draft": noindexed, out of the sitemap and the
+// CollectionPage/ItemList, BreadcrumbList only. `draftPdpsReachable` (same
+// TEMPORARY opt-in as the other teamwear sports) lets the drafts with PDP
+// content render and their cards link. No gender toggle: the Teamwear PLP
+// template never renders it.
 //
 // Uses `structuredBlock` (type "decoration"), the same field/shape Cricket
 // introduced -- no component or type change needed for this category.
 //
-// No volleyball GSM or inseam number is ever stated (owner spec) -- every
-// fabric-weight or fit reference is worded as "tuned/confirmed on your
-// sample," never a made-up figure.
-//
-// Punctuation rule (owner spec, site-wide sweep): headings, eyebrows, labels
-// and short fact/chip lines carry no trailing period; periods stay only on
-// real sentences (leads, FAQ answers, descriptions, the fabric footnote, the
-// Specifications subtitle, the final-CTA subline). Written period-clean from
-// the start here, not swept after the fact.
-//
-// Highlight rule (owner spec, applied since Cricket/Basketball, standing for
-// every sport since): the decoration structured block's own note and the
-// main fabric table's own footnote each bold exactly one short, genuinely
-// important phrase (`NoteSegment[]`, not a plain string) -- not the whole
-// sentence. Written in from the start here, not swept after the fact.
-//
-// American spelling, no en/em dashes, "spandex" never "elastane"/"Lycra",
-// never "seamless" -- confirmed throughout, same standing sitewide rules
-// every category follows.
+// No fabric-weight, ounce or inseam figure is ever stated (owner spec) --
+// every weight reference is worded as "tuned to your program/confirmed on
+// your sample", and competition rules are referenced, never quoted.
 import type { Category } from "../activewear/types";
 import { faqGetStarted } from "../getStarted";
+
+const PLP = "/capriowear/teamwear/volleyball";
+
+const QUALITY_HEADING = "Court-legal, matched across the roster";
+const NAMES_NUMBERS_POINT = "Names and numbers dyed into the fiber, so they will not crack or peel";
+const AQL_POINT = "Every run inspected to AQL 2.5, third-party inspection welcome";
+
+const PENDING_WEIGHT = "Pending, confirmed on your sample.";
+const SEAMS_LABEL = "Flatlock seams, tagless printed care label";
+
+type Step = [title: string, body: string];
+const PACKAGING_STEP: Step = ["Packaging", "Polybags, boxes, retail-ready to your spec"];
+
+// Per-style "How we customize" carousel. Images are the shared factory
+// test shots (same stand-ins every PDP carousel uses), cycled in order.
+function customizeSteps(steps: Step[]) {
+  return {
+    eyebrow: "HOW WE CUSTOMIZE",
+    heading: "Your brand, applied\nin-house, no outsourcing",
+    steps: steps.map(([title, body], i) => ({
+      title,
+      body,
+      image: { src: `/factory-test/inside-factory-${(i % 5) + 1}.jpg`, alt: title },
+    })),
+  };
+}
+
+// Alt-only gallery (no photography yet): 6 frames, alt = the card name.
+function gallery(alt: string) {
+  return Array.from({ length: 6 }, () => ({ alt }));
+}
 
 export const volleyball: Category = {
   slug: "volleyball",
   group: "Teamwear",
   menuLabel: "Volleyball",
+  // Entity FAQ (PLP FAQ 1 and FAQ 1 on every PDP) is built by
+  // categoryEntityFaq() from these four fields.
   manufacturerNoun: "Volleyball Uniform",
   productNounPlural: "volleyball uniforms and kits",
-  entityExampleStyles: "indoor jerseys, libero jerseys, fitted shorts, and warm-ups",
-  entityFabrics: "polyester mesh and poly-spandex knits",
+  entityExampleStyles: "indoor and libero jerseys, fitted shorts, beach uniforms and warm-ups",
+  entityFabrics: "polyester mesh and Polyester/Spandex knits",
   h1: "Custom Volleyball Uniform Manufacturer",
   metaTitle: "Custom Volleyball Uniform Manufacturer",
   metaDescription:
-    "Custom volleyball uniform manufacturer. Indoor and beach jerseys, libero jerseys, women's fitted shorts, sublimated, low MOQ. Capriowear.",
+    "Custom volleyball uniform manufacturer: indoor and libero jerseys, fitted women's and men's shorts, beach uniforms, MOQ 50 pieces, DDP to 20+ countries.",
   trustBullets: ["MOQ from 50 pieces", "Samples in 10 to 14 days", "OEM, ODM & Private Label", "DDP to 20+ countries"],
   gridSubline: "Every style, made to your brand spec",
   gridSublineMobile: "Every style is available in custom fabrics & colors",
+  // Teamwear has no gender split (owner spec, 2026-09-25).
+  showGenderFilter: false,
   fabricEyebrow: "FABRIC OPTIONS",
   fabricHeading: "The fabrics behind the\nbig brands",
   fabricOptions: [
@@ -69,29 +86,27 @@ export const volleyball: Category = {
       performance: "Lightweight, breathable, prints cleanly",
     },
     {
-      fabric: "Poly-spandex",
-      bestFor: "Women's fitted shorts and briefs",
+      fabric: "Polyester/Spandex",
+      bestFor: "Women's fitted shorts",
       performance: "Four-way stretch, close fit",
     },
     {
       fabric: "Cationic-dyeable polyester",
-      bestFor: "Deep or saturated colorways",
-      performance: "Takes richer, deeper color",
+      bestFor: "Deep or saturated piece-dyed base colors",
+      performance: "Takes richer color in piece-dyed fabric",
     },
     {
       fabric: "Recycled polyester",
       bestFor: "Sustainability-positioned programs",
-      performance: "Same print and performance as virgin polyester",
+      performance: "Print result confirmed on your sample",
     },
   ],
   fabricNote: [
-    { text: "Polyester-based for full-color sublimation. Jersey and short weights are tuned to your program and " },
-    { text: "confirmed on your sample", bold: true },
     {
-      text: ". For deep or saturated team colors we can use cationic-dyeable polyester, and where a design layers a heat-applied element over a dark base we confirm color-holding on your sample. Swatches before every bulk run.",
+      text: "Polyester-based for full-color sublimation. Jersey and short weights are tuned to your program and confirmed on your sample. Cationic-dyeable polyester is offered for deep or saturated piece-dyed base colors; sublimated prints are color-matched and confirmed on your sample. Swatches before every bulk run.",
     },
   ],
-  fabricPills: ["Polyester mesh", "Microfiber", "Poly-spandex", "Cationic-dyeable polyester", "Recycled option"],
+  fabricPills: ["Polyester mesh", "Microfiber", "Polyester/Spandex", "Cationic-dyeable polyester", "Recycled option"],
   structuredBlock: {
     type: "decoration",
     eyebrow: "DECORATION",
@@ -124,21 +139,21 @@ export const volleyball: Category = {
       { text: " for legibility, even over a busy sublimated design." },
     ],
   },
-  qualityHeading: "Court-legal, matched across the roster",
+  qualityHeading: QUALITY_HEADING,
   qualitySubline:
     "We confirm the libero contrast, the numbering, the color and the fit on your proof and sample before the full roster is produced.",
   qualityPoints: [
     "Libero jersey checked for legal contrast and confirmed before we cut",
     "Numbering size and placement set to your governing body's rules",
-    "Names and numbers sublimated into the fiber, they will not crack, peel or fade",
-    "Every run inspected to AQL 2.5, third-party inspection welcome",
+    "Names and numbers sublimated into the fiber, so they will not crack or peel",
+    AQL_POINT,
   ],
   coverageEyebrow: "CUSTOMIZATION",
   coverageHeading: "From custom fabric to packaging design",
   coverageItems: [
     {
       title: "Fabric",
-      body: "Lightweight polyester jersey knits, fitted poly-spandex shorts, cationic-dyeable polyester for deep colors",
+      body: "Lightweight polyester jersey knits, fitted Polyester/Spandex shorts, cationic-dyeable polyester for piece-dyed deep colors",
     },
     {
       title: "Print",
@@ -154,178 +169,264 @@ export const volleyball: Category = {
     },
   ],
   faqHeading: "Top questions from B2B buyers",
+  // 8 FAQs (owner spec, 2026-09-26): the entity question is prepended at
+  // render time by categoryEntityFaq(), then these 7.
   faqs: [
     {
       q: "What is your MOQ for custom volleyball kit?",
       a: "From 50 pieces per style, and you can mix sizes, names and numbers freely within a colorway. Scales to full bulk.",
     },
     {
-      q: "Is the libero jersey a different construction, or just a different color?",
-      a: "The libero jersey is the same jersey platform in a required contrasting color, produced in the same roster order and the same run, not a separate purchase. We check the color for legal contrast and confirm it before bulk.",
-    },
-    {
-      q: "What colors count as contrasting for a libero jersey?",
-      a: "The libero top must clearly contrast with the team's predominant color. Two darks, like purple and black, or two lights, like white and yellow, can read as too similar, so we help you pick a compliant pairing, and where you have more than one libero, a different color for each. Rules vary by governing body, so we confirm against yours.",
-    },
-    {
-      q: "What does cationic-dyeable polyester do?",
-      a: "It is a modified polyester that takes deeper, richer color than standard polyester, useful for dark or saturated team colorways. Where a design layers a heat-applied element over a dark base, we confirm color-holding on your sample.",
+      q: "How is the libero jersey made, and what colors count as contrasting?",
+      a: "The libero jersey is the same jersey in a required contrasting color, produced in the same roster order and run, not a separate build. It must clearly contrast with the team's predominant color, and two darks or two lights can read as too similar, so we help you choose a compliant pairing and confirm it against your governing body's rules before bulk.",
     },
     {
       q: "How are names and numbers applied?",
-      a: "They are built into the same print file as the design and dyed into the fabric in one pass, so there is no added cost or weight and nothing to peel. Numbers stay a solid contrasting color so they read clearly even over a busy design.",
+      a: "Names and numbers are built into the same print file as the design and dyed into the fabric in one pass, so there is no added cost or weight and nothing to peel. Numbers stay a solid contrasting color so they read clearly even over a busy design.",
     },
     {
       q: "Can indoor and beach volleyball uniforms come from the same order?",
-      a: "Yes. Indoor jerseys, libero jerseys and beach volleyball uniforms are all built on the same cut-and-sew platform, so they can be planned into one program and ship together.",
+      a: "Yes. Indoor jerseys, libero jerseys and beach volleyball uniforms are built on the same cut-and-sew platform, so they can be planned into one program and ship together.",
     },
     {
       q: "What numbering and uniform rules apply?",
-      a: "They vary by governing body, NFHS, USA Volleyball, FIVB and NCAA differ on number size, placement and libero contrast, and a jersey must be long enough to stay tucked or hang past the waistband. Tell us your competition and we build to its current rules, confirmed on your proof.",
+      a: "Numbering and uniform rules vary by governing body, including number size and placement, libero contrast and jersey length. Tell us your competition and we build to its current rules, confirmed on your proof.",
     },
     {
       q: "How long do samples and bulk take?",
-      a: "A digital mockup in a few business days, a physical sample in 10 to 14 days; bulk depends on quantity and customization, confirmed on your quote.",
+      a: "A digital mockup in a few business days, a physical sample in 10 to 14 days. Bulk lead time depends on quantity and customization, confirmed on your quote.",
     },
     faqGetStarted,
   ],
   ctaReferenceNoun: "kit",
-  // All 7 styles ship "draft" (owner spec): zero published at launch, so no
-  // PDP routes generate, nothing enters the sitemap, and ItemList/
-  // CollectionPage is omitted from the PLP entirely (see
-  // app/teamwear/[sport]/page.tsx's own `publishedStyleCards` gate) -- same
-  // pattern Cricket/Basketball/Rugby/Baseball ship with today. Full PDP
-  // content is kept for the two hero styles (Volleyball Jersey, Women's
-  // Volleyball Shorts) so either can flip to "published" on its own once
-  // confirmed and sampled.
+  // TEMPORARY (owner, 2026-09-26): opts Volleyball into the draft-PDP rule,
+  // same as the other teamwear sports, so the drafts with PDP content get
+  // noindexed pages and their cards link. See the field's own comment in
+  // content/activewear/types.ts.
+  draftPdpsReachable: true,
+  // 7 drafts, SKU order (CAP-VOL-01 to 07). Card title = H1 minus
+  // " Manufacturer" = title-tag name = breadcrumb = alt = every pill label
+  // that targets it. Pills carry a `slug`, so a pill for a card-only SKU
+  // falls back to the PLP and switches to its PDP by itself.
   styleCards: [
     {
       status: "draft",
       slug: "indoor-jersey",
       cardTitle: "Custom Volleyball Jersey",
-      cardSubline: "Close-fit, short or long sleeve, fully sublimated",
+      cardSubline: "Tailored fit, short or long sleeve, fully sublimated",
       image: "",
-      imageAlt: "Custom volleyball jersey, close-fit, short or long sleeve, fully sublimated",
-      href: "/capriowear/teamwear/volleyball/indoor-jersey",
-      pdpTitle: "Volleyball Jersey",
+      imageAlt: "Custom Volleyball Jersey",
+      href: `${PLP}/indoor-jersey`,
       sku: "CAP-VOL-01",
       pdpHeading: "Custom Volleyball Jersey Manufacturer",
-      pdpDescription:
-        "Indoor volleyball jersey, custom and private label, a close-fitting cut in lightweight polyester mesh, full-dye sublimated with names and numbers in the print, and available as a legal contrasting libero jersey, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Volleyball jersey, front view" },
-        { alt: "Volleyball jersey, back view with name and number" },
-        { alt: "Volleyball jersey, sleeve detail" },
-        { alt: "Volleyball jersey, libero contrast colorway" },
-        { alt: "Volleyball jersey, sponsor logo placement" },
-        { alt: "Volleyball jersey, fabric close-up" },
-      ],
       pdpMetaTitle: "Custom Volleyball Jersey Manufacturer",
+      pdpDescription:
+        "Indoor volleyball jersey, custom and private label, a tailored-fit polyester mesh jersey with flatlock seams, full-dye sublimated with names and numbers in the print, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Volleyball Jersey"),
       pdpMetaDescription:
-        "Custom volleyball jersey manufacturer, indoor and libero, full-dye sublimated, names and numbers in the print, short or long sleeve, low MOQ. DDP worldwide.",
+        "Custom volleyball jersey manufacturer: tailored-fit sublimated jerseys, short sleeve, long sleeve or sleeveless, flatlock seams, MOQ 50, DDP to 20+ countries.",
       material: "Lightweight polyester mesh or microfiber",
+      pdpFabricPills: ["Polyester mesh", "Microfiber", "Cationic-dyeable polyester", "Recycled polyester"],
+      pdpCustomizationPills: ["Sublimated names & numbers", "Sleeve options", "Home & away kits", "Custom labels"],
       faqs: [
         {
-          q: "How is the libero jersey made and ordered?",
-          a: "It is the same jersey platform in a required contrasting color, produced in the same roster order and run. We check the color for legal contrast and confirm it before bulk, so it is not a separate purchase or a special build.",
+          q: "Which sleeve options are available on the volleyball jersey?",
+          a: "The volleyball jersey is made short sleeve, long sleeve or sleeveless on the same construction, and different sleeve options can be mixed across a roster in one run.",
         },
         {
-          q: "Does the jersey need to be a certain length?",
-          a: "Yes. Competition rules require the top to stay tucked or hang past the waistband and prohibit a bare midriff, so we build the length to meet the rule rather than leave it to chance.",
+          q: "How long is the volleyball jersey cut?",
+          a: "The volleyball jersey is cut long enough to stay tucked or sit past the waistband, with the length set to your competition's rules and confirmed on your sample.",
         },
         {
-          q: "Can we have short and long sleeve in the same order?",
-          a: "Yes. Both are the same construction and can be mixed across a roster in one run.",
+          q: "Can the volleyball jersey be ordered with a libero colorway?",
+          a: "Yes. The libero colorway is the same volleyball jersey in a legal contrasting color, produced in the same order and run as the rest of the roster.",
         },
       ],
       relatedStyleTags: [
-        { label: "Women's Volleyball Shorts", href: "/capriowear/teamwear/volleyball/fitted-shorts" },
-        { label: "Libero Jersey", href: "/capriowear/teamwear/volleyball" },
-        { label: "Men's Shorts", href: "/capriowear/teamwear/volleyball" },
-        { label: "See All", href: "/capriowear/teamwear/volleyball" },
+        { label: "Custom Women's Volleyball Shorts", slug: "fitted-shorts", href: PLP },
+        { label: "Custom Volleyball Libero Jersey", slug: "libero-jersey", href: PLP },
+        { label: "Custom Men's Volleyball Shorts", slug: "mens-shorts", href: PLP },
+        { label: "Custom Beach Volleyball Uniform", slug: "beach-uniform", href: PLP },
+        { label: "See All", href: PLP },
       ],
       specifications: [
         { label: "Style", value: "Indoor volleyball jersey (base type)" },
-        { label: "Fabric", value: "Lightweight polyester mesh or microfiber" },
-        { label: "Weight", value: "Tuned to your program, confirmed on your sample" },
-        { label: "Sleeve", value: "Short or long, same construction" },
-        { label: "Fit", value: "Close-fitting for unrestricted spiking and blocking" },
-        { label: "Length", value: "Built to stay tucked or hang past the waistband, per competition rules" },
-        {
-          label: "Decoration",
-          value: "Full-dye sublimation, names and numbers in the print; numbers kept a solid contrasting color",
-        },
-        { label: "Color", value: "Full sublimation color range, Pantone matched; contrasting libero colorway available" },
-        { label: "Fit and sizing", value: "Graded XS to 5XL, men's, women's and youth blocks" },
-        { label: "Branding", value: "Team crest, sponsor logos, manufacturer mark, woven and care labels, packaging" },
+        { label: "Fabric", value: "Lightweight polyester mesh or microfiber, with mesh side panels optional" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Fit", value: "Tailored close fit for unrestricted hitting and blocking, graded XS to 5XL, men's, women's and youth blocks" },
+        { label: "Sleeve", value: "Short sleeve, long sleeve or sleeveless, same construction" },
+        { label: "Neckline", value: "Crew or V-neck" },
+        { label: "Length", value: "Cut to stay tucked or sit past the waistband, set to your competition's rules" },
+        { label: "Seams and label", value: SEAMS_LABEL },
+        { label: "Decoration and color", value: "Full-dye sublimation, Pantone matched, with names and numbers in the print and numbers kept a solid contrasting color" },
+        { label: "Branding", value: "Team crest, sponsor logos, manufacturer mark, woven brand labels, hangtags, packaging" },
       ],
-      specificationsImage: { alt: "Volleyball jersey, construction detail" },
+      specificationsImage: { alt: "Custom Volleyball Jersey" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Print and artwork", "Full-dye sublimation, unlimited colors in one file at one cost"],
+        ["Names and numbers", "Built into the print file, kept a solid contrasting color for legibility"],
+        ["Libero colorway", "The same jersey in a legal contrasting colorway, in the same run"],
+        ["Fabric", "Polyester mesh or microfiber, or cationic-dyeable polyester for piece-dyed solid colors, sourced or matched to your reference"],
+        ["Color", "Pantone, CMYK, RGB or hex matched, confirmed on your digital proof"],
+        ["Trims and finish", "Tagless printed care labels, woven brand labels, hangtags"],
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline:
+        "We confirm the numbering, the color and the fit on your proof and sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Numbering size and placement set to your governing body's rules",
+        NAMES_NUMBERS_POINT,
+        "Flatlock seams and tagless labels checked for a flat, chafe-free finish",
+        "The full roster produced in one run, same fabric roll and print batch, so every kit matches",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
       slug: "fitted-shorts",
       cardTitle: "Custom Women's Volleyball Shorts",
-      cardSubline: "Fitted poly-spandex, four-way stretch",
+      cardSubline: "Fitted Polyester/Spandex, four-way stretch",
       image: "",
-      imageAlt: "Custom women's volleyball shorts, fitted poly-spandex, four-way stretch",
-      href: "/capriowear/teamwear/volleyball/fitted-shorts",
-      pdpTitle: "Women's Volleyball Shorts",
+      imageAlt: "Custom Women's Volleyball Shorts",
+      href: `${PLP}/fitted-shorts`,
       sku: "CAP-VOL-02",
-      pdpHeading: "Custom Volleyball Shorts Manufacturer",
+      pdpHeading: "Custom Women's Volleyball Shorts Manufacturer",
+      pdpMetaTitle: "Custom Women's Volleyball Shorts Manufacturer",
       pdpDescription:
-        "Fitted volleyball shorts, custom and private label, a close-fitting poly-spandex short or brief with a wide stretch waistband and four-way stretch, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Volleyball shorts, front view" },
-        { alt: "Volleyball shorts, back view" },
-        { alt: "Volleyball shorts, waistband detail" },
-        { alt: "Volleyball shorts, side seam detail" },
-        { alt: "Volleyball shorts, fabric close-up" },
-      ],
-      pdpMetaTitle: "Custom Volleyball Shorts Manufacturer",
+        "Women's volleyball shorts, custom and private label, a fitted four-way stretch Polyester/Spandex short with a wide stretch waistband and rise and length set to your spec, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Women's Volleyball Shorts"),
       pdpMetaDescription:
-        "Custom volleyball shorts manufacturer, fitted poly-spandex women's shorts and briefs, four-way stretch, sublimated, low MOQ. DDP worldwide.",
-      material: "Poly-spandex, four-way stretch",
+        "Custom women's volleyball shorts manufacturer: fitted four-way stretch Polyester/Spandex, wide waistband, custom rise and length, MOQ 50, DDP to 20+ countries.",
+      material: "Polyester/Spandex, four-way stretch",
+      pdpFabricPills: ["Polyester/Spandex", "Four-way stretch knit", "Recycled Polyester/Spandex"],
+      pdpCustomizationPills: ["Rise and length", "Wide waistband", "Team colors", "Custom labels"],
       faqs: [
         {
-          q: "What rise and length options are there?",
-          a: "Multiple rise and coverage options are available, from a shorter brief to a longer fitted short, confirmed on your sample. We do not lock you to one inseam.",
+          q: "What rise and length options are there on the women's volleyball shorts?",
+          a: "The women's volleyball shorts are made in a range of rises and inseams, from a short brief-style cut to a longer fitted short, set to your spec and confirmed on your sample.",
         },
         {
-          q: "Can players wear different short styles on one team?",
-          a: "Bottoms can vary in style across teammates as long as they share the same color, so we hold one team color across every short even if the cut differs.",
+          q: "Can the women's volleyball shorts be ordered in more than one length for a team?",
+          a: "Yes. Different lengths of the women's volleyball shorts can be mixed across one team order in the same team color, and your competition's rules on bottoms are confirmed on your proof.",
         },
         {
-          q: "Do you make a men's short too?",
-          a: "Yes. The men's short is a looser athletic cut on the same platform, in the same team color.",
+          q: "Do the women's volleyball shorts pass an opacity check?",
+          a: "Yes. The women's volleyball shorts are checked for opacity at full stretch on your sample, and we move to a denser knit where it needs more coverage.",
         },
       ],
       relatedStyleTags: [
-        { label: "Volleyball Jersey", href: "/capriowear/teamwear/volleyball/indoor-jersey" },
-        { label: "Libero Jersey", href: "/capriowear/teamwear/volleyball" },
-        { label: "Men's Shorts", href: "/capriowear/teamwear/volleyball" },
-        { label: "See All", href: "/capriowear/teamwear/volleyball" },
+        { label: "Custom Volleyball Jersey", slug: "indoor-jersey", href: PLP },
+        { label: "Custom Volleyball Libero Jersey", slug: "libero-jersey", href: PLP },
+        { label: "Custom Men's Volleyball Shorts", slug: "mens-shorts", href: PLP },
+        { label: "Custom Volleyball Warm-Up Pants", slug: "warm-up-pants", href: PLP },
+        { label: "See All", href: PLP },
       ],
       specifications: [
-        { label: "Style", value: "Women's fitted volleyball short or brief (base type)" },
-        { label: "Fabric", value: "Poly-spandex, four-way stretch" },
-        { label: "Weight", value: "Tuned to your program, confirmed on your sample" },
-        { label: "Rise and length", value: "Multiple rise and coverage options, confirmed on your sample" },
-        { label: "Waistband", value: "Wide stretch waistband" },
-        { label: "Decoration", value: "Full-dye sublimation, team colors and side detail" },
-        { label: "Color", value: "Full sublimation color range, Pantone matched; same short color across the team" },
-        { label: "Sizing", value: "Women's block, graded XS to 5XL; looser men's short available" },
-        { label: "Branding", value: "Team logo, manufacturer mark, woven and care labels, packaging" },
+        { label: "Style", value: "Women's fitted volleyball short (base type)" },
+        { label: "Fabric", value: "Polyester/Spandex, four-way stretch" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Rise and length", value: "Rise and inseam set to your spec, from a short brief-style cut to a longer fitted short" },
+        { label: "Waistband", value: "Wide stretch waistband, finished flat" },
+        { label: "Construction", value: "Four-panel or two-panel body with flatlock seams" },
+        { label: "Gusset", value: "Crotch gusset for freedom of movement" },
+        { label: "Decoration and color", value: "Full-dye sublimation or a solid team color, Pantone matched, with side detail or logos" },
+        { label: "Fit", value: "Women's fitted block, graded XS to 5XL" },
+        { label: "Branding", value: "Team logo, manufacturer mark, tagless printed care label, packaging" },
       ],
-      specificationsImage: { alt: "Volleyball shorts, construction detail" },
+      specificationsImage: { alt: "Custom Women's Volleyball Shorts" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Fit", "Rise and inseam to your spec, wide stretch waistband"],
+        ["Print and artwork", "Full-dye sublimation, team colors and side detail"],
+        ["Fabric", "Four-way stretch Polyester/Spandex, sourced or matched to your reference"],
+        ["Color", "Pantone, CMYK, RGB or hex matched, confirmed on your digital proof"],
+        ["Branding", "Team logo and manufacturer mark"],
+        ["Trims and finish", "Tagless printed care labels, woven brand labels, hangtags"],
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline:
+        "We confirm the fit, the waistband and the color on your sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Rise, length and waistband confirmed on your sample",
+        "Opacity checked at full stretch",
+        "One short color held across the whole team",
+        "The full roster produced in one run, same fabric roll, so every short matches",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
       slug: "libero-jersey",
-      cardTitle: "Custom Libero Jersey",
+      cardTitle: "Custom Volleyball Libero Jersey",
       cardSubline: "Legal contrast colorway of the team jersey",
       image: "",
-      imageAlt: "Custom libero jersey, legal contrast colorway of the team jersey",
-      href: "/capriowear/teamwear/volleyball/libero-jersey",
+      imageAlt: "Custom Volleyball Libero Jersey",
+      href: `${PLP}/libero-jersey`,
+      sku: "CAP-VOL-03",
+      pdpHeading: "Custom Volleyball Libero Jersey Manufacturer",
+      pdpMetaTitle: "Custom Volleyball Libero Jersey Manufacturer",
+      pdpDescription:
+        "Volleyball libero jersey, custom and private label, the same tailored polyester jersey as your team kit in a legal contrasting colorway, produced in the same run as the roster, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Volleyball Libero Jersey"),
+      pdpMetaDescription:
+        "Custom volleyball libero jersey manufacturer: the team jersey in a legal contrasting colorway, same run as your roster, MOQ 50 pieces, DDP to 20+ countries.",
+      material: "Lightweight polyester mesh or microfiber",
+      pdpFabricPills: ["Polyester mesh", "Microfiber", "Cationic-dyeable polyester", "Recycled polyester"],
+      pdpCustomizationPills: ["Contrasting colorway", "Matched numbering", "Sleeve options", "Custom labels"],
+      faqs: [
+        {
+          q: "Is the volleyball libero jersey a different construction from the team jersey?",
+          a: "No. The volleyball libero jersey is the same jersey construction in a contrasting color, produced in the same order and run as the team jerseys, so fabric, fit and numbering match.",
+        },
+        {
+          q: "What colors count as contrasting for a volleyball libero jersey?",
+          a: "A volleyball libero jersey must clearly contrast with the team's predominant jersey color. Two dark colors or two light colors can read as too similar, so we help you choose a compliant pairing and confirm it against your governing body's rules before bulk.",
+        },
+        {
+          q: "Can a team with two liberos get two different libero jerseys?",
+          a: "Yes. Where your rules call for it, each volleyball libero jersey can be made in its own contrasting color, all produced in the same run as the team jerseys.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Volleyball Jersey", slug: "indoor-jersey", href: PLP },
+        { label: "Custom Women's Volleyball Shorts", slug: "fitted-shorts", href: PLP },
+        { label: "Custom Men's Volleyball Shorts", slug: "mens-shorts", href: PLP },
+        { label: "Custom Beach Volleyball Uniform", slug: "beach-uniform", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Volleyball libero jersey, a contrasting colorway of the team jersey (base type)" },
+        { label: "Fabric", value: "Lightweight polyester mesh or microfiber, the same as the team jersey" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Color", value: "A color that clearly contrasts with the team's predominant jersey color, confirmed against your governing body's rules" },
+        { label: "Numbering", value: "Numbers in the same style, size and placement as the team jersey" },
+        { label: "Sleeve", value: "Short sleeve, long sleeve or sleeveless, matched to the team jersey" },
+        { label: "Fit", value: "Tailored close fit, graded XS to 5XL, men's, women's and youth blocks" },
+        { label: "Seams and label", value: SEAMS_LABEL },
+        { label: "Decoration", value: "Full-dye sublimation, with names and numbers in the print" },
+        { label: "Branding", value: "Team crest, sponsor logos, manufacturer mark, woven brand labels, hangtags, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Volleyball Libero Jersey" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Colorway", "A contrasting color chosen with you and checked against your rules"],
+        ["Multiple liberos", "A separate contrasting color for each libero where your rules call for it"],
+        ["Print and artwork", "Full-dye sublimation matched to the team jersey design"],
+        ["Numbering", "Same number style, size and placement as the team jersey"],
+        ["Fabric", "The same polyester mesh or microfiber as the team jersey, sourced or matched to your reference"],
+        ["Trims and finish", "Tagless printed care labels, woven brand labels, hangtags"],
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline:
+        "We confirm the libero contrast, the numbering and the fit on your proof and sample before the full roster is produced.",
+      pdpQualityPoints: [
+        "Libero color checked for legal contrast against the team jersey before we cut",
+        "Numbering matched to the team jersey in style, size and placement",
+        NAMES_NUMBERS_POINT,
+        "Produced in the same run as the team jerseys, so fabric and fit match",
+        AQL_POINT,
+      ],
     },
     {
       status: "draft",
@@ -333,17 +434,19 @@ export const volleyball: Category = {
       cardTitle: "Custom Men's Volleyball Shorts",
       cardSubline: "Looser athletic cut",
       image: "",
-      imageAlt: "Custom men's volleyball shorts, looser athletic cut",
-      href: "/capriowear/teamwear/volleyball/mens-shorts",
+      imageAlt: "Custom Men's Volleyball Shorts",
+      href: `${PLP}/mens-shorts`,
+      sku: "CAP-VOL-04",
     },
     {
       status: "draft",
       slug: "beach-uniform",
       cardTitle: "Custom Beach Volleyball Uniform",
-      cardSubline: "Tank and brief, or two-piece",
+      cardSubline: "Tank or jersey top with fitted bottoms",
       image: "",
-      imageAlt: "Custom beach volleyball uniform, tank and brief, or two-piece",
-      href: "/capriowear/teamwear/volleyball/beach-uniform",
+      imageAlt: "Custom Beach Volleyball Uniform",
+      href: `${PLP}/beach-uniform`,
+      sku: "CAP-VOL-05",
     },
     {
       status: "draft",
@@ -351,8 +454,9 @@ export const volleyball: Category = {
       cardTitle: "Custom Volleyball Warm-Up Jacket",
       cardSubline: "Zip warm-up, tricot or fleece",
       image: "",
-      imageAlt: "Custom volleyball warm-up jacket, zip warm-up, tricot or fleece",
-      href: "/capriowear/teamwear/volleyball/warm-up-jacket",
+      imageAlt: "Custom Volleyball Warm-Up Jacket",
+      href: `${PLP}/warm-up-jacket`,
+      sku: "CAP-VOL-06",
     },
     {
       status: "draft",
@@ -360,12 +464,11 @@ export const volleyball: Category = {
       cardTitle: "Custom Volleyball Warm-Up Pants",
       cardSubline: "Straight or tapered, tricot or fleece",
       image: "",
-      imageAlt: "Custom volleyball warm-up pants, straight or tapered, tricot or fleece",
-      href: "/capriowear/teamwear/volleyball/warm-up-pants",
+      imageAlt: "Custom Volleyball Warm-Up Pants",
+      href: `${PLP}/warm-up-pants`,
+      sku: "CAP-VOL-07",
     },
   ],
-  // "You may also be interested in" (owner rule, 2026-09-23): max 5, Teamwear sports only,
-  // closest sports first.
   relatedLinks: [
     { label: "Basketball", href: "/capriowear/teamwear/basketball" },
     { label: "Soccer", href: "/capriowear/teamwear/soccer" },
