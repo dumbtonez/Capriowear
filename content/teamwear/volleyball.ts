@@ -174,7 +174,7 @@ export const volleyball: Category = {
   faqs: [
     {
       q: "What is your MOQ for custom volleyball kit?",
-      a: "From 50 pieces per style, and you can mix sizes, names and numbers freely within a colorway. Scales to full bulk.",
+      a: "From 50 pieces per style, and you can mix sizes, names and numbers freely within a colorway. Libero jerseys count toward your team jersey order, so the 1 to 3 a team needs can be added in a contrasting colorway with no separate minimum. Scales to full bulk.",
     },
     {
       q: "How is the libero jersey made, and what colors count as contrasting?",
@@ -234,7 +234,7 @@ export const volleyball: Category = {
         },
         {
           q: "Can the volleyball jersey be ordered with a libero colorway?",
-          a: "Yes. The libero colorway is the same volleyball jersey in a legal contrasting color, produced in the same order and run as the rest of the roster.",
+          a: "Yes. The libero colorway is the same volleyball jersey in a legal contrasting color, produced in the same order and run as the rest of the roster, and it counts toward your team jersey order rather than carrying its own minimum.",
         },
       ],
       relatedStyleTags: [
@@ -365,14 +365,23 @@ export const volleyball: Category = {
         "Volleyball libero jersey, custom and private label, the same tailored polyester jersey as your team kit in a legal contrasting colorway, produced in the same run as the roster, made to your brand in Sialkot, Pakistan.",
       images: gallery("Custom Volleyball Libero Jersey"),
       pdpMetaDescription:
-        "Custom volleyball libero jersey manufacturer: the team jersey in a legal contrasting colorway, same run as your roster, MOQ 50 pieces, DDP to 20+ countries.",
+        "Custom volleyball libero jersey manufacturer: your team jersey in a legal contrasting colorway, ordered with your roster, no separate MOQ, DDP to 20+ countries.",
       material: "Lightweight polyester mesh or microfiber",
+      // Libero jerseys carry no separate minimum (owner decision, 2026-09-26):
+      // they count toward the team jersey order, so the first key fact
+      // replaces the shared "MOQ from 50 pieces". Other three unchanged.
+      pdpSpecHighlights: [
+        { icon: "package", text: "Ordered with your team jerseys" },
+        { icon: "calendarDays", text: "Samples in 10 to 14 days" },
+        { icon: "arrowDownAZ", text: "XS to 5XL sizes" },
+        { icon: "ship", text: "DDP to 20+ countries" },
+      ],
       pdpFabricPills: ["Polyester mesh", "Microfiber", "Cationic-dyeable polyester", "Recycled polyester"],
       pdpCustomizationPills: ["Contrasting colorway", "Matched numbering", "Sleeve options", "Custom labels"],
       faqs: [
         {
-          q: "Is the volleyball libero jersey a different construction from the team jersey?",
-          a: "No. The volleyball libero jersey is the same jersey construction in a contrasting color, produced in the same order and run as the team jerseys, so fabric, fit and numbering match.",
+          q: "Is there a minimum order for the volleyball libero jersey?",
+          a: "No separate minimum. The volleyball libero jersey is the same jersey construction in a contrasting color, so the 1 to 3 libero jerseys a team needs count toward your team jersey order and are produced in the same run.",
         },
         {
           q: "What colors count as contrasting for a volleyball libero jersey?",
