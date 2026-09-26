@@ -393,7 +393,7 @@ export const baseball: Category = {
       status: "draft",
       slug: "pullover-jersey",
       cardTitle: "Custom Pullover Baseball Jersey",
-      cardSubline: "Simpler placket, common softball style",
+      cardSubline: "V-neck or crew, no placket",
       image: "",
       imageAlt: "Custom Pullover Baseball Jersey",
       href: `${PLP}/pullover-jersey`,
