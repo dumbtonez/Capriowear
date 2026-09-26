@@ -138,13 +138,12 @@ export default async function SportPage({ params }: PageProps<"/capriowear/teamw
           />
           <div id="plp-listing" className="flex flex-col gap-8 max-xl:pb-6 xl:pb-14 xl:flex-row xl:gap-12">
             <CategoryFilters activeSlug={data.slug} menuGroups={teamwearMegaMenu} basePath="/capriowear/teamwear" ariaLabel="Teamwear categories" />
-            {/* For a sport opted into the draft-PDP rule (TEMPORARY
-                `draftPdpsReachable`, see content/activewear/types.ts), a
-                draft with PDP content links to its noindexed page, same as
-                the Activewear PLP; a card-only draft stays a non-link. */}
+            {/* Draft-PDP rule (Teamwear default): a draft with PDP content
+                links to its noindexed page, same as the Activewear PLP; a
+                card-only draft stays a non-link. */}
             <ProductGrid
               key={data.slug}
-              cards={data.styleCards.map((card) => toGridCard(card, { previewDraft: data.draftPdpsReachable }))}
+              cards={data.styleCards.map((card) => toGridCard(card, { previewDraft: true }))}
             />
           </div>
         </div>

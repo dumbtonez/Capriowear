@@ -211,14 +211,11 @@ export const fightWear: Category = {
     faqGetStarted,
   ],
   ctaReferenceNoun: "rash guard",
-  // All 5 styles ship "draft" (owner spec): zero published at launch, so no
-  // PDP routes generate, nothing enters the sitemap, and ItemList/
-  // CollectionPage is omitted from the PLP entirely (see
-  // app/teamwear/[sport]/page.tsx's own `publishedStyleCards` gate) -- same
-  // pattern every prior Teamwear category ships with today. Full PDP content
-  // is kept for the two hero styles (Long-Sleeve Rash Guard, MMA Fight
-  // Shorts) so either can flip to "published" on its own once confirmed and
-  // sampled.
+  // All 5 styles ship "draft" and are card-only for now: no PDP entry, so no
+  // route, and each card renders as a non-link. The two legacy draft PDPs
+  // (unaudited copy) were removed on 2026-09-26 when the Teamwear draft-PDP
+  // rule became the default; this sport's rebuild adds real PDP content per
+  // style, and each card links as soon as its PDP entry exists.
   styleCards: [
     {
       status: "draft",
@@ -228,56 +225,7 @@ export const fightWear: Category = {
       image: "",
       imageAlt: "Custom Long-Sleeve Rash Guard",
       href: "/capriowear/teamwear/fight-wear/long-sleeve-rash-guard",
-      pdpTitle: "Long-Sleeve Rash Guard",
       sku: "CAP-FGT-01",
-      pdpHeading: "Custom Long-Sleeve Rash Guard Manufacturer",
-      pdpDescription:
-        "Long-sleeve rash guard, custom and private label, a skin-tight full-dye sublimated poly-spandex knit with flatlock seams and a silicone grip hem, built to the IBJJF no-gi rules, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Long-sleeve rash guard, front view" },
-        { alt: "Long-sleeve rash guard, back view" },
-        { alt: "Long-sleeve rash guard, silicone grip hem detail" },
-        { alt: "Long-sleeve rash guard, flatlock seam detail" },
-        { alt: "Long-sleeve rash guard, sponsor and gym logo placement" },
-        { alt: "Long-sleeve rash guard, fabric close-up" },
-      ],
-      pdpMetaTitle: "Custom BJJ Rash Guard Manufacturer",
-      pdpMetaDescription:
-        "Custom BJJ and MMA rash guard manufacturer, IBJJF-legal build, full-dye sublimated, flatlock seams, silicone grip hem, low MOQ. DDP worldwide.",
-      material: "Sublimated poly-spandex knit, roughly 82/18 to 85/15",
-      faqs: [
-        {
-          q: "Is this rash guard IBJJF-legal for no-gi?",
-          a: "Yes. We build it skin-tight, long enough to reach the shorts waistband, with at least 10 percent of the rank color or fully the rank color, and within the black, white, or black-and-white division colors. We confirm the colors on your proof.",
-        },
-        {
-          q: "How does the rank-color rule work in a custom design?",
-          a: "We build the required rank or division color into the sublimation print as part of the artwork, so the compliance color is dyed into the fabric rather than added on. You approve it on the digital proof.",
-        },
-        {
-          q: "Why long sleeve over short sleeve?",
-          a: "Long sleeve adds arm coverage for no-gi grip reduction and mat protection; short sleeve is the same build for warmer training. We make both.",
-        },
-      ],
-      relatedStyleTags: [
-        { label: "Fight Shorts", href: "/capriowear/teamwear/fight-wear/fight-shorts" },
-        { label: "Short-Sleeve Rash Guard", href: "/capriowear/teamwear/fight-wear" },
-        { label: "Grappling Spats", href: "/capriowear/teamwear/fight-wear" },
-        { label: "See All", href: "/capriowear/teamwear/fight-wear" },
-      ],
-      specifications: [
-        { label: "Style", value: "Long-sleeve rash guard (base type)" },
-        { label: "Fabric", value: "Sublimated poly-spandex knit, roughly 82/18 to 85/15" },
-        { label: "Weight", value: "Tuned to the discipline and confirmed on your sample; a lighter knit for airflow, a firmer knit for a more locked-in fit" },
-        { label: "Fit", value: "Skin-tight compression, IBJJF-legal cut, long enough to cover the torso to the shorts waistband" },
-        { label: "Seams", value: "Flatlock, sits flat to resist chafing and mat abrasion" },
-        { label: "Hem", value: "Silicone grip band to stop ride-up during grappling" },
-        { label: "Colors", value: "Full-dye sublimation, rank and division colors built into the print" },
-        { label: "Sleeve", value: "Long, or the same build in short sleeve" },
-        { label: "Sizing", value: "Graded XS to 4XL men's, XS to XXL women's, distinct women's block" },
-        { label: "Branding", value: "Gym and athlete name, sponsor logos, manufacturer mark, woven and care labels, packaging" },
-      ],
-      specificationsImage: { alt: "Long-sleeve rash guard, construction detail" },
     },
     {
       status: "draft",
@@ -287,55 +235,7 @@ export const fightWear: Category = {
       image: "",
       imageAlt: "Custom MMA fight shorts, woven shell, concealed closure, gusset for full range",
       href: "/capriowear/teamwear/fight-wear/fight-shorts",
-      pdpTitle: "MMA Fight Shorts",
       sku: "CAP-FGT-02",
-      pdpHeading: "Custom MMA Fight Shorts Manufacturer",
-      pdpDescription:
-        "MMA fight shorts, custom and private label, a woven poly-spandex shell with a concealed closure, a diamond crotch gusset and an open-slit side seam for kicks and ground work, sublimated and made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "MMA fight shorts, front view" },
-        { alt: "MMA fight shorts, back view" },
-        { alt: "MMA fight shorts, gusset detail" },
-        { alt: "MMA fight shorts, waistband and closure detail" },
-        { alt: "MMA fight shorts, fabric close-up" },
-      ],
-      pdpMetaTitle: "Custom MMA Fight Shorts Manufacturer",
-      pdpMetaDescription:
-        "Custom MMA fight shorts manufacturer, woven poly-spandex shell, concealed closure, gusset for full range, sublimated, low MOQ. DDP worldwide.",
-      material: "Woven poly-spandex shell",
-      faqs: [
-        {
-          q: "Are these shorts legal for sanctioned amateur MMA?",
-          a: "Yes. We build them with a concealed closure and no exposed hook-and-loop, pockets or zippers, and keep the hem above the knee, to the amateur MMA rule. We confirm the build on your sample.",
-        },
-        {
-          q: "What is the gusset and side slit for?",
-          a: "A diamond crotch gusset and an open-slit side seam let the leg move freely for kicks, takedowns and ground work, without the seam binding or tearing.",
-        },
-        {
-          q: "Is the closure hardware made in-house or sourced?",
-          a: "The shell is cut and sewn in-house. The hook-and-loop, drawcord and any grip band are trims we source and sew into the shell, set to hold through a full range of motion.",
-        },
-      ],
-      relatedStyleTags: [
-        { label: "Long-Sleeve Rash Guard", href: "/capriowear/teamwear/fight-wear/long-sleeve-rash-guard" },
-        { label: "Grappling Spats", href: "/capriowear/teamwear/fight-wear" },
-        { label: "Compression Top", href: "/capriowear/teamwear/fight-wear" },
-        { label: "See All", href: "/capriowear/teamwear/fight-wear" },
-      ],
-      specifications: [
-        { label: "Style", value: "MMA fight shorts (base type)" },
-        { label: "Fabric", value: "Woven poly-spandex shell, weight confirmed on your sample" },
-        { label: "Closure", value: "Hook-and-loop fly with an internal drawcord, concealed with no exposed hardware for sanctioned play" },
-        { label: "Gusset", value: "Diamond or triangle crotch gusset for full-range kicks and ground work" },
-        { label: "Side", value: "Open-slit or hook-and-loop side seam for leg range of motion" },
-        { label: "Waistband", value: "Elastic waistband, optional silicone grip liner to stop ride-up" },
-        { label: "Hem", value: "Above the knee, to the amateur MMA rule" },
-        { label: "Decoration", value: "Full-dye sublimation, matched to the rash guard" },
-        { label: "Sizing", value: "Alpha S to 2XL with a waist-inch and length per size" },
-        { label: "Branding", value: "Gym and athlete name, sponsor logos, manufacturer mark, woven and care labels, packaging" },
-      ],
-      specificationsImage: { alt: "MMA fight shorts, construction detail" },
     },
     {
       status: "draft",

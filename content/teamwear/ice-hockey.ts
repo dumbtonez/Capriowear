@@ -177,13 +177,11 @@ export const iceHockey: Category = {
     faqGetStarted,
   ],
   ctaReferenceNoun: "kit",
-  // All 5 styles ship "draft" (owner spec): zero published at launch, so no
-  // PDP routes generate, nothing enters the sitemap, and ItemList/
-  // CollectionPage is omitted from the PLP entirely (see
-  // app/teamwear/[sport]/page.tsx's own `publishedStyleCards` gate) -- same
-  // pattern every prior Teamwear category ships with today. Full PDP content
-  // is kept for the two hero styles (Game Jersey, Goalie Jersey) so either
-  // can flip to "published" on its own once confirmed and sampled.
+  // All 5 styles ship "draft" and are card-only for now: no PDP entry, so no
+  // route, and each card renders as a non-link. The two legacy draft PDPs
+  // (unaudited copy) were removed on 2026-09-26 when the Teamwear draft-PDP
+  // rule became the default; this sport's rebuild adds real PDP content per
+  // style, and each card links as soon as its PDP entry exists.
   styleCards: [
     {
       status: "draft",
@@ -193,57 +191,7 @@ export const iceHockey: Category = {
       image: "",
       imageAlt: "Custom ice hockey game jersey, air-knit or pro-weight, fight strap, reinforced elbows",
       href: "/capriowear/teamwear/ice-hockey/game-jersey",
-      pdpTitle: "Game Jersey",
       sku: "CAP-HKY-01",
-      pdpHeading: "Custom Hockey Jersey Manufacturer",
-      pdpDescription:
-        "Ice hockey game jersey, custom and private label, a durable polyester air-knit or pro-weight jersey cut loose to fit over pads, with reinforced elbows and an optional fight strap, sublimated or tackle twill, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Ice hockey game jersey, front view" },
-        { alt: "Ice hockey game jersey, back view with name and number" },
-        { alt: "Ice hockey game jersey, fight strap detail" },
-        { alt: "Ice hockey game jersey, reinforced elbow detail" },
-        { alt: "Ice hockey game jersey, crest and sponsor placement" },
-        { alt: "Ice hockey game jersey, fabric close-up" },
-      ],
-      pdpMetaTitle: "Custom Hockey Jersey Manufacturer",
-      pdpMetaDescription:
-        "Custom hockey jersey manufacturer, air-knit or pro-weight, sublimation or tackle twill, fight strap, reinforced elbows, low MOQ. DDP worldwide.",
-      material: "Polyester air-knit or pro-weight",
-      faqs: [
-        {
-          q: "What is a fight strap, and do we need one?",
-          a: "It is a fabric loop sewn inside the back of the jersey that anchors it to the pants so it cannot be pulled off. It is required in the NHL and optional in most other leagues, so we build it in or leave it out to match yours.",
-        },
-        {
-          q: "What is the difference between air-knit and pro-weight?",
-          a: "Air-knit is the lighter, more breathable game cut; pro-weight is heavier for maximum durability. Both take sublimation and tackle twill, and we confirm the weight on your sample.",
-        },
-        {
-          q: "Can we choose sublimation or tackle twill?",
-          a: "Yes. Both are available on the same base fabric, so you choose the classic sewn look of tackle twill or the crack-proof full-color of sublimation without changing the jersey build.",
-        },
-      ],
-      relatedStyleTags: [
-        { label: "Goalie Jersey", href: "/capriowear/teamwear/ice-hockey/goalie-jersey" },
-        { label: "Practice Jersey", href: "/capriowear/teamwear/ice-hockey" },
-        { label: "Base Layer", href: "/capriowear/teamwear/ice-hockey" },
-        { label: "See All", href: "/capriowear/teamwear/ice-hockey" },
-      ],
-      specifications: [
-        { label: "Style", value: "Ice hockey game jersey (base type)" },
-        { label: "Fabric", value: "Polyester air-knit (lighter, breathable) or pro-weight (heavier, most durable)" },
-        { label: "Weight", value: "Roughly 215 to 240 GSM by tier, confirmed on your sample" },
-        { label: "Fit", value: "Loose pad-over cut, roomy body and sleeves to move over shoulder and elbow pads; drop-tail hem" },
-        { label: "Collar", value: "Crew or v-collar standard; lace-up collar as a heritage option at a premium" },
-        { label: "Reinforcement", value: "Double-layer elbows, reinforced shoulders and stress seams" },
-        { label: "Fight strap", value: "Optional, snap-button tie-down to the pants; sewn in where your league requires or wants it" },
-        { label: "Decoration", value: "Full-dye sublimation or tackle twill on the same base fabric; names, numbers and crests" },
-        { label: "Color", value: "Full sublimation color range, Pantone matched; home and away colorways" },
-        { label: "Sizing", value: "Graded XS to 5XL, youth and adult as distinct pattern blocks" },
-        { label: "Branding", value: "Team crest, sponsor logos, manufacturer mark, woven and care labels, packaging" },
-      ],
-      specificationsImage: { alt: "Ice hockey game jersey, construction detail" },
     },
     {
       status: "draft",
@@ -253,55 +201,7 @@ export const iceHockey: Category = {
       image: "",
       imageAlt: "Custom goalie jersey, distinct oversized goalie-cut pattern",
       href: "/capriowear/teamwear/ice-hockey/goalie-jersey",
-      pdpTitle: "Goalie Jersey",
       sku: "CAP-HKY-02",
-      pdpHeading: "Custom Goalie Jersey Manufacturer",
-      pdpDescription:
-        "Ice hockey goalie jersey, custom and private label, a distinct oversized goalie-cut pattern with a wider body for the chest protector and roomier sleeves, in a durable polyester air-knit, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Goalie jersey, front view" },
-        { alt: "Goalie jersey, back view with name and number" },
-        { alt: "Goalie jersey, wider body detail" },
-        { alt: "Goalie jersey, sleeve fit detail" },
-        { alt: "Goalie jersey, crest and sponsor placement" },
-        { alt: "Goalie jersey, fabric close-up" },
-      ],
-      pdpMetaTitle: "Custom Goalie Jersey Manufacturer",
-      pdpMetaDescription:
-        "Custom hockey goalie jersey manufacturer, distinct oversized goalie-cut pattern, durable air-knit, sublimation or tackle twill, low MOQ. DDP worldwide.",
-      material: "Durable polyester air-knit or pro-weight",
-      faqs: [
-        {
-          q: "How is a goalie jersey different from a player jersey?",
-          a: "It is a distinct, larger pattern block, not a scaled-up player jersey. The body is wider to clear a chest protector and the sleeves are roomier for bulkier arm equipment.",
-        },
-        {
-          q: "How is a goalie jersey sized?",
-          a: "On its own larger goalie sizing scale rather than the player chart, and we confirm the fit on your sample.",
-        },
-        {
-          q: "Can the goalie jersey match the rest of the team kit?",
-          a: "Yes. It is produced in the same run and decorated with the same sublimation or tackle twill design, so it reads as part of the set.",
-        },
-      ],
-      relatedStyleTags: [
-        { label: "Game Jersey", href: "/capriowear/teamwear/ice-hockey/game-jersey" },
-        { label: "Practice Jersey", href: "/capriowear/teamwear/ice-hockey" },
-        { label: "Base Layer", href: "/capriowear/teamwear/ice-hockey" },
-        { label: "See All", href: "/capriowear/teamwear/ice-hockey" },
-      ],
-      specifications: [
-        { label: "Style", value: "Ice hockey goalie jersey (base type)" },
-        { label: "Fabric", value: "Durable polyester air-knit or pro-weight" },
-        { label: "Weight", value: "Roughly 215 to 240 GSM by tier, confirmed on your sample" },
-        { label: "Fit", value: "A distinct, larger goalie pattern block, not a scaled-up player jersey; wider body for a chest protector and roomier sleeves for arm equipment" },
-        { label: "Sizing", value: "Its own larger goalie sizing scale, confirmed on your sample" },
-        { label: "Reinforcement", value: "Double-layer elbows, reinforced shoulders and stress seams" },
-        { label: "Decoration", value: "Full-dye sublimation or tackle twill on the same base fabric; names, numbers and crests" },
-        { label: "Color", value: "Full sublimation color range, Pantone matched; matched to the team kit" },
-        { label: "Branding", value: "Team crest, sponsor logos, manufacturer mark, woven and care labels, packaging" },
-      ],
-      specificationsImage: { alt: "Goalie jersey, construction detail" },
     },
     {
       status: "draft",

@@ -6,9 +6,8 @@
 // app/teamwear/[sport]/[style]/page.tsx, only this file plus one line in
 // ./sports.ts.
 //
-// PDP publish state (owner spec): every style ships "draft". Baseball opts
-// into the Teamwear draft-PDP rule (`draftPdpsReachable`, TEMPORARY, see
-// content/activewear/types.ts): all 7 styles carry PDP content (batches 1 to 3,
+// PDP publish state (owner spec): every style ships "draft". Under the
+// Teamwear draft-PDP rule (isDraftPdpReachable(), pdpShared.ts), all 7 styles carry PDP content (batches 1 to 3,
 // 2026-09-26) and render as noindexed draft PDPs (BreadcrumbList only, out
 // of the sitemap and the CollectionPage/ItemList) with linking cards. Publishing needs the
 // roster confirmed, the style sampled and real photos (getPublishReadiness()).
@@ -235,10 +234,6 @@ export const baseball: Category = {
     faqGetStarted,
   ],
   ctaReferenceNoun: "kit",
-  // TEMPORARY (owner, 2026-09-26): opts Baseball into the draft-PDP rule so
-  // the batch-1 drafts get noindexed pages and their cards link. See the
-  // field's own comment in content/activewear/types.ts.
-  draftPdpsReachable: true,
   // 7 drafts, SKU order (CAP-BSB-01 to 07), owner spec 2026-09-26. Card
   // title = H1 minus " Manufacturer" = title-tag name = breadcrumb = alt =
   // every pill label that targets it. All 7 carry PDP content (batches 1 to

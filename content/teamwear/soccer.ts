@@ -172,13 +172,11 @@ export const soccer: Category = {
     faqGetStarted,
   ],
   ctaReferenceNoun: "kit",
-  // All 7 styles ship "draft" (owner spec): zero published at launch, so no
-  // PDP routes generate, nothing enters the sitemap, and ItemList/
-  // CollectionPage is omitted from the PLP entirely (see
-  // app/teamwear/[sport]/page.tsx's own `publishedStyleCards` gate) -- same
-  // pattern every prior Teamwear category ships with today. Full PDP content
-  // is kept for the two hero styles (Match Jersey, Soccer Shorts) so either
-  // can flip to "published" on its own once confirmed and sampled.
+  // All 7 styles ship "draft" and are card-only for now: no PDP entry, so no
+  // route, and each card renders as a non-link. The two legacy draft PDPs
+  // (unaudited copy) were removed on 2026-09-26 when the Teamwear draft-PDP
+  // rule became the default; this sport's rebuild adds real PDP content per
+  // style, and each card links as soon as its PDP entry exists.
   styleCards: [
     {
       status: "draft",
@@ -188,57 +186,7 @@ export const soccer: Category = {
       image: "",
       imageAlt: "Custom soccer match jersey, lightweight sublimated, player-issue or replica fit",
       href: "/capriowear/teamwear/soccer/match-jersey",
-      pdpTitle: "Match Jersey",
       sku: "CAP-SOC-01",
-      pdpHeading: "Custom Soccer Jersey Manufacturer",
-      pdpDescription:
-        "Soccer match jersey, custom and private label, a lightweight full-dye sublimated jersey in polyester microfiber or mesh, in a player-issue athletic fit or a replica stadium fit, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Soccer match jersey, front view" },
-        { alt: "Soccer match jersey, back view with name and number" },
-        { alt: "Soccer match jersey, ventilation panel detail" },
-        { alt: "Soccer match jersey, crest and sponsor placement" },
-        { alt: "Soccer match jersey, sleeve detail" },
-        { alt: "Soccer match jersey, fabric close-up" },
-      ],
-      pdpMetaTitle: "Custom Soccer Jersey Manufacturer",
-      pdpMetaDescription:
-        "Custom soccer jersey manufacturer, lightweight sublimated, player names and numbers in the print, player-issue or replica fit, low MOQ. DDP worldwide.",
-      material: "Lightweight polyester microfiber or mesh",
-      faqs: [
-        {
-          q: "What is the difference between a player-issue and a replica jersey?",
-          a: "A player-issue fit runs closer, with engineered or bonded ventilation panels and a slightly higher hem; a replica fit runs a little looser on a slightly heavier knit that holds up to frequent washing. We build either to your spec.",
-        },
-        {
-          q: "Can you produce home, away and third kits together?",
-          a: "Yes. All three are planned into one program and share the same print files, sizing and roster, so they match as a set.",
-        },
-        {
-          q: "How do you keep numbers legible on a busy design?",
-          a: "We can set the number in a contrasting number zone, so it stays clearly readable even over a full-color sublimated jersey, in line with competition legibility rules.",
-        },
-      ],
-      relatedStyleTags: [
-        { label: "Soccer Shorts", href: "/capriowear/teamwear/soccer/shorts" },
-        { label: "Goalkeeper Kit", href: "/capriowear/teamwear/soccer" },
-        { label: "Training Top", href: "/capriowear/teamwear/soccer" },
-        { label: "See All", href: "/capriowear/teamwear/soccer" },
-      ],
-      specifications: [
-        { label: "Style", value: "Soccer match jersey (base type)" },
-        { label: "Fabric", value: "Lightweight polyester microfiber or mesh" },
-        { label: "Weight", value: "The lightest end of our range, roughly 135 to 165 GSM, confirmed on your sample" },
-        { label: "Fit", value: "Player-issue athletic fit or replica stadium fit" },
-        { label: "Ventilation", value: "Engineered or bonded ventilation panels on the player-issue fit; mesh panels on the replica fit" },
-        { label: "Sleeve", value: "Short or long; set-in or raglan, your choice" },
-        { label: "Decoration", value: "Full-dye sublimation, names and numbers in the print; a contrasting number zone for legibility" },
-        { label: "Color", value: "Full sublimation color range, Pantone matched; home, away and third colorways" },
-        { label: "Badge zones", value: "Crest, sponsor and manufacturer marks laid out to your competition's rules" },
-        { label: "Fit and sizing", value: "Graded XS to 5XL, men's, women's and youth blocks" },
-        { label: "Branding", value: "Club crest, sponsor logos, manufacturer mark, woven and care labels, packaging" },
-      ],
-      specificationsImage: { alt: "Soccer match jersey, construction detail" },
     },
     {
       status: "draft",
@@ -248,55 +196,7 @@ export const soccer: Category = {
       image: "",
       imageAlt: "Custom soccer shorts, sublimated interlock, mesh ventilation, drawcord waist",
       href: "/capriowear/teamwear/soccer/shorts",
-      pdpTitle: "Soccer Shorts",
       sku: "CAP-SOC-02",
-      pdpHeading: "Custom Soccer Shorts Manufacturer",
-      pdpDescription:
-        "Soccer shorts, custom and private label, a sublimated polyester interlock short with mesh side or inner ventilation and an elastic drawcord waist, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Soccer shorts, front view" },
-        { alt: "Soccer shorts, back view" },
-        { alt: "Soccer shorts, side mesh panel detail" },
-        { alt: "Soccer shorts, waistband and drawcord detail" },
-        { alt: "Soccer shorts, fabric close-up" },
-      ],
-      pdpMetaTitle: "Custom Soccer Shorts Manufacturer",
-      pdpMetaDescription:
-        "Custom soccer shorts manufacturer, sublimated polyester interlock, matched to your home and away kit, mesh ventilation, low MOQ. DDP worldwide.",
-      material: "Polyester interlock with mesh ventilation panels",
-      faqs: [
-        {
-          q: "What inseam length are soccer shorts?",
-          a: "They sit above the knee, and we cut the inseam to your spec rather than lock you to one length, since it varies by preference and player height.",
-        },
-        {
-          q: "Do the shorts include an inner brief?",
-          a: "That is your choice. We build them with or without an inner brief or compression liner to your spec.",
-        },
-        {
-          q: "Will the shorts match the jersey program?",
-          a: "Yes. Shorts are produced in the same run and color-matched to the home, away and third jerseys so the kit reads as a set.",
-        },
-      ],
-      relatedStyleTags: [
-        { label: "Soccer Match Jersey", href: "/capriowear/teamwear/soccer/match-jersey" },
-        { label: "Goalkeeper Kit", href: "/capriowear/teamwear/soccer" },
-        { label: "Training Top", href: "/capriowear/teamwear/soccer" },
-        { label: "See All", href: "/capriowear/teamwear/soccer" },
-      ],
-      specifications: [
-        { label: "Style", value: "Soccer shorts (base type)" },
-        { label: "Fabric", value: "Polyester interlock, around 180 GSM, confirmed on your sample" },
-        { label: "Ventilation", value: "Mesh side panels or inner lining" },
-        { label: "Length", value: "Above the knee, inseam to your spec" },
-        { label: "Waistband", value: "Elastic with a flat internal drawcord" },
-        { label: "Liner", value: "Optional inner brief, with or without, to your spec" },
-        { label: "Decoration", value: "Full-dye sublimation, team colors and side detail" },
-        { label: "Color", value: "Full sublimation color range, Pantone matched; matched to the jersey program" },
-        { label: "Sizing", value: "Graded XS to 5XL, men's, women's and youth blocks" },
-        { label: "Branding", value: "Team logo, sponsor marks, manufacturer mark, woven and care labels, packaging" },
-      ],
-      specificationsImage: { alt: "Soccer shorts, construction detail" },
     },
     {
       status: "draft",

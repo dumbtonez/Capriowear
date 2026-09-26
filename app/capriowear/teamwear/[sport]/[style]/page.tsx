@@ -47,24 +47,20 @@ import { ORGANIZATION, SITE_NAME, SITE_URL } from "@/content/site";
 import { sports } from "@/content/teamwear/sports";
 import { breadcrumbSchema, faqSchema, productSchema } from "@/lib/schema";
 
-// Published styles, plus drafts with PDP content for a sport that has
-// opted into the Activewear draft-PDP rule (`Category.draftPdpsReachable`,
-// TEMPORARY -- see its comment in content/activewear/types.ts; once every
-// sport is rebuilt, drop the flag and make this the default). A reachable
-// draft renders noindexed, out of the sitemap, with BreadcrumbList only
-// (Product/FAQPage withheld, gated on isPublished() below). A card-only
-// draft, or any draft on a sport without the flag, still 404s.
-function isReachable(
-  sport: { draftPdpsReachable?: boolean },
-  card: { status: "published" | "draft"; pdpHeading?: string; specifications?: unknown[] },
-) {
-  return card.status === "published" || (sport.draftPdpsReachable === true && isDraftPdpReachable(card));
+// Published styles plus drafts with PDP content -- the draft-PDP rule, the
+// Teamwear default since 2026-09-26 (it was a per-sport opt-in while legacy
+// drafts were still being replaced), same as the Activewear PDP's own
+// isReachable(). A reachable draft renders noindexed, out of the sitemap,
+// with BreadcrumbList only (Product/FAQPage withheld, gated on isPublished()
+// below). A card-only draft still 404s.
+function isReachable(card: { status: "published" | "draft"; pdpHeading?: string; specifications?: unknown[] }) {
+  return card.status === "published" || isDraftPdpReachable(card);
 }
 
 export function generateStaticParams() {
   return Object.values(sports).flatMap((sport) =>
     sport.styleCards
-      .filter((card) => isReachable(sport, card))
+      .filter(isReachable)
       .map((card) => ({ sport: sport.slug, style: card.slug })),
   );
 }
@@ -86,7 +82,7 @@ export async function generateMetadata({
 }: PageProps<"/capriowear/teamwear/[sport]/[style]">): Promise<Metadata> {
   const { sport, style } = await params;
   const data = getData(sport, style);
-  if (!data || !isReachable(data.category, data.product)) return {};
+  if (!data || !isReachable(data.product)) return {};
 
   const shortTitle = data.product.pdpTitle ?? data.product.cardTitle;
   const title = data.product.pdpMetaTitle ?? `Custom ${shortTitle} Manufacturer`;
@@ -121,7 +117,7 @@ export async function generateMetadata({
 export default async function TeamwearStylePage({ params }: PageProps<"/capriowear/teamwear/[sport]/[style]">) {
   const { sport, style } = await params;
   const data = getData(sport, style);
-  if (!data || !isReachable(data.category, data.product)) notFound();
+  if (!data || !isReachable(data.product)) notFound();
 
   const productTitle = data.product.pdpTitle ?? data.product.cardTitle;
   const heading = data.product.pdpHeading ?? productTitle;
@@ -134,12 +130,9 @@ export default async function TeamwearStylePage({ params }: PageProps<"/capriowe
     { label: productTitle, href: data.product.href },
   ];
 
-  // Chip resolution only for an opted-in sport; otherwise the tags render
-  // exactly as authored (the old Teamwear behavior).
-  const relatedStyleTags =
-    data.product.relatedStyleTags && data.category.draftPdpsReachable
-      ? resolveRelatedStyleTags(data.product.relatedStyleTags, data.category.styleCards)
-      : data.product.relatedStyleTags;
+  const relatedStyleTags = data.product.relatedStyleTags
+    ? resolveRelatedStyleTags(data.product.relatedStyleTags, data.category.styleCards)
+    : undefined;
 
   const faqItems = [categoryEntityFaq(data.category), ...(data.product.faqs ?? []), ...pdpFaqOperational];
 

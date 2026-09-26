@@ -14,9 +14,8 @@
 // route, until its PDP content lands and it switches to a link automatically.
 //
 // Every style is "draft": noindexed, out of the sitemap and the
-// CollectionPage/ItemList, BreadcrumbList only. `draftPdpsReachable` (same
-// TEMPORARY opt-in as the other teamwear sports) lets the drafts with PDP
-// content render and their cards link. No gender toggle: the Teamwear PLP
+// CollectionPage/ItemList, BreadcrumbList only. Under the Teamwear draft-PDP
+// rule, drafts with PDP content render and their cards link. No gender toggle: the Teamwear PLP
 // template never renders it.
 //
 // Uses `structuredBlock` (type "decoration"), the same field/shape Cricket
@@ -200,11 +199,6 @@ export const volleyball: Category = {
     faqGetStarted,
   ],
   ctaReferenceNoun: "kit",
-  // TEMPORARY (owner, 2026-09-26): opts Volleyball into the draft-PDP rule,
-  // same as the other teamwear sports, so the drafts with PDP content get
-  // noindexed pages and their cards link. See the field's own comment in
-  // content/activewear/types.ts.
-  draftPdpsReachable: true,
   // 7 drafts, SKU order (CAP-VOL-01 to 07). Card title = H1 minus
   // " Manufacturer" = title-tag name = breadcrumb = alt = every pill label
   // that targets it. Pills carry a `slug`, so a pill for a card-only SKU

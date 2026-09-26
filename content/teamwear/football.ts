@@ -181,13 +181,11 @@ export const football: Category = {
     faqGetStarted,
   ],
   ctaReferenceNoun: "kit",
-  // All 6 styles ship "draft" (owner spec): zero published at launch, so no
-  // PDP routes generate, nothing enters the sitemap, and ItemList/
-  // CollectionPage is omitted from the PLP entirely (see
-  // app/teamwear/[sport]/page.tsx's own `publishedStyleCards` gate) -- same
-  // pattern every prior Teamwear category ships with today. Full PDP content
-  // is kept for the two hero styles (Game Jersey, Football Pants) so either
-  // can flip to "published" on its own once confirmed and sampled.
+  // All 6 styles ship "draft" and are card-only for now: no PDP entry, so no
+  // route, and each card renders as a non-link. The two legacy draft PDPs
+  // (unaudited copy) were removed on 2026-09-26 when the Teamwear draft-PDP
+  // rule became the default; this sport's rebuild adds real PDP content per
+  // style, and each card links as soon as its PDP entry exists.
   styleCards: [
     {
       status: "draft",
@@ -197,55 +195,7 @@ export const football: Category = {
       image: "",
       imageAlt: "Custom football game jersey, pro-cut fit over pads, fully sublimated",
       href: "/capriowear/teamwear/football/game-jersey",
-      pdpTitle: "Game Jersey",
       sku: "CAP-FBL-01",
-      pdpHeading: "Custom Football Jersey Manufacturer",
-      pdpDescription:
-        "American football game jersey, custom and private label, a pro-cut fit that sits close over shoulder pads, full-dye sublimated in a contact-weight polyester spandex knit, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Football game jersey, front view" },
-        { alt: "Football game jersey, back view with name and number" },
-        { alt: "Football game jersey, elevated armhole detail" },
-        { alt: "Football game jersey, sponsor and crest placement" },
-        { alt: "Football game jersey, ventilation panel detail" },
-        { alt: "Football game jersey, fabric close-up" },
-      ],
-      pdpMetaTitle: "Custom Football Jersey Manufacturer",
-      pdpMetaDescription:
-        "Custom football jersey manufacturer, pro-cut fit over shoulder pads, fully sublimated, names and numbers in the print, low MOQ. DDP worldwide.",
-      material: "Contact-weight polyester with spandex",
-      faqs: [
-        {
-          q: "Does the pro-cut fit limit the design or sublimation?",
-          a: "No. The tight fit that sits over the pads still takes full-dye sublimation across the whole jersey, so you get the pad-fit cut with unlimited-color graphics.",
-        },
-        {
-          q: "What is the difference between a game jersey and a practice jersey?",
-          a: "The game jersey is the pro-cut, contact-weight jersey built to fit over pads; the practice jersey is a lighter, more open mesh in a looser cut for everyday training.",
-        },
-        {
-          q: "Can badges sit under the shoulder pads without rubbing?",
-          a: "Yes. We can heat-apply badges so they lie flat and reduce interior friction against the pads.",
-        },
-      ],
-      relatedStyleTags: [
-        { label: "Football Pants", href: "/capriowear/teamwear/football/integrated-pad-pants" },
-        { label: "Practice Jersey", href: "/capriowear/teamwear/football" },
-        { label: "Girdle", href: "/capriowear/teamwear/football" },
-        { label: "See All", href: "/capriowear/teamwear/football" },
-      ],
-      specifications: [
-        { label: "Style", value: "Football game jersey, pro-cut (base type)" },
-        { label: "Fabric", value: "Contact-weight polyester with spandex" },
-        { label: "Weight", value: "A contact weight for durability under grabs and friction, confirmed on your sample" },
-        { label: "Fit", value: "Pro-cut, cut close to sit over shoulder pads with an elevated armhole for pad bulk" },
-        { label: "Ventilation", value: "Lateral ventilation panels, laser-cut edges optional to resist fraying" },
-        { label: "Decoration", value: "Full-dye sublimation across the whole jersey; tackle twill numbers or heat-applied badges optional" },
-        { label: "Color", value: "Full sublimation color range, Pantone matched; home and away colorways" },
-        { label: "Sizing", value: "Graded XS to 5XL, youth and adult blocks" },
-        { label: "Branding", value: "Team crest, sponsor logos, manufacturer mark, woven and care labels, packaging" },
-      ],
-      specificationsImage: { alt: "Football game jersey, construction detail" },
     },
     {
       status: "draft",
@@ -255,55 +205,7 @@ export const football: Category = {
       image: "",
       imageAlt: "Custom football pants, integrated pad pockets, heavier stretch shell",
       href: "/capriowear/teamwear/football/integrated-pad-pants",
-      pdpTitle: "Football Pants",
       sku: "CAP-FBL-02",
-      pdpHeading: "Custom Football Pants Manufacturer",
-      pdpDescription:
-        "American football game pants, custom and private label, a heavier poly-spandex shell sewn with integrated pad pockets for a seven-pad set, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Football pants, front view" },
-        { alt: "Football pants, back view" },
-        { alt: "Football pants, pad pocket detail" },
-        { alt: "Football pants, waistband and closure detail" },
-        { alt: "Football pants, fabric close-up" },
-      ],
-      pdpMetaTitle: "Custom Football Pants Manufacturer",
-      pdpMetaDescription:
-        "Custom football pants manufacturer, integrated pad pocket pants for a seven-pad set, heavier stretch shell, sublimated, low MOQ. DDP worldwide.",
-      material: "Heavier poly-spandex stretch shell",
-      faqs: [
-        {
-          q: "Do the pants come with the pads?",
-          a: "The pants are sewn with pockets for a seven-pad set, two thigh, two knee, two hip and one tailbone. We make the shell and the pockets, and the foam pads are a sourced insert we fit to spec, so you can order the pants with or without the pads supplied.",
-        },
-        {
-          q: "What closure options are there?",
-          a: "A lace-up front with waist snaps and a belt, or a simpler integrated elastic belt. We build either to your spec.",
-        },
-        {
-          q: "What is the difference between the pants and the girdle?",
-          a: "The pants are the outer garment with pad pockets; the girdle is a compression base layer with its own built-in pad pockets, worn underneath. A team can use one or both.",
-        },
-      ],
-      relatedStyleTags: [
-        { label: "Football Game Jersey", href: "/capriowear/teamwear/football/game-jersey" },
-        { label: "Girdle", href: "/capriowear/teamwear/football" },
-        { label: "Base Layer", href: "/capriowear/teamwear/football" },
-        { label: "See All", href: "/capriowear/teamwear/football" },
-      ],
-      specifications: [
-        { label: "Style", value: "Football game pants, integrated pad pockets (base type)" },
-        { label: "Fabric", value: "Heavier poly-spandex stretch shell" },
-        { label: "Weight", value: "A heavier shell weight to hold the pads, confirmed on your sample" },
-        { label: "Pad pockets", value: "Built-in pockets for a seven-pad set, two thigh, two knee, two hip and one tailbone; foam pads are a sourced insert" },
-        { label: "Closure", value: "Lace-up front with waist snaps and belt, or an integrated elastic belt, your choice" },
-        { label: "Fit", value: "Sized to fit snugly over the inserted pads" },
-        { label: "Decoration", value: "Full-dye sublimation, team colors and stripes" },
-        { label: "Color", value: "Full sublimation color range, Pantone matched; matched to the jersey" },
-        { label: "Sizing", value: "Graded XS to 5XL, youth and adult blocks" },
-        { label: "Branding", value: "Team logo, manufacturer mark, woven and care labels, packaging" },
-      ],
-      specificationsImage: { alt: "Football pants, construction detail" },
     },
     {
       status: "draft",

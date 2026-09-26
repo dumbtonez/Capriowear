@@ -16,9 +16,8 @@
 // resolves to a real PDP.
 //
 // Every style is "draft": noindexed, out of the sitemap and the
-// CollectionPage/ItemList, BreadcrumbList only. `draftPdpsReachable` (same
-// TEMPORARY opt-in as Cricket) lets the drafts with PDP content render and
-// their cards link. No gender toggle: the Teamwear PLP template never
+// CollectionPage/ItemList, BreadcrumbList only. Under the Teamwear draft-PDP
+// rule, drafts with PDP content render and their cards link. No gender toggle: the Teamwear PLP template never
 // renders it.
 //
 // Cut-and-sew scope (owner standing rule, 2026-09-05, set on Cricket) --
@@ -214,11 +213,6 @@ export const basketball: Category = {
     faqGetStarted,
   ],
   ctaReferenceNoun: "kit",
-  // TEMPORARY (owner, 2026-09-25): opts Basketball into the draft-PDP rule,
-  // same as Cricket, so the drafts with PDP content get noindexed pages and
-  // their cards link. See the field's own comment in
-  // content/activewear/types.ts.
-  draftPdpsReachable: true,
   // 8 drafts, SKU order (CAP-BKB-01 to 08). Card title = H1 minus
   // " Manufacturer" = title-tag name = breadcrumb = alt = every pill label
   // that targets it. Pills carry a `slug`, so a pill for a card-only SKU

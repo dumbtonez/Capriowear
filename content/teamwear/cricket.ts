@@ -264,14 +264,10 @@ export const cricket: Category = {
     faqGetStarted,
   ],
   ctaReferenceNoun: "kit",
-  // TEMPORARY (owner, 2026-09-25): opts Cricket into the draft-PDP rule so
-  // the batch-1 drafts get noindexed pages and their cards link. See the
-  // field's own comment in content/activewear/types.ts.
-  draftPdpsReachable: true,
   // 8 drafts, SKU order (CAP-CRK-01 to 08), owner spec 2026-09-25. Card
   // title = H1 minus " Manufacturer" = title-tag name = breadcrumb = alt =
   // every pill label that targets it. All 8 carry PDP content (batches 1
-  // to 3), rendered as reachable noindexed drafts via `draftPdpsReachable`. Nothing publishes until the
+  // to 3), rendered as reachable noindexed drafts (the Teamwear draft-PDP rule). Nothing publishes until the
   // roster is confirmed, the style sampled and real photos exist
   // (getPublishReadiness()). Fleece Pullover and Cap re-added by the owner
   // (2026-09-25), superseding the 2026-09-05 headwear removal.

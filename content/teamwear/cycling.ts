@@ -182,13 +182,11 @@ export const cycling: Category = {
     faqGetStarted,
   ],
   ctaReferenceNoun: "kit",
-  // All 7 styles ship "draft" (owner spec): zero published at launch, so no
-  // PDP routes generate, nothing enters the sitemap, and ItemList/
-  // CollectionPage is omitted from the PLP entirely (see
-  // app/teamwear/[sport]/page.tsx's own `publishedStyleCards` gate) -- same
-  // pattern every prior Teamwear category ships with today. Full PDP content
-  // is kept for the two hero styles (Cycling Jersey, Bib Shorts) so either
-  // can flip to "published" on its own once confirmed and sampled.
+  // All 7 styles ship "draft" and are card-only for now: no PDP entry, so no
+  // route, and each card renders as a non-link. The two legacy draft PDPs
+  // (unaudited copy) were removed on 2026-09-26 when the Teamwear draft-PDP
+  // rule became the default; this sport's rebuild adds real PDP content per
+  // style, and each card links as soon as its PDP entry exists.
   styleCards: [
     {
       status: "draft",
@@ -198,57 +196,7 @@ export const cycling: Category = {
       image: "",
       imageAlt: "Custom cycling jersey, short sleeve, sublimated aero fit, drop-tail hem, rear pockets",
       href: "/capriowear/teamwear/cycling/jersey",
-      pdpTitle: "Cycling Jersey",
       sku: "CAP-CYC-01",
-      pdpHeading: "Custom Cycling Jersey Manufacturer",
-      pdpDescription:
-        "Cycling jersey, custom and private label, a lightweight full-dye sublimated aero jersey with a drop-tail hem and three rear pockets, in a race or club fit, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Cycling jersey, front view" },
-        { alt: "Cycling jersey, back view with rear pockets" },
-        { alt: "Cycling jersey, drop-tail hem detail" },
-        { alt: "Cycling jersey, sleeve and gripper cuff detail" },
-        { alt: "Cycling jersey, sponsor logo placement" },
-        { alt: "Cycling jersey, fabric close-up" },
-      ],
-      pdpMetaTitle: "Custom Cycling Jersey Manufacturer",
-      pdpMetaDescription:
-        "Custom cycling jersey manufacturer, full-dye sublimated race fit, drop-tail aero hem, three rear pockets, low MOQ. DDP worldwide.",
-      material: "Lightweight aero polyester with mesh ventilation panels",
-      faqs: [
-        {
-          q: "What is the difference between a race fit and a club fit?",
-          a: "A race or aero fit is close and second-skin for less drag; a club or endurance fit runs a little more relaxed and longer for all-day comfort. We build either to your spec.",
-        },
-        {
-          q: "What is a drop-tail hem?",
-          a: "The rear panel is cut longer than the front so the lower back stays covered when you are leaned forward on the bike, rather than riding up.",
-        },
-        {
-          q: "What are the rear pockets for?",
-          a: "The standard three rear pockets carry food, tools and a phone. We reinforce the openings with elastic so they hold weight without sagging.",
-        },
-      ],
-      relatedStyleTags: [
-        { label: "Bib Shorts", href: "/capriowear/teamwear/cycling/bib-shorts" },
-        { label: "Long-Sleeve Jersey", href: "/capriowear/teamwear/cycling" },
-        { label: "Skinsuit", href: "/capriowear/teamwear/cycling" },
-        { label: "See All", href: "/capriowear/teamwear/cycling" },
-      ],
-      specifications: [
-        { label: "Style", value: "Cycling jersey, short sleeve (base type)" },
-        { label: "Fabric", value: "Lightweight aero polyester with mesh ventilation panels" },
-        { label: "Weight", value: "Tuned to your riding, confirmed on your sample; lighter for airflow, a little heavier for a firmer race fit" },
-        { label: "Fit", value: "Race and aero, or a more relaxed club and endurance cut" },
-        { label: "Hem", value: "Drop-tail, the rear runs longer than the front to cover the lower back in the riding position" },
-        { label: "Sleeves", value: "Close-fitting, silicone gripper cuff optional" },
-        { label: "Zip", value: "Full-length or partial front zip" },
-        { label: "Pockets", value: "Three rear pockets, elastic-reinforced openings" },
-        { label: "Decoration", value: "Full-dye sublimation, gradients, names and sponsor logos" },
-        { label: "Sizing", value: "Graded XS to 5XL, men's and women's blocks" },
-        { label: "Branding", value: "Team and sponsor logos, manufacturer mark, woven and care labels, packaging" },
-      ],
-      specificationsImage: { alt: "Cycling jersey, construction detail" },
     },
     {
       status: "draft",
@@ -258,55 +206,7 @@ export const cycling: Category = {
       image: "",
       imageAlt: "Custom cycling bib shorts, compression shell, sourced chamois pad, mesh bib straps",
       href: "/capriowear/teamwear/cycling/bib-shorts",
-      pdpTitle: "Bib Shorts",
       sku: "CAP-CYC-02",
-      pdpHeading: "Custom Cycling Bib Shorts Manufacturer",
-      pdpDescription:
-        "Cycling bib shorts, custom and private label, a high-spandex compression short with over-the-shoulder mesh bib straps and a chamois pad fitted to your ride, sewn in with flatlock seams, made to your brand in Sialkot, Pakistan.",
-      images: [
-        { alt: "Cycling bib shorts, front view" },
-        { alt: "Cycling bib shorts, back view" },
-        { alt: "Cycling bib shorts, mesh bib strap detail" },
-        { alt: "Cycling bib shorts, chamois pad detail" },
-        { alt: "Cycling bib shorts, leg gripper detail" },
-      ],
-      pdpMetaTitle: "Custom Cycling Bib Shorts Manufacturer",
-      pdpMetaDescription:
-        "Custom cycling bib shorts manufacturer, compression shell with a sourced chamois pad, flatlock seams, leg grippers, low MOQ. DDP worldwide.",
-      material: "High-spandex compression knit",
-      faqs: [
-        {
-          q: "Is the chamois pad made in-house or sourced?",
-          a: "The pad is a specialized foam or foam-gel component from dedicated pad makers. We source it to your spec and sew it into a short shell we make in-house, with flatlock seams so nothing rubs.",
-        },
-        {
-          q: "How do we pick the pad for our riders?",
-          a: "By ride length and rider. Thinner, lighter pads for short rides; higher-density, thicker multi-density pads for long endurance rides; and a men's, women's or unisex shape. We confirm it on your sample.",
-        },
-        {
-          q: "Can we get the same short as a waist short instead of a bib?",
-          a: "Yes. The same short is built as a bib with mesh straps or as a waist short, whichever you prefer.",
-        },
-      ],
-      relatedStyleTags: [
-        { label: "Cycling Jersey", href: "/capriowear/teamwear/cycling/jersey" },
-        { label: "Bib Tights", href: "/capriowear/teamwear/cycling" },
-        { label: "Skinsuit", href: "/capriowear/teamwear/cycling" },
-        { label: "See All", href: "/capriowear/teamwear/cycling" },
-      ],
-      specifications: [
-        { label: "Style", value: "Cycling bib shorts (base type)" },
-        { label: "Fabric", value: "High-spandex compression knit body" },
-        { label: "Fit", value: "Race compression, close to the leg, confirmed on your sample" },
-        { label: "Bib", value: "Over-the-shoulder mesh straps, no waistband, cut for the forward riding position" },
-        { label: "Chamois", value: "A sourced foam or foam-gel pad; density and thickness to your ride length; men's, women's or unisex shape; sewn in with flatlock seams" },
-        { label: "Leg hem", value: "Silicone gripper band to hold the leg in place" },
-        { label: "Decoration", value: "Full-dye sublimation, matched to the jersey" },
-        { label: "Color", value: "Full sublimation color range, Pantone matched" },
-        { label: "Sizing", value: "Graded XS to 5XL, men's and women's blocks" },
-        { label: "Branding", value: "Team and sponsor logos, manufacturer mark, woven and care labels, packaging" },
-      ],
-      specificationsImage: { alt: "Cycling bib shorts, construction detail" },
     },
     {
       status: "draft",

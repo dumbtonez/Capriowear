@@ -793,18 +793,6 @@ export type Category = {
    */
   pdpCustomizationSteps?: PdpCustomizeStepsContent;
   /**
-   * TEMPORARY, Teamwear only (owner, 2026-09-25, Cricket PDP batch 1): opts
-   * this sport into the Activewear draft-PDP rule (`isDraftPdpReachable()`,
-   * ./pdpShared.ts) -- a draft with PDP content gets a noindexed page, its
-   * PLP card links, and related-style chips resolve to it. Unset, the
-   * Teamwear routes keep the old rule (drafts 404, cards never link), so the
-   * legacy, unaudited draft PDPs on the other sports stay unexposed until
-   * each sport's own rebuild sets this. Once every Teamwear sport has been
-   * rebuilt to current rules, delete this field and make the draft-PDP rule
-   * the Teamwear default. Ignored by the Activewear routes (always on there).
-   */
-  draftPdpsReachable?: boolean;
-  /**
    * The one word (or short phrase) that fills "a reference [X]" in the
    * closing CTA's own subline (Figma node 579:5710, base copy "Share your
    * tech pack, sketch or a reference legging. We'll come back within 24
