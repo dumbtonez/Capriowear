@@ -6,11 +6,11 @@
 // only this file plus one line in ./sports.ts.
 //
 // PDP publish state (owner spec): every style ships "draft". Under the
-// Teamwear draft-PDP rule (isDraftPdpReachable(), pdpShared.ts), 01 to 03
-// carry PDP content (batch 1, 2026-09-26) and render as noindexed draft PDPs
-// (BreadcrumbList only, out of the sitemap and the CollectionPage/ItemList)
-// with linking cards; 04 to 07 are card-only non-links until their own
-// batch. Publishing needs the roster confirmed, the style sampled and real
+// Teamwear draft-PDP rule (isDraftPdpReachable(), pdpShared.ts), 01 to 06
+// carry PDP content (batches 1 and 2, 2026-09-26) and render as noindexed
+// draft PDPs (BreadcrumbList only, out of the sitemap and the
+// CollectionPage/ItemList) with linking cards; 07 is a card-only non-link
+// until its own batch. Publishing needs the roster confirmed, the style sampled and real
 // photos (getPublishReadiness()).
 //
 // "Aero" is never used (owner spec, 2026-09-26: an unbacked claim).
@@ -49,9 +49,19 @@ const AQL_POINT = "Every run inspected to AQL 2.5, third-party inspection welcom
 const PENDING_WEIGHT = "Pending, confirmed on your sample.";
 const JERSEY_BRANDING = "Team and sponsor logos, manufacturer mark, woven and care labels, packaging";
 
+const CHAMOIS_SPEC = "Sourced foam or foam-gel pad, density and thickness to your ride length";
+const PAD_SHAPE_SPEC = "Men's, women's or unisex shape, sewn in with flatlock seams";
+const BIB_STRAPS_SPEC = "Mesh over-the-shoulder straps, no waistband, cut for the riding position";
+const CHAMOIS_POINT = "Chamois placement and comfort confirmed on your sample";
+const OPACITY_POINT = "Opacity checked at full stretch";
+const GRAPHICS_POINT = "Graphics dyed into the fiber, so they will not crack or peel";
+
 type Step = [title: string, body: string];
 const TRIMS_STEP: Step = ["Trims and finish", "Woven labels, printed care labels, hangtags"];
 const PACKAGING_STEP: Step = ["Packaging", "Polybags, boxes, retail-ready to your spec"];
+const CHAMOIS_STEP: Step = ["Chamois", "Foam or foam-gel pad, density and thickness to your ride length"];
+const PAD_SHAPE_STEP: Step = ["Pad shape", "Men's, women's or unisex shape, sewn in with flatlock seams"];
+const TRIMS_BRAND_STEP: Step = ["Trims and finish", "Printed care labels, woven brand labels, hangtags"];
 
 // Per-style "How we customize" carousel. Images are the shared factory
 // test shots (same stand-ins every PDP carousel uses), cycled in order.
@@ -218,9 +228,9 @@ export const cycling: Category = {
   ctaReferenceNoun: "kit",
   // 7 drafts, SKU order (CAP-CYC-01 to 07), owner spec 2026-09-26. Card
   // title = H1 minus " Manufacturer" = title-tag name = breadcrumb = alt =
-  // every pill label that targets it, no commas in names. 01 to 03 carry PDP
-  // content (batch 1; 01 and 02 reuse the slugs of the removed legacy
-  // drafts); 04 to 07 are card-only non-links until their own batch.
+  // every pill label that targets it, no commas in names. 01 to 03 (batch 1; 01
+  // and 02 reuse the slugs of the removed legacy drafts) and 04 to 06 (batch
+  // 2) carry PDP content; 07 is a card-only non-link until its own batch.
   styleCards: [
     {
       status: "draft",
@@ -306,7 +316,7 @@ export const cycling: Category = {
         "Race or club fit checked on your sample",
         "Drop-tail hem cut to cover the lower back in the riding position",
         "Rear pockets reinforced to carry weight without sagging",
-        "Graphics dyed into the fiber, so they will not crack or peel",
+        GRAPHICS_POINT,
         AQL_POINT,
       ],
     },
@@ -354,9 +364,9 @@ export const cycling: Category = {
         { label: "Style", value: "Cycling bib shorts (base type)" },
         { label: "Fabric", value: "High-spandex compression knit body" },
         { label: "Weight", value: PENDING_WEIGHT },
-        { label: "Bib straps", value: "Mesh over-the-shoulder straps, no waistband, cut for the riding position" },
-        { label: "Chamois", value: "Sourced foam or foam-gel pad, density and thickness to your ride length" },
-        { label: "Pad shape", value: "Men's, women's or unisex shape, sewn in with flatlock seams" },
+        { label: "Bib straps", value: BIB_STRAPS_SPEC },
+        { label: "Chamois", value: CHAMOIS_SPEC },
+        { label: "Pad shape", value: PAD_SHAPE_SPEC },
         { label: "Leg hem", value: "Silicone gripper band that holds the leg in place" },
         { label: "Fit", value: "Close compression fit, graded XS to 5XL, men's and women's blocks" },
         {
@@ -367,8 +377,8 @@ export const cycling: Category = {
       ],
       specificationsImage: { alt: "Custom Cycling Bib Shorts" },
       pdpCustomizationSteps: customizeSteps([
-        ["Chamois", "Foam or foam-gel pad, density and thickness to your ride length"],
-        ["Pad shape", "Men's, women's or unisex shape, sewn in with flatlock seams"],
+        CHAMOIS_STEP,
+        PAD_SHAPE_STEP,
         ["Bib or waist", "Bib straps as standard, or the same short built as a waist short"],
         ["Print and artwork", "Full-dye sublimation or a solid color, matched to your jersey"],
         ["Fabric", "High-spandex compression knit, sourced or matched to your reference"],
@@ -379,10 +389,10 @@ export const cycling: Category = {
       pdpQualitySubline:
         "We confirm the chamois placement, the fit and the seams on your sample before the full order is produced.",
       pdpQualityPoints: [
-        "Chamois placement and comfort confirmed on your sample",
+        CHAMOIS_POINT,
         "Short shell sewn in-house, the sourced pad set with flatlock seams",
         "Leg grippers and straps checked so nothing digs in or rides up",
-        "Opacity checked at full stretch",
+        OPACITY_POINT,
         AQL_POINT,
       ],
     },
@@ -469,9 +479,252 @@ export const cycling: Category = {
         AQL_POINT,
       ],
     },
-    cardOnly("CAP-CYC-04", "bib-tights", "Custom Cycling Bib Tights", "Thermal full-leg, sourced chamois pad"),
-    cardOnly("CAP-CYC-05", "skinsuit", "Custom Cycling Skinsuit", "One-piece race-cut suit, sourced chamois pad"),
-    cardOnly("CAP-CYC-06", "gilet", "Custom Cycling Gilet", "Windproof sleeveless vest, packable"),
+    {
+      status: "draft",
+      slug: "bib-tights",
+      cardTitle: "Custom Cycling Bib Tights",
+      cardSubline: "Thermal full-leg, sourced chamois pad",
+      image: "",
+      imageAlt: "Custom Cycling Bib Tights",
+      href: `${PLP}/bib-tights`,
+      sku: "CAP-CYC-04",
+      pdpHeading: "Custom Cycling Bib Tights Manufacturer",
+      pdpMetaTitle: "Custom Cycling Bib Tights Manufacturer",
+      pdpDescription:
+        "Cycling bib tights, custom and private label, a full-leg brushed thermal bib with mesh straps and a sourced chamois pad chosen for your ride length, sewn in with flatlock seams, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Cycling Bib Tights"),
+      pdpMetaDescription:
+        "Custom cycling bib tights manufacturer: brushed thermal full-leg bib, mesh straps, sourced chamois pad, ankle zips optional, MOQ 50, DDP to 20+ countries.",
+      material: "Brushed thermal or high-spandex compression knit with a sourced foam or foam-gel chamois pad",
+      pdpFabricPills: ["Brushed thermal knit", "Compression knit", "Mesh bib straps", "Sourced chamois pad"],
+      pdpCustomizationPills: ["Pad density & shape", "Ankle finish", "Matched to your bibs", "Custom labels"],
+      faqs: [
+        {
+          q: "Do the cycling bib tights use the same chamois as the bib shorts?",
+          a: "Yes. The cycling bib tights take the same sourced chamois pad options as the bib shorts, chosen by ride length and rider and sewn in with flatlock seams, so a team can run one pad across both.",
+        },
+        {
+          q: "What fabric are the cycling bib tights made in?",
+          a: "The cycling bib tights are made in a brushed thermal knit for cold rides, or a high-spandex compression knit for milder days. Weight is confirmed on your sample.",
+        },
+        {
+          q: "Can the cycling bib tights have ankle zips?",
+          a: "Yes. The cycling bib tights can be finished with a gripper or elastic ankle band, with ankle zips added where riders want them, confirmed on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Cycling Bib Shorts", slug: "bib-shorts", href: PLP },
+        { label: "Custom Long-Sleeve Cycling Jersey", slug: "long-sleeve-jersey", href: PLP },
+        { label: "Custom Cycling Thermal Jacket", slug: "thermal-jacket", href: PLP },
+        { label: "Custom Cycling Gilet", slug: "gilet", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Cycling bib tights, full leg (base type)" },
+        { label: "Fabric", value: "Brushed thermal knit, or a high-spandex compression knit for milder days" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Bib straps", value: BIB_STRAPS_SPEC },
+        { label: "Chamois", value: CHAMOIS_SPEC },
+        { label: "Pad shape", value: PAD_SHAPE_SPEC },
+        { label: "Ankle", value: "Close ankle finish with a gripper or elastic band, ankle zips optional" },
+        { label: "Fit", value: "Close compression fit, graded XS to 5XL, men's and women's blocks" },
+        {
+          label: "Decoration and color",
+          value:
+            "Solid color or print, Pantone matched to your bib shorts and jerseys; print on the thermal knit confirmed on your sample",
+        },
+        { label: "Branding", value: "Team and sponsor logos, manufacturer mark, printed care label, packaging" },
+      ],
+      specificationsImage: { alt: "Custom Cycling Bib Tights" },
+      pdpCustomizationSteps: customizeSteps([
+        CHAMOIS_STEP,
+        PAD_SHAPE_STEP,
+        ["Fabric", "Brushed thermal or compression knit, sourced or matched to your reference"],
+        ["Ankle finish", "Gripper or elastic band, ankle zips optional"],
+        ["Color and print", "Pantone matched to your bibs and jerseys, print confirmed on your sample"],
+        TRIMS_BRAND_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline:
+        "We confirm the chamois placement, the fit and the thermal fabric on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        CHAMOIS_POINT,
+        "Tights shell sewn in-house, the sourced pad set with flatlock seams",
+        "Straps and ankle finish checked so nothing digs in or rides up",
+        OPACITY_POINT,
+        AQL_POINT,
+      ],
+    },
+    {
+      status: "draft",
+      slug: "skinsuit",
+      cardTitle: "Custom Cycling Skinsuit",
+      cardSubline: "One-piece race-cut suit, sourced chamois pad",
+      image: "",
+      imageAlt: "Custom Cycling Skinsuit",
+      href: `${PLP}/skinsuit`,
+      sku: "CAP-CYC-05",
+      pdpHeading: "Custom Cycling Skinsuit Manufacturer",
+      pdpMetaTitle: "Custom Cycling Skinsuit Manufacturer",
+      pdpDescription:
+        "Cycling skinsuit, custom and private label, a one-piece race-cut suit joining jersey and short, full-dye sublimated with a sourced chamois pad, in short or long sleeve, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Cycling Skinsuit"),
+      pdpMetaDescription:
+        "Custom cycling skinsuit manufacturer: one-piece race-cut suit, full-dye sublimated, short or long sleeve, sourced chamois pad, MOQ 50, DDP to 20+ countries.",
+      material: "Polyester/Spandex knit upper and high-spandex compression knit lower with a sourced chamois pad",
+      pdpFabricPills: ["Polyester/Spandex knit", "Compression knit", "Mesh panels", "Sourced chamois pad"],
+      pdpCustomizationPills: ["Short or long sleeve", "Rear pockets optional", "Full-dye sublimation", "Custom labels"],
+      faqs: [
+        {
+          q: "What is the difference between a cycling skinsuit and a jersey with bib shorts?",
+          a: "The cycling skinsuit joins the jersey and short into one piece, so there is no overlap or loose fabric at the waist, while a jersey with bib shorts is two garments. Skinsuits are used mainly for time trials and racing.",
+        },
+        {
+          q: "Does the cycling skinsuit have a chamois pad?",
+          a: "Yes. The cycling skinsuit has a sourced foam or foam-gel chamois pad in a men's, women's or unisex shape, sewn in with flatlock seams and confirmed on your sample.",
+        },
+        {
+          q: "Can the cycling skinsuit have rear pockets?",
+          a: "Yes. The cycling skinsuit can be made with rear pockets for road races or without them for time trials, to your spec.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Short-Sleeve Cycling Jersey", slug: "jersey", href: PLP },
+        { label: "Custom Cycling Bib Shorts", slug: "bib-shorts", href: PLP },
+        { label: "Custom Long-Sleeve Cycling Jersey", slug: "long-sleeve-jersey", href: PLP },
+        { label: "Custom Cycling Bib Tights", slug: "bib-tights", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Cycling skinsuit, one piece (base type)" },
+        {
+          label: "Fabric",
+          value: "Polyester/Spandex knit upper with mesh panels, high-spandex compression knit lower",
+        },
+        { label: "Weight", value: PENDING_WEIGHT },
+        {
+          label: "Fit",
+          value: "Race cut, close through the body, sleeves and legs, with silicone leg grippers",
+        },
+        { label: "Sleeve", value: "Short or long sleeve, close-fitting, gripper or clean-cut cuffs" },
+        { label: "Zip", value: "Full-length or partial front zip" },
+        { label: "Pockets", value: "Rear pockets or none, to your spec" },
+        {
+          label: "Chamois",
+          value:
+            "Sourced foam or foam-gel pad in a men's, women's or unisex shape, sewn in with flatlock seams",
+        },
+        {
+          label: "Decoration and branding",
+          value: "Full-dye sublimation across the whole suit, Pantone matched, with team and sponsor logos",
+        },
+        { label: "Sizing", value: "Graded XS to 5XL, men's and women's blocks" },
+      ],
+      specificationsImage: { alt: "Custom Cycling Skinsuit" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Print and artwork", "Full-dye sublimation across the whole suit, Pantone matched"],
+        ["Sleeve", "Short or long sleeve, gripper or clean-cut cuffs"],
+        ["Chamois", "Foam or foam-gel pad, men's, women's or unisex shape"],
+        ["Pockets", "Rear pockets or none, to your spec"],
+        ["Fabric", "Polyester/Spandex upper and compression lower, sourced or matched to your reference"],
+        TRIMS_BRAND_STEP,
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: "Built for race day",
+      pdpQualitySubline:
+        "We confirm the fit, the chamois and the seam between the upper and lower on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Race fit checked on your sample",
+        "Upper-to-lower seam join set and confirmed on your sample",
+        CHAMOIS_POINT,
+        GRAPHICS_POINT,
+        AQL_POINT,
+      ],
+    },
+    {
+      status: "draft",
+      slug: "gilet",
+      cardTitle: "Custom Cycling Gilet",
+      cardSubline: "Windproof sleeveless vest, packable",
+      image: "",
+      imageAlt: "Custom Cycling Gilet",
+      href: `${PLP}/gilet`,
+      sku: "CAP-CYC-06",
+      pdpHeading: "Custom Cycling Gilet Manufacturer",
+      pdpMetaTitle: "Custom Cycling Gilet Manufacturer",
+      pdpDescription:
+        "Cycling gilet, custom and private label, a windproof sleeveless vest that packs into a jersey pocket, with a breathable mesh back panel option, made to your brand in Sialkot, Pakistan.",
+      images: gallery("Custom Cycling Gilet"),
+      pdpMetaDescription:
+        "Custom cycling gilet manufacturer: windproof, packable sleeveless vest with a mesh back option, full-zip, rear pockets, MOQ 50 pieces, DDP to 20+ countries.",
+      material: "Windproof, water-resistant polyester shell with a mesh or knit back option",
+      pdpFabricPills: ["Windproof polyester shell", "Mesh back panel", "Recycled polyester"],
+      pdpCustomizationPills: ["Packable", "Mesh or shell back", "Printed logos", "Custom labels"],
+      faqs: [
+        {
+          q: "What is the difference between a cycling gilet and a cycling vest?",
+          a: "A cycling gilet and a cycling vest are the same garment: gilet is the common name in the UK and Europe, vest in the US. Ours is a windproof sleeveless layer that packs into a jersey pocket.",
+        },
+        {
+          q: "Can the cycling gilet have a mesh back?",
+          a: "Yes. The cycling gilet can pair a windproof front with a breathable mesh or knit back for warmer days, or a full shell back for cold descents, to your spec.",
+        },
+        {
+          q: "Does the cycling gilet pack into a jersey pocket?",
+          a: "Yes. The cycling gilet is cut from a light windproof shell that packs into a jersey pocket, and the packed size is checked on your sample.",
+        },
+      ],
+      relatedStyleTags: [
+        { label: "Custom Cycling Thermal Jacket", slug: "thermal-jacket", href: PLP },
+        { label: "Custom Short-Sleeve Cycling Jersey", slug: "jersey", href: PLP },
+        { label: "Custom Long-Sleeve Cycling Jersey", slug: "long-sleeve-jersey", href: PLP },
+        { label: "Custom Cycling Bib Shorts", slug: "bib-shorts", href: PLP },
+        { label: "See All", href: PLP },
+      ],
+      specifications: [
+        { label: "Style", value: "Cycling gilet, sleeveless vest (base type)" },
+        { label: "Fabric", value: "Windproof, water-resistant polyester shell front" },
+        { label: "Weight", value: PENDING_WEIGHT },
+        { label: "Back panel", value: "Breathable mesh or knit back, or a full shell back, to your spec" },
+        {
+          label: "Fit",
+          value:
+            "Close cut that does not flap in the wind, with a dropped back hem, graded XS to 5XL, men's and women's blocks",
+        },
+        { label: "Collar", value: "Stand collar" },
+        { label: "Zip", value: "Full-length front zip with a zip garage at the collar" },
+        {
+          label: "Pockets",
+          value: "Rear pockets or pass-through openings to the jersey pockets underneath, to your spec",
+        },
+        { label: "Packability", value: "Packs into a jersey pocket" },
+        {
+          label: "Decoration and branding",
+          value: "Printed team and sponsor logos, Pantone matched, print method confirmed on your sample",
+        },
+      ],
+      specificationsImage: { alt: "Custom Cycling Gilet" },
+      pdpCustomizationSteps: customizeSteps([
+        ["Back panel", "Mesh, knit or full shell back"],
+        ["Fabric", "Windproof water-resistant polyester, sourced or matched to your reference"],
+        ["Fit", "Close race cut with a dropped back hem"],
+        ["Pockets", "Rear pockets or pass-through openings"],
+        ["Logos and color", "Printed team and sponsor logos, Pantone matched"],
+        ["Trims and finish", "Zip pullers, printed care labels, hangtags"],
+        PACKAGING_STEP,
+      ]),
+      pdpQualityHeading: QUALITY_HEADING,
+      pdpQualitySubline:
+        "We confirm the shell fabric, the fit and the packed size on your sample before the full order is produced.",
+      pdpQualityPoints: [
+        "Shell fabric and back panel approved on your sample",
+        "Fit checked so the gilet does not flap in the wind",
+        "Packed size checked so it fits a jersey pocket",
+        "Zips function-tested before bulk",
+        AQL_POINT,
+      ],
+    },
     cardOnly("CAP-CYC-07", "thermal-jacket", "Custom Cycling Thermal Jacket", "Windproof winter jacket, water-resistant shell"),
   ],
   // "You may also be interested in" (owner rule, 2026-09-23): max 5, Teamwear sports only,
